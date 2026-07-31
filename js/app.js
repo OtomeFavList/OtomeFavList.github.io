@@ -97,11 +97,69 @@ function addGameCard() {
     // ===========================
 
     // 放入卡片
-    card.appendChild(title);
-    card.appendChild(label);
-    card.appendChild(select);
+card.appendChild(title);
+card.appendChild(label);
+card.appendChild(select);
 
-    // 放入页面
-    container.appendChild(card);
+// 功能区域
+const content = document.createElement("div");
+content.className = "game-content";
 
-}
+card.appendChild(content);
+
+// 选择游戏
+select.addEventListener("change", function () {
+
+    content.innerHTML = "";
+
+    if (this.value === "") {
+        return;
+    }
+
+    // 喜爱度
+    const heartTitle = document.createElement("h4");
+    heartTitle.textContent = "喜爱度";
+
+    const hearts = document.createElement("div");
+    hearts.className = "heart-area";
+    hearts.textContent = "♡ ♡ ♡ ♡ ♡";
+
+    // 隐藏角色
+    const hiddenBox = document.createElement("div");
+    hiddenBox.className = "hidden-setting";
+
+    hiddenBox.innerHTML = `
+        <label>
+            <input type="checkbox">
+            本游戏显示隐藏角色
+        </label>
+    `;
+
+    // 我推
+    const favTitle = document.createElement("h4");
+    favTitle.textContent = "我推";
+
+    const favEmpty = document.createElement("div");
+    favEmpty.className = "empty";
+    favEmpty.textContent = "（下一步生成角色）";
+
+    // 我推CP
+    const cpTitle = document.createElement("h4");
+    cpTitle.textContent = "我推CP";
+
+    const cpEmpty = document.createElement("div");
+    cpEmpty.className = "empty";
+    cpEmpty.textContent = "（下一步生成 CP）";
+
+    content.appendChild(heartTitle);
+    content.appendChild(hearts);
+    content.appendChild(hiddenBox);
+    content.appendChild(favTitle);
+    content.appendChild(favEmpty);
+    content.appendChild(cpTitle);
+    content.appendChild(cpEmpty);
+
+});
+
+// 放入页面
+container.appendChild(card);
