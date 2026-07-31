@@ -5,8 +5,7 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Otome FavList</title>
 
@@ -14,13 +13,13 @@
 
 </head>
 
-<script src="js/app.js"></script>
-    
 <body>
 
 <div class="container">
 
-    <!-- Header -->
+    <!-- =========================
+         网站标题
+    ========================== -->
 
     <header class="header">
 
@@ -35,3 +34,152 @@
         </p>
 
         <button class="setting-btn">
+             设置
+        </button>
+
+    </header>
+
+    <!-- =========================
+         基础资料
+    ========================== -->
+
+    <section class="card">
+
+        <h2> 基础资料</h2>
+
+        <div class="form-group">
+
+            <label for="nickname">昵称（必填）</label>
+
+            <input
+                id="nickname"
+                type="text"
+                placeholder="请输入昵称">
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="gameCount">游玩数量</label>
+
+            <input
+                id="gameCount"
+                type="number"
+                placeholder="例如：20">
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="startYear">入坑时间</label>
+
+            <input
+                id="startYear"
+                type="text"
+                placeholder="例如：2021">
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="firstGame">入坑作品</label>
+
+            <input
+                id="firstGame"
+                type="text"
+                placeholder="请输入作品名称">
+
+        </div>
+
+    </section>
+
+    <!-- =========================
+         游戏区域
+    ========================== -->
+
+    <section class="card">
+
+        <h2> 游戏</h2>
+
+        <div id="gameContainer">
+
+            <div class="empty">
+
+                目前还没有添加任何游戏。
+
+            </div>
+
+        </div>
+
+        <button
+            id="addGameBtn"
+            class="pink-btn">
+
+            ＋ 添加游戏
+
+        </button>
+
+    </section>
+
+    <!-- =========================
+         导出
+    ========================== -->
+
+    <section class="export-area">
+
+        <button
+            id="generateBtn"
+            class="generate-btn">
+
+             生成 FavList
+
+        </button>
+
+    </section>
+
+    <!-- =========================
+         About
+    ========================== -->
+
+    <footer class="footer">
+
+        <h3>About</h3>
+
+        <p>
+            如果发现角色遗漏、图片错误、
+            功能异常或有任何建议，
+            欢迎联系我。
+        </p>
+
+        <p>
+
+             Email：
+
+            otomefavlist@163.com
+
+        </p>
+
+        <p>
+
+            也欢迎提出想新增的游戏作品、
+            角色资料或功能建议。
+
+        </p>
+
+        <p>
+
+            Version 1.0.0
+
+        </p>
+
+    </footer>
+
+</div>
+
+<!-- JavaScript -->
+
+<script src="js/app.js"></script>
+
+</body>
+
+</html>
