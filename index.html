@@ -2,86 +2,34 @@
 <html lang="zh-CN">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
     <title>Otome FavList</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
+
 </head>
 
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <h1> Otome FavList</h1>
+    <!-- Header -->
 
-        <p class="intro">
-            日乙个人喜好表<br>
-            选择你喜欢的角色，生成属于你的属性表。 
+    <header class="header">
+
+        <h1>Otome FavList</h1>
+
+        <p class="subtitle">
+            日乙个人喜好表
         </p>
 
-        <!-- 基础资料 -->
+        <p class="description">
+            选择你喜欢的角色，生成属于你的属性表。
+        </p>
 
-        <div class="card">
-
-            <h2> 基础资料</h2>
-
-            <label>昵称</label>
-            <input id="name" type="text" placeholder="请输入昵称">
-
-            <label>游玩数量</label>
-            <input id="gameCount" type="number" mint="0">
-
-            <label>入坑时间</label>
-            <input id="startYear" type="text" placeholder="例如：2020">
-
-            <label>入坑作品</label>
-            <input id="firstGame" type="text">
-
-        </div>
-
-        <!-- 游戏喜好 -->
-
-        <div class="card">
-
-            <h2> 游戏喜好</h2>
-
-            <label>选择游戏</label>
-
-            <select id="gameSelect">
-
-                <option value="">请选择游戏</option>
-
-                <option value="hakuoki">薄樱鬼</option>
-
-                <option value="cm">Collar×Malice</option>
-
-                <option value="cr">Code:Realize</option>
-
-            </select>
-
-            <div id="characterArea">
-
-                <!-- JavaScript以后会自动生成角色 -->
-
-            </div>
-
-        </div>
-
-        <button id="addGameBtn">
-            ＋ 添加其他游戏
-        </button>
-
-        <br><br>
-
-        <button id="generateBtn">
-             生成我的 FavList
-        </button>
-
-    </div>
-
-    <script src="script.js"></script>
-
-</body>
-
-</html>
+        <button class="setting-btn">
