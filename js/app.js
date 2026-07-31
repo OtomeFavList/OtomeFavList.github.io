@@ -38,12 +38,40 @@ function addGameCard() {
 
     card.innerHTML = `
 
-        <h3>游戏 ${gameCount}</h3>
+<h3>游戏 ${gameCount}</h3>
 
-        <p>这里以后会放游戏名称。</p>
+<label>游戏名称</label>
 
-    `;
+<select class="game-select">
 
-    container.appendChild(card);
+    <option value="">
 
-}
+        请选择游戏
+
+    </option>
+
+    ${games.map(game=>`
+
+        <option value="${game.id}">
+
+            ${game.name}
+
+        </option>
+
+    `).join("")}
+    
+</select>
+
+<label>
+
+     喜爱度
+
+</label>
+
+<div class="heart-area">
+
+    ♡ ♡ ♡ ♡ ♡
+
+</div>
+
+`;
