@@ -1,0 +1,52 @@
+body {
+    font-family: "Arial", "Microsoft YaHei", sans-serif;
+    background-color: #fff5fa;
+    text-align: center;
+    color: #444;
+}
+
+
+.container {
+    width: 90%;
+    max-width: 800px;
+    margin: 40px auto;
+}
+
+
+h1 {
+    font-size: 40px;
+    color: #d86b9c;
+}
+
+
+.intro {
+    font-size: 18px;
+    line-height: 1.8;
+}
+
+
+.card {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    margin: 25px 0;
+}
+
+
+input {
+    width: 80%;
+    padding: 10px;
+    margin: 8px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+
+
+button {
+    background-color: #d86b9c;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 30px;
+    font-size: 18px;
+}
