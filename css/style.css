@@ -226,3 +226,27 @@ select{
     user-select:none;
 
 }
+
+/* ==========================
+   游戏下拉菜单
+========================== */
+
+.game-select{
+
+    width:100%;
+
+    padding:12px;
+
+    margin-top:8px;
+
+    margin-bottom:15px;
+
+    border-radius:12px;
+
+    border:1px solid #e5d8dd;
+
+    background:white;
+
+    font-size:15px;
+
+}
