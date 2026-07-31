@@ -250,3 +250,16 @@ select{
     font-size:15px;
 
 }
+.game-card {
+
+    background: #fff;
+
+    border: 2px solid #f5d3df;
+
+    border-radius: 18px;
+
+    padding: 20px;
+
+    margin-top: 20px;
+
+}
