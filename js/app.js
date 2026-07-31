@@ -3,17 +3,27 @@
 // app.js
 // ===============================
 
-// 当前已经添加了几个游戏
+// 已添加游戏数量
 let gameCount = 0;
 
 // 页面加载完成
 document.addEventListener("DOMContentLoaded", function () {
 
-    // 找到按钮
+    // 设置按钮
+    const settingBtn = document.querySelector(".setting-btn");
+
+    if (settingBtn) {
+        settingBtn.addEventListener("click", function () {
+            alert("设置功能开发中");
+        });
+    }
+
+    // 添加游戏按钮
     const addButton = document.getElementById("addGameBtn");
 
-    // 点击按钮
-    addButton.addEventListener("click", addGameCard);
+    if (addButton) {
+        addButton.addEventListener("click", addGameCard);
+    }
 
 });
 
@@ -24,11 +34,11 @@ function addGameCard() {
 
     const container = document.getElementById("gameContainer");
 
-    // 删除"暂无游戏"
-    if (container.querySelector(".empty")) {
+    // 删除提示
+    const empty = container.querySelector(".empty");
 
-        container.innerHTML = "";
-
+    if (empty) {
+        empty.remove();
     }
 
     // 创建卡片
@@ -37,41 +47,10 @@ function addGameCard() {
     card.className = "game-card";
 
     card.innerHTML = `
+        <h3>游戏 ${gameCount}</h3>
+        <p>下一课将在这里加入游戏选择。</p>
+    `;
 
-<h3>游戏 ${gameCount}</h3>
+    container.appendChild(card);
 
-<label>游戏名称</label>
-
-<select class="game-select">
-
-    <option value="">
-
-        请选择游戏
-
-    </option>
-
-    ${games.map(game=>`
-
-        <option value="${game.id}">
-
-            ${game.name}
-
-        </option>
-
-    `).join("")}
-    
-</select>
-
-<label>
-
-     喜爱度
-
-</label>
-
-<div class="heart-area">
-
-    ♡ ♡ ♡ ♡ ♡
-
-</div>
-
-`;
+}
