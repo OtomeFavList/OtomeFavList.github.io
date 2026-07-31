@@ -200,3 +200,29 @@ input{
     margin-bottom:10px;
 
 }
+
+select{
+
+    width:100%;
+
+    padding:12px;
+
+    border-radius:12px;
+
+    border:1px solid #e6d5dc;
+
+    margin-bottom:18px;
+
+}
+
+.heart-area{
+
+    font-size:26px;
+
+    color:#d86b9c;
+
+    letter-spacing:5px;
+
+    user-select:none;
+
+}
