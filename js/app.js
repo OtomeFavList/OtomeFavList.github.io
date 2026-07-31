@@ -46,10 +46,46 @@ function addGameCard() {
 
     card.className = "game-card";
 
-    card.innerHTML = `
-        <h3>游戏 ${gameCount}</h3>
-        <p>下一课将在这里加入游戏选择。</p>
-    `;
+    // 创建标题
+const title = document.createElement("h3");
+title.textContent = `游戏 ${gameCount}`;
+
+// 创建文字
+const label = document.createElement("label");
+label.textContent = "游戏名称";
+
+// 创建下拉菜单
+const select = document.createElement("select");
+
+select.className = "game-select";
+
+// 第一项
+const defaultOption = document.createElement("option");
+
+defaultOption.value = "";
+defaultOption.textContent = "请选择游戏";
+
+select.appendChild(defaultOption);
+
+// 加入所有游戏
+for (let i = 0; i < games.length; i++) {
+
+    const option = document.createElement("option");
+
+    option.value = games[i].id;
+
+    option.textContent = games[i].name;
+
+    select.appendChild(option);
+
+}
+
+// 放进卡片
+card.appendChild(title);
+
+card.appendChild(label);
+
+card.appendChild(select);
 
     container.appendChild(card);
 
