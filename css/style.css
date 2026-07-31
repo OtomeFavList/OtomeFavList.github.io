@@ -263,3 +263,56 @@ select{
     margin-top: 20px;
 
 }
+.game-content{
+
+    margin-top:20px;
+
+    border-top:1px solid #f3dce5;
+
+    padding-top:20px;
+
+}
+
+.game-content h4{
+
+    color:#d86b9c;
+
+    margin:15px 0 10px;
+
+}
+
+.hidden-setting{
+
+    margin:15px 0;
+
+}
+
+.hidden-setting label{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    cursor:pointer;
+
+}
+
+.hidden-setting input{
+
+    width:auto;
+
+}
+
+.heart-area{
+
+    font-size:28px;
+
+    color:#d86b9c;
+
+    letter-spacing:6px;
+
+    margin-bottom:15px;
+
+}
