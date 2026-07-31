@@ -47,28 +47,28 @@ function addGameCard() {
     card.className = "game-card";
 
     // 创建标题
-const title = document.createElement("h3");
-title.textContent = `游戏 ${gameCount}`;
+    const title = document.createElement("h3");
+    title.textContent = `游戏 ${gameCount}`;
 
-// 创建文字
-const label = document.createElement("label");
-label.textContent = "游戏名称";
+    // 创建文字
+    const label = document.createElement("label");
+    label.textContent = "游戏名称";
 
-// 创建下拉菜单
-const select = document.createElement("select");
+    // 创建下拉菜单
+    const select = document.createElement("select");
 
-select.className = "game-select";
+    select.className = "game-select";
 
-// 第一项
-const defaultOption = document.createElement("option");
+    // 第一项
+    const defaultOption = document.createElement("option");
 
-defaultOption.value = "";
-defaultOption.textContent = "请选择游戏";
+    defaultOption.value = "";
+    defaultOption.textContent = "请选择游戏";
 
-select.appendChild(defaultOption);
+    select.appendChild(defaultOption);
 
-// 加入所有游戏
-for (let i = 0; i < games.length; i++) {
+    // 加入所有游戏
+    for (let i = 0; i < games.length; i++) {
 
     const option = document.createElement("option");
 
@@ -87,6 +87,6 @@ card.appendChild(label);
 
 card.appendChild(select);
 
-    container.appendChild(card);
+container.appendChild(card);
 
 }
