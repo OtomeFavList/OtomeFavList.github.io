@@ -1,12 +1,63 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <title>Otome FavList</title>
+<meta charset="UTF-8">
+<title>Otome FavList</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div class="container">
 <h1> Otome FavList</h1>
-<p>日乙个人喜好表</p>
-<p>选择你喜欢的角色，生成属于你的属性表。</p>
+<p class="intro">
+日乙个人喜好表<br>
+选择你喜欢的角色，生成属于你的属性表。
+</p>
+<div class="card">
+<h2> 基础信息</h2>
+<p>
+姓名（必填）
+</p>
+<input type="text" placeholder="请输入姓名">
+<p>
+好友码
+</p>
+<input type="text" placeholder="请输入好友码">
+<p>
+游玩乙女游戏数量
+</p>
+<input type="number" placeholder="例如：20">
+<p>
+入坑时间
+</p>
+<input type="text" placeholder="例如：2020年">
+<p>
+入坑作品
+</p>
+<input type="text" placeholder="例如：薄樱鬼">
+</div>
+<div class="card">
+<h2> 游戏喜好</h2>
+<p>
+选择游戏：
+</p>
+<select>
+<option>
+请选择游戏
+</option>
+<option>
+薄樱鬼
+</option>
+<option>
+Code:Realize
+</option>
+<option>
+Collar×Malice
+</option>
+</select>
+</div>
+<button>
+生成我的 FavList
+</button>
+</div>
 </body>
 </html>
