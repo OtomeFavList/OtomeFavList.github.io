@@ -1,84 +1,480 @@
-// ======================================
-// Otome FavList
-// gameLoader.js
-// ======================================
+// ======================================================
+// Otome FavList V3
+// Game Loader
+// ======================================================
 
-// 当前已经添加的游戏
-let addedGames = [];
+"use strict";
 
-// ======================================
-// 打开游戏搜索
-// ======================================
 
-function openGameSearch() {
+// ======================================================
+// Current Game
+// ======================================================
+
+let currentGame = null;
+
+
+// ======================================================
+// Open Game Selector
+// ======================================================
+
+function openGameSelector() {
 
     const modal = document.getElementById(
-        "gameSearchModal"
+
+        "gameSelectorModal"
+
     );
 
-    const input = document.getElementById(
-        "gameSearchInput"
-    );
-
-    if (!modal || !input) {
+    if (!modal) {
 
         return;
 
     }
 
-    modal.classList.remove("hidden");
+    modal.classList.add(
 
-    input.value = "";
+        "show"
 
-    renderGameSearchResult("");
+    );
 
-    input.focus();
+    buildGameList("");
 
 }
 
-// ======================================
-// 关闭搜索
-// ======================================
 
-function closeGameSearch() {
+// ======================================================
+// Close Game Selector
+// ======================================================
+
+function closeGameSelector() {
 
     const modal = document.getElementById(
-        "gameSearchModal"
+
+        "gameSelectorModal"
+
     );
 
-    if (modal) {
-
-        modal.classList.add("hidden");
-
-    }
-
-}
-
-// ======================================
-// 初始化
-// ======================================
-
-function initializeGameSearch() {
-
-    const input = document.getElementById(
-        "gameSearchInput"
-    );
-
-    if (!input) {
+    if (!modal) {
 
         return;
 
     }
 
-    input.addEventListener(
+    modal.classList.remove(
 
-        "input",
+        "show"
 
-        function () {
+    );
 
-            renderGameSearchResult(
+}
 
-                input.value.trim()
+
+// ======================================================
+// Build Game List
+// ======================================================
+
+function buildGameList(
+
+    keyword = ""
+
+) {
+
+    const list = document.getElementById(
+
+        "gameSearchResult"
+
+    );
+
+    if (!list) {
+
+        return;
+
+    }
+
+    list.innerHTML = "";
+
+    let games = getAllGames();
+
+    //----------------------------------------
+    // Search
+    //----------------------------------------
+
+    if (
+
+        keyword.trim() !== ""
+
+    ) {
+
+        const text = keyword
+
+            .trim()
+
+            .toLowerCase();
+
+        games = games.filter(game => {
+
+            //--------------------------------
+            // Name
+            //--------------------------------
+
+            if (
+
+                game.name.toLowerCase().includes(text)
+
+            ) {
+
+                return true;
+
+            }
+
+            //--------------------------------
+            // English
+            //--------------------------------
+
+            if (
+
+                game.englishName
+
+                .toLowerCase()
+
+                .includes(text)
+
+            ) {
+
+                return true;
+
+            }
+
+            //--------------------------------
+            // Keywords
+            //--------------------------------
+
+            return game.keywords.some(
+
+                keyword =>
+
+                keyword
+
+                .toLowerCase()
+
+                .includes(text)
+
+            );
+
+        });
+
+    }
+
+    renderGameList(
+
+        games
+
+    );
+
+}
+
+// ======================================================
+// Render Game List
+// ======================================================
+
+function renderGameList(
+
+    games
+
+) {
+
+    const list = document.getElementById(
+
+        "gameSearchResult"
+
+    );
+
+    if (!list) {
+
+        return;
+
+    }
+
+    list.innerHTML = "";
+
+    //------------------------------------------
+    // Empty
+    //------------------------------------------
+
+    if (
+
+        games.length === 0
+
+    ) {
+
+        const empty = document.createElement(
+
+            "div"
+
+        );
+
+        empty.className =
+
+            "game-search-empty";
+
+        empty.textContent =
+
+            "没有找到对应游戏。";
+
+        list.appendChild(
+
+            empty
+
+        );
+
+        return;
+
+    }
+
+    //------------------------------------------
+    // Game Card
+    //------------------------------------------
+
+    games.forEach(game => {
+
+        const item = createGameListItem(
+
+            game
+
+        );
+
+        list.appendChild(
+
+            item
+
+        );
+
+    });
+
+}
+
+
+// ======================================================
+// Create Game Item
+// ======================================================
+
+function createGameListItem(
+
+    game
+
+) {
+
+    const button = document.createElement(
+
+        "button"
+
+    );
+
+    button.type =
+
+        "button";
+
+    button.className =
+
+        "game-search-item";
+
+    button.dataset.gameId =
+
+        game.id;
+
+    //--------------------------------------------------
+    // Left
+    //--------------------------------------------------
+
+    const left = document.createElement(
+
+        "div"
+
+    );
+
+    left.className =
+
+        "game-search-left";
+
+    //--------------------------------------------------
+    // Cover
+    //--------------------------------------------------
+
+    const cover = document.createElement(
+
+        "img"
+
+    );
+
+    cover.className =
+
+        "game-search-cover";
+
+    cover.src =
+
+        game.cover;
+
+    cover.alt =
+
+        game.name;
+
+    cover.loading =
+
+        "lazy";
+
+    left.appendChild(
+
+        cover
+
+    );
+
+    //--------------------------------------------------
+    // Text
+    //--------------------------------------------------
+
+    const info = document.createElement(
+
+        "div"
+
+    );
+
+    info.className =
+
+        "game-search-info";
+
+    const title = document.createElement(
+
+        "div"
+
+    );
+
+    title.className =
+
+        "game-search-title";
+
+    title.textContent =
+
+        game.name;
+
+    const english = document.createElement(
+
+        "div"
+
+    );
+
+    english.className =
+
+        "game-search-english";
+
+    english.textContent =
+
+        game.englishName;
+
+    info.appendChild(
+
+        title
+
+    );
+
+    info.appendChild(
+
+        english
+
+    );
+
+    left.appendChild(
+
+        info
+
+    );
+
+    button.appendChild(
+
+        left
+
+    );
+
+//--------------------------------------------------
+    // Right
+    //--------------------------------------------------
+
+    const right = document.createElement(
+
+        "div"
+
+    );
+
+    right.className =
+
+        "game-search-right";
+
+    //--------------------------------------------------
+    // Company
+    //--------------------------------------------------
+
+    const company = document.createElement(
+
+        "div"
+
+    );
+
+    company.className =
+
+        "game-search-company";
+
+    company.textContent =
+
+        game.company;
+
+    right.appendChild(
+
+        company
+
+    );
+
+    //--------------------------------------------------
+    // Platform
+    //--------------------------------------------------
+
+    const platform = document.createElement(
+
+        "div"
+
+    );
+
+    platform.className =
+
+        "game-search-platform";
+
+    platform.textContent =
+
+        game.platforms.join(" · ");
+
+    right.appendChild(
+
+        platform
+
+    );
+
+    button.appendChild(
+
+        right
+
+    );
+
+    //--------------------------------------------------
+    // Click
+    //--------------------------------------------------
+
+    button.addEventListener(
+
+        "click",
+
+        () => {
+
+            loadGame(
+
+                game.id
 
             );
 
@@ -86,18 +482,66 @@ function initializeGameSearch() {
 
     );
 
+    return button;
+
 }
 
-// ======================================
-// 搜索游戏
-// ======================================
 
-function renderGameSearchResult(keyword) {
+// ======================================================
+// Load Game
+// ======================================================
 
-    const container =
-        document.getElementById(
-            "gameSearchResult"
-        );
+function loadGame(
+
+    gameID
+
+) {
+
+    currentGame = getGame(
+
+        gameID
+
+    );
+
+    if (
+
+        !currentGame
+
+    ) {
+
+        return;
+
+    }
+
+    //------------------------------------------
+    // Close Modal
+    //------------------------------------------
+
+    closeGameSelector();
+
+    //------------------------------------------
+    // Create Card
+    //------------------------------------------
+
+    createGameCard(
+
+        currentGame
+
+    );
+
+}
+
+// ======================================================
+// Create Game Card
+// ======================================================
+
+function createGameCard(game) {
+
+    const container = document.getElementById(
+
+        "gameContainer"
+
+    );
 
     if (!container) {
 
@@ -105,147 +549,246 @@ function renderGameSearchResult(keyword) {
 
     }
 
-    container.innerHTML = "";
+    //------------------------------------------
+    // Root
+    //------------------------------------------
 
-    // 所有游戏
-    const allGames =
-        getAllGames();
+    const card = document.createElement(
 
-    // 过滤
-    const result = allGames.filter(game => {
+        "section"
 
-        // 已添加的不再显示
-        if (addedGames.includes(game.id)) {
+    );
 
-            return false;
+    card.className =
 
-        }
+        "game-card";
 
-        if (keyword === "") {
+    card.dataset.gameId =
 
-            return true;
+        game.id;
 
-        }
+    //------------------------------------------
+    // Header
+    //------------------------------------------
 
-        const text =
-            keyword.toLowerCase();
+    card.appendChild(
 
-        return (
+        createGameHeader(game)
 
-            game.name
-                .toLowerCase()
-                .includes(text)
+    );
 
-            ||
+    //------------------------------------------
+    // Character
+    //------------------------------------------
 
-            game.shortName
-                .toLowerCase()
-                .includes(text)
+    card.appendChild(
 
-            ||
+        createCharacterSection(game)
 
-            game.company
-                .toLowerCase()
-                .includes(text)
+    );
 
-            ||
+    //------------------------------------------
+    // Couple
+    //------------------------------------------
 
-            game.localization
-                .toLowerCase()
-                .includes(text)
+    card.appendChild(
+
+        createCoupleSection(game)
+
+    );
+
+    container.appendChild(
+
+        card
+
+    );
+
+}
+
+// ======================================================
+// Game Header
+// ======================================================
+
+function createGameHeader(game) {
+
+    const header = document.createElement(
+
+        "div"
+
+    );
+
+    header.className =
+
+        "game-header";
+
+    //------------------------------------------
+    // Title
+    //------------------------------------------
+
+    const title = document.createElement(
+
+        "h2"
+
+    );
+
+    title.className =
+
+        "game-title";
+
+    title.textContent =
+
+        game.name;
+
+    header.appendChild(
+
+        title
+
+    );
+
+    return header;
+
+}
+
+// ======================================================
+// Add Game Button
+// ======================================================
+
+function initializeGameLoader() {
+
+    const addButton = document.getElementById(
+
+        "addGameBtn"
+
+    );
+
+    if (addButton) {
+
+        addButton.addEventListener(
+
+            "click",
+
+            openGameSelector
 
         );
 
-    });
+    }
 
-    if (result.length === 0) {
+    const searchInput = document.getElementById(
 
-        container.innerHTML = `
+        "gameSearchInput"
 
-            <div class="search-empty">
+    );
 
-                没有找到符合条件的游戏
+    if (searchInput) {
 
-            </div>
+        searchInput.addEventListener(
 
-        `;
+            "input",
+
+            event => {
+
+                buildGameList(
+
+                    event.target.value
+
+                );
+
+            }
+
+        );
+
+    }
+
+}
+
+
+// ======================================================
+// Remove Game Card
+// ======================================================
+
+function removeGameCard(gameID) {
+
+    const card = document.querySelector(
+
+        `.game-card[data-game-id="${gameID}"]`
+
+    );
+
+    if (card) {
+
+        card.remove();
+
+    }
+
+}
+
+
+// ======================================================
+// Check Exists
+// ======================================================
+
+function hasGameCard(gameID) {
+
+    return !!document.querySelector(
+
+        `.game-card[data-game-id="${gameID}"]`
+
+    );
+
+}
+
+
+// ======================================================
+// Override Load Game
+// ======================================================
+
+function loadGame(gameID) {
+
+    if (
+
+        hasGameCard(gameID)
+
+    ) {
+
+        closeGameSelector();
 
         return;
 
     }
 
-    result.forEach(game => {
+    const game = getGame(gameID);
 
-        container.appendChild(
+    if (!game) {
 
-            createSearchItem(game)
+        return;
 
-        );
+    }
 
-    });
+    currentGame = game;
 
-}
+    createGameCard(
 
-// ======================================
-// 搜索结果
-// ======================================
-
-function createSearchItem(game) {
-
-    const item =
-        document.createElement("div");
-
-    item.className =
-        "game-search-item";
-
-    item.innerHTML = `
-
-        <div class="search-cover">
-
-            <img
-                src="${game.cover}"
-                alt="${game.name}">
-
-        </div>
-
-        <div class="search-info">
-
-            <div class="search-name">
-
-                ${game.name}
-
-            </div>
-
-            <div class="search-company">
-
-                ${game.company}
-
-            </div>
-
-            <div class="search-platform">
-
-                ${game.platforms.join(" · ")}
-
-            </div>
-
-        </div>
-
-    `;
-
-    item.addEventListener(
-
-        "click",
-
-        () => {
-
-            addGame(game);
-
-            closeGameSearch();
-
-        }
+        game
 
     );
 
-    return item;
+    closeGameSelector();
 
 }
+
+
+// ======================================================
+// Initialize
+// ======================================================
+
+document.addEventListener(
+
+    "DOMContentLoaded",
+
+    () => {
+
+        initializeGameLoader();
+
+    }
+
+);
