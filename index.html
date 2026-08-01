@@ -52,13 +52,15 @@
             <label>昵称</label>
             <input type="text" id="input-nick" placeholder="填写你的昵称">
         </div>
+        <!-- 修改3：游玩数量增加min=0 -->
         <div class="form-row">
             <label>游玩总数</label>
-            <input type="number" id="input-count" placeholder="数字">
+            <input type="number" id="input-count" placeholder="数字" min="0">
         </div>
+        <!-- 修改1：入坑事件 → 入坑时间 -->
         <div class="form-row">
-            <label>入坑事件</label>
-            <input type="text" id="input-story" placeholder="简单描述入坑契机">
+            <label>入坑时间</label>
+            <input type="text" id="input-story" placeholder="例如：2024年夏天">
         </div>
         <div class="form-row">
             <label>入坑作品</label>
@@ -69,7 +71,10 @@
     <!-- 三、游戏列表卡片 -->
     <div class="big-card" id="card-game">
         <h2>三、游戏列表</h2>
-        <button id="btn-add-game">+ 添加游戏</button>
+        <!-- 修改2：添加游戏按钮套居中容器 -->
+        <div class="center-btn-block">
+            <button id="btn-add-game">+ 添加游戏</button>
+        </div>
         <!-- 搜索筛选面板 -->
         <div class="game-search-box hide-block" id="search-panel">
             <input type="text" id="game-search-input" placeholder="搜索游戏名称">
@@ -102,19 +107,19 @@
         <div class="color-set-row">
             <div class="color-item">
                 <label>背景色（纯色）</label>
-                <input type="color" id="color-bg" value="#ffffff">
+                <input type="color" id="color-bg" value="#f7f8fa">
             </div>
             <div class="color-item">
                 <label>标题文字色</label>
-                <input type="color" id="color-title" value="#222222">
+                <input type="color" id="color-title" value="#111827">
             </div>
             <div class="color-item">
                 <label>正文文字色</label>
-                <input type="color" id="color-text" value="#333333">
+                <input type="color" id="color-text" value="#374151">
             </div>
             <div class="color-item">
                 <label>卡片边框色</label>
-                <input type="color" id="color-border" value="#aaaaaa">
+                <input type="color" id="color-border" value="#9ca3af">
             </div>
         </div>
         <div class="size-select">
@@ -125,7 +130,10 @@
             <label><input type="radio" name="export-size" value="1080,1920">小红书竖版1080×1920</label>
             <label><input type="radio" name="export-size" value="1080,1080">微博正方形1:1</label>
         </div>
-        <button id="btn-export">生成并导出图片</button>
+        <!-- 修改2：导出按钮居中 -->
+        <div class="center-btn-block">
+            <button id="btn-export">生成并导出图片</button>
+        </div>
         <canvas id="export-canvas" style="display:none;"></canvas>
     </div>
 </div>
