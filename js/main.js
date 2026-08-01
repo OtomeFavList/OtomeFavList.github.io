@@ -391,10 +391,10 @@ el.exportBtn.onclick = function(){
     // 绘制基础资料，无内容跳过
     const base = appData.baseInfo;
     const baseArr = [
-        base.nick ? `昵称：${base.nick}` : "",
-        base.count ? `游玩数量：${base.count}` : "",
-        base.story ? `入坑事件：${base.story}` : "",
-        base.firstgame ? `入坑作品：${base.firstgame}` : ""
+    base.nick ? `昵称：${base.nick}` : "",
+    base.count ? `游玩数量：${base.count}` : "",
+    base.story ? `入坑时间：${base.story}` : "",
+    base.firstgame ? `入坑作品：${base.firstgame}` : ""
     ].filter(x=>x);
     if(baseArr.length>0){
         ctx.fillStyle = color.title;
