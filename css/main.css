@@ -1,5 +1,10 @@
 *{margin:0;padding:0;box-sizing:border-box;font-family:"Noto Sans SC",system-ui,sans-serif;}
-body{background:#fff;color:#222;padding:20px;transition:background 0.2s;}
+body{
+    background: #f7f8fa;
+    color: #1f2937;
+    padding:20px;
+    transition:background 0.2s;
+}
 
 /* 全局居中标题 */
 .site-title{text-align:center;margin:30px 0 10px;}
@@ -99,3 +104,10 @@ button:hover{background:#2d58bb;}
 
 /* 折叠隐藏类 */
 .hide-block{display:none;}
+
+/* 居中按钮专用 */
+.center-btn-block{
+    display:flex;
+    justify-content:center;
+    margin:16px 0;
+}
