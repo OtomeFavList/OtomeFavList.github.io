@@ -6,7 +6,7 @@ let appData = {
     gameSpoilerRecord: {},
     baseInfo: {nick:"",count:"",story:"",firstgame:""},
     gameList: [],
-    exportColor: {bg:"#fff0f3",title:"#b33a3a",text:"#b33a3a",border:"#f6a5b8"}
+    exportColor: {bg:"#fff7f9",title:"#b33a3a",text:"#b33a3a",border:"#f6a5b8"}
 };
 
 // 页面元素缓存
