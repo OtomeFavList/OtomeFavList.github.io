@@ -1,668 +1,158 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Otome FavList</title>
-
-    <link rel="stylesheet" href="css/style.css">
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Otome FavList</title>
+<!-- 全局字体：小杉圆体粗体 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@900&display=swap" rel="stylesheet">
+<!-- 外部样式 -->
+<link rel="stylesheet" href="./css/main.css">
 </head>
-
 <body>
-
-<div class="container">
-
-    <!-- ==========================
-         Header
-    =========================== -->
-
-    <header class="header">
-
-        <h1>Otome FavList</h1>
-
-        <p class="subtitle">
-            日乙个人喜好表
-        </p>
-
-        <p class="description">
-            选择你喜欢的角色，生成属于你的FavList。
-        </p>
-
-    </header>
-
-    <!-- ==========================
-         设置
-    =========================== -->
-
-    <section class="card settings-card">
-
-        <div class="card-title">
-
-            <h2>设置</h2>
-
-        </div>
-
-        <div class="setting-item">
-
-            <label class="switch">
-
-                <input
-                    id="globalHiddenSwitch"
-                    type="checkbox">
-
-                <span class="slider"></span>
-
-            </label>
-
-            <div class="setting-text">
-
-                <h3>显示所有游戏隐藏角色</h3>
-
-                <p>
-
-                    开启后，新添加的游戏默认显示隐藏角色。
-
-                </p>
-
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- ==========================
-         基础资料
-    =========================== -->
-
-    <section class="card">
-
-        <div class="card-title">
-
-            <h2>基础资料</h2>
-
-        </div>
-
-        <div class="form-grid">
-
-            <div class="form-group">
-
-                <label for="nickname">
-
-                    昵称*
-
-                </label>
-
-                <input
-
-                    id="nickname"
-
-                    type="text"
-
-                    placeholder="请输入昵称">
-
-            </div>
-
-            <div class="form-group">
-
-                <label for="gameCount">
-
-                    游玩数量
-
-                </label>
-
-                <input
-
-                    id="gameCount"
-
-                    type="number"
-
-                    placeholder="例如：35">
-
-            </div>
-
-            <div class="form-group">
-
-                <label for="startYear">
-
-                    入坑时间
-
-                </label>
-
-                <input
-
-                    id="startYear"
-
-                    type="text"
-
-                    placeholder="例如：2020">
-
-            </div>
-
-            <div class="form-group">
-
-                <label for="firstGame">
-
-                    入坑作品
-
-                </label>
-
-                <input
-
-                    id="firstGame"
-
-                    type="text"
-
-                    placeholder="请输入作品">
-
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- ==========================
-         游戏列表
-    =========================== -->
-
-    <section class="card">
-
-        <div class="card-title">
-
-            <h2>游戏列表</h2>
-
-        </div>
-
-        <div
-
-            id="gameContainer"
-
-            class="game-container">
-
-            <div class="empty-state">
-
-                <h3>
-
-                    还没有添加游戏
-
-                </h3>
-
-                <p>
-
-                    点击下方按钮开始添加。
-
-                </p>
-
-            </div>
-
-        </div>
-
-        <div class="button-area">
-
-            <button
-
-                id="addGameBtn"
-
-                class="primary-button"
-
-                type="button">
-
-                添加游戏
-
-            </button>
-
-        </div>
-
-    </section>
-
-    <!-- ==========================
-         导出
-    =========================== -->
-
-    <section class="card">
-
-        <div class="card-title">
-
-            <h2>导出</h2>
-
-        </div>
-
-        <div class="export-options">
-
-            <label class="radio-item">
-
-                <input
-                    type="radio"
-                    name="exportSize"
-                    value="1080x1440"
-                    checked>
-
-                <span>1080 × 1440（推荐）</span>
-
-            </label>
-
-            <label class="radio-item">
-
-                <input
-                    type="radio"
-                    name="exportSize"
-                    value="810x1080">
-
-                <span>810 × 1080</span>
-
-            </label>
-
-        </div>
-
-        <div class="button-area">
-
-            <button
-
-                id="generateBtn"
-
-                class="primary-button"
-
-                type="button">
-
-                生成 FavList
-
-            </button>
-
-        </div>
-
-    </section>
-
-    <!-- ==========================
-         About
-    =========================== -->
-
-    <footer class="card about-card">
-
-        <div class="card-title">
-
-            <h2>About</h2>
-
-        </div>
-
-        <p>
-
-            由于开发者个人没有接触所有游戏，
-            因此会有部分游戏缺少隐藏角色。
-
-        </p>
-
-        <p>
-
-            如果发现角色遗漏（若涉及剧透烦请添加预警）、
-            图片错误、功能异常，或有希望新增的作品，
-            欢迎通过邮箱联系。
-
-        </p>
-
-        <p class="email">
-
-            Email：
-            otomefavlist@163.com
-
-        </p>
-
-        <p class="version">
-
-            Version 1.0.0
-
-        </p>
-
-    </footer>
-
+<!-- 页面标题 -->
+<div class="site-title">
+    <h1>Otome FavList</h1>
+    <p>日乙个人喜好表</p>
 </div>
+<p class="sub-desc">选择你喜欢的角色，生成属于你的FavList。</p>
 
-<!-- ==========================
-     隐藏角色提示
-========================== -->
-
-<div
-
-    id="spoilerModal"
-
-    class="modal hidden">
-
-    <div class="modal-content">
-
-        <h2>
-
-            注意
-
-        </h2>
-
-        <p>
-
-            开启隐藏角色后，
-            可能会显示：
-
-        </p>
-
-        <ul>
-
-            <li>最终攻略对象</li>
-
-            <li>真相路线角色</li>
-
-            <li>剧透相关人物</li>
-
-        </ul>
-
-        <p>
-
-            是否继续显示？
-
-        </p>
-
-        <div class="modal-buttons">
-
-            <button
-
-                id="cancelSpoiler"
-
-                class="secondary-button">
-
-                取消
-
-            </button>
-
-            <button
-
-                id="confirmSpoiler"
-
-                class="primary-button">
-
-                继续显示
-
-            </button>
-
+<div class="wrap">
+    <!-- 一、全局设置卡片 -->
+    <div class="big-card" id="card-setting">
+        <h2>一、设置</h2>
+        <div class="switch-row">
+            <label class="switch">
+                <input type="checkbox" id="global-hide-char">
+                <span class="slider"></span>
+            </label>
+            <div>
+                <span>全局显示隐藏角色</span>
+                <p class="switch-desc">开启后所有游戏默认展示隐藏角色；关闭则全局默认隐藏。单个游戏可独立覆盖该设置，切换此全局开关会触发剧透警告弹窗。</p>
+            </div>
         </div>
-
+        <div class="switch-row">
+            <label class="switch">
+                <input type="checkbox" id="global-fd-game">
+                <span class="slider"></span>
+            </label>
+            <div>
+                <span>全局显示续作/FD角色</span>
+                <p class="switch-desc">开启后所有游戏默认展示FD、续作专属角色；关闭全局隐藏，单游戏可单独开启，切换全局开关触发剧透警告弹窗。</p>
+            </div>
+        </div>
     </div>
 
+    <!-- 二、基础资料卡片 -->
+    <div class="big-card" id="card-base">
+        <h2>二、基础资料</h2>
+        <div class="form-row">
+            <label>昵称</label>
+            <input type="text" id="input-nick" placeholder="填写你的昵称">
+        </div>
+        <div class="form-row">
+            <label>游玩总数</label>
+            <input type="number" id="input-count" placeholder="数字">
+        </div>
+        <div class="form-row">
+            <label>入坑事件</label>
+            <input type="text" id="input-story" placeholder="简单描述入坑契机">
+        </div>
+        <div class="form-row">
+            <label>入坑作品</label>
+            <input type="text" id="input-firstgame" placeholder="第一款日乙游戏">
+        </div>
+    </div>
+
+    <!-- 三、游戏列表卡片 -->
+    <div class="big-card" id="card-game">
+        <h2>三、游戏列表</h2>
+        <button id="btn-add-game">+ 添加游戏</button>
+        <!-- 搜索筛选面板 -->
+        <div class="game-search-box hide-block" id="search-panel">
+            <input type="text" id="game-search-input" placeholder="搜索游戏名称">
+            <div class="filter-group">
+                <select id="filter-year">
+                    <option value="">全部发售年份</option>
+                </select>
+                <select id="filter-publisher">
+                    <option value="">全部发行厂商</option>
+                </select>
+                <select id="filter-cn">
+                    <option value="">全部汉化厂商</option>
+                </select>
+                <select id="filter-writer">
+                    <option value="">全部编剧</option>
+                </select>
+                <select id="filter-art">
+                    <option value="">全部原画</option>
+                </select>
+            </div>
+            <div class="game-list-select" id="game-select-list"></div>
+        </div>
+        <!-- 已添加游戏容器 -->
+        <div id="added-game-container"></div>
+    </div>
+
+    <!-- 四、导出设置卡片 -->
+    <div class="big-card" id="card-export">
+        <h2>四、导出</h2>
+        <div class="color-set-row">
+            <div class="color-item">
+                <label>背景色（纯色）</label>
+                <input type="color" id="color-bg" value="#ffffff">
+            </div>
+            <div class="color-item">
+                <label>标题文字色</label>
+                <input type="color" id="color-title" value="#222222">
+            </div>
+            <div class="color-item">
+                <label>正文文字色</label>
+                <input type="color" id="color-text" value="#333333">
+            </div>
+            <div class="color-item">
+                <label>卡片边框色</label>
+                <input type="color" id="color-border" value="#aaaaaa">
+            </div>
+        </div>
+        <div class="size-select">
+            <label>导出尺寸：</label>
+            <label><input type="radio" name="export-size" value="810,1080" checked>810×1080</label>
+            <label><input type="radio" name="export-size" value="1080,1440">1080×1440</label>
+            <label><input type="radio" name="export-size" value="long">超长图（无分页）</label>
+            <label><input type="radio" name="export-size" value="1080,1920">小红书竖版1080×1920</label>
+            <label><input type="radio" name="export-size" value="1080,1080">微博正方形1:1</label>
+        </div>
+        <button id="btn-export">生成并导出图片</button>
+        <canvas id="export-canvas" style="display:none;"></canvas>
+    </div>
 </div>
 
-<!-- ==========================
-     游戏搜索模板
-========================== -->
+<!-- About区域 -->
+<div class="about-block">
+    <h2>About</h2>
+    <p>由于开发者个人没有接触所有游戏，因此会有部分游戏缺少隐藏角色。</p>
+    <p>如果发现角色遗漏（若涉及剧透烦请在邮件标题添加预警）、图片错误、功能异常，或有希望新增的作品，欢迎通过邮箱联系。</p>
+    <p>Email：otomefavlist@163.com</p>
+</div>
 
-<template id="gameCardTemplate">
-
-    <section class="game-card">
-
-        <!-- ==========================
-             卡片标题
-        =========================== -->
-
-        <div class="game-card-header">
-
-            <div class="game-card-title">
-
-                <span class="game-number">
-
-                    游戏
-
-                </span>
-
-                <span class="selected-game-name">
-
-                    未选择游戏
-
-                </span>
-
-            </div>
-
-            <button
-
-                class="collapse-button"
-
-                type="button">
-
-                收起
-
-            </button>
-
+<!-- 剧透警告弹窗遮罩 -->
+<div class="modal-mask" id="spoiler-modal">
+    <div class="modal-box">
+        <h3>⚠️ 剧透警告</h3>
+        <p>注意！打开后可能涉及：剧情结局、最终攻略对象、真相路线，是否继续？</p>
+        <div class="modal-btns">
+            <button class="btn-del" id="spoiler-cancel">取消</button>
+            <button id="spoiler-confirm">显示</button>
         </div>
-
-        <!-- ==========================
-             搜索游戏
-        =========================== -->
-
-        <div class="game-search-area">
-
-            <label>
-
-                游戏名称
-
-            </label>
-
-            <div class="search-select">
-
-                <input
-
-                    class="game-search-input"
-
-                    type="text"
-
-                    placeholder="搜索或选择游戏">
-
-                <button
-
-                    class="search-button"
-
-                    type="button">
-
-                    ▼
-
-                </button>
-
-                <div class="search-result hidden">
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <!-- ==========================
-             游戏内容
-        =========================== -->
-
-        <div class="game-detail">
-
-            <!-- 喜爱度 -->
-
-            <div class="section-block">
-
-                <h3>
-
-                    喜爱度
-
-                </h3>
-
-                <div class="heart-container">
-
-                    <button class="heart" data-value="1"></button>
-
-                    <button class="heart" data-value="2"></button>
-
-                    <button class="heart" data-value="3"></button>
-
-                    <button class="heart" data-value="4"></button>
-
-                    <button class="heart" data-value="5"></button>
-
-                </div>
-
-            </div>
-
-            <!-- 隐藏角色 -->
-
-            <div class="section-block">
-
-                <div class="setting-item">
-
-                    <label class="switch">
-
-                        <input
-
-                            class="hidden-character-switch"
-
-                            type="checkbox">
-
-                        <span class="slider"></span>
-
-                    </label>
-
-                    <div class="setting-text">
-
-                        <h3>
-
-                            显示本游戏隐藏角色
-
-                        </h3>
-
-                        <p>
-
-                            仅影响当前游戏。
-
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <!-- 我推 -->
-
-            <div class="section-block">
-
-                <h3>
-
-                    Character
-
-                </h3>
-
-                <div
-
-                    class="favorite-character-area">
-
-                </div>
-
-            </div>
-
-            <!-- 我推CP -->
-
-            <div class="section-block">
-
-                <h3>
-
-                    Couple
-
-                </h3>
-
-                <div class="cp-layout">
-
-                    <div class="heroine-column">
-
-                        <div class="heroine-select">
-
-                        </div>
-
-                    </div>
-
-                    <div class="hero-column">
-
-                        <div
-
-                            class="cp-character-area">
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <!-- 游戏摘要（折叠后显示） -->
-
-            <div class="game-summary hidden">
-
-                <div class="summary-row">
-
-                    <span>游戏</span>
-
-                    <span class="summary-game-name">
-                        未选择
-                    </span>
-
-                </div>
-
-                <div class="summary-row">
-
-                    <span>喜爱度</span>
-
-                    <span class="summary-heart">
-                        0 / 5
-                    </span>
-
-                </div>
-
-                <div class="summary-row">
-
-                    <span>我推</span>
-
-                    <span class="summary-favorite-count">
-                        0 人
-                    </span>
-
-                </div>
-
-                <div class="summary-row">
-
-                    <span>我推 CP</span>
-
-                    <span class="summary-cp-count">
-                        0 组
-                    </span>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-</template>
-
-<!-- ==========================
-     JavaScript
-========================== -->
-
-<script src="data/index.js"></script>
-
-<script src="js/storage.js"></script>
-
-<script src="js/modal.js"></script>
-
-<script src="js/settings.js"></script>
-
-<script src="js/gameCard.js"></script>
-
-<script src="js/export.js"></script>
-
-<script src="js/app.js"></script>
-
+    </div>
+</div>
+
+<!-- JS加载顺序：loader→data→主逻辑 -->
+<script src="./js/loader.js"></script>
+<script src="./data/games.js"></script>
+<script src="./js/main.js"></script>
 </body>
-
 </html>
