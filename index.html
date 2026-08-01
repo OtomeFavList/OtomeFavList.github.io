@@ -15,9 +15,8 @@
 <!-- 页面标题 -->
 <div class="site-title">
     <h1>Otome FavList</h1>
-    <p>日乙个人喜好表</p>
+    <p class="sub-desc text-black">选择你喜欢的角色，生成属于你的FavList。</p>
 </div>
-<p class="sub-desc">选择你喜欢的角色，生成属于你的FavList。</p>
 
 <div class="wrap">
     <!-- 一、全局设置卡片 -->
@@ -29,8 +28,8 @@
                 <span class="slider"></span>
             </label>
             <div>
-                <span>全局显示隐藏角色</span>
-                <p class="switch-desc">开启后所有游戏默认展示隐藏角色；关闭则全局默认隐藏。单个游戏可独立覆盖该设置，切换此全局开关会触发剧透警告弹窗。</p>
+                <span class="text-light-pink">全局显示隐藏角色</span>
+                <p class="switch-desc">开启后默认展示隐藏角色；关闭则所有游戏默认隐藏。单个游戏可单独开启，切换此全局开关会触发剧透警告弹窗。</p>
             </div>
         </div>
         <div class="switch-row">
@@ -39,8 +38,8 @@
                 <span class="slider"></span>
             </label>
             <div>
-                <span>全局显示续作/FD角色</span>
-                <p class="switch-desc">开启后所有游戏默认展示FD、续作专属角色；关闭全局隐藏，单游戏可单独开启，切换全局开关触发剧透警告弹窗。</p>
+                <span class="text-light-pink">全局显示续作/FD角色</span>
+                <p class="switch-desc">开启后默认展示续作、FD专属角色；关闭则所有游戏默认隐藏。单个游戏可单独开启，切换此全局开关会触发剧透警告弹窗。</p>
             </div>
         </div>
     </div>
@@ -49,21 +48,21 @@
     <div class="big-card" id="card-base">
         <h2>二、基础资料</h2>
         <div class="form-row">
-            <label>昵称</label>
+            <label class="text-light-pink">昵称</label>
             <input type="text" id="input-nick" placeholder="填写你的昵称">
         </div>
-        <!-- 修改3：游玩数量增加min=0 -->
+        <!-- 游玩数量增加min=0 -->
         <div class="form-row">
-            <label>游玩总数</label>
+            <label class="text-light-pink">游玩总数</label>
             <input type="number" id="input-count" placeholder="数字" min="0">
         </div>
-        <!-- 修改1：入坑事件 → 入坑时间 -->
+        <!-- 入坑事件 → 入坑时间 -->
         <div class="form-row">
-            <label>入坑时间</label>
-            <input type="text" id="input-story" placeholder="例如：2024年">
+            <label class="text-light-pink">入坑时间</label>
+            <input type="text" id="input-story" placeholder="例如：2024年夏天">
         </div>
         <div class="form-row">
-            <label>入坑作品</label>
+            <label class="text-light-pink">入坑作品</label>
             <input type="text" id="input-firstgame" placeholder="第一款日乙游戏">
         </div>
     </div>
@@ -71,7 +70,7 @@
     <!-- 三、游戏列表卡片 -->
     <div class="big-card" id="card-game">
         <h2>三、游戏列表</h2>
-        <!-- 修改2：添加游戏按钮套居中容器 -->
+        <!-- 添加游戏按钮居中容器 -->
         <div class="center-btn-block">
             <button id="btn-add-game">+ 添加游戏</button>
         </div>
@@ -106,31 +105,31 @@
         <h2>四、导出</h2>
         <div class="color-set-row">
             <div class="color-item">
-                <label>背景色（纯色）</label>
+                <label class="text-light-pink">背景色</label>
                 <input type="color" id="color-bg" value="#fff0f3">
             </div>
             <div class="color-item">
-                <label>标题文字色</label>
+                <label class="text-light-pink">标题文字色</label>
                 <input type="color" id="color-title" value="#b33a3a">
             </div>
             <div class="color-item">
-                <label>正文文字色</label>
+                <label class="text-light-pink">正文文字色</label>
                 <input type="color" id="color-text" value="#b33a3a">
             </div>
             <div class="color-item">
-                <label>卡片边框色</label>
+                <label class="text-light-pink">卡片边框色</label>
                 <input type="color" id="color-border" value="#f6a5b8">
             </div>
         </div>
         <div class="size-select">
-            <label>导出尺寸：</label>
+            <label class="text-light-pink">导出尺寸：</label>
             <label><input type="radio" name="export-size" value="810,1080" checked>810×1080</label>
             <label><input type="radio" name="export-size" value="1080,1440">1080×1440</label>
-            <label><input type="radio" name="export-size" value="long">超长图（无分页）</label>
+            <label><input type="radio" name="export-size" value="long">长图（无分页）</label>
             <label><input type="radio" name="export-size" value="1080,1920">小红书竖版1080×1920</label>
             <label><input type="radio" name="export-size" value="1080,1080">微博正方形1:1</label>
         </div>
-        <!-- 修改2：导出按钮居中 -->
+        <!-- 导出按钮居中 -->
         <div class="center-btn-block">
             <button id="btn-export">生成并导出图片</button>
         </div>
@@ -138,11 +137,11 @@
     </div>
 </div>
 
-<!-- About区域 -->
-<div class="about-block">
+<!-- About区域 全局黑色文字 -->
+<div class="about-block text-black">
     <h2>About</h2>
     <p>由于开发者个人没有接触所有游戏，因此会有部分游戏缺少隐藏角色。</p>
-    <p>如果发现角色遗漏（若涉及剧透烦请在邮件标题添加预警）、图片错误、功能异常，或有希望新增的作品，欢迎通过邮箱联系。</p>
+    <p>如果发现角色遗漏（若涉及剧透烦请在邮件标题添加预警）、图片错误、功能异常，<br>或有希望新增的作品，欢迎通过邮箱联系。</p>
     <p>Email：otomefavlist@163.com</p>
 </div>
 
