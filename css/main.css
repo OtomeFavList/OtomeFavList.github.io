@@ -111,3 +111,20 @@ button:hover{background:#2d58bb;}
     justify-content:center;
     margin:16px 0;
 }
+
+/* 主标题、板块标题红色（保留原红色） */
+h1,h2{
+    color: #b33a3a;
+}
+/* 次要标签淡粉色文字，区分主标题 */
+.text-light-pink{
+    color: #d47080;
+}
+/* 固定黑色文字：副标题、About说明 */
+.text-black{
+    color: #222222;
+}
+/* 开关小字说明也用淡浅灰，弱化层级 */
+.switch-desc{
+    color: #888;
+}
