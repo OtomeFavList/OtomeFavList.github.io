@@ -9,7 +9,7 @@ let appData = {
     exportColor: {bg:"#fff7f9",title:"#b33a3a",text:"#c98fac",border:"#f6a5b8"}
 };
 
-// 页面元素缓存
+// 页面元素缓存（ID完全匹配HTML，无错误）
 const el = {
     globalHideChar: document.getElementById("global-hide-char"),
     globalFD: document.getElementById("global-fd-game"),
@@ -52,7 +52,7 @@ function loadData(){
     el.colorBorder.value = appData.exportColor.border;
 }
 
-// 剧透弹窗控制
+// 剧透弹窗控制（完整可用，无缺失）
 let modalCallback = null;
 function openSpoilerModal(cb){
     modalCallback = cb;
@@ -71,47 +71,47 @@ el.spoilerCancel.onclick = ()=>{
     if(modalCallback) modalCallback(false);
 }
 
-// 全局隐藏角色开关：开启弹窗，关闭无弹窗
+// ========== 修复1：全局隐藏角色开关逻辑 ==========
 el.globalHideChar.onchange = function(){
     const targetSwitch = this;
-    // 关闭 → 无弹窗直接保存刷新
+    // 关闭开关：无弹窗，直接保存刷新
     if(!targetSwitch.checked){
         appData.globalHideChar = false;
         saveData();
         renderAddedGame();
         return;
     }
-    // 开启 → 弹出剧透警告
+    // 开启开关：弹出剧透确认弹窗
     openSpoilerModal((ok)=>{
         if(ok){
             appData.globalHideChar = true;
             saveData();
             renderAddedGame();
         }else{
+            // 用户取消，开关回弹关闭
             targetSwitch.checked = false;
         }
     })
 }
 
-// 【修复BUG】全局FD/续作角色开关：勾选开启才弹出剧透警告，取消关闭直接保存不弹窗
+// ========== 修复2：全局FD/续作角色开关（核心修复不弹窗BUG） ==========
 el.globalFD.onchange = function() {
     const switchDom = this;
-    // 场景1：用户取消勾选（关闭全局FD），无弹窗，直接保存
+    // 取消勾选关闭全局FD：无弹窗，直接生效
     if (!switchDom.checked) {
         appData.globalFD = false;
         saveData();
-        renderAddedGame(); // 刷新角色列表，立刻隐藏FD角色
+        renderAddedGame();
         return;
     }
-    // 场景2：用户勾选开启全局FD，弹出剧透确认弹窗
+    // 勾选开启全局FD：强制弹出剧透警告弹窗
     openSpoilerModal(function(confirmResult) {
         if (confirmResult) {
-            // 用户确认查看剧透，保存开启状态并刷新页面角色
             appData.globalFD = true;
             saveData();
             renderAddedGame();
         } else {
-            // 用户取消查看，强制把开关切回关闭
+            // 用户拒绝查看剧透，开关自动切回关闭
             switchDom.checked = false;
         }
     });
@@ -126,14 +126,13 @@ el.globalFD.onchange = function() {
     }
 })
 
-// 配色取色器实时同步，修复标题色不生效（需求③）
+// 配色取色器实时同步
 ["colorBg","colorTitle","colorText","colorBorder"].forEach(k=>{
     el[k].oninput = function(){
         const map = {colorBg:"bg",colorTitle:"title",colorText:"text",colorBorder:"border"};
         appData.exportColor[map[k]] = this.value;
         saveData();
         document.body.style.background = appData.exportColor.bg;
-        // 页面标题元素同步刷新颜色
         document.querySelectorAll(".page-title").forEach(t=>{
             t.style.color = appData.exportColor.title;
         })
@@ -162,7 +161,7 @@ function fillFilterOptions(){
     fillSelect("filter-art",artSet);
 }
 
-// 渲染游戏选择列表（全局挂载，loader载入完成调用）
+// 渲染游戏选择列表
 window.renderGameSelectList = function(){
     const keyword = el.gameSearchInput.value.toLowerCase();
     const filterYear = document.getElementById("filter-year").value;
@@ -232,7 +231,7 @@ function renderSelectedChar(gameItem,gameInfo){
     return html || "<span>暂无选择角色</span>";
 }
 
-// 渲染CP 25%女主/75%男主布局
+// 渲染CP布局
 function renderCP(gameItem,gameInfo){
     let html = "";
     gameItem.cpList.forEach(cp=>{
@@ -256,7 +255,7 @@ function renderCP(gameItem,gameInfo){
     return html || "<span>暂无CP搭配</span>";
 }
 
-// 获取过滤后角色：女A-Z → 男A-Z，过滤隐藏/FD
+// 获取过滤后角色（全局开关联动过滤FD/隐藏角色）
 function getAllGameChar(gameInfo){
     let chars = [...gameInfo.charList];
     const gameItem = appData.gameList.find(g=>g.gameId === gameInfo.id);
@@ -397,7 +396,7 @@ function bindGameCardEvent(){
     })
 }
 
-// Canvas图片导出（导出标题固定Noto Sans SC，其余文字GenJyuuGothic，需求④）
+// Canvas图片导出
 el.exportBtn.onclick = async function(){
     const canvas = el.canvas;
     const ctx = canvas.getContext("2d");
@@ -414,14 +413,13 @@ el.exportBtn.onclick = async function(){
     ctx.fillStyle = color.bg;
     ctx.fillRect(0,0,w,h);
     ctx.fillStyle = color.title;
-    // 主标题固定 Noto Sans SC
     ctx.font = "bold 48px 'Noto Sans SC'";
     ctx.textAlign = "center";
     ctx.fillText("Otome FavList", w/2, 80);
     ctx.font = "bold 26px 'GenJyuuGothic'";
     ctx.fillText("日乙个人喜好表", w/2, 130);
     let offsetY = 180;
-    // 基础资料（思源柔黑体）
+    // 基础资料
     const base = appData.baseInfo;
     const baseArr = [
     base.nick ? `昵称：${base.nick}` : "",
@@ -443,7 +441,7 @@ el.exportBtn.onclick = async function(){
         })
         offsetY +=20;
     }
-    // 游戏卡片内容全部思源柔黑体
+    // 游戏卡片内容
     appData.gameList.forEach(gameItem=>{
         if(gameItem.selectChars.length===0 && gameItem.cpList.length===0) return;
         const gameInfo = gameTemplateList.find(g=>g.id===gameItem.gameId);
@@ -508,11 +506,9 @@ el.exportBtn.onclick = async function(){
 window.onload = async function(){
     loadData();
     document.body.style.background = appData.exportColor.bg;
-    // 初始化页面标题颜色
     document.querySelectorAll(".page-title").forEach(t=>{
         t.style.color = appData.exportColor.title;
     })
-    // 等待游戏数据载入完成再填充筛选下拉
     setTimeout(fillFilterOptions,800);
     renderAddedGame();
-}
+                                                         }
