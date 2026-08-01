@@ -33,10 +33,22 @@ const el = {
     canvas: document.getElementById("export-canvas")
 };
 
-// 修复：同步直接赋值，取消微任务延迟
+// 当前弹窗操作标记：区分是隐藏角色还是FD开关触发弹窗
+let currentGlobalTarget = ""; // "hideChar" / "fd"
+
+// 同步滑块视觉：只根据appData数据渲染
 window.syncSwitchByData = function() {
     el.globalHideChar.checked = appData.globalHideChar;
     el.globalFD.checked = appData.globalFD;
+}
+
+// 批量同步所有游戏对应全局功能状态
+// type: hideChar / fd
+function syncAllGameSwitch(type, status) {
+    appData.gameList.forEach(game => {
+        if(type === "hideChar") game.localHideChar = status;
+        if(type === "fd") game.localFD = status;
+    })
 }
 
 // 本地存储读写
@@ -54,7 +66,6 @@ function loadData(){
     el.colorTitle.value = appData.exportColor.title;
     el.colorText.value = appData.exportColor.text;
     el.colorBorder.value = appData.exportColor.border;
-    // 加载完成同步滑块
     syncSwitchByData();
 }
 
@@ -68,67 +79,81 @@ function closeSpoilerModal(){
     el.spoilerModal.style.display = "none";
     modalCallback = null;
 }
+
+// 弹窗确认按钮
 el.spoilerConfirm.onclick = ()=>{
     closeSpoilerModal();
     if(modalCallback) modalCallback(true);
 }
+// 弹窗取消按钮
 el.spoilerCancel.onclick = ()=>{
     closeSpoilerModal();
     if(modalCallback) modalCallback(false);
-    // 取消弹窗，强制同步数据，滑块变回灰色
     syncSwitchByData();
 }
 
-// 全局隐藏角色开关【修复】删掉手动置false代码
+// ===================== 全局隐藏角色开关【重写全新逻辑】 =====================
 el.globalHideChar.onchange = function(){
     const targetSwitch = this;
-    const wantOpen = targetSwitch.checked;
+    const newState = targetSwitch.checked;
 
-    if(!wantOpen){
+    // 场景1：关闭全局开关（从粉色点成灰色，无弹窗）
+    if(!newState) {
         appData.globalHideChar = false;
-        syncSwitchByData();
+        syncAllGameSwitch("hideChar", false);
         saveData();
-        setTimeout(renderAddedGame, 50);
+        syncSwitchByData();
+        renderAddedGame();
         return;
     }
 
-    // 移除 targetSwitch.checked = false;
-    openSpoilerModal((ok)=>{
-        appData.globalHideChar = ok;
+    // 场景2：开启全局开关，弹出剧透警告弹窗
+    currentGlobalTarget = "hideChar";
+    openSpoilerModal((confirm)=>{
+        if(confirm){
+            // 用户选择显示：全局开启 + 所有游戏同步开启
+            appData.globalHideChar = true;
+            syncAllGameSwitch("hideChar", true);
+        }else{
+            // 用户取消：全局保持关闭，滑块回灰
+            appData.globalHideChar = false;
+        }
         saveData();
         syncSwitchByData();
-        // 渲染后二次同步兜底
-        setTimeout(()=>{
-            renderAddedGame();
-            syncSwitchByData();
-        }, 200);
+        renderAddedGame();
     })
 }
 
-// 全局FD开关【修复】删掉手动置false代码
+// ===================== 全局FD/续作开关【重写全新逻辑】 =====================
 el.globalFD.onchange = function() {
     const switchDom = this;
-    const wantOpen = switchDom.checked;
+    const newState = switchDom.checked;
 
-    if (!wantOpen) {
+    // 场景1：关闭全局开关（从粉色点成灰色，无弹窗）
+    if (!newState) {
         appData.globalFD = false;
-        syncSwitchByData();
+        syncAllGameSwitch("fd", false);
         saveData();
-        setTimeout(renderAddedGame, 50);
+        syncSwitchByData();
+        renderAddedGame();
         return;
     }
 
-    // 移除 switchDom.checked = false;
-    openSpoilerModal(function(confirmResult) {
-        appData.globalFD = confirmResult;
+    // 场景2：开启全局开关，弹出剧透警告弹窗
+    currentGlobalTarget = "fd";
+    openSpoilerModal((confirm)=>{
+        if(confirm){
+            // 用户选择显示：全局开启 + 所有游戏同步开启
+            appData.globalFD = true;
+            syncAllGameSwitch("fd", true);
+        }else{
+            // 用户取消：全局保持关闭，滑块回灰
+            appData.globalFD = false;
+        }
         saveData();
         syncSwitchByData();
-        // 渲染后二次同步兜底
-        setTimeout(()=>{
-            renderAddedGame();
-            syncSwitchByData();
-        }, 200);
-    });
+        renderAddedGame();
+    })
 };
 
 // 基础资料自动保存
@@ -327,7 +352,7 @@ function renderAddedGame(){
     bindGameCardEvent();
 }
 
-// 游戏卡片事件绑定
+// 游戏卡片事件绑定（单独游戏开关，不影响全局滑块）
 function bindGameCardEvent(){
     document.querySelectorAll(".fold-game").forEach(btn=>{
         btn.onclick = ()=>{
@@ -357,50 +382,24 @@ function bindGameCardEvent(){
             }
         })
     })
+    // 单游戏隐藏角色开关（仅当前游戏生效，不修改全局globalHideChar）
     document.querySelectorAll(".local-hide-char").forEach(sw=>{
         sw.onchange = function(){
             const gid = this.dataset.gid;
             const gameItem = appData.gameList.find(g=>g.gameId === gid);
-            const targetChecked = this.checked;
-            if(!appData.gameSpoilerRecord[gid]){
-                openSpoilerModal((ok)=>{
-                    if(ok){
-                        gameItem.localHideChar = targetChecked;
-                        appData.gameSpoilerRecord[gid] = true;
-                        saveData();
-                        renderAddedGame();
-                    }else{
-                        this.checked = !targetChecked;
-                    }
-                })
-            }else{
-                gameItem.localHideChar = targetChecked;
-                saveData();
-                renderAddedGame();
-            }
+            gameItem.localHideChar = this.checked;
+            saveData();
+            renderAddedGame();
         }
     })
+    // 单游戏FD开关（仅当前游戏生效，不修改全局globalFD）
     document.querySelectorAll(".local-fd").forEach(sw=>{
         sw.onchange = function(){
             const gid = this.dataset.gid;
             const gameItem = appData.gameList.find(g=>g.gameId === gid);
-            const targetChecked = this.checked;
-            if(!appData.gameSpoilerRecord[gid]){
-                openSpoilerModal((ok)=>{
-                    if(ok){
-                        gameItem.localFD = targetChecked;
-                        appData.gameSpoilerRecord[gid] = true;
-                        saveData();
-                        renderAddedGame();
-                    }else{
-                        this.checked = !targetChecked;
-                    }
-                })
-            }else{
-                gameItem.localFD = targetChecked;
-                saveData();
-                renderAddedGame();
-            }
+            gameItem.localFD = this.checked;
+            saveData();
+            renderAddedGame();
         }
     })
 }
