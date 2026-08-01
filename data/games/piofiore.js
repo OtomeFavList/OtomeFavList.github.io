@@ -121,9 +121,7 @@ heroines:[
         englishName:"Liliana Adornato",
 
         sortName:"Liliana",
-
-        thumbnail:"..."
-
+        
         image:"images/piofiore/heroine/liliana.webp"
 
     }
