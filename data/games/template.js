@@ -100,9 +100,7 @@ const templateGame = [
             name:"",
 
             sortName:"",
-
-            thumbnail:"..."
-
+            
             image:""
 
         }
@@ -603,6 +601,8 @@ images:[
 
         source:"base",
 
+        thumbnail:"..."
+        
         file:"..."
 
     }
