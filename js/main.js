@@ -36,7 +36,7 @@ const el = {
 // 当前弹窗操作标记：区分是隐藏角色还是FD开关触发弹窗
 let currentGlobalTarget = "";
 
-// 同步滑块视觉（仅单独同步单个开关，不全部覆盖）
+// 同步滑块视觉（仅读取数据渲染，不修改数据）
 window.syncSwitchByData = function() {
     if(el.globalHideChar) el.globalHideChar.checked = appData.globalHideChar;
     if(el.globalFD) el.globalFD.checked = appData.globalFD;
@@ -83,27 +83,26 @@ function closeSpoilerModal(){
     modalCallback = null;
 }
 
-// 弹窗按钮
+// 弹窗确认按钮
 if(el.spoilerConfirm){
     el.spoilerConfirm.onclick = ()=>{
         closeSpoilerModal();
         if(modalCallback) modalCallback(true);
     }
 }
+// 弹窗取消按钮【修复核心：只执行回调，不强制刷新覆盖双开关】
 if(el.spoilerCancel){
     el.spoilerCancel.onclick = ()=>{
         closeSpoilerModal();
         if(modalCallback) modalCallback(false);
-        // 只刷新视图，不强制修改两个开关数据
-        syncSwitchByData();
     }
 }
 
-// ========== 全局隐藏角色开关【独立逻辑，不干扰FD开关】 ==========
+// ========== 全局隐藏角色开关【完全独立，不碰FD】 ==========
 if(el.globalHideChar){
     el.globalHideChar.onchange = function(){
         const newState = this.checked;
-        // 关闭操作：只修改隐藏角色，不动FD
+        // 手动关闭开关：只改自身
         if(!newState) {
             appData.globalHideChar = false;
             syncSingleGameSwitch("hideChar", false);
@@ -112,14 +111,15 @@ if(el.globalHideChar){
             renderAddedGame();
             return;
         }
-        // 开启触发弹窗
+        // 打开触发弹窗
         currentGlobalTarget = "hideChar";
         openSpoilerModal((confirm)=>{
             if(confirm){
+                // 确认开启
                 appData.globalHideChar = true;
                 syncSingleGameSwitch("hideChar", true);
             }else{
-                // 取消仅回退当前这个开关，FD保持原样
+                // 取消：仅还原当前这个开关，FD保持原样
                 appData.globalHideChar = false;
             }
             saveData();
@@ -129,11 +129,11 @@ if(el.globalHideChar){
     }
 }
 
-// ========== 全局FD开关【独立逻辑，不干扰隐藏角色开关】 ==========
+// ========== 全局FD开关【完全独立，不碰隐藏角色】 ==========
 if(el.globalFD){
     el.globalFD.onchange = function() {
         const newState = this.checked;
-        // 关闭操作：只修改FD，不动隐藏角色
+        // 手动关闭开关：只改自身
         if (!newState) {
             appData.globalFD = false;
             syncSingleGameSwitch("fd", false);
@@ -142,14 +142,15 @@ if(el.globalFD){
             renderAddedGame();
             return;
         }
-        // 开启触发弹窗
+        // 打开触发弹窗
         currentGlobalTarget = "fd";
         openSpoilerModal((confirm)=>{
             if(confirm){
+                // 确认开启
                 appData.globalFD = true;
                 syncSingleGameSwitch("fd", true);
             }else{
-                // 取消仅回退FD开关，隐藏角色保持原样
+                // 取消：仅还原FD开关，隐藏角色完全不动
                 appData.globalFD = false;
             }
             saveData();
@@ -412,7 +413,7 @@ function bindGameCardEvent(){
     })
 }
 
-// 导出按钮逻辑【完整try-catch + beginPath修复边框】
+// 导出按钮逻辑
 if(el.exportBtn){
     el.exportBtn.onclick = async function(){
         try {
@@ -480,13 +481,12 @@ if(el.exportBtn){
                 offsetY +=20;
             }
 
-            // 循环绘制游戏卡片 每一张前beginPath 修复边框消失
+            // 循环绘制游戏卡片
             appData.gameList.forEach(gameItem=>{
                 if(gameItem.selectChars.length===0 && gameItem.cpList.length===0) return;
                 const gameInfo = typeof gameTemplateList !== "undefined" ? gameTemplateList.find(g=>g.id===gameItem.gameId) : null;
                 if(!gameInfo) return;
 
-                // 关键修复：重置绘制路径
                 ctx.beginPath();
                 ctx.strokeStyle = color.border;
                 ctx.lineWidth = 3;
@@ -549,17 +549,15 @@ if(el.exportBtn){
     }
 }
 
-// 页面初始化【独立try-catch，初始化报错不阻断页面底色渲染】
+// 页面初始化
 window.onload = async function(){
     try {
         loadData();
-        // JS兜底设置页面背景
         document.body.style.background = appData.exportColor.bg;
         setTimeout(fillFilterOptions,800);
         renderAddedGame();
     }catch(e){
         console.error("页面初始化出错：",e);
-        // 初始化报错强制恢复默认底色，不会纯白
         document.body.style.background = "#fff7f9";
     }
-    }
+}
