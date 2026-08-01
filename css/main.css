@@ -2,8 +2,36 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    /* 全局默认字体：小杉圆体 */
-    font-family:"Xiaoshan Round Sans", "Noto Sans SC",system-ui,sans-serif;
+    /* 全局默认字体：思源柔黑体 GenJyuuGothic，兜底原有字体 */
+    font-family:"GenJyuuGothic", "Noto Sans SC",system-ui,sans-serif;
+}
+
+/* 预加载思源柔黑体、思源黑体字体（放在最顶部字体定义） */
+@font-face {
+    font-family: "GenJyuuGothic";
+    src: url("./font/GenJyuuGothic-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: "GenJyuuGothic";
+    src: url("./font/GenJyuuGothic-Bold.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Noto Sans SC Black";
+    src: url("./font/NotoSansSC-Black.woff2") format("woff2");
+    font-weight: 900;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Noto Sans SC";
+    src: url("./font/NotoSansSC-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-display: swap;
 }
 
 /* 强制基础样式优先级 */
@@ -23,7 +51,7 @@ body{
     transition:background 0.2s;
 }
 
-/* 顶部大标题 Otome FavList 单独黑体，缩小字间距 */
+/* 顶部大标题 Otome FavList 单独粗黑体，缩小字间距（保留原有Noto Sans SC Black） */
 .site-title{
     text-align:center;
     margin:30px 0 10px;
@@ -35,11 +63,12 @@ body{
     letter-spacing:1px;
     color: #b33a3a;
 }
-/* 需求⑤：日乙个人喜好表，和顶部描述同尺寸同灰色 */
+/* 日乙个人喜好表副标题，思源柔黑体，和顶部描述同尺寸同灰色 */
 .title-sub-cn{
     font-size:16px;
     margin:8px 0;
     color:#666;
+    font-family:"GenJyuuGothic", sans-serif;
 }
 .sub-desc{
     text-align:center;
@@ -56,7 +85,7 @@ body{
     gap:30px;
 }
 
-/* 卡片容器：内部标题小杉圆粗体 */
+/* 卡片容器 */
 .big-card{
     background:#ffffff;
     border:2px solid #f6a5b8;
@@ -64,7 +93,7 @@ body{
     padding:24px;
     transition:border-color 0.2s;
 }
-/* 需求④：卡片小标题 小杉圆粗体，双粉色搭配 */
+/* 卡片小标题 思源柔黑体粗体，双粉色搭配 */
 .big-card h2{
     margin-bottom:20px;
     font-size:24px;
@@ -72,7 +101,7 @@ body{
     padding-left:12px;
     color: #b85878;
     font-weight:bold;
-    font-family:"Xiaoshan Round Sans", "Noto Sans SC", sans-serif;
+    font-family:"GenJyuuGothic", "Noto Sans SC", sans-serif;
 }
 
 /* 开关区域 */
@@ -129,7 +158,7 @@ input:checked + .slider:before{
     transform:translateX(24px);
 }
 
-/* 表单区域，全部常规小杉圆体，无加粗 */
+/* 表单区域，常规思源柔黑体，无加粗 */
 .form-row{
     margin:16px 0;
     display:flex;
@@ -158,12 +187,12 @@ button{
     cursor:pointer;
     font-size:15px;
     transition:0.2s;
-    font-family:"Xiaoshan Round Sans", sans-serif;
+    font-family:"GenJyuuGothic", sans-serif;
 }
 button:hover{
     background:#992e2e;
 }
-/* 需求②：弹窗确认按钮和取消同红色 */
+/* 弹窗确认/删除按钮红色系 */
 .btn-del, #spoiler-confirm{
     background:#dd4444;
 }
@@ -378,6 +407,7 @@ button:hover{
 .modal-box h3{
     margin-bottom:14px;
     color:#b33a3a;
+    font-family:"GenJyuuGothic", sans-serif;
 }
 .modal-btns{
     display:flex;
