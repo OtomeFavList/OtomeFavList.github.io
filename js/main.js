@@ -9,7 +9,7 @@ let appData = {
     exportColor: {bg:"#fff7f9",title:"#b33a3a",text:"#c98fac",border:"#f6a5b8"}
 };
 
-// 页面元素缓存（ID完全匹配HTML，无错误）
+// 页面元素缓存
 const el = {
     globalHideChar: document.getElementById("global-hide-char"),
     globalFD: document.getElementById("global-fd-game"),
@@ -33,10 +33,12 @@ const el = {
     canvas: document.getElementById("export-canvas")
 };
 
-// 【新增】独立刷新全局开关，单独执行不与渲染绑定
-function refreshGlobalSwitch() {
-    el.globalHideChar.checked = appData.globalHideChar;
-    el.globalFD.checked = appData.globalFD;
+// =========【核心新增】数据监听，数据变化立刻同步滑块，不受渲染影响=========
+function syncSwitchByData() {
+    queueMicrotask(() => {
+        el.globalHideChar.checked = appData.globalHideChar;
+        el.globalFD.checked = appData.globalFD;
+    })
 }
 
 // 本地存储读写
@@ -54,9 +56,11 @@ function loadData(){
     el.colorTitle.value = appData.exportColor.title;
     el.colorText.value = appData.exportColor.text;
     el.colorBorder.value = appData.exportColor.border;
+    // 加载完成同步滑块
+    syncSwitchByData();
 }
 
-// 剧透弹窗控制（完整可用，无缺失）
+// 剧透弹窗控制
 let modalCallback = null;
 function openSpoilerModal(cb){
     modalCallback = cb;
@@ -75,50 +79,52 @@ el.spoilerCancel.onclick = ()=>{
     if(modalCallback) modalCallback(false);
 }
 
-// ========== 修复1：全局隐藏角色开关逻辑 ==========
+// =========【完全重写】全局隐藏角色开关，调换渲染和滑块更新顺序=========
 el.globalHideChar.onchange = function(){
     const targetSwitch = this;
     const wantOpen = targetSwitch.checked;
-    // 主动关闭开关，直接生效
+
+    // 用户直接关闭开关：先改数据同步滑块，再渲染列表
     if(!wantOpen){
         appData.globalHideChar = false;
+        syncSwitchByData();
         saveData();
-        renderAddedGame();
-        setTimeout(refreshGlobalSwitch, 150);
+        setTimeout(renderAddedGame, 50);
         return;
     }
-    // 打开触发弹窗，先强制置灰
+
+    // 用户勾选开启，先强制取消勾选弹出确认框
     targetSwitch.checked = false;
     openSpoilerModal((ok)=>{
-        // 仅修改数据，不操作DOM
+        // 1. 先修改内存数据
         appData.globalHideChar = ok;
         saveData();
-        // 先渲染游戏列表
-        renderAddedGame();
-        // 等待DOM渲染完成，再刷新滑块状态
-        setTimeout(refreshGlobalSwitch, 150);
+        // 2. 优先同步滑块状态（微任务，比渲染更早执行）
+        syncSwitchByData();
+        // 3. 延迟再渲染游戏列表，避免DOM刷新覆盖滑块
+        setTimeout(renderAddedGame, 200);
     })
 }
 
-// ========== 修复2：全局FD/续作角色开关 ==========
+// =========【完全重写】全局FD开关，逻辑同上=========
 el.globalFD.onchange = function() {
     const switchDom = this;
     const wantOpen = switchDom.checked;
-    // 主动关闭开关
+
     if (!wantOpen) {
         appData.globalFD = false;
+        syncSwitchByData();
         saveData();
-        renderAddedGame();
-        setTimeout(refreshGlobalSwitch, 150);
+        setTimeout(renderAddedGame, 50);
         return;
     }
-    // 打开触发弹窗，先置灰
+
     switchDom.checked = false;
     openSpoilerModal(function(confirmResult) {
         appData.globalFD = confirmResult;
         saveData();
-        renderAddedGame();
-        setTimeout(refreshGlobalSwitch, 150);
+        syncSwitchByData();
+        setTimeout(renderAddedGame, 200);
     });
 };
 
@@ -228,7 +234,7 @@ el.addGameBtn.onclick = ()=>{
 function renderSelectedChar(gameItem,gameInfo){
     let html = "";
     gameItem.selectChars.forEach(cid=>{
-        const char = getAllGameChar(gameInfo).find(c=>c.id===cid);
+        const char = gameInfo.charList.find(c=>c.id===cid);
         if(!char) return;
         const img = char.imgs[0];
         html += `<div class="char-item selected"><img src="img/char/${img}" style="width:100px;height:100px;"><div>${char.name}</div></div>`;
@@ -240,11 +246,11 @@ function renderSelectedChar(gameItem,gameInfo){
 function renderCP(gameItem,gameInfo){
     let html = "";
     gameItem.cpList.forEach(cp=>{
-        const fChar = getAllGameChar(gameInfo).find(c=>c.id===cp.femaleId);
+        const fChar = gameInfo.charList.find(c=>c.id===cp.femaleId);
         if(!fChar) return;
         let maleHtml = "";
         cp.maleIds.forEach(mid=>{
-            const mChar = getAllGameChar(gameInfo).find(c=>c.id===mid);
+            const mChar = gameInfo.charList.find(c=>c.id===mid);
             if(!mChar) return;
             maleHtml += `<div class="char-item selected"><img src="img/char/${mChar.imgs[0]}" style="width:100px;height:100px;"><div>${mChar.name}</div></div>`;
         })
@@ -260,7 +266,7 @@ function renderCP(gameItem,gameInfo){
     return html || "<span>暂无CP搭配</span>";
 }
 
-// 获取过滤后角色（全局开关联动过滤FD/隐藏角色，只读取appData真实数据）
+// 获取过滤后角色
 function getAllGameChar(gameInfo){
     let chars = [...gameInfo.charList];
     const gameItem = appData.gameList.find(g=>g.gameId === gameInfo.id);
@@ -273,7 +279,7 @@ function getAllGameChar(gameInfo){
     return [...female,...male];
 }
 
-// 渲染所有已添加游戏卡片【彻底删除全局滑块赋值代码】
+// 渲染游戏卡片：全程不操作全局滑块
 function renderAddedGame(){
     let html = "";
     appData.gameList.forEach(gameItem=>{
@@ -316,12 +322,10 @@ function renderAddedGame(){
     })
     el.addedGameBox.innerHTML = html;
     bindGameCardEvent();
-    // 无任何全局滑块赋值代码
 }
 
 // 游戏卡片事件绑定
 function bindGameCardEvent(){
-    // 折叠
     document.querySelectorAll(".fold-game").forEach(btn=>{
         btn.onclick = ()=>{
             const gid = btn.dataset.gid;
@@ -331,7 +335,6 @@ function bindGameCardEvent(){
             renderAddedGame();
         }
     })
-    // 删除游戏
     document.querySelectorAll(".del-game").forEach(btn=>{
         btn.onclick = ()=>{
             const gid = btn.dataset.gid;
@@ -340,7 +343,6 @@ function bindGameCardEvent(){
             renderAddedGame();
         }
     })
-    // 爱心打分
     document.querySelectorAll(".heart-rate").forEach(box=>{
         const gid = box.dataset.gid;
         const gameItem = appData.gameList.find(g=>g.gameId === gid);
@@ -352,7 +354,6 @@ function bindGameCardEvent(){
             }
         })
     })
-    // 单游戏隐藏角色开关
     document.querySelectorAll(".local-hide-char").forEach(sw=>{
         sw.onchange = function(){
             const gid = this.dataset.gid;
@@ -376,7 +377,6 @@ function bindGameCardEvent(){
             }
         }
     })
-    // 单游戏FD开关
     document.querySelectorAll(".local-fd").forEach(sw=>{
         sw.onchange = function(){
             const gid = this.dataset.gid;
@@ -402,7 +402,7 @@ function bindGameCardEvent(){
     })
 }
 
-// Canvas图片导出【修复字体预加载】
+// Canvas导出
 el.exportBtn.onclick = async function(){
     const canvas = el.canvas;
     const ctx = canvas.getContext("2d");
@@ -413,7 +413,6 @@ el.exportBtn.onclick = async function(){
     if(sizeVal[0]==="long"){w=1080;h=9999;}else{w=Number(sizeVal[0]);h=Number(sizeVal[1]);}
     canvas.width = w; canvas.height = h;
 
-    // 批量预加载全部导出用到的字体，修复文字方框缺失
     await Promise.all([
         document.fonts.load('900 48px "Noto Sans SC"'),
         document.fonts.load('700 42px "GenJyuuGothic"'),
@@ -434,7 +433,6 @@ el.exportBtn.onclick = async function(){
     ctx.font = "bold 26px 'GenJyuuGothic'";
     ctx.fillText("日乙个人喜好表", w/2, 130);
     let offsetY = 180;
-    // 基础资料
     const base = appData.baseInfo;
     const baseArr = [
     base.nick ? `昵称：${base.nick}` : "",
@@ -456,7 +454,6 @@ el.exportBtn.onclick = async function(){
         })
         offsetY +=20;
     }
-    // 游戏卡片内容
     appData.gameList.forEach(gameItem=>{
         if(gameItem.selectChars.length===0 && gameItem.cpList.length===0) return;
         const gameInfo = gameTemplateList.find(g=>g.id===gameItem.gameId);
@@ -467,14 +464,12 @@ el.exportBtn.onclick = async function(){
         ctx.font = "bold 32px 'GenJyuuGothic'";
         ctx.textAlign = "left";
         ctx.fillText(gameInfo.name,60,offsetY+40);
-        // 爱心
         ctx.fillStyle = "#ff4d88";
         let heartTxt = "";
         for(let i=0;i<gameItem.loveRate;i++) heartTxt += "♥ ";
         ctx.font = "bold 28px 'GenJyuuGothic'";
         ctx.fillText(heartTxt,60,offsetY+80);
         offsetY += 110;
-        // 角色文字
         if(gameItem.selectChars.length>0){
             ctx.fillStyle = color.title;
             ctx.font = "bold 26px 'GenJyuuGothic'";
@@ -483,13 +478,12 @@ el.exportBtn.onclick = async function(){
             ctx.fillStyle = color.text;
             ctx.font = "bold 22px 'GenJyuuGothic'";
             const charNames = gameItem.selectChars.map(cid=>{
-                const c = getAllGameChar(gameInfo).find(x=>x.id===cid);
+                const c = gameInfo.charList.find(x=>x.id===cid);
                 return c?.name || "";
             }).filter(x=>x);
             ctx.fillText(charNames.join(" / "),60,offsetY);
             offsetY +=44;
         }
-        // CP文字
         if(gameItem.cpList.length>0){
             ctx.fillStyle = color.title;
             ctx.font = "bold 26px 'GenJyuuGothic'";
@@ -498,9 +492,9 @@ el.exportBtn.onclick = async function(){
             ctx.fillStyle = color.text;
             ctx.font = "bold 22px 'GenJyuuGothic'";
             gameItem.cpList.forEach(cp=>{
-                const f = getAllGameChar(gameInfo).find(x=>x.id===cp.femaleId);
+                const f = gameInfo.charList.find(x=>x.id===cp.femaleId);
                 const mNames = cp.maleIds.map(mid=>{
-                    const m = getAllGameChar(gameInfo).find(x=>x.id===mid);
+                    const m = gameInfo.charList.find(x=>x.id===mid);
                     return m?.name || "";
                 }).filter(x=>x);
                 const cpTxt = `${f?.name} × ${mNames.join("、")}`;
@@ -510,7 +504,6 @@ el.exportBtn.onclick = async function(){
         }
         offsetY +=60;
     })
-    // 下载图片
     const link = document.createElement("a");
     link.download = "Otome_FavList.png";
     link.href = canvas.toDataURL("image/png");
@@ -526,6 +519,4 @@ window.onload = async function(){
     })
     setTimeout(fillFilterOptions,800);
     renderAddedGame();
-    // 页面加载完成强制刷新全局开关状态
-    refreshGlobalSwitch();
 }
