@@ -71,43 +71,51 @@ el.spoilerCancel.onclick = ()=>{
     if(modalCallback) modalCallback(false);
 }
 
-// 全局隐藏角色开关：仅打开弹窗，关闭直接保存（需求②）
+// 全局隐藏角色开关：开启弹窗，关闭无弹窗
 el.globalHideChar.onchange = function(){
     const targetSwitch = this;
-    // 关闭开关 → 无弹窗直接保存
+    // 关闭 → 无弹窗直接保存刷新
     if(!targetSwitch.checked){
         appData.globalHideChar = false;
         saveData();
+        renderAddedGame();
         return;
     }
-    // 打开开关 → 弹出剧透警告
+    // 开启 → 弹出剧透警告
     openSpoilerModal((ok)=>{
         if(ok){
             appData.globalHideChar = true;
             saveData();
+            renderAddedGame();
         }else{
             targetSwitch.checked = false;
         }
     })
 }
 
-// 全局FD/续作开关修复：开启弹窗、关闭无弹窗（解决①②）
-el.globalFD.onchange = function(){
-    const targetSwitch = this;
-    if(!targetSwitch.checked){
+// 【修复BUG】全局FD/续作角色开关：勾选开启才弹出剧透警告，取消关闭直接保存不弹窗
+el.globalFD.onchange = function() {
+    const switchDom = this;
+    // 场景1：用户取消勾选（关闭全局FD），无弹窗，直接保存
+    if (!switchDom.checked) {
         appData.globalFD = false;
         saveData();
+        renderAddedGame(); // 刷新角色列表，立刻隐藏FD角色
         return;
     }
-    openSpoilerModal((ok)=>{
-        if(ok){
+    // 场景2：用户勾选开启全局FD，弹出剧透确认弹窗
+    openSpoilerModal(function(confirmResult) {
+        if (confirmResult) {
+            // 用户确认查看剧透，保存开启状态并刷新页面角色
             appData.globalFD = true;
             saveData();
-        }else{
-            targetSwitch.checked = false;
+            renderAddedGame();
+        } else {
+            // 用户取消查看，强制把开关切回关闭
+            switchDom.checked = false;
         }
-    })
-}
+    });
+};
 
 // 基础资料自动保存
 ["inputNick","inputCount","inputStory","inputFirstgame"].forEach(k=>{
