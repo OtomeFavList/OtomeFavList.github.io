@@ -6,7 +6,6 @@ let appData = {
     gameSpoilerRecord: {},
     baseInfo: {nick:"",count:"",story:"",firstgame:""},
     gameList: [],
-    // 需求③：正文色同步页面浅粉#c98fac
     exportColor: {bg:"#fff7f9",title:"#b33a3a",text:"#c98fac",border:"#f6a5b8"}
 };
 
@@ -72,26 +71,40 @@ el.spoilerCancel.onclick = ()=>{
     if(modalCallback) modalCallback(false);
 }
 
-// 全局开关切换（FD开关自带同款剧透弹窗，需求①已原生支持无需新增代码）
+// 全局隐藏角色开关：仅打开弹窗，关闭直接保存（需求②）
 el.globalHideChar.onchange = function(){
     const targetSwitch = this;
+    // 关闭开关 → 无弹窗直接保存
+    if(!targetSwitch.checked){
+        appData.globalHideChar = false;
+        saveData();
+        return;
+    }
+    // 打开开关 → 弹出剧透警告
     openSpoilerModal((ok)=>{
         if(ok){
-            appData.globalHideChar = targetSwitch.checked;
+            appData.globalHideChar = true;
             saveData();
         }else{
-            targetSwitch.checked = !targetSwitch.checked;
+            targetSwitch.checked = false;
         }
     })
 }
+
+// 全局FD/续作开关修复：开启弹窗、关闭无弹窗（解决①②）
 el.globalFD.onchange = function(){
     const targetSwitch = this;
+    if(!targetSwitch.checked){
+        appData.globalFD = false;
+        saveData();
+        return;
+    }
     openSpoilerModal((ok)=>{
         if(ok){
-            appData.globalFD = targetSwitch.checked;
+            appData.globalFD = true;
             saveData();
         }else{
-            targetSwitch.checked = !targetSwitch.checked;
+            targetSwitch.checked = false;
         }
     })
 }
@@ -104,12 +117,18 @@ el.globalFD.onchange = function(){
         saveData();
     }
 })
+
+// 配色取色器实时同步，修复标题色不生效（需求③）
 ["colorBg","colorTitle","colorText","colorBorder"].forEach(k=>{
     el[k].oninput = function(){
         const map = {colorBg:"bg",colorTitle:"title",colorText:"text",colorBorder:"border"};
         appData.exportColor[map[k]] = this.value;
         saveData();
         document.body.style.background = appData.exportColor.bg;
+        // 页面标题元素同步刷新颜色
+        document.querySelectorAll(".page-title").forEach(t=>{
+            t.style.color = appData.exportColor.title;
+        })
     }
 })
 
@@ -370,8 +389,8 @@ function bindGameCardEvent(){
     })
 }
 
-// Canvas图片导出
-el.exportBtn.onclick = function(){
+// Canvas图片导出（导出标题固定Noto Sans SC，其余文字GenJyuuGothic，需求④）
+el.exportBtn.onclick = async function(){
     const canvas = el.canvas;
     const ctx = canvas.getContext("2d");
     const color = appData.exportColor;
@@ -380,16 +399,21 @@ el.exportBtn.onclick = function(){
     const sizeVal = sizeRadio.value.split(",");
     if(sizeVal[0]==="long"){w=1080;h=9999;}else{w=Number(sizeVal[0]);h=Number(sizeVal[1]);}
     canvas.width = w; canvas.height = h;
+
+    await document.fonts.load('bold 48px GenJyuuGothic');
+    await document.fonts.load('bold 48px Noto Sans SC');
+
     ctx.fillStyle = color.bg;
     ctx.fillRect(0,0,w,h);
     ctx.fillStyle = color.title;
+    // 主标题固定 Noto Sans SC
     ctx.font = "bold 48px 'Noto Sans SC'";
     ctx.textAlign = "center";
     ctx.fillText("Otome FavList", w/2, 80);
-    ctx.font = "bold 26px 'Noto Sans SC'";
+    ctx.font = "bold 26px 'GenJyuuGothic'";
     ctx.fillText("日乙个人喜好表", w/2, 130);
     let offsetY = 180;
-    // 绘制基础资料，无内容跳过（已修改入坑事件→入坑时间）
+    // 基础资料（思源柔黑体）
     const base = appData.baseInfo;
     const baseArr = [
     base.nick ? `昵称：${base.nick}` : "",
@@ -399,19 +423,19 @@ el.exportBtn.onclick = function(){
     ].filter(x=>x);
     if(baseArr.length>0){
         ctx.fillStyle = color.title;
-        ctx.font = "bold 30px 'Noto Sans SC'";
+        ctx.font = "bold 30px 'GenJyuuGothic'";
         ctx.textAlign = "left";
         ctx.fillText("基础资料", 60, offsetY);
         offsetY +=40;
         ctx.fillStyle = color.text;
-        ctx.font = "bold 22px 'Noto Sans SC'";
+        ctx.font = "bold 22px 'GenJyuuGothic'";
         baseArr.forEach(txt=>{
             ctx.fillText(txt,60,offsetY);
             offsetY +=34;
         })
         offsetY +=20;
     }
-    // 绘制游戏卡片，无角色无CP跳过
+    // 游戏卡片内容全部思源柔黑体
     appData.gameList.forEach(gameItem=>{
         if(gameItem.selectChars.length===0 && gameItem.cpList.length===0) return;
         const gameInfo = gameTemplateList.find(g=>g.id===gameItem.gameId);
@@ -419,24 +443,24 @@ el.exportBtn.onclick = function(){
         ctx.lineWidth = 3;
         ctx.strokeRect(40,offsetY,w-80,220);
         ctx.fillStyle = color.title;
-        ctx.font = "bold 32px 'Noto Sans SC'";
+        ctx.font = "bold 32px 'GenJyuuGothic'";
         ctx.textAlign = "left";
         ctx.fillText(gameInfo.name,60,offsetY+40);
         // 爱心
         ctx.fillStyle = "#ff4d88";
         let heartTxt = "";
         for(let i=0;i<gameItem.loveRate;i++) heartTxt += "♥ ";
-        ctx.font = "bold 28px 'Noto Sans SC'";
+        ctx.font = "bold 28px 'GenJyuuGothic'";
         ctx.fillText(heartTxt,60,offsetY+80);
         offsetY += 110;
         // 角色文字
         if(gameItem.selectChars.length>0){
             ctx.fillStyle = color.title;
-            ctx.font = "bold 26px 'Noto Sans SC'";
+            ctx.font = "bold 26px 'GenJyuuGothic'";
             ctx.fillText("Selected Character",60,offsetY);
             offsetY +=36;
             ctx.fillStyle = color.text;
-            ctx.font = "bold 22px 'Noto Sans SC'";
+            ctx.font = "bold 22px 'GenJyuuGothic'";
             const charNames = gameItem.selectChars.map(cid=>{
                 const c = getAllGameChar(gameInfo).find(x=>x.id===cid);
                 return c?.name || "";
@@ -447,11 +471,11 @@ el.exportBtn.onclick = function(){
         // CP文字
         if(gameItem.cpList.length>0){
             ctx.fillStyle = color.title;
-            ctx.font = "bold 26px 'Noto Sans SC'";
+            ctx.font = "bold 26px 'GenJyuuGothic'";
             ctx.fillText("Couple List",60,offsetY);
             offsetY +=36;
             ctx.fillStyle = color.text;
-            ctx.font = "bold 22px 'Noto Sans SC'";
+            ctx.font = "bold 22px 'GenJyuuGothic'";
             gameItem.cpList.forEach(cp=>{
                 const f = getAllGameChar(gameInfo).find(x=>x.id===cp.femaleId);
                 const mNames = cp.maleIds.map(mid=>{
@@ -476,6 +500,10 @@ el.exportBtn.onclick = function(){
 window.onload = async function(){
     loadData();
     document.body.style.background = appData.exportColor.bg;
+    // 初始化页面标题颜色
+    document.querySelectorAll(".page-title").forEach(t=>{
+        t.style.color = appData.exportColor.title;
+    })
     // 等待游戏数据载入完成再填充筛选下拉
     setTimeout(fillFilterOptions,800);
     renderAddedGame();
