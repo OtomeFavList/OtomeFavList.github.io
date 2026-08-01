@@ -2,31 +2,28 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:"Noto Sans SC",system-ui,sans-serif;
+    /* 全局默认字体：小杉圆体 */
+    font-family:"Xiaoshan Round Sans", "Noto Sans SC",system-ui,sans-serif;
 }
 
-/* 强制卡片白底，最高优先级 */
+/* 强制基础样式优先级 */
 .big-card {
     background: #ffffff !important;
 }
-/* 强制页面淡粉色背景 */
 body {
     background: #fff7f9 !important;
 }
-/* 强制指定次级文字粉色 */
 .text-light-pink {
     color: #c98fac !important;
 }
 
-/* 页面背景淡粉 */
 body{
     background: #fff7f9;
-    color: #b33a3a;
     padding:20px;
     transition:background 0.2s;
 }
 
-/* 全局居中大标题 Otome FavList 需求①：黑体英文紧凑标题字体 */
+/* 顶部大标题 Otome FavList 单独黑体，缩小字间距 */
 .site-title{
     text-align:center;
     margin:30px 0 10px;
@@ -35,16 +32,15 @@ body{
     font-family:"Noto Sans SC Black", "Microsoft YaHei Black", sans-serif;
     font-size:42px;
     font-weight:900;
-    letter-spacing:1px; /* 英文字间距缩小，不再松散 */
+    letter-spacing:1px;
     color: #b33a3a;
 }
-/* 需求⑤：日乙个人喜好表，纯黑色 */
+/* 需求⑤：日乙个人喜好表，和顶部描述同尺寸同灰色 */
 .title-sub-cn{
-    font-size:20px;
+    font-size:16px;
     margin:8px 0;
-    color:#222;
+    color:#666;
 }
-/* 顶部描述文案 浅灰色 */
 .sub-desc{
     text-align:center;
     font-size:16px;
@@ -52,7 +48,6 @@ body{
     margin-bottom:40px;
 }
 
-/* 外层容器 */
 .wrap{
     max-width:1200px;
     margin:0 auto;
@@ -61,7 +56,7 @@ body{
     gap:30px;
 }
 
-/* 大卡片：白色底，和淡粉背景区分 */
+/* 卡片容器：内部标题小杉圆粗体 */
 .big-card{
     background:#ffffff;
     border:2px solid #f6a5b8;
@@ -69,16 +64,18 @@ body{
     padding:24px;
     transition:border-color 0.2s;
 }
-/* 需求②：卡片小标题（一、设置/二、基础资料）双粉色适配，不突兀 */
+/* 需求④：卡片小标题 小杉圆粗体，双粉色搭配 */
 .big-card h2{
     margin-bottom:20px;
     font-size:24px;
     border-left:5px solid #c98fac;
     padding-left:12px;
     color: #b85878;
+    font-weight:bold;
+    font-family:"Xiaoshan Round Sans", "Noto Sans SC", sans-serif;
 }
 
-/* 开关组件 */
+/* 开关区域 */
 .switch-row{
     display:flex;
     align-items:center;
@@ -86,7 +83,6 @@ body{
     margin:14px 0;
     flex-wrap:wrap;
 }
-/* 需求⑦：说明小字取消加粗，统一灰色 */
 .switch-desc{
     font-size:14px;
     color:#666;
@@ -133,7 +129,7 @@ input:checked + .slider:before{
     transform:translateX(24px);
 }
 
-/* 表单输入 */
+/* 表单区域，全部常规小杉圆体，无加粗 */
 .form-row{
     margin:16px 0;
     display:flex;
@@ -141,7 +137,6 @@ input:checked + .slider:before{
     gap:6px;
     max-width:600px;
 }
-/* 需求⑦：表单标签取消加粗 */
 .form-row label{
     font-weight:normal !important;
 }
@@ -153,7 +148,7 @@ input:checked + .slider:before{
     background:#fcfcfc;
 }
 
-/* 需求④：统一按钮为标题同款红色 */
+/* 按钮统一主色，弹窗两个按钮统一取消红色 */
 button{
     padding:10px 18px;
     border:none;
@@ -163,14 +158,16 @@ button{
     cursor:pointer;
     font-size:15px;
     transition:0.2s;
+    font-family:"Xiaoshan Round Sans", sans-serif;
 }
 button:hover{
     background:#992e2e;
 }
-.btn-del{
+/* 需求②：弹窗确认按钮和取消同红色 */
+.btn-del, #spoiler-confirm{
     background:#dd4444;
 }
-.btn-del:hover{
+.btn-del:hover, #spoiler-confirm:hover{
     background:#b82c2c;
 }
 .btn-fold{
@@ -180,14 +177,12 @@ button:hover{
     background:#555;
 }
 
-/* 居中按钮容器 */
 .center-btn-block{
     display:flex;
     justify-content:center;
     margin:16px 0;
 }
 
-/* 游戏搜索筛选面板 */
 .game-search-box{
     margin:16px 0;
     display:flex;
@@ -247,7 +242,6 @@ button:hover{
     object-fit:cover;
 }
 
-/* 已添加游戏卡片 */
 .game-card{
     background:#ffffff;
     border:1px solid #f6a5b8;
@@ -284,7 +278,6 @@ button:hover{
     flex-wrap:wrap;
 }
 
-/* Character角色选择区 */
 .char-section{
     margin:16px 0;
     padding:12px;
@@ -334,7 +327,6 @@ button:hover{
     align-items:flex-end;
 }
 
-/* CP布局规则：左25%女主区，右75%男主区 固定比例 */
 .cp-group{
     margin:16px 0;
     padding:12px;
@@ -394,7 +386,7 @@ button:hover{
     margin-top:20px;
 }
 
-/* 导出配色选择 */
+/* 导出配色 */
 .color-set-row{
     display:flex;
     gap:20px;
@@ -419,13 +411,12 @@ button:hover{
     gap:10px;
     flex-wrap:wrap;
 }
-/* 需求③：导出尺寸文字强制跟随浅粉色 */
 .size-select label{
     color:#c98fac !important;
     font-weight:normal;
 }
 
-/* About底部区块 需求⑥：正文灰色，邮箱保留黑色 */
+/* About区域 */
 .about-block{
     text-align:center;
     margin-top:50px;
@@ -441,32 +432,23 @@ button:hover{
     color:#222;
 }
 
-/* 折叠隐藏类 */
 .hide-block{
     display:none;
 }
 
-/* 主标题大字体深色红 */
 h1{
     color: #b33a3a;
 }
-/* 卡片小标题双粉色搭配 */
 h2{
     color: #b85878;
 }
-
-/* 次级标签统一浅玫瑰粉（全局开关、昵称、导出尺寸全部走这个类） */
 .text-light-pink{
     color: #c98fac;
     font-weight:normal !important;
 }
-
-/* 纯黑色文字类 */
 .text-black{
     color: #222222;
 }
-
-/* 全局统一说明小字灰色 */
 .text-gray-desc{
     color:#666;
     font-weight:normal;
