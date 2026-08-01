@@ -71,49 +71,55 @@ el.spoilerCancel.onclick = ()=>{
     if(modalCallback) modalCallback(false);
 }
 
-// ========== 修复1：全局隐藏角色开关逻辑 ==========
+// ========== 修复1：全局隐藏角色开关逻辑（彻底修复取消不回弹） ==========
 el.globalHideChar.onchange = function(){
     const targetSwitch = this;
-    // 关闭开关：无弹窗，直接保存刷新
+    // 手动取消勾选关闭开关：无弹窗，直接保存刷新
     if(!targetSwitch.checked){
         appData.globalHideChar = false;
         saveData();
         renderAddedGame();
         return;
     }
-    // 开启开关：弹出剧透确认弹窗
+    // 用户勾选开启：立刻先切回关闭，规避浏览器二次change冲突
+    targetSwitch.checked = false;
     openSpoilerModal((ok)=>{
         if(ok){
+            // 确认开启
             appData.globalHideChar = true;
-            saveData();
-            renderAddedGame();
+            targetSwitch.checked = true;
         }else{
-            // 用户取消，开关回弹关闭
+            // 取消：保持关闭，数据置假
+            appData.globalHideChar = false;
             targetSwitch.checked = false;
         }
+        saveData();
+        renderAddedGame();
     })
 }
 
-// ========== 修复2：全局FD/续作角色开关（核心修复不弹窗BUG） ==========
+// ========== 修复2：全局FD/续作角色开关（彻底修复取消不回弹） ==========
 el.globalFD.onchange = function() {
     const switchDom = this;
-    // 取消勾选关闭全局FD：无弹窗，直接生效
+    // 手动取消勾选关闭全局FD：无弹窗，直接生效
     if (!switchDom.checked) {
         appData.globalFD = false;
         saveData();
         renderAddedGame();
         return;
     }
-    // 勾选开启全局FD：强制弹出剧透警告弹窗
+    // 用户勾选开启：立刻先切回关闭，规避浏览器二次change冲突
+    switchDom.checked = false;
     openSpoilerModal(function(confirmResult) {
         if (confirmResult) {
             appData.globalFD = true;
-            saveData();
-            renderAddedGame();
+            switchDom.checked = true;
         } else {
-            // 用户拒绝查看剧透，开关自动切回关闭
+            appData.globalFD = false;
             switchDom.checked = false;
         }
+        saveData();
+        renderAddedGame();
     });
 };
 
@@ -151,7 +157,7 @@ function fillFilterOptions(){
     })
     const fillSelect = (id,dataSet)=>{
         const sel = document.getElementById(id);
-        const origin = sel.innerHTML;
+        sel.innerHTML = '<option value="">全部</option>';
         dataSet.forEach(v=>sel.innerHTML += `<option value="${v}">${v}</option>`);
     }
     fillSelect("filter-year",yearSet);
@@ -255,7 +261,7 @@ function renderCP(gameItem,gameInfo){
     return html || "<span>暂无CP搭配</span>";
 }
 
-// 获取过滤后角色（全局开关联动过滤FD/隐藏角色）
+// 获取过滤后角色（全局开关联动过滤FD/隐藏角色，只读取appData真实数据）
 function getAllGameChar(gameInfo){
     let chars = [...gameInfo.charList];
     const gameItem = appData.gameList.find(g=>g.gameId === gameInfo.id);
@@ -311,6 +317,9 @@ function renderAddedGame(){
     })
     el.addedGameBox.innerHTML = html;
     bindGameCardEvent();
+    // 兜底：每次渲染强制同步全局开关UI，杜绝界面与数据错位
+    el.globalHideChar.checked = appData.globalHideChar;
+    el.globalFD.checked = appData.globalFD;
 }
 
 // 游戏卡片事件绑定
