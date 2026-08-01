@@ -36,9 +36,11 @@ const el = {
 // 当前弹窗操作标记：区分是隐藏角色还是FD开关触发弹窗
 let currentGlobalTarget = "";
 
-// 同步滑块视觉（仅读取数据渲染，不修改数据）
-window.syncSwitchByData = function() {
+// 【拆分刷新函数，只刷新单个开关，不再一次性刷两个】
+function refreshHideCharSwitch(){
     if(el.globalHideChar) el.globalHideChar.checked = appData.globalHideChar;
+}
+function refreshFDSwitch(){
     if(el.globalFD) el.globalFD.checked = appData.globalFD;
 }
 
@@ -66,7 +68,9 @@ function loadData(){
         if(el.colorTitle) el.colorTitle.value = appData.exportColor.title;
         if(el.colorText) el.colorText.value = appData.exportColor.text;
         if(el.colorBorder) el.colorBorder.value = appData.exportColor.border;
-        syncSwitchByData();
+        // 初始化分别刷新，互不干扰
+        refreshHideCharSwitch();
+        refreshFDSwitch();
     }catch(e){
         console.error("读取本地存储失败：",e);
     }
@@ -83,14 +87,13 @@ function closeSpoilerModal(){
     modalCallback = null;
 }
 
-// 弹窗确认按钮
+// 弹窗按钮
 if(el.spoilerConfirm){
     el.spoilerConfirm.onclick = ()=>{
         closeSpoilerModal();
         if(modalCallback) modalCallback(true);
     }
 }
-// 弹窗取消按钮【修复核心：只执行回调，不强制刷新覆盖双开关】
 if(el.spoilerCancel){
     el.spoilerCancel.onclick = ()=>{
         closeSpoilerModal();
@@ -98,63 +101,70 @@ if(el.spoilerCancel){
     }
 }
 
-// ========== 全局隐藏角色开关【完全独立，不碰FD】 ==========
+// ========== 全局隐藏角色开关【完全独立逻辑，不触碰FD任何代码】 ==========
 if(el.globalHideChar){
     el.globalHideChar.onchange = function(){
-        const newState = this.checked;
-        // 手动关闭开关：只改自身
+        const selfInput = this;
+        const newState = selfInput.checked;
+
+        // 手动关闭开关，只修改隐藏角色数据
         if(!newState) {
             appData.globalHideChar = false;
             syncSingleGameSwitch("hideChar", false);
             saveData();
-            syncSwitchByData();
+            refreshHideCharSwitch();
             renderAddedGame();
             return;
         }
+
         // 打开触发弹窗
-        currentGlobalTarget = "hideChar";
         openSpoilerModal((confirm)=>{
             if(confirm){
                 // 确认开启
                 appData.globalHideChar = true;
                 syncSingleGameSwitch("hideChar", true);
+                refreshHideCharSwitch();
             }else{
-                // 取消：仅还原当前这个开关，FD保持原样
+                // 取消：仅重置当前开关，FD完全不动
                 appData.globalHideChar = false;
+                // 直接手动取消勾选，杜绝视觉联动
+                selfInput.checked = false;
             }
             saveData();
-            syncSwitchByData();
             renderAddedGame();
         })
     }
 }
 
-// ========== 全局FD开关【完全独立，不碰隐藏角色】 ==========
+// ========== 全局FD开关【完全独立逻辑，不触碰隐藏角色任何代码】 ==========
 if(el.globalFD){
     el.globalFD.onchange = function() {
-        const newState = this.checked;
-        // 手动关闭开关：只改自身
+        const selfInput = this;
+        const newState = selfInput.checked;
+
+        // 手动关闭开关，只修改FD数据
         if (!newState) {
             appData.globalFD = false;
             syncSingleGameSwitch("fd", false);
             saveData();
-            syncSwitchByData();
+            refreshFDSwitch();
             renderAddedGame();
             return;
         }
+
         // 打开触发弹窗
-        currentGlobalTarget = "fd";
         openSpoilerModal((confirm)=>{
             if(confirm){
-                // 确认开启
                 appData.globalFD = true;
                 syncSingleGameSwitch("fd", true);
+                refreshFDSwitch();
             }else{
-                // 取消：仅还原FD开关，隐藏角色完全不动
+                // 取消：仅重置FD开关，隐藏角色完全不动
                 appData.globalFD = false;
+                // 直接手动取消勾选，杜绝视觉联动
+                selfInput.checked = false;
             }
             saveData();
-            syncSwitchByData();
             renderAddedGame();
         })
     };
