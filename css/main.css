@@ -1,520 +1,474 @@
-// 全局存储key
-const STORE_KEY = "otome-favlist-data";
-let appData = {
-    globalHideChar: false,
-    globalFD: false,
-    gameSpoilerRecord: {},
-    baseInfo: {nick:"",count:"",story:"",firstgame:""},
-    gameList: [],
-    exportColor: {bg:"#fff7f9",title:"#b33a3a",text:"#c98fac",border:"#f6a5b8"}
-};
-
-// 页面元素缓存
-const el = {
-    globalHideChar: document.getElementById("global-hide-char"),
-    globalFD: document.getElementById("global-fd-game"),
-    spoilerModal: document.getElementById("spoiler-modal"),
-    spoilerCancel: document.getElementById("spoiler-cancel"),
-    spoilerConfirm: document.getElementById("spoiler-confirm"),
-    addGameBtn: document.getElementById("btn-add-game"),
-    searchPanel: document.getElementById("search-panel"),
-    gameSearchInput: document.getElementById("game-search-input"),
-    gameSelectList: document.getElementById("game-select-list"),
-    addedGameBox: document.getElementById("added-game-container"),
-    inputNick: document.getElementById("input-nick"),
-    inputCount: document.getElementById("input-count"),
-    inputStory: document.getElementById("input-story"),
-    inputFirstgame: document.getElementById("input-firstgame"),
-    colorBg: document.getElementById("color-bg"),
-    colorTitle: document.getElementById("color-title"),
-    colorText: document.getElementById("color-text"),
-    colorBorder: document.getElementById("color-border"),
-    exportBtn: document.getElementById("btn-export"),
-    canvas: document.getElementById("export-canvas")
-};
-
-// 当前弹窗操作标记：区分是隐藏角色还是FD开关触发弹窗
-let currentGlobalTarget = ""; // "hideChar" / "fd"
-let modalCallback = null;
-
-// 同步滑块视觉：只根据appData数据渲染
-window.syncSwitchByData = function() {
-    el.globalHideChar.checked = appData.globalHideChar;
-    el.globalFD.checked = appData.globalFD;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    /* 全局默认字体：思源柔黑体 GenJyuuGothic，兜底原有字体 */
+    font-family:"GenJyuuGothic", "Noto Sans SC",system-ui,sans-serif;
 }
 
-// 批量同步所有游戏对应全局功能状态
-// type: hideChar / fd
-function syncAllGameSwitch(type, status) {
-    appData.gameList.forEach(game => {
-        if(type === "hideChar") game.localHideChar = status;
-        if(type === "fd") game.localFD = status;
-    })
+/* 预加载思源柔黑体、思源黑体字体（放在最顶部字体定义） */
+@font-face {
+    font-family: "GenJyuuGothic";
+    src: url("./font/GenJyuuGothic-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: "GenJyuuGothic";
+    src: url("./font/GenJyuuGothic-Bold.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Noto Sans SC Black";
+    src: url("./font/NotoSansSC-Black.woff2") format("woff2");
+    font-weight: 900;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Noto Sans SC";
+    src: url("./font/NotoSansSC-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-display: swap;
 }
 
-// 本地存储读写
-function saveData(){
-    localStorage.setItem(STORE_KEY, JSON.stringify(appData));
-}
-function loadData(){
-    const raw = localStorage.getItem(STORE_KEY);
-    if(raw) appData = JSON.parse(raw);
-    el.inputNick.value = appData.baseInfo.nick;
-    el.inputCount.value = appData.baseInfo.count;
-    el.inputStory.value = appData.baseInfo.story;
-    el.inputFirstgame.value = appData.baseInfo.firstgame;
-    el.colorBg.value = appData.exportColor.bg;
-    el.colorTitle.value = appData.exportColor.title;
-    el.colorText.value = appData.exportColor.text;
-    el.colorBorder.value = appData.exportColor.border;
-    syncSwitchByData();
+body{
+    background: #fff7f9;
+    padding:20px;
+    transition:background 0.2s;
 }
 
-// 剧透弹窗控制
-function openSpoilerModal(cb){
-    modalCallback = cb;
-    el.spoilerModal.style.display = "flex";
+/* 顶部大标题 Otome FavList 单独粗黑体，缩小字间距（保留原有Noto Sans SC Black） */
+.site-title{
+    text-align:center;
+    margin:30px 0 10px;
 }
-function closeSpoilerModal(){
-    el.spoilerModal.style.display = "none";
-    modalCallback = null;
+.site-title h1{
+    font-family:"Noto Sans SC Black", "Microsoft YaHei Black", sans-serif;
+    font-size:42px;
+    font-weight:900;
+    letter-spacing:1px;
+    color: #b33a3a;
 }
-
-// 弹窗确认按钮
-el.spoilerConfirm.onclick = ()=>{
-    closeSpoilerModal();
-    if(modalCallback) modalCallback(true);
+/* 日乙个人喜好表副标题，思源柔黑体，和顶部描述同尺寸同灰色 */
+.title-sub-cn{
+    font-size:16px;
+    margin:8px 0;
+    color:#666;
+    font-family:"GenJyuuGothic", sans-serif;
 }
-// 弹窗取消按钮
-el.spoilerCancel.onclick = ()=>{
-    closeSpoilerModal();
-    if(modalCallback) modalCallback(false);
-    syncSwitchByData();
-}
-
-// ===================== 全局隐藏角色开关【全新重写逻辑】 =====================
-el.globalHideChar.onchange = function(){
-    const newState = this.checked;
-
-    // 场景1：关闭全局开关（从粉色点成灰色，无弹窗）
-    if(!newState) {
-        appData.globalHideChar = false;
-        syncAllGameSwitch("hideChar", false);
-        saveData();
-        syncSwitchByData();
-        renderAddedGame();
-        return;
-    }
-
-    // 场景2：开启全局开关，弹出剧透警告弹窗
-    openSpoilerModal((confirm)=>{
-        if(confirm){
-            // 用户选择显示：全局开启 + 所有游戏同步开启
-            appData.globalHideChar = true;
-            syncAllGameSwitch("hideChar", true);
-        }else{
-            // 用户取消：全局保持关闭，滑块回灰
-            appData.globalHideChar = false;
-        }
-        saveData();
-        syncSwitchByData();
-        renderAddedGame();
-    })
+.sub-desc{
+    text-align:center;
+    font-size:16px;
+    color:#666;
+    margin-bottom:40px;
 }
 
-// ===================== 全局FD/续作开关【全新重写逻辑】 =====================
-el.globalFD.onchange = function() {
-    const newState = this.checked;
-
-    // 场景1：关闭全局开关（从粉色点成灰色，无弹窗）
-    if (!newState) {
-        appData.globalFD = false;
-        syncAllGameSwitch("fd", false);
-        saveData();
-        syncSwitchByData();
-        renderAddedGame();
-        return;
-    }
-
-    // 场景2：开启全局开关，弹出剧透警告弹窗
-    openSpoilerModal((confirm)=>{
-        if(confirm){
-            // 用户选择显示：全局开启 + 所有游戏同步开启
-            appData.globalFD = true;
-            syncAllGameSwitch("fd", true);
-        }else{
-            // 用户取消：全局保持关闭，滑块回灰
-            appData.globalFD = false;
-        }
-        saveData();
-        syncSwitchByData();
-        renderAddedGame();
-    })
-};
-
-// 基础资料自动保存
-["inputNick","inputCount","inputStory","inputFirstgame"].forEach(k=>{
-    el[k].oninput = function(){
-        const map = {inputNick:"nick",inputCount:"count",inputStory:"story",inputFirstgame:"firstgame"};
-        appData.baseInfo[map[k]] = this.value;
-        saveData();
-    }
-})
-
-// 配色取色器实时同步
-["colorBg","colorTitle","colorText","colorBorder"].forEach(k=>{
-    el[k].oninput = function(){
-        const map = {colorBg:"bg",colorTitle:"title",colorText:"text",colorBorder:"border"};
-        appData.exportColor[map[k]] = this.value;
-        saveData();
-        document.body.style.background = appData.exportColor.bg;
-        document.querySelectorAll(".page-title").forEach(t=>{
-            t.style.color = appData.exportColor.title;
-        })
-    }
-})
-
-// 筛选下拉选项填充
-function fillFilterOptions(){
-    const yearSet = new Set(),pubSet=new Set(),cnSet=new Set(),writerSet=new Set(),artSet=new Set();
-    gameTemplateList.forEach(g=>{
-        yearSet.add(g.year);
-        pubSet.add(g.publisher);
-        cnSet.add(g.cnStudio);
-        writerSet.add(g.writer);
-        artSet.add(g.art);
-    })
-    const fillSelect = (id,dataSet)=>{
-        const sel = document.getElementById(id);
-        sel.innerHTML = '<option value="">全部</option>';
-        dataSet.forEach(v=>sel.innerHTML += `<option value="${v}">${v}</option>`);
-    }
-    fillSelect("filter-year",yearSet);
-    fillSelect("filter-publisher",pubSet);
-    fillSelect("filter-cn",cnSet);
-    fillSelect("filter-writer",writerSet);
-    fillSelect("filter-art",artSet);
+.wrap{
+    max-width:1200px;
+    margin:0 auto;
+    display:flex;
+    flex-direction:column;
+    gap:30px;
 }
 
-// 渲染游戏选择列表
-window.renderGameSelectList = function(){
-    const keyword = el.gameSearchInput.value.toLowerCase();
-    const filterYear = document.getElementById("filter-year").value;
-    const filterPub = document.getElementById("filter-publisher").value;
-    const filterCn = document.getElementById("filter-cn").value;
-    const filterWriter = document.getElementById("filter-writer").value;
-    const filterArt = document.getElementById("filter-art").value;
-    const sortedGames = gameTemplateList.sort((a,b)=>a.name.localeCompare(b.name,"zh-CN"));
-    let html = "";
-    sortedGames.forEach(game=>{
-        let match = true;
-        if(keyword && !game.name.toLowerCase().includes(keyword)) match = false;
-        if(filterYear && game.year != filterYear) match = false;
-        if(filterPub && game.publisher != filterPub) match = false;
-        if(filterCn && game.cnStudio != filterCn) match = false;
-        if(filterWriter && game.writer != filterWriter) match = false;
-        if(filterArt && game.art != filterArt) match = false;
-        if(!match) return;
-        html += `
-        <div class="game-option-item" data-game-id="${game.id}">
-            <img src="img/game/${game.cover}" alt="${game.name}">
-            <div>${game.name}</div>
-            <div style="font-size:12px;color:#777">${game.year}</div>
-        </div>
-        `;
-    })
-    el.gameSelectList.innerHTML = html;
-    document.querySelectorAll(".game-option-item").forEach(item=>{
-        item.onclick = ()=>{
-            const gid = item.dataset.gameId;
-            const targetGame = gameTemplateList.find(g=>g.id===gid);
-            const exist = appData.gameList.find(g=>g.gameId === gid);
-            if(exist) return alert("该游戏已添加！");
-            const newGameData = {
-                gameId: gid,
-                fold: false,
-                localHideChar: false,
-                localFD: false,
-                loveRate: 0,
-                selectChars: [],
-                cpList: []
-            };
-            appData.gameList.push(newGameData);
-            saveData();
-            el.searchPanel.classList.add("hide-block");
-            renderAddedGame();
-        }
-    })
+/* 卡片容器 */
+.big-card{
+    background:#ffffff;
+    border:2px solid #f6a5b8;
+    border-radius:16px;
+    padding:24px;
+    transition:border-color 0.2s;
 }
-el.gameSearchInput.oninput = renderGameSelectList;
-
-// 打开添加游戏面板
-el.addGameBtn.onclick = ()=>{
-    el.searchPanel.classList.toggle("hide-block");
-    renderGameSelectList();
+/* 卡片小标题 思源柔黑体粗体，双粉色搭配 */
+.big-card h2{
+    margin-bottom:20px;
+    font-size:24px;
+    border-left:5px solid #c98fac;
+    padding-left:12px;
+    color: #b85878;
+    font-weight:bold;
+    font-family:"GenJyuuGothic", "Noto Sans SC", sans-serif;
 }
 
-// 渲染已选角色缩略
-function renderSelectedChar(gameItem,gameInfo){
-    let html = "";
-    gameItem.selectChars.forEach(cid=>{
-        const char = gameInfo.charList.find(c=>c.id===cid);
-        if(!char) return;
-        const img = char.imgs[0];
-        html += `<div class="char-item selected"><img src="img/char/${img}" style="width:100px;height:100px;"><div>${char.name}</div></div>`;
-    })
-    return html || "<span>暂无选择角色</span>";
+/* 开关区域 */
+.switch-row{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin:14px 0;
+    flex-wrap:wrap;
+}
+.switch-desc{
+    font-size:14px;
+    color:#666;
+    line-height:1.6;
+    max-width:900px;
+    font-weight:normal !important;
+}
+.switch{
+    position:relative;
+    width:50px;
+    height:26px;
+}
+.switch input{
+    opacity:0;
+    width:0;
+    height:0;
+}
+.slider{
+    position:absolute;
+    cursor:pointer;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background:#ccc;
+    border-radius:34px;
+    transition:.3s;
+}
+.slider:before{
+    position:absolute;
+    content:"";
+    height:20px;
+    width:20px;
+    left:3px;
+    bottom:3px;
+    background:white;
+    border-radius:50%;
+    transition:.3s;
+}
+input:checked + .slider{
+    background:#e895a8;
+}
+input:checked + .slider:before{
+    transform:translateX(24px);
 }
 
-// 渲染CP布局
-function renderCP(gameItem,gameInfo){
-    let html = "";
-    gameItem.cpList.forEach(cp=>{
-        const fChar = gameInfo.charList.find(c=>c.id===cp.femaleId);
-        if(!fChar) return;
-        let maleHtml = "";
-        cp.maleIds.forEach(mid=>{
-            const mChar = gameInfo.charList.find(c=>c.id===mid);
-            if(!mChar) return;
-            maleHtml += `<div class="char-item selected"><img src="img/char/${mChar.imgs[0]}" style="width:100px;height:100px;"><div>${mChar.name}</div></div>`;
-        })
-        html += `
-        <div class="cp-row">
-            <div class="cp-female">
-                <div class="char-item selected"><img src="img/char/${fChar.imgs[0]}" style="width:100px;height:100px;"><div>${fChar.name}</div></div>
-            </div>
-            <div class="cp-male-wrap">${maleHtml || "<span>未选择男主</span>"}</div>
-        </div>
-        `;
-    })
-    return html || "<span>暂无CP搭配</span>";
+/* 表单区域，常规思源柔黑体，无加粗 */
+.form-row{
+    margin:16px 0;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    max-width:600px;
+}
+.form-row label{
+    font-weight:normal !important;
+}
+.form-row input{
+    padding:10px;
+    border:1px solid #eee;
+    border-radius:8px;
+    font-size:16px;
+    background:#fcfcfc;
 }
 
-// 获取过滤后角色
-function getAllGameChar(gameInfo){
-    let chars = [...gameInfo.charList];
-    const gameItem = appData.gameList.find(g=>g.gameId === gameInfo.id);
-    const showHide = gameItem.localHideChar || appData.globalHideChar;
-    const showFD = gameItem.localFD || appData.globalFD;
-    if(!showHide) chars = chars.filter(c=>!c.isHidden);
-    if(!showFD) chars = chars.filter(c=>!c.isFD);
-    const female = chars.filter(c=>c.gender==="female").sort((a,b)=>a.name.localeCompare(b.name,"zh-CN"));
-    const male = chars.filter(c=>c.gender==="male").sort((a,b)=>a.name.localeCompare(b.name,"zh-CN"));
-    return [...female,...male];
+/* 按钮统一主色，弹窗两个按钮统一取消红色 */
+button{
+    padding:10px 18px;
+    border:none;
+    border-radius:8px;
+    background:#b33a3a;
+    color:#fff;
+    cursor:pointer;
+    font-size:15px;
+    transition:0.2s;
+    font-family:"GenJyuuGothic", sans-serif;
+}
+button:hover{
+    background:#992e2e;
+}
+/* 弹窗确认/删除按钮红色系 */
+.btn-del, #spoiler-confirm{
+    background:#dd4444;
+}
+.btn-del:hover, #spoiler-confirm:hover{
+    background:#b82c2c;
+}
+.btn-fold{
+    background:#888;
+}
+.btn-fold:hover{
+    background:#555;
 }
 
-// 渲染游戏卡片
-function renderAddedGame(){
-    let html = "";
-    appData.gameList.forEach(gameItem=>{
-        const gameInfo = gameTemplateList.find(g=>g.id === gameItem.gameId);
-        if(!gameInfo) return;
-        let heartHtml = "";
-        for(let i=1;i<=5;i++) heartHtml += `<span class="heart ${gameItem.loveRate >= i ? 'active' : ''}" data-val="${i}">♥</span>`;
-        html += `
-        <div class="game-card ${gameItem.fold ? 'hide-block' : ''}" data-gid="${gameItem.gameId}">
-            <div class="game-card-head">
-                <h3>${gameInfo.name}</h3>
-                <div style="display:flex;gap:8px;">
-                    <button class="btn-fold fold-game" data-gid="${gameItem.gameId}">折叠</button>
-                    <button class="btn-del del-game" data-gid="${gameItem.gameId}">删除</button>
-                </div>
-            </div>
-            <div class="heart-rate" data-gid="${gameItem.gameId}">${heartHtml}</div>
-            <div class="game-switch-group">
-                <label class="switch">
-                    <input type="checkbox" class="local-hide-char" data-gid="${gameItem.gameId}" ${gameItem.localHideChar ? 'checked' : ''}>
-                    <span class="slider"></span>
-                </label>
-                <span>单独显示本游戏隐藏角色</span>
-                <label class="switch">
-                    <input type="checkbox" class="local-fd" data-gid="${gameItem.gameId}" ${gameItem.localFD ? 'checked' : ''}>
-                    <span class="slider"></span>
-                </label>
-                <span>单独显示本游戏FD/续作角色</span>
-            </div>
-            <div class="char-section">
-                <button class="open-char-pool" data-gid="${gameItem.gameId}">选择角色 Character</button>
-                <div class="char-selected-row" data-gid="${gameItem.gameId}">${renderSelectedChar(gameItem,gameInfo)}</div>
-            </div>
-            <div class="cp-group">
-                <button class="open-cp-pool" data-gid="${gameItem.gameId}">搭配CP Couple</button>
-                <div class="cp-render-box" data-gid="${gameItem.gameId}">${renderCP(gameItem,gameInfo)}</div>
-            </div>
-        </div>
-        `;
-    })
-    el.addedGameBox.innerHTML = html;
-    bindGameCardEvent();
+.center-btn-block{
+    display:flex;
+    justify-content:center;
+    margin:16px 0;
 }
 
-// 游戏卡片事件绑定（单独游戏开关，不影响全局滑块）
-function bindGameCardEvent(){
-    document.querySelectorAll(".fold-game").forEach(btn=>{
-        btn.onclick = ()=>{
-            const gid = btn.dataset.gid;
-            const gameItem = appData.gameList.find(g=>g.gameId === gid);
-            gameItem.fold = !gameItem.fold;
-            saveData();
-            renderAddedGame();
-        }
-    })
-    document.querySelectorAll(".del-game").forEach(btn=>{
-        btn.onclick = ()=>{
-            const gid = btn.dataset.gid;
-            appData.gameList = appData.gameList.filter(g=>g.gameId !== gid);
-            saveData();
-            renderAddedGame();
-        }
-    })
-    document.querySelectorAll(".heart-rate").forEach(box=>{
-        const gid = box.dataset.gid;
-        const gameItem = appData.gameList.find(g=>g.gameId === gid);
-        box.querySelectorAll(".heart").forEach(h=>{
-            h.onclick = ()=>{
-                gameItem.loveRate = Number(h.dataset.val);
-                saveData();
-                renderAddedGame();
-            }
-        })
-    })
-    // 单游戏隐藏角色开关（仅当前游戏生效，不修改全局globalHideChar）
-    document.querySelectorAll(".local-hide-char").forEach(sw=>{
-        sw.onchange = function(){
-            const gid = this.dataset.gid;
-            const gameItem = appData.gameList.find(g=>g.gameId === gid);
-            gameItem.localHideChar = this.checked;
-            saveData();
-            renderAddedGame();
-        }
-    })
-    // 单游戏FD开关（仅当前游戏生效，不修改全局globalFD）
-    document.querySelectorAll(".local-fd").forEach(sw=>{
-        sw.onchange = function(){
-            const gid = this.dataset.gid;
-            const gameItem = appData.gameList.find(g=>g.gameId === gid);
-            gameItem.localFD = this.checked;
-            saveData();
-            renderAddedGame();
-        }
-    })
+.game-search-box{
+    margin:16px 0;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    align-items:center;
+}
+.game-search-box input{
+    padding:10px;
+    flex:1;
+    min-width:220px;
+    border:1px solid #eee;
+    border-radius:8px;
+    background:#fcfcfc;
+}
+.filter-group{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin:10px 0;
+}
+.filter-group select{
+    padding:8px;
+    border-radius:6px;
+    border:1px solid #eee;
+    background:#fcfcfc;
+}
+.game-list-select{
+    max-height:320px;
+    overflow-y:auto;
+    border:1px solid #eee;
+    border-radius:10px;
+    padding:10px;
+    margin:12px 0;
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+    gap:12px;
+    background:#fff;
+}
+.game-option-item{
+    border:1px solid #eee;
+    border-radius:10px;
+    padding:8px;
+    cursor:pointer;
+    text-align:center;
+    background:#fff;
+}
+.game-option-item:hover{
+    background:#fff0f3;
+    border-color:#e895a8;
+}
+.game-option-item img{
+    width:120px;
+    height:auto;
+    border-radius:6px;
+    margin-bottom:6px;
+    object-fit:cover;
 }
 
-// Canvas导出
-el.exportBtn.onclick = async function(){
-    const canvas = el.canvas;
-    const ctx = canvas.getContext("2d");
-    const color = appData.exportColor;
-    const sizeRadio = document.querySelector('input[name="export-size"]:checked');
-    let w,h;
-    const sizeVal = sizeRadio.value.split(",");
-    if(sizeVal[0]==="long"){w=1080;h=9999;}else{w=Number(sizeVal[0]);h=Number(sizeVal[1]);}
-    canvas.width = w; canvas.height = h;
-
-    await Promise.all([
-        document.fonts.load('900 48px "Noto Sans SC"'),
-        document.fonts.load('700 42px "GenJyuuGothic"'),
-        document.fonts.load('700 32px "GenJyuuGothic"'),
-        document.fonts.load('700 28px "GenJyuuGothic"'),
-        document.fonts.load('400 26px "GenJyuuGothic"'),
-        document.fonts.load('400 22px "GenJyuuGothic"'),
-        document.fonts.load('400 16px "GenJyuuGothic"')
-    ]);
-    await document.fonts.ready;
-
-    ctx.fillStyle = color.bg;
-    ctx.fillRect(0,0,w,h);
-    ctx.fillStyle = color.title;
-    ctx.font = "bold 48px 'Noto Sans SC'";
-    ctx.textAlign = "center";
-    ctx.fillText("Otome FavList", w/2, 80);
-    ctx.font = "bold 26px 'GenJyuuGothic'";
-    ctx.fillText("日乙个人喜好表", w/2, 130);
-    let offsetY = 180;
-    const base = appData.baseInfo;
-    const baseArr = [
-    base.nick ? `昵称：${base.nick}` : "",
-    base.count ? `游玩数量：${base.count}` : "",
-    base.story ? `入坑时间：${base.story}` : "",
-    base.firstgame ? `入坑作品：${base.firstgame}` : ""
-    ].filter(x=>x);
-    if(baseArr.length>0){
-        ctx.fillStyle = color.title;
-        ctx.font = "bold 30px 'GenJyuuGothic'";
-        ctx.textAlign = "left";
-        ctx.fillText("基础资料", 60, offsetY);
-        offsetY +=40;
-        ctx.fillStyle = color.text;
-        ctx.font = "bold 22px 'GenJyuuGothic'";
-        baseArr.forEach(txt=>{
-            ctx.fillText(txt,60,offsetY);
-            offsetY +=34;
-        })
-        offsetY +=20;
-    }
-    appData.gameList.forEach(gameItem=>{
-        if(gameItem.selectChars.length===0 && gameItem.cpList.length===0) return;
-        const gameInfo = gameTemplateList.find(g=>g.id===gameItem.gameId);
-        ctx.strokeStyle = color.border;
-        ctx.lineWidth = 3;
-        ctx.strokeRect(40,offsetY,w-80,220);
-        ctx.fillStyle = color.title;
-        ctx.font = "bold 32px 'GenJyuuGothic'";
-        ctx.textAlign = "left";
-        ctx.fillText(gameInfo.name,60,offsetY+40);
-        ctx.fillStyle = "#ff4d88";
-        let heartTxt = "";
-        for(let i=0;i<gameItem.loveRate;i++) heartTxt += "♥ ";
-        ctx.font = "bold 28px 'GenJyuuGothic'";
-        ctx.fillText(heartTxt,60,offsetY+80);
-        offsetY += 110;
-        if(gameItem.selectChars.length>0){
-            ctx.fillStyle = color.title;
-            ctx.font = "bold 26px 'GenJyuuGothic'";
-            ctx.fillText("Selected Character",60,offsetY);
-            offsetY +=36;
-            ctx.fillStyle = color.text;
-            ctx.font = "bold 22px 'GenJyuuGothic'";
-            const charNames = gameItem.selectChars.map(cid=>{
-                const c = gameInfo.charList.find(x=>x.id===cid);
-                return c?.name || "";
-            }).filter(x=>x);
-            ctx.fillText(charNames.join(" / "),60,offsetY);
-            offsetY +=44;
-        }
-        if(gameItem.cpList.length>0){
-            ctx.fillStyle = color.title;
-            ctx.font = "bold 26px 'GenJyuuGothic'";
-            ctx.fillText("Couple List",60,offsetY);
-            offsetY +=36;
-            ctx.fillStyle = color.text;
-            ctx.font = "bold 22px 'GenJyuuGothic'";
-            gameItem.cpList.forEach(cp=>{
-                const f = gameInfo.charList.find(x=>x.id===cp.femaleId);
-                const mNames = cp.maleIds.map(mid=>{
-                    const m = gameInfo.charList.find(x=>x.id===mid);
-                    return m?.name || "";
-                }).filter(x=>x);
-                const cpTxt = `${f?.name} × ${mNames.join("、")}`;
-                ctx.fillText(cpTxt,60,offsetY);
-                offsetY +=34;
-            })
-        }
-        offsetY +=60;
-    })
-    const link = document.createElement("a");
-    link.download = "Otome_FavList.png";
-    link.href = canvas.toDataURL("image/png");
-    link.click();
+.game-card{
+    background:#ffffff;
+    border:1px solid #f6a5b8;
+    border-radius:12px;
+    padding:18px;
+    margin:16px 0;
+}
+.game-card-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:12px;
+    flex-wrap:wrap;
+    gap:10px;
+}
+.heart-rate{
+    display:flex;
+    gap:6px;
+    margin:8px 0;
+}
+.heart{
+    font-size:28px;
+    color:#ccc;
+    cursor:pointer;
+    transition:0.2s;
+}
+.heart.active{
+    color:#ff4d88;
+}
+.game-switch-group{
+    display:flex;
+    gap:16px;
+    margin:10px 0;
+    flex-wrap:wrap;
 }
 
-// 页面初始化
-window.onload = async function(){
-    loadData();
-    document.body.style.background = appData.exportColor.bg;
-    document.querySelectorAll(".page-title").forEach(t=>{
-        t.style.color = appData.exportColor.title;
-    })
-    setTimeout(fillFilterOptions,800);
-    renderAddedGame();
+.char-section{
+    margin:16px 0;
+    padding:12px;
+    border-top:1px solid #eee;
+}
+.char-title{
+    font-weight:normal;
+    margin:10px 0;
+}
+.char-pool{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(130px,1fr));
+    gap:12px;
+    margin:10px 0;
+}
+.char-item{
+    text-align:center;
+    border:1px solid #eee;
+    padding:8px;
+    border-radius:10px;
+    cursor:pointer;
+    background:#fff;
+}
+.char-item.selected{
+    border-color:#e895a8;
+    background:#fff0f3;
+}
+.char-item img{
+    width:200px;
+    height:200px;
+    object-fit:cover;
+    border-radius:8px;
+    margin-bottom:6px;
+    max-width:100%;
+}
+.char-img-switch{
+    font-size:12px;
+    margin-top:4px;
+    color:#e895a8;
+    cursor:pointer;
+}
+.char-selected-row{
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+    margin:12px 0;
+    align-items:flex-end;
+}
+
+.cp-group{
+    margin:16px 0;
+    padding:12px;
+    border-top:1px solid #eee;
+}
+.cp-row{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    margin:10px 0;
+    padding-bottom:16px;
+    border-bottom:1px solid #eee;
+    width:100%;
+}
+.cp-female{
+    flex: 0 0 25%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.cp-male-wrap{
+    flex: 1;
+    flex-basis:75%;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    align-items:flex-end;
+}
+
+/* 弹窗遮罩 */
+.modal-mask{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.6);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:999;
+    display:none;
+}
+.modal-box{
+    background:#fff;
+    padding:26px;
+    border-radius:14px;
+    max-width:520px;
+    width:90%;
+    border:2px solid #f6a5b8;
+}
+.modal-box h3{
+    margin-bottom:14px;
+    color:#b33a3a;
+    font-family:"GenJyuuGothic", sans-serif;
+}
+.modal-btns{
+    display:flex;
+    gap:12px;
+    justify-content:flex-end;
+    margin-top:20px;
+}
+
+/* 导出配色 */
+.color-set-row{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+    margin:16px 0;
+}
+.color-item{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+}
+.color-item input[type="color"]{
+    width:80px;
+    height:40px;
+    border:none;
+    cursor:pointer;
+    border-radius:6px;
+}
+.size-select{
+    margin:16px 0;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+.size-select label{
+    color:#c98fac !important;
+    font-weight:normal;
+}
+
+/* About区域 */
+.about-block{
+    text-align:center;
+    margin-top:50px;
+    padding:20px;
+}
+.about-block p{
+    margin:8px 0;
+    font-size:16px;
+    line-height:1.8;
+    color:#666;
+}
+.about-block p.email-text{
+    color:#222;
+}
+
+.hide-block{
+    display:none;
+}
+
+h1{
+    color: #b33a3a;
+}
+h2{
+    color: #b85878;
+}
+.text-light-pink{
+    color: #c98fac;
+    font-weight:normal !important;
+}
+.text-black{
+    color: #222222;
+}
+.text-gray-desc{
+    color:#666;
+    font-weight:normal;
 }
