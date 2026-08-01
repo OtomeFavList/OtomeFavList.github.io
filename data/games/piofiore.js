@@ -6,16 +6,31 @@
 const piofiore = [
 
 {
-
     id: "piofiore",
 
     name: "虔诚之花的晚钟",
 
-    englishName: "Piofiore: Fated Memories",
-
     shortName: "Piofiore",
 
-    cover: "images/piofiore/cover.webp",
+    company: "Otomate",
+
+    localization: "Otomate World",
+
+    platforms: [
+
+        "PS Vita",
+
+        "Nintendo Switch"
+
+    ],
+
+    releaseDate: {
+
+        jp: "2018-08-30",
+
+        zh: "2025-xx-xx"
+
+    },
 
     heroine: {
 
