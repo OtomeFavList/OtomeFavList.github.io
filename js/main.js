@@ -33,12 +33,10 @@ const el = {
     canvas: document.getElementById("export-canvas")
 };
 
-// =========【修复】挂载到window全局，控制台可调用 =========
+// 修复：同步直接赋值，取消微任务延迟
 window.syncSwitchByData = function() {
-    queueMicrotask(() => {
-        el.globalHideChar.checked = appData.globalHideChar;
-        el.globalFD.checked = appData.globalFD;
-    })
+    el.globalHideChar.checked = appData.globalHideChar;
+    el.globalFD.checked = appData.globalFD;
 }
 
 // 本地存储读写
@@ -96,8 +94,8 @@ el.globalHideChar.onchange = function(){
     openSpoilerModal((ok)=>{
         appData.globalHideChar = ok;
         saveData();
-        syncSwitchByData();
-        setTimeout(renderAddedGame, 200);
+        syncSwitchByData(); // 立刻修改勾选状态
+        setTimeout(renderAddedGame, 200); // 延后渲染列表，避免覆盖
     })
 }
 
@@ -118,7 +116,7 @@ el.globalFD.onchange = function() {
     openSpoilerModal(function(confirmResult) {
         appData.globalFD = confirmResult;
         saveData();
-        syncSwitchByData();
+        syncSwitchByData(); // 立刻点亮滑块
         setTimeout(renderAddedGame, 200);
     });
 };
