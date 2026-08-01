@@ -36,14 +36,14 @@ const el = {
 // 当前弹窗操作标记：区分是隐藏角色还是FD开关触发弹窗
 let currentGlobalTarget = "";
 
-// 同步滑块视觉
+// 同步滑块视觉（仅单独同步单个开关，不全部覆盖）
 window.syncSwitchByData = function() {
     if(el.globalHideChar) el.globalHideChar.checked = appData.globalHideChar;
     if(el.globalFD) el.globalFD.checked = appData.globalFD;
 }
 
-// 批量同步所有游戏对应全局功能状态
-function syncAllGameSwitch(type, status) {
+// 仅同步单个游戏对应全局功能状态
+function syncSingleGameSwitch(type, status) {
     appData.gameList.forEach(game => {
         if(type === "hideChar") game.localHideChar = status;
         if(type === "fd") game.localFD = status;
@@ -94,28 +94,32 @@ if(el.spoilerCancel){
     el.spoilerCancel.onclick = ()=>{
         closeSpoilerModal();
         if(modalCallback) modalCallback(false);
+        // 只刷新视图，不强制修改两个开关数据
         syncSwitchByData();
     }
 }
 
-// 全局隐藏角色开关
+// ========== 全局隐藏角色开关【独立逻辑，不干扰FD开关】 ==========
 if(el.globalHideChar){
     el.globalHideChar.onchange = function(){
         const newState = this.checked;
+        // 关闭操作：只修改隐藏角色，不动FD
         if(!newState) {
             appData.globalHideChar = false;
-            syncAllGameSwitch("hideChar", false);
+            syncSingleGameSwitch("hideChar", false);
             saveData();
             syncSwitchByData();
             renderAddedGame();
             return;
         }
+        // 开启触发弹窗
         currentGlobalTarget = "hideChar";
         openSpoilerModal((confirm)=>{
             if(confirm){
                 appData.globalHideChar = true;
-                syncAllGameSwitch("hideChar", true);
+                syncSingleGameSwitch("hideChar", true);
             }else{
+                // 取消仅回退当前这个开关，FD保持原样
                 appData.globalHideChar = false;
             }
             saveData();
@@ -125,24 +129,27 @@ if(el.globalHideChar){
     }
 }
 
-// 全局FD开关
+// ========== 全局FD开关【独立逻辑，不干扰隐藏角色开关】 ==========
 if(el.globalFD){
     el.globalFD.onchange = function() {
         const newState = this.checked;
+        // 关闭操作：只修改FD，不动隐藏角色
         if (!newState) {
             appData.globalFD = false;
-            syncAllGameSwitch("fd", false);
+            syncSingleGameSwitch("fd", false);
             saveData();
             syncSwitchByData();
             renderAddedGame();
             return;
         }
+        // 开启触发弹窗
         currentGlobalTarget = "fd";
         openSpoilerModal((confirm)=>{
             if(confirm){
                 appData.globalFD = true;
-                syncAllGameSwitch("fd", true);
+                syncSingleGameSwitch("fd", true);
             }else{
+                // 取消仅回退FD开关，隐藏角色保持原样
                 appData.globalFD = false;
             }
             saveData();
@@ -171,9 +178,6 @@ if(el.globalFD){
             appData.exportColor[map[k]] = this.value;
             saveData();
             document.body.style.background = appData.exportColor.bg;
-            document.querySelectorAll(".page-title").forEach(t=>{
-                t.style.color = appData.exportColor.title;
-            })
         }
     }
 })
@@ -551,9 +555,6 @@ window.onload = async function(){
         loadData();
         // JS兜底设置页面背景
         document.body.style.background = appData.exportColor.bg;
-        document.querySelectorAll(".page-title").forEach(t=>{
-            t.style.color = appData.exportColor.title;
-        })
         setTimeout(fillFilterOptions,800);
         renderAddedGame();
     }catch(e){
@@ -561,4 +562,4 @@ window.onload = async function(){
         // 初始化报错强制恢复默认底色，不会纯白
         document.body.style.background = "#fff7f9";
     }
-}
+    }
