@@ -33,6 +33,12 @@ const el = {
     canvas: document.getElementById("export-canvas")
 };
 
+// 【新增】独立刷新全局开关，单独执行不与渲染绑定
+function refreshGlobalSwitch() {
+    el.globalHideChar.checked = appData.globalHideChar;
+    el.globalFD.checked = appData.globalFD;
+}
+
 // 本地存储读写
 function saveData(){
     localStorage.setItem(STORE_KEY, JSON.stringify(appData));
@@ -44,9 +50,6 @@ function loadData(){
     el.inputCount.value = appData.baseInfo.count;
     el.inputStory.value = appData.baseInfo.story;
     el.inputFirstgame.value = appData.baseInfo.firstgame;
-    // 初始化仅页面加载时同步一次DOM
-    el.globalHideChar.checked = appData.globalHideChar;
-    el.globalFD.checked = appData.globalFD;
     el.colorBg.value = appData.exportColor.bg;
     el.colorTitle.value = appData.exportColor.title;
     el.colorText.value = appData.exportColor.text;
@@ -72,63 +75,50 @@ el.spoilerCancel.onclick = ()=>{
     if(modalCallback) modalCallback(false);
 }
 
-// ========== 修复1：全局隐藏角色开关逻辑（加延迟防覆盖） ==========
+// ========== 修复1：全局隐藏角色开关逻辑 ==========
 el.globalHideChar.onchange = function(){
     const targetSwitch = this;
     const wantOpen = targetSwitch.checked;
-    // 用户取消关闭开关：直接同步存储+UI
+    // 主动关闭开关，直接生效
     if(!wantOpen){
         appData.globalHideChar = false;
-        targetSwitch.checked = false;
         saveData();
         renderAddedGame();
+        setTimeout(refreshGlobalSwitch, 150);
         return;
     }
-    // 用户想要开启，先强制切回灰色，弹出确认框
+    // 打开触发弹窗，先强制置灰
     targetSwitch.checked = false;
     openSpoilerModal((ok)=>{
-        setTimeout(() => {
-            if(ok){
-                // 确认开启：同步数据 + 立刻修改DOM勾选状态（关键）
-                appData.globalHideChar = true;
-                targetSwitch.checked = true;
-            }else{
-                // 取消：保持关闭
-                appData.globalHideChar = false;
-                targetSwitch.checked = false;
-            }
-            saveData();
-            renderAddedGame();
-        }, 60);
+        // 仅修改数据，不操作DOM
+        appData.globalHideChar = ok;
+        saveData();
+        // 先渲染游戏列表
+        renderAddedGame();
+        // 等待DOM渲染完成，再刷新滑块状态
+        setTimeout(refreshGlobalSwitch, 150);
     })
 }
 
-// ========== 修复2：全局FD/续作角色开关（同步加延迟修复） ==========
+// ========== 修复2：全局FD/续作角色开关 ==========
 el.globalFD.onchange = function() {
     const switchDom = this;
     const wantOpen = switchDom.checked;
-    // 用户手动关闭
+    // 主动关闭开关
     if (!wantOpen) {
         appData.globalFD = false;
-        switchDom.checked = false;
         saveData();
         renderAddedGame();
+        setTimeout(refreshGlobalSwitch, 150);
         return;
     }
-    // 想要开启，先切灰弹窗确认
+    // 打开触发弹窗，先置灰
     switchDom.checked = false;
     openSpoilerModal(function(confirmResult) {
-        setTimeout(() => {
-            if (confirmResult) {
-                appData.globalFD = true;
-                switchDom.checked = true;
-            } else {
-                appData.globalFD = false;
-                switchDom.checked = false;
-            }
-            saveData();
-            renderAddedGame();
-        }, 60);
+        appData.globalFD = confirmResult;
+        saveData();
+        renderAddedGame();
+        setTimeout(refreshGlobalSwitch, 150);
     });
 };
 
@@ -283,7 +273,7 @@ function getAllGameChar(gameInfo){
     return [...female,...male];
 }
 
-// 渲染所有已添加游戏卡片【已删除末尾两行覆盖全局开关的代码】
+// 渲染所有已添加游戏卡片【彻底删除全局滑块赋值代码】
 function renderAddedGame(){
     let html = "";
     appData.gameList.forEach(gameItem=>{
@@ -326,9 +316,7 @@ function renderAddedGame(){
     })
     el.addedGameBox.innerHTML = html;
     bindGameCardEvent();
-    // ========= 重点修复：删掉了下面两行会强制重置开关的代码 =========
-    // el.globalHideChar.checked = appData.globalHideChar;
-    // el.globalFD.checked = appData.globalFD;
+    // 无任何全局滑块赋值代码
 }
 
 // 游戏卡片事件绑定
@@ -538,4 +526,6 @@ window.onload = async function(){
     })
     setTimeout(fillFilterOptions,800);
     renderAddedGame();
+    // 页面加载完成强制刷新全局开关状态
+    refreshGlobalSwitch();
 }
