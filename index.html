@@ -6,14 +6,16 @@
 <title>Otome FavList</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./css/main.css">
 </head>
 <body>
 
 <div class="site-title">
     <h1>Otome FavList</h1>
-    <p class="sub-desc text-black">选择你喜欢的角色，生成属于你的FavList。</p>
+    <!-- 需求⑤：补回日乙个人喜好表，纯黑 -->
+    <p class="title-sub-cn">日乙个人喜好表</p>
+    <p class="sub-desc text-gray-desc">选择你喜欢的角色，生成属于你的属性表。</p>
 </div>
 
 <div class="wrap">
@@ -110,6 +112,7 @@
                 <input type="color" id="color-border" value="#f6a5b8">
             </div>
         </div>
+        <!-- 需求③：全部尺寸选项自动继承浅粉色 -->
         <div class="size-select">
             <label class="text-light-pink">导出尺寸：</label>
             <label><input type="radio" name="export-size" value="810,1080" checked>810×1080</label>
@@ -125,17 +128,18 @@
     </div>
 </div>
 
-<div class="about-block text-black">
+<div class="about-block">
     <h2>About</h2>
     <p>由于开发者个人没有接触所有游戏，因此会有部分游戏缺少隐藏角色。</p>
     <p>如果发现角色遗漏（若涉及剧透烦请在邮件标题添加预警）、图片错误、功能异常，<br>或有希望新增的作品，欢迎通过邮箱联系。</p>
-    <p>Email：otomefavlist@163.com</p>
+    <!-- 需求⑥：邮箱单独保留纯黑色 -->
+    <p class="email-text">Email：otomefavlist@163.com</p>
 </div>
 
 <div class="modal-mask" id="spoiler-modal">
     <div class="modal-box">
         <h3>⚠️ 剧透警告</h3>
-        <p>注意！打开后可能涉及：剧情结局、最终攻略对象、真相路线，是否继续？</p>
+        <p class="text-gray-desc">注意！打开后可能涉及：剧情结局、最终攻略对象、真相路线，是否继续？</p>
         <div class="modal-btns">
             <button class="btn-del" id="spoiler-cancel">取消</button>
             <button id="spoiler-confirm">显示</button>
