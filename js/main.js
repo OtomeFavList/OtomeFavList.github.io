@@ -404,126 +404,141 @@ function bindGameCardEvent(){
     })
 }
 
-// Canvas导出（已修改基础资料两两同行逻辑）
+// Canvas导出【修复完整版：捕获报错、边框beginPath、尺寸空判断、基础资料两两同行】
 el.exportBtn.onclick = async function(){
-    const canvas = el.canvas;
-    const ctx = canvas.getContext("2d");
-    const color = appData.exportColor;
-    const sizeRadio = document.querySelector('input[name="export-size"]:checked');
-    let w,h;
-    const sizeVal = sizeRadio.value.split(",");
-    if(sizeVal[0]==="long"){w=1080;h=9999;}else{w=Number(sizeVal[0]);h=Number(sizeVal[1]);}
-    canvas.width = w; canvas.height = h;
+    try {
+        const canvas = el.canvas;
+        const ctx = canvas.getContext("2d");
+        const color = appData.exportColor;
+        const sizeRadio = document.querySelector('input[name="export-size"]:checked');
 
-    await Promise.all([
-        document.fonts.load('900 48px "Noto Sans SC"'),
-        document.fonts.load('700 42px "GenJyuuGothic"'),
-        document.fonts.load('700 32px "GenJyuuGothic"'),
-        document.fonts.load('700 28px "GenJyuuGothic"'),
-        document.fonts.load('400 26px "GenJyuuGothic"'),
-        document.fonts.load('400 22px "GenJyuuGothic"'),
-        document.fonts.load('400 16px "GenJyuuGothic"')
-    ]);
-    await document.fonts.ready;
+        // 修复：无尺寸选择时弹窗提示，不中断代码
+        if (!sizeRadio) {
+            alert("请先选择导出图片尺寸！");
+            return;
+        }
+        let w,h;
+        const sizeVal = sizeRadio.value.split(",");
+        if(sizeVal[0]==="long"){w=1080;h=9999;}else{w=Number(sizeVal[0]);h=Number(sizeVal[1]);}
+        canvas.width = w; canvas.height = h;
 
-    ctx.fillStyle = color.bg;
-    ctx.fillRect(0,0,w,h);
-    ctx.fillStyle = color.title;
-    ctx.font = "bold 48px 'Noto Sans SC'";
-    ctx.textAlign = "center";
-    ctx.fillText("Otome FavList", w/2, 80);
-    ctx.font = "bold 26px 'GenJyuuGothic'";
-    ctx.fillText("日乙个人喜好表", w/2, 130);
-    let offsetY = 180;
-    const base = appData.baseInfo;
-    // 收集所有非空基础信息
-    const baseArr = [
-        base.nick ? `昵称：${base.nick}` : "",
-        base.count ? `游玩数量：${base.count}` : "",
-        base.story ? `入坑时间：${base.story}` : "",
-        base.firstgame ? `入坑作品：${base.firstgame}` : ""
-    ].filter(x=>x);
+        await Promise.all([
+            document.fonts.load('900 48px "Noto Sans SC"'),
+            document.fonts.load('700 42px "GenJyuuGothic"'),
+            document.fonts.load('700 32px "GenJyuuGothic"'),
+            document.fonts.load('700 28px "GenJyuuGothic"'),
+            document.fonts.load('400 26px "GenJyuuGothic"'),
+            document.fonts.load('400 22px "GenJyuuGothic"'),
+            document.fonts.load('400 16px "GenJyuuGothic"')
+        ]);
+        await document.fonts.ready;
 
-    if(baseArr.length>0){
+        ctx.fillStyle = color.bg;
+        ctx.fillRect(0,0,w,h);
         ctx.fillStyle = color.title;
-        ctx.font = "bold 30px 'GenJyuuGothic'";
-        ctx.textAlign = "left";
-        ctx.fillText("基础资料", 60, offsetY);
-        offsetY +=40;
-        ctx.fillStyle = color.text;
-        ctx.font = "bold 22px 'GenJyuuGothic'";
-        // 画布左右两栏分割点，中间留80px空隙防止文字重叠
-        const splitX = w / 2 - 40;
-        const lineGap = 34;
-        // 两两循环绘制
-        for(let i = 0; i < baseArr.length; i += 2) {
-            const leftText = baseArr[i];
-            const rightText = baseArr[i + 1];
-            // 左侧文字
-            ctx.fillText(leftText, 60, offsetY);
-            // 存在第二条则在右侧绘制
-            if(rightText) {
-                ctx.fillText(rightText, splitX, offsetY);
+        ctx.font = "bold 48px 'Noto Sans SC'";
+        ctx.textAlign = "center";
+        ctx.fillText("Otome FavList", w/2, 80);
+        ctx.font = "bold 26px 'GenJyuuGothic'";
+        ctx.fillText("日乙个人喜好表", w/2, 130);
+        let offsetY = 180;
+        const base = appData.baseInfo;
+        // 收集所有非空基础信息
+        const baseArr = [
+            base.nick ? `昵称：${base.nick}` : "",
+            base.count ? `游玩数量：${base.count}` : "",
+            base.story ? `入坑时间：${base.story}` : "",
+            base.firstgame ? `入坑作品：${base.firstgame}` : ""
+        ].filter(x=>x);
+
+        if(baseArr.length>0){
+            ctx.fillStyle = color.title;
+            ctx.font = "bold 30px 'GenJyuuGothic'";
+            ctx.textAlign = "left";
+            ctx.fillText("基础资料", 60, offsetY);
+            offsetY +=40;
+            ctx.fillStyle = color.text;
+            ctx.font = "bold 22px 'GenJyuuGothic'";
+            // 画布左右两栏分割点，中间留80px空隙防止文字重叠
+            const splitX = w / 2 - 40;
+            const lineGap = 34;
+            // 两两循环绘制
+            for(let i = 0; i < baseArr.length; i += 2) {
+                const leftText = baseArr[i];
+                const rightText = baseArr[i + 1];
+                // 左侧文字
+                ctx.fillText(leftText, 60, offsetY);
+                // 存在第二条则在右侧绘制
+                if(rightText) {
+                    ctx.fillText(rightText, splitX, offsetY);
+                }
+                offsetY += lineGap;
             }
-            offsetY += lineGap;
+            offsetY +=20;
         }
-        offsetY +=20;
-    }
 
-    appData.gameList.forEach(gameItem=>{
-        if(gameItem.selectChars.length===0 && gameItem.cpList.length===0) return;
-        const gameInfo = gameTemplateList.find(g=>g.id===gameItem.gameId);
-        ctx.strokeStyle = color.border;
-        ctx.lineWidth = 3;
-        ctx.strokeRect(40,offsetY,w-80,220);
-        ctx.fillStyle = color.title;
-        ctx.font = "bold 32px 'GenJyuuGothic'";
-        ctx.textAlign = "left";
-        ctx.fillText(gameInfo.name,60,offsetY+40);
-        ctx.fillStyle = "#ff4d88";
-        let heartTxt = "";
-        for(let i=0;i<gameItem.loveRate;i++) heartTxt += "♥ ";
-        ctx.font = "bold 28px 'GenJyuuGothic'";
-        ctx.fillText(heartTxt,60,offsetY+80);
-        offsetY += 110;
-        if(gameItem.selectChars.length>0){
+        appData.gameList.forEach(gameItem=>{
+            if(gameItem.selectChars.length===0 && gameItem.cpList.length===0) return;
+            const gameInfo = gameTemplateList.find(g=>g.id===gameItem.gameId);
+            // 修复：每个矩形重置路径，边框不会消失重叠
+            ctx.beginPath();
+            ctx.strokeStyle = color.border;
+            ctx.lineWidth = 3;
+            ctx.strokeRect(40,offsetY,w-80,220);
+
             ctx.fillStyle = color.title;
-            ctx.font = "bold 26px 'GenJyuuGothic'";
-            ctx.fillText("Selected Character",60,offsetY);
-            offsetY +=36;
-            ctx.fillStyle = color.text;
-            ctx.font = "bold 22px 'GenJyuuGothic'";
-            const charNames = gameItem.selectChars.map(cid=>{
-                const c = gameInfo.charList.find(x=>x.id===cid);
-                return c?.name || "";
-            }).filter(x=>x);
-            ctx.fillText(charNames.join(" / "),60,offsetY);
-            offsetY +=44;
-        }
-        if(gameItem.cpList.length>0){
-            ctx.fillStyle = color.title;
-            ctx.font = "bold 26px 'GenJyuuGothic'";
-            ctx.fillText("Couple List",60,offsetY);
-            offsetY +=36;
-            ctx.fillStyle = color.text;
-            ctx.font = "bold 22px 'GenJyuuGothic'";
-            gameItem.cpList.forEach(cp=>{
-                const f = gameInfo.charList.find(x=>x.id===cp.femaleId);
-                const mNames = cp.maleIds.map(mid=>{
-                    const m = gameInfo.charList.find(x=>x.id===mid);
-                    return m?.name || "";
+            ctx.font = "bold 32px 'GenJyuuGothic'";
+            ctx.textAlign = "left";
+            ctx.fillText(gameInfo.name,60,offsetY+40);
+            ctx.fillStyle = "#ff4d88";
+            let heartTxt = "";
+            for(let i=0;i<gameItem.loveRate;i++) heartTxt += "♥ ";
+            ctx.font = "bold 28px 'GenJyuuGothic'";
+            ctx.fillText(heartTxt,60,offsetY+80);
+            offsetY += 110;
+            if(gameItem.selectChars.length>0){
+                ctx.fillStyle = color.title;
+                ctx.font = "bold 26px 'GenJyuuGothic'";
+                ctx.fillText("Selected Character",60,offsetY);
+                offsetY +=36;
+                ctx.fillStyle = color.text;
+                ctx.font = "bold 22px 'GenJyuuGothic'";
+                const charNames = gameItem.selectChars.map(cid=>{
+                    const c = gameInfo.charList.find(x=>x.id===cid);
+                    return c?.name || "";
                 }).filter(x=>x);
-                const cpTxt = `${f?.name} × ${mNames.join("、")}`;
-                ctx.fillText(cpTxt,60,offsetY);
-                offsetY +=34;
-            })
-        }
-        offsetY +=60;
-    })
-    const link = document.createElement("a");
-    link.download = "Otome_FavList.png";
-    link.href = canvas.toDataURL("image/png");
-    link.click();
+                ctx.fillText(charNames.join(" / "),60,offsetY);
+                offsetY +=44;
+            }
+            if(gameItem.cpList.length>0){
+                ctx.fillStyle = color.title;
+                ctx.font = "bold 26px 'GenJyuuGothic'";
+                ctx.fillText("Couple List",60,offsetY);
+                offsetY +=36;
+                ctx.fillStyle = color.text;
+                ctx.font = "bold 22px 'GenJyuuGothic'";
+                gameItem.cpList.forEach(cp=>{
+                    const f = gameInfo.charList.find(x=>x.id===cp.femaleId);
+                    const mNames = cp.maleIds.map(mid=>{
+                        const m = gameInfo.charList.find(x=>x.id===mid);
+                        return m?.name || "";
+                    }).filter(x=>x);
+                    const cpTxt = `${f?.name} × ${mNames.join("、")}`;
+                    ctx.fillText(cpTxt,60,offsetY);
+                    offsetY +=34;
+                })
+            }
+            offsetY +=60;
+        })
+        const link = document.createElement("a");
+        link.download = "Otome_FavList.png";
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+    } catch(err) {
+        // 捕获导出所有报错，控制台打印，不影响页面整体运行
+        console.error("导出图片出错：", err);
+        alert("导出失败，请检查页面尺寸选择或刷新重试");
+    }
 }
 
 // 页面初始化
@@ -535,4 +550,4 @@ window.onload = async function(){
     })
     setTimeout(fillFilterOptions,800);
     renderAddedGame();
-}
+        }
