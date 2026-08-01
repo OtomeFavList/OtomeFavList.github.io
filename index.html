@@ -6,7 +6,14 @@
 <title>Otome FavList</title>
 <link rel="stylesheet" href="./css/main.css">
 <style>
-/* 弹窗文字居中样式，追加到页面，也可复制进main.css底部 */
+/* 全局兜底背景，防止JS加载失败页面纯白 */
+html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background-color: #fff7f9 !important;
+}
+/* 弹窗文字居中样式 */
 #spoiler-modal .modal-box h3 {
     text-align: center;
 }
@@ -18,9 +25,38 @@
 .form-row-double {
     display: flex;
     gap: 2rem;
+    flex-wrap: wrap;
 }
 .form-row-double .form-row {
     flex: 1;
+    min-width: 280px;
+}
+/* 剧透弹窗基础样式 */
+#spoiler-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+}
+.modal-box {
+    background: white;
+    padding: 32px;
+    border-radius: 12px;
+    max-width: 400px;
+    width: 90%;
+}
+.modal-btns {
+    display: flex;
+    gap: 1rem;
+    margin-top: 24px;
+    justify-content: center;
+}
+/* 通用隐藏类，和JS匹配 */
+.hide-block {
+    display: none !important;
 }
 </style>
 </head>
