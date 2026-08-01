@@ -71,52 +71,48 @@ el.spoilerCancel.onclick = ()=>{
     if(modalCallback) modalCallback(false);
 }
 
-// ========== 修复1：全局隐藏角色开关逻辑（彻底修复取消不回弹） ==========
-el.globalHideChar.onchange = function(){
+// ========== 修复1：全局隐藏角色开关逻辑 ==========
+el.globalHideChar.onchange = function(e){
     const targetSwitch = this;
-    // 手动取消勾选关闭开关：无弹窗，直接保存刷新
-    if(!targetSwitch.checked){
+    const newState = targetSwitch.checked;
+    // 关闭开关：无弹窗，直接保存刷新
+    if(!newState){
         appData.globalHideChar = false;
         saveData();
         renderAddedGame();
         return;
     }
-    // 用户勾选开启：立刻先切回关闭，规避浏览器二次change冲突
+    // 勾选开启，临时视觉切灰，弹窗确认
     targetSwitch.checked = false;
     openSpoilerModal((ok)=>{
         if(ok){
-            // 确认开启
             appData.globalHideChar = true;
-            targetSwitch.checked = true;
         }else{
-            // 取消：保持关闭，数据置假
             appData.globalHideChar = false;
-            targetSwitch.checked = false;
         }
         saveData();
         renderAddedGame();
     })
 }
 
-// ========== 修复2：全局FD/续作角色开关（彻底修复取消不回弹） ==========
-el.globalFD.onchange = function() {
+// ========== 修复2：全局FD/续作角色开关 ==========
+el.globalFD.onchange = function(e) {
     const switchDom = this;
+    const newState = switchDom.checked;
     // 手动取消勾选关闭全局FD：无弹窗，直接生效
-    if (!switchDom.checked) {
+    if (!newState) {
         appData.globalFD = false;
         saveData();
         renderAddedGame();
         return;
     }
-    // 用户勾选开启：立刻先切回关闭，规避浏览器二次change冲突
+    // 勾选开启全局FD：临时切灰，弹出弹窗
     switchDom.checked = false;
     openSpoilerModal(function(confirmResult) {
         if (confirmResult) {
             appData.globalFD = true;
-            switchDom.checked = true;
         } else {
             appData.globalFD = false;
-            switchDom.checked = false;
         }
         saveData();
         renderAddedGame();
@@ -317,9 +313,11 @@ function renderAddedGame(){
     })
     el.addedGameBox.innerHTML = html;
     bindGameCardEvent();
-    // 兜底：每次渲染强制同步全局开关UI，杜绝界面与数据错位
-    el.globalHideChar.checked = appData.globalHideChar;
-    el.globalFD.checked = appData.globalFD;
+    // 兜底：延时同步开关UI，解决浏览器渲染不同步
+    setTimeout(()=>{
+        el.globalHideChar.checked = appData.globalHideChar;
+        el.globalFD.checked = appData.globalFD;
+    }, 0);
 }
 
 // 游戏卡片事件绑定
