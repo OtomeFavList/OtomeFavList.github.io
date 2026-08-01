@@ -71,8 +71,9 @@ el.spoilerCancel.onclick = ()=>{
     if(modalCallback) modalCallback(false);
 }
 
-// ========== 修复1：全局隐藏角色开关逻辑 ==========
+// ========== 修复1：全局隐藏角色开关逻辑【增加阻止默认事件】 ==========
 el.globalHideChar.onchange = function(e){
+    e.preventDefault();
     const targetSwitch = this;
     const newState = targetSwitch.checked;
     // 关闭开关：无弹窗，直接保存刷新
@@ -95,8 +96,9 @@ el.globalHideChar.onchange = function(e){
     })
 }
 
-// ========== 修复2：全局FD/续作角色开关 ==========
+// ========== 修复2：全局FD/续作角色开关【增加阻止默认事件】 ==========
 el.globalFD.onchange = function(e) {
+    e.preventDefault();
     const switchDom = this;
     const newState = switchDom.checked;
     // 手动取消勾选关闭全局FD：无弹窗，直接生效
@@ -313,11 +315,13 @@ function renderAddedGame(){
     })
     el.addedGameBox.innerHTML = html;
     bindGameCardEvent();
-    // 兜底：延时同步开关UI，解决浏览器渲染不同步
+    // 【核心修复】延时提升至50ms + 强制DOM回流，彻底解决滑块不变色
     setTimeout(()=>{
         el.globalHideChar.checked = appData.globalHideChar;
         el.globalFD.checked = appData.globalFD;
-    }, 0);
+        void el.globalHideChar.offsetHeight;
+        void el.globalFD.offsetHeight;
+    }, 50);
 }
 
 // 游戏卡片事件绑定
@@ -403,7 +407,7 @@ function bindGameCardEvent(){
     })
 }
 
-// Canvas图片导出
+// Canvas图片导出【修复字体预加载】
 el.exportBtn.onclick = async function(){
     const canvas = el.canvas;
     const ctx = canvas.getContext("2d");
@@ -414,8 +418,17 @@ el.exportBtn.onclick = async function(){
     if(sizeVal[0]==="long"){w=1080;h=9999;}else{w=Number(sizeVal[0]);h=Number(sizeVal[1]);}
     canvas.width = w; canvas.height = h;
 
-    await document.fonts.load('bold 48px GenJyuuGothic');
-    await document.fonts.load('bold 48px Noto Sans SC');
+    // 批量预加载全部导出用到的字体，修复文字方框缺失
+    await Promise.all([
+        document.fonts.load('900 48px "Noto Sans SC"'),
+        document.fonts.load('700 42px "GenJyuuGothic"'),
+        document.fonts.load('700 32px "GenJyuuGothic"'),
+        document.fonts.load('700 28px "GenJyuuGothic"'),
+        document.fonts.load('400 26px "GenJyuuGothic"'),
+        document.fonts.load('400 22px "GenJyuuGothic"'),
+        document.fonts.load('400 16px "GenJyuuGothic"')
+    ]);
+    await document.fonts.ready;
 
     ctx.fillStyle = color.bg;
     ctx.fillRect(0,0,w,h);
