@@ -71,7 +71,7 @@ el.spoilerCancel.onclick = ()=>{
     if(modalCallback) modalCallback(false);
 }
 
-// 全局开关切换（每次弹窗）
+// 全局开关切换（每次弹窗，FD开关已同步增加预警弹窗逻辑）
 el.globalHideChar.onchange = function(){
     const targetSwitch = this;
     openSpoilerModal((ok)=>{
@@ -388,7 +388,7 @@ el.exportBtn.onclick = function(){
     ctx.font = "bold 26px 'Noto Sans SC'";
     ctx.fillText("日乙个人喜好表", w/2, 130);
     let offsetY = 180;
-    // 绘制基础资料，无内容跳过
+    // 绘制基础资料，无内容跳过（已修改入坑事件→入坑时间）
     const base = appData.baseInfo;
     const baseArr = [
     base.nick ? `昵称：${base.nick}` : "",
