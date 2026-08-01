@@ -122,6 +122,8 @@ heroines:[
 
         sortName:"Liliana",
 
+        thumbnail:"..."
+
         image:"images/piofiore/heroine/liliana.webp"
 
     }
@@ -172,6 +174,8 @@ characters:[
 
             source:"base",
 
+            thumbnail:"..."
+
             file:"images/piofiore/heroine/liliana.webp"
 
         }
@@ -210,6 +214,8 @@ characters:[
 
             source:"base",
 
+            thumbnail:"..."
+
             file:"images/piofiore/dante/01.webp"
 
         },
@@ -221,6 +227,8 @@ characters:[
             name:"1926",
 
             source:"1926",
+
+            thumbnail:"..."
 
             file:"images/piofiore/dante/02.webp"
 
@@ -256,6 +264,8 @@ characters:[
 
             source:"base",
 
+            thumbnail:"..."
+
             file:"images/piofiore/gilbert/01.webp"
 
         }
@@ -289,6 +299,8 @@ characters:[
             name:"本篇",
 
             source:"base",
+
+            thumbnail:"..."
 
             file:"images/piofiore/henri/01.webp"
 
@@ -324,6 +336,8 @@ characters:[
 
             source:"base",
 
+            thumbnail:"..."
+
             file:"images/piofiore/nicola/01.webp"
 
         },
@@ -335,6 +349,8 @@ characters:[
             name:"1926",
 
             source:"1926",
+
+            thumbnail:"..."
 
             file:"images/piofiore/nicola/02.webp"
 
@@ -370,6 +386,8 @@ characters:[
 
             source:"base",
 
+            thumbnail:"..."
+
             file:"images/piofiore/orlok/01.webp"
 
         },
@@ -381,6 +399,8 @@ characters:[
             name:"1926",
 
             source:"1926",
+
+            thumbnail:"..."
 
             file:"images/piofiore/orlok/02.webp"
 
@@ -416,6 +436,8 @@ characters:[
 
             source:"base",
 
+            thumbnail:"..."
+
             file:"images/piofiore/yang/01.webp"
 
         },
@@ -428,6 +450,8 @@ characters:[
 
             source:"base",
 
+            thumbnail:"..."
+
             file:"images/piofiore/yang/02.webp"
 
         },
@@ -439,6 +463,8 @@ characters:[
             name:"1926",
 
             source:"1926",
+
+            thumbnail:"..."
 
             file:"images/piofiore/yang/03.webp"
 
