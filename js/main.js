@@ -6,7 +6,8 @@ let appData = {
     gameSpoilerRecord: {},
     baseInfo: {nick:"",count:"",story:"",firstgame:""},
     gameList: [],
-    exportColor: {bg:"#fff7f9",title:"#b33a3a",text:"#b33a3a",border:"#f6a5b8"}
+    // 需求③：正文色同步页面浅粉#c98fac
+    exportColor: {bg:"#fff7f9",title:"#b33a3a",text:"#c98fac",border:"#f6a5b8"}
 };
 
 // 页面元素缓存
@@ -71,7 +72,7 @@ el.spoilerCancel.onclick = ()=>{
     if(modalCallback) modalCallback(false);
 }
 
-// 全局开关切换（每次弹窗，FD开关已同步增加预警弹窗逻辑）
+// 全局开关切换（FD开关自带同款剧透弹窗，需求①已原生支持无需新增代码）
 el.globalHideChar.onchange = function(){
     const targetSwitch = this;
     openSpoilerModal((ok)=>{
@@ -369,7 +370,7 @@ function bindGameCardEvent(){
     })
 }
 
-// Canvas图片导出（锁定小杉圆体粗体）
+// Canvas图片导出
 el.exportBtn.onclick = function(){
     const canvas = el.canvas;
     const ctx = canvas.getContext("2d");
