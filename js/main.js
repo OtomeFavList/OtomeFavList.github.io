@@ -9,7 +9,7 @@ let appData = {
     exportColor: {bg:"#fff7f9",title:"#b33a3a",text:"#c98fac",border:"#f6a5b8"}
 };
 
-// 页面元素缓存（ID完全匹配HTML，无错误）
+// 页面元素缓存（ID完全匹配HTML）
 const el = {
     globalHideChar: document.getElementById("global-hide-char"),
     globalFD: document.getElementById("global-fd-game"),
@@ -44,6 +44,7 @@ function loadData(){
     el.inputCount.value = appData.baseInfo.count;
     el.inputStory.value = appData.baseInfo.story;
     el.inputFirstgame.value = appData.baseInfo.firstgame;
+    // 页面载入强制同步开关真实数据
     el.globalHideChar.checked = appData.globalHideChar;
     el.globalFD.checked = appData.globalFD;
     el.colorBg.value = appData.exportColor.bg;
@@ -52,7 +53,7 @@ function loadData(){
     el.colorBorder.value = appData.exportColor.border;
 }
 
-// 剧透弹窗控制（完整可用，无缺失）
+// 剧透弹窗控制
 let modalCallback = null;
 function openSpoilerModal(cb){
     modalCallback = cb;
@@ -71,48 +72,56 @@ el.spoilerCancel.onclick = ()=>{
     if(modalCallback) modalCallback(false);
 }
 
-// ========== 修复1：全局隐藏角色开关逻辑 ==========
+// ========== 修复：全局隐藏角色开关（取消弹窗自动回弹开关，数据同步） ==========
 el.globalHideChar.onchange = function(){
     const targetSwitch = this;
-    // 关闭开关：无弹窗，直接保存刷新
+    // 用户手动取消勾选：直接关闭，无弹窗
     if(!targetSwitch.checked){
         appData.globalHideChar = false;
         saveData();
         renderAddedGame();
         return;
     }
-    // 开启开关：弹出剧透确认弹窗
+    // 用户勾选开启，弹出确认弹窗
     openSpoilerModal((ok)=>{
         if(ok){
+            // 确认查看剧透：数据设为开启
             appData.globalHideChar = true;
             saveData();
             renderAddedGame();
         }else{
-            // 用户取消，开关回弹关闭
+            // 取消查看：1. UI开关切回关闭 2. 数据强制置false 3. 保存刷新页面
             targetSwitch.checked = false;
+            appData.globalHideChar = false;
+            saveData();
+            renderAddedGame();
         }
     })
 }
 
-// ========== 修复2：全局FD/续作角色开关（核心修复不弹窗BUG） ==========
+// ========== 修复：全局FD/续作角色开关（取消弹窗自动回弹开关，数据同步） ==========
 el.globalFD.onchange = function() {
     const switchDom = this;
-    // 取消勾选关闭全局FD：无弹窗，直接生效
+    // 用户手动取消勾选：直接关闭，无弹窗
     if (!switchDom.checked) {
         appData.globalFD = false;
         saveData();
         renderAddedGame();
         return;
     }
-    // 勾选开启全局FD：强制弹出剧透警告弹窗
+    // 用户勾选开启，弹出确认弹窗
     openSpoilerModal(function(confirmResult) {
         if (confirmResult) {
+            // 确认：开启全局FD
             appData.globalFD = true;
             saveData();
             renderAddedGame();
         } else {
-            // 用户拒绝查看剧透，开关自动切回关闭
+            // 取消：1. 复选框回弹未选中 2. 内存数据重置false 3. 存本地 4. 刷新角色列表
             switchDom.checked = false;
+            appData.globalFD = false;
+            saveData();
+            renderAddedGame();
         }
     });
 };
@@ -255,10 +264,11 @@ function renderCP(gameItem,gameInfo){
     return html || "<span>暂无CP搭配</span>";
 }
 
-// 获取过滤后角色（全局开关联动过滤FD/隐藏角色）
+// 获取过滤后角色（完全读取appData真实存储值，杜绝UI与逻辑不一致）
 function getAllGameChar(gameInfo){
     let chars = [...gameInfo.charList];
     const gameItem = appData.gameList.find(g=>g.gameId === gameInfo.id);
+    // 这里读取内存真实数据，不读取复选框视觉状态，保证逻辑绝对准确
     const showHide = gameItem.localHideChar || appData.globalHideChar;
     const showFD = gameItem.localFD || appData.globalFD;
     if(!showHide) chars = chars.filter(c=>!c.isHidden);
@@ -361,6 +371,8 @@ function bindGameCardEvent(){
                         renderAddedGame();
                     }else{
                         this.checked = !targetChecked;
+                        saveData();
+                        renderAddedGame();
                     }
                 })
             }else{
@@ -385,6 +397,8 @@ function bindGameCardEvent(){
                         renderAddedGame();
                     }else{
                         this.checked = !targetChecked;
+                        saveData();
+                        renderAddedGame();
                     }
                 })
             }else{
@@ -511,4 +525,4 @@ window.onload = async function(){
     })
     setTimeout(fillFilterOptions,800);
     renderAddedGame();
-                                                         }
+}
