@@ -60,7 +60,7 @@ function loadData(){
     if(raw) appData = JSON.parse(raw);
     el.inputNick.value = appData.baseInfo.nick;
     el.inputCount.value = appData.baseInfo.count;
-    el.inputStory.value = appData.baseInfo.story;
+    el.inputStory = appData.baseInfo.story;
     el.inputFirstgame.value = appData.baseInfo.firstgame;
     el.colorBg.value = appData.exportColor.bg;
     el.colorTitle.value = appData.exportColor.title;
@@ -404,7 +404,7 @@ function bindGameCardEvent(){
     })
 }
 
-// Canvas导出
+// Canvas导出（已修改基础资料两两同行逻辑）
 el.exportBtn.onclick = async function(){
     const canvas = el.canvas;
     const ctx = canvas.getContext("2d");
@@ -436,12 +436,14 @@ el.exportBtn.onclick = async function(){
     ctx.fillText("日乙个人喜好表", w/2, 130);
     let offsetY = 180;
     const base = appData.baseInfo;
+    // 收集所有非空基础信息
     const baseArr = [
-    base.nick ? `昵称：${base.nick}` : "",
-    base.count ? `游玩数量：${base.count}` : "",
-    base.story ? `入坑时间：${base.story}` : "",
-    base.firstgame ? `入坑作品：${base.firstgame}` : ""
+        base.nick ? `昵称：${base.nick}` : "",
+        base.count ? `游玩数量：${base.count}` : "",
+        base.story ? `入坑时间：${base.story}` : "",
+        base.firstgame ? `入坑作品：${base.firstgame}` : ""
     ].filter(x=>x);
+
     if(baseArr.length>0){
         ctx.fillStyle = color.title;
         ctx.font = "bold 30px 'GenJyuuGothic'";
@@ -450,12 +452,24 @@ el.exportBtn.onclick = async function(){
         offsetY +=40;
         ctx.fillStyle = color.text;
         ctx.font = "bold 22px 'GenJyuuGothic'";
-        baseArr.forEach(txt=>{
-            ctx.fillText(txt,60,offsetY);
-            offsetY +=34;
-        })
+        // 画布左右两栏分割点，中间留80px空隙防止文字重叠
+        const splitX = w / 2 - 40;
+        const lineGap = 34;
+        // 两两循环绘制
+        for(let i = 0; i < baseArr.length; i += 2) {
+            const leftText = baseArr[i];
+            const rightText = baseArr[i + 1];
+            // 左侧文字
+            ctx.fillText(leftText, 60, offsetY);
+            // 存在第二条则在右侧绘制
+            if(rightText) {
+                ctx.fillText(rightText, splitX, offsetY);
+            }
+            offsetY += lineGap;
+        }
         offsetY +=20;
     }
+
     appData.gameList.forEach(gameItem=>{
         if(gameItem.selectChars.length===0 && gameItem.cpList.length===0) return;
         const gameInfo = gameTemplateList.find(g=>g.id===gameItem.gameId);
