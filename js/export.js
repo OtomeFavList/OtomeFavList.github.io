@@ -394,7 +394,7 @@ function createExportGame(card) {
 
             createExportCharacterArea(
 
-                "我推",
+                "Character",
 
                 favorite,
 
@@ -418,7 +418,7 @@ function createExportGame(card) {
 
             createExportCharacterArea(
 
-                "我推 CP",
+                "Couple",
 
                 cp,
 
