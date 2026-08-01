@@ -101,6 +101,8 @@ const templateGame = [
 
             sortName:"",
 
+            thumbnail:"..."
+
             image:""
 
         }
@@ -129,6 +131,8 @@ const templateGame = [
 
             source:"base",
 
+            thumbnail:"..."
+
             images:[
 
                 {
@@ -138,6 +142,8 @@ const templateGame = [
                     name:"默认",
 
                     source:"base",
+
+                    thumbnail:"..."
 
                     file:""
 
@@ -278,6 +284,8 @@ characters:[
 
                 source:"1926",
 
+                thumbnail:"..."
+
                 file:"images/piofiore/yang/02.webp"
 
             },
@@ -289,6 +297,8 @@ characters:[
                 name:"特典",
 
                 source:"1926",
+
+                thumbnail:"..."
 
                 file:"images/piofiore/yang/03.webp"
 
