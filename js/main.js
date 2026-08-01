@@ -44,6 +44,7 @@ function loadData(){
     el.inputCount.value = appData.baseInfo.count;
     el.inputStory.value = appData.baseInfo.story;
     el.inputFirstgame.value = appData.baseInfo.firstgame;
+    // 初始化直接同步DOM
     el.globalHideChar.checked = appData.globalHideChar;
     el.globalFD.checked = appData.globalFD;
     el.colorBg.value = appData.exportColor.bg;
@@ -71,50 +72,56 @@ el.spoilerCancel.onclick = ()=>{
     if(modalCallback) modalCallback(false);
 }
 
-// ========== 修复1：全局隐藏角色开关逻辑【增加阻止默认事件】 ==========
-el.globalHideChar.onchange = function(e){
-    e.preventDefault();
+// ========== 修复1：全局隐藏角色开关逻辑（彻底修复勾选不亮） ==========
+el.globalHideChar.onchange = function(){
     const targetSwitch = this;
-    const newState = targetSwitch.checked;
-    // 关闭开关：无弹窗，直接保存刷新
-    if(!newState){
+    const wantOpen = targetSwitch.checked;
+    // 用户取消关闭开关：直接同步存储+UI
+    if(!wantOpen){
         appData.globalHideChar = false;
+        targetSwitch.checked = false;
         saveData();
         renderAddedGame();
         return;
     }
-    // 勾选开启，临时视觉切灰，弹窗确认
+    // 用户想要开启，先强制切回灰色，弹出确认框
     targetSwitch.checked = false;
     openSpoilerModal((ok)=>{
         if(ok){
+            // 确认开启：同步数据 + 立刻修改DOM勾选状态（关键）
             appData.globalHideChar = true;
+            targetSwitch.checked = true;
         }else{
+            // 取消：保持关闭
             appData.globalHideChar = false;
+            targetSwitch.checked = false;
         }
         saveData();
         renderAddedGame();
     })
 }
 
-// ========== 修复2：全局FD/续作角色开关【增加阻止默认事件】 ==========
-el.globalFD.onchange = function(e) {
-    e.preventDefault();
+// ========== 修复2：全局FD/续作角色开关（同步修复） ==========
+el.globalFD.onchange = function() {
     const switchDom = this;
-    const newState = switchDom.checked;
-    // 手动取消勾选关闭全局FD：无弹窗，直接生效
-    if (!newState) {
+    const wantOpen = switchDom.checked;
+    // 用户手动关闭
+    if (!wantOpen) {
         appData.globalFD = false;
+        switchDom.checked = false;
         saveData();
         renderAddedGame();
         return;
     }
-    // 勾选开启全局FD：临时切灰，弹出弹窗
+    // 想要开启，先切灰弹窗确认
     switchDom.checked = false;
     openSpoilerModal(function(confirmResult) {
         if (confirmResult) {
             appData.globalFD = true;
+            switchDom.checked = true;
         } else {
             appData.globalFD = false;
+            switchDom.checked = false;
         }
         saveData();
         renderAddedGame();
@@ -315,13 +322,9 @@ function renderAddedGame(){
     })
     el.addedGameBox.innerHTML = html;
     bindGameCardEvent();
-    // 【核心修复】延时提升至50ms + 强制DOM回流，彻底解决滑块不变色
-    setTimeout(()=>{
-        el.globalHideChar.checked = appData.globalHideChar;
-        el.globalFD.checked = appData.globalFD;
-        void el.globalHideChar.offsetHeight;
-        void el.globalFD.offsetHeight;
-    }, 50);
+    // 兜底同步UI状态
+    el.globalHideChar.checked = appData.globalHideChar;
+    el.globalFD.checked = appData.globalFD;
 }
 
 // 游戏卡片事件绑定
