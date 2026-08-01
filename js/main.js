@@ -75,9 +75,11 @@ el.spoilerConfirm.onclick = ()=>{
 el.spoilerCancel.onclick = ()=>{
     closeSpoilerModal();
     if(modalCallback) modalCallback(false);
+    // 取消弹窗，强制同步数据，滑块变回灰色
+    syncSwitchByData();
 }
 
-// 全局隐藏角色开关
+// 全局隐藏角色开关【修复】删掉手动置false代码
 el.globalHideChar.onchange = function(){
     const targetSwitch = this;
     const wantOpen = targetSwitch.checked;
@@ -90,16 +92,20 @@ el.globalHideChar.onchange = function(){
         return;
     }
 
-    targetSwitch.checked = false;
+    // 移除 targetSwitch.checked = false;
     openSpoilerModal((ok)=>{
         appData.globalHideChar = ok;
         saveData();
-        syncSwitchByData(); // 立刻修改勾选状态
-        setTimeout(renderAddedGame, 200); // 延后渲染列表，避免覆盖
+        syncSwitchByData();
+        // 渲染后二次同步兜底
+        setTimeout(()=>{
+            renderAddedGame();
+            syncSwitchByData();
+        }, 200);
     })
 }
 
-// 全局FD开关
+// 全局FD开关【修复】删掉手动置false代码
 el.globalFD.onchange = function() {
     const switchDom = this;
     const wantOpen = switchDom.checked;
@@ -112,12 +118,16 @@ el.globalFD.onchange = function() {
         return;
     }
 
-    switchDom.checked = false;
+    // 移除 switchDom.checked = false;
     openSpoilerModal(function(confirmResult) {
         appData.globalFD = confirmResult;
         saveData();
-        syncSwitchByData(); // 立刻点亮滑块
-        setTimeout(renderAddedGame, 200);
+        syncSwitchByData();
+        // 渲染后二次同步兜底
+        setTimeout(()=>{
+            renderAddedGame();
+            syncSwitchByData();
+        }, 200);
     });
 };
 
