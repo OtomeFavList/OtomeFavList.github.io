@@ -33,8 +33,8 @@ const el = {
     canvas: document.getElementById("export-canvas")
 };
 
-// =========【核心新增】数据监听，数据变化立刻同步滑块，不受渲染影响=========
-function syncSwitchByData() {
+// =========【修复】挂载到window全局，控制台可调用 =========
+window.syncSwitchByData = function() {
     queueMicrotask(() => {
         el.globalHideChar.checked = appData.globalHideChar;
         el.globalFD.checked = appData.globalFD;
@@ -79,12 +79,11 @@ el.spoilerCancel.onclick = ()=>{
     if(modalCallback) modalCallback(false);
 }
 
-// =========【完全重写】全局隐藏角色开关，调换渲染和滑块更新顺序=========
+// 全局隐藏角色开关
 el.globalHideChar.onchange = function(){
     const targetSwitch = this;
     const wantOpen = targetSwitch.checked;
 
-    // 用户直接关闭开关：先改数据同步滑块，再渲染列表
     if(!wantOpen){
         appData.globalHideChar = false;
         syncSwitchByData();
@@ -93,20 +92,16 @@ el.globalHideChar.onchange = function(){
         return;
     }
 
-    // 用户勾选开启，先强制取消勾选弹出确认框
     targetSwitch.checked = false;
     openSpoilerModal((ok)=>{
-        // 1. 先修改内存数据
         appData.globalHideChar = ok;
         saveData();
-        // 2. 优先同步滑块状态（微任务，比渲染更早执行）
         syncSwitchByData();
-        // 3. 延迟再渲染游戏列表，避免DOM刷新覆盖滑块
         setTimeout(renderAddedGame, 200);
     })
 }
 
-// =========【完全重写】全局FD开关，逻辑同上=========
+// 全局FD开关
 el.globalFD.onchange = function() {
     const switchDom = this;
     const wantOpen = switchDom.checked;
@@ -279,7 +274,7 @@ function getAllGameChar(gameInfo){
     return [...female,...male];
 }
 
-// 渲染游戏卡片：全程不操作全局滑块
+// 渲染游戏卡片
 function renderAddedGame(){
     let html = "";
     appData.gameList.forEach(gameItem=>{
