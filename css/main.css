@@ -1,0 +1,101 @@
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Noto Sans SC",system-ui,sans-serif;}
+body{background:#fff;color:#222;padding:20px;transition:background 0.2s;}
+
+/* 全局居中标题 */
+.site-title{text-align:center;margin:30px 0 10px;}
+.site-title h1{font-size:42px;font-weight:900;letter-spacing:3px;}
+.site-title p{font-size:20px;margin:8px 0;color:#444;}
+.sub-desc{text-align:center;font-size:16px;color:#666;margin-bottom:40px;}
+
+/* 外层容器 */
+.wrap{max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:30px;}
+.big-card{border:2px solid #aaa;border-radius:16px;padding:24px;transition:border-color 0.2s;}
+.big-card h2{margin-bottom:20px;font-size:24px;border-left:5px solid #666;padding-left:12px;}
+
+/* 开关组件 */
+.switch-row{display:flex;align-items:center;gap:12px;margin:14px 0;flex-wrap:wrap;}
+.switch-desc{font-size:14px;color:#555;line-height:1.6;max-width:900px;}
+.switch{position:relative;width:50px;height:26px;}
+.switch input{opacity:0;width:0;height:0;}
+.slider{position:absolute;cursor:pointer;top:0;left:0;right:0;bottom:0;background:#ccc;border-radius:34px;transition:.3s;}
+.slider:before{position:absolute;content:"";height:20px;width:20px;left:3px;bottom:3px;background:white;border-radius:50%;transition:.3s;}
+input:checked + .slider{background:#6a99ff;}
+input:checked + .slider:before{transform:translateX(24px);}
+
+/* 表单输入 */
+.form-row{margin:16px 0;display:flex;flex-direction:column;gap:6px;max-width:600px;}
+.form-row label{font-weight:bold;}
+.form-row input{padding:10px;border:1px solid #bbb;border-radius:8px;font-size:16px;}
+
+/* 通用按钮 */
+button{padding:10px 18px;border:none;border-radius:8px;background:#4477dd;color:#fff;cursor:pointer;font-size:15px;transition:0.2s;}
+button:hover{background:#2d58bb;}
+.btn-del{background:#dd4444;}
+.btn-del:hover{background:#b82c2c;}
+.btn-fold{background:#888;}
+.btn-fold:hover{background:#555;}
+
+/* 游戏搜索筛选面板 */
+.game-search-box{margin:16px 0;display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+.game-search-box input{padding:10px;flex:1;min-width:220px;border:1px solid #bbb;border-radius:8px;}
+.filter-group{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0;}
+.filter-group select{padding:8px;border-radius:6px;border:1px solid #bbb;}
+.game-list-select{max-height:320px;overflow-y:auto;border:1px solid #ddd;border-radius:10px;padding:10px;margin:12px 0;display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;}
+.game-option-item{border:1px solid #eee;border-radius:10px;padding:8px;cursor:pointer;text-align:center;}
+.game-option-item:hover{background:#f2f6ff;border-color:#8ab0ff;}
+.game-option-item img{width:120px;height:auto;border-radius:6px;margin-bottom:6px;object-fit:cover;}
+
+/* 已添加游戏卡片 */
+.game-card{border:1px solid #ddd;border-radius:12px;padding:18px;margin:16px 0;}
+.game-card-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:10px;}
+.heart-rate{display:flex;gap:6px;margin:8px 0;}
+.heart{font-size:28px;color:#ccc;cursor:pointer;transition:0.2s;}
+.heart.active{color:#ff4d88;}
+.game-switch-group{display:flex;gap:16px;margin:10px 0;flex-wrap:wrap;}
+
+/* Character角色选择区 */
+.char-section{margin:16px 0;padding:12px;border-top:1px solid #eee;}
+.char-title{font-weight:bold;margin:10px 0;}
+.char-pool{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px;margin:10px 0;}
+.char-item{text-align:center;border:1px solid #eee;padding:8px;border-radius:10px;cursor:pointer;}
+.char-item.selected{border-color:#4477dd;background:#f0f6ff;}
+.char-item img{width:200px;height:200px;object-fit:cover;border-radius:8px;margin-bottom:6px;max-width:100%;}
+.char-img-switch{font-size:12px;margin-top:4px;color:#4477dd;cursor:pointer;}
+.char-selected-row{display:flex;gap:14px;flex-wrap:wrap;margin:12px 0;align-items:flex-end;}
+
+/* ===================== 核心CP布局：左25%女主 / 右75%男主 ===================== */
+.cp-group{margin:16px 0;padding:12px;border-top:1px solid #eee;}
+.cp-row{display:flex;align-items:center;gap:16px;margin:10px 0;padding-bottom:16px;border-bottom:1px solid #eee;width:100%;}
+.cp-female{
+    flex: 0 0 25%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.cp-male-wrap{
+    flex: 1;
+    flex-basis:75%;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    align-items:flex-end;
+}
+
+/* 弹窗遮罩 */
+.modal-mask{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;z-index:999;display:none;}
+.modal-box{background:#fff;padding:26px;border-radius:14px;max-width:520px;width:90%;}
+.modal-box h3{margin-bottom:14px;}
+.modal-btns{display:flex;gap:12px;justify-content:flex-end;margin-top:20px;}
+
+/* 导出配色选择 */
+.color-set-row{display:flex;gap:20px;flex-wrap:wrap;margin:16px 0;}
+.color-item{display:flex;flex-direction:column;gap:6px;}
+.color-item input[type="color"]{width:80px;height:40px;border:none;cursor:pointer;}
+.size-select{margin:16px 0;display:flex;gap:10px;flex-wrap:wrap;}
+
+/* About底部区块 */
+.about-block{text-align:center;margin-top:50px;padding:20px;}
+.about-block p{margin:8px 0;font-size:16px;line-height:1.8;}
+
+/* 折叠隐藏类 */
+.hide-block{display:none;}
