@@ -225,15 +225,15 @@ window.onload = async function () {
         }
     }
     
-    // ============【修正完成】全局隐藏角色开关 ============
+    // ============【最终版】全局隐藏角色开关 ============
     if (el.globalHideChar) {
         el.globalHideChar.onchange = function () {
-            const targetStatus = this.checked;
-            const switchDom = this; // 缓存当前开关DOM
-            console.log("隐藏角色开关状态变更，目标状态：", targetStatus);
+            const self = this;
+            const nowChecked = self.checked;
+            console.log("隐藏角色开关状态变更，目标状态：", nowChecked);
 
-            // 场景1：滑块向左关闭，直接生效，无弹窗
-            if (targetStatus === false) {
+            // 操作1：滑块往左关闭，无需弹窗，直接生效
+            if (!nowChecked) {
                 appData.globalHideChar = false;
                 syncSingleGameSwitch("hideChar", false);
                 saveData();
@@ -242,43 +242,41 @@ window.onload = async function () {
                 return;
             }
 
-            // 场景2：滑块向右打开，弹出确认弹窗
+            // 防止重复弹窗
             if (modalOpen) {
-                switchDom.checked = false;
+                self.checked = false;
                 refreshHideCharSwitch();
                 return;
             }
-            // 立刻把滑块拉回关闭原位
-            switchDom.checked = false;
-            refreshHideCharSwitch();
 
+            // 操作2：滑块往右打开，弹出确认弹窗（不提前回弹滑块）
             openSpoilerModal((confirm) => {
                 if (confirm) {
-                    // 点击继续：全局开启，手动设置滑块勾选
+                    // 选择继续：滑块保持开启，全局开启，同步所有游戏子开关
                     appData.globalHideChar = true;
                     syncSingleGameSwitch("hideChar", true);
-                    switchDom.checked = true;
+                    self.checked = true;
                 } else {
-                    // 点击取消：保持关闭，滑块维持原位
+                    // 选择取消：滑块强制复位关闭，全局保持关闭，同步所有游戏子开关关闭
                     appData.globalHideChar = false;
-                    switchDom.checked = false;
+                    syncSingleGameSwitch("hideChar", false);
+                    self.checked = false;
                 }
                 saveData();
-                refreshHideCharSwitch();
                 renderAddedGame();
             })
         }
     }
     
-    // ============【修正完成】全局FD开关 ============
+    // ============【最终版】全局FD续作开关 ============
     if (el.globalFD) {
         el.globalFD.onchange = function () {
-            const targetStatus = this.checked;
-            const switchDom = this; // 缓存当前开关DOM
-            console.log("FD开关状态变更，目标状态：", targetStatus);
+            const self = this;
+            const nowChecked = self.checked;
+            console.log("FD开关状态变更，目标状态：", nowChecked);
 
-            // 场景1：滑块向左关闭，直接生效，无弹窗
-            if (targetStatus === false) {
+            // 操作1：滑块往左关闭，无需弹窗，直接生效
+            if (!nowChecked) {
                 appData.globalFD = false;
                 syncSingleGameSwitch("fd", false);
                 saveData();
@@ -287,29 +285,27 @@ window.onload = async function () {
                 return;
             }
 
-            // 场景2：滑块向右打开，弹出确认弹窗
+            // 防止重复弹窗
             if (modalOpen) {
-                switchDom.checked = false;
+                self.checked = false;
                 refreshFDSwitch();
                 return;
             }
-            // 弹窗弹出前强制滑块回到关闭原位
-            switchDom.checked = false;
-            refreshFDSwitch();
 
+            // 操作2：滑块往右打开，弹出确认弹窗（不提前回弹滑块）
             openSpoilerModal((confirm) => {
                 if (confirm) {
-                    // 确认开启，手动勾选滑块
+                    // 选择继续：滑块保持开启，全局开启，同步所有游戏子开关
                     appData.globalFD = true;
                     syncSingleGameSwitch("fd", true);
-                    switchDom.checked = true;
+                    self.checked = true;
                 } else {
-                    // 取消，保持关闭
+                    // 选择取消：滑块强制复位关闭，全局保持关闭，同步所有游戏子开关关闭
                     appData.globalFD = false;
-                    switchDom.checked = false;
+                    syncSingleGameSwitch("fd", false);
+                    self.checked = false;
                 }
                 saveData();
-                refreshFDSwitch();
                 renderAddedGame();
             })
         };
