@@ -37,7 +37,7 @@ const el = {
 let modalOpen = false;
 let currentGlobalTarget = "";
 
-// 【仅修改这里：增加indeterminate清除复选框视觉残留】
+// 【修复】增加indeterminate清除复选框视觉残留
 function refreshHideCharSwitch() {
     if (el.globalHideChar) {
         el.globalHideChar.checked = appData.globalHideChar;
@@ -109,7 +109,7 @@ if (el.spoilerCancel) {
     }
 }
 
-// ========== 【修复版】全局隐藏角色开关 ==========
+// ========== 【修复版】全局隐藏角色开关：弹窗全程不点亮，取消保持关闭 ==========
 if (el.globalHideChar) {
     el.globalHideChar.onclick = function (e) {
         // 弹窗打开时直接拦截操作
@@ -149,7 +149,7 @@ if (el.globalHideChar) {
     }
 }
 
-// ========== 【修复版】全局FD开关 ==========
+// ========== 【修复版】全局FD开关：弹窗全程不点亮，取消保持关闭 ==========
 if (el.globalFD) {
     el.globalFD.onclick = function (e) {
         // 弹窗打开时拦截操作
@@ -187,11 +187,11 @@ if (el.globalFD) {
     };
 }
 
-// 下面所有代码完全原样复制你的原始代码，无任何修改
-// 基础资料自动保存
+// 【修复】基础资料自动保存：增加DOM存在判断，消除undefined报错
 ["inputNick", "inputCount", "inputStory", "inputFirstgame"].forEach(k => {
-    if (el[k]) {
-        el[k].oninput = function () {
+    const dom = el[k];
+    if (dom) {
+        dom.oninput = function () {
             const map = { inputNick: "nick", inputCount: "count", inputStory: "story", inputFirstgame: "firstgame" };
             appData.baseInfo[map[k]] = this.value;
             saveData();
@@ -199,14 +199,15 @@ if (el.globalFD) {
     }
 })
 
-// 配色取色器实时同步
+// 【修复】配色取色器实时同步：增加DOM存在判断，消除colorBorder报错
 ["colorBg", "colorTitle", "colorText", "colorBorder"].forEach(k => {
-    if (el[k]) {
-        el[k].oninput = function () {
+    const dom = el[k];
+    if (dom) {
+        dom.oninput = function () {
             const map = { colorBg: "bg", colorTitle: "title", colorText: "text", colorBorder: "border" };
             appData.exportColor[map[k]] = this.value;
             saveData();
-            document.body.style.background = appData.exportColor.bg;
+            if(el.colorBg) document.body.style.background = appData.exportColor.bg;
         }
     }
 })
@@ -441,7 +442,7 @@ function bindGameCardEvent() {
     })
 }
 
-// 导出按钮逻辑
+// 【修复导出模块】移除全部自定义字体加载，替换通用系统字体，消除字体跨域报错
 if (el.exportBtn) {
     el.exportBtn.onclick = async function () {
         try {
@@ -459,24 +460,15 @@ if (el.exportBtn) {
             if (sizeVal[0] === "long") { w = 1080; h = 9999; } else { w = Number(sizeVal[0]); h = Number(sizeVal[1]); }
             canvas.width = w; canvas.height = h;
 
-            await Promise.all([
-                document.fonts.load('900 48px "Noto Sans SC"'),
-                document.fonts.load('700 42px "GenJyuuGothic"'),
-                document.fonts.load('700 32px "GenJyuuGothic"'),
-                document.fonts.load('700 28px "GenJyuuGothic"'),
-                document.fonts.load('400 26px "GenJyuuGothic"'),
-                document.fonts.load('400 22px "GenJyuuGothic"'),
-                document.fonts.load('400 16px "GenJyuuGothic"')
-            ]);
-            await document.fonts.ready;
+            // 已删除自定义字体加载Promise，不再请求远程字体文件
 
             ctx.fillStyle = color.bg;
             ctx.fillRect(0, 0, w, h);
             ctx.fillStyle = color.title;
-            ctx.font = "bold 48px 'Noto Sans SC'";
+            ctx.font = "bold 48px sans-serif";
             ctx.textAlign = "center";
             ctx.fillText("Otome FavList", w / 2, 80);
-            ctx.font = "bold 26px 'GenJyuuGothic'";
+            ctx.font = "bold 26px sans-serif";
             ctx.fillText("日乙个人喜好表", w / 2, 130);
             let offsetY = 180;
             const base = appData.baseInfo;
@@ -489,12 +481,12 @@ if (el.exportBtn) {
 
             if (baseArr.length > 0) {
                 ctx.fillStyle = color.title;
-                ctx.font = "bold 30px 'GenJyuuGothic'";
+                ctx.font = "bold 30px sans-serif";
                 ctx.textAlign = "left";
                 ctx.fillText("基础资料", 60, offsetY);
                 offsetY += 40;
                 ctx.fillStyle = color.text;
-                ctx.font = "bold 22px 'GenJyuuGothic'";
+                ctx.font = "bold 22px sans-serif";
                 const splitX = w / 2 - 40;
                 const lineGap = 34;
                 for (let i = 0; i < baseArr.length; i += 2) {
@@ -518,23 +510,23 @@ if (el.exportBtn) {
                 ctx.strokeRect(40, offsetY, w - 80, 220);
 
                 ctx.fillStyle = color.title;
-                ctx.font = "bold 32px 'GenJyuuGothic'";
+                ctx.font = "bold 32px sans-serif";
                 ctx.textAlign = "left";
                 ctx.fillText(gameInfo.name, 60, offsetY + 40);
                 ctx.fillStyle = "#ff4d88";
                 let heartTxt = "";
                 for (let i = 0; i < gameItem.loveRate; i++) heartTxt += "♥ ";
-                ctx.font = "bold 28px 'GenJyuuGothic'";
+                ctx.font = "bold 28px sans-serif";
                 ctx.fillText(heartTxt, 60, offsetY + 80);
                 offsetY += 110;
 
                 if (gameItem.selectChars.length > 0) {
                     ctx.fillStyle = color.title;
-                    ctx.font = "bold 26px 'GenJyuuGothic'";
+                    ctx.font = "bold 26px sans-serif";
                     ctx.fillText("Selected Character", 60, offsetY);
                     offsetY += 36;
                     ctx.fillStyle = color.text;
-                    ctx.font = "bold 22px 'GenJyuuGothic'";
+                    ctx.font = "bold 22px sans-serif";
                     const charNames = gameItem.selectChars.map(cid => {
                         const c = gameInfo.charList.find(x => x.id === cid);
                         return c?.name || "";
@@ -544,11 +536,11 @@ if (el.exportBtn) {
                 }
                 if (gameItem.cpList.length > 0) {
                     ctx.fillStyle = color.title;
-                    ctx.font = "bold 26px 'GenJyuuGothic'";
+                    ctx.font = "bold 26px sans-serif";
                     ctx.fillText("Couple List", 60, offsetY);
                     offsetY += 36;
                     ctx.fillStyle = color.text;
-                    ctx.font = "bold 22px 'GenJyuuGothic'";
+                    ctx.font = "bold 22px sans-serif";
                     gameItem.cpList.forEach(cp => {
                         const f = gameInfo.charList.find(x => x.id === cp.femaleId);
                         const mNames = cp.maleIds.map(mid => {
