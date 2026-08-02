@@ -232,7 +232,7 @@ window.onload = async function () {
             const nowChecked = self.checked;
             console.log("隐藏角色开关状态变更，目标状态：", nowChecked);
 
-            // 操作1：滑块往左关闭，无需弹窗，直接生效
+            // 场景1：滑块向左拖动关闭全局 → 无弹窗，批量关闭所有游戏子开关
             if (!nowChecked) {
                 appData.globalHideChar = false;
                 syncSingleGameSwitch("hideChar", false);
@@ -242,22 +242,22 @@ window.onload = async function () {
                 return;
             }
 
-            // 防止重复弹窗
+            // 防止重复弹出多个弹窗
             if (modalOpen) {
                 self.checked = false;
                 refreshHideCharSwitch();
                 return;
             }
 
-            // 操作2：滑块往右打开，弹出确认弹窗（不提前回弹滑块）
+            // 场景2：滑块向右拖动打开全局 → 弹出确认弹窗
             openSpoilerModal((confirm) => {
                 if (confirm) {
-                    // 选择继续：滑块保持开启，全局开启，同步所有游戏子开关
+                    // 确认开启：全局开启，批量同步所有游戏小开关打开
                     appData.globalHideChar = true;
                     syncSingleGameSwitch("hideChar", true);
                     self.checked = true;
                 } else {
-                    // 选择取消：滑块强制复位关闭，全局保持关闭，同步所有游戏子开关关闭
+                    // 取消开启：全局保持关闭，批量同步所有游戏小开关关闭，滑块回弹
                     appData.globalHideChar = false;
                     syncSingleGameSwitch("hideChar", false);
                     self.checked = false;
@@ -268,14 +268,14 @@ window.onload = async function () {
         }
     }
     
-    // ============【最终版】全局FD续作开关 ============
+    // ============【最终版】全局续作FD开关 ============
     if (el.globalFD) {
         el.globalFD.onchange = function () {
             const self = this;
             const nowChecked = self.checked;
             console.log("FD开关状态变更，目标状态：", nowChecked);
 
-            // 操作1：滑块往左关闭，无需弹窗，直接生效
+            // 场景1：滑块向左拖动关闭全局 → 无弹窗，批量关闭所有游戏子开关
             if (!nowChecked) {
                 appData.globalFD = false;
                 syncSingleGameSwitch("fd", false);
@@ -292,15 +292,15 @@ window.onload = async function () {
                 return;
             }
 
-            // 操作2：滑块往右打开，弹出确认弹窗（不提前回弹滑块）
+            // 场景2：滑块向右拖动打开全局 → 弹出确认弹窗
             openSpoilerModal((confirm) => {
                 if (confirm) {
-                    // 选择继续：滑块保持开启，全局开启，同步所有游戏子开关
+                    // 确认开启：全局开启，批量同步所有游戏小开关打开
                     appData.globalFD = true;
                     syncSingleGameSwitch("fd", true);
                     self.checked = true;
                 } else {
-                    // 选择取消：滑块强制复位关闭，全局保持关闭，同步所有游戏子开关关闭
+                    // 取消开启：全局保持关闭，批量同步所有游戏小开关关闭，滑块回弹
                     appData.globalFD = false;
                     syncSingleGameSwitch("fd", false);
                     self.checked = false;
