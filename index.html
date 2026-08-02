@@ -31,33 +31,6 @@ html, body {
     flex: 1;
     min-width: 280px;
 }
-/* 剧透弹窗基础样式 */
-.modal-mask {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.6);
-    z-index: 999;
-    align-items: center;
-    justify-content: center;
-    display: flex;
-}
-.modal-box {
-    background: white;
-    padding: 32px;
-    border-radius: 12px;
-    max-width: 400px;
-    width: 90%;
-}
-.modal-btns {
-    display: flex;
-    gap: 1rem;
-    margin-top: 24px;
-    justify-content: center;
-}
-/* 通用隐藏类，和JS匹配 */
-.hide-block {
-    display: none !important;
-}
 </style>
 </head>
 <body>
@@ -190,7 +163,7 @@ html, body {
     <p class="email-text">Email：otomefavlist@163.com</p>
 </div>
 
-<!-- 剧透弹窗 已完成居中、换行、文字修改 -->
+<!-- 剧透弹窗 初始隐藏 -->
 <div class="modal-mask hide-block" id="spoiler-modal">
     <div class="modal-box">
         <h3>⚠️剧透警告</h3>
