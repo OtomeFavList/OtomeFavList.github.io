@@ -376,19 +376,15 @@ button:hover{
     align-items:flex-end;
 }
 
-/* 弹窗遮罩【修复完成】 */
+/* 弹窗遮罩【已修复：默认隐藏，纯JS行内display控制，删除modal-mask.hide-block冲突样式】 */
 .modal-mask{
     position:fixed;
     inset:0;
     background:rgba(0,0,0,0.6);
-    display:flex;
+    display: none;
     align-items:center;
     justify-content:center;
     z-index:999;
-}
-/* 只有添加hide-block才隐藏弹窗 */
-.modal-mask.hide-block{
-    display:none !important;
 }
 .modal-box{
     background:#fff;
