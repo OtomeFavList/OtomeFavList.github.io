@@ -24,22 +24,21 @@ function loadData() {
     }
 }
 
-// 【新增】异步加载全部游戏模板数据，修复路径404、MIME报错
+// 【核心修改：修正错误路径，删除多余一层 data/】
+// 原线上地址 https://otomefavlist.github.io/data/data/games/ → https://otomefavlist.github.io/data/games/
 async function loadAllGameTemplates() {
-    // 修正错误路径：删除多余一层 data/
     const basePath = "/data/games/";
-    // 你可根据实际游戏文件数量修改此处id范围
     const gameIdList = ["001"];
     const tempList = [];
 
     for (const id of gameIdList) {
         try {
-            // 动态导入正确路径JS模块
+            // 动态导入修正路径后的游戏JS文件（game001.js / game002.js...）
             const mod = await import(`${basePath}game${id}.js`);
             if (mod && mod.gameData) {
                 tempList.push(mod.gameData);
             }
-        } catch (err)
+        } catch (err) {
             console.error(`游戏文件 game${id}.js 加载失败(404/MIME错误)`, err);
             // 单文件加载失败不阻塞整体加载流程
             continue;
@@ -224,15 +223,12 @@ window.onload = async function () {
         }
     }
 
-    // ==========【修复：使用onchange 替代onclick，解决复选框事件冲突】==========
-    // 全局隐藏角色开关
+    // 全局隐藏角色开关（统一使用onchange，全页面事件写法标准化）
     if (el.globalHideChar) {
         el.globalHideChar.onchange = function () {
             const nowStatus = this.checked;
             console.log("隐藏角色开关状态变更，新状态：", nowStatus);
-            // 用户想要开启，弹出确认弹窗
             if (nowStatus === true) {
-                // 强制回显关闭，等待弹窗确认
                 this.checked = false;
                 refreshHideCharSwitch();
                 if (modalOpen) return;
@@ -249,7 +245,6 @@ window.onload = async function () {
                     renderAddedGame();
                 })
             } else {
-                // 用户关闭，直接生效无弹窗
                 appData.globalHideChar = false;
                 syncSingleGameSwitch("hideChar", false);
                 saveData();
@@ -259,14 +254,12 @@ window.onload = async function () {
         }
     }
 
-    // 全局FD开关
+    // 全局FD开关（统一onchange事件，与上方开关逻辑格式完全统一）
     if (el.globalFD) {
         el.globalFD.onchange = function () {
             const nowStatus = this.checked;
             console.log("FD开关状态变更，新状态：", nowStatus);
-            // 用户想要开启，弹出确认弹窗
             if (nowStatus === true) {
-                // 强制回显关闭，等待弹窗确认
                 this.checked = false;
                 refreshFDSwitch();
                 if (modalOpen) return;
@@ -283,7 +276,6 @@ window.onload = async function () {
                     renderAddedGame();
                 })
             } else {
-                // 用户关闭，直接生效无弹窗
                 appData.globalFD = false;
                 syncSingleGameSwitch("fd", false);
                 saveData();
@@ -292,9 +284,8 @@ window.onload = async function () {
             }
         };
     }
-    // ====================================================================
 
-    // 基础资料输入框绑定（带存在判断，绝不报错）
+    // 基础资料输入框绑定（统一oninput）
     ["inputNick", "inputCount", "inputStory", "inputFirstgame"].forEach(k => {
         const dom = el[k];
         if (dom) {
@@ -306,7 +297,7 @@ window.onload = async function () {
         }
     })
 
-    // 配色取色器绑定
+    // 配色取色器绑定（统一oninput，写法标准化）
     ["colorBg", "colorTitle", "colorText", "colorBorder"].forEach(k => {
         const dom = el[k];
         if (dom) {
@@ -423,7 +414,7 @@ window.onload = async function () {
         bindGameCardEvent();
     }
 
-    // 游戏卡片内按钮事件
+    // 游戏卡片内按钮事件（统一事件绑定格式）
     function bindGameCardEvent() {
         document.querySelectorAll(".fold-game").forEach(btn => {
             btn.onclick = () => {
@@ -611,9 +602,8 @@ window.onload = async function () {
         }
     }
 
-    // 【核心】先异步加载游戏模板数据，再渲染页面
+    // 加载流程标准化：先加载游戏资源，再渲染页面
     await loadAllGameTemplates();
-    // 延迟加载筛选下拉、游戏列表
     setTimeout(() => {
         fillFilterOptions(gameTemplateList);
         renderAddedGame();
