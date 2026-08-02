@@ -225,11 +225,10 @@ window.onload = async function () {
         }
     }
     
-    // ============【最终版】全局隐藏角色开关 ============
+    // ============【修复滑块回弹】全局隐藏角色开关 ============
     if (el.globalHideChar) {
         el.globalHideChar.onchange = function () {
-            const self = this;
-            const nowChecked = self.checked;
+            const nowChecked = this.checked;
             console.log("隐藏角色开关状态变更，目标状态：", nowChecked);
 
             // 场景1：滑块向左拖动关闭全局 → 无弹窗，批量关闭所有游戏子开关
@@ -244,7 +243,6 @@ window.onload = async function () {
 
             // 防止重复弹出多个弹窗
             if (modalOpen) {
-                self.checked = false;
                 refreshHideCharSwitch();
                 return;
             }
@@ -255,24 +253,23 @@ window.onload = async function () {
                     // 确认开启：全局开启，批量同步所有游戏小开关打开
                     appData.globalHideChar = true;
                     syncSingleGameSwitch("hideChar", true);
-                    self.checked = true;
                 } else {
-                    // 取消开启：全局保持关闭，批量同步所有游戏小开关关闭，滑块回弹
+                    // 取消开启：全局保持关闭，批量同步所有游戏小开关关闭
                     appData.globalHideChar = false;
                     syncSingleGameSwitch("hideChar", false);
-                    self.checked = false;
                 }
+                // 强制刷新滑块DOM，保证取消时自动归位
+                refreshHideCharSwitch();
                 saveData();
                 renderAddedGame();
             })
         }
     }
     
-    // ============【最终版】全局续作FD开关 ============
+    // ============【修复滑块回弹】全局续作FD开关 ============
     if (el.globalFD) {
         el.globalFD.onchange = function () {
-            const self = this;
-            const nowChecked = self.checked;
+            const nowChecked = this.checked;
             console.log("FD开关状态变更，目标状态：", nowChecked);
 
             // 场景1：滑块向左拖动关闭全局 → 无弹窗，批量关闭所有游戏子开关
@@ -287,7 +284,6 @@ window.onload = async function () {
 
             // 防止重复弹窗
             if (modalOpen) {
-                self.checked = false;
                 refreshFDSwitch();
                 return;
             }
@@ -298,13 +294,13 @@ window.onload = async function () {
                     // 确认开启：全局开启，批量同步所有游戏小开关打开
                     appData.globalFD = true;
                     syncSingleGameSwitch("fd", true);
-                    self.checked = true;
                 } else {
-                    // 取消开启：全局保持关闭，批量同步所有游戏小开关关闭，滑块回弹
+                    // 取消开启：全局保持关闭，批量同步所有游戏小开关关闭
                     appData.globalFD = false;
                     syncSingleGameSwitch("fd", false);
-                    self.checked = false;
                 }
+                // 强制刷新滑块DOM，保证取消时自动归位
+                refreshFDSwitch();
                 saveData();
                 renderAddedGame();
             })
