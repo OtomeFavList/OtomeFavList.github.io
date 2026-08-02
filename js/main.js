@@ -2,8 +2,8 @@
 const STORE_KEY = "otome-favlist-data";
 const SPOILER_DATE_KEY = "spoiler-confirm-date"; // 新增：记录剧透确认日期
 let appData = {
-    globalHideChar: false,
-    globalFD: false,
+    globalHideChar: true,
+    globalFD: true,
     gameSpoilerRecord: {},
     baseInfo: { nick: "", count: "", story: "", firstgame: "" },
     gameList: [],
@@ -247,64 +247,62 @@ window.onload = async function () {
         }
     }
     
-    // ============【全局隐藏角色开关 新版逻辑】 ============
+    // ============【全局隐藏角色开关 修复版 change 逻辑】 ============
     if (el.globalHideChar) {
-        el.globalHideChar.onclick = function(e) {
-            e.preventDefault(); // 拦截浏览器原生勾选视觉跳转
-            const currentStatus = appData.globalHideChar;
-            // 情况1：当前开关是开启状态，直接关闭，无弹窗
-            if (currentStatus === true) {
+        el.globalHideChar.addEventListener('change', function() {
+            const newStatus = this.checked;
+            // 关闭开关：直接生效，无弹窗
+            if (newStatus === false) {
                 appData.globalHideChar = false;
                 syncSingleGameSwitch("hideChar", false);
                 saveData();
-                refreshHideCharSwitch();
                 renderAddedGame();
                 return;
             }
-            // 情况2：当前开关关闭，判断今日是否确认过
+            // 打开开关逻辑
             if(isTodayConfirmed()){
-                // 今天已经确认过，直接打开，不弹窗
+                // 今日已确认，直接开启
                 appData.globalHideChar = true;
                 syncSingleGameSwitch("hideChar", true);
                 saveData();
-                refreshHideCharSwitch();
                 renderAddedGame();
             }else{
-                // 今日未确认，弹出剧透弹窗
+                // 今日未确认，回滚勾选并弹出弹窗
+                this.checked = false;
+                refreshHideCharSwitch();
                 if(modalOpen) return;
                 openSpoilerModal("hideChar");
             }
-        }
+        })
     }
     
-    // ============【全局FD/续作开关 新版逻辑】 ============
+    // ============【全局FD/续作开关 修复版 change 逻辑】 ============
     if (el.globalFD) {
-        el.globalFD.onclick = function(e) {
-            e.preventDefault(); // 拦截浏览器原生勾选视觉跳转
-            const currentStatus = appData.globalFD;
-            // 情况1：当前开关是开启状态，直接关闭，无弹窗
-            if (currentStatus === true) {
+        el.globalFD.addEventListener('change', function() {
+            const newStatus = this.checked;
+            // 关闭开关：直接生效，无弹窗
+            if (newStatus === false) {
                 appData.globalFD = false;
                 syncSingleGameSwitch("fd", false);
                 saveData();
-                refreshFDSwitch();
                 renderAddedGame();
                 return;
             }
-            // 情况2：当前开关关闭，判断今日是否确认过
+            // 打开开关逻辑
             if(isTodayConfirmed()){
-                // 今天已经确认过，直接打开，不弹窗
+                // 今日已确认，直接开启
                 appData.globalFD = true;
                 syncSingleGameSwitch("fd", true);
                 saveData();
-                refreshFDSwitch();
                 renderAddedGame();
             }else{
-                // 今日未确认，弹出剧透弹窗
+                // 今日未确认，回滚勾选并弹出弹窗
+                this.checked = false;
+                refreshFDSwitch();
                 if(modalOpen) return;
                 openSpoilerModal("fd");
             }
-        };
+        })
     }
     
     // 基础资料输入框绑定
