@@ -37,12 +37,18 @@ const el = {
 let modalOpen = false;
 let currentGlobalTarget = "";
 
-// 单个开关独立刷新函数（互不干扰）
+// 单个开关独立刷新函数（互不干扰）【修复：增加indeterminate清除残留勾选】
 function refreshHideCharSwitch() {
-    if (el.globalHideChar) el.globalHideChar.checked = appData.globalHideChar;
+    if (el.globalHideChar) {
+        el.globalHideChar.checked = appData.globalHideChar;
+        el.globalHideChar.indeterminate = false;
+    }
 }
 function refreshFDSwitch() {
-    if (el.globalFD) el.globalFD.checked = appData.globalFD;
+    if (el.globalFD) {
+        el.globalFD.checked = appData.globalFD;
+        el.globalFD.indeterminate = false;
+    }
 }
 
 // 同步游戏内全局开关状态
@@ -133,12 +139,12 @@ if (el.globalHideChar) {
                 appData.globalHideChar = true;
                 syncSingleGameSwitch("hideChar", true);
             } else {
-                // 取消：数据不变，UI不勾选，完全不碰FD数据
+                // 取消：数据置false
                 appData.globalHideChar = false;
             }
             saveData();
-            refreshHideCharSwitch();
-            renderAddedGame();
+            refreshHideCharSwitch(); // 优先刷新开关UI，立刻取消勾选视觉
+            renderAddedGame();       // 再渲染游戏列表
         })
     }
 }
@@ -175,8 +181,8 @@ if (el.globalFD) {
                 appData.globalFD = false;
             }
             saveData();
-            refreshFDSwitch();
-            renderAddedGame();
+            refreshFDSwitch(); // 优先刷新开关UI，立刻取消勾选视觉
+            renderAddedGame(); // 再渲染游戏列表
         })
     };
 }
