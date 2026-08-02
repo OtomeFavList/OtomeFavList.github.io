@@ -2,8 +2,8 @@
 const STORE_KEY = "otome-favlist-data";
 const SPOILER_DATE_KEY = "spoiler-confirm-date"; // 新增：记录剧透确认日期
 let appData = {
-    globalHideChar: true,
-    globalFD: true,
+    globalHideChar: false,
+    globalFD: false,
     gameSpoilerRecord: {},
     baseInfo: { nick: "", count: "", story: "", firstgame: "" },
     gameList: [],
