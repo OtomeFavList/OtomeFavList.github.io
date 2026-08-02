@@ -109,7 +109,7 @@ if (el.spoilerCancel) {
     }
 }
 
-// ========== 全局隐藏角色开关【仅调整回调内两行执行顺序，其余不动】 ==========
+// ========== 【修复版】全局隐藏角色开关 ==========
 if (el.globalHideChar) {
     el.globalHideChar.onclick = function (e) {
         // 弹窗打开时直接拦截操作
@@ -118,10 +118,9 @@ if (el.globalHideChar) {
             return;
         }
         const input = this;
-        // 点击后预期新状态
         const willChecked = !input.checked;
 
-        // 场景1：用户手动关闭开关
+        // 场景1：原本是开启，手动关闭（直接生效）
         if (!willChecked) {
             appData.globalHideChar = false;
             syncSingleGameSwitch("hideChar", false);
@@ -131,25 +130,26 @@ if (el.globalHideChar) {
             return;
         }
 
-        // 场景2：用户要开启，弹出剧透确认
-        e.preventDefault(); // 阻止浏览器自动勾选，等弹窗确认再改状态
+        // 场景2：原本关闭，想要开启 → 弹出确认弹窗，全程不点亮开关
+        e.preventDefault(); // 彻底阻止浏览器勾选视觉
         currentGlobalTarget = "hideChar";
         openSpoilerModal((confirm) => {
             if (confirm) {
+                // 用户确认，才打开开关
                 appData.globalHideChar = true;
                 syncSingleGameSwitch("hideChar", true);
             } else {
-                // 取消：数据置false
+                // 取消：数据保持false，UI不变
                 appData.globalHideChar = false;
             }
             saveData();
-            refreshHideCharSwitch(); // 优先刷新开关UI，立刻取消勾选视觉
-            renderAddedGame();       // 再渲染游戏列表
+            refreshHideCharSwitch();
+            renderAddedGame();
         })
     }
 }
 
-// ========== 全局FD开关【仅调整回调内两行执行顺序，其余不动】 ==========
+// ========== 【修复版】全局FD开关 ==========
 if (el.globalFD) {
     el.globalFD.onclick = function (e) {
         // 弹窗打开时拦截操作
@@ -160,7 +160,7 @@ if (el.globalFD) {
         const input = this;
         const willChecked = !input.checked;
 
-        // 手动关闭开关
+        // 手动关闭开关，直接生效
         if (!willChecked) {
             appData.globalFD = false;
             syncSingleGameSwitch("fd", false);
@@ -170,7 +170,7 @@ if (el.globalFD) {
             return;
         }
 
-        // 开启触发弹窗
+        // 想要开启，弹窗确认，不临时点亮
         e.preventDefault();
         currentGlobalTarget = "fd";
         openSpoilerModal((confirm) => {
@@ -181,8 +181,8 @@ if (el.globalFD) {
                 appData.globalFD = false;
             }
             saveData();
-            refreshFDSwitch(); // 优先刷新开关UI，立刻取消勾选视觉
-            renderAddedGame(); // 再渲染游戏列表
+            refreshFDSwitch();
+            renderAddedGame();
         })
     };
 }
