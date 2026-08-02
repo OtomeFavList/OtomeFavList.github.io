@@ -229,6 +229,7 @@ window.onload = async function () {
     if (el.globalHideChar) {
         el.globalHideChar.onchange = function () {
             const targetStatus = this.checked;
+            const switchDom = this; // 缓存当前开关DOM
             console.log("隐藏角色开关状态变更，目标状态：", targetStatus);
 
             // 场景1：滑块向左关闭，直接生效，无弹窗
@@ -243,23 +244,24 @@ window.onload = async function () {
 
             // 场景2：滑块向右打开，弹出确认弹窗
             if (modalOpen) {
-                // 已有弹窗，直接强制归位
-                this.checked = false;
+                switchDom.checked = false;
                 refreshHideCharSwitch();
                 return;
             }
             // 立刻把滑块拉回关闭原位
-            this.checked = false;
+            switchDom.checked = false;
             refreshHideCharSwitch();
 
             openSpoilerModal((confirm) => {
                 if (confirm) {
-                    // 点击继续：全局开启
+                    // 点击继续：全局开启，手动设置滑块勾选
                     appData.globalHideChar = true;
                     syncSingleGameSwitch("hideChar", true);
+                    switchDom.checked = true;
                 } else {
                     // 点击取消：保持关闭，滑块维持原位
                     appData.globalHideChar = false;
+                    switchDom.checked = false;
                 }
                 saveData();
                 refreshHideCharSwitch();
@@ -267,11 +269,12 @@ window.onload = async function () {
             })
         }
     }
-
+    
     // ============【修正完成】全局FD开关 ============
     if (el.globalFD) {
         el.globalFD.onchange = function () {
             const targetStatus = this.checked;
+            const switchDom = this; // 缓存当前开关DOM
             console.log("FD开关状态变更，目标状态：", targetStatus);
 
             // 场景1：滑块向左关闭，直接生效，无弹窗
@@ -286,22 +289,24 @@ window.onload = async function () {
 
             // 场景2：滑块向右打开，弹出确认弹窗
             if (modalOpen) {
-                this.checked = false;
+                switchDom.checked = false;
                 refreshFDSwitch();
                 return;
             }
             // 弹窗弹出前强制滑块回到关闭原位
-            this.checked = false;
+            switchDom.checked = false;
             refreshFDSwitch();
 
             openSpoilerModal((confirm) => {
                 if (confirm) {
-                    // 确认开启
+                    // 确认开启，手动勾选滑块
                     appData.globalFD = true;
                     syncSingleGameSwitch("fd", true);
+                    switchDom.checked = true;
                 } else {
                     // 取消，保持关闭
                     appData.globalFD = false;
+                    switchDom.checked = false;
                 }
                 saveData();
                 refreshFDSwitch();
