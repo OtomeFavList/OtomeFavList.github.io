@@ -454,7 +454,7 @@ button:hover{
 }
 
 .hide-block{
-    display:none;
+    display:none !important;
 }
 
 h1{
