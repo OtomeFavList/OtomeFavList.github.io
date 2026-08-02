@@ -1,5 +1,6 @@
 // 全局存储key
 const STORE_KEY = "otome-favlist-data";
+const SPOILER_DATE_KEY = "spoiler-confirm-date"; // 新增：记录剧透确认日期
 let appData = {
     globalHideChar: false,
     globalFD: false,
@@ -22,6 +23,23 @@ function loadData() {
     } catch (e) {
         console.error("读取本地存储失败：", e);
     }
+}
+// 获取今日日期字符串 YYYY-MM-DD 用于跨零点判断
+function getTodayDateStr() {
+    const d = new Date();
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, "0");
+    const day = String(d.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+}
+// 判断今天是否已经确认过剧透
+function isTodayConfirmed() {
+    const savedDate = localStorage.getItem(SPOILER_DATE_KEY);
+    return savedDate === getTodayDateStr();
+}
+// 保存今日确认标记到本地
+function saveConfirmDate() {
+    localStorage.setItem(SPOILER_DATE_KEY, getTodayDateStr());
 }
 
 // 路径已修正：单层 /data/games/，删除多余一层data/
@@ -139,7 +157,6 @@ window.onload = async function () {
         globalHideChar: document.getElementById("global-hide-char"),
         globalFD: document.getElementById("global-fd-game"),
         spoilerModal: document.getElementById("spoiler-modal"),
-        spoilerCancel: document.getElementById("spoiler-cancel"),
         spoilerConfirm: document.getElementById("spoiler-confirm"),
         addGameBtn: document.getElementById("btn-add-game"),
         searchPanel: document.getElementById("search-panel"),
@@ -159,7 +176,7 @@ window.onload = async function () {
     };
 
     let modalOpen = false;
-    let modalCallback = null;
+    let modalTargetType = ""; // 标记弹窗是哪个开关：hideChar / fd
 
     // 复选框刷新清除残留
     function refreshHideCharSwitch() {
@@ -175,25 +192,23 @@ window.onload = async function () {
         }
     }
 
-    // ========== 弹窗统一控制函数（全程使用style.display，无classList操作弹窗） ==========
-    function openSpoilerModal(cb) {
-        console.log("执行打开弹窗");
+    // ========== 弹窗统一控制函数（仅单确认按钮，无取消） ==========
+    function openSpoilerModal(type) {
+        console.log("执行打开弹窗", type);
         if (!el.spoilerModal) {
             console.error("严重错误：页面不存在ID=spoiler-modal的弹窗DOM！HTML缺失弹窗");
             alert("页面缺少剧透弹窗容器，弹窗无法弹出，请检查HTML弹窗代码");
             return;
         }
         modalOpen = true;
-        modalCallback = cb;
-        // 打开弹窗：flex
+        modalTargetType = type;
         el.spoilerModal.style.display = "flex";
     }
     function closeSpoilerModal() {
         if (!el.spoilerModal) return;
         modalOpen = false;
-        // 关闭弹窗：none
         el.spoilerModal.style.display = "none";
-        modalCallback = null;
+        modalTargetType = "";
     }
 
     // 加载本地存储
@@ -211,28 +226,34 @@ window.onload = async function () {
     refreshHideCharSwitch();
     refreshFDSwitch();
 
-    // 弹窗按钮绑定
+    // 弹窗唯一确认按钮绑定
     if (el.spoilerConfirm) {
         el.spoilerConfirm.onclick = () => {
+            // 点击确认，保存今日已确认标记
+            saveConfirmDate();
+            // 根据弹窗对应的开关类型打开全局开关
+            if(modalTargetType === "hideChar"){
+                appData.globalHideChar = true;
+                syncSingleGameSwitch("hideChar", true);
+                refreshHideCharSwitch();
+            }else if(modalTargetType === "fd"){
+                appData.globalFD = true;
+                syncSingleGameSwitch("fd", true);
+                refreshFDSwitch();
+            }
+            saveData();
+            renderAddedGame();
             closeSpoilerModal();
-            if (modalCallback) modalCallback(true);
-        }
-    }
-    if (el.spoilerCancel) {
-        el.spoilerCancel.onclick = () => {
-            closeSpoilerModal();
-            if (modalCallback) modalCallback(false);
         }
     }
     
-    // ============【修复滑块回弹】全局隐藏角色开关 ============
+    // ============【全局隐藏角色开关 新版逻辑】 ============
     if (el.globalHideChar) {
-        el.globalHideChar.onchange = function () {
-            const nowChecked = this.checked;
-            console.log("隐藏角色开关状态变更，目标状态：", nowChecked);
-
-            // 场景1：滑块向左拖动关闭全局 → 无弹窗，批量关闭所有游戏子开关
-            if (!nowChecked) {
+        el.globalHideChar.onclick = function(e) {
+            e.preventDefault(); // 拦截浏览器原生勾选视觉跳转
+            const currentStatus = appData.globalHideChar;
+            // 情况1：当前开关是开启状态，直接关闭，无弹窗
+            if (currentStatus === true) {
                 appData.globalHideChar = false;
                 syncSingleGameSwitch("hideChar", false);
                 saveData();
@@ -240,40 +261,29 @@ window.onload = async function () {
                 renderAddedGame();
                 return;
             }
-
-            // 防止重复弹出多个弹窗
-            if (modalOpen) {
-                refreshHideCharSwitch();
-                return;
-            }
-
-            // 场景2：滑块向右拖动打开全局 → 弹出确认弹窗
-            openSpoilerModal((confirm) => {
-                if (confirm) {
-                    // 确认开启：全局开启，批量同步所有游戏小开关打开
-                    appData.globalHideChar = true;
-                    syncSingleGameSwitch("hideChar", true);
-                } else {
-                    // 取消开启：全局保持关闭，批量同步所有游戏小开关关闭
-                    appData.globalHideChar = false;
-                    syncSingleGameSwitch("hideChar", false);
-                }
-                // 强制刷新滑块DOM，保证取消时自动归位
-                refreshHideCharSwitch();
+            // 情况2：当前开关关闭，判断今日是否确认过
+            if(isTodayConfirmed()){
+                // 今天已经确认过，直接打开，不弹窗
+                appData.globalHideChar = true;
+                syncSingleGameSwitch("hideChar", true);
                 saveData();
+                refreshHideCharSwitch();
                 renderAddedGame();
-            })
+            }else{
+                // 今日未确认，弹出剧透弹窗
+                if(modalOpen) return;
+                openSpoilerModal("hideChar");
+            }
         }
     }
     
-    // ============【修复滑块回弹】全局续作FD开关 ============
+    // ============【全局FD/续作开关 新版逻辑】 ============
     if (el.globalFD) {
-        el.globalFD.onchange = function () {
-            const nowChecked = this.checked;
-            console.log("FD开关状态变更，目标状态：", nowChecked);
-
-            // 场景1：滑块向左拖动关闭全局 → 无弹窗，批量关闭所有游戏子开关
-            if (!nowChecked) {
+        el.globalFD.onclick = function(e) {
+            e.preventDefault(); // 拦截浏览器原生勾选视觉跳转
+            const currentStatus = appData.globalFD;
+            // 情况1：当前开关是开启状态，直接关闭，无弹窗
+            if (currentStatus === true) {
                 appData.globalFD = false;
                 syncSingleGameSwitch("fd", false);
                 saveData();
@@ -281,29 +291,19 @@ window.onload = async function () {
                 renderAddedGame();
                 return;
             }
-
-            // 防止重复弹窗
-            if (modalOpen) {
-                refreshFDSwitch();
-                return;
-            }
-
-            // 场景2：滑块向右拖动打开全局 → 弹出确认弹窗
-            openSpoilerModal((confirm) => {
-                if (confirm) {
-                    // 确认开启：全局开启，批量同步所有游戏小开关打开
-                    appData.globalFD = true;
-                    syncSingleGameSwitch("fd", true);
-                } else {
-                    // 取消开启：全局保持关闭，批量同步所有游戏小开关关闭
-                    appData.globalFD = false;
-                    syncSingleGameSwitch("fd", false);
-                }
-                // 强制刷新滑块DOM，保证取消时自动归位
-                refreshFDSwitch();
+            // 情况2：当前开关关闭，判断今日是否确认过
+            if(isTodayConfirmed()){
+                // 今天已经确认过，直接打开，不弹窗
+                appData.globalFD = true;
+                syncSingleGameSwitch("fd", true);
                 saveData();
+                refreshFDSwitch();
                 renderAddedGame();
-            })
+            }else{
+                // 今日未确认，弹出剧透弹窗
+                if(modalOpen) return;
+                openSpoilerModal("fd");
+            }
         };
     }
     
