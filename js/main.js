@@ -224,65 +224,73 @@ window.onload = async function () {
         }
     }
 
-    // 全局隐藏角色开关
+    // ============【修复后】全局隐藏角色开关 ============
     if (el.globalHideChar) {
         el.globalHideChar.onchange = function () {
-            const nowStatus = this.checked;
-            console.log("隐藏角色开关状态变更，新状态：", nowStatus);
-            if (nowStatus === true) {
-                this.checked = false;
-                refreshHideCharSwitch();
-                if (modalOpen) return;
-                openSpoilerModal((confirm) => {
-                    if (confirm) {
-                        appData.globalHideChar = true;
-                        syncSingleGameSwitch("hideChar", true);
-                    } else {
-                        appData.globalHideChar = false;
-                        syncSingleGameSwitch("hideChar", false);
-                    }
-                    saveData();
-                    refreshHideCharSwitch();
-                    renderAddedGame();
-                })
-            } else {
+            const targetStatus = this.checked;
+            console.log("隐藏角色开关状态变更，目标状态：", targetStatus);
+
+            // 关闭操作：直接生效，无弹窗
+            if (targetStatus === false) {
                 appData.globalHideChar = false;
                 syncSingleGameSwitch("hideChar", false);
                 saveData();
                 refreshHideCharSwitch();
                 renderAddedGame();
+                return;
             }
+
+            // 打开操作：弹出确认弹窗
+            if (modalOpen) return;
+            openSpoilerModal((confirm) => {
+                if (confirm) {
+                    // 确认：全局开启，滑块保持打开状态
+                    appData.globalHideChar = true;
+                    syncSingleGameSwitch("hideChar", true);
+                } else {
+                    // 取消：全局不变，滑块切回关闭
+                    appData.globalHideChar = false;
+                    syncSingleGameSwitch("hideChar", false);
+                }
+                saveData();
+                refreshHideCharSwitch();
+                renderAddedGame();
+            })
         }
     }
 
-    // 全局FD开关
+    // ============【修复后】全局FD开关 ============
     if (el.globalFD) {
         el.globalFD.onchange = function () {
-            const nowStatus = this.checked;
-            console.log("FD开关状态变更，新状态：", nowStatus);
-            if (nowStatus === true) {
-                this.checked = false;
-                refreshFDSwitch();
-                if (modalOpen) return;
-                openSpoilerModal((confirm) => {
-                    if (confirm) {
-                        appData.globalFD = true;
-                        syncSingleGameSwitch("fd", true);
-                    } else {
-                        appData.globalFD = false;
-                        syncSingleGameSwitch("fd", false);
-                    }
-                    saveData();
-                    refreshFDSwitch();
-                    renderAddedGame();
-                })
-            } else {
+            const targetStatus = this.checked;
+            console.log("FD开关状态变更，目标状态：", targetStatus);
+
+            // 关闭操作：直接生效，无弹窗
+            if (targetStatus === false) {
                 appData.globalFD = false;
                 syncSingleGameSwitch("fd", false);
                 saveData();
                 refreshFDSwitch();
                 renderAddedGame();
+                return;
             }
+
+            // 打开操作：弹出确认弹窗
+            if (modalOpen) return;
+            openSpoilerModal((confirm) => {
+                if (confirm) {
+                    // 确认开启
+                    appData.globalFD = true;
+                    syncSingleGameSwitch("fd", true);
+                } else {
+                    // 取消，恢复关闭
+                    appData.globalFD = false;
+                    syncSingleGameSwitch("fd", false);
+                }
+                saveData();
+                refreshFDSwitch();
+                renderAddedGame();
+            })
         };
     }
 
