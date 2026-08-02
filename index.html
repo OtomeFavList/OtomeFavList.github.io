@@ -32,14 +32,14 @@ html, body {
     min-width: 280px;
 }
 /* 剧透弹窗基础样式 */
-#spoiler-modal {
-    display: none;
+.modal-mask {
     position: fixed;
     inset: 0;
     background: rgba(0,0,0,0.6);
     z-index: 999;
     align-items: center;
     justify-content: center;
+    display: flex;
 }
 .modal-box {
     background: white;
@@ -191,7 +191,7 @@ html, body {
 </div>
 
 <!-- 剧透弹窗 已完成居中、换行、文字修改 -->
-<div class="modal-mask" id="spoiler-modal">
+<div class="modal-mask hide-block" id="spoiler-modal">
     <div class="modal-box">
         <h3>⚠️剧透警告</h3>
         <p class="text-gray-desc">注意！<br>开启后可能涉及：<br>剧情结局、最终攻略对象、真相路线，<br>是否继续？</p>
