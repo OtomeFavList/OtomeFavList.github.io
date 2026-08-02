@@ -133,7 +133,7 @@ function getAllGameChar(gameInfo) {
     return [...female, ...male];
 }
 
-// 页面所有DOM、事件、渲染逻辑全部放在onload内部（移除async）
+// 页面所有DOM、事件、渲染逻辑全部放在onload内部
 window.onload = async function () {
     // 1. 页面加载完成再获取所有DOM元素
     const el = {
@@ -176,16 +176,17 @@ window.onload = async function () {
         }
     }
 
-    // 弹窗控制【修复：增加控制台打印排查、DOM判空提示】
+    // 弹窗控制
     function openSpoilerModal(cb) {
+        console.log("执行打开弹窗");
         if (!el.spoilerModal) {
-            console.error("弹窗DOM #spoiler-modal 不存在，无法弹出剧透窗口");
+            console.error("严重错误：页面不存在ID=spoiler-modal的弹窗DOM！HTML缺失弹窗");
+            alert("页面缺少剧透弹窗容器，弹窗无法弹出，请补充HTML弹窗代码");
             return;
         }
         modalOpen = true;
         modalCallback = cb;
         el.spoilerModal.style.display = "flex";
-        console.log("剧透弹窗已打开");
     }
     function closeSpoilerModal() {
         if (!el.spoilerModal) return;
@@ -223,66 +224,72 @@ window.onload = async function () {
         }
     }
 
-    // ==========【核心修复：两个全局开关点击逻辑，修复弹窗不触发】==========
+    // ==========【修复：使用onchange 替代onclick，解决复选框事件冲突】==========
     // 全局隐藏角色开关
     if (el.globalHideChar) {
-        el.globalHideChar.onclick = function (e) {
-            e.preventDefault();
-            const targetWantOpen = !appData.globalHideChar;
-            console.log("点击全局隐藏角色开关，目标状态：", targetWantOpen);
-
-            // 关闭开关，直接执行无弹窗
-            if (!targetWantOpen) {
+        el.globalHideChar.onchange = function () {
+            const nowStatus = this.checked;
+            console.log("隐藏角色开关状态变更，新状态：", nowStatus);
+            // 用户想要开启，弹出确认弹窗
+            if (nowStatus === true) {
+                // 强制回显关闭，等待弹窗确认
+                this.checked = false;
+                refreshHideCharSwitch();
+                if (modalOpen) return;
+                openSpoilerModal((confirm) => {
+                    if (confirm) {
+                        appData.globalHideChar = true;
+                        syncSingleGameSwitch("hideChar", true);
+                    } else {
+                        appData.globalHideChar = false;
+                        syncSingleGameSwitch("hideChar", false);
+                    }
+                    saveData();
+                    refreshHideCharSwitch();
+                    renderAddedGame();
+                })
+            } else {
+                // 用户关闭，直接生效无弹窗
                 appData.globalHideChar = false;
                 syncSingleGameSwitch("hideChar", false);
                 saveData();
                 refreshHideCharSwitch();
                 renderAddedGame();
-                return;
             }
-
-            // 需要打开，唤起弹窗
-            if (modalOpen) return;
-            openSpoilerModal((confirm) => {
-                if (confirm) {
-                    appData.globalHideChar = true;
-                    syncSingleGameSwitch("hideChar", true);
-                }
-                saveData();
-                refreshHideCharSwitch();
-                renderAddedGame();
-            })
         }
     }
 
     // 全局FD开关
     if (el.globalFD) {
-        el.globalFD.onclick = function (e) {
-            e.preventDefault();
-            const targetWantOpen = !appData.globalFD;
-            console.log("点击全局FD开关，目标状态：", targetWantOpen);
-
-            // 关闭开关，直接执行无弹窗
-            if (!targetWantOpen) {
+        el.globalFD.onchange = function () {
+            const nowStatus = this.checked;
+            console.log("FD开关状态变更，新状态：", nowStatus);
+            // 用户想要开启，弹出确认弹窗
+            if (nowStatus === true) {
+                // 强制回显关闭，等待弹窗确认
+                this.checked = false;
+                refreshFDSwitch();
+                if (modalOpen) return;
+                openSpoilerModal((confirm) => {
+                    if (confirm) {
+                        appData.globalFD = true;
+                        syncSingleGameSwitch("fd", true);
+                    } else {
+                        appData.globalFD = false;
+                        syncSingleGameSwitch("fd", false);
+                    }
+                    saveData();
+                    refreshFDSwitch();
+                    renderAddedGame();
+                })
+            } else {
+                // 用户关闭，直接生效无弹窗
                 appData.globalFD = false;
                 syncSingleGameSwitch("fd", false);
                 saveData();
                 refreshFDSwitch();
                 renderAddedGame();
-                return;
             }
-
-            // 需要打开，唤起弹窗
-            if (modalOpen) return;
-            openSpoilerModal((confirm) => {
-                if (confirm) {
-                    appData.globalFD = true;
-                    syncSingleGameSwitch("fd", true);
-                }
-                saveData();
-                refreshFDSwitch();
-                renderAddedGame();
-            })
         };
     }
     // ====================================================================
