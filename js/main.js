@@ -9,7 +9,7 @@ let appData = {
     exportColor: { bg: "#fff7f9", title: "#b33a3a", text: "#c98fac", border: "#f6a5b8" }
 };
 // 兜底：游戏数据模块加载失败时赋值空数组，彻底解决undefined报错
-let gameTemplateList = window.gameTemplateList || [];
+let gameTemplateList = [];
 
 // 本地存储读写
 function saveData() {
@@ -24,8 +24,34 @@ function loadData() {
     }
 }
 
+// 【新增】异步加载全部游戏模板数据，修复路径404、MIME报错
+async function loadAllGameTemplates() {
+    // 修正错误路径：删除多余一层 data/
+    const basePath = "/data/games/";
+    // 你可根据实际游戏文件数量修改此处id范围
+    const gameIdList = ["001"];
+    const tempList = [];
+
+    for (const id of gameIdList) {
+        try {
+            // 动态导入正确路径JS模块
+            const mod = await import(`${basePath}game${id}.js`);
+            if (mod && mod.gameData) {
+                tempList.push(mod.gameData);
+            }
+        } catch (err)
+            console.error(`游戏文件 game${id}.js 加载失败(404/MIME错误)`, err);
+            // 单文件加载失败不阻塞整体加载流程
+            continue;
+        }
+    }
+    // 赋值全局游戏模板数组
+    gameTemplateList = tempList;
+}
+
 // 同步游戏内全局开关状态
 function syncSingleGameSwitch(type, status) {
+    if (!Array.isArray(appData.gameList)) return;
     appData.gameList.forEach(game => {
         if (type === "hideChar") game.localHideChar = status;
         if (type === "fd") game.localFD = status;
@@ -60,7 +86,7 @@ function fillFilterOptions(gameList) {
 function renderSelectedChar(gameItem, gameInfo) {
     if (!gameInfo?.charList) return "<span>暂无选择角色</span>";
     let html = "";
-    gameItem.selectChars.forEach(cid => {
+    gameItem.selectChars?.forEach(cid => {
         const char = gameInfo.charList?.find(c => c.id === cid);
         if (!char || !char.imgs?.[0]) return;
         const img = char.imgs[0];
@@ -73,11 +99,11 @@ function renderSelectedChar(gameItem, gameInfo) {
 function renderCP(gameItem, gameInfo) {
     if (!gameInfo?.charList) return "<span>暂无CP搭配</span>";
     let html = "";
-    gameItem.cpList.forEach(cp => {
+    gameItem.cpList?.forEach(cp => {
         const fChar = gameInfo.charList?.find(c => c.id === cp.femaleId);
         if (!fChar || !fChar.imgs?.[0]) return;
         let maleHtml = "";
-        cp.maleIds.forEach(mid => {
+        cp.maleIds?.forEach(mid => {
             const mChar = gameInfo.charList?.find(c => c.id === mid);
             if (!mChar || !mChar.imgs?.[0]) return;
             maleHtml += `<div class="char-item selected"><img src="img/char/${mChar.imgs[0]}" style="width:100px;height:100px;"><div>${mChar.name}</div></div>`;
@@ -96,7 +122,7 @@ function renderCP(gameItem, gameInfo) {
 
 // 过滤角色
 function getAllGameChar(gameInfo) {
-    let chars = [...(gameInfo.charList || [])];
+    let chars = [...(gameInfo?.charList || [])];
     const gameItem = appData.gameList.find(g => g.gameId === gameInfo.id);
     const showHide = gameItem?.localHideChar || appData.globalHideChar;
     const showFD = gameItem?.localFD || appData.globalFD;
@@ -108,7 +134,7 @@ function getAllGameChar(gameInfo) {
 }
 
 // 页面所有DOM、事件、渲染逻辑全部放在onload内部（移除async）
-window.onload = function () {
+window.onload = async function () {
     // 1. 页面加载完成再获取所有DOM元素
     const el = {
         globalHideChar: document.getElementById("global-hide-char"),
@@ -291,7 +317,7 @@ window.onload = function () {
         let html = "";
         sortedGames.forEach(game => {
             let match = true;
-            if (keyword && !game.name.toLowerCase().includes(keyword)) match = false;
+            if (keyword && !game.name?.toLowerCase().includes(keyword)) match = false;
             if (filterYear && game.year != filterYear) match = false;
             if (filterPub && game.publisher != filterPub) match = false;
             if (filterCn && game.cnStudio != filterCn) match = false;
@@ -335,8 +361,8 @@ window.onload = function () {
     // 渲染已添加游戏卡片
     function renderAddedGame() {
         if (!el.addedGameBox) return;
-        if (!Array.isArray(gameTemplateList)) {
-            el.addedGameBox.innerHTML = "<p>游戏数据加载失败，暂时无法展示</p>";
+        if (!Array.isArray(gameTemplateList) || gameTemplateList.length === 0) {
+            el.addedGameBox.innerHTML = "<p>⚠️ 游戏数据加载失败，部分文件404/路径错误，暂时无法展示游戏卡片</p>";
             return;
         }
         let html = "";
@@ -502,7 +528,7 @@ window.onload = function () {
                     offsetY += 20;
                 }
 
-                if (!Array.isArray(gameTemplateList)) throw new Error("游戏数据加载失败，无法导出");
+                if (!Array.isArray(gameTemplateList) || gameTemplateList.length === 0) throw new Error("游戏数据加载失败，无法导出");
                 appData.gameList.forEach(gameItem => {
                     if (gameItem.selectChars.length === 0 && gameItem.cpList.length === 0) return;
                     const gameInfo = gameTemplateList.find(g => g.id === gameItem.gameId);
@@ -547,11 +573,11 @@ window.onload = function () {
                         ctx.font = "bold 22px sans-serif";
                         gameItem.cpList.forEach(cp => {
                             const f = gameInfo.charList?.find(x => x.id === cp.femaleId);
-                            const mNames = cp.maleIds.map(mid => {
+                            const mNames = cp.maleIds?.map(mid => {
                                 const m = gameInfo.charList?.find(x => x.id === mid);
                                 return m?.name || "";
                             }).filter(x => x);
-                            const cpTxt = `${f?.name} × ${mNames.join("、")}`;
+                            const cpTxt = `${f?.name || ""} × ${mNames.join("、")}`;
                             ctx.fillText(cpTxt, 60, offsetY);
                             offsetY += 34;
                         })
@@ -570,9 +596,11 @@ window.onload = function () {
         }
     }
 
+    // 【核心】先异步加载游戏模板数据，再渲染页面
+    await loadAllGameTemplates();
     // 延迟加载筛选下拉、游戏列表
     setTimeout(() => {
         fillFilterOptions(gameTemplateList);
         renderAddedGame();
-    }, 800);
+    }, 200);
 }
