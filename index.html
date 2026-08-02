@@ -21,6 +21,12 @@ html, body {
     text-align: center;
     line-height: 1.8;
 }
+/* 弹窗单按钮居中 */
+#spoiler-modal .modal-btns {
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
+}
 /* 基础资料双行布局样式 */
 .form-row-double {
     display: flex;
@@ -169,7 +175,6 @@ html, body {
         <h3>⚠️剧透警告</h3>
         <p class="text-gray-desc">注意！<br>开启后可能涉及：<br>剧情结局、最终攻略对象、真相路线，<br>是否继续？</p>
         <div class="modal-btns">
-            <button class="btn-del" id="spoiler-cancel">取消</button>
             <button id="spoiler-confirm">继续</button>
         </div>
     </div>
