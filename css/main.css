@@ -474,3 +474,8 @@ h2{
     color:#666;
     font-weight:normal;
 }
+
+/* 剧透弹窗单确认按钮居中 */
+#spoiler-modal .modal-btns {
+    justify-content: center;
+}
