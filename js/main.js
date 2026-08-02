@@ -47,7 +47,7 @@ async function loadAllGameTemplates() {
     gameTemplateList = tempList;
 }
 
-// 同步游戏内全局开关状态
+// 同步游戏内全局开关状态（仅批量初始化，不锁死单游戏开关）
 function syncSingleGameSwitch(type, status) {
     if (!Array.isArray(appData.gameList)) return;
     appData.gameList.forEach(game => {
@@ -118,12 +118,13 @@ function renderCP(gameItem, gameInfo) {
     return html || "<span>暂无CP搭配</span>";
 }
 
-// 过滤角色
+// 过滤角色规则：单游戏开关优先级高于全局开关
 function getAllGameChar(gameInfo) {
     let chars = [...(gameInfo?.charList || [])];
     const gameItem = appData.gameList.find(g => g.gameId === gameInfo.id);
-    const showHide = gameItem?.localHideChar || appData.globalHideChar;
-    const showFD = gameItem?.localFD || appData.globalFD;
+    // 单游戏本地开关优先，全局仅作为初始批量设置
+    const showHide = gameItem?.localHideChar;
+    const showFD = gameItem?.localFD;
     if (!showHide) chars = chars.filter(c => !c.isHidden);
     if (!showFD) chars = chars.filter(c => !c.isFD);
     const female = chars.filter(c => c.gender === "female").sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
@@ -224,13 +225,13 @@ window.onload = async function () {
         }
     }
 
-    // ============【修复后】全局隐藏角色开关 ============
+    // ============【修正完成】全局隐藏角色开关 ============
     if (el.globalHideChar) {
         el.globalHideChar.onchange = function () {
             const targetStatus = this.checked;
             console.log("隐藏角色开关状态变更，目标状态：", targetStatus);
 
-            // 关闭操作：直接生效，无弹窗
+            // 场景1：滑块向左关闭，直接生效，无弹窗
             if (targetStatus === false) {
                 appData.globalHideChar = false;
                 syncSingleGameSwitch("hideChar", false);
@@ -240,17 +241,16 @@ window.onload = async function () {
                 return;
             }
 
-            // 打开操作：弹出确认弹窗
+            // 场景2：滑块向右打开，弹出确认弹窗
             if (modalOpen) return;
             openSpoilerModal((confirm) => {
                 if (confirm) {
-                    // 确认：全局开启，滑块保持打开状态
+                    // 点击继续：全局开启，同步所有游戏本地开关为true，滑块保持打开
                     appData.globalHideChar = true;
                     syncSingleGameSwitch("hideChar", true);
                 } else {
-                    // 取消：全局不变，滑块切回关闭
+                    // 点击取消：全局不变仍关闭，强制刷新滑块切回关闭
                     appData.globalHideChar = false;
-                    syncSingleGameSwitch("hideChar", false);
                 }
                 saveData();
                 refreshHideCharSwitch();
@@ -259,13 +259,13 @@ window.onload = async function () {
         }
     }
 
-    // ============【修复后】全局FD开关 ============
+    // ============【修正完成】全局FD开关 ============
     if (el.globalFD) {
         el.globalFD.onchange = function () {
             const targetStatus = this.checked;
             console.log("FD开关状态变更，目标状态：", targetStatus);
 
-            // 关闭操作：直接生效，无弹窗
+            // 场景1：滑块向左关闭，直接生效，无弹窗
             if (targetStatus === false) {
                 appData.globalFD = false;
                 syncSingleGameSwitch("fd", false);
@@ -275,17 +275,16 @@ window.onload = async function () {
                 return;
             }
 
-            // 打开操作：弹出确认弹窗
+            // 场景2：滑块向右打开，弹出确认弹窗
             if (modalOpen) return;
             openSpoilerModal((confirm) => {
                 if (confirm) {
-                    // 确认开启
+                    // 确认开启，批量同步所有游戏开关
                     appData.globalFD = true;
                     syncSingleGameSwitch("fd", true);
                 } else {
-                    // 取消，恢复关闭
+                    // 取消，全局保持关闭，滑块回弹
                     appData.globalFD = false;
-                    syncSingleGameSwitch("fd", false);
                 }
                 saveData();
                 refreshFDSwitch();
@@ -423,7 +422,7 @@ window.onload = async function () {
         bindGameCardEvent();
     }
 
-    // 游戏卡片内按钮事件
+    // 游戏卡片内按钮事件（单游戏开关完全独立，不受全局锁死）
     function bindGameCardEvent() {
         document.querySelectorAll(".fold-game").forEach(btn => {
             btn.onclick = () => {
@@ -455,6 +454,7 @@ window.onload = async function () {
                 }
             })
         })
+        // 单游戏隐藏角色开关，独立修改，不受全局限制
         document.querySelectorAll(".local-hide-char").forEach(sw => {
             sw.onchange = function () {
                 const gid = this.dataset.gid;
@@ -465,6 +465,7 @@ window.onload = async function () {
                 renderAddedGame();
             }
         })
+        // 单游戏FD开关，独立修改，不受全局限制
         document.querySelectorAll(".local-fd").forEach(sw => {
             sw.onchange = function () {
                 const gid = this.dataset.gid;
