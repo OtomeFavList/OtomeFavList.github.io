@@ -619,3 +619,55 @@ window.onload = async function () {
         renderAddedGame();
     }, 200);
 }
+
+// 全局元素缓存
+const el = {
+    spoilerModal: document.getElementById('spoiler-modal'),
+    spoilerCancel: document.getElementById('spoiler-cancel'),
+    spoilerConfirm: document.getElementById('spoiler-confirm'),
+    globalHideChar: document.getElementById('global-hide-char'),
+    globalFdGame: document.getElementById('global-fd-game')
+};
+// 弹窗回调缓存
+let modalCallback = null;
+
+// 打开弹窗
+function openSpoilerModal(cb) {
+    modalCallback = cb;
+    el.spoilerModal.classList.remove('hide-block');
+}
+// 关闭弹窗
+function closeSpoilerModal() {
+    el.spoilerModal.classList.add('hide-block');
+    modalCallback = null;
+}
+
+// 弹窗取消按钮
+el.spoilerCancel.addEventListener('click', () => {
+    closeSpoilerModal();
+});
+// 弹窗确认按钮
+el.spoilerConfirm.addEventListener('click', () => {
+    closeSpoilerModal();
+    if (modalCallback) modalCallback();
+});
+
+// 第一个滑块：全局显示隐藏角色 勾选弹出弹窗
+el.globalHideChar.addEventListener('change', function () {
+    if (this.checked) {
+        openSpoilerModal(() => {
+            // 这里写你原本开启隐藏角色后的业务逻辑
+            console.log("确认开启隐藏角色");
+        })
+    }
+});
+
+// 第二个滑块：全局显示FD/续作角色 勾选弹出弹窗
+el.globalFdGame.addEventListener('change', function () {
+    if (this.checked) {
+        openSpoilerModal(() => {
+            // 这里写你原本开启FD角色后的业务逻辑
+            console.log("确认开启FD/续作角色");
+        })
+    }
+});
