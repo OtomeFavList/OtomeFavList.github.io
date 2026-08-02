@@ -224,14 +224,13 @@ window.onload = async function () {
             if (modalCallback) modalCallback(false);
         }
     }
-
-        // ============【修正完成】全局隐藏角色开关 ============
+    
+    // ============【修正完成】全局隐藏角色开关 ============
     if (el.globalHideChar) {
-        el.globalHideChar.onchange = function (e) {
+        el.globalHideChar.onchange = function () {
             const targetStatus = this.checked;
             console.log("隐藏角色开关状态变更，目标状态：", targetStatus);
-            // 阻止浏览器默认勾选行为，先还原视觉
-            e.preventDefault();
+
             // 场景1：滑块向左关闭，直接生效，无弹窗
             if (targetStatus === false) {
                 appData.globalHideChar = false;
@@ -241,22 +240,25 @@ window.onload = async function () {
                 renderAddedGame();
                 return;
             }
+
             // 场景2：滑块向右打开，弹出确认弹窗
             if (modalOpen) {
+                // 已有弹窗，直接强制归位
+                this.checked = false;
                 refreshHideCharSwitch();
                 return;
             }
-            // 先强制把滑块视觉切回关闭
+            // 立刻把滑块拉回关闭原位
             this.checked = false;
             refreshHideCharSwitch();
-            const self = this;
+
             openSpoilerModal((confirm) => {
                 if (confirm) {
-                    // 点击继续：全局开启，同步所有游戏本地开关为true，滑块打开
+                    // 点击继续：全局开启
                     appData.globalHideChar = true;
                     syncSingleGameSwitch("hideChar", true);
                 } else {
-                    // 点击取消：全局不变仍关闭，滑块保持关闭
+                    // 点击取消：保持关闭，滑块维持原位
                     appData.globalHideChar = false;
                 }
                 saveData();
@@ -268,11 +270,10 @@ window.onload = async function () {
 
     // ============【修正完成】全局FD开关 ============
     if (el.globalFD) {
-        el.globalFD.onchange = function (e) {
+        el.globalFD.onchange = function () {
             const targetStatus = this.checked;
             console.log("FD开关状态变更，目标状态：", targetStatus);
-            // 阻止浏览器默认勾选行为
-            e.preventDefault();
+
             // 场景1：滑块向左关闭，直接生效，无弹窗
             if (targetStatus === false) {
                 appData.globalFD = false;
@@ -282,21 +283,24 @@ window.onload = async function () {
                 renderAddedGame();
                 return;
             }
+
             // 场景2：滑块向右打开，弹出确认弹窗
             if (modalOpen) {
+                this.checked = false;
                 refreshFDSwitch();
                 return;
             }
-            // 强制还原滑块视觉
+            // 弹窗弹出前强制滑块回到关闭原位
             this.checked = false;
             refreshFDSwitch();
+
             openSpoilerModal((confirm) => {
                 if (confirm) {
-                    // 确认开启，批量同步所有游戏开关
+                    // 确认开启
                     appData.globalFD = true;
                     syncSingleGameSwitch("fd", true);
                 } else {
-                    // 取消，全局保持关闭，滑块回弹
+                    // 取消，保持关闭
                     appData.globalFD = false;
                 }
                 saveData();
