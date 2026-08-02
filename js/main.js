@@ -24,8 +24,7 @@ function loadData() {
     }
 }
 
-// 【核心修改：修正错误路径，删除多余一层 data/】
-// 原线上地址 https://otomefavlist.github.io/data/data/games/ → https://otomefavlist.github.io/data/games/
+// 路径已修正：单层 /data/games/，删除多余一层data/
 async function loadAllGameTemplates() {
     const basePath = "/data/games/";
     const gameIdList = ["001"];
@@ -33,7 +32,7 @@ async function loadAllGameTemplates() {
 
     for (const id of gameIdList) {
         try {
-            // 动态导入修正路径后的游戏JS文件（game001.js / game002.js...）
+            // 动态导入单层路径游戏JS文件
             const mod = await import(`${basePath}game${id}.js`);
             if (mod && mod.gameData) {
                 tempList.push(mod.gameData);
@@ -175,21 +174,23 @@ window.onload = async function () {
         }
     }
 
-    // 弹窗控制
+    // ========== 弹窗统一控制函数（全程使用style.display，无classList操作弹窗） ==========
     function openSpoilerModal(cb) {
         console.log("执行打开弹窗");
         if (!el.spoilerModal) {
             console.error("严重错误：页面不存在ID=spoiler-modal的弹窗DOM！HTML缺失弹窗");
-            alert("页面缺少剧透弹窗容器，弹窗无法弹出，请补充HTML弹窗代码");
+            alert("页面缺少剧透弹窗容器，弹窗无法弹出，请检查HTML弹窗代码");
             return;
         }
         modalOpen = true;
         modalCallback = cb;
+        // 打开弹窗：flex
         el.spoilerModal.style.display = "flex";
     }
     function closeSpoilerModal() {
         if (!el.spoilerModal) return;
         modalOpen = false;
+        // 关闭弹窗：none
         el.spoilerModal.style.display = "none";
         modalCallback = null;
     }
@@ -223,7 +224,7 @@ window.onload = async function () {
         }
     }
 
-    // 全局隐藏角色开关（统一使用onchange，全页面事件写法标准化）
+    // 全局隐藏角色开关
     if (el.globalHideChar) {
         el.globalHideChar.onchange = function () {
             const nowStatus = this.checked;
@@ -254,7 +255,7 @@ window.onload = async function () {
         }
     }
 
-    // 全局FD开关（统一onchange事件，与上方开关逻辑格式完全统一）
+    // 全局FD开关
     if (el.globalFD) {
         el.globalFD.onchange = function () {
             const nowStatus = this.checked;
@@ -285,7 +286,7 @@ window.onload = async function () {
         };
     }
 
-    // 基础资料输入框绑定（统一oninput）
+    // 基础资料输入框绑定
     ["inputNick", "inputCount", "inputStory", "inputFirstgame"].forEach(k => {
         const dom = el[k];
         if (dom) {
@@ -297,7 +298,7 @@ window.onload = async function () {
         }
     })
 
-    // 配色取色器绑定（统一oninput，写法标准化）
+    // 配色取色器绑定
     ["colorBg", "colorTitle", "colorText", "colorBorder"].forEach(k => {
         const dom = el[k];
         if (dom) {
@@ -414,7 +415,7 @@ window.onload = async function () {
         bindGameCardEvent();
     }
 
-    // 游戏卡片内按钮事件（统一事件绑定格式）
+    // 游戏卡片内按钮事件
     function bindGameCardEvent() {
         document.querySelectorAll(".fold-game").forEach(btn => {
             btn.onclick = () => {
@@ -478,7 +479,7 @@ window.onload = async function () {
     // 搜索输入框
     if (el.gameSearchInput) el.gameSearchInput.oninput = renderGameSelectList;
 
-    // 导出按钮逻辑（移除远程字体，通用sans-serif）
+    // 导出按钮逻辑
     if (el.exportBtn) {
         el.exportBtn.onclick = function () {
             try {
