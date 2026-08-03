@@ -3,14 +3,14 @@
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
 // 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
 const gameData = {
-    id: "game001",
-    name: "虔诚之花的晚钟",
+    id: "game002",
+    name: "第六妖守",
     year: "2020",
     publisher: "Otomate",
     cnStudio: "GSE",
-    writer: "かずら林檎",
-    art: "RiRi",
-    cover: "img/game/001.jpg",
+    writer: "かずら林檎","みぞおち鳩子","仰木サヤ","七瀬みお","紫堂零",
+    art: "スオウ",
+    cover: "img/game/002.jpg",
     charList: [
         // 莉莉安娜
         {
