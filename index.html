@@ -7,371 +7,6 @@
 <link rel="stylesheet" href="./css/main.css">
 <!-- 引入html2canvas CDN，用于图片导出 -->
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-<style>
-/* 全局兜底背景，防止JS加载失败页面纯白 */
-html, body {
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    background-color: #fff7f9 !important;
-}
-/* 站点标题全部居中 */
-.site-title {
-    text-align: center;
-}
-/* 日乙个人喜好表 取消加粗 */
-.title-sub-cn {
-    font-weight: normal;
-}
-/* 弹窗文字居中样式 */
-#spoiler-modal .modal-box h3 {
-    text-align: center;
-}
-#spoiler-modal .modal-box p.text-gray-desc {
-    text-align: center;
-    line-height: 1.8;
-}
-/* 弹窗单按钮居中 */
-#spoiler-modal .modal-btns {
-    display: flex;
-    justify-content: center;
-    margin-top: 16px;
-}
-/* 基础资料双行布局样式 */
-.form-row-double {
-    display: flex;
-    gap: 2rem;
-    flex-wrap: wrap;
-}
-.form-row-double .form-row {
-    flex: 1;
-    min-width: 280px;
-}
-/* 按钮居中容器 */
-.center-btn-block {
-    display: flex;
-    justify-content: center;
-    margin: 16px 0;
-}
-
-/* ========== 角色选择弹窗新增样式 ========== */
-.modal-mask {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.65);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 999;
-}
-.modal-mask.active {
-    display: flex;
-}
-.modal-box {
-    background: #fff;
-    width: min(92%, 900px);
-    max-height: 85vh;
-    overflow-y: auto;
-    border-radius: 12px;
-    padding: 20px;
-    box-sizing: border-box;
-}
-.modal-small .modal-box {
-    width: min(90%, 480px);
-}
-.modal-header{
-    display:flex;
-    justify-content: space-between;
-    align-items:center;
-    margin-bottom:12px;
-}
-.modal-close-btn{
-    border:none;
-    background:none;
-    font-size:24px;
-    cursor:pointer;
-    padding:0 6px;
-}
-.modal-body{
-    padding:8px 0;
-}
-.modal-footer{
-    margin-top:16px;
-    display:flex;
-    gap:12px;
-    justify-content:center;
-}
-
-/* ========= 核心：CP隔离布局 固定比例 25% ｜ 75% ========= */
-.cp-layout-row{
-    display:grid;
-    grid-template-columns: 25% 75%;
-    gap:16px;
-    margin-top:16px;
-}
-.heroine-column, .hero-list-column {
-    display: flex;
-    flex-direction: column;
-    gap:10px;
-}
-
-/* ========= 核心：角色卡片强制200*200正方形边框 ========= */
-.char-card-wrapper{
-    display:flex;
-    flex-wrap:wrap;
-    gap:12px;
-}
-.char-card-wrapper label.char-card-item{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content: space-between;
-    cursor:pointer;
-    border:1px solid #ddd;
-    border-radius:8px;
-    width:200px;
-    height:200px;
-    padding:8px;
-    box-sizing: border-box;
-    overflow:hidden;
-    position: relative;
-}
-.char-card-img-box{
-    width:100%;
-    flex:1;
-    display:grid;
-    place-items:center;
-    position: relative;
-}
-.char-card-img-box img{
-    max-width:100%;
-    max-height:140px;
-    object-fit:contain;
-}
-.char-card-name{
-    width:100%;
-    text-align:center;
-    padding:4px 0;
-    font-size:14px;
-}
-
-/* ==========【新增：角色立绘左右切换箭头样式】========== */
-.char-switch-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width:26px;
-    height:26px;
-    border-radius:50%;
-    border:none;
-    background:rgba(255,255,255,0.75);
-    color:#222;
-    font-size:16px;
-    cursor:pointer;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    z-index:2;
-}
-.char-switch-btn:hover{
-    background:rgba(255,255,255,0.95);
-}
-.char-switch-prev{
-    left:4px;
-}
-.char-switch-next{
-    right:4px;
-}
-/* 只有多张立绘的时候才显示箭头，单张自动隐藏（JS控制 class） */
-.char-has-multi-img .char-switch-btn{
-    display:flex;
-}
-.char-card-img-box:not(.char-has-multi-img) .char-switch-btn{
-    display:none;
-}
-
-.local-switch-group{
-    display:flex;
-    gap:32px;
-    margin-bottom:12px;
-    flex-wrap:wrap;
-}
-hr.divider{
-    border:0;
-    border-top:1px solid #e2d2d7;
-    margin:14px 0;
-}
-.char-image-switch{
-    display:flex;
-    gap:6px;
-    margin-top:6px;
-}
-.char-image-switch button{
-    font-size:12px;
-    padding:2px 6px;
-    cursor:pointer;
-}
-
-/* =========【新增：游戏搜索面板样式】========= */
-.game-search-box {
-    margin:12px 0;
-    padding:16px;
-    border:1px solid #e2d2d7;
-    border-radius:10px;
-}
-.game-search-box input[type="text"]{
-    width:100%;
-    padding:8px 10px;
-    box-sizing:border-box;
-    margin-bottom:10px;
-    border:1px solid #ddd;
-    border-radius:6px;
-}
-.filter-group{
-    display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px,1fr));
-    gap:8px;
-    margin-bottom:12px;
-}
-.filter-group select{
-    padding:6px 8px;
-    border:1px solid #ddd;
-    border-radius:6px;
-}
-.game-item{
-    padding:10px;
-    border:1px solid #eee;
-    border-radius:8px;
-    cursor:pointer;
-    margin-bottom:8px;
-}
-.game-item:hover{
-    background:#f8eef2;
-}
-.game-item-detail{
-    display:none;
-    grid-template-columns:220px 1fr;
-    gap:16px;
-    margin-top:12px;
-}
-.game-item-detail.active{
-    display:grid;
-}
-.game-cover-preview{
-    width:100%;
-    aspect-ratio:3/4;
-    background:#dddddd;
-    border-radius:6px;
-}
-
-/* =========【新增：游戏条目展开详情样式｜第一项开发】 ========= */
-.added-game-card{
-    border:1px solid #f6a5b8;
-    border-radius:10px;
-    padding:14px;
-    margin:12px 0;
-}
-.game-card-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-.game-card-title{
-    cursor: pointer;
-    font-size:18px;
-    font-weight:bold;
-    color:#b33a3a;
-}
-.game-card-title:hover{
-    text-decoration: underline;
-}
-.game-card-switch-group{
-    display:flex;
-    gap:10px;
-}
-.game-expand-detail{
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap:18px;
-    margin-top:14px;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.35s ease;
-}
-.game-expand-detail.open{
-    max-height: 600px;
-}
-.game-expand-cover{
-    width:100%;
-    aspect-ratio:3/4;
-    background:#eee;
-    border-radius:8px;
-    object-fit:cover;
-}
-.game-info-text p{
-    margin:6px 0;
-    line-height:1.6;
-}
-.char-add-box{
-    width:200px;
-    height:200px;
-    border:2px dashed #b98899;
-    display:grid;
-    place-items:center;
-    cursor:pointer;
-}
-.couple-slot-left{
-    min-height:200px;
-    border:1px dashed #c997a8;
-    display:grid;
-    place-items:center;
-}
-/* 文字层级配色类 */
-.text-light-pink{
-    color:#c98fac;
-}
-.text-gray-desc{
-    color:#666666;
-}
-/* 导出尺寸所有选项文字统一和标题同色 */
-.size-select label {
-    color:#c98fac;
-}
-/* 设置/基础资料/游戏列表/导出 板块标题颜色 修改为 #b85878 */
-#card-setting h2,
-#card-base h2,
-#card-game h2,
-#card-export h2 {
-    color:#b85878;
-}
-/* About标题单独红色 #b33a3a */
-.about-block h2 {
-    color:#b33a3a;
-}
-
-/* =====【导出专用样式】===== */
-/* 导出快照时，添加 .export-snapshot class，隐藏所有交互控件 */
-.export-snapshot .center-btn-block,
-.export-snapshot .modal-mask,
-.export-snapshot input[type="checkbox"],
-.export-snapshot input[type="radio"],
-.export-snapshot button,
-.export-snapshot .switch-row label .slider,
-.export-snapshot .game-card-switch-group
-{
-    display: none !important;
-}
-/* 导出时移除虚线添加框 */
-.export-snapshot .char-add-box,
-.export-snapshot .couple-slot-left
-{
-    display: none !important;
-}
-/* 空白区域自动隐藏，优化图片留白 */
-.export-hidden-empty {
-    display: none !important;
-}
-</style>
 </head>
 <body>
 
@@ -393,7 +28,7 @@ hr.divider{
                 </label>
                 <div>
                     <span class="text-light-pink">全局显示隐藏角色</span>
-                    <p class="switch-desc">开启后默认展示隐藏角色；关闭则所有游戏默认隐藏，单个游戏可单独开启。每日首次切换全局开关会触发剧透警告弹窗。</p>
+                    <p class="switch-desc">开启后默认展示隐藏角色；关闭则所有游戏默认隐藏，单个游戏可单独开启。切换此全局开关会触发剧透警告弹窗。</p>
                 </div>
             </div>
             <div class="switch-row">
@@ -403,7 +38,7 @@ hr.divider{
                 </label>
                 <div>
                     <span class="text-light-pink">全局显示续作/FD角色</span>
-                    <p class="switch-desc">开启后默认展示续作、FD专属角色；关闭则所有游戏默认隐藏，单个游戏可单独开启。每日首次切换全局开关会触发剧透警告弹窗。</p>
+                    <p class="switch-desc">开启后默认展示续作、FD专属角色；关闭则所有游戏默认隐藏，单个游戏可单独开启。切换此全局开关会触发剧透警告弹窗。</p>
                 </div>
             </div>
         </div>
@@ -411,7 +46,7 @@ hr.divider{
         <div class="big-card" id="card-base">
             <h2>二、基础资料</h2>
             <!-- 昵称+游玩总数同一行 -->
-            <div class="form-row-double">
+            <div class="form-row-double form-row" style="display:flex;gap:2rem;flex-wrap:wrap;">
                 <div class="form-row">
                     <label class="text-light-pink">昵称</label>
                     <input type="text" id="input-nick" placeholder="填写你的昵称">
@@ -422,7 +57,7 @@ hr.divider{
                 </div>
             </div>
             <!-- 入坑时间+入坑作品同一行 -->
-            <div class="form-row-double">
+            <div class="form-row-double form-row" style="display:flex;gap:2rem;flex-wrap:wrap;">
                 <div class="form-row">
                     <label class="text-light-pink">入坑时间</label>
                     <input type="text" id="input-story" placeholder="例如：2020年">
@@ -507,26 +142,26 @@ hr.divider{
     </div>
 </div>
 
-<!-- 剧透弹窗（原版单按钮，移除取消按钮） -->
+<!-- 剧透弹窗 -->
 <div class="modal-mask modal-small" id="spoiler-modal">
     <div class="modal-box">
         <h3>⚠️剧透警告</h3>
-        <p class="text-gray-desc">注意！<br>开启后可能涉及：<br>剧情结局、最终攻略对象、真相路线，<br>是否继续？</p>
-        <div class="modal-btns">
+        <p class="text-gray-desc" style="text-align:center;line-height:1.8;">注意！<br>开启后可能涉及：<br>剧情结局、最终攻略对象、真相路线，<br>是否继续？</p>
+        <div class="modal-btns" style="justify-content:center;">
             <button id="spoiler-confirm">继续</button>
         </div>
     </div>
 </div>
 
-<!-- ========== 【新增】角色选择弹窗 ========== -->
+<!-- 角色选择弹窗 -->
 <div class="modal-mask" id="char-select-modal">
-    <div class="modal-box">
-        <div class="modal-header">
+    <div class="modal-box" style="max-width:900px;width:92%;max-height:85vh;overflow-y:auto;">
+        <div class="modal-header" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
             <h3 id="modal-game-title">游戏名称</h3>
-            <button class="modal-close-btn">&times;</button>
+            <button class="modal-close-btn" style="border:none;background:none;font-size:24px;cursor:pointer;padding:0 6px;">&times;</button>
         </div>
         <div class="modal-body">
-            <div class="local-switch-group">
+            <div class="local-switch-group" style="display:flex;gap:32px;margin-bottom:12px;flex-wrap:wrap;">
                 <label>
                     <input type="checkbox" id="local-show-secret"> 显示本游戏隐藏角色
                 </label>
@@ -534,20 +169,24 @@ hr.divider{
                     <input type="checkbox" id="local-show-fd"> 显示本游戏续作/FD角色
                 </label>
             </div>
-            <hr class="divider">
+            <hr style="border:0;border-top:1px solid #e2d2d7;margin:14px 0;">
             <!-- CP 25% | 75% 布局容器 -->
-            <div class="cp-layout-row">
-                <div class="heroine-column">
-                    <h4>女主</h4>
-                    <div id="heroine-box" class="char-card-wrapper"></div>
+            <div class="cp-row">
+                <div class="cp-female">
+                    <div class="heroine-column" style="display:flex;flex-direction:column;gap:10px;width:100%;">
+                        <h4>女主</h4>
+                        <div id="heroine-box" class="char-pool"></div>
+                    </div>
                 </div>
-                <div class="hero-list-column">
-                    <h4>可攻略角色</h4>
-                    <div id="hero-list-box" class="char-card-wrapper"></div>
+                <div class="cp-male-wrap">
+                    <div class="hero-list-column" style="display:flex;flex-direction:column;gap:10px;width:100%;">
+                        <h4>可攻略角色</h4>
+                        <div id="hero-list-box" class="char-pool"></div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="modal-footer">
+        <div class="modal-btns">
             <button id="modal-cancel-btn">取消</button>
             <button id="modal-confirm-btn">确认选择</button>
         </div>
@@ -570,7 +209,7 @@ document.addEventListener('DOMContentLoaded', () => {
             exportBtn.disabled = true;
             exportBtn.textContent = "正在生成图片...";
 
-            // 1. 添加导出快照样式：自动隐藏按钮、开关、虚线添加框
+            // 1. 添加导出快照标识，js配合css控制隐藏交互元素
             snapshotContainer.classList.add('export-snapshot');
 
             // 2. 获取选择的导出尺寸
