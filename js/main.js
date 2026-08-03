@@ -9,7 +9,7 @@ let appData = {
     baseInfo: { nick: "", count: "", story: "", firstgame: "" },
     gameList: [],
     exportColor: { bg: "#fff7f9", title: "#b33a3a", text: "#c98fac", border: "#f6a5b8" },
-    charImageSelect: {} // 新增：持久存储角色选中立绘索引 key:"gameId-charId"
+    charImageSelect: {} // 持久存储角色选中立绘索引 key:"gameId-charId"
 };
 // 兜底：游戏数据模块加载失败时赋值空数组，彻底解决undefined报错
 let gameTemplateList = [];
@@ -169,15 +169,12 @@ function renderSelectedChar(gameItem, gameInfo) {
 
         html += `
         <div class="char-card-item selected" data-char-id="${char.id}" data-game-id="${gameInfo.id}">
-            <div class="char-card-img-box">
+            <div class="char-card-img-box ${availableImgs.length>1?'char-has-multi-img':''}">
+                ${availableImgs.length>1?`<button class="char-switch-btn char-switch-prev">&lt;</button>`:""}
                 <img src="img/char/${targetImg.src}" alt="${char.name}">
+                ${availableImgs.length>1?`<button class="char-switch-btn char-switch-next">&gt;</button>`:""}
             </div>
             <div class="char-card-name">${char.name}</div>
-            ${availableImgs.length > 1 ? `
-            <div class="char-image-switch">
-                <button class="prev-img">◀</button>
-                <button class="next-img">▶</button>
-            </div>` : ""}
         </div>
         `;
     })
@@ -218,15 +215,12 @@ function renderCP(gameItem, gameInfo) {
 
             maleHtml += `
             <div class="char-card-item selected" data-char-id="${mChar.id}" data-game-id="${gameInfo.id}">
-                <div class="char-card-img-box">
+                <div class="char-card-img-box ${mAvailImgs.length>1?'char-has-multi-img':''}">
+                    ${mAvailImgs.length>1?`<button class="char-switch-btn char-switch-prev">&lt;</button>`:""}
                     <img src="img/char/${mTargetImg.src}" alt="${mChar.name}">
+                    ${mAvailImgs.length>1?`<button class="char-switch-btn char-switch-next">&gt;</button>`:""}
                 </div>
                 <div class="char-card-name">${mChar.name}</div>
-                ${mAvailImgs.length > 1 ? `
-                <div class="char-image-switch">
-                    <button class="prev-img">◀</button>
-                    <button class="next-img">▶</button>
-                </div>` : ""}
             </div>
             `;
         })
@@ -235,15 +229,12 @@ function renderCP(gameItem, gameInfo) {
         <div class="cp-layout-row">
             <div class="heroine-column">
                 <div class="char-card-item selected" data-char-id="${fChar.id}" data-game-id="${gameInfo.id}">
-                    <div class="char-card-img-box">
+                    <div class="char-card-img-box ${fAvailImgs.length>1?'char-has-multi-img':''}">
+                        ${fAvailImgs.length>1?`<button class="char-switch-btn char-switch-prev">&lt;</button>`:""}
                         <img src="img/char/${fTargetImg.src}" alt="${fChar.name}">
+                        ${fAvailImgs.length>1?`<button class="char-switch-btn char-switch-next">&gt;</button>`:""}
                     </div>
                     <div class="char-card-name">${fChar.name}</div>
-                    ${fAvailImgs.length > 1 ? `
-                    <div class="char-image-switch">
-                        <button class="prev-img">◀</button>
-                        <button class="next-img">▶</button>
-                    </div>` : ""}
                 </div>
             </div>
             <div class="hero-list-column">
@@ -271,7 +262,7 @@ function getAllGameChar(gameInfo) {
     return [...female, ...male];
 }
 
-// 渲染角色选择弹窗内容【核心修改：200*200卡片模板，匹配HTML CSS】
+// 渲染角色选择弹窗内容【核心修改：加入左右箭头按钮DOM】
 function renderCharSelectModal(gameId) {
     const gameInfo = gameTemplateList.find(g => g.id === gameId);
     const gameItem = appData.gameList.find(g => g.gameId === gameId);
@@ -292,9 +283,11 @@ function renderCharSelectModal(gameId) {
         if(imgs.length === 0) return;
         const selected = gameItem.selectChars.includes(char.id) ? "selected" : "";
         femHtml += `
-        <label class="char-card-item ${selected}" data-cid="${char.id}">
-            <div class="char-card-img-box">
+        <label class="char-card-item ${selected}" data-cid="${char.id}" data-char-id="${char.id}" data-game-id="${gameId}">
+            <div class="char-card-img-box ${imgs.length>1?'char-has-multi-img':''}">
+                ${imgs.length>1?`<button class="char-switch-btn char-switch-prev">&lt;</button>`:""}
                 <img src="img/char/${imgs[0].src}" alt="${char.name}">
+                ${imgs.length>1?`<button class="char-switch-btn char-switch-next">&gt;</button>`:""}
             </div>
             <div class="char-card-name">${char.name}</div>
         </label>`;
@@ -308,18 +301,22 @@ function renderCharSelectModal(gameId) {
         if(imgs.length === 0) return;
         const selected = gameItem.selectChars.includes(char.id) ? "selected" : "";
         maleHtml += `
-        <label class="char-card-item ${selected}" data-cid="${char.id}">
-            <div class="char-card-img-box">
+        <label class="char-card-item ${selected}" data-cid="${char.id}" data-char-id="${char.id}" data-game-id="${gameId}">
+            <div class="char-card-img-box ${imgs.length>1?'char-has-multi-img':''}">
+                ${imgs.length>1?`<button class="char-switch-btn char-switch-prev">&lt;</button>`:""}
                 <img src="img/char/${imgs[0].src}" alt="${char.name}">
+                ${imgs.length>1?`<button class="char-switch-btn char-switch-next">&gt;</button>`:""}
             </div>
             <div class="char-card-name">${char.name}</div>
         </label>`;
     });
     document.getElementById("hero-list-box").innerHTML = maleHtml;
 
-    // 绑定弹窗内角色点击勾选
+    // 绑定弹窗内角色卡片勾选点击
     document.querySelectorAll("#char-select-modal .char-card-item").forEach(item => {
-        item.onclick = function(){
+        item.onclick = function(e){
+            // 如果点击切换箭头，阻止勾选角色
+            if(e.target.classList.contains("char-switch-btn")) return;
             const cid = this.dataset.cid;
             const idx = gameItem.selectChars.indexOf(cid);
             if(idx > -1){
@@ -386,57 +383,47 @@ window.onload = async function () {
     let modalOpen = false;
     let modalTargetType = ""; // 标记弹窗是哪个开关：hideChar / fd / localHide / localFD
 
-    // ==========【全局事件委托：切换立绘 仅绑定一次，根除重复绑定BUG】==========
-    if(el.addedGameBox){
-        el.addedGameBox.addEventListener("click", function(e){
-            const switchBtn = e.target.closest(".char-image-switch button");
-            if(switchBtn){
-                e.stopPropagation();
-                const charItemBox = switchBtn.closest(".char-card-item");
-                const charId = charItemBox.dataset.charId;
-                const gameId = charItemBox.dataset.gameId;
-                const gameInfo = gameTemplateList.find(g => g.id === gameId);
-                const char = gameInfo.charList.find(c => c.id === charId);
-                const gameItem = appData.gameList.find(g => g.gameId === gameId);
+    // ==========【全局事件委托：角色立绘左右切换 统一处理】==========
+    document.addEventListener("click", function(e){
+        const switchBtn = e.target.closest(".char-switch-btn");
+        if(!switchBtn) return;
+        e.stopPropagation();
+        const charCard = switchBtn.closest(".char-card-item");
+        const charId = charCard.dataset.charId;
+        const gameId = charCard.dataset.gameId;
+        const gameInfo = gameTemplateList.find(g => g.id === gameId);
+        if(!gameInfo) return;
+        const char = gameInfo.charList.find(c => c.id === charId);
+        if(!char) return;
+        const gameItem = appData.gameList.find(g => g.gameId === gameId);
+        if(!gameItem) return;
 
-                const availImgs = getAvailableCharImages(
-                    char,
-                    appData.globalHideChar,
-                    appData.globalFD,
-                    gameItem.localHideChar,
-                    gameItem.localFD
-                );
-                if (availImgs.length <= 1) return;
+        const availImgs = getAvailableCharImages(
+            char,
+            appData.globalHideChar,
+            appData.globalFD,
+            gameItem.localHideChar,
+            gameItem.localFD
+        );
+        if (availImgs.length <= 1) return;
 
-                const imgDom = charItemBox.querySelector(".char-card-img-box img");
-                const saveKey = `${gameId}-${charId}`;
-                let currentIndex = Number(appData.charImageSelect[saveKey] ?? 0);
+        const imgDom = charCard.querySelector(".char-card-img-box img");
+        const saveKey = `${gameId}-${charId}`;
+        let currentIndex = Number(appData.charImageSelect[saveKey] ?? 0);
 
-                if(switchBtn.classList.contains("next-img")){
-                    currentIndex++;
-                    if(currentIndex >= availImgs.length) currentIndex = 0;
-                }else{
-                    currentIndex--;
-                    if(currentIndex < 0) currentIndex = availImgs.length -1;
-                }
+        if(switchBtn.classList.contains("char-switch-next")){
+            currentIndex++;
+            if(currentIndex >= availImgs.length) currentIndex = 0;
+        }else{
+            currentIndex--;
+            if(currentIndex < 0) currentIndex = availImgs.length -1;
+        }
 
-                // 更新图片 + 持久存储
-                imgDom.src = `img/char/${availImgs[currentIndex].src}`;
-                appData.charImageSelect[saveKey] = currentIndex;
-                saveData();
-                return;
-            }
-
-            // =====【新增：点击游戏标题，展开/收起详情区块】=====
-            const titleClick = e.target.closest(".game-card-title");
-            if(titleClick){
-                const cardWrap = titleClick.closest(".added-game-card");
-                const detailBlock = cardWrap.querySelector(".game-expand-detail");
-                detailBlock.classList.toggle("open");
-                return;
-            }
-        })
-    }
+        // 更新图片 + 持久存储索引
+        imgDom.src = `img/char/${availImgs[currentIndex].src}`;
+        appData.charImageSelect[saveKey] = currentIndex;
+        saveData();
+    });
 
     // 复选框刷新清除残留
     function refreshHideCharSwitch() {
