@@ -52,6 +52,39 @@ function saveLocalSwitchConfirmDate() {
     localStorage.setItem(SPOILER_LOCAL_SWITCH_KEY, getTodayDateStr());
 }
 
+/**
+ * 获取角色可用图片列表（过滤被权限锁定的图像）
+ * @param {Object} char 角色对象
+ * @param {boolean} globalHideSwitch 全局隐藏角色开关
+ * @param {boolean} globalFDSwitch 全局FD开关
+ * @param {boolean} localHideSwitch 当前游戏隐藏角色开关
+ * @param {boolean} localFDSwitch 当前游戏FD开关
+ * @returns Array 过滤后可用图片数组
+ */
+function getAvailableCharImages(char, globalHideSwitch, globalFDSwitch, localHideSwitch, localFDSwitch) {
+    // 旧数据兼容处理：识别老的 imgs 数组
+    if (!char.images && Array.isArray(char.imgs)) {
+        char.images = char.imgs.map(src => ({ src, type: "base" }));
+    }
+    if (!char.images || !Array.isArray(char.images)) return [];
+
+    const enableHidden = globalHideSwitch || localHideSwitch;
+    const enableFD = globalFDSwitch || localFDSwitch;
+
+    return char.images.filter(img => {
+        switch (img.type) {
+            case "base":
+                return true;
+            case "hidden":
+                return enableHidden;
+            case "fd":
+                return enableFD;
+            default:
+                return false;
+        }
+    });
+}
+
 // 路径已修正：单层 /data/games/，删除多余一层data/
 async function loadAllGameTemplates() {
     const basePath = "/data/games/";
@@ -108,42 +141,111 @@ function fillFilterOptions(gameList) {
     fillSelect("filter-art", artSet);
 }
 
-// 渲染选中角色
+// 渲染选中角色【重构：支持多图切换】
 function renderSelectedChar(gameItem, gameInfo) {
     if (!gameInfo?.charList) return "<span>暂无选择角色</span>";
     let html = "";
+    const globalHide = appData.globalHideChar;
+    const globalFD = appData.globalFD;
+    const localHide = gameItem.localHideChar;
+    const localFD = gameItem.localFD;
+
     gameItem.selectChars?.forEach(cid => {
         const char = gameInfo.charList?.find(c => c.id === cid);
-        if (!char || !char.imgs?.[0]) return;
-        const img = char.imgs[0];
-        html += `<div class="char-item selected"><img src="img/char/${img}" style="width:100px;height:100px;"><div>${char.name}</div></div>`;
+        if (!char) return;
+        const availableImgs = getAvailableCharImages(char, globalHide, globalFD, localHide, localFD);
+        if (availableImgs.length === 0) return;
+
+        const firstImg = availableImgs[0];
+        html += `
+        <div class="char-item selected" data-char-id="${char.id}" data-game-id="${gameInfo.id}">
+            <img class="char-main-img" src="img/char/${firstImg.src}" style="width:100px;height:100px;">
+            <div>${char.name}</div>
+            ${availableImgs.length > 1 ? `<div class="char-img-switch">切换立绘</div>` : ""}
+        </div>
+        `;
     })
     return html || "<span>暂无选择角色</span>";
 }
 
-// 渲染CP
+// 渲染CP【重构：支持多图切换，维持25%/75%布局】
 function renderCP(gameItem, gameInfo) {
     if (!gameInfo?.charList) return "<span>暂无CP搭配</span>";
     let html = "";
+    const globalHide = appData.globalHideChar;
+    const globalFD = appData.globalFD;
+    const localHide = gameItem.localHideChar;
+    const localFD = gameItem.localFD;
+
     gameItem.cpList?.forEach(cp => {
         const fChar = gameInfo.charList?.find(c => c.id === cp.femaleId);
-        if (!fChar || !fChar.imgs?.[0]) return;
+        if (!fChar) return;
+        const fAvailImgs = getAvailableCharImages(fChar, globalHide, globalFD, localHide, localFD);
+        if (fAvailImgs.length === 0) return;
+
         let maleHtml = "";
         cp.maleIds?.forEach(mid => {
             const mChar = gameInfo.charList?.find(c => c.id === mid);
-            if (!mChar || !mChar.imgs?.[0]) return;
-            maleHtml += `<div class="char-item selected"><img src="img/char/${mChar.imgs[0]}" style="width:100px;height:100px;"><div>${mChar.name}</div></div>`;
+            if (!mChar) return;
+            const mAvailImgs = getAvailableCharImages(mChar, globalHide, globalFD, localHide, localFD);
+            if (mAvailImgs.length === 0) return;
+            const mFirstImg = mAvailImgs[0];
+            maleHtml += `
+            <div class="char-item selected" data-char-id="${mChar.id}" data-game-id="${gameInfo.id}">
+                <img class="char-main-img" src="img/char/${mFirstImg.src}" style="width:100px;height:100px;">
+                <div>${mChar.name}</div>
+                ${mAvailImgs.length > 1 ? `<div class="char-img-switch">切换立绘</div>` : ""}
+            </div>
+            `;
         })
+        const fFirstImg = fAvailImgs[0];
         html += `
         <div class="cp-row">
             <div class="cp-female">
-                <div class="char-item selected"><img src="img/char/${fChar.imgs[0]}" style="width:100px;height:100px;"><div>${fChar.name}</div></div>
+                <div class="char-item selected" data-char-id="${fChar.id}" data-game-id="${gameInfo.id}">
+                    <img class="char-main-img" src="img/char/${fFirstImg.src}" style="width:100px;height:100px;">
+                    <div>${fChar.name}</div>
+                    ${fAvailImgs.length > 1 ? `<div class="char-img-switch">切换立绘</div>` : ""}
+                </div>
             </div>
             <div class="cp-male-wrap">${maleHtml || "<span>未选择男主</span>"}</div>
         </div>
         `;
     })
     return html || "<span>暂无CP搭配</span>";
+}
+
+// 绑定角色图片切换事件（每次渲染卡片后执行）
+function bindCharImageSwitch() {
+    document.querySelectorAll(".char-img-switch").forEach(switchBtn => {
+        switchBtn.onclick = function (e) {
+            e.stopPropagation();
+            const charItemBox = this.closest(".char-item");
+            const charId = charItemBox.dataset.charId;
+            const gameId = charItemBox.dataset.gameId;
+            const gameInfo = gameTemplateList.find(g => g.id === gameId);
+            const char = gameInfo.charList.find(c => c.id === charId);
+            const gameItem = appData.gameList.find(g => g.gameId === gameId);
+
+            const availImgs = getAvailableCharImages(
+                char,
+                appData.globalHideChar,
+                appData.globalFD,
+                gameItem.localHideChar,
+                gameItem.localFD
+            );
+            if (availImgs.length <= 1) return;
+
+            const imgDom = charItemBox.querySelector(".char-main-img");
+            // 取出当前图片路径
+            const currentSrc = imgDom.src.replace(location.origin + "/img/char/", "");
+            let currentIndex = availImgs.findIndex(i => i.src === currentSrc);
+            // 循环切换索引
+            currentIndex++;
+            if (currentIndex >= availImgs.length) currentIndex = 0;
+            imgDom.src = `img/char/${availImgs[currentIndex].src}`;
+        }
+    })
 }
 
 // 过滤角色规则：单游戏开关优先级高于全局开关
@@ -459,6 +561,7 @@ window.onload = async function () {
         })
         el.addedGameBox.innerHTML = html;
         bindGameCardEvent();
+        bindCharImageSwitch(); // 绑定图片切换事件！不可缺少
     }
 
     // 游戏卡片内按钮事件（单游戏开关完全独立，不受全局锁死）
