@@ -1,326 +1,147 @@
-// ===================== main.js 【数据层、公共工具函数】 =====================
-// 🚨【新增游戏请在此数组添加编号！】请勿改动其他位置
-const gameIdList = [
-    "001"
-    //新增游戏在这里追加,"002","003"
-];
+// script.js 页面交互层，接收main.js传入Core上下文
+export function initPage(Core) {
+    const {
+        appData, saveData, syncSingleGameSwitch, fillFilterOptions, gameTemplateList,
+        isTodayConfirmed, saveConfirmDate
+    } = Core;
 
-// 全局存储key
-export const STORE_KEY = "otome-favlist-data";
-export const SPOILER_DATE_KEY = "spoiler-confirm-date"; // 全局剧透确认日期
-export const SPOILER_LOCAL_SWITCH_KEY = "local-switch-spoiler-date"; // 单机局部开关单日预警标记
-
-export let appData = {
-    globalHideChar: false,
-    globalFD: false,
-    gameSpoilerRecord: {},
-    baseInfo: { nick: "", count: "", story: "", firstgame: "" },
-    gameList: [],
-    exportColor: { bg: "#fff7f9", title: "#b33a3a", text: "#c98fac", border: "#f6a5b8" },
-    charImageSelect: {} // 持久存储角色选中立绘索引 key:"gameId-charId"
-};
-// 兜底：游戏数据模块加载失败时赋值空数组，彻底解决undefined报错
-export let gameTemplateList = [];
-
-// 角色弹窗全局变量
-export let currentEditGameId = null;
-export let charPoolMode = "char"; // char = 单选角色, cp = CP搭配
-
-// 本地存储读写
-export function saveData() {
-    localStorage.setItem(STORE_KEY, JSON.stringify(appData));
-}
-export function loadData() {
-    try {
-        const raw = localStorage.getItem(STORE_KEY);
-        if (raw) appData = JSON.parse(raw);
-    } catch (e) {
-        console.error("读取本地存储失败：", e);
-    }
-}
-// 获取今日日期字符串 YYYY-MM-DD 用于跨零点判断
-export function getTodayDateStr() {
-    const d = new Date();
-    const year = d.getFullYear();
-    const month = String(d.getMonth() + 1).padStart(2, "0");
-    const day = String(d.getDate()).padStart(2, "0");
-    return `${year}-${month}-${day}`;
-}
-// 判断今天是否已经确认过【全局】剧透
-export function isTodayConfirmed() {
-    const savedDate = localStorage.getItem(SPOILER_DATE_KEY);
-    return savedDate === getTodayDateStr();
-}
-// 保存今日【全局】确认标记到本地
-export function saveConfirmDate() {
-    localStorage.setItem(SPOILER_DATE_KEY, getTodayDateStr());
-}
-// 判断今日局部单机开关是否已经确认过剧透
-export function localSwitchIsConfirmedToday() {
-    const saved = localStorage.getItem(SPOILER_LOCAL_SWITCH_KEY);
-    return saved === getTodayDateStr();
-}
-// 标记今日单机局部开关已完成剧透确认
-export function saveLocalSwitchConfirmDate() {
-    localStorage.setItem(SPOILER_LOCAL_SWITCH_KEY, getTodayDateStr());
-}
-
-/**
- * 获取角色可用图片组（适配你项目 srcList 格式）
- * @param {Object} char 角色对象
- * @param {boolean} globalHideSwitch 全局隐藏角色开关
- * @param {boolean} globalFDSwitch 全局FD开关
- * @param {boolean} localHideSwitch 当前游戏隐藏角色开关
- * @param {boolean} localFDSwitch 当前游戏FD开关
- * @returns Array 过滤后可用图片单元，每个单元包含 srcList + type
- */
-export function getAvailableCharImages(char, globalHideSwitch, globalFDSwitch, localHideSwitch, localFDSwitch) {
-    if (!char) return [];
-    if (!char.images || !Array.isArray(char.images)) return [];
-
-    const enableHidden = globalHideSwitch || localHideSwitch;
-    const enableFD = globalFDSwitch || localFDSwitch;
-
-    return char.images.filter(imgUnit => {
-        if(!imgUnit || !Array.isArray(imgUnit.srcList)) return false;
-        switch (imgUnit.type) {
-            case "base":
-                return true;
-            case "hidden":
-                return enableHidden;
-            case "fd":
-                return enableFD;
-            default:
-                return false;
-        }
-    });
-}
-
-// ✅修复1：路径已修正：单层 /data/games/
-export async function loadAllGameTemplates() {
-    const basePath = "/data/games/";
-    const tempList = [];
-
-    for (const id of gameIdList) {
-        try {
-            // 动态导入单层路径游戏JS文件
-            const mod = await import(`${basePath}game${id}.js`);
-            if (mod && mod.gameData) {
-                tempList.push(mod.gameData);
-            }else{
-                console.warn(`game${id}.js 加载成功，但缺失 gameData 数据，数据格式异常`);
-            }
-        } catch (err) {
-            if(err.message.includes("404") || err.name === "TypeError"){
-                console.error(`游戏文件 game${id}.js 【404 文件缺失】路径：${basePath}game${id}.js`, err);
-            }else{
-                console.error(`游戏文件 game${id}.js 【模块/MIME/格式错误】`, err);
-            }
-            // 单文件加载失败不阻塞整体加载流程
-            continue;
-        }
-    }
-    // 赋值全局游戏模板数组
-    gameTemplateList = tempList;
-}
-
-// 同步游戏内全局开关状态（仅批量初始化，不锁死单游戏开关）
-export function syncSingleGameSwitch(type, status) {
-    if (!Array.isArray(appData.gameList)) return;
-    appData.gameList.forEach(game => {
-        if(!game) return;
-        if (type === "hideChar") game.localHideChar = status;
-        if (type === "fd") game.localFD = status;
-    })
-}
-
-// 筛选下拉填充
-export function fillFilterOptions(gameList) {
-    if (!Array.isArray(gameList) || gameList.length === 0) return;
-    const yearSet = new Set(), pubSet = new Set(), cnSet = new Set(), writerSet = new Set(), artSet = new Set();
-    gameList.forEach(g => {
-        if(!g) return;
-        yearSet.add(g.year);
-        pubSet.add(g.publisher);
-        cnSet.add(g.cnStudio);
-        writerSet.add(g.writer);
-        artSet.add(g.art);
-    })
-    const fillSelect = (id, dataSet) => {
-        const sel = document.getElementById(id);
-        if (!sel) return;
-        sel.innerHTML = '<option value="">全部</option>';
-        dataSet.forEach(v => sel.innerHTML += `<option value="${v}">${v}</option>`);
-    }
-    fillSelect("filter-year", yearSet);
-    fillSelect("filter-publisher", pubSet);
-    fillSelect("filter-cn", cnSet);
-    fillSelect("filter-writer", writerSet);
-    fillSelect("filter-art", artSet);
-}
-
-// 渲染选中角色【适配 srcList 多图数组】
-export function renderSelectedChar(gameItem, gameInfo) {
-    if (!gameInfo?.charList || !gameItem) return "<span>暂无选择角色</span>";
-    let html = "";
-    const globalHide = appData.globalHideChar;
-    const globalFD = appData.globalFD;
-    const localHide = gameItem.localHideChar;
-    const localFD = gameItem.localFD;
-
-    if(!Array.isArray(gameItem.selectChars)) gameItem.selectChars = [];
-    gameItem.selectChars?.forEach(cid => {
-        const char = gameInfo.charList?.find(c => c.id === cid);
-        if (!char) return;
-        const availableImgUnits = getAvailableCharImages(char, globalHide, globalFD, localHide, localFD);
-        if (availableImgUnits.length === 0) return;
-
-        // 合并所有可用图片地址
-        let allSrc = [];
-        availableImgUnits.forEach(u => allSrc.push(...u.srcList));
-        if(allSrc.length === 0) return;
-
-        const saveKey = `${gameInfo.id}-${char.id}`;
-        let imgIndex = Number(appData.charImageSelect[saveKey] ?? 0);
-        if(imgIndex >= allSrc.length) imgIndex = 0;
-        const targetSrc = allSrc[imgIndex];
-
-        html += `
-        <div class="char-card-item selected" data-char-id="${char.id}" data-game-id="${gameInfo.id}" data-total-img="${allSrc.length}">
-            <div class="char-card-img-box ${allSrc.length>1?'char-has-multi-img':''}">
-                ${allSrc.length>1?`<button class="char-switch-btn char-switch-prev">&lt;</button>`:""}
-                <img src="${targetSrc}" alt="${char.name}">
-                ${allSrc.length>1?`<button class="char-switch-btn char-switch-next">&gt;</button>`:""}
-            </div>
-            <div class="char-card-name">${char.name}</div>
-        </div>
-        `;
-    })
-    return html || "<span>暂无选择角色</span>";
-}
-
-// 渲染CP【严格25%｜75%布局｜适配srcList】
-export function renderCP(gameItem, gameInfo) {
-    if (!gameInfo?.charList || !gameItem) return "<span>暂无CP搭配</span>";
-    let html = "";
-    const globalHide = appData.globalHideChar;
-    const globalFD = appData.globalFD;
-    const localHide = gameItem.localHideChar;
-    const localFD = gameItem.localFD;
-
-    if(!Array.isArray(gameItem.cpList)) gameItem.cpList = [];
-    gameItem.cpList?.forEach(cp => {
-        if(!cp) return;
-        const fChar = gameInfo.charList?.find(c => c.id === cp.femaleId);
-        if (!fChar) return;
-        const fAvailUnits = getAvailableCharImages(fChar, globalHide, globalFD, localHide, localFD);
-        let fAllSrc = [];
-        fAvailUnits.forEach(u=>fAllSrc.push(...u.srcList));
-        if (fAllSrc.length === 0) return;
-
-        const fSaveKey = `${gameInfo.id}-${fChar.id}`;
-        let fIndex = Number(appData.charImageSelect[fSaveKey] ?? 0);
-        if(fIndex >= fAllSrc.length) fIndex = 0;
-        const fTargetSrc = fAllSrc[fIndex];
-
-        let maleHtml = "";
-        if(!Array.isArray(cp.maleIds)) cp.maleIds = [];
-        cp.maleIds?.forEach(mid => {
-            const mChar = gameInfo.charList?.find(c => c.id === mid);
-            if (!mChar) return;
-            const mAvailUnits = getAvailableCharImages(mChar, globalHide, globalFD, localHide, localFD);
-            let mAllSrc = [];
-            mAvailUnits.forEach(u=>mAllSrc.push(...u.srcList));
-            if (mAllSrc.length === 0) return;
-
-            const mSaveKey = `${gameInfo.id}-${mChar.id}`;
-            let mIndex = Number(appData.charImageSelect[mSaveKey] ?? 0);
-            if(mIndex >= mAllSrc.length) mIndex = 0;
-            const mTargetSrc = mAllSrc[mIndex];
-
-            maleHtml += `
-            <div class="char-card-item selected" data-char-id="${mChar.id}" data-game-id="${gameInfo.id}" data-total-img="${mAllSrc.length}">
-                <div class="char-card-img-box ${mAllSrc.length>1?'char-has-multi-img':''}">
-                    ${mAllSrc.length>1?`<button class="char-switch-btn char-switch-prev">&lt;</button>`:""}
-                    <img src="${mTargetSrc}" alt="${mChar.name}">
-                    ${mAllSrc.length>1?`<button class="char-switch-btn char-switch-next">&gt;</button>`:""}
-                </div>
-                <div class="char-card-name">${mChar.name}</div>
-            </div>
-            `;
-        })
-
-        html += `
-        <div class="cp-layout-row">
-            <div class="heroine-column" style="width:25%">
-                <div class="char-card-item selected" data-char-id="${fChar.id}" data-game-id="${gameInfo.id}" data-total-img="${fAllSrc.length}">
-                    <div class="char-card-img-box ${fAllSrc.length>1?'char-has-multi-img':''}">
-                        ${fAllSrc.length>1?`<button class="char-switch-btn char-switch-prev">&lt;</button>`:""}
-                        <img src="${fTargetSrc}" alt="${fChar.name}">
-                        ${fAllSrc.length>1?`<button class="char-switch-btn char-switch-next">&gt;</button>`:""}
-                    </div>
-                    <div class="char-card-name">${fChar.name}</div>
-                </div>
-            </div>
-            <div class="hero-list-column" style="width:75%">
-                <div class="char-card-wrapper">
-                    ${maleHtml || "<span>未选择男主</span>"}
-                </div>
-            </div>
-        </div>
-        `;
-    })
-    return html || "<span>暂无CP搭配</span>";
-}
-
-// 过滤角色规则：全局开关 || 单游戏开关，任一开启即可展示
-export function getAllGameChar(gameInfo) {
-    if(!gameInfo) return [];
-    let chars = [...(gameInfo?.charList || [])];
-    const gameItem = appData.gameList.find(g => g?.gameId === gameInfo.id);
-
-    const showHide = appData.globalHideChar || gameItem?.localHideChar;
-    const showFD = appData.globalFD || gameItem?.localFD;
-
-    if (!showHide) chars = chars.filter(c => c && !c.isHidden);
-    if (!showFD) chars = chars.filter(c => c && !c.isFD);
-
-    const female = chars.filter(c => c.gender === "female").sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
-    const male = chars.filter(c => c.gender === "male").sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
-    return [...female, ...male];
-}
-
-// ===================== 启动入口 =====================
-import { initPage } from "./script.js";
-
-// 组装Core上下文对象，统一供给UI层script.js
-function buildCoreContext() {
-    const Core = {
-        appData,
-        gameTemplateList,
-        currentEditGameId,
-        charPoolMode,
-        loadAllGameTemplates,
-        loadData,
-        saveData,
-        syncSingleGameSwitch,
-        fillFilterOptions,
-        renderSelectedChar,
-        renderCP,
-        getAllGameChar,
-        getAvailableCharImages,
-        isTodayConfirmed,
-        saveConfirmDate,
-        localSwitchIsConfirmedToday,
-        saveLocalSwitchConfirmDate
+    // ========= DOM元素获取（全部实时获取 + 判空，杜绝undefined =========
+    const el = {
+        globalHideChar: document.getElementById("global-hide-char"),
+        globalFDGame: document.getElementById("global-fd-game"),
+        spoilerModal: document.getElementById("spoiler-modal"),
+        spoilerConfirm: document.getElementById("spoiler-confirm"),
+        spoilerCancel: document.getElementById("spoiler-cancel"),
+        colorBg: document.getElementById("color-bg"),
+        colorTitle: document.getElementById("color-title"),
+        colorText: document.getElementById("color-text"),
+        colorBorder: document.getElementById("color-border"),
+        inputNick: document.getElementById("input-nick"),
+        inputCount: document.getElementById("input-count"),
+        inputStory: document.getElementById("input-story"),
+        inputFirstgame: document.getElementById("input-firstgame"),
+        addedGameContainer: document.getElementById("added-game-container"),
+        btnAddGame: document.getElementById("btn-add-game")
     };
-    return Core;
-}
 
-// 对外暴露启动入口，供index.html调用
-export async function bootstrapCore() {
-    loadData();
-    await loadAllGameTemplates();
-    const Core = buildCoreContext();
-    initPage(Core);
+    // 剧透弹窗控制
+    function openSpoilerModal() {
+        if(el.spoilerModal) el.spoilerModal.style.display = "flex";
+    }
+    function closeSpoilerModal() {
+        if(el.spoilerModal) el.spoilerModal.style.display = "none";
+    }
+
+    // 记录当前等待确认的开关类型
+    let pendingSwitchType = null; // hide / fd
+
+    // ========== 全局隐藏角色开关 绑定（带剧透弹窗） ==========
+    if(el.globalHideChar){
+        el.globalHideChar.checked = appData.globalHideChar;
+        el.globalHideChar.addEventListener("change", async ()=>{
+            const targetStatus = el.globalHideChar.checked;
+            // 已确认今日，则直接切换
+            if(isTodayConfirmed()){
+                appData.globalHideChar = targetStatus;
+                syncSingleGameSwitch("hideChar", targetStatus);
+                saveData();
+                return;
+            }
+            // 未确认，弹出预警
+            pendingSwitchType = "hide";
+            openSpoilerModal();
+            // 临时回滚复选框，等待用户确认
+            el.globalHideChar.checked = !targetStatus;
+        })
+    }
+
+    // ========== 全局FD续作角色开关 绑定（同样剧透弹窗） ==========
+    if(el.globalFDGame){
+        el.globalFDGame.checked = appData.globalFD;
+        el.globalFDGame.addEventListener("change", async ()=>{
+            const targetStatus = el.globalFDGame.checked;
+            if(isTodayConfirmed()){
+                appData.globalFD = targetStatus;
+                syncSingleGameSwitch("fd", targetStatus);
+                saveData();
+                return;
+            }
+            pendingSwitchType = "fd";
+            openSpoilerModal();
+            el.globalFDGame.checked = !targetStatus;
+        })
+    }
+
+    // ========== 剧透弹窗【确认按钮】 ==========
+    if(el.spoilerConfirm){
+        el.spoilerConfirm.onclick = ()=>{
+            saveConfirmDate();
+            if(pendingSwitchType === "hide"){
+                appData.globalHideChar = el.globalHideChar.checked ? false : true;
+                syncSingleGameSwitch("hideChar", appData.globalHideChar);
+            }else if(pendingSwitchType === "fd"){
+                appData.globalFD = el.globalFDGame.checked ? false : true;
+                syncSingleGameSwitch("fd", appData.globalFD);
+            }
+            saveData();
+            pendingSwitchType = null;
+            closeSpoilerModal();
+        }
+    }
+    // 弹窗取消
+    if(el.spoilerCancel){
+        el.spoilerCancel.onclick = ()=>{
+            pendingSwitchType = null;
+            closeSpoilerModal();
+        }
+    }
+
+    // ========== 【重点】配色取色器绑定 全容错，根除 colorBorder 报错 ==========
+    const colorBindList = [
+        {dom: el.colorBg, dataKey: "bg"},
+        {dom: el.colorTitle, dataKey: "title"},
+        {dom: el.colorText, dataKey: "text"},
+        {dom: el.colorBorder, dataKey: "border"}
+    ];
+    colorBindList.forEach(item => {
+        if(!item.dom) return; // DOM不存在直接跳过，不会触发属性访问报错
+        item.dom.value = appData.exportColor[item.dataKey];
+        item.dom.oninput = () => {
+            appData.exportColor[item.dataKey] = item.dom.value;
+            saveData();
+            if(item.dataKey === "bg") document.body.style.background = item.dom.value;
+        }
+    })
+
+    // ========== 基础资料输入框绑定 ==========
+    if(el.inputNick){
+        el.inputNick.value = appData.baseInfo.nick;
+        el.inputNick.oninput = ()=>{
+            appData.baseInfo.nick = el.inputNick.value; saveData();
+        }
+    }
+    if(el.inputCount){
+        el.inputCount.value = appData.baseInfo.count;
+        el.inputCount.oninput = ()=>{
+            appData.baseInfo.count = el.inputCount.value; saveData();
+        }
+    }
+    if(el.inputStory){
+        el.inputStory.value = appData.baseInfo.story;
+        el.inputStory.oninput = ()=>{
+            appData.baseInfo.story = el.inputStory.value; saveData();
+        }
+    }
+    if(el.inputFirstgame){
+        el.inputFirstgame.value = appData.baseInfo.firstgame;
+        el.inputFirstgame.oninput = ()=>{
+            appData.baseInfo.firstgame = el.inputFirstgame.value; saveData();
+        }
+    }
+
+    // 初始化筛选下拉
+    fillFilterOptions(gameTemplateList);
+
+    // ========= 后续你原有：添加游戏、角色弹窗、渲染逻辑继续写在这里 =========
+    // 你原来剩下的业务代码直接追加在此下方即可
 }
