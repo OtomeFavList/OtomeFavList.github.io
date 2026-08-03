@@ -8,7 +8,8 @@ let appData = {
     gameSpoilerRecord: {},
     baseInfo: { nick: "", count: "", story: "", firstgame: "" },
     gameList: [],
-    exportColor: { bg: "#fff7f9", title: "#b33a3a", text: "#c98fac", border: "#f6a5b8" }
+    exportColor: { bg: "#fff7f9", title: "#b33a3a", text: "#c98fac", border: "#f6a5b8" },
+    charImageSelect: {} // 新增：持久存储角色选中立绘索引 key:"gameId-charId"
 };
 // 兜底：游戏数据模块加载失败时赋值空数组，彻底解决undefined报错
 let gameTemplateList = [];
@@ -145,7 +146,7 @@ function fillFilterOptions(gameList) {
     fillSelect("filter-art", artSet);
 }
 
-// 渲染选中角色【重构：支持多图切换】
+// 渲染选中角色【重构：读取本地保存立绘索引】
 function renderSelectedChar(gameItem, gameInfo) {
     if (!gameInfo?.charList) return "<span>暂无选择角色</span>";
     let html = "";
@@ -160,10 +161,15 @@ function renderSelectedChar(gameItem, gameInfo) {
         const availableImgs = getAvailableCharImages(char, globalHide, globalFD, localHide, localFD);
         if (availableImgs.length === 0) return;
 
-        const firstImg = availableImgs[0];
+        const saveKey = `${gameInfo.id}-${char.id}`;
+        // 读取存储索引，越界自动归零
+        let imgIndex = Number(appData.charImageSelect[saveKey] ?? 0);
+        if(imgIndex >= availableImgs.length) imgIndex = 0;
+        const targetImg = availableImgs[imgIndex];
+
         html += `
         <div class="char-item selected" data-char-id="${char.id}" data-game-id="${gameInfo.id}">
-            <img class="char-main-img" src="img/char/${firstImg.src}" style="width:100px;height:100px;">
+            <img class="char-main-img" src="img/char/${targetImg.src}" style="width:100px;height:100px;">
             <div>${char.name}</div>
             ${availableImgs.length > 1 ? `<div class="char-img-switch">切换立绘</div>` : ""}
         </div>
@@ -172,7 +178,7 @@ function renderSelectedChar(gameItem, gameInfo) {
     return html || "<span>暂无选择角色</span>";
 }
 
-// 渲染CP【重构：支持多图切换，维持25%/75%布局】
+// 渲染CP【重构：读取本地保存立绘索引，维持25%/75%布局】
 function renderCP(gameItem, gameInfo) {
     if (!gameInfo?.charList) return "<span>暂无CP搭配</span>";
     let html = "";
@@ -187,27 +193,37 @@ function renderCP(gameItem, gameInfo) {
         const fAvailImgs = getAvailableCharImages(fChar, globalHide, globalFD, localHide, localFD);
         if (fAvailImgs.length === 0) return;
 
+        const fSaveKey = `${gameInfo.id}-${fChar.id}`;
+        let fIndex = Number(appData.charImageSelect[fSaveKey] ?? 0);
+        if(fIndex >= fAvailImgs.length) fIndex = 0;
+        const fTargetImg = fAvailImgs[fIndex];
+
         let maleHtml = "";
         cp.maleIds?.forEach(mid => {
             const mChar = gameInfo.charList?.find(c => c.id === mid);
             if (!mChar) return;
             const mAvailImgs = getAvailableCharImages(mChar, globalHide, globalFD, localHide, localFD);
             if (mAvailImgs.length === 0) return;
-            const mFirstImg = mAvailImgs[0];
+
+            const mSaveKey = `${gameInfo.id}-${mChar.id}`;
+            let mIndex = Number(appData.charImageSelect[mSaveKey] ?? 0);
+            if(mIndex >= mAvailImgs.length) mIndex = 0;
+            const mTargetImg = mAvailImgs[mIndex];
+
             maleHtml += `
             <div class="char-item selected" data-char-id="${mChar.id}" data-game-id="${gameInfo.id}">
-                <img class="char-main-img" src="img/char/${mFirstImg.src}" style="width:100px;height:100px;">
+                <img class="char-main-img" src="img/char/${mTargetImg.src}" style="width:100px;height:100px;">
                 <div>${mChar.name}</div>
                 ${mAvailImgs.length > 1 ? `<div class="char-img-switch">切换立绘</div>` : ""}
             </div>
             `;
         })
-        const fFirstImg = fAvailImgs[0];
+
         html += `
         <div class="cp-row">
             <div class="cp-female">
                 <div class="char-item selected" data-char-id="${fChar.id}" data-game-id="${gameInfo.id}">
-                    <img class="char-main-img" src="img/char/${fFirstImg.src}" style="width:100px;height:100px;">
+                    <img class="char-main-img" src="img/char/${fTargetImg.src}" style="width:100px;height:100px;">
                     <div>${fChar.name}</div>
                     ${fAvailImgs.length > 1 ? `<div class="char-img-switch">切换立绘</div>` : ""}
                 </div>
@@ -217,39 +233,6 @@ function renderCP(gameItem, gameInfo) {
         `;
     })
     return html || "<span>暂无CP搭配</span>";
-}
-
-// 绑定角色图片切换事件（每次渲染卡片后执行）
-function bindCharImageSwitch() {
-    document.querySelectorAll(".char-img-switch").forEach(switchBtn => {
-        switchBtn.onclick = function (e) {
-            e.stopPropagation();
-            const charItemBox = this.closest(".char-item");
-            const charId = charItemBox.dataset.charId;
-            const gameId = charItemBox.dataset.gameId;
-            const gameInfo = gameTemplateList.find(g => g.id === gameId);
-            const char = gameInfo.charList.find(c => c.id === charId);
-            const gameItem = appData.gameList.find(g => g.gameId === gameId);
-
-            const availImgs = getAvailableCharImages(
-                char,
-                appData.globalHideChar,
-                appData.globalFD,
-                gameItem.localHideChar,
-                gameItem.localFD
-            );
-            if (availImgs.length <= 1) return;
-
-            const imgDom = charItemBox.querySelector(".char-main-img");
-            // 取出当前图片路径
-            const currentSrc = imgDom.src.replace(location.origin + "/img/char/", "");
-            let currentIndex = availImgs.findIndex(i => i.src === currentSrc);
-            // 循环切换索引
-            currentIndex++;
-            if (currentIndex >= availImgs.length) currentIndex = 0;
-            imgDom.src = `img/char/${availImgs[currentIndex].src}`;
-        }
-    })
 }
 
 // 过滤角色规则：单游戏开关优先级高于全局开关
@@ -373,6 +356,42 @@ window.onload = async function () {
 
     let modalOpen = false;
     let modalTargetType = ""; // 标记弹窗是哪个开关：hideChar / fd / localHide / localFD
+
+    // ==========【全局事件委托：切换立绘 仅绑定一次，根除重复绑定BUG】==========
+    if(el.addedGameBox){
+        el.addedGameBox.addEventListener("click", function(e){
+            const switchBtn = e.target.closest(".char-img-switch");
+            if(!switchBtn) return;
+            e.stopPropagation();
+
+            const charItemBox = switchBtn.closest(".char-item");
+            const charId = charItemBox.dataset.charId;
+            const gameId = charItemBox.dataset.gameId;
+            const gameInfo = gameTemplateList.find(g => g.id === gameId);
+            const char = gameInfo.charList.find(c => c.id === charId);
+            const gameItem = appData.gameList.find(g => g.gameId === gameId);
+
+            const availImgs = getAvailableCharImages(
+                char,
+                appData.globalHideChar,
+                appData.globalFD,
+                gameItem.localHideChar,
+                gameItem.localFD
+            );
+            if (availImgs.length <= 1) return;
+
+            const imgDom = charItemBox.querySelector(".char-main-img");
+            const saveKey = `${gameId}-${charId}`;
+            let currentIndex = Number(appData.charImageSelect[saveKey] ?? 0);
+            currentIndex++;
+            if(currentIndex >= availImgs.length) currentIndex = 0;
+
+            // 更新图片 + 持久存储
+            imgDom.src = `img/char/${availImgs[currentIndex].src}`;
+            appData.charImageSelect[saveKey] = currentIndex;
+            saveData();
+        })
+    }
 
     // 复选框刷新清除残留
     function refreshHideCharSwitch() {
@@ -645,7 +664,7 @@ window.onload = async function () {
         })
         el.addedGameBox.innerHTML = html;
         bindGameCardEvent();
-        bindCharImageSwitch(); // 绑定图片切换事件！不可缺少
+        // ❗已移除 bindCharImageSwitch(); 不再重复绑定
     }
 
     // 游戏卡片内按钮事件（单游戏开关完全独立，不受全局锁死）
@@ -728,206 +747,4 @@ window.onload = async function () {
         document.querySelectorAll(".local-fd").forEach(sw => {
             sw.onchange = function () {
                 const gid = this.dataset.gid;
-                const gameItem = appData.gameList.find(g => g.gameId === gid);
-                if (!gameItem) return;
-                const targetStatus = this.checked;
-                // 关闭开关直接生效，无需弹窗
-                if (!targetStatus) {
-                    gameItem.localFD = false;
-                    saveData();
-                    renderAddedGame();
-                    return;
-                }
-                if(localSwitchIsConfirmedToday()){
-                    gameItem.localFD = true;
-                    saveData();
-                    renderAddedGame();
-                }else{
-                    this.checked = false;
-                    if (modalOpen) return;
-                    this.classList.add("modal-trigger");
-                    modalTargetType = "localFD";
-                    openSpoilerModal("localFD");
-                }
-            }
-        })
-    }
-
-    // =========== 角色选择弹窗内部按钮绑定 ===========
-    // 关闭 ×
-    if(el.modalCloseBtn){
-        el.modalCloseBtn.onclick = closeCharSelectModal;
-    }
-    // 取消按钮
-    if(el.modalCancelBtn){
-        el.modalCancelBtn.onclick = closeCharSelectModal;
-    }
-    // 确认按钮：关闭弹窗并刷新页面卡片
-    if(el.modalConfirmBtn){
-        el.modalConfirmBtn.onclick = function(){
-            closeCharSelectModal();
-            renderAddedGame();
-        }
-    }
-    // 弹窗内【单独显示隐藏角色】切换
-    if(el.localShowSecret){
-        el.localShowSecret.onchange = function(){
-            if(!currentEditGameId) return;
-            const gameItem = appData.gameList.find(g=>g.gameId === currentEditGameId);
-            gameItem.localHideChar = this.checked;
-            saveData();
-            renderCharSelectModal(currentEditGameId);
-        }
-    }
-    // 弹窗内【单独显示FD角色】切换
-    if(el.localShowFD){
-        el.localShowFD.onchange = function(){
-            if(!currentEditGameId) return;
-            const gameItem = appData.gameList.find(g=>g.gameId === currentEditGameId);
-            gameItem.localFD = this.checked;
-            saveData();
-            renderCharSelectModal(currentEditGameId);
-        }
-    }
-
-    // 添加游戏按钮
-    if (el.addGameBtn) {
-        el.addGameBtn.onclick = () => {
-            if(el.searchPanel) el.searchPanel.classList.toggle("hide-block");
-            renderGameSelectList();
-        }
-    }
-    // 搜索输入框
-    if (el.gameSearchInput) el.gameSearchInput.oninput = renderGameSelectList;
-
-    // 导出按钮逻辑
-    if (el.exportBtn) {
-        el.exportBtn.onclick = function () {
-            try {
-                const canvas = el.canvas;
-                if (!canvas) return alert("画布元素缺失");
-                const ctx = canvas.getContext("2d");
-                const color = appData.exportColor;
-                const sizeRadio = document.querySelector('input[name="export-size"]:checked');
-
-                if (!sizeRadio) {
-                    alert("请先选择导出图片尺寸！");
-                    return;
-                }
-                let w, h;
-                const sizeVal = sizeRadio.value.split(",");
-                if (sizeVal[0] === "long") { w = 1080; h = 9999; } else { w = Number(sizeVal[0]); h = Number(sizeVal[1]); }
-                canvas.width = w; canvas.height = h;
-
-                ctx.fillStyle = color.bg;
-                ctx.fillRect(0, 0, w, h);
-                ctx.fillStyle = color.title;
-                ctx.font = "bold 48px sans-serif";
-                ctx.textAlign = "center";
-                ctx.fillText("Otome FavList", w / 2, 80);
-                ctx.font = "bold 26px sans-serif";
-                ctx.fillText("日乙个人喜好表", w / 2, 130);
-                let offsetY = 180;
-                const base = appData.baseInfo;
-                const baseArr = [
-                    base.nick ? `昵称：${base.nick}` : "",
-                    base.count ? `游玩数量：${base.count}` : "",
-                    base.story ? `入坑时间：${base.story}` : "",
-                    base.firstgame ? `入坑作品：${base.firstgame}` : ""
-                ].filter(x => x);
-
-                if (baseArr.length > 0) {
-                    ctx.fillStyle = color.title;
-                    ctx.font = "bold 30px sans-serif";
-                    ctx.textAlign = "left";
-                    ctx.fillText("基础资料", 60, offsetY);
-                    offsetY += 40;
-                    ctx.fillStyle = color.text;
-                    ctx.font = "bold 22px sans-serif";
-                    const splitX = w / 2 - 40;
-                    const lineGap = 34;
-                    for (let i = 0; i < baseArr.length; i += 2) {
-                        const leftText = baseArr[i];
-                        const rightText = baseArr[i + 1];
-                        ctx.fillText(leftText, 60, offsetY);
-                        if (rightText) ctx.fillText(rightText, splitX, offsetY);
-                        offsetY += lineGap;
-                    }
-                    offsetY += 20;
-                }
-
-                if (!Array.isArray(gameTemplateList) || gameTemplateList.length === 0) throw new Error("游戏数据加载失败，无法导出");
-                appData.gameList.forEach(gameItem => {
-                    if (gameItem.selectChars.length === 0 && gameItem.cpList.length === 0) return;
-                    const gameInfo = gameTemplateList.find(g => g.id === gameItem.gameId);
-                    if (!gameInfo) return;
-
-                    ctx.beginPath();
-                    ctx.strokeStyle = color.border;
-                    ctx.lineWidth = 3;
-                    ctx.strokeRect(40, offsetY, w - 80, 220);
-
-                    ctx.fillStyle = color.title;
-                    ctx.font = "bold 32px sans-serif";
-                    ctx.textAlign = "left";
-                    ctx.fillText(gameInfo.name, 60, offsetY + 40);
-                    ctx.fillStyle = "#ff4d88";
-                    let heartTxt = "";
-                    for (let i = 0; i < gameItem.loveRate; i++) heartTxt += "♥ ";
-                    ctx.font = "bold 28px sans-serif";
-                    ctx.fillText(heartTxt, 60, offsetY + 80);
-                    offsetY += 110;
-
-                    if (gameItem.selectChars.length > 0) {
-                        ctx.fillStyle = color.title;
-                        ctx.font = "bold 26px sans-serif";
-                        ctx.fillText("Selected Character", 60, offsetY);
-                        offsetY += 36;
-                        ctx.fillStyle = color.text;
-                        ctx.font = "bold 22px sans-serif";
-                        const charNames = gameItem.selectChars.map(cid => {
-                            const c = gameInfo.charList?.find(x => x.id === cid);
-                            return c?.name || "";
-                        }).filter(x => x);
-                        ctx.fillText(charNames.join(" / "), 60, offsetY);
-                        offsetY += 44;
-                    }
-                    if (gameItem.cpList.length > 0) {
-                        ctx.fillStyle = color.title;
-                        ctx.font = "bold 26px sans-serif";
-                        ctx.fillText("Couple List", 60, offsetY);
-                        offsetY += 36;
-                        ctx.fillStyle = color.text;
-                        ctx.font = "bold 22px sans-serif";
-                        gameItem.cpList.forEach(cp => {
-                            const f = gameInfo.charList?.find(x => x.id === cp.femaleId);
-                            const mNames = cp.maleIds?.map(mid => {
-                                const m = gameInfo.charList?.find(x => x.id === mid);
-                                return m?.name || "";
-                            }).filter(x => x);
-                            const cpTxt = `${f?.name || ""} × ${mNames.join("、")}`;
-                            ctx.fillText(cpTxt, 60, offsetY);
-                            offsetY += 34;
-                        })
-                    }
-                    offsetY += 60;
-                })
-
-                const link = document.createElement("a");
-                link.download = "Otome_FavList.png";
-                link.href = canvas.toDataURL("image/png");
-                link.click();
-            } catch (err) {
-                console.error("导出异常：", err);
-                alert("导出失败：" + err.message);
-            }
-        }
-    }
-
-    // 加载流程标准化：先加载游戏资源，再渲染页面
-    await loadAllGameTemplates();
-    setTimeout(() => {
-        fillFilterOptions(gameTemplateList);
-        renderAddedGame();
-    }, 200);
-}
+                const gameItem = appDa
