@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Otome FavList</title>
 <link rel="stylesheet" href="./css/main.css">
-<!-- 引入html2canvas CDN（普通非模块脚本，放head预加载） -->
+<!-- html2canvas 普通CDN脚本 -->
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 </head>
 <body>
@@ -28,7 +28,7 @@
                 </label>
                 <div>
                     <span class="text-light-pink">全局显示隐藏角色</span>
-                    <p class="switch-desc">开启后默认展示隐藏角色；关闭则所有游戏默认隐藏，单个游戏可单独开启。切换此全局开关会触发剧透警告弹窗。</p>
+                    <p class="switch-desc">开启后默认展示隐藏角色；关闭则所有游戏默认隐藏，单个游戏可单独开启。每日首次切换全局开关会触发剧透警告弹窗。</p>
                 </div>
             </div>
             <div class="switch-row">
@@ -38,7 +38,7 @@
                 </label>
                 <div>
                     <span class="text-light-pink">全局显示续作/FD角色</span>
-                    <p class="switch-desc">开启后默认展示续作、FD专属角色；关闭则所有游戏默认隐藏，单个游戏可单独开启。切换此全局开关会触发剧透警告弹窗。</p>
+                    <p class="switch-desc">开启后默认展示续作、FD专属角色；关闭则所有游戏默认隐藏，单个游戏可单独开启。每日首次切换全局开关会触发剧透警告弹窗。</p>
                 </div>
             </div>
         </div>
@@ -193,19 +193,24 @@
     </div>
 </div>
 
-<!-- ES Module 统一声明，所有带import/export脚本统一type="module" -->
-<script type="module" src="./data/games.js"></script>
-<script type="module" src="./js/main.js"></script>
-<script type="module" src="./js/script.js"></script>
-
 <script type="module">
-// 图片导出逻辑放入模块内部，避免变量冲突
-import * as Core from "./js/main.js";
-import { initPage } from "./js/script.js";
+// 模块加载顺序严格控制：先核心脚本，最后执行初始化
+import "./js/main.js";
+import "./js/script.js";
+import "./data/games.js";
 
-document.addEventListener('DOMContentLoaded', () => {
-    initPage(Core);
+// 等待DOM全部就绪再初始化页面
+document.addEventListener('DOMContentLoaded', async () => {
+    // 等待游戏数据加载完成
+    if(typeof window.loadAllGames === "function"){
+        await window.loadAllGames();
+    }
 
+    if(typeof initPage === "function"){
+        initPage();
+    }
+
+    // ==========图片导出逻辑============
     const exportBtn = document.getElementById('btn-export');
     const snapshotContainer = document.getElementById('snapshot-container');
     const canvas = document.getElementById('export-canvas');
