@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Otome FavList</title>
 <link rel="stylesheet" href="./css/main.css">
+<!-- 引入html2canvas CDN，用于图片导出 -->
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 <style>
 /* 全局兜底背景，防止JS加载失败页面纯白 */
 html, body {
@@ -330,137 +332,163 @@ h2{
 .sub-desc, .about-block p{
     color:#222222;
 }
+
+/* =====【导出专用样式】===== */
+/* 导出快照时，添加 .export-snapshot class，隐藏所有交互控件 */
+.export-snapshot .center-btn-block,
+.export-snapshot .modal-mask,
+.export-snapshot input[type="checkbox"],
+.export-snapshot input[type="radio"],
+.export-snapshot button,
+.export-snapshot .switch-row label .slider,
+.export-snapshot .game-card-switch-group
+{
+    display: none !important;
+}
+/* 导出时移除虚线添加框 */
+.export-snapshot .char-add-box,
+.export-snapshot .couple-slot-left
+{
+    display: none !important;
+}
+/* 空白区域自动隐藏，优化图片留白 */
+.export-hidden-empty {
+    display: none !important;
+}
 </style>
 </head>
 <body>
 
-<div class="site-title">
-    <h1>Otome FavList</h1>
-    <p class="title-sub-cn">日乙个人喜好表</p>
-    <p class="sub-desc text-gray-desc">选择你喜欢的角色，生成属于你的FavList。</p>
-</div>
-
-<div class="wrap">
-    <div class="big-card" id="card-setting">
-        <h2>一、设置</h2>
-        <div class="switch-row">
-            <label class="switch">
-                <input type="checkbox" id="global-hide-char">
-                <span class="slider"></span>
-            </label>
-            <div>
-                <span class="text-light-pink">全局显示隐藏角色</span>
-                <p class="switch-desc">开启后默认展示隐藏角色；关闭则所有游戏默认隐藏。单个游戏可单独开启，切换此全局开关会触发剧透警告弹窗。</p>
-            </div>
-        </div>
-        <div class="switch-row">
-            <label class="switch">
-                <input type="checkbox" id="global-fd-game">
-                <span class="slider"></span>
-            </label>
-            <div>
-                <span class="text-light-pink">全局显示续作/FD角色</span>
-                <p class="switch-desc">开启后默认展示续作、FD专属角色；关闭则所有游戏默认隐藏。单个游戏可单独开启，切换此全局开关会触发剧透警告弹窗。</p>
-            </div>
-        </div>
+<!-- 导出目标容器：所有需要渲染进图片的内容包裹在这里 -->
+<div id="snapshot-container">
+    <div class="site-title">
+        <h1>Otome FavList</h1>
+        <p class="title-sub-cn">日乙个人喜好表</p>
+        <p class="sub-desc text-gray-desc">选择你喜欢的角色，生成属于你的FavList。</p>
     </div>
 
-    <div class="big-card" id="card-base">
-        <h2>二、基础资料</h2>
-        <!-- 昵称+游玩总数同一行 -->
-        <div class="form-row-double">
-            <div class="form-row">
-                <label class="text-light-pink">昵称</label>
-                <input type="text" id="input-nick" placeholder="填写你的昵称">
+    <div class="wrap">
+        <div class="big-card" id="card-setting">
+            <h2>一、设置</h2>
+            <div class="switch-row">
+                <label class="switch">
+                    <input type="checkbox" id="global-hide-char">
+                    <span class="slider"></span>
+                </label>
+                <div>
+                    <span class="text-light-pink">全局显示隐藏角色</span>
+                    <p class="switch-desc">开启后默认展示隐藏角色；关闭则所有游戏默认隐藏。单个游戏可单独开启，切换此全局开关会触发剧透警告弹窗。</p>
+                </div>
             </div>
-            <div class="form-row">
-                <label class="text-light-pink">游玩总数</label>
-                <input type="number" id="input-count" placeholder="数字" min="0">
+            <div class="switch-row">
+                <label class="switch">
+                    <input type="checkbox" id="global-fd-game">
+                    <span class="slider"></span>
+                </label>
+                <div>
+                    <span class="text-light-pink">全局显示续作/FD角色</span>
+                    <p class="switch-desc">开启后默认展示续作、FD专属角色；关闭则所有游戏默认隐藏。单个游戏可单独开启，切换此全局开关会触发剧透警告弹窗。</p>
+                </div>
             </div>
         </div>
-        <!-- 入坑时间+入坑作品同一行 -->
-        <div class="form-row-double">
-            <div class="form-row">
-                <label class="text-light-pink">入坑时间</label>
-                <input type="text" id="input-story" placeholder="例如：2020年">
-            </div>
-            <div class="form-row">
-                <label class="text-light-pink">入坑作品</label>
-                <input type="text" id="input-firstgame" placeholder="第一款日乙游戏">
-            </div>
-        </div>
-    </div>
 
-    <div class="big-card" id="card-game">
-        <h2>三、游戏列表</h2>
-        <div class="center-btn-block">
-            <button id="btn-add-game">+ 添加游戏</button>
-        </div>
-        <div class="game-search-box hide-block" id="search-panel">
-            <input type="text" id="game-search-input" placeholder="搜索游戏名称">
-            <div class="filter-group">
-                <select id="filter-year">
-                    <option value="">全部发售年份</option>
-                </select>
-                <select id="filter-publisher">
-                    <option value="">全部发行厂商</option>
-                </select>
-                <select id="filter-cn">
-                    <option value="">全部汉化厂商</option>
-                </select>
-                <select id="filter-writer">
-                    <option value="">全部编剧</option>
-                </select>
-                <select id="filter-art">
-                    <option value="">全部原画</option>
-                </select>
+        <div class="big-card" id="card-base">
+            <h2>二、基础资料</h2>
+            <!-- 昵称+游玩总数同一行 -->
+            <div class="form-row-double">
+                <div class="form-row">
+                    <label class="text-light-pink">昵称</label>
+                    <input type="text" id="input-nick" placeholder="填写你的昵称">
+                </div>
+                <div class="form-row">
+                    <label class="text-light-pink">游玩总数</label>
+                    <input type="number" id="input-count" placeholder="数字" min="0">
+                </div>
             </div>
-            <div class="game-list-select" id="game-select-list"></div>
+            <!-- 入坑时间+入坑作品同一行 -->
+            <div class="form-row-double">
+                <div class="form-row">
+                    <label class="text-light-pink">入坑时间</label>
+                    <input type="text" id="input-story" placeholder="例如：2020年">
+                </div>
+                <div class="form-row">
+                    <label class="text-light-pink">入坑作品</label>
+                    <input type="text" id="input-firstgame" placeholder="第一款日乙游戏">
+                </div>
+            </div>
         </div>
-        <div id="added-game-container"></div>
-    </div>
 
-    <div class="big-card" id="card-export">
-        <h2>四、导出</h2>
-        <div class="color-set-row">
-            <div class="color-item">
-                <label class="text-light-pink">背景色</label>
-                <input type="color" id="color-bg" value="#fff7f9">
+        <div class="big-card" id="card-game">
+            <h2>三、游戏列表</h2>
+            <div class="center-btn-block">
+                <button id="btn-add-game">+ 添加游戏</button>
             </div>
-            <div class="color-item">
-                <label class="text-light-pink">标题文字色</label>
-                <input type="color" id="color-title" value="#b33a3a">
+            <div class="game-search-box hide-block" id="search-panel">
+                <input type="text" id="game-search-input" placeholder="搜索游戏名称">
+                <div class="filter-group">
+                    <select id="filter-year">
+                        <option value="">全部发售年份</option>
+                    </select>
+                    <select id="filter-publisher">
+                        <option value="">全部发行厂商</option>
+                    </select>
+                    <select id="filter-cn">
+                        <option value="">全部汉化厂商</option>
+                    </select>
+                    <select id="filter-writer">
+                        <option value="">全部编剧</option>
+                    </select>
+                    <select id="filter-art">
+                        <option value="">全部原画</option>
+                    </select>
+                </div>
+                <div class="game-list-select" id="game-select-list"></div>
             </div>
-            <div class="color-item">
-                <label class="text-light-pink">正文文字色</label>
-                <input type="color" id="color-text" value="#c98fac">
-            </div>
-            <div class="color-item">
-                <label class="text-light-pink">卡片边框色</label>
-                <input type="color" id="color-border" value="#f6a5b8">
-            </div>
+            <div id="added-game-container"></div>
         </div>
-        <div class="size-select">
-            <label class="text-light-pink">导出尺寸：</label>
-            <label><input type="radio" name="export-size" value="810,1080" checked>810×1080</label>
-            <label><input type="radio" name="export-size" value="1080,1440">1080×1440</label>
-            <label><input type="radio" name="export-size" value="long">长图（无分页）</label>
-            <label><input type="radio" name="export-size" value="1080,1920">小红书竖版1080×1920</label>
-            <label><input type="radio" name="export-size" value="1080,1080">微博正方形1:1</label>
-        </div>
-        <div class="center-btn-block">
-            <button id="btn-export">生成并导出图片</button>
-        </div>
-        <canvas id="export-canvas" style="display:none;"></canvas>
-    </div>
-</div>
 
-<div class="about-block">
-    <h2>About</h2>
-    <p>由于开发者个人没有接触所有游戏，因此会有部分游戏缺少隐藏角色。</p>
-    <p>如果发现角色遗漏（若涉及剧透烦请在邮件标题添加预警）、图片错误、功能异常，<br>
+        <div class="big-card" id="card-export">
+            <h2>四、导出</h2>
+            <div class="color-set-row">
+                <div class="color-item">
+                    <label class="text-light-pink">背景色</label>
+                    <input type="color" id="color-bg" value="#fff7f9">
+                </div>
+                <div class="color-item">
+                    <label class="text-light-pink">标题文字色</label>
+                    <input type="color" id="color-title" value="#b33a3a">
+                </div>
+                <div class="color-item">
+                    <label class="text-light-pink">正文文字色</label>
+                    <input type="color" id="color-text" value="#c98fac">
+                </div>
+                <div class="color-item">
+                    <label class="text-light-pink">卡片边框色</label>
+                    <input type="color" id="color-border" value="#f6a5b8">
+                </div>
+            </div>
+            <div class="size-select">
+                <label class="text-light-pink">导出尺寸：</label>
+                <label><input type="radio" name="export-size" value="810,1080" checked>810×1080</label>
+                <label><input type="radio" name="export-size" value="1080,1440">1080×1440</label>
+                <label><input type="radio" name="export-size" value="long">长图（无分页）</label>
+                <label><input type="radio" name="export-size" value="1080,1920">小红书竖版1080×1920</label>
+                <label><input type="radio" name="export-size" value="1080,1080">微博正方形1:1</label>
+            </div>
+            <div class="center-btn-block">
+                <button id="btn-export">生成并导出图片</button>
+            </div>
+            <canvas id="export-canvas" style="display:none;"></canvas>
+        </div>
+
+        <div class="about-block">
+            <h2>About</h2>
+            <p>由于开发者个人没有接触所有游戏，因此会有部分游戏缺少隐藏角色。</p>
+            <p>如果发现角色遗漏（若涉及剧透烦请在邮件标题添加预警）、图片错误、功能异常，<br>
 或有希望新增的作品，欢迎通过邮箱联系。</p>
-    <p class="email-text">Email：otomefavlist@163.com</p>
+            <p class="email-text">Email：otomefavlist@163.com</p>
+        </div>
+    </div>
 </div>
 
 <!-- 剧透弹窗（原版单按钮，移除取消按钮） -->
@@ -513,6 +541,85 @@ h2{
 <script src="./js/loader.js"></script>
 <script src="./data/games.js" type="module"></script>
 <script src="./js/main.js"></script>
+
+<script>
+// ========== 导出图片核心逻辑，绑定【生成并导出图片】按钮 ==========
+document.addEventListener('DOMContentLoaded', () => {
+    const exportBtn = document.getElementById('btn-export');
+    const snapshotContainer = document.getElementById('snapshot-container');
+    const canvas = document.getElementById('export-canvas');
+    const ctx = canvas.getContext('2d');
+
+    exportBtn.addEventListener('click', async () => {
+        try {
+            exportBtn.disabled = true;
+            exportBtn.textContent = "正在生成图片...";
+
+            // 1. 添加导出快照样式：自动隐藏按钮、开关、虚线添加框
+            snapshotContainer.classList.add('export-snapshot');
+
+            // 2. 获取选择的导出尺寸
+            let sizeValue = document.querySelector('input[name="export-size"]:checked').value;
+            let targetWidth, targetHeight;
+            if(sizeValue === 'long'){
+                targetWidth = 1080;
+                targetHeight = 0; //自动高度，长图
+            }else{
+                const [w,h] = sizeValue.split(',').map(Number);
+                targetWidth = w;
+                targetHeight = h;
+            }
+
+            // 3. 获取自定义配色
+            const bgColor = document.getElementById('color-bg').value;
+
+            // 4. html2canvas渲染配置
+            const renderCanvas = await html2canvas(snapshotContainer, {
+                backgroundColor: bgColor,
+                scale: 2, //2倍清晰度，适合社交平台
+                useCORS: true, //解决跨域图片加载失败
+                logging: false,
+            });
+
+            // 5. 尺寸适配处理
+            let finalCanvas;
+            if(targetHeight === 0){
+                // 长图模式，宽度固定，高度自适应
+                finalCanvas = renderCanvas;
+            }else{
+                //固定尺寸画布
+                canvas.width = targetWidth;
+                canvas.height = targetHeight;
+                ctx.fillStyle = bgColor;
+                ctx.fillRect(0,0,targetWidth,targetHeight);
+                //等比例缩放居中绘制截图
+                const scale = Math.min(targetWidth / renderCanvas.width, targetHeight / renderCanvas.height);
+                const drawW = renderCanvas.width * scale;
+                const drawH = renderCanvas.height * scale;
+                const offsetX = (targetWidth - drawW) / 2;
+                const offsetY = (targetHeight - drawH) / 2;
+                ctx.drawImage(renderCanvas, offsetX, offsetY, drawW, drawH);
+                finalCanvas = canvas;
+            }
+
+            // 6. 下载图片
+            const link = document.createElement('a');
+            link.download = `Otome_FavList_${new Date().getTime()}.png`;
+            link.href = finalCanvas.toDataURL('image/png');
+            link.click();
+
+        } catch (err) {
+            console.error("导出失败：", err);
+            alert('图片导出异常，请检查图片链接，不要使用跨域未授权图片！');
+        } finally {
+            // 7. 恢复页面正常显示
+            snapshotContainer.classList.remove('export-snapshot');
+            exportBtn.disabled = false;
+            exportBtn.textContent = "生成并导出图片";
+        }
+    });
+});
+</script>
 
 </body>
 </html>
