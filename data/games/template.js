@@ -14,9 +14,12 @@ const singleGameData = {
             id: "g001_f01",
             name: "女主A",
             gender: "female",
-            isHidden: false,
-            isFD: false,
-            imgs: ["char/g001_f01_1.jpg","char/g001_f01_2.jpg"]
+            isHidden: false,    // 角色本体：是否为隐藏角色
+            isFD: false,        // 角色本体：是否为FD/续作专属角色
+            images: [
+                { src: "char/g001_f01_1.jpg", type: "base" },      // 默认基础图，永久可用
+                { src: "char/g001_f01_2.jpg", type: "hidden" }     // 需要开启隐藏角色开关才加载
+            ]
         },
         // 普通可攻略男主 male
         {
@@ -25,25 +28,33 @@ const singleGameData = {
             gender: "male",
             isHidden: false,
             isFD: false,
-            imgs: ["char/g001_m01_1.jpg","char/g001_m01_2.jpg","char/g001_m01_3.jpg"]
+            images: [
+                { src: "char/g001_m01_1.jpg", type: "base" },
+                { src: "char/g001_m01_2.jpg", type: "hidden" },
+                { src: "char/g001_m01_3.jpg", type: "fd" }          // 需要开启FD开关才加载
+            ]
         },
-        // 隐藏角色（开关开启才显示）
+        // 隐藏角色（开关开启才显示整个角色卡片）
         {
             id: "g001_h01",
             name: "隐藏攻略角色",
             gender: "male",
             isHidden: true,
             isFD: false,
-            imgs: ["char/g001_h01_1.jpg"]
+            images: [
+                { src: "char/g001_h01_1.jpg", type: "base" }
+            ]
         },
-        // FD续作限定角色
+        // FD续作限定角色（FD开关开启才显示整个角色卡片）
         {
             id: "g001_fd01",
             name: "FD新增角色",
             gender: "male",
             isHidden: false,
             isFD: true,
-            imgs: ["char/g001_fd01_1.jpg"]
+            images: [
+                { src: "char/g001_fd01_1.jpg", type: "base" }
+            ]
         }
     ]
 };
