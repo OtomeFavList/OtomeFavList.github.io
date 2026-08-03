@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Otome FavList</title>
 <link rel="stylesheet" href="./css/main.css">
-<!-- 引入html2canvas CDN，用于图片导出 -->
+<!-- 引入html2canvas CDN（普通非模块脚本，放head预加载） -->
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 </head>
 <body>
@@ -193,12 +193,19 @@
     </div>
 </div>
 
+<!-- ES Module 统一声明，所有带import/export脚本统一type="module" -->
 <script type="module" src="./data/games.js"></script>
-<script src="./js/main.js"></script>
+<script type="module" src="./js/main.js"></script>
+<script type="module" src="./js/script.js"></script>
 
-<script>
-// ========== 导出图片核心逻辑，绑定【生成并导出图片】按钮 ==========
+<script type="module">
+// 图片导出逻辑放入模块内部，避免变量冲突
+import * as Core from "./js/main.js";
+import { initPage } from "./js/script.js";
+
 document.addEventListener('DOMContentLoaded', () => {
+    initPage(Core);
+
     const exportBtn = document.getElementById('btn-export');
     const snapshotContainer = document.getElementById('snapshot-container');
     const canvas = document.getElementById('export-canvas');
@@ -209,44 +216,36 @@ document.addEventListener('DOMContentLoaded', () => {
             exportBtn.disabled = true;
             exportBtn.textContent = "正在生成图片...";
 
-            // 1. 添加导出快照标识，js配合css控制隐藏交互元素
             snapshotContainer.classList.add('export-snapshot');
 
-            // 2. 获取选择的导出尺寸
             let sizeValue = document.querySelector('input[name="export-size"]:checked').value;
             let targetWidth, targetHeight;
             if(sizeValue === 'long'){
                 targetWidth = 1080;
-                targetHeight = 0; //自动高度，长图
+                targetHeight = 0;
             }else{
                 const [w,h] = sizeValue.split(',').map(Number);
                 targetWidth = w;
                 targetHeight = h;
             }
 
-            // 3. 获取自定义配色
             const bgColor = document.getElementById('color-bg').value;
 
-            // 4. html2canvas渲染配置
             const renderCanvas = await html2canvas(snapshotContainer, {
                 backgroundColor: bgColor,
-                scale: 2, //2倍清晰度，适合社交平台
-                useCORS: true, //解决跨域图片加载失败
+                scale: 2,
+                useCORS: true,
                 logging: false,
             });
 
-            // 5. 尺寸适配处理
             let finalCanvas;
             if(targetHeight === 0){
-                // 长图模式，宽度固定，高度自适应
                 finalCanvas = renderCanvas;
             }else{
-                //固定尺寸画布
                 canvas.width = targetWidth;
                 canvas.height = targetHeight;
                 ctx.fillStyle = bgColor;
                 ctx.fillRect(0,0,targetWidth,targetHeight);
-                //等比例缩放居中绘制截图
                 const scale = Math.min(targetWidth / renderCanvas.width, targetHeight / renderCanvas.height);
                 const drawW = renderCanvas.width * scale;
                 const drawH = renderCanvas.height * scale;
@@ -256,7 +255,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 finalCanvas = canvas;
             }
 
-            // 6. 下载图片
             const link = document.createElement('a');
             link.download = `Otome_FavList_${new Date().getTime()}.png`;
             link.href = finalCanvas.toDataURL('image/png');
@@ -266,20 +264,12 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error("导出失败：", err);
             alert('图片导出异常，请检查图片链接，不要使用跨域未授权图片！');
         } finally {
-            // 7. 恢复页面正常显示
             snapshotContainer.classList.remove('export-snapshot');
             exportBtn.disabled = false;
             exportBtn.textContent = "生成并导出图片";
         }
     });
 });
-<!-- html2canvas 必须保留，图片导出依赖 -->
-<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-
-<script type="module">
-import * as Core from "./main.js";
-import { initPage } from "./script.js";
-initPage(Core);
 </script>
 
 </body>
