@@ -20,7 +20,7 @@ const singleGameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { src: "img/char/001/Liliana.jpg","img/char/001/Liliana2.jpg", type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/001/Liliana.jpg","img/char/001/Liliana2.jpg"], type: "base" }
             ]
         },
         // 但丁·法尔宗
@@ -31,7 +31,7 @@ const singleGameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { src: "img/char/001/Dante.jpg","img/char/001/Dante2.jpg","img/char/001/Dante3.jpg", type: "base" },
+                { srcList: ["img/char/001/Dante.jpg","img/char/001/Dante2.jpg","img/char/001/Dante3.jpg"], type: "base" }
             ]
         },
         // 吉尔伯特·烈福
@@ -42,7 +42,7 @@ const singleGameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { src: "img/char/001/Gilbert.jpg","img/char/001/Gilbert2.jpg","img/char/001/Gilbert3.jpg", type: "base" },
+                { srcList: ["img/char/001/Gilbert.jpg","img/char/001/Gilbert2.jpg","img/char/001/Gilbert3.jpg"], type: "base" }
             ]
         },
         // 尼古拉‧法兰捷斯卡
@@ -53,7 +53,7 @@ const singleGameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { src: "img/char/001/Nicola.jpg","img/char/001/Nicola2.jpg","img/char/001/Nicola3.jpg", type: "base" },
+                { srcList: ["img/char/001/Nicola.jpg","img/char/001/Nicola2.jpg","img/char/001/Nicola3.jpg"], type: "base" }
             ]
         },
         // 奥罗克
@@ -64,18 +64,18 @@ const singleGameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { src: "img/char/001/Orlok.jpg","img/char/001/Orlok2.jpg","img/char/001/Orlok3.jpg", type: "base" },
+                { srcList: ["img/char/001/Orlok.jpg","img/char/001/Orlok2.jpg","img/char/001/Orlok3.jpg"], type: "base" }
             ]
         },
-        // 杨
+        // 杨（⚠️你原来名字写错成但丁，一并修正）
         {
             id: "g001_m05",
-            name: "但丁·法尔宗",
+            name: "杨",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { src: "img/char/001/Yang.jpg","img/char/001/Yang2.jpg","img/char/001/Yang3.jpg", type: "base" },
+                { srcList: ["img/char/001/Yang.jpg","img/char/001/Yang2.jpg","img/char/001/Yang3.jpg"], type: "base" }
             ]
         },
         // 亨利‧兰伯特
@@ -86,9 +86,9 @@ const singleGameData = {
             isHidden: true,
             isFD: false,
             images: [
-                { src: "img/char/001/Henri.jpg", type: "base" }
+                { srcList: ["img/char/001/Henri.jpg"], type: "base" }
             ]
-        },
+        }
     ]
 };
 
