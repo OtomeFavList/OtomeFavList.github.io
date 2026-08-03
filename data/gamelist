@@ -1,6 +1,0 @@
-// data/gamelist.js
-// 新增游戏只在这里追加编号
-export const gameIdList = [
-    "001"
-    //,"002","003"
-];
