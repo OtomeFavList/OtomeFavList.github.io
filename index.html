@@ -128,12 +128,14 @@ html, body {
     padding:8px;
     box-sizing: border-box;
     overflow:hidden;
+    position: relative;
 }
 .char-card-img-box{
     width:100%;
     flex:1;
     display:grid;
     place-items:center;
+    position: relative;
 }
 .char-card-img-box img{
     max-width:100%;
@@ -147,6 +149,41 @@ html, body {
     font-size:14px;
 }
 
+/* ==========【新增：角色立绘左右切换箭头样式】========== */
+.char-switch-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width:26px;
+    height:26px;
+    border-radius:50%;
+    border:none;
+    background:rgba(255,255,255,0.75);
+    color:#222;
+    font-size:16px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:2;
+}
+.char-switch-btn:hover{
+    background:rgba(255,255,255,0.95);
+}
+.char-switch-prev{
+    left:4px;
+}
+.char-switch-next{
+    right:4px;
+}
+/* 只有多张立绘的时候才显示箭头，单张自动隐藏（JS控制 class） */
+.char-has-multi-img .char-switch-btn{
+    display:flex;
+}
+.char-card-img-box:not(.char-has-multi-img) .char-switch-btn{
+    display:none;
+}
+
 .local-switch-group{
     display:flex;
     gap:32px;
@@ -158,7 +195,6 @@ hr.divider{
     border-top:1px solid #e2d2d7;
     margin:14px 0;
 }
-/* 角色图片切换按钮样式（预留，后续左右箭头） */
 .char-image-switch{
     display:flex;
     gap:6px;
@@ -222,7 +258,7 @@ hr.divider{
     border-radius:6px;
 }
 
-/* =========【新增：游戏条目展开详情样式｜本次开发第一项】 ========= */
+/* =========【新增：游戏条目展开详情样式｜第一项开发】 ========= */
 .added-game-card{
     border:1px solid #f6a5b8;
     border-radius:10px;
@@ -234,7 +270,6 @@ hr.divider{
     justify-content:space-between;
     align-items:center;
 }
-/* 标题点击区域，鼠标悬浮提示 */
 .game-card-title{
     cursor: pointer;
     font-size:18px;
@@ -248,7 +283,6 @@ hr.divider{
     display:flex;
     gap:10px;
 }
-/* 游戏详情折叠容器 默认收起 */
 .game-expand-detail{
     display: grid;
     grid-template-columns: 200px 1fr;
@@ -476,7 +510,6 @@ h2{
     </div>
 </div>
 
-<!-- JS引入顺序不变，后续请给games.js添加type="module"解决路径问题 -->
 <script src="./js/loader.js"></script>
 <script src="./data/games.js" type="module"></script>
 <script src="./js/main.js"></script>
