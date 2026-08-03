@@ -37,6 +37,87 @@ html, body {
     flex: 1;
     min-width: 280px;
 }
+
+/* ========== 角色选择弹窗新增样式 ========== */
+.modal-mask {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.65);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+.modal-mask.active {
+    display: flex;
+}
+.modal-box {
+    background: #fff;
+    width: min(92%, 900px);
+    max-height: 85vh;
+    overflow-y: auto;
+    border-radius: 12px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+.modal-small .modal-box {
+    width: min(90%, 480px);
+}
+.modal-header{
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+    margin-bottom:12px;
+}
+.modal-close-btn{
+    border:none;
+    background:none;
+    font-size:24px;
+    cursor:pointer;
+    padding:0 6px;
+}
+.modal-body{
+    padding:8px 0;
+}
+.modal-footer{
+    margin-top:16px;
+    display:flex;
+    gap:12px;
+    justify-content:center;
+}
+/* CP布局 左25% 女主｜右75% 可攻略角色 */
+.cp-layout-row{
+    display:grid;
+    grid-template-columns: 25% 75%;
+    gap:16px;
+    margin-top:16px;
+}
+.char-card-wrapper{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+}
+.char-card-wrapper label{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    cursor:pointer;
+    border:1px solid #ddd;
+    padding:8px;
+    border-radius:8px;
+    min-width:70px;
+}
+.local-switch-group{
+    display:flex;
+    gap:32px;
+    margin-bottom:12px;
+    flex-wrap:wrap;
+}
+hr.divider{
+    border:0;
+    border-top:1px solid #e2d2d7;
+    margin:14px 0;
+}
 </style>
 </head>
 <body>
@@ -57,7 +138,7 @@ html, body {
             </label>
             <div>
                 <span class="text-light-pink">全局显示隐藏角色</span>
-                <p class="switch-desc">开启后默认展示隐藏角色；关闭则所有游戏默认隐藏。单个游戏可单独开启，每日首次切换全局开关会触发剧透警告弹窗。</p>
+                <p class="switch-desc">开启后默认展示隐藏角色；关闭则所有游戏默认隐藏。单个游戏可单独开启，切换此全局开关会触发剧透警告弹窗。</p>
             </div>
         </div>
         <div class="switch-row">
@@ -67,7 +148,7 @@ html, body {
             </label>
             <div>
                 <span class="text-light-pink">全局显示续作/FD角色</span>
-                <p class="switch-desc">开启后默认展示续作、FD专属角色；关闭则所有游戏默认隐藏。单个游戏可单独开启，每日首次切换全局开关会触发剧透警告弹窗。</p>
+                <p class="switch-desc">开启后默认展示续作、FD专属角色；关闭则所有游戏默认隐藏。单个游戏可单独开启，切换此全局开关会触发剧透警告弹窗。</p>
             </div>
         </div>
     </div>
@@ -169,13 +250,48 @@ html, body {
     <p class="email-text">Email：otomefavlist@163.com</p>
 </div>
 
-<!-- 剧透弹窗 初始隐藏（无hide-block类，由CSS默认display:none控制） -->
-<div class="modal-mask" id="spoiler-modal">
+<!-- 剧透弹窗（原版单按钮，移除取消按钮） -->
+<div class="modal-mask modal-small" id="spoiler-modal">
     <div class="modal-box">
         <h3>⚠️剧透警告</h3>
         <p class="text-gray-desc">注意！<br>开启后可能涉及：<br>剧情结局、最终攻略对象、真相路线，<br>是否继续？</p>
         <div class="modal-btns">
             <button id="spoiler-confirm">继续</button>
+        </div>
+    </div>
+</div>
+
+<!-- ========== 【新增】角色选择弹窗 ========== -->
+<div class="modal-mask" id="char-select-modal">
+    <div class="modal-box">
+        <div class="modal-header">
+            <h3 id="modal-game-title">游戏名称</h3>
+            <button class="modal-close-btn">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="local-switch-group">
+                <label>
+                    <input type="checkbox" id="local-show-secret"> 显示本游戏隐藏角色
+                </label>
+                <label>
+                    <input type="checkbox" id="local-show-fd"> 显示本游戏续作/FD角色
+                </label>
+            </div>
+            <hr class="divider">
+            <div class="cp-layout-row">
+                <div class="heroine-column">
+                    <h4>女主</h4>
+                    <div id="heroine-box" class="char-card-wrapper"></div>
+                </div>
+                <div class="hero-list-column">
+                    <h4>可攻略角色</h4>
+                    <div id="hero-list-box" class="char-card-wrapper"></div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button id="modal-cancel-btn">取消</button>
+            <button id="modal-confirm-btn">确认选择</button>
         </div>
     </div>
 </div>
