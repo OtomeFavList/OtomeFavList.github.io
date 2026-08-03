@@ -511,3 +511,21 @@ h2{
         grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
     }
 }
+
+/* 基础信息 两行双栏布局 */
+.form-row-pair{
+    display:flex;
+    gap:24px;
+    flex-wrap:wrap;
+}
+.form-row-pair > .form-row{
+    flex:1;
+    min-width:260px;
+    max-width:unset;
+}
+
+@media (max-width:768px){
+    .form-row-pair{
+        flex-direction:column;
+    }
+}
