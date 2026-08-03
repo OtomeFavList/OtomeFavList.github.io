@@ -1,5 +1,5 @@
 // ===================== main.js 【数据层、公共工具函数】 =====================
-import { gameIdList } from "../data/game-list.js";
+import { gameIdList } from "../data/gamelist.js";
 
 // 全局存储key
 export const STORE_KEY = "otome-favlist-data";
