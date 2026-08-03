@@ -1,5 +1,9 @@
 // ===================== main.js 【数据层、公共工具函数】 =====================
-import { gameIdList } from "../data/gamelist.js";
+// 🚨【新增游戏请在此数组添加编号！】请勿改动其他位置
+const gameIdList = [
+    "001"
+    //新增游戏在这里追加,"002","003"
+];
 
 // 全局存储key
 export const STORE_KEY = "otome-favlist-data";
@@ -97,7 +101,7 @@ export function getAvailableCharImages(char, globalHideSwitch, globalFDSwitch, l
     });
 }
 
-// ✅修复1：路径已修正：单层 /data/games/，删除多余一层data/ 彻底解决 data/data 错误
+// ✅修复1：路径已修正：单层 /data/games/
 export async function loadAllGameTemplates() {
     const basePath = "/data/games/";
     const tempList = [];
@@ -109,11 +113,9 @@ export async function loadAllGameTemplates() {
             if (mod && mod.gameData) {
                 tempList.push(mod.gameData);
             }else{
-                // ✅修复5：区分数据格式错误
                 console.warn(`game${id}.js 加载成功，但缺失 gameData 数据，数据格式异常`);
             }
         } catch (err) {
-            // ✅修复5：区分404与其他错误
             if(err.message.includes("404") || err.name === "TypeError"){
                 console.error(`游戏文件 game${id}.js 【404 文件缺失】路径：${basePath}game${id}.js`, err);
             }else{
@@ -288,7 +290,7 @@ export function getAllGameChar(gameInfo) {
     return [...female, ...male];
 }
 
-// ===================== 启动入口（新增代码） =====================
+// ===================== 启动入口 =====================
 import { initPage } from "./script.js";
 
 // 组装Core上下文对象，统一供给UI层script.js
