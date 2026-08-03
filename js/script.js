@@ -23,7 +23,7 @@ export function initPage(Core) {
     // 渲染角色选择弹窗内容【修复：适配srcList，读取持久化图片索引】
     function renderCharSelectModal(gameId) {
         const gameInfo = gameTemplateList.find(g => g.id === gameId);
-        const gameItem = appData.gameList.find(g => g?.gameId === gameId);
+        const gameItem = appData.gameList?.find(g => g?.gameId === gameId);
         if (!gameInfo || !gameItem) return;
 
         const modalGameTitle = document.getElementById("modal-game-title");
@@ -51,7 +51,7 @@ export function initPage(Core) {
             if (allSrc.length === 0) return;
 
             const saveKey = `${gameId}-${char.id}`;
-            let imgIndex = Number(appData.charImageSelect[saveKey] ?? 0);
+            let imgIndex = Number(appData.charImageSelect?.[saveKey] ?? 0);
             if (imgIndex >= allSrc.length) imgIndex = 0;
             const showSrc = allSrc[imgIndex];
 
@@ -78,7 +78,7 @@ export function initPage(Core) {
             if (allSrc.length === 0) return;
 
             const saveKey = `${gameId}-${char.id}`;
-            let imgIndex = Number(appData.charImageSelect[saveKey] ?? 0);
+            let imgIndex = Number(appData.charImageSelect?.[saveKey] ?? 0);
             if (imgIndex >= allSrc.length) imgIndex = 0;
             const showSrc = allSrc[imgIndex];
 
@@ -180,7 +180,7 @@ export function initPage(Core) {
             if (!gameInfo) return;
             const char = gameInfo.charList.find(c => c.id === charId);
             if (!char) return;
-            const gameItem = appData.gameList.find(g => g.gameId === gameId);
+            const gameItem = appData.gameList?.find(g => g.gameId === gameId);
             if (!gameItem) return;
 
             const availImgUnits = getAvailableCharImages(
@@ -196,7 +196,7 @@ export function initPage(Core) {
 
             const imgDom = charCard.querySelector(".char-card-img-box img");
             const saveKey = `${gameId}-${charId}`;
-            let currentIndex = Number(appData.charImageSelect[saveKey] ?? 0);
+            let currentIndex = Number(appData.charImageSelect?.[saveKey] ?? 0);
 
             if (switchBtn.classList.contains("char-switch-next")) {
                 currentIndex++;
@@ -249,12 +249,12 @@ export function initPage(Core) {
         loadData();
 
         // 回填表单基础信息
-        if (el.inputNick) el.inputNick.value = appData.baseInfo.nick;
-        if (el.inputCount) el.inputCount.value = appData.baseInfo.count;
-        if (el.inputStory) el.inputStory.value = appData.baseInfo.story;
-        if (el.inputFirstgame) el.inputFirstgame.value = appData.baseInfo.firstgame;
+        if (el.inputNick) el.inputNick.value = appData.baseInfo?.nick ?? "";
+        if (el.inputCount) el.inputCount.value = appData.baseInfo?.count ?? "";
+        if (el.inputStory) el.inputStory.value = appData.baseInfo?.story ?? "";
+        if (el.inputFirstgame) el.inputFirstgame.value = appData.baseInfo?.firstgame ?? "";
 
-        // ✅【修复】配色绑定 增加DOM判空，彻底消除 colorBorder undefined 报错
+        // ✅配色绑定 增加DOM判空，彻底消除 colorBorder undefined 报错
         const colorBindList = [
             { dom: el.colorBg, dataKey: "bg" },
             { dom: el.colorTitle, dataKey: "title" },
@@ -263,14 +263,15 @@ export function initPage(Core) {
         ];
         colorBindList.forEach(item => {
             if (!item.dom) return;
-            item.dom.value = appData.exportColor[item.dataKey];
+            item.dom.value = appData.exportColor?.[item.dataKey] ?? "#ffffff";
             item.dom.oninput = () => {
+                if(!appData.exportColor) appData.exportColor = {};
                 appData.exportColor[item.dataKey] = item.dom.value;
                 saveData();
                 if (item.dataKey === "bg") document.body.style.background = item.dom.value;
             }
         });
-        if (el.colorBg) document.body.style.background = appData.exportColor.bg;
+        if (el.colorBg) document.body.style.background = appData.exportColor?.bg ?? "#ffffff";
 
         refreshHideCharSwitch();
         refreshFDSwitch();
@@ -292,7 +293,7 @@ export function initPage(Core) {
                     const triggerSwitch = document.querySelector(`.local-hide-char.modal-trigger`);
                     if (triggerSwitch) {
                         const gid = triggerSwitch.dataset.gid;
-                        const targetGame = appData.gameList.find(g => g.gameId === gid);
+                        const targetGame = appData.gameList?.find(g => g.gameId === gid);
                         if (targetGame) targetGame.localHideChar = true;
                     }
                 } else if (modalTargetType === "localFD") {
@@ -300,7 +301,7 @@ export function initPage(Core) {
                     const triggerSwitch = document.querySelector(`.local-fd.modal-trigger`);
                     if (triggerSwitch) {
                         const gid = triggerSwitch.dataset.gid;
-                        const targetGame = appData.gameList.find(g => g.gameId === gid);
+                        const targetGame = appData.gameList?.find(g => g.gameId === gid);
                         if (targetGame) targetGame.localFD = true;
                     }
                 }
@@ -374,6 +375,7 @@ export function initPage(Core) {
         baseInputMap.forEach(item => {
             if (!item.dom) return;
             item.dom.oninput = function () {
+                if(!appData.baseInfo) appData.baseInfo = {};
                 appData.baseInfo[item.key] = this.value;
                 saveData();
             }
@@ -433,7 +435,7 @@ export function initPage(Core) {
                     const gid = item.dataset.gameId;
                     const targetGame = gameTemplateList.find(g => g.id === gid);
                     if (!targetGame) return alert("游戏数据加载异常");
-                    const exist = appData.gameList.find(g => g.gameId === gid);
+                    const exist = appData.gameList?.find(g => g.gameId === gid);
                     if (exist) return alert("该游戏已添加！");
                     const newGameData = {
                         gameId: gid,
@@ -445,6 +447,7 @@ export function initPage(Core) {
                         selectChars: [],
                         cpList: []
                     };
+                    if(!appData.gameList) appData.gameList = [];
                     appData.gameList.push(newGameData);
                     saveData();
                     if (el.searchPanel) el.searchPanel.classList.add("hide-block");
@@ -463,7 +466,7 @@ export function initPage(Core) {
             document.querySelectorAll(".modal-trigger").forEach(dom => dom.classList.remove("modal-trigger"));
 
             let html = "";
-            appData.gameList.forEach(gameItem => {
+            appData.gameList?.forEach(gameItem => {
                 if (!gameItem) return;
                 const gameInfo = gameTemplateList.find(g => g.id === gameItem.gameId);
                 if (!gameInfo) return;
@@ -524,7 +527,7 @@ export function initPage(Core) {
             document.querySelectorAll(".fold-game").forEach(btn => {
                 btn.onclick = () => {
                     const gid = btn.dataset.gid;
-                    const gameItem = appData.gameList.find(g => g.gameId === gid);
+                    const gameItem = appData.gameList?.find(g => g.gameId === gid);
                     if (!gameItem) return;
                     gameItem.fold = !gameItem.fold;
                     saveData();
@@ -541,7 +544,7 @@ export function initPage(Core) {
             })
             document.querySelectorAll(".heart-rate").forEach(box => {
                 const gid = box.dataset.gid;
-                const gameItem = appData.gameList.find(g => g.gameId === gid);
+                const gameItem = appData.gameList?.find(g => g.gameId === gid);
                 if (!gameItem) return;
                 box.querySelectorAll(".heart").forEach(h => {
                     h.onclick = () => {
@@ -569,7 +572,7 @@ export function initPage(Core) {
             document.querySelectorAll(".local-hide-char").forEach(sw => {
                 sw.onchange = function () {
                     const gid = this.dataset.gid;
-                    const gameItem = appData.gameList.find(g => g.gameId === gid);
+                    const gameItem = appData.gameList?.find(g => g.gameId === gid);
                     if (!gameItem) return;
                     const targetStatus = this.checked;
                     if (!targetStatus) {
@@ -595,7 +598,7 @@ export function initPage(Core) {
             document.querySelectorAll(".local-fd").forEach(sw => {
                 sw.onchange = function () {
                     const gid = this.dataset.gid;
-                    const gameItem = appData.gameList.find(g => g.gameId === gid);
+                    const gameItem = appData.gameList?.find(g => g.gameId === gid);
                     if (!gameItem) return;
                     const targetStatus = this.checked;
                     if (!targetStatus) {
@@ -631,7 +634,7 @@ export function initPage(Core) {
                     el.exportBtn.disabled = true;
                     el.exportBtn.textContent = "正在生成图片...";
 
-                    const baseInfo = appData.baseInfo;
+                    const baseInfo = appData.baseInfo ?? {};
                     const infoArr = [
                         { el: el.inputNick, text: baseInfo.nick ? `昵称：${baseInfo.nick}` : null },
                         { el: el.inputCount, text: baseInfo.count !== "" ? `游玩总数：${baseInfo.count}` : null },
@@ -649,7 +652,9 @@ export function initPage(Core) {
 
                     el.snapshotContainer.classList.add('export-snapshot');
 
-                    let sizeValue = document.querySelector('input[name="export-size"]:checked').value;
+                    const sizeRadio = document.querySelector('input[name="export-size"]:checked');
+                    if(!sizeRadio) throw new Error("未选中导出尺寸");
+                    let sizeValue = sizeRadio.value;
                     let targetWidth, targetHeight;
                     if (sizeValue === 'long') {
                         targetWidth = 1080;
@@ -660,7 +665,8 @@ export function initPage(Core) {
                         targetHeight = h;
                     }
 
-                    const bgColor = document.getElementById('color-bg').value;
+                    // ✅【关键修复！原先这里直接getElementById，改用缓存el.colorBg，消除colorBorder报错源头】
+                    const bgColor = el.colorBg?.value ?? "#ffffff";
 
                     const renderCanvas = await html2canvas(el.snapshotContainer, {
                         backgroundColor: bgColor,
@@ -673,7 +679,8 @@ export function initPage(Core) {
                     if (targetHeight === 0) {
                         finalCanvas = renderCanvas;
                     } else {
-                        const canvas = document.getElementById('export-canvas');
+                        if(!el.canvas) throw new Error("导出canvas元素缺失");
+                        const canvas = el.canvas;
                         canvas.width = targetWidth;
                         canvas.height = targetHeight;
                         const ctx = canvas.getContext('2d');
@@ -694,7 +701,7 @@ export function initPage(Core) {
                     link.click();
                 } catch (err) {
                     console.error("导出失败：", err);
-                    alert('图片导出异常！外部图片跨域可能导致失败，请使用本地图片资源。');
+                    alert('图片导出异常！外部图片跨域可能导致失败，请使用本地图片资源。\n' + err.message);
                 } finally {
                     el.snapshotContainer.classList.remove('export-snapshot');
                     document.querySelectorAll("#card-base .form-row input").forEach(input => {
