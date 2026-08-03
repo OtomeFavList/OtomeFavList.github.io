@@ -13,6 +13,10 @@ let appData = {
 // 兜底：游戏数据模块加载失败时赋值空数组，彻底解决undefined报错
 let gameTemplateList = [];
 
+// 角色弹窗全局变量
+let currentEditGameId = null;
+let charPoolMode = "char"; // char = 单选角色, cp = CP搭配
+
 // 本地存储读写
 function saveData() {
     localStorage.setItem(STORE_KEY, JSON.stringify(appData));
@@ -262,6 +266,79 @@ function getAllGameChar(gameInfo) {
     return [...female, ...male];
 }
 
+// 渲染角色选择弹窗内容
+function renderCharSelectModal(gameId) {
+    const gameInfo = gameTemplateList.find(g => g.id === gameId);
+    const gameItem = appData.gameList.find(g => g.gameId === gameId);
+    if (!gameInfo || !gameItem) return;
+
+    document.getElementById("modal-game-title").innerText = gameInfo.name;
+    document.getElementById("local-show-secret").checked = gameItem.localHideChar;
+    document.getElementById("local-show-fd").checked = gameItem.localFD;
+
+    const allChars = getAllGameChar(gameInfo);
+    const femaleChars = allChars.filter(c => c.gender === "female");
+    const maleChars = allChars.filter(c => c.gender === "male");
+
+    // 渲染女主区域
+    let femHtml = "";
+    femaleChars.forEach(char => {
+        const imgs = getAvailableCharImages(char, appData.globalHideChar, appData.globalFD, gameItem.localHideChar, gameItem.localFD);
+        if(imgs.length === 0) return;
+        const selected = gameItem.selectChars.includes(char.id) ? "selected" : "";
+        femHtml += `
+        <label class="char-card-wrapper ${selected}" data-cid="${char.id}">
+            <img src="img/char/${imgs[0].src}" style="width:80px;height:80px;object-fit:cover;">
+            <div>${char.name}</div>
+        </label>`;
+    });
+    document.getElementById("heroine-box").innerHTML = femHtml;
+
+    // 男性角色区域
+    let maleHtml = "";
+    maleChars.forEach(char => {
+        const imgs = getAvailableCharImages(char, appData.globalHideChar, appData.globalFD, gameItem.localHideChar, gameItem.localFD);
+        if(imgs.length === 0) return;
+        const selected = gameItem.selectChars.includes(char.id) ? "selected" : "";
+        maleHtml += `
+        <label class="char-card-wrapper ${selected}" data-cid="${char.id}">
+            <img src="img/char/${imgs[0].src}" style="width:80px;height:80px;object-fit:cover;">
+            <div>${char.name}</div>
+        </label>`;
+    });
+    document.getElementById("hero-list-box").innerHTML = maleHtml;
+
+    // 绑定弹窗内角色点击勾选
+    document.querySelectorAll("#char-select-modal .char-card-wrapper").forEach(item => {
+        item.onclick = function(){
+            const cid = this.dataset.cid;
+            const idx = gameItem.selectChars.indexOf(cid);
+            if(idx > -1){
+                gameItem.selectChars.splice(idx,1);
+                this.classList.remove("selected");
+            }else{
+                gameItem.selectChars.push(cid);
+                this.classList.add("selected");
+            }
+            saveData();
+        }
+    })
+}
+
+// 打开角色弹窗
+function openCharSelectModal(gameId){
+    currentEditGameId = gameId;
+    const modal = document.getElementById("char-select-modal");
+    modal.classList.add("active");
+    renderCharSelectModal(gameId);
+}
+// 关闭角色弹窗
+function closeCharSelectModal(){
+    const modal = document.getElementById("char-select-modal");
+    modal.classList.remove("active");
+    currentEditGameId = null;
+}
+
 // 页面所有DOM、事件、渲染逻辑全部放在onload内部
 window.onload = async function () {
     // 1. 页面加载完成再获取所有DOM元素
@@ -284,7 +361,14 @@ window.onload = async function () {
         colorText: document.getElementById("color-text"),
         colorBorder: document.getElementById("color-border"),
         exportBtn: document.getElementById("btn-export"),
-        canvas: document.getElementById("export-canvas")
+        canvas: document.getElementById("export-canvas"),
+        // 角色选择弹窗DOM
+        charSelectModal: document.getElementById("char-select-modal"),
+        modalCloseBtn: document.querySelector(".modal-close-btn"),
+        modalCancelBtn: document.getElementById("modal-cancel-btn"),
+        modalConfirmBtn: document.getElementById("modal-confirm-btn"),
+        localShowSecret: document.getElementById("local-show-secret"),
+        localShowFD: document.getElementById("local-show-fd")
     };
 
     let modalOpen = false;
@@ -596,6 +680,22 @@ window.onload = async function () {
                 }
             })
         })
+        // 【打开角色选择弹窗按钮】
+        document.querySelectorAll(".open-char-pool").forEach(btn=>{
+            btn.onclick = function(){
+                const gid = this.dataset.gid;
+                charPoolMode = "char";
+                openCharSelectModal(gid);
+            }
+        })
+        // 【打开CP搭配弹窗（当前复用同一个弹窗，后续可以扩展cp逻辑）】
+        document.querySelectorAll(".open-cp-pool").forEach(btn=>{
+            btn.onclick = function(){
+                const gid = this.dataset.gid;
+                charPoolMode = "cp";
+                openCharSelectModal(gid);
+            }
+        })
         // 单游戏隐藏角色开关【已修复弹窗逻辑】
         document.querySelectorAll(".local-hide-char").forEach(sw => {
             sw.onchange = function () {
@@ -651,6 +751,43 @@ window.onload = async function () {
                 }
             }
         })
+    }
+
+    // =========== 角色选择弹窗内部按钮绑定 ===========
+    // 关闭 ×
+    if(el.modalCloseBtn){
+        el.modalCloseBtn.onclick = closeCharSelectModal;
+    }
+    // 取消按钮
+    if(el.modalCancelBtn){
+        el.modalCancelBtn.onclick = closeCharSelectModal;
+    }
+    // 确认按钮：关闭弹窗并刷新页面卡片
+    if(el.modalConfirmBtn){
+        el.modalConfirmBtn.onclick = function(){
+            closeCharSelectModal();
+            renderAddedGame();
+        }
+    }
+    // 弹窗内【单独显示隐藏角色】切换
+    if(el.localShowSecret){
+        el.localShowSecret.onchange = function(){
+            if(!currentEditGameId) return;
+            const gameItem = appData.gameList.find(g=>g.gameId === currentEditGameId);
+            gameItem.localHideChar = this.checked;
+            saveData();
+            renderCharSelectModal(currentEditGameId);
+        }
+    }
+    // 弹窗内【单独显示FD角色】切换
+    if(el.localShowFD){
+        el.localShowFD.onchange = function(){
+            if(!currentEditGameId) return;
+            const gameItem = appData.gameList.find(g=>g.gameId === currentEditGameId);
+            gameItem.localFD = this.checked;
+            saveData();
+            renderCharSelectModal(currentEditGameId);
+        }
     }
 
     // 添加游戏按钮
