@@ -309,35 +309,51 @@ button:hover{
 }
 .char-pool{
     display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(130px,1fr));
-    gap:12px;
+    grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+    gap:14px;
     margin:10px 0;
 }
+/* ========== Character角色卡片：200*200固定容器 + 边框 ========== */
 .char-item{
     text-align:center;
     border:1px solid #eee;
-    padding:8px;
+    padding:10px;
     border-radius:10px;
     cursor:pointer;
     background:#fff;
+    transition:0.2s ease;
 }
 .char-item.selected{
     border-color:#e895a8;
     background:#fff0f3;
 }
-.char-item img{
+.char-item:hover{
+    border-color:#f0b8c8;
+}
+/* 强制200×200图片容器 */
+.char-item-img-box{
     width:200px;
     height:200px;
-    object-fit:cover;
+    margin:0 auto 8px;
     border-radius:8px;
-    margin-bottom:6px;
-    max-width:100%;
+    overflow:hidden;
+    border:1px solid #e2e2e2;
+}
+.char-item img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
 }
 .char-img-switch{
     font-size:12px;
     margin-top:4px;
-    color:#e895a8;
+    color:#666;
     cursor:pointer;
+    text-decoration:underline;
+}
+.char-img-switch:hover{
+    color:#c0392b;
 }
 .char-selected-row{
     display:flex;
@@ -347,6 +363,7 @@ button:hover{
     align-items:flex-end;
 }
 
+/* ========== CP布局 严格25% / 75% 分区 ========== */
 .cp-group{
     margin:16px 0;
     padding-top:12px;
@@ -355,24 +372,30 @@ button:hover{
 .cp-row{
     display:flex;
     align-items:flex-start;
-    gap:14px;
-    margin:10px 0;
-    padding-bottom:16px;
+    gap:16px;
+    margin:12px 0;
+    padding-bottom:18px;
     border-bottom:1px solid #eee;
     width:100%;
 }
+/* 左侧女角色区域 固定25% */
 .cp-female{
     flex: 0 0 25%;
     display:flex;
     justify-content:center;
     align-items:flex-start;
 }
+/* 右侧男角色区域 固定75% */
 .cp-male-wrap{
     flex: 0 0 75%;
     display:flex;
-    gap:10px;
+    gap:12px;
     flex-wrap:wrap;
     align-items:flex-end;
+}
+/* CP内复用200px卡片保持统一 */
+.cp-char-card{
+    width:200px;
 }
 
 /* 弹窗遮罩（核心修改：默认display:none，已删除.modal-mask.hide-block规则） */
@@ -473,13 +496,18 @@ h2{
     color:#666;
     font-weight:normal;
 }
-.char-img-switch {
-    margin-top:4px;
-    font-size:12px;
-    color:#666;
-    cursor:pointer;
-    text-decoration:underline;
-}
-.char-img-switch:hover{
-    color:#c0392b;
+
+/* 移动端适配：小屏幕CP布局自动上下堆叠 */
+@media (max-width:768px) {
+    .cp-row{
+        flex-direction:column;
+    }
+    .cp-female,
+    .cp-male-wrap{
+        flex: unset;
+        width:100%;
+    }
+    .char-pool{
+        grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+    }
 }
