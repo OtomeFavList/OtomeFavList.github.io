@@ -283,3 +283,37 @@ export function getAllGameChar(gameInfo) {
     const male = chars.filter(c => c.gender === "male").sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
     return [...female, ...male];
 }
+
+import { initPage } from "./script.js";
+
+// 组装Core上下文对象，统一供给UI层script.js
+function buildCoreContext() {
+    const Core = {
+        appData,
+        gameTemplateList,
+        currentEditGameId,
+        charPoolMode,
+        loadAllGameTemplates,
+        loadData,
+        saveData,
+        syncSingleGameSwitch,
+        fillFilterOptions,
+        renderSelectedChar,
+        renderCP,
+        getAllGameChar,
+        getAvailableCharImages,
+        isTodayConfirmed,
+        saveConfirmDate,
+        localSwitchIsConfirmedToday,
+        saveLocalSwitchConfirmDate
+    };
+    return Core;
+}
+
+// 对外暴露启动入口，供index.html调用
+export async function bootstrapCore() {
+    loadData();
+    await loadAllGameTemplates();
+    const Core = buildCoreContext();
+    initPage(Core);
+}
