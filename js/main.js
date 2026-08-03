@@ -482,12 +482,13 @@ window.onload = async function () {
     // 弹窗唯一确认按钮绑定
     if (el.spoilerConfirm) {
         el.spoilerConfirm.onclick = () => {
-            saveConfirmDate();
             if(modalTargetType === "hideChar"){
+                saveConfirmDate();
                 appData.globalHideChar = true;
                 syncSingleGameSwitch("hideChar", true);
                 refreshHideCharSwitch();
             }else if(modalTargetType === "fd"){
+                saveConfirmDate();
                 appData.globalFD = true;
                 syncSingleGameSwitch("fd", true);
                 refreshFDSwitch();
@@ -514,7 +515,7 @@ window.onload = async function () {
         }
     }
     
-    // ============【全局隐藏角色开关 原始逻辑完全保留，无修改】 ============
+    // ============【全局隐藏角色开关】 ============
     if (el.globalHideChar) {
         el.globalHideChar.addEventListener('change', function() {
             const newStatus = this.checked;
@@ -543,7 +544,7 @@ window.onload = async function () {
         })
     }
     
-    // ============【全局FD/续作开关 原始逻辑完全保留，无修改】 ============
+    // ============【全局FD/续作开关（已配置剧透弹窗）】 ============
     if (el.globalFD) {
         el.globalFD.addEventListener('change', function() {
             const newStatus = this.checked;
@@ -798,7 +799,7 @@ window.onload = async function () {
                 }
             }
         })
-        // 单游戏FD开关
+        // 单游戏FD开关（同步增加剧透弹窗逻辑）
         document.querySelectorAll(".local-fd").forEach(sw => {
             sw.onchange = function () {
                 const gid = this.dataset.gid;
