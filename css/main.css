@@ -54,18 +54,18 @@ body{
     letter-spacing:1px;
     color: #b33a3a;
 }
-/* 日乙个人喜好表副标题，统一主标题红色 */
+/* 日乙个人喜好表副标题 #666 */
 .title-sub-cn{
     font-size:16px;
     margin:8px 0;
-    color:#b33a3a;
+    color:#666;
     font-family:sans-serif;
     font-weight:bold;
 }
 .sub-desc{
     text-align:center;
     font-size:16px;
-    color:#b33a3a;
+    color:#666;
     margin-bottom:40px;
 }
 
@@ -85,13 +85,13 @@ body{
     padding:24px;
     transition:border-color 0.2s;
 }
-/* 卡片小标题 */
+/* 卡片小标题：一、设置... 改为 #b85878 */
 .big-card h2{
     margin-bottom:20px;
     font-size:24px;
     border-left:5px solid #c98fac;
     padding-left:12px;
-    color: #b33a3a;
+    color: #b85878;
     font-weight:bold;
     font-family:sans-serif;
 }
@@ -477,10 +477,11 @@ button:hover{
     margin:8px 0;
     font-size:16px;
     line-height:1.8;
-    color:#b33a3a;
+    color:#666;
 }
+/* Email单独 #222222 */
 .about-block p.email-text{
-    color:#b33a3a;
+    color:#222222;
 }
 
 /* 通用隐藏类：仅用于搜索面板、折叠卡片，不控制弹窗 */
@@ -491,8 +492,9 @@ button:hover{
 h1{
     color: #b33a3a;
 }
+/* 清除全局h2旧色冲突，由.big-card h2单独控制 */
 h2{
-    color: #b33a3a;
+    color: inherit;
 }
 .text-light-pink{
     color: #c98fac;
