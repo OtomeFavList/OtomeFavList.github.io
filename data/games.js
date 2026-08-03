@@ -3,7 +3,6 @@
 // 新增游戏只新建data/games/gameXXX.js，仅需在下方数组追加路径，本文件其余代码永久不用修改
 const allGameFiles = [
     "data/games/game001.js",
-    "data/games/game002.js"
     // 后续新增游戏仅在此添加一行文件路径即可，仅此一处极小改动
 ];
 
