@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Otome FavList</title>
 <link rel="stylesheet" href="./css/main.css">
-<!-- html2canvas CDN -->
+<!-- html2canvas CDN（第三方库，保留全局引入） -->
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 </head>
 <body>
@@ -192,28 +192,15 @@
     </div>
 </div>
 
-<!-- 【重点改动：分开顺序加载脚本，移除type="module"！】 -->
-<!-- 1.优先加载游戏数据 -->
-<script src="./data/games.js"></script>
-<!-- 2.公共工具脚本 -->
-<script src="./js/main.js"></script>
-<!-- 3.页面交互逻辑 -->
-<script src="./js/script.js"></script>
+<!-- ==========【改造完成：统一模块脚本，移除所有普通script引入】 ========== -->
+<script type="module">
+import { bootstrapCore } from "./js/main.js";
 
-<!-- 4.页面初始化 & 导出逻辑（DOM就绪后执行） -->
-<script>
-document.addEventListener('DOMContentLoaded', async () => {
-    // 等待游戏数据加载
-    if(typeof window.loadAllGames === "function"){
-        await window.loadAllGames();
-    }
+document.addEventListener("DOMContentLoaded", async () => {
+    // 初始化核心程序
+    await bootstrapCore();
 
-    // 初始化页面
-    if(typeof initPage === "function"){
-        initPage();
-    }
-
-    // ==========图片导出逻辑============
+    // ==========图片导出逻辑（移入模块内部，保留全部原有功能）============
     const exportBtn = document.getElementById('btn-export');
     const snapshotContainer = document.getElementById('snapshot-container');
     const canvas = document.getElementById('export-canvas');
