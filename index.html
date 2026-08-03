@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Otome FavList</title>
 <link rel="stylesheet" href="./css/main.css">
-<!-- html2canvas 普通CDN脚本 -->
+<!-- html2canvas CDN -->
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 </head>
 <body>
 
-<!-- 导出目标容器：所有需要渲染进图片的内容包裹在这里 -->
+<!-- 导出目标容器 -->
 <div id="snapshot-container">
     <div class="site-title">
         <h1>Otome FavList</h1>
@@ -28,7 +28,7 @@
                 </label>
                 <div>
                     <span class="text-light-pink">全局显示隐藏角色</span>
-                    <p class="switch-desc">开启后默认展示隐藏角色；关闭则所有游戏默认隐藏，单个游戏可单独开启。每日首次切换全局开关会触发剧透警告弹窗。</p>
+                    <p class="switch-desc">开启后默认展示隐藏角色；关闭则所有游戏默认隐藏。单个游戏可单独开启，切换此全局开关会触发剧透警告弹窗。</p>
                 </div>
             </div>
             <div class="switch-row">
@@ -38,14 +38,13 @@
                 </label>
                 <div>
                     <span class="text-light-pink">全局显示续作/FD角色</span>
-                    <p class="switch-desc">开启后默认展示续作、FD专属角色；关闭则所有游戏默认隐藏，单个游戏可单独开启。每日首次切换全局开关会触发剧透警告弹窗。</p>
+                    <p class="switch-desc">开启后默认展示续作、FD专属角色；关闭则所有游戏默认隐藏。单个游戏可单独开启，切换此全局开关会触发剧透警告弹窗。</p>
                 </div>
             </div>
         </div>
 
         <div class="big-card" id="card-base">
             <h2>二、基础资料</h2>
-            <!-- 昵称+游玩总数同一行 -->
             <div class="form-row-double">
                 <div class="form-row">
                     <label class="text-light-pink">昵称</label>
@@ -56,7 +55,6 @@
                     <input type="number" id="input-count" placeholder="数字" min="0">
                 </div>
             </div>
-            <!-- 入坑时间+入坑作品同一行 -->
             <div class="form-row-double">
                 <div class="form-row">
                     <label class="text-light-pink">入坑时间</label>
@@ -149,6 +147,7 @@
         <p class="text-gray-desc" style="text-align:center;line-height:1.8;">注意！<br>开启后可能涉及：<br>剧情结局、最终攻略对象、真相路线，<br>是否继续？</p>
         <div class="modal-btns" style="justify-content:center;">
             <button id="spoiler-confirm">继续</button>
+            <button id="spoiler-cancel">取消</button>
         </div>
     </div>
 </div>
@@ -170,15 +169,15 @@
                 </label>
             </div>
             <hr style="border:0;border-top:1px solid #e2d2d7;margin:14px 0;">
-            <!-- CP 25% | 75% 布局容器 -->
-            <div class="cp-row">
-                <div class="cp-female">
+            <!-- CP布局 左25% 右75% -->
+            <div class="cp-row" style="display:flex;gap:16px;">
+                <div class="cp-female" style="width:25%;">
                     <div class="heroine-column" style="display:flex;flex-direction:column;gap:10px;width:100%;">
                         <h4>女主</h4>
                         <div id="heroine-box" class="char-pool"></div>
                     </div>
                 </div>
-                <div class="cp-male-wrap">
+                <div class="cp-male-wrap" style="width:75%;">
                     <div class="hero-list-column" style="display:flex;flex-direction:column;gap:10px;width:100%;">
                         <h4>可攻略角色</h4>
                         <div id="hero-list-box" class="char-pool"></div>
@@ -193,19 +192,23 @@
     </div>
 </div>
 
-<script type="module">
-// 模块加载顺序严格控制：先核心脚本，最后执行初始化
-import "./js/main.js";
-import "./js/script.js";
-import "./data/games.js";
+<!-- 【重点改动：分开顺序加载脚本，移除type="module"！】 -->
+<!-- 1.优先加载游戏数据 -->
+<script src="./data/games.js"></script>
+<!-- 2.公共工具脚本 -->
+<script src="./js/main.js"></script>
+<!-- 3.页面交互逻辑 -->
+<script src="./js/script.js"></script>
 
-// 等待DOM全部就绪再初始化页面
+<!-- 4.页面初始化 & 导出逻辑（DOM就绪后执行） -->
+<script>
 document.addEventListener('DOMContentLoaded', async () => {
-    // 等待游戏数据加载完成
+    // 等待游戏数据加载
     if(typeof window.loadAllGames === "function"){
         await window.loadAllGames();
     }
 
+    // 初始化页面
     if(typeof initPage === "function"){
         initPage();
     }
