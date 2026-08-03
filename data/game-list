@@ -1,6 +1,0 @@
-// data/game-list.js
-// 新增游戏只在这里追加ID，无需修改main.js
-export const gameIdList = [
-    "001"
-    // 示例追加：,"002","003"
-];
