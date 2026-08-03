@@ -1,8 +1,8 @@
 // data/games/game001.js
-// ==========【单个游戏独立数据模板】==========
+// ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
-// 仅需要在data/games.js的allGameFiles数组追加本文件路径
-const singleGameData = {
+// 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
+const gameData = {
     id: "game001",
     name: "虔诚之花的晚钟",
     year: "2020",
@@ -92,4 +92,5 @@ const singleGameData = {
     ]
 };
 
-window.gameDataList.push(singleGameData);
+// 移除旧全局push写法！使用ESModule导出
+export { gameData };
