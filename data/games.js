@@ -15,15 +15,11 @@ async function loadAllGames() {
         for (let src of allGameFiles) {
             await import(src);
         }
-        // 载入完成后渲染页面游戏筛选列表
-        if (typeof window.renderGameSelectList === "function") {
-            window.renderGameSelectList();
-        }
+        console.log("✅所有游戏数据加载完毕");
     } catch (err) {
         console.error("游戏数据加载失败：", err);
         alert("部分游戏文件加载失败，请检查文件路径名称！");
     }
 }
-
-// 启动加载
-loadAllGames();
+// 将函数暴露到全局，交给index.html DOMContentLoaded之后再调用
+window.loadAllGames = loadAllGames;
