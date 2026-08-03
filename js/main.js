@@ -1,4 +1,6 @@
 // ===================== main.js 【数据层、公共工具函数】 =====================
+import { gameIdList } from "../data/game-list.js";
+
 // 全局存储key
 export const STORE_KEY = "otome-favlist-data";
 export const SPOILER_DATE_KEY = "spoiler-confirm-date"; // 全局剧透确认日期
@@ -98,7 +100,6 @@ export function getAvailableCharImages(char, globalHideSwitch, globalFDSwitch, l
 // ✅修复1：路径已修正：单层 /data/games/，删除多余一层data/ 彻底解决 data/data 错误
 export async function loadAllGameTemplates() {
     const basePath = "/data/games/";
-    const gameIdList = ["001"];
     const tempList = [];
 
     for (const id of gameIdList) {
