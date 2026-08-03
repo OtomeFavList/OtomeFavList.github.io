@@ -90,7 +90,7 @@ function getAvailableCharImages(char, globalHideSwitch, globalFDSwitch, localHid
     });
 }
 
-// 路径已修正：单层 /data/games/，删除多余一层data/
+// 路径已修正：单层 /data/games/，删除多余一层data/ 彻底解决 data/data 错误
 async function loadAllGameTemplates() {
     const basePath = "/data/games/";
     const gameIdList = ["001"];
@@ -181,7 +181,7 @@ function renderSelectedChar(gameItem, gameInfo) {
     return html || "<span>暂无选择角色</span>";
 }
 
-// 渲染CP【重点修改：严格25%｜75%布局 cp-layout-row】
+// 渲染CP【严格25%｜75%布局 cp-layout-row】
 function renderCP(gameItem, gameInfo) {
     if (!gameInfo?.charList) return "<span>暂无CP搭配</span>";
     let html = "";
@@ -227,7 +227,7 @@ function renderCP(gameItem, gameInfo) {
 
         html += `
         <div class="cp-layout-row">
-            <div class="heroine-column">
+            <div class="heroine-column" style="width:25%">
                 <div class="char-card-item selected" data-char-id="${fChar.id}" data-game-id="${gameInfo.id}">
                     <div class="char-card-img-box ${fAvailImgs.length>1?'char-has-multi-img':''}">
                         ${fAvailImgs.length>1?`<button class="char-switch-btn char-switch-prev">&lt;</button>`:""}
@@ -237,7 +237,7 @@ function renderCP(gameItem, gameInfo) {
                     <div class="char-card-name">${fChar.name}</div>
                 </div>
             </div>
-            <div class="hero-list-column">
+            <div class="hero-list-column" style="width:75%">
                 <div class="char-card-wrapper">
                     ${maleHtml || "<span>未选择男主</span>"}
                 </div>
@@ -440,12 +440,12 @@ window.onload = async function () {
         }
     }
 
-    // ========== 弹窗统一控制函数（仅单确认按钮，无取消） ==========
+    // ========== 弹窗统一控制函数 ==========
     function openSpoilerModal(type) {
         console.log("执行打开弹窗", type);
         if (!el.spoilerModal) {
             console.error("严重错误：页面不存在ID=spoiler-modal的弹窗DOM！HTML缺失弹窗");
-            alert("页面缺少剧透弹窗容器，弹窗无法弹出，请检查HTML弹窗代码");
+            alert("页面缺少剧透弹窗容器，请检查HTML");
             return;
         }
         modalOpen = true;
@@ -527,13 +527,11 @@ window.onload = async function () {
             }
             // 打开开关逻辑
             if(isTodayConfirmed()){
-                // 今日已确认，直接开启
                 appData.globalHideChar = true;
                 syncSingleGameSwitch("hideChar", true);
                 saveData();
                 renderAddedGame();
             }else{
-                // 今日未确认，回滚勾选并弹出弹窗
                 this.checked = false;
                 refreshHideCharSwitch();
                 if(modalOpen) return;
@@ -542,7 +540,7 @@ window.onload = async function () {
         })
     }
     
-    // ============【全局FD/续作开关（已配置剧透弹窗）】 ============
+    // ============【全局FD/续作开关｜已开启剧透预警，和隐藏角色规则一致】 ============
     if (el.globalFD) {
         el.globalFD.addEventListener('change', function() {
             const newStatus = this.checked;
@@ -554,15 +552,13 @@ window.onload = async function () {
                 renderAddedGame();
                 return;
             }
-            // 打开开关逻辑
+            // 打开开关触发剧透弹窗
             if(isTodayConfirmed()){
-                // 今日已确认，直接开启
                 appData.globalFD = true;
                 syncSingleGameSwitch("fd", true);
                 saveData();
                 renderAddedGame();
             }else{
-                // 今日未确认，回滚勾选并弹出弹窗
                 this.checked = false;
                 refreshFDSwitch();
                 if(modalOpen) return;
@@ -654,7 +650,7 @@ window.onload = async function () {
                 const newGameData = {
                     gameId: gid,
                     fold: false,
-                    expand: false, // 新增：控制详情展开状态
+                    expand: false,
                     localHideChar: false,
                     localFD: false,
                     loveRate: 0,
@@ -669,14 +665,13 @@ window.onload = async function () {
         })
     }
 
-    // 渲染已添加游戏卡片【重点更新DOM模板，匹配index.html折叠详情】
+    // 渲染已添加游戏卡片
     function renderAddedGame() {
         if (!el.addedGameBox) return;
         if (!Array.isArray(gameTemplateList) || gameTemplateList.length === 0) {
-            el.addedGameBox.innerHTML = "<p>⚠️ 游戏数据加载失败，部分文件404/路径错误，暂时无法展示游戏卡片</p>";
+            el.addedGameBox.innerHTML = "<p>⚠️ 游戏数据加载失败，文件路径错误/404</p>";
             return;
         }
-        // 清理上次渲染残留的弹窗标记class
         document.querySelectorAll(".modal-trigger").forEach(dom => dom.classList.remove("modal-trigger"));
 
         let html = "";
@@ -686,7 +681,6 @@ window.onload = async function () {
             let heartHtml = "";
             for (let i = 1; i <= 5; i++) heartHtml += `<span class="heart ${gameItem.loveRate >= i ? 'active' : ''}" data-val="${i}">♥</span>`;
             
-            // 封面图片路径兜底
             const coverImgSrc = gameInfo.cover ? `img/game/${gameInfo.cover}` : "";
 
             html += `
@@ -698,7 +692,6 @@ window.onload = async function () {
                         <button class="btn-del del-game" data-gid="${gameItem.gameId}">删除游戏</button>
                     </div>
                 </div>
-                <!-- 新增：点击标题展开/收起的游戏详情区域 -->
                 <div class="game-expand-detail ${gameItem.expand ? "open" : ""}">
                     <img class="game-expand-cover" src="${coverImgSrc}" alt="${gameInfo.name}封面">
                     <div class="game-info-text">
@@ -738,7 +731,7 @@ window.onload = async function () {
         bindGameCardEvent();
     }
 
-    // 游戏卡片内按钮事件（单游戏开关完全独立，不受全局锁死）
+    // 游戏卡片内按钮事件
     function bindGameCardEvent() {
         document.querySelectorAll(".fold-game").forEach(btn => {
             btn.onclick = () => {
@@ -770,7 +763,6 @@ window.onload = async function () {
                 }
             })
         })
-        // 【打开角色选择弹窗按钮】
         document.querySelectorAll(".open-char-pool").forEach(btn=>{
             btn.onclick = function(){
                 const gid = this.dataset.gid;
@@ -778,7 +770,6 @@ window.onload = async function () {
                 openCharSelectModal(gid);
             }
         })
-        // 【打开CP搭配弹窗（当前复用同一个弹窗，后续扩展cp逻辑）】
         document.querySelectorAll(".open-cp-pool").forEach(btn=>{
             btn.onclick = function(){
                 const gid = this.dataset.gid;
@@ -793,14 +784,12 @@ window.onload = async function () {
                 const gameItem = appData.gameList.find(g => g.gameId === gid);
                 if (!gameItem) return;
                 const targetStatus = this.checked;
-                // 关闭开关直接生效，无需弹窗
                 if (!targetStatus) {
                     gameItem.localHideChar = false;
                     saveData();
                     renderAddedGame();
                     return;
                 }
-                // 开启开关判断弹窗
                 if(localSwitchIsConfirmedToday()){
                     gameItem.localHideChar = true;
                     saveData();
@@ -814,7 +803,7 @@ window.onload = async function () {
                 }
             }
         })
-        // 单游戏FD开关（同步增加剧透弹窗逻辑）
+        // 单游戏FD开关【增加剧透弹窗逻辑，修复原缺失】
         document.querySelectorAll(".local-fd").forEach(sw => {
             sw.onchange = function () {
                 const gid = this.dataset.gid;
@@ -860,25 +849,21 @@ window.onload = async function () {
                 el.exportBtn.disabled = true;
                 el.exportBtn.textContent = "正在生成图片...";
 
-                // 启用导出快照样式，隐藏交互控件
                 el.snapshotContainer.classList.add('export-snapshot');
 
-                // 获取选中导出尺寸
                 let sizeValue = document.querySelector('input[name="export-size"]:checked').value;
                 let targetWidth, targetHeight;
                 if(sizeValue === 'long'){
                     targetWidth = 1080;
-                    targetHeight = 0; // 自适应高度，长图模式
+                    targetHeight = 0;
                 }else{
                     const [w,h] = sizeValue.split(',').map(Number);
                     targetWidth = w;
                     targetHeight = h;
                 }
 
-                // 获取自定义背景色
                 const bgColor = document.getElementById('color-bg').value;
 
-                // html2canvas渲染配置
                 const renderCanvas = await html2canvas(el.snapshotContainer, {
                     backgroundColor: bgColor,
                     scale: 2,
@@ -888,10 +873,8 @@ window.onload = async function () {
 
                 let finalCanvas;
                 if(targetHeight === 0){
-                    // 长图自适应
                     finalCanvas = renderCanvas;
                 }else{
-                    // 固定尺寸画布，居中绘制
                     const canvas = document.getElementById('export-canvas');
                     canvas.width = targetWidth;
                     canvas.height = targetHeight;
@@ -907,23 +890,20 @@ window.onload = async function () {
                     finalCanvas = canvas;
                 }
 
-                // 下载图片
                 const link = document.createElement('a');
                 link.download = `Otome_FavList_${new Date().getTime()}.png`;
                 link.href = finalCanvas.toDataURL('image/png');
                 link.click();
             } catch (err) {
                 console.error("导出失败：", err);
-                alert('图片导出异常！大概率是外部图片跨域限制，请优先使用本地图片资源。');
+                alert('图片导出异常！外部图片跨域可能导致失败，请使用本地图片资源。');
             } finally {
-                // 恢复页面正常显示
                 el.snapshotContainer.classList.remove('export-snapshot');
                 el.exportBtn.disabled = false;
                 el.exportBtn.textContent = "生成并导出图片";
             }
         });
     }
-    // =========================================================================
 
     // 初始渲染
     renderAddedGame();
