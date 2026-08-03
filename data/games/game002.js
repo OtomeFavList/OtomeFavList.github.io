@@ -8,87 +8,76 @@ const gameData = {
     year: "2020",
     publisher: "Otomate",
     cnStudio: "GSE",
-    writer: "かずら林檎","みぞおち鳩子","仰木サヤ","七瀬みお","紫堂零",
+    writer: "みぞおち鳩子","仰木サヤ","七瀬みお","紫堂零",
     art: "スオウ",
     cover: "img/game/002.jpg",
     charList: [
-        // 莉莉安娜
+        // 秋津志乃
         {
-            id: "g001_f01",
-            name: "莉莉安娜·亚多尔纳特",
+            id: "g002_f01",
+            name: "秋津志乃",
             gender: "female",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/001/Liliana.jpg","img/char/001/Liliana2.jpg"], type: "base" }
+                { srcList: ["img/char/002/Shino.jpg", type: "base" }
             ]
         },
-        // 但丁·法尔宗
+        // 恶露王
         {
-            id: "g001_m01",
-            name: "但丁·法尔宗",
+            id: "g002_m01",
+            name: "恶露王",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/001/Dante.jpg","img/char/001/Dante2.jpg","img/char/001/Dante3.jpg"], type: "base" }
+                { srcList: ["img/char/002/Akuroou.jpg","img/char/002/Akuroou2.jpg"], type: "base" }
             ]
         },
-        // 吉尔伯特·烈福
+        // 比良
         {
-            id: "g001_m02",
-            name: "吉尔伯特·烈福",
+            id: "g002_m02",
+            name: "比良",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/001/Gilbert.jpg","img/char/001/Gilbert2.jpg","img/char/001/Gilbert3.jpg"], type: "base" }
+                { srcList: ["img/char/002/Hira.jpg","img/char/002/Hira2.jpg"], type: "base" }
             ]
         },
-        // 尼古拉‧法兰捷斯卡
+        // 濑见季继
         {
-            id: "g001_m03",
-            name: "尼古拉‧法兰捷斯卡",
+            id: "g002_m03",
+            name: "濑见季继",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/001/Nicola.jpg","img/char/001/Nicola2.jpg","img/char/001/Nicola3.jpg"], type: "base" }
+                { srcList: ["img/char/002/Semi.jpg","img/char/002/Semi2.jpg"], type: "base" }
             ]
         },
-        // 奥罗克
+        // 白月
         {
-            id: "g001_m04",
-            name: "奥罗克",
+            id: "g002_m04",
+            name: "白月",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/001/Orlok.jpg","img/char/001/Orlok2.jpg","img/char/001/Orlok3.jpg"], type: "base" }
+                { srcList: ["img/char/002/Shiratsuki.jpg","img/char/002/Shiratsuki2.jpg"], type: "base" }
             ]
         },
-        // 杨
+        // 湫
         {
-            id: "g001_m05",
-            name: "杨",
+            id: "g002_m05",
+            name: "湫",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/001/Yang.jpg","img/char/001/Yang2.jpg","img/char/001/Yang3.jpg"], type: "base" }
+                { srcList: ["img/char/002/Shuu.jpg","img/char/002/Shuu2.jpg"], type: "base" }
             ]
         },
-        // 亨利‧兰伯特
-        {
-            id: "g001_h01",
-            name: "亨利·兰伯特",
-            gender: "male",
-            isHidden: true,
-            isFD: false,
-            images: [
-                { srcList: ["img/char/001/Henri.jpg"], type: "base" }
-            ]
-        }
     ]
 };
 
