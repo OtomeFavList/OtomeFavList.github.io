@@ -146,7 +146,7 @@ function fillFilterOptions(gameList) {
     fillSelect("filter-art", artSet);
 }
 
-// 渲染选中角色【重构：读取本地保存立绘索引】
+// 渲染选中角色【重构：读取本地保存立绘索引 | 适配200*200卡片样式】
 function renderSelectedChar(gameItem, gameInfo) {
     if (!gameInfo?.charList) return "<span>暂无选择角色</span>";
     let html = "";
@@ -168,17 +168,23 @@ function renderSelectedChar(gameItem, gameInfo) {
         const targetImg = availableImgs[imgIndex];
 
         html += `
-        <div class="char-item selected" data-char-id="${char.id}" data-game-id="${gameInfo.id}">
-            <img class="char-main-img" src="img/char/${targetImg.src}" style="width:100px;height:100px;">
-            <div>${char.name}</div>
-            ${availableImgs.length > 1 ? `<div class="char-img-switch">切换立绘</div>` : ""}
+        <div class="char-card-item selected" data-char-id="${char.id}" data-game-id="${gameInfo.id}">
+            <div class="char-card-img-box">
+                <img src="img/char/${targetImg.src}" alt="${char.name}">
+            </div>
+            <div class="char-card-name">${char.name}</div>
+            ${availableImgs.length > 1 ? `
+            <div class="char-image-switch">
+                <button class="prev-img">◀</button>
+                <button class="next-img">▶</button>
+            </div>` : ""}
         </div>
         `;
     })
     return html || "<span>暂无选择角色</span>";
 }
 
-// 渲染CP【重构：读取本地保存立绘索引，维持25%/75%布局】
+// 渲染CP【重点修改：严格25%｜75%布局 cp-layout-row】
 function renderCP(gameItem, gameInfo) {
     if (!gameInfo?.charList) return "<span>暂无CP搭配</span>";
     let html = "";
@@ -211,24 +217,40 @@ function renderCP(gameItem, gameInfo) {
             const mTargetImg = mAvailImgs[mIndex];
 
             maleHtml += `
-            <div class="char-item selected" data-char-id="${mChar.id}" data-game-id="${gameInfo.id}">
-                <img class="char-main-img" src="img/char/${mTargetImg.src}" style="width:100px;height:100px;">
-                <div>${mChar.name}</div>
-                ${mAvailImgs.length > 1 ? `<div class="char-img-switch">切换立绘</div>` : ""}
+            <div class="char-card-item selected" data-char-id="${mChar.id}" data-game-id="${gameInfo.id}">
+                <div class="char-card-img-box">
+                    <img src="img/char/${mTargetImg.src}" alt="${mChar.name}">
+                </div>
+                <div class="char-card-name">${mChar.name}</div>
+                ${mAvailImgs.length > 1 ? `
+                <div class="char-image-switch">
+                    <button class="prev-img">◀</button>
+                    <button class="next-img">▶</button>
+                </div>` : ""}
             </div>
             `;
         })
 
         html += `
-        <div class="cp-row">
-            <div class="cp-female">
-                <div class="char-item selected" data-char-id="${fChar.id}" data-game-id="${gameInfo.id}">
-                    <img class="char-main-img" src="img/char/${fTargetImg.src}" style="width:100px;height:100px;">
-                    <div>${fChar.name}</div>
-                    ${fAvailImgs.length > 1 ? `<div class="char-img-switch">切换立绘</div>` : ""}
+        <div class="cp-layout-row">
+            <div class="heroine-column">
+                <div class="char-card-item selected" data-char-id="${fChar.id}" data-game-id="${gameInfo.id}">
+                    <div class="char-card-img-box">
+                        <img src="img/char/${fTargetImg.src}" alt="${fChar.name}">
+                    </div>
+                    <div class="char-card-name">${fChar.name}</div>
+                    ${fAvailImgs.length > 1 ? `
+                    <div class="char-image-switch">
+                        <button class="prev-img">◀</button>
+                        <button class="next-img">▶</button>
+                    </div>` : ""}
                 </div>
             </div>
-            <div class="cp-male-wrap">${maleHtml || "<span>未选择男主</span>"}</div>
+            <div class="hero-list-column">
+                <div class="char-card-wrapper">
+                    ${maleHtml || "<span>未选择男主</span>"}
+                </div>
+            </div>
         </div>
         `;
     })
@@ -249,7 +271,7 @@ function getAllGameChar(gameInfo) {
     return [...female, ...male];
 }
 
-// 渲染角色选择弹窗内容
+// 渲染角色选择弹窗内容【核心修改：200*200卡片模板，匹配HTML CSS】
 function renderCharSelectModal(gameId) {
     const gameInfo = gameTemplateList.find(g => g.id === gameId);
     const gameItem = appData.gameList.find(g => g.gameId === gameId);
@@ -270,9 +292,11 @@ function renderCharSelectModal(gameId) {
         if(imgs.length === 0) return;
         const selected = gameItem.selectChars.includes(char.id) ? "selected" : "";
         femHtml += `
-        <label class="char-card-wrapper ${selected}" data-cid="${char.id}">
-            <img src="img/char/${imgs[0].src}" style="width:80px;height:80px;object-fit:cover;">
-            <div>${char.name}</div>
+        <label class="char-card-item ${selected}" data-cid="${char.id}">
+            <div class="char-card-img-box">
+                <img src="img/char/${imgs[0].src}" alt="${char.name}">
+            </div>
+            <div class="char-card-name">${char.name}</div>
         </label>`;
     });
     document.getElementById("heroine-box").innerHTML = femHtml;
@@ -284,15 +308,17 @@ function renderCharSelectModal(gameId) {
         if(imgs.length === 0) return;
         const selected = gameItem.selectChars.includes(char.id) ? "selected" : "";
         maleHtml += `
-        <label class="char-card-wrapper ${selected}" data-cid="${char.id}">
-            <img src="img/char/${imgs[0].src}" style="width:80px;height:80px;object-fit:cover;">
-            <div>${char.name}</div>
+        <label class="char-card-item ${selected}" data-cid="${char.id}">
+            <div class="char-card-img-box">
+                <img src="img/char/${imgs[0].src}" alt="${char.name}">
+            </div>
+            <div class="char-card-name">${char.name}</div>
         </label>`;
     });
     document.getElementById("hero-list-box").innerHTML = maleHtml;
 
     // 绑定弹窗内角色点击勾选
-    document.querySelectorAll("#char-select-modal .char-card-wrapper").forEach(item => {
+    document.querySelectorAll("#char-select-modal .char-card-item").forEach(item => {
         item.onclick = function(){
             const cid = this.dataset.cid;
             const idx = gameItem.selectChars.indexOf(cid);
@@ -363,11 +389,11 @@ window.onload = async function () {
     // ==========【全局事件委托：切换立绘 仅绑定一次，根除重复绑定BUG】==========
     if(el.addedGameBox){
         el.addedGameBox.addEventListener("click", function(e){
-            const switchBtn = e.target.closest(".char-img-switch");
+            const switchBtn = e.target.closest(".char-image-switch button");
             if(!switchBtn) return;
             e.stopPropagation();
 
-            const charItemBox = switchBtn.closest(".char-item");
+            const charItemBox = switchBtn.closest(".char-card-item");
             const charId = charItemBox.dataset.charId;
             const gameId = charItemBox.dataset.gameId;
             const gameInfo = gameTemplateList.find(g => g.id === gameId);
@@ -383,11 +409,17 @@ window.onload = async function () {
             );
             if (availImgs.length <= 1) return;
 
-            const imgDom = charItemBox.querySelector(".char-main-img");
+            const imgDom = charItemBox.querySelector(".char-card-img-box img");
             const saveKey = `${gameId}-${charId}`;
             let currentIndex = Number(appData.charImageSelect[saveKey] ?? 0);
-            currentIndex++;
-            if(currentIndex >= availImgs.length) currentIndex = 0;
+
+            if(switchBtn.classList.contains("next-img")){
+                currentIndex++;
+                if(currentIndex >= availImgs.length) currentIndex = 0;
+            }else{
+                currentIndex--;
+                if(currentIndex < 0) currentIndex = availImgs.length -1;
+            }
 
             // 更新图片 + 持久存储
             imgDom.src = `img/char/${availImgs[currentIndex].src}`;
@@ -677,7 +709,7 @@ window.onload = async function () {
                 </div>
                 <div class="char-section">
                     <button class="open-char-pool" data-gid="${gameItem.gameId}">选择角色 Character</button>
-                    <div class="char-selected-row" data-gid="${gameItem.gameId}">${renderSelectedChar(gameItem, gameInfo)}</div>
+                    <div class="char-card-wrapper char-selected-row" data-gid="${gameItem.gameId}">${renderSelectedChar(gameItem, gameInfo)}</div>
                 </div>
                 <div class="cp-group">
                     <button class="open-cp-pool" data-gid="${gameItem.gameId}">搭配CP Couple</button>
