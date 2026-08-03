@@ -19,6 +19,10 @@ html, body {
 .site-title {
     text-align: center;
 }
+/* 日乙个人喜好表 取消加粗 */
+.title-sub-cn {
+    font-weight: normal;
+}
 /* 弹窗文字居中样式 */
 #spoiler-modal .modal-box h3 {
     text-align: center;
@@ -322,10 +326,23 @@ hr.divider{
     display:grid;
     place-items:center;
 }
-/* 文字层级配色类（只定义class，实际颜色交给外部css） */
+/* 文字层级配色类 */
 .text-light-pink{
+    color:#c98fac;
 }
 .text-gray-desc{
+    color:#666666;
+}
+/* 设置/基础资料/游戏列表/导出 板块标题颜色 */
+#card-setting h2,
+#card-base h2,
+#card-game h2,
+#card-export h2 {
+    color:#c98fac;
+}
+/* About标题单独红色 #b33a3a */
+.about-block h2 {
+    color:#b33a3a;
 }
 
 /* =====【导出专用样式】===== */
