@@ -250,11 +250,9 @@ button:hover{
     background:#fff0f3;
     border-color:#e895a8;
 }
-/* =========【重点修改】游戏封面：固定高度300，宽度自动等比例 ========= */
 .game-option-item img{
-    height:300px;
-    width:auto;
-    max-width:100%;
+    width:120px;
+    height:auto;
     border-radius:6px;
     margin-bottom:6px;
     object-fit:cover;
