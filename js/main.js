@@ -390,41 +390,51 @@ window.onload = async function () {
     if(el.addedGameBox){
         el.addedGameBox.addEventListener("click", function(e){
             const switchBtn = e.target.closest(".char-image-switch button");
-            if(!switchBtn) return;
-            e.stopPropagation();
+            if(switchBtn){
+                e.stopPropagation();
+                const charItemBox = switchBtn.closest(".char-card-item");
+                const charId = charItemBox.dataset.charId;
+                const gameId = charItemBox.dataset.gameId;
+                const gameInfo = gameTemplateList.find(g => g.id === gameId);
+                const char = gameInfo.charList.find(c => c.id === charId);
+                const gameItem = appData.gameList.find(g => g.gameId === gameId);
 
-            const charItemBox = switchBtn.closest(".char-card-item");
-            const charId = charItemBox.dataset.charId;
-            const gameId = charItemBox.dataset.gameId;
-            const gameInfo = gameTemplateList.find(g => g.id === gameId);
-            const char = gameInfo.charList.find(c => c.id === charId);
-            const gameItem = appData.gameList.find(g => g.gameId === gameId);
+                const availImgs = getAvailableCharImages(
+                    char,
+                    appData.globalHideChar,
+                    appData.globalFD,
+                    gameItem.localHideChar,
+                    gameItem.localFD
+                );
+                if (availImgs.length <= 1) return;
 
-            const availImgs = getAvailableCharImages(
-                char,
-                appData.globalHideChar,
-                appData.globalFD,
-                gameItem.localHideChar,
-                gameItem.localFD
-            );
-            if (availImgs.length <= 1) return;
+                const imgDom = charItemBox.querySelector(".char-card-img-box img");
+                const saveKey = `${gameId}-${charId}`;
+                let currentIndex = Number(appData.charImageSelect[saveKey] ?? 0);
 
-            const imgDom = charItemBox.querySelector(".char-card-img-box img");
-            const saveKey = `${gameId}-${charId}`;
-            let currentIndex = Number(appData.charImageSelect[saveKey] ?? 0);
+                if(switchBtn.classList.contains("next-img")){
+                    currentIndex++;
+                    if(currentIndex >= availImgs.length) currentIndex = 0;
+                }else{
+                    currentIndex--;
+                    if(currentIndex < 0) currentIndex = availImgs.length -1;
+                }
 
-            if(switchBtn.classList.contains("next-img")){
-                currentIndex++;
-                if(currentIndex >= availImgs.length) currentIndex = 0;
-            }else{
-                currentIndex--;
-                if(currentIndex < 0) currentIndex = availImgs.length -1;
+                // 更新图片 + 持久存储
+                imgDom.src = `img/char/${availImgs[currentIndex].src}`;
+                appData.charImageSelect[saveKey] = currentIndex;
+                saveData();
+                return;
             }
 
-            // 更新图片 + 持久存储
-            imgDom.src = `img/char/${availImgs[currentIndex].src}`;
-            appData.charImageSelect[saveKey] = currentIndex;
-            saveData();
+            // =====【新增：点击游戏标题，展开/收起详情区块】=====
+            const titleClick = e.target.closest(".game-card-title");
+            if(titleClick){
+                const cardWrap = titleClick.closest(".added-game-card");
+                const detailBlock = cardWrap.querySelector(".game-expand-detail");
+                detailBlock.classList.toggle("open");
+                return;
+            }
         })
     }
 
@@ -656,6 +666,7 @@ window.onload = async function () {
                 const newGameData = {
                     gameId: gid,
                     fold: false,
+                    expand: false, // 新增：控制详情展开状态
                     localHideChar: false,
                     localFD: false,
                     loveRate: 0,
@@ -670,7 +681,7 @@ window.onload = async function () {
         })
     }
 
-    // 渲染已添加游戏卡片
+    // 渲染已添加游戏卡片【重点更新DOM模板，匹配index.html折叠详情】
     function renderAddedGame() {
         if (!el.addedGameBox) return;
         if (!Array.isArray(gameTemplateList) || gameTemplateList.length === 0) {
@@ -686,15 +697,31 @@ window.onload = async function () {
             if (!gameInfo) return;
             let heartHtml = "";
             for (let i = 1; i <= 5; i++) heartHtml += `<span class="heart ${gameItem.loveRate >= i ? 'active' : ''}" data-val="${i}">♥</span>`;
+            
+            // 封面图片路径兜底
+            const coverImgSrc = gameInfo.cover ? `img/game/${gameInfo.cover}` : "";
+
             html += `
-            <div class="game-card ${gameItem.fold ? 'hide-block' : ''}" data-gid="${gameItem.gameId}">
-                <div class="game-card-head">
-                    <h3>${gameInfo.name}</h3>
-                    <div style="display:flex;gap:8px;">
-                        <button class="btn-fold fold-game" data-gid="${gameItem.gameId}">折叠</button>
-                        <button class="btn-del del-game" data-gid="${gameItem.gameId}">删除</button>
+            <div class="added-game-card" data-game-id="${gameItem.gameId}">
+                <div class="game-card-header">
+                    <span class="game-card-title">${gameInfo.name}</span>
+                    <div class="game-card-switch-group">
+                        <button class="btn-fold fold-game" data-gid="${gameItem.gameId}">折叠板块</button>
+                        <button class="btn-del del-game" data-gid="${gameItem.gameId}">删除游戏</button>
                     </div>
                 </div>
+                <!-- 新增：点击标题展开/收起的游戏详情区域 -->
+                <div class="game-expand-detail ${gameItem.expand ? "open" : ""}">
+                    <img class="game-expand-cover" src="${coverImgSrc}" alt="${gameInfo.name}封面">
+                    <div class="game-info-text">
+                        <p><strong>发售年份：</strong>${gameInfo.year || "暂无资料"}</p>
+                        <p><strong>发行厂商：</strong>${gameInfo.publisher || "暂无资料"}</p>
+                        <p><strong>原画：</strong>${gameInfo.art || "暂无资料"}</p>
+                        <p><strong>编剧：</strong>${gameInfo.writer || "暂无资料"}</p>
+                        <p><strong>简介：</strong>${gameInfo.desc || "暂无简介"}</p>
+                    </div>
+                </div>
+
                 <div class="heart-rate" data-gid="${gameItem.gameId}">${heartHtml}</div>
                 <div class="game-switch-group">
                     <label class="switch">
