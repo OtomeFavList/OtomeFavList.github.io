@@ -324,6 +324,9 @@ function closeCharSelectModal(){
 
 // 页面所有DOM、事件、渲染逻辑全部放在onload内部
 window.onload = async function () {
+    // 预加载所有游戏数据
+    await loadAllGameTemplates();
+
     // 1. 页面加载完成再获取所有DOM元素
     const el = {
         globalHideChar: document.getElementById("global-hide-char"),
@@ -417,12 +420,12 @@ window.onload = async function () {
         }
         modalOpen = true;
         modalTargetType = type;
-        el.spoilerModal.style.display = "flex";
+        el.spoilerModal.classList.add("active");
     }
     function closeSpoilerModal() {
         if (!el.spoilerModal) return;
         modalOpen = false;
-        el.spoilerModal.style.display = "none";
+        el.spoilerModal.classList.remove("active");
         modalTargetType = "";
     }
 
@@ -440,6 +443,9 @@ window.onload = async function () {
     if(el.colorBg) document.body.style.background = appData.exportColor.bg;
     refreshHideCharSwitch();
     refreshFDSwitch();
+
+    // 填充筛选下拉选项
+    fillFilterOptions(gameTemplateList);
 
     // 弹窗唯一确认按钮绑定
     if (el.spoilerConfirm) {
@@ -559,6 +565,24 @@ window.onload = async function () {
         }
     })
 
+    // =========【新增：添加游戏按钮点击事件】=========
+    if(el.addGameBtn){
+        el.addGameBtn.onclick = function(){
+            renderGameSelectList();
+            el.searchPanel.classList.remove("hide-block");
+        }
+    }
+    // 搜索框输入实时刷新列表
+    if(el.gameSearchInput){
+        el.gameSearchInput.addEventListener("input", renderGameSelectList);
+    }
+    // 筛选下拉变更刷新列表
+    const filterSelectIds = ["filter-year","filter-publisher","filter-cn","filter-writer","filter-art"];
+    filterSelectIds.forEach(selId=>{
+        const sel = document.getElementById(selId);
+        if(sel) sel.addEventListener("change", renderGameSelectList);
+    });
+
     // 游戏列表渲染函数
     function renderGameSelectList() {
         if (!el.gameSearchInput || !el.gameSelectList || !Array.isArray(gameTemplateList)) return;
@@ -664,7 +688,6 @@ window.onload = async function () {
         })
         el.addedGameBox.innerHTML = html;
         bindGameCardEvent();
-        // ❗已移除 bindCharImageSwitch(); 不再重复绑定
     }
 
     // 游戏卡片内按钮事件（单游戏开关完全独立，不受全局锁死）
@@ -707,7 +730,7 @@ window.onload = async function () {
                 openCharSelectModal(gid);
             }
         })
-        // 【打开CP搭配弹窗（当前复用同一个弹窗，后续可以扩展cp逻辑）】
+        // 【打开CP搭配弹窗（当前复用同一个弹窗，后续扩展cp逻辑）】
         document.querySelectorAll(".open-cp-pool").forEach(btn=>{
             btn.onclick = function(){
                 const gid = this.dataset.gid;
@@ -715,7 +738,7 @@ window.onload = async function () {
                 openCharSelectModal(gid);
             }
         })
-        // 单游戏隐藏角色开关【已修复弹窗逻辑】
+        // 单游戏隐藏角色开关
         document.querySelectorAll(".local-hide-char").forEach(sw => {
             sw.onchange = function () {
                 const gid = this.dataset.gid;
@@ -743,8 +766,45 @@ window.onload = async function () {
                 }
             }
         })
-        // 单游戏FD开关【已修复弹窗逻辑】
+        // 单游戏FD开关
         document.querySelectorAll(".local-fd").forEach(sw => {
             sw.onchange = function () {
                 const gid = this.dataset.gid;
-                const gameItem = appDa
+                const gameItem = appData.gameList.find(g => g.gameId === gid);
+                if (!gameItem) return;
+                const targetStatus = this.checked;
+                if (!targetStatus) {
+                    gameItem.localFD = false;
+                    saveData();
+                    renderAddedGame();
+                    return;
+                }
+                if(localSwitchIsConfirmedToday()){
+                    gameItem.localFD = true;
+                    saveData();
+                    renderAddedGame();
+                }else{
+                    this.checked = false;
+                    if (modalOpen) return;
+                    this.classList.add("modal-trigger");
+                    modalTargetType = "localFD";
+                    openSpoilerModal("localFD");
+                }
+            }
+        })
+    }
+
+    // 角色弹窗关闭按钮
+    if(el.modalCloseBtn){
+        el.modalCloseBtn.onclick = closeCharSelectModal;
+    }
+    if(el.modalCancelBtn){
+        el.modalCancelBtn.onclick = closeCharSelectModal;
+    }
+    if(el.modalConfirmBtn){
+        el.modalConfirmBtn.onclick = closeCharSelectModal;
+    }
+
+    // 初始渲染
+    renderAddedGame();
+}
