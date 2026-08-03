@@ -1,4 +1,4 @@
-// data/games/game001.js
+// data/games/game002.js
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
 // 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
@@ -8,7 +8,7 @@ const gameData = {
     year: "2020",
     publisher: "Otomate",
     cnStudio: "GSE",
-    writer: "みぞおち鳩子","仰木サヤ","七瀬みお","紫堂零",
+    writer: ["みぞおち鳩子","仰木サヤ","七瀬みお","紫堂零"],
     art: "スオウ",
     cover: "img/game/002.jpg",
     charList: [
@@ -20,7 +20,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/002/Shino.jpg", type: "base" }
+                { srcList: ["img/char/002/Shino.jpg"], type: "base" }
             ]
         },
         // 恶露王
@@ -77,9 +77,9 @@ const gameData = {
             images: [
                 { srcList: ["img/char/002/Shuu.jpg","img/char/002/Shuu2.jpg"], type: "base" }
             ]
-        },
+        }
     ]
 };
 
-// 移除旧全局push写法！使用ESModule导出
+// ESModule导出
 export { gameData };
