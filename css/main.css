@@ -54,17 +54,18 @@ body{
     letter-spacing:1px;
     color: #b33a3a;
 }
-/* 日乙个人喜好表副标题，同尺寸灰色文字 */
+/* 日乙个人喜好表副标题，统一主标题红色 */
 .title-sub-cn{
     font-size:16px;
     margin:8px 0;
-    color:#666;
+    color:#b33a3a;
     font-family:sans-serif;
+    font-weight:bold;
 }
 .sub-desc{
     text-align:center;
     font-size:16px;
-    color:#666;
+    color:#222222;
     margin-bottom:40px;
 }
 
@@ -90,7 +91,7 @@ body{
     font-size:24px;
     border-left:5px solid #c98fac;
     padding-left:12px;
-    color: #b85878;
+    color: #b33a3a;
     font-weight:bold;
     font-family:sans-serif;
 }
@@ -102,6 +103,11 @@ body{
     gap:12px;
     margin:14px 0;
     flex-wrap:wrap;
+}
+/* 开关名称文字：淡色区分（全局显示隐藏角色/续作FD角色标签） */
+.switch-row > label:first-of-type{
+    color:#c98fac;
+    font-weight:normal !important;
 }
 .switch-desc{
     font-size:14px;
@@ -157,7 +163,9 @@ input:checked + .slider:before{
     gap:6px;
     max-width:600px;
 }
+/* 设置项标签：昵称、背景色、导出尺寸 → 淡粉色区分 */
 .form-row label{
+    color:#c98fac;
     font-weight:normal !important;
 }
 .form-row input{
@@ -201,6 +209,7 @@ button:hover{
     display:flex;
     justify-content:center;
     margin:16px 0;
+    gap:12px;
 }
 
 .game-search-box{
@@ -468,10 +477,10 @@ button:hover{
     margin:8px 0;
     font-size:16px;
     line-height:1.8;
-    color:#666;
+    color:#222222;
 }
 .about-block p.email-text{
-    color:#222;
+    color:#222222;
 }
 
 /* 通用隐藏类：仅用于搜索面板、折叠卡片，不控制弹窗 */
@@ -483,7 +492,7 @@ h1{
     color: #b33a3a;
 }
 h2{
-    color: #b85878;
+    color: #b33a3a;
 }
 .text-light-pink{
     color: #c98fac;
