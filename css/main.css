@@ -2,8 +2,8 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    /* 全局默认字体：思源柔黑体 GenJyuuGothic，兜底原有字体 */
-    font-family:sans-serif,system-ui;
+    /* 全局默认字体：思源柔黑体 GenJyuuGothic */
+    font-family:"GenJyuuGothic", sans-serif,system-ui;
 }
 
 /* 预加载思源柔黑体、思源黑体字体（放在最顶部字体定义） */
@@ -59,7 +59,6 @@ body{
     font-size:16px;
     margin:8px 0;
     color:#666;
-    font-family:sans-serif;
     font-weight:normal;
 }
 .sub-desc{
@@ -93,7 +92,6 @@ body{
     padding-left:12px;
     color: #b85878;
     font-weight:bold;
-    font-family:sans-serif;
 }
 
 /* 开关区域 */
@@ -176,7 +174,6 @@ button{
     cursor:pointer;
     font-size:15px;
     transition:0.2s;
-    font-family:sans-serif;
 }
 button:hover{
     background:#992e2e;
@@ -418,7 +415,6 @@ button:hover{
 .modal-box h3{
     margin-bottom:14px;
     color:#b33a3a;
-    font-family:sans-serif;
 }
 .modal-btns{
     display:flex;
