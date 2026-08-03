@@ -12,18 +12,18 @@ const singleGameData = {
     art: "RiRi",
     cover: "img/game/001.jpg", // 封面图路径，统一前缀img/
     charList: [
-        // 女主模板 female
+        // 莉莉安娜
         {
             id: "g001_f01",
-            name: "莉莉安娜",
+            name: "莉莉安娜·亚多尔纳特",
             gender: "female",
             isHidden: false,
             isFD: false,
             images: [
-                { src: "img/char/001/Liliana.jpg", type: "base" },      // 默认基础图，始终加载
+                { src: "img/char/001/Liliana.jpg","img/char/001/Liliana2.jpg", type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 但丁·法尔宗
         {
             id: "g001_m01",
             name: "但丁·法尔宗",
@@ -31,10 +31,10 @@ const singleGameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { src: "img/char/001/Dante.jpg", type: "base" },
+                { src: "img/char/001/Dante.jpg","img/char/001/Dante2.jpg","img/char/001/Dante3.jpg", type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 吉尔伯特·烈福
         {
             id: "g001_m02",
             name: "吉尔伯特·烈福",
@@ -42,36 +42,32 @@ const singleGameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { src: "img/char/g001_m01_1.jpg", type: "base" },
+                { src: "img/char/001/Gilbert.jpg","img/char/001/Gilbert2.jpg","img/char/001/Gilbert3.jpg", type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 尼古拉‧法兰捷斯卡
         {
             id: "g001_m03",
-            name: "但丁·法尔宗",
+            name: "尼古拉‧法兰捷斯卡",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { src: "img/char/g001_m01_1.jpg", type: "base" },
-                { src: "img/char/g001_m01_2.jpg", type: "hidden" },
-                { src: "img/char/g001_m01_3.jpg", type: "fd" }          // 需要开启FD开关才展示的图片
+                { src: "img/char/001/Nicola.jpg","img/char/001/Nicola2.jpg","img/char/001/Nicola3.jpg", type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 奥罗克
         {
             id: "g001_m04",
-            name: "但丁·法尔宗",
+            name: "奥罗克",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { src: "img/char/g001_m01_1.jpg", type: "base" },
-                { src: "img/char/g001_m01_2.jpg", type: "hidden" },
-                { src: "img/char/g001_m01_3.jpg", type: "fd" }          // 需要开启FD开关才展示的图片
+                { src: "img/char/001/Orlok.jpg","img/char/001/Orlok2.jpg","img/char/001/Orlok3.jpg", type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 杨
         {
             id: "g001_m05",
             name: "但丁·法尔宗",
@@ -79,12 +75,10 @@ const singleGameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { src: "img/char/g001_m01_1.jpg", type: "base" },
-                { src: "img/char/g001_m01_2.jpg", type: "hidden" },
-                { src: "img/char/g001_m01_3.jpg", type: "fd" }          // 需要开启FD开关才展示的图片
+                { src: "img/char/001/Yang.jpg","img/char/001/Yang2.jpg","img/char/001/Yang3.jpg", type: "base" },
             ]
         },
-        // 隐藏角色（isHidden=true → 开关开启才显示整个角色卡片）
+        // 亨利‧兰伯特
         {
             id: "g001_h01",
             name: "亨利·兰伯特",
@@ -92,7 +86,7 @@ const singleGameData = {
             isHidden: true,
             isFD: false,
             images: [
-                { src: "img/char/g001_h01_1.jpg", type: "base" }
+                { src: "img/char/001/Henri.jpg", type: "base" }
             ]
         },
     ]
