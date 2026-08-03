@@ -452,6 +452,10 @@ button:hover{
     gap:10px;
     flex-wrap:wrap;
 }
+/* 导出尺寸所有选项文字统一和导出尺寸标签同色 */
+.size-select label {
+    color:#c98fac;
+}
 
 /* About底部区域【需求②：About标题 #b33a3a】 */
 .about-block{
