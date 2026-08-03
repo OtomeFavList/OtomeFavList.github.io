@@ -54,13 +54,13 @@ body{
     letter-spacing:1px;
     color: #b33a3a;
 }
-/* 日乙个人喜好表副标题 #666 */
+/* 日乙个人喜好表副标题 #666 取消加粗【需求①】 */
 .title-sub-cn{
     font-size:16px;
     margin:8px 0;
     color:#666;
     font-family:sans-serif;
-    font-weight:bold;
+    font-weight:normal;
 }
 .sub-desc{
     text-align:center;
@@ -85,13 +85,13 @@ body{
     padding:24px;
     transition:border-color 0.2s;
 }
-/* 卡片小标题：一、设置... 改为 #b85878 */
+/* 板块标题：一、设置/基础资料/游戏列表/导出 → #c98fac【需求③】 */
 .big-card h2{
     margin-bottom:20px;
     font-size:24px;
     border-left:5px solid #c98fac;
     padding-left:12px;
-    color: #b85878;
+    color: #c98fac;
     font-weight:bold;
     font-family:sans-serif;
 }
@@ -103,11 +103,6 @@ body{
     gap:12px;
     margin:14px 0;
     flex-wrap:wrap;
-}
-/* 开关名称文字：淡色区分（全局显示隐藏角色/续作FD角色标签） */
-.switch-row > label:first-of-type{
-    color:#c98fac;
-    font-weight:normal !important;
 }
 .switch-desc{
     font-size:14px;
@@ -162,11 +157,6 @@ input:checked + .slider:before{
     flex-direction:column;
     gap:6px;
     max-width:600px;
-}
-/* 设置项标签：昵称、背景色、导出尺寸 → 淡粉色区分 */
-.form-row label{
-    color:#c98fac;
-    font-weight:normal !important;
 }
 .form-row input{
     padding:10px;
@@ -407,7 +397,7 @@ button:hover{
     width:200px;
 }
 
-/* 弹窗遮罩（核心修改：默认display:none，已删除.modal-mask.hide-block规则） */
+/* 弹窗遮罩 */
 .modal-mask{
     position:fixed;
     inset:0;
@@ -462,16 +452,15 @@ button:hover{
     gap:10px;
     flex-wrap:wrap;
 }
-.size-select label{
-    color:#c98fac !important;
-    font-weight:normal;
-}
 
-/* About底部区域 */
+/* About底部区域【需求②：About标题 #b33a3a】 */
 .about-block{
     text-align:center;
     margin-top:50px;
     padding:20px;
+}
+.about-block h2{
+    color:#b33a3a;
 }
 .about-block p{
     margin:8px 0;
