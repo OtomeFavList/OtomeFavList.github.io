@@ -371,6 +371,7 @@ window.onload = async function () {
         colorBorder: document.getElementById("color-border"),
         exportBtn: document.getElementById("btn-export"),
         canvas: document.getElementById("export-canvas"),
+        snapshotContainer: document.getElementById("snapshot-container"),
         // 角色选择弹窗DOM
         charSelectModal: document.getElementById("char-select-modal"),
         modalCloseBtn: document.querySelector(".modal-close-btn"),
@@ -851,6 +852,78 @@ window.onload = async function () {
     if(el.modalConfirmBtn){
         el.modalConfirmBtn.onclick = closeCharSelectModal;
     }
+
+    // =====================【导出图片核心逻辑，适配html2canvas】=====================
+    if(el.exportBtn && el.snapshotContainer){
+        el.exportBtn.addEventListener('click', async () => {
+            try {
+                el.exportBtn.disabled = true;
+                el.exportBtn.textContent = "正在生成图片...";
+
+                // 启用导出快照样式，隐藏交互控件
+                el.snapshotContainer.classList.add('export-snapshot');
+
+                // 获取选中导出尺寸
+                let sizeValue = document.querySelector('input[name="export-size"]:checked').value;
+                let targetWidth, targetHeight;
+                if(sizeValue === 'long'){
+                    targetWidth = 1080;
+                    targetHeight = 0; // 自适应高度，长图模式
+                }else{
+                    const [w,h] = sizeValue.split(',').map(Number);
+                    targetWidth = w;
+                    targetHeight = h;
+                }
+
+                // 获取自定义背景色
+                const bgColor = document.getElementById('color-bg').value;
+
+                // html2canvas渲染配置
+                const renderCanvas = await html2canvas(el.snapshotContainer, {
+                    backgroundColor: bgColor,
+                    scale: 2,
+                    useCORS: true,
+                    logging: false
+                });
+
+                let finalCanvas;
+                if(targetHeight === 0){
+                    // 长图自适应
+                    finalCanvas = renderCanvas;
+                }else{
+                    // 固定尺寸画布，居中绘制
+                    const canvas = document.getElementById('export-canvas');
+                    canvas.width = targetWidth;
+                    canvas.height = targetHeight;
+                    const ctx = canvas.getContext('2d');
+                    ctx.fillStyle = bgColor;
+                    ctx.fillRect(0,0,targetWidth,targetHeight);
+                    const scale = Math.min(targetWidth / renderCanvas.width, targetHeight / renderCanvas.height);
+                    const drawW = renderCanvas.width * scale;
+                    const drawH = renderCanvas.height * scale;
+                    const offsetX = (targetWidth - drawW) / 2;
+                    const offsetY = (targetHeight - drawH) / 2;
+                    ctx.drawImage(renderCanvas, offsetX, offsetY, drawW, drawH);
+                    finalCanvas = canvas;
+                }
+
+                // 下载图片
+                const link = document.createElement('a');
+                link.download = `Otome_FavList_${new Date().getTime()}.png`;
+                link.href = finalCanvas.toDataURL('image/png');
+                link.click();
+            } catch (err) {
+                console.error("导出失败：", err);
+                alert('图片导出异常！大概率是外部图片跨域限制，请优先使用本地图片资源。');
+            } finally {
+                // 恢复页面正常显示
+                el.snapshotContainer.classList.remove('export-snapshot');
+                el.exportBtn.disabled = false;
+                el.exportBtn.textContent = "生成并导出图片";
+            }
+        });
+    }
+    // =========================================================================
 
     // 初始渲染
     renderAddedGame();
