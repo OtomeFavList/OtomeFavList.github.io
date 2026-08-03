@@ -129,6 +129,88 @@ hr.divider{
     padding:2px 6px;
     cursor:pointer;
 }
+
+/* =========【新增：游戏搜索面板样式】========= */
+.game-search-box {
+    margin:12px 0;
+    padding:16px;
+    border:1px solid #e2d2d7;
+    border-radius:10px;
+}
+.game-search-box input[type="text"]{
+    width:100%;
+    padding:8px 10px;
+    box-sizing:border-box;
+    margin-bottom:10px;
+    border:1px solid #ddd;
+    border-radius:6px;
+}
+.filter-group{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px,1fr));
+    gap:8px;
+    margin-bottom:12px;
+}
+.filter-group select{
+    padding:6px 8px;
+    border:1px solid #ddd;
+    border-radius:6px;
+}
+.game-item{
+    padding:10px;
+    border:1px solid #eee;
+    border-radius:8px;
+    cursor:pointer;
+    margin-bottom:8px;
+}
+.game-item:hover{
+    background:#f8eef2;
+}
+.game-item-detail{
+    display:none;
+    grid-template-columns:220px 1fr;
+    gap:16px;
+    margin-top:12px;
+}
+.game-item-detail.active{
+    display:grid;
+}
+.game-cover-preview{
+    width:100%;
+    aspect-ratio:3/4;
+    background:#dddddd;
+    border-radius:6px;
+}
+/* 已添加游戏卡片样式 */
+.added-game-card{
+    border:1px solid #f6a5b8;
+    border-radius:10px;
+    padding:14px;
+    margin:12px 0;
+}
+.game-card-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+.game-card-switch-group{
+    display:flex;
+    gap:10px;
+}
+.char-add-box{
+    width:200px;
+    height:200px;
+    border:2px dashed #b98899;
+    display:grid;
+    place-items:center;
+    cursor:pointer;
+}
+.couple-slot-left{
+    min-height:200px;
+    border:1px dashed #c997a8;
+    display:grid;
+    place-items:center;
+}
 </style>
 </head>
 <body>
