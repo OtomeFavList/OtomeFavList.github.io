@@ -512,20 +512,20 @@ h2{
     }
 }
 
-/* 基础信息 两行双栏布局 */
-.form-row-pair{
-    display:flex;
-    gap:24px;
-    flex-wrap:wrap;
+.form-row-double {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin: 16px 0;
 }
-.form-row-pair > .form-row{
-    flex:1;
-    min-width:260px;
-    max-width:unset;
+.form-row-double > .form-row {
+    flex: 1;
+    min-width: 260px;
+    max-width: unset;
 }
-
-@media (max-width:768px){
-    .form-row-pair{
-        flex-direction:column;
+@media (max-width:768px) {
+    .form-row-double {
+        flex-direction: column;
+        gap: 12px;
     }
 }
