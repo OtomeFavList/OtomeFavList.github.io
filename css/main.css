@@ -65,7 +65,7 @@ body{
 .sub-desc{
     text-align:center;
     font-size:16px;
-    color:#222222;
+    color:#b33a3a;
     margin-bottom:40px;
 }
 
@@ -477,10 +477,10 @@ button:hover{
     margin:8px 0;
     font-size:16px;
     line-height:1.8;
-    color:#222222;
+    color:#b33a3a;
 }
 .about-block p.email-text{
-    color:#222222;
+    color:#b33a3a;
 }
 
 /* 通用隐藏类：仅用于搜索面板、折叠卡片，不控制弹窗 */
