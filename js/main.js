@@ -66,29 +66,24 @@ export function saveLocalSwitchConfirmDate() {
 }
 
 /**
- * 获取角色可用图片列表（过滤被权限锁定的图像）
+ * 获取角色可用图片组（适配你项目 srcList 格式）
  * @param {Object} char 角色对象
  * @param {boolean} globalHideSwitch 全局隐藏角色开关
  * @param {boolean} globalFDSwitch 全局FD开关
  * @param {boolean} localHideSwitch 当前游戏隐藏角色开关
  * @param {boolean} localFDSwitch 当前游戏FD开关
- * @returns Array 过滤后可用图片数组
+ * @returns Array 过滤后可用图片单元，每个单元包含 srcList + type
  */
 export function getAvailableCharImages(char, globalHideSwitch, globalFDSwitch, localHideSwitch, localFDSwitch) {
-    // 空值防御
     if (!char) return [];
-    // 旧数据兼容处理：识别老的 imgs 数组
-    if (!char.images && Array.isArray(char.imgs)) {
-        char.images = char.imgs.map(src => ({ src, type: "base" }));
-    }
     if (!char.images || !Array.isArray(char.images)) return [];
 
     const enableHidden = globalHideSwitch || localHideSwitch;
     const enableFD = globalFDSwitch || localFDSwitch;
 
-    return char.images.filter(img => {
-        if(!img) return false;
-        switch (img.type) {
+    return char.images.filter(imgUnit => {
+        if(!imgUnit || !Array.isArray(imgUnit.srcList)) return false;
+        switch (imgUnit.type) {
             case "base":
                 return true;
             case "hidden":
@@ -164,9 +159,8 @@ export function fillFilterOptions(gameList) {
     fillSelect("filter-art", artSet);
 }
 
-// 渲染选中角色【重构：读取本地保存立绘索引 | 适配200*200卡片样式】
+// 渲染选中角色【适配 srcList 多图数组】
 export function renderSelectedChar(gameItem, gameInfo) {
-    // ✅修复2：空值防御
     if (!gameInfo?.charList || !gameItem) return "<span>暂无选择角色</span>";
     let html = "";
     const globalHide = appData.globalHideChar;
@@ -178,21 +172,25 @@ export function renderSelectedChar(gameItem, gameInfo) {
     gameItem.selectChars?.forEach(cid => {
         const char = gameInfo.charList?.find(c => c.id === cid);
         if (!char) return;
-        const availableImgs = getAvailableCharImages(char, globalHide, globalFD, localHide, localFD);
-        if (availableImgs.length === 0) return;
+        const availableImgUnits = getAvailableCharImages(char, globalHide, globalFD, localHide, localFD);
+        if (availableImgUnits.length === 0) return;
+
+        // 合并所有可用图片地址
+        let allSrc = [];
+        availableImgUnits.forEach(u => allSrc.push(...u.srcList));
+        if(allSrc.length === 0) return;
 
         const saveKey = `${gameInfo.id}-${char.id}`;
-        // 读取存储索引，越界自动归零
         let imgIndex = Number(appData.charImageSelect[saveKey] ?? 0);
-        if(imgIndex >= availableImgs.length) imgIndex = 0;
-        const targetImg = availableImgs[imgIndex];
+        if(imgIndex >= allSrc.length) imgIndex = 0;
+        const targetSrc = allSrc[imgIndex];
 
         html += `
-        <div class="char-card-item selected" data-char-id="${char.id}" data-game-id="${gameInfo.id}">
-            <div class="char-card-img-box ${availableImgs.length>1?'char-has-multi-img':''}">
-                ${availableImgs.length>1?`<button class="char-switch-btn char-switch-prev">&lt;</button>`:""}
-                <img src="img/char/${targetImg.src}" alt="${char.name}">
-                ${availableImgs.length>1?`<button class="char-switch-btn char-switch-next">&gt;</button>`:""}
+        <div class="char-card-item selected" data-char-id="${char.id}" data-game-id="${gameInfo.id}" data-total-img="${allSrc.length}">
+            <div class="char-card-img-box ${allSrc.length>1?'char-has-multi-img':''}">
+                ${allSrc.length>1?`<button class="char-switch-btn char-switch-prev">&lt;</button>`:""}
+                <img src="${targetSrc}" alt="${char.name}">
+                ${allSrc.length>1?`<button class="char-switch-btn char-switch-next">&gt;</button>`:""}
             </div>
             <div class="char-card-name">${char.name}</div>
         </div>
@@ -201,9 +199,8 @@ export function renderSelectedChar(gameItem, gameInfo) {
     return html || "<span>暂无选择角色</span>";
 }
 
-// 渲染CP【严格25%｜75%布局 cp-layout-row】
+// 渲染CP【严格25%｜75%布局｜适配srcList】
 export function renderCP(gameItem, gameInfo) {
-    // ✅修复2：空防御
     if (!gameInfo?.charList || !gameItem) return "<span>暂无CP搭配</span>";
     let html = "";
     const globalHide = appData.globalHideChar;
@@ -216,33 +213,37 @@ export function renderCP(gameItem, gameInfo) {
         if(!cp) return;
         const fChar = gameInfo.charList?.find(c => c.id === cp.femaleId);
         if (!fChar) return;
-        const fAvailImgs = getAvailableCharImages(fChar, globalHide, globalFD, localHide, localFD);
-        if (fAvailImgs.length === 0) return;
+        const fAvailUnits = getAvailableCharImages(fChar, globalHide, globalFD, localHide, localFD);
+        let fAllSrc = [];
+        fAvailUnits.forEach(u=>fAllSrc.push(...u.srcList));
+        if (fAllSrc.length === 0) return;
 
         const fSaveKey = `${gameInfo.id}-${fChar.id}`;
         let fIndex = Number(appData.charImageSelect[fSaveKey] ?? 0);
-        if(fIndex >= fAvailImgs.length) fIndex = 0;
-        const fTargetImg = fAvailImgs[fIndex];
+        if(fIndex >= fAllSrc.length) fIndex = 0;
+        const fTargetSrc = fAllSrc[fIndex];
 
         let maleHtml = "";
         if(!Array.isArray(cp.maleIds)) cp.maleIds = [];
         cp.maleIds?.forEach(mid => {
             const mChar = gameInfo.charList?.find(c => c.id === mid);
             if (!mChar) return;
-            const mAvailImgs = getAvailableCharImages(mChar, globalHide, globalFD, localHide, localFD);
-            if (mAvailImgs.length === 0) return;
+            const mAvailUnits = getAvailableCharImages(mChar, globalHide, globalFD, localHide, localFD);
+            let mAllSrc = [];
+            mAvailUnits.forEach(u=>mAllSrc.push(...u.srcList));
+            if (mAllSrc.length === 0) return;
 
             const mSaveKey = `${gameInfo.id}-${mChar.id}`;
             let mIndex = Number(appData.charImageSelect[mSaveKey] ?? 0);
-            if(mIndex >= mAvailImgs.length) mIndex = 0;
-            const mTargetImg = mAvailImgs[mIndex];
+            if(mIndex >= mAllSrc.length) mIndex = 0;
+            const mTargetSrc = mAllSrc[mIndex];
 
             maleHtml += `
-            <div class="char-card-item selected" data-char-id="${mChar.id}" data-game-id="${gameInfo.id}">
-                <div class="char-card-img-box ${mAvailImgs.length>1?'char-has-multi-img':''}">
-                    ${mAvailImgs.length>1?`<button class="char-switch-btn char-switch-prev">&lt;</button>`:""}
-                    <img src="img/char/${mTargetImg.src}" alt="${mChar.name}">
-                    ${mAvailImgs.length>1?`<button class="char-switch-btn char-switch-next">&gt;</button>`:""}
+            <div class="char-card-item selected" data-char-id="${mChar.id}" data-game-id="${gameInfo.id}" data-total-img="${mAllSrc.length}">
+                <div class="char-card-img-box ${mAllSrc.length>1?'char-has-multi-img':''}">
+                    ${mAllSrc.length>1?`<button class="char-switch-btn char-switch-prev">&lt;</button>`:""}
+                    <img src="${mTargetSrc}" alt="${mChar.name}">
+                    ${mAllSrc.length>1?`<button class="char-switch-btn char-switch-next">&gt;</button>`:""}
                 </div>
                 <div class="char-card-name">${mChar.name}</div>
             </div>
@@ -252,11 +253,11 @@ export function renderCP(gameItem, gameInfo) {
         html += `
         <div class="cp-layout-row">
             <div class="heroine-column" style="width:25%">
-                <div class="char-card-item selected" data-char-id="${fChar.id}" data-game-id="${gameInfo.id}">
-                    <div class="char-card-img-box ${fAvailImgs.length>1?'char-has-multi-img':''}">
-                        ${fAvailImgs.length>1?`<button class="char-switch-btn char-switch-prev">&lt;</button>`:""}
-                        <img src="img/char/${fTargetImg.src}" alt="${fChar.name}">
-                        ${fAvailImgs.length>1?`<button class="char-switch-btn char-switch-next">&gt;</button>`:""}
+                <div class="char-card-item selected" data-char-id="${fChar.id}" data-game-id="${gameInfo.id}" data-total-img="${fAllSrc.length}">
+                    <div class="char-card-img-box ${fAllSrc.length>1?'char-has-multi-img':''}">
+                        ${fAllSrc.length>1?`<button class="char-switch-btn char-switch-prev">&lt;</button>`:""}
+                        <img src="${fTargetSrc}" alt="${fChar.name}">
+                        ${fAllSrc.length>1?`<button class="char-switch-btn char-switch-next">&gt;</button>`:""}
                     </div>
                     <div class="char-card-name">${fChar.name}</div>
                 </div>
@@ -278,7 +279,6 @@ export function getAllGameChar(gameInfo) {
     let chars = [...(gameInfo?.charList || [])];
     const gameItem = appData.gameList.find(g => g?.gameId === gameInfo.id);
 
-    // 全局开关 OR 当前游戏单独开关 → 显示对应角色
     const showHide = appData.globalHideChar || gameItem?.localHideChar;
     const showFD = appData.globalFD || gameItem?.localFD;
 
