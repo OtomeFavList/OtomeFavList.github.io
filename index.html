@@ -221,7 +221,8 @@ hr.divider{
     background:#dddddd;
     border-radius:6px;
 }
-/* 已添加游戏卡片样式 */
+
+/* =========【新增：游戏条目展开详情样式｜本次开发第一项】 ========= */
 .added-game-card{
     border:1px solid #f6a5b8;
     border-radius:10px;
@@ -233,9 +234,43 @@ hr.divider{
     justify-content:space-between;
     align-items:center;
 }
+/* 标题点击区域，鼠标悬浮提示 */
+.game-card-title{
+    cursor: pointer;
+    font-size:18px;
+    font-weight:bold;
+    color:#b33a3a;
+}
+.game-card-title:hover{
+    text-decoration: underline;
+}
 .game-card-switch-group{
     display:flex;
     gap:10px;
+}
+/* 游戏详情折叠容器 默认收起 */
+.game-expand-detail{
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap:18px;
+    margin-top:14px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+}
+.game-expand-detail.open{
+    max-height: 600px;
+}
+.game-expand-cover{
+    width:100%;
+    aspect-ratio:3/4;
+    background:#eee;
+    border-radius:8px;
+    object-fit:cover;
+}
+.game-info-text p{
+    margin:6px 0;
+    line-height:1.6;
 }
 .char-add-box{
     width:200px;
