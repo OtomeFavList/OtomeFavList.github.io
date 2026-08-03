@@ -269,21 +269,25 @@ export function renderCP(gameItem, gameInfo) {
     return html || "<span>暂无CP搭配</span>";
 }
 
-// 过滤角色规则：单游戏开关优先级高于全局开关
+// 过滤角色规则：全局开关 || 单游戏开关，任一开启即可展示
 export function getAllGameChar(gameInfo) {
     if(!gameInfo) return [];
     let chars = [...(gameInfo?.charList || [])];
     const gameItem = appData.gameList.find(g => g?.gameId === gameInfo.id);
-    // 单游戏本地开关优先，全局仅作为初始批量设置
-    const showHide = gameItem?.localHideChar;
-    const showFD = gameItem?.localFD;
+
+    // 全局开关 OR 当前游戏单独开关 → 显示对应角色
+    const showHide = appData.globalHideChar || gameItem?.localHideChar;
+    const showFD = appData.globalFD || gameItem?.localFD;
+
     if (!showHide) chars = chars.filter(c => c && !c.isHidden);
     if (!showFD) chars = chars.filter(c => c && !c.isFD);
+
     const female = chars.filter(c => c.gender === "female").sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
     const male = chars.filter(c => c.gender === "male").sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
     return [...female, ...male];
 }
 
+// ===================== 启动入口（新增代码） =====================
 import { initPage } from "./script.js";
 
 // 组装Core上下文对象，统一供给UI层script.js
