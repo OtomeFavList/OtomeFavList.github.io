@@ -1,4 +1,7 @@
-// 单个游戏独立数据模板，新增游戏复制整文件，修改ID、信息、角色
+// data/games/game001.js
+// ==========【单个游戏独立数据模板】==========
+// 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
+// 无需修改data/games.js，仅需要在data/games.js的allGameFiles数组追加本文件路径
 const singleGameData = {
     id: "game001", // 全局唯一ID，不可重复
     name: "示例乙女游戏1",
@@ -7,18 +10,18 @@ const singleGameData = {
     cnStudio: "汉化组/汉化厂商",
     writer: "剧本编剧",
     art: "原画画师",
-    cover: "game/game001_cover.jpg", // 封面图路径 img/game/xxx
+    cover: "img/game/game001_cover.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 女主模板 female
         {
             id: "g001_f01",
             name: "女主A",
             gender: "female",
-            isHidden: false,    // 角色本体：是否为隐藏角色
-            isFD: false,        // 角色本体：是否为FD/续作专属角色
+            isHidden: false,    // 角色本体：true=隐藏角色，全局/游戏单独开关控制是否展示该角色
+            isFD: false,        // 角色本体：true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { src: "char/g001_f01_1.jpg", type: "base" },      // 默认基础图，永久可用
-                { src: "char/g001_f01_2.jpg", type: "hidden" }     // 需要开启隐藏角色开关才加载
+                { src: "img/char/g001_f01_1.jpg", type: "base" },      // 默认基础图，始终加载
+                { src: "img/char/g001_f01_2.jpg", type: "hidden" }     // 需要开启隐藏角色开关才展示的图片
             ]
         },
         // 普通可攻略男主 male
@@ -29,12 +32,12 @@ const singleGameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { src: "char/g001_m01_1.jpg", type: "base" },
-                { src: "char/g001_m01_2.jpg", type: "hidden" },
-                { src: "char/g001_m01_3.jpg", type: "fd" }          // 需要开启FD开关才加载
+                { src: "img/char/g001_m01_1.jpg", type: "base" },
+                { src: "img/char/g001_m01_2.jpg", type: "hidden" },
+                { src: "img/char/g001_m01_3.jpg", type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
-        // 隐藏角色（开关开启才显示整个角色卡片）
+        // 隐藏角色（isHidden=true → 开关开启才显示整个角色卡片）
         {
             id: "g001_h01",
             name: "隐藏攻略角色",
@@ -42,10 +45,10 @@ const singleGameData = {
             isHidden: true,
             isFD: false,
             images: [
-                { src: "char/g001_h01_1.jpg", type: "base" }
+                { src: "img/char/g001_h01_1.jpg", type: "base" }
             ]
         },
-        // FD续作限定角色（FD开关开启才显示整个角色卡片）
+        // FD续作限定角色（isFD=true → FD开关开启才显示整个角色卡片）
         {
             id: "g001_fd01",
             name: "FD新增角色",
@@ -53,10 +56,11 @@ const singleGameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { src: "char/g001_fd01_1.jpg", type: "base" }
+                { src: "img/char/g001_fd01_1.jpg", type: "base" }
             ]
         }
     ]
 };
-// 自动推入全局游戏数组，无需手动修改聚合文件
-window.gameTemplateList.push(singleGameData);
+
+// 自动推入全局游戏数组，加载器script统一读取 window.gameDataList
+window.gameDataList.push(singleGameData);
