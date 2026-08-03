@@ -1,4 +1,4 @@
-// ===================== script.js UI交互层 =====================
+// ===================== script.js UI交互层（模块化导出） =====================
 export function initPage(Core) {
     const {
         appData,
@@ -26,9 +26,16 @@ export function initPage(Core) {
         const gameItem = appData.gameList.find(g => g?.gameId === gameId);
         if (!gameInfo || !gameItem) return;
 
-        document.getElementById("modal-game-title").innerText = gameInfo.name;
-        document.getElementById("local-show-secret").checked = !!gameItem.localHideChar;
-        document.getElementById("local-show-fd").checked = !!gameItem.localFD;
+        const modalGameTitle = document.getElementById("modal-game-title");
+        const localShowSecret = document.getElementById("local-show-secret");
+        const localShowFD = document.getElementById("local-show-fd");
+        const heroineBox = document.getElementById("heroine-box");
+        const heroListBox = document.getElementById("hero-list-box");
+        if (!modalGameTitle || !localShowSecret || !localShowFD || !heroineBox || !heroListBox) return;
+
+        modalGameTitle.innerText = gameInfo.name;
+        localShowSecret.checked = !!gameItem.localHideChar;
+        localShowFD.checked = !!gameItem.localFD;
 
         const allChars = getAllGameChar(gameInfo);
         const femaleChars = allChars.filter(c => c.gender === "female");
@@ -38,15 +45,14 @@ export function initPage(Core) {
         let femHtml = "";
         femaleChars.forEach(char => {
             const imgsUnitList = getAvailableCharImages(char, appData.globalHideChar, appData.globalFD, gameItem.localHideChar, gameItem.localFD);
-            if(imgsUnitList.length === 0) return;
-            // 合并全部图片地址
+            if (imgsUnitList.length === 0) return;
             let allSrc = [];
             imgsUnitList.forEach(u => allSrc.push(...u.srcList));
-            if(allSrc.length === 0) return;
+            if (allSrc.length === 0) return;
 
             const saveKey = `${gameId}-${char.id}`;
             let imgIndex = Number(appData.charImageSelect[saveKey] ?? 0);
-            if(imgIndex >= allSrc.length) imgIndex = 0;
+            if (imgIndex >= allSrc.length) imgIndex = 0;
             const showSrc = allSrc[imgIndex];
 
             const selected = gameItem.selectChars?.includes(char.id) ? "selected" : "";
@@ -60,20 +66,20 @@ export function initPage(Core) {
                 <div class="char-card-name">${char.name}</div>
             </label>`;
         });
-        document.getElementById("heroine-box").innerHTML = femHtml;
+        heroineBox.innerHTML = femHtml;
 
         // 男性角色区域
         let maleHtml = "";
         maleChars.forEach(char => {
             const imgsUnitList = getAvailableCharImages(char, appData.globalHideChar, appData.globalFD, gameItem.localHideChar, gameItem.localFD);
-            if(imgsUnitList.length === 0) return;
+            if (imgsUnitList.length === 0) return;
             let allSrc = [];
             imgsUnitList.forEach(u => allSrc.push(...u.srcList));
-            if(allSrc.length === 0) return;
+            if (allSrc.length === 0) return;
 
             const saveKey = `${gameId}-${char.id}`;
             let imgIndex = Number(appData.charImageSelect[saveKey] ?? 0);
-            if(imgIndex >= allSrc.length) imgIndex = 0;
+            if (imgIndex >= allSrc.length) imgIndex = 0;
             const showSrc = allSrc[imgIndex];
 
             const selected = gameItem.selectChars?.includes(char.id) ? "selected" : "";
@@ -87,20 +93,19 @@ export function initPage(Core) {
                 <div class="char-card-name">${char.name}</div>
             </label>`;
         });
-        document.getElementById("hero-list-box").innerHTML = maleHtml;
+        heroListBox.innerHTML = maleHtml;
 
         // 绑定弹窗内角色卡片勾选点击
         document.querySelectorAll("#char-select-modal .char-card-item").forEach(item => {
-            item.onclick = function(e){
-                // 如果点击切换箭头，阻止勾选角色
-                if(e.target.classList.contains("char-switch-btn")) return;
+            item.onclick = function (e) {
+                if (e.target.classList.contains("char-switch-btn")) return;
                 const cid = this.dataset.cid;
-                if(!Array.isArray(gameItem.selectChars)) gameItem.selectChars = [];
+                if (!Array.isArray(gameItem.selectChars)) gameItem.selectChars = [];
                 const idx = gameItem.selectChars.indexOf(cid);
-                if(idx > -1){
-                    gameItem.selectChars.splice(idx,1);
+                if (idx > -1) {
+                    gameItem.selectChars.splice(idx, 1);
                     this.classList.remove("selected");
-                }else{
+                } else {
                     gameItem.selectChars.push(cid);
                     this.classList.add("selected");
                 }
@@ -110,30 +115,33 @@ export function initPage(Core) {
     }
 
     // 打开角色弹窗
-    function openCharSelectModal(gameId){
+    function openCharSelectModal(gameId) {
         Core.currentEditGameId = gameId;
         const modal = document.getElementById("char-select-modal");
+        if (!modal) return;
         modal.classList.add("active");
         renderCharSelectModal(gameId);
     }
     // 关闭角色弹窗
-    function closeCharSelectModal(){
+    function closeCharSelectModal() {
         const modal = document.getElementById("char-select-modal");
+        if (!modal) return;
         modal.classList.remove("active");
         Core.currentEditGameId = null;
     }
 
-    // 页面所有DOM、事件、渲染逻辑全部放在onload内部
+    // 页面所有DOM、事件、渲染逻辑全部放在bootstrap内部
     async function bootstrap() {
         // 预加载所有游戏数据
         await loadAllGameTemplates();
 
-        // 1. 页面加载完成再获取所有DOM元素
+        // 1. DOM元素缓存（全部实时获取）
         const el = {
             globalHideChar: document.getElementById("global-hide-char"),
             globalFD: document.getElementById("global-fd-game"),
             spoilerModal: document.getElementById("spoiler-modal"),
             spoilerConfirm: document.getElementById("spoiler-confirm"),
+            spoilerCancel: document.getElementById("spoiler-cancel"),
             addGameBtn: document.getElementById("btn-add-game"),
             searchPanel: document.getElementById("search-panel"),
             gameSearchInput: document.getElementById("game-search-input"),
@@ -143,7 +151,6 @@ export function initPage(Core) {
             inputCount: document.getElementById("input-count"),
             inputStory: document.getElementById("input-story"),
             inputFirstgame: document.getElementById("input-firstgame"),
-            cardBase: document.getElementById("card-base"),
             colorBg: document.getElementById("color-bg"),
             colorTitle: document.getElementById("color-title"),
             colorText: document.getElementById("color-text"),
@@ -155,28 +162,26 @@ export function initPage(Core) {
             charSelectModal: document.getElementById("char-select-modal"),
             modalCloseBtn: document.querySelector(".modal-close-btn"),
             modalCancelBtn: document.getElementById("modal-cancel-btn"),
-            modalConfirmBtn: document.getElementById("modal-confirm-btn"),
-            localShowSecret: document.getElementById("local-show-secret"),
-            localShowFD: document.getElementById("local-show-fd")
+            modalConfirmBtn: document.getElementById("modal-confirm-btn")
         };
 
         let modalOpen = false;
-        let modalTargetType = ""; // 标记弹窗是哪个开关：hideChar / fd / localHide / localFD
+        let modalTargetType = ""; // hideChar / fd / localHide / localFD
 
-        // ==========【全局事件委托：角色立绘左右切换 统一处理｜已修复srcList】==========
-        document.addEventListener("click", function(e){
+        // ==========【全局事件委托：角色立绘左右切换】==========
+        document.addEventListener("click", function (e) {
             const switchBtn = e.target.closest(".char-switch-btn");
-            if(!switchBtn) return;
+            if (!switchBtn) return;
             e.stopPropagation();
             const charCard = switchBtn.closest(".char-card-item");
             const charId = charCard.dataset.charId;
             const gameId = charCard.dataset.gameId;
             const gameInfo = gameTemplateList.find(g => g.id === gameId);
-            if(!gameInfo) return;
+            if (!gameInfo) return;
             const char = gameInfo.charList.find(c => c.id === charId);
-            if(!char) return;
+            if (!char) return;
             const gameItem = appData.gameList.find(g => g.gameId === gameId);
-            if(!gameItem) return;
+            if (!gameItem) return;
 
             const availImgUnits = getAvailableCharImages(
                 char,
@@ -185,7 +190,6 @@ export function initPage(Core) {
                 gameItem.localHideChar,
                 gameItem.localFD
             );
-            // 合并所有图片路径
             let allSrc = [];
             availImgUnits.forEach(unit => allSrc.push(...unit.srcList));
             if (allSrc.length <= 1) return;
@@ -194,25 +198,22 @@ export function initPage(Core) {
             const saveKey = `${gameId}-${charId}`;
             let currentIndex = Number(appData.charImageSelect[saveKey] ?? 0);
 
-            if(switchBtn.classList.contains("char-switch-next")){
+            if (switchBtn.classList.contains("char-switch-next")) {
                 currentIndex++;
-                if(currentIndex >= allSrc.length) currentIndex = 0;
-            }else{
+                if (currentIndex >= allSrc.length) currentIndex = 0;
+            } else {
                 currentIndex--;
-                if(currentIndex < 0) currentIndex = allSrc.length -1;
+                if (currentIndex < 0) currentIndex = allSrc.length - 1;
             }
 
-            // 更新图片 + 持久存储索引
             imgDom.src = allSrc[currentIndex];
             appData.charImageSelect[saveKey] = currentIndex;
             saveData();
-            // 如果是弹窗内切换，实时刷新选中卡片预览
-            if(document.getElementById("char-select-modal").classList.contains("active")){
+            if (document.getElementById("char-select-modal")?.classList.contains("active")) {
                 renderAddedGame();
             }
         });
 
-        // 复选框刷新清除残留
         function refreshHideCharSwitch() {
             if (el.globalHideChar) {
                 el.globalHideChar.checked = appData.globalHideChar;
@@ -226,12 +227,11 @@ export function initPage(Core) {
             }
         }
 
-        // ========== 弹窗统一控制函数 ==========
+        // ========== 剧透弹窗控制 ==========
         function openSpoilerModal(type) {
-            console.log("执行打开弹窗", type);
             if (!el.spoilerModal) {
-                console.error("严重错误：页面不存在ID=spoiler-modal的弹窗DOM！HTML缺失弹窗");
-                alert("页面缺少剧透弹窗容器，请检查HTML");
+                console.error("缺少spoiler-modal弹窗DOM");
+                alert("页面缺失剧透弹窗组件，请检查index.html");
                 return;
             }
             modalOpen = true;
@@ -247,50 +247,61 @@ export function initPage(Core) {
 
         // 加载本地存储
         loadData();
-        // 回填表单值
+
+        // 回填表单基础信息
         if (el.inputNick) el.inputNick.value = appData.baseInfo.nick;
         if (el.inputCount) el.inputCount.value = appData.baseInfo.count;
         if (el.inputStory) el.inputStory.value = appData.baseInfo.story;
         if (el.inputFirstgame) el.inputFirstgame.value = appData.baseInfo.firstgame;
-        if (el.colorBg) el.colorBg.value = appData.exportColor.bg;
-        if (el.colorTitle) el.colorTitle.value = appData.exportColor.title;
-        if (el.colorText) el.colorText.value = appData.exportColor.text;
-        if (el.colorBorder) el.colorBorder.value = appData.exportColor.border;
-        if(el.colorBg) document.body.style.background = appData.exportColor.bg;
+
+        // ✅【修复】配色绑定 增加DOM判空，彻底消除 colorBorder undefined 报错
+        const colorBindList = [
+            { dom: el.colorBg, dataKey: "bg" },
+            { dom: el.colorTitle, dataKey: "title" },
+            { dom: el.colorText, dataKey: "text" },
+            { dom: el.colorBorder, dataKey: "border" }
+        ];
+        colorBindList.forEach(item => {
+            if (!item.dom) return;
+            item.dom.value = appData.exportColor[item.dataKey];
+            item.dom.oninput = () => {
+                appData.exportColor[item.dataKey] = item.dom.value;
+                saveData();
+                if (item.dataKey === "bg") document.body.style.background = item.dom.value;
+            }
+        });
+        if (el.colorBg) document.body.style.background = appData.exportColor.bg;
+
         refreshHideCharSwitch();
         refreshFDSwitch();
-
-        // 填充筛选下拉选项
         fillFilterOptions(gameTemplateList);
 
-        // 弹窗唯一确认按钮绑定
+        // 剧透弹窗【确认按钮】
         if (el.spoilerConfirm) {
             el.spoilerConfirm.onclick = () => {
-                if(modalTargetType === "hideChar"){
+                if (modalTargetType === "hideChar") {
                     saveConfirmDate();
                     appData.globalHideChar = true;
                     syncSingleGameSwitch("hideChar", true);
-                    refreshHideCharSwitch();
-                }else if(modalTargetType === "fd"){
+                } else if (modalTargetType === "fd") {
                     saveConfirmDate();
                     appData.globalFD = true;
                     syncSingleGameSwitch("fd", true);
-                    refreshFDSwitch();
-                }else if(modalTargetType === "localHide"){
+                } else if (modalTargetType === "localHide") {
                     saveLocalSwitchConfirmDate();
                     const triggerSwitch = document.querySelector(`.local-hide-char.modal-trigger`);
-                    if(triggerSwitch){
+                    if (triggerSwitch) {
                         const gid = triggerSwitch.dataset.gid;
-                        const targetGame = appData.gameList.find(g=>g.gameId === gid);
-                        if(targetGame) targetGame.localHideChar = true;
+                        const targetGame = appData.gameList.find(g => g.gameId === gid);
+                        if (targetGame) targetGame.localHideChar = true;
                     }
-                }else if(modalTargetType === "localFD"){
+                } else if (modalTargetType === "localFD") {
                     saveLocalSwitchConfirmDate();
                     const triggerSwitch = document.querySelector(`.local-fd.modal-trigger`);
-                    if(triggerSwitch){
+                    if (triggerSwitch) {
                         const gid = triggerSwitch.dataset.gid;
-                        const targetGame = appData.gameList.find(g=>g.gameId === gid);
-                        if(targetGame) targetGame.localFD = true;
+                        const targetGame = appData.gameList.find(g => g.gameId === gid);
+                        if (targetGame) targetGame.localFD = true;
                     }
                 }
                 saveData();
@@ -298,12 +309,15 @@ export function initPage(Core) {
                 closeSpoilerModal();
             }
         }
-        
+        // 弹窗取消按钮
+        if (el.spoilerCancel) {
+            el.spoilerCancel.onclick = closeSpoilerModal;
+        }
+
         // ============【全局隐藏角色开关】 ============
         if (el.globalHideChar) {
-            el.globalHideChar.addEventListener('change', function() {
+            el.globalHideChar.addEventListener('change', function () {
                 const newStatus = this.checked;
-                // 关闭开关：直接生效，无弹窗
                 if (newStatus === false) {
                     appData.globalHideChar = false;
                     syncSingleGameSwitch("hideChar", false);
@@ -311,26 +325,24 @@ export function initPage(Core) {
                     renderAddedGame();
                     return;
                 }
-                // 打开开关逻辑
-                if(isTodayConfirmed()){
+                if (isTodayConfirmed()) {
                     appData.globalHideChar = true;
                     syncSingleGameSwitch("hideChar", true);
                     saveData();
                     renderAddedGame();
-                }else{
+                } else {
                     this.checked = false;
                     refreshHideCharSwitch();
-                    if(modalOpen) return;
+                    if (modalOpen) return;
                     openSpoilerModal("hideChar");
                 }
             })
         }
-        
-        // ============【全局FD/续作开关｜已开启剧透预警，和隐藏角色规则一致】 ============
+
+        // ============【全局FD/续作开关｜剧透预警】 ============
         if (el.globalFD) {
-            el.globalFD.addEventListener('change', function() {
+            el.globalFD.addEventListener('change', function () {
                 const newStatus = this.checked;
-                // 关闭开关：直接生效，无弹窗
                 if (newStatus === false) {
                     appData.globalFD = false;
                     syncSingleGameSwitch("fd", false);
@@ -338,67 +350,54 @@ export function initPage(Core) {
                     renderAddedGame();
                     return;
                 }
-                // 打开开关触发剧透弹窗
-                if(isTodayConfirmed()){
+                if (isTodayConfirmed()) {
                     appData.globalFD = true;
                     syncSingleGameSwitch("fd", true);
                     saveData();
                     renderAddedGame();
-                }else{
+                } else {
                     this.checked = false;
                     refreshFDSwitch();
-                    if(modalOpen) return;
+                    if (modalOpen) return;
                     openSpoilerModal("fd");
                 }
             })
         }
-        
+
         // 基础资料输入框绑定
-        ["inputNick", "inputCount", "inputStory", "inputFirstgame"].forEach(k => {
-            const dom = el[k];
-            if (dom) {
-                dom.oninput = function () {
-                    const map = { inputNick: "nick", inputCount: "count", inputStory: "story", inputFirstgame: "firstgame" };
-                    appData.baseInfo[map[k]] = this.value;
-                    saveData();
-                }
+        const baseInputMap = [
+            { dom: el.inputNick, key: "nick" },
+            { dom: el.inputCount, key: "count" },
+            { dom: el.inputStory, key: "story" },
+            { dom: el.inputFirstgame, key: "firstgame" }
+        ];
+        baseInputMap.forEach(item => {
+            if (!item.dom) return;
+            item.dom.oninput = function () {
+                appData.baseInfo[item.key] = this.value;
+                saveData();
             }
         })
 
-        // 配色取色器绑定
-        ["colorBg", "colorTitle", "colorText", "colorBorder"].forEach(k => {
-            const dom = el[k];
-            if (dom) {
-                dom.oninput = function () {
-                    const map = { colorBg: "bg", colorTitle: "title", colorText: "text", colorBorder: "border" };
-                    appData.exportColor[map[k]] = this.value;
-                    saveData();
-                    if(el.colorBg) document.body.style.background = appData.exportColor.bg;
-                }
-            }
-        })
-
-        // ✅修复3：加固【添加游戏按钮】事件绑定，消除点击失效隐患
-        if(el.addGameBtn){
-            el.addGameBtn.removeEventListener("click", null);
-            el.addGameBtn.onclick = function(){
+        // 添加游戏按钮
+        if (el.addGameBtn) {
+            el.addGameBtn.onclick = function () {
                 renderGameSelectList();
-                el.searchPanel.classList.remove("hide-block");
-                console.log("【添加游戏按钮触发】");
+                if (el.searchPanel) el.searchPanel.classList.remove("hide-block");
             }
         }
-        // 搜索框输入实时刷新列表
-        if(el.gameSearchInput){
+        // 搜索输入监听
+        if (el.gameSearchInput) {
             el.gameSearchInput.addEventListener("input", renderGameSelectList);
         }
-        // 筛选下拉变更刷新列表
-        const filterSelectIds = ["filter-year","filter-publisher","filter-cn","filter-writer","filter-art"];
-        filterSelectIds.forEach(selId=>{
+        // 筛选下拉监听
+        const filterSelectIds = ["filter-year", "filter-publisher", "filter-cn", "filter-writer", "filter-art"];
+        filterSelectIds.forEach(selId => {
             const sel = document.getElementById(selId);
-            if(sel) sel.addEventListener("change", renderGameSelectList);
+            if (sel) sel.addEventListener("change", renderGameSelectList);
         });
 
-        // 游戏列表渲染函数
+        // 渲染游戏选择列表
         function renderGameSelectList() {
             if (!el.gameSearchInput || !el.gameSelectList || !Array.isArray(gameTemplateList)) return;
             const keyword = el.gameSearchInput.value.toLowerCase();
@@ -410,7 +409,7 @@ export function initPage(Core) {
             const sortedGames = [...gameTemplateList].sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
             let html = "";
             sortedGames.forEach(game => {
-                if(!game) return;
+                if (!game) return;
                 let match = true;
                 if (keyword && !game.name?.toLowerCase().includes(keyword)) match = false;
                 if (filterYear && game.year != filterYear) match = false;
@@ -448,7 +447,7 @@ export function initPage(Core) {
                     };
                     appData.gameList.push(newGameData);
                     saveData();
-                    if(el.searchPanel) el.searchPanel.classList.add("hide-block");
+                    if (el.searchPanel) el.searchPanel.classList.add("hide-block");
                     renderAddedGame();
                 }
             })
@@ -458,21 +457,20 @@ export function initPage(Core) {
         function renderAddedGame() {
             if (!el.addedGameBox) return;
             if (!Array.isArray(gameTemplateList) || gameTemplateList.length === 0) {
-                el.addedGameBox.innerHTML = "<p>⚠️ 游戏数据加载失败，文件路径错误/404</p>";
+                el.addedGameBox.innerHTML = "<p>⚠️ 游戏数据加载失败，检查data/games路径</p>";
                 return;
             }
             document.querySelectorAll(".modal-trigger").forEach(dom => dom.classList.remove("modal-trigger"));
 
             let html = "";
             appData.gameList.forEach(gameItem => {
-                if(!gameItem) return;
+                if (!gameItem) return;
                 const gameInfo = gameTemplateList.find(g => g.id === gameItem.gameId);
                 if (!gameInfo) return;
                 let heartHtml = "";
                 for (let i = 1; i <= 5; i++) heartHtml += `<span class="heart ${gameItem.loveRate >= i ? 'active' : ''}" data-val="${i}">♥</span>`;
-                
-                const coverImgSrc = gameInfo.cover ? `${gameInfo.cover}` : "";
 
+                const coverImgSrc = gameInfo.cover ? `${gameInfo.cover}` : "";
                 html += `
                 <div class="added-game-card" data-game-id="${gameItem.gameId}">
                     <div class="game-card-header">
@@ -521,7 +519,7 @@ export function initPage(Core) {
             bindGameCardEvent();
         }
 
-        // 游戏卡片内按钮事件
+        // 游戏卡片事件绑定
         function bindGameCardEvent() {
             document.querySelectorAll(".fold-game").forEach(btn => {
                 btn.onclick = () => {
@@ -553,15 +551,15 @@ export function initPage(Core) {
                     }
                 })
             })
-            document.querySelectorAll(".open-char-pool").forEach(btn=>{
-                btn.onclick = function(){
+            document.querySelectorAll(".open-char-pool").forEach(btn => {
+                btn.onclick = function () {
                     const gid = this.dataset.gid;
                     Core.charPoolMode = "char";
                     openCharSelectModal(gid);
                 }
             })
-            document.querySelectorAll(".open-cp-pool").forEach(btn=>{
-                btn.onclick = function(){
+            document.querySelectorAll(".open-cp-pool").forEach(btn => {
+                btn.onclick = function () {
                     const gid = this.dataset.gid;
                     Core.charPoolMode = "cp";
                     openCharSelectModal(gid);
@@ -580,11 +578,11 @@ export function initPage(Core) {
                         renderAddedGame();
                         return;
                     }
-                    if(localSwitchIsConfirmedToday()){
+                    if (localSwitchIsConfirmedToday()) {
                         gameItem.localHideChar = true;
                         saveData();
                         renderAddedGame();
-                    }else{
+                    } else {
                         this.checked = false;
                         if (modalOpen) return;
                         this.classList.add("modal-trigger");
@@ -593,7 +591,7 @@ export function initPage(Core) {
                     }
                 }
             })
-            // 单游戏FD开关【增加剧透弹窗逻辑】
+            // 单游戏FD开关
             document.querySelectorAll(".local-fd").forEach(sw => {
                 sw.onchange = function () {
                     const gid = this.dataset.gid;
@@ -606,11 +604,11 @@ export function initPage(Core) {
                         renderAddedGame();
                         return;
                     }
-                    if(localSwitchIsConfirmedToday()){
+                    if (localSwitchIsConfirmedToday()) {
                         gameItem.localFD = true;
                         saveData();
                         renderAddedGame();
-                    }else{
+                    } else {
                         this.checked = false;
                         if (modalOpen) return;
                         this.classList.add("modal-trigger");
@@ -622,36 +620,28 @@ export function initPage(Core) {
         }
 
         // 角色弹窗关闭按钮
-        if(el.modalCloseBtn){
-            el.modalCloseBtn.onclick = closeCharSelectModal;
-        }
-        if(el.modalCancelBtn){
-            el.modalCancelBtn.onclick = closeCharSelectModal;
-        }
-        if(el.modalConfirmBtn){
-            el.modalConfirmBtn.onclick = closeCharSelectModal;
-        }
+        if (el.modalCloseBtn) el.modalCloseBtn.onclick = closeCharSelectModal;
+        if (el.modalCancelBtn) el.modalCancelBtn.onclick = closeCharSelectModal;
+        if (el.modalConfirmBtn) el.modalConfirmBtn.onclick = closeCharSelectModal;
 
         // =====================【导出图片核心逻辑】=====================
-        if(el.exportBtn && el.snapshotContainer){
+        if (el.exportBtn && el.snapshotContainer) {
             el.exportBtn.addEventListener('click', async () => {
                 try {
                     el.exportBtn.disabled = true;
                     el.exportBtn.textContent = "正在生成图片...";
 
-                    // 收集基础资料数据
                     const baseInfo = appData.baseInfo;
                     const infoArr = [
-                        {el: el.inputNick, text: baseInfo.nick ? `昵称：${baseInfo.nick}` : null},
-                        {el: el.inputCount, text: baseInfo.count !== "" ? `游玩总数：${baseInfo.count}` : null},
-                        {el: el.inputStory, text: baseInfo.story ? `入坑时间：${baseInfo.story}` : null},
-                        {el: el.inputFirstgame, text: baseInfo.firstgame ? `入坑作品：${baseInfo.firstgame}` : null}
+                        { el: el.inputNick, text: baseInfo.nick ? `昵称：${baseInfo.nick}` : null },
+                        { el: el.inputCount, text: baseInfo.count !== "" ? `游玩总数：${baseInfo.count}` : null },
+                        { el: el.inputStory, text: baseInfo.story ? `入坑时间：${baseInfo.story}` : null },
+                        { el: el.inputFirstgame, text: baseInfo.firstgame ? `入坑作品：${baseInfo.firstgame}` : null }
                     ];
 
-                    // 快照预处理：隐藏空项目，保存原始display状态，用于恢复
                     const hideElements = [];
-                    infoArr.forEach(item=>{
-                        if(item.el && !item.text){
+                    infoArr.forEach(item => {
+                        if (item.el && !item.text) {
                             hideElements.push(item.el);
                             item.el.style.display = "none";
                         }
@@ -661,11 +651,11 @@ export function initPage(Core) {
 
                     let sizeValue = document.querySelector('input[name="export-size"]:checked').value;
                     let targetWidth, targetHeight;
-                    if(sizeValue === 'long'){
+                    if (sizeValue === 'long') {
                         targetWidth = 1080;
                         targetHeight = 0;
-                    }else{
-                        const [w,h] = sizeValue.split(',').map(Number);
+                    } else {
+                        const [w, h] = sizeValue.split(',').map(Number);
                         targetWidth = w;
                         targetHeight = h;
                     }
@@ -680,15 +670,15 @@ export function initPage(Core) {
                     });
 
                     let finalCanvas;
-                    if(targetHeight === 0){
+                    if (targetHeight === 0) {
                         finalCanvas = renderCanvas;
-                    }else{
+                    } else {
                         const canvas = document.getElementById('export-canvas');
                         canvas.width = targetWidth;
                         canvas.height = targetHeight;
                         const ctx = canvas.getContext('2d');
                         ctx.fillStyle = bgColor;
-                        ctx.fillRect(0,0,targetWidth,targetHeight);
+                        ctx.fillRect(0, 0, targetWidth, targetHeight);
                         const scale = Math.min(targetWidth / renderCanvas.width, targetHeight / renderCanvas.height);
                         const drawW = renderCanvas.width * scale;
                         const drawH = renderCanvas.height * scale;
@@ -707,8 +697,7 @@ export function initPage(Core) {
                     alert('图片导出异常！外部图片跨域可能导致失败，请使用本地图片资源。');
                 } finally {
                     el.snapshotContainer.classList.remove('export-snapshot');
-                    // 恢复所有被隐藏的输入框
-                    document.querySelectorAll("#card-base .form-row input").forEach(input=>{
+                    document.querySelectorAll("#card-base .form-row input").forEach(input => {
                         input.style.display = "";
                     });
                     el.exportBtn.disabled = false;
