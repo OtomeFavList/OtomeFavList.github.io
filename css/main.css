@@ -354,8 +354,8 @@ button:hover{
 }
 .cp-row{
     display:flex;
-    align-items:center;
-    gap:16px;
+    align-items:flex-start;
+    gap:14px;
     margin:10px 0;
     padding-bottom:16px;
     border-bottom:1px solid #eee;
@@ -365,11 +365,10 @@ button:hover{
     flex: 0 0 25%;
     display:flex;
     justify-content:center;
-    align-items:center;
+    align-items:flex-start;
 }
 .cp-male-wrap{
-    flex: 1;
-    flex-basis:75%;
+    flex: 0 0 75%;
     display:flex;
     gap:10px;
     flex-wrap:wrap;
