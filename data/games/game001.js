@@ -1,16 +1,16 @@
 // data/games/game001.js
 // ==========【单个游戏独立数据模板】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
-// 无需修改data/games.js，仅需要在data/games.js的allGameFiles数组追加本文件路径
+// 仅需要在data/games.js的allGameFiles数组追加本文件路径
 const singleGameData = {
-    id: "game001", // 全局唯一ID，不可重复
+    id: "game001",
     name: "虔诚之花的晚钟",
     year: "2020",
     publisher: "Otomate",
     cnStudio: "GSE",
     writer: "かずら林檎",
     art: "RiRi",
-    cover: "img/game/001.jpg", // 封面图路径，统一前缀img/
+    cover: "img/game/001.jpg",
     charList: [
         // 莉莉安娜
         {
@@ -67,7 +67,7 @@ const singleGameData = {
                 { srcList: ["img/char/001/Orlok.jpg","img/char/001/Orlok2.jpg","img/char/001/Orlok3.jpg"], type: "base" }
             ]
         },
-        // 杨（⚠️你原来名字写错成但丁，一并修正）
+        // 杨
         {
             id: "g001_m05",
             name: "杨",
@@ -92,5 +92,4 @@ const singleGameData = {
     ]
 };
 
-// 自动推入全局游戏数组，加载器script统一读取 window.gameDataList
 window.gameDataList.push(singleGameData);
