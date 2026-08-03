@@ -85,13 +85,13 @@ body{
     padding:24px;
     transition:border-color 0.2s;
 }
-/* 板块标题：一、设置/基础资料/游戏列表/导出 → #c98fac【需求③】 */
+/* 板块标题：设置、基础资料、游戏列表、导出 文字+左侧竖线 #b85878 */
 .big-card h2{
     margin-bottom:20px;
     font-size:24px;
-    border-left:5px solid #c98fac;
+    border-left:5px solid #b85878;
     padding-left:12px;
-    color: #c98fac;
+    color: #b85878;
     font-weight:bold;
     font-family:sans-serif;
 }
