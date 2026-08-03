@@ -1,6 +1,7 @@
 // 全局存储key
 const STORE_KEY = "otome-favlist-data";
-const SPOILER_DATE_KEY = "spoiler-confirm-date"; // 新增：记录剧透确认日期
+const SPOILER_DATE_KEY = "spoiler-confirm-date"; // 全局剧透确认日期
+const SPOILER_LOCAL_SWITCH_KEY = "local-switch-spoiler-date"; // 单机局部开关单日预警标记
 let appData = {
     globalHideChar: false,
     globalFD: false,
@@ -32,14 +33,23 @@ function getTodayDateStr() {
     const day = String(d.getDate()).padStart(2, "0");
     return `${year}-${month}-${day}`;
 }
-// 判断今天是否已经确认过剧透
+// 判断今天是否已经确认过【全局】剧透
 function isTodayConfirmed() {
     const savedDate = localStorage.getItem(SPOILER_DATE_KEY);
     return savedDate === getTodayDateStr();
 }
-// 保存今日确认标记到本地
+// 保存今日【全局】确认标记到本地
 function saveConfirmDate() {
     localStorage.setItem(SPOILER_DATE_KEY, getTodayDateStr());
+}
+// 判断今日局部单机开关是否已经确认过剧透
+function localSwitchIsConfirmedToday() {
+    const saved = localStorage.getItem(SPOILER_LOCAL_SWITCH_KEY);
+    return saved === getTodayDateStr();
+}
+// 标记今日单机局部开关已完成剧透确认
+function saveLocalSwitchConfirmDate() {
+    localStorage.setItem(SPOILER_LOCAL_SWITCH_KEY, getTodayDateStr());
 }
 
 // 路径已修正：单层 /data/games/，删除多余一层data/
@@ -176,7 +186,7 @@ window.onload = async function () {
     };
 
     let modalOpen = false;
-    let modalTargetType = ""; // 标记弹窗是哪个开关：hideChar / fd
+    let modalTargetType = ""; // 标记弹窗是哪个开关：hideChar / fd / localHide / localFD
 
     // 复选框刷新清除残留
     function refreshHideCharSwitch() {
@@ -229,9 +239,7 @@ window.onload = async function () {
     // 弹窗唯一确认按钮绑定
     if (el.spoilerConfirm) {
         el.spoilerConfirm.onclick = () => {
-            // 点击确认，保存今日已确认标记
             saveConfirmDate();
-            // 根据弹窗对应的开关类型打开全局开关
             if(modalTargetType === "hideChar"){
                 appData.globalHideChar = true;
                 syncSingleGameSwitch("hideChar", true);
@@ -240,6 +248,22 @@ window.onload = async function () {
                 appData.globalFD = true;
                 syncSingleGameSwitch("fd", true);
                 refreshFDSwitch();
+            }else if(modalTargetType === "localHide"){
+                saveLocalSwitchConfirmDate();
+                const triggerSwitch = document.querySelector(`.local-hide-char.modal-trigger`);
+                if(triggerSwitch){
+                    const gid = triggerSwitch.dataset.gid;
+                    const targetGame = appData.gameList.find(g=>g.gameId === gid);
+                    if(targetGame) targetGame.localHideChar = true;
+                }
+            }else if(modalTargetType === "localFD"){
+                saveLocalSwitchConfirmDate();
+                const triggerSwitch = document.querySelector(`.local-fd.modal-trigger`);
+                if(triggerSwitch){
+                    const gid = triggerSwitch.dataset.gid;
+                    const targetGame = appData.gameList.find(g=>g.gameId === gid);
+                    if(targetGame) targetGame.localFD = true;
+                }
             }
             saveData();
             renderAddedGame();
@@ -247,7 +271,7 @@ window.onload = async function () {
         }
     }
     
-    // ============【全局隐藏角色开关 修复版 change 逻辑】 ============
+    // ============【全局隐藏角色开关 原始逻辑完全保留，无修改】 ============
     if (el.globalHideChar) {
         el.globalHideChar.addEventListener('change', function() {
             const newStatus = this.checked;
@@ -276,7 +300,7 @@ window.onload = async function () {
         })
     }
     
-    // ============【全局FD/续作开关 修复版 change 逻辑】 ============
+    // ============【全局FD/续作开关 原始逻辑完全保留，无修改】 ============
     if (el.globalFD) {
         el.globalFD.addEventListener('change', function() {
             const newStatus = this.checked;
@@ -391,6 +415,9 @@ window.onload = async function () {
             el.addedGameBox.innerHTML = "<p>⚠️ 游戏数据加载失败，部分文件404/路径错误，暂时无法展示游戏卡片</p>";
             return;
         }
+        // 清理上次渲染残留的弹窗标记class
+        document.querySelectorAll(".modal-trigger").forEach(dom => dom.classList.remove("modal-trigger"));
+
         let html = "";
         appData.gameList.forEach(gameItem => {
             const gameInfo = gameTemplateList.find(g => g.id === gameItem.gameId);
@@ -466,26 +493,59 @@ window.onload = async function () {
                 }
             })
         })
-        // 单游戏隐藏角色开关，独立修改，不受全局限制
+        // 单游戏隐藏角色开关【已修复弹窗逻辑】
         document.querySelectorAll(".local-hide-char").forEach(sw => {
             sw.onchange = function () {
                 const gid = this.dataset.gid;
                 const gameItem = appData.gameList.find(g => g.gameId === gid);
                 if (!gameItem) return;
-                gameItem.localHideChar = this.checked;
-                saveData();
-                renderAddedGame();
+                const targetStatus = this.checked;
+                // 关闭开关直接生效，无需弹窗
+                if (!targetStatus) {
+                    gameItem.localHideChar = false;
+                    saveData();
+                    renderAddedGame();
+                    return;
+                }
+                // 开启开关判断弹窗
+                if(localSwitchIsConfirmedToday()){
+                    gameItem.localHideChar = true;
+                    saveData();
+                    renderAddedGame();
+                }else{
+                    this.checked = false;
+                    if (modalOpen) return;
+                    this.classList.add("modal-trigger");
+                    modalTargetType = "localHide";
+                    openSpoilerModal("localHide");
+                }
             }
         })
-        // 单游戏FD开关，独立修改，不受全局限制
+        // 单游戏FD开关【已修复弹窗逻辑】
         document.querySelectorAll(".local-fd").forEach(sw => {
             sw.onchange = function () {
                 const gid = this.dataset.gid;
                 const gameItem = appData.gameList.find(g => g.gameId === gid);
                 if (!gameItem) return;
-                gameItem.localFD = this.checked;
-                saveData();
-                renderAddedGame();
+                const targetStatus = this.checked;
+                // 关闭开关直接生效，无需弹窗
+                if (!targetStatus) {
+                    gameItem.localFD = false;
+                    saveData();
+                    renderAddedGame();
+                    return;
+                }
+                if(localSwitchIsConfirmedToday()){
+                    gameItem.localFD = true;
+                    saveData();
+                    renderAddedGame();
+                }else{
+                    this.checked = false;
+                    if (modalOpen) return;
+                    this.classList.add("modal-trigger");
+                    modalTargetType = "localFD";
+                    openSpoilerModal("localFD");
+                }
             }
         })
     }
