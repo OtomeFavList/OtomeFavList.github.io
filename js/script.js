@@ -20,7 +20,7 @@ export function initPage(Core) {
         saveLocalSwitchConfirmDate
     } = Core;
 
-    // 渲染角色选择弹窗内容【核心修改：加入左右箭头按钮DOM】
+    // 渲染角色选择弹窗内容【修复：适配srcList，读取持久化图片索引】
     function renderCharSelectModal(gameId) {
         const gameInfo = gameTemplateList.find(g => g.id === gameId);
         const gameItem = appData.gameList.find(g => g?.gameId === gameId);
@@ -37,15 +37,25 @@ export function initPage(Core) {
         // 渲染女主区域
         let femHtml = "";
         femaleChars.forEach(char => {
-            const imgs = getAvailableCharImages(char, appData.globalHideChar, appData.globalFD, gameItem.localHideChar, gameItem.localFD);
-            if(imgs.length === 0) return;
+            const imgsUnitList = getAvailableCharImages(char, appData.globalHideChar, appData.globalFD, gameItem.localHideChar, gameItem.localFD);
+            if(imgsUnitList.length === 0) return;
+            // 合并全部图片地址
+            let allSrc = [];
+            imgsUnitList.forEach(u => allSrc.push(...u.srcList));
+            if(allSrc.length === 0) return;
+
+            const saveKey = `${gameId}-${char.id}`;
+            let imgIndex = Number(appData.charImageSelect[saveKey] ?? 0);
+            if(imgIndex >= allSrc.length) imgIndex = 0;
+            const showSrc = allSrc[imgIndex];
+
             const selected = gameItem.selectChars?.includes(char.id) ? "selected" : "";
             femHtml += `
-            <label class="char-card-item ${selected}" data-cid="${char.id}" data-char-id="${char.id}" data-game-id="${gameId}">
-                <div class="char-card-img-box ${imgs.length>1?'char-has-multi-img':''}">
-                    ${imgs.length>1?`<button class="char-switch-btn char-switch-prev">&lt;</button>`:""}
-                    <img src="img/char/${imgs[0].src}" alt="${char.name}">
-                    ${imgs.length>1?`<button class="char-switch-btn char-switch-next">&gt;</button>`:""}
+            <label class="char-card-item ${selected}" data-cid="${char.id}" data-char-id="${char.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}">
+                <div class="char-card-img-box ${allSrc.length>1?'char-has-multi-img':''}">
+                    ${allSrc.length>1?`<button class="char-switch-btn char-switch-prev">&lt;</button>`:""}
+                    <img src="${showSrc}" alt="${char.name}">
+                    ${allSrc.length>1?`<button class="char-switch-btn char-switch-next">&gt;</button>`:""}
                 </div>
                 <div class="char-card-name">${char.name}</div>
             </label>`;
@@ -55,15 +65,24 @@ export function initPage(Core) {
         // 男性角色区域
         let maleHtml = "";
         maleChars.forEach(char => {
-            const imgs = getAvailableCharImages(char, appData.globalHideChar, appData.globalFD, gameItem.localHideChar, gameItem.localFD);
-            if(imgs.length === 0) return;
+            const imgsUnitList = getAvailableCharImages(char, appData.globalHideChar, appData.globalFD, gameItem.localHideChar, gameItem.localFD);
+            if(imgsUnitList.length === 0) return;
+            let allSrc = [];
+            imgsUnitList.forEach(u => allSrc.push(...u.srcList));
+            if(allSrc.length === 0) return;
+
+            const saveKey = `${gameId}-${char.id}`;
+            let imgIndex = Number(appData.charImageSelect[saveKey] ?? 0);
+            if(imgIndex >= allSrc.length) imgIndex = 0;
+            const showSrc = allSrc[imgIndex];
+
             const selected = gameItem.selectChars?.includes(char.id) ? "selected" : "";
             maleHtml += `
-            <label class="char-card-item ${selected}" data-cid="${char.id}" data-char-id="${char.id}" data-game-id="${gameId}">
-                <div class="char-card-img-box ${imgs.length>1?'char-has-multi-img':''}">
-                    ${imgs.length>1?`<button class="char-switch-btn char-switch-prev">&lt;</button>`:""}
-                    <img src="img/char/${imgs[0].src}" alt="${char.name}">
-                    ${imgs.length>1?`<button class="char-switch-btn char-switch-next">&gt;</button>`:""}
+            <label class="char-card-item ${selected}" data-cid="${char.id}" data-char-id="${char.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}">
+                <div class="char-card-img-box ${allSrc.length>1?'char-has-multi-img':''}">
+                    ${allSrc.length>1?`<button class="char-switch-btn char-switch-prev">&lt;</button>`:""}
+                    <img src="${showSrc}" alt="${char.name}">
+                    ${allSrc.length>1?`<button class="char-switch-btn char-switch-next">&gt;</button>`:""}
                 </div>
                 <div class="char-card-name">${char.name}</div>
             </label>`;
@@ -144,7 +163,7 @@ export function initPage(Core) {
         let modalOpen = false;
         let modalTargetType = ""; // 标记弹窗是哪个开关：hideChar / fd / localHide / localFD
 
-        // ==========【全局事件委托：角色立绘左右切换 统一处理】==========
+        // ==========【全局事件委托：角色立绘左右切换 统一处理｜已修复srcList】==========
         document.addEventListener("click", function(e){
             const switchBtn = e.target.closest(".char-switch-btn");
             if(!switchBtn) return;
@@ -159,14 +178,17 @@ export function initPage(Core) {
             const gameItem = appData.gameList.find(g => g.gameId === gameId);
             if(!gameItem) return;
 
-            const availImgs = getAvailableCharImages(
+            const availImgUnits = getAvailableCharImages(
                 char,
                 appData.globalHideChar,
                 appData.globalFD,
                 gameItem.localHideChar,
                 gameItem.localFD
             );
-            if (availImgs.length <= 1) return;
+            // 合并所有图片路径
+            let allSrc = [];
+            availImgUnits.forEach(unit => allSrc.push(...unit.srcList));
+            if (allSrc.length <= 1) return;
 
             const imgDom = charCard.querySelector(".char-card-img-box img");
             const saveKey = `${gameId}-${charId}`;
@@ -174,16 +196,20 @@ export function initPage(Core) {
 
             if(switchBtn.classList.contains("char-switch-next")){
                 currentIndex++;
-                if(currentIndex >= availImgs.length) currentIndex = 0;
+                if(currentIndex >= allSrc.length) currentIndex = 0;
             }else{
                 currentIndex--;
-                if(currentIndex < 0) currentIndex = availImgs.length -1;
+                if(currentIndex < 0) currentIndex = allSrc.length -1;
             }
 
             // 更新图片 + 持久存储索引
-            imgDom.src = `img/char/${availImgs[currentIndex].src}`;
+            imgDom.src = allSrc[currentIndex];
             appData.charImageSelect[saveKey] = currentIndex;
             saveData();
+            // 如果是弹窗内切换，实时刷新选中卡片预览
+            if(document.getElementById("char-select-modal").classList.contains("active")){
+                renderAddedGame();
+            }
         });
 
         // 复选框刷新清除残留
@@ -396,7 +422,7 @@ export function initPage(Core) {
                 const coverSrc = game.cover || "";
                 html += `
                 <div class="game-option-item" data-game-id="${game.id}">
-                    <img src="img/game/${coverSrc}" alt="${game.name}">
+                    <img src="${coverSrc}" alt="${game.name}">
                     <div>${game.name}</div>
                     <div style="font-size:12px;color:#777">${game.year}</div>
                 </div>
@@ -445,7 +471,7 @@ export function initPage(Core) {
                 let heartHtml = "";
                 for (let i = 1; i <= 5; i++) heartHtml += `<span class="heart ${gameItem.loveRate >= i ? 'active' : ''}" data-val="${i}">♥</span>`;
                 
-                const coverImgSrc = gameInfo.cover ? `img/game/${gameInfo.cover}` : "";
+                const coverImgSrc = gameInfo.cover ? `${gameInfo.cover}` : "";
 
                 html += `
                 <div class="added-game-card" data-game-id="${gameItem.gameId}">
@@ -567,7 +593,7 @@ export function initPage(Core) {
                     }
                 }
             })
-            // 单游戏FD开关【增加剧透弹窗逻辑，修复原缺失】
+            // 单游戏FD开关【增加剧透弹窗逻辑】
             document.querySelectorAll(".local-fd").forEach(sw => {
                 sw.onchange = function () {
                     const gid = this.dataset.gid;
@@ -606,7 +632,7 @@ export function initPage(Core) {
             el.modalConfirmBtn.onclick = closeCharSelectModal;
         }
 
-        // =====================【导出图片核心逻辑改造】=====================
+        // =====================【导出图片核心逻辑】=====================
         if(el.exportBtn && el.snapshotContainer){
             el.exportBtn.addEventListener('click', async () => {
                 try {
