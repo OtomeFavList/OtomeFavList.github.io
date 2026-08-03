@@ -13,6 +13,10 @@ html, body {
     min-height: 100vh;
     background-color: #fff7f9 !important;
 }
+/* 站点标题全部居中 */
+.site-title {
+    text-align: center;
+}
 /* 弹窗文字居中样式 */
 #spoiler-modal .modal-box h3 {
     text-align: center;
@@ -36,6 +40,12 @@ html, body {
 .form-row-double .form-row {
     flex: 1;
     min-width: 280px;
+}
+/* 按钮居中容器 */
+.center-btn-block {
+    display: flex;
+    justify-content: center;
+    margin: 16px 0;
 }
 
 /* ========== 角色选择弹窗新增样式 ========== */
@@ -85,28 +95,58 @@ html, body {
     gap:12px;
     justify-content:center;
 }
-/* CP布局 左25% 女主｜右75% 可攻略角色 */
+
+/* ========= 核心：CP隔离布局 固定比例 25% ｜ 75% ========= */
 .cp-layout-row{
     display:grid;
     grid-template-columns: 25% 75%;
     gap:16px;
     margin-top:16px;
 }
+.heroine-column, .hero-list-column {
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+}
+
+/* ========= 核心：角色卡片强制200*200正方形边框 ========= */
 .char-card-wrapper{
     display:flex;
     flex-wrap:wrap;
-    gap:10px;
+    gap:12px;
 }
-.char-card-wrapper label{
+.char-card-wrapper label.char-card-item{
     display:flex;
     flex-direction:column;
     align-items:center;
+    justify-content: space-between;
     cursor:pointer;
     border:1px solid #ddd;
-    padding:8px;
     border-radius:8px;
-    min-width:70px;
+    width:200px;
+    height:200px;
+    padding:8px;
+    box-sizing: border-box;
+    overflow:hidden;
 }
+.char-card-img-box{
+    width:100%;
+    flex:1;
+    display:grid;
+    place-items:center;
+}
+.char-card-img-box img{
+    max-width:100%;
+    max-height:140px;
+    object-fit:contain;
+}
+.char-card-name{
+    width:100%;
+    text-align:center;
+    padding:4px 0;
+    font-size:14px;
+}
+
 .local-switch-group{
     display:flex;
     gap:32px;
@@ -118,7 +158,7 @@ hr.divider{
     border-top:1px solid #e2d2d7;
     margin:14px 0;
 }
-/* 角色图片切换按钮样式（预留） */
+/* 角色图片切换按钮样式（预留，后续左右箭头） */
 .char-image-switch{
     display:flex;
     gap:6px;
@@ -210,6 +250,16 @@ hr.divider{
     border:1px dashed #c997a8;
     display:grid;
     place-items:center;
+}
+/* 文字层级配色规范 */
+h2{
+    color:#b33a3a;
+}
+.text-light-pink{
+    color:#c98fac;
+}
+.sub-desc, .about-block p{
+    color:#222222;
 }
 </style>
 </head>
@@ -371,6 +421,7 @@ hr.divider{
                 </label>
             </div>
             <hr class="divider">
+            <!-- CP 25% | 75% 布局容器 -->
             <div class="cp-layout-row">
                 <div class="heroine-column">
                     <h4>女主</h4>
@@ -389,9 +440,9 @@ hr.divider{
     </div>
 </div>
 
-<!-- JS引入顺序不变 -->
+<!-- JS引入顺序不变，后续请给games.js添加type="module"解决路径问题 -->
 <script src="./js/loader.js"></script>
-<script src="./data/games.js"></script>
+<script src="./data/games.js" type="module"></script>
 <script src="./js/main.js"></script>
 
 </body>
