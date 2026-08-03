@@ -386,6 +386,7 @@ window.onload = async function () {
         inputCount: document.getElementById("input-count"),
         inputStory: document.getElementById("input-story"),
         inputFirstgame: document.getElementById("input-firstgame"),
+        cardBase: document.getElementById("card-base"),
         colorBg: document.getElementById("color-bg"),
         colorTitle: document.getElementById("color-title"),
         colorText: document.getElementById("color-text"),
@@ -866,12 +867,30 @@ window.onload = async function () {
         el.modalConfirmBtn.onclick = closeCharSelectModal;
     }
 
-    // =====================【导出图片核心逻辑，适配html2canvas】=====================
+    // =====================【导出图片核心逻辑改造】=====================
     if(el.exportBtn && el.snapshotContainer){
         el.exportBtn.addEventListener('click', async () => {
             try {
                 el.exportBtn.disabled = true;
                 el.exportBtn.textContent = "正在生成图片...";
+
+                // 收集基础资料数据
+                const baseInfo = appData.baseInfo;
+                const infoArr = [
+                    {el: el.inputNick, text: baseInfo.nick ? `昵称：${baseInfo.nick}` : null},
+                    {el: el.inputCount, text: baseInfo.count !== "" ? `游玩总数：${baseInfo.count}` : null},
+                    {el: el.inputStory, text: baseInfo.story ? `入坑时间：${baseInfo.story}` : null},
+                    {el: el.inputFirstgame, text: baseInfo.firstgame ? `入坑作品：${baseInfo.firstgame}` : null}
+                ];
+
+                // 快照预处理：隐藏空项目，保存原始display状态，用于恢复
+                const hideElements = [];
+                infoArr.forEach(item=>{
+                    if(item.el && !item.text){
+                        hideElements.push(item.el);
+                        item.el.style.display = "none";
+                    }
+                });
 
                 el.snapshotContainer.classList.add('export-snapshot');
 
@@ -923,6 +942,10 @@ window.onload = async function () {
                 alert('图片导出异常！外部图片跨域可能导致失败，请使用本地图片资源。');
             } finally {
                 el.snapshotContainer.classList.remove('export-snapshot');
+                // 恢复所有被隐藏的输入框
+                document.querySelectorAll("#card-base .form-row input").forEach(input=>{
+                    input.style.display = "";
+                });
                 el.exportBtn.disabled = false;
                 el.exportBtn.textContent = "生成并导出图片";
             }
