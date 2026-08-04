@@ -168,7 +168,7 @@ export function initPage(Core) {
 
         let modalOpen = false;
         let modalTargetType = ""; // hideChar / fd / localHide / localFD
-        let triggerCheckboxEl = null; // 缓存触发弹窗的复选框，【新增关键变量】
+        let triggerCheckboxEl = null; // 缓存触发弹窗的复选框
 
         // ==========【全局事件委托：角色立绘左右切换】==========
         document.addEventListener("click", function (e) {
@@ -230,7 +230,7 @@ export function initPage(Core) {
             }
         }
 
-        // ========== 剧透弹窗控制【核心修改：active → open】 ==========
+        // ========== 剧透弹窗控制【CSS使用 .open 控制显隐】 ==========
         function openSpoilerModal(type, checkboxDom) {
             if (!el.spoilerModal) {
                 console.error("缺少spoiler-modal弹窗DOM");
@@ -239,17 +239,16 @@ export function initPage(Core) {
             }
             modalOpen = true;
             modalTargetType = type;
-            triggerCheckboxEl = checkboxDom; // 保存触发的复选框
+            triggerCheckboxEl = checkboxDom;
             el.spoilerModal.classList.add("open");
         }
         function closeSpoilerModal(isConfirm = false) {
             if (!el.spoilerModal) return;
 
-            // 如果点击【取消】，强制把复选框恢复原始状态
+            // 取消：复选框恢复原始状态
             if (!isConfirm && triggerCheckboxEl) {
                 if(modalTargetType === "hideChar") triggerCheckboxEl.checked = appData.globalHideChar;
                 if(modalTargetType === "fd") triggerCheckboxEl.checked = appData.globalFD;
-                // 局部游戏开关
                 if(modalTargetType === "localHide"){
                     const gid = triggerCheckboxEl.dataset.gid;
                     const gameItem = appData.gameList.find(g=>g.gameId === gid);
@@ -340,9 +339,9 @@ export function initPage(Core) {
             el.spoilerCancel.onclick = ()=> closeSpoilerModal(false);
         }
 
-        // ============【全局隐藏角色开关｜修复重写】 ============
+        // ============【全局隐藏角色开关｜更换为 change 事件，修复闪烁】 ============
         if (el.globalHideChar) {
-            el.globalHideChar.addEventListener('click', function (e) {
+            el.globalHideChar.addEventListener('change', function () {
                 const currentStatus = appData.globalHideChar;
                 // 关闭操作：直接生效
                 if(currentStatus === true){
@@ -353,7 +352,6 @@ export function initPage(Core) {
                     renderAddedGame();
                     return;
                 }
-                // 想要打开
                 if(modalOpen) return;
                 if (isTodayConfirmed()) {
                     appData.globalHideChar = true;
@@ -362,14 +360,17 @@ export function initPage(Core) {
                     saveData();
                     renderAddedGame();
                 }else{
+                    // 用户想要开启，弹出弹窗，此时不修改checked
                     openSpoilerModal("hideChar", this);
+                    // 强制回滚视觉，防止checkbox自动点亮
+                    this.checked = false;
                 }
             })
         }
 
-        // ============【全局FD/续作开关｜剧透预警｜重写】 ============
+        // ============【全局FD/续作开关｜剧透预警｜更换change事件】 ============
         if (el.globalFD) {
-            el.globalFD.addEventListener('click', function () {
+            el.globalFD.addEventListener('change', function () {
                 const currentStatus = appData.globalFD;
                 // 关闭操作：直接生效
                 if(currentStatus === true){
@@ -389,6 +390,7 @@ export function initPage(Core) {
                     renderAddedGame();
                 }else{
                     openSpoilerModal("fd", this);
+                    this.checked = false;
                 }
             })
         }
@@ -427,7 +429,7 @@ export function initPage(Core) {
             if (sel) sel.addEventListener("change", renderGameSelectList);
         });
 
-        // 渲染游戏选择列表【✅重点修复：调用main.js统一模板，移除旧代码】
+        // 渲染游戏选择列表【✅重点修复：调用main.js统一模板】
         function renderGameSelectList() {
             if (!el.gameSearchInput || !el.gameSelectList || !Array.isArray(gameTemplateList)) return;
             const keyword = el.gameSearchInput.value.toLowerCase();
@@ -446,7 +448,6 @@ export function initPage(Core) {
                 if (filterPub && game.publisher != filterPub) match = false;
                 if (filterCn && game.cnStudio != filterCn) match = false;
 
-                // ==========【修复区域：兼容writer数组/字符串】==========
                 if (filterWriter) {
                     let writerArr = [];
                     if (Array.isArray(game.writer)) {
@@ -456,11 +457,9 @@ export function initPage(Core) {
                     }
                     if (!writerArr.includes(filterWriter)) match = false;
                 }
-                // ======================================================
 
                 if (filterArt && game.art != filterArt) match = false;
                 if (!match) return;
-                // 调用main.js中渲染模板，不再手写旧HTML
                 html += renderGameSelectItem(game);
             })
             el.gameSelectList.innerHTML = html;
@@ -603,15 +602,13 @@ export function initPage(Core) {
                 }
             })
 
-            // ==========【单游戏本地开关 完全修复】==========
-            // 单游戏隐藏角色开关
+            // ==========【单游戏本地开关 修复】==========
             document.querySelectorAll(".local-hide-char").forEach(sw => {
-                sw.addEventListener('click', function () {
+                sw.addEventListener('change', function () {
                     const gid = this.dataset.gid;
                     const gameItem = appData.gameList?.find(g => g.gameId === gid);
                     if (!gameItem) return;
                     const currentStatus = gameItem.localHideChar;
-                    // 关闭，直接生效
                     if(currentStatus === true){
                         gameItem.localHideChar = false;
                         this.checked = false;
@@ -619,7 +616,6 @@ export function initPage(Core) {
                         renderAddedGame();
                         return;
                     }
-                    // 需要开启，弹出确认框
                     if(modalOpen) return;
                     if (localSwitchIsConfirmedToday()) {
                         gameItem.localHideChar = true;
@@ -628,12 +624,12 @@ export function initPage(Core) {
                         renderAddedGame();
                     } else {
                         openSpoilerModal("localHide", this);
+                        this.checked = false;
                     }
                 })
             })
-            // 单游戏FD开关
             document.querySelectorAll(".local-fd").forEach(sw => {
-                sw.addEventListener('click', function () {
+                sw.addEventListener('change', function () {
                     const gid = this.dataset.gid;
                     const gameItem = appData.gameList?.find(g => g.gameId === gid);
                     if (!gameItem) return;
@@ -653,6 +649,7 @@ export function initPage(Core) {
                         renderAddedGame();
                     } else {
                         openSpoilerModal("localFD", this);
+                        this.checked = false;
                     }
                 })
             })
