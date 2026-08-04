@@ -504,9 +504,10 @@ function wrapClickHandler(e){
 
 
 /**
- * 【绑定全局开关 change事件 + 剧透弹窗逻辑】
- * 1. false→true（打开）：立刻把checkbox回退为false，弹出弹窗；确认后才改为true
- * 2. true→false（关闭）：直接修改数据，保存，更新UI，不弹窗
+ * 【绑定全局开关 click事件 + 剧透弹窗逻辑】
+ * 改用label click，阻止默认，不再使用change，规避label包裹checkbox时序bug
+ * 1.想要打开：阻止原生勾选，弹出弹窗；确认后才改为true
+ * 2.想要关闭：直接修改数据，保存，更新UI，不弹窗
  * 恢复取消按钮完整逻辑
  */
 function bindGlobalSwitchSpoilerEvents() {
@@ -521,35 +522,44 @@ function bindGlobalSwitchSpoilerEvents() {
         return;
     }
 
-    // 全局隐藏角色开关
-    hideCharInput.addEventListener("change", function(){
-        // 用户想要关闭
-        if(this.checked === false){
+    // 获取包裹input的label元素
+    const labelHideChar = hideCharInput.closest("label.switch");
+    const labelFD = fdInput.closest("label.switch");
+
+    // --------全局隐藏角色开关 使用label click，阻止默认行为--------
+    labelHideChar.addEventListener("click", function(e){
+        e.preventDefault(); // 禁止浏览器原生切换checkbox！全部交给JS控制
+        // 当前实际状态
+        const currentVal = appData.globalHideChar;
+        if(currentVal === true){
+            // 用户要关闭
             appData.globalHideChar = false;
             saveData();
             renderGlobalSwitchDom();
             return;
         }
-        // 用户想要打开，回退勾选，弹出弹窗
-        this.checked = false;
+        // 用户想要打开：不修改勾选，弹出弹窗
         pendingGlobalSwitch = "hideChar";
         window.pendingGlobalSwitch = pendingGlobalSwitch;
         spoilerModal.classList.add("active");
     });
 
-    // 全局FD开关
-    fdInput.addEventListener("change", function(){
-        if(this.checked === false){
+    // --------全局FD开关--------
+    labelFD.addEventListener("click", function(e){
+        e.preventDefault();
+        const currentVal = appData.globalFD;
+        if(currentVal === true){
+            // 用户要关闭
             appData.globalFD = false;
             saveData();
             renderGlobalSwitchDom();
             return;
         }
-        this.checked = false;
         pendingGlobalSwitch = "fdGame";
         window.pendingGlobalSwitch = pendingGlobalSwitch;
         spoilerModal.classList.add("active");
     });
+
 
     // 弹窗确认【扩展：同时处理全局 / 编辑弹窗局部 / 动态卡片局部】
     spoilerConfirmBtn.onclick = null;
