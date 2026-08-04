@@ -229,7 +229,7 @@ export function initPage(Core) {
             }
         }
 
-        // ========== 剧透弹窗控制【CSS使用 .open 控制显隐 + 异步修复同步冲突】 ==========
+        // ========== 剧透弹窗控制【CSS使用 .open 控制显隐】 ==========
         function openSpoilerModal(type, checkboxDom) {
             if (!el.spoilerModal) {
                 console.error("缺少spoiler-modal弹窗DOM");
@@ -239,12 +239,9 @@ export function initPage(Core) {
             modalOpen = true;
             modalTargetType = type;
             triggerCheckboxEl = checkboxDom;
-            // 异步延时，规避checkbox同步事件竞争，解决弹窗无法弹出bug
-            setTimeout(()=>{
-                el.spoilerModal.classList.add("open");
-            },60);
+            el.spoilerModal.classList.add("open");
         }
-        function closeSpoilerModal(isConfirm = false) {
+        function closeSpoilerModal() {
             if (!el.spoilerModal) return;
             modalOpen = false;
             modalTargetType = "";
@@ -316,7 +313,7 @@ export function initPage(Core) {
                 }
                 saveData();
                 renderAddedGame();
-                closeSpoilerModal(true);
+                closeSpoilerModal();
             }
         }
 
