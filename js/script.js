@@ -207,6 +207,7 @@ export function initPage(Core) {
             }
 
             imgDom.src = allSrc[currentIndex];
+            if(!appData.charImageSelect) appData.charImageSelect = {};
             appData.charImageSelect[saveKey] = currentIndex;
             saveData();
             if (document.getElementById("char-select-modal")?.classList.contains("active")) {
@@ -315,51 +316,54 @@ export function initPage(Core) {
             el.spoilerCancel.onclick = closeSpoilerModal;
         }
 
-        // ============【全局隐藏角色开关】 ============
+        // ============【全局隐藏角色开关｜修复：click事件拦截，解决取消后滑块残留】 ============
         if (el.globalHideChar) {
-            el.globalHideChar.addEventListener('change', function () {
-                const newStatus = this.checked;
-                if (newStatus === false) {
+            // 移除原有change监听，改用click
+            el.globalHideChar.removeEventListener('change', el.globalHideChar._changeHandler);
+            el.globalHideChar.addEventListener('click', function (e) {
+                // 关闭操作：直接生效
+                if(this.checked === false){
                     appData.globalHideChar = false;
                     syncSingleGameSwitch("hideChar", false);
                     saveData();
                     renderAddedGame();
                     return;
                 }
+                // 打开操作，阻止默认勾选，等待弹窗确认
+                e.preventDefault();
+                if(modalOpen) return;
                 if (isTodayConfirmed()) {
                     appData.globalHideChar = true;
                     syncSingleGameSwitch("hideChar", true);
+                    this.checked = true;
                     saveData();
                     renderAddedGame();
-                } else {
-                    this.checked = false;
-                    refreshHideCharSwitch();
-                    if (modalOpen) return;
+                }else{
                     openSpoilerModal("hideChar");
                 }
             })
         }
 
-        // ============【全局FD/续作开关｜剧透预警】 ============
+        // ============【全局FD/续作开关｜剧透预警｜同逻辑修复】 ============
         if (el.globalFD) {
-            el.globalFD.addEventListener('change', function () {
-                const newStatus = this.checked;
-                if (newStatus === false) {
+            el.globalFD.removeEventListener('change', el.globalFD._changeHandler);
+            el.globalFD.addEventListener('click', function (e) {
+                if(this.checked === false){
                     appData.globalFD = false;
                     syncSingleGameSwitch("fd", false);
                     saveData();
                     renderAddedGame();
                     return;
                 }
+                e.preventDefault();
+                if(modalOpen) return;
                 if (isTodayConfirmed()) {
                     appData.globalFD = true;
                     syncSingleGameSwitch("fd", true);
+                    this.checked = true;
                     saveData();
                     renderAddedGame();
-                } else {
-                    this.checked = false;
-                    refreshFDSwitch();
-                    if (modalOpen) return;
+                }else{
                     openSpoilerModal("fd");
                 }
             })
@@ -580,26 +584,31 @@ export function initPage(Core) {
                     openCharSelectModal(gid);
                 }
             })
+
+            // ==========【单游戏本地开关 修复】==========
             // 单游戏隐藏角色开关
             document.querySelectorAll(".local-hide-char").forEach(sw => {
-                sw.onchange = function () {
+                sw.onclick = function (e) {
                     const gid = this.dataset.gid;
                     const gameItem = appData.gameList?.find(g => g.gameId === gid);
                     if (!gameItem) return;
                     const targetStatus = this.checked;
+                    // 关闭，直接生效
                     if (!targetStatus) {
                         gameItem.localHideChar = false;
                         saveData();
                         renderAddedGame();
                         return;
                     }
+                    // 开启，拦截，弹窗确认
+                    e.preventDefault();
+                    if(modalOpen) return;
                     if (localSwitchIsConfirmedToday()) {
                         gameItem.localHideChar = true;
+                        this.checked = true;
                         saveData();
                         renderAddedGame();
                     } else {
-                        this.checked = false;
-                        if (modalOpen) return;
                         this.classList.add("modal-trigger");
                         modalTargetType = "localHide";
                         openSpoilerModal("localHide");
@@ -608,7 +617,7 @@ export function initPage(Core) {
             })
             // 单游戏FD开关
             document.querySelectorAll(".local-fd").forEach(sw => {
-                sw.onchange = function () {
+                sw.onclick = function (e) {
                     const gid = this.dataset.gid;
                     const gameItem = appData.gameList?.find(g => g.gameId === gid);
                     if (!gameItem) return;
@@ -619,13 +628,14 @@ export function initPage(Core) {
                         renderAddedGame();
                         return;
                     }
+                    e.preventDefault();
+                    if(modalOpen) return;
                     if (localSwitchIsConfirmedToday()) {
                         gameItem.localFD = true;
+                        this.checked = true;
                         saveData();
                         renderAddedGame();
                     } else {
-                        this.checked = false;
-                        if (modalOpen) return;
                         this.classList.add("modal-trigger");
                         modalTargetType = "localFD";
                         openSpoilerModal("localFD");
@@ -677,7 +687,6 @@ export function initPage(Core) {
                         targetHeight = h;
                     }
 
-                    // ✅【关键修复！原先这里直接getElementById，改用缓存el.colorBg，消除colorBorder报错源头】
                     const bgColor = el.colorBg?.value ?? "#ffffff";
 
                     const renderCanvas = await html2canvas(el.snapshotContainer, {
