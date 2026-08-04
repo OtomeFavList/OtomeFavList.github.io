@@ -146,19 +146,24 @@ export function fillFilterOptions(gameList) {
         writerArr.forEach(name => writerSet.add(name));
         artSet.add(g.art);
     })
-    const fillSelect = (id, dataSet) => {
+    const fillSelect = (id, dataSet, placeholderText) => {
         const sel = document.getElementById(id);
         if (!sel) return;
         const firstOption = sel.querySelector("option");
         sel.innerHTML = "";
-        if(firstOption) sel.appendChild(firstOption);
+        if(firstOption) {
+            firstOption.textContent = placeholderText;
+            sel.appendChild(firstOption);
+        } else {
+            sel.innerHTML = `<option value="">${placeholderText}</option>`;
+        }
         dataSet.forEach(v => sel.innerHTML += `<option value="${v}">${v}</option>`);
     }
-    fillSelect("filter-writer", writerSet);
-    fillSelect("filter-art", artSet);
-    fillSelect("filter-year", yearSet);
-    fillSelect("filter-publisher", pubSet);
-    fillSelect("filter-cn", cnSet);
+    fillSelect("filter-writer", writerSet, "全部");
+    fillSelect("filter-art", artSet, "全部");
+    fillSelect("filter-year", yearSet, "全部");
+    fillSelect("filter-publisher", pubSet, "全部");
+    fillSelect("filter-cn", cnSet, "全部");
 }
 
 /**
