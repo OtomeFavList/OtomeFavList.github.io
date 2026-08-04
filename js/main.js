@@ -510,7 +510,6 @@ function wrapChangeHandler(e){
 
 /**
  * 【绑定全局开关 change事件 + 剧透弹窗逻辑】
- * 改用change事件，不再e.preventDefault锁死checkbox
  * 1. false→true（打开）：立刻把checkbox回退为false，弹出弹窗；确认后才改为true
  * 2. true→false（关闭）：直接修改数据，保存，更新UI，不弹窗
  */
@@ -610,7 +609,7 @@ function bindGlobalSwitchSpoilerEvents() {
         window.pendingGameOp = null;
     });
 
-    // 弹窗取消：关闭弹窗，清空全部待处理标记
+    // 弹窗取消：关闭弹窗，清空全部待处理标记，不修改任何状态
     spoilerCancelBtn.onclick = null;
     spoilerCancelBtn.addEventListener("click", function(){
         spoilerModal.classList.remove("modal-show");
