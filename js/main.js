@@ -127,7 +127,7 @@ export function syncSingleGameSwitch(type, status) {
     })
 }
 
-// 【修复】筛选下拉填充，不再覆盖默认提示文字
+// 【修复】筛选下拉填充，增加元素获取兜底，防止undefined报错
 export function fillFilterOptions(gameList) {
     if (!Array.isArray(gameList) || gameList.length === 0) return;
     const yearSet = new Set(), pubSet = new Set(), cnSet = new Set(), writerSet = new Set(), artSet = new Set();
@@ -171,11 +171,12 @@ export function fillFilterOptions(gameList) {
  * 布局：左侧封面，右侧竖排信息，移除名称旁发售年份
  */
 export function renderGameSelectItem(game) {
+    if(!game) return "";
     return `
     <div class="game-option-item" data-game-id="${game.id}">
-        <img src="${game.cover}" alt="${game.name}">
+        <img src="${game.cover}" alt="${game.name || ''}">
         <div class="game-option-info">
-            <div class="game-option-name">${game.name}</div>
+            <div class="game-option-name">${game.name || ""}</div>
             <p>编剧：${Array.isArray(game.writer) ? game.writer.join("、") : game.writer || "无"}</p>
             <p>画师：${game.art || "无"}</p>
             <p>发售年份：${game.year || "无"}</p>
@@ -215,10 +216,10 @@ export function renderSelectedChar(gameItem, gameInfo) {
         <div class="char-card-item selected" data-char-id="${char.id}" data-game-id="${gameInfo.id}" data-total-img="${allSrc.length}">
             <div class="char-card-img-box ${allSrc.length>1?'char-has-multi-img':''}">
                 ${allSrc.length>1?`<button class="char-switch-btn char-switch-prev">&lt;</button>`:""}
-                <img src="${targetSrc}" alt="${char.name}">
+                <img src="${targetSrc}" alt="${char.name || ''}">
                 ${allSrc.length>1?`<button class="char-switch-btn char-switch-next">&gt;</button>`:""}
             </div>
-            <div class="char-card-name">${char.name}</div>
+            <div class="char-card-name">${char.name || ""}</div>
         </div>
         `;
     })
@@ -268,10 +269,10 @@ export function renderCP(gameItem, gameInfo) {
             <div class="char-card-item selected" data-char-id="${mChar.id}" data-game-id="${gameInfo.id}" data-total-img="${mAllSrc.length}">
                 <div class="char-card-img-box ${mAllSrc.length>1?'char-has-multi-img':''}">
                     ${mAllSrc.length>1?`<button class="char-switch-btn char-switch-prev">&lt;</button>`:""}
-                    <img src="${mTargetSrc}" alt="${mChar.name}">
+                    <img src="${mTargetSrc}" alt="${mChar.name || ''}">
                     ${mAllSrc.length>1?`<button class="char-switch-btn char-switch-next">&gt;</button>`:""}
                 </div>
-                <div class="char-card-name">${mChar.name}</div>
+                <div class="char-card-name">${mChar.name || ""}</div>
             </div>
             `;
         })
@@ -282,10 +283,10 @@ export function renderCP(gameItem, gameInfo) {
                 <div class="char-card-item selected" data-char-id="${fChar.id}" data-game-id="${gameInfo.id}" data-total-img="${fAllSrc.length}">
                     <div class="char-card-img-box ${fAllSrc.length>1?'char-has-multi-img':''}">
                         ${fAllSrc.length>1?`<button class="char-switch-btn char-switch-prev">&lt;</button>`:""}
-                        <img src="${fTargetSrc}" alt="${fChar.name}">
+                        <img src="${fTargetSrc}" alt="${fChar.name || ''}">
                         ${fAllSrc.length>1?`<button class="char-switch-btn char-switch-next">&gt;</button>`:""}
                     </div>
-                    <div class="char-card-name">${fChar.name}</div>
+                    <div class="char-card-name">${fChar.name || ""}</div>
                 </div>
             </div>
             <div class="hero-list-column" style="width:75%">
