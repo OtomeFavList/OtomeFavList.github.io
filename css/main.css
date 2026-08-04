@@ -419,7 +419,7 @@ input[type="checkbox"] {
     transition: all 0.22s ease;
 }
 
-/* ========== 弹窗遮罩 modal-mask ========== */
+/* ========== 弹窗遮罩 modal-mask【修复核心】 ========== */
 .modal-mask{
     position:fixed;
     inset:0;
@@ -429,7 +429,7 @@ input[type="checkbox"] {
     justify-content:center;
     z-index:999;
 }
-.modal-mask.open{
+.modal-mask.active{
     display:flex;
 }
 
@@ -458,7 +458,7 @@ input[type="checkbox"] {
     margin-top:20px;
 }
 
-/* ========== 剧透弹窗按钮：与全局button（添加游戏）完全一致红色样式 ========== */
+/* ========== 剧透弹窗按钮 ========== */
 #spoiler-cancel,
 #spoiler-confirm {
     padding:10px 18px;
@@ -600,7 +600,7 @@ h2{
     gap:8px;
 }
 
-/* ========== 剧透弹窗按钮配色（与添加游戏按钮红色系统一） ========== */
+/* ========== 按钮统一配色 ========== */
 #btn-add-game,
 #spoiler-confirm,
 #spoiler-cancel {
@@ -617,29 +617,4 @@ h2{
 #spoiler-confirm:hover,
 #spoiler-cancel:hover {
     background-color: #942e2e;
-}
-
-/* 弹窗默认隐藏，js使用 display:flex 显示 */
-#spoiler-modal.modal-mask {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.55);
-    z-index: 9999;
-    align-items: center;
-    justify-content: center;
-}
-#spoiler-modal .modal-box {
-    background: #fff7f9;
-    padding: 24px 28px;
-    border-radius: 10px;
-    border: 2px solid #f6a5b8;
-    max-width: 420px;
-    width: 90%;
-}
-#spoiler-modal .modal-btns {
-    margin-top:20px;
-    display:flex;
-    gap:14px;
-    justify-content:center;
 }
