@@ -127,7 +127,7 @@ export function syncSingleGameSwitch(type, status) {
     })
 }
 
-// 筛选下拉填充【增强容错：自动兼容字符串writer，强制转为数组】
+// 【修复】筛选下拉填充，不再覆盖默认提示文字
 export function fillFilterOptions(gameList) {
     if (!Array.isArray(gameList) || gameList.length === 0) return;
     const yearSet = new Set(), pubSet = new Set(), cnSet = new Set(), writerSet = new Set(), artSet = new Set();
@@ -137,7 +137,6 @@ export function fillFilterOptions(gameList) {
         pubSet.add(g.publisher);
         cnSet.add(g.cnStudio);
 
-        // 核心修复：兼容字符串/数组两种writer格式，防止game001缺失选项
         let writerArr = [];
         if(Array.isArray(g.writer)){
             writerArr = g.writer;
@@ -145,13 +144,14 @@ export function fillFilterOptions(gameList) {
             writerArr = [g.writer];
         }
         writerArr.forEach(name => writerSet.add(name));
-
         artSet.add(g.art);
     })
     const fillSelect = (id, dataSet) => {
         const sel = document.getElementById(id);
         if (!sel) return;
-        sel.innerHTML = '<option value="">筛选</option>';
+        const firstOption = sel.querySelector("option");
+        sel.innerHTML = "";
+        if(firstOption) sel.appendChild(firstOption);
         dataSet.forEach(v => sel.innerHTML += `<option value="${v}">${v}</option>`);
     }
     fillSelect("filter-writer", writerSet);
@@ -162,8 +162,8 @@ export function fillFilterOptions(gameList) {
 }
 
 /**
- * 【重要修改】渲染游戏选择列表卡片模板
- * 布局：左侧封面，右侧竖排信息，移除简介
+ * 渲染游戏选择列表卡片模板
+ * 布局：左侧封面，右侧竖排信息，移除名称旁发售年份
  */
 export function renderGameSelectItem(game) {
     return `
@@ -197,7 +197,6 @@ export function renderSelectedChar(gameItem, gameInfo) {
         const availableImgUnits = getAvailableCharImages(char, globalHide, globalFD, localHide, localFD);
         if (availableImgUnits.length === 0) return;
 
-        // 合并所有可用图片地址
         let allSrc = [];
         availableImgUnits.forEach(u => allSrc.push(...u.srcList));
         if(allSrc.length === 0) return;
@@ -335,7 +334,7 @@ function buildCoreContext() {
         saveConfirmDate,
         localSwitchIsConfirmedToday,
         saveLocalSwitchConfirmDate,
-        renderGameSelectItem // 对外暴露新版游戏卡片渲染函数
+        renderGameSelectItem
     };
     return Core;
 }
