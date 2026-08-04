@@ -450,8 +450,8 @@ export function renderLocalSwitchDom(gameItem){
  * 逻辑规则：
  * 1. false → true（要开启）：弹出剧透确认弹窗，确认后才真正打开开关
  * 2. true → false（要关闭）：直接修改数据、保存、更新UI，**不弹出任何弹窗**
- * 3. 全部阻止浏览器原生checkbox勾选行为，完全由JS接管checked状态，修复滑块不回弹bug
- * 4. 新增：spoiler‑cancel【取消按钮】，点击关闭弹窗，不修改任何开关状态
+ * 3. e.preventDefault()阻止浏览器原生checkbox自动翻转，JS全权接管checked状态
+ * 4. 取消：关闭弹窗，不修改任何开关数据与UI
  */
 function bindGlobalSwitchSpoilerEvents() {
     const hideCharInput = document.getElementById("global-hide-char");
@@ -465,31 +465,24 @@ function bindGlobalSwitchSpoilerEvents() {
         return;
     }
 
-    // -------------------- 全局隐藏角色开关 --------------------
+    // 全局隐藏角色开关
     hideCharInput.addEventListener("click", function(e){
-        e.preventDefault(); // 全部阻止原生勾选，JS全权接管
-        const oldVal = appData.globalHideChar;
-        const newVal = !oldVal;
-
-        if(newVal === false){
-            // 关闭：直接生效
+        e.preventDefault();
+        if(appData.globalHideChar === true){
+            // 关闭，直接生效
             appData.globalHideChar = false;
             saveData();
             renderGlobalSwitchDom();
             return;
         }
-        // 开启：弹弹窗，记录待处理开关类型
         pendingGlobalSwitch = "hideChar";
         spoilerModal.style.display = "flex";
     });
 
-    // -------------------- 全局FD开关 --------------------
+    // 全局FD开关
     fdInput.addEventListener("click", function(e){
         e.preventDefault();
-        const oldVal = appData.globalFD;
-        const newVal = !oldVal;
-
-        if(newVal === false){
+        if(appData.globalFD === true){
             appData.globalFD = false;
             saveData();
             renderGlobalSwitchDom();
@@ -499,37 +492,29 @@ function bindGlobalSwitchSpoilerEvents() {
         spoilerModal.style.display = "flex";
     });
 
-    // -------------------- 弹窗【确认】按钮逻辑 --------------------
+    // 弹窗确认
+    spoilerConfirmBtn.onclick = null;
     spoilerConfirmBtn.addEventListener("click", function(){
-        console.log("剧透弹窗确认，pendingGlobalSwitch =", pendingGlobalSwitch);
         if(!pendingGlobalSwitch){
             spoilerModal.style.display = "none";
             return;
         }
-
-        // 全局开关：隐藏角色
         if(pendingGlobalSwitch === "hideChar"){
             appData.globalHideChar = true;
             saveData();
             renderGlobalSwitchDom();
-        }
-        // 全局开关：FD角色
-        else if(pendingGlobalSwitch === "fdGame"){
+        }else if(pendingGlobalSwitch === "fdGame"){
             appData.globalFD = true;
             saveData();
             renderGlobalSwitchDom();
-        }
-        // 局部游戏开关：本游戏隐藏角色
-        else if(pendingGlobalSwitch === "localHide"){
+        }else if(pendingGlobalSwitch === "localHide"){
             const gameItem = appData.gameList.find(g=>g.gameId === currentEditGameId);
             if(gameItem){
                 gameItem.localHideChar = true;
                 saveData();
                 renderLocalSwitchDom(gameItem);
             }
-        }
-        // 局部游戏开关：本游戏FD角色
-        else if(pendingGlobalSwitch === "localFD"){
+        }else if(pendingGlobalSwitch === "localFD"){
             const gameItem = appData.gameList.find(g=>g.gameId === currentEditGameId);
             if(gameItem){
                 gameItem.localFD = true;
@@ -537,15 +522,13 @@ function bindGlobalSwitchSpoilerEvents() {
                 renderLocalSwitchDom(gameItem);
             }
         }
-
-        // 关闭弹窗，清空待处理标记
         spoilerModal.style.display = "none";
         pendingGlobalSwitch = null;
     });
 
-    // -------------------- 弹窗【取消】按钮逻辑【本次新增】 --------------------
+    // 弹窗取消：只关弹窗，不改动任何开关
+    spoilerCancelBtn.onclick = null;
     spoilerCancelBtn.addEventListener("click", function(){
-        console.log("剧透弹窗取消，不修改任何开关状态");
         spoilerModal.style.display = "none";
         pendingGlobalSwitch = null;
     });
@@ -566,35 +549,25 @@ function bindLocalGameSwitchEvents(){
         return;
     }
 
-    // -------------------- 本游戏隐藏角色开关 --------------------
     localHideEl.addEventListener("click", function(e){
         e.preventDefault();
         const gameItem = appData.gameList.find(g=>g.gameId === currentEditGameId);
         if(!gameItem) return;
-        const oldVal = gameItem.localHideChar;
-        const newVal = !oldVal;
-
-        if(newVal === false){
-            // 关闭直接生效
+        if(gameItem.localHideChar === true){
             gameItem.localHideChar = false;
             saveData();
             renderLocalSwitchDom(gameItem);
             return;
         }
-        // 开启弹弹窗，记录待处理标记
         pendingGlobalSwitch = "localHide";
         spoilerModal.style.display = "flex";
     });
 
-    // -------------------- 本游戏续作/FD角色开关 --------------------
     localFDEl.addEventListener("click", function(e){
         e.preventDefault();
         const gameItem = appData.gameList.find(g=>g.gameId === currentEditGameId);
         if(!gameItem) return;
-        const oldVal = gameItem.localFD;
-        const newVal = !oldVal;
-
-        if(newVal === false){
+        if(gameItem.localFD === true){
             gameItem.localFD = false;
             saveData();
             renderLocalSwitchDom(gameItem);
