@@ -2,11 +2,10 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    /* 全局默认字体：思源柔黑体 GenJyuuGothic */
     font-family:"GenJyuuGothic", sans-serif,system-ui;
 }
 
-/* 预加载思源柔黑体、思源黑体字体（放在最顶部字体定义） */
+/* 全部字体加载代码已注释 */
 /*
 @font-face {
     font-family: "GenJyuuGothic";
@@ -42,7 +41,6 @@ body{
     transition:background 0.2s;
 }
 
-/* 顶部大标题 Otome FavList 单独粗黑体，缩小字间距 */
 .site-title{
     text-align:center;
     margin:30px 0 10px;
@@ -54,7 +52,6 @@ body{
     letter-spacing:1px;
     color: #b33a3a;
 }
-/* 日乙个人喜好表副标题 #666 取消加粗【需求①】 */
 .title-sub-cn{
     font-size:16px;
     margin:8px 0;
@@ -76,7 +73,6 @@ body{
     gap:30px;
 }
 
-/* 卡片容器 */
 .big-card{
     background:#ffffff;
     border:2px solid #f6a5b8;
@@ -84,7 +80,6 @@ body{
     padding:24px;
     transition:border-color 0.2s;
 }
-/* 板块标题：设置、基础资料、游戏列表、导出 文字+左侧竖线 #b85878 */
 .big-card h2{
     margin-bottom:20px;
     font-size:24px;
@@ -94,7 +89,6 @@ body{
     font-weight:bold;
 }
 
-/* 开关区域 */
 .switch-row{
     display:flex;
     align-items:center;
@@ -148,7 +142,6 @@ input:checked + .slider:before{
     transform:translateX(24px);
 }
 
-/* 表单区域 */
 .form-row{
     margin:16px 0;
     display:flex;
@@ -164,7 +157,6 @@ input:checked + .slider:before{
     background:#fcfcfc;
 }
 
-/* 按钮通用样式 */
 button{
     padding:10px 18px;
     border:none;
@@ -178,7 +170,6 @@ button{
 button:hover{
     background:#992e2e;
 }
-/* 弹窗取消/删除红色按钮 */
 .btn-del, #spoiler-confirm{
     background:#dd4444;
 }
@@ -202,14 +193,13 @@ button:hover{
 .game-search-box{
     margin:16px 0;
     display:flex;
+    flex-direction:column;
     gap:10px;
-    flex-wrap:wrap;
-    align-items:center;
+    align-items:stretch;
 }
 .game-search-box input{
     padding:10px;
-    flex:1;
-    min-width:220px;
+    width:100%;
     border:1px solid #eee;
     border-radius:8px;
     background:#fcfcfc;
@@ -218,7 +208,6 @@ button:hover{
     display:flex;
     gap:8px;
     flex-wrap:wrap;
-    margin:10px 0;
 }
 .filter-group select{
     padding:8px;
@@ -227,7 +216,6 @@ button:hover{
     background:#fcfcfc;
 }
 
-/* =========【重点修改：游戏选择弹窗网格布局】========= */
 .game-list-select{
     max-height:320px;
     overflow-y:auto;
@@ -235,7 +223,6 @@ button:hover{
     border-radius:10px;
     padding:10px;
     margin:12px 0;
-    /* PC端一行3个卡片 */
     display:grid;
     grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
     gap:14px;
@@ -243,11 +230,10 @@ button:hover{
 }
 @media (max-width:768px) {
     .game-list-select{
-        grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
-        /* 移动端一行1个 */
+        grid-template-columns:1fr;
     }
 }
-/* 游戏选项卡片：左封面 + 右侧文字 */
+
 .game-option-item{
     border:1px solid #eee;
     border-radius:10px;
@@ -334,7 +320,6 @@ button:hover{
     gap:14px;
     margin:10px 0;
 }
-/* ========== Character角色卡片：200*200固定容器 + 边框 ========== */
 .char-item{
     text-align:center;
     border:1px solid #eee;
@@ -351,7 +336,6 @@ button:hover{
 .char-item:hover{
     border-color:#f0b8c8;
 }
-/* 强制200×200图片容器 */
 .char-item-img-box{
     width:200px;
     height:200px;
@@ -384,7 +368,6 @@ button:hover{
     align-items:flex-end;
 }
 
-/* ========== CP布局 严格25% / 75% 分区 ========== */
 .cp-group{
     margin:16px 0;
     padding-top:12px;
@@ -399,14 +382,12 @@ button:hover{
     border-bottom:1px solid #eee;
     width:100%;
 }
-/* 左侧女角色区域 固定25% */
 .cp-female{
     flex: 0 0 25%;
     display:flex;
     justify-content:center;
     align-items:flex-start;
 }
-/* 右侧男角色区域 固定75% */
 .cp-male-wrap{
     flex: 0 0 75%;
     display:flex;
@@ -414,12 +395,11 @@ button:hover{
     flex-wrap:wrap;
     align-items:flex-end;
 }
-/* CP内复用200px卡片保持统一 */
 .cp-char-card{
     width:200px;
 }
 
-/* 弹窗遮罩 */
+/* 弹窗默认隐藏，修复弹窗问题 */
 .modal-mask{
     position:fixed;
     inset:0;
@@ -428,6 +408,9 @@ button:hover{
     align-items:center;
     justify-content:center;
     z-index:999;
+}
+.modal-mask.open{
+    display:flex;
 }
 .modal-box{
     background:#fff;
@@ -448,7 +431,6 @@ button:hover{
     margin-top:20px;
 }
 
-/* 导出配色区域 */
 .color-set-row{
     display:flex;
     gap:20px;
@@ -473,12 +455,10 @@ button:hover{
     gap:10px;
     flex-wrap:wrap;
 }
-/* 导出尺寸所有选项文字统一和导出尺寸标签同色 */
 .size-select label {
     color:#c98fac;
 }
 
-/* About底部区域【需求②：About标题 #b33a3a】 */
 .about-block{
     text-align:center;
     margin-top:50px;
@@ -493,12 +473,10 @@ button:hover{
     line-height:1.8;
     color:#666;
 }
-/* Email单独 #222222 */
 .about-block p.email-text{
     color:#222222;
 }
 
-/* 通用隐藏类：仅用于搜索面板、折叠卡片，不控制弹窗 */
 .hide-block{
     display:none !important;
 }
@@ -506,7 +484,6 @@ button:hover{
 h1{
     color: #b33a3a;
 }
-/* 清除全局h2旧色冲突，由.big-card h2单独控制 */
 h2{
     color: inherit;
 }
@@ -522,7 +499,6 @@ h2{
     font-weight:normal;
 }
 
-/* 移动端适配：小屏幕CP布局自动上下堆叠 */
 @media (max-width:768px) {
     .cp-row{
         flex-direction:column;
@@ -555,7 +531,6 @@ h2{
     }
 }
 
-/* ========== CP 25% / 75%布局样式 ========== */
 .cp-layout-row{
     display:flex;
     gap:12px;
