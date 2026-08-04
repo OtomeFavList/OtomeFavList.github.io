@@ -127,7 +127,7 @@ export function syncSingleGameSwitch(type, status) {
     })
 }
 
-// 筛选下拉填充【已修改：拆分writer数组，独立生成每个编剧选项】
+// 筛选下拉填充【增强容错：自动兼容字符串writer，强制转为数组】
 export function fillFilterOptions(gameList) {
     if (!Array.isArray(gameList) || gameList.length === 0) return;
     const yearSet = new Set(), pubSet = new Set(), cnSet = new Set(), writerSet = new Set(), artSet = new Set();
@@ -136,10 +136,16 @@ export function fillFilterOptions(gameList) {
         yearSet.add(g.year);
         pubSet.add(g.publisher);
         cnSet.add(g.cnStudio);
-        // 遍历编剧数组，逐个存入集合
+
+        // 核心修复：兼容字符串/数组两种writer格式，防止game001缺失选项
+        let writerArr = [];
         if(Array.isArray(g.writer)){
-            g.writer.forEach(name => writerSet.add(name));
+            writerArr = g.writer;
+        }else if(typeof g.writer === "string" && g.writer.trim() !== ""){
+            writerArr = [g.writer];
         }
+        writerArr.forEach(name => writerSet.add(name));
+
         artSet.add(g.art);
     })
     const fillSelect = (id, dataSet) => {
