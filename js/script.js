@@ -1,4 +1,5 @@
 // ===================== script.js UI交互层（模块化导出） =====================
+// 【重要说明】剧透弹窗、全局/局部开关click事件全部迁移至main.js，本文件不再处理开关点击逻辑
 export function initPage(Core) {
     const {
         appData,
@@ -21,7 +22,11 @@ export function initPage(Core) {
         renderGameSelectItem
     } = Core;
 
-    // 渲染角色选择弹窗内容【修复：适配srcList，读取持久化图片索引】
+    // ===================== 角色选择弹窗渲染函数 =====================
+    /**
+     * 渲染角色选择弹窗内容
+     * @param {string} gameId 当前编辑游戏id
+     */
     function renderCharSelectModal(gameId) {
         const gameInfo = gameTemplateList.find(g => g.id === gameId);
         const gameItem = appData.gameList?.find(g => g?.gameId === gameId);
@@ -115,7 +120,10 @@ export function initPage(Core) {
         })
     }
 
-    // 打开角色弹窗（保留active，不改动）
+    /**
+     * 打开角色选择弹窗
+     * @param {string} gameId 游戏id
+     */
     function openCharSelectModal(gameId) {
         Core.currentEditGameId = gameId;
         const modal = document.getElementById("char-select-modal");
@@ -123,7 +131,10 @@ export function initPage(Core) {
         modal.classList.add("active");
         renderCharSelectModal(gameId);
     }
-    // 关闭角色弹窗（保留active，不改动）
+
+    /**
+     * 关闭角色选择弹窗
+     */
     function closeCharSelectModal() {
         const modal = document.getElementById("char-select-modal");
         if (!modal) return;
@@ -131,12 +142,12 @@ export function initPage(Core) {
         Core.currentEditGameId = null;
     }
 
-    // 页面所有DOM、事件、渲染逻辑全部放在bootstrap内部
+
+    // ===================== 页面启动bootstrap，UI渲染、表单、导出、卡片事件 =====================
     async function bootstrap() {
-        // 预加载所有游戏数据
         await loadAllGameTemplates();
 
-        // 1. DOM元素缓存【移除spoilerCancel，HTML已经删除取消按钮】
+        // DOM元素缓存
         const el = {
             globalHideChar: document.getElementById("global-hide-char"),
             globalFD: document.getElementById("global-fd-game"),
@@ -158,16 +169,11 @@ export function initPage(Core) {
             exportBtn: document.getElementById("btn-export"),
             canvas: document.getElementById("export-canvas"),
             snapshotContainer: document.getElementById("snapshot-container"),
-            // 角色选择弹窗DOM
             charSelectModal: document.getElementById("char-select-modal"),
             modalCloseBtn: document.querySelector(".modal-close-btn"),
             modalCancelBtn: document.getElementById("modal-cancel-btn"),
             modalConfirmBtn: document.getElementById("modal-confirm-btn")
         };
-
-        let modalOpen = false;
-        let modalTargetType = ""; // hideChar / fd / localHide / localFD
-        let triggerCheckboxEl = null; // 缓存触发弹窗的复选框
 
         // ==========【全局事件委托：角色立绘左右切换】==========
         document.addEventListener("click", function (e) {
@@ -216,12 +222,18 @@ export function initPage(Core) {
             }
         });
 
+        /**
+         * 更新全局隐藏角色复选框DOM状态（仅更新UI，点击事件由main.js接管）
+         */
         function refreshHideCharSwitch() {
             if (el.globalHideChar) {
                 el.globalHideChar.checked = appData.globalHideChar;
                 el.globalHideChar.indeterminate = false;
             }
         }
+        /**
+         * 更新全局FD复选框DOM状态（仅更新UI，点击事件由main.js接管）
+         */
         function refreshFDSwitch() {
             if (el.globalFD) {
                 el.globalFD.checked = appData.globalFD;
@@ -229,36 +241,16 @@ export function initPage(Core) {
             }
         }
 
-        // ========== 剧透弹窗控制【CSS使用 .open 控制显隐】 ==========
-        function openSpoilerModal(type, checkboxDom) {
-            if (!el.spoilerModal) {
-                console.error("缺少spoiler-modal弹窗DOM");
-                alert("页面缺失剧透弹窗组件，请检查index.html");
-                return;
-            }
-            modalOpen = true;
-            modalTargetType = type;
-            triggerCheckboxEl = checkboxDom;
-            el.spoilerModal.classList.add("open");
-        }
-        function closeSpoilerModal() {
-            if (!el.spoilerModal) return;
-            modalOpen = false;
-            modalTargetType = "";
-            triggerCheckboxEl = null;
-            el.spoilerModal.classList.remove("open");
-        }
-
         // 加载本地存储
         loadData();
 
-        // 回填表单基础信息
+        // 回填基础资料表单
         if (el.inputNick) el.inputNick.value = appData.baseInfo?.nick ?? "";
         if (el.inputCount) el.inputCount.value = appData.baseInfo?.count ?? "";
         if (el.inputStory) el.inputStory.value = appData.baseInfo?.story ?? "";
         if (el.inputFirstgame) el.inputFirstgame.value = appData.baseInfo?.firstgame ?? "";
 
-        // ✅配色绑定 增加DOM判空，彻底消除 colorBorder undefined 报错
+        // 配色绑定，增加DOM判空，消除colorBorder undefined报错
         const colorBindList = [
             { dom: el.colorBg, dataKey: "bg" },
             { dom: el.colorTitle, dataKey: "title" },
@@ -281,108 +273,8 @@ export function initPage(Core) {
         refreshFDSwitch();
         fillFilterOptions(gameTemplateList);
 
-        // 剧透弹窗【确认按钮】【取消按钮代码全部移除】
-        if (el.spoilerConfirm) {
-            el.spoilerConfirm.onclick = () => {
-                if (modalTargetType === "hideChar") {
-                    saveConfirmDate();
-                    appData.globalHideChar = true;
-                    syncSingleGameSwitch("hideChar", true);
-                    if(triggerCheckboxEl) triggerCheckboxEl.checked = true;
-                } else if (modalTargetType === "fd") {
-                    saveConfirmDate();
-                    appData.globalFD = true;
-                    syncSingleGameSwitch("fd", true);
-                    if(triggerCheckboxEl) triggerCheckboxEl.checked = true;
-                } else if (modalTargetType === "localHide") {
-                    saveLocalSwitchConfirmDate();
-                    const gid = triggerCheckboxEl.dataset.gid;
-                    const targetGame = appData.gameList?.find(g => g.gameId === gid);
-                    if (targetGame) {
-                        targetGame.localHideChar = true;
-                        triggerCheckboxEl.checked = true;
-                    }
-                } else if (modalTargetType === "localFD") {
-                    saveLocalSwitchConfirmDate();
-                    const gid = triggerCheckboxEl.dataset.gid;
-                    const targetGame = appData.gameList?.find(g => g.gameId === gid);
-                    if (targetGame) {
-                        targetGame.localFD = true;
-                        triggerCheckboxEl.checked = true;
-                    }
-                }
-                saveData();
-                renderAddedGame();
-                closeSpoilerModal();
-            }
-        }
 
-        // ============【全局隐藏角色开关 使用click，阻止原生勾选】 ============
-        if (el.globalHideChar) {
-            el.globalHideChar.addEventListener('click', function (e) {
-                const currentStatus = appData.globalHideChar;
-                // 关闭操作：直接生效
-                if(currentStatus === true){
-                    e.preventDefault();
-                    appData.globalHideChar = false;
-                    this.checked = false;
-                    syncSingleGameSwitch("hideChar", false);
-                    saveData();
-                    renderAddedGame();
-                    return;
-                }
-                if(modalOpen){
-                    e.preventDefault();
-                    return;
-                }
-                if (isTodayConfirmed()) {
-                    //今日已确认，直接打开
-                    e.preventDefault();
-                    appData.globalHideChar = true;
-                    this.checked = true;
-                    syncSingleGameSwitch("hideChar", true);
-                    saveData();
-                    renderAddedGame();
-                }else{
-                    e.preventDefault();
-                    openSpoilerModal("hideChar", this);
-                }
-            })
-        }
-
-        // ============【全局FD/续作开关｜剧透预警 click事件】 ============
-        if (el.globalFD) {
-            el.globalFD.addEventListener('click', function (e) {
-                const currentStatus = appData.globalFD;
-                // 关闭操作：直接生效
-                if(currentStatus === true){
-                    e.preventDefault();
-                    appData.globalFD = false;
-                    this.checked = false;
-                    syncSingleGameSwitch("fd", false);
-                    saveData();
-                    renderAddedGame();
-                    return;
-                }
-                if(modalOpen){
-                    e.preventDefault();
-                    return;
-                }
-                if (isTodayConfirmed()) {
-                    e.preventDefault();
-                    appData.globalFD = true;
-                    this.checked = true;
-                    syncSingleGameSwitch("fd", true);
-                    saveData();
-                    renderAddedGame();
-                }else{
-                    e.preventDefault();
-                    openSpoilerModal("fd", this);
-                }
-            })
-        }
-
-        // 基础资料输入框绑定
+        // ========== 基础资料输入框绑定 ==========
         const baseInputMap = [
             { dom: el.inputNick, key: "nick" },
             { dom: el.inputCount, key: "count" },
@@ -398,25 +290,29 @@ export function initPage(Core) {
             }
         })
 
-        // 添加游戏按钮
+        // ========== 添加游戏按钮 ==========
         if (el.addGameBtn) {
             el.addGameBtn.onclick = function () {
                 renderGameSelectList();
                 if (el.searchPanel) el.searchPanel.classList.remove("hide-block");
             }
         }
-        // 搜索输入监听
+
+        // ========== 搜索输入监听 ==========
         if (el.gameSearchInput) {
             el.gameSearchInput.addEventListener("input", renderGameSelectList);
         }
-        // 筛选下拉监听
+
+        // ========== 筛选下拉监听 ==========
         const filterSelectIds = ["filter-year", "filter-publisher", "filter-cn", "filter-writer", "filter-art"];
         filterSelectIds.forEach(selId => {
             const sel = document.getElementById(selId);
             if (sel) sel.addEventListener("change", renderGameSelectList);
         });
 
-        // 渲染游戏选择列表【✅重点修复：调用main.js统一模板】
+        /**
+         * 渲染游戏选择弹窗列表
+         */
         function renderGameSelectList() {
             if (!el.gameSearchInput || !el.gameSelectList || !Array.isArray(gameTemplateList)) return;
             const keyword = el.gameSearchInput.value.toLowerCase();
@@ -476,7 +372,9 @@ export function initPage(Core) {
             })
         }
 
-        // 渲染已添加游戏卡片
+        /**
+         * 渲染已添加游戏卡片
+         */
         function renderAddedGame() {
             if (!el.addedGameBox) return;
             if (!Array.isArray(gameTemplateList) || gameTemplateList.length === 0) {
@@ -542,7 +440,10 @@ export function initPage(Core) {
             bindGameCardEvent();
         }
 
-        // 游戏卡片事件绑定
+        /**
+         * 游戏卡片内部事件绑定：折叠、删除、爱心评分、打开角色/CP弹窗
+         * ⚠️注意：local‑hide‑char / local‑fd 的click事件不在此处绑定，交给main.js
+         */
         function bindGameCardEvent() {
             document.querySelectorAll(".fold-game").forEach(btn => {
                 btn.onclick = () => {
@@ -589,70 +490,10 @@ export function initPage(Core) {
                 }
             })
 
-            // ==========【单游戏本地开关 改为click事件，阻止原生勾选】==========
-            document.querySelectorAll(".local-hide-char").forEach(sw => {
-                sw.addEventListener('click', function (e) {
-                    const gid = this.dataset.gid;
-                    const gameItem = appData.gameList?.find(g => g.gameId === gid);
-                    if (!gameItem) return;
-                    const currentStatus = gameItem.localHideChar;
-                    if(currentStatus === true){
-                        e.preventDefault();
-                        gameItem.localHideChar = false;
-                        this.checked = false;
-                        saveData();
-                        renderAddedGame();
-                        return;
-                    }
-                    if(modalOpen){
-                        e.preventDefault();
-                        return;
-                    }
-                    if (localSwitchIsConfirmedToday()) {
-                        e.preventDefault();
-                        gameItem.localHideChar = true;
-                        this.checked = true;
-                        saveData();
-                        renderAddedGame();
-                    } else {
-                        e.preventDefault();
-                        openSpoilerModal("localHide", this);
-                    }
-                })
-            })
-            document.querySelectorAll(".local-fd").forEach(sw => {
-                sw.addEventListener('click', function (e) {
-                    const gid = this.dataset.gid;
-                    const gameItem = appData.gameList?.find(g => g.gameId === gid);
-                    if (!gameItem) return;
-                    const currentStatus = gameItem.localFD;
-                    if(currentStatus === true){
-                        e.preventDefault();
-                        gameItem.localFD = false;
-                        this.checked = false;
-                        saveData();
-                        renderAddedGame();
-                        return;
-                    }
-                    if(modalOpen){
-                        e.preventDefault();
-                        return;
-                    }
-                    if (localSwitchIsConfirmedToday()) {
-                        e.preventDefault();
-                        gameItem.localFD = true;
-                        this.checked = true;
-                        saveData();
-                        renderAddedGame();
-                    } else {
-                        e.preventDefault();
-                        openSpoilerModal("localFD", this);
-                    }
-                })
-            })
+            // 【重点】local‑hide‑char / local‑fd 不在这里addEventListener，全部交给main.js的bindLocalGameSwitchEvents
         }
 
-        // 角色弹窗关闭按钮
+        // ==========角色弹窗关闭按钮 ==========
         if (el.modalCloseBtn) el.modalCloseBtn.onclick = closeCharSelectModal;
         if (el.modalCancelBtn) el.modalCancelBtn.onclick = closeCharSelectModal;
         if (el.modalConfirmBtn) el.modalConfirmBtn.onclick = closeCharSelectModal;
@@ -742,10 +583,9 @@ export function initPage(Core) {
             });
         }
 
-        // 初始渲染
+        // 初始渲染页面
         renderAddedGame();
     }
 
-    // 启动页面
     bootstrap();
 }
