@@ -26,10 +26,10 @@ export let gameTemplateList = [];
 export let currentEditGameId = null;
 export let charPoolMode = "char"; // char = 单选角色, cp = CP搭配
 
-// 【全局开关弹窗临时标记】记录当前等待确认的是哪一个全局开关
+// 【全局开关弹窗临时标记】记录当前等待确认的是哪一个全局开关；仅“开启”流程使用
 let pendingGlobalSwitch = null;
 
-// 本地存储读写
+// ===================== 本地存储读写工具 =====================
 export function saveData() {
     localStorage.setItem(STORE_KEY, JSON.stringify(appData));
 }
@@ -41,6 +41,7 @@ export function loadData() {
         console.error("读取本地存储失败：", e);
     }
 }
+
 // 获取今日日期字符串 YYYY‑MM‑DD 用于跨零点判断
 export function getTodayDateStr() {
     const d = new Date();
@@ -361,7 +362,10 @@ function renderGlobalSwitchDom() {
 
 /**
  * 【绑定全局开关点击事件 + 剧透弹窗逻辑】
- * 点击滑块不会直接打开开关，弹出剧透确认弹窗；确认后才真正修改appData并保存
+ * 逻辑规则：
+ * 1. false → true（要开启）：弹出剧透确认弹窗，确认后才真正打开开关
+ * 2. true → false（要关闭）：直接修改数据、保存、更新UI，**不弹出任何弹窗**
+ * 3. 局部游戏开关(local‑show‑secret / local‑show‑fd)不经过此处，直接在script.js处理
  */
 function bindGlobalSwitchSpoilerEvents() {
     // 获取DOM元素
@@ -379,49 +383,64 @@ function bindGlobalSwitchSpoilerEvents() {
     // ---------- 全局隐藏角色开关 click事件 ----------
     hideCharInput.addEventListener("click", function(e){
         console.log("点击：全局隐藏角色开关");
-        // 阻止原生勾选，不直接打开
+        const oldVal = appData.globalHideChar;
+        const newVal = !oldVal;
+
+        // 分支A：关闭开关 true → false：直接生效，阻止原生勾选后手动赋值
+        if(newVal === false){
+            e.preventDefault();
+            appData.globalHideChar = false;
+            saveData();
+            renderGlobalSwitchDom();
+            return;
+        }
+
+        // 分支B：开启开关 false → true：弹出剧透弹窗，暂不修改数据
         e.preventDefault();
-        // 设置标记：等待确认的开关为 hideChar
         pendingGlobalSwitch = "hideChar";
-        // 打开弹窗，使用style.display控制显示
         spoilerModal.style.display = "flex";
     });
 
     // ---------- 全局FD开关 click事件 ----------
     fdInput.addEventListener("click", function(e){
         console.log("点击：全局FD开关");
-        // 阻止原生勾选，不直接打开
+        const oldVal = appData.globalFD;
+        const newVal = !oldVal;
+
+        // 分支A：关闭开关 true → false：直接生效
+        if(newVal === false){
+            e.preventDefault();
+            appData.globalFD = false;
+            saveData();
+            renderGlobalSwitchDom();
+            return;
+        }
+
+        // 分支B：开启开关 false → true：弹出剧透弹窗
         e.preventDefault();
-        // 设置标记：等待确认的开关为 fdGame
         pendingGlobalSwitch = "fdGame";
-        // 打开弹窗，使用style.display控制显示
         spoilerModal.style.display = "flex";
     });
 
-    // ---------- 弹窗【继续/确认】按钮逻辑 ----------
+    // ---------- 弹窗【确认】按钮逻辑：真正执行开启操作 ----------
     spoilerConfirmBtn.addEventListener("click", function(){
         console.log("剧透弹窗确认，pendingGlobalSwitch =", pendingGlobalSwitch);
         if(!pendingGlobalSwitch){
-            // 无待确认开关，直接关闭弹窗
             spoilerModal.style.display = "none";
             return;
         }
 
-        // 根据标记，开启对应全局开关
+        // 根据标记开启对应开关
         if(pendingGlobalSwitch === "hideChar"){
             appData.globalHideChar = true;
         }else if(pendingGlobalSwitch === "fdGame"){
             appData.globalFD = true;
         }
 
-        // 保存到本地存储
         saveData();
-        // 更新页面滑块勾选状态
         renderGlobalSwitchDom();
-        // 关闭弹窗
         spoilerModal.style.display = "none";
-        // 清空临时标记
-        pendingGlobalSwitch = null;
+        pendingGlobalSwitch = null; // 清空临时标记
     });
 }
 
