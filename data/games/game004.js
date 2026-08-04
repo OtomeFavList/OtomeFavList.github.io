@@ -8,7 +8,7 @@ const gameData = {
     year: "2021",
     publisher: "HuneX ",
     cnStudio: "GSE",
-    writer: ["Yu-masu"],
+    writer: ["Yu‑masu"],
     art: "一色箱",
     cover: "img/game/004.jpg",
     charList: [
@@ -20,7 +20,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/004/Cyrus.jpg","img/char/004/Cyrus2.jpg"], type: "base" }
+                { srcList: ["img/char/004/Cyrus.jpg","img/char/004/Cyrus2.jpg"], type: "base" },
                 { srcList: ["img/char/004/Cyrus3.jpg","img/char/004/Cyrus4.jpg"], type: "hidden" }
             ]
         },
@@ -32,7 +32,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/004/Adage.jpg","img/char/004/Adage2.jpg"], type: "base" }
+                { srcList: ["img/char/004/Adage.jpg","img/char/004/Adage2.jpg"], type: "base" },
                 { srcList: ["img/char/004/Adage3.jpg"], type: "hidden" }
             ]
         },
@@ -44,7 +44,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/004/Eltcreed.jpg","img/char/004/Eltcreed2.jpg"], type: "base" }
+                { srcList: ["img/char/004/Eltcreed.jpg","img/char/004/Eltcreed2.jpg"], type: "base" },
                 { srcList: ["img/char/004/Eltcreed3.jpg"], type: "hidden" }
             ]
         },
@@ -56,7 +56,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/004/Fin.jpg","img/char/004/Fin2.jpg"], type: "base" }
+                { srcList: ["img/char/004/Fin.jpg","img/char/004/Fin2.jpg"], type: "base" },
                 { srcList: ["img/char/004/Fin3.jpg","img/char/004/Fin4.jpg"], type: "hidden" }
             ]
         },
@@ -68,7 +68,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/004/Ines.jpg","img/char/004/Ines2.jpg"], type: "base" }
+                { srcList: ["img/char/004/Ines.jpg","img/char/004/Ines2.jpg"], type: "base" },
                 { srcList: ["img/char/004/Ines3.jpg"], type: "hidden" }
             ]
         },
@@ -80,10 +80,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/004/Ulrik.jpg","img/char/004/Ulrik2.jpg"], type: "base" }
+                { srcList: ["img/char/004/Ulrik.jpg","img/char/004/Ulrik2.jpg"], type: "base" },
                 { srcList: ["img/char/004/Ulrik3.jpg"], type: "hidden" }
             ]
-        }
+        },
         // 尤尼･石英
         {
             id: "g004_m06",
@@ -92,10 +92,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/004/Yune.jpg","img/char/004/Yune2.jpg"], type: "base" }
-                { srcList: ["img/char/004/Yune3.jpg], type: "hidden" }
+                { srcList: ["img/char/004/Yune.jpg","img/char/004/Yune2.jpg"], type: "base" },
+                { srcList: ["img/char/004/Yune3.jpg"], type: "hidden" }
             ]
-        }
+        },
         // 杰里姆
         {
             id: "g004_fd01",
@@ -106,7 +106,7 @@ const gameData = {
             images: [
                 { srcList: ["img/char/004/Jereme.jpg"], type: "base" }
             ]
-        }
+        },
         // 杰比特
         {
             id: "g004_fd02",
@@ -117,7 +117,7 @@ const gameData = {
             images: [
                 { srcList: ["img/char/004/Jevite.jpg"], type: "base" }
             ]
-        }
+        },
         // 萨克森‧布兰登堡
         {
             id: "g004_fd03",
