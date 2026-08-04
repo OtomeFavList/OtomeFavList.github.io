@@ -1,4 +1,4 @@
-// ===================== main.js 【数据层、公共工具函数】 =====================
+// ===================== main.js 【数据层、公共工具函数】 =====================// ===================== main.js 【数据层、公共工具函数】 =====================
 // 🚨【新增游戏请在此数组添加编号！】请勿改动其他位置
 const gameIdList = [
     "001","002"
@@ -34,6 +34,9 @@ export let charPoolMode = "char"; // char = 单选角色, cp = CP搭配
 window.pendingGlobalSwitch = null;
 let pendingGlobalSwitch = window.pendingGlobalSwitch;
 export { pendingGlobalSwitch };
+
+// 动态游戏卡片待操作标记
+window.pendingGameOp = null;
 
 
 // ===================== 本地存储读写工具函数 =====================
@@ -446,6 +449,48 @@ export function renderLocalSwitchDom(gameItem){
     if(localFDEl) localFDEl.checked = !!gameItem.localFD;
 }
 
+/**
+ * 事件委托：处理动态渲染游戏卡片内部开关（.game‑hide‑char / .game‑fd‑switch）
+ */
+function bindDynamicGameCardSwitchEvents(){
+    const wrap = document.querySelector(".wrap");
+    const spoilerModal = document.getElementById("spoiler-modal");
+    if(!wrap || !spoilerModal) return;
+
+    wrap.addEventListener("change", function(e){
+        const target = e.target;
+        // 本游戏隐藏角色开关
+        if(target.classList.contains("game-hide-char")){
+            const idx = Number(target.dataset.gameidx);
+            const gameItem = appData.gameList[idx];
+            if(!gameItem) return;
+            if(target.checked === false){
+                gameItem.localHideChar = false;
+                saveData();
+                // 通知script.js重渲染游戏列表
+                return;
+            }
+            target.checked = false;
+            window.pendingGameOp = { type:"hideChar", idx };
+            spoilerModal.classList.add("modal-show");
+        }
+        // 本游戏FD/续作开关
+        if(target.classList.contains("game-fd-switch")){
+            const idx = Number(target.dataset.gameidx);
+            const gameItem = appData.gameList[idx];
+            if(!gameItem) return;
+            if(target.checked === false){
+                gameItem.localFD = false;
+                saveData();
+                return;
+            }
+            target.checked = false;
+            window.pendingGameOp = { type:"fd", idx };
+            spoilerModal.classList.add("modal-show");
+        }
+    })
+}
+
 
 /**
  * 【绑定全局开关 change事件 + 剧透弹窗逻辑】
@@ -495,9 +540,25 @@ function bindGlobalSwitchSpoilerEvents() {
         spoilerModal.classList.add("modal-show");
     });
 
-    // 弹窗确认
+    // 弹窗确认【扩展：同时处理全局 / 编辑弹窗局部 / 动态卡片局部】
     spoilerConfirmBtn.onclick = null;
     spoilerConfirmBtn.addEventListener("click", function(){
+        // 优先处理动态游戏卡片操作
+        if(window.pendingGameOp){
+            const op = window.pendingGameOp;
+            const g = appData.gameList[op.idx];
+            if(g){
+                if(op.type === "hideChar") g.localHideChar = true;
+                if(op.type === "fd") g.localFD = true;
+            }
+            window.pendingGameOp = null;
+            saveData();
+            spoilerModal.classList.remove("modal-show");
+            pendingGlobalSwitch = null;
+            window.pendingGlobalSwitch = null;
+            return;
+        }
+
         if(!pendingGlobalSwitch){
             spoilerModal.classList.remove("modal-show");
             pendingGlobalSwitch = null;
@@ -530,14 +591,16 @@ function bindGlobalSwitchSpoilerEvents() {
         spoilerModal.classList.remove("modal-show");
         pendingGlobalSwitch = null;
         window.pendingGlobalSwitch = null;
+        window.pendingGameOp = null;
     });
 
-    // 弹窗取消：关闭弹窗，不修改开关
+    // 弹窗取消：关闭弹窗，清空全部待处理标记
     spoilerCancelBtn.onclick = null;
     spoilerCancelBtn.addEventListener("click", function(){
         spoilerModal.classList.remove("modal-show");
         pendingGlobalSwitch = null;
         window.pendingGlobalSwitch = null;
+        window.pendingGameOp = null;
     });
 }
 
@@ -605,4 +668,6 @@ export async function bootstrapCore() {
     bindGlobalSwitchSpoilerEvents();
     // 6.绑定游戏弹窗内局部开关事件
     bindLocalGameSwitchEvents();
+    // 7.绑定动态游戏卡片内开关事件委托
+    bindDynamicGameCardSwitchEvents();
 }
