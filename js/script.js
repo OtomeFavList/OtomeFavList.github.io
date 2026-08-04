@@ -444,11 +444,11 @@ export function initPage(Core) {
                 </div>
                 `;
             })
-            // 1.先写入完整DOM
+            // 1.写入DOM
             el.addedGameBox.innerHTML = html;
-            // 2.再绑定卡片内部事件
+            // 2.普通卡片事件绑定（折叠、删除、爱心、角色弹窗）
             bindGameCardEvent();
-            // 3.最后执行main.js的开关事件委托（DOM全部生成完毕）
+            // 3.【关键】DOM全部渲染完成后，调用main.js导出的事件委托函数，接管.game‑hide‑char / .game‑fd‑switch点击
             bindDynamicGameCardSwitchEvents();
         }
 
