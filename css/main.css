@@ -423,6 +423,11 @@ button:hover{
 .modal-box h3{
     margin-bottom:14px;
     color:#b33a3a;
+    text-align:center;
+}
+.modal-box p.text-gray-desc{
+    text-align:center;
+    line-height:1.8;
 }
 .modal-btns{
     display:flex;
