@@ -243,7 +243,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 const drawW = renderCanvas.width * scale;
                 const drawH = renderCanvas.height * scale;
                 const offsetX = (targetWidth - drawW) / 2;
-                const offsetY = (targetHeight - drawW) / 2;
+                const offsetY = (targetHeight - drawH) / 2;
                 ctx.drawImage(renderCanvas, offsetX, offsetY, drawW, drawH);
                 finalCanvas = canvas;
             }
