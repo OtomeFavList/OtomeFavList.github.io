@@ -3,79 +3,79 @@
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
 // 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
 const gameData = {
-    id: "game002",
-    name: "第六妖守",
+    id: "game003",
+    name: "幻奏咖啡厅-Enchanté-",
     year: "2020",
     publisher: "Otomate",
     cnStudio: "GSE",
-    writer: ["みぞおち鳩子","仰木サヤ","七瀬みお","紫堂零"],
-    art: "スオウ",
-    cover: "img/game/002.jpg",
+    writer: ["中山智美","佐々木麿","吉村りりか","小縞なお","高羽朋美"],
+    art: "ユウヤ",
+    cover: "img/game/003.jpg",
     charList: [
-        // 秋津志乃
+        // 淡木琴音
         {
-            id: "g002_f01",
-            name: "秋津志乃",
+            id: "g003_f01",
+            name: "淡木琴音",
             gender: "female",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/002/Shino.jpg"], type: "base" }
+                { srcList: ["img/char/003/Awaki.jpg","img/char/003/Awaki2.jpg"], type: "base" }
             ]
         },
-        // 恶露王
+        // 卡努斯·埃斯帕达
         {
-            id: "g002_m01",
-            name: "恶露王",
+            id: "g003_m01",
+            name: "卡努斯·埃斯帕达",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/002/Akuroou.jpg","img/char/002/Akuroou2.jpg"], type: "base" }
+                { srcList: ["img/char/003/Canus.jpg","img/char/003/Canus2.jpg"], type: "base" }
             ]
         },
-        // 比良
+        // 伊格尼斯·卡里本库鲁斯
         {
-            id: "g002_m02",
-            name: "比良",
+            id: "g003_m02",
+            name: "伊格尼斯·卡里本库鲁斯",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/002/Hira.jpg","img/char/002/Hira2.jpg"], type: "base" }
+                { srcList: ["img/char/003/Ignis.jpg","img/char/003/Ignis2.jpg"], type: "base" }
             ]
         },
-        // 濑见季继
+        // 伊尔·法多·德·里艾
         {
-            id: "g002_m03",
-            name: "濑见季继",
+            id: "g003_m03",
+            name: "伊尔·法多·德·里艾",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/002/Semi.jpg","img/char/002/Semi2.jpg"], type: "base" }
+                { srcList: ["img/char/003/Il.jpg","img/char/003/Il2.jpg"], type: "base" }
             ]
         },
-        // 白月
+        // 米歇尔·阿雷克斯
         {
-            id: "g002_m04",
-            name: "白月",
+            id: "g003_m04",
+            name: "米歇尔·阿雷克斯",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/002/Shiratsuki.jpg","img/char/002/Shiratsuki2.jpg"], type: "base" }
+                { srcList: ["img/char/003/Misyr.jpg","img/char/003/Misyr2.jpg"], type: "base" }
             ]
         },
-        // 湫
+        // 凜堂香
         {
-            id: "g002_m05",
-            name: "湫",
+            id: "g003_m05",
+            name: "凜堂香",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/002/Shuu.jpg","img/char/002/Shuu2.jpg"], type: "base" }
+                { srcList: ["img/char/003/Rindou.jpg","img/char/003/Rindou2.jpg"], type: "base" }
             ]
         }
     ]
