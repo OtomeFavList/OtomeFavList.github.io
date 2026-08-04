@@ -428,7 +428,7 @@ input[type="checkbox"] {
 .modal-mask {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.55);
+    background: rgba(0,0,0,0.65);
     display: none; /* 默认隐藏 */
     z-index: 9999;
     align-items: center;
@@ -440,7 +440,7 @@ input[type="checkbox"] {
 }
 
 .modal-box {
-    background:#fff;
+    background:#fff7f9;
     padding:24px 28px;
     border-radius:12px;
     border:2px solid #f6a5b8;
