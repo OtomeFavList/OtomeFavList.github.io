@@ -441,8 +441,9 @@ function buildCoreContext() {
 function renderGlobalSwitchDom() {
     const hideCharInput = document.getElementById("global-hide-char");
     const fdInput = document.getElementById("global-fd-game");
-    if(hideCharInput) hideCharInput.checked = appData.globalHideChar;
-    if(fdInput) fdInput.checked = appData.globalFD;
+    // 加固：严格读取appData，不读取DOM旧状态
+    if(hideCharInput) hideCharInput.checked = !!appData.globalHideChar;
+    if(fdInput) fdInput.checked = !!appData.globalFD;
 }
 
 /**
