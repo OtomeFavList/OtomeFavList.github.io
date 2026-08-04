@@ -314,7 +314,7 @@ button:hover{
     transition:0.2s;
 }
 .heart.active{
-    color:#ff4d88;
+    color:#e895a8;
 }
 .game-switch-group{
     display:flex;
@@ -440,7 +440,7 @@ input[type="checkbox"] {
 }
 
 .modal-box {
-    background:#fff7f9;
+    background:#ffffff;
     padding:24px 28px;
     border-radius:12px;
     border:2px solid #f6a5b8;
