@@ -127,7 +127,7 @@ export function syncSingleGameSwitch(type, status) {
     })
 }
 
-// 筛选下拉填充
+// 筛选下拉填充【已修改：拆分writer数组，独立生成每个编剧选项】
 export function fillFilterOptions(gameList) {
     if (!Array.isArray(gameList) || gameList.length === 0) return;
     const yearSet = new Set(), pubSet = new Set(), cnSet = new Set(), writerSet = new Set(), artSet = new Set();
@@ -136,7 +136,10 @@ export function fillFilterOptions(gameList) {
         yearSet.add(g.year);
         pubSet.add(g.publisher);
         cnSet.add(g.cnStudio);
-        writerSet.add(g.writer);
+        // 遍历编剧数组，逐个存入集合
+        if(Array.isArray(g.writer)){
+            g.writer.forEach(name => writerSet.add(name));
+        }
         artSet.add(g.art);
     })
     const fillSelect = (id, dataSet) => {
