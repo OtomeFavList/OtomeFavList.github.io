@@ -1,4 +1,4 @@
-// ===================== main.js 【数据层、公共工具函数】 =====================// ===================== main.js 【数据层、公共工具函数】 =====================
+// ===================== main.js 【数据层、公共工具函数】 =====================
 // 🚨【新增游戏请在此数组添加编号！】请勿改动其他位置
 const gameIdList = [
     "001","002"
@@ -421,7 +421,8 @@ function buildCoreContext() {
         saveConfirmDate,
         localSwitchIsConfirmedToday,
         saveLocalSwitchConfirmDate,
-        renderGameSelectItem
+        renderGameSelectItem,
+        bindDynamicGameCardSwitchEvents // 导出给script.js调用
     };
     return Core;
 }
@@ -451,44 +452,50 @@ export function renderLocalSwitchDom(gameItem){
 
 /**
  * 事件委托：处理动态渲染游戏卡片内部开关（.game‑hide‑char / .game‑fd‑switch）
+ * 导出，不要在bootstrap内部直接调用！！由script.js渲染完列表后调用
  */
-function bindDynamicGameCardSwitchEvents(){
+export function bindDynamicGameCardSwitchEvents(){
     const wrap = document.querySelector(".wrap");
     const spoilerModal = document.getElementById("spoiler-modal");
-    if(!wrap || !spoilerModal) return;
+    if(!wrap || !spoilerModal){
+        console.warn("bindDynamicGameCardSwitchEvents：wrap或modal不存在，跳过绑定");
+        return;
+    }
+    // 防止重复绑定，先移除旧监听
+    wrap.removeEventListener("change", wrapChangeHandler);
+    wrap.addEventListener("change", wrapChangeHandler);
+}
 
-    wrap.addEventListener("change", function(e){
-        const target = e.target;
-        // 本游戏隐藏角色开关
-        if(target.classList.contains("game-hide-char")){
-            const idx = Number(target.dataset.gameidx);
-            const gameItem = appData.gameList[idx];
-            if(!gameItem) return;
-            if(target.checked === false){
-                gameItem.localHideChar = false;
-                saveData();
-                // 通知script.js重渲染游戏列表
-                return;
-            }
-            target.checked = false;
-            window.pendingGameOp = { type:"hideChar", idx };
-            spoilerModal.classList.add("modal-show");
+function wrapChangeHandler(e){
+    const target = e.target;
+    // 本游戏隐藏角色开关
+    if(target.classList.contains("game-hide-char")){
+        const idx = Number(target.dataset.gameidx);
+        const gameItem = appData.gameList[idx];
+        if(!gameItem) return;
+        if(target.checked === false){
+            gameItem.localHideChar = false;
+            saveData();
+            return;
         }
-        // 本游戏FD/续作开关
-        if(target.classList.contains("game-fd-switch")){
-            const idx = Number(target.dataset.gameidx);
-            const gameItem = appData.gameList[idx];
-            if(!gameItem) return;
-            if(target.checked === false){
-                gameItem.localFD = false;
-                saveData();
-                return;
-            }
-            target.checked = false;
-            window.pendingGameOp = { type:"fd", idx };
-            spoilerModal.classList.add("modal-show");
+        target.checked = false;
+        window.pendingGameOp = { type:"hideChar", idx };
+        spoilerModal.classList.add("modal-show");
+    }
+    // 本游戏FD/续作开关
+    if(target.classList.contains("game-fd-switch")){
+        const idx = Number(target.dataset.gameidx);
+        const gameItem = appData.gameList[idx];
+        if(!gameItem) return;
+        if(target.checked === false){
+            gameItem.localFD = false;
+            saveData();
+            return;
         }
-    })
+        target.checked = false;
+        window.pendingGameOp = { type:"fd", idx };
+        spoilerModal.classList.add("modal-show");
+    }
 }
 
 
@@ -668,6 +675,5 @@ export async function bootstrapCore() {
     bindGlobalSwitchSpoilerEvents();
     // 6.绑定游戏弹窗内局部开关事件
     bindLocalGameSwitchEvents();
-    // 7.绑定动态游戏卡片内开关事件委托
-    bindDynamicGameCardSwitchEvents();
+    // ⚠️移除这里bindDynamicGameCardSwitchEvents()调用，放到script.js渲染完列表后执行
 }
