@@ -17,7 +17,8 @@ export function initPage(Core) {
         isTodayConfirmed,
         saveConfirmDate,
         localSwitchIsConfirmedToday,
-        saveLocalSwitchConfirmDate
+        saveLocalSwitchConfirmDate,
+        renderGameSelectItem
     } = Core;
 
     // 渲染角色选择弹窗内容【修复：适配srcList，读取持久化图片索引】
@@ -403,7 +404,7 @@ export function initPage(Core) {
             if (sel) sel.addEventListener("change", renderGameSelectList);
         });
 
-        // 渲染游戏选择列表【重点修复编剧筛选逻辑】
+        // 渲染游戏选择列表【✅重点修复：调用main.js统一模板，移除旧代码】
         function renderGameSelectList() {
             if (!el.gameSearchInput || !el.gameSelectList || !Array.isArray(gameTemplateList)) return;
             const keyword = el.gameSearchInput.value.toLowerCase();
@@ -436,14 +437,8 @@ export function initPage(Core) {
 
                 if (filterArt && game.art != filterArt) match = false;
                 if (!match) return;
-                const coverSrc = game.cover || "";
-                html += `
-                <div class="game-option-item" data-game-id="${game.id}">
-                    <img src="${coverSrc}" alt="${game.name}">
-                    <div>${game.name}</div>
-                    <div style="font-size:12px;color:#777">${game.year}</div>
-                </div>
-                `;
+                // 调用main.js中渲染模板，不再手写旧HTML
+                html += renderGameSelectItem(game);
             })
             el.gameSelectList.innerHTML = html;
             document.querySelectorAll(".game-option-item").forEach(item => {
