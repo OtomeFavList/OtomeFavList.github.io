@@ -419,29 +419,30 @@ input[type="checkbox"] {
     transition: all 0.22s ease;
 }
 
-/* ========== 弹窗遮罩 modal-mask【已修复class名称与JS保持一致 modal‑show】 ========== */
-.modal-mask{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,0.55);
-    display: none;
-    align-items:center;
-    justify-content:center;
-    z-index:999;
+/* ========== 剧透弹窗遮罩 ========== */
+.modal-mask {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.65);
+    display: none; /* 默认隐藏 */
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
 }
-.modal-mask.modal-show{
-    display:flex;
+/* 显示弹窗的激活类 */
+.modal-mask.modal-show {
+    display: flex;
 }
 
-/* ========== 弹窗盒子 modal-box ========== */
-.modal-box{
-    background:#fff;
-    padding:26px;
-    border-radius:14px;
-    max-width:520px;
-    width:90%;
+.modal-box {
+    background:#fff7f9;
+    padding:24px 28px;
+    border-radius:12px;
     border:2px solid #f6a5b8;
+    max-width:420px;
+    width:90%;
 }
+
 .modal-box h3{
     margin-bottom:14px;
     color:#b33a3a;
@@ -523,11 +524,6 @@ input[type="checkbox"] {
 }
 .about-block p.email-text{
     color:#222222;
-}
-
-/* ========== 隐藏类 hide-block ========== */
-.hide-block{
-    display:none !important;
 }
 
 /* ========== 文本颜色公共类 ========== */
