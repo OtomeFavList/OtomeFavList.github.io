@@ -507,15 +507,15 @@ function wrapClickHandler(e){
  * 【绑定全局开关 change事件 + 剧透弹窗逻辑】
  * 1. false→true（打开）：立刻把checkbox回退为false，弹出弹窗；确认后才改为true
  * 2. true→false（关闭）：直接修改数据，保存，更新UI，不弹窗
+ * ⚠️已移除取消按钮全部逻辑，弹窗只保留确认按钮
  */
 function bindGlobalSwitchSpoilerEvents() {
     const hideCharInput = document.getElementById("global-hide-char");
     const fdInput = document.getElementById("global-fd-game");
     const spoilerModal = document.getElementById("spoiler-modal");
     const spoilerConfirmBtn = document.getElementById("spoiler-confirm");
-    const spoilerCancelBtn = document.getElementById("spoiler-cancel");
 
-    if(!hideCharInput || !fdInput || !spoilerModal || !spoilerConfirmBtn || !spoilerCancelBtn){
+    if(!hideCharInput || !fdInput || !spoilerModal || !spoilerConfirmBtn){
         console.warn("bindGlobalSwitchSpoilerEvents：部分DOM缺失，全局开关弹窗未挂载");
         return;
     }
@@ -603,15 +603,6 @@ function bindGlobalSwitchSpoilerEvents() {
         window.pendingGlobalSwitch = null;
         window.pendingGameOp = null;
     });
-
-    // 弹窗取消：关闭弹窗，清空全部待处理标记，不修改任何状态
-    spoilerCancelBtn.onclick = null;
-    spoilerCancelBtn.addEventListener("click", function(){
-        spoilerModal.classList.remove("active");
-        pendingGlobalSwitch = null;
-        window.pendingGlobalSwitch = null;
-        window.pendingGameOp = null;
-    });
 }
 
 
@@ -674,7 +665,7 @@ export async function bootstrapCore() {
 
     // 4.渲染全局开关初始勾选状态
     renderGlobalSwitchDom();
-    // 5.绑定全局开关+剧透弹窗事件（含确认、取消双按钮）
+    // 5.绑定全局开关+剧透弹窗事件（仅确认按钮）
     bindGlobalSwitchSpoilerEvents();
     // 6.绑定游戏弹窗内局部开关事件
     bindLocalGameSwitchEvents();
