@@ -399,7 +399,7 @@ export function initPage(Core) {
             if (sel) sel.addEventListener("change", renderGameSelectList);
         });
 
-        // 渲染游戏选择列表
+        // 渲染游戏选择列表【重点修复编剧筛选逻辑】
         function renderGameSelectList() {
             if (!el.gameSearchInput || !el.gameSelectList || !Array.isArray(gameTemplateList)) return;
             const keyword = el.gameSearchInput.value.toLowerCase();
@@ -417,7 +417,19 @@ export function initPage(Core) {
                 if (filterYear && game.year != filterYear) match = false;
                 if (filterPub && game.publisher != filterPub) match = false;
                 if (filterCn && game.cnStudio != filterCn) match = false;
-                if (filterWriter && game.writer != filterWriter) match = false;
+
+                // ==========【修复区域：兼容writer数组/字符串】==========
+                if (filterWriter) {
+                    let writerArr = [];
+                    if (Array.isArray(game.writer)) {
+                        writerArr = game.writer;
+                    } else if (typeof game.writer === "string") {
+                        writerArr = [game.writer];
+                    }
+                    if (!writerArr.includes(filterWriter)) match = false;
+                }
+                // ======================================================
+
                 if (filterArt && game.art != filterArt) match = false;
                 if (!match) return;
                 const coverSrc = game.cover || "";
@@ -489,7 +501,7 @@ export function initPage(Core) {
                             <p><strong>发售年份：</strong>${gameInfo.year || "暂无资料"}</p>
                             <p><strong>发行厂商：</strong>${gameInfo.publisher || "暂无资料"}</p>
                             <p><strong>原画：</strong>${gameInfo.art || "暂无资料"}</p>
-                            <p><strong>编剧：</strong>${gameInfo.writer || "暂无资料"}</p>
+                            <p><strong>编剧：</strong>${Array.isArray(gameInfo.writer) ? gameInfo.writer.join("、") : gameInfo.writer || "暂无资料"}</p>
                             <p><strong>简介：</strong>${gameInfo.desc || "暂无简介"}</p>
                         </div>
                     </div>
