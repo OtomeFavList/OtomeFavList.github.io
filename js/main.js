@@ -478,12 +478,12 @@ function wrapClickHandler(e){
     if(!spoilerModal) return;
     const targetInput = e.target.closest(".game-hide-char,.game-fd-switch");
     if(!targetInput) return;
-    e.preventDefault();
+
     const idx = Number(targetInput.dataset.gameidx);
     const gameItem = appData.gameList[idx];
     if(!gameItem) return;
 
-    // 如果是关闭，直接生效，不弹窗
+    // 已经勾选：用户要关闭，直接生效，不弹窗
     if(targetInput.checked === true){
         if(targetInput.classList.contains("game-hide-char")){
             gameItem.localHideChar = false;
@@ -493,7 +493,9 @@ function wrapClickHandler(e){
         saveData();
         return;
     }
-    // 用户要打开：标记待处理，弹出弹窗，不提前勾选
+
+    // 用户想要打开：阻止原生勾选，弹出剧透弹窗，等待确认按钮
+    e.preventDefault();
     if(targetInput.classList.contains("game-hide-char")){
         window.pendingGameOp = { type:"hideChar", idx };
     }else{
