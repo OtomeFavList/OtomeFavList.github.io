@@ -114,7 +114,7 @@ export function initPage(Core) {
         })
     }
 
-    // 打开角色弹窗
+    // 打开角色弹窗（保留active，不改动）
     function openCharSelectModal(gameId) {
         Core.currentEditGameId = gameId;
         const modal = document.getElementById("char-select-modal");
@@ -122,7 +122,7 @@ export function initPage(Core) {
         modal.classList.add("active");
         renderCharSelectModal(gameId);
     }
-    // 关闭角色弹窗
+    // 关闭角色弹窗（保留active，不改动）
     function closeCharSelectModal() {
         const modal = document.getElementById("char-select-modal");
         if (!modal) return;
@@ -228,7 +228,7 @@ export function initPage(Core) {
             }
         }
 
-        // ========== 剧透弹窗控制 ==========
+        // ========== 剧透弹窗控制【核心修改：active → open】 ==========
         function openSpoilerModal(type) {
             if (!el.spoilerModal) {
                 console.error("缺少spoiler-modal弹窗DOM");
@@ -237,12 +237,12 @@ export function initPage(Core) {
             }
             modalOpen = true;
             modalTargetType = type;
-            el.spoilerModal.classList.add("active");
+            el.spoilerModal.classList.add("open");
         }
         function closeSpoilerModal() {
             if (!el.spoilerModal) return;
             modalOpen = false;
-            el.spoilerModal.classList.remove("active");
+            el.spoilerModal.classList.remove("open");
             modalTargetType = "";
         }
 
