@@ -75,20 +75,21 @@
             <div class="game-search-box hide-block" id="search-panel">
                 <input type="text" id="game-search-input" placeholder="搜索游戏名称">
                 <div class="filter-group">
-                    <select id="filter-year">
-                        <option value="">全部发售年份</option>
-                    </select>
-                    <select id="filter-publisher">
-                        <option value="">全部发行厂商</option>
-                    </select>
-                    <select id="filter-cn">
-                        <option value="">全部汉化厂商</option>
-                    </select>
+                    <!-- 【修改】筛选顺序：编剧 → 画师 → 发售年份 → 发行厂商 → 汉化厂商 -->
                     <select id="filter-writer">
-                        <option value="">全部编剧</option>
+                        <option value="">筛选编剧</option>
                     </select>
                     <select id="filter-art">
-                        <option value="">全部原画</option>
+                        <option value="">筛选画师</option>
+                    </select>
+                    <select id="filter-year">
+                        <option value="">筛选发售年份</option>
+                    </select>
+                    <select id="filter-publisher">
+                        <option value="">筛选发行厂商</option>
+                    </select>
+                    <select id="filter-cn">
+                        <option value="">筛选汉化厂商</option>
                     </select>
                 </div>
                 <div class="game-list-select" id="game-select-list"></div>
