@@ -75,7 +75,7 @@
             <div class="game-search-box hide-block" id="search-panel">
                 <input type="text" id="game-search-input" placeholder="搜索游戏名称">
                 <div class="filter-group">
-                    <!-- 【修改】筛选顺序：编剧 → 画师 → 发售年份 → 发行厂商 → 汉化厂商 -->
+                    <!-- 筛选顺序：编剧 → 画师 → 发售年份 → 发行厂商 → 汉化厂商 -->
                     <select id="filter-writer">
                         <option value="">筛选编剧</option>
                     </select>
@@ -193,15 +193,12 @@
     </div>
 </div>
 
-<!-- ==========【改造完成：统一模块脚本，移除所有普通script引入】 ========== -->
 <script type="module">
 import { bootstrapCore } from "./js/main.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
-    // 初始化核心程序
     await bootstrapCore();
 
-    // ==========图片导出逻辑（移入模块内部，保留全部原有功能）============
     const exportBtn = document.getElementById('btn-export');
     const snapshotContainer = document.getElementById('snapshot-container');
     const canvas = document.getElementById('export-canvas');
@@ -246,7 +243,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 const drawW = renderCanvas.width * scale;
                 const drawH = renderCanvas.height * scale;
                 const offsetX = (targetWidth - drawW) / 2;
-                const offsetY = (targetHeight - drawH) / 2;
+                const offsetY = (targetHeight - drawW) / 2;
                 ctx.drawImage(renderCanvas, offsetX, offsetY, drawW, drawH);
                 finalCanvas = canvas;
             }
