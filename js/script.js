@@ -1,5 +1,6 @@
 // ===================== script.js UI交互层（模块化导出） =====================
-// 【重要说明】剧透弹窗、全局/局部开关click事件全部迁移至main.js，本文件不再处理开关点击逻辑
+// 【重要说明】剧透弹窗、全局开关click事件全部迁移至main.js，本文件不再处理全局开关点击逻辑
+// 游戏卡片动态生成的局部开关：使用事件委托对接main.js剧透弹窗逻辑
 export function initPage(Core) {
     const {
         appData,
@@ -145,8 +146,7 @@ export function initPage(Core) {
 
     // ===================== 页面启动bootstrap，UI渲染、表单、导出、卡片事件 =====================
     async function bootstrap() {
-        await loadAllGameTemplates();
-
+        // ❗删除重复加载：loadAllGameTemplates 在 bootstrapCore 已经执行过
         // DOM元素缓存
         const el = {
             globalHideChar: document.getElementById("global-hide-char"),
@@ -174,6 +174,43 @@ export function initPage(Core) {
             modalCancelBtn: document.getElementById("modal-cancel-btn"),
             modalConfirmBtn: document.getElementById("modal-confirm-btn")
         };
+
+        // ==========【事件委托：游戏卡片上动态生成的局部复选框 .local‑hide‑char / .local‑fd】==========
+        // 逻辑和main.js保持一致：关闭状态点击弹剧透弹窗；开启状态点击直接关闭；不绑定在循环渲染内
+        document.addEventListener("click", function(e){
+            const inputEl = e.target.closest(".local-hide-char, .local-fd");
+            if(!inputEl) return;
+            e.preventDefault();
+            const gid = inputEl.dataset.gid;
+            const gameItem = appData.gameList.find(g=>g.gameId === gid);
+            if(!gameItem) return;
+            const spoilerModal = document.getElementById("spoiler-modal");
+            if(!spoilerModal) return;
+
+            if(inputEl.classList.contains("local-hide-char")){
+                if(gameItem.localHideChar === true){
+                    // 开启 → 直接关闭，无弹窗
+                    gameItem.localHideChar = false;
+                    saveData();
+                    renderAddedGame();
+                }else{
+                    // 关闭 → 弹出剧透弹窗
+                    window.pendingGlobalSwitch = "localHide";
+                    Core.currentEditGameId = gid;
+                    spoilerModal.style.display = "flex";
+                }
+            }else if(inputEl.classList.contains("local-fd")){
+                if(gameItem.localFD === true){
+                    gameItem.localFD = false;
+                    saveData();
+                    renderAddedGame();
+                }else{
+                    window.pendingGlobalSwitch = "localFD";
+                    Core.currentEditGameId = gid;
+                    spoilerModal.style.display = "flex";
+                }
+            }
+        });
 
         // ==========【全局事件委托：角色立绘左右切换】==========
         document.addEventListener("click", function (e) {
@@ -442,7 +479,7 @@ export function initPage(Core) {
 
         /**
          * 游戏卡片内部事件绑定：折叠、删除、爱心评分、打开角色/CP弹窗
-         * ⚠️注意：local‑hide‑char / local‑fd 的click事件不在此处绑定，交给main.js
+         * ⚠️注意：local‑hide‑char / local‑fd 使用document事件委托，不在此处绑定
          */
         function bindGameCardEvent() {
             document.querySelectorAll(".fold-game").forEach(btn => {
@@ -489,8 +526,6 @@ export function initPage(Core) {
                     openCharSelectModal(gid);
                 }
             })
-
-            // 【重点】local‑hide‑char / local‑fd 不在这里addEventListener，全部交给main.js的bindLocalGameSwitchEvents
         }
 
         // ==========角色弹窗关闭按钮 ==========
