@@ -1,6 +1,8 @@
 // ===================== script.js UI交互层（模块化导出） =====================
 // 【重要说明】剧透弹窗、全局开关click事件全部迁移至main.js，本文件不再处理全局开关点击逻辑
 // 游戏卡片动态生成的局部开关：使用事件委托对接main.js剧透弹窗逻辑
+import { pendingGlobalSwitch } from './main.js';
+
 export function initPage(Core) {
     const {
         appData,
@@ -195,9 +197,9 @@ export function initPage(Core) {
                     renderAddedGame();
                 }else{
                     // 关闭 → 弹出剧透弹窗
-                    window.pendingGlobalSwitch = "localHide";
+                    pendingGlobalSwitch.targetKey = "localHide";
                     Core.currentEditGameId = gid;
-                    spoilerModal.style.display = "flex";
+                    spoilerModal.classList.add("modal-show");
                 }
             }else if(inputEl.classList.contains("local-fd")){
                 if(gameItem.localFD === true){
@@ -205,9 +207,9 @@ export function initPage(Core) {
                     saveData();
                     renderAddedGame();
                 }else{
-                    window.pendingGlobalSwitch = "localFD";
+                    pendingGlobalSwitch.targetKey = "localFD";
                     Core.currentEditGameId = gid;
-                    spoilerModal.style.display = "flex";
+                    spoilerModal.classList.add("modal-show");
                 }
             }
         });
