@@ -1,10 +1,10 @@
-// data/games/game002.js
+// data/games/game003.js
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
 // 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
 const gameData = {
     id: "game003",
-    name: "幻奏咖啡厅-Enchanté-",
+    name: "幻奏咖啡厅",
     year: "2020",
     publisher: "Otomate",
     cnStudio: "GSE",
