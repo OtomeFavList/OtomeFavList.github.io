@@ -26,7 +26,8 @@ export let gameTemplateList = [];
 export let currentEditGameId = null;
 export let charPoolMode = "char"; // char = 单选角色, cp = CP搭配
 
-// 【全局开关弹窗临时标记】记录当前等待确认的是哪一个全局开关；仅“开启”流程使用
+// 【全局&局部开关弹窗临时标记】
+// 可选值：hideChar / fdGame / localHide / localFD
 let pendingGlobalSwitch = null;
 
 // ===================== 本地存储读写工具 =====================
@@ -361,68 +362,70 @@ function renderGlobalSwitchDom() {
 }
 
 /**
+ * 【渲染当前编辑游戏的局部开关DOM状态】
+ * @param {Object} gameItem 当前正在编辑的游戏条目
+ */
+export function renderLocalSwitchDom(gameItem){
+    const localHideEl = document.getElementById("local-show-secret");
+    const localFDEl = document.getElementById("local-show-fd");
+    if(!gameItem) return;
+    if(localHideEl) localHideEl.checked = !!gameItem.localHideChar;
+    if(localFDEl) localFDEl.checked = !!gameItem.localFD;
+}
+
+/**
  * 【绑定全局开关点击事件 + 剧透弹窗逻辑】
  * 逻辑规则：
  * 1. false → true（要开启）：弹出剧透确认弹窗，确认后才真正打开开关
  * 2. true → false（要关闭）：直接修改数据、保存、更新UI，**不弹出任何弹窗**
- * 3. 局部游戏开关(local‑show‑secret / local‑show‑fd)不经过此处，直接在script.js处理
+ * 3. 全部阻止浏览器原生checkbox勾选行为，完全由JS接管checked状态，修复滑块不回弹bug
  */
 function bindGlobalSwitchSpoilerEvents() {
-    // 获取DOM元素
     const hideCharInput = document.getElementById("global-hide-char");
     const fdInput = document.getElementById("global-fd-game");
     const spoilerModal = document.getElementById("spoiler-modal");
     const spoilerConfirmBtn = document.getElementById("spoiler-confirm");
 
-    // 元素缺失直接终止绑定，避免控制台报错
     if(!hideCharInput || !fdInput || !spoilerModal || !spoilerConfirmBtn){
         console.warn("bindGlobalSwitchSpoilerEvents：部分DOM缺失，全局开关弹窗未挂载");
         return;
     }
 
-    // ---------- 全局隐藏角色开关 click事件 ----------
+    // 全局隐藏角色开关
     hideCharInput.addEventListener("click", function(e){
-        console.log("点击：全局隐藏角色开关");
+        e.preventDefault(); // 全部阻止原生勾选，JS全权接管
         const oldVal = appData.globalHideChar;
         const newVal = !oldVal;
 
-        // 分支A：关闭开关 true → false：直接生效，阻止原生勾选后手动赋值
         if(newVal === false){
-            e.preventDefault();
+            // 关闭：直接生效
             appData.globalHideChar = false;
             saveData();
             renderGlobalSwitchDom();
             return;
         }
-
-        // 分支B：开启开关 false → true：弹出剧透弹窗，暂不修改数据
-        e.preventDefault();
+        // 开启：弹弹窗
         pendingGlobalSwitch = "hideChar";
         spoilerModal.style.display = "flex";
     });
 
-    // ---------- 全局FD开关 click事件 ----------
+    // 全局FD开关
     fdInput.addEventListener("click", function(e){
-        console.log("点击：全局FD开关");
+        e.preventDefault();
         const oldVal = appData.globalFD;
         const newVal = !oldVal;
 
-        // 分支A：关闭开关 true → false：直接生效
         if(newVal === false){
-            e.preventDefault();
             appData.globalFD = false;
             saveData();
             renderGlobalSwitchDom();
             return;
         }
-
-        // 分支B：开启开关 false → true：弹出剧透弹窗
-        e.preventDefault();
         pendingGlobalSwitch = "fdGame";
         spoilerModal.style.display = "flex";
     });
 
-    // ---------- 弹窗【确认】按钮逻辑：真正执行开启操作 ----------
+    // 弹窗确认按钮，处理4种开关case
     spoilerConfirmBtn.addEventListener("click", function(){
         console.log("剧透弹窗确认，pendingGlobalSwitch =", pendingGlobalSwitch);
         if(!pendingGlobalSwitch){
@@ -430,17 +433,88 @@ function bindGlobalSwitchSpoilerEvents() {
             return;
         }
 
-        // 根据标记开启对应开关
+        // -------- 全局开关 --------
         if(pendingGlobalSwitch === "hideChar"){
             appData.globalHideChar = true;
+            saveData();
+            renderGlobalSwitchDom();
         }else if(pendingGlobalSwitch === "fdGame"){
             appData.globalFD = true;
+            saveData();
+            renderGlobalSwitchDom();
+        }
+        // -------- 局部游戏开关 --------
+        else if(pendingGlobalSwitch === "localHide"){
+            const gameItem = appData.gameList.find(g=>g.gameId === currentEditGameId);
+            if(gameItem){
+                gameItem.localHideChar = true;
+                saveData();
+                renderLocalSwitchDom(gameItem);
+            }
+        }else if(pendingGlobalSwitch === "localFD"){
+            const gameItem = appData.gameList.find(g=>g.gameId === currentEditGameId);
+            if(gameItem){
+                gameItem.localFD = true;
+                saveData();
+                renderLocalSwitchDom(gameItem);
+            }
         }
 
-        saveData();
-        renderGlobalSwitchDom();
         spoilerModal.style.display = "none";
-        pendingGlobalSwitch = null; // 清空临时标记
+        pendingGlobalSwitch = null;
+    });
+}
+
+/**
+ * 【绑定游戏弹窗内部局部开关事件】
+ * local‑show‑secret / local‑show‑fd，逻辑和全局开关完全一致
+ * false→true开启弹剧透弹窗；true→false关闭直接切换，不弹窗
+ */
+function bindLocalGameSwitchEvents(){
+    const localHideEl = document.getElementById("local-show-secret");
+    const localFDEl = document.getElementById("local-show-fd");
+    const spoilerModal = document.getElementById("spoiler-modal");
+    if(!localHideEl || !localFDEl || !spoilerModal){
+        console.warn("bindLocalGameSwitchEvents：局部开关DOM缺失");
+        return;
+    }
+
+    // 本游戏隐藏角色
+    localHideEl.addEventListener("click", function(e){
+        e.preventDefault();
+        const gameItem = appData.gameList.find(g=>g.gameId === currentEditGameId);
+        if(!gameItem) return;
+        const oldVal = gameItem.localHideChar;
+        const newVal = !oldVal;
+
+        if(newVal === false){
+            // 关闭直接生效
+            gameItem.localHideChar = false;
+            saveData();
+            renderLocalSwitchDom(gameItem);
+            return;
+        }
+        // 开启弹弹窗
+        pendingGlobalSwitch = "localHide";
+        spoilerModal.style.display = "flex";
+    });
+
+    // 本游戏续作/FD角色
+    localFDEl.addEventListener("click", function(e){
+        e.preventDefault();
+        const gameItem = appData.gameList.find(g=>g.gameId === currentEditGameId);
+        if(!gameItem) return;
+        const oldVal = gameItem.localFD;
+        const newVal = !oldVal;
+
+        if(newVal === false){
+            gameItem.localFD = false;
+            saveData();
+            renderLocalSwitchDom(gameItem);
+            return;
+        }
+        pendingGlobalSwitch = "localFD";
+        spoilerModal.style.display = "flex";
     });
 }
 
@@ -451,9 +525,10 @@ export async function bootstrapCore() {
     const Core = buildCoreContext();
     initPage(Core);
 
-    // ==================== 在bootstrapCore末尾追加全局开关+弹窗全套逻辑 ====================
     // 1.渲染全局开关DOM初始勾选状态
     renderGlobalSwitchDom();
-    // 2.绑定滑块点击、剧透弹窗事件
+    // 2.绑定全局开关+剧透弹窗
     bindGlobalSwitchSpoilerEvents();
+    // 3.绑定游戏弹窗内局部开关事件（逻辑与全局统一）
+    bindLocalGameSwitchEvents();
 }
