@@ -7,7 +7,7 @@ const gameData = {
     name: "蒸汽监狱",
     year: "2021",
     publisher: "HuneX ",
-    cnStudio: "",
+    cnStudio: "GSE",
     writer: ["Yu-masu"],
     art: "一色箱",
     cover: "img/game/004.jpg",
