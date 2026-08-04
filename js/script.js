@@ -400,27 +400,16 @@ export function initPage(Core) {
                 let heartHtml = "";
                 for (let i = 1; i <= 5; i++) heartHtml += `<span class="heart ${gameItem.loveRate >= i ? 'active' : ''}" data-val="${i}">♥</span>`;
 
-                const coverImgSrc = gameInfo.cover ? `${gameInfo.cover}` : "";
                 html += `
                 <div class="added-game-card" data-game-id="${gameItem.gameId}">
                     <div class="game-card-header">
-                        <span class="game-card-title">${gameInfo.name}</span>
+                        <span class="game-card-title" style="color:#b33a3a;font-size:17px;">${gameInfo.name}</span>
                         <div class="game-card-switch-group">
                             <button class="btn-fold fold-game" data-gid="${gameItem.gameId}">折叠板块</button>
                             <button class="btn-del del-game" data-gid="${gameItem.gameId}">删除游戏</button>
                         </div>
                     </div>
-                    <div class="game-expand-detail ${gameItem.expand ? "open" : ""}">
-                        <img class="game-expand-cover" src="${coverImgSrc}" alt="${gameInfo.name}封面">
-                        <div class="game-info-text">
-                            <p><strong>发售年份：</strong>${gameInfo.year || "暂无资料"}</p>
-                            <p><strong>发行厂商：</strong>${gameInfo.publisher || "暂无资料"}</p>
-                            <p><strong>原画：</strong>${gameInfo.art || "暂无资料"}</p>
-                            <p><strong>编剧：</strong>${Array.isArray(gameInfo.writer) ? gameInfo.writer.join("、") : gameInfo.writer || "暂无资料"}</p>
-                            <p><strong>简介：</strong>${gameInfo.desc || "暂无简介"}</p>
-                        </div>
-                    </div>
-
+                    <%-- 删除展开详情块，封面、年份、厂商、原画、编剧、简介全部移除 --%>
                     <div class="heart-rate" data-gid="${gameItem.gameId}">${heartHtml}</div>
                     <div class="game-switch-group">
                         <label class="switch">
