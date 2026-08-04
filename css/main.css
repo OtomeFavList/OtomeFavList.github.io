@@ -434,8 +434,8 @@ input[type="checkbox"] {
     align-items: center;
     justify-content: center;
 }
-/* 显示弹窗的激活类 */
-.modal-mask.modal-show {
+/* 激活弹窗，只用 .active，已删除旧 modal‑show */
+.modal-mask.active {
     display: flex;
 }
 
