@@ -599,3 +599,47 @@ h2{
     flex-wrap:wrap;
     gap:8px;
 }
+
+/* ========== 剧透弹窗按钮配色（与添加游戏按钮红色系统一） ========== */
+#btn-add-game,
+#spoiler-confirm,
+#spoiler-cancel {
+    background-color: #b33a3a;
+    color: #ffffff;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+#btn-add-game:hover,
+#spoiler-confirm:hover,
+#spoiler-cancel:hover {
+    background-color: #942e2e;
+}
+
+/* 弹窗默认隐藏，js使用 display:flex 显示 */
+#spoiler-modal.modal-mask {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+}
+#spoiler-modal .modal-box {
+    background: #fff7f9;
+    padding: 24px 28px;
+    border-radius: 10px;
+    border: 2px solid #f6a5b8;
+    max-width: 420px;
+    width: 90%;
+}
+#spoiler-modal .modal-btns {
+    margin-top:20px;
+    display:flex;
+    gap:14px;
+    justify-content:center;
+}
