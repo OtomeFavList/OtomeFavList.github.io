@@ -54,6 +54,13 @@ export function loadData() {
     try {
         const raw = localStorage.getItem(STORE_KEY);
         if (raw) appData = JSON.parse(raw);
+        // 【新增兜底：旧存档缺失局部开关字段，补默认false】
+        if(Array.isArray(appData.gameList)){
+            appData.gameList.forEach(g=>{
+                if(typeof g.localHideChar !== "boolean") g.localHideChar = false;
+                if(typeof g.localFD !== "boolean") g.localFD = false;
+            })
+        }
     } catch (e) {
         console.error("读取本地存储失败：", e);
     }
