@@ -176,7 +176,7 @@ export function syncSingleGameSwitch(type, status) {
 
 // ===================== 筛选下拉菜单填充函数 =====================
 /**
- * 【修复】筛选下拉填充，增加元素获取兜底，防止undefined报错
+ * 【修复】筛选下拉填充：保留HTML原生顶部placeholder option，只追加数据选项，不再覆盖HTML提示文字
  * @param {Array} gameList 游戏模板数组
  */
 export function fillFilterOptions(gameList) {
@@ -202,27 +202,27 @@ export function fillFilterOptions(gameList) {
      * 内部辅助：填充单个select下拉框
      * @param {string} id dom id
      * @param {Set} dataSet 选项集合
-     * @param {string} placeholderText 默认提示文字
      */
-    const fillSelect = (id, dataSet, placeholderText) => {
+    const fillSelect = (id, dataSet) => {
         const sel = document.getElementById(id);
         if (!sel) return;
-        const firstOption = sel.querySelector("option");
-        sel.innerHTML = "";
-        if(firstOption) {
-            firstOption.textContent = placeholderText;
-            sel.appendChild(firstOption);
-        } else {
-            sel.innerHTML = `<option value="">${placeholderText}</option>`;
-        }
-        dataSet.forEach(v => sel.innerHTML += `<option value="${v}">${v}</option>`);
+        // 保留HTML写好的第一个option（筛选编剧 / 筛选画师…），只追加后面数据项
+        const firstOpt = sel.querySelector('option');
+        sel.innerHTML = '';
+        if(firstOpt) sel.appendChild(firstOpt);
+        dataSet.forEach(v => {
+            const opt = document.createElement('option');
+            opt.value = v;
+            opt.textContent = v;
+            sel.appendChild(opt);
+        });
     }
 
-    fillSelect("filter-writer", writerSet, "全部");
-    fillSelect("filter-art", artSet, "全部");
-    fillSelect("filter-year", yearSet, "全部");
-    fillSelect("filter-publisher", pubSet, "全部");
-    fillSelect("filter-cn", cnSet, "全部");
+    fillSelect("filter-writer", writerSet);
+    fillSelect("filter-art", artSet);
+    fillSelect("filter-year", yearSet);
+    fillSelect("filter-publisher", pubSet);
+    fillSelect("filter-cn", cnSet);
 }
 
 
