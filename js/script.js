@@ -226,6 +226,7 @@ export function initPage(Core) {
             saveData();
             if (document.getElementById("char-select-modal")?.classList.contains("active")) {
                 renderAddedGame();
+                bindDynamicGameCardSwitchEvents();
             }
         });
 
@@ -375,6 +376,7 @@ export function initPage(Core) {
                     saveData();
                     if (el.searchPanel) el.searchPanel.classList.add("hide-block");
                     renderAddedGame();
+                    bindDynamicGameCardSwitchEvents();
                 }
             })
         }
@@ -464,6 +466,7 @@ export function initPage(Core) {
                     gameItem.fold = !gameItem.fold;
                     saveData();
                     renderAddedGame();
+                    bindDynamicGameCardSwitchEvents();
                 }
             })
             document.querySelectorAll(".del-game").forEach(btn => {
@@ -472,6 +475,7 @@ export function initPage(Core) {
                     appData.gameList = appData.gameList.filter(g => g.gameId !== gid);
                     saveData();
                     renderAddedGame();
+                    bindDynamicGameCardSwitchEvents();
                 }
             })
             document.querySelectorAll(".heart-rate").forEach(box => {
@@ -485,6 +489,7 @@ export function initPage(Core) {
                         gameItem.loveRate = Number(h.dataset.val);
                         saveData();
                         renderAddedGame();
+                        bindDynamicGameCardSwitchEvents();
                     }
                 })
             })
