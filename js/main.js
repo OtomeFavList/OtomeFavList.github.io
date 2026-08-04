@@ -459,7 +459,7 @@ export function renderLocalSwitchDom(gameItem){
 
 /**
  * 事件委托：处理动态渲染游戏卡片内部开关（.game‑hide‑char / .game‑fd‑switch）
- * 导出，不要在bootstrap内部直接调用！！由script.js渲染完列表后调用
+ * 改为click委托，不再监听change；导出，由script.js渲染完列表后调用
  */
 export function bindDynamicGameCardSwitchEvents(){
     const wrap = document.querySelector(".wrap");
@@ -468,43 +468,38 @@ export function bindDynamicGameCardSwitchEvents(){
         console.warn("bindDynamicGameCardSwitchEvents：wrap或modal不存在，跳过绑定");
         return;
     }
-    // 防止重复绑定，先移除旧监听
-    wrap.removeEventListener("change", wrapChangeHandler);
-    wrap.addEventListener("change", wrapChangeHandler);
+    // 移除旧监听，防止重复绑定
+    wrap.removeEventListener("click", wrapClickHandler);
+    wrap.addEventListener("click", wrapClickHandler);
 }
 
-function wrapChangeHandler(e){
+function wrapClickHandler(e){
     const spoilerModal = document.getElementById("spoiler-modal");
     if(!spoilerModal) return;
-    const target = e.target;
-    // 本游戏隐藏角色开关
-    if(target.classList.contains("game-hide-char")){
-        const idx = Number(target.dataset.gameidx);
-        const gameItem = appData.gameList[idx];
-        if(!gameItem) return;
-        if(target.checked === false){
+    const targetInput = e.target.closest(".game-hide-char,.game-fd-switch");
+    if(!targetInput) return;
+    e.preventDefault();
+    const idx = Number(targetInput.dataset.gameidx);
+    const gameItem = appData.gameList[idx];
+    if(!gameItem) return;
+
+    // 如果是关闭，直接生效，不弹窗
+    if(targetInput.checked === true){
+        if(targetInput.classList.contains("game-hide-char")){
             gameItem.localHideChar = false;
-            saveData();
-            return;
-        }
-        target.checked = false;
-        window.pendingGameOp = { type:"hideChar", idx };
-        spoilerModal.classList.add("modal-show");
-    }
-    // 本游戏FD/续作开关
-    if(target.classList.contains("game-fd-switch")){
-        const idx = Number(target.dataset.gameidx);
-        const gameItem = appData.gameList[idx];
-        if(!gameItem) return;
-        if(target.checked === false){
+        }else{
             gameItem.localFD = false;
-            saveData();
-            return;
         }
-        target.checked = false;
-        window.pendingGameOp = { type:"fd", idx };
-        spoilerModal.classList.add("modal-show");
+        saveData();
+        return;
     }
+    // 用户要打开：标记待处理，弹出弹窗，不提前勾选
+    if(targetInput.classList.contains("game-hide-char")){
+        window.pendingGameOp = { type:"hideChar", idx };
+    }else{
+        window.pendingGameOp = { type:"fd", idx };
+    }
+    spoilerModal.classList.add("active");
 }
 
 
@@ -538,7 +533,7 @@ function bindGlobalSwitchSpoilerEvents() {
         this.checked = false;
         pendingGlobalSwitch = "hideChar";
         window.pendingGlobalSwitch = pendingGlobalSwitch;
-        spoilerModal.classList.add("modal-show");
+        spoilerModal.classList.add("active");
     });
 
     // 全局FD开关
@@ -552,7 +547,7 @@ function bindGlobalSwitchSpoilerEvents() {
         this.checked = false;
         pendingGlobalSwitch = "fdGame";
         window.pendingGlobalSwitch = pendingGlobalSwitch;
-        spoilerModal.classList.add("modal-show");
+        spoilerModal.classList.add("active");
     });
 
     // 弹窗确认【扩展：同时处理全局 / 编辑弹窗局部 / 动态卡片局部】
@@ -568,14 +563,14 @@ function bindGlobalSwitchSpoilerEvents() {
             }
             window.pendingGameOp = null;
             saveData();
-            spoilerModal.classList.remove("modal-show");
+            spoilerModal.classList.remove("active");
             pendingGlobalSwitch = null;
             window.pendingGlobalSwitch = null;
             return;
         }
 
         if(!pendingGlobalSwitch){
-            spoilerModal.classList.remove("modal-show");
+            spoilerModal.classList.remove("active");
             pendingGlobalSwitch = null;
             window.pendingGlobalSwitch = null;
             return;
@@ -603,7 +598,7 @@ function bindGlobalSwitchSpoilerEvents() {
                 renderLocalSwitchDom(gameItem);
             }
         }
-        spoilerModal.classList.remove("modal-show");
+        spoilerModal.classList.remove("active");
         pendingGlobalSwitch = null;
         window.pendingGlobalSwitch = null;
         window.pendingGameOp = null;
@@ -612,7 +607,7 @@ function bindGlobalSwitchSpoilerEvents() {
     // 弹窗取消：关闭弹窗，清空全部待处理标记，不修改任何状态
     spoilerCancelBtn.onclick = null;
     spoilerCancelBtn.addEventListener("click", function(){
-        spoilerModal.classList.remove("modal-show");
+        spoilerModal.classList.remove("active");
         pendingGlobalSwitch = null;
         window.pendingGlobalSwitch = null;
         window.pendingGameOp = null;
@@ -645,7 +640,7 @@ function bindLocalGameSwitchEvents(){
         this.checked = false;
         pendingGlobalSwitch = "localHide";
         window.pendingGlobalSwitch = pendingGlobalSwitch;
-        spoilerModal.classList.add("modal-show");
+        spoilerModal.classList.add("active");
     });
 
     localFDEl.addEventListener("change", function(){
@@ -660,7 +655,7 @@ function bindLocalGameSwitchEvents(){
         this.checked = false;
         pendingGlobalSwitch = "localFD";
         window.pendingGlobalSwitch = pendingGlobalSwitch;
-        spoilerModal.classList.add("modal-show");
+        spoilerModal.classList.add("active");
     });
 }
 
