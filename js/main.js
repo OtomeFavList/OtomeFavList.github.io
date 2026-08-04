@@ -31,7 +31,9 @@ export let charPoolMode = "char"; // char = 单选角色, cp = CP搭配
 
 // ===================== 剧透弹窗临时待处理标记 =====================
 // 可选值：hideChar / fdGame / localHide / localFD
-let pendingGlobalSwitch = null;
+window.pendingGlobalSwitch = null;
+let pendingGlobalSwitch = window.pendingGlobalSwitch;
+export { pendingGlobalSwitch };
 
 
 // ===================== 本地存储读写工具函数 =====================
@@ -476,7 +478,8 @@ function bindGlobalSwitchSpoilerEvents() {
             return;
         }
         pendingGlobalSwitch = "hideChar";
-        spoilerModal.style.display = "flex";
+        window.pendingGlobalSwitch = pendingGlobalSwitch;
+        spoilerModal.classList.add("modal-show");
     });
 
     // 全局FD开关
@@ -489,14 +492,17 @@ function bindGlobalSwitchSpoilerEvents() {
             return;
         }
         pendingGlobalSwitch = "fdGame";
-        spoilerModal.style.display = "flex";
+        window.pendingGlobalSwitch = pendingGlobalSwitch;
+        spoilerModal.classList.add("modal-show");
     });
 
     // 弹窗确认
     spoilerConfirmBtn.onclick = null;
     spoilerConfirmBtn.addEventListener("click", function(){
         if(!pendingGlobalSwitch){
-            spoilerModal.style.display = "none";
+            spoilerModal.classList.remove("modal-show");
+            pendingGlobalSwitch = null;
+            window.pendingGlobalSwitch = null;
             return;
         }
         if(pendingGlobalSwitch === "hideChar"){
@@ -522,15 +528,17 @@ function bindGlobalSwitchSpoilerEvents() {
                 renderLocalSwitchDom(gameItem);
             }
         }
-        spoilerModal.style.display = "none";
+        spoilerModal.classList.remove("modal-show");
         pendingGlobalSwitch = null;
+        window.pendingGlobalSwitch = null;
     });
 
     // 弹窗取消：只关弹窗，不改动任何开关
     spoilerCancelBtn.onclick = null;
     spoilerCancelBtn.addEventListener("click", function(){
-        spoilerModal.style.display = "none";
+        spoilerModal.classList.remove("modal-show");
         pendingGlobalSwitch = null;
+        window.pendingGlobalSwitch = null;
     });
 }
 
@@ -560,7 +568,8 @@ function bindLocalGameSwitchEvents(){
             return;
         }
         pendingGlobalSwitch = "localHide";
-        spoilerModal.style.display = "flex";
+        window.pendingGlobalSwitch = pendingGlobalSwitch;
+        spoilerModal.classList.add("modal-show");
     });
 
     localFDEl.addEventListener("click", function(e){
@@ -574,7 +583,8 @@ function bindLocalGameSwitchEvents(){
             return;
         }
         pendingGlobalSwitch = "localFD";
-        spoilerModal.style.display = "flex";
+        window.pendingGlobalSwitch = pendingGlobalSwitch;
+        spoilerModal.classList.add("modal-show");
     });
 }
 
