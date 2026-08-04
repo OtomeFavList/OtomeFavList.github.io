@@ -8,7 +8,7 @@ const gameData = {
     year: "2020",
     publisher: "Otomate",
     cnStudio: "GSE",
-    writer: "かずら林檎",
+    writer: ["かずら林檎"],
     art: "RiRi",
     cover: "img/game/001.jpg",
     charList: [
