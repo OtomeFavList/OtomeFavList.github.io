@@ -96,7 +96,7 @@ export function getAvailableCharImages(char, globalHideSwitch, globalFDSwitch, l
     });
 }
 
-// ✅路径：/data/games/
+// ✅路径：/data/games/（已移除多余data文件夹）
 export async function loadAllGameTemplates() {
     const basePath = "/data/games/";
     const tempList = [];
@@ -151,14 +151,34 @@ export function fillFilterOptions(gameList) {
     const fillSelect = (id, dataSet) => {
         const sel = document.getElementById(id);
         if (!sel) return;
-        sel.innerHTML = '<option value="">全部</option>';
+        sel.innerHTML = '<option value="">筛选</option>';
         dataSet.forEach(v => sel.innerHTML += `<option value="${v}">${v}</option>`);
     }
+    fillSelect("filter-writer", writerSet);
+    fillSelect("filter-art", artSet);
     fillSelect("filter-year", yearSet);
     fillSelect("filter-publisher", pubSet);
     fillSelect("filter-cn", cnSet);
-    fillSelect("filter-writer", writerSet);
-    fillSelect("filter-art", artSet);
+}
+
+/**
+ * 【重要修改】渲染游戏选择列表卡片模板
+ * 布局：左侧封面，右侧竖排信息，移除简介
+ */
+export function renderGameSelectItem(game) {
+    return `
+    <div class="game-option-item" data-game-id="${game.id}">
+        <img src="${game.cover}" alt="${game.name}">
+        <div class="game-option-info">
+            <div class="game-option-name">${game.name}</div>
+            <p>编剧：${Array.isArray(game.writer) ? game.writer.join("、") : game.writer || "无"}</p>
+            <p>画师：${game.art || "无"}</p>
+            <p>发售年份：${game.year || "无"}</p>
+            <p>发行厂商：${game.publisher || "无"}</p>
+            <p>汉化厂商：${game.cnStudio || "无"}</p>
+        </div>
+    </div>
+    `;
 }
 
 // 渲染选中角色【适配 srcList 多图数组】
@@ -314,7 +334,8 @@ function buildCoreContext() {
         isTodayConfirmed,
         saveConfirmDate,
         localSwitchIsConfirmedToday,
-        saveLocalSwitchConfirmDate
+        saveLocalSwitchConfirmDate,
+        renderGameSelectItem // 对外暴露新版游戏卡片渲染函数
     };
     return Core;
 }
