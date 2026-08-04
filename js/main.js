@@ -336,7 +336,7 @@ export function renderCP(gameItem, gameInfo) {
             const mTargetSrc = mAllSrc[mIndex];
 
             maleHtml += `
-            <div class="char-card-item selected" data-char-id="${mChar.id}" data-game-id="${gameInfo.id}" data-total-img="${mAllSrc.length}">
+            <div class="char-card-item selected" data-char-id="${mChar.id}" data-game-id="${mChar.id}" data-total-img="${mAllSrc.length}">
                 <div class="char-card-img-box ${mAllSrc.length>1?'char-has-multi-img':''}">
                     ${mAllSrc.length>1?`<button class="char-switch-btn char-switch-prev">&lt;</button>`:""}
                     <img src="${mTargetSrc}" alt="${mChar.name || ''}">
@@ -448,12 +448,10 @@ export function renderLocalSwitchDom(gameItem){
 
 
 /**
- * 【绑定全局开关点击事件 + 剧透弹窗逻辑】
- * 逻辑规则：
- * 1. false → true（要开启）：弹出剧透确认弹窗，确认后才真正打开开关
- * 2. true → false（要关闭）：直接修改数据、保存、更新UI，**不弹出任何弹窗**
- * 3. e.preventDefault()阻止浏览器原生checkbox自动翻转，JS全权接管checked状态
- * 4. 取消：关闭弹窗，不修改任何开关数据与UI
+ * 【绑定全局开关 change事件 + 剧透弹窗逻辑】
+ * 改用change事件，不再e.preventDefault锁死checkbox
+ * 1. false→true（打开）：立刻把checkbox回退为false，弹出弹窗；确认后才改为true
+ * 2. true→false（关闭）：直接修改数据，保存，更新UI，不弹窗
  */
 function bindGlobalSwitchSpoilerEvents() {
     const hideCharInput = document.getElementById("global-hide-char");
@@ -468,29 +466,30 @@ function bindGlobalSwitchSpoilerEvents() {
     }
 
     // 全局隐藏角色开关
-    hideCharInput.addEventListener("click", function(e){
-        e.preventDefault();
-        if(appData.globalHideChar === true){
-            // 关闭，直接生效
+    hideCharInput.addEventListener("change", function(){
+        // 用户想要关闭
+        if(this.checked === false){
             appData.globalHideChar = false;
             saveData();
             renderGlobalSwitchDom();
             return;
         }
+        // 用户想要打开，回退勾选，弹出弹窗
+        this.checked = false;
         pendingGlobalSwitch = "hideChar";
         window.pendingGlobalSwitch = pendingGlobalSwitch;
         spoilerModal.classList.add("modal-show");
     });
 
     // 全局FD开关
-    fdInput.addEventListener("click", function(e){
-        e.preventDefault();
-        if(appData.globalFD === true){
+    fdInput.addEventListener("change", function(){
+        if(this.checked === false){
             appData.globalFD = false;
             saveData();
             renderGlobalSwitchDom();
             return;
         }
+        this.checked = false;
         pendingGlobalSwitch = "fdGame";
         window.pendingGlobalSwitch = pendingGlobalSwitch;
         spoilerModal.classList.add("modal-show");
@@ -533,7 +532,7 @@ function bindGlobalSwitchSpoilerEvents() {
         window.pendingGlobalSwitch = null;
     });
 
-    // 弹窗取消：只关弹窗，不改动任何开关
+    // 弹窗取消：关闭弹窗，不修改开关
     spoilerCancelBtn.onclick = null;
     spoilerCancelBtn.addEventListener("click", function(){
         spoilerModal.classList.remove("modal-show");
@@ -545,8 +544,7 @@ function bindGlobalSwitchSpoilerEvents() {
 
 /**
  * 【绑定游戏弹窗内部局部开关事件】
- * local‑show‑secret / local‑show‑fd，逻辑和全局开关完全一致
- * false→true开启弹剧透弹窗；true→false关闭直接切换，不弹窗
+ * local‑show‑secret / local‑show‑fd
  */
 function bindLocalGameSwitchEvents(){
     const localHideEl = document.getElementById("local-show-secret");
@@ -557,31 +555,31 @@ function bindLocalGameSwitchEvents(){
         return;
     }
 
-    localHideEl.addEventListener("click", function(e){
-        e.preventDefault();
+    localHideEl.addEventListener("change", function(){
         const gameItem = appData.gameList.find(g=>g.gameId === currentEditGameId);
         if(!gameItem) return;
-        if(gameItem.localHideChar === true){
+        if(this.checked === false){
             gameItem.localHideChar = false;
             saveData();
             renderLocalSwitchDom(gameItem);
             return;
         }
+        this.checked = false;
         pendingGlobalSwitch = "localHide";
         window.pendingGlobalSwitch = pendingGlobalSwitch;
         spoilerModal.classList.add("modal-show");
     });
 
-    localFDEl.addEventListener("click", function(e){
-        e.preventDefault();
+    localFDEl.addEventListener("change", function(){
         const gameItem = appData.gameList.find(g=>g.gameId === currentEditGameId);
         if(!gameItem) return;
-        if(gameItem.localFD === true){
+        if(this.checked === false){
             gameItem.localFD = false;
             saveData();
             renderLocalSwitchDom(gameItem);
             return;
         }
+        this.checked = false;
         pendingGlobalSwitch = "localFD";
         window.pendingGlobalSwitch = pendingGlobalSwitch;
         spoilerModal.classList.add("modal-show");
