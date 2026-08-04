@@ -329,7 +329,7 @@ export function initPage(Core) {
             const filterCn = document.getElementById("filter-cn")?.value || "";
             const filterWriter = document.getElementById("filter-writer")?.value || "";
             const filterArt = document.getElementById("filter-art")?.value || "";
-            const sortedGames = [...gameTemplateList].sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
+            const sortedGames = [...gameTemplateList].sort((a, b) => a.name.localeCompare(b.name, "zh‑CN"));
             let html = "";
             sortedGames.forEach(game => {
                 if (!game) return;
@@ -374,7 +374,7 @@ export function initPage(Core) {
                     if(!appData.gameList) appData.gameList = [];
                     appData.gameList.push(newGameData);
                     saveData();
-                    if (el.searchPanel) el.searchPanel.classList.add("hide-block");
+                    if (el.searchPanel) el.searchPanel.classList.add("hide‑block");
                     renderAddedGame();
                     bindDynamicGameCardSwitchEvents();
                 }
@@ -390,7 +390,7 @@ export function initPage(Core) {
                 el.addedGameBox.innerHTML = "<p>⚠️ 游戏数据加载失败，检查data/games路径</p>";
                 return;
             }
-            document.querySelectorAll(".modal-trigger").forEach(dom => dom.classList.remove("modal-trigger"));
+            document.querySelectorAll(".modal‑trigger").forEach(dom => dom.classList.remove("modal‑trigger"));
 
             let html = "";
             appData.gameList?.forEach((gameItem, index) => {
@@ -398,45 +398,46 @@ export function initPage(Core) {
                 const gameInfo = gameTemplateList.find(g => g.id === gameItem.gameId);
                 if (!gameInfo) return;
                 let heartHtml = "";
-                for (let i = 1; i <= 5; i++) heartHtml += `<span class="heart ${gameItem.loveRate >= i ? 'active' : ''}" data-val="${i}">♥</span>`;
+                for (let i = 1; i <= 5; i++) heartHtml += `<span class="heart ${gameItem.loveRate >= i ? 'active' : ''}" data‑val="${i}">♥</span>`;
 
                 html += `
-                <div class="added-game-card" data-game-id="${gameItem.gameId}">
-                    <div class="game-card-header">
-                        <span class="game-card-title" style="color:#b33a3a;font-size:17px;">${gameInfo.name}</span>
-                        <div class="game-card-switch-group">
-                            <button class="btn-fold fold-game" data-gid="${gameItem.gameId}">折叠板块</button>
-                            <button class="btn-del del-game" data-gid="${gameItem.gameId}">删除游戏</button>
+                <div class="added‑game‑card" data‑game‑id="${gameItem.gameId}">
+                    <div class="game‑card‑header‑row">
+                        <span class="game‑card‑title" style="color:#b33a3a;font‑weight:bold;font‑size:18px;">${gameInfo.name}</span>
+                        <div class="heart‑rate" data‑gid="${gameItem.gameId}">${heartHtml}</div>
+                        <div class="game‑switch‑group">
+                            <label class="switch">
+                                <input type="checkbox" class="game‑hide‑char" data‑gameidx="${index}" ${(gameItem.localHideChar ?? false) ? 'checked' : ''}>
+                                <span class="slider"></span>
+                            </label>
+                            <span>单独显示本游戏隐藏角色</span>
+                            <label class="switch">
+                                <input type="checkbox" class="game‑fd‑switch" data‑gameidx="${index}" ${(gameItem.localFD ?? false) ? 'checked' : ''}>
+                                <span class="slider"></span>
+                            </label>
+                            <span>单独显示本游戏续作/FD角色</span>
                         </div>
                     </div>
-                    <%-- 删除展开详情块，封面、年份、厂商、原画、编剧、简介全部移除 --%>
-                    <div class="heart-rate" data-gid="${gameItem.gameId}">${heartHtml}</div>
-                    <div class="game-switch-group">
-                        <label class="switch">
-                            <input type="checkbox" class="game-hide-char" data-gameidx="${index}" ${(gameItem.localHideChar ?? false) ? 'checked' : ''}>
-                            <span class="slider"></span>
-                        </label>
-                        <span>单独显示本游戏隐藏角色</span>
-                        <label class="switch">
-                            <input type="checkbox" class="game-fd-switch" data-gameidx="${index}" ${(gameItem.localFD ?? false) ? 'checked' : ''}>
-                            <span class="slider"></span>
-                        </label>
-                        <span>单独显示本游戏续作/FD角色</span>
+
+                    <div class="char‑section">
+                        <button class="open‑char‑pool" data‑gid="${gameItem.gameId}">选择角色 Character</button>
+                        <div class="char‑card‑wrapper char‑selected‑row" data‑gid="${gameItem.gameId}">${renderSelectedChar(gameItem, gameInfo)}</div>
                     </div>
-                    <div class="char-section">
-                        <button class="open-char-pool" data-gid="${gameItem.gameId}">选择角色 Character</button>
-                        <div class="char-card-wrapper char-selected-row" data-gid="${gameItem.gameId}">${renderSelectedChar(gameItem, gameInfo)}</div>
+                    <div class="cp‑group">
+                        <button class="open‑cp‑pool" data‑gid="${gameItem.gameId}">搭配CP Couple</button>
+                        <div class="cp‑render‑box" data‑gid="${gameItem.gameId}">${renderCP(gameItem, gameInfo)}</div>
                     </div>
-                    <div class="cp-group">
-                        <button class="open-cp-pool" data-gid="${gameItem.gameId}">搭配CP Couple</button>
-                        <div class="cp-render-box" data-gid="${gameItem.gameId}">${renderCP(gameItem, gameInfo)}</div>
+
+                    <div class="card‑bottom‑btn‑group">
+                        <button class="btn‑fold fold‑game" data‑gid="${gameItem.gameId}">折叠</button>
+                        <button class="btn‑fold del‑game" data‑gid="${gameItem.gameId}">删除</button>
                     </div>
                 </div>
                 `;
             })
             // 1.写入DOM
             el.addedGameBox.innerHTML = html;
-            // 2.普通卡片事件绑定（折叠、删除、爱心、角色弹窗）
+            // 2.普通卡片事件绑定（折叠、删除、爱心、打开角色/CP弹窗）
             bindGameCardEvent();
             // 3.【关键】DOM全部渲染完成后，调用main.js导出的事件委托函数，接管.game‑hide‑char / .game‑fd‑switch点击
             bindDynamicGameCardSwitchEvents();
@@ -447,7 +448,7 @@ export function initPage(Core) {
          * ⚠️注意：game‑hide‑char / game‑fd‑switch 使用main.js事件委托，不在此处绑定
          */
         function bindGameCardEvent() {
-            document.querySelectorAll(".fold-game").forEach(btn => {
+            document.querySelectorAll(".fold‑game").forEach(btn => {
                 btn.onclick = () => {
                     const gid = btn.dataset.gid;
                     const gameItem = appData.gameList?.find(g => g.gameId === gid);
@@ -458,7 +459,7 @@ export function initPage(Core) {
                     bindDynamicGameCardSwitchEvents();
                 }
             })
-            document.querySelectorAll(".del-game").forEach(btn => {
+            document.querySelectorAll(".del‑game").forEach(btn => {
                 btn.onclick = () => {
                     const gid = btn.dataset.gid;
                     appData.gameList = appData.gameList.filter(g => g.gameId !== gid);
@@ -467,7 +468,7 @@ export function initPage(Core) {
                     bindDynamicGameCardSwitchEvents();
                 }
             })
-            document.querySelectorAll(".heart-rate").forEach(box => {
+            document.querySelectorAll(".heart‑rate").forEach(box => {
                 const gid = box.dataset.gid;
                 const gameItem = appData.gameList?.find(g => g.gameId === gid);
                 if (!gameItem) return;
@@ -482,14 +483,14 @@ export function initPage(Core) {
                     }
                 })
             })
-            document.querySelectorAll(".open-char-pool").forEach(btn => {
+            document.querySelectorAll(".open‑char‑pool").forEach(btn => {
                 btn.onclick = function () {
                     const gid = this.dataset.gid;
                     Core.charPoolMode = "char";
                     openCharSelectModal(gid);
                 }
             })
-            document.querySelectorAll(".open-cp-pool").forEach(btn => {
+            document.querySelectorAll(".open‑cp‑pool").forEach(btn => {
                 btn.onclick = function () {
                     const gid = this.dataset.gid;
                     Core.charPoolMode = "cp";
@@ -526,9 +527,9 @@ export function initPage(Core) {
                         }
                     });
 
-                    el.snapshotContainer.classList.add('export-snapshot');
+                    el.snapshotContainer.classList.add('export‑snapshot');
 
-                    const sizeRadio = document.querySelector('input[name="export-size"]:checked');
+                    const sizeRadio = document.querySelector('input[name="export‑size"]:checked');
                     if(!sizeRadio) throw new Error("未选中导出尺寸");
                     let sizeValue = sizeRadio.value;
                     let targetWidth, targetHeight;
@@ -578,8 +579,8 @@ export function initPage(Core) {
                     console.error("导出失败：", err);
                     alert('图片导出异常！外部图片跨域可能导致失败，请使用本地图片资源。\n' + err.message);
                 } finally {
-                    el.snapshotContainer.classList.remove('export-snapshot');
-                    document.querySelectorAll("#card-base .form-row input").forEach(input => {
+                    el.snapshotContainer.classList.remove('export‑snapshot');
+                    document.querySelectorAll("#card‑base .form‑row input").forEach(input => {
                         input.style.display = "";
                     });
                     el.exportBtn.disabled = false;
