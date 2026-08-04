@@ -36,6 +36,11 @@
 }
 */
 
+/* ========== 隐藏块类：用于搜索面板 search‑panel ========== */
+.hide-block {
+    display: none !important;
+}
+
 /* ========== body基础 ========== */
 body{
     background: #fff7f9;
