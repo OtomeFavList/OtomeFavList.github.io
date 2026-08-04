@@ -3,7 +3,8 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:"GenJyuuGothic", sans-serif,system-ui;
+    /* 已移除GenJyuuGothic，消除缺失字体警告 */
+    font-family: sans-serif,system-ui;
 }
 
 /* ========== 字体定义（全部已注释，不加载外部字体文件） ========== */
@@ -480,6 +481,16 @@ input[type="checkbox"] {
 #spoiler-confirm:hover {
     background:#992e2e;
 }
+
+/* 如果需要取消按钮灰色，放开下面这段 */
+/*
+#spoiler-cancel{
+    background:#888;
+}
+#spoiler-cancel:hover{
+    background:#666;
+}
+*/
 
 /* ========== 导出颜色设置 color-set-row ========== */
 .color-set-row{
