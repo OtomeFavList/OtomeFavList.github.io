@@ -22,7 +22,8 @@ export function initPage(Core) {
         saveConfirmDate,
         localSwitchIsConfirmedToday,
         saveLocalSwitchConfirmDate,
-        renderGameSelectItem
+        renderGameSelectItem,
+        bindDynamicGameCardSwitchEvents
     } = Core;
 
     // ===================== 角色选择弹窗渲染函数 =====================
@@ -177,42 +178,7 @@ export function initPage(Core) {
             modalConfirmBtn: document.getElementById("modal-confirm-btn")
         };
 
-        // ==========【事件委托：游戏卡片上动态生成的局部复选框 .local‑hide‑char / .local‑fd】==========
-        // 逻辑和main.js保持一致：关闭状态点击弹剧透弹窗；开启状态点击直接关闭；不绑定在循环渲染内
-        document.addEventListener("click", function(e){
-            const inputEl = e.target.closest(".local-hide-char, .local-fd");
-            if(!inputEl) return;
-            e.preventDefault();
-            const gid = inputEl.dataset.gid;
-            const gameItem = appData.gameList.find(g=>g.gameId === gid);
-            if(!gameItem) return;
-            const spoilerModal = document.getElementById("spoiler-modal");
-            if(!spoilerModal) return;
-
-            if(inputEl.classList.contains("local-hide-char")){
-                if(gameItem.localHideChar === true){
-                    // 开启 → 直接关闭，无弹窗
-                    gameItem.localHideChar = false;
-                    saveData();
-                    renderAddedGame();
-                }else{
-                    // 关闭 → 弹出剧透弹窗
-                    pendingGlobalSwitch.targetKey = "localHide";
-                    Core.currentEditGameId = gid;
-                    spoilerModal.classList.add("modal-show");
-                }
-            }else if(inputEl.classList.contains("local-fd")){
-                if(gameItem.localFD === true){
-                    gameItem.localFD = false;
-                    saveData();
-                    renderAddedGame();
-                }else{
-                    pendingGlobalSwitch.targetKey = "localFD";
-                    Core.currentEditGameId = gid;
-                    spoilerModal.classList.add("modal-show");
-                }
-            }
-        });
+        // ==========【已移除旧的错误local‑hide‑char / local‑fd事件委托，全部交由main.js bindDynamicGameCardSwitchEvents】==========
 
         // ==========【全局事件委托：角色立绘左右切换】==========
         document.addEventListener("click", function (e) {
@@ -423,7 +389,7 @@ export function initPage(Core) {
             document.querySelectorAll(".modal-trigger").forEach(dom => dom.classList.remove("modal-trigger"));
 
             let html = "";
-            appData.gameList?.forEach(gameItem => {
+            appData.gameList?.forEach((gameItem, index) => {
                 if (!gameItem) return;
                 const gameInfo = gameTemplateList.find(g => g.id === gameItem.gameId);
                 if (!gameInfo) return;
@@ -454,12 +420,12 @@ export function initPage(Core) {
                     <div class="heart-rate" data-gid="${gameItem.gameId}">${heartHtml}</div>
                     <div class="game-switch-group">
                         <label class="switch">
-                            <input type="checkbox" class="local-hide-char" data-gid="${gameItem.gameId}" ${gameItem.localHideChar ? 'checked' : ''}>
+                            <input type="checkbox" class="game-hide-char" data-gameidx="${index}" ${gameItem.localHideChar ? 'checked' : ''}>
                             <span class="slider"></span>
                         </label>
                         <span>单独显示本游戏隐藏角色</span>
                         <label class="switch">
-                            <input type="checkbox" class="local-fd" data-gid="${gameItem.gameId}" ${gameItem.localFD ? 'checked' : ''}>
+                            <input type="checkbox" class="game-fd-switch" data-gameidx="${index}" ${gameItem.localFD ? 'checked' : ''}>
                             <span class="slider"></span>
                         </label>
                         <span>单独显示本游戏FD/续作角色</span>
@@ -477,11 +443,13 @@ export function initPage(Core) {
             })
             el.addedGameBox.innerHTML = html;
             bindGameCardEvent();
+            // ✅【关键】DOM渲染完毕，调用main.js导出的事件委托绑定
+            bindDynamicGameCardSwitchEvents();
         }
 
         /**
          * 游戏卡片内部事件绑定：折叠、删除、爱心评分、打开角色/CP弹窗
-         * ⚠️注意：local‑hide‑char / local‑fd 使用document事件委托，不在此处绑定
+         * ⚠️注意：game‑hide‑char / game‑fd‑switch 使用main.js事件委托，不在此处绑定
          */
         function bindGameCardEvent() {
             document.querySelectorAll(".fold-game").forEach(btn => {
