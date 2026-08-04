@@ -440,9 +440,11 @@ export function initPage(Core) {
                 </div>
                 `;
             })
+            // 1.先写入完整DOM
             el.addedGameBox.innerHTML = html;
+            // 2.再绑定卡片内部事件
             bindGameCardEvent();
-            // ✅【关键】DOM渲染完毕，调用main.js导出的事件委托绑定
+            // 3.最后执行main.js的开关事件委托（DOM全部生成完毕）
             bindDynamicGameCardSwitchEvents();
         }
 
@@ -474,7 +476,9 @@ export function initPage(Core) {
                 const gameItem = appData.gameList?.find(g => g.gameId === gid);
                 if (!gameItem) return;
                 box.querySelectorAll(".heart").forEach(h => {
-                    h.onclick = () => {
+                    h.onclick = (e) => {
+                        // 修复：阻止冒泡，爱心点击不会向上传递给switch事件委托
+                        e.stopPropagation();
                         gameItem.loveRate = Number(h.dataset.val);
                         saveData();
                         renderAddedGame();
