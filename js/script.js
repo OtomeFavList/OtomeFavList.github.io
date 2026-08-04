@@ -428,7 +428,7 @@ export function initPage(Core) {
                             <input type="checkbox" class="game-fd-switch" data-gameidx="${index}" ${gameItem.localFD ? 'checked' : ''}>
                             <span class="slider"></span>
                         </label>
-                        <span>单独显示本游戏FD/续作角色</span>
+                        <span>单独显示本游戏续作/FD角色</span>
                     </div>
                     <div class="char-section">
                         <button class="open-char-pool" data-gid="${gameItem.gameId}">选择角色 Character</button>
