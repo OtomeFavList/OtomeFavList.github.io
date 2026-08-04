@@ -467,6 +467,8 @@ export function bindDynamicGameCardSwitchEvents(){
 }
 
 function wrapChangeHandler(e){
+    const spoilerModal = document.getElementById("spoiler-modal");
+    if(!spoilerModal) return;
     const target = e.target;
     // 本游戏隐藏角色开关
     if(target.classList.contains("game-hide-char")){
