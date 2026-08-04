@@ -72,6 +72,7 @@
             <div class="center-btn-block">
                 <button id="btn-add-game">+ 添加游戏</button>
             </div>
+            <!-- 搜索面板：id=search‑panel，class hide‑block css控制默认隐藏 -->
             <div class="game-search-box hide-block" id="search-panel">
                 <input type="text" id="game-search-input" placeholder="搜索游戏名称">
                 <div class="filter-group">
@@ -141,7 +142,7 @@
     </div>
 </div>
 
-<!-- 剧透弹窗【已添加取消按钮，无btn‑del类，两个按钮ID：spoiler‑cancel / spoiler‑confirm】 -->
+<!-- 剧透弹窗 -->
 <div class="modal-mask" id="spoiler-modal">
     <div class="modal-box">
         <h3>⚠️剧透警告⚠️</h3>
@@ -193,75 +194,11 @@
     </div>
 </div>
 
+<!-- JS入口模块，main.js内bootstrapCore会调用script.js的initPage -->
 <script type="module">
 import { bootstrapCore } from "./js/main.js";
-
 document.addEventListener("DOMContentLoaded", async () => {
     await bootstrapCore();
-
-    const exportBtn = document.getElementById('btn-export');
-    const snapshotContainer = document.getElementById('snapshot-container');
-    const canvas = document.getElementById('export-canvas');
-    const ctx = canvas.getContext('2d');
-
-    exportBtn.addEventListener('click', async () => {
-        try {
-            exportBtn.disabled = true;
-            exportBtn.textContent = "正在生成图片...";
-
-            snapshotContainer.classList.add('export-snapshot');
-
-            let sizeValue = document.querySelector('input[name="export-size"]:checked').value;
-            let targetWidth, targetHeight;
-            if(sizeValue === 'long'){
-                targetWidth = 1080;
-                targetHeight = 0;
-            }else{
-                const [w,h] = sizeValue.split(',').map(Number);
-                targetWidth = w;
-                targetHeight = h;
-            }
-
-            const bgColor = document.getElementById('color-bg').value;
-
-            const renderCanvas = await html2canvas(snapshotContainer, {
-                backgroundColor: bgColor,
-                scale: 2,
-                useCORS: true,
-                logging: false,
-            });
-
-            let finalCanvas;
-            if(targetHeight === 0){
-                finalCanvas = renderCanvas;
-            }else{
-                canvas.width = targetWidth;
-                canvas.height = targetHeight;
-                ctx.fillStyle = bgColor;
-                ctx.fillRect(0,0,targetWidth,targetHeight);
-                const scale = Math.min(targetWidth / renderCanvas.width, targetHeight / renderCanvas.height);
-                const drawW = renderCanvas.width * scale;
-                const drawH = renderCanvas.height * scale;
-                const offsetX = (targetWidth - drawW) / 2;
-                const offsetY = (targetHeight - drawH) / 2;
-                ctx.drawImage(renderCanvas, offsetX, offsetY, drawW, drawH);
-                finalCanvas = canvas;
-            }
-
-            const link = document.createElement('a');
-            link.download = `Otome_FavList_${new Date().getTime()}.png`;
-            link.href = finalCanvas.toDataURL('image/png');
-            link.click();
-
-        } catch (err) {
-            console.error("导出失败：", err);
-            alert('图片导出异常，请检查图片链接，不要使用跨域未授权图片！');
-        } finally {
-            snapshotContainer.classList.remove('export-snapshot');
-            exportBtn.disabled = false;
-            exportBtn.textContent = "生成并导出图片";
-        }
-    });
 });
 </script>
 
