@@ -26,6 +26,9 @@ export let gameTemplateList = [];
 export let currentEditGameId = null;
 export let charPoolMode = "char"; // char = 单选角色, cp = CP搭配
 
+// 【全局开关弹窗临时标记】记录当前等待确认的是哪一个全局开关
+let pendingGlobalSwitch = null;
+
 // 本地存储读写
 export function saveData() {
     localStorage.setItem(STORE_KEY, JSON.stringify(appData));
@@ -38,7 +41,7 @@ export function loadData() {
         console.error("读取本地存储失败：", e);
     }
 }
-// 获取今日日期字符串 YYYY-MM-DD 用于跨零点判断
+// 获取今日日期字符串 YYYY‑MM‑DD 用于跨零点判断
 export function getTodayDateStr() {
     const d = new Date();
     const year = d.getFullYear();
@@ -312,8 +315,8 @@ export function getAllGameChar(gameInfo) {
     if (!showHide) chars = chars.filter(c => c && !c.isHidden);
     if (!showFD) chars = chars.filter(c => c && !c.isFD);
 
-    const female = chars.filter(c => c.gender === "female").sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
-    const male = chars.filter(c => c.gender === "male").sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
+    const female = chars.filter(c => c.gender === "female").sort((a, b) => a.name.localeCompare(b.name, "zh‑CN"));
+    const male = chars.filter(c => c.gender === "male").sort((a, b) => a.name.localeCompare(b.name, "zh‑CN"));
     return [...female, ...male];
 }
 
@@ -345,10 +348,93 @@ function buildCoreContext() {
     return Core;
 }
 
+/**
+ * 【渲染全局开关复选框状态】
+ * 根据appData数据，更新页面上两个全局滑块勾选状态
+ */
+function renderGlobalSwitchDom() {
+    const hideCharInput = document.getElementById("global-hide-char");
+    const fdInput = document.getElementById("global-fd-game");
+    if(hideCharInput) hideCharInput.checked = appData.globalHideChar;
+    if(fdInput) fdInput.checked = appData.globalFD;
+}
+
+/**
+ * 【绑定全局开关点击事件 + 剧透弹窗逻辑】
+ * 点击滑块不会直接打开开关，弹出剧透确认弹窗；确认后才真正修改appData并保存
+ */
+function bindGlobalSwitchSpoilerEvents() {
+    // 获取DOM元素
+    const hideCharInput = document.getElementById("global-hide-char");
+    const fdInput = document.getElementById("global-fd-game");
+    const spoilerModal = document.getElementById("spoiler-modal");
+    const spoilerConfirmBtn = document.getElementById("spoiler-confirm");
+
+    // 元素缺失直接终止绑定，避免控制台报错
+    if(!hideCharInput || !fdInput || !spoilerModal || !spoilerConfirmBtn){
+        console.warn("bindGlobalSwitchSpoilerEvents：部分DOM缺失，全局开关弹窗未挂载");
+        return;
+    }
+
+    // ---------- 全局隐藏角色开关 click事件 ----------
+    hideCharInput.addEventListener("click", function(e){
+        console.log("点击：全局隐藏角色开关");
+        // 阻止原生勾选，不直接打开
+        e.preventDefault();
+        // 设置标记：等待确认的开关为 hideChar
+        pendingGlobalSwitch = "hideChar";
+        // 打开弹窗，使用style.display控制显示
+        spoilerModal.style.display = "flex";
+    });
+
+    // ---------- 全局FD开关 click事件 ----------
+    fdInput.addEventListener("click", function(e){
+        console.log("点击：全局FD开关");
+        // 阻止原生勾选，不直接打开
+        e.preventDefault();
+        // 设置标记：等待确认的开关为 fdGame
+        pendingGlobalSwitch = "fdGame";
+        // 打开弹窗，使用style.display控制显示
+        spoilerModal.style.display = "flex";
+    });
+
+    // ---------- 弹窗【继续/确认】按钮逻辑 ----------
+    spoilerConfirmBtn.addEventListener("click", function(){
+        console.log("剧透弹窗确认，pendingGlobalSwitch =", pendingGlobalSwitch);
+        if(!pendingGlobalSwitch){
+            // 无待确认开关，直接关闭弹窗
+            spoilerModal.style.display = "none";
+            return;
+        }
+
+        // 根据标记，开启对应全局开关
+        if(pendingGlobalSwitch === "hideChar"){
+            appData.globalHideChar = true;
+        }else if(pendingGlobalSwitch === "fdGame"){
+            appData.globalFD = true;
+        }
+
+        // 保存到本地存储
+        saveData();
+        // 更新页面滑块勾选状态
+        renderGlobalSwitchDom();
+        // 关闭弹窗
+        spoilerModal.style.display = "none";
+        // 清空临时标记
+        pendingGlobalSwitch = null;
+    });
+}
+
 // 对外暴露启动入口，供index.html调用
 export async function bootstrapCore() {
     loadData();
     await loadAllGameTemplates();
     const Core = buildCoreContext();
     initPage(Core);
+
+    // ==================== 在bootstrapCore末尾追加全局开关+弹窗全套逻辑 ====================
+    // 1.渲染全局开关DOM初始勾选状态
+    renderGlobalSwitchDom();
+    // 2.绑定滑块点击、剧透弹窗事件
+    bindGlobalSwitchSpoilerEvents();
 }
