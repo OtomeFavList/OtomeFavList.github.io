@@ -399,6 +399,10 @@ button:hover{
     width:200px;
 }
 
+/* 开关滑块平滑过渡，和全局保持一致 */
+input[type="checkbox"] {
+    transition: all 0.22s ease;
+}
 /* 弹窗默认隐藏，修复弹窗问题 */
 .modal-mask{
     position:fixed;
