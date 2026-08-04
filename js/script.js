@@ -23,7 +23,8 @@ export function initPage(Core) {
         localSwitchIsConfirmedToday,
         saveLocalSwitchConfirmDate,
         renderGameSelectItem,
-        bindDynamicGameCardSwitchEvents
+        bindDynamicGameCardSwitchEvents,
+        renderLocalSwitchDom
     } = Core;
 
     // ===================== 角色选择弹窗渲染函数 =====================
@@ -37,15 +38,13 @@ export function initPage(Core) {
         if (!gameInfo || !gameItem) return;
 
         const modalGameTitle = document.getElementById("modal-game-title");
-        const localShowSecret = document.getElementById("local-show-secret");
-        const localShowFD = document.getElementById("local-show-fd");
         const heroineBox = document.getElementById("heroine-box");
         const heroListBox = document.getElementById("hero-list-box");
-        if (!modalGameTitle || !localShowSecret || !localShowFD || !heroineBox || !heroListBox) return;
+        if (!modalGameTitle || !heroineBox || !heroListBox) return;
 
         modalGameTitle.innerText = gameInfo.name;
-        localShowSecret.checked = !!gameItem.localHideChar;
-        localShowFD.checked = !!gameItem.localFD;
+        // 【改动】删除此处直接操作localShowSecret / localShowFD.checked，交给main.js renderLocalSwitchDom(gameItem)
+        renderLocalSwitchDom(gameItem);
 
         const allChars = getAllGameChar(gameInfo);
         const femaleChars = allChars.filter(c => c.gender === "female");
