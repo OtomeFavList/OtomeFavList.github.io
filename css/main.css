@@ -458,23 +458,21 @@ input[type="checkbox"] {
     margin-top:20px;
 }
 
-/* ========== 剧透弹窗双按钮【重点：取消、确认完全统一样式，无色差】 ========== */
+/* ========== 剧透弹窗按钮：与全局button（添加游戏）完全一致红色样式 ========== */
 #spoiler-cancel,
 #spoiler-confirm {
-    min-width:100px;
-    padding:10px 16px;
+    padding:10px 18px;
+    border:none;
     border-radius:8px;
-    border: 2px solid #f6a5b8;
-    background-color:#fff7f9;
-    color:#b33a3a;
-    font-size:15px;
-    transition: all 0.2s ease;
+    background:#b33a3a;
+    color:#fff;
     cursor:pointer;
+    font-size:15px;
+    transition:0.2s;
 }
 #spoiler-cancel:hover,
 #spoiler-confirm:hover {
-    background-color:#f6a5b8;
-    color:#ffffff;
+    background:#992e2e;
 }
 
 /* ========== 导出颜色设置 color-set-row ========== */
