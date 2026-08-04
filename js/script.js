@@ -131,7 +131,6 @@ export function initPage(Core) {
     function openCharSelectModal(gameId) {
         Core.currentEditGameId = gameId;
         // ✅新增：赋值完gameId，立刻绑定本游戏局部开关事件
-        Core.bindLocalGameSwitchEvents();
 
         const modal = document.getElementById("char-select-modal");
         if (!modal) return;
