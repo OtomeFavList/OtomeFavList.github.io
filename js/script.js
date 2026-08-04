@@ -1,7 +1,7 @@
 // ===================== script.js UI交互层（模块化导出） =====================
 // 【重要说明】剧透弹窗、全局开关click事件全部迁移至main.js，本文件不再处理全局开关点击逻辑
 // 游戏卡片动态生成的局部开关：使用事件委托对接main.js剧透弹窗逻辑
-import { pendingGlobalSwitch } from './main.js';
+import {  } from './main.js';
 
 export function initPage(Core) {
     const {
@@ -66,7 +66,7 @@ export function initPage(Core) {
 
             const selected = gameItem.selectChars?.includes(char.id) ? "selected" : "";
             femHtml += `
-            <label class="char-card-item ${selected}" data-cid="${char.id}" data-char-id="${char.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}">
+            <label class="char-item ${selected}" data-cid="${char.id}" data-char-id="${char.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}">
                 <div class="char-card-img-box ${allSrc.length>1?'char-has-multi-img':''}">
                     ${allSrc.length>1?`<button class="char-switch-btn char-switch-prev">&lt;</button>`:""}
                     <img src="${showSrc}" alt="${char.name}">
@@ -93,7 +93,7 @@ export function initPage(Core) {
 
             const selected = gameItem.selectChars?.includes(char.id) ? "selected" : "";
             maleHtml += `
-            <label class="char-card-item ${selected}" data-cid="${char.id}" data-char-id="${char.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}">
+            <label class="char-item ${selected}" data-cid="${char.id}" data-char-id="${char.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}">
                 <div class="char-card-img-box ${allSrc.length>1?'char-has-multi-img':''}">
                     ${allSrc.length>1?`<button class="char-switch-btn char-switch-prev">&lt;</button>`:""}
                     <img src="${showSrc}" alt="${char.name}">
@@ -105,7 +105,7 @@ export function initPage(Core) {
         heroListBox.innerHTML = maleHtml;
 
         // 绑定弹窗内角色卡片勾选点击
-        document.querySelectorAll("#char-select-modal .char-card-item").forEach(item => {
+        document.querySelectorAll("#char-select-modal .char-item").forEach(item => {
             item.onclick = function (e) {
                 if (e.target.classList.contains("char-switch-btn")) return;
                 const cid = this.dataset.cid;
@@ -184,7 +184,7 @@ export function initPage(Core) {
             const switchBtn = e.target.closest(".char-switch-btn");
             if (!switchBtn) return;
             e.stopPropagation();
-            const charCard = switchBtn.closest(".char-card-item");
+            const charCard = switchBtn.closest(".char-item");
             const charId = charCard.dataset.charId;
             const gameId = charCard.dataset.gameId;
             const gameInfo = gameTemplateList.find(g => g.id === gameId);
