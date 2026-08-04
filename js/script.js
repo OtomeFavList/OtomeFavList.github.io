@@ -136,13 +136,12 @@ export function initPage(Core) {
         // 预加载所有游戏数据
         await loadAllGameTemplates();
 
-        // 1. DOM元素缓存（全部实时获取）
+        // 1. DOM元素缓存【移除spoilerCancel，HTML已经删除取消按钮】
         const el = {
             globalHideChar: document.getElementById("global-hide-char"),
             globalFD: document.getElementById("global-fd-game"),
             spoilerModal: document.getElementById("spoiler-modal"),
             spoilerConfirm: document.getElementById("spoiler-confirm"),
-            spoilerCancel: document.getElementById("spoiler-cancel"),
             addGameBtn: document.getElementById("btn-add-game"),
             searchPanel: document.getElementById("search-panel"),
             gameSearchInput: document.getElementById("game-search-input"),
@@ -230,7 +229,7 @@ export function initPage(Core) {
             }
         }
 
-        // ========== 剧透弹窗控制【CSS使用 .open 控制显隐】 ==========
+        // ========== 剧透弹窗控制【CSS使用 .open 控制显隐 + 异步修复同步冲突】 ==========
         function openSpoilerModal(type, checkboxDom) {
             if (!el.spoilerModal) {
                 console.error("缺少spoiler-modal弹窗DOM");
@@ -240,27 +239,13 @@ export function initPage(Core) {
             modalOpen = true;
             modalTargetType = type;
             triggerCheckboxEl = checkboxDom;
-            el.spoilerModal.classList.add("open");
+            // 异步延时，规避checkbox同步事件竞争，解决弹窗无法弹出bug
+            setTimeout(()=>{
+                el.spoilerModal.classList.add("open");
+            },60);
         }
         function closeSpoilerModal(isConfirm = false) {
             if (!el.spoilerModal) return;
-
-            // 取消：复选框恢复原始状态
-            if (!isConfirm && triggerCheckboxEl) {
-                if(modalTargetType === "hideChar") triggerCheckboxEl.checked = appData.globalHideChar;
-                if(modalTargetType === "fd") triggerCheckboxEl.checked = appData.globalFD;
-                if(modalTargetType === "localHide"){
-                    const gid = triggerCheckboxEl.dataset.gid;
-                    const gameItem = appData.gameList.find(g=>g.gameId === gid);
-                    triggerCheckboxEl.checked = !!gameItem?.localHideChar;
-                }
-                if(modalTargetType === "localFD"){
-                    const gid = triggerCheckboxEl.dataset.gid;
-                    const gameItem = appData.gameList.find(g=>g.gameId === gid);
-                    triggerCheckboxEl.checked = !!gameItem?.localFD;
-                }
-            }
-
             modalOpen = false;
             modalTargetType = "";
             triggerCheckboxEl = null;
@@ -299,7 +284,7 @@ export function initPage(Core) {
         refreshFDSwitch();
         fillFilterOptions(gameTemplateList);
 
-        // 剧透弹窗【确认按钮】
+        // 剧透弹窗【确认按钮】【取消按钮代码全部移除】
         if (el.spoilerConfirm) {
             el.spoilerConfirm.onclick = () => {
                 if (modalTargetType === "hideChar") {
@@ -334,12 +319,8 @@ export function initPage(Core) {
                 closeSpoilerModal(true);
             }
         }
-        // 弹窗取消按钮
-        if (el.spoilerCancel) {
-            el.spoilerCancel.onclick = ()=> closeSpoilerModal(false);
-        }
 
-        // ============【全局隐藏角色开关｜更换为 change 事件，修复闪烁】 ============
+        // ============【全局隐藏角色开关｜更换为 change 事件】 ============
         if (el.globalHideChar) {
             el.globalHideChar.addEventListener('change', function () {
                 const currentStatus = appData.globalHideChar;
@@ -360,15 +341,13 @@ export function initPage(Core) {
                     saveData();
                     renderAddedGame();
                 }else{
-                    // 用户想要开启，弹出弹窗，此时不修改checked
                     openSpoilerModal("hideChar", this);
-                    // 强制回滚视觉，防止checkbox自动点亮
                     this.checked = false;
                 }
             })
         }
 
-        // ============【全局FD/续作开关｜剧透预警｜更换change事件】 ============
+        // ============【全局FD/续作开关｜剧透预警】 ============
         if (el.globalFD) {
             el.globalFD.addEventListener('change', function () {
                 const currentStatus = appData.globalFD;
