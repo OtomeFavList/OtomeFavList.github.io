@@ -10,6 +10,7 @@ export const STORE_KEY = "otome-favlist-data";
 export const SPOILER_DATE_KEY = "spoiler-confirm-date"; // 全局剧透确认日期
 export const SPOILER_LOCAL_SWITCH_KEY = "local-switch-spoiler-date"; // 单机局部开关单日预警标记
 
+// ===================== 全局应用数据对象 =====================
 export let appData = {
     globalHideChar: false,
     globalFD: false,
@@ -19,21 +20,31 @@ export let appData = {
     exportColor: { bg: "#fff7f9", title: "#b33a3a", text: "#c98fac", border: "#f6a5b8" },
     charImageSelect: {} // 持久存储角色选中立绘索引 key:"gameId-charId"
 };
+
+// ===================== 游戏模板数据兜底变量 =====================
 // 兜底：游戏数据模块加载失败时赋值空数组，彻底解决undefined报错
 export let gameTemplateList = [];
 
-// 角色弹窗全局变量
+// ===================== 角色编辑弹窗全局状态变量 =====================
 export let currentEditGameId = null;
 export let charPoolMode = "char"; // char = 单选角色, cp = CP搭配
 
-// 【全局&局部开关弹窗临时标记】
+// ===================== 剧透弹窗临时待处理标记 =====================
 // 可选值：hideChar / fdGame / localHide / localFD
 let pendingGlobalSwitch = null;
 
-// ===================== 本地存储读写工具 =====================
+
+// ===================== 本地存储读写工具函数 =====================
+/**
+ * 将appData完整保存到localStorage
+ */
 export function saveData() {
     localStorage.setItem(STORE_KEY, JSON.stringify(appData));
 }
+
+/**
+ * 从localStorage读取并恢复appData，捕获解析异常
+ */
 export function loadData() {
     try {
         const raw = localStorage.getItem(STORE_KEY);
@@ -43,7 +54,10 @@ export function loadData() {
     }
 }
 
-// 获取今日日期字符串 YYYY‑MM‑DD 用于跨零点判断
+/**
+ * 获取今日日期字符串 YYYY‑MM‑DD 用于跨零点判断
+ * @returns {string} 日期字符串
+ */
 export function getTodayDateStr() {
     const d = new Date();
     const year = d.getFullYear();
@@ -51,25 +65,41 @@ export function getTodayDateStr() {
     const day = String(d.getDate()).padStart(2, "0");
     return `${year}-${month}-${day}`;
 }
-// 判断今天是否已经确认过【全局】剧透
+
+/**
+ * 判断今天是否已经确认过【全局】剧透
+ * @returns {boolean}
+ */
 export function isTodayConfirmed() {
     const savedDate = localStorage.getItem(SPOILER_DATE_KEY);
     return savedDate === getTodayDateStr();
 }
-// 保存今日【全局】确认标记到本地
+
+/**
+ * 保存今日【全局】确认标记到本地存储
+ */
 export function saveConfirmDate() {
     localStorage.setItem(SPOILER_DATE_KEY, getTodayDateStr());
 }
-// 判断今日局部单机开关是否已经确认过剧透
+
+/**
+ * 判断今日局部单机开关是否已经确认过剧透
+ * @returns {boolean}
+ */
 export function localSwitchIsConfirmedToday() {
     const saved = localStorage.getItem(SPOILER_LOCAL_SWITCH_KEY);
     return saved === getTodayDateStr();
 }
-// 标记今日单机局部开关已完成剧透确认
+
+/**
+ * 标记今日单机局部开关已完成剧透确认
+ */
 export function saveLocalSwitchConfirmDate() {
     localStorage.setItem(SPOILER_LOCAL_SWITCH_KEY, getTodayDateStr());
 }
 
+
+// ===================== 角色图片过滤工具函数 =====================
 /**
  * 获取角色可用图片组（适配你项目 srcList 格式）
  * @param {Object} char 角色对象
@@ -101,6 +131,8 @@ export function getAvailableCharImages(char, globalHideSwitch, globalFDSwitch, l
     });
 }
 
+
+// ===================== 游戏模板加载模块 =====================
 // ✅路径：/data/games/（已移除多余data文件夹）
 export async function loadAllGameTemplates() {
     const basePath = "/data/games/";
@@ -122,7 +154,11 @@ export async function loadAllGameTemplates() {
     gameTemplateList = tempList;
 }
 
-// 同步游戏内全局开关状态（仅批量初始化，不锁死单游戏开关）
+/**
+ * 同步游戏内全局开关状态（仅批量初始化，不锁死单游戏开关）
+ * @param {string} type 开关类型 hideChar / fd
+ * @param {boolean} status 开关布尔状态
+ */
 export function syncSingleGameSwitch(type, status) {
     if (!Array.isArray(appData.gameList)) return;
     appData.gameList.forEach(game => {
@@ -132,7 +168,12 @@ export function syncSingleGameSwitch(type, status) {
     })
 }
 
-// 【修复】筛选下拉填充，增加元素获取兜底，防止undefined报错
+
+// ===================== 筛选下拉菜单填充函数 =====================
+/**
+ * 【修复】筛选下拉填充，增加元素获取兜底，防止undefined报错
+ * @param {Array} gameList 游戏模板数组
+ */
 export function fillFilterOptions(gameList) {
     if (!Array.isArray(gameList) || gameList.length === 0) return;
     const yearSet = new Set(), pubSet = new Set(), cnSet = new Set(), writerSet = new Set(), artSet = new Set();
@@ -151,6 +192,13 @@ export function fillFilterOptions(gameList) {
         writerArr.forEach(name => writerSet.add(name));
         artSet.add(g.art);
     })
+
+    /**
+     * 内部辅助：填充单个select下拉框
+     * @param {string} id dom id
+     * @param {Set} dataSet 选项集合
+     * @param {string} placeholderText 默认提示文字
+     */
     const fillSelect = (id, dataSet, placeholderText) => {
         const sel = document.getElementById(id);
         if (!sel) return;
@@ -164,6 +212,7 @@ export function fillFilterOptions(gameList) {
         }
         dataSet.forEach(v => sel.innerHTML += `<option value="${v}">${v}</option>`);
     }
+
     fillSelect("filter-writer", writerSet, "全部");
     fillSelect("filter-art", artSet, "全部");
     fillSelect("filter-year", yearSet, "全部");
@@ -171,9 +220,13 @@ export function fillFilterOptions(gameList) {
     fillSelect("filter-cn", cnSet, "全部");
 }
 
+
+// ===================== HTML模板渲染函数 =====================
 /**
  * 渲染游戏选择列表卡片模板
  * 布局：左侧封面，右侧竖排信息，移除名称旁发售年份
+ * @param {Object} game 游戏模板对象
+ * @returns {string} html字符串
  */
 export function renderGameSelectItem(game) {
     if(!game) return "";
@@ -192,7 +245,12 @@ export function renderGameSelectItem(game) {
     `;
 }
 
-// 渲染选中角色【适配 srcList 多图数组】
+/**
+ * 渲染选中角色【适配 srcList 多图数组】
+ * @param {Object} gameItem 当前已添加游戏条目(appData.gameList内)
+ * @param {Object} gameInfo 游戏模板gameTemplateList内对象
+ * @returns {string} html字符串
+ */
 export function renderSelectedChar(gameItem, gameInfo) {
     if (!gameInfo?.charList || !gameItem) return "<span>暂无选择角色</span>";
     let html = "";
@@ -231,7 +289,12 @@ export function renderSelectedChar(gameItem, gameInfo) {
     return html || "<span>暂无选择角色</span>";
 }
 
-// 渲染CP【严格25%｜75%布局｜适配srcList】
+/**
+ * 渲染CP【严格25%｜75%布局｜适配srcList】
+ * @param {Object} gameItem 当前已添加游戏条目
+ * @param {Object} gameInfo 游戏模板对象
+ * @returns {string} html字符串
+ */
 export function renderCP(gameItem, gameInfo) {
     if (!gameInfo?.charList || !gameItem) return "<span>暂无CP搭配</span>";
     let html = "";
@@ -305,7 +368,11 @@ export function renderCP(gameItem, gameInfo) {
     return html || "<span>暂无CP搭配</span>";
 }
 
-// 过滤角色规则：全局开关 || 单游戏开关，任一开启即可展示
+/**
+ * 过滤角色规则：全局开关 || 单游戏开关，任一开启即可展示
+ * @param {Object} gameInfo 游戏模板对象
+ * @returns {Array} 过滤完成角色数组，女主在前，男主在后
+ */
 export function getAllGameChar(gameInfo) {
     if(!gameInfo) return [];
     let chars = [...(gameInfo?.charList || [])];
@@ -322,10 +389,14 @@ export function getAllGameChar(gameInfo) {
     return [...female, ...male];
 }
 
-// ===================== 启动入口 =====================
+
+// ===================== 页面启动入口模块 =====================
 import { initPage } from "./script.js";
 
-// 组装Core上下文对象，统一供给UI层script.js
+/**
+ * 组装Core上下文对象，统一供给UI层script.js
+ * @returns {Object} Core对象，所有核心方法对外暴露
+ */
 function buildCoreContext() {
     const Core = {
         appData,
@@ -373,25 +444,28 @@ export function renderLocalSwitchDom(gameItem){
     if(localFDEl) localFDEl.checked = !!gameItem.localFD;
 }
 
+
 /**
  * 【绑定全局开关点击事件 + 剧透弹窗逻辑】
  * 逻辑规则：
  * 1. false → true（要开启）：弹出剧透确认弹窗，确认后才真正打开开关
  * 2. true → false（要关闭）：直接修改数据、保存、更新UI，**不弹出任何弹窗**
  * 3. 全部阻止浏览器原生checkbox勾选行为，完全由JS接管checked状态，修复滑块不回弹bug
+ * 4. 新增：spoiler‑cancel【取消按钮】，点击关闭弹窗，不修改任何开关状态
  */
 function bindGlobalSwitchSpoilerEvents() {
     const hideCharInput = document.getElementById("global-hide-char");
     const fdInput = document.getElementById("global-fd-game");
     const spoilerModal = document.getElementById("spoiler-modal");
     const spoilerConfirmBtn = document.getElementById("spoiler-confirm");
+    const spoilerCancelBtn = document.getElementById("spoiler-cancel");
 
-    if(!hideCharInput || !fdInput || !spoilerModal || !spoilerConfirmBtn){
+    if(!hideCharInput || !fdInput || !spoilerModal || !spoilerConfirmBtn || !spoilerCancelBtn){
         console.warn("bindGlobalSwitchSpoilerEvents：部分DOM缺失，全局开关弹窗未挂载");
         return;
     }
 
-    // 全局隐藏角色开关
+    // -------------------- 全局隐藏角色开关 --------------------
     hideCharInput.addEventListener("click", function(e){
         e.preventDefault(); // 全部阻止原生勾选，JS全权接管
         const oldVal = appData.globalHideChar;
@@ -404,12 +478,12 @@ function bindGlobalSwitchSpoilerEvents() {
             renderGlobalSwitchDom();
             return;
         }
-        // 开启：弹弹窗
+        // 开启：弹弹窗，记录待处理开关类型
         pendingGlobalSwitch = "hideChar";
         spoilerModal.style.display = "flex";
     });
 
-    // 全局FD开关
+    // -------------------- 全局FD开关 --------------------
     fdInput.addEventListener("click", function(e){
         e.preventDefault();
         const oldVal = appData.globalFD;
@@ -425,7 +499,7 @@ function bindGlobalSwitchSpoilerEvents() {
         spoilerModal.style.display = "flex";
     });
 
-    // 弹窗确认按钮，处理4种开关case
+    // -------------------- 弹窗【确认】按钮逻辑 --------------------
     spoilerConfirmBtn.addEventListener("click", function(){
         console.log("剧透弹窗确认，pendingGlobalSwitch =", pendingGlobalSwitch);
         if(!pendingGlobalSwitch){
@@ -433,17 +507,19 @@ function bindGlobalSwitchSpoilerEvents() {
             return;
         }
 
-        // -------- 全局开关 --------
+        // 全局开关：隐藏角色
         if(pendingGlobalSwitch === "hideChar"){
             appData.globalHideChar = true;
             saveData();
             renderGlobalSwitchDom();
-        }else if(pendingGlobalSwitch === "fdGame"){
+        }
+        // 全局开关：FD角色
+        else if(pendingGlobalSwitch === "fdGame"){
             appData.globalFD = true;
             saveData();
             renderGlobalSwitchDom();
         }
-        // -------- 局部游戏开关 --------
+        // 局部游戏开关：本游戏隐藏角色
         else if(pendingGlobalSwitch === "localHide"){
             const gameItem = appData.gameList.find(g=>g.gameId === currentEditGameId);
             if(gameItem){
@@ -451,7 +527,9 @@ function bindGlobalSwitchSpoilerEvents() {
                 saveData();
                 renderLocalSwitchDom(gameItem);
             }
-        }else if(pendingGlobalSwitch === "localFD"){
+        }
+        // 局部游戏开关：本游戏FD角色
+        else if(pendingGlobalSwitch === "localFD"){
             const gameItem = appData.gameList.find(g=>g.gameId === currentEditGameId);
             if(gameItem){
                 gameItem.localFD = true;
@@ -460,10 +538,19 @@ function bindGlobalSwitchSpoilerEvents() {
             }
         }
 
+        // 关闭弹窗，清空待处理标记
+        spoilerModal.style.display = "none";
+        pendingGlobalSwitch = null;
+    });
+
+    // -------------------- 弹窗【取消】按钮逻辑【本次新增】 --------------------
+    spoilerCancelBtn.addEventListener("click", function(){
+        console.log("剧透弹窗取消，不修改任何开关状态");
         spoilerModal.style.display = "none";
         pendingGlobalSwitch = null;
     });
 }
+
 
 /**
  * 【绑定游戏弹窗内部局部开关事件】
@@ -479,7 +566,7 @@ function bindLocalGameSwitchEvents(){
         return;
     }
 
-    // 本游戏隐藏角色
+    // -------------------- 本游戏隐藏角色开关 --------------------
     localHideEl.addEventListener("click", function(e){
         e.preventDefault();
         const gameItem = appData.gameList.find(g=>g.gameId === currentEditGameId);
@@ -494,12 +581,12 @@ function bindLocalGameSwitchEvents(){
             renderLocalSwitchDom(gameItem);
             return;
         }
-        // 开启弹弹窗
+        // 开启弹弹窗，记录待处理标记
         pendingGlobalSwitch = "localHide";
         spoilerModal.style.display = "flex";
     });
 
-    // 本游戏续作/FD角色
+    // -------------------- 本游戏续作/FD角色开关 --------------------
     localFDEl.addEventListener("click", function(e){
         e.preventDefault();
         const gameItem = appData.gameList.find(g=>g.gameId === currentEditGameId);
@@ -518,17 +605,23 @@ function bindLocalGameSwitchEvents(){
     });
 }
 
-// 对外暴露启动入口，供index.html调用
+
+/**
+ * 对外暴露启动入口，供index.html调用
+ */
 export async function bootstrapCore() {
+    // 1.读取本地存储数据
     loadData();
+    // 2.加载全部游戏模板数据
     await loadAllGameTemplates();
+    // 3.组装核心上下文对象，传给UI层script.js
     const Core = buildCoreContext();
     initPage(Core);
 
-    // 1.渲染全局开关DOM初始勾选状态
+    // 4.渲染全局开关初始勾选状态
     renderGlobalSwitchDom();
-    // 2.绑定全局开关+剧透弹窗
+    // 5.绑定全局开关+剧透弹窗事件（含确认、取消双按钮）
     bindGlobalSwitchSpoilerEvents();
-    // 3.绑定游戏弹窗内局部开关事件（逻辑与全局统一）
+    // 6.绑定游戏弹窗内局部开关事件
     bindLocalGameSwitchEvents();
 }
