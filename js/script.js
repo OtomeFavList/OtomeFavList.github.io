@@ -419,12 +419,12 @@ export function initPage(Core) {
                     <div class="heart-rate" data-gid="${gameItem.gameId}">${heartHtml}</div>
                     <div class="game-switch-group">
                         <label class="switch">
-                            <input type="checkbox" class="game-hide-char" data-gameidx="${index}" ${gameItem.localHideChar ? 'checked' : ''}>
+                            <input type="checkbox" class="game-hide-char" data-gameidx="${index}" ${(gameItem.localHideChar ?? false) ? 'checked' : ''}>
                             <span class="slider"></span>
                         </label>
                         <span>单独显示本游戏隐藏角色</span>
                         <label class="switch">
-                            <input type="checkbox" class="game-fd-switch" data-gameidx="${index}" ${gameItem.localFD ? 'checked' : ''}>
+                            <input type="checkbox" class="game-fd-switch" data-gameidx="${index}" ${(gameItem.localFD ?? false) ? 'checked' : ''}>
                             <span class="slider"></span>
                         </label>
                         <span>单独显示本游戏续作/FD角色</span>
