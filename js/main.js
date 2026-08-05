@@ -401,6 +401,28 @@ export function getAllGameChar(gameInfo) {
     return [...female, ...male];
 }
 
+/**
+ * 在角色选择弹窗内渲染本游戏局部开关（#modal‑local‑switch‑wrap）
+ * @param {object} gameItem appData.gameList单条游戏条目
+ */
+export function renderLocalSwitchDom(gameItem) {
+    const wrap = document.getElementById("modal-local-switch-wrap");
+    if (!wrap) return;
+    wrap.innerHTML = `
+<label class="switch">
+    <input type="checkbox" class="modal-local-hide-char" ${gameItem.localHideChar ? "checked" : ""}>
+    <span class="slider"></span>
+</label>
+<span>本游戏显示隐藏角色</span>
+
+<label class="switch">
+    <input type="checkbox" class="modal-local-fd" ${gameItem.localFD ? "checked" : ""}>
+    <span class="slider"></span>
+</label>
+<span>本游戏显示FD续作角色</span>
+`;
+}
+
 
 // ===================== 页面启动入口模块 =====================
 import { initPage } from "./script.js";
@@ -429,7 +451,8 @@ function buildCoreContext() {
         localSwitchIsConfirmedToday,
         saveLocalSwitchConfirmDate,
         renderGameSelectItem,
-        bindDynamicGameCardSwitchEvents // 导出给script.js调用
+        bindDynamicGameCardSwitchEvents,
+        renderLocalSwitchDom
     };
     return Core;
 }
@@ -446,17 +469,6 @@ function renderGlobalSwitchDom() {
     if(fdInput) fdInput.checked = !!appData.globalFD;
 }
 
-/**
- * 【渲染当前编辑游戏的局部开关DOM状态】
- * @param {Object} gameItem 当前正在编辑的游戏条目
- */
-export function renderLocalSwitchDom(gameItem){
-    const localHideEl = document.getElementById("local-show-secret");
-    const localFDEl = document.getElementById("local-show-fd");
-    if(!gameItem) return;
-    if(localHideEl) localHideEl.checked = !!gameItem.localHideChar;
-    if(localFDEl) localFDEl.checked = !!gameItem.localFD;
-}
 
 /**
  * 事件委托：处理动态渲染游戏卡片内部开关（.game‑hide‑char / .game‑fd‑switch）
@@ -477,16 +489,24 @@ export function bindDynamicGameCardSwitchEvents(){
 function wrapClickHandler(e){
     const spoilerModal = document.getElementById("spoiler-modal");
     if(!spoilerModal) return;
-    const targetInput = e.target.closest(".game-hide-char,.game-fd-switch");
+    const targetInput = e.target.closest(".game-hide-char,.game-fd-switch,.modal-local-hide-char,.modal-local-fd");
     if(!targetInput) return;
 
-    const idx = Number(targetInput.dataset.gameidx);
-    const gameItem = appData.gameList[idx];
-    if(!gameItem) return;
+    let idx;
+    let gameItem;
+    if(targetInput.classList.contains("modal-local-hide-char") || targetInput.classList.contains("modal-local-fd")){
+        gameItem = appData.gameList.find(g=>g.gameId === currentEditGameId);
+        if(!gameItem) return;
+        idx = appData.gameList.indexOf(gameItem);
+    }else{
+        idx = Number(targetInput.dataset.gameidx);
+        gameItem = appData.gameList[idx];
+        if(!gameItem) return;
+    }
 
     // 已经勾选：用户要关闭，直接生效，不弹窗
     if(targetInput.checked === true){
-        if(targetInput.classList.contains("game-hide-char")){
+        if(targetInput.classList.contains("game-hide-char") || targetInput.classList.contains("modal-local-hide-char")){
             gameItem.localHideChar = false;
         }else{
             gameItem.localFD = false;
@@ -497,7 +517,7 @@ function wrapClickHandler(e){
 
     // 用户想要打开：阻止原生勾选，弹出剧透弹窗，等待确认按钮
     e.preventDefault();
-    if(targetInput.classList.contains("game-hide-char")){
+    if(targetInput.classList.contains("game-hide-char") || targetInput.classList.contains("modal-local-hide-char")){
         window.pendingGameOp = { type:"hideChar", idx };
     }else{
         window.pendingGameOp = { type:"fd", idx };
@@ -567,7 +587,7 @@ function bindGlobalSwitchSpoilerEvents() {
     // 弹窗确认【扩展：同时处理全局 / 编辑弹窗局部 / 动态卡片局部】
     spoilerConfirmBtn.onclick = null;
     spoilerConfirmBtn.addEventListener("click", function(){
-        // 优先处理动态游戏卡片操作
+        // 优先处理动态游戏卡片操作（含弹窗内modal-local‑*开关）
         if(window.pendingGameOp){
             const op = window.pendingGameOp;
             const g = appData.gameList[op.idx];
@@ -602,14 +622,12 @@ function bindGlobalSwitchSpoilerEvents() {
             if(gameItem){
                 gameItem.localHideChar = true;
                 saveData();
-                renderLocalSwitchDom(gameItem);
             }
         }else if(pendingGlobalSwitch === "localFD"){
             const gameItem = appData.gameList.find(g=>g.gameId === currentEditGameId);
             if(gameItem){
                 gameItem.localFD = true;
                 saveData();
-                renderLocalSwitchDom(gameItem);
             }
         }
         spoilerModal.classList.remove("active");
@@ -648,7 +666,6 @@ function bindLocalGameSwitchEvents(){
         if(this.checked === false){
             gameItem.localHideChar = false;
             saveData();
-            renderLocalSwitchDom(gameItem);
             return;
         }
         this.checked = false;
@@ -663,7 +680,6 @@ function bindLocalGameSwitchEvents(){
         if(this.checked === false){
             gameItem.localFD = false;
             saveData();
-            renderLocalSwitchDom(gameItem);
             return;
         }
         this.checked = false;
