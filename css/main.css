@@ -646,7 +646,7 @@ h2{
     /* 和昵称同颜色，加粗，二级标题 */
     color:#c98fac;
     font-weight:bold;
-    font-size:16px;
+    font-size:18px;
 }
 .heart-rate {
     display:flex;
