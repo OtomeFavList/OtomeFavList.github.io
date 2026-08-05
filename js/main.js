@@ -32,8 +32,6 @@ export let charPoolMode = "char"; // char = 单选角色, cp = CP搭配
 // ===================== 剧透弹窗临时待处理标记 =====================
 // 可选值：hideChar / fdGame / localHide / localFD
 window.pendingGlobalSwitch = null;
-let pendingGlobalSwitch = window.pendingGlobalSwitch;
-export { pendingGlobalSwitch };
 
 // 动态游戏卡片待操作标记
 window.pendingGameOp = null;
@@ -202,7 +200,14 @@ export function fillFilterOptions(gameList) {
             writerArr = [g.writer];
         }
         writerArr.forEach(name => writerSet.add(name));
-        artSet.add(g.art);
+
+        let artArr = [];
+        if(Array.isArray(g.art)){
+            artArr = g.art;
+        }else if(typeof g.art === "string" && g.art.trim() !== ""){
+            artArr = [g.art];
+        }
+        artArr.forEach(name => artSet.add(name));
     })
 
     /**
@@ -248,7 +253,7 @@ export function renderGameSelectItem(game) {
         <div class="game-option-info">
             <div class="game-option-name">${game.name || ""}</div>
             <p>编剧：${Array.isArray(game.writer) ? game.writer.join("、") : game.writer || "无"}</p>
-            <p>画师：${game.art || "无"}</p>
+            <p>画师：${Array.isArray(game.art) ? game.art.join("、") : game.art || "无"}</p>
             <p>发售年份：${game.year || "无"}</p>
             <p>发行厂商：${game.publisher || "无"}</p>
             <p>汉化厂商：${game.cnStudio || "无"}</p>
@@ -603,8 +608,7 @@ function bindGlobalSwitchSpoilerEvents() {
             return;
         }
         // 用户想要打开：不修改勾选，弹出弹窗
-        pendingGlobalSwitch = "hideChar";
-        window.pendingGlobalSwitch = pendingGlobalSwitch;
+        window.pendingGlobalSwitch = "hideChar";
         spoilerModal.classList.add("active");
     });
 
@@ -619,8 +623,7 @@ function bindGlobalSwitchSpoilerEvents() {
             renderGlobalSwitchDom();
             return;
         }
-        pendingGlobalSwitch = "fdGame";
-        window.pendingGlobalSwitch = pendingGlobalSwitch;
+        window.pendingGlobalSwitch = "fdGame";
         spoilerModal.classList.add("active");
     });
 
@@ -641,29 +644,27 @@ function bindGlobalSwitchSpoilerEvents() {
             window.pendingGameOp = null;
             saveData();
             spoilerModal.classList.remove("active");
-            pendingGlobalSwitch = null;
             window.pendingGlobalSwitch = null;
             if(window.refreshGameCardUi) window.refreshGameCardUi();
             return;
         }
 
-        if(!pendingGlobalSwitch){
+        if(!window.pendingGlobalSwitch){
             spoilerModal.classList.remove("active");
-            pendingGlobalSwitch = null;
             window.pendingGlobalSwitch = null;
+            window.pendingGameOp = null;
             return;
         }
-        if(pendingGlobalSwitch === "hideChar"){
+        if(window.pendingGlobalSwitch === "hideChar"){
             appData.globalHideChar = true;
             saveData();
             renderGlobalSwitchDom();
-        }else if(pendingGlobalSwitch === "fdGame"){
+        }else if(window.pendingGlobalSwitch === "fdGame"){
             appData.globalFD = true;
             saveData();
             renderGlobalSwitchDom();
         }
         spoilerModal.classList.remove("active");
-        pendingGlobalSwitch = null;
         window.pendingGlobalSwitch = null;
         window.pendingGameOp = null;
     });
@@ -672,7 +673,6 @@ function bindGlobalSwitchSpoilerEvents() {
     spoilerCancelBtn.onclick = null;
     spoilerCancelBtn.addEventListener("click", function(){
         spoilerModal.classList.remove("active");
-        pendingGlobalSwitch = null;
         window.pendingGlobalSwitch = null;
         window.pendingGameOp = null;
     });
