@@ -77,8 +77,8 @@ const gameData = {
             images: [
                 { srcList: ["img/char/007/Takeru.jpg"], type: "base" }
             ]
-        }
-      // 冴木弓弦
+        }, // ✅补上逗号
+        // 冴木弓弦
         {
             id: "g007_h01",
             name: "隐藏攻略角色",
@@ -86,7 +86,7 @@ const gameData = {
             isHidden: true,
             isFD: true,
             images: [
-                { src: ["img/char/007/Yuzuru.jpg"], type: "base" }
+                { srcList: ["img/char/007/Yuzuru.jpg"], type: "base" } // ✅src → srcList
             ]
         },
         // 峰岸誠司
@@ -97,9 +97,9 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { src: ["img/char/007/Shiraishi.jpg"], type: "base" }
+                { srcList: ["img/char/007/Shiraishi.jpg"], type: "base" } // ✅src → srcList
             ]
-        }
+        }, // ✅补上逗号
         // 吉成秀明
         {
             id: "g007_fd02",
@@ -108,7 +108,7 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { src: ["img/char/007/Yoshinari.jpg"], type: "base" }
+                { srcList: ["img/char/007/Yoshinari.jpg"], type: "base" } // ✅src → srcList
             ]
         }
     ]
