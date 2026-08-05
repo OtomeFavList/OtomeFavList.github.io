@@ -42,6 +42,17 @@
     display: none !important;
 }
 
+/* ========== 【新增】面板头部 panel‑head 角色选择面板标题+关闭按钮横向布局 ========== */
+.panel-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+}
+.panel-head h3{
+    margin:0;
+}
+
 /* ========== body基础 ========== */
 body{
     background: #fff7f9;
@@ -805,7 +816,7 @@ h2{
 }
 #char‑select‑item‑list{
     display:grid;
-    grid-template-columns:repeat(auto‑fill, minmax(140px,1fr));
+    grid-template-columns:repeat(auto-fill, minmax(140px,1fr));
     gap:10px;
     padding:12px;
 }
