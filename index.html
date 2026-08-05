@@ -142,7 +142,7 @@
     </div>
 </div>
 
-<!-- 剧透弹窗 -->
+<!-- 剧透弹窗：取消按钮完整保留 -->
 <div class="modal-mask" id="spoiler-modal">
     <div class="modal-box">
         <h3>⚠️剧透警告⚠️</h3>
@@ -154,8 +154,8 @@
     </div>
 </div>
 
-<!-- 角色选择弹窗 增加style="display:none;" 初始隐藏，由JS添加.active显示 -->
-<div class="modal-mask" id="char-select-modal" style="display:none;">
+<!-- 角色选择弹窗：移除行内style="display:none;"，由CSS class .active控制显示；取消按钮全部保留 -->
+<div class="modal-mask" id="char-select-modal">
     <div class="modal-box" style="max-width:900px;width:92%;max-height:85vh;overflow-y:auto;">
         <div class="modal-header" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
             <h3 id="modal-game-title">游戏名称</h3>
@@ -165,16 +165,16 @@
             <!-- 新增：局部开关渲染容器 -->
             <div id="modal-local-switch-wrap"></div>
             <hr style="border:0;border-top:1px solid #e2d2d7;margin:14px 0;">
-            <!-- CP布局 左25% 右75% -->
-            <div class="cp-row" style="display:flex;gap:16px;">
-                <div class="cp-female" style="width:25%;">
-                    <div class="heroine-column" style="display:flex;flex-direction:column;gap:10px;width:100%;">
+            <!-- CP布局 左25% 右75%，移除全部内联样式，交给main.css类控制 -->
+            <div class="cp-row">
+                <div class="cp-female">
+                    <div class="heroine-column">
                         <h4>女主</h4>
                         <div id="heroine-box" class="char-pool"></div>
                     </div>
                 </div>
-                <div class="cp-male-wrap" style="width:75%;">
-                    <div class="hero-list-column" style="display:flex;flex-direction:column;gap:10px;width:100%;">
+                <div class="cp-male-wrap">
+                    <div class="hero-list-column">
                         <h4>可攻略角色</h4>
                         <div id="hero-list-box" class="char-pool"></div>
                     </div>
