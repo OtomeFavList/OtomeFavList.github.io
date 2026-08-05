@@ -96,13 +96,30 @@
                 <div class="game-list-select" id="game-select-list"></div>
             </div>
 
-            <!-- 【新增】角色选择展开面板，使用game-search-box，页面文档流向下展开 -->
-            <div id="char-select-panel" class="game-search-box hide-block">
+            <!-- 角色选择底部滑出面板，复用game-search-box样式，和search‑panel同一套动画 -->
+            <div id="char-slide-panel" class="game-search-box hide-block">
                 <div class="panel-head">
-                    <h3>选择角色</h3>
-                    <button id="close‑char‑panel">关闭</button>
+                    <h3 id="modal-game-title"></h3>
+                    <button class="modal-close-btn" style="border:none;background:none;font-size:24px;cursor:pointer;padding:0 6px;">&times;</button>
                 </div>
-                <div id="char‑select‑item‑list" class="game-select-list"></div>
+                <!-- 本游戏局部开关容器 -->
+                <div id="local-switch-area"></div>
+                <hr style="border:0;border-top:1px solid #e2d2d7;margin:14px 0;">
+                <!-- CP布局 左25% / 右75% -->
+                <div class="cp-row">
+                    <div class="cp-female">
+                        <div class="heroine-column">
+                            <h4>女主</h4>
+                            <div id="heroine-box" class="char-pool"></div>
+                        </div>
+                    </div>
+                    <div class="cp-male-wrap">
+                        <div class="hero-list-column">
+                            <h4>可攻略角色</h4>
+                            <div id="hero-list-box" class="char-pool"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div id="added-game-container"></div>
@@ -164,7 +181,7 @@
     </div>
 </div>
 
-<!-- 旧角色弹窗（暂时保留，后续确认全部正常后可以删除） -->
+<!-- 旧角色模态弹窗（调试用，全部跑通后再删除） -->
 <div class="modal-mask" id="char-select-modal">
     <div class="modal-box" style="max-width:900px;width:92%;max-height:85vh;overflow-y:auto;">
         <div class="modal-header" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
@@ -172,10 +189,8 @@
             <button class="modal-close-btn" style="border:none;background:none;font-size:24px;cursor:pointer;padding:0 6px;">&times;</button>
         </div>
         <div class="modal-body">
-            <!-- 新增：局部开关渲染容器 -->
             <div id="modal-local-switch-wrap"></div>
             <hr style="border:0;border-top:1px solid #e2d2d7;margin:14px 0;">
-            <!-- CP布局 左25% 右75%，移除全部内联样式，交给main.css类控制 -->
             <div class="cp-row">
                 <div class="cp-female">
                     <div class="heroine-column">
