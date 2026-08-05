@@ -4,18 +4,18 @@
 // 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
 const gameData = {
     id: "game009",
-    name: "项圈×恶意",
+    name: "共生丘比特",
     year: "2021",
     publisher: "Otomate",
-    cnStudio: "JSD",
-    writer: ["有野幸","砂原有季","いわた志信","小縞なお"],
-    art: "花邑舞",
+    cnStudio: "GSE",
+    writer: ["吉村りりか"],
+    art: "ユウヤ",
     cover: "img/game/009.jpg",
     charList: [
-        // 星野市香
+        // 莉涅特‧米勒
         {
             id: "g009_f01",
-            name: "星野市香",
+            name: "莉涅特‧米勒",
             gender: "female",
             isHidden: false,
             isFD: false,
@@ -23,81 +23,103 @@ const gameData = {
                 { srcList: ["img/char/007/Ichika.jpg","img/char/007/Ichika2.jpg"], type: "base" }
             ]
         },
-        // 柳爱时
+        // 艾伦·梅尔维尔
         {
             id: "g009_m01",
-            name: "柳爱时",
+            name: "艾伦·梅尔维尔",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/007/Aiji.jpg"], type: "base" }
+                { srcList: ["img/char/007/Ichika.jpg","img/char/007/Ichika2.jpg"], type: "base" }
             ]
         },
-        // 冈崎契
+        // 吉尔‧洛夫克拉夫特
         {
             id: "g009_m02",
-            name: "冈崎契",
+            name: "吉尔‧洛夫克拉夫特",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/007/Kei.jpg"], type: "base" }
+                { srcList: ["img/char/007/Ichika.jpg","img/char/007/Ichika2.jpg"], type: "base" }
             ]
         },
-        // 榎本峰雄
+        // 萤彩院‧Ｆ‧琉辉
         {
             id: "g009_m03",
-            name: "榎本峰雄",
+            name: "萤彩院‧Ｆ‧琉辉",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/007/Mineo.jpg"], type: "base" }
+                { srcList: ["img/char/007/Ichika.jpg","img/char/007/Ichika2.jpg"], type: "base" }
             ]
         },
-        // 白石景之
+        // 劳尔‧亚克尼特
         {
             id: "g009_m04",
-            name: "白石景之",
+            name: "劳尔‧亚克尼特",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/007/Shiraishi.jpg"], type: "base" }
+                { srcList: ["img/char/007/Ichika.jpg","img/char/007/Ichika2.jpg"], type: "base" }
             ]
         },
-        // 笹塚尊
+        // 薛尔比‧史奈尔
         {
             id: "g009_m05",
-            name: "笹塚尊",
+            name: "薛尔比‧史奈尔",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/007/Takeru.jpg"], type: "base" }
+                { srcList: ["img/char/007/Ichika.jpg","img/char/007/Ichika2.jpg"], type: "base" }
             ]
         }
-      // 冴木弓弦
+      // 彼得‧弗拉修
         {
             id: "g009_h01",
-            name: "隐藏攻略角色",
+            name: "彼得‧弗拉修",
             gender: "male",
             isHidden: true,
             isFD: true,
             images: [
-                { src: "img/char/007/Yuzuru.jpg", type: "base" }
+                { src: ["img/char/007/Ichika.jpg","img/char/007/Ichika2.jpg"], type: "base" }
             ]
         },
-        // 峰岸誠司
+        // 伊萊‧奧马尔
         {
             id: "g009_fd01",
-            name: "峰岸誠司",
+            name: "伊萊‧奧马尔",
             gender: "male",
             isHidden: false,
             isFD: true,
             images: [
-                { src: "img/char/007/Shiraishi.jpg", type: "base" }
+                { src: ["img/char/007/Ichika.jpg","img/char/007/Ichika2.jpg"], type: "base" }
+            ]
+        }
+        // 梅列尼斯‧莱文
+        {
+            id: "g009_fd02",
+            name: "梅列尼斯‧莱文",
+            gender: "male",
+            isHidden: false,
+            isFD: true,
+            images: [
+                { src: ["img/char/007/Ichika.jpg","img/char/007/Ichika2.jpg"], type: "base" }
+            ]
+        }
+        // 欧文·赫里欧
+        {
+            id: "g009_fd03",
+            name: "欧文·赫里欧",
+            gender: "male",
+            isHidden: false,
+            isFD: true,
+            images: [
+                { src: ["img/char/007/Ichika.jpg","img/char/007/Ichika2.jpg"], type: "base" }
             ]
         }
     ]
