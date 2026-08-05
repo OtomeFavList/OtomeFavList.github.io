@@ -20,7 +20,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/007/Ichika.jpg","img/char/007/Ichika2.jpg"], type: "base" }
+                { srcList: ["img/char/009/Lynette.jpg","img/char/009/Lynette2.jpg"], type: "base" }
             ]
         },
         // 艾伦·梅尔维尔
@@ -31,7 +31,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/007/Ichika.jpg","img/char/007/Ichika2.jpg"], type: "base" }
+                { srcList: ["img/char/009/Allan.jpg","img/char/009/Allan2.jpg"], type: "base" }
             ]
         },
         // 吉尔‧洛夫克拉夫特
@@ -42,7 +42,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/007/Ichika.jpg","img/char/007/Ichika2.jpg"], type: "base" }
+                { srcList: ["img/char/009/Gill.jpg","img/char/009/Gill2.jpg"], type: "base" }
             ]
         },
         // 萤彩院‧Ｆ‧琉辉
@@ -53,7 +53,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/007/Ichika.jpg","img/char/007/Ichika2.jpg"], type: "base" }
+                { srcList: ["img/char/009/Keisaiin.jpg","img/char/009/Keisaiin2.jpg"], type: "base" }
             ]
         },
         // 劳尔‧亚克尼特
@@ -64,7 +64,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/007/Ichika.jpg","img/char/007/Ichika2.jpg"], type: "base" }
+                { srcList: ["img/char/009/Raul.jpg","img/char/009/Raul2.jpg"], type: "base" }
             ]
         },
         // 薛尔比‧史奈尔
@@ -75,7 +75,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/007/Ichika.jpg","img/char/007/Ichika2.jpg"], type: "base" }
+                { srcList: ["img/char/009/Shelby.jpg","img/char/009/Shelby2.jpg"], type: "base" }
             ]
         }
       // 彼得‧弗拉修
@@ -86,7 +86,7 @@ const gameData = {
             isHidden: true,
             isFD: true,
             images: [
-                { src: ["img/char/007/Ichika.jpg","img/char/007/Ichika2.jpg"], type: "base" }
+                { src: ["img/char/009/Peter.jpg","img/char/009/Peter2.jpg"], type: "base" }
             ]
         },
         // 伊萊‧奧马尔
@@ -97,7 +97,7 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { src: ["img/char/007/Ichika.jpg","img/char/007/Ichika2.jpg"], type: "base" }
+                { src: ["img/char/009/Eli.png"], type: "base" }
             ]
         }
         // 梅列尼斯‧莱文
@@ -108,7 +108,7 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { src: ["img/char/007/Ichika.jpg","img/char/007/Ichika2.jpg"], type: "base" }
+                { src: ["img/char/009/Merenice.jpg"], type: "base" }
             ]
         }
         // 欧文·赫里欧
@@ -119,7 +119,7 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { src: ["img/char/007/Ichika.jpg","img/char/007/Ichika2.jpg"], type: "base" }
+                { src: ["img/char/009/Owen.jpg","img/char/009/Owen2.jpg"], type: "base" }
             ]
         }
     ]
