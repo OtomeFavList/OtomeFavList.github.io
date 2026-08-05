@@ -630,27 +630,64 @@ h2{
     background-color: #992e2e;
 }
 
-/* 游戏卡片头部行布局 */
-.game-card-header-row{
+/* 游戏卡片头部PC端同一行布局 */
+.added-game-card {
+    padding:16px;
+    margin-bottom:14px;
+}
+.game-card-header-row {
+    display:flex;
+    align-items:center;
+    gap:14px;
+    flex-wrap:wrap;
+    margin-bottom:12px;
+}
+.game-card-title {
+    /* 和昵称同颜色，加粗，二级标题 */
+    color:#c98fac;
+    font-weight:bold;
+    font-size:16px;
+};
+    font-weight:bold;
+    font-size:16px;
+}
+.heart-rate {
+    display:flex;
+    gap:4px;
+}
+.game-switch-group {
     display:flex;
     align-items:center;
     gap:12px;
     flex-wrap:wrap;
-    margin-bottom:12px;
 }
-/* 手机端：游戏名+爱心一行；开关单独换行 */
-@media (max-width:768px){
-    .game-card-header-row{
+
+/* 卡片底部按钮区域，放在CP下方 */
+.card-bottom-buttons {
+    margin-top:14px;
+    display:flex;
+    gap:10px;
+}
+.btn-del.del-game {
+    /* 删除按钮使用和折叠按钮相同颜色，不再是红色 */
+    background-color:inherit;
+    color:inherit;
+}
+
+/* =========手机端适配========= */
+@media (max-width:768px) {
+    .game-card-header-row {
         flex-direction:column;
         align-items:flex-start;
         gap:8px;
     }
+    /* 手机第一行：游戏名称 + 爱心 */
+    .game-card-header-row > .game-card-title,
+    .game-card-header-row > .heart-rate {
+        display:flex;
+    }
+    /* 手机第二行：两个开关整行 */
+    .game-switch-group {
+        width:100%;
+    }
 }
-/* 底部按钮容器，放折叠、删除 */
-.card-bottom-btn-group{
-    margin-top:16px;
-    display:flex;
-    gap:10px;
-}
-/* 删除按钮复用btn-fold类，颜色与折叠保持一致，不再使用btn-del */
-
