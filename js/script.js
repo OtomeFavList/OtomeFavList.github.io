@@ -428,7 +428,7 @@ export function initPage(Core) {
     </div>
 
     <div class="cp-group">
-        <button class="open-cp-pool" data-gid="${gameItem.gameId}">搭配CP Couple</button>
+        <button class="open-cp-pool" data-gid="${gameItem.gameId}">选择角色 Couple</button>
         <div class="cp-render-box" data-gid="${gameItem.gameId}">${renderCP(gameItem, gameInfo)}</div>
     </div>
 
