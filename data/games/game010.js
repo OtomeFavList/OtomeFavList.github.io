@@ -1,7 +1,7 @@
 // data/games/game010.js
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
-// 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
+// 仅需要在 games.js 的 allGameFiles数组追加本文件路径
 const gameData = {
     id: "game010",
     name: "冷然之天秤：帝都幻惑绮谭",
@@ -77,7 +77,7 @@ const gameData = {
             images: [
                 { srcList: ["img/char/010/Rui.jpg","img/char/010/Rui2.jpg"], type: "base" }
             ]
-        }
+        },
         // 鹈饲昌吾
         {
             id: "g010_m06",
