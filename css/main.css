@@ -1,4 +1,4 @@
-/* ========== 全局重置 ========== */
+ /* ========== 全局重置 ========== */
 *{
     margin:0;
     padding:0;
@@ -859,4 +859,10 @@ h2{
 .char-option-name{
     font-size:14px;
     text-align:center;
+}
+
+/* ==========【本次新增】卡片折叠collapsed，强制隐藏内部两套滑出面板 ========== */
+.added-game-card.collapsed .char-slide-panel-char,
+.added-game-card.collapsed .char-slide-panel-cp {
+    display: none !important;
 }
