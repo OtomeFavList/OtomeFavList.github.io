@@ -346,7 +346,7 @@ export function renderCP(gameItem, gameInfo) {
             const mTargetSrc = mAllSrc[mIndex];
 
             maleHtml += `
-            <div class="char-card-item selected" data-char-id="${mChar.id}" data-game-id="${mChar.id}" data-total-img="${mAllSrc.length}">
+            <div class="char-card-item selected" data-char-id="${mChar.id}" data-game-id="${gameInfo.id}" data-total-img="${mAllSrc.length}">
                 <div class="char-card-img-box ${mAllSrc.length>1?'char-has-multi-img':''}">
                     ${mAllSrc.length>1?`<button class="char-switch-btn char-switch-prev">&lt;</button>`:""}
                     <img src="${mTargetSrc}" alt="${mChar.name || ''}">
@@ -396,8 +396,8 @@ export function getAllGameChar(gameInfo) {
     if (!showHide) chars = chars.filter(c => c && !c.isHidden);
     if (!showFD) chars = chars.filter(c => c && !c.isFD);
 
-    const female = chars.filter(c => c.gender === "female").sort((a, b) => a.name.localeCompare(b.name, "zh‑CN"));
-    const male = chars.filter(c => c.gender === "male").sort((a, b) => a.name.localeCompare(b.name, "zh‑CN"));
+    const female = chars.filter(c => c.gender === "female").sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
+    const male = chars.filter(c => c.gender === "male").sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
     return [...female, ...male];
 }
 
