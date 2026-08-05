@@ -8,7 +8,7 @@ const gameData = {
     year: "2021",
     publisher: "Rejet",
     cnStudio: "JOYOLAND",
-    writer: ["やまだ有見","加納高子","吉村りりか","夏野景 ","小和泉いづみ","山田かのこ","砂原有季","関涼子","瀬多海人"],
+    writer: ["やまだ有見","加納高子","吉村りりか","夏野景","小和泉いづみ","山田かのこ","砂原有季","関涼子","瀬多海人"],
     art: "読",
     cover: "img/game/011.jpg",
     charList: [
@@ -77,49 +77,49 @@ const gameData = {
             images: [
                 { srcList: ["img/char/011/Yoritomo.jpg"], type: "base" }
             ]
-        }, // ✅修复：补上缺失逗号
+        },
         // 佐佐木高纲
         {
-            id: "g009_fd01",
+            id: "g011_fd01",
             name: "佐佐木高纲",
             gender: "male",
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["img/char/011/Sasaki.jpg"], type: "base" } // ✅src→srcList
+                { srcList: ["img/char/011/Sasaki.jpg"], type: "base" }
             ]
-        }
+        },
         // 平重衡
         {
-            id: "g009_fd02",
+            id: "g011_fd02",
             name: "平重衡",
             gender: "male",
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["img/char/011/Shigehira.jpg"], type: "base" } // ✅src→srcList
+                { srcList: ["img/char/011/Shigehira.jpg"], type: "base" }
             ]
-        }
+        },
         // 佐藤忠信
         {
-            id: "g009_fd03",
+            id: "g011_fd03",
             name: "佐藤忠信",
             gender: "male",
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["img/char/011/Tadanobu.jpg"], type: "base" } // ✅src→srcList
+                { srcList: ["img/char/011/Tadanobu.jpg"], type: "base" }
             ]
-        }
+        },
         // 佐藤继信
         {
-            id: "g009_fd04",
+            id: "g011_fd04",
             name: "佐藤继信",
             gender: "male",
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["img/char/011/Tsugunobu.jpg"], type: "base" } // ✅src→srcList
+                { srcList: ["img/char/011/Tsugunobu.jpg"], type: "base" }
             ]
         }
     ]
