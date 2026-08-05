@@ -10,6 +10,7 @@ const allGameFiles = [
     "./games/game006.js",
     "./games/game007.js",
     "./games/game008.js",
+    "./games/game009.js",
     // 后续新增游戏仅在此添加一行文件路径即可，仅此一处极小改动
 ];
 
