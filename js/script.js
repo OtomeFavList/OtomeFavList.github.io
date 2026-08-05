@@ -20,11 +20,10 @@ import {
     getAvailableCharImages,
     isTodayConfirmed,
     saveConfirmDate,
-    localSwitchIsConfirmedToday,
-    saveLocalSwitchConfirmDate,
+    localSwitchNeedWarn,
     renderGameSelectItem,
     bindDynamicGameCardSwitchEvents,
-    renderLocalSwitchDom
+    renderLocalSwitchModalContent
 } from './main.js';
 
 export function initPage(Core = {}) {
@@ -53,7 +52,7 @@ export function initPage(Core = {}) {
         titleEl.innerText = `${gameInfo.name} — ${mode === "char" ? "选择角色 Character" : "选择CP Couple"}`;
         // 修复：传入本面板内部的local-switch-wrap dom
         const localWrap = panelDom.querySelector(".local-switch-wrap");
-        renderLocalSwitchDom(gameItem, localWrap);
+        renderLocalSwitchModalContent(gameItem, localWrap);
 
         const allChars = getAllGameChar(gameInfo);
         const femaleChars = allChars.filter(c => c.gender === "female");
@@ -77,7 +76,7 @@ export function initPage(Core = {}) {
             const selected = gameItem.selectChars?.includes(char.id) ? "selected" : "";
             femHtml += `
             <label class="char-item ${selected}" data-cid="${char.id}" data-char-id="${char.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}">
-                <div class="char-card-img-box ${allSrc.length>1?'char-has-multi-img':''}">
+                <div class="char-card-img-box ${allSrc.length>1?'char-multi-img':''}">
                     ${allSrc.length>1?`<button class="char-switch-btn char-switch-prev">&lt;</button>`:""}
                     <img src="${showSrc}" alt="${char.name}">
                     ${allSrc.length>1?`<button class="char-switch-btn char-switch-next">&gt;</button>`:""}
@@ -105,7 +104,7 @@ export function initPage(Core = {}) {
             const selected = gameItem.selectChars?.includes(char.id) ? "selected" : "";
             maleHtml += `
             <label class="char-item ${selected}" data-cid="${char.id}" data-char-id="${char.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}">
-                <div class="char-card-img-box ${allSrc.length>1?'char-has-multi-img':''}">
+                <div class="char-card-img-box ${allSrc.length>1?'char-multi-img':''}">
                     ${allSrc.length>1?`<button class="char-switch-btn char-switch-prev">&lt;</button>`:""}
                     <img src="${showSrc}" alt="${char.name}">
                     ${allSrc.length>1?`<button class="char-switch-btn char-switch-next">&gt;</button>`:""}
@@ -137,13 +136,13 @@ export function initPage(Core = {}) {
 
     // ===================== 页面启动bootstrap，UI渲染、表单、导出、卡片事件 =====================
     async function bootstrap() {
-        // 【修复】全局钩子，使用Core句柄，禁止裸写renderAddedGame
-        window.refreshGameCardUi = Core.renderAddedGame;
+        // 【修改点】全局钩子指向本文件内部renderAddedGame，保证DOM class统一为 added‑game‑card
+        window.refreshGameCardUi = renderAddedGame;
 
         // DOM元素缓存，移除全局char-slide-panel
         const el = {
             globalHideChar: document.getElementById("global-hide-char"),
-            globalFD: document.getElementById("global-fd-game"),
+            globalFD: document.getElementById("global-fd"),
             spoilerModal: document.getElementById("spoiler-modal"),
             spoilerConfirm: document.getElementById("spoiler-confirm"),
             addGameBtn: document.getElementById("btn-add-game"),
@@ -667,7 +666,7 @@ export function initPage(Core = {}) {
     // ✅挂载全局句柄给main.js调用
     window.openCharSelectModal = openCharSelectModal;
     window.renderCharSelectList = renderCharSelectList;
-    window.refreshGameCardUi = Core.renderAddedGame;
+    window.refreshGameCardUi = renderAddedGame;
 
     bootstrap();
 }
