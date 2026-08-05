@@ -496,6 +496,26 @@ function wrapClickHandler(e){
     const spoilerModal = document.getElementById("spoiler-modal");
     if(!spoilerModal) return;
 
+    // -------- Character / Couple 按钮点击处理【新增】 --------
+    const charBtn = e.target.closest(".btn-character, .btn-couple");
+    if(charBtn){
+        const gameCardEl = charBtn.closest(".game-card");
+        if(!gameCardEl) return;
+        // 赋值当前编辑游戏ID
+        currentEditGameId = gameCardEl.dataset.gameid;
+        if(charBtn.classList.contains("btn-character")){
+            charPoolMode = "char";
+        }else{
+            charPoolMode = "cp";
+        }
+        // 调用script.js暴露的弹窗打开与渲染
+        if(window.openCharSelectModal && window.renderCharSelectList){
+            window.openCharSelectModal();
+            window.renderCharSelectList();
+        }
+        return;
+    }
+
     // -------- 角色图片切换按钮处理 --------
     const switchBtn = e.target.closest(".char-switch-prev,.char-switch-next");
     if(switchBtn){
