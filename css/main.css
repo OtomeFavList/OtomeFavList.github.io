@@ -1,4 +1,4 @@
- /* ========== 全局重置 ========== */
+/* ========== 全局重置 ========== */
 *{
     margin:0;
     padding:0;
@@ -228,17 +228,27 @@ button{
 button:hover{
     background:#992e2e;
 }
+/* 注释原红色删除按钮
 .btn-del{
     background:#dd4444;
 }
 .btn-del:hover{
     background:#b82c2c;
 }
+*/
 .btn-fold{
     background:#888 !important;
 }
 .btn-fold:hover{
     background:#666 !important;
+}
+/* 删除按钮统一灰色 */
+.btn-del.del-game {
+    background-color:#888 !important;
+    color:#fff;
+}
+.btn-del.del-game:hover {
+    background-color:#666 !important;
 }
 
 /* ==========【新增】游戏卡片每组模块，增加上下间距，解决拥挤 ========== */
@@ -416,14 +426,6 @@ button:hover{
 }
 .char-item:hover{
     border-color:#f0b8c8;
-}
-.char-item-img-box{
-    width:200px;
-    height:200px;
-    margin:0 auto 8px;
-    border-radius:8px;
-    overflow:hidden;
-    border:1px solid #e2e2e2;
 }
 .char-item img{
     width:100%;
@@ -605,16 +607,6 @@ input[type="checkbox"] {
     background:#992e2e;
 }
 
-/* 如果需要取消按钮灰色，放开下面这段 */
-/*
-#spoiler-cancel{
-    background:#888;
-}
-#spoiler-cancel:hover{
-    background:#666;
-}
-*/
-
 /* ========== 导出颜色设置 color-set-row ========== */
 .color-set-row{
     display:flex;
@@ -793,14 +785,6 @@ h2{
     margin-top:14px;
     display:flex;
     gap:10px;
-}
-.btn-del.del-game {
-    /* 删除按钮与折叠按钮同样式 */
-    background-color:#888 !important;
-    color:#fff;
-}
-.btn-del.del-game:hover {
-    background-color:#666 !important;
 }
 .btn-fold{
     background:#888 !important;
