@@ -587,7 +587,7 @@ function bindGlobalSwitchSpoilerEvents() {
     // 弹窗确认【扩展：同时处理全局 / 编辑弹窗局部 / 动态卡片局部】
     spoilerConfirmBtn.onclick = null;
     spoilerConfirmBtn.addEventListener("click", function(){
-        // 优先处理动态游戏卡片操作（含弹窗内modal-local‑*开关）
+        // 优先处理动态游戏卡片操作（含弹窗内modal‑local‑*开关）
         if(window.pendingGameOp){
             const op = window.pendingGameOp;
             const g = appData.gameList[op.idx];
