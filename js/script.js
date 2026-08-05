@@ -20,7 +20,6 @@ import {
     getAvailableCharImages,
     isTodayConfirmed,
     saveConfirmDate,
-    localSwitchNeedWarn,
     renderGameSelectItem,
     bindDynamicGameCardSwitchEvents,
     renderLocalSwitchModalContent
