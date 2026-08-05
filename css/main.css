@@ -666,9 +666,18 @@ h2{
     gap:10px;
 }
 .btn-del.del-game {
-    /* 删除按钮使用和折叠按钮相同颜色，不再是红色 */
-    background-color:inherit;
-    color:inherit;
+    /* 删除按钮与折叠按钮同样式 */
+    background-color:#888;
+    color:#fff;
+}
+.btn-del.del-game:hover {
+    background-color:#666;
+}
+.btn-fold{
+    background:#888;
+}
+.btn-fold:hover{
+    background:#666;
 }
 
 /* =========手机端适配========= */
