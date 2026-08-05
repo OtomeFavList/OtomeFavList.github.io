@@ -327,7 +327,8 @@ export function initPage(Core) {
             const filterCn = document.getElementById("filter-cn")?.value || "";
             const filterWriter = document.getElementById("filter-writer")?.value || "";
             const filterArt = document.getElementById("filter-art")?.value || "";
-            const sortedGames = [...gameTemplateList].sort((a, b) => a.name.localeCompare(b.name, "zh‑CN"));
+            // 此处修复：使用键盘普通减号 zh‑CN → zh-CN
+            const sortedGames = [...gameTemplateList].sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
             let html = "";
             sortedGames.forEach(game => {
                 if (!game) return;
