@@ -4,89 +4,89 @@
 // 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
 const gameData = {
     id: "game008",
-    name: "奥林匹亚的晚宴",
+    name: "剑为君舞",
     year: "2021",
-    publisher: "Otomate",
-    cnStudio: "JSD",
-    writer: ["片桐由摩"],
-    art: "さとい",
+    publisher: "Rejet",
+    cnStudio: "JOYOLAND",
+    writer: ["やまだ有見","加納高子","吉村りりか","夏野景 ","小和泉いづみ","山田かのこ","砂原有季","関涼子","瀬多海人"],
+    art: "読",
     cover: "img/game/008.jpg",
     charList: [
-        // 奥林匹亚
+        // 香夜
         {
             id: "g008_f01",
-            name: "奥林匹亚",
+            name: "香夜",
             gender: "female",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/006/Olympia.jpg","img/char/006/Olympia2.jpg"], type: "base" }
+                { srcList: ["img/char/008/Kayo.jpg","img/char/008/Kayo2.jpg"], type: "base" }
             ]
         },
-        // 朱砂
+        // 缘
         {
             id: "g008_m01",
-            name: "朱砂",
-            gender: "male",
-            isHidden: false,
-            isFD: false,
-            images: [
-                { srcList: ["img/char/006/Akaza.jpg","img/char/006/Akaza2.jpg"], type: "base" }
-            ]
-        },
-        // 天草四郎时贞
-        {
-            id: "g008_m02",
-            name: "天草四郎时贞",
-            gender: "male",
-            isHidden: false,
-            isFD: false,
-            images: [
-                { srcList: ["img/char/006/Amakusa.jpg","img/char/006/Amakusa2.jpg"], type: "base" }
-            ]
-        },
-        // 火向
-        {
-            id: "g008_m03",
-            name: "火向",
-            gender: "male",
-            isHidden: false,
-            isFD: false,
-            images: [
-                { srcList: ["img/char/006/Himuka.jpg","img/char/006/Himuka2.jpg"], type: "base" }
-            ]
-        },
-        // 玄叶
-        {
-            id: "g008_m04",
-            name: "玄叶",
-            gender: "male",
-            isHidden: false,
-            isFD: false,
-            images: [
-                { srcList: ["img/char/006/Kuroba.jpg","img/char/006/Kuroba2.jpg"], type: "base" }
-            ]
-        },
-        // 璃空
-        {
-            id: "g008_m05",
-            name: "璃空",
-            gender: "male",
-            isHidden: false,
-            isFD: false,
-            images: [
-                { srcList: ["img/char/006/Rikuu.jpg","img/char/006/Rikuu2.jpg"], type: "base" }
-            ]
-        }
-      // 缘
-        {
-            id: "g008_m06",
             name: "缘",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/006/Yosuga.jpg","img/char/006/Yosuga2.jpg"], type: "base" }
+                { srcList: ["img/char/008/Enishi.jpg","img/char/008/Enishi2.jpg"], type: "base" }
+            ]
+        },
+        // 萤
+        {
+            id: "g008_m02",
+            name: "萤",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            images: [
+                { srcList: ["img/char/008/Kei.jpg","img/char/008/Kei2.jpg"], type: "base" }
+            ]
+        },
+        // 黑羽实彰
+        {
+            id: "g008_m03",
+            name: "黑羽实彰",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            images: [
+                { srcList: ["img/char/008/Kuroba.jpg","img/char/008/Kuroba2.jpg"], type: "base" }
+            ]
+        },
+        // 鹭原左京
+        {
+            id: "g008_m04",
+            name: "鹭原左京",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            images: [
+                { srcList: ["img/char/008/Sakyou.jpg","img/char/008/Sakyou2.jpg"], type: "base" }
+            ]
+        },
+        // 铃悬
+        {
+            id: "g008_m05",
+            name: "铃悬",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            images: [
+                { srcList: ["img/char/008/Suzukake.jpg","img/char/008/Suzukake2.jpg"], type: "base" }
+            ]
+        }
+      // 九十九丸
+        {
+            id: "g008_m06",
+            name: "九十九丸",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            images: [
+                { srcList: ["img/char/008/Tsuzuramaru.jpg","img/char/008/Tsuzuramaru2.jpg"], type: "base" }
             ]
         }
     ]
