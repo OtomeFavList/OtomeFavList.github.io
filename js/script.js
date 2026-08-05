@@ -1,6 +1,7 @@
 // ===================== script.js UI交互层（模块化导出） =====================
 // 【重要说明】剧透弹窗、全局开关click事件全部迁移至main.js，本文件不再处理全局开关点击逻辑
 // 游戏卡片动态生成的局部开关：使用事件委托对接main.js剧透弹窗逻辑
+// 修改：角色选择由居中modal弹窗 → 底部滑出面板，和search‑panel同一套hide‑block动画逻辑
 import {
     appData,
     gameTemplateList,
@@ -28,9 +29,9 @@ export function initPage(Core) {
     const {
     } = Core;
 
-    // ===================== 角色选择弹窗渲染函数 =====================
+    // ===================== 角色选择面板渲染函数（现已改为底部滑出面板） =====================
     /**
-     * 渲染角色选择弹窗内容
+     * 渲染角色选择滑出面板内容
      * @param {string} gameId 当前编辑游戏id
      */
     function renderCharSelectModal(gameId) {
@@ -44,7 +45,7 @@ export function initPage(Core) {
         if (!modalGameTitle || !heroineBox || !heroListBox) return;
 
         modalGameTitle.innerText = gameInfo.name;
-        // ✅恢复调用渲染弹窗内局部开关DOM
+        // ✅恢复调用渲染面板内局部开关DOM
         renderLocalSwitchDom(gameItem);
 
         const allChars = getAllGameChar(gameInfo);
@@ -105,8 +106,8 @@ export function initPage(Core) {
         });
         heroListBox.innerHTML = maleHtml;
 
-        // 绑定弹窗内角色卡片勾选点击
-        document.querySelectorAll("#char-select-modal .char-item").forEach(item => {
+        // 绑定滑出面板内角色卡片勾选点击（选择器改为 .char‑slide‑panel）
+        document.querySelectorAll(".char-slide-panel .char-item").forEach(item => {
             item.onclick = function (e) {
                 if (e.target.classList.contains("char-switch-btn")) return;
                 const cid = this.dataset.cid;
@@ -126,34 +127,32 @@ export function initPage(Core) {
     }
 
     /**
-     * 打开角色选择弹窗
+     * 打开角色选择【底部滑出面板】，逻辑完全对齐search‑panel，移除modal弹窗逻辑
      * @param {string} gameId 游戏id
      */
     function openCharSelectModal(gameId) {
         Core.currentEditGameId = gameId;
 
-        const modal = document.getElementById("char-select-modal");
-        if (!modal) return;
-        modal.style.display = "block";
-        modal.classList.add("active");
+        const slidePanel = document.getElementById("char-slide-panel");
+        if (!slidePanel) return;
+        slidePanel.classList.remove("hide-block");
         renderCharSelectModal(gameId);
     }
 
     /**
-     * 关闭角色选择弹窗
+     * 关闭角色选择底部滑出面板
      */
     function closeCharSelectModal() {
-        const modal = document.getElementById("char-select-modal");
-        if (!modal) return;
-        modal.classList.remove("active");
-        modal.style.display = "none";
+        const slidePanel = document.getElementById("char-slide-panel");
+        if (!slidePanel) return;
+        slidePanel.classList.add("hide-block");
         Core.currentEditGameId = null;
     }
 
 
     // ===================== 页面启动bootstrap，UI渲染、表单、导出、卡片事件 =====================
     async function bootstrap() {
-        // DOM元素缓存
+        // DOM元素缓存：charSelectModal替换为charSlidePanel，移除modalCancelBtn / modalConfirmBtn
         const el = {
             globalHideChar: document.getElementById("global-hide-char"),
             globalFD: document.getElementById("global-fd-game"),
@@ -175,10 +174,8 @@ export function initPage(Core) {
             exportBtn: document.getElementById("btn-export"),
             canvas: document.getElementById("export-canvas"),
             snapshotContainer: document.getElementById("snapshot-container"),
-            charSelectModal: document.getElementById("char-select-modal"),
-            modalCloseBtn: document.querySelector(".modal-close-btn"),
-            modalCancelBtn: document.getElementById("modal-cancel-btn"),
-            modalConfirmBtn: document.getElementById("modal-confirm-btn")
+            charSlidePanel: document.getElementById("char-slide-panel"),
+            modalCloseBtn: document.querySelector(".modal-close-btn")
         };
 
         // ==========【全局事件委托：角色立绘左右切换，不再限定弹窗内，卡片/CP全部生效】==========
@@ -186,7 +183,7 @@ export function initPage(Core) {
             const switchBtn = e.target.closest(".char-switch-btn");
             if (!switchBtn) return;
             e.stopPropagation();
-            // 同时兼容弹窗内 .char-item 和游戏卡片 .char-card-item
+            // 同时兼容滑出面板内 .char-item 和游戏卡片 .char-card-item
             const charCard = switchBtn.closest(".char-item, .char-card-item");
             const charId = charCard.dataset.charId;
             const gameId = charCard.dataset.gameId;
@@ -446,7 +443,7 @@ export function initPage(Core) {
         }
 
         /**
-         * 游戏卡片内部事件绑定：折叠、删除、爱心评分、打开角色/CP弹窗
+         * 游戏卡片内部事件绑定：折叠、删除、爱心评分、打开角色/CP滑出面板
          * ⚠️注意：game‑hide‑char / game‑fd‑switch 使用main.js事件委托，不在此处绑定
          */
         function bindGameCardEvent() {
@@ -488,8 +485,8 @@ export function initPage(Core) {
             document.querySelectorAll(".open-char-pool").forEach(btn => {
                 btn.onclick = function () {
                     const gid = this.dataset.gid;
-                    const modal = document.getElementById("char-select-modal");
-                    if(modal && modal.classList.contains("active")){
+                    const panel = document.getElementById("char-slide-panel");
+                    if(panel && !panel.classList.contains("hide-block")){
                         closeCharSelectModal();
                         return;
                     }
@@ -500,8 +497,8 @@ export function initPage(Core) {
             document.querySelectorAll(".open-cp-pool").forEach(btn => {
                 btn.onclick = function () {
                     const gid = this.dataset.gid;
-                    const modal = document.getElementById("char-select-modal");
-                    if(modal && modal.classList.contains("active")){
+                    const panel = document.getElementById("char-slide-panel");
+                    if(panel && !panel.classList.contains("hide-block")){
                         closeCharSelectModal();
                         return;
                     }
@@ -511,10 +508,8 @@ export function initPage(Core) {
             })
         }
 
-        // ==========角色弹窗关闭按钮 ==========
+        // ==========滑出面板关闭按钮 ==========
         if (el.modalCloseBtn) el.modalCloseBtn.onclick = closeCharSelectModal;
-        if (el.modalCancelBtn) el.modalCancelBtn.onclick = closeCharSelectModal;
-        if (el.modalConfirmBtn) el.modalConfirmBtn.onclick = closeCharSelectModal;
 
         // =====================【导出图片核心逻辑】=====================
         if (el.exportBtn && el.snapshotContainer) {
