@@ -191,10 +191,19 @@ button:hover{
     background:#b82c2c;
 }
 .btn-fold{
-    background:#888;
+    background:#888 !important;
 }
 .btn-fold:hover{
-    background:#666;
+    background:#666 !important;
+}
+
+/* ==========【新增】游戏卡片每组模块，增加上下间距，解决拥挤 ========== */
+.game-card-block-item{
+    margin-bottom:24px;
+}
+.game-card-empty-tip{
+    margin:10px 0 18px 0;
+    font-size:18px;
 }
 
 /* ========== 居中按钮块 center-btn-block ========== */
@@ -730,17 +739,17 @@ h2{
 }
 .btn-del.del-game {
     /* 删除按钮与折叠按钮同样式 */
-    background-color:#888;
+    background-color:#888 !important;
     color:#fff;
 }
 .btn-del.del-game:hover {
-    background-color:#666;
+    background-color:#666 !important;
 }
 .btn-fold{
-    background:#888;
+    background:#888 !important;
 }
 .btn-fold:hover{
-    background:#666;
+    background:#666 !important;
 }
 
 /* =========手机端适配========= */
