@@ -6,7 +6,7 @@ const allGameFiles = [
     "./games/game002.js",
     "./games/game003.js",
     "./games/game004.js",
-    ".//games/game005.js",
+    "./games/game005.js",
     "./games/game006.js",
     "./games/game007.js",
     "./games/game008.js",
