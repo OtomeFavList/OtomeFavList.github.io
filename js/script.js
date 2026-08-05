@@ -24,7 +24,7 @@ export function initPage(Core) {
         saveLocalSwitchConfirmDate,
         renderGameSelectItem,
         bindDynamicGameCardSwitchEvents,
-        // renderLocalSwitchDom, // main.js未导出该函数，临时注释
+        renderLocalSwitchDom, // ✅恢复解构
         bindLocalGameSwitchEvents
     } = Core;
 
@@ -44,8 +44,8 @@ export function initPage(Core) {
         if (!modalGameTitle || !heroineBox || !heroListBox) return;
 
         modalGameTitle.innerText = gameInfo.name;
-        // 【改动】删除此处直接操作localShowSecret / localShowFD.checked，交给main.js renderLocalSwitchDom(gameItem)
-        // renderLocalSwitchDom(gameItem); // 函数未导出，临时注释
+        // ✅恢复调用渲染弹窗内局部开关DOM
+        renderLocalSwitchDom(gameItem);
 
         const allChars = getAllGameChar(gameInfo);
         const femaleChars = allChars.filter(c => c.gender === "female");
@@ -130,10 +130,10 @@ export function initPage(Core) {
      */
     function openCharSelectModal(gameId) {
         Core.currentEditGameId = gameId;
-        // ✅新增：赋值完gameId，立刻绑定本游戏局部开关事件
 
         const modal = document.getElementById("char-select-modal");
         if (!modal) return;
+        modal.style.display = "block";
         modal.classList.add("active");
         renderCharSelectModal(gameId);
     }
@@ -145,13 +145,13 @@ export function initPage(Core) {
         const modal = document.getElementById("char-select-modal");
         if (!modal) return;
         modal.classList.remove("active");
+        modal.style.display = "none";
         Core.currentEditGameId = null;
     }
 
 
     // ===================== 页面启动bootstrap，UI渲染、表单、导出、卡片事件 =====================
     async function bootstrap() {
-        // ❗删除重复加载：loadAllGameTemplates 在 bootstrapCore 已经执行过
         // DOM元素缓存
         const el = {
             globalHideChar: document.getElementById("global-hide-char"),
@@ -179,8 +179,6 @@ export function initPage(Core) {
             modalCancelBtn: document.getElementById("modal-cancel-btn"),
             modalConfirmBtn: document.getElementById("modal-confirm-btn")
         };
-
-        // ==========【已移除旧的错误local‑hide‑char / local‑fd事件委托，全部交由main.js bindDynamicGameCardSwitchEvents】==========
 
         // ==========【全局事件委托：角色立绘左右切换】==========
         document.addEventListener("click", function (e) {
@@ -329,7 +327,7 @@ export function initPage(Core) {
             const filterCn = document.getElementById("filter-cn")?.value || "";
             const filterWriter = document.getElementById("filter-writer")?.value || "";
             const filterArt = document.getElementById("filter-art")?.value || "";
-            const sortedGames = [...gameTemplateList].sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
+            const sortedGames = [...gameTemplateList].sort((a, b) => a.name.localeCompare(b.name, "zh‑CN"));
             let html = "";
             sortedGames.forEach(game => {
                 if (!game) return;
@@ -382,7 +380,7 @@ export function initPage(Core) {
         }
 
         /**
-         * 渲染已添加游戏卡片【仅此处修改，其余全部保留原样】
+         * 渲染已添加游戏卡片
          */
         function renderAddedGame() {
             if (!el.addedGameBox) return;
@@ -409,32 +407,32 @@ export function initPage(Core) {
         <div class="heart-rate" data-gid="${gameItem.gameId}">${heartHtml}</div>
         <div class="game-switch-group">
             <label class="switch">
-                <input type="checkbox" class="game-hide-char" data-gameidx="${index}" ${(gameItem.localHideChar ?? false) ? 'checked' : ''}>
+                <input type="checkbox" class="game‑hide‑char" data‑gameidx="${index}" ${(gameItem.localHideChar ?? false) ? 'checked' : ''}>
                 <span class="slider"></span>
             </label>
             <span>单独显示本游戏隐藏角色</span>
 
             <label class="switch">
-                <input type="checkbox" class="game-fd-switch" data-gameidx="${index}" ${(gameItem.localFD ?? false) ? 'checked' : ''}>
+                <input type="checkbox" class="game‑fd‑switch" data‑gameidx="${index}" ${(gameItem.localFD ?? false) ? 'checked' : ''}>
                 <span class="slider"></span>
             </label>
             <span>单独显示本游戏续作/FD角色</span>
         </div>
     </div>
 
-    <div class="char-section">
-        <button class="open-char-pool" data-gid="${gameItem.gameId}">选择角色 Character</button>
-        <div class="char-card-wrapper char-selected-row" data-gid="${gameItem.gameId}">${renderSelectedChar(gameItem, gameInfo)}</div>
+    <div class="char‑section">
+        <button class="open‑char‑pool" data‑gid="${gameItem.gameId}">选择角色 Character</button>
+        <div class="char‑card‑wrapper char‑selected‑row" data‑gid="${gameItem.gameId}">${renderSelectedChar(gameItem, gameInfo)}</div>
     </div>
 
-    <div class="cp-group">
-        <button class="open-cp-pool" data-gid="${gameItem.gameId}">选择角色 Couple</button>
-        <div class="cp-render-box" data-gid="${gameItem.gameId}">${renderCP(gameItem, gameInfo)}</div>
+    <div class="cp‑group">
+        <button class="open‑cp‑pool" data‑gid="${gameItem.gameId}">选择角色 Couple</button>
+        <div class="cp‑render‑box" data‑gid="${gameItem.gameId}">${renderCP(gameItem, gameInfo)}</div>
     </div>
 
-    <div class="card-bottom-buttons">
-        <button class="btn-fold fold-game" data-gid="${gameItem.gameId}">折叠</button>
-        <button class="btn-del del-game" data-gid="${gameItem.gameId}">删除</button>
+    <div class="card‑bottom‑buttons">
+        <button class="btn‑fold fold‑game" data‑gid="${gameItem.gameId}">折叠</button>
+        <button class="btn‑del del‑game" data‑gid="${gameItem.gameId}">删除</button>
     </div>
 </div>
 `;
@@ -452,7 +450,7 @@ export function initPage(Core) {
          * ⚠️注意：game‑hide‑char / game‑fd‑switch 使用main.js事件委托，不在此处绑定
          */
         function bindGameCardEvent() {
-            document.querySelectorAll(".fold-game").forEach(btn => {
+            document.querySelectorAll(".fold‑game").forEach(btn => {
                 btn.onclick = () => {
                     const gid = btn.dataset.gid;
                     const gameItem = appData.gameList?.find(g => g.gameId === gid);
@@ -463,7 +461,7 @@ export function initPage(Core) {
                     bindDynamicGameCardSwitchEvents();
                 }
             })
-            document.querySelectorAll(".del-game").forEach(btn => {
+            document.querySelectorAll(".del‑game").forEach(btn => {
                 btn.onclick = () => {
                     const gid = btn.dataset.gid;
                     appData.gameList = appData.gameList.filter(g => g.gameId !== gid);
@@ -472,7 +470,7 @@ export function initPage(Core) {
                     bindDynamicGameCardSwitchEvents();
                 }
             })
-            document.querySelectorAll(".heart-rate").forEach(box => {
+            document.querySelectorAll(".heart‑rate").forEach(box => {
                 const gid = box.dataset.gid;
                 const gameItem = appData.gameList?.find(g => g.gameId === gid);
                 if (!gameItem) return;
@@ -487,14 +485,14 @@ export function initPage(Core) {
                     }
                 })
             })
-            document.querySelectorAll(".open-char-pool").forEach(btn => {
+            document.querySelectorAll(".open‑char‑pool").forEach(btn => {
                 btn.onclick = function () {
                     const gid = this.dataset.gid;
                     Core.charPoolMode = "char";
                     openCharSelectModal(gid);
                 }
             })
-            document.querySelectorAll(".open-cp-pool").forEach(btn => {
+            document.querySelectorAll(".open‑cp‑pool").forEach(btn => {
                 btn.onclick = function () {
                     const gid = this.dataset.gid;
                     Core.charPoolMode = "cp";
@@ -531,9 +529,9 @@ export function initPage(Core) {
                         }
                     });
 
-                    el.snapshotContainer.classList.add('export-snapshot');
+                    el.snapshotContainer.classList.add('export‑snapshot');
 
-                    const sizeRadio = document.querySelector('input[name="export-size"]:checked');
+                    const sizeRadio = document.querySelector('input[name="export‑size"]:checked');
                     if(!sizeRadio) throw new Error("未选中导出尺寸");
                     let sizeValue = sizeRadio.value;
                     let targetWidth, targetHeight;
@@ -583,8 +581,8 @@ export function initPage(Core) {
                     console.error("导出失败：", err);
                     alert('图片导出异常！外部图片跨域可能导致失败，请使用本地图片资源。\n' + err.message);
                 } finally {
-                    el.snapshotContainer.classList.remove('export-snapshot');
-                    document.querySelectorAll("#card-base .form-row input").forEach(input => {
+                    el.snapshotContainer.classList.remove('export‑snapshot');
+                    document.querySelectorAll("#card‑base .form‑row input").forEach(input => {
                         input.style.display = "";
                     });
                     el.exportBtn.disabled = false;
