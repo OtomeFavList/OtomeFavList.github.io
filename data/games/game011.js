@@ -78,15 +78,48 @@ const gameData = {
                 { srcList: ["img/char/008/Suzukake.jpg","img/char/008/Suzukake2.jpg"], type: "base" }
             ]
         }, // ✅修复：补上缺失逗号
-        // 九十九丸
+        // 欧文·赫里欧
         {
-            id: "g011_m06",
-            name: "九十九丸",
+            id: "g009_fd01",
+            name: "欧文·赫里欧",
             gender: "male",
             isHidden: false,
-            isFD: false,
+            isFD: true,
             images: [
-                { srcList: ["img/char/008/Tsuzuramaru.jpg","img/char/008/Tsuzuramaru2.jpg"], type: "base" }
+                { srcList: ["img/char/009/Owen.jpg","img/char/009/Owen2.jpg"], type: "base" } // ✅src→srcList
+            ]
+        }
+        // 欧文·赫里欧
+        {
+            id: "g009_fd02",
+            name: "欧文·赫里欧",
+            gender: "male",
+            isHidden: false,
+            isFD: true,
+            images: [
+                { srcList: ["img/char/009/Owen.jpg","img/char/009/Owen2.jpg"], type: "base" } // ✅src→srcList
+            ]
+        }
+        // 欧文·赫里欧
+        {
+            id: "g009_fd03",
+            name: "欧文·赫里欧",
+            gender: "male",
+            isHidden: false,
+            isFD: true,
+            images: [
+                { srcList: ["img/char/009/Owen.jpg","img/char/009/Owen2.jpg"], type: "base" } // ✅src→srcList
+            ]
+        }
+        // 欧文·赫里欧
+        {
+            id: "g009_fd04",
+            name: "欧文·赫里欧",
+            gender: "male",
+            isHidden: false,
+            isFD: true,
+            images: [
+                { srcList: ["img/char/009/Owen.jpg","img/char/009/Owen2.jpg"], type: "base" } // ✅src→srcList
             ]
         }
     ]
