@@ -167,17 +167,14 @@ export async function loadAllGameTemplates() {
 }
 
 /**
- * 同步游戏内全局开关状态（仅批量初始化，不锁死单游戏开关）
+ * 同步游戏内全局开关状态【⚠️禁止调用！需求变更：全局与局部开关互相独立】
  * @param {string} type 开关类型 hideChar / fd
  * @param {boolean} status 开关布尔状态
  */
 export function syncSingleGameSwitch(type, status) {
-    if (!Array.isArray(appData.gameList)) return;
-    appData.gameList.forEach(game => {
-        if(!game) return;
-        if (type === "hideChar") game.localHideChar = status;
-        if (type === "fd") game.localFD = status;
-    })
+    // 保留导出防止import报错，业务逻辑不再执行
+    console.warn("syncSingleGameSwitch 已废弃，请勿调用");
+    return;
 }
 
 
@@ -302,7 +299,7 @@ export function renderSelectedChar(gameItem, gameInfo) {
 }
 
 /**
- * 渲染CP【严格25%｜75%布局｜适配srcList】
+ * 渲染CP【严格25%｜75%布局｜适配srcList，移除内联style，交由css控制】
  * @param {Object} gameItem 当前已添加游戏条目
  * @param {Object} gameInfo 游戏模板对象
  * @returns {string} html字符串
@@ -358,8 +355,8 @@ export function renderCP(gameItem, gameInfo) {
         })
 
         html += `
-        <div class="cp-layout-row" style="display:flex;gap:16px;">
-            <div class="heroine-column" style="width:25%">
+        <div class="cp-layout-row">
+            <div class="heroine-column">
                 <div class="char-card-item selected" data-char-id="${fChar.id}" data-game-id="${gameInfo.id}" data-total-img="${fAllSrc.length}">
                     <div class="char-card-img-box ${fAllSrc.length>1?'char-has-multi-img':''}">
                         ${fAllSrc.length>1?`<button class="char-switch-btn char-switch-prev">&lt;</button>`:""}
@@ -369,8 +366,8 @@ export function renderCP(gameItem, gameInfo) {
                     <div class="char-card-name">${fChar.name || ""}</div>
                 </div>
             </div>
-            <div class="hero-list-column" style="width:75%">
-                <div class="char-card-wrapper" style="display:flex;flex-wrap:wrap;gap:8px;">
+            <div class="hero-list-column">
+                <div class="char-card-wrapper">
                     ${maleHtml || "<span>未选择男主</span>"}
                 </div>
             </div>
@@ -471,7 +468,7 @@ function renderGlobalSwitchDom() {
 
 
 /**
- * 事件委托：处理动态渲染游戏卡片内部开关（.game‑hide‑char / .game‑fd‑switch）
+ * 事件委托：处理动态渲染游戏卡片内部开关 + 角色图片切换按钮
  * 改为click委托，不再监听change；导出，由script.js渲染完列表后调用
  */
 export function bindDynamicGameCardSwitchEvents(){
@@ -489,6 +486,32 @@ export function bindDynamicGameCardSwitchEvents(){
 function wrapClickHandler(e){
     const spoilerModal = document.getElementById("spoiler-modal");
     if(!spoilerModal) return;
+
+    // -------- 角色图片切换按钮处理 --------
+    const switchBtn = e.target.closest(".char-switch-prev,.char-switch-next");
+    if(switchBtn){
+        const cardEl = switchBtn.closest(".char-card-item");
+        if(!cardEl) return;
+        const gameId = cardEl.dataset.gameId;
+        const charId = cardEl.dataset.charId;
+        const totalImg = Number(cardEl.dataset.totalImg) || 1;
+        const saveKey = `${gameId}-${charId}`;
+        let currentIdx = Number(appData.charImageSelect[saveKey] ?? 0);
+        if(switchBtn.classList.contains("char-switch-prev")){
+            currentIdx = currentIdx - 1;
+            if(currentIdx < 0) currentIdx = totalImg -1;
+        }else{
+            currentIdx = currentIdx +1;
+            if(currentIdx >= totalImg) currentIdx = 0;
+        }
+        appData.charImageSelect[saveKey] = currentIdx;
+        saveData();
+        // 通知script.js重新渲染游戏卡片
+        if(window.refreshGameCardUi) window.refreshGameCardUi();
+        return;
+    }
+
+    // -------- 游戏局部开关处理 --------
     const targetInput = e.target.closest(".game-hide-char,.game-fd-switch,.modal-local-hide-char,.modal-local-fd");
     if(!targetInput) return;
 
@@ -512,11 +535,25 @@ function wrapClickHandler(e){
             gameItem.localFD = false;
         }
         saveData();
+        if(window.refreshGameCardUi) window.refreshGameCardUi();
         return;
     }
 
-    // 用户想要打开：阻止原生勾选，弹出剧透弹窗，等待确认按钮
+    // 用户想要打开局部开关
     e.preventDefault();
+    // 判断今日是否已经确认过单机剧透：确认过直接开启，不弹窗
+    if(localSwitchIsConfirmedToday()){
+        if(targetInput.classList.contains("game-hide-char") || targetInput.classList.contains("modal-local-hide-char")){
+            gameItem.localHideChar = true;
+        }else{
+            gameItem.localFD = true;
+        }
+        saveData();
+        if(window.refreshGameCardUi) window.refreshGameCardUi();
+        return;
+    }
+
+    // 今日未确认，弹出剧透弹窗
     if(targetInput.classList.contains("game-hide-char") || targetInput.classList.contains("modal-local-hide-char")){
         window.pendingGameOp = { type:"hideChar", idx };
     }else{
@@ -584,7 +621,7 @@ function bindGlobalSwitchSpoilerEvents() {
     });
 
 
-    // 弹窗确认【扩展：同时处理全局 / 编辑弹窗局部 / 动态卡片局部】
+    // 弹窗确认【扩展：同时处理全局 / 动态卡片局部】
     spoilerConfirmBtn.onclick = null;
     spoilerConfirmBtn.addEventListener("click", function(){
         // 优先处理动态游戏卡片操作（含弹窗内modal‑local‑*开关）
@@ -595,11 +632,14 @@ function bindGlobalSwitchSpoilerEvents() {
                 if(op.type === "hideChar") g.localHideChar = true;
                 if(op.type === "fd") g.localFD = true;
             }
+            // 标记今日单机局部开关已确认，同天不再弹窗
+            saveLocalSwitchConfirmDate();
             window.pendingGameOp = null;
             saveData();
             spoilerModal.classList.remove("active");
             pendingGlobalSwitch = null;
             window.pendingGlobalSwitch = null;
+            if(window.refreshGameCardUi) window.refreshGameCardUi();
             return;
         }
 
@@ -617,18 +657,6 @@ function bindGlobalSwitchSpoilerEvents() {
             appData.globalFD = true;
             saveData();
             renderGlobalSwitchDom();
-        }else if(pendingGlobalSwitch === "localHide"){
-            const gameItem = appData.gameList.find(g=>g.gameId === currentEditGameId);
-            if(gameItem){
-                gameItem.localHideChar = true;
-                saveData();
-            }
-        }else if(pendingGlobalSwitch === "localFD"){
-            const gameItem = appData.gameList.find(g=>g.gameId === currentEditGameId);
-            if(gameItem){
-                gameItem.localFD = true;
-                saveData();
-            }
         }
         spoilerModal.classList.remove("active");
         pendingGlobalSwitch = null;
@@ -643,49 +671,6 @@ function bindGlobalSwitchSpoilerEvents() {
         pendingGlobalSwitch = null;
         window.pendingGlobalSwitch = null;
         window.pendingGameOp = null;
-    });
-}
-
-
-/**
- * 【绑定游戏弹窗内部局部开关事件】
- * local‑show‑secret / local‑show‑fd
- */
-function bindLocalGameSwitchEvents(){
-    const localHideEl = document.getElementById("local-show-secret");
-    const localFDEl = document.getElementById("local-show-fd");
-    const spoilerModal = document.getElementById("spoiler-modal");
-    if(!localHideEl || !localFDEl || !spoilerModal){
-        console.warn("bindLocalGameSwitchEvents：局部开关DOM缺失");
-        return;
-    }
-
-    localHideEl.addEventListener("change", function(){
-        const gameItem = appData.gameList.find(g=>g.gameId === currentEditGameId);
-        if(!gameItem) return;
-        if(this.checked === false){
-            gameItem.localHideChar = false;
-            saveData();
-            return;
-        }
-        this.checked = false;
-        pendingGlobalSwitch = "localHide";
-        window.pendingGlobalSwitch = pendingGlobalSwitch;
-        spoilerModal.classList.add("active");
-    });
-
-    localFDEl.addEventListener("change", function(){
-        const gameItem = appData.gameList.find(g=>g.gameId === currentEditGameId);
-        if(!gameItem) return;
-        if(this.checked === false){
-            gameItem.localFD = false;
-            saveData();
-            return;
-        }
-        this.checked = false;
-        pendingGlobalSwitch = "localFD";
-        window.pendingGlobalSwitch = pendingGlobalSwitch;
-        spoilerModal.classList.add("active");
     });
 }
 
@@ -706,7 +691,5 @@ export async function bootstrapCore() {
     renderGlobalSwitchDom();
     // 5.绑定全局开关+剧透弹窗事件（确认+取消双按钮）
     bindGlobalSwitchSpoilerEvents();
-    // 6.绑定游戏弹窗内局部开关事件
-    bindLocalGameSwitchEvents();
-    // ⚠️移除这里bindDynamicGameCardSwitchEvents()调用，放到script.js渲染完列表后执行
+    // ⚠️移除bindDynamicGameCardSwitchEvents()调用，放到script.js渲染完列表后执行
 }
