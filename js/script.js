@@ -1,7 +1,7 @@
 // ===================== script.js UI交互层（模块化导出） =====================
 // 【重要说明】剧透弹窗、全局开关click事件全部迁移至main.js，本文件不再处理全局开关点击逻辑
 // 游戏卡片动态生成的局部开关：使用事件委托对接main.js剧透弹窗逻辑
-// 改造：每个游戏卡片内部动态生成两套独立滑出面板 char / cp；不再使用全局唯一char‑slide‑panel
+// 改造：每个游戏卡片内部动态生成两套独立滑出面板 char / cp；不再使用全局唯一char-slide-panel
 // 注意：main.js禁止import本文件，避免循环依赖
 
 import {
@@ -33,7 +33,7 @@ export function initPage(Core = {}) {
 
     /**
      * 在指定游戏卡片内部渲染滑出面板内容
-     * @param {HTMLElement} cardDom 游戏卡片dom .added‑game‑card
+     * @param {HTMLElement} cardDom 游戏卡片dom .added-game-card
      * @param {string} gameId
      * @param {'char'|'cp'} mode
      * @param {HTMLElement} panelDom 本卡片内的滑出面板容器
@@ -45,14 +45,14 @@ export function initPage(Core = {}) {
         if (!gameInfo || !gameItem || !panelDom) return;
 
         // 面板头部
-        const titleEl = panelDom.querySelector(".panel‑game‑title");
-        const heroineBox = panelDom.querySelector(".heroine‑box");
-        const heroListBox = panelDom.querySelector(".hero‑list‑box");
+        const titleEl = panelDom.querySelector(".panel-game-title");
+        const heroineBox = panelDom.querySelector(".heroine-box");
+        const heroListBox = panelDom.querySelector(".hero-list-box");
         if (!titleEl || !heroineBox || !heroListBox) return;
 
         titleEl.innerText = `${gameInfo.name} — ${mode === "char" ? "选择角色 Character" : "选择CP Couple"}`;
-        // 修复：传入本面板内部的local‑switch‑wrap dom
-        const localWrap = panelDom.querySelector(".local‑switch‑wrap");
+        // 修复：传入本面板内部的local-switch-wrap dom
+        const localWrap = panelDom.querySelector(".local-switch-wrap");
         renderLocalSwitchDom(gameItem, localWrap);
 
         const allChars = getAllGameChar(gameInfo);
@@ -121,52 +121,52 @@ export function initPage(Core = {}) {
      * @param {'char'|'cp'} mode
      */
     function getInnerSlidePanelHtml(mode){
-        const cls = mode === "char" ? "char‑slide‑panel‑char" : "char‑slide‑panel‑cp";
+        const cls = mode === "char" ? "char-slide-panel-char" : "char-slide-panel-cp";
         return `
-<div class="${cls} hide‑block">
-    <div class="panel‑header">
-        <h4 class="panel‑game‑title"></h4>
-        <button class="panel‑close‑btn">×</button>
+<div class="${cls} hide-block">
+    <div class="panel-header">
+        <h4 class="panel-game-title"></h4>
+        <button class="panel-close-btn">×</button>
     </div>
-    <div class="local‑switch‑wrap"></div>
-    <div class="heroine‑box"></div>
-    <div class="hero‑list‑box"></div>
+    <div class="local-switch-wrap"></div>
+    <div class="heroine-box"></div>
+    <div class="hero-list-box"></div>
 </div>
 `;
     }
 
     // ===================== 页面启动bootstrap，UI渲染、表单、导出、卡片事件 =====================
     async function bootstrap() {
-        // DOM元素缓存，移除全局char‑slide‑panel
+        // DOM元素缓存，移除全局char-slide-panel
         const el = {
-            globalHideChar: document.getElementById("global‑hide‑char"),
-            globalFD: document.getElementById("global‑fd‑game"),
-            spoilerModal: document.getElementById("spoiler‑modal"),
-            spoilerConfirm: document.getElementById("spoiler‑confirm"),
-            addGameBtn: document.getElementById("btn‑add‑game"),
-            searchPanel: document.getElementById("search‑panel"),
-            gameSearchInput: document.getElementById("game‑search‑input"),
-            gameSelectList: document.getElementById("game‑select‑list"),
-            addedGameBox: document.getElementById("added‑game‑container"),
-            inputNick: document.getElementById("input‑nick"),
-            inputCount: document.getElementById("input‑count"),
-            inputStory: document.getElementById("input‑story"),
-            inputFirstgame: document.getElementById("input‑firstgame"),
-            colorBg: document.getElementById("color‑bg"),
-            colorTitle: document.getElementById("color‑title"),
-            colorText: document.getElementById("color‑text"),
-            colorBorder: document.getElementById("color‑border"),
-            exportBtn: document.getElementById("btn‑export"),
-            canvas: document.getElementById("export‑canvas"),
-            snapshotContainer: document.getElementById("snapshot‑container")
+            globalHideChar: document.getElementById("global-hide-char"),
+            globalFD: document.getElementById("global-fd-game"),
+            spoilerModal: document.getElementById("spoiler-modal"),
+            spoilerConfirm: document.getElementById("spoiler-confirm"),
+            addGameBtn: document.getElementById("btn-add-game"),
+            searchPanel: document.getElementById("search-panel"),
+            gameSearchInput: document.getElementById("game-search-input"),
+            gameSelectList: document.getElementById("game-select-list"),
+            addedGameBox: document.getElementById("added-game-container"),
+            inputNick: document.getElementById("input-nick"),
+            inputCount: document.getElementById("input-count"),
+            inputStory: document.getElementById("input-story"),
+            inputFirstgame: document.getElementById("input-firstgame"),
+            colorBg: document.getElementById("color-bg"),
+            colorTitle: document.getElementById("color-title"),
+            colorText: document.getElementById("color-text"),
+            colorBorder: document.getElementById("color-border"),
+            exportBtn: document.getElementById("btn-export"),
+            canvas: document.getElementById("export-canvas"),
+            snapshotContainer: document.getElementById("snapshot-container")
         };
 
         // ==========【全局事件委托：角色立绘左右切换，卡片内面板生效】==========
         document.addEventListener("click", function (e) {
-            const switchBtn = e.target.closest(".char‑switch‑btn");
+            const switchBtn = e.target.closest(".char-switch-btn");
             if (!switchBtn) return;
             e.stopPropagation();
-            const charCard = switchBtn.closest(".char‑item, .char‑card‑item");
+            const charCard = switchBtn.closest(".char-item, .char-card-item");
             const charId = charCard.dataset.charId;
             const gameId = charCard.dataset.gameId;
             const gameInfo = gameTemplateList.find(g => g.id === gameId);
@@ -187,12 +187,12 @@ export function initPage(Core = {}) {
             availImgUnits.forEach(unit => allSrc.push(...unit.srcList));
             if (allSrc.length <= 1) return;
 
-            const imgDom = charCard.querySelector(".char‑card‑img‑box img");
+            const imgDom = charCard.querySelector(".char-card-img-box img");
             const saveKey = `${gameId}-${charId}`;
             if(!appData.charImageSelect) appData.charImageSelect = {};
             let currentIndex = Number(appData.charImageSelect?.[saveKey] ?? 0);
 
-            if (switchBtn.classList.contains("char‑switch‑next")) {
+            if (switchBtn.classList.contains("char-switch-next")) {
                 currentIndex++;
                 if (currentIndex >= allSrc.length) currentIndex = 0;
             } else {
@@ -203,7 +203,7 @@ export function initPage(Core = {}) {
             imgDom.src = allSrc[currentIndex];
             appData.charImageSelect[saveKey] = currentIndex;
             saveData();
-            if(charCard.classList.contains("char‑card‑item")){
+            if(charCard.classList.contains("char-card-item")){
                 renderAddedGame();
                 bindDynamicGameCardSwitchEvents();
             }
@@ -211,9 +211,9 @@ export function initPage(Core = {}) {
 
         // ✅ 卡片内滑出面板角色勾选事件委托：勾选完成 → 修改数据关闭面板
         document.addEventListener("click", function(e){
-            const charItem = e.target.closest(".char‑slide‑panel‑char .char‑item, .char‑slide‑panel‑cp .char‑item");
+            const charItem = e.target.closest(".char-slide-panel-char .char-item, .char-slide-panel-cp .char-item");
             if(!charItem) return;
-            if (e.target.classList.contains("char‑switch‑btn")) return;
+            if (e.target.classList.contains("char-switch-btn")) return;
             const cid = charItem.dataset.cid;
             const gameId = charItem.dataset.gameId;
             const gameItem = appData.gameList?.find(g=>g.gameId === gameId);
@@ -227,7 +227,7 @@ export function initPage(Core = {}) {
             }
 
             // 判断是char还是cp面板，关闭对应面板
-            const panel = charItem.closest(".char‑slide‑panel‑char");
+            const panel = charItem.closest(".char-slide-panel-char");
             if(panel){
                 gameItem.charPanelOpen = false;
             }else{
@@ -239,15 +239,15 @@ export function initPage(Core = {}) {
 
         // ✅面板内部关闭按钮（×），数据驱动关闭面板
         document.addEventListener("click", function(e){
-            const closeBtn = e.target.closest(".panel‑close‑btn");
+            const closeBtn = e.target.closest(".panel-close-btn");
             if(!closeBtn) return;
-            const panel = closeBtn.closest(".char‑slide‑panel‑char, .char‑slide‑panel‑cp");
+            const panel = closeBtn.closest(".char-slide-panel-char, .char-slide-panel-cp");
             if(!panel) return;
-            const card = panel.closest(".added‑game‑card");
+            const card = panel.closest(".added-game-card");
             const gid = card.dataset.gameId;
             const gameItem = appData.gameList.find(g=>g.gameId === gid);
             if(!gameItem) return;
-            if(panel.classList.contains("char‑slide‑panel‑char")){
+            if(panel.classList.contains("char-slide-panel-char")){
                 gameItem.charPanelOpen = false;
             }else{
                 gameItem.cpPanelOpen = false;
@@ -335,7 +335,7 @@ export function initPage(Core = {}) {
         if (el.addGameBtn) {
             el.addGameBtn.onclick = function () {
                 renderGameSelectList();
-                if (el.searchPanel) el.searchPanel.classList.remove("hide‑block");
+                if (el.searchPanel) el.searchPanel.classList.remove("hide-block");
             }
         }
 
@@ -345,7 +345,7 @@ export function initPage(Core = {}) {
         }
 
         // ========== 筛选下拉监听 ==========
-        const filterSelectIds = ["filter‑year", "filter‑publisher", "filter‑cn", "filter‑writer", "filter‑art"];
+        const filterSelectIds = ["filter-year", "filter-publisher", "filter-cn", "filter-writer", "filter-art"];
         filterSelectIds.forEach(selId => {
             const sel = document.getElementById(selId);
             if (sel) sel.addEventListener("change", renderGameSelectList);
@@ -357,12 +357,12 @@ export function initPage(Core = {}) {
         function renderGameSelectList() {
             if (!el.gameSearchInput || !el.gameSelectList || !Array.isArray(gameTemplateList)) return;
             const keyword = el.gameSearchInput.value.toLowerCase();
-            const filterYear = document.getElementById("filter‑year")?.value || "";
-            const filterPub = document.getElementById("filter‑publisher")?.value || "";
-            const filterCn = document.getElementById("filter‑cn")?.value || "";
-            const filterWriter = document.getElementById("filter‑writer")?.value || "";
-            const filterArt = document.getElementById("filter‑art")?.value || "";
-            const sortedGames = [...gameTemplateList].sort((a, b) => a.name.localeCompare(b.name, "zh‑CN"));
+            const filterYear = document.getElementById("filter-year")?.value || "";
+            const filterPub = document.getElementById("filter-publisher")?.value || "";
+            const filterCn = document.getElementById("filter-cn")?.value || "";
+            const filterWriter = document.getElementById("filter-writer")?.value || "";
+            const filterArt = document.getElementById("filter-art")?.value || "";
+            const sortedGames = [...gameTemplateList].sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
             let html = "";
             sortedGames.forEach(game => {
                 if (!game) return;
@@ -390,7 +390,7 @@ export function initPage(Core = {}) {
                 html += renderGameSelectItem(game);
             })
             el.gameSelectList.innerHTML = html;
-            document.querySelectorAll(".game‑option‑item").forEach(item => {
+            document.querySelectorAll(".game-option-item").forEach(item => {
                 item.onclick = () => {
                     const gid = item.dataset.gameId;
                     const targetGame = gameTemplateList.find(g => g.id === gid);
@@ -412,7 +412,7 @@ export function initPage(Core = {}) {
                     if(!appData.gameList) appData.gameList = [];
                     appData.gameList.push(newGameData);
                     saveData();
-                    if (el.searchPanel) el.searchPanel.classList.add("hide‑block");
+                    if (el.searchPanel) el.searchPanel.classList.add("hide-block");
                     renderAddedGame();
                     bindDynamicGameCardSwitchEvents();
                 }
@@ -429,7 +429,7 @@ export function initPage(Core = {}) {
                 el.addedGameBox.innerHTML = "<p>⚠️ 游戏数据加载失败，检查data/games路径</p>";
                 return;
             }
-            document.querySelectorAll(".modal‑trigger").forEach(dom => dom.classList.remove("modal‑trigger"));
+            document.querySelectorAll(".modal-trigger").forEach(dom => dom.classList.remove("modal-trigger"));
 
             let html = "";
             appData.gameList?.forEach((gameItem, index) => {
@@ -438,48 +438,48 @@ export function initPage(Core = {}) {
                 if (!gameInfo) return;
                 let heartHtml = "";
                 for (let i = 1; i <= 5; i++) {
-                    heartHtml += `<span class="heart ${gameItem.loveRate >= i ? 'active' : ''}" data‑val="${i}">♥</span>`;
+                    heartHtml += `<span class="heart ${gameItem.loveRate >= i ? 'active' : ''}" data-val="${i}">♥</span>`;
                 }
 
                 // 根据数据字段输出面板显隐class，fold优先级最高
-                const charPanelClass = (gameItem.fold || !gameItem.charPanelOpen) ? "hide‑block" : "";
-                const cpPanelClass = (gameItem.fold || !gameItem.cpPanelOpen) ? "hide‑block" : "";
+                const charPanelClass = (gameItem.fold || !gameItem.charPanelOpen) ? "hide-block" : "";
+                const cpPanelClass = (gameItem.fold || !gameItem.cpPanelOpen) ? "hide-block" : "";
 
                 html += `
-<div class="added‑game‑card" data‑game‑id="${gameItem.gameId}">
-    <div class="game‑card‑header‑row">
-        <span class="game‑card‑title">${gameInfo.name}</span>
-        <div class="heart‑rate" data‑gid="${gameItem.gameId}">${heartHtml}</div>
-        <div class="game‑switch‑group">
+<div class="added-game-card" data-game-id="${gameItem.gameId}">
+    <div class="game-card-header-row">
+        <span class="game-card-title">${gameInfo.name}</span>
+        <div class="heart-rate" data-gid="${gameItem.gameId}">${heartHtml}</div>
+        <div class="game-switch-group">
             <label class="switch">
-                <input type="checkbox" class="game‑hide‑char" data‑gameidx="${index}" ${(gameItem.localHideChar ?? false) ? 'checked' : ''}>
+                <input type="checkbox" class="game-hide-char" data-gameidx="${index}" ${(gameItem.localHideChar ?? false) ? 'checked' : ''}>
                 <span class="slider"></span>
             </label>
             <span>单独显示本游戏隐藏角色</span>
 
             <label class="switch">
-                <input type="checkbox" class="game‑fd‑switch" data‑gameidx="${index}" ${(gameItem.localFD ?? false) ? 'checked' : ''}>
+                <input type="checkbox" class="game-fd-switch" data-gameidx="${index}" ${(gameItem.localFD ?? false) ? 'checked' : ''}>
                 <span class="slider"></span>
             </label>
             <span>单独显示本游戏续作/FD角色</span>
         </div>
     </div>
 
-    <div class="game‑card‑block‑item char‑section block‑margin‑gap">
-        <button class="open‑char‑pool" data‑gid="${gameItem.gameId}">选择角色 Character</button>
-        ${getInnerSlidePanelHtml("char").replace('hide‑block', charPanelClass)}
-        <div class="game‑card‑empty‑tip char‑card‑wrapper char‑selected‑row" data‑gid="${gameItem.gameId}">${renderSelectedChar(gameItem, gameInfo) || `<div class="empty‑hint">暂未选择角色</div>`}</div>
+    <div class="game-card-block-item char-section block-margin-gap">
+        <button class="open-char-pool" data-gid="${gameItem.gameId}">选择角色 Character</button>
+        ${getInnerSlidePanelHtml("char").replace('hide-block', charPanelClass)}
+        <div class="game-card-empty-tip char-card-wrapper char-selected-row" data-gid="${gameItem.gameId}">${renderSelectedChar(gameItem, gameInfo) || `<div class="empty-hint">暂未选择角色</div>`}</div>
     </div>
 
-    <div class="game‑card‑block‑item cp‑group block‑margin‑gap">
-        <button class="open‑cp‑pool" data‑gid="${gameItem.gameId}">选择角色 Couple</button>
-        ${getInnerSlidePanelHtml("cp").replace('hide‑block', cpPanelClass)}
-        <div class="game‑card‑empty‑tip cp‑render‑box" data‑gid="${gameItem.gameId}">${renderCP(gameItem, gameInfo) || `<div class="empty‑hint">暂未选择角色</div>`}</div>
+    <div class="game-card-block-item cp-group block-margin-gap">
+        <button class="open-cp-pool" data-gid="${gameItem.gameId}">选择角色 Couple</button>
+        ${getInnerSlidePanelHtml("cp").replace('hide-block', cpPanelClass)}
+        <div class="game-card-empty-tip cp-render-box" data-gid="${gameItem.gameId}">${renderCP(gameItem, gameInfo) || `<div class="empty-hint">暂未选择角色</div>`}</div>
     </div>
 
-    <div class="card‑bottom‑buttons block‑margin‑gap">
-        <button class="btn‑fold fold‑game btn‑gray‑bg" data‑gid="${gameItem.gameId}">折叠</button>
-        <button class="btn‑del del‑game btn‑gray‑bg" data‑gid="${gameItem.gameId}">删除</button>
+    <div class="card-bottom-buttons block-margin-gap">
+        <button class="btn-fold fold-game btn-gray-bg" data-gid="${gameItem.gameId}">折叠</button>
+        <button class="btn-del del-game btn-gray-bg" data-gid="${gameItem.gameId}">删除</button>
     </div>
 </div>
 `;
@@ -496,7 +496,7 @@ export function initPage(Core = {}) {
          * 游戏卡片内部事件绑定：折叠、删除、爱心评分、打开角色/CP滑出面板
          */
         function bindGameCardEvent() {
-            document.querySelectorAll(".fold‑game").forEach(btn => {
+            document.querySelectorAll(".fold-game").forEach(btn => {
                 btn.onclick = () => {
                     const gid = btn.dataset.gid;
                     const gameItem = appData.gameList?.find(g => g.gameId === gid);
@@ -507,7 +507,7 @@ export function initPage(Core = {}) {
                     bindDynamicGameCardSwitchEvents();
                 }
             })
-            document.querySelectorAll(".del‑game").forEach(btn => {
+            document.querySelectorAll(".del-game").forEach(btn => {
                 btn.onclick = () => {
                     const gid = btn.dataset.gid;
                     appData.gameList = appData.gameList.filter(g => g.gameId !== gid);
@@ -516,7 +516,7 @@ export function initPage(Core = {}) {
                     bindDynamicGameCardSwitchEvents();
                 }
             })
-            document.querySelectorAll(".heart‑rate").forEach(box => {
+            document.querySelectorAll(".heart-rate").forEach(box => {
                 const gid = box.dataset.gid;
                 const gameItem = appData.gameList?.find(g => g.gameId === gid);
                 if (!gameItem) return;
@@ -532,7 +532,7 @@ export function initPage(Core = {}) {
             })
 
             // Character按钮：切换本卡片内 char滑出面板（数据驱动）
-            document.querySelectorAll(".open‑char‑pool").forEach(btn => {
+            document.querySelectorAll(".open-char-pool").forEach(btn => {
                 btn.onclick = function () {
                     const gid = this.dataset.gid;
                     const gameItem = appData.gameList.find(g=>g.gameId === gid);
@@ -547,7 +547,7 @@ export function initPage(Core = {}) {
             })
 
             // Couple按钮：切换本卡片内 cp滑出面板（数据驱动）
-            document.querySelectorAll(".open‑cp‑pool").forEach(btn => {
+            document.querySelectorAll(".open-cp-pool").forEach(btn => {
                 btn.onclick = function () {
                     const gid = this.dataset.gid;
                     const gameItem = appData.gameList.find(g=>g.gameId === gid);
@@ -589,9 +589,9 @@ export function initPage(Core = {}) {
                         }
                     });
 
-                    el.snapshotContainer.classList.add('export‑snapshot');
+                    el.snapshotContainer.classList.add('export-snapshot');
 
-                    const sizeRadio = document.querySelector('input[name="export‑size"]:checked');
+                    const sizeRadio = document.querySelector('input[name="export-size"]:checked');
                     if(!sizeRadio) throw new Error("未选中导出尺寸");
                     let sizeValue = sizeRadio.value;
                     let targetWidth, targetHeight;
@@ -641,8 +641,8 @@ export function initPage(Core = {}) {
                     console.error("导出失败：", err);
                     alert('图片导出异常！外部图片跨域可能导致失败，请使用本地图片资源。\n' + err.message);
                 } finally {
-                    el.snapshotContainer.classList.remove('export‑snapshot');
-                    document.querySelectorAll("#card‑base .form‑row input").forEach(input => {
+                    el.snapshotContainer.classList.remove('export-snapshot');
+                    document.querySelectorAll("#card-base .form-row input").forEach(input => {
                         input.style.display = "";
                     });
                     el.exportBtn.disabled = false;
