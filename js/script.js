@@ -206,17 +206,17 @@ export function initPage(Core = {}) {
             imgDom.src = allSrc[currentIndex];
             appData.charImageSelect[saveKey] = currentIndex;
             saveData();
-            if(charCard.classList.contains("char-card-item")){
-                Core.renderAddedGame();
-                bindDynamicGameCardSwitchEvents();
-            }
+            // 修复：只更新图片，不再整卡重渲染，避免面板关闭、状态丢失
         });
 
         // ✅ 卡片内滑出面板角色勾选事件委托：勾选完成 → 修改数据关闭面板
         document.addEventListener("click", function(e){
+            const switchBtn = e.target.closest(".char-switch-btn");
+            if(switchBtn) return;
+
             const charItem = e.target.closest(".char-slide-panel-char .char-item, .char-slide-panel-cp .char-item");
             if(!charItem) return;
-            if (e.target.classList.contains("char-switch-btn")) return;
+
             const cid = charItem.dataset.cid;
             const gameId = charItem.dataset.gameId;
             const gameItem = appData.gameList?.find(g=>g.gameId === gameId);
