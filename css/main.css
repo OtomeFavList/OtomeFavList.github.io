@@ -60,6 +60,10 @@
     justify-content:space-between;
     align-items:center;
     margin-bottom:10px;
+    gap:12px;
+}
+.panel-header h4{
+    margin:0;
 }
 .panel-close-btn {
     border:none;
@@ -73,17 +77,6 @@
     flex-wrap:wrap;
     gap:10px;
     margin-bottom:12px;
-}
-
-/* ========== 【新增】面板头部 panel‑head 角色选择面板标题+关闭按钮横向布局 ========== */
-.panel-head{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:12px;
-}
-.panel-head h3{
-    margin:0;
 }
 
 /* ========== body基础 ========== */
@@ -228,14 +221,6 @@ button{
 button:hover{
     background:#992e2e;
 }
-/* 注释原红色删除按钮
-.btn-del{
-    background:#dd4444;
-}
-.btn-del:hover{
-    background:#b82c2c;
-}
-*/
 .btn-fold{
     background:#888 !important;
 }
@@ -427,7 +412,7 @@ button:hover{
 .char-item:hover{
     border-color:#f0b8c8;
 }
-.char-item img{
+.char-item .char-card-img-box img{
     width:100%;
     height:100%;
     object-fit:cover;
@@ -689,48 +674,6 @@ h2{
     .char-pool{
         grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
     }
-    .form-row-double {
-        flex-direction: column;
-        gap: 12px;
-    }
-    .cp-layout-row{
-        flex-direction:column;
-    }
-    .heroine-column,.hero-list-column{
-        width:100%;
-    }
-}
-
-/* ========== 双列表表单 form‑row‑double ========== */
-.form-row-double {
-    display: flex;
-    gap: 2rem;
-    flex-wrap: wrap;
-    margin: 16px 0;
-}
-.form-row-double > .form-row {
-    flex: 1;
-    min-width: 260px;
-    max-width: unset;
-}
-
-/* ========== CP布局辅助类 cp‑layout‑row ========== */
-.cp-layout-row{
-    display:flex;
-    gap:12px;
-    margin:10px 0;
-    align-items:flex-start;
-}
-.heroine-column{
-    width:25%;
-}
-.hero-list-column{
-    width:75%;
-}
-.char-card-wrapper{
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
 }
 
 /* ========== 按钮统一：新增游戏按钮与导出图片按钮尺寸对齐 ========== */
@@ -786,12 +729,6 @@ h2{
     display:flex;
     gap:10px;
 }
-.btn-fold{
-    background:#888 !important;
-}
-.btn-fold:hover{
-    background:#666 !important;
-}
 
 /* =========手机端适配========= */
 @media (max-width:768px) {
@@ -843,10 +780,4 @@ h2{
 .char-option-name{
     font-size:14px;
     text-align:center;
-}
-
-/* ==========【本次新增】卡片折叠collapsed，强制隐藏内部两套滑出面板 ========== */
-.added-game-card.collapsed .char-slide-panel-char,
-.added-game-card.collapsed .char-slide-panel-cp {
-    display: none !important;
 }
