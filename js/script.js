@@ -132,6 +132,93 @@ export function initPage(Core = {}) {
 `;
     }
 
+    /**
+     * 渲染已添加游戏卡片
+     * 每个卡片内部嵌入两套滑出面板 char / cp
+     */
+    function renderAddedGame() {
+        if (!el.addedGameBox) return;
+        if (!Array.isArray(gameTemplateList) || gameTemplateList.length === 0) {
+            el.addedGameBox.innerHTML = "<p>⚠️ 游戏数据加载失败，检查data/games路径</p>";
+            return;
+        }
+        document.querySelectorAll(".modal-trigger").forEach(dom => dom.classList.remove("modal-trigger"));
+
+        let html = "";
+        appData.gameList?.forEach((gameItem, index) => {
+            if (!gameItem) return;
+            const gameInfo = gameTemplateList.find(g => g.id === gameItem.gameId);
+            if (!gameInfo) return;
+            let heartHtml = "";
+            for (let i = 1; i <= 5; i++) {
+                heartHtml += `<span class="heart ${gameItem.loveRate >= i ? 'active' : ''}" data-val="${i}">♥</span>`;
+            }
+
+            // 根据数据字段输出面板显隐class，fold优先级最高
+            const charPanelClass = (gameItem.fold || !gameItem.charPanelOpen) ? "hide-block" : "";
+            const cpPanelClass = (gameItem.fold || !gameItem.cpPanelOpen) ? "hide-block" : "";
+
+            html += `
+<div class="added-game-card" data-gameid="${gameItem.gameId}">
+    <div class="game-card-header-row">
+        <span class="game-card-title">${gameInfo.name}</span>
+        <div class="heart-rate" data-gid="${gameItem.gameId}">${heartHtml}</div>
+        <div class="game-switch-group">
+            <label class="switch">
+                <input type="checkbox" class="game-hide-char" data-gameidx="${index}" ${(gameItem.localHideChar ?? false) ? 'checked' : ''}>
+                <span class="slider"></span>
+            </label>
+            <span>单独显示本游戏隐藏角色</span>
+
+            <label class="switch">
+                <input type="checkbox" class="game-fd-switch" data-gameidx="${index}" ${(gameItem.localFD ?? false) ? 'checked' : ''}>
+                <span class="slider"></span>
+            </label>
+            <span>单独显示本游戏续作/FD角色</span>
+        </div>
+    </div>
+
+    <div class="game-card-block-item char-section block-margin-gap">
+        <button class="btn-character" data-gid="${gameItem.gameId}">选择角色 Character</button>
+        ${getInnerSlidePanelHtml("char").replace('hide-block', charPanelClass)}
+        <div class="game-card-empty-tip char-card-wrapper char-selected-row" data-gid="${gameItem.gameId}">${renderSelectedChar(gameItem, gameInfo) || `<div class="empty-hint">暂未选择角色</div>`}</div>
+    </div>
+
+    <div class="game-card-block-item cp-group block-margin-gap">
+        <button class="btn-couple" data-gid="${gameItem.gameId}">选择角色 Couple</button>
+        ${getInnerSlidePanelHtml("cp").replace('hide-block', cpPanelClass)}
+        <div class="game-card-empty-tip cp-render-box" data-gid="${gameItem.gameId}">${renderCP(gameItem, gameInfo) || `<div class="empty-hint">暂未选择角色</div>`}</div>
+    </div>
+
+    <div class="card-bottom-buttons block-margin-gap">
+        <button class="btn-fold fold-game btn-gray-bg" data-gid="${gameItem.gameId}">折叠</button>
+        <button class="btn-del del-game btn-gray-bg" data-gid="${gameItem.gameId}">删除</button>
+    </div>
+</div>
+`;
+        });
+
+        el.addedGameBox.innerHTML = html;
+        bindGameCardEvent();
+        // ✅渲染完卡片，调用main.js导出的委托绑定
+        if (typeof bindDynamicGameCardSwitchEvents === "function") {
+            bindDynamicGameCardSwitchEvents();
+        }
+
+        // 【关键修复】循环所有卡片，找到内部滑出面板，执行面板内容渲染
+        document.querySelectorAll(".added-game-card").forEach(cardDom => {
+            const gid = cardDom.dataset.gameid;
+            const gameItem = appData.gameList.find(g => g.gameId === gid);
+            const gameInfo = gameTemplateList.find(g => g.id === gid);
+            if(!gameItem || !gameInfo) return;
+
+            const charPanel = cardDom.querySelector(".char-slide-panel-char");
+            const cpPanel = cardDom.querySelector(".char-slide-panel-cp");
+            if(charPanel) renderCharSelectPanel(cardDom, gid, "char", charPanel);
+            if(cpPanel) renderCharSelectPanel(cardDom, gid, "cp", cpPanel);
+        });
+    }
+
     // ===================== 页面启动bootstrap，UI渲染、表单、导出、卡片事件 =====================
     async function bootstrap() {
         // 【修改点】全局钩子指向本文件内部renderAddedGame，保证DOM class统一为 added‑game‑card
@@ -218,7 +305,7 @@ export function initPage(Core = {}) {
                     gameItem.cpPanelOpen = false;
                 }
                 saveData();
-                Core.renderAddedGame();
+                window.refreshGameCardUi();
                 return;
             }
             const cpBtn = e.target.closest(".btn-couple");
@@ -231,7 +318,7 @@ export function initPage(Core = {}) {
                     gameItem.charPanelOpen = false;
                 }
                 saveData();
-                Core.renderAddedGame();
+                window.refreshGameCardUi();
                 return;
             }
         });
@@ -264,7 +351,7 @@ export function initPage(Core = {}) {
                 gameItem.cpPanelOpen = false;
             }
             saveData();
-            Core.renderAddedGame();
+            window.refreshGameCardUi();
         });
 
         // ✅面板内部关闭按钮（×），数据驱动关闭面板
@@ -283,7 +370,7 @@ export function initPage(Core = {}) {
                 gameItem.cpPanelOpen = false;
             }
             saveData();
-            Core.renderAddedGame();
+            window.refreshGameCardUi();
         });
 
         /**
@@ -444,97 +531,10 @@ export function initPage(Core = {}) {
                     appData.gameList.push(newGameData);
                     saveData();
                     if (el.searchPanel) el.searchPanel.classList.add("hide-block");
-                    Core.renderAddedGame();
+                    window.refreshGameCardUi();
                     bindDynamicGameCardSwitchEvents();
                 }
             })
-        }
-
-        /**
-         * 渲染已添加游戏卡片
-         * 每个卡片内部嵌入两套滑出面板 char / cp
-         */
-        function renderAddedGame() {
-            if (!el.addedGameBox) return;
-            if (!Array.isArray(gameTemplateList) || gameTemplateList.length === 0) {
-                el.addedGameBox.innerHTML = "<p>⚠️ 游戏数据加载失败，检查data/games路径</p>";
-                return;
-            }
-            document.querySelectorAll(".modal-trigger").forEach(dom => dom.classList.remove("modal-trigger"));
-
-            let html = "";
-            appData.gameList?.forEach((gameItem, index) => {
-                if (!gameItem) return;
-                const gameInfo = gameTemplateList.find(g => g.id === gameItem.gameId);
-                if (!gameInfo) return;
-                let heartHtml = "";
-                for (let i = 1; i <= 5; i++) {
-                    heartHtml += `<span class="heart ${gameItem.loveRate >= i ? 'active' : ''}" data-val="${i}">♥</span>`;
-                }
-
-                // 根据数据字段输出面板显隐class，fold优先级最高
-                const charPanelClass = (gameItem.fold || !gameItem.charPanelOpen) ? "hide-block" : "";
-                const cpPanelClass = (gameItem.fold || !gameItem.cpPanelOpen) ? "hide-block" : "";
-
-                html += `
-<div class="added-game-card" data-gameid="${gameItem.gameId}">
-    <div class="game-card-header-row">
-        <span class="game-card-title">${gameInfo.name}</span>
-        <div class="heart-rate" data-gid="${gameItem.gameId}">${heartHtml}</div>
-        <div class="game-switch-group">
-            <label class="switch">
-                <input type="checkbox" class="game-hide-char" data-gameidx="${index}" ${(gameItem.localHideChar ?? false) ? 'checked' : ''}>
-                <span class="slider"></span>
-            </label>
-            <span>单独显示本游戏隐藏角色</span>
-
-            <label class="switch">
-                <input type="checkbox" class="game-fd-switch" data-gameidx="${index}" ${(gameItem.localFD ?? false) ? 'checked' : ''}>
-                <span class="slider"></span>
-            </label>
-            <span>单独显示本游戏续作/FD角色</span>
-        </div>
-    </div>
-
-    <div class="game-card-block-item char-section block-margin-gap">
-        <button class="btn-character" data-gid="${gameItem.gameId}">选择角色 Character</button>
-        ${getInnerSlidePanelHtml("char").replace('hide-block', charPanelClass)}
-        <div class="game-card-empty-tip char-card-wrapper char-selected-row" data-gid="${gameItem.gameId}">${renderSelectedChar(gameItem, gameInfo) || `<div class="empty-hint">暂未选择角色</div>`}</div>
-    </div>
-
-    <div class="game-card-block-item cp-group block-margin-gap">
-        <button class="btn-couple" data-gid="${gameItem.gameId}">选择角色 Couple</button>
-        ${getInnerSlidePanelHtml("cp").replace('hide-block', cpPanelClass)}
-        <div class="game-card-empty-tip cp-render-box" data-gid="${gameItem.gameId}">${renderCP(gameItem, gameInfo) || `<div class="empty-hint">暂未选择角色</div>`}</div>
-    </div>
-
-    <div class="card-bottom-buttons block-margin-gap">
-        <button class="btn-fold fold-game btn-gray-bg" data-gid="${gameItem.gameId}">折叠</button>
-        <button class="btn-del del-game btn-gray-bg" data-gid="${gameItem.gameId}">删除</button>
-    </div>
-</div>
-`;
-            });
-
-            el.addedGameBox.innerHTML = html;
-            bindGameCardEvent();
-            // ✅渲染完卡片，调用main.js导出的委托绑定
-            if (typeof bindDynamicGameCardSwitchEvents === "function") {
-                bindDynamicGameCardSwitchEvents();
-            }
-
-            // 【关键修复】循环所有卡片，找到内部滑出面板，执行面板内容渲染
-            document.querySelectorAll(".added-game-card").forEach(cardDom => {
-                const gid = cardDom.dataset.gameid;
-                const gameItem = appData.gameList.find(g => g.gameId === gid);
-                const gameInfo = gameTemplateList.find(g => g.id === gid);
-                if(!gameItem || !gameInfo) return;
-
-                const charPanel = cardDom.querySelector(".char-slide-panel-char");
-                const cpPanel = cardDom.querySelector(".char-slide-panel-cp");
-                if(charPanel) renderCharSelectPanel(cardDom, gid, "char", charPanel);
-                if(cpPanel) renderCharSelectPanel(cardDom, gid, "cp", cpPanel);
-            });
         }
 
         /**
@@ -549,7 +549,7 @@ export function initPage(Core = {}) {
                     if (!gameItem) return;
                     gameItem.fold = !gameItem.fold;
                     saveData();
-                    Core.renderAddedGame();
+                    window.refreshGameCardUi();
                     bindDynamicGameCardSwitchEvents();
                 }
             })
@@ -558,7 +558,7 @@ export function initPage(Core = {}) {
                     const gid = btn.dataset.gid;
                     appData.gameList = appData.gameList.filter(g => g.gameId !== gid);
                     saveData();
-                    Core.renderAddedGame();
+                    window.refreshGameCardUi();
                     bindDynamicGameCardSwitchEvents();
                 }
             })
@@ -571,7 +571,7 @@ export function initPage(Core = {}) {
                         e.stopPropagation();
                         gameItem.loveRate = Number(h.dataset.val);
                         saveData();
-                        Core.renderAddedGame();
+                        window.refreshGameCardUi();
                         bindDynamicGameCardSwitchEvents();
                     }
                 })
@@ -668,7 +668,7 @@ export function initPage(Core = {}) {
         }
 
         // 初始渲染页面
-        Core.renderAddedGame();
+        window.refreshGameCardUi();
     }
 
     // 适配main.js调用的两个别名函数（本项目为卡片内嵌面板，无独立弹窗DOM）
