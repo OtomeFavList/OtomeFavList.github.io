@@ -388,6 +388,63 @@ button:hover{
     align-items:flex-end;
 }
 
+/* ========== 【新增】渲染输出选中角色卡片 char‑card‑item ========== */
+.char-card-item{
+    width:200px;
+    text-align:center;
+    border:1px solid #eee;
+    padding:10px;
+    border-radius:10px;
+    background:#fff;
+}
+.char-card-item.selected{
+    border-color:#e895a8;
+    background:#fff0f3;
+}
+.char-card-img-box{
+    width:100%;
+    height:200px;
+    border-radius:8px;
+    overflow:hidden;
+    position:relative;
+    border:1px solid #e2e2e2;
+    margin-bottom:8px;
+}
+.char-card-img-box img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+.char-card-name{
+    font-size:15px;
+}
+
+/* ==========【新增】角色图片切换按钮 左右翻图按钮 ========== */
+.char-switch-btn{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    width:28px;
+    height:28px;
+    border-radius:50%;
+    background:rgba(0,0,0,0.45);
+    color:#fff;
+    border:none;
+    font-size:16px;
+    padding:0;
+    z-index:2;
+}
+.char-switch-prev{
+    left:4px;
+}
+.char-switch-next{
+    right:4px;
+}
+.char-switch-btn:hover{
+    background:rgba(0,0,0,0.65);
+}
+
 /* ========== CP布局 cp-group cp-row ========== */
 .cp-group{
     margin:16px 0;
@@ -577,6 +634,12 @@ h2{
     .form-row-double {
         flex-direction: column;
         gap: 12px;
+    }
+    .cp-layout-row{
+        flex-direction:column;
+    }
+    .heroine-column,.hero-list-column{
+        width:100%;
     }
 }
 
