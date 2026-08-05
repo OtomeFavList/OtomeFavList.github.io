@@ -264,7 +264,7 @@ export function renderGameSelectItem(game) {
  * @returns {string} html字符串
  */
 export function renderSelectedChar(gameItem, gameInfo) {
-    if (!gameInfo?.charList || !gameItem) return "<span>暂无选择角色</span>";
+    if (!gameInfo?.charList || !gameItem) return "<span>暂无搭配角色</span>";
     let html = "";
     const globalHide = appData.globalHideChar;
     const globalFD = appData.globalFD;
@@ -298,7 +298,7 @@ export function renderSelectedChar(gameItem, gameInfo) {
         </div>
         `;
     })
-    return html || "<span>暂无选择角色</span>";
+    return html || "<span>暂无搭配角色</span>";
 }
 
 /**
@@ -308,7 +308,7 @@ export function renderSelectedChar(gameItem, gameInfo) {
  * @returns {string} html字符串
  */
 export function renderCP(gameItem, gameInfo) {
-    if (!gameInfo?.charList || !gameItem) return "<span>暂无CP搭配</span>";
+    if (!gameInfo?.charList || !gameItem) return "<span>暂无搭配角色</span>";
     let html = "";
     const globalHide = appData.globalHideChar;
     const globalFD = appData.globalFD;
@@ -377,7 +377,7 @@ export function renderCP(gameItem, gameInfo) {
         </div>
         `;
     })
-    return html || "<span>暂无CP搭配</span>";
+    return html || "<span>暂无搭配角色</span>";
 }
 
 /**
