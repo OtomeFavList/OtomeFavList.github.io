@@ -68,7 +68,7 @@ export function loadData() {
 }
 
 /**
- * 获取今日日期字符串 YYYY‑MM‑DD 用于跨零点判断
+ * 获取今日日期字符串 YYYY-MM-DD 用于跨零点判断
  * @returns {string} 日期字符串
  */
 export function getTodayDateStr() {
