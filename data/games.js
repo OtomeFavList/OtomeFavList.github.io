@@ -1,6 +1,6 @@
-// data/games.js
-// 聚合data/games/下所有独立游戏数据，自动合并全局数组
-// 新增游戏只新建data/games/gameXXX.js，仅需要在下方数组追加路径，本文件其余代码永久不用修改
+// games.js
+// 聚合games/下所有独立游戏数据，自动合并全局数组
+// 新增游戏只新建games/gameXXX.js，仅需要在下方数组追加路径，本文件其余代码永久不用修改
 const allGameFiles = [
     "./games/game001.js",
     "./games/game002.js",
@@ -16,15 +16,17 @@ window.gameDataList = [];
 
 // 动态载入所有游戏数据
 async function loadAllGames() {
-    try {
-        for (let src of allGameFiles) {
+    for (let src of allGameFiles) {
+        try {
             await import(src);
+            console.log("✅已加载：", src);
+        } catch (err) {
+            console.warn("⚠️该游戏文件加载跳过：", src, err);
         }
-        console.log("✅所有游戏数据加载完毕");
-    } catch (err) {
-        console.error("游戏数据加载失败：", err);
-        alert("部分游戏文件加载失败，请检查文件路径名称！");
     }
+    console.log("✅游戏加载流程执行完毕，总数量：", window.gameDataList.length);
+    // 载入完成后渲染页面游戏筛选列表
+    if(window.renderGameSelectList) renderGameSelectList();
 }
 // 将函数暴露到全局，交给index.html DOMContentLoaded之后再调用
 window.loadAllGames = loadAllGames;
