@@ -208,6 +208,36 @@ export function initPage(Core = {}) {
             // 修复：只更新图片，不再整卡重渲染，避免面板关闭、状态丢失
         });
 
+        // ==========【修复：btn‑character / btn‑couple 全局事件委托，彻底解决innerHTML重渲染事件丢失】==========
+        document.addEventListener("click", function(e){
+            const charBtn = e.target.closest(".btn-character");
+            if(charBtn){
+                const gid = charBtn.dataset.gid;
+                const gameItem = appData.gameList.find(g=>g.gameId === gid);
+                if(!gameItem) return;
+                gameItem.charPanelOpen = !gameItem.charPanelOpen;
+                if(gameItem.charPanelOpen){
+                    gameItem.cpPanelOpen = false;
+                }
+                saveData();
+                Core.renderAddedGame();
+                return;
+            }
+            const cpBtn = e.target.closest(".btn-couple");
+            if(cpBtn){
+                const gid = cpBtn.dataset.gid;
+                const gameItem = appData.gameList.find(g=>g.gameId === gid);
+                if (!gameItem) return;
+                gameItem.cpPanelOpen = !gameItem.cpPanelOpen;
+                if(gameItem.cpPanelOpen){
+                    gameItem.charPanelOpen = false;
+                }
+                saveData();
+                Core.renderAddedGame();
+                return;
+            }
+        });
+
         // ✅ 卡片内滑出面板角色勾选事件委托：勾选完成 → 修改数据关闭面板
         document.addEventListener("click", function(e){
             const switchBtn = e.target.closest(".char-switch-btn");
@@ -497,7 +527,8 @@ export function initPage(Core = {}) {
         }
 
         /**
-         * 游戏卡片内部事件绑定：折叠、删除、爱心评分、打开角色/CP滑出面板
+         * 游戏卡片内部事件绑定：折叠、删除、爱心评分
+         * 【改动：移除 btn‑character / btn‑couple 的onclick绑定，改用全局document委托】
          */
         function bindGameCardEvent() {
             document.querySelectorAll(".fold-game").forEach(btn => {
@@ -533,36 +564,6 @@ export function initPage(Core = {}) {
                         bindDynamicGameCardSwitchEvents();
                     }
                 })
-            })
-
-            // Character按钮：切换本卡片内 char滑出面板（数据驱动）
-            document.querySelectorAll(".btn-character").forEach(btn => {
-                btn.onclick = function () {
-                    const gid = this.dataset.gid;
-                    const gameItem = appData.gameList.find(g=>g.gameId === gid);
-                    if(!gameItem) return;
-                    gameItem.charPanelOpen = !gameItem.charPanelOpen;
-                    if(gameItem.charPanelOpen){
-                        gameItem.cpPanelOpen = false;
-                    }
-                    saveData();
-                    Core.renderAddedGame();
-                }
-            })
-
-            // Couple按钮：切换本卡片内 cp滑出面板（数据驱动）
-            document.querySelectorAll(".btn-couple").forEach(btn => {
-                btn.onclick = function () {
-                    const gid = this.dataset.gid;
-                    const gameItem = appData.gameList.find(g=>g.gameId === gid);
-                    if (!gameItem) return;
-                    gameItem.cpPanelOpen = !gameItem.cpPanelOpen;
-                    if(gameItem.cpPanelOpen){
-                        gameItem.charPanelOpen = false;
-                    }
-                    saveData();
-                    Core.renderAddedGame();
-                }
             })
         }
 
