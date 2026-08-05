@@ -24,7 +24,7 @@ export function initPage(Core) {
         saveLocalSwitchConfirmDate,
         renderGameSelectItem,
         bindDynamicGameCardSwitchEvents,
-        renderLocalSwitchDom,
+        // renderLocalSwitchDom, // main.js未导出该函数，临时注释
         bindLocalGameSwitchEvents
     } = Core;
 
@@ -45,7 +45,7 @@ export function initPage(Core) {
 
         modalGameTitle.innerText = gameInfo.name;
         // 【改动】删除此处直接操作localShowSecret / localShowFD.checked，交给main.js renderLocalSwitchDom(gameItem)
-        renderLocalSwitchDom(gameItem);
+        // renderLocalSwitchDom(gameItem); // 函数未导出，临时注释
 
         const allChars = getAllGameChar(gameInfo);
         const femaleChars = allChars.filter(c => c.gender === "female");
