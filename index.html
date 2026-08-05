@@ -95,6 +95,16 @@
                 </div>
                 <div class="game-list-select" id="game-select-list"></div>
             </div>
+
+            <!-- 【新增】角色选择展开面板，模仿添加游戏search‑panel，默认隐藏 -->
+            <div id="char-select-panel" class="search-panel hide-block">
+                <div class="panel-head">
+                    <h3>选择角色</h3>
+                    <button id="close‑char‑panel">关闭</button>
+                </div>
+                <div id="char‑select‑item‑list" class="game-select-list"></div>
+            </div>
+
             <div id="added-game-container"></div>
         </div>
 
@@ -154,7 +164,7 @@
     </div>
 </div>
 
-<!-- 角色选择弹窗：移除行内style="display:none;"，由CSS class .active控制显示；取消按钮全部保留 -->
+<!-- 旧角色弹窗（暂时保留，后续确认全部正常后可以删除） -->
 <div class="modal-mask" id="char-select-modal">
     <div class="modal-box" style="max-width:900px;width:92%;max-height:85vh;overflow-y:auto;">
         <div class="modal-header" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
