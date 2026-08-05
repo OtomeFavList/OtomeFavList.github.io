@@ -400,38 +400,43 @@ export function initPage(Core) {
                 let heartHtml = "";
                 for (let i = 1; i <= 5; i++) heartHtml += `<span class="heart ${gameItem.loveRate >= i ? 'active' : ''}" data-val="${i}">♥</span>`;
 
-                html += `
-                <div class="added-game-card" data-game-id="${gameItem.gameId}">
-                    <div class="game-card-header">
-                        <span class="game-card-title" style="color:#b33a3a;font-size:17px;">${gameInfo.name}</span>
-                        <div class="game-card-switch-group">
-                            <button class="btn-fold fold-game" data-gid="${gameItem.gameId}">折叠板块</button>
-                            <button class="btn-del del-game" data-gid="${gameItem.gameId}">删除游戏</button>
-                        </div>
-                    </div>
-                    <div class="heart-rate" data-gid="${gameItem.gameId}">${heartHtml}</div>
-                    <div class="game-switch-group">
-                        <label class="switch">
-                            <input type="checkbox" class="game-hide-char" data-gameidx="${index}" ${(gameItem.localHideChar ?? false) ? 'checked' : ''}>
-                            <span class="slider"></span>
-                        </label>
-                        <span>单独显示本游戏隐藏角色</span>
-                        <label class="switch">
-                            <input type="checkbox" class="game-fd-switch" data-gameidx="${index}" ${(gameItem.localFD ?? false) ? 'checked' : ''}>
-                            <span class="slider"></span>
-                        </label>
-                        <span>单独显示本游戏续作/FD角色</span>
-                    </div>
-                    <div class="char-section">
-                        <button class="open-char-pool" data-gid="${gameItem.gameId}">选择角色 Character</button>
-                        <div class="char-card-wrapper char-selected-row" data-gid="${gameItem.gameId}">${renderSelectedChar(gameItem, gameInfo)}</div>
-                    </div>
-                    <div class="cp-group">
-                        <button class="open-cp-pool" data-gid="${gameItem.gameId}">搭配CP Couple</button>
-                        <div class="cp-render-box" data-gid="${gameItem.gameId}">${renderCP(gameItem, gameInfo)}</div>
-                    </div>
-                </div>
-                `;
+               html += `
+<div class="added-game-card" data-game-id="${gameItem.gameId}">
+    <div class="game-card-header-row">
+        <span class="game-card-title">${gameInfo.name}</span>
+        <div class="heart-rate" data-gid="${gameItem.gameId}">${heartHtml}</div>
+        <div class="game-switch-group">
+            <label class="switch">
+                <input type="checkbox" class="game-hide-char" data-gameidx="${index}" ${(gameItem.localHideChar ?? false) ? 'checked' : ''}>
+                <span class="slider"></span>
+            </label>
+            <span>单独显示本游戏隐藏角色</span>
+
+            <label class="switch">
+                <input type="checkbox" class="game-fd-switch" data-gameidx="${index}" ${(gameItem.localFD ?? false) ? 'checked' : ''}>
+                <span class="slider"></span>
+            </label>
+            <span>单独显示本游戏续作/FD角色</span>
+        </div>
+    </div>
+
+    <div class="char-section">
+        <button class="open-char-pool" data-gid="${gameItem.gameId}">选择角色 Character</button>
+        <div class="char-card-wrapper char-selected-row" data-gid="${gameItem.gameId}">${renderSelectedChar(gameItem, gameInfo)}</div>
+    </div>
+
+    <div class="cp-group">
+        <button class="open-cp-pool" data-gid="${gameItem.gameId}">搭配CP Couple</button>
+        <div class="cp-render-box" data-gid="${gameItem.gameId}">${renderCP(gameItem, gameInfo)}</div>
+    </div>
+
+    <!-- 按钮移动到卡片最底部 -->
+    <div class="card-bottom-buttons">
+        <button class="btn-fold fold-game" data-gid="${gameItem.gameId}">折叠</button>
+        <button class="btn-del del-game" data-gid="${gameItem.gameId}">删除</button>
+    </div>
+</div>
+`;
             })
             // 1.写入DOM
             el.addedGameBox.innerHTML = html;
