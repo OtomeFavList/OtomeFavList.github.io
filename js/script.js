@@ -247,7 +247,7 @@ export function initPage(Core = {}) {
             const panel = closeBtn.closest(".char-slide-panel-char, .char-slide-panel-cp");
             if(!panel) return;
             const card = panel.closest(".added-game-card");
-            const gid = card.dataset.gameId;
+            const gid = card.dataset.gameid;
             const gameItem = appData.gameList.find(g=>g.gameId === gid);
             if(!gameItem) return;
             if(panel.classList.contains("char-slide-panel-char")){
@@ -449,7 +449,7 @@ export function initPage(Core = {}) {
                 const cpPanelClass = (gameItem.fold || !gameItem.cpPanelOpen) ? "hide-block" : "";
 
                 html += `
-<div class="added-game-card" data-game-id="${gameItem.gameId}">
+<div class="added-game-card" data-gameid="${gameItem.gameId}">
     <div class="game-card-header-row">
         <span class="game-card-title">${gameInfo.name}</span>
         <div class="heart-rate" data-gid="${gameItem.gameId}">${heartHtml}</div>
@@ -469,13 +469,13 @@ export function initPage(Core = {}) {
     </div>
 
     <div class="game-card-block-item char-section block-margin-gap">
-        <button class="open-char-pool" data-gid="${gameItem.gameId}">选择角色 Character</button>
+        <button class="btn-character" data-gid="${gameItem.gameId}">选择角色 Character</button>
         ${getInnerSlidePanelHtml("char").replace('hide-block', charPanelClass)}
         <div class="game-card-empty-tip char-card-wrapper char-selected-row" data-gid="${gameItem.gameId}">${renderSelectedChar(gameItem, gameInfo) || `<div class="empty-hint">暂未选择角色</div>`}</div>
     </div>
 
     <div class="game-card-block-item cp-group block-margin-gap">
-        <button class="open-cp-pool" data-gid="${gameItem.gameId}">选择角色 Couple</button>
+        <button class="btn-couple" data-gid="${gameItem.gameId}">选择角色 Couple</button>
         ${getInnerSlidePanelHtml("cp").replace('hide-block', cpPanelClass)}
         <div class="game-card-empty-tip cp-render-box" data-gid="${gameItem.gameId}">${renderCP(gameItem, gameInfo) || `<div class="empty-hint">暂未选择角色</div>`}</div>
     </div>
@@ -490,6 +490,7 @@ export function initPage(Core = {}) {
 
             el.addedGameBox.innerHTML = html;
             bindGameCardEvent();
+            // ✅渲染完卡片，调用main.js导出的委托绑定
             if (typeof bindDynamicGameCardSwitchEvents === "function") {
                 bindDynamicGameCardSwitchEvents();
             }
@@ -535,7 +536,7 @@ export function initPage(Core = {}) {
             })
 
             // Character按钮：切换本卡片内 char滑出面板（数据驱动）
-            document.querySelectorAll(".open-char-pool").forEach(btn => {
+            document.querySelectorAll(".btn-character").forEach(btn => {
                 btn.onclick = function () {
                     const gid = this.dataset.gid;
                     const gameItem = appData.gameList.find(g=>g.gameId === gid);
@@ -550,7 +551,7 @@ export function initPage(Core = {}) {
             })
 
             // Couple按钮：切换本卡片内 cp滑出面板（数据驱动）
-            document.querySelectorAll(".open-cp-pool").forEach(btn => {
+            document.querySelectorAll(".btn-couple").forEach(btn => {
                 btn.onclick = function () {
                     const gid = this.dataset.gid;
                     const gameItem = appData.gameList.find(g=>g.gameId === gid);
@@ -657,6 +658,15 @@ export function initPage(Core = {}) {
         // 初始渲染页面
         renderAddedGame();
     }
+
+    // 适配main.js调用的两个别名函数（本项目为卡片内嵌面板，无独立弹窗DOM）
+    function openCharSelectModal(){}
+    function renderCharSelectList(){}
+
+    // ✅挂载全局句柄给main.js调用
+    window.openCharSelectModal = openCharSelectModal;
+    window.renderCharSelectList = renderCharSelectList;
+    window.refreshGameCardUi = renderAddedGame;
 
     bootstrap();
 }
