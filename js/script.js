@@ -137,8 +137,8 @@ export function initPage(Core = {}) {
 
     // ===================== 页面启动bootstrap，UI渲染、表单、导出、卡片事件 =====================
     async function bootstrap() {
-        // 【已插入】全局钩子，供main.js调用刷新卡片UI
-        window.refreshGameCardUi = renderAddedGame;
+        // 【修复】全局钩子，使用Core句柄，禁止裸写renderAddedGame
+        window.refreshGameCardUi = Core.renderAddedGame;
 
         // DOM元素缓存，移除全局char-slide-panel
         const el = {
@@ -207,7 +207,7 @@ export function initPage(Core = {}) {
             appData.charImageSelect[saveKey] = currentIndex;
             saveData();
             if(charCard.classList.contains("char-card-item")){
-                renderAddedGame();
+                Core.renderAddedGame();
                 bindDynamicGameCardSwitchEvents();
             }
         });
@@ -237,7 +237,7 @@ export function initPage(Core = {}) {
                 gameItem.cpPanelOpen = false;
             }
             saveData();
-            renderAddedGame();
+            Core.renderAddedGame();
         });
 
         // ✅面板内部关闭按钮（×），数据驱动关闭面板
@@ -256,7 +256,7 @@ export function initPage(Core = {}) {
                 gameItem.cpPanelOpen = false;
             }
             saveData();
-            renderAddedGame();
+            Core.renderAddedGame();
         });
 
         /**
@@ -416,7 +416,7 @@ export function initPage(Core = {}) {
                     appData.gameList.push(newGameData);
                     saveData();
                     if (el.searchPanel) el.searchPanel.classList.add("hide-block");
-                    renderAddedGame();
+                    Core.renderAddedGame();
                     bindDynamicGameCardSwitchEvents();
                 }
             })
@@ -507,7 +507,7 @@ export function initPage(Core = {}) {
                     if (!gameItem) return;
                     gameItem.fold = !gameItem.fold;
                     saveData();
-                    renderAddedGame();
+                    Core.renderAddedGame();
                     bindDynamicGameCardSwitchEvents();
                 }
             })
@@ -516,7 +516,7 @@ export function initPage(Core = {}) {
                     const gid = btn.dataset.gid;
                     appData.gameList = appData.gameList.filter(g => g.gameId !== gid);
                     saveData();
-                    renderAddedGame();
+                    Core.renderAddedGame();
                     bindDynamicGameCardSwitchEvents();
                 }
             })
@@ -529,7 +529,7 @@ export function initPage(Core = {}) {
                         e.stopPropagation();
                         gameItem.loveRate = Number(h.dataset.val);
                         saveData();
-                        renderAddedGame();
+                        Core.renderAddedGame();
                         bindDynamicGameCardSwitchEvents();
                     }
                 })
@@ -546,7 +546,7 @@ export function initPage(Core = {}) {
                         gameItem.cpPanelOpen = false;
                     }
                     saveData();
-                    renderAddedGame();
+                    Core.renderAddedGame();
                 }
             })
 
@@ -561,7 +561,7 @@ export function initPage(Core = {}) {
                         gameItem.charPanelOpen = false;
                     }
                     saveData();
-                    renderAddedGame();
+                    Core.renderAddedGame();
                 }
             })
         }
@@ -656,7 +656,7 @@ export function initPage(Core = {}) {
         }
 
         // 初始渲染页面
-        renderAddedGame();
+        Core.renderAddedGame();
     }
 
     // 适配main.js调用的两个别名函数（本项目为卡片内嵌面板，无独立弹窗DOM）
@@ -666,7 +666,7 @@ export function initPage(Core = {}) {
     // ✅挂载全局句柄给main.js调用
     window.openCharSelectModal = openCharSelectModal;
     window.renderCharSelectList = renderCharSelectList;
-    window.refreshGameCardUi = renderAddedGame;
+    window.refreshGameCardUi = Core.renderAddedGame;
 
     bootstrap();
 }
