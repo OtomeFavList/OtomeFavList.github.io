@@ -781,3 +781,16 @@ h2{
     font-size:14px;
     text-align:center;
 }
+
+/* ========== 双列表表单 form‑row‑double ========== */
+.form-row-double {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin: 16px 0;
+}
+.form-row-double > .form-row {
+    flex: 1;
+    min-width: 260px;
+    max-width: unset;
+}
