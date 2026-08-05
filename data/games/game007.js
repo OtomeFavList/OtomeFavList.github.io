@@ -86,7 +86,7 @@ const gameData = {
             isHidden: true,
             isFD: true,
             images: [
-                { src: "img/char/007/Yuzuru.jpg", type: "base" }
+                { src: ["img/char/007/Yuzuru.jpg"], type: "base" }
             ]
         },
         // 峰岸誠司
@@ -97,7 +97,7 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { src: "img/char/007/Shiraishi.jpg", type: "base" }
+                { src: ["img/char/007/Shiraishi.jpg"], type: "base" }
             ]
         }
         // 吉成秀明
@@ -108,7 +108,7 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { src: "img/char/007/Yoshinari.jpg", type: "base" }
+                { src: ["img/char/007/Yoshinari.jpg"], type: "base" }
             ]
         }
     ]
