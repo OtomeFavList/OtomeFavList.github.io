@@ -162,14 +162,8 @@
             <button class="modal-close-btn" style="border:none;background:none;font-size:24px;cursor:pointer;padding:0 6px;">&times;</button>
         </div>
         <div class="modal-body">
-            <div class="local-switch-group" style="display:flex;gap:32px;margin-bottom:12px;flex-wrap:wrap;">
-                <label>
-                    <input type="checkbox" id="local-show-secret"> 显示本游戏隐藏角色
-                </label>
-                <label>
-                    <input type="checkbox" id="local-show-fd"> 显示本游戏续作/FD角色
-                </label>
-            </div>
+            <!-- 新增：局部开关渲染容器 -->
+            <div id="modal-local-switch-wrap"></div>
             <hr style="border:0;border-top:1px solid #e2d2d7;margin:14px 0;">
             <!-- CP布局 左25% 右75% -->
             <div class="cp-row" style="display:flex;gap:16px;">
