@@ -59,6 +59,9 @@ export function loadData() {
             appData.gameList.forEach(g=>{
                 if(typeof g.localHideChar !== "boolean") g.localHideChar = false;
                 if(typeof g.localFD !== "boolean") g.localFD = false;
+                // 新增：滑出面板展开状态兜底
+                if(typeof g.charPanelOpen !== "boolean") g.charPanelOpen = false;
+                if(typeof g.cpPanelOpen !== "boolean") g.cpPanelOpen = false;
             })
         }
     } catch (e) {
@@ -399,11 +402,12 @@ export function getAllGameChar(gameInfo) {
 }
 
 /**
- * 在角色选择弹窗内渲染本游戏局部开关（#modal‑local‑switch‑wrap）
+ * 在角色选择弹窗内渲染本游戏局部开关
  * @param {object} gameItem appData.gameList单条游戏条目
+ * @param {HTMLElement|null} wrapDom 传入面板内部.local‑switch‑wrap，不传则回退旧全局id
  */
-export function renderLocalSwitchDom(gameItem) {
-    const wrap = document.getElementById("modal-local-switch-wrap");
+export function renderLocalSwitchDom(gameItem, wrapDom = null) {
+    const wrap = wrapDom ?? document.getElementById("modal-local-switch-wrap");
     if (!wrap) return;
     wrap.innerHTML = `
 <label class="switch">
