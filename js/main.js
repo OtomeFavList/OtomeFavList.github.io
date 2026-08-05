@@ -458,7 +458,8 @@ function buildCoreContext() {
         saveLocalSwitchConfirmDate,
         renderGameSelectItem,
         bindDynamicGameCardSwitchEvents,
-        renderLocalSwitchDom
+        renderLocalSwitchDom,
+        renderAddedGame
     };
     return Core;
 }
