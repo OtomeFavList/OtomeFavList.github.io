@@ -347,6 +347,60 @@ button:hover{
     padding:18px;
     margin:16px 0;
 }
+/* JS渲染头部：收藏、折叠、删除按钮 */
+.game-card-header {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+    margin-bottom:10px;
+}
+.game-card-title-wrap h3.game-card-title{
+    font-size:20px;
+    color:#b33a3a;
+}
+.game-card-actions {
+    display:flex;
+    gap:6px;
+}
+.btn-fav {
+    background:transparent;
+    color:#ccc;
+    font-size:20px;
+    padding:0 4px;
+}
+.btn-fav.active {
+    color:#b33a3a;
+}
+.btn-toggle-char,
+.btn-toggle-cp,
+.btn-delete-game {
+    padding:4px 8px;
+    font-size:14px;
+}
+
+.game-switch-row{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin:10px 0;
+    flex-wrap:wrap;
+}
+.game-card-buttons{
+    display:flex;
+    gap:10px;
+    margin:12px 0;
+}
+/* 折叠面板类 */
+.panel-collapsed .char-list-wrap,
+.panel-collapsed .cp-wrap {
+    display:none;
+}
+.char-panel-wrap,
+.cp-panel-wrap {
+    margin:10px 0;
+}
+
 .game-card-head{
     display:flex;
     justify-content:space-between;
@@ -436,7 +490,7 @@ button:hover{
     align-items:flex-end;
 }
 
-/* ========== 【新增】渲染输出选中角色卡片 char‑card‑item ========== */
+/* ========== 【渲染输出选中角色卡片 char‑card‑item ========== */
 .char-card-item{
     width:200px;
     text-align:center;
@@ -493,13 +547,13 @@ button:hover{
     background:rgba(0,0,0,0.65);
 }
 
-/* ========== CP布局 cp-group cp-row ========== */
+/* ========== CP布局 cp‑layout‑row 【和main.js渲染class严格对应，25%｜75%】 ========== */
 .cp-group{
     margin:16px 0;
     padding-top:12px;
     border-top:1px solid #eee;
 }
-.cp-row{
+.cp-layout-row{
     display:flex;
     align-items:flex-start;
     gap:16px;
@@ -508,26 +562,20 @@ button:hover{
     border-bottom:1px solid #eee;
     width:100%;
 }
-/* 在game‑search‑box内部，消除左右margin，依靠父容器padding */
-.game-search-box .cp-row{
-    margin-left:0;
-    margin-right:0;
-}
-.cp-female{
+.heroine-column{
     flex: 0 0 25%;
     display:flex;
     justify-content:center;
     align-items:flex-start;
 }
-.cp-male-wrap{
+.hero-list-column{
     flex: 0 0 75%;
+}
+.char-card-wrapper{
     display:flex;
     gap:12px;
     flex-wrap:wrap;
     align-items:flex-end;
-}
-.cp-char-card{
-    width:200px;
 }
 
 /* ========== checkbox过渡 ========== */
@@ -663,11 +711,11 @@ h2{
 
 /* ========== 移动端适配 max‑width:768px ========== */
 @media (max-width:768px) {
-    .cp-row{
+    .cp-layout-row{
         flex-direction:column;
     }
-    .cp-female,
-    .cp-male-wrap{
+    .heroine-column,
+    .hero-list-column{
         flex: unset;
         width:100%;
     }
