@@ -77,8 +77,8 @@ const gameData = {
             images: [
                 { srcList: ["img/char/008/Suzukake.jpg","img/char/008/Suzukake2.jpg"], type: "base" }
             ]
-        }
-      // 九十九丸
+        }, // ✅修复：补上缺失逗号
+        // 九十九丸
         {
             id: "g008_m06",
             name: "九十九丸",
