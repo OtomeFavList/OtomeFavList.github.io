@@ -416,8 +416,6 @@ export function renderLocalSwitchDom(gameItem, wrapDom = null) {
 
 
 // ===================== 页面启动入口模块 =====================
-import { initPage } from "./script.js";
-
 /**
  * 组装Core上下文对象，统一供给UI层script.js
  * @returns {Object} Core对象，所有核心方法对外暴露
@@ -657,6 +655,9 @@ export async function bootstrapCore() {
     await loadAllGameTemplates();
     // 3.组装核心上下文对象，传给UI层script.js
     const Core = buildCoreContext();
+
+    // 动态导入，消除顶层import循环依赖
+    const { initPage } = await import("./script.js");
     initPage(Core);
 
     // 4.渲染全局开关初始勾选状态
