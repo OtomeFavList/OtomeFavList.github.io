@@ -280,11 +280,12 @@ export function initPage(Core = {}) {
 
         // 加载本地存储
         loadData();
-        // 兜底：旧本地存储数据补charPanelOpen、cpPanelOpen字段
+        // 兜底：旧本地存储数据补charPanelOpen、cpPanelOpen、loveRate字段
         if(Array.isArray(appData.gameList)){
             appData.gameList.forEach(g=>{
                 if(typeof g.charPanelOpen !== "boolean") g.charPanelOpen = false;
                 if(typeof g.cpPanelOpen !== "boolean") g.cpPanelOpen = false;
+                if(typeof g.loveRate !== "number") g.loveRate = 0;
             });
         }
 
