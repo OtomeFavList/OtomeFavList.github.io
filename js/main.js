@@ -8,7 +8,6 @@ const gameIdList = [
 // 全局存储key
 export const STORE_KEY = "otome-favlist-data";
 export const SPOILER_DATE_KEY = "spoiler-confirm-date"; // 全局剧透确认日期
-export const SPOILER_LOCAL_SWITCH_KEY = "local-switch-spoiler-date"; // 单机局部开关单日预警标记
 
 // ===================== 全局应用数据对象 =====================
 export let appData = {
@@ -96,22 +95,6 @@ export function isTodayConfirmed() {
  */
 export function saveConfirmDate() {
     localStorage.setItem(SPOILER_DATE_KEY, getTodayDateStr());
-}
-
-/**
- * 判断今日局部单机开关是否已经确认过剧透
- * @returns {boolean}
- */
-export function localSwitchIsConfirmedToday() {
-    const saved = localStorage.getItem(SPOILER_LOCAL_SWITCH_KEY);
-    return saved === getTodayDateStr();
-}
-
-/**
- * 标记今日单机局部开关已完成剧透确认
- */
-export function saveLocalSwitchConfirmDate() {
-    localStorage.setItem(SPOILER_LOCAL_SWITCH_KEY, getTodayDateStr());
 }
 
 
@@ -456,8 +439,6 @@ function buildCoreContext() {
         getAvailableCharImages,
         isTodayConfirmed,
         saveConfirmDate,
-        localSwitchIsConfirmedToday,
-        saveLocalSwitchConfirmDate,
         renderGameSelectItem,
         bindDynamicGameCardSwitchEvents,
         renderLocalSwitchDom,
@@ -615,21 +596,8 @@ function wrapClickHandler(e){
         return;
     }
 
-    // 用户想要打开局部开关
+    // 用户想要打开局部开关，直接弹出剧透弹窗（不再做日期判断）
     e.preventDefault();
-    // 判断今日是否已经确认过单机剧透：确认过直接开启，不弹窗
-    if(localSwitchIsConfirmedToday()){
-        if(targetInput.classList.contains("game-hide-char") || targetInput.classList.contains("modal-local-hide-char")){
-            gameItem.localHideChar = true;
-        }else{
-            gameItem.localFD = true;
-        }
-        saveData();
-        if(window.refreshGameCardUi) window.refreshGameCardUi();
-        return;
-    }
-
-    // 今日未确认，弹出剧透弹窗
     if(targetInput.classList.contains("game-hide-char") || targetInput.classList.contains("modal-local-hide-char")){
         window.pendingGameOp = { type:"hideChar", idx };
     }else{
@@ -706,8 +674,6 @@ function bindGlobalSwitchSpoilerEvents() {
                 if(op.type === "hideChar") g.localHideChar = true;
                 if(op.type === "fd") g.localFD = true;
             }
-            // 标记今日单机局部开关已确认，同天不再弹窗
-            saveLocalSwitchConfirmDate();
             window.pendingGameOp = null;
             saveData();
             spoilerModal.classList.remove("active");
