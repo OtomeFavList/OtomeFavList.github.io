@@ -20,7 +20,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/008/Kayo.jpg","img/char/008/Kayo2.jpg"], type: "base" }
+                { srcList: ["img/char/011/Shanaou.jpg"], type: "base" }
             ]
         },
         // 武藏坊弁庆
@@ -31,7 +31,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/008/Enishi.jpg","img/char/008/Enishi2.jpg"], type: "base" }
+                { srcList: ["img/char/011/Benkei.jpg"], type: "base" }
             ]
         },
         // 平教经
@@ -42,7 +42,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/008/Kei.jpg","img/char/008/Kei2.jpg"], type: "base" }
+                { srcList: ["img/char/011/Noritsune.jpg","img/char/011/Noritsune2.jpg"], type: "base" }
             ]
         },
         // 春玄
@@ -53,7 +53,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/008/Kuroba.jpg","img/char/008/Kuroba2.jpg"], type: "base" }
+                { srcList: ["img/char/011/Shungen.jpg","img/char/011/Shungen2.jpg"], type: "base" }
             ]
         },
         // 平知盛
@@ -64,7 +64,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/008/Sakyou.jpg","img/char/008/Sakyou2.jpg"], type: "base" }
+                { srcList: ["img/char/011/Tomomori.jpg"], type: "base" }
             ]
         },
         // 源赖朝
@@ -75,7 +75,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/008/Suzukake.jpg","img/char/008/Suzukake2.jpg"], type: "base" }
+                { srcList: ["img/char/011/Yoritomo.jpg"], type: "base" }
             ]
         }, // ✅修复：补上缺失逗号
         // 佐佐木高纲
@@ -86,7 +86,7 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["img/char/009/Owen.jpg","img/char/009/Owen2.jpg"], type: "base" } // ✅src→srcList
+                { srcList: ["img/char/011/Sasaki.jpg"], type: "base" } // ✅src→srcList
             ]
         }
         // 平重衡
@@ -97,7 +97,7 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["img/char/009/Owen.jpg","img/char/009/Owen2.jpg"], type: "base" } // ✅src→srcList
+                { srcList: ["img/char/011/Shigehira.jpg"], type: "base" } // ✅src→srcList
             ]
         }
         // 佐藤忠信
@@ -108,7 +108,7 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["img/char/009/Owen.jpg","img/char/009/Owen2.jpg"], type: "base" } // ✅src→srcList
+                { srcList: ["img/char/011/Tadanobu.jpg"], type: "base" } // ✅src→srcList
             ]
         }
         // 佐藤继信
@@ -119,7 +119,7 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["img/char/009/Owen.jpg","img/char/009/Owen2.jpg"], type: "base" } // ✅src→srcList
+                { srcList: ["img/char/011/Tsugunobu.jpg"], type: "base" } // ✅src→srcList
             ]
         }
     ]
