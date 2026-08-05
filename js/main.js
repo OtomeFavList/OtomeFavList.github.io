@@ -441,8 +441,7 @@ function buildCoreContext() {
         saveConfirmDate,
         renderGameSelectItem,
         bindDynamicGameCardSwitchEvents,
-        renderLocalSwitchDom,
-        renderAddedGame
+        renderLocalSwitchDom
     };
     return Core;
 }
@@ -479,70 +478,6 @@ export function bindDynamicGameCardSwitchEvents(){
 function wrapClickHandler(e){
     const spoilerModal = document.getElementById("spoiler-modal");
     if(!spoilerModal) return;
-
-    // -------- 新增：卡片头部按钮：收藏、折叠、删除 --------
-    const favBtn = e.target.closest(".btn-fav");
-    if(favBtn){
-        const gameCardEl = favBtn.closest(".game-card");
-        const idx = Number(gameCardEl.dataset.gameidx);
-        const gameItem = appData.gameList[idx];
-        if(!gameItem) return;
-        gameItem.isFav = !gameItem.isFav;
-        saveData();
-        if(window.refreshGameCardUi) window.refreshGameCardUi();
-        return;
-    }
-
-    const toggleCharBtn = e.target.closest(".btn-toggle-char");
-    if(toggleCharBtn){
-        const idx = Number(toggleCharBtn.dataset.gameidx);
-        const gameItem = appData.gameList[idx];
-        if(!gameItem) return;
-        gameItem.charPanelOpen = !gameItem.charPanelOpen;
-        saveData();
-        if(window.refreshGameCardUi) window.refreshGameCardUi();
-        return;
-    }
-
-    const toggleCpBtn = e.target.closest(".btn-toggle-cp");
-    if(toggleCpBtn){
-        const idx = Number(toggleCpBtn.dataset.gameidx);
-        const gameItem = appData.gameList[idx];
-        if(!gameItem) return;
-        gameItem.cpPanelOpen = !gameItem.cpPanelOpen;
-        saveData();
-        if(window.refreshGameCardUi) window.refreshGameCardUi();
-        return;
-    }
-
-    const delBtn = e.target.closest(".btn-delete-game");
-    if(delBtn){
-        const idx = Number(delBtn.dataset.gameidx);
-        appData.gameList.splice(idx,1);
-        saveData();
-        if(window.refreshGameCardUi) window.refreshGameCardUi();
-        return;
-    }
-
-    // -------- Character / Couple 按钮点击处理【新增】 --------
-    const charBtn = e.target.closest(".btn-character, .btn-couple");
-    if(charBtn){
-        const gameCardEl = charBtn.closest(".game-card");
-        if(!gameCardEl) return;
-        // 赋值当前编辑游戏ID
-        currentEditGameId = gameCardEl.dataset.gameid;
-        if(charBtn.classList.contains("btn-character")){
-            charPoolMode = "char";
-        }else{
-            charPoolMode = "cp";
-        }
-        // 调用script.js暴露的弹窗打开与渲染
-        if(window.openCharSelectModal && window.renderCharSelectList){
-            window.openCharSelectModal();
-            window.renderCharSelectList();
-        }
-        return;
-    }
 
     // -------- 角色图片切换按钮处理 --------
     const switchBtn = e.target.closest(".char-switch-prev,.char-switch-next");
@@ -708,83 +643,6 @@ function bindGlobalSwitchSpoilerEvents() {
         spoilerModal.classList.remove("active");
         window.pendingGlobalSwitch = null;
         window.pendingGameOp = null;
-    });
-}
-
-
-/**
- * renderAddedGame：渲染全部已添加游戏卡片到 #added-game-container
- * 完整版本：包含五颗评分爱心，DOM顺序重排，文案修改
- */
-export function renderAddedGame(){
-    const container = document.getElementById("added-game-container");
-    if(!container) return;
-    container.innerHTML = "";
-
-    appData.gameList.forEach((gameItem, idx)=>{
-        const gameInfo = gameTemplateList.find(g => g.id === gameItem.gameId);
-        if(!gameInfo) return;
-
-        const charHtml = renderSelectedChar(gameItem, gameInfo);
-        const cpHtml = renderCP(gameItem, gameInfo);
-
-        // 读取面板展开状态
-        const charOpen = !!gameItem.charPanelOpen;
-        const cpOpen = !!gameItem.cpPanelOpen;
-
-        const domStr = `
-<div class="game-card" data-gameid="${gameItem.gameId}" data-gameidx="${idx}">
-    <!-- 游戏名称 + 五颗爱心在同一行 -->
-    <div class="game-card-header">
-        <h3 class="game-card-title">${gameInfo.name}</h3>
-        <div class="game-card-hearts">
-            <span class="heart ${gameItem.loveRate >= 1 ? "active" : ""}" data-val="1">♥</span>
-            <span class="heart ${gameItem.loveRate >= 2 ? "active" : ""}" data-val="2">♥</span>
-            <span class="heart ${gameItem.loveRate >= 3 ? "active" : ""}" data-val="3">♥</span>
-            <span class="heart ${gameItem.loveRate >= 4 ? "active" : ""}" data-val="4">♥</span>
-            <span class="heart ${gameItem.loveRate >= 5 ? "active" : ""}" data-val="5">♥</span>
-        </div>
-
-        <div class="game-card-actions">
-            <button class="btn-delete-game" data-gameidx="${idx}" title="删除本游戏">✕</button>
-        </div>
-    </div>
-
-    <!-- 单独显示隐藏角色 / 单独显示续作FD角色 -->
-    <div class="game-switch-row">
-        <label class="switch">
-            <input type="checkbox" class="game-hide-char" data-gameidx="${idx}" ${gameItem.localHideChar?"checked":""}>
-            <span class="slider"></span>
-        </label>
-        <span>单独显示隐藏角色</span>
-
-        <label class="switch">
-            <input type="checkbox" class="game-fd-switch" data-gameidx="${idx}" ${gameItem.localFD?"checked":""}>
-            <span class="slider"></span>
-        </label>
-        <span>单独显示续作/FD角色</span>
-    </div>
-
-    <!-- Character区域 -->
-    <div class="game-card-section">
-        <button class="btn-character">Character</button>
-        <h4 class="section-title">Character</h4>
-        <div class="char-list-wrap">
-            ${gameItem.selectChars?.length ? charHtml : `<div class="empty-hint">暂未添加角色</div>`}
-        </div>
-    </div>
-
-    <!-- Couple区域 -->
-    <div class="game-card-section">
-        <button class="btn-couple">Couple</button>
-        <h4 class="section-title">Couple</h4>
-        <div class="cp-wrap">
-            ${gameItem.cpList?.length ? cpHtml : `<div class="empty-hint">暂未添加角色</div>`}
-        </div>
-    </div>
-</div>
-        `;
-        container.insertAdjacentHTML("beforeend", domStr);
     });
 }
 
