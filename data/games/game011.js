@@ -12,10 +12,10 @@ const gameData = {
     art: "読",
     cover: "img/game/011.jpg",
     charList: [
-        // 香夜
+        // 源义经
         {
             id: "g011_f01",
-            name: "香夜",
+            name: "源义经",
             gender: "female",
             isHidden: false,
             isFD: false,
@@ -23,10 +23,10 @@ const gameData = {
                 { srcList: ["img/char/008/Kayo.jpg","img/char/008/Kayo2.jpg"], type: "base" }
             ]
         },
-        // 缘
+        // 武藏坊弁庆
         {
             id: "g011_m01",
-            name: "缘",
+            name: "武藏坊弁庆",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -34,10 +34,10 @@ const gameData = {
                 { srcList: ["img/char/008/Enishi.jpg","img/char/008/Enishi2.jpg"], type: "base" }
             ]
         },
-        // 萤
+        // 平教经
         {
             id: "g011_m02",
-            name: "萤",
+            name: "平教经",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -45,10 +45,10 @@ const gameData = {
                 { srcList: ["img/char/008/Kei.jpg","img/char/008/Kei2.jpg"], type: "base" }
             ]
         },
-        // 黑羽实彰
+        // 春玄
         {
             id: "g011_m03",
-            name: "黑羽实彰",
+            name: "春玄",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -56,10 +56,10 @@ const gameData = {
                 { srcList: ["img/char/008/Kuroba.jpg","img/char/008/Kuroba2.jpg"], type: "base" }
             ]
         },
-        // 鹭原左京
+        // 平知盛
         {
             id: "g011_m04",
-            name: "鹭原左京",
+            name: "平知盛",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -67,10 +67,10 @@ const gameData = {
                 { srcList: ["img/char/008/Sakyou.jpg","img/char/008/Sakyou2.jpg"], type: "base" }
             ]
         },
-        // 铃悬
+        // 源赖朝
         {
             id: "g011_m05",
-            name: "铃悬",
+            name: "源赖朝",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -78,10 +78,10 @@ const gameData = {
                 { srcList: ["img/char/008/Suzukake.jpg","img/char/008/Suzukake2.jpg"], type: "base" }
             ]
         }, // ✅修复：补上缺失逗号
-        // 欧文·赫里欧
+        // 佐佐木高纲
         {
             id: "g009_fd01",
-            name: "欧文·赫里欧",
+            name: "佐佐木高纲",
             gender: "male",
             isHidden: false,
             isFD: true,
@@ -89,10 +89,10 @@ const gameData = {
                 { srcList: ["img/char/009/Owen.jpg","img/char/009/Owen2.jpg"], type: "base" } // ✅src→srcList
             ]
         }
-        // 欧文·赫里欧
+        // 平重衡
         {
             id: "g009_fd02",
-            name: "欧文·赫里欧",
+            name: "平重衡",
             gender: "male",
             isHidden: false,
             isFD: true,
@@ -100,10 +100,10 @@ const gameData = {
                 { srcList: ["img/char/009/Owen.jpg","img/char/009/Owen2.jpg"], type: "base" } // ✅src→srcList
             ]
         }
-        // 欧文·赫里欧
+        // 佐藤忠信
         {
             id: "g009_fd03",
-            name: "欧文·赫里欧",
+            name: "佐藤忠信",
             gender: "male",
             isHidden: false,
             isFD: true,
@@ -111,10 +111,10 @@ const gameData = {
                 { srcList: ["img/char/009/Owen.jpg","img/char/009/Owen2.jpg"], type: "base" } // ✅src→srcList
             ]
         }
-        // 欧文·赫里欧
+        // 佐藤继信
         {
             id: "g009_fd04",
-            name: "欧文·赫里欧",
+            name: "佐藤继信",
             gender: "male",
             isHidden: false,
             isFD: true,
