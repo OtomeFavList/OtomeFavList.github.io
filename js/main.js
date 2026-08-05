@@ -700,6 +700,55 @@ function bindGlobalSwitchSpoilerEvents() {
 
 
 /**
+ * renderAddedGame：渲染全部已添加游戏卡片到 #added-game-container
+ * 对应报错缺失函数，补写到此文件
+ */
+export function renderAddedGame(){
+    const container = document.getElementById("added-game-container");
+    if(!container) return;
+    container.innerHTML = "";
+
+    appData.gameList.forEach((gameItem, idx)=>{
+        const gameInfo = gameTemplateList.find(g => g.id === gameItem.gameId);
+        if(!gameInfo) return;
+
+        const charHtml = renderSelectedChar(gameItem, gameInfo);
+        const cpHtml = renderCP(gameItem, gameInfo);
+
+        const domStr = `
+<div class="game-card" data-gameid="${gameItem.gameId}" data-gameidx="${idx}">
+    <h3>${gameInfo.name}</h3>
+    <div class="game-switch-row">
+        <label class="switch">
+            <input type="checkbox" class="game-hide-char" data-gameidx="${idx}" ${gameItem.localHideChar?"checked":""}>
+            <span class="slider"></span>
+        </label>
+        <span>本游戏隐藏角色</span>
+
+        <label class="switch">
+            <input type="checkbox" class="game-fd-switch" data-gameidx="${idx}" ${gameItem.localFD?"checked":""}>
+            <span class="slider"></span>
+        </label>
+        <span>本游戏FD角色</span>
+    </div>
+    <div class="game-card-buttons">
+        <button class="btn-character">Character</button>
+        <button class="btn-couple">Couple</button>
+    </div>
+
+    <h4>Character</h4>
+    <div class="char-list-wrap">${charHtml}</div>
+
+    <h4>Couple</h4>
+    <div class="cp-wrap">${cpHtml}</div>
+</div>
+        `;
+        container.insertAdjacentHTML("beforeend", domStr);
+    });
+}
+
+
+/**
  * 对外暴露启动入口，供index.html调用
  */
 export async function bootstrapCore() {
