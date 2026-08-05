@@ -382,7 +382,7 @@ export function initPage(Core) {
         }
 
         /**
-         * 渲染已添加游戏卡片
+         * 渲染已添加游戏卡片【仅此处修改，其余全部保留原样】
          */
         function renderAddedGame() {
             if (!el.addedGameBox) return;
@@ -398,9 +398,11 @@ export function initPage(Core) {
                 const gameInfo = gameTemplateList.find(g => g.id === gameItem.gameId);
                 if (!gameInfo) return;
                 let heartHtml = "";
-                for (let i = 1; i <= 5; i++) heartHtml += `<span class="heart ${gameItem.loveRate >= i ? 'active' : ''}" data-val="${i}">♥</span>`;
+                for (let i = 1; i <= 5; i++) {
+                    heartHtml += `<span class="heart ${gameItem.loveRate >= i ? 'active' : ''}" data-val="${i}">♥</span>`;
+                }
 
-               html += `
+                html += `
 <div class="added-game-card" data-game-id="${gameItem.gameId}">
     <div class="game-card-header-row">
         <span class="game-card-title">${gameInfo.name}</span>
@@ -430,20 +432,19 @@ export function initPage(Core) {
         <div class="cp-render-box" data-gid="${gameItem.gameId}">${renderCP(gameItem, gameInfo)}</div>
     </div>
 
-    <!-- 按钮移动到卡片最底部 -->
     <div class="card-bottom-buttons">
         <button class="btn-fold fold-game" data-gid="${gameItem.gameId}">折叠</button>
         <button class="btn-del del-game" data-gid="${gameItem.gameId}">删除</button>
     </div>
 </div>
 `;
-            })
-            // 1.写入DOM
+            });
+
             el.addedGameBox.innerHTML = html;
-            // 2.普通卡片事件绑定（折叠、删除、爱心、角色弹窗）
             bindGameCardEvent();
-            // 3.【关键】DOM全部渲染完成后，调用main.js导出的事件委托函数，接管.game‑hide‑char / .game‑fd‑switch点击
-            bindDynamicGameCardSwitchEvents();
+            if (typeof bindDynamicGameCardSwitchEvents === "function") {
+                bindDynamicGameCardSwitchEvents();
+            }
         }
 
         /**
