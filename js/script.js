@@ -51,7 +51,9 @@ export function initPage(Core = {}) {
         if (!titleEl || !heroineBox || !heroListBox) return;
 
         titleEl.innerText = `${gameInfo.name} — ${mode === "char" ? "选择角色 Character" : "选择CP Couple"}`;
-        renderLocalSwitchDom(gameItem, panelDom);
+        // 修复：传入本面板内部的local‑switch‑wrap dom
+        const localWrap = panelDom.querySelector(".local‑switch‑wrap");
+        renderLocalSwitchDom(gameItem, localWrap);
 
         const allChars = getAllGameChar(gameInfo);
         const femaleChars = allChars.filter(c => c.gender === "female");
@@ -207,7 +209,7 @@ export function initPage(Core = {}) {
             }
         });
 
-        // ✅ 卡片内滑出面板角色勾选事件委托：勾选完成立刻关闭当前面板
+        // ✅ 卡片内滑出面板角色勾选事件委托：勾选完成 → 修改数据关闭面板
         document.addEventListener("click", function(e){
             const charItem = e.target.closest(".char‑slide‑panel‑char .char‑item, .char‑slide‑panel‑cp .char‑item");
             if(!charItem) return;
@@ -220,24 +222,38 @@ export function initPage(Core = {}) {
             const idx = gameItem.selectChars.indexOf(cid);
             if (idx > -1) {
                 gameItem.selectChars.splice(idx, 1);
-                charItem.classList.remove("selected");
             } else {
                 gameItem.selectChars.push(cid);
-                charItem.classList.add("selected");
+            }
+
+            // 判断是char还是cp面板，关闭对应面板
+            const panel = charItem.closest(".char‑slide‑panel‑char");
+            if(panel){
+                gameItem.charPanelOpen = false;
+            }else{
+                gameItem.cpPanelOpen = false;
             }
             saveData();
-
-            // 勾选完成 → 关闭当前所属滑出面板
-            const thisPanel = charItem.closest(".char‑slide‑panel‑char, .char‑slide‑panel‑cp");
-            if(thisPanel) thisPanel.classList.add("hide‑block");
+            renderAddedGame();
         });
 
-        // ✅面板内部关闭按钮
+        // ✅面板内部关闭按钮（×），数据驱动关闭面板
         document.addEventListener("click", function(e){
             const closeBtn = e.target.closest(".panel‑close‑btn");
             if(!closeBtn) return;
             const panel = closeBtn.closest(".char‑slide‑panel‑char, .char‑slide‑panel‑cp");
-            if(panel) panel.classList.add("hide‑block");
+            if(!panel) return;
+            const card = panel.closest(".added‑game‑card");
+            const gid = card.dataset.gameId;
+            const gameItem = appData.gameList.find(g=>g.gameId === gid);
+            if(!gameItem) return;
+            if(panel.classList.contains("char‑slide‑panel‑char")){
+                gameItem.charPanelOpen = false;
+            }else{
+                gameItem.cpPanelOpen = false;
+            }
+            saveData();
+            renderAddedGame();
         });
 
         /**
@@ -261,6 +277,13 @@ export function initPage(Core = {}) {
 
         // 加载本地存储
         loadData();
+        // 兜底：旧本地存储数据补charPanelOpen、cpPanelOpen字段
+        if(Array.isArray(appData.gameList)){
+            appData.gameList.forEach(g=>{
+                if(typeof g.charPanelOpen !== "boolean") g.charPanelOpen = false;
+                if(typeof g.cpPanelOpen !== "boolean") g.cpPanelOpen = false;
+            });
+        }
 
         // 回填基础资料表单
         if (el.inputNick) el.inputNick.value = appData.baseInfo?.nick ?? "";
@@ -378,6 +401,8 @@ export function initPage(Core = {}) {
                         gameId: gid,
                         fold: false,
                         expand: false,
+                        charPanelOpen: false,
+                        cpPanelOpen: false,
                         localHideChar: false,
                         localFD: false,
                         loveRate: 0,
@@ -416,8 +441,9 @@ export function initPage(Core = {}) {
                     heartHtml += `<span class="heart ${gameItem.loveRate >= i ? 'active' : ''}" data‑val="${i}">♥</span>`;
                 }
 
-                // 卡片折叠状态：面板强制隐藏
-                const panelHideClass = gameItem.fold ? "hide‑block" : "";
+                // 根据数据字段输出面板显隐class，fold优先级最高
+                const charPanelClass = (gameItem.fold || !gameItem.charPanelOpen) ? "hide‑block" : "";
+                const cpPanelClass = (gameItem.fold || !gameItem.cpPanelOpen) ? "hide‑block" : "";
 
                 html += `
 <div class="added‑game‑card" data‑game‑id="${gameItem.gameId}">
@@ -441,13 +467,13 @@ export function initPage(Core = {}) {
 
     <div class="game‑card‑block‑item char‑section block‑margin‑gap">
         <button class="open‑char‑pool" data‑gid="${gameItem.gameId}">选择角色 Character</button>
-        ${getInnerSlidePanelHtml("char").replace('hide‑block', `hide‑block ${panelHideClass}`)}
+        ${getInnerSlidePanelHtml("char").replace('hide‑block', charPanelClass)}
         <div class="game‑card‑empty‑tip char‑card‑wrapper char‑selected‑row" data‑gid="${gameItem.gameId}">${renderSelectedChar(gameItem, gameInfo) || `<div class="empty‑hint">暂未选择角色</div>`}</div>
     </div>
 
     <div class="game‑card‑block‑item cp‑group block‑margin‑gap">
         <button class="open‑cp‑pool" data‑gid="${gameItem.gameId}">选择角色 Couple</button>
-        ${getInnerSlidePanelHtml("cp").replace('hide‑block', `hide‑block ${panelHideClass}`)}
+        ${getInnerSlidePanelHtml("cp").replace('hide‑block', cpPanelClass)}
         <div class="game‑card‑empty‑tip cp‑render‑box" data‑gid="${gameItem.gameId}">${renderCP(gameItem, gameInfo) || `<div class="empty‑hint">暂未选择角色</div>`}</div>
     </div>
 
@@ -505,45 +531,33 @@ export function initPage(Core = {}) {
                 })
             })
 
-            // Character按钮：切换本卡片内 char滑出面板
+            // Character按钮：切换本卡片内 char滑出面板（数据驱动）
             document.querySelectorAll(".open‑char‑pool").forEach(btn => {
                 btn.onclick = function () {
                     const gid = this.dataset.gid;
-                    const card = this.closest(".added‑game‑card");
-                    if(!card) return;
-                    const panel = card.querySelector(".char‑slide‑panel‑char");
-                    if(!panel) return;
-                    if(!panel.classList.contains("hide‑block")){
-                        panel.classList.add("hide‑block");
-                        return;
+                    const gameItem = appData.gameList.find(g=>g.gameId === gid);
+                    if(!gameItem) return;
+                    gameItem.charPanelOpen = !gameItem.charPanelOpen;
+                    if(gameItem.charPanelOpen){
+                        gameItem.cpPanelOpen = false;
                     }
-                    // 关闭同卡片另一个cp面板
-                    const cpPanel = card.querySelector(".char‑slide‑panel‑cp");
-                    if(cpPanel) cpPanel.classList.add("hide‑block");
-
-                    panel.classList.remove("hide‑block");
-                    renderCharSelectPanel(card, gid, "char", panel);
+                    saveData();
+                    renderAddedGame();
                 }
             })
 
-            // Couple按钮：切换本卡片内 cp滑出面板
+            // Couple按钮：切换本卡片内 cp滑出面板（数据驱动）
             document.querySelectorAll(".open‑cp‑pool").forEach(btn => {
                 btn.onclick = function () {
                     const gid = this.dataset.gid;
-                    const card = this.closest(".added‑game‑card");
-                    if(!card) return;
-                    const panel = card.querySelector(".char‑slide‑panel‑cp");
-                    if(!panel) return;
-                    if(!panel.classList.contains("hide‑block")){
-                        panel.classList.add("hide‑block");
-                        return;
+                    const gameItem = appData.gameList.find(g=>g.gameId === gid);
+                    if (!gameItem) return;
+                    gameItem.cpPanelOpen = !gameItem.cpPanelOpen;
+                    if(gameItem.cpPanelOpen){
+                        gameItem.charPanelOpen = false;
                     }
-                    // 关闭同卡片另一个char面板
-                    const charPanel = card.querySelector(".char‑slide‑panel‑char");
-                    if(charPanel) charPanel.classList.add("hide‑block");
-
-                    panel.classList.remove("hide‑block");
-                    renderCharSelectPanel(card, gid, "cp", panel);
+                    saveData();
+                    renderAddedGame();
                 }
             })
         }
