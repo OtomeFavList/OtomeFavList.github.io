@@ -120,6 +120,7 @@ export function initPage(Core) {
                     this.classList.add("selected");
                 }
                 saveData();
+                closeCharSelectModal();
             }
         })
     }
@@ -489,6 +490,11 @@ export function initPage(Core) {
             document.querySelectorAll(".open‑char‑pool").forEach(btn => {
                 btn.onclick = function () {
                     const gid = this.dataset.gid;
+                    const modal = document.getElementById("char-select-modal");
+                    if(modal && modal.classList.contains("active")){
+                        closeCharSelectModal();
+                        return;
+                    }
                     Core.charPoolMode = "char";
                     openCharSelectModal(gid);
                 }
@@ -496,6 +502,11 @@ export function initPage(Core) {
             document.querySelectorAll(".open‑cp‑pool").forEach(btn => {
                 btn.onclick = function () {
                     const gid = this.dataset.gid;
+                    const modal = document.getElementById("char-select-modal");
+                    if(modal && modal.classList.contains("active")){
+                        closeCharSelectModal();
+                        return;
+                    }
                     Core.charPoolMode = "cp";
                     openCharSelectModal(gid);
                 }
