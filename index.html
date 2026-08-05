@@ -155,7 +155,22 @@
     </div>
 </div>
 
-<!-- JS入口模块，main.js内bootstrapCore会调用script.js的initPage -->
+<!-- 角色选择弹窗 -->
+<div class="modal-mask" id="char-select-modal">
+    <div class="modal-box">
+        <div class="panel-head">
+            <h3>选择角色</h3>
+            <button class="panel-close-btn" id="char-modal-close">×</button>
+        </div>
+        <div id="char-select-modal-body"></div>
+        <div class="modal-btns">
+            <button id="char-modal-cancel">取消</button>
+            <button id="char-modal-ok">确定</button>
+        </div>
+    </div>
+</div>
+
+<!-- JS入口模块 -->
 <script type="module">
 import { bootstrapCore } from "./js/main.js";
 document.addEventListener("DOMContentLoaded", async () => {
