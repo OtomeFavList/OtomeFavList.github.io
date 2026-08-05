@@ -21,8 +21,7 @@ import {
     isTodayConfirmed,
     saveConfirmDate,
     renderGameSelectItem,
-    bindDynamicGameCardSwitchEvents,
-    renderLocalSwitchModalContent
+    bindDynamicGameCardSwitchEvents
 } from './main.js';
 
 export function initPage(Core = {}) {
@@ -49,9 +48,9 @@ export function initPage(Core = {}) {
         if (!titleEl || !heroineBox || !heroListBox) return;
 
         titleEl.innerText = `${gameInfo.name} — ${mode === "char" ? "选择角色 Character" : "选择CP Couple"}`;
-        // 修复：传入本面板内部的local-switch-wrap dom
+        // 废弃：renderLocalSwitchModalContent，开关已经渲染在卡片头部，此处不再调用
         const localWrap = panelDom.querySelector(".local-switch-wrap");
-        renderLocalSwitchModalContent(gameItem, localWrap);
+        if(localWrap) localWrap.innerHTML = "";
 
         const allChars = getAllGameChar(gameInfo);
         const femaleChars = allChars.filter(c => c.gender === "female");
