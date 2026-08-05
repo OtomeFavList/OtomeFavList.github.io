@@ -409,20 +409,20 @@ export function getAllGameChar(gameInfo) {
 /**
  * 在角色选择弹窗内渲染本游戏局部开关
  * @param {object} gameItem appData.gameList单条游戏条目
- * @param {HTMLElement|null} wrapDom 传入面板内部.local‑switch‑wrap，不传则回退旧全局id
+ * @param {HTMLElement|null} wrapDom 传入面板内部.local-switch-wrap，不传则回退旧全局id
  */
 export function renderLocalSwitchDom(gameItem, wrapDom = null) {
-    const wrap = wrapDom ?? document.getElementById("modal‑local‑switch‑wrap");
+    const wrap = wrapDom ?? document.getElementById("modal-local-switch-wrap");
     if (!wrap) return;
     wrap.innerHTML = `
 <label class="switch">
-    <input type="checkbox" class="modal‑local‑hide‑char" ${gameItem.localHideChar ? "checked" : ""}>
+    <input type="checkbox" class="modal-local-hide-char" ${gameItem.localHideChar ? "checked" : ""}>
     <span class="slider"></span>
 </label>
 <span>本游戏显示隐藏角色</span>
 
 <label class="switch">
-    <input type="checkbox" class="modal‑local‑fd" ${gameItem.localFD ? "checked" : ""}>
+    <input type="checkbox" class="modal-local-fd" ${gameItem.localFD ? "checked" : ""}>
     <span class="slider"></span>
 </label>
 <span>本游戏显示FD续作角色</span>
@@ -469,8 +469,8 @@ function buildCoreContext() {
  * 根据appData数据，更新页面上两个全局滑块勾选状态
  */
 function renderGlobalSwitchDom() {
-    const hideCharInput = document.getElementById("global‑hide‑char");
-    const fdInput = document.getElementById("global‑fd‑game");
+    const hideCharInput = document.getElementById("global-hide-char");
+    const fdInput = document.getElementById("global-fd-game");
     // 加固：严格读取appData，不读取DOM旧状态
     if(hideCharInput) hideCharInput.checked = !!appData.globalHideChar;
     if(fdInput) fdInput.checked = !!appData.globalFD;
@@ -483,7 +483,7 @@ function renderGlobalSwitchDom() {
  */
 export function bindDynamicGameCardSwitchEvents(){
     const wrap = document.querySelector(".wrap");
-    const spoilerModal = document.getElementById("spoiler‑modal");
+    const spoilerModal = document.getElementById("spoiler-modal");
     if(!wrap || !spoilerModal){
         console.warn("bindDynamicGameCardSwitchEvents：wrap或modal不存在，跳过绑定");
         return;
@@ -494,13 +494,13 @@ export function bindDynamicGameCardSwitchEvents(){
 }
 
 function wrapClickHandler(e){
-    const spoilerModal = document.getElementById("spoiler‑modal");
+    const spoilerModal = document.getElementById("spoiler-modal");
     if(!spoilerModal) return;
 
     // -------- 新增：卡片头部按钮：收藏、折叠、删除 --------
-    const favBtn = e.target.closest(".btn‑fav");
+    const favBtn = e.target.closest(".btn-fav");
     if(favBtn){
-        const gameCardEl = favBtn.closest(".game‑card");
+        const gameCardEl = favBtn.closest(".game-card");
         const idx = Number(gameCardEl.dataset.gameidx);
         const gameItem = appData.gameList[idx];
         if(!gameItem) return;
@@ -510,7 +510,7 @@ function wrapClickHandler(e){
         return;
     }
 
-    const toggleCharBtn = e.target.closest(".btn‑toggle‑char");
+    const toggleCharBtn = e.target.closest(".btn-toggle-char");
     if(toggleCharBtn){
         const idx = Number(toggleCharBtn.dataset.gameidx);
         const gameItem = appData.gameList[idx];
@@ -521,7 +521,7 @@ function wrapClickHandler(e){
         return;
     }
 
-    const toggleCpBtn = e.target.closest(".btn‑toggle‑cp");
+    const toggleCpBtn = e.target.closest(".btn-toggle-cp");
     if(toggleCpBtn){
         const idx = Number(toggleCpBtn.dataset.gameidx);
         const gameItem = appData.gameList[idx];
@@ -532,7 +532,7 @@ function wrapClickHandler(e){
         return;
     }
 
-    const delBtn = e.target.closest(".btn‑delete‑game");
+    const delBtn = e.target.closest(".btn-delete-game");
     if(delBtn){
         const idx = Number(delBtn.dataset.gameidx);
         appData.gameList.splice(idx,1);
@@ -542,13 +542,13 @@ function wrapClickHandler(e){
     }
 
     // -------- Character / Couple 按钮点击处理【新增】 --------
-    const charBtn = e.target.closest(".btn‑character, .btn‑couple");
+    const charBtn = e.target.closest(".btn-character, .btn-couple");
     if(charBtn){
-        const gameCardEl = charBtn.closest(".game‑card");
+        const gameCardEl = charBtn.closest(".game-card");
         if(!gameCardEl) return;
         // 赋值当前编辑游戏ID
         currentEditGameId = gameCardEl.dataset.gameid;
-        if(charBtn.classList.contains("btn‑character")){
+        if(charBtn.classList.contains("btn-character")){
             charPoolMode = "char";
         }else{
             charPoolMode = "cp";
@@ -562,16 +562,16 @@ function wrapClickHandler(e){
     }
 
     // -------- 角色图片切换按钮处理 --------
-    const switchBtn = e.target.closest(".char‑switch‑prev,.char‑switch‑next");
+    const switchBtn = e.target.closest(".char-switch-prev,.char-switch-next");
     if(switchBtn){
-        const cardEl = switchBtn.closest(".char‑card‑item");
+        const cardEl = switchBtn.closest(".char-card-item");
         if(!cardEl) return;
         const gameId = cardEl.dataset.gameId;
         const charId = cardEl.dataset.charId;
         const totalImg = Number(cardEl.dataset.totalImg) || 1;
-        const saveKey = `${gameId}‑${charId}`;
+        const saveKey = `${gameId}-${charId}`;
         let currentIdx = Number(appData.charImageSelect[saveKey] ?? 0);
-        if(switchBtn.classList.contains("char‑switch‑prev")){
+        if(switchBtn.classList.contains("char-switch-prev")){
             currentIdx = currentIdx - 1;
             if(currentIdx < 0) currentIdx = totalImg -1;
         }else{
@@ -586,12 +586,12 @@ function wrapClickHandler(e){
     }
 
     // -------- 游戏局部开关处理 --------
-    const targetInput = e.target.closest(".game‑hide‑char,.game‑fd‑switch,.modal‑local‑hide‑char,.modal‑local‑fd");
+    const targetInput = e.target.closest(".game-hide-char,.game-fd-switch,.modal-local-hide-char,.modal-local-fd");
     if(!targetInput) return;
 
     let idx;
     let gameItem;
-    if(targetInput.classList.contains("modal‑local‑hide‑char") || targetInput.classList.contains("modal‑local‑fd")){
+    if(targetInput.classList.contains("modal-local-hide-char") || targetInput.classList.contains("modal-local-fd")){
         gameItem = appData.gameList.find(g=>g.gameId === currentEditGameId);
         if(!gameItem) return;
         idx = appData.gameList.indexOf(gameItem);
@@ -603,7 +603,7 @@ function wrapClickHandler(e){
 
     // 已经勾选：用户要关闭，直接生效，不弹窗
     if(targetInput.checked === true){
-        if(targetInput.classList.contains("game‑hide‑char") || targetInput.classList.contains("modal‑local‑hide‑char")){
+        if(targetInput.classList.contains("game-hide-char") || targetInput.classList.contains("modal-local-hide-char")){
             gameItem.localHideChar = false;
         }else{
             gameItem.localFD = false;
@@ -617,7 +617,7 @@ function wrapClickHandler(e){
     e.preventDefault();
     // 判断今日是否已经确认过单机剧透：确认过直接开启，不弹窗
     if(localSwitchIsConfirmedToday()){
-        if(targetInput.classList.contains("game‑hide‑char") || targetInput.classList.contains("modal‑local‑hide‑char")){
+        if(targetInput.classList.contains("game-hide-char") || targetInput.classList.contains("modal-local-hide-char")){
             gameItem.localHideChar = true;
         }else{
             gameItem.localFD = true;
@@ -628,7 +628,7 @@ function wrapClickHandler(e){
     }
 
     // 今日未确认，弹出剧透弹窗
-    if(targetInput.classList.contains("game‑hide‑char") || targetInput.classList.contains("modal‑local‑hide‑char")){
+    if(targetInput.classList.contains("game-hide-char") || targetInput.classList.contains("modal-local-hide-char")){
         window.pendingGameOp = { type:"hideChar", idx };
     }else{
         window.pendingGameOp = { type:"fd", idx };
@@ -645,11 +645,11 @@ function wrapClickHandler(e){
  * 恢复取消按钮完整逻辑
  */
 function bindGlobalSwitchSpoilerEvents() {
-    const hideCharInput = document.getElementById("global‑hide‑char");
-    const fdInput = document.getElementById("global‑fd‑game");
-    const spoilerModal = document.getElementById("spoiler‑modal");
-    const spoilerConfirmBtn = document.getElementById("spoiler‑confirm");
-    const spoilerCancelBtn = document.getElementById("spoiler‑cancel");
+    const hideCharInput = document.getElementById("global-hide-char");
+    const fdInput = document.getElementById("global-fd-game");
+    const spoilerModal = document.getElementById("spoiler-modal");
+    const spoilerConfirmBtn = document.getElementById("spoiler-confirm");
+    const spoilerCancelBtn = document.getElementById("spoiler-cancel");
 
     if(!hideCharInput || !fdInput || !spoilerModal || !spoilerConfirmBtn || !spoilerCancelBtn){
         console.warn("bindGlobalSwitchSpoilerEvents：部分DOM缺失，全局开关弹窗未挂载");
@@ -696,7 +696,7 @@ function bindGlobalSwitchSpoilerEvents() {
     // 弹窗确认【扩展：同时处理全局 / 动态卡片局部】
     spoilerConfirmBtn.onclick = null;
     spoilerConfirmBtn.addEventListener("click", function(){
-        // 优先处理动态游戏卡片操作（含弹窗内modal‑local‑*开关）
+        // 优先处理动态游戏卡片操作（含弹窗内modal-local-*开关）
         if(window.pendingGameOp){
             const op = window.pendingGameOp;
             const g = appData.gameList[op.idx];
@@ -745,11 +745,11 @@ function bindGlobalSwitchSpoilerEvents() {
 
 
 /**
- * renderAddedGame：渲染全部已添加游戏卡片到 #added‑game‑container
+ * renderAddedGame：渲染全部已添加游戏卡片到 #added-game-container
  * 完整版本：包含爱心、折叠、删除按钮，保留原有全部功能
  */
 export function renderAddedGame(){
-    const container = document.getElementById("added‑game‑container");
+    const container = document.getElementById("added-game-container");
     if(!container) return;
     container.innerHTML = "";
 
@@ -765,47 +765,47 @@ export function renderAddedGame(){
         const cpOpen = !!gameItem.cpPanelOpen;
 
         const domStr = `
-<div class="game‑card" data‑gameid="${gameItem.gameId}" data‑gameidx="${idx}">
+<div class="game-card" data-gameid="${gameItem.gameId}" data-gameidx="${idx}">
     <!-- 卡片头部操作栏：爱心、折叠、删除 -->
-    <div class="game‑card‑header">
-        <div class="game‑card‑title‑wrap">
-            <h3 class="game‑card‑title">${gameInfo.name}</h3>
+    <div class="game-card-header">
+        <div class="game-card-title-wrap">
+            <h3 class="game-card-title">${gameInfo.name}</h3>
         </div>
-        <div class="game‑card‑actions">
-            <button class="btn‑fav ${gameItem.isFav ? "active" : ""}" title="收藏爱心">♥</button>
-            <button class="btn‑toggle‑char" data‑gameidx="${idx}" title="折叠Character面板">${charOpen ? "▼" : "▶"}</button>
-            <button class="btn‑toggle‑cp" data‑gameidx="${idx}" title="折叠Couple面板">${cpOpen ? "▼" : "▶"}</button>
-            <button class="btn‑delete‑game" data‑gameidx="${idx}" title="删除本游戏">✕</button>
+        <div class="game-card-actions">
+            <button class="btn-fav ${gameItem.isFav ? "active" : ""}" title="收藏爱心">♥</button>
+            <button class="btn-toggle-char" data-gameidx="${idx}" title="折叠Character面板">${charOpen ? "▼" : "▶"}</button>
+            <button class="btn-toggle-cp" data-gameidx="${idx}" title="折叠Couple面板">${cpOpen ? "▼" : "▶"}</button>
+            <button class="btn-delete-game" data-gameidx="${idx}" title="删除本游戏">✕</button>
         </div>
     </div>
 
-    <div class="game‑switch‑row">
+    <div class="game-switch-row">
         <label class="switch">
-            <input type="checkbox" class="game‑hide‑char" data‑gameidx="${idx}" ${gameItem.localHideChar?"checked":""}>
+            <input type="checkbox" class="game-hide-char" data-gameidx="${idx}" ${gameItem.localHideChar?"checked":""}>
             <span class="slider"></span>
         </label>
         <span>本游戏隐藏角色</span>
 
         <label class="switch">
-            <input type="checkbox" class="game‑fd‑switch" data‑gameidx="${idx}" ${gameItem.localFD?"checked":""}>
+            <input type="checkbox" class="game-fd-switch" data-gameidx="${idx}" ${gameItem.localFD?"checked":""}>
             <span class="slider"></span>
         </label>
         <span>本游戏FD角色</span>
     </div>
 
-    <div class="game‑card‑buttons">
-        <button class="btn‑character">Character</button>
-        <button class="btn‑couple">Couple</button>
+    <div class="game-card-buttons">
+        <button class="btn-character">Character</button>
+        <button class="btn-couple">Couple</button>
     </div>
 
-    <div class="char‑panel‑wrap ${charOpen ? "" : "panel‑collapsed"}">
+    <div class="char-panel-wrap ${charOpen ? "" : "panel-collapsed"}">
         <h4>Character</h4>
-        <div class="char‑list‑wrap">${charHtml}</div>
+        <div class="char-list-wrap">${charHtml}</div>
     </div>
 
-    <div class="cp‑panel‑wrap ${cpOpen ? "" : "panel‑collapsed"}">
+    <div class="cp-panel-wrap ${cpOpen ? "" : "panel-collapsed"}">
         <h4>Couple</h4>
-        <div class="cp‑wrap">${cpHtml}</div>
+        <div class="cp-wrap">${cpHtml}</div>
     </div>
 </div>
         `;
