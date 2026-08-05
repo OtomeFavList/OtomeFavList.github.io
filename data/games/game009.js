@@ -77,8 +77,8 @@ const gameData = {
             images: [
                 { srcList: ["img/char/009/Shelby.jpg","img/char/009/Shelby2.jpg"], type: "base" }
             ]
-        }
-      // 彼得‧弗拉修
+        }, // ✅补逗号
+        // 彼得‧弗拉修
         {
             id: "g009_h01",
             name: "彼得‧弗拉修",
@@ -86,7 +86,7 @@ const gameData = {
             isHidden: true,
             isFD: true,
             images: [
-                { src: ["img/char/009/Peter.jpg","img/char/009/Peter2.jpg"], type: "base" }
+                { srcList: ["img/char/009/Peter.jpg","img/char/009/Peter2.jpg"], type: "base" } // ✅src→srcList
             ]
         },
         // 伊萊‧奧马尔
@@ -97,9 +97,9 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { src: ["img/char/009/Eli.png"], type: "base" }
+                { srcList: ["img/char/009/Eli.png"], type: "base" } // ✅src→srcList
             ]
-        }
+        }, // ✅补逗号
         // 梅列尼斯‧莱文
         {
             id: "g009_fd02",
@@ -108,9 +108,9 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { src: ["img/char/009/Merenice.jpg"], type: "base" }
+                { srcList: ["img/char/009/Merenice.jpg"], type: "base" } // ✅src→srcList
             ]
-        }
+        }, // ✅补逗号
         // 欧文·赫里欧
         {
             id: "g009_fd03",
@@ -119,7 +119,7 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { src: ["img/char/009/Owen.jpg","img/char/009/Owen2.jpg"], type: "base" }
+                { srcList: ["img/char/009/Owen.jpg","img/char/009/Owen2.jpg"], type: "base" } // ✅src→srcList
             ]
         }
     ]
