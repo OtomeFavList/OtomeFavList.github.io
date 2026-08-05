@@ -61,6 +61,8 @@ export function loadData() {
                 if(typeof g.charPanelOpen !== "boolean") g.charPanelOpen = false;
                 if(typeof g.cpPanelOpen !== "boolean") g.cpPanelOpen = false;
                 if(typeof g.isFav !== "boolean") g.isFav = false;
+                // 兜底评分爱心字段
+                if(typeof g.loveRate !== "number") g.loveRate = 0;
             })
         }
     } catch (e) {
@@ -269,7 +271,7 @@ export function renderGameSelectItem(game) {
  * @returns {string} html字符串
  */
 export function renderSelectedChar(gameItem, gameInfo) {
-    if (!gameInfo?.charList || !gameItem) return "<span>暂无搭配角色</span>";
+    if (!gameInfo?.charList || !gameItem) return `<div class="empty-hint">暂未添加角色</div>`;
     let html = "";
     const globalHide = appData.globalHideChar;
     const globalFD = appData.globalFD;
@@ -303,7 +305,7 @@ export function renderSelectedChar(gameItem, gameInfo) {
         </div>
         `;
     })
-    return html || "<span>暂无搭配角色</span>";
+    return html || `<div class="empty-hint">暂未添加角色</div>`;
 }
 
 /**
@@ -313,7 +315,7 @@ export function renderSelectedChar(gameItem, gameInfo) {
  * @returns {string} html字符串
  */
 export function renderCP(gameItem, gameInfo) {
-    if (!gameInfo?.charList || !gameItem) return "<span>暂无搭配角色</span>";
+    if (!gameInfo?.charList || !gameItem) return `<div class="empty-hint">暂未添加角色</div>`;
     let html = "";
     const globalHide = appData.globalHideChar;
     const globalFD = appData.globalFD;
@@ -382,7 +384,7 @@ export function renderCP(gameItem, gameInfo) {
         </div>
         `;
     })
-    return html || "<span>暂无搭配角色</span>";
+    return html || `<div class="empty-hint">暂未添加角色</div>`;
 }
 
 /**
@@ -746,7 +748,7 @@ function bindGlobalSwitchSpoilerEvents() {
 
 /**
  * renderAddedGame：渲染全部已添加游戏卡片到 #added-game-container
- * 完整版本：包含爱心、折叠、删除按钮，保留原有全部功能
+ * 完整版本：包含五颗评分爱心，DOM顺序重排，文案修改
  */
 export function renderAddedGame(){
     const container = document.getElementById("added-game-container");
@@ -766,46 +768,53 @@ export function renderAddedGame(){
 
         const domStr = `
 <div class="game-card" data-gameid="${gameItem.gameId}" data-gameidx="${idx}">
-    <!-- 卡片头部操作栏：爱心、折叠、删除 -->
+    <!-- 游戏名称 + 五颗爱心在同一行 -->
     <div class="game-card-header">
-        <div class="game-card-title-wrap">
-            <h3 class="game-card-title">${gameInfo.name}</h3>
+        <h3 class="game-card-title">${gameInfo.name}</h3>
+        <div class="game-card-hearts">
+            <span class="heart ${gameItem.loveRate >= 1 ? "active" : ""}" data-val="1">♥</span>
+            <span class="heart ${gameItem.loveRate >= 2 ? "active" : ""}" data-val="2">♥</span>
+            <span class="heart ${gameItem.loveRate >= 3 ? "active" : ""}" data-val="3">♥</span>
+            <span class="heart ${gameItem.loveRate >= 4 ? "active" : ""}" data-val="4">♥</span>
+            <span class="heart ${gameItem.loveRate >= 5 ? "active" : ""}" data-val="5">♥</span>
         </div>
+
         <div class="game-card-actions">
-            <button class="btn-fav ${gameItem.isFav ? "active" : ""}" title="收藏爱心">♥</button>
-            <button class="btn-toggle-char" data-gameidx="${idx}" title="折叠Character面板">${charOpen ? "▼" : "▶"}</button>
-            <button class="btn-toggle-cp" data-gameidx="${idx}" title="折叠Couple面板">${cpOpen ? "▼" : "▶"}</button>
             <button class="btn-delete-game" data-gameidx="${idx}" title="删除本游戏">✕</button>
         </div>
     </div>
 
+    <!-- 单独显示隐藏角色 / 单独显示续作FD角色 -->
     <div class="game-switch-row">
         <label class="switch">
             <input type="checkbox" class="game-hide-char" data-gameidx="${idx}" ${gameItem.localHideChar?"checked":""}>
             <span class="slider"></span>
         </label>
-        <span>本游戏隐藏角色</span>
+        <span>单独显示隐藏角色</span>
 
         <label class="switch">
             <input type="checkbox" class="game-fd-switch" data-gameidx="${idx}" ${gameItem.localFD?"checked":""}>
             <span class="slider"></span>
         </label>
-        <span>本游戏FD角色</span>
+        <span>单独显示续作/FD角色</span>
     </div>
 
-    <div class="game-card-buttons">
+    <!-- Character区域 -->
+    <div class="game-card-section">
         <button class="btn-character">Character</button>
+        <h4 class="section-title">Character</h4>
+        <div class="char-list-wrap">
+            ${gameItem.selectChars?.length ? charHtml : `<div class="empty-hint">暂未添加角色</div>`}
+        </div>
+    </div>
+
+    <!-- Couple区域 -->
+    <div class="game-card-section">
         <button class="btn-couple">Couple</button>
-    </div>
-
-    <div class="char-panel-wrap ${charOpen ? "" : "panel-collapsed"}">
-        <h4>Character</h4>
-        <div class="char-list-wrap">${charHtml}</div>
-    </div>
-
-    <div class="cp-panel-wrap ${cpOpen ? "" : "panel-collapsed"}">
-        <h4>Couple</h4>
-        <div class="cp-wrap">${cpHtml}</div>
+        <h4 class="section-title">Couple</h4>
+        <div class="cp-wrap">
+            ${gameItem.cpList?.length ? cpHtml : `<div class="empty-hint">暂未添加角色</div>`}
+        </div>
     </div>
 </div>
         `;
