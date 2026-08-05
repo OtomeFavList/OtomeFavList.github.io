@@ -137,6 +137,9 @@ export function initPage(Core = {}) {
 
     // ===================== 页面启动bootstrap，UI渲染、表单、导出、卡片事件 =====================
     async function bootstrap() {
+        // 【已插入】全局钩子，供main.js调用刷新卡片UI
+        window.refreshGameCardUi = renderAddedGame;
+
         // DOM元素缓存，移除全局char-slide-panel
         const el = {
             globalHideChar: document.getElementById("global-hide-char"),
