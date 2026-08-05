@@ -347,22 +347,44 @@ button:hover{
     padding:18px;
     margin:16px 0;
 }
-/* JS渲染头部：收藏、折叠、删除按钮 */
+/* JS渲染头部：名称 + 五颗爱心 + 删除按钮 */
 .game-card-header {
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:12px;
-    margin-bottom:10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
 }
-.game-card-title-wrap h3.game-card-title{
-    font-size:20px;
-    color:#b33a3a;
+
+.game-card-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #c98fac;
+    margin: 0;
 }
+
+.game-card-hearts {
+    display: flex;
+    gap: 4px;
+}
+
+.game-card-hearts .heart {
+    font-size: 26px;
+    color: #ccc;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.game-card-hearts .heart.active {
+    color: #e895a8;
+}
+
 .game-card-actions {
-    display:flex;
-    gap:6px;
+    display: flex;
+    gap: 6px;
 }
+
 .btn-fav {
     background:transparent;
     color:#ccc;
@@ -380,17 +402,49 @@ button:hover{
 }
 
 .game-switch-row{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    margin:10px 0;
-    flex-wrap:wrap;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 10px 0 16px;
+    flex-wrap: wrap;
 }
+.game-switch-row span {
+    font-size: 14px;
+    color: #666;
+}
+
 .game-card-buttons{
     display:flex;
     gap:10px;
     margin:12px 0;
 }
+
+/* Character / CP 模块容器 */
+.game-card-section {
+    margin-bottom: 20px;
+}
+.game-card-section .btn-character,
+.game-card-section .btn-couple {
+    margin-bottom: 10px;
+}
+.section-title {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    font-weight: normal;
+    color: #666;
+}
+.char-list-wrap,
+.cp-wrap {
+    min-height: 220px;
+}
+
+/* 空状态提示 */
+.empty-hint {
+    font-size: 16px;
+    color: #666;
+    padding: 12px 0;
+}
+
 /* 折叠面板类 */
 .panel-collapsed .char-list-wrap,
 .panel-collapsed .cp-wrap {
@@ -753,16 +807,6 @@ h2{
     gap:14px;
     flex-wrap:wrap;
     margin-bottom:12px;
-}
-.game-card-title {
-    /* 和昵称同颜色，加粗，二级标题 */
-    color:#c98fac;
-    font-weight:bold;
-    font-size:22px;
-}
-.heart-rate {
-    display:flex;
-    gap:4px;
 }
 .game-switch-group {
     display:flex;
