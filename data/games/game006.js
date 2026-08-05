@@ -77,8 +77,8 @@ const gameData = {
             images: [
                 { srcList: ["img/char/006/Rikuu.jpg","img/char/006/Rikuu2.jpg"], type: "base" }
             ]
-        }
-      // 缘
+        }, // ←===【修复：补上这里缺失的逗号】===
+        // 缘
         {
             id: "g006_m06",
             name: "缘",
