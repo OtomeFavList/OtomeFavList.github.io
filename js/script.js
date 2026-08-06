@@ -686,5 +686,6 @@ export function initPage(Core = {}) {
   window.openCharSelectModal = openCharSelectModal;
   window.renderCharSelectList = renderCharSelectList;
 
-  bootstrap();
+  // 不再此处直接调用bootstrap，交给index.html时序控制
+  window.uiBootstrap = bootstrap;
 }
