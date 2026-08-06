@@ -159,14 +159,21 @@
 
 <script type="module">
 import { bootstrapCore } from "./js/main.js";
+import { initPage } from "./js/script.js";
 
 (async function(){
     await new Promise(resolve=>document.addEventListener("DOMContentLoaded",resolve));
-    // games.js已经提前加载完毕，调用全局暴露loadAllGames
+    // 先初始化main层
+    await bootstrapCore();
+    // 加载游戏数据
     if(typeof window.loadAllGames === "function"){
         await window.loadAllGames();
     }
-    await bootstrapCore();
+    // 游戏数据全部加载完毕，再初始化UI层
+    initPage();
+    if(typeof window.uiBootstrap === "function"){
+        await window.uiBootstrap();
+    }
 })();
 </script>
 
