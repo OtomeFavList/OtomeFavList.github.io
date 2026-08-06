@@ -77,7 +77,7 @@ const gameData = {
             name: "UKYO",
             gender: "male",
             isHidden: true,
-            isFD: false,
+            isFD: true,
             images: [
                 { src: ["img/char/027/Ukyo.jpg"], type: "base" }
                 { src: ["img/char/027/Ukyo2.jpg","img/char/027/Ukyo3.jpg","img/char/027/Ukyo4.jpg","img/char/027/Ukyo5.jpg"], type: "fd" },     // 需要开启隐藏角色开关才展示的图片
