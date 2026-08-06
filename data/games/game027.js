@@ -32,7 +32,7 @@ const gameData = {
             isFD: false,
             images: [
                 { src: ["img/char/027/Ikki.jpg","img/char/027/Ikki2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { src: ["img/char/027/Ikki3.jpg","img/char/027/Ikki4.jpg","img/char/027/Ikki5.jpg","img/char/027/Ikki6.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
+                { src: ["img/char/027/Ikki3.jpg","img/char/027/Ikki4.jpg","img/char/027/Ikki5.jpg","img/char/027/Ikki6.jpg"], type: "fd" },     // 需要开启隐藏角色开关才展示的图片
             ]
         },
         // KENT
@@ -44,7 +44,7 @@ const gameData = {
             isFD: false,
             images: [
                 { src: ["img/char/027/Kent.jpg","img/char/027/Kent2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { src: ["img/char/027/Kent3.jpg","img/char/027/Kent4.jpg","img/char/027/Kent5.jpg","img/char/027/Kent6.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
+                { src: ["img/char/027/Kent3.jpg","img/char/027/Kent4.jpg","img/char/027/Kent5.jpg","img/char/027/Kent6.jpg"], type: "fd" },     // 需要开启隐藏角色开关才展示的图片
             ]
         },
         // SHIN
@@ -56,7 +56,7 @@ const gameData = {
             isFD: false,
             images: [
                 { src: ["img/char/027/Shin.jpg","img/char/027/Shin2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { src: ["img/char/027/Shin3.jpg","img/char/027/Shin4.jpg","img/char/027/Shin5.jpg","img/char/027/Shin6.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
+                { src: ["img/char/027/Shin3.jpg","img/char/027/Shin4.jpg","img/char/027/Shin5.jpg","img/char/027/Shin6.jpg"], type: "fd" },     // 需要开启隐藏角色开关才展示的图片
             ]
         },
         // TOMA
@@ -68,7 +68,7 @@ const gameData = {
             isFD: false,
             images: [
                 { src: ["img/char/027/Toma.jpg","img/char/027/Toma2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { src: ["img/char/027/Toma3.jpg","img/char/027/Toma4.jpg","img/char/027/Toma5.jpg","img/char/027/Toma6.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
+                { src: ["img/char/027/Toma3.jpg","img/char/027/Toma4.jpg","img/char/027/Toma5.jpg","img/char/027/Toma6.jpg"], type: "fd" },     // 需要开启隐藏角色开关才展示的图片
             ]
         },
         // UKYO
@@ -80,7 +80,7 @@ const gameData = {
             isFD: false,
             images: [
                 { src: ["img/char/027/Ukyo.jpg"], type: "base" }
-                { src: ["img/char/027/Ukyo2.jpg","img/char/027/Ukyo3.jpg","img/char/027/Ukyo4.jpg","img/char/027/Ukyo5.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
+                { src: ["img/char/027/Ukyo2.jpg","img/char/027/Ukyo3.jpg","img/char/027/Ukyo4.jpg","img/char/027/Ukyo5.jpg"], type: "fd" },     // 需要开启隐藏角色开关才展示的图片
             ]
         },
     ]
