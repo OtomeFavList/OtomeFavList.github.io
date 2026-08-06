@@ -673,3 +673,22 @@ export async function bootstrapCore() {
     bindGlobalSwitchSpoilerEvents();
     // ⚠️移除bindDynamicGameCardSwitchEvents()调用，放到script.js渲染完列表后执行
 }
+
+export {
+    loadData,
+    saveData,
+    syncSingleGameSwitch,
+    fillFilterOptions,
+    renderSelectedChar,
+    renderCP,
+    getAllGameChar,
+    getAvailableCharImages,
+    isTodayConfirmed,
+    saveConfirmDate,
+    localSwitchIsConfirmedToday,
+    saveLocalSwitchConfirmDate,
+    renderGameSelectItem,
+    renderLocalSwitchDom,
+    bindDynamicGameCardSwitchEvents,
+    bootstrapCore
+};
