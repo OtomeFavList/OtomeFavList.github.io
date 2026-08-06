@@ -418,66 +418,8 @@ export function renderLocalSwitchDom(gameItem, wrapDom = null) {
 export function localSwitchIsConfirmedToday(){return false;}
 export function saveLocalSwitchConfirmDate(){}
 
-// ===================== 页面启动入口模块 =====================
-/**
- * 组装Core上下文对象，统一供给UI层script.js
- * @returns {Object} Core对象，所有核心方法对外暴露
- */
-function buildCoreContext() {
-    const Core = {
-        appData,
-        gameTemplateList,
-        currentEditGameId,
-        charPoolMode,
-        loadAllGameTemplates,
-        loadData,
-        saveData,
-        syncSingleGameSwitch,
-        fillFilterOptions,
-        renderSelectedChar,
-        renderCP,
-        getAllGameChar,
-        getAvailableCharImages,
-        isTodayConfirmed,
-        saveConfirmDate,
-        localSwitchIsConfirmedToday,
-        saveLocalSwitchConfirmDate,
-        renderGameSelectItem,
-        bindDynamicGameCardSwitchEvents,
-        renderLocalSwitchDom
-    };
-    return Core;
-}
 
-/**
- * 【渲染全局开关复选框状态】
- * 根据appData数据，更新页面上两个全局滑块勾选状态
- */
-function renderGlobalSwitchDom() {
-    const hideCharInput = document.getElementById("global-hide-char");
-    const fdInput = document.getElementById("global-fd-game");
-    // 加固：严格读取appData，不读取DOM旧状态
-    if(hideCharInput) hideCharInput.checked = !!appData.globalHideChar;
-    if(fdInput) fdInput.checked = !!appData.globalFD;
-}
-
-
-/**
- * 事件委托：处理动态渲染游戏卡片内部开关 + 角色图片切换按钮
- * 改为click委托，不再监听change；导出，由script.js渲染完列表后调用
- */
-export function bindDynamicGameCardSwitchEvents(){
-    const wrap = document.querySelector(".wrap");
-    const spoilerModal = document.getElementById("spoiler-modal");
-    if(!wrap || !spoilerModal){
-        console.warn("bindDynamicGameCardSwitchEvents：wrap或modal不存在，跳过绑定");
-        return;
-    }
-    // 移除旧监听，防止重复绑定
-    wrap.removeEventListener("click", wrapClickHandler);
-    wrap.addEventListener("click", wrapClickHandler);
-}
-
+// ==========【修复：提升到模块顶层，可被removeEventListener移除】==========
 function wrapClickHandler(e){
     const spoilerModal = document.getElementById("spoiler-modal");
     if(!spoilerModal) return;
@@ -542,6 +484,66 @@ function wrapClickHandler(e){
         window.pendingGameOp = { type:"fd", idx };
     }
     spoilerModal.classList.add("active");
+}
+
+/**
+ * 事件委托：处理动态渲染游戏卡片内部开关 + 角色图片切换按钮
+ * 改为click委托，不再监听change；导出，由script.js渲染完列表后调用
+ */
+export function bindDynamicGameCardSwitchEvents(){
+    const wrap = document.querySelector(".wrap");
+    const spoilerModal = document.getElementById("spoiler-modal");
+    if(!wrap || !spoilerModal){
+        console.warn("bindDynamicGameCardSwitchEvents：wrap或modal不存在，跳过绑定");
+        return;
+    }
+    // 移除旧监听，防止重复绑定（现在可以正常移除，因为handler是顶层函数引用）
+    wrap.removeEventListener("click", wrapClickHandler);
+    wrap.addEventListener("click", wrapClickHandler);
+}
+
+
+// ===================== 页面启动入口模块 =====================
+/**
+ * 组装Core上下文对象，统一供给UI层script.js
+ * @returns {Object} Core对象，所有核心方法对外暴露
+ */
+function buildCoreContext() {
+    const Core = {
+        appData,
+        gameTemplateList,
+        currentEditGameId,
+        charPoolMode,
+        loadAllGameTemplates,
+        loadData,
+        saveData,
+        syncSingleGameSwitch,
+        fillFilterOptions,
+        renderSelectedChar,
+        renderCP,
+        getAllGameChar,
+        getAvailableCharImages,
+        isTodayConfirmed,
+        saveConfirmDate,
+        localSwitchIsConfirmedToday,
+        saveLocalSwitchConfirmDate,
+        renderGameSelectItem,
+        bindDynamicGameCardSwitchEvents,
+        renderLocalSwitchDom
+    };
+    return Core;
+}
+
+/**
+ * 【渲染全局开关复选框状态】
+ * 根据appData数据，更新页面上两个全局滑块勾选状态
+ */
+function renderGlobalSwitchDom() {
+    const hideCharInput = document.getElementById("global-hide-char");
+    const fdInput = document.getElementById("global-fd-game");
+    // 加固：严格读取appData，不读取DOM旧状态
+    if(hideCharInput) hideCharInput.checked = !!appData.globalHideChar;
+    if(fdInput) fdInput.checked = !!appData.globalFD;
 }
 
 
