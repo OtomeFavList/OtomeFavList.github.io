@@ -479,8 +479,8 @@ button:hover{
 }
 .game-switch-group{
     display:flex;
-    gap:16px;
-    margin:10px 0;
+    align-items:center;
+    gap:12px;
     flex-wrap:wrap;
 }
 
@@ -807,12 +807,6 @@ h2{
     gap:14px;
     flex-wrap:wrap;
     margin-bottom:12px;
-}
-.game-switch-group {
-    display:flex;
-    align-items:center;
-    gap:12px;
-    flex-wrap:wrap;
 }
 
 /* 卡片底部按钮区域，放在CP下方 */
