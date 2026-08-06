@@ -40,7 +40,7 @@ const gameData = {
         },
         // 普通可攻略男主 male
         {
-            id: "g0_m01",
+            id: "g0_m02",
             name: "男主1",
             gender: "male",
             isHidden: false,
@@ -53,7 +53,7 @@ const gameData = {
         },
         // 普通可攻略男主 male
         {
-            id: "g0_m01",
+            id: "g0_m03",
             name: "男主1",
             gender: "male",
             isHidden: false,
@@ -66,7 +66,7 @@ const gameData = {
         },
         // 普通可攻略男主 male
         {
-            id: "g0_m01",
+            id: "g0_m04",
             name: "男主1",
             gender: "male",
             isHidden: false,
@@ -79,7 +79,7 @@ const gameData = {
         },
         // 普通可攻略男主 male
         {
-            id: "g0_m01",
+            id: "g0_m05",
             name: "男主1",
             gender: "male",
             isHidden: false,
