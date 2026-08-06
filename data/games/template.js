@@ -8,7 +8,7 @@ const gameData = {
     year: "20",
     publisher: "原厂发行商",
     cnStudio: "汉化组/汉化厂商",
-    writer: "剧本编剧",
+    writer: ["剧本编剧","剧本编剧","剧本编剧","剧本编剧"],
     art: "原画画师",
     cover: "img/game/game0.jpg", // 封面图路径，统一前缀img/
     charList: [
