@@ -12,70 +12,70 @@ const gameData = {
     art: "miko",
     cover: "img/game/013.jpg",
     charList: [
-        // 久世鸫
+        // 卡尔迪娅·贝克福德
         {
             id: "g013_f01",
-            name: "久世鸫",
+            name: "卡尔迪娅·贝克福德",
             gender: "female",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/010/Tsugumi.jpg","img/char/010/Tsugumi2.jpg"], type: "base" }
+                { srcList: ["img/char/013/Cardia.jpg","img/char/013/Cardia2.jpg"], type: "base" }
             ]
         },
-        // 鸿上滉
+        // 维克多·弗兰肯斯坦
         {
             id: "g013_m01",
-            name: "鸿上滉",
+            name: "维克多·弗兰肯斯坦",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/010/Akira.jpg","img/char/010/Akira2.jpg"], type: "base" }
+                { srcList: ["img/char/013/Frankenstein.jpg","img/char/013/Frankenstein2.jpg"], type: "base" }
             ]
         },
-        // 星川翡翠
+        // 圣·日耳曼
         {
             id: "g013_m02",
-            name: "星川翡翠",
+            name: "圣·日耳曼",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/010/Hoshikawa.jpg","img/char/010/Hoshikawa2.jpg"], type: "base" }
+                { srcList: ["img/char/013/Germain.jpg","img/char/013/Germain2.jpg"], type: "base" }
             ]
         },
-        // 汀紫鹤
+        // 因倍·巴比康
         {
             id: "g013_m03",
-            name: "汀紫鹤",
+            name: "因倍·巴比康",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/010/Migiwa.jpg","img/char/010/Migiwa2.jpg"], type: "base" }
+                { srcList: ["img/char/013/Impey.jpg","img/char/013/Impey2.jpg"], type: "base" }
             ]
         },
-        // 尾崎隼人
+        // 亚森·罗宾
         {
             id: "g013_m04",
-            name: "尾崎隼人",
+            name: "亚森·罗宾",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/010/Ozaki.jpg","img/char/010/Ozaki2.jpg"], type: "base" }
+                { srcList: ["img/char/013/Lupin.jpg","img/char/013/Lupin2.jpg","img/char/013/Lupin3.jpg"], type: "base" }
             ]
         },
-        // 鹭泽累
+        // 亚伯拉罕·范·海辛
         {
             id: "g013_m05",
-            name: "鹭泽累",
+            name: "亚伯拉罕·范·海辛",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/010/Rui.jpg","img/char/010/Rui2.jpg"], type: "base" }
+                { srcList: ["img/char/013/Van.jpg","img/char/013/Van2.jpg"], type: "base" }
             ]
         },
     ]
