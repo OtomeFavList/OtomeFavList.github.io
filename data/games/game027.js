@@ -12,84 +12,77 @@ const gameData = {
     art: "花邑まい",
     cover: "img/game/game027.jpg", // 封面图路径，统一前缀img/
     charList: [
-        // 女主模板 female
+        // Heroine
         {
             id: "g027_f01",
-            name: "女主A",
+            name: "Heroine",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { src: ["img/char/g001_f0_1.jpg","img/char/g001_f0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { src: ["img/char/g001_f0_3.jpg"], type: "hidden" }     // 需要开启隐藏角色开关才展示的图片
-                { src: ["img/char/g001_f0_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { src: ["img/char/027/Protagonist.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // IKKI
         {
             id: "g027_m01",
-            name: "男主1",
+            name: "IKKI",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { src: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { src: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { src: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { src: ["img/char/027/Ikki.jpg","img/char/027/Ikki2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { src: ["img/char/027/Ikki3.jpg","img/char/027/Ikki4.jpg","img/char/027/Ikki5.jpg","img/char/027/Ikki6.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
             ]
         },
-        // 普通可攻略男主 male
+        // KENT
         {
             id: "g027_m02",
-            name: "男主1",
+            name: "KENT",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { src: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { src: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { src: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { src: ["img/char/027/Kent.jpg","img/char/027/Kent2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { src: ["img/char/027/Kent3.jpg","img/char/027/Kent4.jpg","img/char/027/Kent5.jpg","img/char/027/Kent6.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
             ]
         },
-        // 普通可攻略男主 male
+        // SHIN
         {
             id: "g027_m03",
-            name: "男主1",
+            name: "SHIN",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { src: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { src: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { src: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { src: ["img/char/027/Shin.jpg","img/char/027/Shin2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { src: ["img/char/027/Shin3.jpg","img/char/027/Shin4.jpg","img/char/027/Shin5.jpg","img/char/027/Shin6.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
             ]
         },
-        // 普通可攻略男主 male
+        // TOMA
         {
             id: "g027_m04",
-            name: "男主1",
+            name: "TOMA",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { src: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { src: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { src: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { src: ["img/char/027/Toma.jpg","img/char/027/Toma2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { src: ["img/char/027/Toma3.jpg","img/char/027/Toma4.jpg","img/char/027/Toma5.jpg","img/char/027/Toma6.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
             ]
         },
-        // 普通可攻略男主 male
+        // UKYO
         {
-            id: "g027_m05",
-            name: "男主1",
+            id: "g027_h01",
+            name: "UKYO",
             gender: "male",
-            isHidden: false,
+            isHidden: true,
             isFD: false,
             images: [
-                { src: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { src: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { src: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { src: ["img/char/027/Ukyo.jpg"], type: "base" }
+                { src: ["img/char/027/Ukyo2.jpg","img/char/027/Ukyo3.jpg","img/char/027/Ukyo4.jpg","img/char/027/Ukyo5.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
             ]
-        }
+        },
     ]
 };
 
