@@ -48,7 +48,7 @@ const gameData = {
         // 尼古拉·法兰捷斯卡
         {
             id: "g001_m03",
-            name: "尼古拉‧法兰捷斯卡",
+            name: "尼古拉·法兰捷斯卡",
             gender: "male",
             isHidden: false,
             isFD: false,
