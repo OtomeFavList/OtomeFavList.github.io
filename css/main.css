@@ -37,7 +37,7 @@
 }
 */
 
-/* ========== 隐藏块类：用于搜索面板 search‑panel ========== */
+/* ========== 隐藏块类：用于搜索面板 search-panel ========== */
 .hide-block {
     display: none !important;
 }
@@ -544,7 +544,7 @@ button:hover{
     align-items:flex-end;
 }
 
-/* ========== 【渲染输出选中角色卡片 char‑card‑item ========== */
+/* ========== 【渲染输出选中角色卡片 char-card-item ========== */
 .char-card-item{
     width:200px;
     text-align:center;
@@ -601,7 +601,7 @@ button:hover{
     background:rgba(0,0,0,0.65);
 }
 
-/* ========== CP布局 cp‑layout‑row 【和main.js渲染class严格对应，25%｜75%】 ========== */
+/* ========== CP布局 cp-layout-row 【和main.js渲染class严格对应，25%｜75%】 ========== */
 .cp-group{
     margin:16px 0;
     padding-top:12px;
@@ -647,7 +647,7 @@ input[type="checkbox"] {
     align-items: center;
     justify-content: center;
 }
-/* 激活弹窗，只用 .active，已删除旧 modal‑show */
+/* 激活弹窗，只用 .active，已删除旧 modal-show */
 .modal-mask.active {
     display: flex;
 }
@@ -763,7 +763,7 @@ h2{
     font-weight:normal;
 }
 
-/* ========== 移动端适配 max‑width:768px ========== */
+/* ========== 移动端适配 max-width:768px ========== */
 @media (max-width:768px) {
     .cp-layout-row{
         flex-direction:column;
@@ -868,7 +868,7 @@ h2{
     text-align:center;
 }
 
-/* ========== 双列表表单 form‑row‑double ========== */
+/* ========== 双列表表单 form-row-double ========== */
 .form-row-double {
     display: flex;
     gap: 2rem;
