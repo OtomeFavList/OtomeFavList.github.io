@@ -607,11 +607,13 @@ function bindGlobalSwitchSpoilerEvents() {
                 if(op.type === "hideChar") g.localHideChar = true;
                 if(op.type === "fd") g.localFD = true;
             }
-            window.pendingGameOp = null;
             saveData();
-            spoilerModal.classList.remove("active");
+            window.pendingGameOp = null;
             window.pendingGlobalSwitch = null;
-            if(window.refreshGameCardUi) window.refreshGameCardUi();
+            spoilerModal.classList.remove("active");
+            if(window.refreshGameCardUi) {
+                window.refreshGameCardUi();
+            }
             return;
         }
 
