@@ -38,6 +38,58 @@ const gameData = {
                 { src: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
+        // 普通可攻略男主 male
+        {
+            id: "g0_m01",
+            name: "男主1",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            images: [
+                { src: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { src: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
+                { src: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+            ]
+        },
+        // 普通可攻略男主 male
+        {
+            id: "g0_m01",
+            name: "男主1",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            images: [
+                { src: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { src: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
+                { src: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+            ]
+        },
+        // 普通可攻略男主 male
+        {
+            id: "g0_m01",
+            name: "男主1",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            images: [
+                { src: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { src: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
+                { src: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+            ]
+        },
+        // 普通可攻略男主 male
+        {
+            id: "g0_m01",
+            name: "男主1",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            images: [
+                { src: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { src: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
+                { src: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+            ]
+        },
         // 隐藏角色（isHidden=true → 开关开启才显示整个角色卡片）
         {
             id: "g0_h01",
