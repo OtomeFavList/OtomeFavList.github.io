@@ -77,7 +77,7 @@ const gameData = {
             images: [
                 { srcList: ["img/char/012/Jorm.jpg","img/char/012/Jorm2.jpg","img/char/012/Jorm3.jpg"], type: "base" }
             ]
-        },
+        }
     ]
 };
 
