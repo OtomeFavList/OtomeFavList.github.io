@@ -627,7 +627,7 @@ function bindGlobalSwitchSpoilerEvents() {
 export async function bootstrapCore() {
     // 1.读取本地存储数据
     loadData();
-    // 2.加载全部游戏模板数据
+    // 2.加载全部游戏模板数据（读取全局window.gameDataList，由data/games.js提前加载完毕）
     await loadAllGameTemplates();
     // 3.组装核心上下文对象，传给UI层script.js
     const Core = buildCoreContext();
