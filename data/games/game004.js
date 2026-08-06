@@ -12,7 +12,7 @@ const gameData = {
     art: "一色箱",
     cover: "img/game/004.jpg",
     charList: [
-        // 琪丝･提斯特拉
+        // 琪丝·提斯特拉
         {
             id: "g004_f01",
             name: "琪丝･提斯特拉",
@@ -36,7 +36,7 @@ const gameData = {
                 { srcList: ["img/char/004/Adage3.jpg"], type: "fd" }
             ]
         },
-        // 埃尔托克里德･瓦伦丁
+        // 埃尔托克里德·瓦伦丁
         {
             id: "g004_m02",
             name: "埃尔托克里德･瓦伦丁",
@@ -48,7 +48,7 @@ const gameData = {
                 { srcList: ["img/char/004/Eltcreed3.jpg"], type: "fd" }
             ]
         },
-        // 芬･尤克列斯
+        // 芬·尤克列斯
         {
             id: "g004_m03",
             name: "芬･尤克列斯",
@@ -60,7 +60,7 @@ const gameData = {
                 { srcList: ["img/char/004/Fin3.jpg","img/char/004/Fin4.jpg"], type: "fd" }
             ]
         },
-        // 伊内斯･海因里希･海涅
+        // 伊内斯·海因里希·海涅
         {
             id: "g004_m04",
             name: "伊内斯･海因里希･海涅",
@@ -72,7 +72,7 @@ const gameData = {
                 { srcList: ["img/char/004/Ines3.jpg"], type: "fd" }
             ]
         },
-        // 乌尔利克･费里尔
+        // 乌尔利克·费里尔
         {
             id: "g004_m05",
             name: "乌尔利克･费里尔",
@@ -84,10 +84,10 @@ const gameData = {
                 { srcList: ["img/char/004/Ulrik3.jpg"], type: "fd" }
             ]
         },
-        // 尤尼･石英
+        // 尤尼·石英
         {
             id: "g004_m06",
-            name: "尤尼･石英",
+            name: "尤尼·石英",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -118,10 +118,10 @@ const gameData = {
                 { srcList: ["img/char/004/Jevite.jpg"], type: "base" }
             ]
         },
-        // 萨克森‧布兰登堡
+        // 萨克森·布兰登堡
         {
             id: "g004_fd03",
-            name: "萨克森‧布兰登堡",
+            name: "萨克森·布兰登堡",
             gender: "male",
             isHidden: false,
             isFD: true,
