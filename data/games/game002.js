@@ -5,7 +5,7 @@
 const gameData = {
     id: "game002",
     name: "第六妖守",
-    year: "2020",
+    year: "2021",
     publisher: "Otomate",
     cnStudio: "GSE",
     writer: ["みぞおち鳩子","仰木サヤ","七瀬みお","紫堂零"],
