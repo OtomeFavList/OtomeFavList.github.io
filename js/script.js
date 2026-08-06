@@ -139,7 +139,7 @@ export function initPage(Core = {}) {
     // DOM元素缓存，移除全局char-slide-panel
     const el = {
       globalHideChar: document.getElementById("global-hide-char"),
-      globalFD: document.getElementById("global-fd-game"), // 【修复】修正ID与HTML保持一致
+      globalFD: document.getElementById("global-fd-game"),
       spoilerModal: document.getElementById("spoiler-modal"),
       spoilerConfirm: document.getElementById("spoiler-confirm"),
       addGameBtn: document.getElementById("btn-add-game"),
@@ -230,7 +230,6 @@ export function initPage(Core = {}) {
       el.addedGameBox.innerHTML = html;
       bindGameCardEvent();
 
-      // =========【修复！！这段循环移入renderAddedGame函数内部，卡片渲染完成后执行】=========
       document.querySelectorAll(".added-game-card").forEach(cardDom => {
         const gid = cardDom.dataset.gameid;
         const gameItem = appData.gameList.find(g => g.gameId === gid);
@@ -242,9 +241,8 @@ export function initPage(Core = {}) {
         if(charPanel) renderCharSelectPanel(cardDom, gid, "char", charPanel);
         if(cpPanel) renderCharSelectPanel(cardDom, gid, "cp", cpPanel);
       });
-    } // renderAddedGame 闭合
+    }
 
-    // 【✅修复此处：包装箭头函数，把bootstrap内部el传入renderAddedGame】
     window.refreshGameCardUi = () => renderAddedGame(el);
 
     // ==========【全局事件委托：角色立绘左右切换，卡片内面板生效】==========
@@ -293,10 +291,9 @@ export function initPage(Core = {}) {
       imgDom.src = allSrc[currentIndex];
       appData.charImageSelect[saveKey] = currentIndex;
       saveData();
-      // 修复：只更新图片，不再整卡重渲染，避免面板关闭、状态丢失
     });
 
-    // ==========【修复：btn-character / btn-couple 全局事件委托，彻底解决innerHTML重渲染事件丢失】==========
+    // ==========【修复：btn-character / btn-couple 全局事件委托】==========
     document.addEventListener("click", function(e){
       const charBtn = e.target.closest(".btn-character");
       if(charBtn){
@@ -327,7 +324,7 @@ export function initPage(Core = {}) {
       }
     });
 
-    // ✅ 卡片内滑出面板角色勾选事件委托：勾选完成 → 修改数据关闭面板
+    // ✅ 卡片内滑出面板角色勾选事件委托
     document.addEventListener("click", function(e){
       const switchBtn = e.target.closest(".char-switch-btn");
       if(switchBtn) return;
@@ -348,7 +345,6 @@ export function initPage(Core = {}) {
         gameItem.selectChars.push(cid);
       }
 
-      // 判断是char还是cp面板，关闭对应面板
       const panel = charItem.closest(".char-slide-panel-char");
       if(panel){
         gameItem.charPanelOpen = false;
@@ -359,7 +355,7 @@ export function initPage(Core = {}) {
       window.refreshGameCardUi();
     });
 
-    // ✅面板内部关闭按钮（×），数据驱动关闭面板
+    // ✅面板内部关闭按钮（×）
     document.addEventListener("click", function(e){
       const closeBtn = e.target.closest(".panel-close-btn");
       if(!closeBtn) return;
@@ -381,9 +377,6 @@ export function initPage(Core = {}) {
       window.refreshGameCardUi();
     });
 
-    /**
-     * 更新全局隐藏角色复选框DOM状态（仅更新UI，点击事件由main.js接管）
-     */
     function refreshHideCharSwitch() {
       if (el.globalHideChar) {
         el.globalHideChar.checked = appData.globalHideChar;
@@ -391,9 +384,6 @@ export function initPage(Core = {}) {
       }
     }
 
-    /**
-     * 更新全局FD复选框DOM状态（仅更新UI，点击事件由main.js接管）
-     */
     function refreshFDSwitch() {
       if (el.globalFD) {
         el.globalFD.checked = appData.globalFD;
@@ -401,10 +391,8 @@ export function initPage(Core = {}) {
       }
     }
 
-    // 加载本地存储
     loadData();
 
-    // 兜底：旧本地存储数据补charPanelOpen、cpPanelOpen、loveRate字段
     if(Array.isArray(appData.gameList)){
       appData.gameList.forEach(g=>{
         if(typeof g.charPanelOpen !== "boolean") g.charPanelOpen = false;
@@ -413,13 +401,11 @@ export function initPage(Core = {}) {
       });
     }
 
-    // 回填基础资料表单
     if (el.inputNick) el.inputNick.value = appData.baseInfo?.nick ?? "";
     if (el.inputCount) el.inputCount.value = appData.baseInfo?.count ?? "";
     if (el.inputStory) el.inputStory.value = appData.baseInfo?.story ?? "";
     if (el.inputFirstgame) el.inputFirstgame.value = appData.baseInfo?.firstgame ?? "";
 
-    // 配色绑定，增加DOM判空，消除colorBorder undefined报错
     const colorBindList = [
       {dom: el.colorBg, dataKey: "bg"},
       {dom: el.colorTitle, dataKey: "title"},
@@ -443,7 +429,6 @@ export function initPage(Core = {}) {
     refreshFDSwitch();
     fillFilterOptions(gameTemplateList);
 
-    // ========== 基础资料输入框绑定 ==========
     const baseInputMap = [
       {dom: el.inputNick, key: "nick"},
       {dom: el.inputCount, key: "count"},
@@ -459,7 +444,6 @@ export function initPage(Core = {}) {
       }
     })
 
-    // ========== 添加游戏按钮 ==========
     if (el.addGameBtn) {
       el.addGameBtn.onclick = function () {
         renderGameSelectList();
@@ -467,21 +451,16 @@ export function initPage(Core = {}) {
       }
     }
 
-    // ========== 搜索输入监听 ==========
     if (el.gameSearchInput) {
       el.gameSearchInput.addEventListener("input", renderGameSelectList);
     }
 
-    // ========== 筛选下拉监听 ==========
     const filterSelectIds = ["filter-year", "filter-publisher", "filter-cn", "filter-writer", "filter-art"];
     filterSelectIds.forEach(selId => {
       const sel = document.getElementById(selId);
       if (sel) sel.addEventListener("change", renderGameSelectList);
     });
 
-    /**
-     * 渲染游戏选择弹窗列表
-     */
     function renderGameSelectList() {
       if (!el.gameSearchInput || !el.gameSelectList || !Array.isArray(gameTemplateList)) return;
 
@@ -555,10 +534,6 @@ export function initPage(Core = {}) {
       })
     }
 
-    /**
-     * 游戏卡片内部事件绑定：折叠、删除、爱心评分
-     * 【改动：移除 btn-character / btn-couple 的onclick绑定，改用全局document委托】
-     */
     function bindGameCardEvent() {
       document.querySelectorAll(".fold-game").forEach(btn => {
         btn.onclick = () => {
@@ -590,11 +565,9 @@ export function initPage(Core = {}) {
             e.stopPropagation();
             e.preventDefault();
             e.stopImmediatePropagation();
-            // 关键修复：阻止向上冒泡，不会触发卡片开关委托事件
             gameItem.loveRate = Number(h.dataset.val);
             saveData();
 
-            // 局部更新爱心，禁止全卡片重渲染，防止DOM销毁带来事件泄露冒泡bug
             const allHearts = box.querySelectorAll(".heart");
             allHearts.forEach(ht => {
               const val = Number(ht.dataset.val);
@@ -609,9 +582,7 @@ export function initPage(Core = {}) {
       })
     }
 
-    // =====================【导出图片核心逻辑】=====================
     if (el.exportBtn && el.snapshotContainer) {
-      // ✅修复：给回调增加 async，解决 await is a reserved identifier
       el.exportBtn.addEventListener('click', async () => {
         try {
           if(typeof html2canvas !== "function"){
@@ -699,19 +670,16 @@ export function initPage(Core = {}) {
       });
     }
 
-    // ✅【只启动时调用1次委托，不要多次重复绑定】
+    // ✅仅启动时执行一次，不会重复绑定
     if (typeof bindDynamicGameCardSwitchEvents === "function") {
       bindDynamicGameCardSwitchEvents();
     }
 
-    // 初始渲染页面
     window.refreshGameCardUi();
   }
 
-  // 适配main.js调用的两个别名函数（本项目为卡片内嵌面板，无独立弹窗DOM）
   function openCharSelectModal(){}
   function renderCharSelectList(){}
-  // ✅挂载全局句柄给main.js调用
   window.openCharSelectModal = openCharSelectModal;
   window.renderCharSelectList = renderCharSelectList;
 
