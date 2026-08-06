@@ -163,7 +163,9 @@ export function getAvailableCharImages(char, globalHideSwitch, globalFDSwitch, l
 
 // ===================== 游戏模板加载模块 =====================
 export async function loadAllGameTemplates() {
-    const basePath = "./data/games/";
+    // 👉 重点：如果games文件夹放在仓库根目录，使用 "../data/games/"
+    // 如果放在js目录内，改回 "./data/games/"
+    const basePath = "../data/games/";
     const tempList = [];
 
     for (const id of gameIdList) {
