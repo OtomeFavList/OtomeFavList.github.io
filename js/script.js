@@ -23,121 +23,102 @@ import {
     bindDynamicGameCardSwitchEvents
 } from './main.js';
 
-// =========【关键修复：DOM缓存提升到模块顶层，全局可用，脱离bootstrap闭包】=========
-const el = {
-    globalHideChar: null,
-    globalFD: null,
-    spoilerModal: null,
-    spoilerConfirm: null,
-    addGameBtn: null,
-    searchPanel: null,
-    gameSearchInput: null,
-    gameSelectList: null,
-    addedGameBox: null,
-    inputNick: null,
-    inputCount: null,
-    inputStory: null,
-    inputFirstgame: null,
-    colorBg: null,
-    colorTitle: null,
-    colorText: null,
-    colorBorder: null,
-    exportBtn: null,
-    canvas: null,
-    snapshotContainer: null
-};
+export function initPage(Core = {}) {
+    // 安全兜底，防止不传Core报错
+    Core = Core || {};
 
-/**
- * 在指定游戏卡片内部渲染滑出面板内容
- * @param {HTMLElement} cardDom 游戏卡片dom .added-game-card
- * @param {string} gameId
- * @param {'char'|'cp'} mode
- * @param {HTMLElement} panelDom 本卡片内的滑出面板容器
- */
-function renderCharSelectPanel(cardDom, gameId, mode, panelDom) {
-    if (!Array.isArray(gameTemplateList)) return;
-    const gameInfo = gameTemplateList.find(g => g.id === gameId);
-    const gameItem = appData.gameList?.find(g => g?.gameId === gameId);
-    if (!gameInfo || !gameItem || !panelDom) return;
+    /**
+     * 在指定游戏卡片内部渲染滑出面板内容
+     * @param {HTMLElement} cardDom 游戏卡片dom .added-game-card
+     * @param {string} gameId
+     * @param {'char'|'cp'} mode
+     * @param {HTMLElement} panelDom 本卡片内的滑出面板容器
+     */
+    function renderCharSelectPanel(cardDom, gameId, mode, panelDom) {
+        if (!Array.isArray(gameTemplateList)) return;
+        const gameInfo = gameTemplateList.find(g => g.id === gameId);
+        const gameItem = appData.gameList?.find(g => g?.gameId === gameId);
+        if (!gameInfo || !gameItem || !panelDom) return;
 
-    // 面板头部
-    const titleEl = panelDom.querySelector(".panel-game-title");
-    const heroineBox = panelDom.querySelector(".heroine-box");
-    const heroListBox = panelDom.querySelector(".hero-list-box");
-    if (!titleEl || !heroineBox || !heroListBox) return;
+        // 面板头部
+        const titleEl = panelDom.querySelector(".panel-game-title");
+        const heroineBox = panelDom.querySelector(".heroine-box");
+        const heroListBox = panelDom.querySelector(".hero-list-box");
+        if (!titleEl || !heroineBox || !heroListBox) return;
 
-    titleEl.innerText = `${gameInfo.name} — ${mode === "char" ? "选择角色 Character" : "选择CP Couple"}`;
-    const localWrap = panelDom.querySelector(".local-switch-wrap");
-    if(localWrap) localWrap.innerHTML = "";
+        titleEl.innerText = `${gameInfo.name} — ${mode === "char" ? "选择角色 Character" : "选择CP Couple"}`;
+        // 废弃：renderLocalSwitchModalContent，开关已经渲染在卡片头部，此处不再调用
+        const localWrap = panelDom.querySelector(".local-switch-wrap");
+        if(localWrap) localWrap.innerHTML = "";
 
-    const allChars = getAllGameChar(gameInfo);
-    const femaleChars = allChars.filter(c => c.gender === "female");
-    const maleChars = allChars.filter(c => c.gender === "male");
+        const allChars = getAllGameChar(gameInfo);
+        const femaleChars = allChars.filter(c => c.gender === "female");
+        const maleChars = allChars.filter(c => c.gender === "male");
 
-    // 女主区域
-    let femHtml = "";
-    femaleChars.forEach(char => {
-        const imgsUnitList = getAvailableCharImages(char, appData.globalHideChar, appData.globalFD, gameItem.localHideChar, gameItem.localFD);
-        if (imgsUnitList.length === 0) return;
-        let allSrc = [];
-        imgsUnitList.forEach(u => allSrc.push(...u.srcList));
-        if (allSrc.length === 0) return;
+        // 女主区域
+        let femHtml = "";
+        femaleChars.forEach(char => {
+            const imgsUnitList = getAvailableCharImages(char, appData.globalHideChar, appData.globalFD, gameItem.localHideChar, gameItem.localFD);
+            if (imgsUnitList.length === 0) return;
+            let allSrc = [];
+            imgsUnitList.forEach(u => allSrc.push(...u.srcList));
+            if (allSrc.length === 0) return;
 
-        const saveKey = `${gameId}-${char.id}`;
-        if(!appData.charImageSelect) appData.charImageSelect = {};
-        let imgIndex = Number(appData.charImageSelect?.[saveKey] ?? 0);
-        if (imgIndex >= allSrc.length) imgIndex = 0;
-        const showSrc = allSrc[imgIndex];
+            const saveKey = `${gameId}-${char.id}`;
+            if(!appData.charImageSelect) appData.charImageSelect = {};
+            let imgIndex = Number(appData.charImageSelect?.[saveKey] ?? 0);
+            if (imgIndex >= allSrc.length) imgIndex = 0;
+            const showSrc = allSrc[imgIndex];
 
-        const selected = gameItem.selectChars?.includes(char.id) ? "selected" : "";
-        femHtml += `
-        <label class="char-item ${selected}" data-cid="${char.id}" data-char-id="${char.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}">
-            <div class="char-card-img-box ${allSrc.length>1?'char-multi-img':''}">
-                ${allSrc.length>1?`<button class="char-switch-btn char-switch-prev">&lt;</button>`:""}
-                <img src="${showSrc}" alt="${char.name}">
-                ${allSrc.length>1?`<button class="char-switch-btn char-switch-next">&gt;</button>`:""}
-            </div>
-            <div class="char-card-name">${char.name}</div>
-        </label>`;
-    });
-    heroineBox.innerHTML = femHtml;
+            const selected = gameItem.selectChars?.includes(char.id) ? "selected" : "";
+            femHtml += `
+            <label class="char-item ${selected}" data-cid="${char.id}" data-char-id="${char.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}">
+                <div class="char-card-img-box ${allSrc.length>1?'char-multi-img':''}">
+                    ${allSrc.length>1?`<button class="char-switch-btn char-switch-prev">&lt;</button>`:""}
+                    <img src="${showSrc}" alt="${char.name}">
+                    ${allSrc.length>1?`<button class="char-switch-btn char-switch-next">&gt;</button>`:""}
+                </div>
+                <div class="char-card-name">${char.name}</div>
+            </label>`;
+        });
+        heroineBox.innerHTML = femHtml;
 
-    // 男性角色区域
-    let maleHtml = "";
-    maleChars.forEach(char => {
-        const imgsUnitList = getAvailableCharImages(char, appData.globalHideChar, appData.globalFD, gameItem.localHideChar, gameItem.localFD);
-        if (imgsUnitList.length === 0) return;
-        let allSrc = [];
-        imgsUnitList.forEach(u => allSrc.push(...u.srcList));
-        if (allSrc.length === 0) return;
+        // 男性角色区域
+        let maleHtml = "";
+        maleChars.forEach(char => {
+            const imgsUnitList = getAvailableCharImages(char, appData.globalHideChar, appData.globalFD, gameItem.localHideChar, gameItem.localFD);
+            if (imgsUnitList.length === 0) return;
+            let allSrc = [];
+            imgsUnitList.forEach(u => allSrc.push(...u.srcList));
+            if (allSrc.length === 0) return;
 
-        const saveKey = `${gameId}-${char.id}`;
-        if(!appData.charImageSelect) appData.charImageSelect = {};
-        let imgIndex = Number(appData.charImageSelect?.[saveKey] ?? 0);
-        if (imgIndex >= allSrc.length) imgIndex = 0;
-        const showSrc = allSrc[imgIndex];
+            const saveKey = `${gameId}-${char.id}`;
+            if(!appData.charImageSelect) appData.charImageSelect = {};
+            let imgIndex = Number(appData.charImageSelect?.[saveKey] ?? 0);
+            if (imgIndex >= allSrc.length) imgIndex = 0;
+            const showSrc = allSrc[imgIndex];
 
-        const selected = gameItem.selectChars?.includes(char.id) ? "selected" : "";
-        maleHtml += `
-        <label class="char-item ${selected}" data-cid="${char.id}" data-char-id="${char.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}">
-            <div class="char-card-img-box ${allSrc.length>1?'char-multi-img':''}">
-                ${allSrc.length>1?`<button class="char-switch-btn char-switch-prev">&lt;</button>`:""}
-                <img src="${showSrc}" alt="${char.name}">
-                ${allSrc.length>1?`<button class="char-switch-btn char-switch-next">&gt;</button>`:""}
-            </div>
-            <div class="char-card-name">${char.name}</div>
-        </label>`;
-    });
-    heroListBox.innerHTML = maleHtml;
-}
+            const selected = gameItem.selectChars?.includes(char.id) ? "selected" : "";
+            maleHtml += `
+            <label class="char-item ${selected}" data-cid="${char.id}" data-char-id="${char.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}">
+                <div class="char-card-img-box ${allSrc.length>1?'char-multi-img':''}">
+                    ${allSrc.length>1?`<button class="char-switch-btn char-switch-prev">&lt;</button>`:""}
+                    <img src="${showSrc}" alt="${char.name}">
+                    ${allSrc.length>1?`<button class="char-switch-btn char-switch-next">&gt;</button>`:""}
+                </div>
+                <div class="char-card-name">${char.name}</div>
+            </label>`;
+        });
+        heroListBox.innerHTML = maleHtml;
+    }
 
-/**
- * 生成单个游戏卡片内部滑出面板HTML字符串
- * @param {'char'|'cp'} mode
- */
-function getInnerSlidePanelHtml(mode){
-    const cls = mode === "char" ? "char-slide-panel-char" : "char-slide-panel-cp";
-    return `
+    /**
+     * 生成单个游戏卡片内部滑出面板HTML字符串
+     * @param {'char'|'cp'} mode
+     */
+    function getInnerSlidePanelHtml(mode){
+        const cls = mode === "char" ? "char-slide-panel-char" : "char-slide-panel-cp";
+        return `
 <div class="${cls} hide-block">
     <div class="panel-header">
         <h4 class="panel-game-title"></h4>
@@ -148,33 +129,63 @@ function getInnerSlidePanelHtml(mode){
     <div class="hero-list-box"></div>
 </div>
 `;
-}
-
-/**
- * 渲染已添加游戏卡片
- */
-function renderAddedGame() {
-    if (!el.addedGameBox) return;
-    if (!Array.isArray(gameTemplateList) || gameTemplateList.length === 0) {
-        el.addedGameBox.innerHTML = "<p>⚠️ 游戏数据加载失败，检查data/games路径</p>";
-        return;
     }
-    document.querySelectorAll(".modal-trigger").forEach(dom => dom.classList.remove("modal-trigger"));
 
-    let html = "";
-    appData.gameList?.forEach((gameItem, index) => {
-        if (!gameItem) return;
-        const gameInfo = gameTemplateList.find(g => g.id === gameItem.gameId);
-        if (!gameInfo) return;
-        let heartHtml = "";
-        for (let i = 1; i <= 5; i++) {
-            heartHtml += `<span class="heart ${gameItem.loveRate >= i ? 'active' : ''}" data-val="${i}">♥</span>`;
-        }
 
-        const charPanelClass = (gameItem.fold || !gameItem.charPanelOpen) ? "hide-block" : "";
-        const cpPanelClass = (gameItem.fold || !gameItem.cpPanelOpen) ? "hide-block" : "";
+    // ===================== 页面启动bootstrap，UI渲染、表单、导出、卡片事件 =====================
+    async function bootstrap() {
+        // DOM元素缓存，移除全局char-slide-panel
+        const el = {
+            globalHideChar: document.getElementById("global-hide-char"),
+            globalFD: document.getElementById("global-fd"),
+            spoilerModal: document.getElementById("spoiler-modal"),
+            spoilerConfirm: document.getElementById("spoiler-confirm"),
+            addGameBtn: document.getElementById("btn-add-game"),
+            searchPanel: document.getElementById("search-panel"),
+            gameSearchInput: document.getElementById("game-search-input"),
+            gameSelectList: document.getElementById("game-select-list"),
+            addedGameBox: document.getElementById("added-game-container"),
+            inputNick: document.getElementById("input-nick"),
+            inputCount: document.getElementById("input-count"),
+            inputStory: document.getElementById("input-story"),
+            inputFirstgame: document.getElementById("input-firstgame"),
+            colorBg: document.getElementById("color-bg"),
+            colorTitle: document.getElementById("color-title"),
+            colorText: document.getElementById("color-text"),
+            colorBorder: document.getElementById("color-border"),
+            exportBtn: document.getElementById("btn-export"),
+            canvas: document.getElementById("export-canvas"),
+            snapshotContainer: document.getElementById("snapshot-container")
+        };
 
-        html += `
+        /**
+         * 渲染已添加游戏卡片
+         * 每个卡片内部嵌入两套滑出面板 char / cp
+         * ✅传入容器对象el，消除ReferenceError
+         */
+        function renderAddedGame(el) {
+            if (!el.addedGameBox) return;
+            if (!Array.isArray(gameTemplateList) || gameTemplateList.length === 0) {
+                el.addedGameBox.innerHTML = "<p>⚠️ 游戏数据加载失败，检查data/games路径</p>";
+                return;
+            }
+            document.querySelectorAll(".modal-trigger").forEach(dom => dom.classList.remove("modal-trigger"));
+
+            let html = "";
+            appData.gameList?.forEach((gameItem, index) => {
+                if (!gameItem) return;
+                const gameInfo = gameTemplateList.find(g => g.id === gameItem.gameId);
+                if (!gameInfo) return;
+                let heartHtml = "";
+                for (let i = 1; i <= 5; i++) {
+                    heartHtml += `<span class="heart ${gameItem.loveRate >= i ? 'active' : ''}" data-val="${i}">♥</span>`;
+                }
+
+                // 根据数据字段输出面板显隐class，fold优先级最高
+                const charPanelClass = (gameItem.fold || !gameItem.charPanelOpen) ? "hide-block" : "";
+                const cpPanelClass = (gameItem.fold || !gameItem.cpPanelOpen) ? "hide-block" : "";
+
+                html += `
 <div class="added-game-card" data-gameid="${gameItem.gameId}">
     <div class="game-card-header-row">
         <span class="game-card-title">${gameInfo.name}</span>
@@ -212,56 +223,33 @@ function renderAddedGame() {
     </div>
 </div>
 `;
-    });
+            });
 
-    el.addedGameBox.innerHTML = html;
-    bindGameCardEvent();
-    if (typeof bindDynamicGameCardSwitchEvents === "function") {
-        bindDynamicGameCardSwitchEvents();
-    }
+            el.addedGameBox.innerHTML = html;
+            bindGameCardEvent();
+            // ✅渲染完卡片，调用main.js导出的委托绑定
+            if (typeof bindDynamicGameCardSwitchEvents === "function") {
+                bindDynamicGameCardSwitchEvents();
+            }
 
-    document.querySelectorAll(".added-game-card").forEach(cardDom => {
-        const gid = cardDom.dataset.gameid;
-        const gameItem = appData.gameList.find(g => g.gameId === gid);
-        const gameInfo = gameTemplateList.find(g => g.id === gid);
-        if(!gameItem || !gameInfo) return;
+            // =========【修复！！这段循环移入renderAddedGame函数内部，卡片渲染完成后执行】=========
+            document.querySelectorAll(".added-game-card").forEach(cardDom => {
+                const gid = cardDom.dataset.gameid;
+                const gameItem = appData.gameList.find(g => g.gameId === gid);
+                const gameInfo = gameTemplateList.find(g => g.id === gid);
+                if(!gameItem || !gameInfo) return;
 
-        const charPanel = cardDom.querySelector(".char-slide-panel-char");
-        const cpPanel = cardDom.querySelector(".char-slide-panel-cp");
-        if(charPanel) renderCharSelectPanel(cardDom, gid, "char", charPanel);
-        if(cpPanel) renderCharSelectPanel(cardDom, gid, "cp", cpPanel);
-    });
-}
+                const charPanel = cardDom.querySelector(".char-slide-panel-char");
+                const cpPanel = cardDom.querySelector(".char-slide-panel-cp");
+                if(charPanel) renderCharSelectPanel(cardDom, gid, "char", charPanel);
+                if(cpPanel) renderCharSelectPanel(cardDom, gid, "cp", cpPanel);
+            });
+        } // renderAddedGame 闭合
 
-export function initPage(Core = {}) {
-    Core = Core || {};
+        // 【✅修复此处：包装箭头函数，把bootstrap内部el传入renderAddedGame】
+        window.refreshGameCardUi = () => renderAddedGame(el);
 
-    // =========bootstrap内部只做DOM赋值，不再重新声明el对象==========
-    async function bootstrap() {
-        el.globalHideChar = document.getElementById("global-hide-char");
-        el.globalFD = document.getElementById("global-fd");
-        el.spoilerModal = document.getElementById("spoiler-modal");
-        el.spoilerConfirm = document.getElementById("spoiler-confirm");
-        el.addGameBtn = document.getElementById("btn-add-game");
-        el.searchPanel = document.getElementById("search-panel");
-        el.gameSearchInput = document.getElementById("game-search-input");
-        el.gameSelectList = document.getElementById("game-select-list");
-        el.addedGameBox = document.getElementById("added-game-container");
-        el.inputNick = document.getElementById("input-nick");
-        el.inputCount = document.getElementById("input-count");
-        el.inputStory = document.getElementById("input-story");
-        el.inputFirstgame = document.getElementById("input-firstgame");
-        el.colorBg = document.getElementById("color-bg");
-        el.colorTitle = document.getElementById("color-title");
-        el.colorText = document.getElementById("color-text");
-        el.colorBorder = document.getElementById("color-border");
-        el.exportBtn = document.getElementById("btn-export");
-        el.canvas = document.getElementById("export-canvas");
-        el.snapshotContainer = document.getElementById("snapshot-container");
-
-        window.refreshGameCardUi = renderAddedGame;
-
-        // ==========角色立绘左右切换事件委托==========
+        // ==========【全局事件委托：角色立绘左右切换，卡片内面板生效】==========
         document.addEventListener("click", function (e) {
             const switchBtn = e.target.closest(".char-switch-btn");
             if (!switchBtn) return;
@@ -303,9 +291,10 @@ export function initPage(Core = {}) {
             imgDom.src = allSrc[currentIndex];
             appData.charImageSelect[saveKey] = currentIndex;
             saveData();
+            // 修复：只更新图片，不再整卡重渲染，避免面板关闭、状态丢失
         });
 
-        // ==========btn‑character / btn‑couple 全局事件委托==========
+        // ==========【修复：btn‑character / btn‑couple 全局事件委托，彻底解决innerHTML重渲染事件丢失】==========
         document.addEventListener("click", function(e){
             const charBtn = e.target.closest(".btn-character");
             if(charBtn){
@@ -335,7 +324,7 @@ export function initPage(Core = {}) {
             }
         });
 
-        // ✅ 面板角色勾选
+        // ✅ 卡片内滑出面板角色勾选事件委托：勾选完成 → 修改数据关闭面板
         document.addEventListener("click", function(e){
             const switchBtn = e.target.closest(".char-switch-btn");
             if(switchBtn) return;
@@ -355,6 +344,7 @@ export function initPage(Core = {}) {
                 gameItem.selectChars.push(cid);
             }
 
+            // 判断是char还是cp面板，关闭对应面板
             const panel = charItem.closest(".char-slide-panel-char");
             if(panel){
                 gameItem.charPanelOpen = false;
@@ -365,7 +355,7 @@ export function initPage(Core = {}) {
             window.refreshGameCardUi();
         });
 
-        // ✅面板关闭按钮×
+        // ✅面板内部关闭按钮（×），数据驱动关闭面板
         document.addEventListener("click", function(e){
             const closeBtn = e.target.closest(".panel-close-btn");
             if(!closeBtn) return;
@@ -384,12 +374,18 @@ export function initPage(Core = {}) {
             window.refreshGameCardUi();
         });
 
+        /**
+         * 更新全局隐藏角色复选框DOM状态（仅更新UI，点击事件由main.js接管）
+         */
         function refreshHideCharSwitch() {
             if (el.globalHideChar) {
                 el.globalHideChar.checked = appData.globalHideChar;
                 el.globalHideChar.indeterminate = false;
             }
         }
+        /**
+         * 更新全局FD复选框DOM状态（仅更新UI，点击事件由main.js接管）
+         */
         function refreshFDSwitch() {
             if (el.globalFD) {
                 el.globalFD.checked = appData.globalFD;
@@ -397,7 +393,9 @@ export function initPage(Core = {}) {
             }
         }
 
+        // 加载本地存储
         loadData();
+        // 兜底：旧本地存储数据补charPanelOpen、cpPanelOpen、loveRate字段
         if(Array.isArray(appData.gameList)){
             appData.gameList.forEach(g=>{
                 if(typeof g.charPanelOpen !== "boolean") g.charPanelOpen = false;
@@ -406,11 +404,13 @@ export function initPage(Core = {}) {
             });
         }
 
+        // 回填基础资料表单
         if (el.inputNick) el.inputNick.value = appData.baseInfo?.nick ?? "";
         if (el.inputCount) el.inputCount.value = appData.baseInfo?.count ?? "";
         if (el.inputStory) el.inputStory.value = appData.baseInfo?.story ?? "";
         if (el.inputFirstgame) el.inputFirstgame.value = appData.baseInfo?.firstgame ?? "";
 
+        // 配色绑定，增加DOM判空，消除colorBorder undefined报错
         const colorBindList = [
             { dom: el.colorBg, dataKey: "bg" },
             { dom: el.colorTitle, dataKey: "title" },
@@ -433,6 +433,8 @@ export function initPage(Core = {}) {
         refreshFDSwitch();
         fillFilterOptions(gameTemplateList);
 
+
+        // ========== 基础资料输入框绑定 ==========
         const baseInputMap = [
             { dom: el.inputNick, key: "nick" },
             { dom: el.inputCount, key: "count" },
@@ -448,6 +450,7 @@ export function initPage(Core = {}) {
             }
         })
 
+        // ========== 添加游戏按钮 ==========
         if (el.addGameBtn) {
             el.addGameBtn.onclick = function () {
                 renderGameSelectList();
@@ -455,16 +458,21 @@ export function initPage(Core = {}) {
             }
         }
 
+        // ========== 搜索输入监听 ==========
         if (el.gameSearchInput) {
             el.gameSearchInput.addEventListener("input", renderGameSelectList);
         }
 
+        // ========== 筛选下拉监听 ==========
         const filterSelectIds = ["filter-year", "filter-publisher", "filter-cn", "filter-writer", "filter-art"];
         filterSelectIds.forEach(selId => {
             const sel = document.getElementById(selId);
             if (sel) sel.addEventListener("change", renderGameSelectList);
         });
 
+        /**
+         * 渲染游戏选择弹窗列表
+         */
         function renderGameSelectList() {
             if (!el.gameSearchInput || !el.gameSelectList || !Array.isArray(gameTemplateList)) return;
             const keyword = el.gameSearchInput.value.toLowerCase();
@@ -530,6 +538,10 @@ export function initPage(Core = {}) {
             })
         }
 
+        /**
+         * 游戏卡片内部事件绑定：折叠、删除、爱心评分
+         * 【改动：移除 btn‑character / btn‑couple 的onclick绑定，改用全局document委托】
+         */
         function bindGameCardEvent() {
             document.querySelectorAll(".fold-game").forEach(btn => {
                 btn.onclick = () => {
@@ -561,6 +573,7 @@ export function initPage(Core = {}) {
                         e.preventDefault();
                         gameItem.loveRate = Number(h.dataset.val);
                         saveData();
+                        // 局部更新爱心，禁止全卡片重渲染，防止DOM销毁带来事件泄露冒泡bug
                         const allHearts = box.querySelectorAll(".heart");
                         allHearts.forEach(ht => {
                             const val = Number(ht.dataset.val);
@@ -576,7 +589,7 @@ export function initPage(Core = {}) {
             })
         }
 
-        // 导出图片
+        // =====================【导出图片核心逻辑】=====================
         if (el.exportBtn && el.snapshotContainer) {
             el.exportBtn.addEventListener('click', async () => {
                 try {
@@ -665,12 +678,15 @@ export function initPage(Core = {}) {
             });
         }
 
+        // 初始渲染页面
         window.refreshGameCardUi();
     }
 
+    // 适配main.js调用的两个别名函数（本项目为卡片内嵌面板，无独立弹窗DOM）
     function openCharSelectModal(){}
     function renderCharSelectList(){}
 
+    // ✅挂载全局句柄给main.js调用
     window.openCharSelectModal = openCharSelectModal;
     window.renderCharSelectList = renderCharSelectList;
 
