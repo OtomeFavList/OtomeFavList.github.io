@@ -21,7 +21,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["img/char/004/Cyrus.jpg","img/char/004/Cyrus2.jpg"], type: "base" },
-                { srcList: ["img/char/004/Cyrus3.jpg","img/char/004/Cyrus4.jpg"], type: "hidden" }
+                { srcList: ["img/char/004/Cyrus3.jpg","img/char/004/Cyrus4.jpg"], type: "fd" }
             ]
         },
         // 亚达钧
@@ -33,7 +33,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["img/char/004/Adage.jpg","img/char/004/Adage2.jpg"], type: "base" },
-                { srcList: ["img/char/004/Adage3.jpg"], type: "hidden" }
+                { srcList: ["img/char/004/Adage3.jpg"], type: "fd" }
             ]
         },
         // 埃尔托克里德･瓦伦丁
@@ -45,7 +45,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["img/char/004/Eltcreed.jpg","img/char/004/Eltcreed2.jpg"], type: "base" },
-                { srcList: ["img/char/004/Eltcreed3.jpg"], type: "hidden" }
+                { srcList: ["img/char/004/Eltcreed3.jpg"], type: "fd" }
             ]
         },
         // 芬･尤克列斯
@@ -57,7 +57,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["img/char/004/Fin.jpg","img/char/004/Fin2.jpg"], type: "base" },
-                { srcList: ["img/char/004/Fin3.jpg","img/char/004/Fin4.jpg"], type: "hidden" }
+                { srcList: ["img/char/004/Fin3.jpg","img/char/004/Fin4.jpg"], type: "fd" }
             ]
         },
         // 伊内斯･海因里希･海涅
@@ -69,7 +69,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["img/char/004/Ines.jpg","img/char/004/Ines2.jpg"], type: "base" },
-                { srcList: ["img/char/004/Ines3.jpg"], type: "hidden" }
+                { srcList: ["img/char/004/Ines3.jpg"], type: "fd" }
             ]
         },
         // 乌尔利克･费里尔
@@ -81,7 +81,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["img/char/004/Ulrik.jpg","img/char/004/Ulrik2.jpg"], type: "base" },
-                { srcList: ["img/char/004/Ulrik3.jpg"], type: "hidden" }
+                { srcList: ["img/char/004/Ulrik3.jpg"], type: "fd" }
             ]
         },
         // 尤尼･石英
@@ -93,7 +93,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["img/char/004/Yune.jpg","img/char/004/Yune2.jpg"], type: "base" },
-                { srcList: ["img/char/004/Yune3.jpg"], type: "hidden" }
+                { srcList: ["img/char/004/Yune3.jpg"], type: "fd" }
             ]
         },
         // 杰里姆
