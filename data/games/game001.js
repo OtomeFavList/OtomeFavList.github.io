@@ -45,7 +45,7 @@ const gameData = {
                 { srcList: ["img/char/001/Gilbert.jpg","img/char/001/Gilbert2.jpg","img/char/001/Gilbert3.jpg"], type: "base" }
             ]
         },
-        // 尼古拉‧法兰捷斯卡
+        // 尼古拉·法兰捷斯卡
         {
             id: "g001_m03",
             name: "尼古拉‧法兰捷斯卡",
@@ -78,7 +78,7 @@ const gameData = {
                 { srcList: ["img/char/001/Yang.jpg","img/char/001/Yang2.jpg","img/char/001/Yang3.jpg"], type: "base" }
             ]
         },
-        // 亨利‧兰伯特
+        // 亨利·兰伯特
         {
             id: "g001_h01",
             name: "亨利·兰伯特",
