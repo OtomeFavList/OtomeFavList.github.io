@@ -21,7 +21,7 @@ window.gameDataList = [];
 
 // 使用网站根绝对路径，彻底消除模块相对路径错乱
 async function loadAllGames() {
-    const baseUrl = "./data/games/";
+    const baseUrl = "./games/";
     for (let fname of allGameFileNames) {
         const src = baseUrl + fname;
         try {
