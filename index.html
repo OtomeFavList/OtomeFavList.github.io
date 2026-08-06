@@ -7,6 +7,8 @@
 <link rel="stylesheet" href="./css/main.css">
 <!-- html2canvas CDN（第三方库，保留全局引入） -->
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<!-- 游戏数据聚合脚本，挂载 window.gameDataList，必须在main.js模块之前 -->
+<script src="./data/games.js"></script>
 </head>
 <body>
 
@@ -155,15 +157,9 @@
     </div>
 </div>
 
-<!-- ==========修复点1：加上 type="module"========== -->
-<script type="module" src="./data/games.js"></script>
-
 <script type="module">
 import { bootstrapCore } from "./js/main.js";
-
 document.addEventListener("DOMContentLoaded", async () => {
-    // 等待全部游戏文件加载完成，再启动主程序
-    await window.loadAllGames();
     bootstrapCore();
 })
 </script>
