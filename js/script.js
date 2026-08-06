@@ -230,11 +230,6 @@ export function initPage(Core = {}) {
       el.addedGameBox.innerHTML = html;
       bindGameCardEvent();
 
-      // ✅渲染完卡片，调用main.js导出的委托绑定
-      if (typeof bindDynamicGameCardSwitchEvents === "function") {
-        bindDynamicGameCardSwitchEvents();
-      }
-
       // =========【修复！！这段循环移入renderAddedGame函数内部，卡片渲染完成后执行】=========
       document.querySelectorAll(".added-game-card").forEach(cardDom => {
         const gid = cardDom.dataset.gameid;
@@ -556,7 +551,6 @@ export function initPage(Core = {}) {
 
           if (el.searchPanel) el.searchPanel.classList.add("hide-block");
           window.refreshGameCardUi();
-          bindDynamicGameCardSwitchEvents();
         }
       })
     }
@@ -574,7 +568,6 @@ export function initPage(Core = {}) {
           gameItem.fold = !gameItem.fold;
           saveData();
           window.refreshGameCardUi();
-          bindDynamicGameCardSwitchEvents();
         }
       })
 
@@ -584,7 +577,6 @@ export function initPage(Core = {}) {
           appData.gameList = appData.gameList.filter(g => g.gameId !== gid);
           saveData();
           window.refreshGameCardUi();
-          bindDynamicGameCardSwitchEvents();
         }
       })
 
@@ -612,7 +604,6 @@ export function initPage(Core = {}) {
                 ht.classList.remove("active");
               }
             });
-            // ❗删除 bindDynamicGameCardSwitchEvents(); 爱心点击不需要重新绑定委托
           }
         })
       })
@@ -706,6 +697,11 @@ export function initPage(Core = {}) {
           el.exportBtn.textContent = "生成并导出图片";
         }
       });
+    }
+
+    // ✅【只启动时调用1次委托，不要多次重复绑定】
+    if (typeof bindDynamicGameCardSwitchEvents === "function") {
+      bindDynamicGameCardSwitchEvents();
     }
 
     // 初始渲染页面
