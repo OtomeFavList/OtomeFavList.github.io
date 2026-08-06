@@ -8,6 +8,7 @@ const gameIdList = [
 // 全局存储key
 export const STORE_KEY = "otome-favlist-data";
 export const SPOILER_DATE_KEY = "spoiler-confirm-date"; // 全局剧透确认日期
+export const SPOILER_LOCAL_SWITCH_KEY = "local-switch-spoiler-date";
 
 // ===================== 全局应用数据对象 =====================
 export let appData = {
@@ -95,6 +96,17 @@ export function isTodayConfirmed() {
  */
 export function saveConfirmDate() {
     localStorage.setItem(SPOILER_DATE_KEY, getTodayDateStr());
+}
+
+/**
+ * 局部开关单日确认标记（兼容旧script.js解构）
+ */
+export function localSwitchIsConfirmedToday() {
+    const saved = localStorage.getItem(SPOILER_LOCAL_SWITCH_KEY);
+    return saved === getTodayDateStr();
+}
+export function saveLocalSwitchConfirmDate() {
+    localStorage.setItem(SPOILER_LOCAL_SWITCH_KEY, getTodayDateStr());
 }
 
 // ===================== 角色图片过滤工具函数 =====================
@@ -405,6 +417,8 @@ function buildCoreContext() {
         getAvailableCharImages,
         isTodayConfirmed,
         saveConfirmDate,
+        localSwitchIsConfirmedToday,
+        saveLocalSwitchConfirmDate,
         renderGameSelectItem,
         bindDynamicGameCardSwitchEvents
     };
@@ -439,7 +453,7 @@ function wrapClickHandler(e) {
         if (targetInput.classList.contains("modal-local-hide-char") || targetInput.classList.contains("modal-local-fd")) {
             gameItem = appData.gameList.find(g => g.gameId === currentEditGameId);
             if (!gameItem) return;
-            idx = appData.gameList.indexOf(gameItem);
+            idx = appData.gameList.findIndex(g => g.gameId === currentEditGameId);
         } else {
             idx = Number(targetInput.dataset.gameidx);
             gameItem = appData.gameList[idx];
@@ -499,6 +513,13 @@ function wrapClickHandler(e) {
         // 通知script.js重新渲染游戏卡片
         if (window.refreshGameCardUi) window.refreshGameCardUi();
         return;
+    }
+
+    // 点击遮罩空白关闭弹窗
+    if(e.target === spoilerModal){
+        spoilerModal.classList.remove("active");
+        window.pendingGlobalSwitch = null;
+        window.pendingGameOp = null;
     }
 }
 
