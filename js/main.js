@@ -128,26 +128,17 @@ export function getAvailableCharImages(char, globalHideSwitch, globalFDSwitch, l
 
 }
 
-// ===================== 游戏模板加载模块 =====================
+// ===================== 游戏模板加载模块（不再import游戏，读取全局已加载数据） =====================
 export async function loadAllGameTemplates() {
-    // ========== 修复：相对路径，main.js位于js目录，向上回退一层访问同级data文件夹 ==========
-    const basePath = "../data/games/";
-    const tempList = [];
-
-for (const id of gameIdList) {
-    try {
-        const mod = await import(`${basePath}game${id}.js`);
-        if (mod && mod.gameData) {
-            tempList.push(mod.gameData);
-        }else{
-            console.warn(`game${id}.js 加载成功，但缺失 gameData 数据，数据格式异常`);
-        }
-    } catch (err) {
-        console.error(`游戏文件 game${id}.js 加载异常`, err);
-        continue;
+    // 等待全局window.gameDataList就绪（data/games.js已经完成全部import）
+    if (!Array.isArray(window.gameDataList)) {
+        gameTemplateList = [];
+        console.warn("window.gameDataList不存在，游戏模板为空");
+        return;
     }
-}
-gameTemplateList = tempList;
+    // 直接赋值，不再重复导入游戏脚本
+    gameTemplateList = [...window.gameDataList];
+    console.log("✅main.js读取全局游戏模板，数量：", gameTemplateList.length);
 }
 
 /**
