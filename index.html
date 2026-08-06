@@ -138,13 +138,13 @@
             <p>由于开发者个人没有接触所有游戏，因此会有部分游戏缺少隐藏角色。</p>
             <p>如果发现角色遗漏（若涉及剧透烦请在邮件标题添加预警）、图片错误、功能异常，<br>
 或有希望新增的作品，欢迎通过邮箱联系。</p>
-            <p class="email-text">Email：otomefavlist@163.com</p>
+            <p class="email-text">Email：<a href="mailto:otomefavlist@163.com">otomefavlist@163.com</a></p>
         </div>
     </div>
 </div>
 
-<!-- 剧透弹窗：取消按钮完整保留 -->
-<div class="modal-mask" id="spoiler-modal">
+<!-- 剧透警告弹窗 -->
+<div id="spoiler-modal" class="modal-mask">
     <div class="modal-box">
         <h3>⚠️剧透警告⚠️</h3>
         <p class="text-gray-desc">注意！<br>开启后可能涉及：<br>剧情结局、最终攻略对象、真相路线，<br>是否继续？</p>
@@ -155,30 +155,9 @@
     </div>
 </div>
 
-<!-- 角色选择弹窗 -->
-<div class="modal-mask" id="char-select-modal">
-    <div class="modal-box">
-        <div class="panel-header">
-            <h3>选择角色</h3>
-            <button class="panel-close-btn" id="char-modal-close">×</button>
-        </div>
-        <!-- 新增：局部开关渲染容器 -->
-        <div id="modal-local-switch-wrap"></div>
-        <div id="char-select-modal-body"></div>
-        <div class="modal-btns">
-            <button id="char-modal-cancel">取消</button>
-            <button id="char-modal-ok">确定</button>
-        </div>
-    </div>
-</div>
-
-<!-- JS入口模块 -->
 <script type="module">
 import { bootstrapCore } from "./js/main.js";
-document.addEventListener("DOMContentLoaded", async () => {
-    await bootstrapCore();
-});
+bootstrapCore();
 </script>
-
 </body>
 </html>
