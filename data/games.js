@@ -2,17 +2,17 @@
 // 聚合games/下所有独立游戏数据，自动合并全局数组
 // 新增游戏只新建games/gameXXX.js，仅需要在下方数组追加路径，本文件其余代码永久不用修改
 const allGameFiles = [
-    "/data/games/game001.js",
-    "/data/games/game002.js",
-    "/data/games/game003.js",
-    "/data/games/game004.js",
-    "/data/games/game005.js",
-    "/data/games/game006.js",
-    "/data/games/game007.js",
-    "/data/games/game008.js",
-    "/data/games/game009.js",
-    "/data/games/game010.js",
-    "/data/games/game011.js",
+    "./games/game001.js",
+    "./games/game002.js",
+    "./games/game003.js",
+    "./games/game004.js",
+    "./games/game005.js",
+    "./games/game006.js",
+    "./games/game007.js",
+    "./games/game008.js",
+    "./games/game009.js",
+    "./games/game010.js",
+    "./games/game011.js",
     // 后续新增游戏仅在此添加一行文件路径即可，仅此一处极小改动
 ];
 
