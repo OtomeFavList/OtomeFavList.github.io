@@ -8,7 +8,7 @@ const gameData = {
     year: "2022",
     publisher: "Rejet",
     cnStudio: "JOYOLAND",
-    writer: ["真崎结衣"],
+    writer: ["真崎结衣","鷹匠早紀","やまだ有見","秋月ひろ","こたに白子","久遠まひろ","由女川萩","竹藤夜宵"],
     art: "hagi",
     cover: "img/game/012.jpg",
     charList: [
