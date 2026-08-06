@@ -48,7 +48,7 @@ const gameData = {
         // 璐卡·普鲁斯特
         {
             id: "g016_m03",
-            name: "璐卡‧普鲁斯特",
+            name: "璐卡·普鲁斯特",
             gender: "male",
             isHidden: false,
             isFD: false,
