@@ -30,8 +30,10 @@ async function loadAllGames() {
         }
     }
     console.log("✅游戏加载流程执行完毕，总数量：", window.gameDataList.length);
-    // 载入完成后渲染页面游戏筛选列表
-    if(window.renderGameSelectList) renderGameSelectList();
+    // 载入完成后渲染页面游戏筛选列表，增加存在性判断，防止函数不存在报错
+    if(typeof window.renderGameSelectList === "function"){
+        window.renderGameSelectList();
+    }
 }
 // 将函数暴露到全局，交给index.html DOMContentLoaded之后再调用
 window.loadAllGames = loadAllGames;
