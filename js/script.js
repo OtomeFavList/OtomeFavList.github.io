@@ -4,7 +4,7 @@
 // 改造：每个游戏卡片内部动态生成两套独立滑出面板 char / cp；不再使用全局唯一char-slide-panel
 // 注意：main.js禁止import本文件，避免循环依赖
 
-export function initPage(Core = {}) {
+export async function initPage(Core = {}) {
     // 安全兜底，防止不传Core报错
     Core = Core || {};
 
