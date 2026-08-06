@@ -247,8 +247,8 @@ function renderAddedGame(el) {
             });
         }
 
-        // 【修改点】全局钩子指向本文件内部renderAddedGame，保证DOM class统一为 added‑game‑card
-        window.refreshGameCardUi = renderAddedGame;
+        // 【✅修复此处：包装箭头函数，把bootstrap内部el传入renderAddedGame】
+        window.refreshGameCardUi = () => renderAddedGame(el);
 
         // ==========【全局事件委托：角色立绘左右切换，卡片内面板生效】==========
         document.addEventListener("click", function (e) {
