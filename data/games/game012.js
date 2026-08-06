@@ -4,78 +4,78 @@
 // 仅需要在 games.js 的 allGameFiles数组追加本文件路径
 const gameData = {
     id: "game012",
-    name: "冷然之天秤：帝都幻惑绮谭",
+    name: "谎月香格里拉",
     year: "2022",
-    publisher: "Otomate",
-    cnStudio: "GSE",
-    writer: ["片桐由摩"],
-    art: "さとい",
+    publisher: "Rejet",
+    cnStudio: "JOYOLAND",
+    writer: ["真崎结衣"],
+    art: "hagi",
     cover: "img/game/012.jpg",
     charList: [
-        // 久世鸫
+        // 晦光
         {
             id: "g012_f01",
-            name: "久世鸫",
+            name: "晦光",
             gender: "female",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/010/Tsugumi.jpg","img/char/010/Tsugumi2.jpg"], type: "base" }
+                { srcList: ["img/char/012/Akari.jpg","img/char/012/Akari2.jpg"], type: "base" }
             ]
         },
-        // 鸿上滉
+        // 恩德
         {
             id: "g012_m01",
-            name: "鸿上滉",
+            name: "恩德",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/010/Akira.jpg","img/char/010/Akira2.jpg"], type: "base" }
+                { srcList: ["img/char/012/Ende.jpg","img/char/012/Ende2.jpg"], type: "base" }
             ]
         },
-        // 星川翡翠
+        // 芬里尔
         {
             id: "g012_m02",
-            name: "星川翡翠",
+            name: "芬里尔",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/010/Hoshikawa.jpg","img/char/010/Hoshikawa2.jpg"], type: "base" }
+                { srcList: ["img/char/012/Fenrir.jpg","img/char/012/Fenrir2.jpg","img/char/012/Fenrir3.jpg"], type: "base" }
             ]
         },
-        // 汀紫鹤
+        // 哈提
         {
             id: "g012_m03",
-            name: "汀紫鹤",
+            name: "哈提",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/010/Migiwa.jpg","img/char/010/Migiwa2.jpg"], type: "base" }
+                { srcList: ["img/char/012/Hati.jpg","img/char/012/Hati2.jpg"], type: "base" }
             ]
         },
-        // 尾崎隼人
+        // 海拉
         {
             id: "g012_m04",
-            name: "尾崎隼人",
+            name: "海拉",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/010/Ozaki.jpg","img/char/010/Ozaki2.jpg"], type: "base" }
+                { srcList: ["img/char/012/Hel.jpg","img/char/012/Hel2.jpg","img/char/012/Hel3.jpg"], type: "base" }
             ]
         },
-        // 鹭泽累
+        // 耶梦加得
         {
             id: "g012_m05",
-            name: "鹭泽累",
+            name: "耶梦加得",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/010/Rui.jpg","img/char/010/Rui2.jpg"], type: "base" }
+                { srcList: ["img/char/012/Jorm.jpg","img/char/012/Jorm2.jpg","img/char/012/Jorm3.jpg"], type: "base" }
             ]
         },
     ]
