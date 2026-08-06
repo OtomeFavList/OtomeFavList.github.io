@@ -8,7 +8,7 @@ const gameData = {
     year: "2021",
     publisher: "Otomate",
     cnStudio: "JSD",
-    writer: ["小縞なお","西村悠"],
+    writer: ["小縞なお","西村悠","中山智美","有野幸"],
     art: "miko",
     cover: "img/game/013.jpg",
     charList: [
