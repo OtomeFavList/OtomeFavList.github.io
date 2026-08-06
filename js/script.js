@@ -4,28 +4,32 @@
 // 改造：每个游戏卡片内部动态生成两套独立滑出面板 char / cp；不再使用全局唯一char-slide-panel
 // 注意：main.js禁止import本文件，避免循环依赖
 
-import {
-    appData,
-    gameTemplateList,
-    currentEditGameId,
-    charPoolMode,
-    loadAllGameTemplates,
-    saveData,
-    syncSingleGameSwitch,
-    fillFilterOptions,
-    renderSelectedChar,
-    renderCP,
-    getAllGameChar,
-    getAvailableCharImages,
-    isTodayConfirmed,
-    saveConfirmDate,
-    renderGameSelectItem,
-    bindDynamicGameCardSwitchEvents
-} from './main.js';
-
 export function initPage(Core = {}) {
     // 安全兜底，防止不传Core报错
     Core = Core || {};
+
+    // ============ 从Core上下文完整解构，与main.js buildCoreContext严格对齐 ============
+    const {
+        appData,
+        gameTemplateList,
+        currentEditGameId,
+        charPoolMode,
+        loadAllGameTemplates,
+        loadData,
+        saveData,
+        syncSingleGameSwitch,
+        fillFilterOptions,
+        renderSelectedChar,
+        renderCP,
+        getAllGameChar,
+        getAvailableCharImages,
+        isTodayConfirmed,
+        saveConfirmDate,
+        localSwitchIsConfirmedToday,
+        saveLocalSwitchConfirmDate,
+        renderGameSelectItem,
+        bindDynamicGameCardSwitchEvents
+    } = Core;
 
     /**
      * 在指定游戏卡片内部渲染滑出面板内容
@@ -393,7 +397,7 @@ export function initPage(Core = {}) {
             }
         }
 
-        // 加载本地存储
+        // 加载本地存储【修复：从Core拿loadData】
         loadData();
         // 兜底：旧本地存储数据补charPanelOpen、cpPanelOpen、loveRate字段
         if(Array.isArray(appData.gameList)){
@@ -690,5 +694,5 @@ export function initPage(Core = {}) {
     window.openCharSelectModal = openCharSelectModal;
     window.renderCharSelectList = renderCharSelectList;
 
-    bootstrap();
+    await bootstrap();
 }
