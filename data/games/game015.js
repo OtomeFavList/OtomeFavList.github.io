@@ -20,9 +20,7 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { src: ["img/char/g001_f0_1.jpg","img/char/g001_f0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { src: ["img/char/g001_f0_3.jpg"], type: "hidden" }     // 需要开启隐藏角色开关才展示的图片
-                { src: ["img/char/g001_f0_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { src: ["img/char/015/Suzuno.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 锦次
@@ -33,9 +31,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { src: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { src: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { src: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { src: ["img/char/015/Kinji.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 久贺源十郎
@@ -46,9 +42,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { src: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { src: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { src: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { src: ["img/char/015/Kuga.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 东条国孝
@@ -59,9 +53,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { src: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { src: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { src: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { src: ["img/char/015/Kunitaka.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 樱太郎
@@ -72,9 +64,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { src: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { src: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { src: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { src: ["img/char/015/Outarou.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 篁智成
@@ -85,9 +75,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { src: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { src: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { src: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { src: ["img/char/015/Tomonari.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },// 与市
         {
@@ -97,9 +85,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { src: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { src: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { src: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { src: ["img/char/015/Yoichi.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         }
     ]
