@@ -5,10 +5,10 @@
 const gameData = {
     id: "game011",
     name: "毘卢遮那战姬~源平飞花梦想~",
-    year: "2021",
+    year: "2022",
     publisher: "Rejet",
-    cnStudio: "JOYOLAND",
-    writer: ["やまだ有見","加納高子","吉村りりか","夏野景","小和泉いづみ","山田かのこ","砂原有季","関涼子","瀬多海人"],
+    cnStudio: "JSD",
+    writer: ["伊東愛","崎本知世","庵原ふじ","榛乃綾子","春森よしちか"],
     art: "読",
     cover: "img/game/011.jpg",
     charList: [
