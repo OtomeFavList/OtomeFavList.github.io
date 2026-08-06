@@ -5,7 +5,7 @@
 const gameData = {
     id: "game001",
     name: "虔诚之花的晚钟-ricordo-",
-    year: "2020",
+    year: "2019",
     publisher: "Otomate",
     cnStudio: "GSE",
     writer: ["かずら林檎"],
