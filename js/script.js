@@ -570,9 +570,19 @@ export function initPage(Core = {}) {
                 box.querySelectorAll(".heart").forEach(h => {
                     h.onclick = (e) => {
                         e.stopPropagation();
+                        e.preventDefault();
                         gameItem.loveRate = Number(h.dataset.val);
                         saveData();
-                        window.refreshGameCardUi();
+                        // 局部更新爱心，禁止全卡片重渲染，防止DOM销毁带来事件泄露冒泡bug
+                        const allHearts = box.querySelectorAll(".heart");
+                        allHearts.forEach(ht => {
+                            const val = Number(ht.dataset.val);
+                            if(val <= gameItem.loveRate){
+                                ht.classList.add("active");
+                            }else{
+                                ht.classList.remove("active");
+                            }
+                        });
                         bindDynamicGameCardSwitchEvents();
                     }
                 })
