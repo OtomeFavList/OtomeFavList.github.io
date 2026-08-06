@@ -4,11 +4,11 @@
 // 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
 const gameData = {
     id: "game003",
-    name: "幻奏咖啡厅",
+    name: "幻奏咖啡厅-Enchanté-",
     year: "2020",
     publisher: "Otomate",
     cnStudio: "GSE",
-    writer: ["中山智美","佐々木麿","吉村りりか","小縞なお","高羽朋美"],
+    writer: ["中山智美","佐々木麿","吉村りりか","小縞なお"],
     art: "ユウヤ",
     cover: "img/game/003.jpg",
     charList: [
