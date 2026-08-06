@@ -84,7 +84,7 @@ const gameData = {
             name: "亨利·兰伯特",
             gender: "male",
             isHidden: true,
-            isFD: false,
+            isFD: true,
             images: [
                 { srcList: ["img/char/001/Henri.jpg"], type: "base" }
             ]
