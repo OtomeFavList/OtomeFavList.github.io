@@ -130,8 +130,8 @@ export function getAvailableCharImages(char, globalHideSwitch, globalFDSwitch, l
 
 // ===================== 游戏模板加载模块 =====================
 export async function loadAllGameTemplates() {
-    // ========== 已修改：改为根绝对路径 /data/games/ ==========
-    const basePath = "/data/games/";
+    // ========== 修复：相对路径，main.js位于js目录，向上回退一层访问同级data文件夹 ==========
+    const basePath = "../data/games/";
     const tempList = [];
 
 for (const id of gameIdList) {
