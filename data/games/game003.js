@@ -5,7 +5,7 @@
 const gameData = {
     id: "game003",
     name: "幻奏咖啡厅-Enchanté-",
-    year: "2019",
+    year: "2020",
     publisher: "Otomate",
     cnStudio: "GSE",
     writer: ["中山智美","佐々木麿","吉村りりか","小縞なお"],
