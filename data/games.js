@@ -1,4 +1,4 @@
-// games.js
+// data/games.js
 // 聚合games/下所有独立游戏数据，自动合并全局数组
 // 新增游戏只新建games/gameXXX.js，仅需要在下方数组追加路径，本文件其余代码永久不用修改
 const allGameFiles = [
@@ -16,14 +16,17 @@ const allGameFiles = [
     // 后续新增游戏仅在此添加一行文件路径即可，仅此一处极小改动
 ];
 
-// 全局游戏数据存储容器（各个gameXXX.js内将数据push到此数组）
+// 全局游戏数据存储容器（各个gameXXX.js导出gameData，此处读取导出并push）
 window.gameDataList = [];
 
 // 动态载入所有游戏数据
 async function loadAllGames() {
     for (let src of allGameFiles) {
         try {
-            await import(src);
+            const mod = await import(src);
+            if (mod.gameData) {
+                window.gameDataList.push(mod.gameData);
+            }
             console.log("✅已加载：", src);
         } catch (err) {
             console.warn("⚠️该游戏文件加载跳过：", src, err);
