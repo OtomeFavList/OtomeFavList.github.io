@@ -10,7 +10,6 @@ import {
     currentEditGameId,
     charPoolMode,
     loadAllGameTemplates,
-    loadData,
     saveData,
     syncSingleGameSwitch,
     fillFilterOptions,
@@ -132,33 +131,61 @@ export function initPage(Core = {}) {
 `;
     }
 
-    /**
-     * 渲染已添加游戏卡片
-     * 每个卡片内部嵌入两套滑出面板 char / cp
-     */
-    function renderAddedGame() {
-        if (!el.addedGameBox) return;
-        if (!Array.isArray(gameTemplateList) || gameTemplateList.length === 0) {
-            el.addedGameBox.innerHTML = "<p>⚠️ 游戏数据加载失败，检查data/games路径</p>";
-            return;
-        }
-        document.querySelectorAll(".modal-trigger").forEach(dom => dom.classList.remove("modal-trigger"));
 
-        let html = "";
-        appData.gameList?.forEach((gameItem, index) => {
-            if (!gameItem) return;
-            const gameInfo = gameTemplateList.find(g => g.id === gameItem.gameId);
-            if (!gameInfo) return;
-            let heartHtml = "";
-            for (let i = 1; i <= 5; i++) {
-                heartHtml += `<span class="heart ${gameItem.loveRate >= i ? 'active' : ''}" data-val="${i}">♥</span>`;
+    // ===================== 页面启动bootstrap，UI渲染、表单、导出、卡片事件 =====================
+    async function bootstrap() {
+        // DOM元素缓存，移除全局char-slide-panel
+        const el = {
+            globalHideChar: document.getElementById("global-hide-char"),
+            globalFD: document.getElementById("global-fd"),
+            spoilerModal: document.getElementById("spoiler-modal"),
+            spoilerConfirm: document.getElementById("spoiler-confirm"),
+            addGameBtn: document.getElementById("btn-add-game"),
+            searchPanel: document.getElementById("search-panel"),
+            gameSearchInput: document.getElementById("game-search-input"),
+            gameSelectList: document.getElementById("game-select-list"),
+            addedGameBox: document.getElementById("added-game-container"),
+            inputNick: document.getElementById("input-nick"),
+            inputCount: document.getElementById("input-count"),
+            inputStory: document.getElementById("input-story"),
+            inputFirstgame: document.getElementById("input-firstgame"),
+            colorBg: document.getElementById("color-bg"),
+            colorTitle: document.getElementById("color-title"),
+            colorText: document.getElementById("color-text"),
+            colorBorder: document.getElementById("color-border"),
+            exportBtn: document.getElementById("btn-export"),
+            canvas: document.getElementById("export-canvas"),
+            snapshotContainer: document.getElementById("snapshot-container")
+        };
+
+        /**
+         * 渲染已添加游戏卡片
+         * 每个卡片内部嵌入两套滑出面板 char / cp
+         * ✅移入bootstrap内部，可以访问局部变量 el
+         */
+        function renderAddedGame() {
+            if (!el.addedGameBox) return;
+            if (!Array.isArray(gameTemplateList) || gameTemplateList.length === 0) {
+                el.addedGameBox.innerHTML = "<p>⚠️ 游戏数据加载失败，检查data/games路径</p>";
+                return;
             }
+            document.querySelectorAll(".modal-trigger").forEach(dom => dom.classList.remove("modal-trigger"));
 
-            // 根据数据字段输出面板显隐class，fold优先级最高
-            const charPanelClass = (gameItem.fold || !gameItem.charPanelOpen) ? "hide-block" : "";
-            const cpPanelClass = (gameItem.fold || !gameItem.cpPanelOpen) ? "hide-block" : "";
+            let html = "";
+            appData.gameList?.forEach((gameItem, index) => {
+                if (!gameItem) return;
+                const gameInfo = gameTemplateList.find(g => g.id === gameItem.gameId);
+                if (!gameInfo) return;
+                let heartHtml = "";
+                for (let i = 1; i <= 5; i++) {
+                    heartHtml += `<span class="heart ${gameItem.loveRate >= i ? 'active' : ''}" data-val="${i}">♥</span>`;
+                }
 
-            html += `
+                // 根据数据字段输出面板显隐class，fold优先级最高
+                const charPanelClass = (gameItem.fold || !gameItem.charPanelOpen) ? "hide-block" : "";
+                const cpPanelClass = (gameItem.fold || !gameItem.cpPanelOpen) ? "hide-block" : "";
+
+                html += `
 <div class="added-game-card" data-gameid="${gameItem.gameId}">
     <div class="game-card-header-row">
         <span class="game-card-title">${gameInfo.name}</span>
@@ -196,57 +223,31 @@ export function initPage(Core = {}) {
     </div>
 </div>
 `;
-        });
+            });
 
-        el.addedGameBox.innerHTML = html;
-        bindGameCardEvent();
-        // ✅渲染完卡片，调用main.js导出的委托绑定
-        if (typeof bindDynamicGameCardSwitchEvents === "function") {
-            bindDynamicGameCardSwitchEvents();
+            el.addedGameBox.innerHTML = html;
+            bindGameCardEvent();
+            // ✅渲染完卡片，调用main.js导出的委托绑定
+            if (typeof bindDynamicGameCardSwitchEvents === "function") {
+                bindDynamicGameCardSwitchEvents();
+            }
+
+            // 【关键修复】循环所有卡片，找到内部滑出面板，执行面板内容渲染
+            document.querySelectorAll(".added-game-card").forEach(cardDom => {
+                const gid = cardDom.dataset.gameid;
+                const gameItem = appData.gameList.find(g => g.gameId === gid);
+                const gameInfo = gameTemplateList.find(g => g.id === gid);
+                if(!gameItem || !gameInfo) return;
+
+                const charPanel = cardDom.querySelector(".char-slide-panel-char");
+                const cpPanel = cardDom.querySelector(".char-slide-panel-cp");
+                if(charPanel) renderCharSelectPanel(cardDom, gid, "char", charPanel);
+                if(cpPanel) renderCharSelectPanel(cardDom, gid, "cp", cpPanel);
+            });
         }
 
-        // 【关键修复】循环所有卡片，找到内部滑出面板，执行面板内容渲染
-        document.querySelectorAll(".added-game-card").forEach(cardDom => {
-            const gid = cardDom.dataset.gameid;
-            const gameItem = appData.gameList.find(g => g.gameId === gid);
-            const gameInfo = gameTemplateList.find(g => g.id === gid);
-            if(!gameItem || !gameInfo) return;
-
-            const charPanel = cardDom.querySelector(".char-slide-panel-char");
-            const cpPanel = cardDom.querySelector(".char-slide-panel-cp");
-            if(charPanel) renderCharSelectPanel(cardDom, gid, "char", charPanel);
-            if(cpPanel) renderCharSelectPanel(cardDom, gid, "cp", cpPanel);
-        });
-    }
-
-    // ===================== 页面启动bootstrap，UI渲染、表单、导出、卡片事件 =====================
-    async function bootstrap() {
         // 【修改点】全局钩子指向本文件内部renderAddedGame，保证DOM class统一为 added‑game‑card
         window.refreshGameCardUi = renderAddedGame;
-
-        // DOM元素缓存，移除全局char-slide-panel
-        const el = {
-            globalHideChar: document.getElementById("global-hide-char"),
-            globalFD: document.getElementById("global-fd"),
-            spoilerModal: document.getElementById("spoiler-modal"),
-            spoilerConfirm: document.getElementById("spoiler-confirm"),
-            addGameBtn: document.getElementById("btn-add-game"),
-            searchPanel: document.getElementById("search-panel"),
-            gameSearchInput: document.getElementById("game-search-input"),
-            gameSelectList: document.getElementById("game-select-list"),
-            addedGameBox: document.getElementById("added-game-container"),
-            inputNick: document.getElementById("input-nick"),
-            inputCount: document.getElementById("input-count"),
-            inputStory: document.getElementById("input-story"),
-            inputFirstgame: document.getElementById("input-firstgame"),
-            colorBg: document.getElementById("color-bg"),
-            colorTitle: document.getElementById("color-title"),
-            colorText: document.getElementById("color-text"),
-            colorBorder: document.getElementById("color-border"),
-            exportBtn: document.getElementById("btn-export"),
-            canvas: document.getElementById("export-canvas"),
-            snapshotContainer: document.getElementById("snapshot-container")
-        };
 
         // ==========【全局事件委托：角色立绘左右切换，卡片内面板生效】==========
         document.addEventListener("click", function (e) {
@@ -678,7 +679,6 @@ export function initPage(Core = {}) {
     // ✅挂载全局句柄给main.js调用
     window.openCharSelectModal = openCharSelectModal;
     window.renderCharSelectList = renderCharSelectList;
-    window.refreshGameCardUi = renderAddedGame;
 
     bootstrap();
 }
