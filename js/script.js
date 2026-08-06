@@ -10,6 +10,7 @@ import {
     currentEditGameId,
     charPoolMode,
     loadAllGameTemplates,
+    loadData,
     saveData,
     syncSingleGameSwitch,
     fillFilterOptions,
@@ -572,6 +573,7 @@ async function bootstrap() {
                 h.onclick = (e) => {
                     e.stopPropagation();
                     e.preventDefault();
+                    e.stopImmediatePropagation(); // 关键修复：阻止向上冒泡，不会触发卡片开关委托事件
                     gameItem.loveRate = Number(h.dataset.val);
                     saveData();
                     // 局部更新爱心，禁止全卡片重渲染，防止DOM销毁带来事件泄露冒泡bug
