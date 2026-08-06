@@ -594,6 +594,7 @@ async function bootstrap() {
 
     // =====================【导出图片核心逻辑】=====================
     if (el.exportBtn && el.snapshotContainer) {
+        // ✅修复：给回调增加 async，解决 await is a reserved identifier
         el.exportBtn.addEventListener('click', async () => {
             try {
                 if(typeof html2canvas !== "function"){
