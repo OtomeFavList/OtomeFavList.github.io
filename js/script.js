@@ -134,7 +134,7 @@ export function initPage(Core = {}) {
 
     // ===================== 页面启动bootstrap，UI渲染、表单、导出、卡片事件 =====================
     async function bootstrap() {
-        // DOM元素缓存，移除全局char-slide-panel
+        // DOM元素缓存
         const el = {
             globalHideChar: document.getElementById("global-hide-char"),
             globalFD: document.getElementById("global-fd"),
@@ -160,13 +160,12 @@ export function initPage(Core = {}) {
 
         /**
          * 渲染已添加游戏卡片
-         * 每个卡片内部嵌入两套滑出面板 char / cp
-         * ✅传入容器对象el，消除ReferenceError
+         * @param {object} elDom 缓存dom对象
          */
-        function renderAddedGame(el) {
-            if (!el.addedGameBox) return;
+        function renderAddedGame(elDom) {
+            if (!elDom.addedGameBox) return;
             if (!Array.isArray(gameTemplateList) || gameTemplateList.length === 0) {
-                el.addedGameBox.innerHTML = "<p>⚠️ 游戏数据加载失败，检查data/games路径</p>";
+                elDom.addedGameBox.innerHTML = "<p>⚠️ 游戏数据加载失败，检查data/games路径</p>";
                 return;
             }
             document.querySelectorAll(".modal-trigger").forEach(dom => dom.classList.remove("modal-trigger"));
@@ -225,14 +224,12 @@ export function initPage(Core = {}) {
 `;
             });
 
-            el.addedGameBox.innerHTML = html;
+            elDom.addedGameBox.innerHTML = html;
             bindGameCardEvent();
-            // ✅渲染完卡片，调用main.js导出的委托绑定
             if (typeof bindDynamicGameCardSwitchEvents === "function") {
                 bindDynamicGameCardSwitchEvents();
             }
 
-            // =========【修复！！这段循环移入renderAddedGame函数内部，卡片渲染完成后执行】=========
             document.querySelectorAll(".added-game-card").forEach(cardDom => {
                 const gid = cardDom.dataset.gameid;
                 const gameItem = appData.gameList.find(g => g.gameId === gid);
@@ -244,9 +241,9 @@ export function initPage(Core = {}) {
                 if(charPanel) renderCharSelectPanel(cardDom, gid, "char", charPanel);
                 if(cpPanel) renderCharSelectPanel(cardDom, gid, "cp", cpPanel);
             });
-        } // renderAddedGame 闭合
+        }
 
-        // 【✅修复此处：包装箭头函数，把bootstrap内部el传入renderAddedGame】
+        // ✅修复：把el传入，不再闭包丢失
         window.refreshGameCardUi = () => renderAddedGame(el);
 
         // ==========【全局事件委托：角色立绘左右切换，卡片内面板生效】==========
@@ -291,10 +288,9 @@ export function initPage(Core = {}) {
             imgDom.src = allSrc[currentIndex];
             appData.charImageSelect[saveKey] = currentIndex;
             saveData();
-            // 修复：只更新图片，不再整卡重渲染，避免面板关闭、状态丢失
         });
 
-        // ==========【修复：btn‑character / btn‑couple 全局事件委托，彻底解决innerHTML重渲染事件丢失】==========
+        // ==========btn‑character / btn‑couple 全局事件委托==========
         document.addEventListener("click", function(e){
             const charBtn = e.target.closest(".btn-character");
             if(charBtn){
@@ -324,7 +320,7 @@ export function initPage(Core = {}) {
             }
         });
 
-        // ✅ 卡片内滑出面板角色勾选事件委托：勾选完成 → 修改数据关闭面板
+        // ✅ 卡片内滑出面板角色勾选事件委托
         document.addEventListener("click", function(e){
             const switchBtn = e.target.closest(".char-switch-btn");
             if(switchBtn) return;
@@ -344,7 +340,6 @@ export function initPage(Core = {}) {
                 gameItem.selectChars.push(cid);
             }
 
-            // 判断是char还是cp面板，关闭对应面板
             const panel = charItem.closest(".char-slide-panel-char");
             if(panel){
                 gameItem.charPanelOpen = false;
@@ -355,7 +350,7 @@ export function initPage(Core = {}) {
             window.refreshGameCardUi();
         });
 
-        // ✅面板内部关闭按钮（×），数据驱动关闭面板
+        // ✅面板内部关闭按钮（×）
         document.addEventListener("click", function(e){
             const closeBtn = e.target.closest(".panel-close-btn");
             if(!closeBtn) return;
@@ -374,18 +369,12 @@ export function initPage(Core = {}) {
             window.refreshGameCardUi();
         });
 
-        /**
-         * 更新全局隐藏角色复选框DOM状态（仅更新UI，点击事件由main.js接管）
-         */
         function refreshHideCharSwitch() {
             if (el.globalHideChar) {
                 el.globalHideChar.checked = appData.globalHideChar;
                 el.globalHideChar.indeterminate = false;
             }
         }
-        /**
-         * 更新全局FD复选框DOM状态（仅更新UI，点击事件由main.js接管）
-         */
         function refreshFDSwitch() {
             if (el.globalFD) {
                 el.globalFD.checked = appData.globalFD;
@@ -395,7 +384,6 @@ export function initPage(Core = {}) {
 
         // 加载本地存储
         loadData();
-        // 兜底：旧本地存储数据补charPanelOpen、cpPanelOpen、loveRate字段
         if(Array.isArray(appData.gameList)){
             appData.gameList.forEach(g=>{
                 if(typeof g.charPanelOpen !== "boolean") g.charPanelOpen = false;
@@ -404,13 +392,11 @@ export function initPage(Core = {}) {
             });
         }
 
-        // 回填基础资料表单
         if (el.inputNick) el.inputNick.value = appData.baseInfo?.nick ?? "";
         if (el.inputCount) el.inputCount.value = appData.baseInfo?.count ?? "";
         if (el.inputStory) el.inputStory.value = appData.baseInfo?.story ?? "";
         if (el.inputFirstgame) el.inputFirstgame.value = appData.baseInfo?.firstgame ?? "";
 
-        // 配色绑定，增加DOM判空，消除colorBorder undefined报错
         const colorBindList = [
             { dom: el.colorBg, dataKey: "bg" },
             { dom: el.colorTitle, dataKey: "title" },
@@ -540,7 +526,6 @@ export function initPage(Core = {}) {
 
         /**
          * 游戏卡片内部事件绑定：折叠、删除、爱心评分
-         * 【改动：移除 btn‑character / btn‑couple 的onclick绑定，改用全局document委托】
          */
         function bindGameCardEvent() {
             document.querySelectorAll(".fold-game").forEach(btn => {
@@ -573,7 +558,7 @@ export function initPage(Core = {}) {
                         e.preventDefault();
                         gameItem.loveRate = Number(h.dataset.val);
                         saveData();
-                        // 局部更新爱心，禁止全卡片重渲染，防止DOM销毁带来事件泄露冒泡bug
+                        // 局部更新爱心，不整卡重渲染
                         const allHearts = box.querySelectorAll(".heart");
                         allHearts.forEach(ht => {
                             const val = Number(ht.dataset.val);
@@ -682,11 +667,9 @@ export function initPage(Core = {}) {
         window.refreshGameCardUi();
     }
 
-    // 适配main.js调用的两个别名函数（本项目为卡片内嵌面板，无独立弹窗DOM）
     function openCharSelectModal(){}
     function renderCharSelectList(){}
 
-    // ✅挂载全局句柄给main.js调用
     window.openCharSelectModal = openCharSelectModal;
     window.renderCharSelectList = renderCharSelectList;
 
