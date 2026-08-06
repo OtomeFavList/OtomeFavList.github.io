@@ -74,8 +74,8 @@
             <div class="center-btn-block">
                 <button id="btn-add-game">+ 添加游戏</button>
             </div>
-            <!-- 搜索面板：id=search-panel，class hide-block css控制默认隐藏 -->
-            <div class="game-search-box hide-block" id="search-panel">
+            <!-- 搜索面板：默认隐藏，JS通过 .active 控制显示 -->
+            <div class="game-search-box" id="search-panel">
                 <input type="text" id="game-search-input" placeholder="搜索游戏名称">
                 <div class="filter-group">
                     <!-- 筛选顺序：编剧 → 画师 → 发售年份 → 发行厂商 → 汉化厂商 -->
@@ -145,7 +145,7 @@
     </div>
 </div>
 
-<!-- 剧透警告弹窗 -->
+<!-- 剧透警告弹窗：id="spoiler-modal" class="modal‑mask"，用 .active 控制显示 -->
 <div id="spoiler-modal" class="modal-mask">
     <div class="modal-box">
         <h3>⚠️剧透警告⚠️</h3>
