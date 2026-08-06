@@ -1,27 +1,29 @@
 // data/games.js
 // 聚合games/下所有独立游戏数据，自动合并全局数组
-// 新增游戏只新建games/gameXXX.js，仅需要在下方数组追加路径，本文件其余代码永久不用修改
-const allGameFiles = [
-    "./games/game001.js",
-    "./games/game002.js",
-    "./games/game003.js",
-    "./games/game004.js",
-    "./games/game005.js",
-    "./games/game006.js",
-    "./games/game007.js",
-    "./games/game008.js",
-    "./games/game009.js",
-    "./games/game010.js",
-    "./games/game011.js",
-    // 后续新增游戏仅在此添加一行文件路径即可，仅此一处极小改动
+// 新增游戏只新建games/gameXXX.js，仅需要在下方数组追加文件名，本文件其余代码永久不用修改
+const allGameFileNames = [
+    "game001.js",
+    "game002.js",
+    "game003.js",
+    "game004.js",
+    "game005.js",
+    "game006.js",
+    "game007.js",
+    "game008.js",
+    "game009.js",
+    "game010.js",
+    "game011.js",
+    // 后续新增游戏仅在此添加一行文件名即可
 ];
 
-// 全局游戏数据存储容器（各个gameXXX.js导出gameData，此处读取导出并push）
+// 全局游戏数据存储容器
 window.gameDataList = [];
 
-// 动态载入所有游戏数据
+// 使用网站根绝对路径，彻底消除模块相对路径错乱
 async function loadAllGames() {
-    for (let src of allGameFiles) {
+    const baseUrl = "./data/games/";
+    for (let fname of allGameFileNames) {
+        const src = baseUrl + fname;
         try {
             const mod = await import(src);
             if (mod.gameData) {
@@ -33,10 +35,8 @@ async function loadAllGames() {
         }
     }
     console.log("✅游戏加载流程执行完毕，总数量：", window.gameDataList.length);
-    // 载入完成后渲染页面游戏筛选列表，增加存在性判断，防止函数不存在报错
     if(typeof window.renderGameSelectList === "function"){
         window.renderGameSelectList();
     }
 }
-// 将函数暴露到全局，交给index.html DOMContentLoaded之后再调用
 window.loadAllGames = loadAllGames;
