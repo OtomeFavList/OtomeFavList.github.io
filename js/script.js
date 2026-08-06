@@ -121,8 +121,9 @@ export function initPage(Core = {}) {
    */
   function getInnerSlidePanelHtml(mode){
     const cls = mode === "char" ? "char-slide-panel-char" : "char-slide-panel-cp";
+    // 移除hide‑block，默认无class，靠 .active 控制显示
     return `
-    <div class="${cls} hide-block">
+    <div class="${cls}">
       <div class="panel-header">
         <h4 class="panel-game-title"></h4>
         <button class="panel-close-btn">×</button>
@@ -185,9 +186,9 @@ export function initPage(Core = {}) {
           heartHtml += `<span class="heart ${gameItem.loveRate >= i ? 'active' : ''}" data-val="${i}">♥</span>`;
         }
 
-        // 根据数据字段输出面板显隐class，fold优先级最高
-        const charPanelClass = (gameItem.fold || !gameItem.charPanelOpen) ? "hide-block" : "";
-        const cpPanelClass = (gameItem.fold || !gameItem.cpPanelOpen) ? "hide-block" : "";
+        // 改用 active：打开加active，无则隐藏；fold优先级最高
+        const charPanelClass = ((gameItem.fold || !gameItem.charPanelOpen)) ? "" : "active";
+        const cpPanelClass = ((gameItem.fold || !gameItem.cpPanelOpen)) ? "" : "active";
 
         html += `
         <div class="added-game-card" data-gameid="${gameItem.gameId}">
@@ -211,12 +212,12 @@ export function initPage(Core = {}) {
           </div>
           <div class="game-card-block-item char-section block-margin-gap">
             <button class="btn-character" data-gid="${gameItem.gameId}">选择角色 Character</button>
-            ${getInnerSlidePanelHtml("char").replace('hide-block', charPanelClass)}
+            ${getInnerSlidePanelHtml("char").replace('class="char-slide-panel-char"',`class="char-slide-panel-char ${charPanelClass}"`)}
             <div class="game-card-empty-tip char-card-wrapper char-selected-row" data-gid="${gameItem.gameId}">${renderSelectedChar(gameItem, gameInfo) || `<div class="empty-hint">暂未选择角色</div>`}</div>
           </div>
           <div class="game-card-block-item cp-group block-margin-gap">
             <button class="btn-couple" data-gid="${gameItem.gameId}">选择CP Couple</button>
-            ${getInnerSlidePanelHtml("cp").replace('hide-block', cpPanelClass)}
+            ${getInnerSlidePanelHtml("cp").replace('class="char-slide-panel-cp"',`class="char-slide-panel-cp ${cpPanelClass}"`)}
             <div class="game-card-empty-tip cp-render-box" data-gid="${gameItem.gameId}">${renderCP(gameItem, gameInfo) || `<div class="empty-hint">暂未选择CP</div>`}</div>
           </div>
           <div class="card-bottom-buttons block-margin-gap">
@@ -672,7 +673,7 @@ export function initPage(Core = {}) {
       });
     }
 
-    // ✅仅启动时执行一次，不会重复绑定
+    // ✅仅启动时执行一次事件委托绑定，卡片渲染完成后
     if (typeof bindDynamicGameCardSwitchEvents === "function") {
       bindDynamicGameCardSwitchEvents();
     }
