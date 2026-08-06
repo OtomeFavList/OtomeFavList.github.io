@@ -158,34 +158,34 @@ export function initPage(Core = {}) {
             snapshotContainer: document.getElementById("snapshot-container")
         };
 
- /**
- * 渲染已添加游戏卡片
- * 每个卡片内部嵌入两套滑出面板 char / cp
- * ✅传入容器对象el，消除ReferenceError
- */
-function renderAddedGame(el) {
-    if (!el.addedGameBox) return;
-    if (!Array.isArray(gameTemplateList) || gameTemplateList.length === 0) {
-        el.addedGameBox.innerHTML = "<p>⚠️ 游戏数据加载失败，检查data/games路径</p>";
-        return;
-    }
-    document.querySelectorAll(".modal-trigger").forEach(dom => dom.classList.remove("modal-trigger"));
+        /**
+         * 渲染已添加游戏卡片
+         * 每个卡片内部嵌入两套滑出面板 char / cp
+         * ✅传入容器对象el，消除ReferenceError
+         */
+        function renderAddedGame(el) {
+            if (!el.addedGameBox) return;
+            if (!Array.isArray(gameTemplateList) || gameTemplateList.length === 0) {
+                el.addedGameBox.innerHTML = "<p>⚠️ 游戏数据加载失败，检查data/games路径</p>";
+                return;
+            }
+            document.querySelectorAll(".modal-trigger").forEach(dom => dom.classList.remove("modal-trigger"));
 
-    let html = "";
-    appData.gameList?.forEach((gameItem, index) => {
-        if (!gameItem) return;
-        const gameInfo = gameTemplateList.find(g => g.id === gameItem.gameId);
-        if (!gameInfo) return;
-        let heartHtml = "";
-        for (let i = 1; i <= 5; i++) {
-            heartHtml += `<span class="heart ${gameItem.loveRate >= i ? 'active' : ''}" data-val="${i}">♥</span>`;
-        }
+            let html = "";
+            appData.gameList?.forEach((gameItem, index) => {
+                if (!gameItem) return;
+                const gameInfo = gameTemplateList.find(g => g.id === gameItem.gameId);
+                if (!gameInfo) return;
+                let heartHtml = "";
+                for (let i = 1; i <= 5; i++) {
+                    heartHtml += `<span class="heart ${gameItem.loveRate >= i ? 'active' : ''}" data-val="${i}">♥</span>`;
+                }
 
-        // 根据数据字段输出面板显隐class，fold优先级最高
-        const charPanelClass = (gameItem.fold || !gameItem.charPanelOpen) ? "hide-block" : "";
-        const cpPanelClass = (gameItem.fold || !gameItem.cpPanelOpen) ? "hide-block" : "";
+                // 根据数据字段输出面板显隐class，fold优先级最高
+                const charPanelClass = (gameItem.fold || !gameItem.charPanelOpen) ? "hide-block" : "";
+                const cpPanelClass = (gameItem.fold || !gameItem.cpPanelOpen) ? "hide-block" : "";
 
-        html += `
+                html += `
 <div class="added-game-card" data-gameid="${gameItem.gameId}">
     <div class="game-card-header-row">
         <span class="game-card-title">${gameInfo.name}</span>
@@ -223,28 +223,28 @@ function renderAddedGame(el) {
     </div>
 </div>
 `;
-    });
+            });
 
-    el.addedGameBox.innerHTML = html;
-    bindGameCardEvent();
-    // ✅渲染完卡片，调用main.js导出的委托绑定
-    if (typeof bindDynamicGameCardSwitchEvents === "function") {
-        bindDynamicGameCardSwitchEvents();
-    }
+            el.addedGameBox.innerHTML = html;
+            bindGameCardEvent();
+            // ✅渲染完卡片，调用main.js导出的委托绑定
+            if (typeof bindDynamicGameCardSwitchEvents === "function") {
+                bindDynamicGameCardSwitchEvents();
+            }
 
-    // =========【修复！！这段循环移入renderAddedGame函数内部，卡片渲染完成后执行】=========
-    document.querySelectorAll(".added-game-card").forEach(cardDom => {
-        const gid = cardDom.dataset.gameid;
-        const gameItem = appData.gameList.find(g => g.gameId === gid);
-        const gameInfo = gameTemplateList.find(g => g.id === gid);
-        if(!gameItem || !gameInfo) return;
+            // =========【修复！！这段循环移入renderAddedGame函数内部，卡片渲染完成后执行】=========
+            document.querySelectorAll(".added-game-card").forEach(cardDom => {
+                const gid = cardDom.dataset.gameid;
+                const gameItem = appData.gameList.find(g => g.gameId === gid);
+                const gameInfo = gameTemplateList.find(g => g.id === gid);
+                if(!gameItem || !gameInfo) return;
 
-        const charPanel = cardDom.querySelector(".char-slide-panel-char");
-        const cpPanel = cardDom.querySelector(".char-slide-panel-cp");
-        if(charPanel) renderCharSelectPanel(cardDom, gid, "char", charPanel);
-        if(cpPanel) renderCharSelectPanel(cardDom, gid, "cp", cpPanel);
-    });
-} // renderAddedGame 闭合
+                const charPanel = cardDom.querySelector(".char-slide-panel-char");
+                const cpPanel = cardDom.querySelector(".char-slide-panel-cp");
+                if(charPanel) renderCharSelectPanel(cardDom, gid, "char", charPanel);
+                if(cpPanel) renderCharSelectPanel(cardDom, gid, "cp", cpPanel);
+            });
+        } // renderAddedGame 闭合
 
         // 【✅修复此处：包装箭头函数，把bootstrap内部el传入renderAddedGame】
         window.refreshGameCardUi = () => renderAddedGame(el);
