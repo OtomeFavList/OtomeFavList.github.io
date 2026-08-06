@@ -8,7 +8,7 @@ const gameData = {
     year: "2021",
     publisher: "HuneX ",
     cnStudio: "GSE",
-    writer: ["Yu‑masu"],
+    writer: ["ゆーます"],
     art: "一色箱",
     cover: "img/game/004.jpg",
     charList: [
