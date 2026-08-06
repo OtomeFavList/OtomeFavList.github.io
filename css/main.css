@@ -37,7 +37,7 @@
 }
 */
 
-/* ========== 隐藏块类：用于搜索面板 search-panel ========== */
+/* ========== 隐藏块类：仅用于卡片内部char/cp滑出面板，搜索面板不再使用此类 ========== */
 .hide-block {
     display: none !important;
 }
@@ -253,10 +253,10 @@ button:hover{
     gap:12px;
 }
 
-/* ========== 游戏搜索面板 game-search-box ========== */
+/* ========== 游戏搜索面板 game-search-box 【核心修复】 ========== */
 .game-search-box{
     margin:16px 0;
-    display:flex;
+    display:none; /* 默认隐藏，不再用hide‑block */
     flex-direction:column;
     gap:10px;
     align-items:stretch;
@@ -264,6 +264,9 @@ button:hover{
     border:1px solid #f6a5b8;
     border-radius:12px;
     background:#fff;
+}
+.game-search-box.active{
+    display:flex; /* 激活恢复flex布局，保证内部filter-group正常排列 */
 }
 .game-search-box input{
     padding:10px;
