@@ -137,7 +137,7 @@ export function initPage(Core = {}) {
         // DOM元素缓存，移除全局char-slide-panel
         const el = {
             globalHideChar: document.getElementById("global-hide-char"),
-            globalFD: document.getElementById("global-fd"),
+            globalFD: document.getElementById("global-fd-game"), // ✅修复：与HTML真实ID对齐
             spoilerModal: document.getElementById("spoiler-modal"),
             spoilerConfirm: document.getElementById("spoiler-confirm"),
             addGameBtn: document.getElementById("btn-add-game"),
