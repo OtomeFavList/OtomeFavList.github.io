@@ -414,6 +414,9 @@ export function renderLocalSwitchDom(gameItem, wrapDom = null) {
 `;
 }
 
+// 占位兼容，script.js需要这两个字段，本项目暂未实现该逻辑，导出空函数防止解构报错
+export function localSwitchIsConfirmedToday(){return false;}
+export function saveLocalSwitchConfirmDate(){}
 
 // ===================== 页面启动入口模块 =====================
 /**
@@ -437,6 +440,8 @@ function buildCoreContext() {
         getAvailableCharImages,
         isTodayConfirmed,
         saveConfirmDate,
+        localSwitchIsConfirmedToday,
+        saveLocalSwitchConfirmDate,
         renderGameSelectItem,
         bindDynamicGameCardSwitchEvents,
         renderLocalSwitchDom
