@@ -447,7 +447,8 @@ export function initPage(Core = {}) {
     if (el.addGameBtn) {
       el.addGameBtn.onclick = function () {
         renderGameSelectList();
-        if (el.searchPanel) el.searchPanel.classList.remove("hide-block");
+        //【修复】打开搜索面板，使用.active
+        if (el.searchPanel) el.searchPanel.classList.add("active");
       }
     }
 
@@ -528,7 +529,8 @@ export function initPage(Core = {}) {
           appData.gameList.push(newGameData);
           saveData();
 
-          if (el.searchPanel) el.searchPanel.classList.add("hide-block");
+          //【修复】关闭搜索面板，使用.active
+          if (el.searchPanel) el.searchPanel.classList.remove("active");
           window.refreshGameCardUi();
         }
       })
