@@ -77,7 +77,7 @@ const gameData = {
             images: [
                 { srcList: ["img/char/013/Van.jpg","img/char/013/Van2.jpg"], type: "base" }
             ]
-        },
+        }
     ]
 };
 
