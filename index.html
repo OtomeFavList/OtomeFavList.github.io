@@ -7,8 +7,8 @@
 <link rel="stylesheet" href="./css/main.css">
 <!-- html2canvas CDN（第三方库，保留全局引入） -->
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-<!-- ✅方案A：引入游戏聚合脚本，type="module"不能省略 -->
-<script type="module" src="./data/games.js"></script>
+<!-- ✅方案A：普通脚本，移除 type="module"，避免ESModule相对路径错乱MIME报错 -->
+<script src="./data/games.js"></script>
 </head>
 <body>
 
