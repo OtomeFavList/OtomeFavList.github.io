@@ -162,16 +162,19 @@ import { bootstrapCore } from "./js/main.js";
 import { initPage } from "./js/script.js";
 
 (async function(){
-    await new Promise(resolve=>document.addEventListener("DOMContentLoaded",resolve));
-    // 先初始化main层
-    await bootstrapCore();
-    // 加载游戏数据
-    if(typeof window.loadAllGames === "function"){
+    await new Promise(resolve => document.addEventListener("DOMContentLoaded", resolve));
+
+    // 1️⃣ 先加载所有游戏数据（填充 window.gameDataList）
+    if (typeof window.loadAllGames === "function") {
         await window.loadAllGames();
     }
-    // 游戏数据全部加载完毕，再初始化UI层
+
+    // 2️⃣ 再初始化核心层（读取 window.gameDataList）
+    await bootstrapCore();
+
+    // 3️⃣ 最后初始化 UI 层
     initPage();
-    if(typeof window.uiBootstrap === "function"){
+    if (typeof window.uiBootstrap === "function") {
         await window.uiBootstrap();
     }
 })();
