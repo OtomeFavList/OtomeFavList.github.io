@@ -7,6 +7,8 @@
 <link rel="stylesheet" href="./css/main.css">
 <!-- html2canvas CDN（第三方库，保留全局引入） -->
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<!-- ✅方案A：引入游戏聚合脚本，type="module"不能省略 -->
+<script type="module" src="./data/games.js"></script>
 </head>
 <body>
 
@@ -156,31 +158,15 @@
 </div>
 
 <script type="module">
-window.gameDataList = [];
-// 导入data/games下全部游戏脚本（路径：../data/games，从index.html出发向上一层到根目录）
-await Promise.all([
-    import("../data/games/game001.js"),
-    import("../data/games/game002.js"),
-    import("../data/games/game003.js"),
-    import("../data/games/game004.js"),
-    import("../data/games/game005.js"),
-    import("../data/games/game006.js"),
-    import("../data/games/game007.js"),
-    import("../data/games/game008.js"),
-    import("../data/games/game009.js"),
-    import("../data/games/game010.js"),
-    import("../data/games/game011.js")
-]).then(modules=>{
-    for(const m of modules){
-        window.gameDataList.push(m.gameData);
-    }
-});
-
 import { bootstrapCore } from "./js/main.js";
 
-// DOM就绪后启动核心
-await new Promise(resolve=>document.addEventListener("DOMContentLoaded",resolve));
-bootstrapCore();
+(async function(){
+    await new Promise(resolve=>document.addEventListener("DOMContentLoaded",resolve));
+    if(typeof window.loadAllGames === "function"){
+        await window.loadAllGames();
+    }
+    bootstrapCore();
+})();
 </script>
 
 </body>
