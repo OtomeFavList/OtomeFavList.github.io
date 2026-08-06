@@ -4,17 +4,17 @@
 // 无需额外配置，仅需要到 main.js 顶部 🚨gameIdList数组追加编号"002","003"...
 const gameData = {
     id: "game027", // 全局唯一ID，不可重复
-    name: "失忆症-AMNESIA-",
+    name: "失忆症",
     year: "2022",
     publisher: "Otomate",
     cnStudio: "GSE",
-    writer: "剧本编剧",
+    writer: ["望月柚枝","果村なずな","やまだ有見"],
     art: "花邑まい",
     cover: "img/game/game027.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 女主模板 female
         {
-            id: "g0_f01",
+            id: "g027_f01",
             name: "女主A",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
@@ -27,7 +27,7 @@ const gameData = {
         },
         // 普通可攻略男主 male
         {
-            id: "g0_m01",
+            id: "g027_m01",
             name: "男主1",
             gender: "male",
             isHidden: false,
@@ -38,26 +38,56 @@ const gameData = {
                 { src: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
-        // 隐藏角色（isHidden=true → 开关开启才显示整个角色卡片）
+        // 普通可攻略男主 male
         {
-            id: "g0_h01",
-            name: "隐藏攻略角色",
-            gender: "male",
-            isHidden: true,
-            isFD: false,
-            images: [
-                { src: ["img/char/g001_h01_1.jpg"], type: "base" }
-            ]
-        },
-        // FD续作限定角色（isFD=true → FD开关开启才显示整个角色卡片）
-        {
-            id: "g0_fd01",
-            name: "续作FD新增角色",
+            id: "g027_m02",
+            name: "男主1",
             gender: "male",
             isHidden: false,
-            isFD: true,
+            isFD: false,
             images: [
-                { src: ["img/char/g001_fd01_1.jpg"], type: "base" }
+                { src: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { src: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
+                { src: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+            ]
+        },
+        // 普通可攻略男主 male
+        {
+            id: "g027_m03",
+            name: "男主1",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            images: [
+                { src: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { src: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
+                { src: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+            ]
+        },
+        // 普通可攻略男主 male
+        {
+            id: "g027_m04",
+            name: "男主1",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            images: [
+                { src: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { src: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
+                { src: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+            ]
+        },
+        // 普通可攻略男主 male
+        {
+            id: "g027_m05",
+            name: "男主1",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            images: [
+                { src: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { src: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
+                { src: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         }
     ]
