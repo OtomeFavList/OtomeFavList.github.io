@@ -36,6 +36,74 @@ window.pendingGlobalSwitch = null;
 window.pendingGameOp = null;
 
 
+// =========模块顶层：事件处理函数，固定引用，允许removeEventListener正确移除==========
+function wrapClickHandler(e){
+    const spoilerModal = document.getElementById("spoiler-modal");
+    if(!spoilerModal) return;
+
+    // -------- 角色图片切换按钮处理 --------
+    const switchBtn = e.target.closest(".char-switch-prev,.char-switch-next");
+    if(switchBtn){
+        const cardEl = switchBtn.closest(".char-card-item");
+        if(!cardEl) return;
+        const gameId = cardEl.dataset.gameId;
+        const charId = cardEl.dataset.charId;
+        const totalImg = Number(cardEl.dataset.totalImg) || 1;
+        const saveKey = `${gameId}-${charId}`;
+        let currentIdx = Number(appData.charImageSelect[saveKey] ?? 0);
+        if(switchBtn.classList.contains("char-switch-prev")){
+            currentIdx = currentIdx - 1;
+            if(currentIdx < 0) currentIdx = totalImg -1;
+        }else{
+            currentIdx = currentIdx +1;
+            if(currentIdx >= totalImg) currentIdx = 0;
+        }
+        appData.charImageSelect[saveKey] = currentIdx;
+        saveData();
+        // 通知script.js重新渲染游戏卡片
+        if(window.refreshGameCardUi) window.refreshGameCardUi();
+        return;
+    }
+
+    // -------- 游戏局部开关处理 --------
+    const targetInput = e.target.closest(".game-hide-char,.game-fd-switch,.modal-local-hide-char,.modal-local-fd");
+    if(!targetInput) return;
+
+    let idx;
+    let gameItem;
+    if(targetInput.classList.contains("modal-local-hide-char") || targetInput.classList.contains("modal-local-fd")){
+        gameItem = appData.gameList.find(g=>g.gameId === currentEditGameId);
+        if(!gameItem) return;
+        idx = appData.gameList.indexOf(gameItem);
+    }else{
+        idx = Number(targetInput.dataset.gameidx);
+        gameItem = appData.gameList[idx];
+        if(!gameItem) return;
+    }
+
+    // 已经勾选：用户要关闭，直接生效，不弹窗
+    if(targetInput.checked === true){
+        if(targetInput.classList.contains("game-hide-char") || targetInput.classList.contains("modal-local-hide-char")){
+            gameItem.localHideChar = false;
+        }else{
+            gameItem.localFD = false;
+        }
+        saveData();
+        if(window.refreshGameCardUi) window.refreshGameCardUi();
+        return;
+    }
+
+    // 用户想要打开局部开关，直接弹出剧透弹窗
+    e.preventDefault();
+    if(targetInput.classList.contains("game-hide-char") || targetInput.classList.contains("modal-local-hide-char")){
+        window.pendingGameOp = { type:"hideChar", idx };
+    }else{
+        window.pendingGameOp = { type:"fd", idx };
+    }
+    spoilerModal.classList.add("active");
+}
+
+
 // ===================== 本地存储读写工具函数 =====================
 /**
  * 将appData完整保存到localStorage
@@ -133,7 +201,8 @@ export function getAvailableCharImages(char, globalHideSwitch, globalFDSwitch, l
 
 // ===================== 游戏模板加载模块 =====================
 export async function loadAllGameTemplates() {
-    const basePath = "/data/games/";
+    // 修复：改为相对路径 ./ ，本地打开文件不会路径错乱
+    const basePath = "./data/games/";
     const tempList = [];
 
     for (const id of gameIdList) {
@@ -419,73 +488,6 @@ export function localSwitchIsConfirmedToday(){return false;}
 export function saveLocalSwitchConfirmDate(){}
 
 
-// ==========【修复：提升到模块顶层，可被removeEventListener移除】==========
-function wrapClickHandler(e){
-    const spoilerModal = document.getElementById("spoiler-modal");
-    if(!spoilerModal) return;
-
-    // -------- 角色图片切换按钮处理 --------
-    const switchBtn = e.target.closest(".char-switch-prev,.char-switch-next");
-    if(switchBtn){
-        const cardEl = switchBtn.closest(".char-card-item");
-        if(!cardEl) return;
-        const gameId = cardEl.dataset.gameId;
-        const charId = cardEl.dataset.charId;
-        const totalImg = Number(cardEl.dataset.totalImg) || 1;
-        const saveKey = `${gameId}-${charId}`;
-        let currentIdx = Number(appData.charImageSelect[saveKey] ?? 0);
-        if(switchBtn.classList.contains("char-switch-prev")){
-            currentIdx = currentIdx - 1;
-            if(currentIdx < 0) currentIdx = totalImg -1;
-        }else{
-            currentIdx = currentIdx +1;
-            if(currentIdx >= totalImg) currentIdx = 0;
-        }
-        appData.charImageSelect[saveKey] = currentIdx;
-        saveData();
-        // 通知script.js重新渲染游戏卡片
-        if(window.refreshGameCardUi) window.refreshGameCardUi();
-        return;
-    }
-
-    // -------- 游戏局部开关处理 --------
-    const targetInput = e.target.closest(".game-hide-char,.game-fd-switch,.modal-local-hide-char,.modal-local-fd");
-    if(!targetInput) return;
-
-    let idx;
-    let gameItem;
-    if(targetInput.classList.contains("modal-local-hide-char") || targetInput.classList.contains("modal-local-fd")){
-        gameItem = appData.gameList.find(g=>g.gameId === currentEditGameId);
-        if(!gameItem) return;
-        idx = appData.gameList.indexOf(gameItem);
-    }else{
-        idx = Number(targetInput.dataset.gameidx);
-        gameItem = appData.gameList[idx];
-        if(!gameItem) return;
-    }
-
-    // 已经勾选：用户要关闭，直接生效，不弹窗
-    if(targetInput.checked === true){
-        if(targetInput.classList.contains("game-hide-char") || targetInput.classList.contains("modal-local-hide-char")){
-            gameItem.localHideChar = false;
-        }else{
-            gameItem.localFD = false;
-        }
-        saveData();
-        if(window.refreshGameCardUi) window.refreshGameCardUi();
-        return;
-    }
-
-    // 用户想要打开局部开关，直接弹出剧透弹窗（不再做日期判断）
-    e.preventDefault();
-    if(targetInput.classList.contains("game-hide-char") || targetInput.classList.contains("modal-local-hide-char")){
-        window.pendingGameOp = { type:"hideChar", idx };
-    }else{
-        window.pendingGameOp = { type:"fd", idx };
-    }
-    spoilerModal.classList.add("active");
-}
-
 /**
  * 事件委托：处理动态渲染游戏卡片内部开关 + 角色图片切换按钮
  * 改为click委托，不再监听change；导出，由script.js渲染完列表后调用
@@ -497,7 +499,6 @@ export function bindDynamicGameCardSwitchEvents(){
         console.warn("bindDynamicGameCardSwitchEvents：wrap或modal不存在，跳过绑定");
         return;
     }
-    // 移除旧监听，防止重复绑定（现在可以正常移除，因为handler是顶层函数引用）
     wrap.removeEventListener("click", wrapClickHandler);
     wrap.addEventListener("click", wrapClickHandler);
 }
