@@ -1,584 +1,699 @@
-// ===================== main.js 【数据层、公共工具函数】 =====================
-// 🚨【新增游戏请在此数组添加编号！】请勿改动其他位置
-const gameIdList = [
-    "001","002","003","004","005","006","007","008","009","010","011"
-    //新增游戏在这里追加,"002","003"
-];
+// ===================== script.js UI交互层（模块化导出） =====================
+// 【重要说明】剧透弹窗、全局开关click事件全部迁移至main.js，本文件不再处理全局开关点击逻辑
+// 游戏卡片动态生成的局部开关：使用事件委托对接main.js剧透弹窗逻辑
+// 改造：每个游戏卡片内部动态生成两套独立滑出面板 char / cp；不再使用全局唯一char‑slide‑panel
+// 注意：main.js禁止import本文件，避免循环依赖
 
-// 全局存储key
-export const STORE_KEY = "otome-favlist-data";
-export const SPOILER_DATE_KEY = "spoiler-confirm-date"; // 全局剧透确认日期
+import {
+    appData,
+    gameTemplateList,
+    currentEditGameId,
+    charPoolMode,
+    loadAllGameTemplates,
+    loadData,
+    saveData,
+    syncSingleGameSwitch,
+    fillFilterOptions,
+    renderSelectedChar,
+    renderCP,
+    getAllGameChar,
+    getAvailableCharImages,
+    isTodayConfirmed,
+    saveConfirmDate,
+    renderGameSelectItem,
+    bindDynamicGameCardSwitchEvents
+} from './main.js';
 
-// ===================== 全局应用数据对象 =====================
-export let appData = {
-    globalHideChar: false,
-    globalFD: false,
-    gameSpoilerRecord: {},
-    baseInfo: { nick: "", count: "", story: "", firstgame: "" },
-    gameList: [],
-    exportColor: { bg: "#fff7f9", title: "#b33a3a", text: "#c98fac", border: "#f6a5b8" },
-    charImageSelect: {} // 持久存储角色选中立绘索引 key:"gameId-charId"
-};
+export function initPage(Core = {}) {
+    // 安全兜底，防止不传Core报错
+    Core = Core || {};
 
-// ===================== 游戏模板数据兜底变量 =====================
-// 兜底：游戏数据模块加载失败时赋值空数组，彻底解决undefined报错
-export let gameTemplateList = [];
-
-// ===================== 角色编辑弹窗全局状态变量 =====================
-export let currentEditGameId = null;
-export let charPoolMode = "char"; // char = 单选角色, cp = CP搭配
-
-// ===================== 剧透弹窗临时待处理标记 =====================
-// 可选值：hideChar / fdGame / localHide / localFD
-window.pendingGlobalSwitch = null;
-
-// 动态游戏卡片待操作标记
-window.pendingGameOp = null;
-
-// ===================== 本地存储读写工具函数 =====================
-/**
-- 将appData完整保存到localStorage
- */
-export function saveData() {
- localStorage.setItem(STORE_KEY, JSON.stringify(appData));
-}
 
 /**
-- 从localStorage读取并恢复appData，捕获解析异常
+ * 在指定游戏卡片内部渲染滑出面板内容
+ * @param {HTMLElement} cardDom 游戏卡片dom .added‑game‑card
+ * @param {string} gameId
+ * @param {'char'|'cp'} mode
+ * @param {HTMLElement} panelDom 本卡片内的滑出面板容器
  */
-export function loadData() {
- try {
- const raw = localStorage.getItem(STORE_KEY);
- if (raw) appData = JSON.parse(raw);
- // 【新增兜底：旧存档缺失局部开关字段，补默认false】
- if(Array.isArray(appData.gameList)){
- appData.gameList.forEach(g=>{
- if(typeof g.localHideChar !== "boolean") g.localHideChar = false;
- if(typeof g.localFD !== "boolean") g.localFD = false;
- // 新增：滑出面板展开状态兜底
- if(typeof g.charPanelOpen !== "boolean") g.charPanelOpen = false;
- if(typeof g.cpPanelOpen !== "boolean") g.cpPanelOpen = false;
- if(typeof g.isFav !== "boolean") g.isFav = false;
- // 兜底评分爱心字段
- if(typeof g.loveRate !== "number") g.loveRate = 0;
- })
- }
- } catch (e) {
- console.error("读取本地存储失败：", e);
- }
-}
+function renderCharSelectPanel(cardDom, gameId, mode, panelDom) {
+    if (!Array.isArray(gameTemplateList)) return;
+    const gameInfo = gameTemplateList.find(g => g.id === gameId);
+    const gameItem = appData.gameList?.find(g => g?.gameId === gameId);
+    if (!gameInfo || !gameItem || !panelDom) return;
 
-/**
-- 获取今日日期字符串 YYYY‑MM‑DD 用于跨零点判断
-- @returns {string} 日期字符串
- */
-export function getTodayDateStr() {
- const d = new Date();
- const year = d.getFullYear();
- const month = String(d.getMonth() + 1).padStart(2, "0");
- const day = String(d.getDate()).padStart(2, "0");
- return `${year}-${month}-${day}`;
-}
+    // 面板头部
+    const titleEl = panelDom.querySelector(".panel‑game‑title");
+    const heroineBox = panelDom.querySelector(".heroine‑box");
+    const heroListBox = panelDom.querySelector(".hero‑list‑box");
+    if (!titleEl || !heroineBox || !heroListBox) return;
 
-/**
-- 判断今天是否已经确认过【全局】剧透
-- @returns {boolean}
- */
-export function isTodayConfirmed() {
- const savedDate = localStorage.getItem(SPOILER_DATE_KEY);
- return savedDate === getTodayDateStr();
-}
+    titleEl.innerText = `${gameInfo.name} — ${mode === "char" ? "选择角色 Character" : "选择CP Couple"}`;
+    // 废弃：renderLocalSwitchModalContent，开关已经渲染在卡片头部，此处不再调用
+    const localWrap = panelDom.querySelector(".local‑switch‑wrap");
+    if(localWrap) localWrap.innerHTML = "";
 
-/**
-- 保存今日【全局】确认标记到本地存储
- */
-export function saveConfirmDate() {
- localStorage.setItem(SPOILER_DATE_KEY, getTodayDateStr());
-}
+    const allChars = getAllGameChar(gameInfo);
+    const femaleChars = allChars.filter(c => c.gender === "female");
+    const maleChars = allChars.filter(c => c.gender === "male");
 
-// ===================== 角色图片过滤工具函数 =====================
-/**
-- 获取角色可用图片组（适配你项目 srcList 格式）
-- @param {Object} char 角色对象
-- @param {boolean} globalHideSwitch 全局隐藏角色开关
-- @param {boolean} globalFDSwitch 全局FD开关
-- @param {boolean} localHideSwitch 当前游戏隐藏角色开关
-- @param {boolean} localFDSwitch 当前游戏FD开关
-- @returns Array 过滤后可用图片单元，每个单元包含 srcList + type
- */
-export function getAvailableCharImages(char, globalHideSwitch, globalFDSwitch, localHideSwitch, localFDSwitch) {
- if (!char) return [];
- if (!char.images || !Array.isArray(char.images)) return [];
- const enableHidden = globalHideSwitch || localHideSwitch;
- const enableFD = globalFDSwitch || localFDSwitch;
- return char.images.filter(imgUnit => {
- if(!imgUnit || !Array.isArray(imgUnit.srcList)) return false;
- switch (imgUnit.type) {
- case "base":
- return true;
- case "hidden":
- return enableHidden;
- case "fd":
- return enableFD;
- default:
- return false;
+    // 女主区域
+    let femHtml = "";
+    femaleChars.forEach(char => {
+        const imgsUnitList = getAvailableCharImages(char, appData.globalHideChar, appData.globalFD, gameItem.localHideChar, gameItem.localFD);
+        if (imgsUnitList.length === 0) return;
+        let allSrc = [];
+        imgsUnitList.forEach(u => allSrc.push(...u.srcList));
+        if (allSrc.length === 0) return;
 
- }
- });
+        const saveKey = `${gameId}-${char.id}`;
+        if(!appData.charImageSelect) appData.charImageSelect = {};
+        let imgIndex = Number(appData.charImageSelect?.[saveKey] ?? 0);
+        if (imgIndex >= allSrc.length) imgIndex = 0;
+        const showSrc = allSrc[imgIndex];
 
-}
-
-// ===================== 游戏模板加载模块（不再import游戏，读取全局已加载数据） =====================
-export async function loadAllGameTemplates() {
-    // 等待全局window.gameDataList就绪（data/games.js已经完成全部import）
-    if (!Array.isArray(window.gameDataList)) {
-        gameTemplateList = [];
-        console.warn("window.gameDataList不存在，游戏模板为空");
-        return;
-    }
-    // 直接赋值，不再重复导入游戏脚本
-    gameTemplateList = [...window.gameDataList];
-    console.log("✅main.js读取全局游戏模板，数量：", gameTemplateList.length);
-}
-
-/**
-- 同步游戏内全局开关状态【⚠️禁止调用！需求变更：全局与局部开关互相独立】
-- @param {string} type 开关类型 hideChar / fd
-- @param {boolean} status 开关布尔状态
- */
-export function syncSingleGameSwitch(type, status) {
- // 保留导出防止import报错，业务逻辑不再执行
- console.warn("syncSingleGameSwitch 已废弃，请勿调用");
- return;
-}
-
-// ===================== 筛选下拉菜单填充函数 =====================
-/**
-- 【修复】筛选下拉填充：保留HTML原生顶部placeholder option，只追加数据选项，不再覆盖HTML提示文字
-- @param {Array} gameList 游戏模板数组
- */
-export function fillFilterOptions(gameList) {
-    if (!Array.isArray(gameList) || gameList.length === 0) return;
-    const yearSet = new Set(), pubSet = new Set(), cnSet = new Set(), writerSet = new Set(), artSet = new Set();
-    gameList.forEach(g => {
-        if(!g) return;
-        yearSet.add(g.year);
-        pubSet.add(g.publisher);
-        cnSet.add(g.cnStudio);
-
-        let writerArr = [];
-        if(Array.isArray(g.writer)){
-            writerArr = g.writer;
-        }else if(typeof g.writer === "string" && g.writer.trim() !== ""){
-            writerArr = [g.writer];
-        }
-        writerArr.forEach(name => writerSet.add(name));
-
-        let artArr = [];
-        if(Array.isArray(g.art)){
-            artArr = g.art;
-        }else if(typeof g.art === "string" && g.art.trim() !== ""){
-            artArr = [g.art];
-        }
-        artArr.forEach(name => artSet.add(name));
+        const selected = gameItem.selectChars?.includes(char.id) ? "selected" : "";
+        femHtml += `
+        <label class="char‑item ${selected}" data‑cid="${char.id}" data‑char‑id="${char.id}" data‑game‑id="${gameId}" data‑total‑img="${allSrc.length}">
+            <div class="char‑card‑img‑box ${allSrc.length>1?'char‑multi‑img':''}">
+                ${allSrc.length>1?`<button class="char‑switch‑btn char‑switch‑prev">&lt;</button>`:""}
+                <img src="${showSrc}" alt="${char.name}">
+                ${allSrc.length>1?`<button class="char‑switch‑btn char‑switch‑next">&gt;</button>`:""}
+            </div>
+            <div class="char‑card‑name">${char.name}</div>
+        </label>`;
     });
+    heroineBox.innerHTML = femHtml;
 
-    const fillSelect = (id, dataSet) => {
-        const sel = document.getElementById(id);
-        if (!sel) return;
-        const firstOpt = sel.querySelector('option');
-        sel.innerHTML = '';
-        if(firstOpt) sel.appendChild(firstOpt);
-        dataSet.forEach(v => {
-            const opt = document.createElement('option');
-            opt.value = v;
-            opt.textContent = v;
-            sel.appendChild(opt);
-        });
+    // 男性角色区域
+    let maleHtml = "";
+    maleChars.forEach(char => {
+        const imgsUnitList = getAvailableCharImages(char, appData.globalHideChar, appData.globalFD, gameItem.localHideChar, gameItem.localFD);
+        if (imgsUnitList.length === 0) return;
+        let allSrc = [];
+        imgsUnitList.forEach(u => allSrc.push(...u.srcList));
+        if (allSrc.length === 0) return;
+
+        const saveKey = `${gameId}-${char.id}`;
+        if(!appData.charImageSelect) appData.charImageSelect = {};
+        let imgIndex = Number(appData.charImageSelect?.[saveKey] ?? 0);
+        if (imgIndex >= allSrc.length) imgIndex = 0;
+        const showSrc = allSrc[imgIndex];
+
+        const selected = gameItem.selectChars?.includes(char.id) ? "selected" : "";
+        maleHtml += `
+        <label class="char‑item ${selected}" data‑cid="${char.id}" data‑char‑id="${char.id}" data‑game‑id="${gameId}" data‑total‑img="${allSrc.length}">
+            <div class="char‑card‑img‑box ${allSrc.length>1?'char‑multi‑img':''}">
+                ${allSrc.length>1?`<button class="char‑switch‑btn char‑switch‑prev">&lt;</button>`:""}
+                <img src="${showSrc}" alt="${char.name}">
+                ${allSrc.length>1?`<button class="char‑switch‑btn char‑switch‑next">&gt;</button>`:""}
+            </div>
+            <div class="char‑card‑name">${char.name}</div>
+        </label>`;
+    });
+    heroListBox.innerHTML = maleHtml;
+}
+
+/**
+ * 生成单个游戏卡片内部滑出面板HTML字符串
+ * @param {'char'|'cp'} mode
+ */
+function getInnerSlidePanelHtml(mode){
+    const cls = mode === "char" ? "char‑slide‑panel‑char" : "char‑slide‑panel‑cp";
+    return `
+    <div class="${cls} hide‑block">
+        <div class="panel‑header">
+            <h4 class="panel‑game‑title"></h4>
+            <button class="panel‑close‑btn">×</button>
+        </div>
+        <div class="local‑switch‑wrap"></div>
+        <div class="heroine‑box"></div>
+        <div class="hero‑list‑box"></div>
+    </div>
+`;
+}
+
+// ===================== 页面启动bootstrap，UI渲染、表单、导出、卡片事件 =====================
+async function bootstrap() {
+    // DOM元素缓存，移除全局char‑slide‑panel
+    const el = {
+        globalHideChar: document.getElementById("global‑hide‑char"),
+        globalFD: document.getElementById("global‑fd‑game"), // 【修复】修正ID与HTML保持一致
+        spoilerModal: document.getElementById("spoiler‑modal"),
+        spoilerConfirm: document.getElementById("spoiler‑confirm"),
+        addGameBtn: document.getElementById("btn‑add‑game"),
+        searchPanel: document.getElementById("search‑panel"),
+        gameSearchInput: document.getElementById("game‑search‑input"),
+        gameSelectList: document.getElementById("game‑select‑list"),
+        addedGameBox: document.getElementById("added‑game‑container"),
+        inputNick: document.getElementById("input‑nick"),
+        inputCount: document.getElementById("input‑count"),
+        inputStory: document.getElementById("input‑story"),
+        inputFirstgame: document.getElementById("input‑firstgame"),
+        colorBg: document.getElementById("color‑bg"),
+        colorTitle: document.getElementById("color‑title"),
+        colorText: document.getElementById("color‑text"),
+        colorBorder: document.getElementById("color‑border"),
+        exportBtn: document.getElementById("btn‑export"),
+        canvas: document.getElementById("export‑canvas"),
+        snapshotContainer: document.getElementById("snapshot‑container")
     };
 
-    fillSelect("filter-writer", writerSet);
-    fillSelect("filter-art", artSet);
-    fillSelect("filter-year", yearSet);
-    fillSelect("filter-publisher", pubSet);
-    fillSelect("filter-cn", cnSet);
-}
+    /**
+     * 渲染已添加游戏卡片
+     * 每个卡片内部嵌入两套滑出面板 char / cp
+     * ✅传入容器对象el，消除ReferenceError
+     */
+    function renderAddedGame(el) {
+        if (!el.addedGameBox) return;
+        if (!Array.isArray(gameTemplateList) || gameTemplateList.length === 0) {
+            el.addedGameBox.innerHTML = "<p>⚠️ 游戏数据加载失败，检查data/games路径</p>";
+            return;
+        }
+        document.querySelectorAll(".modal‑trigger").forEach(dom => dom.classList.remove("modal‑trigger"));
 
-// ===================== HTML模板渲染函数 =====================
-/**
-- 渲染游戏选择列表卡片模板
-- 布局：左侧封面，右侧竖排信息，移除名称旁发售年份
-- @param {Object} game 游戏模板对象
-- @returns {string} html字符串
- */
-export function renderGameSelectItem(game) {
- if(!game) return "";
- return ` 
-   <img src="${game.cover || ''}" alt="${game.name || ''}">
-   <div>
-   <div class="game-option-name">${game.name || ""}</div>
-   <div>编剧：${Array.isArray(game.writer) ? game.writer.join("、") : game.writer || "无"}</div>
-   <div>画师：${Array.isArray(game.art) ? game.art.join("、") : game.art || "无"}</div>
-   <div>发售年份：${game.year || "无"}</div>
-   <div>发行厂商：${game.publisher || "无"}</div>
-   <div>汉化厂商：${game.cnStudio || "无"}</div>
-   </div>
- `;
-}
+        let html = "";
+        appData.gameList?.forEach((gameItem, index) => {
+            if (!gameItem) return;
+            const gameInfo = gameTemplateList.find(g => g.id === gameItem.gameId);
+            if (!gameInfo) return;
+            let heartHtml = "";
+            for (let i = 1; i <= 5; i++) {
+                heartHtml += `<span class="heart ${gameItem.loveRate >= i ? 'active' : ''}" data‑val="${i}">♥</span>`;
+            }
 
-/**
-- 渲染选中角色【适配 srcList 多图数组】
-- @param {Object} gameItem 当前已添加游戏条目(appData.gameList内)
-- @param {Object} gameInfo 游戏模板gameTemplateList内对象
-- @returns {string} html字符串
- */
-export function renderSelectedChar(gameItem, gameInfo) {
- if (!gameInfo?.charList || !gameItem) return `<div class="empty-hint">暂未添加角色</div>`;
- let html = "";
- const globalHide = appData.globalHideChar;
- const globalFD = appData.globalFD;
- const localHide = gameItem.localHideChar;
- const localFD = gameItem.localFD;
- if(!Array.isArray(gameItem.selectChars)) gameItem.selectChars = [];
- gameItem.selectChars?.forEach(cid => {
- const char = gameInfo.charList?.find(c => c.id === cid);
- if (!char) return;
- const availableImgUnits = getAvailableCharImages(char, globalHide, globalFD, localHide, localFD);
- if (availableImgUnits.length === 0) return;
+            // 根据数据字段输出面板显隐class，fold优先级最高
+            const charPanelClass = (gameItem.fold || !gameItem.charPanelOpen) ? "hide‑block" : "";
+            const cpPanelClass = (gameItem.fold || !gameItem.cpPanelOpen) ? "hide‑block" : "";
 
- let allSrc = [];
- availableImgUnits.forEach(u => allSrc.push(...u.srcList));
- if(allSrc.length === 0) return;
+            html += `
+<div class="added‑game‑card" data‑gameid="${gameItem.gameId}">
+    <div class="game‑card‑head">
+        <h3>${gameInfo.name}</h3>
+        <div class="heart‑rate" data‑gid="${gameItem.gameId}">
+            ${heartHtml}
+        </div>
+        <div class="local‑switch‑row">
+            <label class="switch">
+                <input type="checkbox" class="game‑hide‑char" data‑gameidx="${index}" ${(gameItem.localHideChar ?? false) ? 'checked' : ''}>
+                <span class="slider"></span>
+            </label>
+            <span>单独显示本游戏隐藏角色</span>
 
- const saveKey = `${gameInfo.id}-${char.id}`;
- let imgIndex = Number(appData.charImageSelect[saveKey] ?? 0);
- if(imgIndex >= allSrc.length) imgIndex = 0;
- const targetSrc = allSrc[imgIndex];
+            <label class="switch">
+                <input type="checkbox" class="game‑fd‑switch" data‑gameidx="${index}" ${(gameItem.localFD ?? false) ? 'checked' : ''}>
+                <span class="slider"></span>
+            </label>
+            <span>单独显示本游戏续作/FD角色</span>
+        </div>
+    </div>
 
- html += `  <div class="char-card-item selected" data-char-id="${char.id}" data-game-id="${gameInfo.id}" data-total-img="${allSrc.length}">      <div class="char-card-img-box ${allSrc.length>1?'char-has-multi-img':''}">          ${allSrc.length>1?`<`:""}          <img src="${targetSrc}" alt="${char.name || ''}">          ${allSrc.length>1?`>`:""}      </div>      <div class="char-card-name">${char.name || ""}</div>  </div>  `;
- })
- return html || `<div class="empty-hint">暂未添加角色</div>`;
+<div class="game‑card‑block‑item char‑section block‑margin‑gap">
+    <button class="btn‑character" data‑gid="${gameItem.gameId}">选择角色 Character</button>
+    ${getInnerSlidePanelHtml("char").replace('hide‑block', charPanelClass)}
+    <div class="game‑card‑empty‑tip char‑card‑wrapper char‑selected‑row" data‑gid="${gameItem.gameId}">${renderSelectedChar(gameItem, gameInfo) || `<div class="empty‑hint">暂未选择角色</div>`}</div>
+</div>
 
-}
+<div class="game‑card‑block‑item cp‑group block‑margin‑gap">
+    <button class="btn‑couple" data‑gid="${gameItem.gameId}">选择CP Couple</button>
+    ${getInnerSlidePanelHtml("cp").replace('hide‑block', cpPanelClass)}
+    <div class="game‑card‑empty‑tip cp‑render‑box" data‑gid="${gameItem.gameId}">${renderCP(gameItem, gameInfo) || `<div class="empty‑hint">暂未选择CP</div>`}</div>
+</div>
 
-/**
-- 渲染CP【严格25%｜75%布局｜适配srcList，移除内联style，交由css控制】
-- @param {Object} gameItem 当前已添加游戏条目
-- @param {Object} gameInfo 游戏模板对象
-- @returns {string} html字符串
- */
-export function renderCP(gameItem, gameInfo) {
- if (!gameInfo?.charList || !gameItem) return `<div class="empty-hint">暂未添加角色</div>`;
- let html = "";
- const globalHide = appData.globalHideChar;
- const globalFD = appData.globalFD;
- const localHide = gameItem.localHideChar;
- const localFD = gameItem.localFD;
- if(!Array.isArray(gameItem.cpList)) gameItem.cpList = [];
- gameItem.cpList?.forEach(cp => {
- if(!cp) return;
- const fChar = gameInfo.charList?.find(c => c.id === cp.femaleId);
- if (!fChar) return;
- const fAvailUnits = getAvailableCharImages(fChar, globalHide, globalFD, localHide, localFD);
- let fAllSrc = [];
- fAvailUnits.forEach(u=>fAllSrc.push(...u.srcList));
- if (fAllSrc.length === 0) return;
+<div class="card‑bottom‑buttons block‑margin‑gap">
+    <button class="btn‑fold fold‑game btn‑gray‑bg" data‑gid="${gameItem.gameId}">折叠</button>
+    <button class="btn‑del del‑game btn‑gray‑bg" data‑gid="${gameItem.gameId}">删除</button>
+</div>
+</div>
+`;
+            });
 
- const fSaveKey = `${gameInfo.id}-${fChar.id}`;
- let fIndex = Number(appData.charImageSelect[fSaveKey] ?? 0);
- if(fIndex >= fAllSrc.length) fIndex = 0;
- const fTargetSrc = fAllSrc[fIndex];
+        el.addedGameBox.innerHTML = html;
+        bindGameCardEvent();
+        // ✅渲染完卡片，调用main.js导出的委托绑定
+        if (typeof bindDynamicGameCardSwitchEvents === "function") {
+            bindDynamicGameCardSwitchEvents();
+        }
 
- let maleHtml = "";
- if(!Array.isArray(cp.maleIds)) cp.maleIds = [];
- cp.maleIds?.forEach(mid => {
-     const mChar = gameInfo.charList?.find(c => c.id === mid);
-     if (!mChar) return;
-     const mAvailUnits = getAvailableCharImages(mChar, globalHide, globalFD, localHide, localFD);
-     let mAllSrc = [];
-     mAvailUnits.forEach(u=>mAllSrc.push(...u.srcList));
-     if (mAllSrc.length === 0) return;
+        // =========【修复！！这段循环移入renderAddedGame函数内部，卡片渲染完成后执行】=========
+        document.querySelectorAll(".added‑game‑card").forEach(cardDom => {
+            const gid = cardDom.dataset.gameid;
+            const gameItem = appData.gameList.find(g => g.gameId === gid);
+            const gameInfo = gameTemplateList.find(g => g.id === gid);
+            if(!gameItem || !gameInfo) return;
 
- const mSaveKey = `${gameInfo.id}-${mChar.id}`;
- let mIndex = Number(appData.charImageSelect[mSaveKey] ?? 0);
- if(mIndex >= mAllSrc.length) mIndex = 0;
- const mTargetSrc = mAllSrc[mIndex];
+            const charPanel = cardDom.querySelector(".char‑slide‑panel‑char");
+            const cpPanel = cardDom.querySelector(".char‑slide‑panel‑cp");
+            if(charPanel) renderCharSelectPanel(cardDom, gid, "char", charPanel);
+            if(cpPanel) renderCharSelectPanel(cardDom, gid, "cp", cpPanel);
+        });
+    } // renderAddedGame 闭合
 
- maleHtml += `      <div class="char-card-item selected" data-char-id="${mChar.id}" data-game-id="${gameInfo.id}" data-total-img="${mAllSrc.length}">          <div class="char-card-img-box ${mAllSrc.length>1?'char-has-multi-img':''}">              ${mAllSrc.length>1?`<`:""}              <img src="${mTargetSrc}" alt="${mChar.name || ''}">              ${mAllSrc.length>1?`>`:""}          </div>          <div class="char-card-name">${mChar.name || ""}</div>      </div>      `;
- })
+    // 【✅修复此处：包装箭头函数，把bootstrap内部el传入renderAddedGame】
+    window.refreshGameCardUi = () => renderAddedGame(el);
 
- html += `  <div class="cp-layout-row">      <div class="heroine-column">          <div class="char-card-item selected" data-char-id="${fChar.id}" data-game-id="${gameInfo.id}" data-total-img="${fAllSrc.length}">              <div class="char-card-img-box ${fAllSrc.length>1?'char-has-multi-img':''}">                  ${fAllSrc.length>1?`<`:""}                  <img src="${fTargetSrc}" alt="${fChar.name || ''}">                  ${fAllSrc.length>1?`>`:""}              </div>              <div class="char-card-name">${fChar.name || ""}</div>          </div>      </div>      <div class="hero-list-column">          <div class="char-card-wrapper">              ${maleHtml || "<span>未选择男主</span>"}          </div>      </div>  </div>  `;
- })
- return html || `<div class="empty-hint">暂未添加角色</div>`;
+    // ==========【全局事件委托：角色立绘左右切换，卡片内面板生效】==========
+    document.addEventListener("click", function (e) {
+        const switchBtn = e.target.closest(".char‑switch‑btn");
+        if (!switchBtn) return;
+        e.stopPropagation();
+        const charCard = switchBtn.closest(".char‑item, .char‑card‑item");
+        const charId = charCard.dataset.charId;
+        const gameId = charCard.dataset.gameId;
+        const gameInfo = gameTemplateList.find(g => g.id === gameId);
+        if (!gameInfo) return;
+        const char = gameInfo.charList.find(c => c.id === charId);
+        if (!char) return;
+        const gameItem = appData.gameList?.find(g => g.gameId === gameId);
+        if (!gameItem) return;
 
-}
+        const availImgUnits = getAvailableCharImages(
+            char,
+            appData.globalHideChar,
+            appData.globalFD,
+            gameItem.localHideChar,
+            gameItem.localFD
+        );
+        let allSrc = [];
+        availImgUnits.forEach(unit => allSrc.push(...unit.srcList));
+        if (allSrc.length <= 1) return;
 
-/**
-- 过滤角色规则：全局开关 || 单游戏开关，任一开启即可展示
-- @param {Object} gameInfo 游戏模板对象
-- @returns {Array} 过滤完成角色数组，女主在前，男主在后
- */
-export function getAllGameChar(gameInfo) {
- if(!gameInfo) return [];
- let chars = [...(gameInfo?.charList || [])];
- const gameItem = appData.gameList.find(g => g?.gameId === gameInfo.id);
- const showHide = appData.globalHideChar || gameItem?.localHideChar;
- const showFD = appData.globalFD || gameItem?.localFD;
- if (!showHide) chars = chars.filter(c => c && !c.isHidden);
- if (!showFD) chars = chars.filter(c => c && !c.isFD);
- const female = chars.filter(c => c.gender === "female").sort((a, b) => a.name.localeCompare(b.name, "zh‑CN"));
- const male = chars.filter(c => c.gender === "male").sort((a, b) => a.name.localeCompare(b.name, "zh‑CN"));
- return [...female, ...male];
+        const imgDom = charCard.querySelector(".char‑card‑img‑box img");
+        const saveKey = `${gameId}-${charId}`;
+        if(!appData.charImageSelect) appData.charImageSelect = {};
+        let currentIndex = Number(appData.charImageSelect?.[saveKey] ?? 0);
 
-}
+        if (switchBtn.classList.contains("char‑switch‑next")) {
+            currentIndex++;
+            if (currentIndex >= allSrc.length) currentIndex = 0;
+        } else {
+            currentIndex--;
+            if (currentIndex < 0) currentIndex = allSrc.length - 1;
+        }
 
-// ===================== 页面启动入口模块 =====================
-/**
-- 组装Core上下文对象，统一供给UI层script.js
-- @returns {Object} Core对象，所有核心方法对外暴露
- */
-function buildCoreContext() {
- const Core = {
- appData,
- gameTemplateList,
- currentEditGameId,
- charPoolMode,
- loadAllGameTemplates,
- loadData,
- saveData,
- syncSingleGameSwitch,
- fillFilterOptions,
- renderSelectedChar,
- renderCP,
- getAllGameChar,
- getAvailableCharImages,
- isTodayConfirmed,
- saveConfirmDate,
- renderGameSelectItem,
- bindDynamicGameCardSwitchEvents
- };
- return Core;
-}
+        imgDom.src = allSrc[currentIndex];
+        appData.charImageSelect[saveKey] = currentIndex;
+        saveData();
+        // 修复：只更新图片，不再整卡重渲染，避免面板关闭、状态丢失
+    });
 
-/**
-- 【渲染全局开关复选框状态】
-- 根据appData数据，更新页面上两个全局滑块勾选状态
- */
-function renderGlobalSwitchDom() {
- const hideCharInput = document.getElementById("global-hide-char");
- const fdInput = document.getElementById("global-fd-game");
- // 加固：严格读取appData，不读取DOM旧状态
- if(hideCharInput) hideCharInput.checked = !!appData.globalHideChar;
- if(fdInput) fdInput.checked = !!appData.globalFD;
-}
+    // ==========【修复：btn‑character / btn‑couple 全局事件委托，彻底解决innerHTML重渲染事件丢失】==========
+    document.addEventListener("click", function(e){
+        const charBtn = e.target.closest(".btn‑character");
+        if(charBtn){
+            const gid = charBtn.dataset.gid;
+            const gameItem = appData.gameList.find(g=>g.gameId === gid);
+            if(!gameItem) return;
+            gameItem.charPanelOpen = !gameItem.charPanelOpen;
+            if(gameItem.charPanelOpen){
+                gameItem.cpPanelOpen = false;
+            }
+            saveData();
+            window.refreshGameCardUi();
+            return;
+        }
+        const cpBtn = e.target.closest(".btn‑couple");
+        if(cpBtn){
+            const gid = cpBtn.dataset.gid;
+            const gameItem = appData.gameList.find(g=>g.gameId === gid);
+            if (!gameItem) return;
+            gameItem.cpPanelOpen = !gameItem.cpPanelOpen;
+            if(gameItem.cpPanelOpen){
+                gameItem.charPanelOpen = false;
+            }
+            saveData();
+            window.refreshGameCardUi();
+            return;
+        }
+    });
 
-// 模块顶层事件处理函数，解决removeEventListener无效
-function wrapClickHandler(e){
-    const spoilerModal = document.getElementById("spoiler-modal");
-    if(!spoilerModal) return;
+    // ✅ 卡片内滑出面板角色勾选事件委托：勾选完成 → 修改数据关闭面板
+    document.addEventListener("click", function(e){
+        const switchBtn = e.target.closest(".char‑switch‑btn");
+        if(switchBtn) return;
 
-// -------- 角色图片切换按钮处理 --------
-const switchBtn = e.target.closest(".char-switch-prev,.char-switch-next");
-if(switchBtn){
-    const cardEl = switchBtn.closest(".char-card-item");
-    if(!cardEl) return;
-    const gameId = cardEl.dataset.gameId;
-    const charId = cardEl.dataset.charId;
-    const totalImg = Number(cardEl.dataset.totalImg) || 1;
-    const saveKey = `${gameId}-${charId}`;
-    let currentIdx = Number(appData.charImageSelect[saveKey] ?? 0);
-    if(switchBtn.classList.contains("char-switch-prev")){
-        currentIdx = currentIdx - 1;
-        if(currentIdx < 0) currentIdx = totalImg -1;
-    }else{
-        currentIdx = currentIdx +1;
-        if(currentIdx >= totalImg) currentIdx = 0;
+        const charItem = e.target.closest(".char‑slide‑panel‑char .char‑item, .char‑slide‑panel‑cp .char‑item");
+        if(!charItem) return;
+
+        const cid = charItem.dataset.cid;
+        const gameId = charItem.dataset.gameId;
+        const gameItem = appData.gameList?.find(g=>g.gameId === gameId);
+        if(!gameItem) return;
+        if (!Array.isArray(gameItem.selectChars)) gameItem.selectChars = [];
+        const idx = gameItem.selectChars.indexOf(cid);
+        if (idx > -1) {
+            gameItem.selectChars.splice(idx, 1);
+        } else {
+            gameItem.selectChars.push(cid);
+        }
+
+        // 判断是char还是cp面板，关闭对应面板
+        const panel = charItem.closest(".char‑slide‑panel‑char");
+        if(panel){
+            gameItem.charPanelOpen = false;
+        }else{
+            gameItem.cpPanelOpen = false;
+        }
+        saveData();
+        window.refreshGameCardUi();
+    });
+
+    // ✅面板内部关闭按钮（×），数据驱动关闭面板
+    document.addEventListener("click", function(e){
+        const closeBtn = e.target.closest(".panel‑close‑btn");
+        if(!closeBtn) return;
+        const panel = closeBtn.closest(".char‑slide‑panel‑char, .char‑slide‑panel‑cp");
+        if(!panel) return;
+        const card = panel.closest(".added‑game‑card");
+        const gid = card.dataset.gameid;
+        const gameItem = appData.gameList.find(g=>g.gameId === gid);
+        if(!gameItem) return;
+        if(panel.classList.contains("char‑slide‑panel‑char")){
+            gameItem.charPanelOpen = false;
+        }else{
+            gameItem.cpPanelOpen = false;
+        }
+        saveData();
+        window.refreshGameCardUi();
+    });
+
+    /**
+     * 更新全局隐藏角色复选框DOM状态（仅更新UI，点击事件由main.js接管）
+     */
+    function refreshHideCharSwitch() {
+        if (el.globalHideChar) {
+            el.globalHideChar.checked = appData.globalHideChar;
+            el.globalHideChar.indeterminate = false;
+        }
     }
-    appData.charImageSelect[saveKey] = currentIdx;
-    saveData();
-    // 通知script.js重新渲染游戏卡片
-    if(window.refreshGameCardUi) window.refreshGameCardUi();
-    return;
-}
-
-// -------- 游戏局部开关处理 --------
-const targetInput = e.target.closest(".game-hide-char,.game-fd-switch,.modal-local-hide-char,.modal-local-fd");
-if(!targetInput) return;
-
-let idx;
-let gameItem;
-if(targetInput.classList.contains("modal-local-hide-char") || targetInput.classList.contains("modal-local-fd")){
-    gameItem = appData.gameList.find(g=>g.gameId === currentEditGameId);
-    if(!gameItem) return;
-    idx = appData.gameList.indexOf(gameItem);
-}else{
-    idx = Number(targetInput.dataset.gameidx);
-    gameItem = appData.gameList[idx];
-    if(!gameItem) return;
-}
-
-// 读取真实数据状态，不要读取DOM的checked（委托click下DOM状态是旧的）
-let isOpened;
-if(targetInput.classList.contains("game-hide-char") || targetInput.classList.contains("modal-local-hide-char")){
-    isOpened = !!gameItem.localHideChar;
-}else{
-    isOpened = !!gameItem.localFD;
-}
-
-// 已经开启：用户要关闭，直接生效，不弹窗
-if(isOpened){
-    if(targetInput.classList.contains("game-hide-char") || targetInput.classList.contains("modal-local-hide-char")){
-        gameItem.localHideChar = false;
-    }else{
-        gameItem.localFD = false;
+    /**
+     * 更新全局FD复选框DOM状态（仅更新UI，点击事件由main.js接管）
+     */
+    function refreshFDSwitch() {
+        if (el.globalFD) {
+            el.globalFD.checked = appData.globalFD;
+            el.globalFD.indeterminate = false;
+        }
     }
-    saveData();
-    if(window.refreshGameCardUi) window.refreshGameCardUi();
-    return;
+
+    // 加载本地存储
+    loadData();
+    // 兜底：旧本地存储数据补charPanelOpen、cpPanelOpen、loveRate字段
+    if(Array.isArray(appData.gameList)){
+        appData.gameList.forEach(g=>{
+            if(typeof g.charPanelOpen !== "boolean") g.charPanelOpen = false;
+            if(typeof g.cpPanelOpen !== "boolean") g.cpPanelOpen = false;
+            if(typeof g.loveRate !== "number") g.loveRate = 0;
+        });
+    }
+
+    // 回填基础资料表单
+    if (el.inputNick) el.inputNick.value = appData.baseInfo?.nick ?? "";
+    if (el.inputCount) el.inputCount.value = appData.baseInfo?.count ?? "";
+    if (el.inputStory) el.inputStory.value = appData.baseInfo?.story ?? "";
+    if (el.inputFirstgame) el.inputFirstgame.value = appData.baseInfo?.firstgame ?? "";
+
+    // 配色绑定，增加DOM判空，消除colorBorder undefined报错
+    const colorBindList = [
+        { dom: el.colorBg, dataKey: "bg" },
+        { dom: el.colorTitle, dataKey: "title" },
+        { dom: el.colorText, dataKey: "text" },
+        { dom: el.colorBorder, dataKey: "border" }
+    ];
+    colorBindList.forEach(item => {
+        if (!item.dom) return;
+        item.dom.value = appData.exportColor?.[item.dataKey] ?? "#ffffff";
+        item.dom.oninput = () => {
+            if(!appData.exportColor) appData.exportColor = {};
+            appData.exportColor[item.dataKey] = item.dom.value;
+            saveData();
+            if (item.dataKey === "bg") document.body.style.background = item.dom.value;
+        }
+    });
+    if (el.colorBg) document.body.style.background = appData.exportColor?.bg ?? "#ffffff";
+
+    refreshHideCharSwitch();
+    refreshFDSwitch();
+    fillFilterOptions(gameTemplateList);
+
+    // ========== 基础资料输入框绑定 ==========
+    const baseInputMap = [
+        { dom: el.inputNick, key: "nick" },
+        { dom: el.inputCount, key: "count" },
+        { dom: el.inputStory, key: "story" },
+        { dom: el.inputFirstgame, key: "firstgame" }
+    ];
+    baseInputMap.forEach(item => {
+        if (!item.dom) return;
+        item.dom.oninput = function () {
+            if(!appData.baseInfo) appData.baseInfo = {};
+            appData.baseInfo[item.key] = this.value;
+            saveData();
+        }
+    })
+
+    // ========== 添加游戏按钮 ==========
+    if (el.addGameBtn) {
+        el.addGameBtn.onclick = function () {
+            renderGameSelectList();
+            if (el.searchPanel) el.searchPanel.classList.remove("hide‑block");
+        }
+    }
+
+    // ========== 搜索输入监听 ==========
+    if (el.gameSearchInput) {
+        el.gameSearchInput.addEventListener("input", renderGameSelectList);
+    }
+
+    // ========== 筛选下拉监听 ==========
+    const filterSelectIds = ["filter‑year", "filter‑publisher", "filter‑cn", "filter‑writer", "filter‑art"];
+    filterSelectIds.forEach(selId => {
+        const sel = document.getElementById(selId);
+        if (sel) sel.addEventListener("change", renderGameSelectList);
+    });
+
+    /**
+     * 渲染游戏选择弹窗列表
+     */
+    function renderGameSelectList() {
+        if (!el.gameSearchInput || !el.gameSelectList || !Array.isArray(gameTemplateList)) return;
+        const keyword = el.gameSearchInput.value.toLowerCase();
+        const filterYear = document.getElementById("filter‑year")?.value || "";
+        const filterPub = document.getElementById("filter‑publisher")?.value || "";
+        const filterCn = document.getElementById("filter‑cn")?.value || "";
+        const filterWriter = document.getElementById("filter‑writer")?.value || "";
+        const filterArt = document.getElementById("filter‑art")?.value || "";
+        const sortedGames = [...gameTemplateList].sort((a, b) => a.name.localeCompare(b.name, "zh‑CN"));
+        let html = "";
+        sortedGames.forEach(game => {
+            if (!game) return;
+            let match = true;
+            if (keyword && !game.name?.toLowerCase().includes(keyword)) match = false;
+            if (filterYear && game.year != filterYear) match = false;
+            if (filterPub && game.publisher != filterPub) match = false;
+            if (filterCn && game.cnStudio != filterCn) match = false;
+
+            if (filterWriter) {
+                let writerArr = [];
+                if (Array.isArray(game.writer)) {
+                    writerArr = game.writer;
+                } else if (typeof game.writer === "string") {
+                    writerArr = [game.writer];
+                }
+                if (!writerArr.includes(filterWriter)) match = false;
+            }
+
+            if(filterArt){
+                let artArr = Array.isArray(game.art) ? game.art : [game.art];
+                if(!artArr.includes(filterArt)) match = false;
+            }
+            if (!match) return;
+            html += `<div class="game‑option‑item" data‑game‑id="${game.id}">` + renderGameSelectItem(game) + `</div>`;
+        })
+        el.gameSelectList.innerHTML = html;
+        document.querySelectorAll(".game‑option‑item").forEach(item => {
+            item.onclick = () => {
+                const gid = item.dataset.gameId;
+                const targetGame = gameTemplateList.find(g => g.id === gid);
+                if (!targetGame) return alert("游戏数据加载异常");
+                const exist = appData.gameList?.find(g => g.gameId === gid);
+                if (exist) return alert("该游戏已添加！");
+                const newGameData = {
+                    gameId: gid,
+                    fold: false,
+                    expand: false,
+                    charPanelOpen: false,
+                    cpPanelOpen: false,
+                    localHideChar: false,
+                    localFD: false,
+                    loveRate: 0,
+                    selectChars: [],
+                    cpList: []
+                };
+                if(!appData.gameList) appData.gameList = [];
+                appData.gameList.push(newGameData);
+                saveData();
+                if (el.searchPanel) el.searchPanel.classList.add("hide‑block");
+                window.refreshGameCardUi();
+                bindDynamicGameCardSwitchEvents();
+            }
+        })
+    }
+
+    /**
+     * 游戏卡片内部事件绑定：折叠、删除、爱心评分
+     * 【改动：移除 btn‑character / btn‑couple 的onclick绑定，改用全局document委托】
+     */
+    function bindGameCardEvent() {
+        document.querySelectorAll(".fold‑game").forEach(btn => {
+            btn.onclick = () => {
+                const gid = btn.dataset.gid;
+                const gameItem = appData.gameList?.find(g => g.gameId === gid);
+                if (!gameItem) return;
+                gameItem.fold = !gameItem.fold;
+                saveData();
+                window.refreshGameCardUi();
+                bindDynamicGameCardSwitchEvents();
+            }
+        })
+        document.querySelectorAll(".del‑game").forEach(btn => {
+            btn.onclick = () => {
+                const gid = btn.dataset.gid;
+                appData.gameList = appData.gameList.filter(g => g.gameId !== gid);
+                saveData();
+                window.refreshGameCardUi();
+                bindDynamicGameCardSwitchEvents();
+            }
+        })
+        document.querySelectorAll(".heart‑rate").forEach(box => {
+            const gid = box.dataset.gid;
+            const gameItem = appData.gameList?.find(g => g.gameId === gid);
+            if (!gameItem) return;
+            box.querySelectorAll(".heart").forEach(h => {
+                h.onclick = (e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    e.stopImmediatePropagation(); // 关键修复：阻止向上冒泡，不会触发卡片开关委托事件
+                    gameItem.loveRate = Number(h.dataset.val);
+                    saveData();
+                    // 局部更新爱心，禁止全卡片重渲染，防止DOM销毁带来事件泄露冒泡bug
+                    const allHearts = box.querySelectorAll(".heart");
+                    allHearts.forEach(ht => {
+                        const val = Number(ht.dataset.val);
+                        if(val <= gameItem.loveRate){
+                            ht.classList.add("active");
+                        }else{
+                            ht.classList.remove("active");
+                        }
+                    });
+                    // ❗删除 bindDynamicGameCardSwitchEvents(); 爱心点击不需要重新绑定委托
+                }
+            })
+        })
+    }
+
+    // =====================【导出图片核心逻辑】=====================
+    if (el.exportBtn && el.snapshotContainer) {
+        // ✅修复：给回调增加 async，解决 await is a reserved identifier
+        el.exportBtn.addEventListener('click', async () => {
+            try {
+                if(typeof html2canvas !== "function"){
+                    alert("缺少 html2canvas 库，无法导出图片，请检查html引入");
+                    return;
+                }
+                el.exportBtn.disabled = true;
+                el.exportBtn.textContent = "正在生成图片...";
+
+                const baseInfo = appData.baseInfo ?? {};
+                const infoArr = [
+                    { el: el.inputNick, text: baseInfo.nick ? `昵称：${baseInfo.nick}` : null },
+                    { el: el.inputCount, text: baseInfo.count !== "" ? `游玩总数：${baseInfo.count}` : null },
+                    { el: el.inputStory, text: baseInfo.story ? `入坑时间：${baseInfo.story}` : null },
+                    { el: el.inputFirstgame, text: baseInfo.firstgame ? `入坑作品：${baseInfo.firstgame}` : null }
+                ];
+
+                const hideElements = [];
+                infoArr.forEach(item => {
+                    if (item.el && !item.text) {
+                        hideElements.push(item.el);
+                        item.el.style.display = "none";
+                    }
+                });
+
+                el.snapshotContainer.classList.add('export‑snapshot');
+
+                const sizeRadio = document.querySelector('input[name="export‑size"]:checked');
+                if(!sizeRadio) throw new Error("未选中导出尺寸");
+                let sizeValue = sizeRadio.value;
+                let targetWidth, targetHeight;
+                if (sizeValue === 'long') {
+                    targetWidth = 1080;
+                    targetHeight = 0;
+                } else {
+                    const [w, h] = sizeValue.split(',').map(Number);
+                    targetWidth = w;
+                    targetHeight = h;
+                }
+
+                const bgColor = el.colorBg?.value ?? "#ffffff";
+
+                const renderCanvas = await html2canvas(el.snapshotContainer, {
+                    backgroundColor: bgColor,
+                    scale: 2,
+                    useCORS: true,
+                    logging: false
+                });
+
+                let finalCanvas;
+                if (targetHeight === 0) {
+                    finalCanvas = renderCanvas;
+                } else {
+                    if(!el.canvas) throw new Error("导出canvas元素缺失");
+                    const canvas = el.canvas;
+                    canvas.width = targetWidth;
+                    canvas.height = targetHeight;
+                    const ctx = canvas.getContext('2d');
+                    ctx.fillStyle = bgColor;
+                    ctx.fillRect(0, 0, targetWidth, targetHeight);
+                    const scale = Math.min(targetWidth / renderCanvas.width, targetHeight / renderCanvas.height);
+                    const drawW = renderCanvas.width * scale;
+                    const drawH = renderCanvas.height * scale;
+                    const offsetX = (targetWidth - drawW) / 2;
+                    const offsetY = (targetHeight - drawH) / 2;
+                    ctx.drawImage(renderCanvas, offsetX, offsetY, drawW, drawH);
+                    finalCanvas = canvas;
+                }
+
+                const link = document.createElement('a');
+                link.download = `Otome_FavList_${new Date().getTime()}.png`;
+                link.href = finalCanvas.toDataURL('image/png');
+                link.click();
+            } catch (err) {
+                console.error("导出失败：", err);
+                alert('图片导出异常！外部图片跨域可能导致失败，请使用本地图片资源。\n' + err.message);
+            } finally {
+                el.snapshotContainer.classList.remove('export‑snapshot');
+                document.querySelectorAll("#card‑base .form‑row input").forEach(input => {
+                    input.style.display = "";
+                });
+                el.exportBtn.disabled = false;
+                el.exportBtn.textContent = "生成并导出图片";
+            }
+        });
+    }
+
+    // 初始渲染页面
+    window.refreshGameCardUi();
 }
 
-// 用户想要打开局部开关，直接弹出剧透弹窗（不再做日期判断）
-e.preventDefault();
-if(targetInput.classList.contains("game-hide-char") || targetInput.classList.contains("modal-local-hide-char")){
-    window.pendingGameOp = { type:"hideChar", idx };
-}else{
-    window.pendingGameOp = { type:"fd", idx };
-}
-spoilerModal.classList.add("active");
+// 适配main.js调用的两个别名函数（本项目为卡片内嵌面板，无独立弹窗DOM）
+function openCharSelectModal(){}
+function renderCharSelectList(){}
 
-}
+// ✅挂载全局句柄给main.js调用
+window.openCharSelectModal = openCharSelectModal;
+window.renderCharSelectList = renderCharSelectList;
 
-/**
-- 事件委托：处理动态渲染游戏卡片内部开关 + 角色图片切换按钮
-- 改为click委托，不再监听change；导出，由script.js渲染完列表后调用
- */
-export function bindDynamicGameCardSwitchEvents(){
- const wrap = document.querySelector(".wrap");
- const spoilerModal = document.getElementById("spoiler-modal");
- if(!wrap || !spoilerModal){
- console.warn("bindDynamicGameCardSwitchEvents：wrap或modal不存在，跳过绑定");
- return;
- }
- // 移除旧监听，防止重复绑定
- wrap.removeEventListener("click", wrapClickHandler);
- wrap.addEventListener("click", wrapClickHandler);
-}
-
-/**
-- 【绑定全局开关 click事件 + 剧透弹窗逻辑】
-- 改用label click，阻止默认，不再使用change，规避label包裹checkbox时序bug
-- 1.想要打开：阻止原生勾选，弹出弹窗；确认后才改为true
-- 2.想要关闭：直接修改数据，保存，更新UI，不弹窗
-- 恢复取消按钮完整逻辑
- */
-function bindGlobalSwitchSpoilerEvents() {
- const hideCharInput = document.getElementById("global-hide-char");
- const fdInput = document.getElementById("global-fd-game");
- const spoilerModal = document.getElementById("spoiler-modal");
- const spoilerConfirmBtn = document.getElementById("spoiler-confirm");
- const spoilerCancelBtn = document.getElementById("spoiler-cancel");
- if(!hideCharInput || !fdInput || !spoilerModal || !spoilerConfirmBtn || !spoilerCancelBtn){
- console.warn("bindGlobalSwitchSpoilerEvents：部分DOM缺失，全局开关弹窗未挂载");
- return;
- }
- // 获取包裹input的label元素
- const labelHideChar = hideCharInput.closest("label.switch");
- const labelFD = fdInput.closest("label.switch");
- // --------全局隐藏角色开关 使用label click，阻止默认行为--------
- labelHideChar.addEventListener("click", function(e){
- e.preventDefault(); // 禁止浏览器原生切换checkbox！全部交给JS控制
- // 当前实际状态
- const currentVal = appData.globalHideChar;
- if(currentVal === true){
- // 用户要关闭
- appData.globalHideChar = false;
- saveData();
- renderGlobalSwitchDom();
- return;
- }
- // 用户想要打开：不修改勾选，弹出弹窗
- window.pendingGlobalSwitch = "hideChar";
- spoilerModal.classList.add("active");
- });
- // --------全局FD开关--------
- labelFD.addEventListener("click", function(e){
- e.preventDefault();
- const currentVal = appData.globalFD;
- if(currentVal === true){
- // 用户要关闭
- appData.globalFD = false;
- saveData();
- renderGlobalSwitchDom();
- return;
- }
- window.pendingGlobalSwitch = "fdGame";
- spoilerModal.classList.add("active");
- });
- // 弹窗确认【扩展：同时处理全局 / 动态卡片局部】
- spoilerConfirmBtn.onclick = null;
- spoilerConfirmBtn.addEventListener("click", function(){
- // 优先处理动态游戏卡片操作（含弹窗内modal-local-*开关）
- if(window.pendingGameOp){
- const op = window.pendingGameOp;
- const g = appData.gameList[op.idx];
- if(g){
- if(op.type === "hideChar") g.localHideChar = true;
- if(op.type === "fd") g.localFD = true;
- }
- window.pendingGameOp = null;
- saveData();
- spoilerModal.classList.remove("active");
- window.pendingGlobalSwitch = null;
- if(window.refreshGameCardUi) window.refreshGameCardUi();
- return;
- }
-
- if(!window.pendingGlobalSwitch){
-     spoilerModal.classList.remove("active");
-     window.pendingGlobalSwitch = null;
-     window.pendingGameOp = null;
-     return;
- }
- if(window.pendingGlobalSwitch === "hideChar"){
-     appData.globalHideChar = true;
-     saveData();
-     renderGlobalSwitchDom();
- }else if(window.pendingGlobalSwitch === "fdGame"){
-     appData.globalFD = true;
-     saveData();
-     renderGlobalSwitchDom();
- }
- spoilerModal.classList.remove("active");
- window.pendingGlobalSwitch = null;
- window.pendingGameOp = null;
- });
- // 弹窗取消：关闭弹窗，清空全部待处理标记，**不修改任何开关状态**
- spoilerCancelBtn.onclick = null;
- spoilerCancelBtn.addEventListener("click", function(){
- spoilerModal.classList.remove("active");
- window.pendingGlobalSwitch = null;
- window.pendingGameOp = null;
- });
-
-}
-
-/**
-- 对外暴露启动入口，供index.html调用
- */
-export async function bootstrapCore() {
- // 1.读取本地存储数据
- loadData();
- // 2.加载全部游戏模板数据
- await loadAllGameTemplates();
- // 3.组装核心上下文对象，传给UI层script.js
- const Core = buildCoreContext();
- // 动态导入，消除顶层import循环依赖
- const { initPage } = await import("./script.js");
- initPage(Core);
- // 4.渲染全局开关初始勾选状态
- renderGlobalSwitchDom();
- // 5.绑定全局开关+剧透弹窗事件（确认+取消双按钮）
- bindGlobalSwitchSpoilerEvents();
- // ⚠️移除bindDynamicGameCardSwitchEvents()调用，放到script.js渲染完列表后执行
+bootstrap();
 
 }
