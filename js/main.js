@@ -377,6 +377,54 @@ function wrapClickHandler(e){
     const spoilerModal = document.getElementById("spoiler-modal");
     if(!spoilerModal) return;
 
+    // -------- 游戏局部开关处理 --------
+    const targetInput = e.target.closest(".game-hide-char,.game-fd-switch,.modal-local-hide-char,.modal-local-fd");
+    if(targetInput){
+        // ✅修复：只要命中局部开关，直接阻止浏览器原生checkbox切换，全部JS接管
+        e.preventDefault();
+
+        let idx;
+        let gameItem;
+        if(targetInput.classList.contains("modal-local-hide-char") || targetInput.classList.contains("modal-local-fd")){
+            gameItem = appData.gameList.find(g=>g.gameId === currentEditGameId);
+            if(!gameItem) return;
+            idx = appData.gameList.indexOf(gameItem);
+        }else{
+            idx = Number(targetInput.dataset.gameidx);
+            gameItem = appData.gameList[idx];
+            if(!gameItem) return;
+        }
+
+        // 读取真实数据状态，不要读取DOM的checked（委托click下DOM状态是旧的）
+        let isOpened;
+        if(targetInput.classList.contains("game-hide-char") || targetInput.classList.contains("modal-local-hide-char")){
+            isOpened = !!gameItem.localHideChar;
+        }else{
+            isOpened = !!gameItem.localFD;
+        }
+
+        // 已经开启：用户要关闭，直接生效，不弹窗
+        if(isOpened){
+            if(targetInput.classList.contains("game-hide-char") || targetInput.classList.contains("modal-local-hide-char")){
+                gameItem.localHideChar = false;
+            }else{
+                gameItem.localFD = false;
+            }
+            saveData();
+            if(window.refreshGameCardUi) window.refreshGameCardUi();
+            return;
+        }
+
+        // 用户想要打开局部开关，直接弹出剧透弹窗
+        if(targetInput.classList.contains("game-hide-char") || targetInput.classList.contains("modal-local-hide-char")){
+            window.pendingGameOp = { type:"hideChar", idx };
+        }else{
+            window.pendingGameOp = { type:"fd", idx };
+        }
+        spoilerModal.classList.add("active");
+        return;
+    }
+
 // -------- 角色图片切换按钮处理 --------
 const switchBtn = e.target.closest(".char-switch-prev,.char-switch-next");
 if(switchBtn){
@@ -400,51 +448,6 @@ if(switchBtn){
     if(window.refreshGameCardUi) window.refreshGameCardUi();
     return;
 }
-
-// -------- 游戏局部开关处理 --------
-const targetInput = e.target.closest(".game-hide-char,.game-fd-switch,.modal-local-hide-char,.modal-local-fd");
-if(!targetInput) return;
-
-let idx;
-let gameItem;
-if(targetInput.classList.contains("modal-local-hide-char") || targetInput.classList.contains("modal-local-fd")){
-    gameItem = appData.gameList.find(g=>g.gameId === currentEditGameId);
-    if(!gameItem) return;
-    idx = appData.gameList.indexOf(gameItem);
-}else{
-    idx = Number(targetInput.dataset.gameidx);
-    gameItem = appData.gameList[idx];
-    if(!gameItem) return;
-}
-
-// 读取真实数据状态，不要读取DOM的checked（委托click下DOM状态是旧的）
-let isOpened;
-if(targetInput.classList.contains("game-hide-char") || targetInput.classList.contains("modal-local-hide-char")){
-    isOpened = !!gameItem.localHideChar;
-}else{
-    isOpened = !!gameItem.localFD;
-}
-
-// 已经开启：用户要关闭，直接生效，不弹窗
-if(isOpened){
-    if(targetInput.classList.contains("game-hide-char") || targetInput.classList.contains("modal-local-hide-char")){
-        gameItem.localHideChar = false;
-    }else{
-        gameItem.localFD = false;
-    }
-    saveData();
-    if(window.refreshGameCardUi) window.refreshGameCardUi();
-    return;
-}
-
-// 用户想要打开局部开关，直接弹出剧透弹窗（不再做日期判断）
-e.preventDefault();
-if(targetInput.classList.contains("game-hide-char") || targetInput.classList.contains("modal-local-hide-char")){
-    window.pendingGameOp = { type:"hideChar", idx };
-}else{
-    window.pendingGameOp = { type:"fd", idx };
-}
-spoilerModal.classList.add("active");
 
 }
 
