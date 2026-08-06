@@ -167,55 +167,50 @@ export function syncSingleGameSwitch(type, status) {
 - @param {Array} gameList 游戏模板数组
  */
 export function fillFilterOptions(gameList) {
- if (!Array.isArray(gameList) || gameList.length === 0) return;
- const yearSet = new Set(), pubSet = new Set(), cnSet = new Set(), writerSet = new Set(), artSet = new Set();
- gameList.forEach(g => {
- if(!g) return;
- yearSet.add(g.year);
- pubSet.add(g.publisher);
- cnSet.add(g.cnStudio);
+    if (!Array.isArray(gameList) || gameList.length === 0) return;
+    const yearSet = new Set(), pubSet = new Set(), cnSet = new Set(), writerSet = new Set(), artSet = new Set();
+    gameList.forEach(g => {
+        if(!g) return;
+        yearSet.add(g.year);
+        pubSet.add(g.publisher);
+        cnSet.add(g.cnStudio);
 
- let writerArr = [];
- if(Array.isArray(g.writer)){
-     writerArr = g.writer;
- }else if(typeof g.writer === "string" && g.writer.trim() !== ""){
-     writerArr = [g.writer];
- }
- writerArr.forEach(name => writerSet.add(name));
+        let writerArr = [];
+        if(Array.isArray(g.writer)){
+            writerArr = g.writer;
+        }else if(typeof g.writer === "string" && g.writer.trim() !== ""){
+            writerArr = [g.writer];
+        }
+        writerArr.forEach(name => writerSet.add(name));
 
- let artArr = [];
- if(Array.isArray(g.art)){
-     artArr = g.art;
- }else if(typeof g.art === "string" && g.art.trim() !== ""){
-     artArr = [g.art];
- }
- artArr.forEach(name => artSet.add(name));
- })
- /** fillSelect("filter-writer", writerSet);
- fillSelect("filter-art", artSet);
- fillSelect("filter-year", yearSet);
- fillSelect("filter-publisher", pubSet);
- fillSelect("filter-cn", cnSet);
+        let artArr = [];
+        if(Array.isArray(g.art)){
+            artArr = g.art;
+        }else if(typeof g.art === "string" && g.art.trim() !== ""){
+            artArr = [g.art];
+        }
+        artArr.forEach(name => artSet.add(name));
+    });
 
-- 内部辅助：填充单个select下拉框
-- @param {string} id dom id
-- @param {Set} dataSet 选项集合
-*/
- const fillSelect = (id, dataSet) => {
- const sel = document.getElementById(id);
- if (!sel) return;
- // 保留HTML写好的第一个option（筛选编剧 / 筛选画师…），只追加后面数据项
- const firstOpt = sel.querySelector('option');
- sel.innerHTML = '';
- if(firstOpt) sel.appendChild(firstOpt);
- dataSet.forEach(v => {
- const opt = document.createElement('option');
- opt.value = v;
- opt.textContent = v;
- sel.appendChild(opt);
- });
- }
+    const fillSelect = (id, dataSet) => {
+        const sel = document.getElementById(id);
+        if (!sel) return;
+        const firstOpt = sel.querySelector('option');
+        sel.innerHTML = '';
+        if(firstOpt) sel.appendChild(firstOpt);
+        dataSet.forEach(v => {
+            const opt = document.createElement('option');
+            opt.value = v;
+            opt.textContent = v;
+            sel.appendChild(opt);
+        });
+    };
 
+    fillSelect("filter-writer", writerSet);
+    fillSelect("filter-art", artSet);
+    fillSelect("filter-year", yearSet);
+    fillSelect("filter-publisher", pubSet);
+    fillSelect("filter-cn", cnSet);
 }
 
 // ===================== HTML模板渲染函数 =====================
@@ -228,18 +223,15 @@ export function fillFilterOptions(gameList) {
 export function renderGameSelectItem(game) {
  if(!game) return "";
  return ` 
- ![${game.name || ''}](${game.cover})
-
-   ${game.name || ""}
- 编剧：${Array.isArray(game.writer) ? game.writer.join("、") : game.writer || "无"}
-
-   画师：${Array.isArray(game.art) ? game.art.join("、") : game.art || "无"}
-
-   发售年份：${game.year || "无"}
-
-   发行厂商：${game.publisher || "无"}
-
-   汉化厂商：${game.cnStudio || "无"}
+   <img src="${game.cover || ''}" alt="${game.name || ''}">
+   <div>
+   <div class="game-option-name">${game.name || ""}</div>
+   <div>编剧：${Array.isArray(game.writer) ? game.writer.join("、") : game.writer || "无"}</div>
+   <div>画师：${Array.isArray(game.art) ? game.art.join("、") : game.art || "无"}</div>
+   <div>发售年份：${game.year || "无"}</div>
+   <div>发行厂商：${game.publisher || "无"}</div>
+   <div>汉化厂商：${game.cnStudio || "无"}</div>
+   </div>
  `;
 }
 
@@ -349,22 +341,6 @@ export function getAllGameChar(gameInfo) {
 
 }
 
-/**
-- 在角色选择弹窗内渲染本游戏局部开关
-- @param {object} gameItem appData.gameList单条游戏条目
-- @param {HTMLElement|null} wrapDom 传入面板内部.local-switch-wrap，不传则回退旧全局id
- */
-export function renderLocalSwitchDom(gameItem, wrapDom = null) {
- const wrap = wrapDom ?? document.getElementById("modal-local-switch-wrap");
- if (!wrap) return;
- wrap.innerHTML = `
-
-本游戏显示隐藏角色
-
-本游戏显示FD续作角色
-`;
-}
-
 // ===================== 页面启动入口模块 =====================
 /**
 - 组装Core上下文对象，统一供给UI层script.js
@@ -388,8 +364,7 @@ function buildCoreContext() {
  isTodayConfirmed,
  saveConfirmDate,
  renderGameSelectItem,
- bindDynamicGameCardSwitchEvents,
- renderLocalSwitchDom
+ bindDynamicGameCardSwitchEvents
  };
  return Core;
 }
@@ -406,22 +381,7 @@ function renderGlobalSwitchDom() {
  if(fdInput) fdInput.checked = !!appData.globalFD;
 }
 
-/**
-- 事件委托：处理动态渲染游戏卡片内部开关 + 角色图片切换按钮
-- 改为click委托，不再监听change；导出，由script.js渲染完列表后调用
- */
-export function bindDynamicGameCardSwitchEvents(){
- const wrap = document.querySelector(".wrap");
- const spoilerModal = document.getElementById("spoiler-modal");
- if(!wrap || !spoilerModal){
- console.warn("bindDynamicGameCardSwitchEvents：wrap或modal不存在，跳过绑定");
- return;
- }
- // 移除旧监听，防止重复绑定
- wrap.removeEventListener("click", wrapClickHandler);
- wrap.addEventListener("click", wrapClickHandler);
-}
-
+// 模块顶层事件处理函数，解决removeEventListener无效
 function wrapClickHandler(e){
     const spoilerModal = document.getElementById("spoiler-modal");
     if(!spoilerModal) return;
@@ -495,6 +455,22 @@ if(targetInput.classList.contains("game-hide-char") || targetInput.classList.con
 }
 spoilerModal.classList.add("active");
 
+}
+
+/**
+- 事件委托：处理动态渲染游戏卡片内部开关 + 角色图片切换按钮
+- 改为click委托，不再监听change；导出，由script.js渲染完列表后调用
+ */
+export function bindDynamicGameCardSwitchEvents(){
+ const wrap = document.querySelector(".wrap");
+ const spoilerModal = document.getElementById("spoiler-modal");
+ if(!wrap || !spoilerModal){
+ console.warn("bindDynamicGameCardSwitchEvents：wrap或modal不存在，跳过绑定");
+ return;
+ }
+ // 移除旧监听，防止重复绑定
+ wrap.removeEventListener("click", wrapClickHandler);
+ wrap.addEventListener("click", wrapClickHandler);
 }
 
 /**
