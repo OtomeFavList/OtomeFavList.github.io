@@ -231,21 +231,20 @@ function renderAddedGame(el) {
     if (typeof bindDynamicGameCardSwitchEvents === "function") {
         bindDynamicGameCardSwitchEvents();
     }
-}
 
-            // 【关键修复】循环所有卡片，找到内部滑出面板，执行面板内容渲染
-            document.querySelectorAll(".added-game-card").forEach(cardDom => {
-                const gid = cardDom.dataset.gameid;
-                const gameItem = appData.gameList.find(g => g.gameId === gid);
-                const gameInfo = gameTemplateList.find(g => g.id === gid);
-                if(!gameItem || !gameInfo) return;
+    // =========【修复！！这段循环移入renderAddedGame函数内部，卡片渲染完成后执行】=========
+    document.querySelectorAll(".added-game-card").forEach(cardDom => {
+        const gid = cardDom.dataset.gameid;
+        const gameItem = appData.gameList.find(g => g.gameId === gid);
+        const gameInfo = gameTemplateList.find(g => g.id === gid);
+        if(!gameItem || !gameInfo) return;
 
-                const charPanel = cardDom.querySelector(".char-slide-panel-char");
-                const cpPanel = cardDom.querySelector(".char-slide-panel-cp");
-                if(charPanel) renderCharSelectPanel(cardDom, gid, "char", charPanel);
-                if(cpPanel) renderCharSelectPanel(cardDom, gid, "cp", cpPanel);
-            });
-        }
+        const charPanel = cardDom.querySelector(".char-slide-panel-char");
+        const cpPanel = cardDom.querySelector(".char-slide-panel-cp");
+        if(charPanel) renderCharSelectPanel(cardDom, gid, "char", charPanel);
+        if(cpPanel) renderCharSelectPanel(cardDom, gid, "cp", cpPanel);
+    });
+} // renderAddedGame 闭合
 
         // 【✅修复此处：包装箭头函数，把bootstrap内部el传入renderAddedGame】
         window.refreshGameCardUi = () => renderAddedGame(el);
