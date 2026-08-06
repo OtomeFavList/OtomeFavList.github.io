@@ -9,7 +9,7 @@ const gameData = {
     publisher: "Otomate",
     cnStudio: "JSD",
     writer: ["有野幸","砂原有季","いわた志信","小縞なお"],
-    art: "花邑舞",
+    art: "花邑まい",
     cover: "img/game/007.jpg",
     charList: [
         // 星野市香
