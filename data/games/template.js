@@ -4,8 +4,8 @@
 // 无需额外配置，仅需要到 main.js 顶部 🚨gameIdList数组追加编号"002","003"...
 const gameData = {
     id: "game0", // 全局唯一ID，不可重复
-    name: "示例乙女游戏1",
-    year: "2020",
+    name: "示例乙女游戏",
+    year: "20",
     publisher: "原厂发行商",
     cnStudio: "汉化组/汉化厂商",
     writer: "剧本编剧",
