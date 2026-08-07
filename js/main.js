@@ -611,6 +611,7 @@ function bindGlobalSwitchSpoilerEvents() {
             appData.globalHideChar = false;
             saveData();
             renderGlobalSwitchDom();
+            if(window.refreshGameCardUi) window.refreshGameCardUi();
             return;
         }
         // 用户想要打开：不修改勾选，弹出弹窗
@@ -627,6 +628,7 @@ function bindGlobalSwitchSpoilerEvents() {
             appData.globalFD = false;
             saveData();
             renderGlobalSwitchDom();
+            if(window.refreshGameCardUi) window.refreshGameCardUi();
             return;
         }
         window.pendingGlobalSwitch = "fdGame";
@@ -671,6 +673,9 @@ function bindGlobalSwitchSpoilerEvents() {
         spoilerModal.classList.remove("active");
         window.pendingGlobalSwitch = null;
         window.pendingGameOp = null;
+        if (window.refreshGameCardUi) {
+            window.refreshGameCardUi();
+        }
     });
 
     // 弹窗取消：关闭弹窗，清空全部待处理标记，**不修改任何开关状态**
