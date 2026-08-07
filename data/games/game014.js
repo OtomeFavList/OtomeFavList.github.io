@@ -8,9 +8,9 @@ const gameData = {
     year: "2022",
     publisher: "Rejet",
     cnStudio: "JOYOLAND",
-    writer: ["(やまだ有見","真崎結衣","小和泉いづみ","三芳秀克","こたに白子","久遠まひろ","関涼子"],
+    writer: ["やまだ有見","真崎結衣","小和泉いづみ","三芳秀克","こたに白子","久遠まひろ","関涼子"],
     art: "前田浩孝",
-    cover: "img/game/game014.jpg", // 封面图路径，统一前缀img/
+    cover: "img/game/014.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 立华律香
         {
@@ -20,7 +20,7 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { src: ["img/char/014/Ritsuka.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/014/Ritsuka.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 立华林多
@@ -31,7 +31,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { src: ["img/char/014/Lindo.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/014/Lindo.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 南那城梅吉
@@ -42,7 +42,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { src: ["img/char/014/Mage.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/014/Mage.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 钩贯雷姆
@@ -53,7 +53,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { src: ["img/char/014/Rem.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/014/Rem.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 罗恩
@@ -64,7 +64,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { src: ["img/char/014/Roen.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/014/Roen.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 枣坂四季
@@ -75,7 +75,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { src: ["img/char/014/Shiki.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/014/Shiki.jpg"], type: "base" },      // 默认基础图，始终加载
+            ]
         },
         // 楚神乌列
         {
@@ -85,7 +86,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { src: ["img/char/014/Urie.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/014/Urie.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         }
     ]
