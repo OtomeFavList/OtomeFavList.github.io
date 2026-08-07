@@ -1155,3 +1155,15 @@ h2{
 .cp-male-image-switch .char-switch-next {
     right: 8px;
 }
+
+/* ========== CP选择面板底部按钮栏 ========== */
+.cp-select-btn-bar{
+    display:flex;
+    gap:12px;
+    justify-content:flex-end;
+    padding:12px 16px;
+}
+.cp-confirm-btn,
+.cp-cancel-btn{
+    padding:6px 14px;
+}
