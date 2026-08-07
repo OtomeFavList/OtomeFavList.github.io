@@ -6,9 +6,9 @@ const gameData = {
     name: "黑桃国的爱丽丝~Wonderful White World~",
     year: "2023",
     publisher: "Otomate",
-    cnStudio: "汉化组/汉化厂商",
-    writer: ["剧本编剧","剧本编剧","剧本编剧","剧本编剧"],
-    art: "原画画师",
+    cnStudio: "GSE",
+    writer: ["七瀬みお","仰木サヤ"],
+    art: "藤丸豆ノ介",
     cover: "img/game/021.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 女主模板 female
