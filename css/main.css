@@ -404,16 +404,22 @@ button:hover{
 .game-switch-row{
     display: flex;
     align-items: flex-start;
-    gap: 12px 16px;
+    gap: 24px;
     margin: 10px 0 16px;
     flex-wrap: wrap;
+}
+/* 每一组【开关+文字】独立单元 */
+.game-switch-row > div {
+    display: flex;
+    align-items: flex-start;
+    gap:12px;
+    flex: 0 1 auto;
+    min-width:280px;
 }
 .game-switch-row span {
     font-size: 14px;
     color: #666;
     line-height: 1.6;
-    flex: 1;
-    min-width: 220px;
 }
 
 .game-card-buttons{
