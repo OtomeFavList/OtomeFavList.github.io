@@ -48,7 +48,7 @@ export function initPage(Core = {}) {
     const heroListBox = panelDom.querySelector(".hero-list-box");
     if (!titleEl || !heroineBox || !heroListBox) return;
 
-    titleEl.innerText = `${gameInfo.name} — ${mode === "char" ? "选择角色 Character" : "选择CP Couple"}`;
+    titleEl.innerText = `${gameInfo.name} — ${mode === "char" ? "选择角色 Character" : "选择角色 Couple"}`;
 
     // 废弃：renderLocalSwitchModalContent，开关已经渲染在卡片头部，此处不再调用
     const localWrap = panelDom.querySelector(".local-switch-wrap");
@@ -298,9 +298,9 @@ export function initPage(Core = {}) {
             <div class="game-card-empty-tip char-card-wrapper char-selected-row" data-gid="${gameItem.gameId}">${renderSelectedChar(gameItem, gameInfo) || `<div class="empty-hint">暂未选择角色</div>`}</div>
           </div>
           <div class="game-card-block-item cp-group block-margin-gap">
-            <button class="btn-couple" data-gid="${gameItem.gameId}">选择CP Couple</button>
+            <button class="btn-couple" data-gid="${gameItem.gameId}">选择角色 Couple</button>
             ${getInnerSlidePanelHtml("cp").replace('class="char-slide-panel-cp"',`class="char-slide-panel-cp ${cpPanelClass}"`)}
-            <div class="game-card-empty-tip cp-render-box" data-gid="${gameItem.gameId}">${renderCP(gameItem, gameInfo) || `<div class="empty-hint">暂未选择CP</div>`}</div>
+            <div class="game-card-empty-tip cp-render-box" data-gid="${gameItem.gameId}">${renderCP(gameItem, gameInfo) || `<div class="empty-hint">暂未选择角色</div>`}</div>
           </div>
           <div class="card-bottom-buttons block-margin-gap">
             <button class="btn-fold fold-game btn-gray-bg" data-gid="${gameItem.gameId}">折叠</button>
