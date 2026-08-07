@@ -19,7 +19,7 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/g001_f0_1.jpg","img/char/g001_f0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/026/Anastasia.jpg","img/char/026/Anastasia2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 克莱奥斯·卡索洛克
@@ -30,7 +30,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/026/Crius.jpg","img/char/026/Crius2.jpg","img/char/026/Crius3.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 路西恩·诺伊施本
@@ -41,7 +41,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/026/Lucien.jpg","img/char/026/Lucien2.jpg","img/char/026/Lucien3.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 提瑞尔·I·利斯特
@@ -52,7 +52,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/026/Tyril.jpg","img/char/026/Tyril2.jpg","img/char/026/Tyril3.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 泽恩·索菲尔德
@@ -63,7 +63,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/026/Zenn.jpg","img/char/026/Zenn2.jpg","img/char/026/Zenn3.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 伊什
@@ -74,7 +74,7 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["img/char/g001_h01_1.jpg"], type: "base" }
+                { srcList: ["img/char/026/Majo.jpg","img/char/026/Majo2.jpg","img/char/026/Majo3.jpg"], type: "base" }
             ]
         }
     ]
