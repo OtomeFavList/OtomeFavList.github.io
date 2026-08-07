@@ -59,7 +59,7 @@ const gameData = {
         // 伊庭八郎
         {
             id: "g019_m04",
-            name: "男主1",
+            name: "伊庭八郎",
             gender: "male",
             isHidden: false,
             isFD: false,
