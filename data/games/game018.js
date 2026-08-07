@@ -10,7 +10,7 @@ const gameData = {
     cnStudio: "GSE",
     writer: ["潮文音","一二階"],
     art: ["悌太","清白かりん"],
-    cover: "img/game/game018.jpg", // 封面图路径，统一前缀img/
+    cover: "img/game/018.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 小春
         {
