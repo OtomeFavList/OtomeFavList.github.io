@@ -277,9 +277,7 @@ export function renderSelectedChar(gameItem, gameInfo) {
         html += `
             <div class="char-card-item selected" data-char-id="${char.id}" data-game-id="${gameInfo.id}" data-total-img="${allSrc.length}">
                 <div class="char-card-img-box ${allSrc.length > 1 ? 'char-has-multi-img' : ''}">
-                    ${allSrc.length > 1 ? `<` : ""}
                     <img src="${targetSrc}" alt="${char.name || ''}">
-                    ${allSrc.length > 1 ? `>` : ""}
                 </div>
                 <div class="char-card-name">${char.name || ""}</div>
             </div>
@@ -341,9 +339,7 @@ export function renderCP(gameItem, gameInfo) {
             maleHtml += `
                 <div class="char-card-item selected" data-char-id="${mChar.id}" data-game-id="${gameInfo.id}" data-total-img="${mAllSrc.length}">
                     <div class="char-card-img-box ${mAllSrc.length > 1 ? 'char-has-multi-img' : ''}">
-                        ${mAllSrc.length > 1 ? `<` : ""}
                         <img src="${mTargetSrc}" alt="${mChar.name || ''}">
-                        ${mAllSrc.length > 1 ? `>` : ""}
                     </div>
                     <div class="char-card-name">${mChar.name || ""}</div>
                 </div>
@@ -355,9 +351,7 @@ export function renderCP(gameItem, gameInfo) {
                 <div class="heroine-column">
                     <div class="char-card-item selected" data-char-id="${fChar.id}" data-game-id="${gameInfo.id}" data-total-img="${fAllSrc.length}">
                         <div class="char-card-img-box ${fAllSrc.length > 1 ? 'char-has-multi-img' : ''}">
-                            ${fAllSrc.length > 1 ? `<` : ""}
                             <img src="${fTargetSrc}" alt="${fChar.name || ''}">
-                            ${fAllSrc.length > 1 ? `>` : ""}
                         </div>
                         <div class="char-card-name">${fChar.name || ""}</div>
                     </div>
