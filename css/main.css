@@ -403,14 +403,17 @@ button:hover{
 
 .game-switch-row{
     display: flex;
-    align-items: center;
-    gap: 12px;
+    align-items: flex-start;
+    gap: 12px 16px;
     margin: 10px 0 16px;
     flex-wrap: wrap;
 }
 .game-switch-row span {
     font-size: 14px;
     color: #666;
+    line-height: 1.6;
+    flex: 1;
+    min-width: 220px;
 }
 
 .game-card-buttons{
