@@ -452,40 +452,50 @@ export function initPage(Core = {}) {
             return;
         }
 
-        // 【新增】确认按钮：草稿落地真实数据，关闭男主候选区
+        // 【新增】确认按钮：草稿落地真实数据，关闭男主候选区，保留cp面板，局部更新预览
         const cpConfirmBtn = e.target.closest(".cp-confirm-btn");
         if(cpConfirmBtn){
             e.stopPropagation();
             const fid = cpConfirmBtn.dataset.fid;
             const gid = cpConfirmBtn.dataset.gid;
+            const cardDom = cpConfirmBtn.closest(".added-game-card");
             const panel = cpConfirmBtn.closest(".char-slide-panel-cp");
             const draftMap = panel._tempCpDraftMap;
-            if(!draftMap || !draftMap[fid]) return;
+            if(!draftMap || !draftMap[fid] || !cardDom) return;
             const gameItem = appData.gameList.find(g=>g.gameId === gid);
             if(!gameItem) return;
+            const gameInfo = gameTemplateList.find(g=>g.id === gid);
+            if(!gameInfo) return;
+
             const st = gameItem.cpEditState.find(s=>s.femaleId === fid);
             if(!st) return;
-            // 草稿覆盖真实maleIds
+            // 草稿落地真实数据
             st.maleIds = Array.from(draftMap[fid]);
             st.openMalePanel = false;
             saveData();
-            window.refreshGameCardUi();
+
+            // ✅关键：不全局刷新整个卡片！只做两件事
+            // 1. 关闭当前男主展开区块（局部DOM修改，不销毁外层cp面板）
+            const maleWrap = panel.querySelector(`.cp-male-select-wrap[data-fid="${fid}"]`);
+            if(maleWrap) maleWrap.remove();
+            // 2. 直接更新本卡片的cp预览输出框，立刻看到修改结果，不需要关闭面板
+            const cpRenderBox = cardDom.querySelector(".cp-render-box");
+            if(cpRenderBox){
+                cpRenderBox.innerHTML = renderCP(gameItem, gameInfo) || `<div class="empty-hint">暂未选择角色</div>`;
+            }
             return;
         }
 
-        //【新增】取消按钮：丢弃草稿，直接关闭男主候选区，原数据不变
+        //【新增】取消按钮：丢弃草稿，只关闭男主候选区，不重绘整张卡片
         const cpCancelBtn = e.target.closest(".cp-cancel-btn");
         if(cpCancelBtn){
             e.stopPropagation();
             const fid = cpCancelBtn.dataset.fid;
-            const gid = cpCancelBtn.dataset.gid;
-            const gameItem = appData.gameList.find(g=>g.gameId === gid);
-            if(!gameItem) return;
-            const st = gameItem.cpEditState.find(s=>s.femaleId === fid);
-            if(!st) return;
-            st.openMalePanel = false;
-            saveData();
-            window.refreshGameCardUi();
+            const panel = cpCancelBtn.closest(".char-slide-panel-cp");
+            if(!panel) return;
+            // 只移除男主展开面板，不操作gameItem、不调用refreshGameCardUi
+            const maleWrap = panel.querySelector(`.cp-male-select-wrap[data-fid="${fid}"]`);
+            if(maleWrap) maleWrap.remove();
             return;
         }
     });
@@ -673,7 +683,7 @@ export function initPage(Core = {}) {
       const filterWriter = document.getElementById("filter-writer")?.value || "";
       const filterArt = document.getElementById("filter-art")?.value || "";
 
-      const sortedGames = [...gameTemplateList].sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
+      const sortedGames = [...gameTemplateList].sort((a, b) => a.name.localeCompare(b.name, "zh‑CN"));
       let html = "";
 
       sortedGames.forEach(game => {
