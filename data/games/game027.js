@@ -10,7 +10,7 @@ const gameData = {
     cnStudio: "GSE",
     writer: ["望月柚枝","果村なずな","やまだ有見"],
     art: "花邑まい",
-    cover: "img/game/game027.jpg", // 封面图路径，统一前缀img/
+    cover: "img/game/027.jpg", // 封面图路径，统一前缀img/
     charList: [
         // Heroine
         {
