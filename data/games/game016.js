@@ -80,7 +80,7 @@ const gameData = {
         },
         // 伊孚
         {
-            id: "g016_m05",
+            id: "g016_m06",
             name: "伊孚",
             gender: "male",
             isHidden: false,
