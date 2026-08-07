@@ -422,27 +422,6 @@ button:hover{
     line-height: 1.6;
 }
 
-/* ========== 新增：卡片局部开关 local‑switch‑row ========== */
-.local-switch-row{
-    display: flex;
-    align-items: flex-start;
-    gap: 24px;
-    margin: 10px 0 16px;
-    flex-wrap: wrap;
-}
-.local-switch-row > div {
-    display: flex;
-    align-items: flex-start;
-    gap:12px;
-    flex: 0 1 auto;
-    min-width:280px;
-}
-.local-switch-row span {
-    font-size: 14px;
-    color: #666;
-    line-height: 1.6;
-}
-
 .game-card-buttons{
     display:flex;
     gap:10px;
