@@ -292,10 +292,7 @@ export function initPage(Core = {}) {
           heartHtml += `<span class="heart ${gameItem.loveRate >= i ? 'active' : ''}" data-val="${i}">♥</span>`;
         }
 
-        // 改用 active：打开加active，无则隐藏；fold优先级最高
-        const charPanelClass = ((gameItem.fold || !gameItem.charPanelOpen)) ? "" : "active";
-        const cpPanelClass = ((gameItem.fold || !gameItem.cpPanelOpen)) ? "" : "active";
-
+        // =========修复点1：模板字符串不再拼接active类=========
         html += `
         <div class="added-game-card" data-gameid="${gameItem.gameId}">
           <div class="game-card-head">
@@ -323,12 +320,12 @@ export function initPage(Core = {}) {
           <!-- ✅全部移出game-card-head，作为added-game-card直接子节点 -->
           <div class="game-card-block-item char-section block-margin-gap">
             <button class="btn-character" data-gid="${gameItem.gameId}">选择角色 Character</button>
-            ${getInnerSlidePanelHtml("char").replace('class="char-slide-panel-char"',`class="char-slide-panel-char ${charPanelClass}"`)}
+            ${getInnerSlidePanelHtml("char")}
             <div class="game-card-empty-tip char-card-wrapper char-selected-row" data-gid="${gameItem.gameId}">${renderSelectedChar(gameItem, gameInfo) || `<div class="empty-hint">暂未选择角色</div>`}</div>
           </div>
           <div class="game-card-block-item cp-group block-margin-gap">
             <button class="btn-couple" data-gid="${gameItem.gameId}">选择角色 Couple</button>
-            ${getInnerSlidePanelHtml("cp").replace('class="char-slide-panel-cp"',`class="char-slide-panel-cp ${cpPanelClass}"`)}
+            ${getInnerSlidePanelHtml("cp")}
             <div class="game-card-empty-tip cp-render-box" data-gid="${gameItem.gameId}">${renderCP(gameItem, gameInfo) || `<div class="empty-hint">暂未选择角色</div>`}</div>
           </div>
           <div class="card-bottom-buttons block-margin-gap">
@@ -350,8 +347,16 @@ export function initPage(Core = {}) {
 
         const charPanel = cardDom.querySelector(".char-slide-panel-char");
         const cpPanel = cardDom.querySelector(".char-slide-panel-cp");
+
+        // 1.先填充面板内容
         if(charPanel) renderCharSelectPanel(cardDom, gid, "char", charPanel);
         if(cpPanel) renderCharSelectPanel(cardDom, gid, "cp", cpPanel);
+
+        // 2.内容填充完毕，再根据状态打开面板
+        if (!gameItem.fold) {
+            if(gameItem.charPanelOpen) charPanel?.classList.add("active");
+            if(gameItem.cpPanelOpen) cpPanel?.classList.add("active");
+        }
       });
     }
 
@@ -427,7 +432,9 @@ export function initPage(Core = {}) {
                 st.openMalePanel = !st.openMalePanel;
             }
             saveData();
-            window.refreshGameCardUi();
+            requestAnimationFrame(()=>{
+                window.refreshGameCardUi();
+            });
             return;
         }
 
@@ -500,7 +507,7 @@ export function initPage(Core = {}) {
         }
     });
 
-    // ==========【修复：btn-character / btn-couple 全局事件委托】==========
+    // ==========【修复：btn‑character / btn‑couple 全局事件委托】==========
     document.addEventListener("click", function(e){
       const charBtn = e.target.closest(".btn-character");
       if(charBtn){
@@ -512,7 +519,9 @@ export function initPage(Core = {}) {
           gameItem.cpPanelOpen = false;
         }
         saveData();
-        window.refreshGameCardUi();
+        requestAnimationFrame(()=>{
+            window.refreshGameCardUi();
+        });
         return;
       }
 
@@ -526,7 +535,9 @@ export function initPage(Core = {}) {
           gameItem.charPanelOpen = false;
         }
         saveData();
-        window.refreshGameCardUi();
+        requestAnimationFrame(()=>{
+            window.refreshGameCardUi();
+        });
         return;
       }
     });
@@ -553,7 +564,9 @@ export function initPage(Core = {}) {
         gameItem.cpPanelOpen = false;
       }
       saveData();
-      window.refreshGameCardUi();
+      requestAnimationFrame(()=>{
+          window.refreshGameCardUi();
+      });
     });
 
     // ✅面板内部关闭按钮（×）
@@ -575,7 +588,9 @@ export function initPage(Core = {}) {
         gameItem.cpPanelOpen = false;
       }
       saveData();
-      window.refreshGameCardUi();
+      requestAnimationFrame(()=>{
+          window.refreshGameCardUi();
+      });
     });
 
     function refreshHideCharSwitch() {
@@ -758,7 +773,9 @@ export function initPage(Core = {}) {
           if (!gameItem) return;
           gameItem.fold = !gameItem.fold;
           saveData();
-          window.refreshGameCardUi();
+          requestAnimationFrame(()=>{
+              window.refreshGameCardUi();
+          });
         }
       })
 
@@ -767,7 +784,9 @@ export function initPage(Core = {}) {
           const gid = btn.dataset.gid;
           appData.gameList = appData.gameList.filter(g => g.gameId !== gid);
           saveData();
-          window.refreshGameCardUi();
+          requestAnimationFrame(()=>{
+              window.refreshGameCardUi();
+          });
         }
       })
 
