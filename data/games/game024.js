@@ -30,7 +30,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/024/Akito.jpg","img/char/024/Akito2.jpg","img/char/024/Akito3.jpg","img/char/024/Akito4.jpg","img/char/024/Akito5.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 卡米尔·赛谢林
