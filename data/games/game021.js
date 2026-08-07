@@ -3,9 +3,9 @@
 // 无需额外配置，仅需要到 main.js 顶部 🚨gameIdList数组追加编号"002","003"...
 const gameData = {
     id: "game021", // 全局唯一ID，不可重复
-    name: "示例乙女游戏",
+    name: "黑桃国的爱丽丝~Wonderful White World~",
     year: "2023",
-    publisher: "原厂发行商",
+    publisher: "Otomate",
     cnStudio: "汉化组/汉化厂商",
     writer: ["剧本编剧","剧本编剧","剧本编剧","剧本编剧"],
     art: "原画画师",
