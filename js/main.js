@@ -66,6 +66,14 @@ export function loadData() {
                 // ============【新增：CP独立勾选池兜底】============
                 if (!Array.isArray(g.selectChars)) g.selectChars = [];
                 if (!Array.isArray(g.cpSelectIds)) g.cpSelectIds = [];
+
+                // =====方案C：cpEditState 旧存档兼容兜底=====
+                // 注意：loadData阶段gameTemplateList还未加载，不能生成真实cpEditState；
+                // 此处只做占位，真实生成逻辑放在script.js renderCharSelectPanel的if(mode==="cp")内部
+                if(!Array.isArray(g.cpEditState)){
+                    g.cpEditState = null;
+                }
+                if(!Array.isArray(g.cpList)) g.cpList = [];
             });
         }
     } catch (e) {
