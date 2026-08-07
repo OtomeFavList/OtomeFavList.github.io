@@ -10,7 +10,7 @@ const gameData = {
     cnStudio: "JSD",
     writer:["佐々木麿","結城由乃","仰木サヤ","みぞおち鳩子"],
     art: ["Team.","十ガ才力"],
-    cover: "img/game/game015.jpg", // 封面图路径，统一前缀img/
+    cover: "img/game/015.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 纱乃
         {
