@@ -20,7 +20,7 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { src: ["img/char/017/Chloe.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/017/Chloe.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 奈杰
@@ -31,7 +31,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { src: ["img/char/017/Nagi.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/017/Nagi.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 纳兹米
@@ -42,7 +42,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { src: ["img/char/017/Natsume.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/017/Natsume.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 雷
@@ -53,7 +53,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { src: ["img/char/017/Ray.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/017/Ray.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 斯巴
@@ -64,7 +64,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { src: ["img/char/017/Shiba.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/017/Shiba.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         }
     ]
