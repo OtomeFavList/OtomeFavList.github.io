@@ -9,7 +9,7 @@ const gameData = {
     cnStudio: "GSE",
     writer: ["平野ヒロ"],
     art: "永原キナミ",
-    cover: "img/game/game017.jpg",
+    cover: "img/game/017.jpg",
     charList: [
         // 克洛伊
         {
