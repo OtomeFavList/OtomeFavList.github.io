@@ -1,26 +1,25 @@
-// data/games/game017.js
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
-// 无需额外配置，仅需要到 main.js 顶部 🚨gameIdList数组追加编号"002","003"...
+// 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
 const gameData = {
-    id: "game017", // 全局唯一ID，不可重复
+    id: "game017",
     name: "暗之眷属",
     year: "2023",
     publisher: "HuneX",
     cnStudio: "GSE",
     writer: ["平野ヒロ"],
     art: "永原キナミ",
-    cover: "img/game/game017.jpg", // 封面图路径，统一前缀img/
+    cover: "img/game/game017.jpg",
     charList: [
         // 克洛伊
         {
             id: "g017_f01",
             name: "克洛伊",
             gender: "female",
-            isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
-            isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
+            isHidden: false,
+            isFD: false,
             images: [
-                { srcList: ["img/char/017/Chloe.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/017/Chloe.jpg"], type: "base" }
             ]
         },
         // 奈杰
@@ -31,7 +30,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/017/Nagi.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/017/Nagi.jpg"], type: "base" }
             ]
         },
         // 纳兹米
@@ -42,7 +41,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/017/Natsume.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/017/Natsume.jpg"], type: "base" }
             ]
         },
         // 雷
@@ -53,7 +52,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/017/Ray.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/017/Ray.jpg"], type: "base" }
             ]
         },
         // 斯巴
@@ -64,11 +63,11 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/017/Shiba.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/017/Shiba.jpg"], type: "base" }
             ]
         }
     ]
 };
 
-// ✅新版导出！不要使用window.gameDataList.push！
+// ESModule导出，和其他游戏保持一致
 export { gameData };
