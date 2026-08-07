@@ -20,7 +20,9 @@ import {
   isTodayConfirmed,
   saveConfirmDate,
   renderGameSelectItem,
-  bindDynamicGameCardSwitchEvents
+  bindDynamicGameCardSwitchEvents,
+  toggleCharItemSelect,
+  toggleCpItemSelect
 } from './main.js';
 
 export function initPage(Core = {}) {
@@ -71,7 +73,13 @@ export function initPage(Core = {}) {
       let imgIndex = Number(appData.charImageSelect?.[saveKey] ?? 0);
       if (imgIndex >= allSrc.length) imgIndex = 0;
       const showSrc = allSrc[imgIndex];
-      const selected = gameItem.selectChars?.includes(char.id) ? "selected" : "";
+      // =========改动：cp模式读取cpSelectIds============
+      let selected = "";
+      if(mode === "char"){
+        selected = gameItem.selectChars?.includes(char.id) ? "selected" : "";
+      }else{
+        selected = gameItem.cpSelectIds?.includes(char.id) ? "selected" : "";
+      }
 
       femHtml += `
       <label class="char-item ${selected}" data-cid="${char.id}" data-char-id="${char.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}">
@@ -100,7 +108,13 @@ export function initPage(Core = {}) {
       let imgIndex = Number(appData.charImageSelect?.[saveKey] ?? 0);
       if (imgIndex >= allSrc.length) imgIndex = 0;
       const showSrc = allSrc[imgIndex];
-      const selected = gameItem.selectChars?.includes(char.id) ? "selected" : "";
+      // =========改动：cp模式读取cpSelectIds============
+      let selected = "";
+      if(mode === "char"){
+        selected = gameItem.selectChars?.includes(char.id) ? "selected" : "";
+      }else{
+        selected = gameItem.cpSelectIds?.includes(char.id) ? "selected" : "";
+      }
 
       maleHtml += `
       <label class="char-item ${selected}" data-cid="${char.id}" data-char-id="${char.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}">
@@ -330,7 +344,7 @@ export function initPage(Core = {}) {
       }
     });
 
-    // ✅ 卡片内滑出面板角色勾选事件委托
+    // ✅ 卡片内滑出面板角色勾选事件委托【改动：调用main导出函数，区分面板类型】
     document.addEventListener("click", function(e){
       const switchBtn = e.target.closest(".char-switch-btn");
       if(switchBtn) return;
@@ -343,18 +357,12 @@ export function initPage(Core = {}) {
       const gameItem = appData.gameList?.find(g=>g.gameId === gameId);
       if(!gameItem) return;
 
-      if (!Array.isArray(gameItem.selectChars)) gameItem.selectChars = [];
-      const idx = gameItem.selectChars.indexOf(cid);
-      if (idx > -1) {
-        gameItem.selectChars.splice(idx, 1);
-      } else {
-        gameItem.selectChars.push(cid);
-      }
-
-      const panel = charItem.closest(".char-slide-panel-char");
-      if(panel){
+      const panelChar = charItem.closest(".char-slide-panel-char");
+      if(panelChar){
+        toggleCharItemSelect(gameItem, cid);
         gameItem.charPanelOpen = false;
       }else{
+        toggleCpItemSelect(gameItem, cid);
         gameItem.cpPanelOpen = false;
       }
       saveData();
@@ -404,6 +412,8 @@ export function initPage(Core = {}) {
         if(typeof g.charPanelOpen !== "boolean") g.charPanelOpen = false;
         if(typeof g.cpPanelOpen !== "boolean") g.cpPanelOpen = false;
         if(typeof g.loveRate !== "number") g.loveRate = 0;
+        if(!Array.isArray(g.selectChars)) g.selectChars = [];
+        if(!Array.isArray(g.cpSelectIds)) g.cpSelectIds = [];
       });
     }
 
@@ -529,6 +539,7 @@ export function initPage(Core = {}) {
             localFD: false,
             loveRate: 0,
             selectChars: [],
+            cpSelectIds: [],
             cpList: []
           };
           if(!appData.gameList) appData.gameList = [];
