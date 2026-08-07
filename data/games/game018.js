@@ -12,136 +12,136 @@ const gameData = {
     art: ["悌太","清白かりん"],
     cover: "img/game/game018.jpg", // 封面图路径，统一前缀img/
     charList: [
-        // 女主模板 female
+        // 小春
         {
             id: "g018_f01",
-            name: "女主A",
+            name: "小春",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { src: ["img/char/g001_f0_1.jpg","img/char/g001_f0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { src: ["img/char/018/Koharu.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 女主模板 female
+        // 久我深琴
         {
             id: "g018_f02",
-            name: "女主A",
+            name: "久我深琴",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { src: ["img/char/g001_f0_1.jpg","img/char/g001_f0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { src: ["img/char/018/Mikoto.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 女主模板 female
+        // 不知火七海
         {
             id: "g018_f03",
-            name: "女主A",
+            name: "不知火七海",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { src: ["img/char/g001_f0_1.jpg","img/char/g001_f0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { src: ["img/char/018/Nanami.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 宿史晓人
         {
             id: "g018_m01",
-            name: "男主1",
+            name: "宿史晓人",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { src: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { src: ["img/char/018/Akito.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 乙丸平士
         {
             id: "g018_m02",
-            name: "男主1",
+            name: "乙丸平士",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { src: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { src: ["img/char/018/Heishi.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 加贺见一月
         {
             id: "g018_m03",
-            name: "男主1",
+            name: "加贺见一月",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { src: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { src: ["img/char/018/Itsuki.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 结贺驱
         {
             id: "g018_m04",
-            name: "男主1",
+            name: "结贺驱",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { src: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { src: ["img/char/018/Kakeru.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 远矢正宗
         {
             id: "g018_m05",
-            name: "男主1",
+            name: "远矢正宗",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { src: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { src: ["img/char/018/Masamune.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 吾妻夏彦
         {
             id: "g018_m06",
-            name: "男主1",
+            name: "吾妻夏彦",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { src: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { src: ["img/char/018/Natsuhiko.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-      // 普通可攻略男主 male
+      // 室星朗
         {
             id: "g018_m07",
-            name: "男主1",
+            name: "室星朗",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { src: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { src: ["img/char/018/Ron.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-      // 普通可攻略男主 male
+      // 二条朔也
         {
             id: "g018_m08",
-            name: "男主1",
+            name: "二条朔也",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { src: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { src: ["img/char/018/Sakuya.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-      // 普通可攻略男主 male
+      // 市之濑千里
         {
             id: "g018_m09",
-            name: "男主1",
+            name: "市之濑千里",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { src: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { src: ["img/char/018/Senri.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         }
     ]
