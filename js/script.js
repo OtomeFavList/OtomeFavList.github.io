@@ -126,7 +126,7 @@ export function initPage(Core = {}) {
             }));
         }
 
-        // 渲染CP面板HTML：每一位女主作为可点击200*200按钮；展开则下方显示该女主专属男主选择区，自动换行
+        // 渲染CP面板HTML：每一位女主作为可点击按钮；展开则下方显示该女主专属男主选择区，自动换行
         let cpPanelHtml = "";
         femaleChars.forEach(fChar=>{
             const state = gameItem.cpEditState.find(s=>s.femaleId === fChar.id);
@@ -142,12 +142,14 @@ export function initPage(Core = {}) {
             if(imgIndex >= allSrc.length) imgIndex =0;
             const showSrc = allSrc[imgIndex];
 
-            // 女主卡片，点击切换展开男主列表
+            // 女主卡片：严格DOM嵌套，移除全部行内style
             cpPanelHtml += `
             <div class="cp-female-block" data-fid="${fChar.id}" data-gid="${gameId}">
-                <!-- 女主点击按钮，200*200 -->
-                <div class="cp-female-card-btn" data-fid="${fChar.id}" style="width:200px;height:200px;cursor:pointer;">
-                    <img src="${showSrc}" alt="${fChar.name}" style="width:100%;height:100%;object-fit:cover;">
+                <!-- 女主点击按钮 -->
+                <div class="cp-female-card-btn" data-fid="${fChar.id}">
+                    <div class="char-card-img-box">
+                        <img src="${showSrc}" alt="${fChar.name}">
+                    </div>
                     <div class="cp-female-name">${fChar.name}</div>
                 </div>
                 <!-- 如果openMalePanel=true，渲染该女主对应的男主候选列表 -->
@@ -162,9 +164,11 @@ export function initPage(Core = {}) {
                             if(mSrcArr.length===0) return "";
                             const mSel = state.maleIds.includes(mChar.id) ? "selected" : "";
                             return `
-                            <div class="cp-male-item ${mSel}" data-fid="${fChar.id}" data-mid="${mChar.id}" style="width:160px;">
-                                <img src="${mSrcArr[0]}" alt="${mChar.name}" style="width:100px;height:100px;object-fit:cover;">
-                                <div>${mChar.name}</div>
+                            <div class="cp-male-item ${mSel}" data-fid="${fChar.id}" data-mid="${mChar.id}">
+                                <div class="char-card-img-box">
+                                    <img src="${mSrcArr[0]}" alt="${mChar.name}">
+                                </div>
+                                <div class="char-card-name">${mChar.name}</div>
                             </div>`;
                         }).join("")}
                     </div>
