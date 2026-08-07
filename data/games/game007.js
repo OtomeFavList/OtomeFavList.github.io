@@ -97,7 +97,7 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["img/char/007/Shiraishi.jpg"], type: "base" } // ✅src → srcList
+                { srcList: ["img/char/007/Minegishi.jpg"], type: "base" } // ✅src → srcList
             ]
         }, // ✅补上逗号
         // 吉成秀明
