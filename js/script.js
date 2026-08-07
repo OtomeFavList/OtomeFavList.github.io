@@ -198,18 +198,21 @@ export function initPage(Core = {}) {
               ${heartHtml}
             </div>
             <div class="local-switch-row">
-              <label class="switch">
-                <input type="checkbox" class="game-hide-char" data-gameidx="${index}" ${(gameItem.localHideChar ?? false) ? 'checked' : ''}>
-                <span class="slider"></span>
-              </label>
-              <span>单独显示本游戏隐藏角色</span>
-              <label class="switch">
-                <input type="checkbox" class="game-fd-switch" data-gameidx="${index}" ${(gameItem.localFD ?? false) ? 'checked' : ''}>
-                <span class="slider"></span>
-              </label>
-              <span>单独显示本游戏续作/FD角色</span>
+                <div>
+                    <label class="switch">
+                        <input type="checkbox" class="game-hide-char" data-gameidx="${index}" ${(gameItem.localHideChar ?? false) ? 'checked' : ''}>
+                        <span class="slider"></span>
+                    </label>
+                    <span>单独显示本游戏隐藏角色</span>
+                </div>
+                <div>
+                    <label class="switch">
+                        <input type="checkbox" class="game-fd-switch" data-gameidx="${index}" ${(gameItem.localFD ?? false) ? 'checked' : ''}>
+                        <span class="slider"></span>
+                    </label>
+                    <span>单独显示本游戏续作/FD角色</span>
+                </div>
             </div>
-          </div>
           <div class="game-card-block-item char-section block-margin-gap">
             <button class="btn-character" data-gid="${gameItem.gameId}">选择角色 Character</button>
             ${getInnerSlidePanelHtml("char").replace('class="char-slide-panel-char"',`class="char-slide-panel-char ${charPanelClass}"`)}
