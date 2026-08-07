@@ -13,7 +13,7 @@ const gameData = {
     charList: [
         // 濑名阳爱
         {
-            id: "g0_f01",
+            id: "g022_f01",
             name: "濑名阳爱",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
@@ -24,7 +24,7 @@ const gameData = {
         },
         // 陀宰明
         {
-            id: "g0_m01",
+            id: "g022_m01",
             name: "陀宰明",
             gender: "male",
             isHidden: false,
@@ -35,7 +35,7 @@ const gameData = {
         },
         // 获端圭人
         {
-            id: "g0_m02",
+            id: "g022_m02",
             name: "获端圭人",
             gender: "male",
             isHidden: false,
@@ -46,7 +46,7 @@ const gameData = {
         },
         // 双巳椋一
         {
-            id: "g0_m03",
+            id: "g022_m03",
             name: "双巳椋一",
             gender: "male",
             isHidden: false,
@@ -57,7 +57,7 @@ const gameData = {
         },
         // 废寺拓海
         {
-            id: "g0_m04",
+            id: "g022_m04",
             name: "废寺拓海",
             gender: "male",
             isHidden: false,
@@ -68,7 +68,7 @@ const gameData = {
         },
         // 射落水树
         {
-            id: "g0_m05",
+            id: "g022_m05",
             name: "射落水树",
             gender: "male",
             isHidden: false,
@@ -79,7 +79,7 @@ const gameData = {
         },
         // 明濑境也
         {
-            id: "g0_m06",
+            id: "g022_m06",
             name: "明濑境也",
             gender: "male",
             isHidden: false,
@@ -90,7 +90,7 @@ const gameData = {
         },
         // 茅裂镇
         {
-            id: "g0_m07",
+            id: "g022_m07",
             name: "茅裂镇",
             gender: "male",
             isHidden: false,
@@ -101,7 +101,7 @@ const gameData = {
         },
         // 凝部奏汰
         {
-            id: "g0_m08",
+            id: "g022_m08",
             name: "凝部奏汰",
             gender: "male",
             isHidden: false,
@@ -112,7 +112,7 @@ const gameData = {
         },
         // 万城灯星
         {
-            id: "g0_m09",
+            id: "g022_m09",
             name: "万城灯星",
             gender: "male",
             isHidden: false,
