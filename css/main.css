@@ -941,7 +941,7 @@ h2{
     right: 4px;
 }
 
-/* ========== CP面板方案C布局样式 ========== */
+/* ========== CP面板方案C布局样式【修复后完整版本】 ========== */
 .cp-female-block{
     margin:12px 0;
     display:flex;
@@ -992,10 +992,11 @@ h2{
     text-align:center;
 }
 
+/* ❗删除外围灰色边框和padding，这是多余外层容器 */
 .cp-male-select-wrap{
-    padding:10px;
-    border:1px solid #ccc;
-    border-radius:6px;
+    padding:0;
+    border:none;
+    border-radius:0;
 }
 .cp-male-title{
     font-weight:bold;
@@ -1044,6 +1045,43 @@ h2{
     display:block;
 }
 .cp-male-item .char-card-name {
+    font-size:14px;
+    color:#222;
+}
+
+/* ========== 【新增】CP已选角色卡片（已选女主、已选男主，完全对齐 char‑card‑item） ========== */
+.cp-selected-card-item{
+    width:120px;
+    text-align:center;
+    border:1px solid #eee;
+    padding:8px;
+    border-radius:10px;
+    background:#fff;
+}
+.cp-selected-card-item.selected{
+    border-color:#e895a8;
+    background:#fff0f3;
+}
+.cp-selected-card-item .char-card-img-box{
+    width:100%;
+    height: auto;
+    padding-top: 100%;
+    border-radius:8px;
+    overflow:hidden;
+    position:relative;
+    border:1px solid #e2e2e2;
+    margin-bottom:8px;
+}
+.cp-selected-card-item .char-card-img-box img{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+.cp-selected-card-item .char-card-name{
     font-size:14px;
     color:#222;
 }
