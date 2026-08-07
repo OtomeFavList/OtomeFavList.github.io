@@ -4,7 +4,7 @@
 // 仅需要在 games.js 的 allGameFiles数组追加本文件路径
 const gameData = {
     id: "game013",
-    name: "Code:Realize~创世的公主~",
+    name: "Code:Realize ~创世的公主~",
     year: "2021",
     publisher: "Otomate",
     cnStudio: "JSD",
