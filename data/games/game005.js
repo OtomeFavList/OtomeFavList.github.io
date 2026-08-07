@@ -4,7 +4,7 @@
 // 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
 const gameData = {
     id: "game005",
-    name: "安琪莉可Luminarise",
+    name: "安琪莉可 Luminarise",
     year: "2021",
     publisher: "KOEI",
     writer: ["雨宮うた"],
