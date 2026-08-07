@@ -10,7 +10,7 @@ const gameData = {
     cnStudio: "GSE",
     writer: ["中山智美","夕月","浅海藍子"],
     art: "読",
-    cover: "img/game/game016.jpg", // 封面图路径，统一前缀img/
+    cover: "img/game/016.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 瑟蕾思
         {
