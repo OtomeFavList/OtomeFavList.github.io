@@ -584,11 +584,17 @@ export function initPage(Core = {}) {
       }
     })
 
+    // ============【已修改：添加游戏按钮，支持再次点击关闭搜索面板】============
     if (el.addGameBtn) {
       el.addGameBtn.onclick = function () {
         renderGameSelectList();
-        //【修复】打开搜索面板，使用.active
-        if (el.searchPanel) el.searchPanel.classList.add("active");
+        if (el.searchPanel) {
+          if (el.searchPanel.classList.contains("active")) {
+            el.searchPanel.classList.remove("active");
+          } else {
+            el.searchPanel.classList.add("active");
+          }
+        }
       }
     }
 
