@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -8,7 +9,8 @@
 <!-- html2canvas CDN（第三方库，保留全局引入） -->
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 <!-- ✅必须 type="module"，games.js内部使用动态import，不能去掉module属性 -->
-<script type="module" src="./data/games.js"></script>
+<!-- 使用绝对路径 /data/games.js 确保从网站根目录加载 -->
+<script type="module" src="/data/games.js"></script>
 </head>
 <body>
 
@@ -182,3 +184,4 @@ import { initPage } from "./js/script.js";
 
 </body>
 </html>
+```
