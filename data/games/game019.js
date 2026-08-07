@@ -9,7 +9,7 @@ const gameData = {
     publisher: "Otomate",
     cnStudio: "JOYOLAND",
     writer: ["長野和泉","小縞なお"],
-    art: "四季咲组",
+    art: "四季咲組",
     cover: "img/game/019.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 雪村千鹤
