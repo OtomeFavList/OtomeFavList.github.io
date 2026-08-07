@@ -213,6 +213,8 @@ export function initPage(Core = {}) {
                     <span>单独显示本游戏续作/FD角色</span>
                 </div>
             </div>
+          </div>
+          <!-- ✅全部移出game‑card‑head，作为added‑game‑card直接子节点 -->
           <div class="game-card-block-item char-section block-margin-gap">
             <button class="btn-character" data-gid="${gameItem.gameId}">选择角色 Character</button>
             ${getInnerSlidePanelHtml("char").replace('class="char-slide-panel-char"',`class="char-slide-panel-char ${charPanelClass}"`)}
@@ -476,7 +478,7 @@ export function initPage(Core = {}) {
       const filterWriter = document.getElementById("filter-writer")?.value || "";
       const filterArt = document.getElementById("filter-art")?.value || "";
 
-      const sortedGames = [...gameTemplateList].sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
+      const sortedGames = [...gameTemplateList].sort((a, b) => a.name.localeCompare(b.name, "zh‑CN"));
       let html = "";
 
       sortedGames.forEach(game => {
@@ -614,8 +616,8 @@ export function initPage(Core = {}) {
             }
           });
 
-          el.snapshotContainer.classList.add('export-snapshot');
-          const sizeRadio = document.querySelector('input[name="export-size"]:checked');
+          el.snapshotContainer.classList.add('export‑snapshot');
+          const sizeRadio = document.querySelector('input[name="export‑size"]:checked');
           if(!sizeRadio) throw new Error("未选中导出尺寸");
           let sizeValue = sizeRadio.value;
 
@@ -666,8 +668,8 @@ export function initPage(Core = {}) {
           console.error("导出失败：", err);
           alert('图片导出异常！外部图片跨域可能导致失败，请使用本地图片资源。\n' + err.message);
         } finally {
-          el.snapshotContainer.classList.remove('export-snapshot');
-          document.querySelectorAll("#card-base .form-row input").forEach(input => {
+          el.snapshotContainer.classList.remove('export‑snapshot');
+          document.querySelectorAll("#card‑base .form‑row input").forEach(input => {
             input.style.display = "";
           });
           el.exportBtn.disabled = false;
