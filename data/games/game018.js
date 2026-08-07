@@ -111,7 +111,7 @@ const gameData = {
                 { src: ["img/char/018/Natsuhiko.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-      // 室星朗
+        // 室星朗
         {
             id: "g018_m07",
             name: "室星朗",
@@ -122,7 +122,7 @@ const gameData = {
                 { src: ["img/char/018/Ron.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-      // 二条朔也
+        // 二条朔也
         {
             id: "g018_m08",
             name: "二条朔也",
@@ -133,7 +133,7 @@ const gameData = {
                 { src: ["img/char/018/Sakuya.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-      // 市之濑千里
+        // 市之濑千里
         {
             id: "g018_m09",
             name: "市之濑千里",
