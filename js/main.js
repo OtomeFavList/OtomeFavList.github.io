@@ -82,7 +82,7 @@ export function loadData() {
 }
 
 /**
- * 获取今日日期字符串 YYYY‑MM‑DD 用于跨零点判断
+ * 获取今日日期字符串 YYYY-MM-DD 用于跨零点判断
  * @returns {string} 日期字符串
  */
 export function getTodayDateStr() {
@@ -177,7 +177,7 @@ export function syncSingleGameSwitch(type, status) {
 }
 
 /**
- * 筛选下拉排序：中文拼音A‑Z → 英文A‑Z → 日文五十音
+ * 筛选下拉排序：中文拼音A-Z → 英文A-Z → 日文五十音
  * @param {string[]} arr 原始字符串数组
  * @returns {string[]} 排好序的数组
  */
@@ -186,9 +186,9 @@ export function sortFilterOptionList(arr) {
     const gojyuon = 'あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをん';
 
     function getLangType(str) {
-        if (/[\u4e00‑\u9fff]/.test(str)) return 'zh';
+        if (/[\u4e00-\u9fff]/.test(str)) return 'zh';
         if (/^[a-zA-Z]/.test(str)) return 'en';
-        if (/[\u3040‑\u30ff]/.test(str)) return 'ja';
+        if (/[\u3040-\u30ff]/.test(str)) return 'ja';
         return 'other';
     }
 
@@ -202,21 +202,21 @@ export function sortFilterOptionList(arr) {
         if(pa !== pb) return pa - pb;
 
         if(ta === 'zh') {
-            return a.localeCompare(b, 'zh‑CN');
+            return a.localeCompare(b, 'zh-CN');
         } else if(ta === 'en') {
             return a.localeCompare(b, 'en', {sensitivity:'base'});
         } else if(ta === 'ja') {
             function toHiragana(s){
-                return s.replace(/[\u30a1‑\u30fa]/g, c=>String.fromCharCode(c.charCodeAt(0)-0x60));
+                return s.replace(/[\u30a1-\u30fa]/g, c=>String.fromCharCode(c.charCodeAt(0)-0x60));
             }
             const ah = toHiragana(a)[0]||'';
             const bh = toHiragana(b)[0]||'';
             const ia = gojyuon.indexOf(ah);
             const ib = gojyuon.indexOf(bh);
-            if(ia ===‑1 && ib ===‑1) return a.localeCompare(b);
-            if(ia ===‑1) return 1;
-            if(ib ===‑1) return‑1;
-            return ia‑ib;
+            if(ia ===-1 && ib ===-1) return a.localeCompare(b);
+            if(ia ===-1) return 1;
+            if(ib ===-1) return-1;
+            return ia-ib;
         }
         return a.localeCompare(b);
     });
@@ -225,7 +225,7 @@ export function sortFilterOptionList(arr) {
 // ===================== 筛选下拉菜单填充函数 =====================
 /**
  * 【修复】筛选下拉填充：保留HTML原生顶部placeholder option，只追加数据选项，不再覆盖HTML提示文字
- * 排序规则：中文A‑Z →英文A‑Z →日文五十音；发售年份数字降序
+ * 排序规则：中文A-Z →英文A-Z →日文五十音；发售年份数字降序
  * @param {Array} gameList 游戏模板数组
  */
 export function fillFilterOptions(gameList) {
