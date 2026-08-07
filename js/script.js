@@ -214,6 +214,10 @@ export function initPage(Core = {}) {
 
   // ===================== 页面启动bootstrap，UI渲染、表单、导出、卡片事件 =====================
   async function bootstrap() {
+    // 防止多次调用bootstrap重复注册click监听
+    if((window).__uiListenerRegistered) return;
+    (window).__uiListenerRegistered = true;
+
     // DOM元素缓存，移除全局char-slide-panel
     const el = {
       globalHideChar: document.getElementById("global-hide-char"),
@@ -510,7 +514,8 @@ export function initPage(Core = {}) {
       }
     }
 
-    loadData();
+    // ============修复：加上await================
+    await loadData();
 
     if(Array.isArray(appData.gameList)){
       appData.gameList.forEach(g=>{
