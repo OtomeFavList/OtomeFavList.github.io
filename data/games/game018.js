@@ -111,15 +111,15 @@ const gameData = {
                 { srcList: ["img/char/018/Natsuhiko.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 室星朗
+        // 吾妻夏彦
         {
-            id: "g018_m07",
-            name: "室星朗",
+            id: "g018_m06",
+            name: "吾妻夏彦",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { src: ["img/char/018/Ron.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/018/Natsuhiko.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 二条朔也
