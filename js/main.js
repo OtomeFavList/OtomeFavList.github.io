@@ -263,8 +263,8 @@ export function fillFilterOptions(gameList) {
     const artSorted = sortFilterOptionList([...artSet]);
     const pubSorted = sortFilterOptionList([...pubSet]);
     const cnSorted = sortFilterOptionList([...cnSet]);
-    // 发售年份：数字降序，新年份在上
-    const yearSorted = [...yearSet].sort((a,b)=>Number(b)-Number(a));
+    // 发售年份：数字升序，旧年份在上
+    const yearSorted = [...yearSet].sort((a,b)=>Number(a)-Number(b));
 
     const fillSelect = (id, dataArr) => {
         const sel = document.getElementById(id);
