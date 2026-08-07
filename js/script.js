@@ -78,11 +78,11 @@ export function initPage(Core = {}) {
             let selected = gameItem.selectChars?.includes(char.id) ? "selected" : "";
 
             femHtml += `
-            <label class="char-item ${selected}" data-cid="${char.id}" data-char-id="${char.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}" data‑panel‑mode="char">
+            <label class="char-item ${selected}" data-cid="${char.id}" data-char-id="${char.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}" data-panel-mode="char">
               <div class="char-card-img-box ${allSrc.length>1?'char-multi-img':''}">
-                ${allSrc.length>1?`<button class="char-switch-btn char-switch-prev" data‑panel‑mode="char">&lt;</button>`: ""}
+                ${allSrc.length>1?`<button class="char-switch-btn char-switch-prev" data-panel-mode="char">&lt;</button>`: ""}
                 <img src="${showSrc}" alt="${char.name}">
-                ${allSrc.length>1?`<button class="char-switch-btn char-switch-next" data‑panel‑mode="char">&gt;</button>`: ""}
+                ${allSrc.length>1?`<button class="char-switch-btn char-switch-next" data-panel-mode="char">&gt;</button>`: ""}
               </div>
               <div class="char-card-name">${char.name}</div>
             </label>`;
@@ -106,11 +106,11 @@ export function initPage(Core = {}) {
             let selected = gameItem.selectChars?.includes(char.id) ? "selected" : "";
 
             maleHtml += `
-            <label class="char-item ${selected}" data-cid="${char.id}" data-char-id="${char.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}" data‑panel‑mode="char">
+            <label class="char-item ${selected}" data-cid="${char.id}" data-char-id="${char.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}" data-panel-mode="char">
               <div class="char-card-img-box ${allSrc.length>1?'char-multi-img':''}">
-                ${allSrc.length>1?`<button class="char-switch-btn char-switch-prev" data‑panel‑mode="char">&lt;</button>`: ""}
+                ${allSrc.length>1?`<button class="char-switch-btn char-switch-prev" data-panel-mode="char">&lt;</button>`: ""}
                 <img src="${showSrc}" alt="${char.name}">
-                ${allSrc.length>1?`<button class="char-switch-btn char-switch-next" data‑panel‑mode="char">&gt;</button>`: ""}
+                ${allSrc.length>1?`<button class="char-switch-btn char-switch-next" data-panel-mode="char">&gt;</button>`: ""}
               </div>
               <div class="char-card-name">${char.name}</div>
             </label>`;
@@ -154,15 +154,15 @@ export function initPage(Core = {}) {
             if(imgIndex >= allSrc.length) imgIndex =0;
             const showSrc = allSrc[imgIndex];
 
-            // 女主卡片：增加data‑char-id，多立绘渲染切换按钮，标记panel‑mode="cp"
+            // 女主卡片：增加data-char-id，多立绘渲染切换按钮，标记panel-mode="cp"
             cpPanelHtml += `
             <div class="cp-female-block" data-fid="${fChar.id}" data-gid="${gameId}">
                 <!-- 女主点击按钮 -->
-                <div class="cp-female-card-btn" data-fid="${fChar.id}" data-char-id="${fChar.id}" data‑panel‑mode="cp">
+                <div class="cp-female-card-btn" data-fid="${fChar.id}" data-char-id="${fChar.id}" data-panel-mode="cp">
                     <div class="char-card-img-box ${allSrc.length>1?'char-multi-img':''}">
-                        ${allSrc.length>1?`<button class="char-switch-btn char-switch-prev" data-char-id="${fChar.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}" data‑panel‑mode="cp">&lt;</button>`:""}
+                        ${allSrc.length>1?`<button class="char-switch-btn char-switch-prev" data-char-id="${fChar.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}" data-panel-mode="cp">&lt;</button>`:""}
                         <img src="${showSrc}" alt="${fChar.name}">
-                        ${allSrc.length>1?`<button class="char-switch-btn char-switch-next" data-char-id="${fChar.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}" data‑panel‑mode="cp">&gt;</button>`:""}
+                        ${allSrc.length>1?`<button class="char-switch-btn char-switch-next" data-char-id="${fChar.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}" data-panel-mode="cp">&gt;</button>`:""}
                     </div>
                     <div class="cp-female-name">${fChar.name}</div>
                 </div>
@@ -179,11 +179,11 @@ export function initPage(Core = {}) {
                             // 从草稿拿选中状态，不再读取state.maleIds
                             const mSel = draftSet.has(mChar.id) ? "selected" : "";
                             return `
-                            <div class="cp-male-item ${mSel}" data-fid="${fChar.id}" data-mid="${mChar.id}" data-char-id="${mChar.id}" data-game-id="${gameId}" data‑panel‑mode="cp">
+                            <div class="cp-male-item ${mSel}" data-fid="${fChar.id}" data-mid="${mChar.id}" data-char-id="${mChar.id}" data-game-id="${gameId}" data-panel-mode="cp">
                                 <div class="char-card-img-box ${mSrcArr.length>1?'char-multi-img':''}">
-                                    ${mSrcArr.length>1?`<button class="char-switch-btn char-switch-prev" data-char-id="${mChar.id}" data-game-id="${gameId}" data-total-img="${mSrcArr.length}" data‑panel‑mode="cp">&lt;</button>`:""}
+                                    ${mSrcArr.length>1?`<button class="char-switch-btn char-switch-prev" data-char-id="${mChar.id}" data-game-id="${gameId}" data-total-img="${mSrcArr.length}" data-panel-mode="cp">&lt;</button>`:""}
                                     <img src="${mSrcArr[0]}" alt="${mChar.name}">
-                                    ${mSrcArr.length>1?`<button class="char-switch-btn char-switch-next" data-char-id="${mChar.id}" data-game-id="${gameId}" data-total-img="${mSrcArr.length}" data‑panel‑mode="cp">&gt;</button>`:""}
+                                    ${mSrcArr.length>1?`<button class="char-switch-btn char-switch-next" data-char-id="${mChar.id}" data-game-id="${gameId}" data-total-img="${mSrcArr.length}" data-panel-mode="cp">&gt;</button>`:""}
                                 </div>
                                 <div class="char-card-name">${mChar.name}</div>
                             </div>`;
@@ -223,7 +223,7 @@ export function initPage(Core = {}) {
    */
   function getInnerSlidePanelHtml(mode){
     const cls = mode === "char" ? "char-slide-panel-char" : "char-slide-panel-cp";
-    // 移除hide‑block，默认无class，靠 .active 控制显示
+    // 移除hide-block，默认无class，靠 .active 控制显示
     return `
     <div class="${cls}">
       <div class="panel-header">
@@ -320,7 +320,7 @@ export function initPage(Core = {}) {
                 </div>
             </div>
           </div>
-          <!-- ✅全部移出game‑card‑head，作为added‑game‑card直接子节点 -->
+          <!-- ✅全部移出game-card-head，作为added-game-card直接子节点 -->
           <div class="game-card-block-item char-section block-margin-gap">
             <button class="btn-character" data-gid="${gameItem.gameId}">选择角色 Character</button>
             ${getInnerSlidePanelHtml("char").replace('class="char-slide-panel-char"',`class="char-slide-panel-char ${charPanelClass}"`)}
@@ -683,7 +683,8 @@ export function initPage(Core = {}) {
       const filterWriter = document.getElementById("filter-writer")?.value || "";
       const filterArt = document.getElementById("filter-art")?.value || "";
 
-      const sortedGames = [...gameTemplateList].sort((a, b) => a.name.localeCompare(b.name, "zh‑CN"));
+      // 修复：把zh‑CN（软连字符）改为标准 zh-CN
+      const sortedGames = [...gameTemplateList].sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
       let html = "";
 
       sortedGames.forEach(game => {
@@ -823,8 +824,8 @@ export function initPage(Core = {}) {
             }
           });
 
-          el.snapshotContainer.classList.add('export‑snapshot');
-          const sizeRadio = document.querySelector('input[name="export‑size"]:checked');
+          el.snapshotContainer.classList.add('export-snapshot');
+          const sizeRadio = document.querySelector('input[name="export-size"]:checked');
           if(!sizeRadio) throw new Error("未选中导出尺寸");
           let sizeValue = sizeRadio.value;
 
@@ -875,8 +876,8 @@ export function initPage(Core = {}) {
           console.error("导出失败：", err);
           alert('图片导出异常！外部图片跨域可能导致失败，请使用本地图片资源。\n' + err.message);
         } finally {
-          el.snapshotContainer.classList.remove('export‑snapshot');
-          document.querySelectorAll("#card‑base .form‑row input").forEach(input => {
+          el.snapshotContainer.classList.remove('export-snapshot');
+          document.querySelectorAll("#card-base .form-row input").forEach(input => {
             input.style.display = "";
           });
           el.exportBtn.disabled = false;
