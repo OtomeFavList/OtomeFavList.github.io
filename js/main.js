@@ -63,6 +63,9 @@ export function loadData() {
                 if (typeof g.isFav !== "boolean") g.isFav = false;
                 // 兜底评分爱心字段
                 if (typeof g.loveRate !== "number") g.loveRate = 0;
+                // ============【新增：CP独立勾选池兜底】============
+                if (!Array.isArray(g.selectChars)) g.selectChars = [];
+                if (!Array.isArray(g.cpSelectIds)) g.cpSelectIds = [];
             });
         }
     } catch (e) {
@@ -389,6 +392,39 @@ export function getAllGameChar(gameInfo) {
     return [...female, ...male];
 }
 
+// ===================== 角色/CP待选勾选切换工具【新增】 =====================
+/**
+ * 单人Character面板勾选切换 → 操作 gameItem.selectChars
+ * @param {Object} gameItem appData.gameList内的游戏条目
+ * @param {string} charId 角色id
+ */
+export function toggleCharItemSelect(gameItem, charId) {
+    if (!Array.isArray(gameItem.selectChars)) gameItem.selectChars = [];
+    const idx = gameItem.selectChars.indexOf(charId);
+    if (idx >= 0) {
+        gameItem.selectChars.splice(idx, 1);
+    } else {
+        gameItem.selectChars.push(charId);
+    }
+    saveData();
+}
+
+/**
+ * CP Couple面板待选勾选切换 → 独立操作 gameItem.cpSelectIds
+ * @param {Object} gameItem appData.gameList内的游戏条目
+ * @param {string} charId 角色id
+ */
+export function toggleCpItemSelect(gameItem, charId) {
+    if (!Array.isArray(gameItem.cpSelectIds)) gameItem.cpSelectIds = [];
+    const idx = gameItem.cpSelectIds.indexOf(charId);
+    if (idx >= 0) {
+        gameItem.cpSelectIds.splice(idx, 1);
+    } else {
+        gameItem.cpSelectIds.push(charId);
+    }
+    saveData();
+}
+
 // ===================== 页面启动入口模块 =====================
 /**
  * 组装Core上下文对象，统一供给UI层script.js
@@ -414,7 +450,9 @@ function buildCoreContext() {
         localSwitchIsConfirmedToday,
         saveLocalSwitchConfirmDate,
         renderGameSelectItem,
-        bindDynamicGameCardSwitchEvents
+        bindDynamicGameCardSwitchEvents,
+        toggleCharItemSelect,
+        toggleCpItemSelect
     };
     return Core;
 }
