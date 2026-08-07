@@ -389,8 +389,8 @@ export function getAllGameChar(gameInfo) {
     if (!showHide) chars = chars.filter(c => c && !c.isHidden);
     if (!showFD) chars = chars.filter(c => c && !c.isFD);
 
-    const female = chars.filter(c => c.gender === "female").sort((a, b) => a.name.localeCompare(b.name, "zh‑CN"));
-    const male = chars.filter(c => c.gender === "male").sort((a, b) => a.name.localeCompare(b.name, "zh‑CN"));
+    const female = chars.filter(c => c.gender === "female").sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
+    const male = chars.filter(c => c.gender === "male").sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
 
     return [...female, ...male];
 }
