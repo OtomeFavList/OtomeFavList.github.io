@@ -13,7 +13,7 @@ const gameData = {
     charList: [
         // 立花希佐
         {
-            id: "g0_f01",
+            id: "g023_f01",
             name: "立花希佐",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
@@ -24,7 +24,7 @@ const gameData = {
         },
         // ‌睦实介
         {
-            id: "g0_m01",
+            id: "g023_m01",
             name: "‌睦实介",
             gender: "male",
             isHidden: false,
@@ -35,7 +35,7 @@ const gameData = {
         },
         // ​白田美骑
         {
-            id: "g0_m02",
+            id: "g023_m02",
             name: "白田美骑",
             gender: "male",
             isHidden: false,
@@ -46,7 +46,7 @@ const gameData = {
         },
         // 根地黑门
         {
-            id: "g0_m03",
+            id: "g023_m03",
             name: "根地黑门",
             gender: "male",
             isHidden: false,
@@ -57,7 +57,7 @@ const gameData = {
         },
         // ​高科更文
         {
-            id: "g0_m04",
+            id: "g023_m04",
             name: "​高科更文",
             gender: "male",
             isHidden: false,
@@ -68,7 +68,7 @@ const gameData = {
         },
         // 世长创司郎
         {
-            id: "g0_m05",
+            id: "g023_m05",
             name: "世长创司郎",
             gender: "male",
             isHidden: false,
@@ -79,7 +79,7 @@ const gameData = {
         },
         // 织卷寿寿
         {
-            id: "g0_m06",
+            id: "g023_m06",
             name: "织卷寿寿,
             gender: "male",
             isHidden: false,
@@ -90,7 +90,7 @@ const gameData = {
         },
         // 田中右宙为
         {
-            id: "g0_m07",
+            id: "g023_m07",
             name: "田中右宙为",
             gender: "male",
             isHidden: false,
@@ -101,7 +101,7 @@ const gameData = {
         },
         // 加斋中
         {
-            id: "g0_m08",
+            id: "g023_m08",
             name: "加斋中",
             gender: "male",
             isHidden: false,
