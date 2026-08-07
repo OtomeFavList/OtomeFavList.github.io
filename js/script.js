@@ -197,7 +197,7 @@ export function initPage(Core = {}) {
             <div class="heart-rate" data-gid="${gameItem.gameId}">
               ${heartHtml}
             </div>
-            <div class="local-switch-row">
+            <div class="game-switch-row">
                 <div>
                     <label class="switch">
                         <input type="checkbox" class="game-hide-char" data-gameidx="${index}" ${(gameItem.localHideChar ?? false) ? 'checked' : ''}>
