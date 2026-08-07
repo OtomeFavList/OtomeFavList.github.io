@@ -12,10 +12,10 @@ const gameData = {
     art: "四季咲组",
     cover: "img/game/game019.jpg", // 封面图路径，统一前缀img/
     charList: [
-        // 女主模板 female
+        // 雪村千鹤
         {
             id: "g019_f01",
-            name: "女主A",
+            name: "雪村千鹤",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
@@ -23,10 +23,10 @@ const gameData = {
                 { src: ["img/char/g001_f0_1.jpg","img/char/g001_f0_2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 斋藤一
         {
             id: "g019_m01",
-            name: "男主1",
+            name: "斋藤一",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -34,10 +34,10 @@ const gameData = {
                 { src: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 原田左之助
         {
             id: "g019_m02",
-            name: "男主1",
+            name: "原田左之助",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -45,10 +45,10 @@ const gameData = {
                 { src: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 藤堂平助
         {
             id: "g019_m03",
-            name: "男主1",
+            name: "藤堂平助",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -56,7 +56,7 @@ const gameData = {
                 { src: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 伊庭八郎
         {
             id: "g019_m04",
             name: "男主1",
@@ -67,10 +67,10 @@ const gameData = {
                 { src: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 风间千景
         {
             id: "g019_m05",
-            name: "男主1",
+            name: "风间千景",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -78,10 +78,10 @@ const gameData = {
                 { src: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 山南敬助
         {
             id: "g019_m06",
-            name: "男主1",
+            name: "山南敬助",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -89,10 +89,10 @@ const gameData = {
                 { src: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 坂本龙马
         {
             id: "g019_m07",
-            name: "男主1",
+            name: "坂本龙马",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -100,10 +100,10 @@ const gameData = {
                 { src: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 永仓新八
         {
             id: "g019_m08",
-            name: "男主1",
+            name: "永仓新八",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -111,10 +111,10 @@ const gameData = {
                 { src: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-      // 普通可攻略男主 male
+      // 冲田总司
         {
             id: "g019_m09",
-            name: "男主1",
+            name: "冲田总司",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -122,10 +122,10 @@ const gameData = {
                 { src: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-      // 普通可攻略男主 male
+      // 相马主计
         {
             id: "g019_m10",
-            name: "男主1",
+            name: "相马主计",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -133,10 +133,10 @@ const gameData = {
                 { src: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-      // 普通可攻略男主 male
+      // 土方岁三
         {
             id: "g019_m11",
-            name: "男主1",
+            name: "土方岁三",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -144,10 +144,10 @@ const gameData = {
                 { src: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-      // 普通可攻略男主 male
+      // 山崎烝‌
         {
             id: "g019_m12",
-            name: "男主1",
+            name: "山崎烝‌",
             gender: "male",
             isHidden: false,
             isFD: false,
