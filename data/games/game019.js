@@ -10,7 +10,7 @@ const gameData = {
     cnStudio: "JOYOLAND",
     writer: ["長野和泉","小縞なお"],
     art: "四季咲组",
-    cover: "img/game/game019.jpg", // 封面图路径，统一前缀img/
+    cover: "img/game/019.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 雪村千鹤
         {
