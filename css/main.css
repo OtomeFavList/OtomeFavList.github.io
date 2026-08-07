@@ -1121,3 +1121,37 @@ h2{
 .cp-male-item .char-switch-btn:hover {
     background:rgba(0,0,0,0.65);
 }
+
+/* ========== CP面板外层图片切换容器（挂载于 cp‑female‑block / cp‑male‑item） ========== */
+.cp-female-block,
+.cp-male-item {
+    position: relative;
+}
+
+.cp-female-image-switch,
+.cp-male-image-switch {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    left: 0;
+    pointer-events: none;
+    z-index: 3;
+}
+
+.cp-female-image-switch .char-switch-btn,
+.cp-male-image-switch .char-switch-btn {
+    position: absolute;
+    pointer-events: auto;
+    /* 宽高/背景/hover全部继承全局.char-switch-btn，不再重复定义 */
+}
+
+.cp-female-image-switch .char-switch-prev,
+.cp-male-image-switch .char-switch-prev {
+    left: 8px;
+}
+
+.cp-female-image-switch .char-switch-next,
+.cp-male-image-switch .char-switch-next {
+    right: 8px;
+}
