@@ -11,112 +11,105 @@ const gameData = {
     art: "ユウヤ",
     cover: "img/game/028.jpg", // 封面图路径，统一前缀img/
     charList: [
-        // 女主模板 female
+        // 浅木春
         {
             id: "g028_f01",
-            name: "女主A",
+            name: "浅木春",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
                 { srcList: ["img/char/g001_f0_1.jpg","img/char/g001_f0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g001_f0_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
                 { srcList: ["img/char/g001_f0_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
-        // 普通可攻略男主 male
+        // 宫之杜博
         {
             id: "g028_m01",
-            name: "男主1",
+            name: "宫之杜博",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
                 { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
                 { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
-        // 普通可攻略男主 male
+        // 宫之杜勇
         {
             id: "g028_m02",
-            name: "男主1",
+            name: "宫之杜勇",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
                 { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
                 { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
-        // 普通可攻略男主 male
+        // 宫之杜雅
         {
             id: "g028_m03",
-            name: "男主1",
+            name: "宫之杜雅",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
                 { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
                 { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
-        // 普通可攻略男主 male
+        // 宫之杜茂
         {
             id: "g028_m04",
-            name: "男主1",
+            name: "宫之杜茂",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
                 { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
                 { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
-        // 普通可攻略男主 male
+        // 宫之杜进
         {
             id: "g028_m05",
-            name: "男主1",
+            name: "宫之杜进",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
                 { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
                 { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
-        // 普通可攻略男主 male
+        // 宫之杜正
         {
             id: "g028_m06",
-            name: "男主1",
+            name: "宫之杜正",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
                 { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
                 { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
-        // FD续作限定角色（isFD=true → FD开关开启才显示整个角色卡片）
+        // 宫之杜守
         {
             id: "g028_h01",
-            name: "续作FD新增角色",
+            name: "宫之杜守",
             gender: "male",
-            isHidden: false,
+            isHidden: true,
             isFD: true,
             images: [
                 { srcList: ["img/char/g001_fd01_1.jpg"], type: "base" }
             ]
         },
-        // FD续作限定角色（isFD=true → FD开关开启才显示整个角色卡片）
+        // 有田喜助
         {
             id: "g028_fd01",
-            name: "续作FD新增角色",
+            name: "有田喜助",
             gender: "male",
             isHidden: false,
             isFD: true,
