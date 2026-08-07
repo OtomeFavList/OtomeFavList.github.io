@@ -5,10 +5,9 @@ const gameData = {
     id: "game020", // 全局唯一ID，不可重复
     name: "不可逾越的红花 ~双月~",
     year: "2023",
-    publisher: "原厂发行商",
-    cnStudio: "汉化组/汉化厂商",
-    writer: ["剧本编剧","剧本编剧","剧本编剧","剧本编剧"],
-    art: "原画画师",
+    publisher: "HuneX",
+    writer: ["松竹梅"],
+    art: "月野御豆",
     cover: "img/game/020.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 女主模板 female
