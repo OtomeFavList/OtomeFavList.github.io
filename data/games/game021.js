@@ -99,10 +99,10 @@ const gameData = {
                 { srcList: ["img/char/021/Ace.jpg","img/char/021/Ace2.jpg","img/char/021/Ace3.jpg","img/char/021/Ace4.png"], type: "base" }
             ]
         },
-        // 波利斯‧艾瑞
+        // 波利斯·艾瑞
         {
             id: "g0_fd02",
-            name: "波利斯‧艾瑞",
+            name: "波利斯·艾瑞",
             gender: "male",
             isHidden: false,
             isFD: true,
