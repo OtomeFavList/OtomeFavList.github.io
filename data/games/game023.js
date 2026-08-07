@@ -22,10 +22,10 @@ const gameData = {
                 { srcList: ["img/char/023/Kisa.png","img/char/023/Kisa2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // ‌睦实介
+        // 睦实介
         {
             id: "g023_m01",
-            name: "‌睦实介",
+            name: "睦实介",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -33,7 +33,7 @@ const gameData = {
                 { srcList: ["img/char/023/Kai.png","img/char/023/Kai2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // ​白田美骑
+        // 白田美骑
         {
             id: "g023_m02",
             name: "白田美骑",
@@ -55,10 +55,10 @@ const gameData = {
                 { srcList: ["img/char/023/Neji.png","img/char/023/Neji2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // ​高科更文
+        // 高科更文
         {
             id: "g023_m04",
-            name: "​高科更文",
+            name: "高科更文",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -80,7 +80,7 @@ const gameData = {
         // 织卷寿寿
         {
             id: "g023_m06",
-            name: "织卷寿寿,
+            name: "织卷寿寿",
             gender: "male",
             isHidden: false,
             isFD: false,
