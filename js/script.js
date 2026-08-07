@@ -478,7 +478,7 @@ export function initPage(Core = {}) {
       const filterWriter = document.getElementById("filter-writer")?.value || "";
       const filterArt = document.getElementById("filter-art")?.value || "";
 
-      const sortedGames = [...gameTemplateList].sort((a, b) => a.name.localeCompare(b.name, "zh‑CN"));
+      const sortedGames = [...gameTemplateList].sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
       let html = "";
 
       sortedGames.forEach(game => {
