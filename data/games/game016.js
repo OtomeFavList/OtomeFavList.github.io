@@ -20,7 +20,7 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { src: ["img/char/016/Ceres.jpg","img/char/016/Ceres2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/016/Ceres.jpg","img/char/016/Ceres2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 阿道夫
@@ -31,7 +31,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { src: ["img/char/016/Adolphe.jpg","img/char/016/Adolphe2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/016/Adolphe.jpg","img/char/016/Adolphe2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 安库
@@ -42,7 +42,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { src: ["img/char/016/Ankou.jpg","img/char/016/Ankou2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/016/Ankou.jpg","img/char/016/Ankou2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 璐卡·普鲁斯特
@@ -53,7 +53,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { src: ["img/char/016/Lucas.jpg","img/char/016/Lucas2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/016/Lucas.jpg","img/char/016/Lucas2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 马蒂斯·克洛德
@@ -64,7 +64,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { src: ["img/char/016/Mathis.jpg","img/char/016/Mathis2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/016/Mathis.jpg","img/char/016/Mathis2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 席安·布洛菲沃思
@@ -75,7 +75,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { src: ["img/char/016/Scien.jpg","img/char/016/Scien2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/016/Scien.jpg","img/char/016/Scien2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 伊孚
@@ -86,7 +86,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { src: ["img/char/016/Yves.jpg","img/char/016/Yves2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/016/Yves.jpg","img/char/016/Yves2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         }
     ]
