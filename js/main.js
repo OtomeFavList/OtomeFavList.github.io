@@ -176,9 +176,56 @@ export function syncSingleGameSwitch(type, status) {
     return;
 }
 
+/**
+ * 筛选下拉排序：中文拼音A‑Z → 英文A‑Z → 日文五十音
+ * @param {string[]} arr 原始字符串数组
+ * @returns {string[]} 排好序的数组
+ */
+export function sortFilterOptionList(arr) {
+    // 日文五十音基础顺序（平假名）
+    const gojyuon = 'あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをん';
+
+    function getLangType(str) {
+        if (/[\u4e00‑\u9fff]/.test(str)) return 'zh';
+        if (/^[a-zA-Z]/.test(str)) return 'en';
+        if (/[\u3040‑\u30ff]/.test(str)) return 'ja';
+        return 'other';
+    }
+
+    return [...arr].sort((a, b) => {
+        const ta = getLangType(a);
+        const tb = getLangType(b);
+        const priority = { zh:0, en:1, ja:2, other:3 };
+        const pa = priority[ta];
+        const pb = priority[tb];
+
+        if(pa !== pb) return pa - pb;
+
+        if(ta === 'zh') {
+            return a.localeCompare(b, 'zh‑CN');
+        } else if(ta === 'en') {
+            return a.localeCompare(b, 'en', {sensitivity:'base'});
+        } else if(ta === 'ja') {
+            function toHiragana(s){
+                return s.replace(/[\u30a1‑\u30fa]/g, c=>String.fromCharCode(c.charCodeAt(0)-0x60));
+            }
+            const ah = toHiragana(a)[0]||'';
+            const bh = toHiragana(b)[0]||'';
+            const ia = gojyuon.indexOf(ah);
+            const ib = gojyuon.indexOf(bh);
+            if(ia ===‑1 && ib ===‑1) return a.localeCompare(b);
+            if(ia ===‑1) return 1;
+            if(ib ===‑1) return‑1;
+            return ia‑ib;
+        }
+        return a.localeCompare(b);
+    });
+}
+
 // ===================== 筛选下拉菜单填充函数 =====================
 /**
  * 【修复】筛选下拉填充：保留HTML原生顶部placeholder option，只追加数据选项，不再覆盖HTML提示文字
+ * 排序规则：中文A‑Z →英文A‑Z →日文五十音；发售年份数字降序
  * @param {Array} gameList 游戏模板数组
  */
 export function fillFilterOptions(gameList) {
@@ -209,13 +256,21 @@ export function fillFilterOptions(gameList) {
         artArr.forEach(name => artSet.add(name));
     });
 
-    const fillSelect = (id, dataSet) => {
+    // ======== 排序处理 ========
+    const writerSorted = sortFilterOptionList([...writerSet]);
+    const artSorted = sortFilterOptionList([...artSet]);
+    const pubSorted = sortFilterOptionList([...pubSet]);
+    const cnSorted = sortFilterOptionList([...cnSet]);
+    // 发售年份：数字降序，新年份在上
+    const yearSorted = [...yearSet].sort((a,b)=>Number(b)-Number(a));
+
+    const fillSelect = (id, dataArr) => {
         const sel = document.getElementById(id);
         if (!sel) return;
         const firstOpt = sel.querySelector('option');
         sel.innerHTML = '';
         if (firstOpt) sel.appendChild(firstOpt);
-        dataSet.forEach(v => {
+        dataArr.forEach(v => {
             const opt = document.createElement('option');
             opt.value = v;
             opt.textContent = v;
@@ -223,11 +278,11 @@ export function fillFilterOptions(gameList) {
         });
     };
 
-    fillSelect("filter-writer", writerSet);
-    fillSelect("filter-art", artSet);
-    fillSelect("filter-year", yearSet);
-    fillSelect("filter-publisher", pubSet);
-    fillSelect("filter-cn", cnSet);
+    fillSelect("filter-writer", writerSorted);
+    fillSelect("filter-art", artSorted);
+    fillSelect("filter-year", yearSorted);
+    fillSelect("filter-publisher", pubSorted);
+    fillSelect("filter-cn", cnSorted);
 }
 
 // ===================== HTML模板渲染函数 =====================
@@ -467,6 +522,7 @@ function buildCoreContext() {
         saveData,
         syncSingleGameSwitch,
         fillFilterOptions,
+        sortFilterOptionList,
         renderSelectedChar,
         renderCP,
         getAllGameChar,
