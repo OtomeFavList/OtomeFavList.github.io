@@ -391,8 +391,26 @@ export function getAllGameChar(gameInfo) {
     const showHide = appData.globalHideChar || gameItem?.localHideChar;
     const showFD = appData.globalFD || gameItem?.localFD;
 
-    if (!showHide) chars = chars.filter(c => c && !c.isHidden);
-    if (!showFD) chars = chars.filter(c => c && !c.isFD);
+    // 修复：isHidden + isFD 双标记角色，任意开关开启即可显示；全部关闭才隐藏
+    chars = chars.filter(c => {
+        if(!c) return false;
+        //普通角色，无隐藏/FD标记，永远显示
+        if(!c.isHidden && !c.isFD) return true;
+
+        //仅隐藏角色
+        if(c.isHidden && !c.isFD){
+            return showHide;
+        }
+        //仅FD角色
+        if(!c.isHidden && c.isFD){
+            return showFD;
+        }
+        //同时是隐藏+FD角色：任意一个开关打开就显示，两个都关才隐藏
+        if(c.isHidden && c.isFD){
+            return showHide || showFD;
+        }
+        return true;
+    });
 
     const female = chars.filter(c => c.gender === "female").sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
     const male = chars.filter(c => c.gender === "male").sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
