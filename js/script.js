@@ -69,7 +69,8 @@ export function initPage(Core = {}) {
             imgsUnitList.forEach(u => allSrc.push(...u.srcList));
             if (allSrc.length === 0) return;
 
-            const saveKey = `${gameId}-${char.id}`;
+            // char模式专属key
+            const saveKey = `char-img-${gameId}-${char.id}`;
             if(!appData.charImageSelect) appData.charImageSelect = {};
             let imgIndex = Number(appData.charImageSelect?.[saveKey] ?? 0);
             if (imgIndex >= allSrc.length) imgIndex = 0;
@@ -77,11 +78,11 @@ export function initPage(Core = {}) {
             let selected = gameItem.selectChars?.includes(char.id) ? "selected" : "";
 
             femHtml += `
-            <label class="char-item ${selected}" data-cid="${char.id}" data-char-id="${char.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}">
+            <label class="char-item ${selected}" data-cid="${char.id}" data-char-id="${char.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}" data‑panel‑mode="char">
               <div class="char-card-img-box ${allSrc.length>1?'char-multi-img':''}">
-                ${allSrc.length>1?`<button class="char-switch-btn char-switch-prev">&lt;</button>`: ""}
+                ${allSrc.length>1?`<button class="char-switch-btn char-switch-prev" data‑panel‑mode="char">&lt;</button>`: ""}
                 <img src="${showSrc}" alt="${char.name}">
-                ${allSrc.length>1?`<button class="char-switch-btn char-switch-next">&gt;</button>`: ""}
+                ${allSrc.length>1?`<button class="char-switch-btn char-switch-next" data‑panel‑mode="char">&gt;</button>`: ""}
               </div>
               <div class="char-card-name">${char.name}</div>
             </label>`;
@@ -97,7 +98,7 @@ export function initPage(Core = {}) {
             imgsUnitList.forEach(u => allSrc.push(...u.srcList));
             if (allSrc.length === 0) return;
 
-            const saveKey = `${gameId}-${char.id}`;
+            const saveKey = `char-img-${gameId}-${char.id}`;
             if(!appData.charImageSelect) appData.charImageSelect = {};
             let imgIndex = Number(appData.charImageSelect?.[saveKey] ?? 0);
             if (imgIndex >= allSrc.length) imgIndex = 0;
@@ -105,11 +106,11 @@ export function initPage(Core = {}) {
             let selected = gameItem.selectChars?.includes(char.id) ? "selected" : "";
 
             maleHtml += `
-            <label class="char-item ${selected}" data-cid="${char.id}" data-char-id="${char.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}">
+            <label class="char-item ${selected}" data-cid="${char.id}" data-char-id="${char.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}" data‑panel‑mode="char">
               <div class="char-card-img-box ${allSrc.length>1?'char-multi-img':''}">
-                ${allSrc.length>1?`<button class="char-switch-btn char-switch-prev">&lt;</button>`: ""}
+                ${allSrc.length>1?`<button class="char-switch-btn char-switch-prev" data‑panel‑mode="char">&lt;</button>`: ""}
                 <img src="${showSrc}" alt="${char.name}">
-                ${allSrc.length>1?`<button class="char-switch-btn char-switch-next">&gt;</button>`: ""}
+                ${allSrc.length>1?`<button class="char-switch-btn char-switch-next" data‑panel‑mode="char">&gt;</button>`: ""}
               </div>
               <div class="char-card-name">${char.name}</div>
             </label>`;
@@ -136,21 +137,22 @@ export function initPage(Core = {}) {
             let allSrc = [];
             imgsUnitList.forEach(u=>allSrc.push(...u.srcList));
             if(allSrc.length === 0) return;
-            const saveKey = `${gameId}-${fChar.id}`;
+            // cp模式专属key
+            const saveKey = `cp-img-${gameId}-${fChar.id}`;
             if(!appData.charImageSelect) appData.charImageSelect = {};
             let imgIndex = Number(appData.charImageSelect?.[saveKey]??0);
             if(imgIndex >= allSrc.length) imgIndex =0;
             const showSrc = allSrc[imgIndex];
 
-            // 女主卡片：增加data‑char-id，多立绘渲染切换按钮
+            // 女主卡片：增加data‑char-id，多立绘渲染切换按钮，标记panel‑mode="cp"
             cpPanelHtml += `
             <div class="cp-female-block" data-fid="${fChar.id}" data-gid="${gameId}">
                 <!-- 女主点击按钮 -->
-                <div class="cp-female-card-btn" data-fid="${fChar.id}" data-char-id="${fChar.id}">
+                <div class="cp-female-card-btn" data-fid="${fChar.id}" data-char-id="${fChar.id}" data‑panel‑mode="cp">
                     <div class="char-card-img-box ${allSrc.length>1?'char-multi-img':''}">
-                        ${allSrc.length>1?`<button class="char-switch-btn char-switch-prev" data-char-id="${fChar.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}">&lt;</button>`:""}
+                        ${allSrc.length>1?`<button class="char-switch-btn char-switch-prev" data-char-id="${fChar.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}" data‑panel‑mode="cp">&lt;</button>`:""}
                         <img src="${showSrc}" alt="${fChar.name}">
-                        ${allSrc.length>1?`<button class="char-switch-btn char-switch-next" data-char-id="${fChar.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}">&gt;</button>`:""}
+                        ${allSrc.length>1?`<button class="char-switch-btn char-switch-next" data-char-id="${fChar.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}" data‑panel‑mode="cp">&gt;</button>`:""}
                     </div>
                     <div class="cp-female-name">${fChar.name}</div>
                 </div>
@@ -166,11 +168,11 @@ export function initPage(Core = {}) {
                             if(mSrcArr.length===0) return "";
                             const mSel = state.maleIds.includes(mChar.id) ? "selected" : "";
                             return `
-                            <div class="cp-male-item ${mSel}" data-fid="${fChar.id}" data-mid="${mChar.id}" data-char-id="${mChar.id}" data-game-id="${gameId}">
+                            <div class="cp-male-item ${mSel}" data-fid="${fChar.id}" data-mid="${mChar.id}" data-char-id="${mChar.id}" data-game-id="${gameId}" data‑panel‑mode="cp">
                                 <div class="char-card-img-box ${mSrcArr.length>1?'char-multi-img':''}">
-                                    ${mSrcArr.length>1?`<button class="char-switch-btn char-switch-prev" data-char-id="${mChar.id}" data-game-id="${gameId}" data-total-img="${mSrcArr.length}">&lt;</button>`:""}
+                                    ${mSrcArr.length>1?`<button class="char-switch-btn char-switch-prev" data-char-id="${mChar.id}" data-game-id="${gameId}" data-total-img="${mSrcArr.length}" data‑panel‑mode="cp">&lt;</button>`:""}
                                     <img src="${mSrcArr[0]}" alt="${mChar.name}">
-                                    ${mSrcArr.length>1?`<button class="char-switch-btn char-switch-next" data-char-id="${mChar.id}" data-game-id="${gameId}" data-total-img="${mSrcArr.length}">&gt;</button>`:""}
+                                    ${mSrcArr.length>1?`<button class="char-switch-btn char-switch-next" data-char-id="${mChar.id}" data-game-id="${gameId}" data-total-img="${mSrcArr.length}" data‑panel‑mode="cp">&gt;</button>`:""}
                                 </div>
                                 <div class="char-card-name">${mChar.name}</div>
                             </div>`;
@@ -345,6 +347,8 @@ export function initPage(Core = {}) {
       const charCard = switchBtn.closest(".char-item, .char-card-item, .cp-female-card-btn, .cp-male-item");
       const charId = charCard.dataset.charId;
       const gameId = charCard.dataset.gameId;
+      // 读取面板模式 char / cp
+      const panelMode = switchBtn.dataset.panelMode || charCard.dataset.panelMode;
       const gameInfo = gameTemplateList.find(g => g.id === gameId);
       if (!gameInfo) return;
 
@@ -367,7 +371,8 @@ export function initPage(Core = {}) {
       if (allSrc.length <= 1) return;
 
       const imgDom = charCard.querySelector(".char-card-img-box img");
-      const saveKey = `${gameId}-${charId}`;
+      // 按面板模式使用隔离key
+      const saveKey = `${panelMode}-img-${gameId}-${charId}`;
       if(!appData.charImageSelect) appData.charImageSelect = {};
       let currentIndex = Number(appData.charImageSelect?.[saveKey] ?? 0);
 
