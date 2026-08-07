@@ -4,7 +4,7 @@
 // 无需额外配置，仅需要到 main.js 顶部 🚨gameIdList数组追加编号"002","003"...
 const gameData = {
     id: "game016", // 全局唯一ID，不可重复
-    name: "终远的威尔修-ErroR:salvation-",
+    name: "终远的威尔修 -ErroR:salvation-",
     year: "2022",
     publisher: "Otomate",
     cnStudio: "GSE",
