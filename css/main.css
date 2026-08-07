@@ -1085,3 +1085,39 @@ h2{
     font-size:14px;
     color:#222;
 }
+
+/* ========== CP待选卡片 图片切换按钮（复用char‑switch‑btn基础类） ========== */
+.cp-female-card-btn .char-card-img-box,
+.cp-male-item .char-card-img-box {
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.cp-female-card-btn .char-switch-btn,
+.cp-male-item .char-switch-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background:rgba(0,0,0,0.45);
+    color:#fff;
+    border:none;
+    font-size:16px;
+    padding:0;
+    z-index:2;
+    cursor:pointer;
+}
+.cp-female-card-btn .char-switch-prev,
+.cp-male-item .char-switch-prev {
+    left:4px;
+}
+.cp-female-card-btn .char-switch-next,
+.cp-male-item .char-switch-next {
+    right:4px;
+}
+.cp-female-card-btn .char-switch-btn:hover,
+.cp-male-item .char-switch-btn:hover {
+    background:rgba(0,0,0,0.65);
+}
