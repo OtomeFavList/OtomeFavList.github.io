@@ -888,3 +888,29 @@ h2{
     min-width: 260px;
     max-width: unset;
 }
+
+/* ========== 仅修复【卡片已选中角色预览区】切换按钮错位 ========== */
+.char-selected-row .char-card-img-box {
+    position: relative;
+    overflow: hidden;
+}
+
+.char-selected-row .char-switch-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255,255,255,0.75);
+    font-size: 16px;
+    cursor: pointer;
+}
+.char-selected-row .char-switch-prev {
+    left: 4px;
+}
+.char-selected-row .char-switch-next {
+    right: 4px;
+}
