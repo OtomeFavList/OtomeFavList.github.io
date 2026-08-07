@@ -58,75 +58,134 @@ export function initPage(Core = {}) {
     const femaleChars = allChars.filter(c => c.gender === "female");
     const maleChars = allChars.filter(c => c.gender === "male");
 
-    // 女主区域
-    let femHtml = "";
-    femaleChars.forEach(char => {
-      const imgsUnitList = getAvailableCharImages(char, appData.globalHideChar, appData.globalFD, gameItem.localHideChar, gameItem.localFD);
-      if (imgsUnitList.length === 0) return;
+    if(mode === "char"){
+        // ========= Character模式：原有全部逻辑完全保留，原样不动 =========
+        let femHtml = "";
+        femaleChars.forEach(char => {
+            const imgsUnitList = getAvailableCharImages(char, appData.globalHideChar, appData.globalFD, gameItem.localHideChar, gameItem.localFD);
+            if (imgsUnitList.length === 0) return;
 
-      let allSrc = [];
-      imgsUnitList.forEach(u => allSrc.push(...u.srcList));
-      if (allSrc.length === 0) return;
+            let allSrc = [];
+            imgsUnitList.forEach(u => allSrc.push(...u.srcList));
+            if (allSrc.length === 0) return;
 
-      const saveKey = `${gameId}-${char.id}`;
-      if(!appData.charImageSelect) appData.charImageSelect = {};
-      let imgIndex = Number(appData.charImageSelect?.[saveKey] ?? 0);
-      if (imgIndex >= allSrc.length) imgIndex = 0;
-      const showSrc = allSrc[imgIndex];
-      // =========改动：cp模式读取cpSelectIds============
-      let selected = "";
-      if(mode === "char"){
-        selected = gameItem.selectChars?.includes(char.id) ? "selected" : "";
-      }else{
-        selected = gameItem.cpSelectIds?.includes(char.id) ? "selected" : "";
-      }
+            const saveKey = `${gameId}-${char.id}`;
+            if(!appData.charImageSelect) appData.charImageSelect = {};
+            let imgIndex = Number(appData.charImageSelect?.[saveKey] ?? 0);
+            if (imgIndex >= allSrc.length) imgIndex = 0;
+            const showSrc = allSrc[imgIndex];
+            let selected = gameItem.selectChars?.includes(char.id) ? "selected" : "";
 
-      femHtml += `
-      <label class="char-item ${selected}" data-cid="${char.id}" data-char-id="${char.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}">
-        <div class="char-card-img-box ${allSrc.length>1?'char-multi-img':''}">
-          ${allSrc.length>1?`<button class="char-switch-btn char-switch-prev">&lt;</button>`: ""}
-          <img src="${showSrc}" alt="${char.name}">
-          ${allSrc.length>1?`<button class="char-switch-btn char-switch-next">&gt;</button>`: ""}
-        </div>
-        <div class="char-card-name">${char.name}</div>
-      </label>`;
-    });
-    heroineBox.innerHTML = femHtml;
+            femHtml += `
+            <label class="char-item ${selected}" data-cid="${char.id}" data-char-id="${char.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}">
+              <div class="char-card-img-box ${allSrc.length>1?'char-multi-img':''}">
+                ${allSrc.length>1?`<button class="char-switch-btn char-switch-prev">&lt;</button>`: ""}
+                <img src="${showSrc}" alt="${char.name}">
+                ${allSrc.length>1?`<button class="char-switch-btn char-switch-next">&gt;</button>`: ""}
+              </div>
+              <div class="char-card-name">${char.name}</div>
+            </label>`;
+        });
+        heroineBox.innerHTML = femHtml;
 
-    // 男性角色区域
-    let maleHtml = "";
-    maleChars.forEach(char => {
-      const imgsUnitList = getAvailableCharImages(char, appData.globalHideChar, appData.globalFD, gameItem.localHideChar, gameItem.localFD);
-      if (imgsUnitList.length === 0) return;
+        let maleHtml = "";
+        maleChars.forEach(char => {
+            const imgsUnitList = getAvailableCharImages(char, appData.globalHideChar, appData.globalFD, gameItem.localHideChar, gameItem.localFD);
+            if (imgsUnitList.length === 0) return;
 
-      let allSrc = [];
-      imgsUnitList.forEach(u => allSrc.push(...u.srcList));
-      if (allSrc.length === 0) return;
+            let allSrc = [];
+            imgsUnitList.forEach(u => allSrc.push(...u.srcList));
+            if (allSrc.length === 0) return;
 
-      const saveKey = `${gameId}-${char.id}`;
-      if(!appData.charImageSelect) appData.charImageSelect = {};
-      let imgIndex = Number(appData.charImageSelect?.[saveKey] ?? 0);
-      if (imgIndex >= allSrc.length) imgIndex = 0;
-      const showSrc = allSrc[imgIndex];
-      // =========改动：cp模式读取cpSelectIds============
-      let selected = "";
-      if(mode === "char"){
-        selected = gameItem.selectChars?.includes(char.id) ? "selected" : "";
-      }else{
-        selected = gameItem.cpSelectIds?.includes(char.id) ? "selected" : "";
-      }
+            const saveKey = `${gameId}-${char.id}`;
+            if(!appData.charImageSelect) appData.charImageSelect = {};
+            let imgIndex = Number(appData.charImageSelect?.[saveKey] ?? 0);
+            if (imgIndex >= allSrc.length) imgIndex = 0;
+            const showSrc = allSrc[imgIndex];
+            let selected = gameItem.selectChars?.includes(char.id) ? "selected" : "";
 
-      maleHtml += `
-      <label class="char-item ${selected}" data-cid="${char.id}" data-char-id="${char.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}">
-        <div class="char-card-img-box ${allSrc.length>1?'char-multi-img':''}">
-          ${allSrc.length>1?`<button class="char-switch-btn char-switch-prev">&lt;</button>`: ""}
-          <img src="${showSrc}" alt="${char.name}">
-          ${allSrc.length>1?`<button class="char-switch-btn char-switch-next">&gt;</button>`: ""}
-        </div>
-        <div class="char-card-name">${char.name}</div>
-      </label>`;
-    });
-    heroListBox.innerHTML = maleHtml;
+            maleHtml += `
+            <label class="char-item ${selected}" data-cid="${char.id}" data-char-id="${char.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}">
+              <div class="char-card-img-box ${allSrc.length>1?'char-multi-img':''}">
+                ${allSrc.length>1?`<button class="char-switch-btn char-switch-prev">&lt;</button>`: ""}
+                <img src="${showSrc}" alt="${char.name}">
+                ${allSrc.length>1?`<button class="char-switch-btn char-switch-next">&gt;</button>`: ""}
+              </div>
+              <div class="char-card-name">${char.name}</div>
+            </label>`;
+        });
+        heroListBox.innerHTML = maleHtml;
+    }else{
+        // ====================== mode === "cp" 方案C全新逻辑 ======================
+        // 兜底：旧存档没有cpEditState则自动生成
+        if(!Array.isArray(gameItem.cpEditState) || gameItem.cpEditState.length ===0){
+            gameItem.cpEditState = femaleChars.map(f=>({
+                femaleId: f.id,
+                openMalePanel: false,
+                maleIds: []
+            }));
+        }
+
+        // 渲染CP面板HTML：每一位女主作为可点击200*200按钮；展开则下方显示该女主专属男主选择区，自动换行
+        let cpPanelHtml = "";
+        femaleChars.forEach(fChar=>{
+            const state = gameItem.cpEditState.find(s=>s.femaleId === fChar.id);
+            if(!state) return;
+
+            const imgsUnitList = getAvailableCharImages(fChar, appData.globalHideChar, appData.globalFD, gameItem.localHideChar, gameItem.localFD);
+            let allSrc = [];
+            imgsUnitList.forEach(u=>allSrc.push(...u.srcList));
+            if(allSrc.length === 0) return;
+            const saveKey = `${gameId}-${fChar.id}`;
+            if(!appData.charImageSelect) appData.charImageSelect = {};
+            let imgIndex = Number(appData.charImageSelect?.[saveKey]??0);
+            if(imgIndex >= allSrc.length) imgIndex =0;
+            const showSrc = allSrc[imgIndex];
+
+            // 女主卡片，点击切换展开男主列表
+            cpPanelHtml += `
+            <div class="cp-female-block" data-fid="${fChar.id}" data-gid="${gameId}">
+                <!-- 女主点击按钮，200*200 -->
+                <div class="cp-female-card-btn" data-fid="${fChar.id}" style="width:200px;height:200px;cursor:pointer;">
+                    <img src="${showSrc}" alt="${fChar.name}" style="width:100%;height:100%;object-fit:cover;">
+                    <div class="cp-female-name">${fChar.name}</div>
+                </div>
+                <!-- 如果openMalePanel=true，渲染该女主对应的男主候选列表 -->
+                ${state.openMalePanel ? `
+                <div class="cp-male-select-wrap" data-fid="${fChar.id}">
+                    <div class="cp-male-title">为【${fChar.name}】选择配对男主</div>
+                    <div class="cp-male-list">
+                        ${maleChars.map(mChar=>{
+                            const mImgs = getAvailableCharImages(mChar, appData.globalHideChar, appData.globalFD, gameItem.localHideChar, gameItem.localFD);
+                            let mSrcArr = [];
+                            mImgs.forEach(u=>mSrcArr.push(...u.srcList));
+                            if(mSrcArr.length===0) return "";
+                            const mSel = state.maleIds.includes(mChar.id) ? "selected" : "";
+                            return `
+                            <div class="cp-male-item ${mSel}" data-fid="${fChar.id}" data-mid="${mChar.id}" style="width:160px;">
+                                <img src="${mSrcArr[0]}" alt="${mChar.name}" style="width:100px;height:100px;object-fit:cover;">
+                                <div>${mChar.name}</div>
+                            </div>`;
+                        }).join("")}
+                    </div>
+                </div>
+                ` : ""}
+            </div>
+            `;
+        });
+
+        // cp模式下，清空原有heroineBox/heroListBox，直接输出新排版
+        heroineBox.innerHTML = "";
+        heroListBox.innerHTML = cpPanelHtml;
+
+        // ========== 根据cpEditState自动生成cpList，供给renderCP预览渲染 ==========
+        gameItem.cpList = gameItem.cpEditState
+            .filter(st=>st.maleIds.length>0)
+            .map(st=>({
+                femaleId: st.femaleId,
+                maleIds: [...st.maleIds]
+            }));
+    }
   }
 
   /**
@@ -313,6 +372,48 @@ export function initPage(Core = {}) {
       saveData();
     });
 
+    //===== CP方案C事件委托，追加在document.addEventListener("click"...)内 =====
+    document.addEventListener("click", function(e){
+        const cpFemaleBtn = e.target.closest(".cp-female-card-btn");
+        if(cpFemaleBtn){
+            e.stopPropagation();
+            const fid = cpFemaleBtn.dataset.fid;
+            const card = cpFemaleBtn.closest(".added-game-card");
+            const gid = card.dataset.gameid;
+            const gameItem = appData.gameList.find(g=>g.gameId === gid);
+            if(!gameItem) return;
+            const st = gameItem.cpEditState.find(s=>s.femaleId === fid);
+            if(st){
+                st.openMalePanel = !st.openMalePanel;
+            }
+            saveData();
+            window.refreshGameCardUi();
+            return;
+        }
+
+        const cpMaleItem = e.target.closest(".cp-male-item");
+        if(cpMaleItem){
+            e.stopPropagation();
+            const fid = cpMaleItem.dataset.fid;
+            const mid = cpMaleItem.dataset.mid;
+            const card = cpMaleItem.closest(".added-game-card");
+            const gid = card.dataset.gameid;
+            const gameItem = appData.gameList.find(g=>g.gameId === gid);
+            if(!gameItem) return;
+            const st = gameItem.cpEditState.find(s=>s.femaleId === fid);
+            if(!st) return;
+            const idx = st.maleIds.indexOf(mid);
+            if(idx >=0){
+                st.maleIds.splice(idx,1);
+            }else{
+                st.maleIds.push(mid);
+            }
+            saveData();
+            window.refreshGameCardUi();
+            return;
+        }
+    });
+
     // ==========【修复：btn-character / btn-couple 全局事件委托】==========
     document.addEventListener("click", function(e){
       const charBtn = e.target.closest(".btn-character");
@@ -414,6 +515,7 @@ export function initPage(Core = {}) {
         if(typeof g.loveRate !== "number") g.loveRate = 0;
         if(!Array.isArray(g.selectChars)) g.selectChars = [];
         if(!Array.isArray(g.cpSelectIds)) g.cpSelectIds = [];
+        if(!Array.isArray(g.cpEditState)) g.cpEditState = [];
       });
     }
 
@@ -540,7 +642,8 @@ export function initPage(Core = {}) {
             loveRate: 0,
             selectChars: [],
             cpSelectIds: [],
-            cpList: []
+            cpList: [],
+            cpEditState: []
           };
           if(!appData.gameList) appData.gameList = [];
           appData.gameList.push(newGameData);
