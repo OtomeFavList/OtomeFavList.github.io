@@ -404,7 +404,7 @@ button:hover{
 .game-switch-row{
     display: flex;
     align-items: flex-start;
-    gap: 24px;
+    gap: 16px;
     margin: 10px 0 16px;
     flex-wrap: wrap;
 }
