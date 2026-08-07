@@ -117,7 +117,7 @@ export function initPage(Core = {}) {
         });
         heroListBox.innerHTML = maleHtml;
     }else{
-        // ====================== mode === "cp" 方案C全新逻辑 ======================
+        // ====================== mode === "cp" 全新草稿模式逻辑 ======================
         // 兜底：旧存档没有cpEditState则自动生成
         if(!Array.isArray(gameItem.cpEditState) || gameItem.cpEditState.length ===0){
             gameItem.cpEditState = femaleChars.map(f=>({
@@ -127,11 +127,21 @@ export function initPage(Core = {}) {
             }));
         }
 
+        // 每个女主打开男主面板时，独立临时草稿，key:charId value:Set
+        const tempCpDraftMap = {};
+        femaleChars.forEach(fChar=>{
+            const state = gameItem.cpEditState.find(s=>s.femaleId === fChar.id);
+            if(state){
+                tempCpDraftMap[fChar.id] = new Set(state.maleIds);
+            }
+        });
+
         // 渲染CP面板HTML：每一位女主作为可点击按钮；展开则下方显示该女主专属男主选择区，自动换行
         let cpPanelHtml = "";
         femaleChars.forEach(fChar=>{
             const state = gameItem.cpEditState.find(s=>s.femaleId === fChar.id);
             if(!state) return;
+            const draftSet = tempCpDraftMap[fChar.id];
 
             const imgsUnitList = getAvailableCharImages(fChar, appData.globalHideChar, appData.globalFD, gameItem.localHideChar, gameItem.localFD);
             let allSrc = [];
@@ -166,7 +176,8 @@ export function initPage(Core = {}) {
                             let mSrcArr = [];
                             mImgs.forEach(u=>mSrcArr.push(...u.srcList));
                             if(mSrcArr.length===0) return "";
-                            const mSel = state.maleIds.includes(mChar.id) ? "selected" : "";
+                            // 从草稿拿选中状态，不再读取state.maleIds
+                            const mSel = draftSet.has(mChar.id) ? "selected" : "";
                             return `
                             <div class="cp-male-item ${mSel}" data-fid="${fChar.id}" data-mid="${mChar.id}" data-char-id="${mChar.id}" data-game-id="${gameId}" data‑panel‑mode="cp">
                                 <div class="char-card-img-box ${mSrcArr.length>1?'char-multi-img':''}">
@@ -177,6 +188,11 @@ export function initPage(Core = {}) {
                                 <div class="char-card-name">${mChar.name}</div>
                             </div>`;
                         }).join("")}
+                    </div>
+                    <!-- 新增确认取消按钮组 -->
+                    <div class="cp-select-btn-bar">
+                        <button class="cp-cancel-btn" data-fid="${fChar.id}" data-gid="${gameId}">取消</button>
+                        <button class="cp-confirm-btn" data-fid="${fChar.id}" data-gid="${gameId}">确认</button>
                     </div>
                 </div>
                 ` : ""}
@@ -195,6 +211,9 @@ export function initPage(Core = {}) {
                 femaleId: st.femaleId,
                 maleIds: [...st.maleIds]
             }));
+
+        // 将草稿map挂载到panel dom上，事件委托可以读取
+        panelDom._tempCpDraftMap = tempCpDraftMap;
     }
   }
 
@@ -412,23 +431,59 @@ export function initPage(Core = {}) {
             return;
         }
 
+        // 点击男主item：只修改草稿，不碰真实state
         const cpMaleItem = e.target.closest(".cp-male-item");
         if(cpMaleItem){
             e.stopPropagation();
             const fid = cpMaleItem.dataset.fid;
             const mid = cpMaleItem.dataset.mid;
-            const card = cpMaleItem.closest(".added-game-card");
-            const gid = card.dataset.gameid;
+            const panel = cpMaleItem.closest(".char-slide-panel-cp");
+            if(!panel) return;
+            const draftMap = panel._tempCpDraftMap;
+            if(!draftMap || !draftMap[fid]) return;
+            const draftSet = draftMap[fid];
+            if(draftSet.has(mid)){
+                draftSet.delete(mid);
+            }else{
+                draftSet.add(mid);
+            }
+            // 只局部切换UI高亮，不全局刷新页面
+            cpMaleItem.classList.toggle("selected", draftSet.has(mid));
+            return;
+        }
+
+        // 【新增】确认按钮：草稿落地真实数据，关闭男主候选区
+        const cpConfirmBtn = e.target.closest(".cp-confirm-btn");
+        if(cpConfirmBtn){
+            e.stopPropagation();
+            const fid = cpConfirmBtn.dataset.fid;
+            const gid = cpConfirmBtn.dataset.gid;
+            const panel = cpConfirmBtn.closest(".char-slide-panel-cp");
+            const draftMap = panel._tempCpDraftMap;
+            if(!draftMap || !draftMap[fid]) return;
             const gameItem = appData.gameList.find(g=>g.gameId === gid);
             if(!gameItem) return;
             const st = gameItem.cpEditState.find(s=>s.femaleId === fid);
             if(!st) return;
-            const idx = st.maleIds.indexOf(mid);
-            if(idx >=0){
-                st.maleIds.splice(idx,1);
-            }else{
-                st.maleIds.push(mid);
-            }
+            // 草稿覆盖真实maleIds
+            st.maleIds = Array.from(draftMap[fid]);
+            st.openMalePanel = false;
+            saveData();
+            window.refreshGameCardUi();
+            return;
+        }
+
+        //【新增】取消按钮：丢弃草稿，直接关闭男主候选区，原数据不变
+        const cpCancelBtn = e.target.closest(".cp-cancel-btn");
+        if(cpCancelBtn){
+            e.stopPropagation();
+            const fid = cpCancelBtn.dataset.fid;
+            const gid = cpCancelBtn.dataset.gid;
+            const gameItem = appData.gameList.find(g=>g.gameId === gid);
+            if(!gameItem) return;
+            const st = gameItem.cpEditState.find(s=>s.femaleId === fid);
+            if(!st) return;
+            st.openMalePanel = false;
             saveData();
             window.refreshGameCardUi();
             return;
