@@ -11,82 +11,103 @@ const gameData = {
     art: "石田翠",
     cover: "img/game/023.jpg", // 封面图路径，统一前缀img/
     charList: [
-        // 女主模板 female
+        // 立花希佐
         {
             id: "g0_f01",
-            name: "女主A",
+            name: "立花希佐",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/g001_f0_1.jpg","img/char/g001_f0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g001_f0_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g001_f0_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/023/Kisa.png","img/char/023/Kisa2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // ‌睦实介
         {
             id: "g0_m01",
-            name: "男主1",
+            name: "‌睦实介",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/023/Kai.png","img/char/023/Kai2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // ​白田美骑
         {
             id: "g0_m02",
-            name: "男主1",
+            name: "白田美骑",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/023/Mitsuki.png","img/char/023/Mitsuki2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 根地黑门
         {
             id: "g0_m03",
-            name: "男主1",
+            name: "根地黑门",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/023/Neji.png","img/char/023/Neji2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // ​高科更文
         {
             id: "g0_m04",
-            name: "男主1",
+            name: "​高科更文",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/023/Sarafumi.png","img/char/023/Sarafumi2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 世长创司郎
         {
             id: "g0_m05",
-            name: "男主1",
+            name: "世长创司郎",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/023/Soushirou.png","img/char/023/Soushirou2.png"], type: "base" },      // 默认基础图，始终加载
+            ]
+        },
+        // 织卷寿寿
+        {
+            id: "g0_m06",
+            name: "织卷寿寿,
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            images: [
+                { srcList: ["img/char/023/Suzu.png","img/char/023/Suzu2.png"], type: "base" },      // 默认基础图，始终加载
+            ]
+        },
+        // 田中右宙为
+        {
+            id: "g0_m07",
+            name: "田中右宙为",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            images: [
+                { srcList: ["img/char/023/Chui.png"], type: "base" },      // 默认基础图，始终加载
+            ]
+        },
+        // 加斋中
+        {
+            id: "g0_m08",
+            name: "加斋中",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            images: [
+                { srcList: ["img/char/023/Kasai.png"], type: "base" },      // 默认基础图，始终加载
             ]
         }
     ]
