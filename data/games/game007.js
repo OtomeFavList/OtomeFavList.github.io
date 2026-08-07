@@ -81,7 +81,7 @@ const gameData = {
         // 冴木弓弦
         {
             id: "g007_h01",
-            name: "隐藏攻略角色",
+            name: "冴木弓弦",
             gender: "male",
             isHidden: true,
             isFD: true,
