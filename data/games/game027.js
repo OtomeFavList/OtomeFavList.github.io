@@ -79,7 +79,7 @@ const gameData = {
             isHidden: true,
             isFD: true,
             images: [
-                { srcList: ["img/char/027/Ukyo.jpg"], type: "base" }
+                { srcList: ["img/char/027/Ukyo.jpg"], type: "base" },
                 { srcList: ["img/char/027/Ukyo2.jpg","img/char/027/Ukyo3.jpg","img/char/027/Ukyo4.jpg","img/char/027/Ukyo5.jpg"], type: "fd" },     // 需要开启FD开关才展示的图片
             ]
         }
