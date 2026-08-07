@@ -11,104 +11,114 @@ const gameData = {
     art: "悌太",
     cover: "img/game/022.jpg", // 封面图路径，统一前缀img/
     charList: [
-        // 女主模板 female
+        // 濑名阳爱
         {
             id: "g0_f01",
-            name: "女主A",
+            name: "濑名阳爱",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/g001_f0_1.jpg","img/char/g001_f0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g001_f0_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g001_f0_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/022/Hiyori.jpg","img/char/022/Hiyori2.jpg","img/char/022/Hiyori3.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 陀宰明
         {
             id: "g0_m01",
-            name: "男主1",
+            name: "陀宰明",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/022/Dazai.jpg","img/char/022/Dazai2.jpg","img/char/022/Dazai3.jpg","img/char/022/Dazai4.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 获端圭人
         {
             id: "g0_m02",
-            name: "男主1",
+            name: "获端圭人",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/022/Ebana.jpg","img/char/022/Ebana2.jpg","img/char/022/Ebana3.jpg","img/char/022/Ebana4.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 双巳椋一
         {
             id: "g0_m03",
-            name: "男主1",
+            name: "双巳椋一",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/022/Futami.jpg","img/char/022/Futami2.jpg","img/char/022/Futami3.jpg","img/char/022/Futami4.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 废寺拓海
         {
             id: "g0_m04",
-            name: "男主1",
+            name: "废寺拓海",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/022/Haiji.jpg","img/char/022/Haiji2.jpg","img/char/022/Haiji3.jpg","img/char/022/Haiji4.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 射落水树
         {
             id: "g0_m05",
-            name: "男主1",
+            name: "射落水树",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/022/Iochi.jpg","img/char/022/Iochi2.jpg","img/char/022/Iochi3.jpg","img/char/022/Iochi4.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 隐藏角色（isHidden=true → 开关开启才显示整个角色卡片）
+        // 明濑境也
         {
-            id: "g0_h01",
-            name: "隐藏攻略角色",
-            gender: "male",
-            isHidden: true,
-            isFD: false,
-            images: [
-                { srcList: ["img/char/g001_h01_1.jpg"], type: "base" }
-            ]
-        },
-        // FD续作限定角色（isFD=true → FD开关开启才显示整个角色卡片）
-        {
-            id: "g0_fd01",
-            name: "续作FD新增角色",
+            id: "g0_m06",
+            name: "明濑境也",
             gender: "male",
             isHidden: false,
-            isFD: true,
+            isFD: false,
             images: [
-                { srcList: ["img/char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["img/char/022/Kyouya.jpg","img/char/022/Kyouya2.jpg","img/char/022/Kyouya3.jpg","img/char/022/Kyouya4.jpg"], type: "base" },      // 默认基础图，始终加载
+            ]
+        },
+        // 茅裂镇
+        {
+            id: "g0_m07",
+            name: "茅裂镇",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            images: [
+                { srcList: ["img/char/022/Mamoru.jpg","img/char/022/Mamoru2.jpg","img/char/022/Mamoru3.jpg","img/char/022/Mamoru4.jpg"], type: "base" },      // 默认基础图，始终加载
+            ]
+        },
+        // 凝部奏汰
+        {
+            id: "g0_m08",
+            name: "凝部奏汰",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            images: [
+                { srcList: ["img/char/022/Souta.jpg","img/char/022/Souta2.jpg","img/char/022/Souta3.jpg","img/char/022/Souta4.jpg"], type: "base" },      // 默认基础图，始终加载
+            ]
+        },
+        // 万城灯星
+        {
+            id: "g0_m09",
+            name: "万城灯星",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            images: [
+                { srcList: ["img/char/022/Tomose.jpg","img/char/022/Tomose2.jpg","img/char/022/Tomose3.jpg","img/char/022/Tomose4.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         }
     ]
