@@ -7,6 +7,7 @@ const gameData = {
     name: "安琪莉可 Luminarise",
     year: "2021",
     publisher: "KOEI",
+    cnStudio: "KOEI",
     writer: ["雨宮うた"],
     art: "紗与イチ",
     cover: "img/game/005.jpg",
