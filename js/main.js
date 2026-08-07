@@ -348,7 +348,7 @@ export function renderCP(gameItem, gameInfo) {
             const mTargetSrc = mAllSrc[mIndex];
 
             maleHtml += `
-                <div class="char-card-item selected" data-char-id="${mChar.id}" data-game-id="${gameInfo.id}" data-total-img="${mAllSrc.length}">
+                <div class="cp-selected-card-item" data-char-id="${mChar.id}" data-game-id="${gameInfo.id}" data-total-img="${mAllSrc.length}">
                     <div class="char-card-img-box ${mAllSrc.length > 1 ? 'char-has-multi-img' : ''}">
                         <img src="${mTargetSrc}" alt="${mChar.name || ''}">
                     </div>
@@ -360,7 +360,7 @@ export function renderCP(gameItem, gameInfo) {
         html += `
             <div class="cp-layout-row">
                 <div class="heroine-column">
-                    <div class="char-card-item selected" data-char-id="${fChar.id}" data-game-id="${gameInfo.id}" data-total-img="${fAllSrc.length}">
+                    <div class="cp-selected-card-item" data-char-id="${fChar.id}" data-game-id="${gameInfo.id}" data-total-img="${fAllSrc.length}">
                         <div class="char-card-img-box ${fAllSrc.length > 1 ? 'char-has-multi-img' : ''}">
                             <img src="${fTargetSrc}" alt="${fChar.name || ''}">
                         </div>
