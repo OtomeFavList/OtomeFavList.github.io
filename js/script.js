@@ -391,6 +391,10 @@ export function initPage(Core = {}) {
 
     //===== CP方案C事件委托，追加在document.addEventListener("click"...)内 =====
     document.addEventListener("click", function(e){
+        // ========= 核心修复：点击切换按钮直接return，阻止触发展开/选中逻辑 =========
+        const switchBtn = e.target.closest(".char-switch-btn");
+        if(switchBtn) return;
+
         const cpFemaleBtn = e.target.closest(".cp-female-card-btn");
         if(cpFemaleBtn){
             e.stopPropagation();
