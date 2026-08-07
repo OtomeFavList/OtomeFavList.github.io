@@ -4,7 +4,7 @@
 // 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
 const gameData = {
     id: "game007",
-    name: "项圈×恶意",
+    name: "Collar×Malice",
     year: "2021",
     publisher: "Otomate",
     cnStudio: "JSD",
