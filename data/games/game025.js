@@ -3,78 +3,78 @@
 // 无需额外配置，仅需要到 main.js 顶部 🚨gameIdList数组追加编号"002","003"...
 const gameData = {
     id: "game025", // 全局唯一ID，不可重复
-    name: "示例乙女游戏",
+    name: "花之女王",
     year: "2023",
-    publisher: "原厂发行商",
-    cnStudio: "汉化组/汉化厂商",
-    writer: ["剧本编剧","剧本编剧","剧本编剧","剧本编剧"],
-    art: "原画画师",
+    publisher: "Otomate",
+    cnStudio: "JSD",
+    writer: ["いわた志信","小縞なお","有野幸","長野和泉","中山智美"],
+    art: "薄葉カゲロー",
     cover: "img/game/025.jpg", // 封面图路径，统一前缀img/
     charList: [
-        // 女主模板 female
+        // 薇欧蕾特
         {
             id: "g025_f01",
-            name: "女主A",
+            name: "薇欧蕾特",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/g001_f0_1.jpg","img/char/g001_f0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/025/Violette.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 吉斯兰
         {
             id: "g025_m01",
-            name: "男主1",
+            name: "吉斯兰",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/025/Ghislain.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 尤贝尔
         {
             id: "g025_m02",
-            name: "男主1",
+            name: "尤贝尔",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/025/Hubert.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 雷欧
         {
             id: "g025_m03",
-            name: "男主1",
+            name: "雷欧",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/025/Leon.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 路易
         {
             id: "g025_m04",
-            name: "男主1",
+            name: "路易",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/025/Louis.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 奥菲
         {
             id: "g025_m05",
-            name: "男主1",
+            name: "奥菲",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/025/Orpheus.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         }
     ]
