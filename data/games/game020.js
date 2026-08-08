@@ -7,8 +7,12 @@ const gameData = {
     year: "2023",
     publisher: ["HuneX"],
     cnStudio: "dramatic create",
-    writer: ["松竹梅"],
-    art: ["月野御豆"],
+    writer: [
+        {name:"松竹梅", lang:"zh"}
+    ],
+    art: [
+        {name:"月野御豆", lang:"zh"}
+    ],
     cover: "img/game/020.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 娜拉
