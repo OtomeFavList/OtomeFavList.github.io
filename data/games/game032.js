@@ -7,125 +7,125 @@ const gameData = {
     year: "2024",
     publisher: "Otomate",
     cnStudio: "JOYOLAND",
-    writer: ["剧本编剧","剧本编剧","剧本编剧","剧本编剧"],
-    art: "原画画师",
+    writer: ["いわた志信","由良绫斗","かずら林檎","小縞なお","すぐり柚貴","結城由乃"],
+    art: "薄葉カゲロー",
     cover: "img/game/032.jpg", // 封面图路径，统一前缀img/
     charList: [
-        // 女主模板 female
+        // 露露
         {
-            id: "g0_f01",
-            name: "女主A",
+            id: "g032_f01",
+            name: "露露",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/g001_f0_1.jpg","img/char/g001_f0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g001_f0_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/032/Lulu.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/032/Lulu.jpg","img/char/032/Lulu2.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
-        // 普通可攻略男主 male
+        // 阿尔贝罗
         {
-            id: "g0_m01",
-            name: "男主1",
+            id: "g032_m01",
+            name: "阿尔贝罗",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/032/Alvaro.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/032/Alvaro2.jpg","img/char/032/Alvaro3.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
-        // 普通可攻略男主 male
+        // 维拉尔
         {
-            id: "g0_m02",
-            name: "男主1",
+            id: "g032_m02",
+            name: "维拉尔",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/032/Bilal.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/032/Bilal2.jpg","img/char/032/Bilal3.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
-        // 普通可攻略男主 male
+        // 埃斯特
         {
-            id: "g0_m03",
-            name: "男主1",
+            id: "g032_m03",
+            name: "埃斯特",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/032/Est.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/032/Est2.jpg","img/char/032/Est3.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
-        // 普通可攻略男主 male
+        // 尤里乌斯
         {
-            id: "g0_m04",
-            name: "男主1",
+            id: "g032_m04",
+            name: "尤里乌斯",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/032/Julius.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/032/Julius2.jpg","img/char/032/Julius3.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
-        // 普通可攻略男主 male
+        // 拉奇
         {
-            id: "g0_m05",
-            name: "男主1",
+            id: "g032_m05",
+            name: "拉奇",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/032/Lagi.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/032/Lagi2.jpg","img/char/032/Lagi3.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
-        // 普通可攻略男主 male
+        // 诺埃尔
         {
-            id: "g0_m06",
-            name: "男主1",
+            id: "g032_m06",
+            name: "诺埃尔",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/032/Noel.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/032/Noel2.png","img/char/032/Noel3.png"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
-        // 普通可攻略男主 male
+        // 艾米
         {
-            id: "g0_m07",
-            name: "男主1",
+            id: "g032_m07",
+            name: "艾米",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/032/Amy.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 埃尔伯特
         {
-            id: "g0_m08",
-            name: "男主1",
+            id: "g032_m08",
+            name: "埃尔伯特",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/032/Elbert.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // FD续作限定角色（isFD=true → FD开关开启才显示整个角色卡片）
+        // 所罗·门
         {
-            id: "g0_fd01",
-            name: "续作FD新增角色",
+            id: "g032_fd01",
+            name: "所罗·门",
             gender: "male",
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg""], type: "base" }
+                { srcList: ["img/char/032/Solo.jpg","img/char/032/Solo2.jpg"], type: "base" }
             ]
         }
     ]
