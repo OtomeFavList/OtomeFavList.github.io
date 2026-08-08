@@ -7,8 +7,14 @@ const gameData = {
     year: "2024",
     publisher: ["dazkarat"],
     cnStudio: "GSE",
-    writer: ["風花琴梨"],
-    art: ["白皙"],
+    writer: [""],
+    art: [""],
+    writer: [
+        {name:"風花琴梨", lang:"zh"}
+    ],
+    art: [
+        {name:"白皙", lang:"zh"}
+    ],
     cover: "img/game/033.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 拉碧丝
