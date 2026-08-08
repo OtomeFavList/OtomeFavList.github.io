@@ -5,10 +5,10 @@ const gameData = {
     id: "game026", // 全局唯一ID，不可重复
     name: "even if TEMPEST 黃昏中魔女如是说",
     year: "2023",
-    publisher: "Voltage",
+    publisher: ["Voltage"],
     cnStudio: "JOYOLAND",
     writer: ["潮文音"],
-    art: "のりた",
+    art: ["のりた"],
     cover: "img/game/026.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 安娜斯塔西娅·林赛尔
