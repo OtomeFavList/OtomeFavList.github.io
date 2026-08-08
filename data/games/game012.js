@@ -6,10 +6,10 @@ const gameData = {
     id: "game012",
     name: "谎月香格里拉",
     year: "2022",
-    publisher: "Rejet",
+    publisher: ["Rejet"],
     cnStudio: "JOYOLAND",
     writer: ["真崎結衣","鷹匠早紀","やまだ有見","秋月ひろ","こたに白子","久遠まひろ","由女川萩","竹藤夜宵"],
-    art: "hagi",
+    art: ["hagi"],
     cover: "img/game/012.jpg",
     charList: [
         // 晦光
