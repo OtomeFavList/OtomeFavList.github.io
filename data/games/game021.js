@@ -5,10 +5,10 @@ const gameData = {
     id: "game021", // 全局唯一ID，不可重复
     name: "黑桃国的爱丽丝~Wonderful White World~",
     year: "2023",
-    publisher: "Otomate",
+    publisher: ["Otomate"],
     cnStudio: "GSE",
     writer: ["七瀬みお","仰木サヤ"],
-    art: "藤丸豆ノ介",
+    art: ["藤丸豆ノ介"],
     cover: "img/game/021.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 爱丽丝·利德尔
