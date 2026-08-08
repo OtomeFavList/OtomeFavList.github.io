@@ -5,10 +5,10 @@ const gameData = {
     id: "game034", // 全局唯一ID，不可重复
     name: "我的超级现充生活",
     year: "2024",
-    publisher: "TetraScope",
+    publisher: ["TetraScope"],
     cnStudio: "TetraScope",
     writer: ["kaiso"],
-    art: "ne-on",
+    art: ["ne-on"],
     cover: "img/game/034.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 姐崎希美
