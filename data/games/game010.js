@@ -6,10 +6,10 @@ const gameData = {
     id: "game010",
     name: "冷然之天秤：帝都幻惑绮谭",
     year: "2022",
-    publisher: "Otomate",
+    publisher: ["Otomate"],
     cnStudio: "GSE",
     writer: ["片桐由摩"],
-    art: "さとい",
+    art: ["さとい"],
     cover: "img/game/010.jpg",
     charList: [
         // 久世鸫
