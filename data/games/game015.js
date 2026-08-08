@@ -15,7 +15,7 @@ const gameData = {
         {name:"みぞおち鳩子", lang:"ja"}
     ],
     art: [
-        {name:"十ガ才力", lang:"zh"},
+        {name:"ナガオカ", lang:"ja"},
         {name:"Team.", lang:"en"}
     ],
     cover: "img/game/015.jpg", // 封面图路径，统一前缀img/
