@@ -7,8 +7,12 @@ const gameData = {
     year: "2024",
     publisher: ["MAGES."],
     cnStudio: "GSE",
-    writer: ["午後ねむる"],
-    art: ["雪広うたこ"],
+    writer: [
+        {name:"午後ねむる", lang:"zh"}
+    ],
+    art: [
+        {name:"雪広うたこ", lang:"zh"}
+    ],
     cover: "img/game/041.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 澄空翼
