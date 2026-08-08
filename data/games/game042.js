@@ -1,0 +1,95 @@
+// ==========【单个游戏独立数据模板｜新版ESModule】==========
+// 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
+// 无需额外配置，仅需要到 main.js 顶部 🚨gameIdList数组追加编号"002","003"...
+const gameData = {
+    id: "game042", // 全局唯一ID，不可重复
+    name: "蛇香之夜~Trap of MUSK~",
+    year: "2024",
+    publisher: ["Frontier Work","Otomate"],
+    cnStudio: "JOYOLAND",
+    writer: ["吉村りりか",],
+    art: ["アサダモチコ"],
+    cover: "img/game/042.jpg", // 封面图路径，统一前缀img/
+    charList: [
+        // 席琳
+        {
+            id: "g042_f01",
+            name: "席琳",
+            gender: "female",
+            isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
+            isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
+            images: [
+                { srcList: ["img/char/042/Shirien.jpg","img/char/042/Shirien2.jpg"], type: "base" },      // 默认基础图，始终加载
+            ]
+        },
+        // 杰米尔
+        {
+            id: "g042_m01",
+            name: "杰米尔",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            images: [
+                { srcList: ["img/char/042/Jemiru.jpg","img/char/042/Jemiru2.jpg","img/char/042/Jemiru3.jpg"], type: "base" },      // 默认基础图，始终加载
+            ]
+        },
+        // 鳞希骊
+        {
+            id: "g042_m02",
+            name: "鳞希骊",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            images: [
+                { srcList: ["img/char/042/Kirei.jpg","img/char/042/Kirei2.jpg","img/char/042/Kirei3.jpg"], type: "base" },      // 默认基础图，始终加载
+            ]
+        },
+        // 鳞皇骊
+        {
+            id: "g042_m03",
+            name: "鳞皇骊",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            images: [
+                { srcList: ["img/char/042/Korei.jpg","img/char/042/Korei2.jpg","img/char/042/Korei3.jpg"], type: "base" },      // 默认基础图，始终加载
+            ]
+        },
+        // 莱扎尔·沙纳萨
+        {
+            id: "g042_m04",
+            name: "莱扎尔·沙纳萨",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            images: [
+                { srcList: ["img/char/042/Lizaru.jpg","img/char/042/Lizaru2.jpg","img/char/042/Lizaru3.jpg"], type: "base" },      // 默认基础图，始终加载
+            ]
+        },
+        // 罗岚·克莱德尔
+        {
+            id: "g042_m05",
+            name: "罗岚·克莱德尔",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            images: [
+                { srcList: ["img/char/042/Rollan.jpg","img/char/042/Rollan2.jpg","img/char/042/Rollan3.jpg"], type: "base" },      // 默认基础图，始终加载
+            ]
+        },
+        // 文斯·卢根
+        {
+            id: "g042_m06",
+            name: "文斯·卢根",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            images: [
+                { srcList: ["img/char/042/Vince.jpg","img/char/042/Vince2.jpg","img/char/042/Vince3.jpg"], type: "base" },      // 默认基础图，始终加载
+            ]
+        }
+    ]
+};
+
+// ✅新版导出！不要使用window.gameDataList.push！
+export { gameData };
