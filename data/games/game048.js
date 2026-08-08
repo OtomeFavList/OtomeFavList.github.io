@@ -24,7 +24,7 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/g001_f0_1.jpg","img/char/g001_f0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/g001_f0_1.jpg"], type: "base" },      // 默认基础图，始终加载
                 { srcList: ["img/char/g001_f0_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
             ]
         },
@@ -36,8 +36,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
+                { srcList: ["img/char/g0_m01_1.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/g0_m01_3.jpg","img/char/g001_m0_2.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
             ]
         },
         // 英央
@@ -48,8 +48,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
+                { srcList: ["img/char/g0_m01_1.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/g0_m01_3.jpg","img/char/g001_m0_2.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
             ]
         },
         // 加纳理一郎
@@ -60,8 +60,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
+                { srcList: ["img/char/g0_m01_1.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/g0_m01_3.jpg","img/char/g001_m0_2.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
             ]
         },
         // 西园寺寅之助
@@ -72,8 +72,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
+                { srcList: ["img/char/g0_m01_1.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/g0_m01_3.jpg","img/char/g001_m0_2.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
             ]
         },
         // 时田终夜
@@ -84,8 +84,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
+                { srcList: ["img/char/g0_m01_1.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/g0_m01_3.jpg","img/char/g001_m0_2.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
             ]
         },
         // 海棠鹰斗
@@ -96,8 +96,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
+                { srcList: ["img/char/g0_m01_1.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/g0_m01_3.jpg","img/char/g001_m0_2.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
             ]
         },
         // 筱宫枫
