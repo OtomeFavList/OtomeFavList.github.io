@@ -7,8 +7,16 @@ const gameData = {
     year: "2023",
     publisher: ["Otomate"],
     cnStudio: "JOYOLAND",
-    writer: ["小縞なお","中村和騎","中山智美","佐々木麿","いわた志信"],
-    art: ["薄葉カゲロー"],
+    writer: [
+        {name:"小縞なお", lang:"zh"},
+        {name:"中村和騎", lang:"zh"},
+        {name:"中山智美", lang:"zh"},
+        {name:"佐々木麿", lang:"zh"},
+        {name:"いわた志信", lang:"ja"}
+    ],
+    art: [
+        {name:"薄葉カゲロー", lang:"zh"},
+    ],
     cover: "img/game/031.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 东条云雀
