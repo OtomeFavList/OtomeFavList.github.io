@@ -5,10 +5,10 @@ const gameData = {
     id: "game035", // 全局唯一ID，不可重复
     name: "BUSTAFELLOWS",
     year: "2024",
-    publisher: "eXtend",
+    publisher: ["eXtend"],
     cnStudio: "GSE",
     writer: ["minetaka"],
-    art: "すめらぎ琥珀",
+    art: ["すめらぎ琥珀"],
     cover: "img/game/035.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 特乌塔
