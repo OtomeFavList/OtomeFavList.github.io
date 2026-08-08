@@ -8,7 +8,7 @@ const gameData = {
     publisher: ["BROCCOLI"],
     cnStudio: "GSE",
     writer: [
-        {name:"かずら林檎", lang:"zh"}
+        {name:"かずら林檎", lang:"ja"}
     ],
     art: [
         {name:"RiRi", lang:"en"}
