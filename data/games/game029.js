@@ -7,8 +7,32 @@ const gameData = {
     year: "2023",
     publisher: ["Otomate"],
     cnStudio: "JSD",
-    writer: ["関涼子","魚住ユキコ","上月はじめ","吉村りりか","恵村まお","夏野景","神城咲弥","夜空茜","石倉みもり","花井カオリ","猫乃しおり","まるや諒","天乃聖樹","センチメンタルべにこ","七瀬みお","仰木サヤ","柿本悠理","祁答院慎","紅原香"],
-    art: ["もちもちた"],
+    writer: ["","","","","","","","","","","","","","","","","","",""],
+    art: [""],
+    writer: [
+        {name:"関涼子", lang:"zh"},
+        {name:"魚住ユキコ", lang:"zh"},
+        {name:"上月はじめ", lang:"zh"},
+        {name:"吉村りりか", lang:"zh"},
+        {name:"恵村まお", lang:"zh"},
+        {name:"夏野景", lang:"zh"},
+        {name:"神城咲弥", lang:"zh"},
+        {name:"夜空茜", lang:"zh"},
+        {name:"石倉みもり", lang:"zh"},
+        {name:"花井カオリ", lang:"zh"},
+        {name:"猫乃しおり", lang:"zh"},
+        {name:"七瀬みお", lang:"zh"},
+        {name:"仰木サヤ", lang:"zh"},
+        {name:"柿本悠理", lang:"zh"},
+        {name:"祁答院慎", lang:"zh"},
+        {name:"紅原香", lang:"zh"},
+        {name:"天乃聖樹", lang:"zh"},
+        {name:"まるや諒", lang:"ja"},
+        {name:"センチメンタルべにこ", lang:"ja"}
+    ],
+    art: [
+        {name:"もちもちた", lang:"ja"}
+    ],
     cover: "img/game/029.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 爱日梨
