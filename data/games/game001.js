@@ -8,8 +8,13 @@ const gameData = {
     year: "2020",
     publisher: ["Otomate"],
     cnStudio: "GSE",
-    writer: ["かずら林檎"],
-    art: ["RiRi"],
+    writer: [
+        {name:"かずら林檎", lang:"ja"}
+    ],
+    art: [
+        
+        {name:"RiRi", lang:"en"}
+    ],
     cover: "img/game/001.jpg",
     charList: [
         // 莉莉安娜
