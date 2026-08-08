@@ -8,8 +8,12 @@ const gameData = {
     year: "2021",
     publisher: ["KOEI"],
     cnStudio: "KOEI",
-    writer: ["雨宮うた"],
-    art: ["紗与イチ"],
+    writer: [
+        {name:"雨宮うた", lang:"zh"}
+    ],
+    art: [
+        {name:"紗与イチ", lang:"zh"}
+    ],
     cover: "img/game/005.jpg",
     charList: [
         // 杏树
