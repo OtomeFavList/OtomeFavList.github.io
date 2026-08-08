@@ -19,7 +19,7 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/039/Rin.jpg","img/char/039/Rin2.jpg","img/char/039/Rin3.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/039/Rin.jpg","img/char/039/Rin2.jpg","img/char/039/Rin3.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 石川五右卫门
@@ -30,7 +30,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/039/Goemon.jpg","img/char/039/Goemon2.jpg","img/char/039/Goemon3.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/039/Goemon.jpg","img/char/039/Goemon2.jpg","img/char/039/Goemon3.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // JacK
@@ -41,7 +41,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/039/Jack.jpg","img/char/039/Jack2.jpg","img/char/039/Jack3.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/039/Jack.jpg","img/char/039/Jack2.jpg","img/char/039/Jack3.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 宇贺菊之助
@@ -52,7 +52,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/039/Kikunosuke.jpg","img/char/039/Kikunosuke2.jpg","img/char/039/Kikunosuke3.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/039/Kikunosuke.jpg","img/char/039/Kikunosuke2.jpg","img/char/039/Kikunosuke3.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 东洲斋写乐
@@ -63,7 +63,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/039/Sharaku.jpg","img/char/039/Sharaku2.jpg","img/char/039/Sharaku3.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/039/Sharaku.jpg","img/char/039/Sharaku2.jpg","img/char/039/Sharaku3.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 村上誉那
@@ -74,7 +74,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/039/Yona.jpg","img/char/039/Yona2.jpg","img/char/039/Yona3.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/039/Yona.jpg","img/char/039/Yona2.jpg","img/char/039/Yona3.png"], type: "base" },      // 默认基础图，始终加载
             ]
         }
     ]
