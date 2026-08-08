@@ -5,10 +5,10 @@ const gameData = {
     id: "game028", // 全局唯一ID，不可重复
     name: "华彩煌煌，吾之一族 摩登时代",
     year: "2023",
-    publisher: "Otomate",
+    publisher: ["Otomate"],
     cnStudio: "GSE",
     writer: ["高木亜由美"],
-    art: "ユウヤ",
+    art: ["ユウヤ"],
     cover: "img/game/028.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 浅木春
