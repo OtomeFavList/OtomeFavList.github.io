@@ -8,14 +8,14 @@ const gameData = {
     publisher: ["Otomate"],
     cnStudio: "JSD",
     writer: [
-        {name:"中文编剧", lang:"zh"},
-        {name:"日文编剧", lang:"ja"},
-        {name:"英文编剧", lang:"en"}
+        {name:"小縞なお", lang:"zh"},
+        {name:"有野幸", lang:"zh"},
+        {name:"北弓しほ", lang:"zh"}
     ],
     art: [
-        {name:"中文原画", lang:"zh"},
-        {name:"日文原画", lang:"ja"},
-        {name:"英文原画", lang:"en"}
+        {name:"薄葉カゲロー", lang:"zh"},
+        {name:"朱玖", lang:"zh"},
+        {name:"miko", lang:"en"}
     ],
     cover: "img/game/045.jpg", // 封面图路径，统一前缀img/
     charList: [
@@ -27,9 +27,7 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/g001_f0_1.jpg","img/char/g001_f0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g001_f0_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g001_f0_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/045/Tifalia.jpg","img/char/045/Tifalia2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 伊昂
@@ -40,9 +38,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/045/Ion.jpg","img/char/045/Ion2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 帕斯哈里亚
@@ -53,9 +49,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/045/Paschalia.jpg","img/char/045/Paschalia2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 拉蒂
@@ -66,9 +60,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/045/Radie.jpg","img/char/045/Radie2.jpg","img/char/045/Radie3.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 威利欧
@@ -79,9 +71,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/045/Vilio.jpg","img/char/045/Vilio2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 札弗拉
@@ -92,9 +82,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/045/Zafora.jpg","img/char/045/Zafora2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 吉尼亚
@@ -105,7 +93,7 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["img/char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["img/char/045/Jinnia.jpg","img/char/045/Jinnia2.jpg","img/char/045/Jinnia3.jpg"], type: "base" }
             ]
         },
         // 里昂
@@ -116,7 +104,7 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["img/char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["img/char/045/Liyan.jpg","img/char/045/Liyan2.jpg"], type: "base" }
             ]
         }
     ]
