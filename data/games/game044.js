@@ -11,10 +11,10 @@ const gameData = {
     art: ["ユウヤ"],
     cover: "img/game/044.jpg", // 封面图路径，统一前缀img/
     charList: [
-        // 女主模板 female
+        // 逸色珠沙
         {
             id: "g0_f01",
-            name: "女主A",
+            name: "逸色珠沙",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
@@ -22,10 +22,10 @@ const gameData = {
                 { srcList: ["img/char/g001_f0_1.jpg","img/char/g001_f0_2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 响
         {
             id: "g044_m01",
-            name: "男主1",
+            name: "响",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -33,10 +33,10 @@ const gameData = {
                 { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 狐春
         {
             id: "g044_m02",
-            name: "男主1",
+            name: "狐春",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -44,10 +44,10 @@ const gameData = {
                 { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 香羊
         {
             id: "g044_m03",
-            name: "男主1",
+            name: "香羊",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -110,10 +110,10 @@ const gameData = {
                 { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 隐藏角色（isHidden=true → 开关开启才显示整个角色卡片）
+        // 桃嘉
         {
             id: "g044_h01",
-            name: "隐藏攻略角色",
+            name: "桃嘉",
             gender: "male",
             isHidden: true,
             isFD: false,
