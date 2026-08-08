@@ -253,11 +253,17 @@ export function fillFilterOptions(gameList) {
         cnSet.add(g.cnStudio);
 
         if (Array.isArray(g.writer)) {
-            g.writer.forEach(name => name && writerSet.add(name));
+            g.writer.forEach(obj => {
+                const n = obj.name;
+                n && writerSet.add(n);
+            });
         }
 
         if (Array.isArray(g.art)) {
-            g.art.forEach(name => name && artSet.add(name));
+            g.art.forEach(obj => {
+                const n = obj.name;
+                n && artSet.add(n);
+            });
         }
     });
 
@@ -304,14 +310,16 @@ export function renderGameSelectItem(game) {
     // 编剧：数组排序拼接
     let writerText = "无";
     if (Array.isArray(game.writer) && game.writer.length > 0) {
-        const sortedWriter = sortFilterOptionList(game.writer);
+        const writerNameArr = game.writer.map(item=>item.name);
+        const sortedWriter = sortFilterOptionList(writerNameArr);
         writerText = sortedWriter.join("、");
     }
 
     // 画师：数组排序拼接
     let artText = "无";
     if (Array.isArray(game.art) && game.art.length > 0) {
-        const sortedArt = sortFilterOptionList(game.art);
+        const artNameArr = game.art.map(item=>item.name);
+        const sortedArt = sortFilterOptionList(artNameArr);
         artText = sortedArt.join("、");
     }
 
