@@ -8,8 +8,15 @@ const gameData = {
     year: "2021",
     publisher: ["Otomate"],
     cnStudio: "GSE",
-    writer: ["みぞおち鳩子","仰木サヤ","七瀬みお","紫堂零"],
-    art: ["スオウ"],
+    writer: [
+        {name:"仰木サヤ", lang:"zh"},
+        {name:"七瀬みお", lang:"zh"},
+        {name:"紫堂零", lang:"zh"},
+        {name:"みぞおち鳩子", lang:"ja"}
+    ],
+    art: [
+        {name:"スオウ", lang:"ja"}
+    ],
     cover: "img/game/002.jpg",
     charList: [
         // 秋津志乃
