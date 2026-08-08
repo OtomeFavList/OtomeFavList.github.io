@@ -5,10 +5,10 @@ const gameData = {
     id: "game0", // 全局唯一ID，不可重复
     name: "示例乙女游戏",
     year: "20",
-    publisher: "原厂发行商",
+    publisher: ["原厂发行商"],
     cnStudio: "汉化组/汉化厂商",
     writer: ["剧本编剧","剧本编剧","剧本编剧","剧本编剧"],
-    art: "原画画师",
+    art: ["原画画师"],
     cover: "img/game/0.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 女主模板 female
