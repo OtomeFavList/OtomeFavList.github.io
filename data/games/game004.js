@@ -8,8 +8,14 @@ const gameData = {
     year: "2021",
     publisher: ["HuneX"],
     cnStudio: "GSE",
-    writer: ["ゆーます"],
-    art: ["一色箱"],
+    writer: [""],
+    art: [""],
+    writer: [
+        {name:"ゆーます", lang:"ja"}
+    ],
+    art: [
+        {name:"一色箱", lang:"zh"}
+    ],
     cover: "img/game/004.jpg",
     charList: [
         // 琪丝·提斯特拉
