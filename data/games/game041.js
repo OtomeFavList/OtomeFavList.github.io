@@ -5,10 +5,10 @@ const gameData = {
     id: "game041", // 全局唯一ID，不可重复
     name: "B-PROJECT 流星*幻想曲",
     year: "2024",
-    publisher: "MAGES.",
+    publisher: ["MAGES."],
     cnStudio: "GSE",
     writer: ["午後ねむる"],
-    art: "雪広うたこ",
+    art: ["雪広うたこ"],
     cover: "img/game/041.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 澄空翼
