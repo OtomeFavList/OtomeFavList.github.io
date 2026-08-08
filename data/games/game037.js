@@ -7,8 +7,14 @@ const gameData = {
     year: "2024",
     publisher: ["RED","Spike Chunsoft"],
     cnStudio: "JSD",
-    writer: ["伊東愛","雨宮うた","真青テテ"],
-    art: ["黒蜜きなこ"],
+    writer: [
+        {name:"伊東愛", lang:"zh"},
+        {name:"雨宮うた", lang:"zh"},
+        {name:"真青テテ", lang:"zh"}
+    ],
+    art: [
+        {name:"黒蜜きなこ", lang:"zh"}
+    ],
     cover: "img/game/037.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 中山日南子
