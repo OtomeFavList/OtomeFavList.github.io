@@ -5,10 +5,10 @@ const gameData = {
     id: "game032", // 全局唯一ID，不可重复
     name: "幸运之杖R",
     year: "2024",
-    publisher: "Otomate",
+    publisher: ["Otomate"],
     cnStudio: "JOYOLAND",
     writer: ["いわた志信","由良绫斗","かずら林檎","小縞なお","すぐり柚貴","結城由乃"],
-    art: "薄葉カゲロー",
+    art: ["薄葉カゲロー"],
     cover: "img/game/032.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 露露
