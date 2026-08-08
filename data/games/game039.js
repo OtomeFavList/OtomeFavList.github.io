@@ -5,10 +5,10 @@ const gameData = {
     id: "game039", // 全局唯一ID，不可重复
     name: "天狱乱斗 -strayside-",
     year: "2024",
-    publisher: "Otomate",
+    publisher: ["Otomate"],
     cnStudio: "JSD",
     writer: ["片桐由摩"],
-    art: "さとい",
+    art: ["さとい"],
     cover: "img/game/039.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 阎魔凛
