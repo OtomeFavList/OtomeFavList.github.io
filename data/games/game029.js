@@ -3,7 +3,7 @@
 // 无需额外配置，仅需要到 main.js 顶部 🚨gameIdList数组追加编号"002","003"...
 const gameData = {
     id: "game029", // 全局唯一ID，不可重复
-    name: "示例乙女游戏",
+    name: "白与黑的爱丽丝",
     year: "2023",
     publisher: "Otomate",
     cnStudio: "JSD",
@@ -11,92 +11,92 @@ const gameData = {
     art: "もちもちた",
     cover: "img/game/029.jpg", // 封面图路径，统一前缀img/
     charList: [
-        // 女主模板 female
+        // 爱日梨
         {
             id: "g029_f01",
-            name: "女主A",
+            name: "爱日梨",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/g001_f0_1.jpg","img/char/g001_f0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/029/Airi.jpg","img/char/029/Airi2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 女主模板 female
+        // 露娜
         {
             id: "g029_f02",
-            name: "女主A",
+            name: "露娜",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/g001_f0_1.jpg","img/char/g001_f0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/029/Luna.jpg","img/char/029/Luna2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 杰克
         {
             id: "g029_m01",
-            name: "男主1",
+            name: "杰克",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/029/Jack.jpg","img/char/029/Jack2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 卡农
         {
             id: "g029_m02",
-            name: "男主1",
+            name: "卡农",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/029/Kanon.jpg","img/char/029/Kanon2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 米涅特
         {
             id: "g029_m03",
-            name: "男主1",
+            name: "米涅特",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/029/Minette.jpg","img/char/029/Minette2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 尼洛
         {
             id: "g029_m04",
-            name: "男主1",
+            name: "尼洛",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/029/Nello.jpg","img/char/029/Nello2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 雷因
         {
             id: "g029_m05",
-            name: "男主1",
+            name: "雷因",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/029/Rain.jpg","img/char/029/Rain2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 斯诺
         {
             id: "g029_m06",
-            name: "男主1",
+            name: "斯诺",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/029/Snow.jpg","img/char/029/Snow2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         }
     ]
