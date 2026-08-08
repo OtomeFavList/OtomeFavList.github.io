@@ -5,10 +5,10 @@ const gameData = {
     id: "game017",
     name: "暗之眷属",
     year: "2023",
-    publisher: "HuneX",
+    publisher: ["HuneX"],
     cnStudio: "GSE",
     writer: ["平野ヒロ"],
-    art: "永原キナミ",
+    art: ["永原キナミ"],
     cover: "img/game/017.jpg",
     charList: [
         // 克洛伊
