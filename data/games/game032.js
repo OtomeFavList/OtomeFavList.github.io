@@ -7,8 +7,19 @@ const gameData = {
     year: "2024",
     publisher: ["Otomate"],
     cnStudio: "JOYOLAND",
-    writer: ["いわた志信","由良绫斗","かずら林檎","小縞なお","すぐり柚貴","結城由乃"],
-    art: ["薄葉カゲロー"],
+    writer: ["","","","","",""],
+    art: [""],
+    writer: [
+        {name:"由良绫斗", lang:"zh"},
+        {name:"小縞なお", lang:"zh"},
+        {name:"結城由乃", lang:"zh"},
+        {name:"いわた志信", lang:"ja"},
+        {name:"かずら林檎", lang:"ja"},
+        {name:"すぐり柚貴", lang:"ja"}
+    ],
+    art: [
+        {name:"薄葉カゲロー", lang:"zh"}
+    ],
     cover: "img/game/032.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 露露
