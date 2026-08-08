@@ -8,8 +8,23 @@ const gameData = {
     year: "2021",
     publisher: ["Rejet"],
     cnStudio: "JOYOLAND",
-    writer: ["やまだ有見","加納高子","吉村りりか","夏野景","小和泉いづみ","山田かのこ","砂原有季","関涼子","谷村日名子","真崎結衣","都井きつき","海桐ユキチカ"],
-    art: ["読"],
+    writer: [
+        {name:"加納高子", lang:"zh"},
+        {name:"吉村りりか", lang:"zh"},
+        {name:"夏野景", lang:"zh"},
+        {name:"小和泉いづみ", lang:"zh"},
+        {name:"山田かのこ", lang:"zh"},
+        {name:"砂原有季", lang:"zh"},
+        {name:"関涼子", lang:"zh"},
+        {name:"谷村日名子", lang:"zh"},
+        {name:"真崎結衣", lang:"zh"},
+        {name:"都井きつき", lang:"zh"},
+        {name:"海桐ユキチカ", lang:"zh"},
+        {name:"やまだ有見", lang:"ja"}
+    ],
+    art: [
+        {name:"読", lang:"zh"}
+    ],
     cover: "img/game/008.jpg",
     charList: [
         // 香夜
