@@ -7,8 +7,12 @@ const gameData = {
     year: "2024",
     publisher: ["Frontier Work","Otomate"],
     cnStudio: "JOYOLAND",
-    writer: ["吉村りりか",],
-    art: ["アサダモチコ"],
+    writer: [
+        {name:"吉村りりか", lang:"zh"}
+    ],
+    art: [
+        {name:"アサダモチコ", lang:"ja"}
+    ],
     cover: "img/game/042.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 席琳
