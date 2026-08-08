@@ -13,7 +13,7 @@ const gameData = {
     charList: [
         // 娜雅
         {
-            id: "g0_f01",
+            id: "g038_f01",
             name: "娜雅",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
@@ -24,7 +24,7 @@ const gameData = {
         },
         // 玖燕来
         {
-            id: "g0_m01",
+            id: "g038_m01",
             name: "玖燕来",
             gender: "male",
             isHidden: false,
@@ -35,7 +35,7 @@ const gameData = {
         },
         // 斐伊
         {
-            id: "g0_m02",
+            id: "g038_m02",
             name: "斐伊",
             gender: "male",
             isHidden: false,
@@ -46,7 +46,7 @@ const gameData = {
         },
         // 洛欧
         {
-            id: "g0_m03",
+            id: "g038_m03",
             name: "洛欧",
             gender: "male",
             isHidden: false,
@@ -57,7 +57,7 @@ const gameData = {
         },
         // 胡青凛
         {
-            id: "g0_m04",
+            id: "g038_m04",
             name: "胡青凛",
             gender: "male",
             isHidden: false,
@@ -68,7 +68,7 @@ const gameData = {
         },
         // 臧布尼勒
         {
-            id: "g0_m05",
+            id: "g038_m05",
             name: "臧布尼勒",
             gender: "male",
             isHidden: false,
@@ -79,7 +79,7 @@ const gameData = {
         },
         // 羯磨
         {
-            id: "g0_h01",
+            id: "g038_h01",
             name: "羯磨",
             gender: "male",
             isHidden: true,
@@ -90,7 +90,7 @@ const gameData = {
         },
         // 斐恩
         {
-            id: "g0_h02",
+            id: "g038_h02",
             name: "斐恩",
             gender: "male",
             isHidden: true,
