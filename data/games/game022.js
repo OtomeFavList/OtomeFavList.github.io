@@ -7,8 +7,13 @@ const gameData = {
     year: "2023",
     publisher: ["Otomate"],
     cnStudio: "JSD",
-    writer: ["雨宮うた","織原あやの"],
-    art: ["悌太"],
+    writer: [
+        {name:"雨宮うた", lang:"zh"},
+        {name:"織原あやの", lang:"zh"}
+    ],
+    art: [
+        {name:"悌太", lang:"zh"}
+    ],
     cover: "img/game/022.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 濑名阳爱
