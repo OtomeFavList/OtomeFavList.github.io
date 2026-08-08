@@ -731,12 +731,44 @@ export function initPage(Core = {}) {
         if (!game) return;
         let match = true;
 
+        // =========【新增：渲染副本+按lang规则排序writer/art】=========
+        const gameCopy = {...game};
+        function sortStaffByLang(list) {
+            if (!Array.isArray(list)) return [];
+            const langOrder = { zh:0, ja:1, en:2 };
+            return [...list].sort((a,b)=>{
+                const oA = langOrder[a.lang] ?? 99;
+                const oB = langOrder[b.lang] ?? 99;
+                if(oA !== oB) return oA - oB;
+
+                const nameA = a.name;
+                const nameB = b.name;
+                if(a.lang === "zh"){
+                    return nameA.localeCompare(nameB,"zh-CN");
+                }else if(a.lang === "ja"){
+                    return nameA.localeCompare(nameB,"ja-JP");
+                }else if(a.lang === "en"){
+                    const lowerA = nameA.toLowerCase();
+                    const lowerB = nameB.toLowerCase();
+                    if(lowerA !== lowerB){
+                        return lowerA.localeCompare(lowerB,"en");
+                    }else{
+                        return nameA.localeCompare(nameB,"en");
+                    }
+                }
+                return nameA.localeCompare(nameB);
+            });
+        }
+        gameCopy.writer = sortStaffByLang(game.writer);
+        gameCopy.art = sortStaffByLang(game.art);
+        // =========【新增代码结束】=========
+
         if (keyword && !game.name?.toLowerCase().includes(keyword)) match = false;
         if (filterYear && game.year != filterYear) match = false;
         if (filterPub && game.publisher != filterPub) match = false;
         if (filterCn && game.cnStudio != filterCn) match = false;
 
-        // ========== 此处为本次修改点：writer / art 现在是对象数组，提取 .name 做匹配 ==========
+        // ========== writer / art 对象数组匹配逻辑，读取原始game，保持不变 ==========
         if (filterWriter) {
           let writerNameList = [];
           if (Array.isArray(game.writer)) {
@@ -754,7 +786,8 @@ export function initPage(Core = {}) {
         }
 
         if (!match) return;
-        html += `<div class="game-option-item" data-game-id="${game.id}">` + renderGameSelectItem(game) + `</div>`;
+        //传入排序副本 gameCopy
+        html += `<div class="game-option-item" data-game-id="${game.id}">` + renderGameSelectItem(gameCopy) + `</div>`;
       })
 
       el.gameSelectList.innerHTML = html;
