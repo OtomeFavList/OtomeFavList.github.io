@@ -303,9 +303,20 @@ export function fillFilterOptions(gameList) {
         }
     });
 
-    // 对象数组按lang规则排序，再提取name字符串
-    const writerSortedObjs = sortStaffByLang(writerObjList);
-    const artSortedObjs = sortStaffByLang(artObjList);
+    // =========新增：人员对象数组按name去重，消除下拉重复项=========
+    function uniqueStaffByName(list) {
+        const seen = new Set();
+        return list.filter(item => {
+            if (!item?.name) return false;
+            if (seen.has(item.name)) return false;
+            seen.add(item.name);
+            return true;
+        });
+    }
+
+    // 对象数组先去重，再按lang规则排序，再提取name字符串
+    const writerSortedObjs = sortStaffByLang(uniqueStaffByName(writerObjList));
+    const artSortedObjs = sortStaffByLang(uniqueStaffByName(artObjList));
     const writerSorted = writerSortedObjs.map(o=>o.name);
     const artSorted = artSortedObjs.map(o=>o.name);
 
