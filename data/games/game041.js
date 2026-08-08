@@ -24,7 +24,7 @@ const gameData = {
         },
         // 不动明谦
         {
-            id: "g0_m01",
+            id: "g041_m01",
             name: "不动明谦",
             gender: "male",
             isHidden: false,
@@ -35,7 +35,7 @@ const gameData = {
         },
         // 金城刚士
         {
-            id: "g0_m02",
+            id: "g041_m02",
             name: "金城刚士",
             gender: "male",
             isHidden: false,
@@ -46,7 +46,7 @@ const gameData = {
         },
         // 寺光遥日
         {
-            id: "g0_m03",
+            id: "g041_m03",
             name: "寺光遥日",
             gender: "male",
             isHidden: false,
@@ -57,7 +57,7 @@ const gameData = {
         },
         // 王茶利晖
         {
-            id: "g0_m04",
+            id: "g041_m04",
             name: "王茶利晖",
             gender: "male",
             isHidden: false,
@@ -68,7 +68,7 @@ const gameData = {
         },
         // 增长和南
         {
-            id: "g0_m05",
+            id: "g041_m05",
             name: "增长和南",
             gender: "male",
             isHidden: false,
@@ -79,7 +79,7 @@ const gameData = {
         },
         // 爱染健十
         {
-            id: "g0_m06",
+            id: "g041_m06",
             name: "爱染健十",
             gender: "male",
             isHidden: false,
@@ -90,7 +90,7 @@ const gameData = {
         },
         // 释村帝人
         {
-            id: "g0_m07",
+            id: "g041_m07",
             name: "释村帝人",
             gender: "male",
             isHidden: false,
@@ -101,7 +101,7 @@ const gameData = {
         },
         // 殿弥勒
         {
-            id: "g0_m08",
+            id: "g041_m08",
             name: "殿弥勒",
             gender: "male",
             isHidden: false,
@@ -112,7 +112,7 @@ const gameData = {
         },
         // 音济百太郎
         {
-            id: "g0_m09",
+            id: "g041_m09",
             name: "音济百太郎",
             gender: "male",
             isHidden: false,
@@ -123,7 +123,7 @@ const gameData = {
         },
         // 是国龙持
         {
-            id: "g0_m10",
+            id: "g041_m10",
             name: "是国龙持",
             gender: "male",
             isHidden: false,
@@ -134,7 +134,7 @@ const gameData = {
         },
         // 野目龙广
         {
-            id: "g0_m11",
+            id: "g041_m11",
             name: "野目龙广",
             gender: "male",
             isHidden: false,
@@ -145,7 +145,7 @@ const gameData = {
         },
         // 北门伦毘沙
         {
-            id: "g0_m12",
+            id: "g041_m12",
             name: "北门伦毘沙",
             gender: "male",
             isHidden: false,
@@ -156,7 +156,7 @@ const gameData = {
         },
         // 阿修悠太
         {
-            id: "g0_m13",
+            id: "g041_m13",
             name: "阿修悠太",
             gender: "male",
             isHidden: false,
@@ -167,7 +167,7 @@ const gameData = {
         },
         // 寺光唯月
         {
-            id: "g0_m14",
+            id: "g041_m14",
             name: "寺光唯月",
             gender: "male",
             isHidden: false,
