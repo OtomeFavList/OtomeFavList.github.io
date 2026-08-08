@@ -6,10 +6,10 @@ const gameData = {
     id: "game009",
     name: "共生丘比特",
     year: "2021",
-    publisher: "Otomate",
+    publisher: ["Otomate"],
     cnStudio: "GSE",
     writer: ["吉村りりか"],
-    art: "ユウヤ",
+    art: ["ユウヤ"],
     cover: "img/game/009.jpg",
     charList: [
         // 莉涅特·米勒
