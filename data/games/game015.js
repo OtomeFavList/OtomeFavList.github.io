@@ -6,7 +6,7 @@ const gameData = {
     id: "game015", // 全局唯一ID，不可重复
     name: "君于雪中希冀",
     year: "2022",
-    publisher: "Otomate",
+    publisher: ["Otomate"],
     cnStudio: "JSD",
     writer:["佐々木麿","結城由乃","仰木サヤ","みぞおち鳩子"],
     art: ["Team.","十ガ才力"],
