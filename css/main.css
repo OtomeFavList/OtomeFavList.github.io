@@ -1003,12 +1003,14 @@ h2{
     text-align:center;
 }
 
-/* ✅修改：增加position:relative */
+/* ✅修改：增加position:relative，替换原有cp‑male‑select-wrap定义 */
 .cp-male-select-wrap{
     min-height: 180px;
     border:none;
     border-radius:0;
     position: relative;
+    /* 增加上下间距，隔开列表与按钮 */
+    padding-bottom:4px;
 }
 .cp-male-title{
     font-weight:bold;
@@ -1181,14 +1183,4 @@ h2{
 .cp-confirm-btn,
 .cp-cancel-btn{
     padding:6px 14px;
-}
-
-/* 男主外层容器，为右下角按钮提供上下文 */
-.cp-male-select-wrap{
-    min-height: 180px;
-    border:none;
-    border-radius:0;
-    position: relative;
-    /* 增加上下间距，隔开列表与按钮 */
-    padding-bottom:4px;
 }
