@@ -1001,11 +1001,10 @@ h2{
     text-align:center;
 }
 
-/* ❗删除外围灰色边框和padding，这是多余外层容器；增加position:relative、padding‑bottom:60px */
+/* ❗修复：把 padding‑bottom:60px; padding:0; 合并为单条 padding:0 0 60px 0，避免覆盖 */
 .cp-male-select-wrap{
     position: relative;
-    padding-bottom: 60px;
-    padding:0;
+    padding: 0 0 60px 0;
     border:none;
     border-radius:0;
 }
