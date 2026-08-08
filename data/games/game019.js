@@ -10,7 +10,7 @@ const gameData = {
     cnStudio: "JOYOLAND",
     writer: [
         {name:"長野和泉", lang:"zh"},
-        {name:"小縞なお", lang:"zh"},
+        {name:"小縞なお", lang:"zh"}
     ],
     art: [
         {name:"四季咲組", lang:"zh"}
