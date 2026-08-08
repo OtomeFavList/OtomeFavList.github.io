@@ -12,7 +12,6 @@ const gameData = {
         {name:"かずら林檎", lang:"ja"}
     ],
     art: [
-        
         {name:"RiRi", lang:"en"}
     ],
     cover: "img/game/001.jpg",
