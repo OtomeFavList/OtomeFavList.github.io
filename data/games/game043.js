@@ -7,8 +7,6 @@ const gameData = {
     year: "2024",
     publisher: ["Otomate"],
     cnStudio: "JSD",
-    writer: ["","","","","",""],
-    art: [""],
     writer: [
         {name:"星野彼方", lang:"zh"},
         {name:"青木ひろえ", lang:"zh"},
