@@ -6,7 +6,7 @@ const gameData = {
     id: "game018", // 全局唯一ID，不可重复
     name: "命运九重奏",
     year: "2023",
-    publisher: "Otomate",
+    publisher: ["Otomate"],
     cnStudio: "GSE",
     writer: ["潮文音","一二階"],
     art: ["悌太","清白かりん"],
