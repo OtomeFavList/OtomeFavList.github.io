@@ -7,8 +7,6 @@ const gameData = {
     year: "2024",
     publisher: ["dazkarat"],
     cnStudio: "GSE",
-    writer: [""],
-    art: [""],
     writer: [
         {name:"風花琴梨", lang:"zh"}
     ],
