@@ -19,129 +19,127 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/g001_f0_1.jpg","img/char/g001_f0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g001_f0_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/036/Yui.jpg","img/char/036/Yui2.jpg","img/char/036/Yui3.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 逆卷绫人
         {
             id: "g036_m01",
-            name: "男主1",
+            name: "逆卷绫人",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/036/Ayato.jpg","img/char/036/Ayato2.jpg","img/char/036/Ayato3.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/036/Ayato4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
-        // 普通可攻略男主 male
+        // 无神梓
         {
             id: "g036_m02",
-            name: "男主1",
+            name: "无神梓",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/036/Azusa.jpg","img/char/036/Azusa2.jpg","img/char/036/Azusa3.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/036/Azusa4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
-        // 普通可攻略男主 male
+        // 逆卷奏人
         {
             id: "g036_m03",
-            name: "男主1",
+            name: "逆卷奏人",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/036/Kanato.jpg","img/char/036/Kanato2.jpg","img/char/036/Kanato3.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/036/Kanato4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
-        // 普通可攻略男主 male
+        // 无神皓
         {
             id: "g036_m04",
-            name: "男主1",
+            name: "无神皓",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/036/Kou.jpg","img/char/036/Kou2.jpg","img/char/036/Kou3.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/036/Kou4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
-        // 普通可攻略男主 male
+        // 逆卷礼人
         {
             id: "g036_m05",
-            name: "男主1",
+            name: "逆卷礼人",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/036/Laito.jpg","img/char/036/Laito2.jpg","img/char/036/Laito3.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/036/Laito4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
-        // 普通可攻略男主 male
+        // 逆卷怜司
         {
             id: "g036_m06",
-            name: "男主1",
+            name: "逆卷怜司",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/036/Reiji.jpg","img/char/036/Reiji2.jpg","img/char/036/Reiji3.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/036/Reiji4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
-        // 普通可攻略男主 male
+        // 无神琉辉
         {
             id: "g036_m07",
-            name: "男主1",
+            name: "无神琉辉",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/036/Ruki.jpg","img/char/036/Ruki2.jpg","img/char/036/Ruki3.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/036/Ruki4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
-        // 普通可攻略男主 male
+        // 逆卷修
         {
             id: "g036_m08",
-            name: "男主1",
+            name: "逆卷修",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/036/Shuu.jpg","img/char/036/Shuu2.jpg","img/char/036/Shuu3.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/036/Shuu4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
-        // 普通可攻略男主 male
+        // 逆卷昴
         {
             id: "g036_m09",
-            name: "男主1",
+            name: "逆卷昴",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/036/Subaru.jpg","img/char/036/Subaru2.jpg","img/char/036/Subaru3.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/036/Subaru4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
-        // 普通可攻略男主 male
+        // 无神悠真
         {
             id: "g036_m10",
-            name: "男主1",
+            name: "无神悠真",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/036/Yuuma.jpg","img/char/036/Yuuma2.jpg","img/char/036/Yuuma3.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/036/Yuuma4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 月浪卡拉
@@ -152,8 +150,8 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["img/char/g001_fd01_1.jpg"], type: "base" }
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/036/Carla.jpg","img/char/036/Carla2.jpg","img/char/036/Carla3.jpg"], type: "base" }
+                { srcList: ["img/char/036/Carla4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 月浪辛
@@ -164,8 +162,8 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["img/char/g001_fd01_1.jpg"], type: "base" }
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/036/Shin.jpg","img/char/036/Shin2.jpg","img/char/036/Shin3.jpg"], type: "base" }
+                { srcList: ["img/char/036/Shin4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 基诺
@@ -176,7 +174,7 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["img/char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["img/char/036/Kino.jpg","img/char/036/Kino2.jpg"], type: "base" }
             ]
         }
     ]
