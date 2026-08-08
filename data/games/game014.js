@@ -8,8 +8,18 @@ const gameData = {
     year: "2022",
     publisher: ["Rejet"],
     cnStudio: "JOYOLAND",
-    writer: ["やまだ有見","真崎結衣","小和泉いづみ","三芳秀克","こたに白子","久遠まひろ","関涼子"],
-    art: ["前田浩孝"],
+    writer: [
+        {name:"真崎結衣", lang:"zh"},
+        {name:"小和泉いづみ", lang:"zh"},
+        {name:"三芳秀克", lang:"zh"},
+        {name:"久遠まひろ", lang:"zh"},
+        {name:"関涼子", lang:"zh"},
+        {name:"やまだ有見", lang:"ja"},
+        {name:"こたに白子", lang:"ja"}
+    ],
+    art: [
+        {name:"前田浩孝", lang:"zh"}
+    ],
     cover: "img/game/014.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 立华律香
