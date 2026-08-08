@@ -7,8 +7,12 @@ const gameData = {
     year: "2024",
     publisher: ["Otomate"],
     cnStudio: "JOYOLAND",
-    writer: ["吉村りりか"],
-    art: ["蓮本リョウ"],
+    writer: [
+        {name:"吉村りりか", lang:"zh"}
+    ],
+    art: [
+        {name:"蓮本リョウ", lang:"zh"}
+    ],
     cover: "img/game/038.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 娜雅
