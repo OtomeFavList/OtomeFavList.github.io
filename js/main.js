@@ -181,7 +181,7 @@ export function syncSingleGameSwitch(type, status) {
 }
 
 /**
- * 筛选下拉排序：中文拼音A‑Z → 英文A‑Z → 日文五十音
+ * 筛选下拉排序：中文拼音A‑Z → 英文A‑Z(忽略大小写) → 日文五十音(平假名优先，片假名转平假名)
  * @param {string[]} arr 原始字符串数组
  * @returns {string[]} 排好序的数组
  */
@@ -190,8 +190,11 @@ export function sortFilterOptionList(arr) {
 
     function getLangType(str) {
         const s = String(str ?? "");
+        // 包含汉字 →中文
         if (/[\u4e00-\u9fff]/.test(s)) return 'zh';
-        if (/^[a-zA-Z]/.test(s)) return 'en';
+        // 只要字符串存在英文字母，就归为英文（不管首字符，大小写全部算英文）
+        if (/[a-zA-Z]/.test(s)) return 'en';
+        // 平假名/片假名 →日文
         if (/[\u3040-\u30ff]/.test(s)) return 'ja';
         return 'other';
     }
@@ -205,14 +208,16 @@ export function sortFilterOptionList(arr) {
         const pa = priority[ta];
         const pb = priority[tb];
 
+        // 大类优先级不同，直接按优先级排序
         if(pa !== pb) return pa - pb;
 
         if(ta === 'zh') {
-            // ✅修复：使用标准减号 U+002D zh‑CN → zh-CN
             return sa.localeCompare(sb, 'zh-CN');
         } else if(ta === 'en') {
+            // sensitivity:'base'：忽略大小写、忽略重音，A a 排一起
             return sa.localeCompare(sb, 'en', {sensitivity:'base'});
         } else if(ta === 'ja') {
+            // 片假名全部转为平假名
             function toHiragana(s){
                 return s.replace(/[\u30a1-\u30fa]/g, c=>String.fromCharCode(c.charCodeAt(0)-0x60));
             }
