@@ -38,14 +38,23 @@
 */
 
 /* ==========【重要】卡片内部动态生成滑出面板 char / cp 两套（JS动态插入DOM） ========== */
-.char-slide-panel-char,
-.char-slide-panel-cp {
+.char-slide-panel-char{
     display:none;
     margin:8px 0;
     border:1px solid #f6a5b8;
     border-radius:8px;
     padding:12px;
     background:#fff7f9;
+}
+.char-slide-panel-cp {
+    display:none;
+    margin:8px 0;
+    border:1px solid #f6a5b8;
+    border-radius:8px;
+    padding:12px;
+    padding-bottom:56px;
+    background:#fff7f9;
+    position:relative;
 }
 .char-slide-panel-char.active,
 .char-slide-panel-cp.active {
@@ -1158,12 +1167,12 @@ h2{
 
 /* ========== CP选择面板底部按钮栏 ========== */
 .cp-select-btn-bar{
+    position:absolute;
+    right:12px;
+    bottom:12px;
     display:flex;
     gap:12px;
     justify-content:flex-end;
-    width:100%;
-    padding:12px 0 0 0;
-    margin-top:12px;
 }
 .cp-confirm-btn,
 .cp-cancel-btn{
