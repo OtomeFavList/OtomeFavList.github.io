@@ -8,8 +8,12 @@ const gameData = {
     year: "2022",
     publisher: ["Otomate"],
     cnStudio: "GSE",
-    writer: ["片桐由摩"],
-    art: ["さとい"],
+    writer: [
+        {name:"片桐由摩", lang:"zh"}
+    ],
+    art: [
+        {name:"さとい", lang:"ja"}
+    ],
     cover: "img/game/010.jpg",
     charList: [
         // 久世鸫
