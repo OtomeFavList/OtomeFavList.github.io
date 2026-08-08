@@ -6,10 +6,10 @@ const gameData = {
     id: "game016", // 全局唯一ID，不可重复
     name: "终远的威尔修 -ErroR:salvation-",
     year: "2022",
-    publisher: "Otomate",
+    publisher: ["Otomate"],
     cnStudio: "GSE",
     writer: ["中山智美","夕月","浅海藍子"],
-    art: "読",
+    art: ["読"],
     cover: "img/game/016.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 瑟蕾思
