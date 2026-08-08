@@ -7,8 +7,12 @@ const gameData = {
     year: "2024",
     publisher: ["TetraScope"],
     cnStudio: "TetraScope",
-    writer: ["kaiso"],
-    art: ["ne-on"],
+    writer: [
+        {name:"kaiso", lang:"en"}
+    ],
+    art: [
+        {name:"ne-on", lang:"en"}
+    ],
     cover: "img/game/034.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 姐崎希美
