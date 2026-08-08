@@ -5,10 +5,10 @@ const gameData = {
     id: "game025", // 全局唯一ID，不可重复
     name: "花之女王",
     year: "2023",
-    publisher: "Otomate",
+    publisher: ["Otomate"],
     cnStudio: "JSD",
     writer: ["いわた志信","小縞なお","有野幸","長野和泉","中山智美"],
-    art: "薄葉カゲロー",
+    art: ["薄葉カゲロー"],
     cover: "img/game/025.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 薇欧蕾特
