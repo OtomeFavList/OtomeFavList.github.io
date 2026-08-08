@@ -19,74 +19,62 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/g001_f0_1.jpg","img/char/g001_f0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g001_f0_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g001_f0_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/038/Naya.jpg","img/char/038/Naya2.jpg","img/char/038/Naya3.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 玖燕来
         {
             id: "g0_m01",
-            name: "男主1",
+            name: "玖燕来",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/038/Enrai.jpg","img/char/038/Enrai2.jpg","img/char/038/Enrai3.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 斐伊
         {
             id: "g0_m02",
-            name: "男主1",
+            name: "斐伊",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/038/Fey.jpg","img/char/038/Fey2.jpg","img/char/038/Fey3.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 洛欧
         {
             id: "g0_m03",
-            name: "男主1",
+            name: "洛欧",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/038/Ruwo.jpg","img/char/038/Ruwo2.jpg","img/char/038/Ruwo3.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 胡青凛
         {
             id: "g0_m04",
-            name: "男主1",
+            name: "胡青凛",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/038/Seirin.jpg","img/char/038/Seirin2.jpg","img/char/038/Seirin3.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 臧布尼勒
         {
             id: "g0_m05",
-            name: "男主1",
+            name: "臧布尼勒",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/038/Zebenera.jpg","img/char/038/Zebenera2.jpg","img/char/038/Zebenera3.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 羯磨
@@ -97,7 +85,7 @@ const gameData = {
             isHidden: true,
             isFD: false,
             images: [
-                { srcList: ["img/char/g001_h01_1.jpg"], type: "base" }
+                { srcList: ["img/char/038/Bicorn.jpg","img/char/038/Bicorn2.jpg","img/char/038/Bicorn3.png"], type: "base" }
             ]
         },
         // 斐恩
@@ -108,7 +96,7 @@ const gameData = {
             isHidden: true,
             isFD: false,
             images: [
-                { srcList: ["img/char/g001_h01_1.jpg"], type: "base" }
+                { srcList: ["img/char/038/Fuen.jpg","img/char/038/Fuen2.jpg"], type: "base" }
             ]
         }
     ]
