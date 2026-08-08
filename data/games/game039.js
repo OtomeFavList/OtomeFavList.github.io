@@ -7,8 +7,12 @@ const gameData = {
     year: "2024",
     publisher: ["Otomate"],
     cnStudio: "JSD",
-    writer: ["片桐由摩"],
-    art: ["さとい"],
+    writer: [
+        {name:"片桐由摩", lang:"zh"}
+    ],
+    art: [
+        {name:"さとい", lang:"ja"}
+    ],
     cover: "img/game/039.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 阎魔凛
