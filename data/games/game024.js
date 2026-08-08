@@ -22,6 +22,7 @@ const gameData = {
     ],
     art: [
         {name:"川人やすた", lang:"zh"}
+    ],
     cover: "img/game/024.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 山城历
