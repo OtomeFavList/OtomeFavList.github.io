@@ -6,10 +6,10 @@ const gameData = {
     id: "game006",
     name: "奥林匹亚的晚宴",
     year: "2021",
-    publisher: "Otomate",
+    publisher: ["Otomate"],
     cnStudio: "GSE",
     writer: ["片桐由摩"],
-    art: "さとい",
+    art: ["さとい"],
     cover: "img/game/006.jpg",
     charList: [
         // 奥林匹亚
