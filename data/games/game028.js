@@ -7,8 +7,12 @@ const gameData = {
     year: "2023",
     publisher: ["Otomate"],
     cnStudio: "GSE",
-    writer: ["高木亜由美"],
-    art: ["ユウヤ"],
+    writer: [
+        {name:"高木亜由美", lang:"zh"}
+    ],
+    art: [
+        {name:"ユウヤ", lang:"ja"}
+    ],
     cover: "img/game/028.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 浅木春
