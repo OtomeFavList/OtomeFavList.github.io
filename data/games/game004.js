@@ -6,10 +6,10 @@ const gameData = {
     id: "game004",
     name: "蒸汽监狱",
     year: "2021",
-    publisher: "HuneX",
+    publisher: ["HuneX"],
     cnStudio: "GSE",
     writer: ["ゆーます"],
-    art: "一色箱",
+    art: ["一色箱"],
     cover: "img/game/004.jpg",
     charList: [
         // 琪丝·提斯特拉
