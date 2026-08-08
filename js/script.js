@@ -736,19 +736,21 @@ export function initPage(Core = {}) {
         if (filterPub && game.publisher != filterPub) match = false;
         if (filterCn && game.cnStudio != filterCn) match = false;
 
+        // ========== 此处为本次修改点：writer / art 现在是对象数组，提取 .name 做匹配 ==========
         if (filterWriter) {
-          let writerArr = [];
+          let writerNameList = [];
           if (Array.isArray(game.writer)) {
-            writerArr = game.writer;
-          } else if (typeof game.writer === "string") {
-            writerArr = [game.writer];
+            writerNameList = game.writer.map(o=>o.name);
           }
-          if (!writerArr.includes(filterWriter)) match = false;
+          if (!writerNameList.includes(filterWriter)) match = false;
         }
 
         if(filterArt){
-          let artArr = Array.isArray(game.art) ? game.art : [game.art];
-          if(!artArr.includes(filterArt)) match = false;
+          let artNameList = [];
+          if(Array.isArray(game.art)){
+            artNameList = game.art.map(o=>o.name);
+          }
+          if(!artNameList.includes(filterArt)) match = false;
         }
 
         if (!match) return;
