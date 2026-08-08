@@ -7,7 +7,7 @@ const gameData = {
     year: "2024",
     publisher: ["Otomate","Rejet"],
     cnStudio: "JOYOLAND",
-    writer: ["剧本编剧","剧本编剧","剧本编剧","剧本编剧"],
+    writer: ["やまだ有見","小和泉いずみ","真崎結衣","恵莉ひなこ","加納高子","ウサギリス","吉村りりか"],
     art: "さとい",
     cover: "img/game/036.jpg", // 封面图路径，统一前缀img/
     charList: [
