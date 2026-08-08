@@ -7,8 +7,14 @@ const gameData = {
     year: "2023",
     publisher: ["Voltage"],
     cnStudio: "JOYOLAND",
-    writer: ["潮文音"],
-    art: ["のりた"],
+    writer: [""],
+    art: [""],
+    writer: [
+        {name:"潮文音", lang:"zh"}
+    ],
+    art: [
+        {name:"のりた", lang:"ja"}
+    ],
     cover: "img/game/026.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 安娜斯塔西娅·林赛尔
