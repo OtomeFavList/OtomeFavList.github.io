@@ -459,37 +459,33 @@ export function initPage(Core = {}) {
             return;
         }
 
-        // 【新增】确认按钮：草稿落地真实数据，关闭男主候选区，保留cp面板，局部更新预览
+        // 【修改】确认按钮：草稿落地真实数据，关闭全部女主的男角色筛选框，直接全局渲染
         const cpConfirmBtn = e.target.closest(".cp-confirm-btn");
         if(cpConfirmBtn){
             e.stopPropagation();
             const fid = cpConfirmBtn.dataset.fid;
             const gid = cpConfirmBtn.dataset.gid;
-            const cardDom = cpConfirmBtn.closest(".added-game-card");
             const panel = cpConfirmBtn.closest(".char-slide-panel-cp");
             const draftMap = panel._tempCpDraftMap;
-            if(!draftMap || !draftMap[fid] || !cardDom) return;
+            if(!draftMap || !draftMap[fid]) return;
             const gameItem = appData.gameList.find(g=>g.gameId === gid);
             if(!gameItem) return;
-            const gameInfo = gameTemplateList.find(g=>g.id === gid);
-            if(!gameInfo) return;
 
+            // 当前确认的女主草稿落地
             const st = gameItem.cpEditState.find(s=>s.femaleId === fid);
             if(!st) return;
-            // 草稿落地真实数据
             st.maleIds = Array.from(draftMap[fid]);
-            st.openMalePanel = false;
-            saveData();
 
-            // ✅关键：不全局刷新整个卡片！只做两件事
-            // 1. 关闭当前男主展开区块（局部DOM修改，不销毁外层cp面板）
-            const maleWrap = panel.querySelector(`.cp-male-select-wrap[data-fid="${fid}"]`);
-            if(maleWrap) maleWrap.remove();
-            // 2. 直接更新本卡片的cp预览输出框，立刻看到修改结果，不需要关闭面板
-            const cpRenderBox = cardDom.querySelector(".cp-render-box");
-            if(cpRenderBox){
-                cpRenderBox.innerHTML = renderCP(gameItem, gameInfo) || `<div class="empty-hint">暂未选择角色</div>`;
-            }
+            // 【核心改动】把该游戏下所有女主的openMalePanel全部设为false
+            gameItem.cpEditState.forEach(item=>{
+                item.openMalePanel = false;
+            });
+
+            saveData();
+            // 直接全局刷新卡片，全部筛选框自动关闭，视图直接渲染完成
+            requestAnimationFrame(()=>{
+                window.refreshGameCardUi();
+            });
             return;
         }
 
