@@ -8,8 +8,16 @@ const gameData = {
     year: "2022",
     publisher: ["Otomate"],
     cnStudio: "JSD",
-    writer: ["伊東愛","崎本知世","庵原ふじ","榛乃綾子","春森よしちか"],
-    art: ["読"],
+    writer: [
+        {name:"伊東愛", lang:"zh"},
+        {name:"崎本知世", lang:"zh"},
+        {name:"庵原ふじ", lang:"zh"},
+        {name:"榛乃綾子", lang:"zh"},
+        {name:"春森よしちか", lang:"zh"},
+    ],
+    art: [
+        {name:"読", lang:"zh"}
+    ],
     cover: "img/game/011.jpg",
     charList: [
         // 源义经
