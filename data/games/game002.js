@@ -6,10 +6,10 @@ const gameData = {
     id: "game002",
     name: "第六妖守",
     year: "2021",
-    publisher: "Otomate",
+    publisher: ["Otomate"],
     cnStudio: "GSE",
     writer: ["みぞおち鳩子","仰木サヤ","七瀬みお","紫堂零"],
-    art: "スオウ",
+    art: ["スオウ"],
     cover: "img/game/002.jpg",
     charList: [
         // 秋津志乃
