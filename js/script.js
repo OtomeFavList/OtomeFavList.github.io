@@ -280,8 +280,35 @@ export function initPage(Core = {}) {
       }
 
       document.querySelectorAll(".modal-trigger").forEach(dom => dom.classList.remove("modal-trigger"));
-      let html = "";
 
+      // =========【修复：第一步：预处理所有游戏数据，先补全cpEditState / cpList，不操作DOM】=========
+      appData.gameList?.forEach((gameItem) => {
+        if (!gameItem) return;
+        const gameInfo = gameTemplateList.find(g => g.id === gameItem.gameId);
+        if (!gameInfo) return;
+
+        const allChars = getAllGameChar(gameInfo);
+        const femaleChars = allChars.filter(c => c.gender === "female");
+
+        // cp模式数据初始化逻辑（和renderCharSelectPanel内部cp分支完全一致）
+        if(!Array.isArray(gameItem.cpEditState) || gameItem.cpEditState.length ===0){
+            gameItem.cpEditState = femaleChars.map(f=>({
+                femaleId: f.id,
+                openMalePanel: false,
+                maleIds: []
+            }));
+        }
+        // 预生成cpList，保证renderCP拿到最新数据
+        gameItem.cpList = gameItem.cpEditState
+            .filter(st=>st.maleIds.length>0)
+            .map(st=>({
+                femaleId: st.femaleId,
+                maleIds: [...st.maleIds]
+            }));
+      });
+
+      // 全部预处理完成，再拼接HTML
+      let html = "";
       appData.gameList?.forEach((gameItem, index) => {
         if (!gameItem) return;
         const gameInfo = gameTemplateList.find(g => g.id === gameItem.gameId);
@@ -348,7 +375,7 @@ export function initPage(Core = {}) {
         const charPanel = cardDom.querySelector(".char-slide-panel-char");
         const cpPanel = cardDom.querySelector(".char-slide-panel-cp");
 
-        // 1.先填充面板内容
+        // DOM面板填充（只负责渲染滑出面板内部HTML，数据已经预处理完毕）
         if(charPanel) renderCharSelectPanel(cardDom, gid, "char", charPanel);
         if(cpPanel) renderCharSelectPanel(cardDom, gid, "cp", cpPanel);
 
