@@ -5,10 +5,10 @@ const gameData = {
     id: "game024", // 全局唯一ID，不可重复
     name: "KLAP!! ~爱与惩罚~",
     year: "2023",
-    publisher: "Otomate",
+    publisher: ["Otomate"],
     cnStudio: "JOYOLAND",
     writer: ["皆川千尋","水都","春夏秋冬よもひろ","夏越ちか","狐塚冬里","城戸蘭丸","駒豆羅々子","寺須ハウス","高林祐樹","有野幸","佐々木麿"],
-    art: "川人やすた",
+    art: ["川人やすた"],
     cover: "img/game/024.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 山城历
