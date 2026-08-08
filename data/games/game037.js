@@ -13,7 +13,7 @@ const gameData = {
     charList: [
         // 中山日南子
         {
-            id: "g0_f01",
+            id: "g037_f01",
             name: "中山日南子",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
@@ -24,7 +24,7 @@ const gameData = {
         },
         // 鬼岛凤凰
         {
-            id: "g0_m01",
+            id: "g037_m01",
             name: "鬼岛凤凰",
             gender: "male",
             isHidden: false,
@@ -35,7 +35,7 @@ const gameData = {
         },
         // 吉良麟太郎
         {
-            id: "g0_m02",
+            id: "g037_m02",
             name: "吉良麟太郎",
             gender: "male",
             isHidden: false,
@@ -46,7 +46,7 @@ const gameData = {
         },
         // 金春贵之
         {
-            id: "g0_m03",
+            id: "g037_m03",
             name: "金春贵之",
             gender: "male",
             isHidden: false,
@@ -57,7 +57,7 @@ const gameData = {
         },
         // 箕轮斗斗丸
         {
-            id: "g0_m04",
+            id: "g037_m04",
             name: "箕轮斗斗丸",
             gender: "male",
             isHidden: false,
@@ -68,7 +68,7 @@ const gameData = {
         },
         // 未良子裕太
         {
-            id: "g0_m05",
+            id: "g037_m05",
             name: "未良子裕太",
             gender: "male",
             isHidden: false,
@@ -79,7 +79,7 @@ const gameData = {
         },
         // 相乐天马
         {
-            id: "g0_fd01",
+            id: "g037_fd01",
             name: "相乐天马",
             gender: "male",
             isHidden: false,
