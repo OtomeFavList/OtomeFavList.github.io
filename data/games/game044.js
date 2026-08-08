@@ -7,8 +7,22 @@ const gameData = {
     year: "2024",
     publisher: ["Otomate"],
     cnStudio: "GSE",
-    writer: ["喜多南","ゆきみなべ","亜文","小縞なお","鵜森はだし","Salala","葉月ネリカ","海野凛久","藤川ちより","長田大夢","長野和泉"],
-    art: ["ユウヤ"],
+    writer: [
+        {name:"喜多南", lang:"zh"},
+        {name:"亜文", lang:"zh"},
+        {name:"小縞なお", lang:"zh"},
+        {name:"鵜森はだし", lang:"zh"},
+        {name:"葉月ネリカ", lang:"zh"},
+        {name:"海野凛久", lang:"zh"},
+        {name:"藤川ちより", lang:"zh"},
+        {name:"長田大夢", lang:"zh"},
+        {name:"長野和泉", lang:"zh"},
+        {name:"ゆきみなべ", lang:"ja"},
+        {name:"Salala", lang:"en"}
+    ],
+    art: [
+        {name:"ユウヤ", lang:"ja"}
+    ],
     cover: "img/game/044.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 逸色珠沙
