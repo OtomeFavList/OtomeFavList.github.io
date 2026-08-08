@@ -521,8 +521,10 @@ button:hover{
 .game-search-box .char-pool{
     grid-template-columns:repeat(auto-fill,minmax(130px,1fr));
 }
+/* ========== char-item 修复：flex纵向布局，解决长名字高度错位 ========== */
 .char-item{
     width: 120px;
+    min-height:168px;
     text-align:center;
     border:1px solid #eee;
     padding:8px;
@@ -530,6 +532,10 @@ button:hover{
     cursor:pointer;
     background:#fff;
     transition:0.2s ease;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
 }
 .char-item.selected{
     border-color:#e895a8;
@@ -547,6 +553,7 @@ button:hover{
     position:relative;
     border:1px solid #e2e2e2;
     margin-bottom:8px;
+    flex-shrink:0;
 }
 .char-item .char-card-img-box img{
     position:absolute;
@@ -560,6 +567,12 @@ button:hover{
 .char-item .char-card-name {
     font-size:14px;
     color:#222;
+    line-height:1.4;
+    min-height:42px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    word-break:break-word;
 }
 .char-img-switch{
     font-size:12px;
@@ -571,22 +584,28 @@ button:hover{
 .char-img-switch:hover{
     color:#c0392b;
 }
+/* 关键：同一行卡片强制拉伸等高，替换原 align-items:flex-end */
 .char-selected-row{
     display:flex;
     gap:14px;
     flex-wrap:wrap;
     margin:12px 0;
-    align-items:flex-end;
+    align-items:stretch;
 }
 
 /* ========== 【渲染输出选中角色卡片 char-card-item ========== */
 .char-card-item{
     width:120px;
+    min-height:168px;
     text-align:center;
     border:1px solid #eee;
     padding:8px;
     border-radius:10px;
     background:#fff;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
 }
 .char-card-item.selected{
     border-color:#e895a8;
@@ -601,6 +620,7 @@ button:hover{
     position:relative;
     border:1px solid #e2e2e2;
     margin-bottom:8px;
+    flex-shrink:0;
 }
 .char-card-img-box img{
     position:absolute;
@@ -614,6 +634,12 @@ button:hover{
 .char-card-name{
     font-size:14px;
     color:#222;
+    line-height:1.4;
+    min-height:42px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    word-break:break-word;
 }
 
 /* ==========【新增】角色图片切换按钮 左右翻图按钮 ========== */
@@ -665,11 +691,12 @@ button:hover{
 .hero-list-column{
     flex: 0 0 75%;
 }
+/* 关键：同一行卡片强制拉伸等高，替换原 align-items:flex-end */
 .char-card-wrapper{
     display:flex;
     gap:12px;
     flex-wrap:wrap;
-    align-items:flex-end;
+    align-items:stretch;
 }
 
 /* ========== checkbox过渡 ========== */
@@ -959,9 +986,10 @@ h2{
     flex-direction:column;
     gap:8px;
 }
-/* 待选女主：完全复制 char-item 样式 */
+/* 待选女主：完全复制 char-item 样式，增加flex纵向布局修复高度 */
 .cp-female-card-btn{
     width: 120px;
+    min-height:168px;
     text-align:center;
     border:1px solid #eee;
     padding:8px;
@@ -969,7 +997,10 @@ h2{
     cursor:pointer;
     background:#fff;
     transition:0.2s ease;
-    display:block;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
 }
 .cp-female-card-btn.selected{
     border-color:#e895a8;
@@ -987,6 +1018,7 @@ h2{
     position:relative;
     border:1px solid #e2e2e2;
     margin-bottom:8px;
+    flex-shrink:0;
 }
 .cp-female-card-btn .char-card-img-box img {
     position:absolute;
@@ -1001,6 +1033,12 @@ h2{
     font-size:14px;
     color:#222;
     text-align:center;
+    line-height:1.4;
+    min-height:42px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    word-break:break-word;
 }
 
 /* ✅修改：增加position:relative，替换原有cp‑male‑select-wrap定义 */
@@ -1020,10 +1058,12 @@ h2{
     display:flex;
     flex-wrap:wrap;
     gap:12px;
+    align-items:stretch;
 }
-/* 待选男主 cp‑male‑item：1:1复刻 char‑item */
+/* 待选男主 cp‑male‑item：1:1复刻 char‑item，flex纵向布局修复高度 */
 .cp-male-item{
     width: 120px;
+    min-height:168px;
     text-align:center;
     border:1px solid #eee;
     padding:8px;
@@ -1031,6 +1071,10 @@ h2{
     cursor:pointer;
     background:#fff;
     transition:0.2s ease;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
 }
 .cp-male-item.selected{
     border-color:#e895a8;
@@ -1048,6 +1092,7 @@ h2{
     position:relative;
     border:1px solid #e2e2e2;
     margin-bottom:8px;
+    flex-shrink:0;
 }
 .cp-male-item .char-card-img-box img {
     position:absolute;
@@ -1061,16 +1106,27 @@ h2{
 .cp-male-item .char-card-name {
     font-size:14px;
     color:#222;
+    line-height:1.4;
+    min-height:42px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    word-break:break-word;
 }
 
 /* ========== 【新增】CP已选角色卡片（已选女主、已选男主，完全对齐 char‑card‑item） ========== */
 .cp-selected-card-item{
     width:120px;
+    min-height:168px;
     text-align:center;
     border:1px solid #eee;
     padding:8px;
     border-radius:10px;
     background:#fff;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
 }
 .cp-selected-card-item.selected{
     border-color:#e895a8;
@@ -1085,6 +1141,7 @@ h2{
     position:relative;
     border:1px solid #e2e2e2;
     margin-bottom:8px;
+    flex-shrink:0;
 }
 .cp-selected-card-item .char-card-img-box img{
     position:absolute;
@@ -1098,6 +1155,12 @@ h2{
 .cp-selected-card-item .char-card-name{
     font-size:14px;
     color:#222;
+    line-height:1.4;
+    min-height:42px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    word-break:break-word;
 }
 
 /* ========== CP待选卡片 图片切换按钮（复用char‑switch‑btn基础类） ========== */
