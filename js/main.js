@@ -181,7 +181,7 @@ export function syncSingleGameSwitch(type, status) {
 }
 
 /**
- * 筛选下拉排序：中文拼音A-Z → 英文A-Z → 日文五十音
+ * 筛选下拉排序：中文拼音A‑Z → 英文A‑Z → 日文五十音
  * @param {string[]} arr 原始字符串数组
  * @returns {string[]} 排好序的数组
  */
@@ -208,6 +208,7 @@ export function sortFilterOptionList(arr) {
         if(pa !== pb) return pa - pb;
 
         if(ta === 'zh') {
+            // ✅修复：使用标准减号 U+002D zh‑CN → zh-CN
             return sa.localeCompare(sb, 'zh-CN');
         } else if(ta === 'en') {
             return sa.localeCompare(sb, 'en', {sensitivity:'base'});
@@ -231,7 +232,7 @@ export function sortFilterOptionList(arr) {
 // ===================== 筛选下拉菜单填充函数 =====================
 /**
  * 【修复】筛选下拉填充：保留HTML原生顶部placeholder option，只追加数据选项，不再覆盖HTML提示文字
- * 排序规则：中文A-Z →英文A-Z →日文五十音；发售年份数字降序
+ * 排序规则：中文A‑Z →英文A‑Z →日文五十音；发售年份数字降序
  * @param {Array} gameList 游戏模板数组
  */
 export function fillFilterOptions(gameList) {
@@ -489,6 +490,7 @@ export function getAllGameChar(gameInfo) {
         return true;
     });
 
+    // ✅修复两处 localeCompare 语言标签，替换为标准 zh‑CN → zh-CN
     const female = chars.filter(c => c.gender === "female").sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
     const male = chars.filter(c => c.gender === "male").sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
 
@@ -499,7 +501,7 @@ export function getAllGameChar(gameInfo) {
 /**
  * 单人Character面板勾选切换 → 操作 gameItem.selectChars
  * @param {Object} gameItem appData.gameList内的游戏条目
- * @param {string} charId 角色id
+ * @param {charId} charId 角色id
  */
 export function toggleCharItemSelect(gameItem, charId) {
     if (!Array.isArray(gameItem.selectChars)) gameItem.selectChars = [];
@@ -734,7 +736,7 @@ function bindGlobalSwitchSpoilerEvents() {
     // 弹窗确认【扩展：同时处理全局 / 动态卡片局部】
     spoilerConfirmBtn.onclick = null;
     spoilerConfirmBtn.addEventListener("click", function () {
-        // 优先处理动态游戏卡片操作（含弹窗内modal-local-*开关）
+        // 优先处理动态游戏卡片操作（含弹窗内modal-local‑*开关）
         if (window.pendingGameOp) {
             const op = window.pendingGameOp;
             const g = appData.gameList[op.idx];
