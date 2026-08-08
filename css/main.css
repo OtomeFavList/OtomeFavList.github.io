@@ -1001,8 +1001,10 @@ h2{
     text-align:center;
 }
 
-/* ❗删除外围灰色边框和padding，这是多余外层容器 */
+/* ❗删除外围灰色边框和padding，这是多余外层容器；增加position:relative、padding‑bottom:60px */
 .cp-male-select-wrap{
+    position: relative;
+    padding-bottom: 60px;
     padding:0;
     border:none;
     border-radius:0;
@@ -1011,12 +1013,11 @@ h2{
     font-weight:bold;
     margin-bottom:8px;
 }
+/* 删除原有的 position:relative; padding‑bottom:60px; gap改为12px */
 .cp-male-list{
     display:flex;
     flex-wrap:wrap;
-    gap:14px;  /* 和 char‑pool gap:14px 保持一致 */
-    position: relative;
-    padding-bottom: 60px; /* 预留底部空间，给右下角按钮栏，避免遮挡角色卡片 */
+    gap:12px;
 }
 /* 待选男主 cp‑male‑item：1:1复刻 char‑item */
 .cp-male-item{
@@ -1167,14 +1168,13 @@ h2{
     right: 8px;
 }
 
-/* ========== CP选择面板底部按钮栏 ========== */
+/* ========== CP选择面板底部按钮栏【修改定位与gap】 ========== */
 .cp-select-btn-bar{
-    position:absolute;
-    right:12px;
-    bottom:12px;
-    display:flex;
-    gap:12px;
-    justify-content:flex-end;
+    position: absolute;
+    right: 16px;
+    bottom: 12px;
+    display: flex;
+    gap: 10px;
 }
 .cp-confirm-btn,
 .cp-cancel-btn{
