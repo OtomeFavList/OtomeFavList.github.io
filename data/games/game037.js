@@ -65,7 +65,7 @@ const gameData = {
         },
         // 普通可攻略男主 male
         {
-            id: "g0_m04",
+            id: "g0_m03",
             name: "男主1",
             gender: "male",
             isHidden: false,
@@ -76,21 +76,7 @@ const gameData = {
                 { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
-        // 普通可攻略男主 male
-        {
-            id: "g0_m05",
-            name: "男主1",
-            gender: "male",
-            isHidden: false,
-            isFD: false,
-            images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
-            ]
-    { srcList: ["img/char/g001_fd01_1.jpg"], type: "base" }
-            ]
-        }
+        
     ]
 };
 
