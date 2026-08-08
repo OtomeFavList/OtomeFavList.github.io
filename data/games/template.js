@@ -10,12 +10,12 @@ const gameData = {
     writer: [
         {name:"中文编剧", lang:"zh"},
         {name:"日文编剧", lang:"ja"},
-        {name:"英文编剧", lang:"en"},
+        {name:"英文编剧", lang:"en"}
     ],
     art: [
         {name:"中文原画", lang:"zh"},
         {name:"日文原画", lang:"ja"},
-        {name:"英文原画", lang:"en"},
+        {name:"英文原画", lang:"en"}
     ],
     cover: "img/game/0.jpg", // 封面图路径，统一前缀img/
     charList: [
