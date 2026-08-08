@@ -24,7 +24,7 @@ const gameData = {
         },
         // 仓口步
         {
-            id: "g0_m01",
+            id: "g034_m01",
             name: "仓口步",
             gender: "male",
             isHidden: false,
@@ -35,7 +35,7 @@ const gameData = {
         },
         // 星名穗积
         {
-            id: "g0_m02",
+            id: "g034_m02",
             name: "星名穗积",
             gender: "male",
             isHidden: false,
@@ -46,7 +46,7 @@ const gameData = {
         },
         // 姐崎隼
         {
-            id: "g0_m03",
+            id: "g034_m03",
             name: "姐崎隼",
             gender: "male",
             isHidden: false,
