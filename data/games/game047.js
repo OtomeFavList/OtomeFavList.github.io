@@ -8,81 +8,77 @@ const gameData = {
     publisher: ["BROCCOLI"],
     cnStudio: "GSE",
     writer: [
-        {name:"中文编剧", lang:"zh"},
-        {name:"日文编剧", lang:"ja"},
-        {name:"英文编剧", lang:"en"}
+        {name:"かずら林檎", lang:"zh"}
     ],
     art: [
-        {name:"中文原画", lang:"zh"},
-        {name:"日文原画", lang:"ja"},
-        {name:"英文原画", lang:"en"}
+        {name:"RiRi", lang:"en"}
     ],
     cover: "img/game/047.jpg", // 封面图路径，统一前缀img/
     charList: [
-        // 女主模板 female
+        // 雏菊
         {
             id: "g047_f01",
-            name: "女主A",
+            name: "雏菊",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/g001_f0_1.jpg","img/char/g001_f0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/047/Hinagiku.jpg","img/char/047/Hinagiku2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 淡雪
         {
             id: "g047_m01",
-            name: "男主1",
+            name: "淡雪",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/047/Awayuki.jpg","img/char/047/Awayuki2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 帷
         {
             id: "g047_m02",
-            name: "男主1",
+            name: "帷",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/047/Tobari.jpg","img/char/047/Tobari2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 露草
         {
             id: "g047_m03",
-            name: "男主1",
+            name: "露草",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/047/Tsuyukusa.jpg","img/char/047/Tsuyukusa2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 矢代
         {
             id: "g047_m04",
-            name: "男主1",
+            name: "矢代",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/047/Yashiro.jpg","img/char/047/Yashiro2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 依
         {
             id: "g047_m05",
             name: "男主1",
-            gender: "male",
+            gender: "依",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/047/Yori.jpg","img/char/047/Yori2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         }
     ]
