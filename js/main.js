@@ -295,6 +295,7 @@ export function fillFilterOptions(gameList) {
 // ===================== HTML模板渲染函数 =====================
 /**
  * 渲染游戏选择列表卡片模板
+ * 【修复】硬编码输出顺序，不再依赖对象key顺序：编剧→画师→发售年份→发行厂商→汉化厂商
  * 布局：左侧封面，右侧竖排信息，移除名称旁发售年份
  * @param {Object} game 游戏模板对象
  * @returns {string} html字符串
@@ -322,15 +323,24 @@ export function renderGameSelectItem(game) {
         pubText = game.publisher.join("、");
     }
 
+    // 【硬编码固定输出顺序，不受对象属性顺序干扰】
+    const lines = [];
+    lines.push(`编剧：${writerText}`);
+    lines.push(`画师：${artText}`);
+    lines.push(`发售年份：${game.year || "无"}`);
+    lines.push(`发行厂商：${pubText}`);
+    lines.push(`汉化厂商：${game.cnStudio || "无"}`);
+
+    let infoHtml = "";
+    for(const t of lines){
+        infoHtml += `<div>${t}</div>`;
+    }
+
     return `
         <img src="${game.cover || ''}" alt="${game.name || ''}">
         <div>
             <div class="game-option-name">${game.name || ""}</div>
-            <div>编剧：${writerText}</div>
-            <div>画师：${artText}</div>
-            <div>发售年份：${game.year || "无"}</div>
-            <div>发行厂商：${pubText}</div>
-            <div>汉化厂商：${game.cnStudio || "无"}</div>
+            ${infoHtml}
         </div>
     `;
 }
