@@ -5,65 +5,65 @@ const gameData = {
     id: "game030", // 全局唯一ID，不可重复
     name: "花合朔",
     year: "2023",
-    publisher: "原厂发行商",
-    cnStudio: "汉化组/汉化厂商",
-    writer: ["剧本编剧","剧本编剧","剧本编剧","剧本编剧"],
-    art: "原画画师",
+    publisher: "HuneX",
+    cnStudio: "dramatic create",
+    writer: ["月花"],
+    art: "由良",
     cover: "img/game/030.jpg", // 封面图路径，统一前缀img/
     charList: [
-        // 女主模板 female
+        // 美琴
         {
             id: "g030_f01",
-            name: "女主A",
+            name: "美琴",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/g001_f0_1.jpg","img/char/g001_f0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/030/Mikoto.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 姬空木
         {
             id: "g030_m01",
-            name: "男主1",
+            name: "姬空木",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/030/Himeutsugi.jpg","img/char/030/Himeutsugi2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 伊吕波
         {
             id: "g030_m02",
-            name: "男主1",
+            name: "伊吕波",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/030/Iroha.jpg","img/char/030/Iroha2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 唐红
         {
             id: "g030_m03",
-            name: "男主1",
+            name: "唐红",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/030/Karakurenai.jpg","img/char/030/Karakurenai2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 蛟
         {
             id: "g030_m04",
-            name: "男主1",
+            name: "蛟",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/030/Mizuchi.jpg","img/char/030/Mizuchi2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         }
     ]
