@@ -2,18 +2,18 @@
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
 // 无需额外配置，仅需要到 main.js 顶部 🚨gameIdList数组追加编号"002","003"...
 const gameData = {
-    id: "game0", // 全局唯一ID，不可重复
+    id: "game043", // 全局唯一ID，不可重复
     name: "共鸣之吻",
-    year: "20",
-    publisher: ["原厂发行商"],
-    cnStudio: "汉化组/汉化厂商",
-    writer: ["剧本编剧","剧本编剧","剧本编剧","剧本编剧"],
-    art: ["原画画师"],
-    cover: "img/game/0.jpg", // 封面图路径，统一前缀img/
+    year: "2024",
+    publisher: ["Otomate"],
+    cnStudio: "JSD",
+    writer: ["ウサギリス株式会社","YUKI","星野彼方","青木ひろえ","大山愛乃","北弓しほ"],
+    art: ["藤理ト"],
+    cover: "img/game/043.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 女主模板 female
         {
-            id: "g0_f01",
+            id: "g043_f01",
             name: "女主A",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
@@ -24,7 +24,7 @@ const gameData = {
         },
         // 普通可攻略男主 male
         {
-            id: "g0_m01",
+            id: "g043_m01",
             name: "男主1",
             gender: "male",
             isHidden: false,
@@ -35,7 +35,7 @@ const gameData = {
         },
         // 普通可攻略男主 male
         {
-            id: "g0_m02",
+            id: "g043_m02",
             name: "男主1",
             gender: "male",
             isHidden: false,
@@ -46,7 +46,7 @@ const gameData = {
         },
         // 普通可攻略男主 male
         {
-            id: "g0_m03",
+            id: "g043_m03",
             name: "男主1",
             gender: "male",
             isHidden: false,
@@ -57,7 +57,7 @@ const gameData = {
         },
         // 普通可攻略男主 male
         {
-            id: "g0_m04",
+            id: "g043_m04",
             name: "男主1",
             gender: "male",
             isHidden: false,
@@ -68,7 +68,18 @@ const gameData = {
         },
         // 普通可攻略男主 male
         {
-            id: "g0_m05",
+            id: "g043_m05",
+            name: "男主1",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            images: [
+                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+            ]
+        },
+        // 普通可攻略男主 male
+        {
+            id: "g043_m06",
             name: "男主1",
             gender: "male",
             isHidden: false,
@@ -79,18 +90,18 @@ const gameData = {
         },
         // 隐藏角色（isHidden=true → 开关开启才显示整个角色卡片）
         {
-            id: "g0_h01",
+            id: "g043_h01",
             name: "隐藏攻略角色",
             gender: "male",
             isHidden: true,
             isFD: false,
             images: [
-                { srcList: ["img/char/g001_h01_1.jpg"], type: "base" }
+                { srcList: ["img/char/g001_h01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" }
             ]
         },
         // 隐藏角色（isHidden=true → 开关开启才显示整个角色卡片）
         {
-            id: "g0_h02",
+            id: "g043_h02",
             name: "隐藏攻略角色",
             gender: "male",
             isHidden: true,
