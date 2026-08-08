@@ -90,7 +90,7 @@ const gameData = {
         },
         // 艾斯
         {
-            id: "g0_fd01",
+            id: "g021_fd01",
             name: "艾斯",
             gender: "male",
             isHidden: false,
@@ -101,7 +101,7 @@ const gameData = {
         },
         // 波利斯·艾瑞
         {
-            id: "g0_fd02",
+            id: "g021_fd02",
             name: "波利斯·艾瑞",
             gender: "male",
             isHidden: false,
@@ -112,7 +112,7 @@ const gameData = {
         },
         // 格雷·林谷马克
         {
-            id: "g0_fd03",
+            id: "g021_fd03",
             name: "格雷·林谷马克",
             gender: "male",
             isHidden: false,
@@ -123,7 +123,7 @@ const gameData = {
         },
         // 汉尼瓦·葛特
         {
-            id: "g0_fd04",
+            id: "g021_fd04",
             name: "汉尼瓦·葛特",
             gender: "male",
             isHidden: false,
@@ -134,7 +134,7 @@ const gameData = {
         },
         // Joker
         {
-            id: "g0_fd05",
+            id: "g021_fd05",
             name: "Joker",
             gender: "male",
             isHidden: false,
@@ -145,7 +145,7 @@ const gameData = {
         },
         // 奈特梅尔·哥德夏洛克
         {
-            id: "g0_fd06",
+            id: "g021_fd06",
             name: "奈特梅尔·哥德夏洛克",
             gender: "male",
             isHidden: false,
