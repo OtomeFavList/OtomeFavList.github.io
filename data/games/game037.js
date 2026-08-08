@@ -11,72 +11,83 @@ const gameData = {
     art: "黒蜜きなこ",
     cover: "img/game/037.jpg", // 封面图路径，统一前缀img/
     charList: [
-        // 女主模板 female
+        // 中山日南子
         {
             id: "g0_f01",
-            name: "女主A",
+            name: "中山日南子",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/g001_f0_1.jpg","img/char/g001_f0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g001_f0_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g001_f0_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/037/Hinako.jpg","img/char/037/Hinako2.jpg","img/char/037/Hinako3.jpgg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 鬼岛凤凰
         {
             id: "g0_m01",
-            name: "男主1",
+            name: "鬼岛凤凰",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/037/Houou.jpg","img/char/037/Houou2.jpg","img/char/037/Houou3.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 吉良麟太郎
         {
             id: "g0_m02",
-            name: "男主1",
+            name: "吉良麟太郎",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/037/Rintarou.png","img/char/037/Rintarou2.png","img/char/037/Rintarou3.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 金春贵之
         {
             id: "g0_m03",
-            name: "男主1",
+            name: "金春贵之",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/037/Takayuki.jpg","img/char/037/Takayuki2.jpgg","img/char/037/Takayuki3.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 箕轮斗斗丸
         {
-            id: "g0_m03",
-            name: "男主1",
+            id: "g0_m04",
+            name: "箕轮斗斗丸",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/037/Totomaru.jpg","img/char/037/Totomaru2.jpg","img/char/037/Totomaru3.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        
+        // 未良子裕太
+        {
+            id: "g0_m05",
+            name: "未良子裕太",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            images: [
+                { srcList: ["img/char/037/Yuuta.jpg","img/char/037/Yuuta2.jpg","img/char/037/Yuuta3.jpg"], type: "base" },      // 默认基础图，始终加载
+            ]
+        },
+        // 相乐天马
+        {
+            id: "g0_fd01",
+            name: "相乐天马",
+            gender: "male",
+            isHidden: false,
+            isFD: true,
+            images: [
+                { srcList: ["img/char/037/Tenma.jpg","img/char/037/Tenma2.jpg","img/char/037/Tenma3.jpg","img/char/037/Tenma4.jpg"], type: "base" }
+            ]
+        }
     ]
 };
 
