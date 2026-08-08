@@ -1172,11 +1172,23 @@ h2{
 .cp-select-btn-bar{
     display: flex;
     gap: 10px;
-    margin-top:12px;
+    margin-top:8px;
     justify-content: flex-end;
     flex-wrap: wrap;
+    /* 放在cp‑male‑select-wrap内部右下角 */
+    padding-right:4px;
 }
 .cp-confirm-btn,
 .cp-cancel-btn{
     padding:6px 14px;
+}
+
+/* 男主外层容器，为右下角按钮提供上下文 */
+.cp-male-select-wrap{
+    min-height: 180px;
+    border:none;
+    border-radius:0;
+    position: relative;
+    /* 增加上下间距，隔开列表与按钮 */
+    padding-bottom:4px;
 }
