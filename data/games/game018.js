@@ -8,8 +8,14 @@ const gameData = {
     year: "2023",
     publisher: ["Otomate"],
     cnStudio: "GSE",
-    writer: ["潮文音","一二階"],
-    art: ["悌太","清白かりん"],
+    writer: [
+        {name:"潮文音", lang:"zh"},
+        {name:"一二階", lang:"zh"}
+    ],
+    art: [
+        {name:"悌太", lang:"zh"},
+        {name:"清白かりん", lang:"zh"}
+    ],
     cover: "img/game/018.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 小春
