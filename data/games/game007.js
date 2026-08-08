@@ -8,8 +8,15 @@ const gameData = {
     year: "2021",
     publisher: ["Otomate"],
     cnStudio: "JSD",
-    writer: ["有野幸","砂原有季","いわた志信","小縞なお"],
-    art: ["花邑まい"],
+    writer: [
+        {name:"有野幸", lang:"zh"},
+        {name:"砂原有季", lang:"zh"},
+        {name:"小縞なお", lang:"zh"},
+        {name:"いわた志信", lang:"ja"}
+    ],
+    art: [
+        {name:"花邑まい", lang:"zh"}
+    ],
     cover: "img/game/007.jpg",
     charList: [
         // 星野市香
