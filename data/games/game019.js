@@ -6,10 +6,10 @@ const gameData = {
     id: "game019", // 全局唯一ID，不可重复
     name: "薄樱鬼 真改 风华传",
     year: "2022",
-    publisher: "Otomate",
+    publisher: ["Otomate"],
     cnStudio: "JOYOLAND",
     writer: ["長野和泉","小縞なお"],
-    art: "四季咲組",
+    art: ["四季咲組"],
     cover: "img/game/019.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 雪村千鹤
