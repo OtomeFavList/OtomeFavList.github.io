@@ -5,10 +5,10 @@ const gameData = {
     id: "game038", // 全局唯一ID，不可重复
     name: "茉莉花之炯 天命胤异传",
     year: "2024",
-    publisher: "Otomate",
+    publisher: ["Otomate"],
     cnStudio: "JOYOLAND",
     writer: ["吉村りりか"],
-    art: "蓮本リョウ",
+    art: ["蓮本リョウ"],
     cover: "img/game/038.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 娜雅
