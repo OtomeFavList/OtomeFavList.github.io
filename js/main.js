@@ -190,12 +190,12 @@ export function sortFilterOptionList(arr) {
 
     function getLangType(str) {
         const s = String(str ?? "");
-        // 包含汉字 →中文
-        if (/[\u4e00-\u9fff]/.test(s)) return 'zh';
-        // 只要字符串存在英文字母，就归为英文（不管首字符，大小写全部算英文）
-        if (/[a-zA-Z]/.test(s)) return 'en';
-        // 平假名/片假名 →日文
+        // ✅优先检测平假名/片假名 → 日文
         if (/[\u3040-\u30ff]/.test(s)) return 'ja';
+        // 其次检测汉字 →中文
+        if (/[\u4e00-\u9fff]/.test(s)) return 'zh';
+        // 最后检测英文字母 →英文
+        if (/[a-zA-Z]/.test(s)) return 'en';
         return 'other';
     }
 
@@ -751,7 +751,7 @@ function bindGlobalSwitchSpoilerEvents() {
     // 弹窗确认【扩展：同时处理全局 / 动态卡片局部】
     spoilerConfirmBtn.onclick = null;
     spoilerConfirmBtn.addEventListener("click", function () {
-        // 优先处理动态游戏卡片操作（含弹窗内modal-local‑*开关）
+        // 优先处理动态游戏卡片操作（含弹窗内modal‑local‑*开关）
         if (window.pendingGameOp) {
             const op = window.pendingGameOp;
             const g = appData.gameList[op.idx];
