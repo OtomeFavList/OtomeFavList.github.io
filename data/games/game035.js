@@ -7,8 +7,6 @@ const gameData = {
     year: "2024",
     publisher: ["eXtend"],
     cnStudio: "GSE",
-    writer: [""],
-    art: [""],
     writer: [
         {name:"minetaka", lang:"en"}
     ],
