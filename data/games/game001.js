@@ -6,10 +6,10 @@ const gameData = {
     id: "game001",
     name: "虔诚之花的晚钟 -ricordo-",
     year: "2020",
-    publisher: "Otomate",
+    publisher: ["Otomate"],
     cnStudio: "GSE",
     writer: ["かずら林檎"],
-    art: "RiRi",
+    art: ["RiRi"],
     cover: "img/game/001.jpg",
     charList: [
         // 莉莉安娜
