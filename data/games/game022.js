@@ -5,10 +5,10 @@ const gameData = {
     id: "game022", // 全局唯一ID，不可重复
     name: "异世界配信：谎言与真实",
     year: "2023",
-    publisher: "Otomate",
+    publisher: ["Otomate"],
     cnStudio: "JSD",
     writer: ["雨宮うた","織原あやの"],
-    art: "悌太",
+    art: ["悌太"],
     cover: "img/game/022.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 濑名阳爱
