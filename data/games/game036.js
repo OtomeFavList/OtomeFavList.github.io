@@ -150,7 +150,7 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["img/char/036/Carla.jpg","img/char/036/Carla2.jpg","img/char/036/Carla3.jpg"], type: "base" }
+                { srcList: ["img/char/036/Carla.jpg","img/char/036/Carla2.jpg","img/char/036/Carla3.jpg"], type: "base" },
                 { srcList: ["img/char/036/Carla4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
@@ -162,7 +162,7 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["img/char/036/Shin.jpg","img/char/036/Shin2.jpg","img/char/036/Shin3.jpg"], type: "base" }
+                { srcList: ["img/char/036/Shin.jpg","img/char/036/Shin2.jpg","img/char/036/Shin3.jpg"], type: "base" },
                 { srcList: ["img/char/036/Shin4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
