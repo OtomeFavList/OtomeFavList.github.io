@@ -7,8 +7,19 @@ const gameData = {
     year: "2024",
     publisher: ["Otomate"],
     cnStudio: "JSD",
-    writer: ["ウサギリス株式会社","YUKI","星野彼方","青木ひろえ","大山愛乃","北弓しほ"],
-    art: ["藤理ト"],
+    writer: ["","","","","",""],
+    art: [""],
+    writer: [
+        {name:"星野彼方", lang:"zh"},
+        {name:"青木ひろえ", lang:"zh"},
+        {name:"大山愛乃", lang:"zh"},
+        {name:"北弓しほ", lang:"zh"},
+        {name:"ウサギリス株式会社", lang:"ja"},
+        {name:"YUKI", lang:"en"}
+    ],
+    art: [
+        {name:"藤理ト", lang:"zh"}
+    ],
     cover: "img/game/043.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 天沢朱里
