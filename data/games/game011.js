@@ -6,10 +6,10 @@ const gameData = {
     id: "game011",
     name: "毘卢遮那战姬 ~源平飞花梦想~",
     year: "2022",
-    publisher: "Otomate",
+    publisher: ["Otomate"],
     cnStudio: "JSD",
     writer: ["伊東愛","崎本知世","庵原ふじ","榛乃綾子","春森よしちか"],
-    art: "読",
+    art: ["読"],
     cover: "img/game/011.jpg",
     charList: [
         // 源义经
