@@ -169,7 +169,7 @@ export function initPage(Core = {}) {
                 <!-- 如果openMalePanel=true，渲染该女主对应的男主候选列表 -->
                 ${state.openMalePanel ? `
                 <div class="cp-male-select-wrap" data-fid="${fChar.id}">
-                    <div class="cp-male-title">为【${fChar.name}】选择配对男主</div>
+                    <div class="cp-male-title">为【${fChar.name}】选择角色</div>
                     <div class="cp-male-list">
                         ${maleChars.map(mChar=>{
                             const mImgs = getAvailableCharImages(mChar, appData.globalHideChar, appData.globalFD, gameItem.localHideChar, gameItem.localFD);
