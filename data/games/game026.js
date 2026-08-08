@@ -68,7 +68,7 @@ const gameData = {
         },
         // 伊什
         {
-            id: "g0_fd01",
+            id: "g026_fd01",
             name: "伊什",
             gender: "male",
             isHidden: false,
