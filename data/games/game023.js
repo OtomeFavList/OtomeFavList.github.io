@@ -7,8 +7,13 @@ const gameData = {
     year: "2023",
     publisher: ["BROCCOLI"],
     cnStudio: "GSE",
-    writer: ["石田翠","十和田シン"],
-    art: ["石田翠"],
+    writer: [
+        {name:"石田翠", lang:"zh"},
+        {name:"十和田シン"", lang:"zh"}
+    ],
+    art: [
+        {name:"石田翠", lang:"zh"}
+    ],
     cover: "img/game/023.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 立花希佐
