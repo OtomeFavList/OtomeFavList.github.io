@@ -20,7 +20,7 @@ const gameData = {
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
                 { srcList: ["img/char/032/Lulu.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/032/Lulu.jpg","img/char/032/Lulu2.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/032/Lulu2.jpg","img/char/032/Lulu3.png"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 阿尔贝罗
@@ -32,7 +32,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["img/char/032/Alvaro.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/032/Alvaro2.jpg","img/char/032/Alvaro3.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/032/Alvaro2.jpg","img/char/032/Alvaro3.png"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 维拉尔
@@ -44,7 +44,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["img/char/032/Bilal.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/032/Bilal2.jpg","img/char/032/Bilal3.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/032/Bilal2.jpg","img/char/032/Bilal3.png"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 埃斯特
@@ -56,7 +56,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["img/char/032/Est.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/032/Est2.jpg","img/char/032/Est3.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/032/Est2.jpg","img/char/032/Est3.png"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 尤里乌斯
@@ -68,7 +68,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["img/char/032/Julius.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/032/Julius2.jpg","img/char/032/Julius3.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/032/Julius2.jpg","img/char/032/Julius3.png"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 拉奇
@@ -80,7 +80,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["img/char/032/Lagi.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/032/Lagi2.jpg","img/char/032/Lagi3.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/032/Lagi2.jpg","img/char/032/Lagi3.png"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 诺埃尔
@@ -91,8 +91,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/032/Noel.png"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/032/Noel2.png","img/char/032/Noel3.png"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/032/Noel.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/032/Noel2.jpg","img/char/032/Noel3.png"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 艾米
@@ -125,7 +125,7 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["img/char/032/Solo.jpg","img/char/032/Solo2.jpg"], type: "base" }
+                { srcList: ["img/char/032/Solo.jpg","img/char/032/Solo2.png"], type: "base" }
             ]
         }
     ]
