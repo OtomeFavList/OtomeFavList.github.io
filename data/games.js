@@ -33,6 +33,7 @@ const allGameFileNames = [
     "game029.js",
     "game030.js",
     "game031.js",
+    "game032.js",
     // 后续新增游戏仅在此添加一行文件名即可
 ];
 
