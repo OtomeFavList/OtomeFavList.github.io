@@ -18,46 +18,43 @@ const gameData = {
     charList: [
         // 九楼抚子
         {
-            id: "g0_f01",
-            name: "女主A",
+            id: "g048_f01",
+            name: "九楼抚子",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
                 { srcList: ["img/char/g001_f0_1.jpg","img/char/g001_f0_2.jpg"], type: "base" },      // 默认基础图，始终加载
                 { srcList: ["img/char/g001_f0_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g001_f0_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 英圆
         {
-            id: "g0_m01",
-            name: "男主1",
+            id: "g048_m01",
+            name: "英圆",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
                 { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
                 { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 英央
         {
-            id: "g0_m02",
-            name: "男主1",
+            id: "g048_m02",
+            name: "英央",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
                 { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
                 { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 加纳理一郎
         {
-            id: "g0_m03",
+            id: "g048_m03",
             name: "加纳理一郎",
             gender: "male",
             isHidden: false,
@@ -65,12 +62,11 @@ const gameData = {
             images: [
                 { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
                 { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 西园寺寅之助
         {
-            id: "g0_m04",
+            id: "g048_m04",
             name: "西园寺寅之助",
             gender: "male",
             isHidden: false,
@@ -78,12 +74,11 @@ const gameData = {
             images: [
                 { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
                 { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 时田终夜
         {
-            id: "g0_m05",
+            id: "g048_m05",
             name: "时田终夜",
             gender: "male",
             isHidden: false,
@@ -91,12 +86,11 @@ const gameData = {
             images: [
                 { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
                 { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 海棠鹰斗
         {
-            id: "g0_m05",
+            id: "g048_m05",
             name: "海棠鹰斗",
             gender: "male",
             isHidden: false,
@@ -104,13 +98,12 @@ const gameData = {
             images: [
                 { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
                 { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
-        // 隐藏角色（isHidden=true → 开关开启才显示整个角色卡片）
+        // 筱宫枫
         {
-            id: "g0_h01",
-            name: "隐藏攻略角色",
+            id: "g048_h01",
+            name: "筱宫枫",
             gender: "male",
             isHidden: true,
             isFD: false,
@@ -118,10 +111,10 @@ const gameData = {
                 { srcList: ["img/char/g001_h01_1.jpg"], type: "base" }
             ]
         },
-        // 隐藏角色（isHidden=true → 开关开启才显示整个角色卡片）
+        // 雷恩
         {
-            id: "g0_h01",
-            name: "隐藏攻略角色",
+            id: "g048_h01",
+            name: "雷恩",
             gender: "male",
             isHidden: true,
             isFD: false,
