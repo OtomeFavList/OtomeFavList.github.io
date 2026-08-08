@@ -2,9 +2,9 @@
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
 // 无需额外配置，仅需要到 main.js 顶部 🚨gameIdList数组追加编号"002","003"...
 const gameData = {
-    id: "game0", // 全局唯一ID，不可重复
-    name: "示例乙女游戏",
-    year: "20",
+    id: "game048", // 全局唯一ID，不可重复
+    name: "CLOCK ZERO ~終焉之一秒~ Devote",
+    year: "2025",
     publisher: ["原厂发行商"],
     cnStudio: "汉化组/汉化厂商",
     writer: [
@@ -13,9 +13,7 @@ const gameData = {
         {name:"英文编剧", lang:"en"}
     ],
     art: [
-        {name:"中文原画", lang:"zh"},
-        {name:"日文原画", lang:"ja"},
-        {name:"英文原画", lang:"en"}
+        {name:"ナガオカ ", lang:"ja"}
     ],
     cover: "img/game/0.jpg", // 封面图路径，统一前缀img/
     charList: [
