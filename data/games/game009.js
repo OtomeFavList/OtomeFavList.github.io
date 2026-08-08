@@ -8,8 +8,12 @@ const gameData = {
     year: "2021",
     publisher: ["Otomate"],
     cnStudio: "GSE",
-    writer: ["吉村りりか"],
-    art: ["ユウヤ"],
+    writer: [
+        {name:"吉村りりか", lang:"zh"}
+    ],
+    art: [
+        {name:"ユウヤ", lang:"ja"}
+    ],
     cover: "img/game/009.jpg",
     charList: [
         // 莉涅特·米勒
