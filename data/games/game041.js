@@ -22,136 +22,158 @@ const gameData = {
                 { srcList: ["img/char/041/Tsubasa.jpg","img/char/041/Tsubasa2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 不动明谦
         {
             id: "g0_m01",
-            name: "男主1",
+            name: "不动明谦",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/041/Tsubasa.jpg","img/char/041/Tsubasa2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/041/Akane.jpg","img/char/041/Akane2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 金城刚士
         {
             id: "g0_m02",
-            name: "男主1",
+            name: "金城刚士",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/041/Tsubasa.jpg","img/char/041/Tsubasa2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/041/Goushi.jpg","img/char/041/Goushi2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 寺光遥日
         {
             id: "g0_m03",
-            name: "男主1",
+            name: "寺光遥日",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/041/Tsubasa.jpg","img/char/041/Tsubasa2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/041/Haruhi.jpg","img/char/041/Haruhi2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 王茶利晖
         {
             id: "g0_m04",
-            name: "男主1",
+            name: "王茶利晖",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/041/Tsubasa.jpg","img/char/041/Tsubasa2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/041/Hikaru.jpg","img/char/041/Hikaru2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 增长和南
         {
             id: "g0_m05",
-            name: "男主1",
+            name: "增长和南",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/041/Tsubasa.jpg","img/char/041/Tsubasa2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/041/Kazuna.jpg","img/char/041/Kazuna2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 爱染健十
         {
             id: "g0_m06",
-            name: "男主1",
+            name: "爱染健十",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/041/Tsubasa.jpg","img/char/041/Tsubasa2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/041/Kento.jpg","img/char/041/Kento2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 释村帝人
         {
             id: "g0_m07",
-            name: "男主1",
+            name: "释村帝人",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/041/Tsubasa.jpg","img/char/041/Tsubasa2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/041/Mikado.jpg","img/char/041/Mikado2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 殿弥勒
         {
             id: "g0_m08",
-            name: "男主1",
+            name: "殿弥勒",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/041/Tsubasa.jpg","img/char/041/Tsubasa2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/041/Miroku.jpg","img/char/041/Miroku2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 音济百太郎
         {
             id: "g0_m09",
-            name: "男主1",
+            name: "音济百太郎",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/041/Tsubasa.jpg","img/char/041/Tsubasa2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/041/Momotarou.jpg","img/char/041/Momotarou2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 是国龙持
         {
             id: "g0_m10",
-            name: "男主1",
+            name: "是国龙持",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/041/Tsubasa.jpg","img/char/041/Tsubasa2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/041/Ryuuji.jpg","img/char/041/Ryuuji2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 野目龙广
         {
             id: "g0_m11",
-            name: "男主1",
+            name: "野目龙广",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/041/Tsubasa.jpg","img/char/041/Tsubasa2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/041/Tatsuhiro.jpg","img/char/041/Tatsuhiro2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 北门伦毘沙
         {
             id: "g0_m12",
-            name: "男主1",
+            name: "北门伦毘沙",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/041/Tsubasa.jpg","img/char/041/Tsubasa2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/041/Tomohisa.jpg","img/char/041/Tomohisa2.png"], type: "base" },      // 默认基础图，始终加载
+            ]
+        },
+        // 阿修悠太
+        {
+            id: "g0_m13",
+            name: "阿修悠太",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            images: [
+                { srcList: ["img/char/041/Yuuta.jpg","img/char/041/Yuuta2.png"], type: "base" },      // 默认基础图，始终加载
+            ]
+        },
+        // 寺光唯月
+        {
+            id: "g0_m14",
+            name: "寺光唯月",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            images: [
+                { srcList: ["img/char/041/Yuzuki.jpg","img/char/041/Yuzuki2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         }
     ]
