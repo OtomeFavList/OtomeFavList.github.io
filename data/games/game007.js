@@ -6,10 +6,10 @@ const gameData = {
     id: "game007",
     name: "Collar×Malice",
     year: "2021",
-    publisher: "Otomate",
+    publisher: ["Otomate"],
     cnStudio: "JSD",
     writer: ["有野幸","砂原有季","いわた志信","小縞なお"],
-    art: "花邑まい",
+    art: ["花邑まい"],
     cover: "img/game/007.jpg",
     charList: [
         // 星野市香
