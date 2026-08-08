@@ -1000,10 +1000,8 @@ h2{
     text-align:center;
 }
 
-/* ❗已修改：增加 min‑height:180px，保留 position:relative，padding:0 0 60px 0 */
+/* ✅已修改：移除position:relative、底部padding */
 .cp-male-select-wrap{
-    position: relative;
-    padding: 0 0 60px 0;
     min-height: 180px;
     border:none;
     border-radius:0;
@@ -1168,15 +1166,11 @@ h2{
 
 /* ========== CP选择面板底部按钮栏【修改定位与gap】 ========== */
 .cp-select-btn-bar{
-    position: absolute;
-    right: 16px;
-    bottom: 12px;
     display: flex;
     gap: 10px;
-    z-index: 10;
-    max-width: calc(100% - 32px);
-    flex-wrap: wrap;
+    margin-top:14px;
     justify-content: flex-end;
+    flex-wrap: wrap;
 }
 .cp-confirm-btn,
 .cp-cancel-btn{
