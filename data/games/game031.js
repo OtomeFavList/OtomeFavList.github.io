@@ -5,10 +5,10 @@ const gameData = {
     id: "game031", // 全局唯一ID，不可重复
     name: "百密一疏少女心",
     year: "2023",
-    publisher: "Otomate",
+    publisher: ["Otomate"],
     cnStudio: "JOYOLAND",
     writer: ["小縞なお","中村和騎","中山智美","佐々木麿","いわた志信"],
-    art: "薄葉カゲロー",
+    art: ["薄葉カゲロー"],
     cover: "img/game/031.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 东条云雀
