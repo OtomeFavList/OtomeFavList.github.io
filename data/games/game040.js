@@ -5,10 +5,10 @@ const gameData = {
     id: "game040", // 全局唯一ID，不可重复
     name: "时钟机关默示录",
     year: "2024",
-    publisher: "Otomate",
+    publisher: ["Otomate"],
     cnStudio: "JOYOLAND",
     writer: ["雨宮うた","笹川チエ"],
-    art: "花羽彩",
+    art: ["花羽彩"],
     cover: "img/game/040.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 拉奇娅·菲利茨
