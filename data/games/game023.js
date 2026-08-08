@@ -9,7 +9,7 @@ const gameData = {
     cnStudio: "GSE",
     writer: [
         {name:"石田翠", lang:"zh"},
-        {name:"十和田シン"", lang:"zh"}
+        {name:"十和田シン", lang:"zh"}
     ],
     art: [
         {name:"石田翠", lang:"zh"}
