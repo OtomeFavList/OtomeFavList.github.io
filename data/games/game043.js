@@ -11,103 +11,103 @@ const gameData = {
     art: ["藤理ト"],
     cover: "img/game/043.jpg", // 封面图路径，统一前缀img/
     charList: [
-        // 女主模板 female
+        // 天沢朱里
         {
             id: "g043_f01",
-            name: "女主A",
+            name: "天沢朱里",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/g001_f0_1.jpg","img/char/g001_f0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/043/Akari.jpg","img/char/043/Akari2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 虎走要司
         {
             id: "g043_m01",
-            name: "男主1",
+            name: "虎走要司",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/043/Kobase.jpg","img/char/043/Kobase2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 凑康平
         {
             id: "g043_m02",
-            name: "男主1",
+            name: "凑康平",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/043/Minato.jpg","img/char/043/Minato2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 五月女光基
         {
             id: "g043_m03",
-            name: "男主1",
+            name: "五月女光基",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/043/Mitsuki.jpg","img/char/043/Mitsuki2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 吉冈绿郎
         {
             id: "g043_m04",
-            name: "男主1",
+            name: "吉冈绿郎",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/043/Rokuro.jpg","img/char/043/Rokuro2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 碓井修也
         {
             id: "g043_m05",
-            name: "男主1",
+            name: "碓井修也",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/043/Shuya.jpg","img/char/043/Shuya2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 多井中法
         {
             id: "g043_m06",
-            name: "男主1",
+            name: "多井中法",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/043/Tainaka.jpg","img/char/043/Tainaka2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 隐藏角色（isHidden=true → 开关开启才显示整个角色卡片）
+        // 比嘉月彦
         {
             id: "g043_h01",
-            name: "隐藏攻略角色",
+            name: "比嘉月彦",
             gender: "male",
             isHidden: true,
             isFD: false,
             images: [
-                { srcList: ["img/char/g001_h01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" }
+                { srcList: ["img/char/043/Higa.jpg","img/char/043/Higa2.jpg"], type: "base" }
             ]
         },
-        // 隐藏角色（isHidden=true → 开关开启才显示整个角色卡片）
+        // YOFY
         {
             id: "g043_h02",
-            name: "隐藏攻略角色",
+            name: "YOFY",
             gender: "male",
             isHidden: true,
             isFD: false,
             images: [
-                { srcList: ["img/char/g001_h01_1.jpg"], type: "base" }
+                { srcList: ["img/char/043/Yofy.jpg"], type: "base" }
             ]
         }
     ]
