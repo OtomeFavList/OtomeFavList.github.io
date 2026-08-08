@@ -8,7 +8,7 @@ const gameData = {
     publisher: ["Otomate","Rejet"],
     cnStudio: "JOYOLAND",
     writer: [
-        {name:"小和泉いずみ", lang:"zh"},
+        {name:"小和泉いづみ", lang:"zh"},
         {name:"真崎結衣", lang:"zh"},
         {name:"恵莉ひなこ", lang:"zh"},
         {name:"加納高子", lang:"zh"},
