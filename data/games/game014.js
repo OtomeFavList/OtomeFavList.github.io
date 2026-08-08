@@ -6,10 +6,10 @@ const gameData = {
     id: "game014", // 全局唯一ID，不可重复
     name: "与魔共舞",
     year: "2022",
-    publisher: "Rejet",
+    publisher: ["Rejet"],
     cnStudio: "JOYOLAND",
     writer: ["やまだ有見","真崎結衣","小和泉いづみ","三芳秀克","こたに白子","久遠まひろ","関涼子"],
-    art: "前田浩孝",
+    art: ["前田浩孝"],
     cover: "img/game/014.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 立华律香
