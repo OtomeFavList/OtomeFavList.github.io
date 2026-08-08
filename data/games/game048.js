@@ -5,19 +5,18 @@ const gameData = {
     id: "game048", // 全局唯一ID，不可重复
     name: "CLOCK ZERO ~終焉之一秒~ Devote",
     year: "2025",
-    publisher: ["原厂发行商"],
-    cnStudio: "汉化组/汉化厂商",
+    publisher: ["Otomate"],
+    cnStudio: "JSD",
     writer: [
-        {name:"中文编剧", lang:"zh"},
-        {name:"日文编剧", lang:"ja"},
-        {name:"英文编剧", lang:"en"}
+        {name:"砂原有季", lang:"zh"},
+        {name:"果村なずな", lang:"zh"}
     ],
     art: [
         {name:"ナガオカ ", lang:"ja"}
     ],
-    cover: "img/game/0.jpg", // 封面图路径，统一前缀img/
+    cover: "img/game/048.jpg", // 封面图路径，统一前缀img/
     charList: [
-        // 女主模板 female
+        // 九楼抚子
         {
             id: "g0_f01",
             name: "女主A",
@@ -30,7 +29,7 @@ const gameData = {
                 { srcList: ["img/char/g001_f0_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
-        // 普通可攻略男主 male
+        // 英圆
         {
             id: "g0_m01",
             name: "男主1",
@@ -43,7 +42,7 @@ const gameData = {
                 { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
-        // 普通可攻略男主 male
+        // 英央
         {
             id: "g0_m02",
             name: "男主1",
@@ -56,10 +55,10 @@ const gameData = {
                 { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
-        // 普通可攻略男主 male
+        // 加纳理一郎
         {
             id: "g0_m03",
-            name: "男主1",
+            name: "加纳理一郎",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -69,10 +68,10 @@ const gameData = {
                 { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
-        // 普通可攻略男主 male
+        // 西园寺寅之助
         {
             id: "g0_m04",
-            name: "男主1",
+            name: "西园寺寅之助",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -82,10 +81,23 @@ const gameData = {
                 { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
-        // 普通可攻略男主 male
+        // 时田终夜
         {
             id: "g0_m05",
-            name: "男主1",
+            name: "时田终夜",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            images: [
+                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
+                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+            ]
+        },
+        // 海棠鹰斗
+        {
+            id: "g0_m05",
+            name: "海棠鹰斗",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -106,15 +118,15 @@ const gameData = {
                 { srcList: ["img/char/g001_h01_1.jpg"], type: "base" }
             ]
         },
-        // FD续作限定角色（isFD=true → FD开关开启才显示整个角色卡片）
+        // 隐藏角色（isHidden=true → 开关开启才显示整个角色卡片）
         {
-            id: "g0_fd01",
-            name: "续作FD新增角色",
+            id: "g0_h01",
+            name: "隐藏攻略角色",
             gender: "male",
-            isHidden: false,
-            isFD: true,
+            isHidden: true,
+            isFD: false,
             images: [
-                { srcList: ["img/char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["img/char/g001_h01_1.jpg"], type: "base" }
             ]
         }
     ]
