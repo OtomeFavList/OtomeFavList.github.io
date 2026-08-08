@@ -8,8 +8,16 @@ const gameData = {
     year: "2022",
     publisher: ["Otomate"],
     cnStudio: "JSD",
-    writer:["佐々木麿","結城由乃","仰木サヤ","みぞおち鳩子"],
-    art: ["Team.","十ガ才力"],
+    writer: [
+        {name:"佐々木麿", lang:"zh"},
+        {name:"結城由乃", lang:"zh"},
+        {name:"仰木サヤ", lang:"zh"},
+        {name:"みぞおち鳩子", lang:"ja"}
+    ],
+    art: [
+        {name:"十ガ才力", lang:"zh"},
+        {name:"Team.", lang:"en"}
+    ],
     cover: "img/game/015.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 纱乃
