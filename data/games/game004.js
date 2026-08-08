@@ -8,8 +8,6 @@ const gameData = {
     year: "2021",
     publisher: ["HuneX"],
     cnStudio: "GSE",
-    writer: [""],
-    art: [""],
     writer: [
         {name:"ゆーます", lang:"ja"}
     ],
