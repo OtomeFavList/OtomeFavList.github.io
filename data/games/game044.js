@@ -27,7 +27,7 @@ const gameData = {
     charList: [
         // 逸色珠沙
         {
-            id: "g0_f01",
+            id: "g044_f01",
             name: "逸色珠沙",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
