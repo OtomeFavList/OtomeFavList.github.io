@@ -5,10 +5,10 @@ const gameData = {
     id: "game030", // 全局唯一ID，不可重复
     name: "花合朔",
     year: "2023",
-    publisher: "HuneX",
+    publisher: ["HuneX"],
     cnStudio: "dramatic create",
     writer: ["月花"],
-    art: "由良",
+    art: ["由良"],
     cover: "img/game/030.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 美琴
