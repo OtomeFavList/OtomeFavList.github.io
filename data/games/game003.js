@@ -8,8 +8,15 @@ const gameData = {
     year: "2020",
     publisher: ["Otomate"],
     cnStudio: "GSE",
-    writer: ["中山智美","佐々木麿","吉村りりか","小縞なお"],
-    art: ["ユウヤ"],
+    writer: [
+        {name:"中山智美", lang:"zh"},
+        {name:"佐々木麿", lang:"zh"},
+        {name:"吉村りりか", lang:"zh"},
+        {name:"小縞なお", lang:"zh"}
+    ],
+    art: [
+        {name:"ユウヤ", lang:"ja"}
+    ],
     cover: "img/game/003.jpg",
     charList: [
         // 淡木琴音
