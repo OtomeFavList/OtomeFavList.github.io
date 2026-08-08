@@ -190,48 +190,46 @@ export function sortFilterOptionList(arr) {
 
     function getLangType(str) {
         const s = String(str ?? "");
-        // ✅优先检测平假名/片假名 → 日文
+        // 优先检测平假名/片假名 → 日文
         if (/[\u3040-\u30ff]/.test(s)) return 'ja';
-        // 其次检测汉字 →中文
+        // 其次检测汉字 → 中文
         if (/[\u4e00-\u9fff]/.test(s)) return 'zh';
-        // 最后检测英文字母 →英文
-        if (/[a-zA-Z]/.test(s)) return 'en';
+        // 最后检测英文字母（含全角） → 英文
+        if (/[a-zA-Z\uFF21-\uFF3A\uFF41-\uFF5A]/.test(s)) return 'en';
         return 'other';
     }
 
-    return [...arr].sort((a, b) => {
-        const sa = String(a ?? "");
-        const sb = String(b ?? "");
-        const ta = getLangType(sa);
-        const tb = getLangType(sb);
-        const priority = { zh:0, en:1, ja:2, other:3 };
-        const pa = priority[ta];
-        const pb = priority[tb];
+    // 按类型分组
+    const groups = { zh: [], en: [], ja: [], other: [] };
+    for (const item of arr) {
+        const type = getLangType(item);
+        groups[type].push(item);
+    }
 
-        // 大类优先级不同，直接按优先级排序
-        if(pa !== pb) return pa - pb;
-
-        if(ta === 'zh') {
-            return sa.localeCompare(sb, 'zh-CN');
-        } else if(ta === 'en') {
-            // sensitivity:'base'：忽略大小写、忽略重音，A a 排一起
-            return sa.localeCompare(sb, 'en', {sensitivity:'base'});
-        } else if(ta === 'ja') {
-            // 片假名全部转为平假名
-            function toHiragana(s){
-                return s.replace(/[\u30a1-\u30fa]/g, c=>String.fromCharCode(c.charCodeAt(0)-0x60));
-            }
-            const ah = toHiragana(sa)[0]||'';
-            const bh = toHiragana(sb)[0]||'';
-            const ia = gojyuon.indexOf(ah);
-            const ib = gojyuon.indexOf(bh);
-            if(ia ===-1 && ib ===-1) return sa.localeCompare(sb);
-            if(ia ===-1) return 1;
-            if(ib ===-1) return-1;
-            return ia-ib;
+    // 各组内部排序
+    const sortZh = (a, b) => a.localeCompare(b, 'zh-CN');
+    const sortEn = (a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' });
+    const sortJa = (a, b) => {
+        function toHiragana(s) {
+            return s.replace(/[\u30a1-\u30fa]/g, c => String.fromCharCode(c.charCodeAt(0) - 0x60));
         }
-        return sa.localeCompare(sb);
-    });
+        const ah = toHiragana(a)[0] || '';
+        const bh = toHiragana(b)[0] || '';
+        const ia = gojyuon.indexOf(ah);
+        const ib = gojyuon.indexOf(bh);
+        if (ia === -1 && ib === -1) return a.localeCompare(b);
+        if (ia === -1) return 1;
+        if (ib === -1) return -1;
+        return ia - ib;
+    };
+
+    groups.zh.sort(sortZh);
+    groups.en.sort(sortEn);
+    groups.ja.sort(sortJa);
+    groups.other.sort();
+
+    // 按顺序合并：zh → en → ja → other
+    return [...groups.zh, ...groups.en, ...groups.ja, ...groups.other];
 }
 
 // ===================== 筛选下拉菜单填充函数 =====================
