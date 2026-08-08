@@ -116,6 +116,17 @@ const gameData = {
             images: [
                 { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
+        },
+        // FD续作限定角色（isFD=true → FD开关开启才显示整个角色卡片）
+        {
+            id: "g0_fd01",
+            name: "续作FD新增角色",
+            gender: "male",
+            isHidden: false,
+            isFD: true,
+            images: [
+                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg""], type: "base" }
+            ]
         }
     ]
 };
