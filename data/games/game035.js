@@ -5,105 +5,92 @@ const gameData = {
     id: "game035", // 全局唯一ID，不可重复
     name: "BUSTAFELLOWS",
     year: "2024",
-    publisher: "原厂发行商",
+    publisher: "eXtend",
     cnStudio: "GSE",
-    writer: ["剧本编剧","剧本编剧","剧本编剧","剧本编剧"],
-    art: "原画画师",
+    writer: ["minetaka"],
+    art: "すめらぎ琥珀",
     cover: "img/game/035.jpg", // 封面图路径，统一前缀img/
     charList: [
-        // 女主模板 female
+        // 特乌塔
         {
             id: "g035_f01",
-            name: "女主A",
+            name: "特乌塔",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/g001_f0_1.jpg","img/char/g001_f0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g001_f0_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/035/Teuta.jpg","img/char/035/Teuta2.jpg","img/char/035/Teuta3.jpg","img/char/035/Teuta4.jpg","img/char/035/Teuta5.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 赫尔贝奇卡
         {
             id: "g035_m01",
-            name: "男主1",
+            name: "赫尔贝奇卡",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/035/Helvetica.jpg","img/char/035/Helvetica2.jpg","img/char/035/Helvetica3.jpg","img/char/035/Helvetica4.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/035/Helvetica5.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
-        // 普通可攻略男主 male
+        // 林波
         {
             id: "g035_m02",
-            name: "男主1",
+            name: "林波",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/035/Limbo.jpg","img/char/035/Limbo2.jpg","img/char/035/Limbo3.jpg","img/char/035/Limbo4.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/035/Limbo5.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
-        // 普通可攻略男主 male
+        // 莫茲
         {
             id: "g035_m03",
-            name: "男主1",
+            name: "莫茲",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/035/Mozu.jpg","img/char/035/Mozu2.jpg","img/char/035/Mozu3.jpg","img/char/035/Mozu4.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/035/Mozu5.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
-        // 普通可攻略男主 male
+        // 斯卡克罗
         {
             id: "g035_m04",
-            name: "男主1",
+            name: "斯卡克罗",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/035/Scarecrow.jpg","img/char/035/Scarecrow2.jpg","img/char/035/Scarecrow3.jpg","img/char/035/Scarecrow4.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/035/Scarecrow5.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
-        // 普通可攻略男主 male
+        // 修
         {
             id: "g035_m05",
-            name: "男主1",
+            name: "修",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/035/Shu.jpg","img/char/035/Shu2.jpg","img/char/035/Shu3.jpg","img/char/035/Shu4.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/035/Shu5.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
-        // 普通可攻略男主 male
-        {
-            id: "g035_m06",
-            name: "男主1",
-            gender: "male",
-            isHidden: false,
-            isFD: false,
-            images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
-            ]
-        },
-        // 隐藏角色（isHidden=true → 开关开启才显示整个角色卡片）
+        // 亚当
         {
             id: "g035_h01",
-            name: "隐藏攻略角色",
+            name: "亚当",
             gender: "male",
             isHidden: true,
             isFD: false,
             images: [
-                { srcList: ["img/char/g001_h01_1.jpg"], type: "base" }
+                { srcList: ["img/char/035/Adam.jpg","img/char/035/Adam2.jpg","img/char/035/Adam3.jpg"], type: "base" }
             ]
         }
     ]
