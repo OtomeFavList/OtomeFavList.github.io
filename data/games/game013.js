@@ -6,10 +6,10 @@ const gameData = {
     id: "game013",
     name: "Code:Realize ~创世的公主~",
     year: "2021",
-    publisher: "Otomate",
+    publisher: ["Otomate"],
     cnStudio: "JSD",
     writer: ["小縞なお","西村悠","中山智美","有野幸"],
-    art: "miko",
+    art: ["miko"],
     cover: "img/game/013.jpg",
     charList: [
         // 卡尔迪娅·贝克福德
