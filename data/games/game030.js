@@ -7,8 +7,12 @@ const gameData = {
     year: "2023",
     publisher: ["HuneX"],
     cnStudio: "dramatic create",
-    writer: ["月花"],
-    art: ["由良"],
+    writer: [
+        {name:"月花", lang:"zh"}
+    ],
+    art: [
+        {name:"由良", lang:"zh"}
+    ],
     cover: "img/game/030.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 美琴
