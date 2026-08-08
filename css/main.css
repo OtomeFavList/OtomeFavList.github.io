@@ -1015,6 +1015,8 @@ h2{
     display:flex;
     flex-wrap:wrap;
     gap:14px;  /* 和 char‑pool gap:14px 保持一致 */
+    position: relative;
+    padding-bottom: 60px; /* 预留底部空间，给右下角按钮栏，避免遮挡角色卡片 */
 }
 /* 待选男主 cp‑male‑item：1:1复刻 char‑item */
 .cp-male-item{
