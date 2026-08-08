@@ -85,7 +85,7 @@ export function loadData() {
 }
 
 /**
- * 获取今日日期字符串 YYYY-MM-DD 用于跨零点判断
+ * 获取今日日期字符串 YYYY‑MM‑DD 用于跨零点判断
  * @returns {string} 日期字符串
  */
 export function getTodayDateStr() {
@@ -180,7 +180,7 @@ export function syncSingleGameSwitch(type, status) {
 }
 
 /**
- * 筛选下拉排序：中文拼音A-Z → 英文A-Z → 日文五十音
+ * 筛选下拉排序：中文拼音A‑Z → 英文A‑Z → 日文五十音
  * @param {string[]} arr 原始字符串数组
  * @returns {string[]} 排好序的数组
  */
@@ -189,9 +189,9 @@ export function sortFilterOptionList(arr) {
     const gojyuon = 'あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをん';
 
     function getLangType(str) {
-        if (/[\u4e00-\u9fff]/.test(str)) return 'zh';
-        if (/^[a-zA-Z]/.test(str)) return 'en';
-        if (/[\u3040-\u30ff]/.test(str)) return 'ja';
+        if (/[\u4e00‑\u9fff]/.test(str)) return 'zh';
+        if (/^[a‑zA‑Z]/.test(str)) return 'en';
+        if (/[\u3040‑\u30ff]/.test(str)) return 'ja';
         return 'other';
     }
 
@@ -205,21 +205,21 @@ export function sortFilterOptionList(arr) {
         if(pa !== pb) return pa - pb;
 
         if(ta === 'zh') {
-            return a.localeCompare(b, 'zh-CN');
+            return a.localeCompare(b, 'zh‑CN');
         } else if(ta === 'en') {
             return a.localeCompare(b, 'en', {sensitivity:'base'});
         } else if(ta === 'ja') {
             function toHiragana(s){
-                return s.replace(/[\u30a1-\u30fa]/g, c=>String.fromCharCode(c.charCodeAt(0)-0x60));
+                return s.replace(/[\u30a1‑\u30fa]/g, c=>String.fromCharCode(c.charCodeAt(0)‑0x60));
             }
             const ah = toHiragana(a)[0]||'';
             const bh = toHiragana(b)[0]||'';
             const ia = gojyuon.indexOf(ah);
             const ib = gojyuon.indexOf(bh);
-            if(ia ===-1 && ib ===-1) return a.localeCompare(b);
-            if(ia ===-1) return 1;
-            if(ib ===-1) return-1;
-            return ia-ib;
+            if(ia ===‑1 && ib ===‑1) return a.localeCompare(b);
+            if(ia ===‑1) return 1;
+            if(ib ===‑1) return‑1;
+            return ia‑ib;
         }
         return a.localeCompare(b);
     });
@@ -228,7 +228,7 @@ export function sortFilterOptionList(arr) {
 // ===================== 筛选下拉菜单填充函数 =====================
 /**
  * 【修复】筛选下拉填充：保留HTML原生顶部placeholder option，只追加数据选项，不再覆盖HTML提示文字
- * 排序规则：中文A-Z →英文A-Z →日文五十音；发售年份数字降序
+ * 排序规则：中文A‑Z →英文A‑Z →日文五十音；发售年份数字降序
  * @param {Array} gameList 游戏模板数组
  */
 export function fillFilterOptions(gameList) {
@@ -265,7 +265,7 @@ export function fillFilterOptions(gameList) {
     const pubSorted = sortFilterOptionList([...pubSet]);
     const cnSorted = sortFilterOptionList([...cnSet]);
     // 发售年份：数字升序，旧年份在上
-    const yearSorted = [...yearSet].sort((a,b)=>Number(a)-Number(b));
+    const yearSorted = [...yearSet].sort((a,b)=>Number(a)‑Number(b));
 
     const fillSelect = (id, dataArr) => {
         const sel = document.getElementById(id);
@@ -281,11 +281,11 @@ export function fillFilterOptions(gameList) {
         });
     };
 
-    fillSelect("filter-writer", writerSorted);
-    fillSelect("filter-art", artSorted);
-    fillSelect("filter-year", yearSorted);
-    fillSelect("filter-publisher", pubSorted);
-    fillSelect("filter-cn", cnSorted);
+    fillSelect("filter‑writer", writerSorted);
+    fillSelect("filter‑art", artSorted);
+    fillSelect("filter‑year", yearSorted);
+    fillSelect("filter‑publisher", pubSorted);
+    fillSelect("filter‑cn", cnSorted);
 }
 
 // ===================== HTML模板渲染函数 =====================
@@ -297,12 +297,31 @@ export function fillFilterOptions(gameList) {
  */
 export function renderGameSelectItem(game) {
     if (!game) return "";
+
+    // 编剧：数组则执行【中文‑英文‑日文五十音】排序
+    let writerText = "无";
+    if (Array.isArray(game.writer)) {
+        const sortedWriter = sortFilterOptionList(game.writer);
+        writerText = sortedWriter.join("、");
+    } else if (typeof game.writer === "string" && game.writer.trim()) {
+        writerText = game.writer.trim();
+    }
+
+    // 画师：数组则执行【中文‑英文‑日文五十音】排序
+    let artText = "无";
+    if (Array.isArray(game.art)) {
+        const sortedArt = sortFilterOptionList(game.art);
+        artText = sortedArt.join("、");
+    } else if (typeof game.art === "string" && game.art.trim()) {
+        artText = game.art.trim();
+    }
+
     return `
         <img src="${game.cover || ''}" alt="${game.name || ''}">
         <div>
-            <div class="game-option-name">${game.name || ""}</div>
-            <div>编剧：${Array.isArray(game.writer) ? game.writer.join("、") : game.writer || "无"}</div>
-            <div>画师：${Array.isArray(game.art) ? game.art.join("、") : game.art || "无"}</div>
+            <div class="game‑option‑name">${game.name || ""}</div>
+            <div>编剧：${writerText}</div>
+            <div>画师：${artText}</div>
             <div>发售年份：${game.year || "无"}</div>
             <div>发行厂商：${game.publisher || "无"}</div>
             <div>汉化厂商：${game.cnStudio || "无"}</div>
@@ -317,7 +336,7 @@ export function renderGameSelectItem(game) {
  * @returns {string} html字符串
  */
 export function renderSelectedChar(gameItem, gameInfo) {
-    if (!gameInfo?.charList || !gameItem) return `<div class="empty-hint">暂未添加角色</div>`;
+    if (!gameInfo?.charList || !gameItem) return `<div class="empty‑hint">暂未添加角色</div>`;
 
     let html = "";
     const globalHide = appData.globalHideChar;
@@ -338,22 +357,22 @@ export function renderSelectedChar(gameItem, gameInfo) {
         availableImgUnits.forEach(u => allSrc.push(...u.srcList));
         if (allSrc.length === 0) return;
 
-        const saveKey = `${gameInfo.id}-${char.id}`;
+        const saveKey = `${gameInfo.id}‑${char.id}`;
         let imgIndex = Number(appData.charImageSelect[saveKey] ?? 0);
         if (imgIndex >= allSrc.length) imgIndex = 0;
         const targetSrc = allSrc[imgIndex];
 
         html += `
-            <div class="char-card-item selected" data-char-id="${char.id}" data-game-id="${gameInfo.id}" data-total-img="${allSrc.length}">
-                <div class="char-card-img-box ${allSrc.length > 1 ? 'char-has-multi-img' : ''}">
+            <div class="char‑card‑item selected" data‑char‑id="${char.id}" data‑game‑id="${gameInfo.id}" data‑total‑img="${allSrc.length}">
+                <div class="char‑card‑img‑box ${allSrc.length > 1 ? 'char‑has‑multi‑img' : ''}">
                     <img src="${targetSrc}" alt="${char.name || ''}">
                 </div>
-                <div class="char-card-name">${char.name || ""}</div>
+                <div class="char‑card‑name">${char.name || ""}</div>
             </div>
         `;
     });
 
-    return html || `<div class="empty-hint">暂未添加角色</div>`;
+    return html || `<div class="empty‑hint">暂未添加角色</div>`;
 }
 
 /**
@@ -363,7 +382,7 @@ export function renderSelectedChar(gameItem, gameInfo) {
  * @returns {string} html字符串
  */
 export function renderCP(gameItem, gameInfo) {
-    if (!gameInfo?.charList || !gameItem) return `<div class="empty-hint">暂未添加角色</div>`;
+    if (!gameInfo?.charList || !gameItem) return `<div class="empty‑hint">暂未添加角色</div>`;
 
     let html = "";
     const globalHide = appData.globalHideChar;
@@ -384,7 +403,7 @@ export function renderCP(gameItem, gameInfo) {
         fAvailUnits.forEach(u => fAllSrc.push(...u.srcList));
         if (fAllSrc.length === 0) return;
 
-        const fSaveKey = `${gameInfo.id}-${fChar.id}`;
+        const fSaveKey = `${gameInfo.id}‑${fChar.id}`;
         let fIndex = Number(appData.charImageSelect[fSaveKey] ?? 0);
         if (fIndex >= fAllSrc.length) fIndex = 0;
         const fTargetSrc = fAllSrc[fIndex];
@@ -400,33 +419,33 @@ export function renderCP(gameItem, gameInfo) {
             mAvailUnits.forEach(u => mAllSrc.push(...u.srcList));
             if (mAllSrc.length === 0) return;
 
-            const mSaveKey = `${gameInfo.id}-${mChar.id}`;
+            const mSaveKey = `${gameInfo.id}‑${mChar.id}`;
             let mIndex = Number(appData.charImageSelect[mSaveKey] ?? 0);
             if (mIndex >= mAllSrc.length) mIndex = 0;
             const mTargetSrc = mAllSrc[mIndex];
 
             maleHtml += `
-                <div class="cp-selected-card-item" data-char-id="${mChar.id}" data-game-id="${gameInfo.id}" data-total-img="${mAllSrc.length}">
-                    <div class="char-card-img-box ${mAllSrc.length > 1 ? 'char-has-multi-img' : ''}">
+                <div class="cp‑selected‑card‑item" data‑char‑id="${mChar.id}" data‑game‑id="${gameInfo.id}" data‑total‑img="${mAllSrc.length}">
+                    <div class="char‑card‑img‑box ${mAllSrc.length > 1 ? 'char‑has‑multi‑img' : ''}">
                         <img src="${mTargetSrc}" alt="${mChar.name || ''}">
                     </div>
-                    <div class="char-card-name">${mChar.name || ""}</div>
+                    <div class="char‑card‑name">${mChar.name || ""}</div>
                 </div>
             `;
         });
 
         html += `
-            <div class="cp-layout-row">
-                <div class="heroine-column">
-                    <div class="cp-selected-card-item" data-char-id="${fChar.id}" data-game-id="${gameInfo.id}" data-total-img="${fAllSrc.length}">
-                        <div class="char-card-img-box ${fAllSrc.length > 1 ? 'char-has-multi-img' : ''}">
+            <div class="cp‑layout‑row">
+                <div class="heroine‑column">
+                    <div class="cp‑selected‑card‑item" data‑char‑id="${fChar.id}" data‑game‑id="${gameInfo.id}" data‑total‑img="${fAllSrc.length}">
+                        <div class="char‑card‑img‑box ${fAllSrc.length > 1 ? 'char‑has‑multi‑img' : ''}">
                             <img src="${fTargetSrc}" alt="${fChar.name || ''}">
                         </div>
-                        <div class="char-card-name">${fChar.name || ""}</div>
+                        <div class="char‑card‑name">${fChar.name || ""}</div>
                     </div>
                 </div>
-                <div class="hero-list-column">
-                    <div class="char-card-wrapper">
+                <div class="hero‑list‑column">
+                    <div class="char‑card‑wrapper">
                         ${maleHtml || "<span>未选择男主</span>"}
                     </div>
                 </div>
@@ -434,7 +453,7 @@ export function renderCP(gameItem, gameInfo) {
         `;
     });
 
-    return html || `<div class="empty-hint">暂未添加角色</div>`;
+    return html || `<div class="empty‑hint">暂未添加角色</div>`;
 }
 
 /**
@@ -470,8 +489,8 @@ export function getAllGameChar(gameInfo) {
         return true;
     });
 
-    const female = chars.filter(c => c.gender === "female").sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
-    const male = chars.filter(c => c.gender === "male").sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
+    const female = chars.filter(c => c.gender === "female").sort((a, b) => a.name.localeCompare(b.name, "zh‑CN"));
+    const male = chars.filter(c => c.gender === "male").sort((a, b) => a.name.localeCompare(b.name, "zh‑CN"));
 
     return [...female, ...male];
 }
@@ -547,8 +566,8 @@ function buildCoreContext() {
  * 根据appData数据，更新页面上两个全局滑块勾选状态
  */
 function renderGlobalSwitchDom() {
-    const hideCharInput = document.getElementById("global-hide-char");
-    const fdInput = document.getElementById("global-fd-game");
+    const hideCharInput = document.getElementById("global‑hide‑char");
+    const fdInput = document.getElementById("global‑fd‑game");
     // 加固：严格读取appData，不读取DOM旧状态
     if (hideCharInput) hideCharInput.checked = !!appData.globalHideChar;
     if (fdInput) fdInput.checked = !!appData.globalFD;
@@ -556,18 +575,18 @@ function renderGlobalSwitchDom() {
 
 // 模块顶层事件处理函数，解决removeEventListener无效
 function wrapClickHandler(e) {
-    const spoilerModal = document.getElementById("spoiler-modal");
+    const spoilerModal = document.getElementById("spoiler‑modal");
     if (!spoilerModal) return;
 
     // -------- 游戏局部开关处理 --------
-    const targetInput = e.target.closest(".game-hide-char,.game-fd-switch,.modal-local-hide-char,.modal-local-fd");
+    const targetInput = e.target.closest(".game‑hide‑char,.game‑fd‑switch,.modal‑local‑hide‑char,.modal‑local‑fd");
     if (targetInput) {
         // ✅修复：只要命中局部开关，直接阻止浏览器原生checkbox切换，全部JS接管
         e.preventDefault();
 
         let idx;
         let gameItem;
-        if (targetInput.classList.contains("modal-local-hide-char") || targetInput.classList.contains("modal-local-fd")) {
+        if (targetInput.classList.contains("modal‑local‑hide‑char") || targetInput.classList.contains("modal‑local‑fd")) {
             gameItem = appData.gameList.find(g => g.gameId === currentEditGameId);
             if (!gameItem) return;
             idx = appData.gameList.findIndex(g => g.gameId === currentEditGameId);
@@ -579,7 +598,7 @@ function wrapClickHandler(e) {
 
         // 读取真实数据状态，不要读取DOM的checked（委托click下DOM状态是旧的）
         let isOpened;
-        if (targetInput.classList.contains("game-hide-char") || targetInput.classList.contains("modal-local-hide-char")) {
+        if (targetInput.classList.contains("game‑hide‑char") || targetInput.classList.contains("modal‑local‑hide‑char")) {
             isOpened = !!gameItem.localHideChar;
         } else {
             isOpened = !!gameItem.localFD;
@@ -587,7 +606,7 @@ function wrapClickHandler(e) {
 
         // 已经开启：用户要关闭，直接生效，不弹窗
         if (isOpened) {
-            if (targetInput.classList.contains("game-hide-char") || targetInput.classList.contains("modal-local-hide-char")) {
+            if (targetInput.classList.contains("game‑hide‑char") || targetInput.classList.contains("modal‑local‑hide‑char")) {
                 gameItem.localHideChar = false;
             } else {
                 gameItem.localFD = false;
@@ -598,7 +617,7 @@ function wrapClickHandler(e) {
         }
 
         // 用户想要打开局部开关，直接弹出剧透弹窗
-        if (targetInput.classList.contains("game-hide-char") || targetInput.classList.contains("modal-local-hide-char")) {
+        if (targetInput.classList.contains("game‑hide‑char") || targetInput.classList.contains("modal‑local‑hide‑char")) {
             window.pendingGameOp = { type: "hideChar", idx };
         } else {
             window.pendingGameOp = { type: "fd", idx };
@@ -608,17 +627,17 @@ function wrapClickHandler(e) {
     }
 
     // -------- 角色图片切换按钮处理 --------
-    const switchBtn = e.target.closest(".char-switch-prev,.char-switch-next");
+    const switchBtn = e.target.closest(".char‑switch‑prev,.char‑switch‑next");
     if (switchBtn) {
-        const cardEl = switchBtn.closest(".char-card-item");
+        const cardEl = switchBtn.closest(".char‑card‑item");
         if (!cardEl) return;
         const gameId = cardEl.dataset.gameId;
         const charId = cardEl.dataset.charId;
         const totalImg = Number(cardEl.dataset.totalImg) || 1;
-        const saveKey = `${gameId}-${charId}`;
+        const saveKey = `${gameId}‑${charId}`;
         let currentIdx = Number(appData.charImageSelect[saveKey] ?? 0);
 
-        if (switchBtn.classList.contains("char-switch-prev")) {
+        if (switchBtn.classList.contains("char‑switch‑prev")) {
             currentIdx = currentIdx - 1;
             if (currentIdx < 0) currentIdx = totalImg - 1;
         } else {
@@ -646,7 +665,7 @@ function wrapClickHandler(e) {
  */
 export function bindDynamicGameCardSwitchEvents() {
     const wrap = document.querySelector(".wrap");
-    const spoilerModal = document.getElementById("spoiler-modal");
+    const spoilerModal = document.getElementById("spoiler‑modal");
     if (!wrap || !spoilerModal) {
         console.warn("bindDynamicGameCardSwitchEvents：wrap或modal不存在，跳过绑定");
         return;
@@ -664,11 +683,11 @@ export function bindDynamicGameCardSwitchEvents() {
  * 恢复取消按钮完整逻辑
  */
 function bindGlobalSwitchSpoilerEvents() {
-    const hideCharInput = document.getElementById("global-hide-char");
-    const fdInput = document.getElementById("global-fd-game");
-    const spoilerModal = document.getElementById("spoiler-modal");
-    const spoilerConfirmBtn = document.getElementById("spoiler-confirm");
-    const spoilerCancelBtn = document.getElementById("spoiler-cancel");
+    const hideCharInput = document.getElementById("global‑hide‑char");
+    const fdInput = document.getElementById("global‑fd‑game");
+    const spoilerModal = document.getElementById("spoiler‑modal");
+    const spoilerConfirmBtn = document.getElementById("spoiler‑confirm");
+    const spoilerCancelBtn = document.getElementById("spoiler‑cancel");
 
     if (!hideCharInput || !fdInput || !spoilerModal || !spoilerConfirmBtn || !spoilerCancelBtn) {
         console.warn("bindGlobalSwitchSpoilerEvents：部分DOM缺失，全局开关弹窗未挂载");
@@ -715,7 +734,7 @@ function bindGlobalSwitchSpoilerEvents() {
     // 弹窗确认【扩展：同时处理全局 / 动态卡片局部】
     spoilerConfirmBtn.onclick = null;
     spoilerConfirmBtn.addEventListener("click", function () {
-        // 优先处理动态游戏卡片操作（含弹窗内modal-local-*开关）
+        // 优先处理动态游戏卡片操作（含弹窗内modal‑local‑*开关）
         if (window.pendingGameOp) {
             const op = window.pendingGameOp;
             const g = appData.gameList[op.idx];
