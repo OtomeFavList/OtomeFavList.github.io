@@ -480,6 +480,8 @@ export function initPage(Core = {}) {
             gameItem.cpEditState.forEach(item=>{
                 item.openMalePanel = false;
             });
+            // 【新增】关闭CP外层滑出面板（女主筛选框）
+            gameItem.cpPanelOpen = false;
 
             saveData();
             // 直接全局刷新卡片，全部筛选框自动关闭，视图直接渲染完成
