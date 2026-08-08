@@ -5,10 +5,10 @@ const gameData = {
     id: "game033", // 全局唯一ID，不可重复
     name: "MAJESTIC☆MAJOLICAL",
     year: "2024",
-    publisher: "dazkarat",
+    publisher: ["dazkarat"],
     cnStudio: "GSE",
     writer: ["風花琴梨"],
-    art: "白皙",
+    art: ["白皙"],
     cover: "img/game/033.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 拉碧丝
