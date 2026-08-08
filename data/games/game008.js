@@ -6,10 +6,10 @@ const gameData = {
     id: "game008",
     name: "剑为君舞 for S",
     year: "2021",
-    publisher: "Rejet",
+    publisher: ["Rejet"],
     cnStudio: "JOYOLAND",
     writer: ["やまだ有見","加納高子","吉村りりか","夏野景","小和泉いづみ","山田かのこ","砂原有季","関涼子","谷村日名子","真崎結衣","都井きつき","海桐ユキチカ"],
-    art: "読",
+    art: ["読"],
     cover: "img/game/008.jpg",
     charList: [
         // 香夜
