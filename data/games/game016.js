@@ -8,8 +8,14 @@ const gameData = {
     year: "2022",
     publisher: ["Otomate"],
     cnStudio: "GSE",
-    writer: ["中山智美","夕月","浅海藍子"],
-    art: ["読"],
+    writer: [
+        {name:"中山智美", lang:"zh"},
+        {name:"夕月", lang:"zh"},
+        {name:"浅海藍子", lang:"zh"}
+    ],
+    art: [
+        {name:"読", lang:"zh"}
+    ],
     cover: "img/game/016.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 瑟蕾思
