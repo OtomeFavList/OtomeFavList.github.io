@@ -189,7 +189,7 @@ export function initPage(Core = {}) {
                             </div>`;
                         }).join("")}
                     </div>
-                    <!-- 新增确认取消按钮组 -->
+                    <!-- cp-select-btn-bar：cp‑male‑select-wrap直接子元素，不是cp‑male‑list子元素 -->
                     <div class="cp-select-btn-bar">
                         <button class="cp-cancel-btn" data-fid="${fChar.id}" data-gid="${gameId}">取消</button>
                         <button class="cp-confirm-btn" data-fid="${fChar.id}" data-gid="${gameId}">确认</button>
