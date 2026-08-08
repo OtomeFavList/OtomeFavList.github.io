@@ -33,7 +33,7 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/g001_f0_1.jpg","img/char/g001_f0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/044/Misa.jpg","img/char/044/Misa2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 响
@@ -44,7 +44,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/044/Hibiki.jpg","img/char/044/Hibiki2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 狐春
@@ -55,7 +55,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/044/Koharu.jpg","img/char/044/Koharu2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 香羊
@@ -66,62 +66,62 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/044/Kouyou.jpg","img/char/044/Kouyou2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 红华
         {
             id: "g044_m04",
-            name: "男主1",
+            name: "红华",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/044/Kureha.jpg","img/char/044/Kureha2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 魅勿鬽
         {
             id: "g044_m05",
-            name: "男主1",
+            name: "魅勿鬽",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/044/Minami.jpg","img/char/044/Minami2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 圣夜
         {
             id: "g044_m06",
-            name: "男主1",
+            name: "圣夜",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/044/Seiya.jpg","img/char/044/Seiya2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 星绊
         {
             id: "g044_m07",
-            name: "男主1",
+            name: "星绊",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/044/Sena.jpg","img/char/044/Sena2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 幸麿
         {
             id: "g044_m08",
-            name: "男主1",
+            name: "幸麿",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/044/Yukimaro.jpg","img/char/044/Yukimaro2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 桃嘉
@@ -132,7 +132,7 @@ const gameData = {
             isHidden: true,
             isFD: false,
             images: [
-                { srcList: ["img/char/g001_h01_1.jpg"], type: "base" }
+                { srcList: ["img/char/044/Toka.jpg","img/char/044/Toka2.png"], type: "base" }
             ]
         }
     ]
