@@ -8,7 +8,7 @@ const gameData = {
     publisher: ["RED","Spike Chunsoft"],
     cnStudio: "JSD",
     writer: ["伊東愛","雨宮うた","真青テテ"],
-    art: "黒蜜きなこ",
+    art: ["黒蜜きなこ"],
     cover: "img/game/037.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 中山日南子
