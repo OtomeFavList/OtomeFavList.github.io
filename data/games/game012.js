@@ -8,8 +8,19 @@ const gameData = {
     year: "2022",
     publisher: ["Rejet"],
     cnStudio: "JOYOLAND",
-    writer: ["真崎結衣","鷹匠早紀","やまだ有見","秋月ひろ","こたに白子","久遠まひろ","由女川萩","竹藤夜宵"],
-    art: ["hagi"],
+    writer: [
+        {name:"真崎結衣", lang:"zh"},
+        {name:"鷹匠早紀", lang:"zh"},
+        {name:"秋月ひろ", lang:"zh"},
+        {name:"久遠まひろ", lang:"zh"},
+        {name:"由女川萩", lang:"zh"},
+        {name:"竹藤夜宵", lang:"zh"},
+        {name:"やまだ有見", lang:"ja"},
+        {name:"こたに白子", lang:"ja"}
+    ],
+    art: [
+        {name:"hagi", lang:"en"}
+    ],
     cover: "img/game/012.jpg",
     charList: [
         // 晦光
