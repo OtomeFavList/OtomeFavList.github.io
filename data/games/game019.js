@@ -8,8 +8,13 @@ const gameData = {
     year: "2022",
     publisher: ["Otomate"],
     cnStudio: "JOYOLAND",
-    writer: ["長野和泉","小縞なお"],
-    art: ["四季咲組"],
+    writer: [
+        {name:"長野和泉", lang:"zh"},
+        {name:"小縞なお", lang:"zh"},
+    ],
+    art: [
+        {name:"四季咲組", lang:"zh"}
+    ],
     cover: "img/game/019.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 雪村千鹤
