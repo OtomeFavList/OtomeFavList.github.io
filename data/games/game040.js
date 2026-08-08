@@ -7,8 +7,13 @@ const gameData = {
     year: "2024",
     publisher: ["Otomate"],
     cnStudio: "JOYOLAND",
-    writer: ["雨宮うた","笹川チエ"],
-    art: ["花羽彩"],
+    writer: [
+        {name:"雨宮うた", lang:"zh"},
+        {name:"笹川チエ", lang:"zh"}
+    ],
+    art: [
+        {name:"花羽彩", lang:"zh"}
+    ],
     cover: "img/game/040.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 拉奇娅·菲利茨
