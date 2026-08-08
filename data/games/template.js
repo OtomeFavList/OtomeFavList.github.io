@@ -7,8 +7,16 @@ const gameData = {
     year: "20",
     publisher: ["原厂发行商"],
     cnStudio: "汉化组/汉化厂商",
-    writer: ["剧本编剧","剧本编剧","剧本编剧","剧本编剧"],
-    art: ["原画画师"],
+    writer: [
+        {name:"中文编剧", lang:"zh"},
+        {name:"日文编剧", lang:"ja"},
+        {name:"英文编剧", lang:"en"},
+    ],
+    art: [
+        {name:"中文原画", lang:"zh"},
+        {name:"日文原画", lang:"ja"},
+        {name:"英文原画", lang:"en"},
+    ],
     cover: "img/game/0.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 女主模板 female
