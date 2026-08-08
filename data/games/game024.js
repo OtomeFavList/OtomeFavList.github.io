@@ -7,8 +7,21 @@ const gameData = {
     year: "2023",
     publisher: ["Otomate"],
     cnStudio: "JOYOLAND",
-    writer: ["皆川千尋","水都","春夏秋冬よもひろ","夏越ちか","狐塚冬里","城戸蘭丸","駒豆羅々子","寺須ハウス","高林祐樹","有野幸","佐々木麿"],
-    art: ["川人やすた"],
+    writer: [
+        {name:"皆川千尋", lang:"zh"},
+        {name:"水都", lang:"zh"},
+        {name:"春夏秋冬よもひろ", lang:"zh"},
+        {name:"夏越ちか", lang:"zh"},
+        {name:"狐塚冬里", lang:"zh"},
+        {name:"城戸蘭丸", lang:"zh"},
+        {name:"駒豆羅々子", lang:"zh"},
+        {name:"寺須ハウス", lang:"zh"},
+        {name:"高林祐樹", lang:"zh"},
+        {name:"有野幸", lang:"zh"},
+        {name:"佐々木麿", lang:"zh"}
+    ],
+    art: [
+        {name:"川人やすた", lang:"zh"}
     cover: "img/game/024.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 山城历
