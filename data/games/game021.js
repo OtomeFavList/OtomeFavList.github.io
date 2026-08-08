@@ -7,8 +7,13 @@ const gameData = {
     year: "2023",
     publisher: ["Otomate"],
     cnStudio: "GSE",
-    writer: ["七瀬みお","仰木サヤ"],
-    art: ["藤丸豆ノ介"],
+    writer: [
+        {name:"七瀬みお", lang:"zh"},
+        {name:"仰木サヤ", lang:"zh"}
+    ],
+    art: [
+        {name:"藤丸豆ノ介", lang:"zh"}
+    ],
     cover: "img/game/021.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 爱丽丝·利德尔
