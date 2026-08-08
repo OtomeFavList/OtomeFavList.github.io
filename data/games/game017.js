@@ -7,8 +7,12 @@ const gameData = {
     year: "2023",
     publisher: ["HuneX"],
     cnStudio: "GSE",
-    writer: ["平野ヒロ"],
-    art: ["永原キナミ"],
+    writer: [
+        {name:"平野ヒロ", lang:"zh"}
+    ],
+    art: [
+        {name:"永原キナミ", lang:"zh"}
+    ],
     cover: "img/game/017.jpg",
     charList: [
         // 克洛伊
