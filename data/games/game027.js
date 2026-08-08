@@ -8,8 +8,14 @@ const gameData = {
     year: "2022",
     publisher: ["Otomate"],
     cnStudio: "GSE",
-    writer: ["望月柚枝","果村なずな","やまだ有見"],
-    art: ["花邑まい"],
+    writer: [
+        {name:"望月柚枝", lang:"zh"},
+        {name:"果村なずな", lang:"zh"},
+        {name:"やまだ有見", lang:"ja"}
+    ],
+    art: [
+        {name:"花邑まい", lang:"zh"}
+    ],
     cover: "img/game/027.jpg", // 封面图路径，统一前缀img/
     charList: [
         // Heroine
