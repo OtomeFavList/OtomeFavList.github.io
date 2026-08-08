@@ -8,8 +8,17 @@ const gameData = {
     year: "2021",
     publisher: ["Otomate"],
     cnStudio: "JSD",
-    writer: ["小縞なお","西村悠","中山智美","有野幸"],
-    art: ["miko"],
+    writer: ["","","",""],
+    art: [""],
+    writer: [
+        {name:"小縞なお", lang:"zh"},
+        {name:"西村悠", lang:"zh"},
+        {name:"中山智美", lang:"zh"},
+        {name:"有野幸", lang:"zh"}
+    ],
+    art: [
+        {name:"miko", lang:"en"}
+    ],
     cover: "img/game/013.jpg",
     charList: [
         // 卡尔迪娅·贝克福德
