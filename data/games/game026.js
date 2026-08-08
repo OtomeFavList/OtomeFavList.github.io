@@ -7,8 +7,6 @@ const gameData = {
     year: "2023",
     publisher: ["Voltage"],
     cnStudio: "JOYOLAND",
-    writer: [""],
-    art: [""],
     writer: [
         {name:"潮文音", lang:"zh"}
     ],
