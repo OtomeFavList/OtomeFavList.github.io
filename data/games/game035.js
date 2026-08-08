@@ -7,8 +7,14 @@ const gameData = {
     year: "2024",
     publisher: ["eXtend"],
     cnStudio: "GSE",
-    writer: ["minetaka"],
-    art: ["すめらぎ琥珀"],
+    writer: [""],
+    art: [""],
+    writer: [
+        {name:"minetaka", lang:"en"}
+    ],
+    art: [
+        {name:"すめらぎ琥珀", lang:"ja"}
+    ],
     cover: "img/game/035.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 特乌塔
