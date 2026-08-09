@@ -44,6 +44,9 @@ export function initPage(Core = {}) {
     const gameItem = appData.gameList?.find(g => g?.gameId === gameId);
     if (!gameInfo || !gameItem || !panelDom) return;
 
+    // ==========新增：本面板图片预加载收集池==========
+    const preloadSrcList = [];
+
     // 面板头部
     const titleEl = panelDom.querySelector(".panel-game-title");
     const heroineBox = panelDom.querySelector(".heroine-box");
@@ -70,6 +73,9 @@ export function initPage(Core = {}) {
             let allSrc = [];
             imgsUnitList.forEach(u => allSrc.push(...u.srcList));
             if (allSrc.length === 0) return;
+
+            // 新增：加入预加载池
+            preloadSrcList.push(...allSrc);
 
             // char模式专属key【修改：替换旧key】
             const saveKey = `${gameId}-${char.id}`;
@@ -99,6 +105,9 @@ export function initPage(Core = {}) {
             let allSrc = [];
             imgsUnitList.forEach(u => allSrc.push(...u.srcList));
             if (allSrc.length === 0) return;
+
+            // 新增
+            preloadSrcList.push(...allSrc);
 
             // char模式专属key【修改：替换旧key】
             const saveKey = `${gameId}-${char.id}`;
@@ -159,6 +168,9 @@ export function initPage(Core = {}) {
             imgsUnitList.forEach(u=>allSrc.push(...u.srcList));
             if(allSrc.length === 0) return;
 
+            // 新增：女主全部立绘加入预加载
+            preloadSrcList.push(...allSrc);
+
             //【修改点2：从cpEditState读取女主立绘下标，不再读appData.charImageSelect】
             let imgIndex = Number(state.femaleImgIndex ?? 0);
             if(imgIndex >= allSrc.length) imgIndex = 0;
@@ -190,6 +202,9 @@ export function initPage(Core = {}) {
                             let mSrcArr = [];
                             mImgs.forEach(u=>mSrcArr.push(...u.srcList));
                             if(mSrcArr.length===0) return "";
+
+                            // 新增：该男主全部立绘加入预加载池
+                            preloadSrcList.push(...mSrcArr);
 
                             //【修改点2】读取草稿map的imgIndex
                             let mImgIndex = 0;
@@ -246,6 +261,13 @@ export function initPage(Core = {}) {
 
         // 将草稿map挂载到panel dom上，事件委托可以读取
         panelDom._tempCpDraftMap = tempCpDraftMap;
+    }
+
+    // ==========渲染HTML全部完成后，执行空闲预加载==========
+    if(Core && typeof Core.preloadImagesInIdle === "function" && preloadSrcList.length > 0){
+        // 去重：避免同一个图片url多次传入
+        const uniqueSrc = [...new Set(preloadSrcList)];
+        Core.preloadImagesInIdle(uniqueSrc);
     }
   }
 
@@ -797,8 +819,8 @@ export function initPage(Core = {}) {
       const filterWriter = document.getElementById("filter-writer")?.value || "";
       const filterArt = document.getElementById("filter-art")?.value || "";
 
-      // 修复：把zh-CN（软连字符）改为标准 zh-CN
-      const sortedGames = [...gameTemplateList].sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
+      // 修复：把zh‑CN（软连字符）改为标准 zh‑CN
+      const sortedGames = [...gameTemplateList].sort((a, b) => a.name.localeCompare(b.name, "zh‑CN"));
       let html = "";
 
       sortedGames.forEach(game => {
@@ -818,9 +840,9 @@ export function initPage(Core = {}) {
                 const nameA = a.name;
                 const nameB = b.name;
                 if(a.lang === "zh"){
-                    return nameA.localeCompare(nameB,"zh-CN");
+                    return nameA.localeCompare(nameB,"zh‑CN");
                 }else if(a.lang === "ja"){
-                    return nameA.localeCompare(nameB,"ja-JP");
+                    return nameA.localeCompare(nameB,"ja‑JP");
                 }else if(a.lang === "en"){
                     const lowerA = nameA.toLowerCase();
                     const lowerB = nameB.toLowerCase();
@@ -977,8 +999,8 @@ export function initPage(Core = {}) {
             }
           });
 
-          el.snapshotContainer.classList.add('export-snapshot');
-          const sizeRadio = document.querySelector('input[name="export-size"]:checked');
+          el.snapshotContainer.classList.add('export‑snapshot');
+          const sizeRadio = document.querySelector('input[name="export‑size"]:checked');
           if(!sizeRadio) throw new Error("未选中导出尺寸");
           let sizeValue = sizeRadio.value;
 
@@ -1029,8 +1051,8 @@ export function initPage(Core = {}) {
           console.error("导出失败：", err);
           alert('图片导出异常！外部图片跨域可能导致失败，请使用本地图片资源。\n' + err.message);
         } finally {
-          el.snapshotContainer.classList.remove('export-snapshot');
-          document.querySelectorAll("#card-base .form-row input").forEach(input => {
+          el.snapshotContainer.classList.remove('export‑snapshot');
+          document.querySelectorAll("#card‑base .form‑row input").forEach(input => {
             input.style.display = "";
           });
           el.exportBtn.disabled = false;
