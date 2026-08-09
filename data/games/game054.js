@@ -21,70 +21,70 @@ const gameData = {
     ],
     cover: "img/game/054.jpg", // 封面图路径，统一前缀img/
     charList: [
-        // 女主模板 female
+        // 莱蒂西娅
         {
             id: "g054_f01",
-            name: "女主A",
+            name: "莱蒂西娅",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/g001_f0_1.jpg","img/char/g001_f0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/054/Laetitia.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 迪兰·纪拜尔
         {
             id: "g054_m01",
-            name: "男主1",
+            name: "迪兰·纪拜尔",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/054/Dylan.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 埃利亚斯·贝尔耶
         {
             id: "g054_m02",
-            name: "男主1",
+            name: "埃利亚斯·贝尔耶",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/054/Elias.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 伊维尔
         {
             id: "g054_m03",
-            name: "男主1",
+            name: "伊维尔",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/054/Hiver.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 奥斯卡·希尔维斯特
         {
             id: "g054_m04",
-            name: "男主1",
+            name: "奥斯卡·希尔维斯特",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/054/Oscar.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 雷吉斯·德·卢佩提
         {
             id: "g054_m05",
-            name: "男主1",
+            name: "雷吉斯·德·卢佩提",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/054/Régis.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         }
     ]
