@@ -2,9 +2,9 @@
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
 // 无需额外配置，仅需要到 main.js 顶部 🚨gameIdList数组追加编号"002","003"...
 const gameData = {
-    id: "game0", // 全局唯一ID，不可重复
+    id: "game064", // 全局唯一ID，不可重复
     name: "圣灵家族-Rinato-",
-    year: "20",
+    year: "2026",
     publisher: ["Comfort","HuneX"],
     cnStudio: "GSE",
     writer: [
@@ -13,11 +13,11 @@ const gameData = {
     art: [
         {name:"さらちよみ", lang:"ja"}
     ],
-    cover: "img/game/0.jpg", // 封面图路径，统一前缀img/
+    cover: "img/game/064.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 菲丽琪塔
         {
-            id: "g0_f01",
+            id: "g064_f01",
             name: "菲丽琪塔",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
@@ -28,7 +28,7 @@ const gameData = {
         },
         // 但丁
         {
-            id: "g0_m01",
+            id: "g064_m01",
             name: "但丁",
             gender: "male",
             isHidden: false,
@@ -39,7 +39,7 @@ const gameData = {
         },
         // 戴维特
         {
-            id: "g0_m02",
+            id: "g064_m02",
             name: "戴维特",
             gender: "male",
             isHidden: false,
@@ -50,7 +50,7 @@ const gameData = {
         },
         // 乔利
         {
-            id: "g0_m03",
+            id: "g064_m03",
             name: "乔利",
             gender: "male",
             isHidden: false,
@@ -61,7 +61,7 @@ const gameData = {
         },
         // 利贝罗塔
         {
-            id: "g0_m04",
+            id: "g064_m04",
             name: "利贝罗塔",
             gender: "male",
             isHidden: false,
@@ -72,7 +72,7 @@ const gameData = {
         },
         // 路卡
         {
-            id: "g0_m05",
+            id: "g064_m05",
             name: "路卡",
             gender: "male",
             isHidden: false,
@@ -83,7 +83,7 @@ const gameData = {
         },
         // 诺瓦
         {
-            id: "g0_m06",
+            id: "g064_m06",
             name: "诺瓦",
             gender: "male",
             isHidden: false,
@@ -94,7 +94,7 @@ const gameData = {
         },
         // 帕契
         {
-            id: "g0_m07",
+            id: "g064_m07",
             name: "帕契",
             gender: "male",
             isHidden: false,
