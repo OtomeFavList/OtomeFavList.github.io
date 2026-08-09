@@ -11,7 +11,8 @@ const gameData = {
         {name:"吉村りりか", lang:"zh"}
     ],
     art: [
-        {name:"アサダモチコ", lang:"ja"}
+        {name:"アサダモチコ", lang:"ja"},
+        {name:"ユウヤ", lang:"ja"}
     ],
     cover: "img/game/042.jpg", // 封面图路径，统一前缀img/
     charList: [
