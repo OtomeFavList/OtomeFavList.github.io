@@ -5,7 +5,7 @@ const gameData = {
     id: "game060", // 全局唯一ID，不可重复
     name: "绝对阶级学园",
     year: "2026",
-    publisher: ["Daisy2","PROTOTYPE"],
+    publisher: ["Daisy²","PROTOTYPE"],
     cnStudio: "JOYOLAND",
     writer: [
         {name:"夏野景", lang:"zh"},
