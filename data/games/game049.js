@@ -4,7 +4,7 @@
 const gameData = {
     id: "game049", // 全局唯一ID，不可重复
     name: "花好似他 & bloom",
-    year: "20",
+    year: "2025",
     publisher: ["MintLip"],
     cnStudio: "JSD",
     writer: [
