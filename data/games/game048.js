@@ -12,7 +12,7 @@ const gameData = {
         {name:"果村なずな", lang:"zh"}
     ],
     art: [
-        {name:"ナガオカ ", lang:"ja"}
+        {name:"ナガオカ", lang:"ja"}
     ],
     cover: "img/game/048.jpg", // 封面图路径，统一前缀img/
     charList: [
