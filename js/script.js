@@ -119,13 +119,14 @@ export function initPage(Core = {}) {
         heroListBox.innerHTML = maleHtml;
     }else{
         // ====================== mode === "cp" 全新草稿模式逻辑 ======================
-        // 兜底：旧存档没有cpEditState则自动生成
+        // 兜底：旧存档没有cpEditState则自动生成【修改点1：增加femaleImgIndex:0】
         if(!Array.isArray(gameItem.cpEditState) || gameItem.cpEditState.length ===0){
             gameItem.cpEditState = femaleChars.map(f=>({
                 femaleId: f.id,
                 openMalePanel: false,
                 maleIds: [],
-                maleItems: []
+                maleItems: [],
+                femaleImgIndex: 0
             }));
         }
 
@@ -155,11 +156,10 @@ export function initPage(Core = {}) {
             let allSrc = [];
             imgsUnitList.forEach(u=>allSrc.push(...u.srcList));
             if(allSrc.length === 0) return;
-            // cp模式专属key
-            const saveKey = `cp-img-${gameId}-${fChar.id}`;
-            if(!appData.charImageSelect) appData.charImageSelect = {};
-            let imgIndex = Number(appData.charImageSelect?.[saveKey]??0);
-            if(imgIndex >= allSrc.length) imgIndex =0;
+
+            //【修改点2：从cpEditState读取女主立绘下标，不再读appData.charImageSelect】
+            let imgIndex = Number(state.femaleImgIndex ?? 0);
+            if(imgIndex >= allSrc.length) imgIndex = 0;
             const showSrc = allSrc[imgIndex];
 
             // 女主卡片：增加data-char-id，多立绘渲染切换按钮，标记panel-mode="cp"
@@ -208,7 +208,6 @@ export function initPage(Core = {}) {
                                 data-char-id="${mChar.id}" 
                                 data-game-id="${gameId}" 
                                 data-total-img="${mSrcArr.length}"
-                                data-current-img-idx="${mImgIndex}"
                                 data-panel-mode="cp">
                                 <div class="char-card-img-box ${mSrcArr.length>1?'char-multi-img':''}">
                                     ${mSrcArr.length>1?`<button class="char-switch-btn char-switch-prev" data-char-id="${mChar.id}" data-game-id="${gameId}" data-total-img="${mSrcArr.length}" data-panel-mode="cp">&lt;</button>`:""}
@@ -234,11 +233,12 @@ export function initPage(Core = {}) {
         heroineBox.innerHTML = "";
         heroListBox.innerHTML = cpPanelHtml;
 
-        // ==========【修改点6】根据cpEditState.maleItems自动生成cpList，供给renderCP预览渲染 ==========
+        // ==========【修改点5：cpList带上femaleImgIndex】==========
         gameItem.cpList = gameItem.cpEditState
             .filter(st=> Array.isArray(st.maleItems) && st.maleItems.length>0)
             .map(st=>({
                 femaleId: st.femaleId,
+                femaleImgIndex: st.femaleImgIndex ?? 0,
                 maleItems: st.maleItems.map(x=>({...x}))
             }));
 
@@ -320,20 +320,22 @@ export function initPage(Core = {}) {
         const allChars = getAllGameChar(gameInfo);
         const femaleChars = allChars.filter(c => c.gender === "female");
 
-        //【修改点7】cp模式数据初始化逻辑（和renderCharSelectPanel内部cp分支完全一致）
+        //【修改点1：初始化增加femaleImgIndex:0】
         if(!Array.isArray(gameItem.cpEditState) || gameItem.cpEditState.length ===0){
             gameItem.cpEditState = femaleChars.map(f=>({
                 femaleId: f.id,
                 openMalePanel: false,
                 maleIds: [],
-                maleItems: []
+                maleItems: [],
+                femaleImgIndex: 0
             }));
         }
-        // 预生成cpList，保证renderCP拿到最新数据
+        // 预生成cpList，保证renderCP拿到最新数据【修改点5带上femaleImgIndex】
         gameItem.cpList = gameItem.cpEditState
             .filter(st=> Array.isArray(st.maleItems) && st.maleItems.length>0)
             .map(st=>({
                 femaleId: st.femaleId,
+                femaleImgIndex: st.femaleImgIndex ?? 0,
                 maleItems: st.maleItems.map(x=>({...x}))
             }));
       });
@@ -479,11 +481,19 @@ export function initPage(Core = {}) {
         imgDom.src = allSrc[currentIndex];
         appData.charImageSelect[saveKey] = currentIndex;
 
-        //【修改点3】cp模式同步写入草稿map
+        //【修改点3】cp模式同步写入草稿map；如果是女主，回写到cpEditState.femaleImgIndex
         if(panelMode === "cp"){
             const cpPanel = charCard.closest(".char-slide-panel-cp");
-            if(cpPanel && cpPanel._tempCpDraftMap){
-                const fid = charCard.dataset.fid;
+            const fid = charCard.dataset.fid;
+            const targetGameItem = appData.gameList?.find(g=>g.gameId === gameId);
+            if(targetGameItem){
+                const st = targetGameItem.cpEditState.find(s=>s.femaleId === fid);
+                // 女主卡片：保存女主自身立绘下标
+                if(st && charCard.classList.contains("cp-female-card-btn")){
+                    st.femaleImgIndex = currentIndex;
+                }
+            }
+            if(cpPanel && cpPanel._tempCpDraftMap && fid){
                 const draftMap = cpPanel._tempCpDraftMap[fid];
                 if(draftMap){
                     draftMap.set(charId, currentIndex);
@@ -517,7 +527,7 @@ export function initPage(Core = {}) {
           return;
       }
 
-      //【修改点4】点击男主item：Map读写，读取data‑current‑img‑idx
+      //【修改点4】点击男主item：优先从draftMap读取已更新下标，不再读DOM属性
       const cpMaleItem = e.target.closest(".cp-male-item");
       if(cpMaleItem){
           e.stopPropagation();
@@ -532,7 +542,11 @@ export function initPage(Core = {}) {
           if(draftCharMap.has(mid)){
               draftCharMap.delete(mid);
           }else{
-              const currentIdx = Number(cpMaleItem.dataset.currentImgIdx) || 0;
+              // 优先取草稿map中已经被切换按钮更新的下标；没有则0
+              let currentIdx = 0;
+              if(draftCharMap.has(mid)){
+                  currentIdx = draftCharMap.get(mid);
+              }
               draftCharMap.set(mid, currentIdx);
           }
           cpMaleItem.classList.toggle("selected", draftCharMap.has(mid));
