@@ -8,7 +8,6 @@ const gameData = {
     publisher: ["dramatic create","honeybee black"],
     cnStudio: "JOYOLAND",
     writer: [
-        {name:"中村幸代", lang:"zh"},
         {name:"柚子みかん", lang:"zh"},
         {name:"浅生柚子", lang:"zh"},
         {name:"相川暁子", lang:"zh"},
