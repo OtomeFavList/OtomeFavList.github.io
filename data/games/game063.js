@@ -13,7 +13,7 @@ const gameData = {
         {name:"トム", lang:"ja"}
     ],
     art: [
-        {{name:"スズケン", lang:"ja"}
+        {name:"スズケン", lang:"ja"}
     ],
     cover: "img/game/063.jpg", // 封面图路径，统一前缀img/
     charList: [
