@@ -220,7 +220,7 @@ export function initPage(Core = {}) {
                         }).join("")}
                     </div>
                 </div>
-                <!-- ✅按钮栏提升到cp‑male‑select‑wrap外部，cp‑female‑block直接子节点 -->
+                <!-- ✅按钮栏提升到cp-male-select-wrap外部，cp-female-block直接子节点 -->
                 <div class="cp-select-btn-bar">
                     <button class="cp-cancel-btn" data-fid="${fChar.id}" data-gid="${gameId}">取消</button>
                     <button class="cp-confirm-btn" data-fid="${fChar.id}" data-gid="${gameId}">确认</button>
@@ -607,7 +607,7 @@ export function initPage(Core = {}) {
           return;
       }
 
-      // ==========【修复：btn‑character / btn‑couple 全局事件委托】==========
+      // ==========【修复：btn-character / btn-couple 全局事件委托】==========
       const charBtn = e.target.closest(".btn-character");
       if(charBtn){
         const gid = charBtn.dataset.gid;
