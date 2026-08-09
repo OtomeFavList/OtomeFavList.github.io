@@ -667,16 +667,6 @@ button:hover{
     background:rgba(0,0,0,0.65);
 }
 
-/* 只有带多图标记的卡片，才显示切换按钮 */
-.char-card-img-box .img-switch-prev,
-.char-card-img-box .img-switch-next {
-    display: none;
-}
-.char-card-img-box.char-has-multi-img .img-switch-prev,
-.char-card-img-box.char-has-multi-img .img-switch-next {
-    display: flex;
-}
-
 /* ========== CP布局 cp-layout-row 【和main.js渲染class严格对应，25%｜75%】 ========== */
 .cp-group{
     margin:16px 0;
