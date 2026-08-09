@@ -80,9 +80,9 @@ export function initPage(Core = {}) {
             femHtml += `
             <label class="char-item ${selected}" data-cid="${char.id}" data-char-id="${char.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}" data-panel-mode="char">
               <div class="char-card-img-box ${allSrc.length>1?'char-multi-img':''}">
-                ${allSrc.length>1?`<button class="char-switch-btn char-switch-prev" data-panel-mode="char">&lt;</button>`: ""}
+                ${allSrc.length>1?`<button class="char-switch-btn char-switch-prev" data-char-id="${char.id}" data-game-id="${gameId}" data-panel-mode="char">&lt;</button>`: ""}
                 <img src="${showSrc}" alt="${char.name}">
-                ${allSrc.length>1?`<button class="char-switch-btn char-switch-next" data-panel-mode="char">&gt;</button>`: ""}
+                ${allSrc.length>1?`<button class="char-switch-btn char-switch-next" data-char-id="${char.id}" data-game-id="${gameId}" data-panel-mode="char">&gt;</button>`: ""}
               </div>
               <div class="char-card-name">${char.name}</div>
             </label>`;
@@ -108,9 +108,9 @@ export function initPage(Core = {}) {
             maleHtml += `
             <label class="char-item ${selected}" data-cid="${char.id}" data-char-id="${char.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}" data-panel-mode="char">
               <div class="char-card-img-box ${allSrc.length>1?'char-multi-img':''}">
-                ${allSrc.length>1?`<button class="char-switch-btn char-switch-prev" data-panel-mode="char">&lt;</button>`: ""}
+                ${allSrc.length>1?`<button class="char-switch-btn char-switch-prev" data-char-id="${char.id}" data-game-id="${gameId}" data-panel-mode="char">&lt;</button>`: ""}
                 <img src="${showSrc}" alt="${char.name}">
-                ${allSrc.length>1?`<button class="char-switch-btn char-switch-next" data-panel-mode="char">&gt;</button>`: ""}
+                ${allSrc.length>1?`<button class="char-switch-btn char-switch-next" data-char-id="${char.id}" data-game-id="${gameId}" data-panel-mode="char">&gt;</button>`: ""}
               </div>
               <div class="char-card-name">${char.name}</div>
             </label>`;
@@ -401,158 +401,145 @@ export function initPage(Core = {}) {
 
     window.refreshGameCardUi = () => renderAddedGame(el);
 
-    // ==========【全局事件委托：角色立绘左右切换，卡片内面板生效】==========
+    // ==========【全局事件委托：角色立绘左右切换 + CP全部业务逻辑】==========
     document.addEventListener("click", function (e) {
       const switchBtn = e.target.closest(".char-switch-btn");
-      if (!switchBtn) return;
-      e.stopPropagation();
+      if (switchBtn) {
+        e.stopPropagation();
 
-      const charCard = switchBtn.closest(".char-item, .char-card-item, .cp-female-card-btn, .cp-male-item");
-      const charId = charCard.dataset.charId;
-      const gameId = charCard.dataset.gameId;
-      // 读取面板模式 char / cp
-      const panelMode = switchBtn.dataset.panelMode || charCard.dataset.panelMode;
-      const gameInfo = gameTemplateList.find(g => g.id === gameId);
-      if (!gameInfo) return;
+        const charCard = switchBtn.closest(".char-item, .char-card-item, .cp-female-card-btn, .cp-male-item");
+        const charId = charCard.dataset.charId;
+        const gameId = charCard.dataset.gameId;
+        const panelMode = switchBtn.dataset.panelMode || charCard.dataset.panelMode;
+        const gameInfo = gameTemplateList.find(g => g.id === gameId);
+        if (!gameInfo) return;
 
-      const char = gameInfo.charList.find(c => c.id === charId);
-      if (!char) return;
+        const char = gameInfo.charList.find(c => c.id === charId);
+        if (!char) return;
 
-      const gameItem = appData.gameList?.find(g => g.gameId === gameId);
-      if (!gameItem) return;
+        const gameItem = appData.gameList?.find(g => g.gameId === gameId);
+        if (!gameItem) return;
 
-      const availImgUnits = getAvailableCharImages(
-        char,
-        appData.globalHideChar,
-        appData.globalFD,
-        gameItem.localHideChar,
-        gameItem.localFD
-      );
+        const availImgUnits = getAvailableCharImages(
+          char,
+          appData.globalHideChar,
+          appData.globalFD,
+          gameItem.localHideChar,
+          gameItem.localFD
+        );
 
-      let allSrc = [];
-      availImgUnits.forEach(unit => allSrc.push(...unit.srcList));
-      if (allSrc.length <= 1) return;
+        let allSrc = [];
+        availImgUnits.forEach(unit => allSrc.push(...unit.srcList));
+        if (allSrc.length <= 1) return;
 
-      const imgDom = charCard.querySelector(".char-card-img-box img");
-      // 按面板模式使用隔离key
-      const saveKey = `${panelMode}-img-${gameId}-${charId}`;
-      if(!appData.charImageSelect) appData.charImageSelect = {};
-      let currentIndex = Number(appData.charImageSelect?.[saveKey] ?? 0);
+        const imgDom = charCard.querySelector(".char-card-img-box img");
+        const saveKey = `${panelMode}-img-${gameId}-${charId}`;
+        if(!appData.charImageSelect) appData.charImageSelect = {};
+        let currentIndex = Number(appData.charImageSelect?.[saveKey] ?? 0);
 
-      if (switchBtn.classList.contains("char-switch-next")) {
-        currentIndex++;
-        if (currentIndex >= allSrc.length) currentIndex = 0;
-      } else {
-        currentIndex--;
-        if (currentIndex < 0) currentIndex = allSrc.length - 1;
+        if (switchBtn.classList.contains("char-switch-next")) {
+          currentIndex++;
+          if (currentIndex >= allSrc.length) currentIndex = 0;
+        } else {
+          currentIndex--;
+          if (currentIndex < 0) currentIndex = allSrc.length - 1;
+        }
+
+        imgDom.src = allSrc[currentIndex];
+        appData.charImageSelect[saveKey] = currentIndex;
+        saveData();
+        return; //处理完图片切换直接return，不再往下执行cp逻辑
       }
 
-      imgDom.src = allSrc[currentIndex];
-      appData.charImageSelect[saveKey] = currentIndex;
-      saveData();
-    });
+      // ============下面全部是原来CP事件逻辑（移到此处）============
+      const cpFemaleBtn = e.target.closest(".cp-female-card-btn");
+      if(cpFemaleBtn){
+          e.stopPropagation();
+          const fid = cpFemaleBtn.dataset.fid;
+          const card = cpFemaleBtn.closest(".added-game-card");
+          const gid = card.dataset.gameid;
+          const gameItem = appData.gameList.find(g=>g.gameId === gid);
+          if(!gameItem) return;
+          const st = gameItem.cpEditState.find(s=>s.femaleId === fid);
+          if(st){
+              st.openMalePanel = !st.openMalePanel;
+          }
+          saveData();
+          requestAnimationFrame(()=>{
+              window.refreshGameCardUi();
+          });
+          return;
+      }
 
-    //===== CP方案C事件委托，追加在document.addEventListener("click"...)内 =====
-    document.addEventListener("click", function(e){
-        // ========= 核心修复：点击切换按钮直接return，阻止触发展开/选中逻辑 =========
-        const switchBtn = e.target.closest(".char-switch-btn");
-        if(switchBtn) return;
+      // 点击男主item：只修改草稿，不碰真实state
+      const cpMaleItem = e.target.closest(".cp-male-item");
+      if(cpMaleItem){
+          e.stopPropagation();
+          const fid = cpMaleItem.dataset.fid;
+          const mid = cpMaleItem.dataset.mid;
+          const panel = cpMaleItem.closest(".char-slide-panel-cp");
+          if(!panel) return;
+          const draftMap = panel._tempCpDraftMap;
+          if(!draftMap || !draftMap[fid]) return;
+          const draftSet = draftMap[fid];
+          if(draftSet.has(mid)){
+              draftSet.delete(mid);
+          }else{
+              draftSet.add(mid);
+          }
+          // 只局部切换UI高亮，不全局刷新页面
+          cpMaleItem.classList.toggle("selected", draftSet.has(mid));
+          return;
+      }
 
-        const cpFemaleBtn = e.target.closest(".cp-female-card-btn");
-        if(cpFemaleBtn){
-            e.stopPropagation();
-            const fid = cpFemaleBtn.dataset.fid;
-            const card = cpFemaleBtn.closest(".added-game-card");
-            const gid = card.dataset.gameid;
-            const gameItem = appData.gameList.find(g=>g.gameId === gid);
-            if(!gameItem) return;
-            const st = gameItem.cpEditState.find(s=>s.femaleId === fid);
-            if(st){
-                st.openMalePanel = !st.openMalePanel;
-            }
-            saveData();
-            requestAnimationFrame(()=>{
-                window.refreshGameCardUi();
-            });
-            return;
-        }
+      // 确认按钮
+      const cpConfirmBtn = e.target.closest(".cp-confirm-btn");
+      if(cpConfirmBtn){
+          e.stopPropagation();
+          const fid = cpConfirmBtn.dataset.fid;
+          const gid = cpConfirmBtn.dataset.gid;
+          const panel = cpConfirmBtn.closest(".char-slide-panel-cp");
+          const draftMap = panel._tempCpDraftMap;
+          if(!draftMap || !draftMap[fid]) return;
+          const gameItem = appData.gameList.find(g=>g.gameId === gid);
+          if(!gameItem) return;
 
-        // 点击男主item：只修改草稿，不碰真实state
-        const cpMaleItem = e.target.closest(".cp-male-item");
-        if(cpMaleItem){
-            e.stopPropagation();
-            const fid = cpMaleItem.dataset.fid;
-            const mid = cpMaleItem.dataset.mid;
-            const panel = cpMaleItem.closest(".char-slide-panel-cp");
-            if(!panel) return;
-            const draftMap = panel._tempCpDraftMap;
-            if(!draftMap || !draftMap[fid]) return;
-            const draftSet = draftMap[fid];
-            if(draftSet.has(mid)){
-                draftSet.delete(mid);
-            }else{
-                draftSet.add(mid);
-            }
-            // 只局部切换UI高亮，不全局刷新页面
-            cpMaleItem.classList.toggle("selected", draftSet.has(mid));
-            return;
-        }
+          const st = gameItem.cpEditState.find(s=>s.femaleId === fid);
+          if(!st) return;
+          st.maleIds = Array.from(draftMap[fid]);
 
-        // 【修改】确认按钮：草稿落地真实数据，关闭全部女主的男角色筛选框，直接全局渲染
-        const cpConfirmBtn = e.target.closest(".cp-confirm-btn");
-        if(cpConfirmBtn){
-            e.stopPropagation();
-            const fid = cpConfirmBtn.dataset.fid;
-            const gid = cpConfirmBtn.dataset.gid;
-            const panel = cpConfirmBtn.closest(".char-slide-panel-cp");
-            const draftMap = panel._tempCpDraftMap;
-            if(!draftMap || !draftMap[fid]) return;
-            const gameItem = appData.gameList.find(g=>g.gameId === gid);
-            if(!gameItem) return;
+          gameItem.cpEditState.forEach(item=>{
+              item.openMalePanel = false;
+          });
+          gameItem.cpPanelOpen = false;
 
-            // 当前确认的女主草稿落地
-            const st = gameItem.cpEditState.find(s=>s.femaleId === fid);
-            if(!st) return;
-            st.maleIds = Array.from(draftMap[fid]);
+          saveData();
+          requestAnimationFrame(()=>{
+              window.refreshGameCardUi();
+          });
+          return;
+      }
 
-            // 【核心改动】把该游戏下所有女主的openMalePanel全部设为false
-            gameItem.cpEditState.forEach(item=>{
-                item.openMalePanel = false;
-            });
-            // 【新增】关闭CP外层滑出面板（女主筛选框）
-            gameItem.cpPanelOpen = false;
+      //取消按钮
+      const cpCancelBtn = e.target.closest(".cp-cancel-btn");
+      if(cpCancelBtn){
+          e.stopPropagation();
+          const fid = cpCancelBtn.dataset.fid;
+          const gid = cpCancelBtn.dataset.gid;
+          const gameItem = appData.gameList.find(g=>g.gameId === gid);
+          if(!gameItem) return;
+          const st = gameItem.cpEditState.find(s=>s.femaleId === fid);
+          if(st){
+              st.openMalePanel = false;
+          }
+          saveData();
+          requestAnimationFrame(()=>{
+              window.refreshGameCardUi();
+          });
+          return;
+      }
 
-            saveData();
-            // 直接全局刷新卡片，全部筛选框自动关闭，视图直接渲染完成
-            requestAnimationFrame(()=>{
-                window.refreshGameCardUi();
-            });
-            return;
-        }
-
-        //【✅已修复】取消按钮：数据驱动，不再手动remove DOM
-        const cpCancelBtn = e.target.closest(".cp-cancel-btn");
-        if(cpCancelBtn){
-            e.stopPropagation();
-            const fid = cpCancelBtn.dataset.fid;
-            const gid = cpCancelBtn.dataset.gid;
-            const gameItem = appData.gameList.find(g=>g.gameId === gid);
-            if(!gameItem) return;
-            // 关闭该女主展开状态，不修改草稿，放弃本次选择
-            const st = gameItem.cpEditState.find(s=>s.femaleId === fid);
-            if(st){
-                st.openMalePanel = false;
-            }
-            saveData();
-            requestAnimationFrame(()=>{
-                window.refreshGameCardUi();
-            });
-            return;
-        }
-    });
-
-    // ==========【修复：btn‑character / btn‑couple 全局事件委托】==========
-    document.addEventListener("click", function(e){
+      // ==========【修复：btn‑character / btn‑couple 全局事件委托】==========
       const charBtn = e.target.closest(".btn-character");
       if(charBtn){
         const gid = charBtn.dataset.gid;
@@ -584,57 +571,52 @@ export function initPage(Core = {}) {
         });
         return;
       }
-    });
 
-    // ✅ 卡片内滑出面板角色勾选事件委托【改动：调用main导出函数，区分面板类型】
-    document.addEventListener("click", function(e){
-      const switchBtn = e.target.closest(".char-switch-btn");
-      if(switchBtn) return;
-
+      // ✅ 卡片内滑出面板角色勾选事件委托【改动：调用main导出函数，区分面板类型】
       const charItem = e.target.closest(".char-slide-panel-char .char-item, .char-slide-panel-cp .char-item");
-      if(!charItem) return;
+      if(charItem){
+        const cid = charItem.dataset.cid;
+        const gameId = charItem.dataset.gameId;
+        const gameItem = appData.gameList?.find(g=>g.gameId === gameId);
+        if(!gameItem) return;
 
-      const cid = charItem.dataset.cid;
-      const gameId = charItem.dataset.gameId;
-      const gameItem = appData.gameList?.find(g=>g.gameId === gameId);
-      if(!gameItem) return;
-
-      const panelChar = charItem.closest(".char-slide-panel-char");
-      if(panelChar){
-        toggleCharItemSelect(gameItem, cid);
-        gameItem.charPanelOpen = false;
-      }else{
-        toggleCpItemSelect(gameItem, cid);
-        gameItem.cpPanelOpen = false;
+        const panelChar = charItem.closest(".char-slide-panel-char");
+        if(panelChar){
+          toggleCharItemSelect(gameItem, cid);
+          gameItem.charPanelOpen = false;
+        }else{
+          toggleCpItemSelect(gameItem, cid);
+          gameItem.cpPanelOpen = false;
+        }
+        saveData();
+        requestAnimationFrame(()=>{
+            window.refreshGameCardUi();
+        });
+        return;
       }
-      saveData();
-      requestAnimationFrame(()=>{
-          window.refreshGameCardUi();
-      });
-    });
 
-    // ✅面板内部关闭按钮（×）
-    document.addEventListener("click", function(e){
+      // ✅面板内部关闭按钮（×）
       const closeBtn = e.target.closest(".panel-close-btn");
-      if(!closeBtn) return;
+      if(closeBtn){
+        const panel = closeBtn.closest(".char-slide-panel-char, .char-slide-panel-cp");
+        if(!panel) return;
 
-      const panel = closeBtn.closest(".char-slide-panel-char, .char-slide-panel-cp");
-      if(!panel) return;
+        const card = panel.closest(".added-game-card");
+        const gid = card.dataset.gameid;
+        const gameItem = appData.gameList.find(g=>g.gameId === gid);
+        if(!gameItem) return;
 
-      const card = panel.closest(".added-game-card");
-      const gid = card.dataset.gameid;
-      const gameItem = appData.gameList.find(g=>g.gameId === gid);
-      if(!gameItem) return;
-
-      if(panel.classList.contains("char-slide-panel-char")){
-        gameItem.charPanelOpen = false;
-      }else{
-        gameItem.cpPanelOpen = false;
+        if(panel.classList.contains("char-slide-panel-char")){
+          gameItem.charPanelOpen = false;
+        }else{
+          gameItem.cpPanelOpen = false;
+        }
+        saveData();
+        requestAnimationFrame(()=>{
+            window.refreshGameCardUi();
+        });
+        return;
       }
-      saveData();
-      requestAnimationFrame(()=>{
-          window.refreshGameCardUi();
-      });
     });
 
     function refreshHideCharSwitch() {
