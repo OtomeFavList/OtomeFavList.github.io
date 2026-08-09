@@ -643,30 +643,31 @@ export function initPage(Core = {}) {
         });
         return;
       }
-
+      
       // ✅ 卡片内滑出面板角色勾选事件委托【改动：调用main导出函数，区分面板类型】
       const charItem = e.target.closest(".char-slide-panel-char .char-item, .char-slide-panel-cp .char-item");
-      if(charItem){
-        const cid = charItem.dataset.cid;
-        const gameId = charItem.dataset.gameId;
-        const gameItem = appData.gameList?.find(g=>g.gameId === gameId);
-        if(!gameItem) return;
+      if (charItem) {
+          const cid = charItem.dataset.cid;
+          const gameId = charItem.dataset.gameId;
+          const gameItem = appData.gameList?.find(g => g.gameId === gameId);
+          if (!gameItem) return;
 
-        const panelChar = charItem.closest(".char-slide-panel-char");
-        if(panelChar){
-          toggleCharItemSelect(gameItem, cid);
-          gameItem.charPanelOpen = false;
-        }else{
-          toggleCpItemSelect(gameItem, cid);
-          gameItem.cpPanelOpen = false;
-        }
-        saveData();
-        requestAnimationFrame(()=>{
-            window.refreshGameCardUi();
-        });
-        return;
+          const panelChar = charItem.closest(".char-slide-panel-char");
+          if (panelChar) {
+              // 修改点：传入 gameId 参数
+              toggleCharItemSelect(gameItem, cid, gameId);
+              gameItem.charPanelOpen = false;
+          } else {
+              toggleCpItemSelect(gameItem, cid);
+              gameItem.cpPanelOpen = false;
+          }
+          saveData();
+          requestAnimationFrame(() => {
+              window.refreshGameCardUi();
+          });
+          return;
       }
-
+      
       // ✅面板内部关闭按钮（×）
       const closeBtn = e.target.closest(".panel-close-btn");
       if(closeBtn){
