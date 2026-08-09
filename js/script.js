@@ -176,13 +176,19 @@ export function initPage(Core = {}) {
                             let mSrcArr = [];
                             mImgs.forEach(u=>mSrcArr.push(...u.srcList));
                             if(mSrcArr.length===0) return "";
+                            // =========【修复：不再硬编码 mSrcArr[0]，读取cp-img索引】=========
+                            const mSaveKey = `cp-img-${gameId}-${mChar.id}`;
+                            if(!appData.charImageSelect) appData.charImageSelect = {};
+                            let mImgIndex = Number(appData.charImageSelect?.[mSaveKey] ?? 0);
+                            if(mImgIndex >= mSrcArr.length) mImgIndex = 0;
+                            const mShowSrc = mSrcArr[mImgIndex];
                             // 从草稿拿选中状态，不再读取state.maleIds
                             const mSel = draftSet.has(mChar.id) ? "selected" : "";
                             return `
                             <div class="cp-male-item ${mSel}" data-fid="${fChar.id}" data-mid="${mChar.id}" data-char-id="${mChar.id}" data-game-id="${gameId}" data-panel-mode="cp">
                                 <div class="char-card-img-box ${mSrcArr.length>1?'char-multi-img':''}">
                                     ${mSrcArr.length>1?`<button class="char-switch-btn char-switch-prev" data-char-id="${mChar.id}" data-game-id="${gameId}" data-total-img="${mSrcArr.length}" data-panel-mode="cp">&lt;</button>`:""}
-                                    <img src="${mSrcArr[0]}" alt="${mChar.name}">
+                                    <img src="${mShowSrc}" alt="${mChar.name}">
                                     ${mSrcArr.length>1?`<button class="char-switch-btn char-switch-next" data-char-id="${mChar.id}" data-game-id="${gameId}" data-total-img="${mSrcArr.length}" data-panel-mode="cp">&gt;</button>`:""}
                                 </div>
                                 <div class="char-card-name">${mChar.name}</div>
@@ -448,6 +454,8 @@ export function initPage(Core = {}) {
         imgDom.src = allSrc[currentIndex];
         appData.charImageSelect[saveKey] = currentIndex;
         saveData();
+        // =========【新增调试日志】=========
+        console.log("saveKey", saveKey,"set index",currentIndex,"src",allSrc[currentIndex]);
         return; //处理完图片切换直接return，不再往下执行cp逻辑
       }
 
