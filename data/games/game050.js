@@ -35,7 +35,7 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/g001_f0_1.jpg","img/char/g001_f0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/050/Haruka.jpg","img/char/050/Haruka2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 细波艾斯
@@ -46,7 +46,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/050/Ace.jpg","img/char/050/Ace2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 神里晓
@@ -57,7 +57,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/050/Kyou.jpg","img/char/050/Kyou2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 来实雅人
@@ -68,7 +68,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/050/Masato.jpg","img/char/050/Masato2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 弓仓音时
@@ -79,7 +79,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/050/Neji.jpg","img/char/050/Neji2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 指乃朱理
@@ -90,7 +90,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/050/Shuri.jpg","img/char/050/Shuri2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 九鬼辉
@@ -101,7 +101,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/050/Haruka.jpg","img/char/050/Haruka2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 九鬼光
@@ -112,7 +112,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/050/Hikaru.jpg","img/char/050/Hikaru2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 九鬼静
@@ -123,7 +123,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/050/Shizuka.jpg","img/char/050/Shizuka2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         }
     ]
