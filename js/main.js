@@ -1,4 +1,3 @@
-```javascript
 // ===================== main.js 【数据层、公共工具函数】 =====================
 // 🚨【新增游戏请在此数组添加编号！】请勿改动其他位置
 const gameIdList = [
@@ -928,4 +927,3 @@ export async function bootstrapCore() {
     bindGlobalSwitchSpoilerEvents();
     // ⚠️移除bindDynamicGameCardSwitchEvents()调用，放到script.js渲染完列表后执行
 }
-```
