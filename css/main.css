@@ -661,6 +661,11 @@ button:hover{
     align-items:center;
     justify-content:center;
 }
+/* 图片切换按钮，禁止点击事件冒泡到父卡片的视觉反馈，提高移动端点击权重 */
+.char-switch-btn{
+    pointer-events:auto !important;
+    touch-action: manipulation;
+}
 .char-switch-prev{
     left:3px;
 }
