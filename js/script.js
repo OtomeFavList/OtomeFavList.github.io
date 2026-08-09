@@ -1,3 +1,4 @@
+```javascript
 // ===================== script.js UI交互层（模块化导出） =====================
 // 【重要说明】剧透弹窗、全局开关click事件全部迁移至main.js，本文件不再处理全局开关点击逻辑
 // 游戏卡片动态生成的局部开关：使用事件委托对接main.js剧透弹窗逻辑
@@ -792,7 +793,7 @@ export function initPage(Core = {}) {
       const filterWriter = document.getElementById("filter-writer")?.value || "";
       const filterArt = document.getElementById("filter-art")?.value || "";
 
-      // 修复：把zh‑CN（软连字符）改为标准 zh-CN
+      // 修复：把zh-CN（软连字符）改为标准 zh-CN
       const sortedGames = [...gameTemplateList].sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
       let html = "";
 
@@ -1050,3 +1051,4 @@ export function initPage(Core = {}) {
   // 不再此处直接调用bootstrap，交给index.html时序控制
   window.uiBootstrap = bootstrap;
 }
+```
