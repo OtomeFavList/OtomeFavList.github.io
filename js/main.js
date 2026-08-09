@@ -72,6 +72,11 @@ export function loadData() {
                 if (!Array.isArray(g.selectChars)) g.selectChars = [];
                 if (!Array.isArray(g.cpSelectIds)) g.cpSelectIds = [];
 
+                // ============【新增：Character模式 已选角色带下标存储兜底】============
+                if (!Array.isArray(g.selectCharItems)) {
+                    g.selectCharItems = [];
+                }
+
                 // =====方案C：cpEditState 旧存档兼容兜底=====
                 // 注意：loadData阶段gameTemplateList还未加载，不能生成真实cpEditState；
                 // 此处只做占位，真实生成逻辑放在script.js renderCharSelectPanel的if(mode==="cp")内部
@@ -419,6 +424,7 @@ export function renderSelectedChar(gameItem, gameInfo) {
     const localFD = gameItem.localFD;
 
     if (!Array.isArray(gameItem.selectChars)) gameItem.selectChars = [];
+    if (!Array.isArray(gameItem.selectCharItems)) gameItem.selectCharItems = [];
 
     gameItem.selectChars?.forEach(cid => {
         const char = gameInfo.charList?.find(c => c.id === cid);
@@ -431,8 +437,9 @@ export function renderSelectedChar(gameItem, gameInfo) {
         availableImgUnits.forEach(u => allSrc.push(...u.srcList));
         if (allSrc.length === 0) return;
 
-        const saveKey = `${gameInfo.id}-${char.id}`;
-        let imgIndex = Number(appData.charImageSelect[saveKey] ?? 0);
+        // 从持久化 selectCharItems 读取imgIndex，不再读取临时appData.charImageSelect
+        const storedItem = gameItem.selectCharItems.find(s => s.charId === cid);
+        let imgIndex = Number(storedItem?.imgIndex ?? 0);
         if (imgIndex >= allSrc.length) imgIndex = 0;
         const targetSrc = allSrc[imgIndex];
 
@@ -477,8 +484,8 @@ export function renderCP(gameItem, gameInfo) {
         fAvailUnits.forEach(u => fAllSrc.push(...u.srcList));
         if (fAllSrc.length === 0) return;
 
-        const fSaveKey = `${gameInfo.id}-${fChar.id}`;
-        let fIndex = Number(appData.charImageSelect[fSaveKey] ?? 0);
+        // ✅修复：从cp自身存储取女主imgIndex，不再读取临时appData.charImageSelect
+        let fIndex = Number(cp.femaleImgIndex ?? 0);
         if (fIndex >= fAllSrc.length) fIndex = 0;
         const fTargetSrc = fAllSrc[fIndex];
 
@@ -577,11 +584,23 @@ export function getAllGameChar(gameInfo) {
  */
 export function toggleCharItemSelect(gameItem, charId) {
     if (!Array.isArray(gameItem.selectChars)) gameItem.selectChars = [];
+    if (!Array.isArray(gameItem.selectCharItems)) gameItem.selectCharItems = [];
+
     const idx = gameItem.selectChars.indexOf(charId);
     if (idx >= 0) {
+        // 取消勾选：同时删除两套数组对应项
         gameItem.selectChars.splice(idx, 1);
+        const itemIdx = gameItem.selectCharItems.findIndex(s => s.charId === charId);
+        if(itemIdx >=0) gameItem.selectCharItems.splice(itemIdx,1);
     } else {
+        // 勾选：读取当前面板临时选中下标 appData.charImageSelect
+        const saveKey = `${currentEditGameId}-${charId}`;
+        const currentImgIndex = Number(appData.charImageSelect[saveKey] ?? 0);
         gameItem.selectChars.push(charId);
+        gameItem.selectCharItems.push({
+            charId: charId,
+            imgIndex: currentImgIndex
+        });
     }
     saveData();
 }
