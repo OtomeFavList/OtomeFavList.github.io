@@ -643,9 +643,10 @@ export function getAllGameChar(gameInfo) {
 /**
  * 单人Character面板勾选切换 → 操作 gameItem.selectChars
  * @param {Object} gameItem appData.gameList内的游戏条目
- * @param {charId} charId 角色id
+ * @param {string} charId 角色id
+ * @param {string} gameId 当前游戏ID（用于正确读取立绘索引）
  */
-export function toggleCharItemSelect(gameItem, charId) {
+export function toggleCharItemSelect(gameItem, charId, gameId) {
     if (!Array.isArray(gameItem.selectChars)) gameItem.selectChars = [];
     if (!Array.isArray(gameItem.selectCharItems)) gameItem.selectCharItems = [];
 
@@ -656,8 +657,8 @@ export function toggleCharItemSelect(gameItem, charId) {
         const itemIdx = gameItem.selectCharItems.findIndex(s => s.charId === charId);
         if(itemIdx >=0) gameItem.selectCharItems.splice(itemIdx,1);
     } else {
-        // 勾选：读取当前面板临时选中下标 appData.charImageSelect
-        const saveKey = `${currentEditGameId}-${charId}`;
+        // 勾选：使用传入的 gameId 构造存储键，不再依赖 currentEditGameId
+        const saveKey = `${gameId}-${charId}`;
         const currentImgIndex = Number(appData.charImageSelect[saveKey] ?? 0);
         gameItem.selectChars.push(charId);
         gameItem.selectCharItems.push({
