@@ -1240,8 +1240,9 @@ h2{
     margin-top:8px;
     justify-content: flex-end;
     flex-wrap: wrap;
-    /* 放在cp‑male‑select-wrap内部右下角 */
-    padding-right:4px;
+    /* 保留右侧额外边距，按钮不贴边框 */
+    padding-right: 12px;
+    padding-left: 12px;
 }
 .cp-confirm-btn,
 .cp-cancel-btn{
