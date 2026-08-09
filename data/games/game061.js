@@ -5,17 +5,14 @@ const gameData = {
     id: "game061", // 全局唯一ID，不可重复
     name: "麻烦清理专家咖啡店-the mystic lover-",
     year: "2026",
-    publisher: ["MintLip","MintLip"],
-    cnStudio: "汉化组/汉化厂商",
+    publisher: ["EDIA","MintLip"],
+    cnStudio: "JSD",
     writer: [
-        {name:"中文编剧", lang:"zh"},
-        {name:"日文编剧", lang:"ja"},
-        {name:"英文编剧", lang:"en"}
+        {name:"雨宮うた", lang:"zh"},
+        {name:"结望はるか", lang:"zh"}
     ],
     art: [
-        {name:"中文原画", lang:"zh"},
-        {name:"日文原画", lang:"ja"},
-        {name:"英文原画", lang:"en"}
+        {name:"ユウヤ", lang:"ja"}
     ],
     cover: "img/game/061.jpg", // 封面图路径，统一前缀img/
     charList: [
