@@ -2,27 +2,35 @@
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
 // 无需额外配置，仅需要到 main.js 顶部 🚨gameIdList数组追加编号"002","003"...
 const gameData = {
-    id: "game0", // 全局唯一ID，不可重复
+    id: "game050", // 全局唯一ID，不可重复
     name: "如果这个世界有神明大人存在的话",
     year: "2025",
     publisher: ["Rejet"],
     cnStudio: "JOYOLAND",
     writer: [
-        {name:"中文编剧", lang:"zh"},
-        {name:"日文编剧", lang:"ja"},
-        {name:"英文编剧", lang:"en"}
+        {name:"三芳秀克", lang:"zh"},
+        {name:"中越麻朝", lang:"zh"},
+        {name:"久遠まひろ", lang:"zh"},
+        {name:"如月蒼", lang:"zh"},
+        {name:"小和泉いづみ", lang:"zh"},
+        {name:"有栖川あやみ", lang:"zh"},
+        {name:"桜木鈴音", lang:"zh"},
+        {name:"真崎結衣", lang:"zh"},
+        {name:"秋月ひろ", lang:"zh"},
+        {name:"関涼子", lang:"zh"},
+        {name:"鷹匠早紀", lang:"zh"},
+        {name:"こたに白子", lang:"ja"},
+        {name:"やまだ有見", lang:"ja"}
     ],
     art: [
-        {name:"中文原画", lang:"zh"},
-        {name:"日文原画", lang:"ja"},
-        {name:"英文原画", lang:"en"}
+        {name:"ワカツキ", lang:"ja"}
     ],
-    cover: "img/game/0.jpg", // 封面图路径，统一前缀img/
+    cover: "img/game/050.jpg", // 封面图路径，统一前缀img/
     charList: [
-        // 女主模板 female
+        // 来实春香
         {
             id: "g0_f01",
-            name: "女主A",
+            name: "来实春香",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
