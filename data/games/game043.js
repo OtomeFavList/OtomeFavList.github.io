@@ -12,7 +12,7 @@ const gameData = {
         {name:"青木ひろえ", lang:"zh"},
         {name:"大山愛乃", lang:"zh"},
         {name:"北弓しほ", lang:"zh"},
-        {name:"ウサギリス株式会社", lang:"ja"},
+        {name:"ウサギリス", lang:"ja"},
         {name:"YUKI", lang:"en"}
     ],
     art: [
