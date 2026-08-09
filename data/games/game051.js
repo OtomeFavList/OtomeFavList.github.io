@@ -5,118 +5,82 @@ const gameData = {
     id: "game051", // 全局唯一ID，不可重复
     name: "夏空的独白 ~Another Memory~",
     year: "2025",
-    publisher: ["原厂发行商"],
-    cnStudio: "汉化组/汉化厂商",
+    publisher: ["Otomate"],
+    cnStudio: "GSE",
     writer: [
-        {name:"中文编剧", lang:"zh"},
-        {name:"日文编剧", lang:"ja"},
-        {name:"英文编剧", lang:"en"}
+        {name:"西村悠", lang:"zh"}
     ],
     art: [
         {name:"中文原画", lang:"zh"},
-        {name:"日文原画", lang:"ja"},
-        {name:"英文原画", lang:"en"}
+        {name:"ろく丸", lang:"ja"}
     ],
     cover: "img/game/051.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 女主模板 female
         {
-            id: "g0_f01",
+            id: "g051_f01",
             name: "女主A",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
                 { srcList: ["img/char/g001_f0_1.jpg","img/char/g001_f0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g001_f0_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g001_f0_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 普通可攻略男主 male
         {
-            id: "g0_m01",
+            id: "g051_m01",
             name: "男主1",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
                 { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 普通可攻略男主 male
         {
-            id: "g0_m02",
+            id: "g051_m02",
             name: "男主1",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
                 { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 普通可攻略男主 male
         {
-            id: "g0_m03",
+            id: "g051_m03",
             name: "男主1",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
                 { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 普通可攻略男主 male
         {
-            id: "g0_m04",
+            id: "g051_m04",
             name: "男主1",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
                 { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 普通可攻略男主 male
         {
-            id: "g0_m05",
+            id: "g051_m05",
             name: "男主1",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
                 { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
-            ]
-        },
-        // 隐藏角色（isHidden=true → 开关开启才显示整个角色卡片）
-        {
-            id: "g0_h01",
-            name: "隐藏攻略角色",
-            gender: "male",
-            isHidden: true,
-            isFD: false,
-            images: [
-                { srcList: ["img/char/g001_h01_1.jpg"], type: "base" }
-            ]
-        },
-        // FD续作限定角色（isFD=true → FD开关开启才显示整个角色卡片）
-        {
-            id: "g0_fd01",
-            name: "续作FD新增角色",
-            gender: "male",
-            isHidden: false,
-            isFD: true,
-            images: [
-                { srcList: ["img/char/g001_fd01_1.jpg"], type: "base" }
+
             ]
         }
     ]
