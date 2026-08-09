@@ -1240,8 +1240,6 @@ h2{
     margin-top:8px;
     justify-content: flex-end;
     flex-wrap: wrap;
-    /* 保留右侧额外边距，按钮不贴边框 */
-    padding-right: 12px;
     padding-left: 12px;
 }
 .cp-confirm-btn,
