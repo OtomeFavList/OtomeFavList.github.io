@@ -79,6 +79,7 @@ export function loadData() {
                     g.cpEditState = null;
                 }
                 if(!Array.isArray(g.cpList)) g.cpList = [];
+                if(!Array.isArray(g.maleItems)) g.maleItems = [];
             });
         }
     } catch (e) {
@@ -482,9 +483,9 @@ export function renderCP(gameItem, gameInfo) {
         const fTargetSrc = fAllSrc[fIndex];
 
         let maleHtml = "";
-        if (!Array.isArray(cp.maleIds)) cp.maleIds = [];
-        cp.maleIds?.forEach(mid => {
-            const mChar = gameInfo.charList?.find(c => c.id === mid);
+        if (!Array.isArray(cp.maleItems)) cp.maleItems = [];
+        cp.maleItems?.forEach(mi => {
+            const mChar = gameInfo.charList?.find(c => c.id === mi.charId);
             if (!mChar) return;
 
             const mAvailUnits = getAvailableCharImages(mChar, globalHide, globalFD, localHide, localFD);
@@ -492,8 +493,7 @@ export function renderCP(gameItem, gameInfo) {
             mAvailUnits.forEach(u => mAllSrc.push(...u.srcList));
             if (mAllSrc.length === 0) return;
 
-            const mSaveKey = `${gameInfo.id}-${mChar.id}`;
-            let mIndex = Number(appData.charImageSelect[mSaveKey] ?? 0);
+            let mIndex = Number(mi.imgIndex ?? 0);
             if (mIndex >= mAllSrc.length) mIndex = 0;
             const mTargetSrc = mAllSrc[mIndex];
 
