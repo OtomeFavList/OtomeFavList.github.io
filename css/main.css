@@ -1234,13 +1234,13 @@ h2{
 }
 
 /* ========== CP选择面板底部按钮栏【修改定位与gap】 ========== */
-.cp-select-btn-bar {
-    position: absolute;
-    right: 16px;
-    bottom: 12px;
+.cp-select-btn-bar{
     display: flex;
-    gap: 10px;
-    /* 移除 margin-top, justify-content, padding-left, flex-wrap（因绝对定位不再需要这些） */
+    gap: 12px;
+    margin-top:8px;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    padding-left: 12px;
 }
 .cp-confirm-btn,
 .cp-cancel-btn{
