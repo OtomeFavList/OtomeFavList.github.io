@@ -518,17 +518,23 @@ export function initPage(Core = {}) {
             return;
         }
 
-        //【修改】取消按钮：丢弃草稿，同时移除候选区和本组按钮栏，不重绘整张卡片
+        //【✅已修复】取消按钮：数据驱动，不再手动remove DOM
         const cpCancelBtn = e.target.closest(".cp-cancel-btn");
         if(cpCancelBtn){
             e.stopPropagation();
             const fid = cpCancelBtn.dataset.fid;
-            const panel = cpCancelBtn.closest(".char-slide-panel-cp");
-            if(!panel) return;
-            const maleWrap = panel.querySelector(`.cp-male-select-wrap[data-fid="${fid}"]`);
-            const btnBar = cpCancelBtn.closest(".cp-select-btn-bar");
-            if(maleWrap) maleWrap.remove();
-            if(btnBar) btnBar.remove();
+            const gid = cpCancelBtn.dataset.gid;
+            const gameItem = appData.gameList.find(g=>g.gameId === gid);
+            if(!gameItem) return;
+            // 关闭该女主展开状态，不修改草稿，放弃本次选择
+            const st = gameItem.cpEditState.find(s=>s.femaleId === fid);
+            if(st){
+                st.openMalePanel = false;
+            }
+            saveData();
+            requestAnimationFrame(()=>{
+                window.refreshGameCardUi();
+            });
             return;
         }
     });
