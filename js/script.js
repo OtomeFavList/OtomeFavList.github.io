@@ -320,8 +320,8 @@ export function initPage(Core = {}) {
         }
 
         // =========【新增：条件渲染本游戏局部开关】=========
-        const hasLocalHideChar = gameInfo.charList.some(c => c.localHideChar === true);
-        const hasLocalFDChar = gameInfo.charList.some(c => c.localFD === true);
+        const hasLocalHideChar = gameInfo.charList.some(c => c.isHidden === true);
+        const hasLocalFDChar = gameInfo.charList.some(c => c.isFD === true);
 
         let switchRowInnerHtml = "";
         if(hasLocalHideChar){
