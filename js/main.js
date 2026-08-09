@@ -93,7 +93,7 @@ export function loadData() {
 }
 
 /**
- * 获取今日日期字符串 YYYY-MM-DD 用于跨零点判断
+ * 获取今日日期字符串 YYYY‑MM‑DD 用于跨零点判断
  * @returns {string} 日期字符串
  */
 export function getTodayDateStr() {
@@ -163,6 +163,33 @@ export function getAvailableCharImages(char, globalHideSwitch, globalFDSwitch, l
     });
 }
 
+/**
+ * 后台预加载并解码图片，解码完成后resolve，避免直接赋值src造成卡顿闪现
+ * @param {string} src
+ * @returns {Promise<HTMLImageElement>}
+ */
+export async function preloadAndDecodeImage(src){
+    const tempImg = new Image();
+    tempImg.decoding = "async";
+    tempImg.src = src;
+    await tempImg.decode();
+    return tempImg;
+}
+
+/**
+ * 安全切换角色立绘：后台预解码完成再更新DOM
+ * @param {HTMLImageElement} domImg 页面真实img DOM
+ * @param {string} nextSrc 新图片地址
+ */
+export async function switchCharImage(domImg, nextSrc){
+    try{
+        await preloadAndDecodeImage(nextSrc);
+        domImg.src = nextSrc;
+    }catch(err){
+        console.error("图片切换失败", err);
+    }
+}
+
 // ===================== 游戏模板加载模块（不再import游戏，读取全局已加载数据） =====================
 export async function loadAllGameTemplates() {
     // 等待全局window.gameDataList就绪（data/games.js已经完成全部import）
@@ -214,7 +241,7 @@ export function sortFilterOptionList(arr) {
     }
 
     // 各组内部排序
-    const sortZh = (a, b) => a.localeCompare(b, 'zh-CN');
+    const sortZh = (a, b) => a.localeCompare(b, 'zh‑CN');
     const sortEn = (a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' });
     const sortJa = (a, b) => {
         function toHiragana(s) {
@@ -257,9 +284,9 @@ export function sortStaffByLang(list) {
         const nameA = a.name;
         const nameB = b.name;
         if(a.lang === "zh"){
-            return nameA.localeCompare(nameB,"zh-CN");
+            return nameA.localeCompare(nameB,"zh‑CN");
         }else if(a.lang === "ja"){
-            return nameA.localeCompare(nameB,"ja-JP");
+            return nameA.localeCompare(nameB,"ja‑JP");
         }else if(a.lang === "en"){
             // en：首字母相同，小写排在大写前面
             const lowerA = nameA.toLowerCase();
@@ -346,11 +373,11 @@ export function fillFilterOptions(gameList) {
         });
     };
 
-    fillSelect("filter-writer", writerSorted);
-    fillSelect("filter-art", artSorted);
-    fillSelect("filter-year", yearSorted);
-    fillSelect("filter-publisher", pubSorted);
-    fillSelect("filter-cn", cnSorted);
+    fillSelect("filter‑writer", writerSorted);
+    fillSelect("filter‑art", artSorted);
+    fillSelect("filter‑year", yearSorted);
+    fillSelect("filter‑publisher", pubSorted);
+    fillSelect("filter‑cn", cnSorted);
 }
 
 // ===================== HTML模板渲染函数 =====================
@@ -400,9 +427,9 @@ export function renderGameSelectItem(game) {
     }
 
     return `
-        <img src="${game.cover || ''}" alt="${game.name || ''}">
+        <img src="${game.cover || ''}" alt="${game.name || ''}" decoding="async">
         <div>
-            <div class="game-option-name">${game.name || ""}</div>
+            <div class="game‑option‑name">${game.name || ""}</div>
             ${infoHtml}
         </div>
     `;
@@ -415,7 +442,7 @@ export function renderGameSelectItem(game) {
  * @returns {string} html字符串
  */
 export function renderSelectedChar(gameItem, gameInfo) {
-    if (!gameInfo?.charList || !gameItem) return `<div class="empty-hint">暂未添加角色</div>`;
+    if (!gameInfo?.charList || !gameItem) return `<div class="empty‑hint">暂未添加角色</div>`;
 
     let html = "";
     const globalHide = appData.globalHideChar;
@@ -444,16 +471,16 @@ export function renderSelectedChar(gameItem, gameInfo) {
         const targetSrc = allSrc[imgIndex];
 
         html += `
-            <div class="char-card-item selected" data-char-id="${char.id}" data-game-id="${gameInfo.id}" data-total-img="${allSrc.length}">
-                <div class="char-card-img-box ${allSrc.length > 1 ? 'char-has-multi-img' : ''}">
-                    <img src="${targetSrc}" alt="${char.name || ''}">
+            <div class="char‑card‑item selected" data‑char‑id="${char.id}" data‑game‑id="${gameInfo.id}" data‑total‑img="${allSrc.length}">
+                <div class="char‑card‑img‑box ${allSrc.length > 1 ? 'char‑has‑multi‑img' : ''}">
+                    <img src="${targetSrc}" alt="${char.name || ''}" decoding="async">
                 </div>
-                <div class="char-card-name">${char.name || ""}</div>
+                <div class="char‑card‑name">${char.name || ""}</div>
             </div>
         `;
     });
 
-    return html || `<div class="empty-hint">暂未添加角色</div>`;
+    return html || `<div class="empty‑hint">暂未添加角色</div>`;
 }
 
 /**
@@ -463,7 +490,7 @@ export function renderSelectedChar(gameItem, gameInfo) {
  * @returns {string} html字符串
  */
 export function renderCP(gameItem, gameInfo) {
-    if (!gameInfo?.charList || !gameItem) return `<div class="empty-hint">暂未添加角色</div>`;
+    if (!gameInfo?.charList || !gameItem) return `<div class="empty‑hint">暂未添加角色</div>`;
 
     let html = "";
     const globalHide = appData.globalHideChar;
@@ -505,27 +532,27 @@ export function renderCP(gameItem, gameInfo) {
             const mTargetSrc = mAllSrc[mIndex];
 
             maleHtml += `
-                <div class="cp-selected-card-item" data-char-id="${mChar.id}" data-game-id="${gameInfo.id}" data-total-img="${mAllSrc.length}">
-                    <div class="char-card-img-box ${mAllSrc.length > 1 ? 'char-has-multi-img' : ''}">
-                        <img src="${mTargetSrc}" alt="${mChar.name || ''}">
+                <div class="cp‑selected‑card‑item" data‑char‑id="${mChar.id}" data‑game‑id="${gameInfo.id}" data‑total‑img="${mAllSrc.length}">
+                    <div class="char‑card‑img‑box ${mAllSrc.length > 1 ? 'char‑has‑multi‑img' : ''}">
+                        <img src="${mTargetSrc}" alt="${mChar.name || ''}" decoding="async">
                     </div>
-                    <div class="char-card-name">${mChar.name || ""}</div>
+                    <div class="char‑card‑name">${mChar.name || ""}</div>
                 </div>
             `;
         });
 
         html += `
-            <div class="cp-layout-row">
-                <div class="heroine-column">
-                    <div class="cp-selected-card-item" data-char-id="${fChar.id}" data-game-id="${gameInfo.id}" data-total-img="${fAllSrc.length}">
-                        <div class="char-card-img-box ${fAllSrc.length > 1 ? 'char-has-multi-img' : ''}">
-                            <img src="${fTargetSrc}" alt="${fChar.name || ''}">
+            <div class="cp‑layout‑row">
+                <div class="heroine‑column">
+                    <div class="cp‑selected‑card‑item" data‑char‑id="${fChar.id}" data‑game‑id="${gameInfo.id}" data‑total‑img="${fAllSrc.length}">
+                        <div class="char‑card‑img‑box ${fAllSrc.length > 1 ? 'char‑has‑multi‑img' : ''}">
+                            <img src="${fTargetSrc}" alt="${fChar.name || ''}" decoding="async">
                         </div>
-                        <div class="char-card-name">${fChar.name || ""}</div>
+                        <div class="char‑card‑name">${fChar.name || ""}</div>
                     </div>
                 </div>
-                <div class="hero-list-column">
-                    <div class="char-card-wrapper">
+                <div class="hero‑list‑column">
+                    <div class="char‑card‑wrapper">
                         ${maleHtml || "<span>未选择男主</span>"}
                     </div>
                 </div>
@@ -533,7 +560,7 @@ export function renderCP(gameItem, gameInfo) {
         `;
     });
 
-    return html || `<div class="empty-hint">暂未添加角色</div>`;
+    return html || `<div class="empty‑hint">暂未添加角色</div>`;
 }
 
 /**
@@ -569,9 +596,9 @@ export function getAllGameChar(gameInfo) {
         return true;
     });
 
-    // ✅修复两处 localeCompare 语言标签，替换为标准 zh-CN
-    const female = chars.filter(c => c.gender === "female").sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
-    const male = chars.filter(c => c.gender === "male").sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
+    // ✅修复两处 localeCompare 语言标签，替换为标准 zh‑CN
+    const female = chars.filter(c => c.gender === "female").sort((a, b) => a.name.localeCompare(b.name, "zh‑CN"));
+    const male = chars.filter(c => c.gender === "male").sort((a, b) => a.name.localeCompare(b.name, "zh‑CN"));
 
     return [...female, ...male];
 }
@@ -643,6 +670,8 @@ function buildCoreContext() {
         renderCP,
         getAllGameChar,
         getAvailableCharImages,
+        preloadAndDecodeImage,
+        switchCharImage,
         isTodayConfirmed,
         saveConfirmDate,
         localSwitchIsConfirmedToday,
@@ -660,8 +689,8 @@ function buildCoreContext() {
  * 根据appData数据，更新页面上两个全局滑块勾选状态
  */
 function renderGlobalSwitchDom() {
-    const hideCharInput = document.getElementById("global-hide-char");
-    const fdInput = document.getElementById("global-fd-game");
+    const hideCharInput = document.getElementById("global‑hide‑char");
+    const fdInput = document.getElementById("global‑fd‑game");
     // 加固：严格读取appData，不读取DOM旧状态
     if (hideCharInput) hideCharInput.checked = !!appData.globalHideChar;
     if (fdInput) fdInput.checked = !!appData.globalFD;
@@ -669,18 +698,18 @@ function renderGlobalSwitchDom() {
 
 // 模块顶层事件处理函数，解决removeEventListener无效
 function wrapClickHandler(e) {
-    const spoilerModal = document.getElementById("spoiler-modal");
+    const spoilerModal = document.getElementById("spoiler‑modal");
     if (!spoilerModal) return;
 
     // -------- 游戏局部开关处理 --------
-    const targetInput = e.target.closest(".game-hide-char,.game-fd-switch,.modal-local-hide-char,.modal-local-fd");
+    const targetInput = e.target.closest(".game‑hide‑char,.game‑fd‑switch,.modal‑local‑hide‑char,.modal‑local‑fd");
     if (targetInput) {
         // ✅修复：只要命中局部开关，直接阻止浏览器原生checkbox切换，全部JS接管
         e.preventDefault();
 
         let idx;
         let gameItem;
-        if (targetInput.classList.contains("modal-local-hide-char") || targetInput.classList.contains("modal-local-fd")) {
+        if (targetInput.classList.contains("modal‑local‑hide‑char") || targetInput.classList.contains("modal‑local‑fd")) {
             gameItem = appData.gameList.find(g => g.gameId === currentEditGameId);
             if (!gameItem) return;
             idx = appData.gameList.findIndex(g => g.gameId === currentEditGameId);
@@ -692,7 +721,7 @@ function wrapClickHandler(e) {
 
         // 读取真实数据状态，不要读取DOM的checked（委托click下DOM状态是旧的）
         let isOpened;
-        if (targetInput.classList.contains("game-hide-char") || targetInput.classList.contains("modal-local-hide-char")) {
+        if (targetInput.classList.contains("game‑hide‑char") || targetInput.classList.contains("modal‑local‑hide‑char")) {
             isOpened = !!gameItem.localHideChar;
         } else {
             isOpened = !!gameItem.localFD;
@@ -700,7 +729,7 @@ function wrapClickHandler(e) {
 
         // 已经开启：用户要关闭，直接生效，不弹窗
         if (isOpened) {
-            if (targetInput.classList.contains("game-hide-char") || targetInput.classList.contains("modal-local-hide-char")) {
+            if (targetInput.classList.contains("game‑hide‑char") || targetInput.classList.contains("modal‑local‑hide‑char")) {
                 gameItem.localHideChar = false;
             } else {
                 gameItem.localFD = false;
@@ -711,7 +740,7 @@ function wrapClickHandler(e) {
         }
 
         // 用户想要打开局部开关，直接弹出剧透弹窗
-        if (targetInput.classList.contains("game-hide-char") || targetInput.classList.contains("modal-local-hide-char")) {
+        if (targetInput.classList.contains("game‑hide‑char") || targetInput.classList.contains("modal‑local‑hide‑char")) {
             window.pendingGameOp = { type: "hideChar", idx };
         } else {
             window.pendingGameOp = { type: "fd", idx };
@@ -721,9 +750,9 @@ function wrapClickHandler(e) {
     }
 
     // -------- 角色图片切换按钮处理 --------
-    const switchBtn = e.target.closest(".char-switch-prev,.char-switch-next");
+    const switchBtn = e.target.closest(".char‑switch‑prev,.char‑switch‑next");
     if (switchBtn) {
-        const cardEl = switchBtn.closest(".char-card-item");
+        const cardEl = switchBtn.closest(".char‑card‑item");
         if (!cardEl) return;
         const gameId = cardEl.dataset.gameId;
         const charId = cardEl.dataset.charId;
@@ -731,7 +760,7 @@ function wrapClickHandler(e) {
         const saveKey = `${gameId}-${charId}`;
         let currentIdx = Number(appData.charImageSelect[saveKey] ?? 0);
 
-        if (switchBtn.classList.contains("char-switch-prev")) {
+        if (switchBtn.classList.contains("char‑switch‑prev")) {
             currentIdx = currentIdx - 1;
             if (currentIdx < 0) currentIdx = totalImg - 1;
         } else {
@@ -759,7 +788,7 @@ function wrapClickHandler(e) {
  */
 export function bindDynamicGameCardSwitchEvents() {
     const wrap = document.querySelector(".wrap");
-    const spoilerModal = document.getElementById("spoiler-modal");
+    const spoilerModal = document.getElementById("spoiler‑modal");
     if (!wrap || !spoilerModal) {
         console.warn("bindDynamicGameCardSwitchEvents：wrap或modal不存在，跳过绑定");
         return;
@@ -777,11 +806,11 @@ export function bindDynamicGameCardSwitchEvents() {
  * 恢复取消按钮完整逻辑
  */
 function bindGlobalSwitchSpoilerEvents() {
-    const hideCharInput = document.getElementById("global-hide-char");
-    const fdInput = document.getElementById("global-fd-game");
-    const spoilerModal = document.getElementById("spoiler-modal");
-    const spoilerConfirmBtn = document.getElementById("spoiler-confirm");
-    const spoilerCancelBtn = document.getElementById("spoiler-cancel");
+    const hideCharInput = document.getElementById("global‑hide‑char");
+    const fdInput = document.getElementById("global‑fd‑game");
+    const spoilerModal = document.getElementById("spoiler‑modal");
+    const spoilerConfirmBtn = document.getElementById("spoiler‑confirm");
+    const spoilerCancelBtn = document.getElementById("spoiler‑cancel");
 
     if (!hideCharInput || !fdInput || !spoilerModal || !spoilerConfirmBtn || !spoilerCancelBtn) {
         console.warn("bindGlobalSwitchSpoilerEvents：部分DOM缺失，全局开关弹窗未挂载");
