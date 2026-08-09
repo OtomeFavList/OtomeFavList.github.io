@@ -8,125 +8,123 @@ const gameData = {
     publisher: ["Daisy²","PROTOTYPE"],
     cnStudio: "JOYOLAND",
     writer: [
-        {name:"中文编剧", lang:"zh"},
-        {name:"日文编剧", lang:"ja"},
-        {name:"英文编剧", lang:"en"}
+        {name:"宙地", lang:"zh"},
+        {name:"陣内", lang:"zh"},
+        {name:"トム", lang:"ja"}
     ],
     art: [
-        {name:"中文原画", lang:"zh"},
-        {name:"日文原画", lang:"ja"},
-        {name:"英文原画", lang:"en"}
+        {{name:"スズケン", lang:"ja"}
     ],
     cover: "img/game/063.jpg", // 封面图路径，统一前缀img/
     charList: [
-        // 女主模板 female
+        // 山田花
         {
-            id: "g0_f01",
-            name: "女主A",
+            id: "g063_f01",
+            name: "山田花",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/g001_f0_1.jpg","img/char/g001_f0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/063/Hana.jpg","img/char/063/Hana2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 文若
         {
-            id: "g0_m01",
-            name: "男主1",
+            id: "g063_m01",
+            name: "文若",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/063/Bunjaku.jpg","img/char/063/Bunjaku2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 仲谋
         {
-            id: "g0_m02",
-            name: "男主1",
+            id: "g063_m02",
+            name: "仲谋",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/063/Chuubou.jpg","img/char/063/Chuubou2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 玄德
         {
-            id: "g0_m03",
-            name: "男主1",
+            id: "g063_m03",
+            name: "玄德",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/063/Gentoku.jpg","img/char/063/Gentoku2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 公瑾
         {
-            id: "g0_m04",
-            name: "男主1",
+            id: "g063_m04",
+            name: "公瑾",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/063/Koukin.jpg","img/char/063/Koukin2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 孔明
         {
-            id: "g0_m05",
-            name: "男主1",
+            id: "g063_m05",
+            name: "孔明",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/063/Koumei.jpg","img/char/063/Koumei2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 孟德
         {
-            id: "g0_m06",
-            name: "男主1",
+            id: "g063_m06",
+            name: "孟德",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/063/Moutoku.jpg","img/char/063/Moutoku2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 子龙
         {
-            id: "g0_m07",
-            name: "男主1",
+            id: "g063_m07",
+            name: "子龙",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/063/Shiryuu.jpg","img/char/063/Shiryuu2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 云长
         {
-            id: "g0_m08",
-            name: "男主1",
+            id: "g063_m08",
+            name: "云长",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/063/Unchou.jpg","img/char/063/Unchou2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 翼德
         {
-            id: "g0_m09",
-            name: "男主1",
+            id: "g063_m09",
+            name: "翼德",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/063/Yokutoku.jpg","img/char/063/Yokutoku2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         }
     ]
