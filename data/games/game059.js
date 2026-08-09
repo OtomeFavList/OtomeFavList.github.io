@@ -8,115 +8,99 @@ const gameData = {
     publisher: ["EDIA","honeybee"],
     cnStudio: "JSD",
     writer: [
-        {name:"中文编剧", lang:"zh"},
-        {name:"日文编剧", lang:"ja"},
-        {name:"英文编剧", lang:"en"}
+        {name:"泉りお", lang:"zh"},
+        {name:"伊原恵", lang:"zh"},
+        {name:"若宮たすく", lang:"zh"},
+        {name:"雨宮うた", lang:"zh"},
+        {name:"水井としえ", lang:"zh"},
+        {name:"葉山いずみ", lang:"zh"},
+        {name:"雅夜美竜", lang:"zh"},
+        {name:"柚子みかん", lang:"zh"},
+        {name:"株式会社エッジワークス", lang:"zh"},
+        {name:"みなづきともこ", lang:"ja"},
+        {name:"ゆずみやともめ", lang:"ja"},
+        {name:"もち大福", lang:"ja"},
     ],
     art: [
-        {name:"中文原画", lang:"zh"},
-        {name:"日文原画", lang:"ja"},
-        {name:"英文原画", lang:"en"}
+        {name:"カズアキ", lang:"ja"}
     ],
     cover: "img/game/059.jpg", // 封面图路径，统一前缀img/
     charList: [
-        // 女主模板 female
+        // 朱音凜
         {
-            id: "g0_f01",
-            name: "女主A",
+            id: "g059_f01",
+            name: "朱音凜",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/g001_f0_1.jpg","img/char/g001_f0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g001_f0_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g001_f0_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/059/Rin.jpg","img/char/059/Rin2.jpg","img/char/059/Rin3.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 木邑浅葱
         {
-            id: "g0_m01",
-            name: "男主1",
+            id: "g059_m01",
+            name: "木邑浅葱",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/059/Asagi.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 伊吹萩之介
         {
-            id: "g0_m02",
-            name: "男主1",
+            id: "g059_m02",
+            name: "伊吹萩之介",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/059/Ibuki.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 芹野真夏
         {
-            id: "g0_m03",
-            name: "男主1",
+            id: "g059_m03",
+            name: "芹野真夏",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/059/Manatsu.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 花苏芳
         {
-            id: "g0_m04",
-            name: "男主1",
+            id: "g059_m04",
+            name: "花苏芳",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/059/Suou.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 犬嶌谣
         {
-            id: "g0_m05",
-            name: "男主1",
+            id: "g059_m05",
+            name: "犬嶌谣",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["img/char/059/Uta.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 隐藏角色（isHidden=true → 开关开启才显示整个角色卡片）
+        // 犬嶌咏
         {
-            id: "g0_h01",
-            name: "隐藏攻略角色",
-            gender: "male",
-            isHidden: true,
-            isFD: false,
-            images: [
-                { srcList: ["img/char/g001_h01_1.jpg"], type: "base" }
-            ]
-        },
-        // FD续作限定角色（isFD=true → FD开关开启才显示整个角色卡片）
-        {
-            id: "g0_fd01",
-            name: "续作FD新增角色",
+            id: "g059_m06",
+            name: "犬嶌咏",
             gender: "male",
             isHidden: false,
-            isFD: true,
+            isFD: false,
             images: [
-                { srcList: ["img/char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["img/char/059/Yomi.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         }
     ]
