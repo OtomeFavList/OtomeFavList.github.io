@@ -23,7 +23,8 @@ import {
   bindDynamicGameCardSwitchEvents,
   toggleCharItemSelect,
   toggleCpItemSelect,
-  switchCharImage
+  switchCharImage,
+  switchCharImageWithLoading
 } from './main.js';
 
 export function initPage(Core = {}) {
@@ -466,7 +467,6 @@ export function initPage(Core = {}) {
         availImgUnits.forEach(unit => allSrc.push(...unit.srcList));
         if (allSrc.length <= 1) return;
 
-        const imgDom = charCard.querySelector(".char-card-img-box img");
         const saveKey = `${panelMode}-img-${gameId}-${charId}`;
         if(!appData.charImageSelect) appData.charImageSelect = {};
         let currentIndex = Number(appData.charImageSelect?.[saveKey] ?? 0);
@@ -502,7 +502,11 @@ export function initPage(Core = {}) {
         }
 
         saveData();
-        await switchCharImage(imgDom, allSrc[currentIndex]);
+        // ========== 替换为带loading切换函数 ==========
+        const imgBox = charCard.querySelector(".char-card-img-box");
+        if(imgBox){
+            await switchCharImageWithLoading(imgBox, allSrc[currentIndex]);
+        }
         // =========【新增调试日志】=========
         console.log("saveKey", saveKey,"set index",currentIndex,"src",allSrc[currentIndex]);
         return; //处理完图片切换直接return，不再往下执行cp逻辑
