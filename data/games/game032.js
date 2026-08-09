@@ -18,7 +18,7 @@ const gameData = {
     art: [
         {name:"薄葉カゲロー", lang:"zh"}
     ],
-    cover: "img/game/0.jpg", // 封面图路径，统一前缀img/
+    cover: "img/game/032.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 露露
         {
