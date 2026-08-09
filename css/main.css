@@ -645,30 +645,27 @@ button:hover{
 /* ==========【新增】角色图片切换按钮 左右翻图按钮 ========== */
 .char-switch-btn{
     position:absolute;
-    width:44px;
-    height:44px;
+    top:50%;
+    transform:translateY(-50%);
+    width:22px;
+    height:22px;
     border-radius:50%;
-    background:rgba(0,0,0,0.35);
+    background:rgba(0,0,0,0.45);
     color:#fff;
     border:none;
-    font-size:22px;
+    font-size:12px;
+    padding:0;
+    z-index:2;
     cursor:pointer;
-    /* 核心：按钮内符号水平+垂直居中 */
     display:flex;
     align-items:center;
     justify-content:center;
-    padding:0;
-    z-index:2;
 }
-.char-switch-btn.char-switch-prev{
-    left:6px;
-    top:50%;
-    transform:translateY(-50%);
+.char-switch-prev{
+    left:3px;
 }
-.char-switch-btn.char-switch-next{
-    right:6px;
-    top:50%;
-    transform:translateY(-50%);
+.char-switch-next{
+    right:3px;
 }
 .char-switch-btn:hover{
     background:rgba(0,0,0,0.65);
@@ -682,6 +679,30 @@ button:hover{
 .char-card-img-box.char-multi-img .char-switch-prev,
 .char-card-img-box.char-multi-img .char-switch-next {
     display: flex;
+}
+
+/* 选中预览区卡片内按钮（白色半透）同步缩小 */
+.char-selected-row .char-switch-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255,255,255,0.75);
+    font-size: 12px;
+    cursor: pointer;
+}
+.char-selected-row .char-switch-prev {
+    left: 3px;
+}
+.char-selected-row .char-switch-next {
+    right: 3px;
+}
+.char-selected-row .char-switch-btn:hover {
+    background:rgba(255,255,255,0.9);
 }
 
 /* ========== CP布局 cp-layout-row 【和main.js渲染class严格对应，25%｜75%】 ========== */
@@ -967,23 +988,6 @@ h2{
     max-width: unset;
 }
 
-/* ========== 仅修复【卡片已选中角色预览区】切换按钮错位 ========== */
-.char-selected-row .char-card-item {
-    width:120px;
-}
-.char-selected-row .char-card-img-box {
-    position: relative;
-    overflow: hidden;
-}
-
-.char-selected-row .char-switch-btn {
-    background: rgba(255,255,255,0.75);
-    z-index: 10;
-}
-.char-selected-row .char-switch-btn:hover {
-    background: rgba(255,255,255,0.9);
-}
-
 /* ========== CP面板方案C布局样式【修复后完整版本】 ========== */
 .cp-female-block{
     margin:12px 0;
@@ -1174,39 +1178,28 @@ h2{
     position: relative !important;
     overflow: hidden !important;
 }
-
-/* ========== CP面板外层图片切换容器（挂载于 cp‑female‑block / cp‑male‑item） ========== */
-.cp-female-block,
-.cp-male-item {
-    position: relative;
-}
-
-.cp-female-image-switch,
-.cp-male-image-switch {
+.cp-female-card-btn .char-switch-btn,
+.cp-male-item .char-switch-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 100%;
-    left: 0;
-    pointer-events: none;
-    z-index: 3;
+    background:rgba(0,0,0,0.45);
+    color:#fff;
+    border:none;
+    z-index:2;
+    cursor:pointer;
 }
-
-.cp-female-image-switch .char-switch-btn,
-.cp-male-image-switch .char-switch-btn {
-    position: absolute;
-    pointer-events: auto;
-    /* 宽高/背景/hover全部继承全局.char-switch-btn，不再重复定义 */
+.cp-female-card-btn .char-switch-prev,
+.cp-male-item .char-switch-prev {
+    left:3px;
 }
-
-.cp-female-image-switch .char-switch-prev,
-.cp-male-image-switch .char-switch-prev {
-    left: 8px;
+.cp-female-card-btn .char-switch-next,
+.cp-male-item .char-switch-next {
+    right:3px;
 }
-
-.cp-female-image-switch .char-switch-next,
-.cp-male-image-switch .char-switch-next {
-    right: 8px;
+.cp-female-card-btn .char-switch-btn:hover,
+.cp-male-item .char-switch-btn:hover {
+    background:rgba(0,0,0,0.65);
 }
 
 /* ========== CP选择面板底部按钮栏【修改定位与gap】 ========== */
