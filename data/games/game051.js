@@ -25,7 +25,7 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/g001_f0_1.jpg","img/char/g001_f0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/051/Aoi.jpg","img/char/051/Aoi2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 加贺阳
@@ -36,7 +36,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/051/Haru.jpg","img/char/051/Haru2.jpg","img/char/051/Haru3.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 绵森枫
@@ -47,7 +47,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/051/Kaede.jpg","img/char/051/Kaede2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 木野濑一辉
@@ -58,7 +58,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/051/Kazuki.jpg","img/char/051/Kazuki2.jpg","img/char/051/Kazuki3.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 浅浪皓
@@ -69,7 +69,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/051/Kou.jpg","img/char/051/Kou2.jpg","img/char/051/Kou3.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 篠原涼太
@@ -80,7 +80,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/051/Ryouta.jpg","img/char/051/Ryouta2.jpg","img/char/051/Ryouta3.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 泽野井宗介
@@ -91,7 +91,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/g0_m01_1.jpg","img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/051/Sousuke.jpg","img/char/051/Sousuke2.jpg","img/char/051/Sousuke3.png"], type: "base" },      // 默认基础图，始终加载
             ]
         }
     ]
