@@ -544,6 +544,11 @@ export function initPage(Core = {}) {
         const imgBox = charCard.querySelector(".char-card-img-box");
         if(imgBox){
             await switchCharImageWithLoading(imgBox, allSrc[currentIndex]);
+            // ========== 后备：强制更新图片 src（解决加载失败时图片不变的问题）==========
+            const imgDom = imgBox.querySelector("img");
+            if (imgDom && imgDom.src !== allSrc[currentIndex]) {
+                imgDom.src = allSrc[currentIndex];
+            }
         }
         // =========【新增调试日志】=========
         console.log("saveKey", saveKey,"set index",currentIndex,"src",allSrc[currentIndex]);
