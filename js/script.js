@@ -158,7 +158,11 @@ export function initPage(Core = {}) {
             cpPanelHtml += `
             <div class="cp-female-block" data-fid="${fChar.id}" data-gid="${gameId}">
                 <!-- 女主点击按钮 -->
-                <div class="cp-female-card-btn" data-fid="${fChar.id}" data-char-id="${fChar.id}" data-panel-mode="cp">
+                <div class="cp-female-card-btn" 
+                    data-fid="${fChar.id}" 
+                    data-char-id="${fChar.id}" 
+                    data-total-img="${allSrc.length}"
+                    data-panel-mode="cp">
                     <div class="char-card-img-box ${allSrc.length>1?'char-multi-img':''}">
                         ${allSrc.length>1?`<button class="char-switch-btn char-switch-prev" data-char-id="${fChar.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}" data-panel-mode="cp">&lt;</button>`:""}
                         <img src="${showSrc}" alt="${fChar.name}">
@@ -185,7 +189,13 @@ export function initPage(Core = {}) {
                             // 从草稿拿选中状态，不再读取state.maleIds
                             const mSel = draftSet.has(mChar.id) ? "selected" : "";
                             return `
-                            <div class="cp-male-item ${mSel}" data-fid="${fChar.id}" data-mid="${mChar.id}" data-char-id="${mChar.id}" data-game-id="${gameId}" data-panel-mode="cp">
+                            <div class="cp-male-item ${mSel}" 
+                                data-fid="${fChar.id}" 
+                                data-mid="${mChar.id}" 
+                                data-char-id="${mChar.id}" 
+                                data-game-id="${gameId}" 
+                                data-total-img="${mSrcArr.length}"
+                                data-panel-mode="cp">
                                 <div class="char-card-img-box ${mSrcArr.length>1?'char-multi-img':''}">
                                     ${mSrcArr.length>1?`<button class="char-switch-btn char-switch-prev" data-char-id="${mChar.id}" data-game-id="${gameId}" data-total-img="${mSrcArr.length}" data-panel-mode="cp">&lt;</button>`:""}
                                     <img src="${mShowSrc}" alt="${mChar.name}">
