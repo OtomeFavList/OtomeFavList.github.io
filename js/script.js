@@ -80,7 +80,8 @@ export function initPage(Core = {}) {
             // 新增：加入预加载池
             preloadSrcList.push(...allSrc);
 
-            const saveKey = `${gameId}-${char.id}`;
+            // ★★★ 修改点：将 saveKey 改为带 char-img- 前缀 ★★★
+            const saveKey = `char-img-${gameId}-${char.id}`;
             if(!appData.charImageSelect) appData.charImageSelect = {};
             let imgIndex = Number(appData.charImageSelect?.[saveKey] ?? 0);
             if (imgIndex >= allSrc.length) imgIndex = 0;
@@ -112,7 +113,8 @@ export function initPage(Core = {}) {
             // 新增
             preloadSrcList.push(...allSrc);
 
-            const saveKey = `${gameId}-${char.id}`;
+            // ★★★ 修改点：将 saveKey 改为带 char-img- 前缀 ★★★
+            const saveKey = `char-img-${gameId}-${char.id}`;
             if(!appData.charImageSelect) appData.charImageSelect = {};
             let imgIndex = Number(appData.charImageSelect?.[saveKey] ?? 0);
             if (imgIndex >= allSrc.length) imgIndex = 0;
