@@ -191,6 +191,40 @@ export async function switchCharImage(domImg, nextSrc){
     }
 }
 
+/**
+ * 带loading状态的角色图片切换
+ * @param {HTMLElement} wrap .char‑card‑img-box容器
+ * @param {string} nextSrc 目标图片地址
+ */
+export async function switchCharImageWithLoading(wrap, nextSrc){
+    // 防重复点击：正在加载直接返回
+    if(wrap.dataset.isImgLoading === "1") return;
+
+    wrap.dataset.isImgLoading = "1";
+    // 插入loading DOM
+    const loaderEl = document.createElement("div");
+    loaderEl.className = "img‑loader‑spinner";
+    wrap.appendChild(loaderEl);
+
+    const tempImg = new Image();
+    tempImg.decoding = "async";
+
+    tempImg.onload = function(){
+        const realImg = wrap.querySelector("img");
+        if(realImg) realImg.src = nextSrc;
+    };
+    tempImg.onerror = function(){
+        console.warn("图片加载失败", nextSrc);
+    };
+    // 无论成功失败，清理loading与锁标记
+    tempImg.onloadend = function(){
+        wrap.dataset.isImgLoading = "";
+        const el = wrap.querySelector(".img‑loader‑spinner");
+        if(el) el.remove();
+    };
+    tempImg.src = nextSrc;
+}
+
 // ===================== 游戏模板加载模块（不再import游戏，读取全局已加载数据） =====================
 export async function loadAllGameTemplates() {
     // 等待全局window.gameDataList就绪（data/games.js已经完成全部import）
@@ -674,6 +708,7 @@ function buildCoreContext() {
         getAvailableCharImages,
         preloadAndDecodeImage,
         switchCharImage,
+        switchCharImageWithLoading,
         isTodayConfirmed,
         saveConfirmDate,
         localSwitchIsConfirmedToday,
