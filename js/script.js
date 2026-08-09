@@ -69,8 +69,8 @@ export function initPage(Core = {}) {
             imgsUnitList.forEach(u => allSrc.push(...u.srcList));
             if (allSrc.length === 0) return;
 
-            // char模式专属key
-            const saveKey = `char-img-${gameId}-${char.id}`;
+            // char模式专属key【修改：替换旧key】
+            const saveKey = `${gameId}-${char.id}`;
             if(!appData.charImageSelect) appData.charImageSelect = {};
             let imgIndex = Number(appData.charImageSelect?.[saveKey] ?? 0);
             if (imgIndex >= allSrc.length) imgIndex = 0;
@@ -78,14 +78,14 @@ export function initPage(Core = {}) {
             let selected = gameItem.selectChars?.includes(char.id) ? "selected" : "";
 
             femHtml += `
-            <label class="char-item ${selected}" data-cid="${char.id}" data-char-id="${char.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}" data-panel-mode="char">
+            <div class="char-item ${selected}" data-cid="${char.id}" data-char-id="${char.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}" data-panel-mode="char">
               <div class="char-card-img-box ${allSrc.length>1?'char-multi-img':''}">
                 ${allSrc.length>1?`<button class="char-switch-btn char-switch-prev" data-char-id="${char.id}" data-game-id="${gameId}" data-panel-mode="char">&lt;</button>`: ""}
                 <img src="${showSrc}" alt="${char.name}">
                 ${allSrc.length>1?`<button class="char-switch-btn char-switch-next" data-char-id="${char.id}" data-game-id="${gameId}" data-panel-mode="char">&gt;</button>`: ""}
               </div>
               <div class="char-card-name">${char.name}</div>
-            </label>`;
+            </div>`;
         });
         heroineBox.innerHTML = femHtml;
 
@@ -98,7 +98,8 @@ export function initPage(Core = {}) {
             imgsUnitList.forEach(u => allSrc.push(...u.srcList));
             if (allSrc.length === 0) return;
 
-            const saveKey = `char-img-${gameId}-${char.id}`;
+            // char模式专属key【修改：替换旧key】
+            const saveKey = `${gameId}-${char.id}`;
             if(!appData.charImageSelect) appData.charImageSelect = {};
             let imgIndex = Number(appData.charImageSelect?.[saveKey] ?? 0);
             if (imgIndex >= allSrc.length) imgIndex = 0;
@@ -106,14 +107,14 @@ export function initPage(Core = {}) {
             let selected = gameItem.selectChars?.includes(char.id) ? "selected" : "";
 
             maleHtml += `
-            <label class="char-item ${selected}" data-cid="${char.id}" data-char-id="${char.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}" data-panel-mode="char">
+            <div class="char-item ${selected}" data-cid="${char.id}" data-char-id="${char.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}" data-panel-mode="char">
               <div class="char-card-img-box ${allSrc.length>1?'char-multi-img':''}">
                 ${allSrc.length>1?`<button class="char-switch-btn char-switch-prev" data-char-id="${char.id}" data-game-id="${gameId}" data-panel-mode="char">&lt;</button>`: ""}
                 <img src="${showSrc}" alt="${char.name}">
                 ${allSrc.length>1?`<button class="char-switch-btn char-switch-next" data-char-id="${char.id}" data-game-id="${gameId}" data-panel-mode="char">&gt;</button>`: ""}
               </div>
               <div class="char-card-name">${char.name}</div>
-            </label>`;
+            </div>`;
         });
         heroListBox.innerHTML = maleHtml;
     }else{
