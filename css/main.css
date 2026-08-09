@@ -1236,7 +1236,7 @@ h2{
 /* ========== CP选择面板底部按钮栏【修改定位与gap】 ========== */
 .cp-select-btn-bar{
     display: flex;
-    gap: 10px;
+    gap: 12px;
     margin-top:8px;
     justify-content: flex-end;
     flex-wrap: wrap;
