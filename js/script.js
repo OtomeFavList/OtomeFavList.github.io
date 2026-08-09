@@ -64,7 +64,10 @@ export function initPage(Core = {}) {
     const maleChars = allChars.filter(c => c.gender === "male");
 
     if(mode === "char"){
-        // ========= Character模式：原有全部逻辑完全保留，原样不动 =========
+        // ========= Character模式：改为草稿临时勾选，确认才写入真实数据 =========
+        // 临时草稿集合，只在本次面板生命周期有效 Set<string>
+        const tempCharDraftSet = new Set(gameItem.selectChars);
+
         let femHtml = "";
         femaleChars.forEach(char => {
             const imgsUnitList = getAvailableCharImages(char, appData.globalHideChar, appData.globalFD, gameItem.localHideChar, gameItem.localFD);
@@ -77,13 +80,13 @@ export function initPage(Core = {}) {
             // 新增：加入预加载池
             preloadSrcList.push(...allSrc);
 
-            // char模式专属key【修改：替换旧key】
             const saveKey = `${gameId}-${char.id}`;
             if(!appData.charImageSelect) appData.charImageSelect = {};
             let imgIndex = Number(appData.charImageSelect?.[saveKey] ?? 0);
             if (imgIndex >= allSrc.length) imgIndex = 0;
             const showSrc = allSrc[imgIndex];
-            let selected = gameItem.selectChars?.includes(char.id) ? "selected" : "";
+            // ✅重点：selected 来自临时草稿，不再读取 gameItem.selectChars
+            let selected = tempCharDraftSet.has(char.id) ? "selected" : "";
 
             femHtml += `
             <div class="char-item ${selected}" data-cid="${char.id}" data-char-id="${char.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}" data-panel-mode="char">
@@ -109,13 +112,13 @@ export function initPage(Core = {}) {
             // 新增
             preloadSrcList.push(...allSrc);
 
-            // char模式专属key【修改：替换旧key】
             const saveKey = `${gameId}-${char.id}`;
             if(!appData.charImageSelect) appData.charImageSelect = {};
             let imgIndex = Number(appData.charImageSelect?.[saveKey] ?? 0);
             if (imgIndex >= allSrc.length) imgIndex = 0;
             const showSrc = allSrc[imgIndex];
-            let selected = gameItem.selectChars?.includes(char.id) ? "selected" : "";
+            // ✅重点：selected 来自临时草稿
+            let selected = tempCharDraftSet.has(char.id) ? "selected" : "";
 
             maleHtml += `
             <div class="char-item ${selected}" data-cid="${char.id}" data-char-id="${char.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}" data-panel-mode="char">
@@ -128,6 +131,17 @@ export function initPage(Core = {}) {
             </div>`;
         });
         heroListBox.innerHTML = maleHtml;
+
+        // ✅追加确认/取消按钮栏，直接复用cp的css类
+        const btnBarHtml = `
+        <div class="cp-select-btn-bar">
+            <button class="char-panel-cancel-btn" data-gid="${gameId}">取消</button>
+            <button class="char-panel-confirm-btn" data-gid="${gameId}">确认</button>
+        </div>`;
+        panelDom.insertAdjacentHTML('beforeend', btnBarHtml);
+
+        // 将草稿集合挂载到panelDom，委托事件可以读取
+        panelDom._tempCharDraftSet = tempCharDraftSet;
     }else{
         // ====================== mode === "cp" 全新草稿模式逻辑 ======================
         // 兜底：旧存档没有cpEditState则自动生成【修改点1：增加femaleImgIndex:0】
@@ -665,7 +679,52 @@ export function initPage(Core = {}) {
         });
         return;
       }
-      
+
+      // ========= char面板确认按钮：把草稿集合同步到真实 selectChars / selectCharItems，关闭面板 =========
+      const charConfirmBtn = e.target.closest(".char-panel-confirm-btn");
+      if(charConfirmBtn){
+          e.stopPropagation();
+          const gid = charConfirmBtn.dataset.gid;
+          const panelDom = charConfirmBtn.closest(".char-slide-panel-char");
+          const draftSet = panelDom._tempCharDraftSet;
+          const gameItem = appData.gameList.find(g=>g.gameId === gid);
+          if(!gameItem || !draftSet) return;
+
+          // 1.清空旧selectChars、selectCharItems
+          gameItem.selectChars = [];
+          gameItem.selectCharItems = [];
+
+          // 2.遍历草稿集合写入真实数据
+          draftSet.forEach(charId=>{
+              gameItem.selectChars.push(charId);
+              // 读取当前面板内该角色的立绘下标（使用与切换一致的key）
+              const imgIndex = Number(appData.charImageSelect[`char-img-${gid}-${charId}`] ?? 0);
+              gameItem.selectCharItems.push({
+                  charId: charId,
+                  imgIndex: imgIndex
+              });
+          });
+
+          // 关闭char面板
+          gameItem.charPanelOpen = false;
+          saveData();
+          requestAnimationFrame(()=>window.refreshGameCardUi());
+          return;
+      }
+
+      // ========= char面板取消按钮：丢弃草稿，直接关闭面板，不做任何修改 =========
+      const charCancelBtn = e.target.closest(".char-panel-cancel-btn");
+      if(charCancelBtn){
+          e.stopPropagation();
+          const gid = charCancelBtn.dataset.gid;
+          const gameItem = appData.gameList.find(g=>g.gameId === gid);
+          if(!gameItem) return;
+          gameItem.charPanelOpen = false;
+          saveData();
+          requestAnimationFrame(()=>window.refreshGameCardUi());
+          return;
+      }
+
       // ✅ 卡片内滑出面板角色勾选事件委托【改动：调用main导出函数，区分面板类型】
       const charItem = e.target.closest(".char-slide-panel-char .char-item, .char-slide-panel-cp .char-item");
       if (charItem) {
@@ -676,20 +735,30 @@ export function initPage(Core = {}) {
 
           const panelChar = charItem.closest(".char-slide-panel-char");
           if (panelChar) {
-              // 修改点：传入 gameId 参数
-              toggleCharItemSelect(gameItem, cid, gameId);
-              gameItem.charPanelOpen = false;
+              // ========= char模式：仅操作本地草稿集合，不写真实数据 =========
+              const draftSet = panelChar._tempCharDraftSet;
+              if(!draftSet) return;
+              if(draftSet.has(cid)){
+                  draftSet.delete(cid);
+                  charItem.classList.remove("selected");
+              }else{
+                  draftSet.add(cid);
+                  charItem.classList.add("selected");
+              }
+              // ❗不保存、不关闭面板，等待用户点确认/取消
+              return;
           } else {
+              // cp模式保持原有逻辑不变
               toggleCpItemSelect(gameItem, cid);
               gameItem.cpPanelOpen = false;
+              saveData();
+              requestAnimationFrame(() => {
+                  window.refreshGameCardUi();
+              });
+              return;
           }
-          saveData();
-          requestAnimationFrame(() => {
-              window.refreshGameCardUi();
-          });
-          return;
       }
-      
+
       // ✅面板内部关闭按钮（×）
       const closeBtn = e.target.closest(".panel-close-btn");
       if(closeBtn){
