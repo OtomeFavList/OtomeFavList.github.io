@@ -319,7 +319,34 @@ export function initPage(Core = {}) {
           heartHtml += `<span class="heart ${gameItem.loveRate >= i ? 'active' : ''}" data-val="${i}">♥</span>`;
         }
 
-        // =========修复点1：模板字符串不再拼接active类=========
+        // =========【新增：条件渲染本游戏局部开关】=========
+        const hasLocalHideChar = gameInfo.charList.some(c => c.localHideChar === true);
+        const hasLocalFDChar = gameInfo.charList.some(c => c.localFD === true);
+
+        let switchRowInnerHtml = "";
+        if(hasLocalHideChar){
+            switchRowInnerHtml += `
+            <div>
+                <label class="switch">
+                    <input type="checkbox" class="game-hide-char" data-gameidx="${index}" ${(gameItem.localHideChar ?? false) ? 'checked' : ''}>
+                    <span class="slider"></span>
+                </label>
+                <span>单独显示本游戏隐藏角色</span>
+            </div>`;
+        }
+        if(hasLocalFDChar){
+            switchRowInnerHtml += `
+            <div>
+                <label class="switch">
+                    <input type="checkbox" class="game-fd-switch" data-gameidx="${index}" ${(gameItem.localFD ?? false) ? 'checked' : ''}>
+                    <span class="slider"></span>
+                </label>
+                <span>单独显示本游戏续作/FD角色</span>
+            </div>`;
+        }
+        const switchRowHtml = switchRowInnerHtml ? `<div class="game-switch-row">${switchRowInnerHtml}</div>` : "";
+        // =========【新增结束】=========
+
         html += `
         <div class="added-game-card" data-gameid="${gameItem.gameId}">
           <div class="game-card-head">
@@ -327,22 +354,7 @@ export function initPage(Core = {}) {
             <div class="heart-rate" data-gid="${gameItem.gameId}">
               ${heartHtml}
             </div>
-            <div class="game-switch-row">
-                <div>
-                    <label class="switch">
-                        <input type="checkbox" class="game-hide-char" data-gameidx="${index}" ${(gameItem.localHideChar ?? false) ? 'checked' : ''}>
-                        <span class="slider"></span>
-                    </label>
-                    <span>单独显示本游戏隐藏角色</span>
-                </div>
-                <div>
-                    <label class="switch">
-                        <input type="checkbox" class="game-fd-switch" data-gameidx="${index}" ${(gameItem.localFD ?? false) ? 'checked' : ''}>
-                        <span class="slider"></span>
-                    </label>
-                    <span>单独显示本游戏续作/FD角色</span>
-                </div>
-            </div>
+            ${switchRowHtml}
           </div>
           <!-- ✅全部移出game-card-head，作为added-game-card直接子节点 -->
           <div class="game-card-block-item char-section block-margin-gap">
