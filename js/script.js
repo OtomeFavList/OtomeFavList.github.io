@@ -890,8 +890,8 @@ export function initPage(Core = {}) {
       const filterWriter = document.getElementById("filter-writer")?.value || "";
       const filterArt = document.getElementById("filter-art")?.value || "";
 
-      // 修复：把zh‑CN（软连字符）改为标准 zh‑CN
-      const sortedGames = [...gameTemplateList].sort((a, b) => a.name.localeCompare(b.name, "zh‑CN"));
+      // 修复：把zh-CN（软连字符）改为标准 zh-CN
+      const sortedGames = [...gameTemplateList].sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
       let html = "";
 
       sortedGames.forEach(game => {
@@ -911,9 +911,9 @@ export function initPage(Core = {}) {
                 const nameA = a.name;
                 const nameB = b.name;
                 if(a.lang === "zh"){
-                    return nameA.localeCompare(nameB,"zh‑CN");
+                    return nameA.localeCompare(nameB,"zh-CN");
                 }else if(a.lang === "ja"){
-                    return nameA.localeCompare(nameB,"ja‑JP");
+                    return nameA.localeCompare(nameB,"ja-JP");
                 }else if(a.lang === "en"){
                     const lowerA = nameA.toLowerCase();
                     const lowerB = nameB.toLowerCase();
@@ -1070,8 +1070,8 @@ export function initPage(Core = {}) {
             }
           });
 
-          el.snapshotContainer.classList.add('export‑snapshot');
-          const sizeRadio = document.querySelector('input[name="export‑size"]:checked');
+          el.snapshotContainer.classList.add('export-snapshot');
+          const sizeRadio = document.querySelector('input[name="export-size"]:checked');
           if(!sizeRadio) throw new Error("未选中导出尺寸");
           let sizeValue = sizeRadio.value;
 
@@ -1122,8 +1122,8 @@ export function initPage(Core = {}) {
           console.error("导出失败：", err);
           alert('图片导出异常！外部图片跨域可能导致失败，请使用本地图片资源。\n' + err.message);
         } finally {
-          el.snapshotContainer.classList.remove('export‑snapshot');
-          document.querySelectorAll("#card‑base .form‑row input").forEach(input => {
+          el.snapshotContainer.classList.remove('export-snapshot');
+          document.querySelectorAll("#card-base .form-row input").forEach(input => {
             input.style.display = "";
           });
           el.exportBtn.disabled = false;
