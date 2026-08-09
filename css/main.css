@@ -1216,11 +1216,10 @@ h2{
     padding:6px 14px;
 }
 
-/* 角色卡片图片容器：相对定位，用于放置loading */
+/* ========== 角色立绘切换 loading 指示器【新增】 ========== */
 .char-card-img-box {
     position: relative !important;
 }
-/* loading旋转指示器，居中浮在图片上面 */
 .img‑loader‑spinner {
     position: absolute;
     left: 0;
