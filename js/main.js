@@ -245,18 +245,20 @@ export async function switchCharImageWithLoading(wrap, nextSrc){
     const tempImg = new Image();
     tempImg.decoding = "async";
 
-    tempImg.onload = function(){
-        const realImg = wrap.querySelector("img");
-        if(realImg) realImg.src = nextSrc;
-    };
-    tempImg.onerror = function(){
-        console.warn("图片加载失败", nextSrc);
-    };
-    // 无论成功失败，清理loading与锁标记
-    tempImg.onloadend = function(){
+    function clearLoading(){
         wrap.dataset.isImgLoading = "";
         const el = wrap.querySelector(".img‑loader‑spinner");
         if(el) el.remove();
+    }
+
+    tempImg.onload = function(){
+        const realImg = wrap.querySelector("img");
+        if(realImg) realImg.src = nextSrc;
+        clearLoading();
+    };
+    tempImg.onerror = function(){
+        console.warn("图片加载失败", nextSrc);
+        clearLoading();
     };
     tempImg.src = nextSrc;
 }
