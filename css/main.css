@@ -672,8 +672,8 @@ button:hover{
 .char-card-img-box .char-switch-next {
     display: none;
 }
-.char-card-img-box.char-has-multi-img .char-switch-prev,
-.char-card-img-box.char-has-multi-img .char-switch-next {
+.char-card-img-box.char-multi-img .char-switch-prev,
+.char-card-img-box.char-multi-img .char-switch-next {
     display: flex;
 }
 
