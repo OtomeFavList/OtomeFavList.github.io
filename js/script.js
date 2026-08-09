@@ -1,7 +1,7 @@
 // ===================== script.js UI交互层（模块化导出） =====================
 // 【重要说明】剧透弹窗、全局开关click事件全部迁移至main.js，本文件不再处理全局开关点击逻辑
 // 游戏卡片动态生成的局部开关：使用事件委托对接main.js剧透弹窗逻辑
-// 改造：每个游戏卡片内部动态生成两套独立滑出面板 char / cp；不再使用全局唯一char-slide-panel
+// 改造：每个游戏卡片内部渲染两套独立滑出面板 char / cp；不再使用全局唯一char-slide-panel
 // 注意：main.js禁止import本文件，避免循环依赖
 import {
   appData,
@@ -123,16 +123,23 @@ export function initPage(Core = {}) {
             gameItem.cpEditState = femaleChars.map(f=>({
                 femaleId: f.id,
                 openMalePanel: false,
-                maleIds: []
+                maleIds: [],
+                maleItems: []
             }));
         }
 
-        // 每个女主打开男主面板时，独立临时草稿，key:charId value:Set
+        // 【修改点1】tempCpDraftMap改为 Map<mid,imgIndex>
         const tempCpDraftMap = {};
         femaleChars.forEach(fChar=>{
             const state = gameItem.cpEditState.find(s=>s.femaleId === fChar.id);
             if(state){
-                tempCpDraftMap[fChar.id] = new Set(state.maleIds);
+                const m = new Map();
+                if(Array.isArray(state.maleItems)){
+                    state.maleItems.forEach(mi=>{
+                        m.set(mi.charId, mi.imgIndex ?? 0);
+                    })
+                }
+                tempCpDraftMap[fChar.id] = m;
             }
         });
 
@@ -141,7 +148,7 @@ export function initPage(Core = {}) {
         femaleChars.forEach(fChar=>{
             const state = gameItem.cpEditState.find(s=>s.femaleId === fChar.id);
             if(!state) return;
-            const draftSet = tempCpDraftMap[fChar.id];
+            const draftMap = tempCpDraftMap[fChar.id];
 
             const imgsUnitList = getAvailableCharImages(fChar, appData.globalHideChar, appData.globalFD, gameItem.localHideChar, gameItem.localFD);
             let allSrc = [];
@@ -180,14 +187,19 @@ export function initPage(Core = {}) {
                             let mSrcArr = [];
                             mImgs.forEach(u=>mSrcArr.push(...u.srcList));
                             if(mSrcArr.length===0) return "";
-                            // =========【修复：不再硬编码 mSrcArr[0]，读取cp-img索引】=========
-                            const mSaveKey = `cp-img-${gameId}-${mChar.id}`;
-                            if(!appData.charImageSelect) appData.charImageSelect = {};
-                            let mImgIndex = Number(appData.charImageSelect?.[mSaveKey] ?? 0);
+
+                            //【修改点2】读取草稿map的imgIndex
+                            let mImgIndex = 0;
+                            if(draftMap && draftMap.has(mChar.id)){
+                                mImgIndex = draftMap.get(mChar.id);
+                            }else{
+                                const mSaveKey = `cp-img-${gameId}-${mChar.id}`;
+                                mImgIndex = Number(appData.charImageSelect?.[mSaveKey] ?? 0);
+                            }
                             if(mImgIndex >= mSrcArr.length) mImgIndex = 0;
                             const mShowSrc = mSrcArr[mImgIndex];
-                            // 从草稿拿选中状态，不再读取state.maleIds
-                            const mSel = draftSet.has(mChar.id) ? "selected" : "";
+                            const mSel = draftMap.has(mChar.id) ? "selected" : "";
+
                             return `
                             <div class="cp-male-item ${mSel}" 
                                 data-fid="${fChar.id}" 
@@ -195,6 +207,7 @@ export function initPage(Core = {}) {
                                 data-char-id="${mChar.id}" 
                                 data-game-id="${gameId}" 
                                 data-total-img="${mSrcArr.length}"
+                                data-current-img-idx="${mImgIndex}"
                                 data-panel-mode="cp">
                                 <div class="char-card-img-box ${mSrcArr.length>1?'char-multi-img':''}">
                                     ${mSrcArr.length>1?`<button class="char-switch-btn char-switch-prev" data-char-id="${mChar.id}" data-game-id="${gameId}" data-total-img="${mSrcArr.length}" data-panel-mode="cp">&lt;</button>`:""}
@@ -220,12 +233,12 @@ export function initPage(Core = {}) {
         heroineBox.innerHTML = "";
         heroListBox.innerHTML = cpPanelHtml;
 
-        // ========== 根据cpEditState自动生成cpList，供给renderCP预览渲染 ==========
+        // ==========【修改点6】根据cpEditState.maleItems自动生成cpList，供给renderCP预览渲染 ==========
         gameItem.cpList = gameItem.cpEditState
-            .filter(st=>st.maleIds.length>0)
+            .filter(st=> Array.isArray(st.maleItems) && st.maleItems.length>0)
             .map(st=>({
                 femaleId: st.femaleId,
-                maleIds: [...st.maleIds]
+                maleItems: st.maleItems.map(x=>({...x}))
             }));
 
         // 将草稿map挂载到panel dom上，事件委托可以读取
@@ -306,20 +319,21 @@ export function initPage(Core = {}) {
         const allChars = getAllGameChar(gameInfo);
         const femaleChars = allChars.filter(c => c.gender === "female");
 
-        // cp模式数据初始化逻辑（和renderCharSelectPanel内部cp分支完全一致）
+        //【修改点7】cp模式数据初始化逻辑（和renderCharSelectPanel内部cp分支完全一致）
         if(!Array.isArray(gameItem.cpEditState) || gameItem.cpEditState.length ===0){
             gameItem.cpEditState = femaleChars.map(f=>({
                 femaleId: f.id,
                 openMalePanel: false,
-                maleIds: []
+                maleIds: [],
+                maleItems: []
             }));
         }
         // 预生成cpList，保证renderCP拿到最新数据
         gameItem.cpList = gameItem.cpEditState
-            .filter(st=>st.maleIds.length>0)
+            .filter(st=> Array.isArray(st.maleItems) && st.maleItems.length>0)
             .map(st=>({
                 femaleId: st.femaleId,
-                maleIds: [...st.maleIds]
+                maleItems: st.maleItems.map(x=>({...x}))
             }));
       });
 
@@ -463,6 +477,19 @@ export function initPage(Core = {}) {
 
         imgDom.src = allSrc[currentIndex];
         appData.charImageSelect[saveKey] = currentIndex;
+
+        //【修改点3】cp模式同步写入草稿map
+        if(panelMode === "cp"){
+            const cpPanel = charCard.closest(".char-slide-panel-cp");
+            if(cpPanel && cpPanel._tempCpDraftMap){
+                const fid = charCard.dataset.fid;
+                const draftMap = cpPanel._tempCpDraftMap[fid];
+                if(draftMap){
+                    draftMap.set(charId, currentIndex);
+                }
+            }
+        }
+
         saveData();
         // =========【新增调试日志】=========
         console.log("saveKey", saveKey,"set index",currentIndex,"src",allSrc[currentIndex]);
@@ -489,7 +516,7 @@ export function initPage(Core = {}) {
           return;
       }
 
-      // 点击男主item：只修改草稿，不碰真实state
+      //【修改点4】点击男主item：Map读写，读取data‑current‑img‑idx
       const cpMaleItem = e.target.closest(".cp-male-item");
       if(cpMaleItem){
           e.stopPropagation();
@@ -499,18 +526,19 @@ export function initPage(Core = {}) {
           if(!panel) return;
           const draftMap = panel._tempCpDraftMap;
           if(!draftMap || !draftMap[fid]) return;
-          const draftSet = draftMap[fid];
-          if(draftSet.has(mid)){
-              draftSet.delete(mid);
+          const draftCharMap = draftMap[fid];
+
+          if(draftCharMap.has(mid)){
+              draftCharMap.delete(mid);
           }else{
-              draftSet.add(mid);
+              const currentIdx = Number(cpMaleItem.dataset.currentImgIdx) || 0;
+              draftCharMap.set(mid, currentIdx);
           }
-          // 只局部切换UI高亮，不全局刷新页面
-          cpMaleItem.classList.toggle("selected", draftSet.has(mid));
+          cpMaleItem.classList.toggle("selected", draftCharMap.has(mid));
           return;
       }
 
-      // 确认按钮
+      //【修改点5】确认按钮：写入maleItems，保留maleIds兼容旧存档
       const cpConfirmBtn = e.target.closest(".cp-confirm-btn");
       if(cpConfirmBtn){
           e.stopPropagation();
@@ -524,7 +552,13 @@ export function initPage(Core = {}) {
 
           const st = gameItem.cpEditState.find(s=>s.femaleId === fid);
           if(!st) return;
-          st.maleIds = Array.from(draftMap[fid]);
+          const draftCharMap = draftMap[fid];
+          st.maleItems = [];
+          draftCharMap.forEach((imgIdx, cid)=>{
+              st.maleItems.push({charId:cid, imgIndex: imgIdx});
+          });
+          // 旧字段兼容保留，不再业务读取
+          st.maleIds = Array.from(draftCharMap.keys());
 
           gameItem.cpEditState.forEach(item=>{
               item.openMalePanel = false;
