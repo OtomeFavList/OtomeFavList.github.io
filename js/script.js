@@ -189,11 +189,11 @@ export function initPage(Core = {}) {
                             </div>`;
                         }).join("")}
                     </div>
-                    <!-- cp-select-btn-bar：cp‑male‑select-wrap直接子元素，不是cp‑male‑list子元素 -->
-                    <div class="cp-select-btn-bar">
-                        <button class="cp-cancel-btn" data-fid="${fChar.id}" data-gid="${gameId}">取消</button>
-                        <button class="cp-confirm-btn" data-fid="${fChar.id}" data-gid="${gameId}">确认</button>
-                    </div>
+                </div>
+                <!-- ✅按钮栏提升到cp‑male‑select‑wrap外部，cp‑female‑block直接子节点 -->
+                <div class="cp-select-btn-bar">
+                    <button class="cp-cancel-btn" data-fid="${fChar.id}" data-gid="${gameId}">取消</button>
+                    <button class="cp-confirm-btn" data-fid="${fChar.id}" data-gid="${gameId}">确认</button>
                 </div>
                 ` : ""}
             </div>
@@ -518,16 +518,17 @@ export function initPage(Core = {}) {
             return;
         }
 
-        //【新增】取消按钮：丢弃草稿，只关闭男主候选区，不重绘整张卡片
+        //【修改】取消按钮：丢弃草稿，同时移除候选区和本组按钮栏，不重绘整张卡片
         const cpCancelBtn = e.target.closest(".cp-cancel-btn");
         if(cpCancelBtn){
             e.stopPropagation();
             const fid = cpCancelBtn.dataset.fid;
             const panel = cpCancelBtn.closest(".char-slide-panel-cp");
             if(!panel) return;
-            // 只移除男主展开面板，不操作gameItem、不调用refreshGameCardUi
             const maleWrap = panel.querySelector(`.cp-male-select-wrap[data-fid="${fid}"]`);
+            const btnBar = cpCancelBtn.closest(".cp-select-btn-bar");
             if(maleWrap) maleWrap.remove();
+            if(btnBar) btnBar.remove();
             return;
         }
     });
