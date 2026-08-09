@@ -193,12 +193,14 @@ export function initPage(Core = {}) {
             const showSrc = allSrc[imgIndex];
 
             // 女主卡片：增加data-char-id，多立绘渲染切换按钮，标记panel-mode="cp"
+            // ★★★ 修复点：为 cp-female-card-btn 添加 data-game-id 属性 ★★★
             cpPanelHtml += `
             <div class="cp-female-block" data-fid="${fChar.id}" data-gid="${gameId}">
                 <!-- 女主点击按钮 -->
                 <div class="cp-female-card-btn" 
                     data-fid="${fChar.id}" 
                     data-char-id="${fChar.id}" 
+                    data-game-id="${gameId}"
                     data-total-img="${allSrc.length}"
                     data-panel-mode="cp">
                     <div class="char-card-img-box ${allSrc.length>1?'char-multi-img':''}">
