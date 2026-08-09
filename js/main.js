@@ -178,6 +178,42 @@ export async function preloadAndDecodeImage(src){
 }
 
 /**
+ * 浏览器空闲时后台预加载一批图片，仅做缓存，不渲染到页面
+ * @param {string[]} srcList 图片地址数组
+ */
+export function preloadImagesInIdle(srcList) {
+    if (!Array.isArray(srcList) || srcList.length === 0) return;
+
+    // 简单全局Set，记录已经预加载过的url，防止重复请求
+    if (!window._preloadedImgSet) window._preloadedImgSet = new Set();
+
+    const needPreload = srcList.filter(src => src && !window._preloadedImgSet.has(src));
+    if (needPreload.length === 0) return;
+
+    const doPreload = () => {
+        needPreload.forEach(src => {
+            const img = new Image();
+            img.decoding = "async";
+            img.src = src;
+            img.onload = () => {
+                window._preloadedImgSet.add(src);
+            };
+            // 预加载失败直接静默丢弃，不影响业务
+            img.onerror = () => {
+                window._preloadedImgSet.add(src);
+            };
+        });
+    };
+
+    // 浏览器空闲才执行；不支持requestIdleCallback直接setTimeout降级
+    if (window.requestIdleCallback) {
+        requestIdleCallback(doPreload);
+    } else {
+        setTimeout(doPreload, 80);
+    }
+}
+
+/**
  * 安全切换角色立绘：后台预解码完成再更新DOM
  * @param {HTMLImageElement} domImg 页面真实img DOM
  * @param {string} nextSrc 新图片地址
@@ -499,6 +535,8 @@ export function renderSelectedChar(gameItem, gameInfo) {
         availableImgUnits.forEach(u => allSrc.push(...u.srcList));
         if (allSrc.length === 0) return;
 
+        preloadImagesInIdle(allSrc);
+
         // 从持久化 selectCharItems 读取imgIndex，不再读取临时appData.charImageSelect
         const storedItem = gameItem.selectCharItems.find(s => s.charId === cid);
         let imgIndex = Number(storedItem?.imgIndex ?? 0);
@@ -547,6 +585,8 @@ export function renderCP(gameItem, gameInfo) {
         fAvailUnits.forEach(u => fAllSrc.push(...u.srcList));
         if (fAllSrc.length === 0) return;
 
+        preloadImagesInIdle(fAllSrc);
+
         // ✅修复：从cp自身存储取女主imgIndex，不再读取临时appData.charImageSelect
         let fIndex = Number(cp.femaleImgIndex ?? 0);
         if (fIndex >= fAllSrc.length) fIndex = 0;
@@ -562,6 +602,8 @@ export function renderCP(gameItem, gameInfo) {
             let mAllSrc = [];
             mAvailUnits.forEach(u => mAllSrc.push(...u.srcList));
             if (mAllSrc.length === 0) return;
+
+            preloadImagesInIdle(mAllSrc);
 
             let mIndex = Number(mi.imgIndex ?? 0);
             if (mIndex >= mAllSrc.length) mIndex = 0;
@@ -708,6 +750,7 @@ function buildCoreContext() {
         getAllGameChar,
         getAvailableCharImages,
         preloadAndDecodeImage,
+        preloadImagesInIdle,
         switchCharImage,
         switchCharImageWithLoading,
         isTodayConfirmed,
