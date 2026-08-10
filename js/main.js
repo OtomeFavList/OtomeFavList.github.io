@@ -195,29 +195,35 @@ export async function preloadAndDecodeImage(src){
 export function preloadImagesInIdle(srcList) {
     if (!Array.isArray(srcList) || srcList.length === 0) return;
 
-    // 简单全局Set，记录已经预加载过的url，防止重复请求
     if (!window._preloadedImgSet) window._preloadedImgSet = new Set();
 
     const needPreload = srcList.filter(src => src && !window._preloadedImgSet.has(src));
     if (needPreload.length === 0) return;
 
-    const doPreload = () => {
-        needPreload.forEach(src => {
-            const img = new Image();
-            img.decoding = "async";
-            img.crossOrigin = "anonymous"; // 预加载时也带上跨域属性
-            img.src = src;
-            img.onload = () => {
-                window._preloadedImgSet.add(src);
-            };
-            // 预加载失败直接静默丢弃，不影响业务
-            img.onerror = () => {
-                window._preloadedImgSet.add(src);
-            };
-        });
+    const doPreload = async () => {
+        // 限制并发数量，一次最多6张，避免请求风暴
+        const batchSize = 6;
+        for (let i = 0; i < needPreload.length; i += batchSize) {
+            const batch = needPreload.slice(i, i + batchSize);
+            await Promise.all(batch.map(async (src) => {
+                return new Promise((resolve) => {
+                    const img = new Image();
+                    img.decoding = "async";
+                    img.crossOrigin = "anonymous";
+                    img.src = src;
+                    img.onload = () => {
+                        window._preloadedImgSet.add(src);
+                        resolve();
+                    };
+                    img.onerror = () => {
+                        // ❗失败不加入缓存，允许下次重新尝试加载
+                        resolve();
+                    };
+                });
+            }));
+        }
     };
 
-    // 浏览器空闲才执行；不支持requestIdleCallback直接setTimeout降级
     if (window.requestIdleCallback) {
         requestIdleCallback(doPreload);
     } else {
