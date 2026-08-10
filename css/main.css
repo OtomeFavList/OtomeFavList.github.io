@@ -1307,3 +1307,37 @@ h2{
 .added-game-card[data-fold="true"] .game-switch-row {
     display: none;
 }
+
+/* ========== 导出图片快照模式：自定义配色（仅生成图片时生效，普通页面不受影响） ========== */
+.snapshot-container.export-snapshot {
+    --export-bg: #fff7f9;
+    --export-title: #b33a3a;
+    --export-subtitle: #b85878;
+    --export-text: #333333;
+    --export-gamename: #c98fac;
+    --export-border: #f6a5b8;
+
+    background-color: var(--export-bg) !important;
+}
+/* 大标题 Otome FavList */
+.snapshot-container.export-snapshot .site-title h1 {
+    color: var(--export-title) !important;
+}
+/* 小标题：基础信息、游戏列表等 h2 */
+.snapshot-container.export-snapshot .big-card h2 {
+    color: var(--export-subtitle) !important;
+    border-left-color: var(--export-subtitle) !important;
+}
+/* 正文：昵称、游玩总数、入坑时间、入坑作品 */
+.snapshot-container.export-snapshot .base-info-item {
+    color: var(--export-text) !important;
+}
+/* 游戏卡片内游戏名称 */
+.snapshot-container.export-snapshot .added-game-card h3 {
+    color: var(--export-gamename) !important;
+}
+/* 卡片边框（big-card、added‑game‑card） */
+.snapshot-container.export-snapshot .big-card,
+.snapshot-container.export-snapshot .added-game-card {
+    border-color: var(--export-border) !important;
+}
