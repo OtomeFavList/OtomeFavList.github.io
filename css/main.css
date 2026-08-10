@@ -480,6 +480,8 @@ button:hover{
     margin-bottom:12px;
     flex-wrap:wrap;
     gap:10px;
+    /* ✅新增：给容器左侧预留空间，容纳向左凸的展开按钮 */
+    padding-left: 34px;
 }
 .heart-rate{
     display:flex;
@@ -887,9 +889,10 @@ h2{
     .cp-select-btn-bar {
         justify-content: flex-end;
     }
-    .game-card-head-title-wrap{
+    /* 移动端不再需要标题左内边距，因为父容器已用 padding-left 留空 */
+    /* .game-card-head-title-wrap{
         padding-left:32px;
-    }
+    } */
     .game-fold-icon-expand{
         width:26px;
         height:26px;
@@ -1258,12 +1261,12 @@ h2{
 /* ==========【新增】折叠状态游戏名旁图标展开按钮 ========== */
 .game-fold-icon-expand {
     position: absolute;
-    left: 0;
+    left: -34px;          /* ✅向左偏移，凸在标题容器外面 */
     top: 50%;
     transform: translateY(-50%);
     display: none;
-    border: 1px solid #b33a3a;  /* 和▼文字同色正方形框 */
-    border-radius: 8px;         /* 和全局按钮统一圆角 */
+    border: 1px solid #b33a3a;
+    border-radius: 8px;
     background: transparent;
     font-size: 20px;
     color: #b33a3a;
@@ -1274,7 +1277,7 @@ h2{
     height:28px;
 }
 .game-fold-icon-expand:hover{
-    background:rgba(179, 58, 58,0.08);
+    background: rgba(179, 58, 58, 0.22);  /* ✅深红色半透，符合主题 */
 }
 
 /* 标题容器开启相对定位，给左侧绝对定位按钮做参照 */
@@ -1282,8 +1285,8 @@ h2{
     position: relative;
     display: flex;
     align-items: center;
-    /* 左侧预留按钮空间，防止文字被按钮盖住 */
-    padding-left: 36px;
+    /* ✅修改：移除padding‑left，让游戏名称文字直接贴左边对齐，和下方按钮对齐 */
+    /* padding-left: 36px; */
     gap: 8px;
 }
 
