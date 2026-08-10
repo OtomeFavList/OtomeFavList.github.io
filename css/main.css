@@ -785,6 +785,10 @@ input[type="checkbox"] {
     justify-content:center;
     margin-top:20px;
 }
+/* 加载弹窗仅有单个按钮时强制居中 */
+#game-load-modal .modal-btns {
+    justify-content: center;
+}
 
 /* ========== 剧透弹窗按钮 ========== */
 #spoiler-cancel,
