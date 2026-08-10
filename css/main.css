@@ -1277,8 +1277,8 @@ h2{
 }
 /* 提高权重，覆盖全局button:hover */
 .game-fold-icon-expand:hover{
-    background: #b33a3a !important;
-    color: #fff !important;
+    background: #992e2e !important;
+    color: #b33a3a !important;
 }
 
 /* 标题容器开启相对定位，给左侧绝对定位按钮做参照 */
