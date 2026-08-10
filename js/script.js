@@ -1286,13 +1286,18 @@ export function initPage(Core = {}) {
                 await new Promise(resolve => requestAnimationFrame(resolve));
                 await new Promise(resolve => requestAnimationFrame(resolve));
 
-                // 7c. 强制预加载快照内所有图片（并行）
+                // 7c. 强制预加载快照内所有图片并重新触发加载（解决 complete 为 true 但未渲染问题）
                 const snapshotImages = snapshotWrap.querySelectorAll('img');
                 await Promise.all(Array.from(snapshotImages).map(img => {
                     return new Promise(resolve => {
+                        const src = img.src;
+                        if (src) {
+                            img.src = "";
+                            img.src = src;  // 重新赋值触发加载
+                        }
                         if (img.complete) return resolve();
                         img.onload = resolve;
-                        img.onerror = resolve;  // 图片404不阻塞渲染
+                        img.onerror = resolve;
                     });
                 }));
 
@@ -1309,26 +1314,29 @@ export function initPage(Core = {}) {
                     useCORS: true,
                     allowTaint: false,
                     logging: false,
-                    imageTimeout: 12000,          // 延长超时时间，避免大图超时空白
+                    imageTimeout: 12000,
                     letterRendering: true,
                     foreignObjectRendering: false,
-                    // 忽略携带 data-no-capture 或隐藏的元素
                     ignoreElements: (el) => {
                         if (el.hasAttribute('data-no-capture')) return true;
                         if (!el.offsetParent) return true;
                         return false;
                     },
-                    // 克隆阶段禁用动画/过渡，并等待克隆图片加载完成（关键修复）
+                    // 克隆阶段禁用动画/过渡，并强制重新加载克隆图片（关键修复）
                     onclone: async (clonedDoc) => {
                         const allNodes = clonedDoc.querySelectorAll('*');
                         allNodes.forEach(node => {
                             node.style.transition = 'none';
                             node.style.animation = 'none';
                         });
-                        // 等待克隆文档内所有图片加载完成
                         const cloneImgs = clonedDoc.querySelectorAll("img");
                         await Promise.all(Array.from(cloneImgs).map(img => {
                             return new Promise(resolve => {
+                                const src = img.src;
+                                if (src) {
+                                    img.src = "";
+                                    img.src = src;  // 重新赋值触发克隆图片加载
+                                }
                                 if (img.complete) return resolve();
                                 img.onload = resolve;
                                 img.onerror = resolve;
