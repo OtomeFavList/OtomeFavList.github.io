@@ -27,6 +27,20 @@ import {
   switchCharImageWithLoading
 } from './main.js';
 
+// ========== 导出预览全局状态锁与缓存 ==========
+let isRendering = false;
+let snapshotBlobCache = null;
+let previewObjectUrl = null;
+
+// 缓存使用完毕后释放资源公共函数
+function clearPreviewCacheResource() {
+    if (previewObjectUrl) {
+        URL.revokeObjectURL(previewObjectUrl);
+        previewObjectUrl = null;
+    }
+    snapshotBlobCache = null;
+}
+
 export function initPage(Core = {}) {
   // 安全兜底，防止不传Core报错
   Core = Core || {};
@@ -342,6 +356,55 @@ export function initPage(Core = {}) {
       snapshotContainer: document.getElementById("snapshot-container")
     };
 
+    // ========== 预览弹窗元素 ==========
+    const previewModal = document.getElementById("export-preview-modal");
+    const previewScrollWrap = previewModal?.querySelector(".preview-scroll-wrap");
+    const previewCloseBtn = document.getElementById("preview-close-btn");
+    const previewRegenBtn = document.getElementById("preview-regen-btn");
+    const previewDownloadBtn = document.getElementById("preview-download-btn");
+    const loadingMask = document.getElementById("export-render-loading");
+
+    // ========== 预览弹窗按钮事件绑定 ==========
+    if (previewModal) {
+        // 点击遮罩关闭
+        previewModal.addEventListener("click", function(e) {
+            if (e.target === previewModal) {
+                previewModal.classList.remove("active");
+                clearPreviewCacheResource();
+            }
+        });
+
+        // 关闭按钮
+        if (previewCloseBtn) {
+            previewCloseBtn.addEventListener("click", () => {
+                previewModal.classList.remove("active");
+                clearPreviewCacheResource();
+            });
+        }
+
+        // 重新生成按钮
+        if (previewRegenBtn) {
+            previewRegenBtn.addEventListener("click", () => {
+                previewModal.classList.remove("active");
+                // 触发重新生成
+                if (el.exportBtn) el.exportBtn.click();
+            });
+        }
+
+        // 导出按钮
+        if (previewDownloadBtn) {
+            previewDownloadBtn.addEventListener("click", () => {
+                if (!snapshotBlobCache) return;
+                const link = document.createElement('a');
+                link.download = `Otome_FavList_${new Date().getTime()}.png`;
+                link.href = URL.createObjectURL(snapshotBlobCache);
+                link.click();
+                previewModal.classList.remove("active");
+                clearPreviewCacheResource();
+            });
+        }
+    }
+
     /**
      * 渲染已添加游戏卡片
      * 每个卡片内部嵌入两套滑出面板 char / cp
@@ -494,6 +557,7 @@ export function initPage(Core = {}) {
           // 图标按钮只做【展开】，只把fold置false
           gameItem.fold = false;
           saveData();
+          clearPreviewCacheResource(); // 缓存失效
           requestAnimationFrame(()=>{
               window.refreshGameCardUi();
           });
@@ -593,6 +657,7 @@ export function initPage(Core = {}) {
               st.openMalePanel = !st.openMalePanel;
           }
           saveData();
+          clearPreviewCacheResource(); // 缓存失效
           requestAnimationFrame(()=>{
               window.refreshGameCardUi();
           });
@@ -653,6 +718,7 @@ export function initPage(Core = {}) {
           gameItem.cpPanelOpen = false;
 
           saveData();
+          clearPreviewCacheResource(); // 缓存失效
           requestAnimationFrame(()=>{
               window.refreshGameCardUi();
           });
@@ -672,6 +738,7 @@ export function initPage(Core = {}) {
               st.openMalePanel = false;
           }
           saveData();
+          clearPreviewCacheResource(); // 缓存失效
           requestAnimationFrame(()=>{
               window.refreshGameCardUi();
           });
@@ -689,6 +756,7 @@ export function initPage(Core = {}) {
           gameItem.cpPanelOpen = false;
         }
         saveData();
+        clearPreviewCacheResource(); // 缓存失效
         requestAnimationFrame(()=>{
             window.refreshGameCardUi();
         });
@@ -705,6 +773,7 @@ export function initPage(Core = {}) {
           gameItem.charPanelOpen = false;
         }
         saveData();
+        clearPreviewCacheResource(); // 缓存失效
         requestAnimationFrame(()=>{
             window.refreshGameCardUi();
         });
@@ -739,6 +808,7 @@ export function initPage(Core = {}) {
           // 关闭char面板
           gameItem.charPanelOpen = false;
           saveData();
+          clearPreviewCacheResource(); // 缓存失效
           requestAnimationFrame(()=>window.refreshGameCardUi());
           return;
       }
@@ -752,6 +822,7 @@ export function initPage(Core = {}) {
           if(!gameItem) return;
           gameItem.charPanelOpen = false;
           saveData();
+          clearPreviewCacheResource(); // 缓存失效
           requestAnimationFrame(()=>window.refreshGameCardUi());
           return;
       }
@@ -783,6 +854,7 @@ export function initPage(Core = {}) {
               toggleCpItemSelect(gameItem, cid);
               gameItem.cpPanelOpen = false;
               saveData();
+              clearPreviewCacheResource(); // 缓存失效
               requestAnimationFrame(() => {
                   window.refreshGameCardUi();
               });
@@ -807,6 +879,7 @@ export function initPage(Core = {}) {
           gameItem.cpPanelOpen = false;
         }
         saveData();
+        clearPreviewCacheResource(); // 缓存失效
         requestAnimationFrame(()=>{
             window.refreshGameCardUi();
         });
@@ -863,7 +936,7 @@ export function initPage(Core = {}) {
         if(!appData.exportColor) appData.exportColor = {};
         appData.exportColor[item.dataKey] = item.dom.value;
         saveData();
-        // 仅背景色实时预览页面，其他颜色只在导出图片生效
+        clearPreviewCacheResource(); // 配色变更，缓存失效
         if (item.dataKey === "bg") document.body.style.background = item.dom.value;
       }
     });
@@ -886,6 +959,7 @@ export function initPage(Core = {}) {
         if(!appData.baseInfo) appData.baseInfo = {};
         appData.baseInfo[item.key] = this.value;
         saveData();
+        clearPreviewCacheResource(); // 基础信息变更，缓存失效
       }
     })
 
@@ -911,6 +985,13 @@ export function initPage(Core = {}) {
     filterSelectIds.forEach(selId => {
       const sel = document.getElementById(selId);
       if (sel) sel.addEventListener("change", renderGameSelectList);
+    });
+
+    // 导出尺寸单选 change 事件缓存失效
+    document.querySelectorAll('input[name="export-size"]').forEach(radio => {
+        radio.addEventListener("change", () => {
+            clearPreviewCacheResource();
+        });
     });
 
     function renderGameSelectList() {
@@ -1017,6 +1098,7 @@ export function initPage(Core = {}) {
           if(!appData.gameList) appData.gameList = [];
           appData.gameList.push(newGameData);
           saveData();
+          clearPreviewCacheResource(); // 游戏列表变更，缓存失效
 
           //【修复】关闭搜索面板，使用.active
           if (el.searchPanel) el.searchPanel.classList.remove("active");
@@ -1033,6 +1115,7 @@ export function initPage(Core = {}) {
           if (!gameItem) return;
           gameItem.fold = !gameItem.fold;
           saveData();
+          clearPreviewCacheResource(); // 折叠状态变更，缓存失效
           requestAnimationFrame(()=>{
               window.refreshGameCardUi();
           });
@@ -1044,6 +1127,7 @@ export function initPage(Core = {}) {
           const gid = btn.dataset.gid;
           appData.gameList = appData.gameList.filter(g => g.gameId !== gid);
           saveData();
+          clearPreviewCacheResource(); // 删除游戏，缓存失效
           requestAnimationFrame(()=>{
               window.refreshGameCardUi();
           });
@@ -1062,6 +1146,7 @@ export function initPage(Core = {}) {
             e.stopImmediatePropagation();
             gameItem.loveRate = Number(h.dataset.val);
             saveData();
+            clearPreviewCacheResource(); // 评分变更，缓存失效
 
             const allHearts = box.querySelectorAll(".heart");
             allHearts.forEach(ht => {
@@ -1077,102 +1162,134 @@ export function initPage(Core = {}) {
       })
     }
 
+    // ========== 重写导出按钮：预览模式 ==========
     if (el.exportBtn && el.snapshotContainer) {
-      el.exportBtn.addEventListener('click', async () => {
-        try {
-          if(typeof html2canvas !== "function"){
-            alert("缺少 html2canvas 库，无法导出图片，请检查html引入");
-            return;
-          }
-          el.exportBtn.disabled = true;
-          el.exportBtn.textContent = "正在生成图片...";
+        el.exportBtn.addEventListener('click', async () => {
+            // 1. 全局渲染锁
+            if (isRendering) return;
+            // 2. 清空旧缓存
+            clearPreviewCacheResource();
+            isRendering = true;
 
-          const baseInfo = appData.baseInfo ?? {};
-          const infoArr = [
-            {el: el.inputNick, text: baseInfo.nick ? `昵称：${baseInfo.nick}` : null},
-            {el: el.inputCount, text: baseInfo.count !== "" ? `游玩总数：${baseInfo.count}` : null},
-            {el: el.inputStory, text: baseInfo.story ? `入坑时间：${baseInfo.story}` : null},
-            {el: el.inputFirstgame, text: baseInfo.firstgame ? `入坑作品：${baseInfo.firstgame}` : null}
-          ];
+            // 获取弹窗元素
+            const loadingMask = document.getElementById("export-render-loading");
+            const previewModal = document.getElementById("export-preview-modal");
+            const previewScrollWrap = previewModal?.querySelector(".preview-scroll-wrap");
+            const downloadBtn = document.getElementById("preview-download-btn");
 
-          const hideElements = [];
-          infoArr.forEach(item => {
-            if (item.el && !item.text) {
-              hideElements.push(item.el);
-              item.el.style.display = "none";
+            try {
+                if (typeof html2canvas !== "function") {
+                    alert("缺少 html2canvas 库，无法导出图片，请检查html引入");
+                    isRendering = false;
+                    return;
+                }
+
+                // ========== 原有渲染准备逻辑 ==========
+                const baseInfo = appData.baseInfo ?? {};
+                const infoArr = [
+                    {el: el.inputNick, text: baseInfo.nick ? `昵称：${baseInfo.nick}` : null},
+                    {el: el.inputCount, text: baseInfo.count !== "" ? `游玩总数：${baseInfo.count}` : null},
+                    {el: el.inputStory, text: baseInfo.story ? `入坑时间：${baseInfo.story}` : null},
+                    {el: el.inputFirstgame, text: baseInfo.firstgame ? `入坑作品：${baseInfo.firstgame}` : null}
+                ];
+
+                const hideElements = [];
+                infoArr.forEach(item => {
+                    if (item.el && !item.text) {
+                        hideElements.push(item.el);
+                        item.el.style.display = "none";
+                    }
+                });
+
+                el.snapshotContainer.classList.add('export-snapshot');
+                const ec = appData.exportColor;
+                el.snapshotContainer.style.setProperty("--export-bg", ec.bg);
+                el.snapshotContainer.style.setProperty("--export-title", ec.title);
+                el.snapshotContainer.style.setProperty("--export-subtitle", ec.subTitle);
+                el.snapshotContainer.style.setProperty("--export-text", ec.text);
+                el.snapshotContainer.style.setProperty("--export-gamename", ec.gameName);
+                el.snapshotContainer.style.setProperty("--export-border", ec.border);
+
+                const sizeRadio = document.querySelector('input[name="export-size"]:checked');
+                if (!sizeRadio) throw new Error("未选中导出尺寸");
+                let sizeValue = sizeRadio.value;
+                let targetWidth, targetHeight;
+                if (sizeValue === 'long') {
+                    targetWidth = 1080;
+                    targetHeight = 0;
+                } else {
+                    const [w, h] = sizeValue.split(',').map(Number);
+                    targetWidth = w;
+                    targetHeight = h;
+                }
+                const bgColor = el.colorBg?.value ?? "#ffffff";
+
+                // ========== 显示Loading ==========
+                if (loadingMask) loadingMask.classList.add("active");
+                if (previewScrollWrap) previewScrollWrap.innerHTML = ""; // 清空预览
+
+                // ========== 执行渲染 ==========
+                const renderCanvas = await html2canvas(el.snapshotContainer, {
+                    backgroundColor: bgColor,
+                    scale: 2,
+                    useCORS: true,
+                    logging: false
+                });
+
+                // ========== 尺寸裁剪 ==========
+                let finalCanvas;
+                if (targetHeight === 0) {
+                    finalCanvas = renderCanvas;
+                } else {
+                    if (!el.canvas) throw new Error("导出canvas元素缺失");
+                    const canvas = el.canvas;
+                    canvas.width = targetWidth;
+                    canvas.height = targetHeight;
+                    const ctx = canvas.getContext('2d');
+                    ctx.fillStyle = bgColor;
+                    ctx.fillRect(0, 0, targetWidth, targetHeight);
+                    const scale = Math.min(targetWidth / renderCanvas.width, targetHeight / renderCanvas.height);
+                    const drawW = renderCanvas.width * scale;
+                    const drawH = renderCanvas.height * scale;
+                    const offsetX = (targetWidth - drawW) / 2;
+                    const offsetY = (targetHeight - drawH) / 2;
+                    ctx.drawImage(renderCanvas, offsetX, offsetY, drawW, drawH);
+                    finalCanvas = canvas;
+                }
+
+                // ========== 生成Blob缓存 ==========
+                const blob = await new Promise((resolve) => {
+                    finalCanvas.toBlob(resolve, "image/png");
+                });
+                if (!blob) throw new Error("画布生成图片失败");
+                snapshotBlobCache = blob;
+                previewObjectUrl = URL.createObjectURL(blob);
+
+                // ========== 关闭Loading，打开预览 ==========
+                if (loadingMask) loadingMask.classList.remove("active");
+                if (previewScrollWrap) {
+                    previewScrollWrap.innerHTML = `<img class="preview-img-item" src="${previewObjectUrl}" alt="导出预览">`;
+                }
+                if (downloadBtn) downloadBtn.disabled = false;
+                if (previewModal) previewModal.classList.add("active");
+
+                // 释放渲染画布内存
+                renderCanvas.width = 0;
+                if (targetHeight !== 0 && el.canvas) el.canvas.width = 0;
+
+            } catch (err) {
+                console.error("渲染快照失败：", err);
+                if (loadingMask) loadingMask.classList.remove("active");
+                alert("渲染失败，若画面过长建议精简内容后重试");
+            } finally {
+                // 恢复页面样式
+                el.snapshotContainer.classList.remove('export-snapshot');
+                document.querySelectorAll("#card-base .form-row input").forEach(input => {
+                    input.style.display = "";
+                });
+                isRendering = false;
             }
-          });
-
-          el.snapshotContainer.classList.add('export-snapshot');
-
-          // =========【新增：把用户设置的6个颜色赋值给快照容器css变量】==========
-          const ec = appData.exportColor;
-          el.snapshotContainer.style.setProperty("--export-bg", ec.bg);
-          el.snapshotContainer.style.setProperty("--export-title", ec.title);
-          el.snapshotContainer.style.setProperty("--export-subtitle", ec.subTitle);
-          el.snapshotContainer.style.setProperty("--export-text", ec.text);
-          el.snapshotContainer.style.setProperty("--export-gamename", ec.gameName);
-          el.snapshotContainer.style.setProperty("--export-border", ec.border);
-
-          const sizeRadio = document.querySelector('input[name="export-size"]:checked');
-          if(!sizeRadio) throw new Error("未选中导出尺寸");
-          let sizeValue = sizeRadio.value;
-
-          let targetWidth, targetHeight;
-          if (sizeValue === 'long') {
-            targetWidth = 1080;
-            targetHeight = 0;
-          } else {
-            const [w, h] = sizeValue.split(',').map(Number);
-            targetWidth = w;
-            targetHeight = h;
-          }
-
-          const bgColor = el.colorBg?.value ?? "#ffffff";
-          const renderCanvas = await html2canvas(el.snapshotContainer, {
-            backgroundColor: bgColor,
-            scale: 2,
-            useCORS: true,
-            logging: false
-          });
-
-          let finalCanvas;
-          if (targetHeight === 0) {
-            finalCanvas = renderCanvas;
-          } else {
-            if(!el.canvas) throw new Error("导出canvas元素缺失");
-            const canvas = el.canvas;
-            canvas.width = targetWidth;
-            canvas.height = targetHeight;
-            const ctx = canvas.getContext('2d');
-            ctx.fillStyle = bgColor;
-            ctx.fillRect(0, 0, targetWidth, targetHeight);
-
-            const scale = Math.min(targetWidth / renderCanvas.width, targetHeight / renderCanvas.height);
-            const drawW = renderCanvas.width * scale;
-            const drawH = renderCanvas.height * scale;
-            const offsetX = (targetWidth - drawW) / 2;
-            const offsetY = (targetHeight - drawH) / 2;
-            ctx.drawImage(renderCanvas, offsetX, offsetY, drawW, drawH);
-            finalCanvas = canvas;
-          }
-
-          const link = document.createElement('a');
-          link.download = `Otome_FavList_${new Date().getTime()}.png`;
-          link.href = finalCanvas.toDataURL('image/png');
-          link.click();
-        } catch (err) {
-          console.error("导出失败：", err);
-          alert('图片导出异常！外部图片跨域可能导致失败，请使用本地图片资源。\n' + err.message);
-        } finally {
-          el.snapshotContainer.classList.remove('export-snapshot');
-          document.querySelectorAll("#card-base .form-row input").forEach(input => {
-            input.style.display = "";
-          });
-          el.exportBtn.disabled = false;
-          el.exportBtn.textContent = "生成并导出图片";
-        }
-      });
+        });
     }
 
     // ✅仅启动时执行一次事件委托绑定，卡片渲染完成后
