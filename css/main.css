@@ -409,10 +409,11 @@ button:hover{
     font-size:14px;
 }
 
+/* ========== 修改部分：游戏开关行间距和单元最小宽度 ========== */
 .game-switch-row{
     display: flex;
     align-items: flex-start;
-    gap: 16px;
+    gap: 12px;  /* 16 → 12，两块开关之间距离 */
     margin: 10px 0 16px;
     flex-wrap: wrap;
 }
@@ -422,7 +423,7 @@ button:hover{
     align-items: flex-start;
     gap:12px;
     flex: 0 1 auto;
-    min-width:280px;
+    min-width:180px; /* 280 →180，允许单元收缩，消除多余空白 */
 }
 .game-switch-row span {
     font-size: 14px;
@@ -885,6 +886,14 @@ h2{
     }
     .cp-select-btn-bar {
         justify-content: flex-end;
+    }
+    .game-card-head-title-wrap{
+        padding-left:32px;
+    }
+    .game-fold-icon-expand{
+        width:26px;
+        height:26px;
+        font-size:18px;
     }
 }
 
