@@ -147,11 +147,14 @@ export class CanvasLayoutPainter {
   /**
    * @param {HTMLCanvasElement} canvas
    * @param {number} width - 画布宽度
+   * @param {number} height - 画布高度【修改：必须传入固定高度】
    * @param {string} bgColor - 背景色
    */
-  constructor(canvas, width, bgColor) {
+  constructor(canvas, width, height, bgColor) {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
+    this.canvas.width = width;
+    this.canvas.height = height;
     this.baseWidth = width;
     this.y = LAYOUT_SPACE.BODY_PADDING; // 初始 Y 坐标（body 上边距）
     this.bgColor = bgColor;
@@ -161,13 +164,9 @@ export class CanvasLayoutPainter {
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
   }
 
-  /** 调整画布高度（长图模式） */
-  resizeCanvas(w, h) {
-    this.canvas.width = w;
-    this.canvas.height = h;
-    this.ctx.fillStyle = this.bgColor;
-    this.ctx.fillRect(0, 0, w, h);
-  }
+  /**
+   * 【移除原resizeCanvas！禁止绘制中途重设画布尺寸】
+   */
 
   /** 绘制圆角矩形（卡片背景+边框） */
   drawRoundRect(x, y, w, h, radius, fill, stroke, strokeWidth = 1) {
@@ -293,15 +292,132 @@ function calcCharAreaHeight(ctx, charItems, containerWidth, cardWidth, gap, font
   return { height, rows, maxCardHeight };
 }
 
+/**
+ * 【新增】虚拟布局计算器：只计算总高度，不进行真实绘制
+ * 复用全部布局逻辑，算出整张画布最终高度
+ * @param {number} targetWidth
+ * @param {Object} appData
+ * @param {Array} gameTemplateList
+ * @param {Array} renderDataList 预收集好的渲染数据
+ * @returns {number} 预估最终画布高度
+ */
+function calcTotalVirtualHeight(targetWidth, appData, gameTemplateList, renderDataList) {
+  const { exportColor, baseInfo } = appData;
+  // 虚拟离屏ctx，仅用于measureText测量文字高度
+  const virtualCanvas = document.createElement('canvas');
+  const vCtx = virtualCanvas.getContext('2d');
+  let cursorY = LAYOUT_SPACE.BODY_PADDING;
+
+  const BODY_PAD = LAYOUT_SPACE.BODY_PADDING;
+  const WRAP_MAX_W = 1200;
+  const wrapW = Math.min(WRAP_MAX_W, targetWidth - BODY_PAD * 2);
+
+  // 1. 站点标题高度
+  cursorY += 42 + LAYOUT_SPACE.SITE_TITLE_MT + LAYOUT_SPACE.SITE_TITLE_MB;
+
+  // 2. 基础信息卡片高度
+  const baseLines = [];
+  if (baseInfo.nick?.trim()) baseLines.push(`昵称：${baseInfo.nick.trim()}`);
+  if (baseInfo.count?.trim()) baseLines.push(`游玩总数：${baseInfo.count.trim()}`);
+  if (baseInfo.story?.trim()) baseLines.push(`入坑时间：${baseInfo.story.trim()}`);
+  if (baseInfo.firstgame?.trim()) baseLines.push(`入坑作品：${baseInfo.firstgame.trim()}`);
+
+  if (baseLines.length > 0) {
+    const innerPad = LAYOUT_SPACE.BIG_CARD_PADDING;
+    const h2FontSize = 24;
+    const lineFontSize = 16;
+    const lineHeight = 26;
+    const maxLineWidth = wrapW - innerPad * 2;
+
+    let contentHeight = 0;
+    baseLines.forEach(line => {
+      const h = measureWrappedHeight(vCtx, line, maxLineWidth, lineHeight, lineFontSize);
+      contentHeight += h;
+    });
+    const h2Height = h2FontSize + LAYOUT_SPACE.BIG_CARD_H2_MB;
+    const cardH = innerPad * 2 + h2Height + contentHeight;
+    cursorY += cardH;
+    cursorY += LAYOUT_SPACE.WRAP_GAP;
+  }
+
+  // 3. 遍历所有游戏卡片计算高度
+  for (const data of renderDataList) {
+    const { gameInfo, charItems, cpItems } = data;
+    const cardInnerPad = LAYOUT_SPACE.ADDED_GAME_CARD_PADDING;
+    const gameCardW = wrapW;
+
+    // 1) 游戏名称高度
+    const nameFontSize = 22;
+    const nameHeight = nameFontSize + LAYOUT_SPACE.GAME_CARD_HEAD_MB;
+
+    // 2) 爱心评分区域高度
+    const HEART_AREA_HEIGHT = 26 + 12;
+
+    // 3) Character 区域
+    let charAreaHeight = 0;
+    if (charItems.length > 0) {
+      const titleH = 18 + 4;
+      const titleMb = 8;
+      const area = calcCharAreaHeight(
+        vCtx,
+        charItems,
+        gameCardW - cardInnerPad * 2,
+        LAYOUT_SPACE.CHAR_CARD_W,
+        LAYOUT_SPACE.CHAR_ROW_GAP,
+        14,
+        true,
+        titleH,
+        titleMb
+      );
+      charAreaHeight = area.height;
+    }
+
+    // 4) Couple 区域
+    let cpAreaHeight = 0;
+    if (cpItems.length > 0) {
+      const titleH = 18 + 8;
+      let totalCpHeight = titleH;
+      const maleContainerWidth = (gameCardW - cardInnerPad * 2) * 0.75 - LAYOUT_SPACE.CP_COLUMN_GAP;
+      const femaleCardWidth = LAYOUT_SPACE.CHAR_CARD_W;
+      const maleCardWidth = LAYOUT_SPACE.CHAR_CARD_W;
+
+      for (const cp of cpItems) {
+        const fHeight = calcCharCardHeight(vCtx, cp.femaleName, femaleCardWidth, 14);
+        let maxMaleH = LAYOUT_SPACE.CHAR_CARD_MIN_H;
+        cp.maleItems.forEach(m => {
+          const h = calcCharCardHeight(vCtx, m.name, maleCardWidth, 14);
+          if (h > maxMaleH) maxMaleH = h;
+        });
+        const perRow = calcCardsPerRow(maleCardWidth, LAYOUT_SPACE.CP_MALE_GAP, maleContainerWidth);
+        const maleRows = Math.ceil(cp.maleItems.length / perRow);
+        const maleAreaH = maleRows * maxMaleH + (maleRows - 1) * LAYOUT_SPACE.CP_MALE_GAP;
+        const rowH = Math.max(fHeight, maleAreaH) + (LAYOUT_SPACE.CP_ROW_MARGIN || 16);
+        totalCpHeight += rowH;
+      }
+      cpAreaHeight = totalCpHeight;
+    }
+
+    const totalCardH = cardInnerPad * 2 + nameHeight + HEART_AREA_HEIGHT + charAreaHeight + cpAreaHeight;
+    cursorY += totalCardH;
+    cursorY += LAYOUT_SPACE.ADDED_GAME_CARD_MB;
+  }
+
+  // 底部边距
+  cursorY += LAYOUT_SPACE.BODY_PADDING;
+  // 安全余量，防止预估偏差（必须加）
+  const SAFE_MARGIN = 300;
+  return cursorY + SAFE_MARGIN;
+}
+
 // ============================ 主渲染函数 ============================
 
 /**
  * 渲染导出图片
  * @param {number} targetWidth - 画布宽度（如 810, 1080）
- * @param {boolean} isLongMode - 是否长图模式
+ * @param {boolean} isLongMode - 是否长图模式【现在不再动态扩容，仅做语义保留】
  * @param {Object} appData - 全局数据
  * @param {Array} gameTemplateList - 游戏模板列表
- * @returns {Promise}
+ * @returns {Promise<Blob>}
  */
 export async function renderExportCanvas(targetWidth, isLongMode, appData, gameTemplateList) {
   const { exportColor, baseInfo, gameList } = appData;
@@ -315,15 +431,7 @@ export async function renderExportCanvas(targetWidth, isLongMode, appData, gameT
   const wrapW = Math.min(WRAP_MAX_W, targetWidth - BODY_PAD * 2);
   const wrapX = Math.max(BODY_PAD, (targetWidth - wrapW) / 2);
 
-  // 创建画布（初始高度足够大，长图模式后续动态扩容）
-  const initHeight = isLongMode ? 8000 : 3000;
-  const canvas = document.createElement('canvas');
-  canvas.width = targetWidth;
-  canvas.height = initHeight;
-  const painter = new CanvasLayoutPainter(canvas, targetWidth, exportColor.bg);
-  const ctx = painter.ctx;
-
-  // ======== 第一步：遍历所有游戏，收集全部需要加载的图片地址 ========
+  // ======== 第一步：遍历所有游戏，收集全部需要加载的图片地址 + 渲染数据 ========
   const allImageSrcList = [];
   const renderDataList = [];
 
@@ -396,6 +504,16 @@ export async function renderExportCanvas(targetWidth, isLongMode, appData, gameT
     if (charItems.length === 0 && cpItems.length === 0) continue;
     renderDataList.push({ gameInfo, charItems, cpItems, gameItem });
   }
+
+  // ======== 【关键修复】虚拟布局计算整张画布高度 ========
+  const estimatedTotalHeight = calcTotalVirtualHeight(targetWidth, appData, gameTemplateList, renderDataList);
+
+  // ======== 一次性创建固定高度画布，不再中途扩容！ ========
+  const canvas = document.createElement('canvas');
+  canvas.width = targetWidth;
+  canvas.height = estimatedTotalHeight;
+  const painter = new CanvasLayoutPainter(canvas, targetWidth, estimatedTotalHeight, exportColor.bg);
+  const ctx = painter.ctx;
 
   // ======== 并发加载所有图片（有限并发） ========
   const imageCache = await loadImagesWithLimit(allImageSrcList, MAX_IMAGE_CONCURRENCY);
@@ -631,7 +749,6 @@ export async function renderExportCanvas(targetWidth, isLongMode, appData, gameT
             const roundCanvas = createRoundImageCanvas(mImg, m.src, imgSize, imgSize, LAYOUT_STYLE.CHAR_IMG_RADIUS);
             painter.drawImageRound(roundCanvas, mx + innerPad, imgY);
           }
-          // 修复：nameY2 计算错误，去掉多余的 + imgSize
           const nameY2 = my + innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB;
           wrapText(ctx, m.name, mx + innerPad, nameY2, maleCardW - innerPad * 2, 16, 14, '#222');
 
@@ -641,7 +758,6 @@ export async function renderExportCanvas(targetWidth, isLongMode, appData, gameT
             my += rowH + maleGap;
           }
         }
-        // 修正 drawY 更新
         drawY = my + rowH;
         drawY += 12;
       }
@@ -650,17 +766,11 @@ export async function renderExportCanvas(targetWidth, isLongMode, appData, gameT
     painter.shiftY(cardH);
     painter.shiftY(LAYOUT_SPACE.ADDED_GAME_CARD_MB);
 
-    // 长图动态扩容
-    if (isLongMode) {
-      const safeBuffer = 1500;
-      if (painter.y + safeBuffer > canvas.height) {
-        const newH = canvas.height + 6000;
-        painter.resizeCanvas(canvas.width, newH);
-      }
-    }
+    // ========== 删除原有长图动态扩容代码！！ ==========
+    // if (isLongMode) { ... }
   }
 
-  // ======== 最终调整画布高度（精确裁剪） ========
+  // ======== 最终精确裁剪（去除底部多余空白） ========
   const finalHeight = painter.y + LAYOUT_SPACE.BODY_PADDING;
   const finalCanvas = document.createElement('canvas');
   finalCanvas.width = targetWidth;
@@ -668,7 +778,7 @@ export async function renderExportCanvas(targetWidth, isLongMode, appData, gameT
   const finalCtx = finalCanvas.getContext('2d');
   finalCtx.fillStyle = exportColor.bg;
   finalCtx.fillRect(0, 0, targetWidth, finalHeight);
-  finalCtx.drawImage(canvas, 0, 0);
+  finalCtx.drawImage(canvas, 0, 0, targetWidth, finalHeight, 0, 0, targetWidth, finalHeight);
 
   // 返回 Blob
   return new Promise((resolve) => {
