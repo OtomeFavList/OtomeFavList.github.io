@@ -1248,14 +1248,20 @@ h2{
 
 /* ==========【新增】折叠状态游戏名旁图标展开按钮 ========== */
 .game-fold-icon-expand {
-    display: none; /* 默认隐藏；仅fold=true时显示 */
-    border: none;
+    display: none;
+    border: 1px solid #b33a3a;   /* 和▼文字同色的方框 */
     background: transparent;
     font-size: 20px;
     color: #b33a3a;
     cursor: pointer;
     padding: 0 4px;
     line-height: 1;
+    border-radius: 8px;          /* 和全站按钮统一圆角 */
+    width: 32px;
+    height:32px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
 }
 .added-game-card[data-fold="true"] .game-fold-icon-expand {
     display: inline-flex;
@@ -1264,14 +1270,25 @@ h2{
     display: none;
 }
 
+/* 折叠时：隐藏本游戏的两个局部开关 */
+.added-game-card[data-fold="true"] .game-switch-row {
+    display: none;
+}
+
 /* 卡片折叠整体隐藏内容 */
 .added-game-card[data-fold="true"] .game-card-block-item,
 .added-game-card[data-fold="true"] .card-bottom-buttons {
     display: none;
 }
-/* 游戏卡片头部行：游戏名 + 图标按钮同行对齐 */
+
+/* 游戏卡片头部行：折叠按钮【在标题左边】，flex顺序：按钮 → h3标题 */
 .game-card-head-title-wrap {
     display: flex;
     align-items: center;
     gap: 8px;
+    flex-direction: row;
+}
+/* 保证h3不挤压 */
+.game-card-head-title-wrap h3 {
+    margin:0;
 }
