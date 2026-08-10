@@ -762,6 +762,12 @@ export async function renderExportCanvas(
   const renderDataList = [];
 
   for (const gameItem of gameList) {
+    // =========【新增过滤逻辑】=========
+    // 如果开关关闭 && 当前游戏处于折叠状态 → 跳过，不加入渲染列表
+    if (!appData.exportFoldContent && gameItem.fold === true) {
+      continue;
+    }
+
     const gameInfo = gameTemplateList.find(g => g.id === gameItem.gameId);
     if (!gameInfo) continue;
 
