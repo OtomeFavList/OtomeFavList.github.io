@@ -153,7 +153,16 @@
 </div>
 
 <!-- ========== 快照容器（导出截图专用，不可见） ========== -->
-<div id="snapshot-container" style="visibility:hidden;position:absolute;left:-9999px;width:1080px;padding:20px;"></div>
+<div id="snapshot-container" style="
+  visibility: hidden;
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  width: 1080px;
+  padding: 20px;
+  pointer-events: none;
+  overflow: hidden;
+"></div>
 
 <!-- 剧透警告弹窗：id="spoiler-modal" class="modal‑mask"，用 .active 控制显示 -->
 <div id="spoiler-modal" class="modal-mask">
