@@ -167,6 +167,29 @@
     </div>
 </div>
 
+<!-- 【新增】导出预览弹窗容器，复用modal-mask遮罩体系 -->
+<div id="export-preview-modal" class="modal-mask">
+    <div class="modal-preview-box">
+        <div class="modal-preview-head">
+            <h3>导出预览</h3>
+        </div>
+        <div class="preview-scroll-wrap">
+            <!-- 预览图片动态插入 -->
+        </div>
+        <div class="modal-preview-footer">
+            <button id="preview-close-btn">关闭</button>
+            <button id="preview-regen-btn">重新生成</button>
+            <button id="preview-download-btn" disabled>导出图片</button>
+        </div>
+    </div>
+</div>
+
+<!-- 【新增】独立全屏Loading遮罩（渲染快照时显示，不属于预览弹窗内部） -->
+<div id="export-render-loading" class="export-loading-mask">
+    <div class="loading-spinner"></div>
+    <p>正在生成预览快照，请稍候…</p>
+</div>
+
 <script type="module">
 import { bootstrapCore } from "./js/main.js";
 import { initPage } from "./js/script.js";
