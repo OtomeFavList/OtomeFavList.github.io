@@ -362,7 +362,7 @@ export function initPage(Core = {}) {
     const previewCloseBtn = document.getElementById("preview-close-btn");
     const previewRegenBtn = document.getElementById("preview-regen-btn");
     const previewDownloadBtn = document.getElementById("preview-download-btn");
-    const loadingMask = document.getElementById("export-render-loading");
+    // ❗ 移除了 loadingMask（export-render-loading）相关代码
 
     // ========== 预览弹窗按钮事件绑定 ==========
     if (previewModal) {
@@ -1162,10 +1162,9 @@ export function initPage(Core = {}) {
       })
     }
 
-    // ========== 重写导出按钮：数据驱动快照组装（带性能优化 + 锁死防御修复） ==========
+    // ========== 导出按钮：先弹窗后渲染（内置加载） ==========
     if (el.exportBtn && el.snapshotContainer) {
         el.exportBtn.addEventListener('click', async () => {
-            // 【防御：增加超时解锁标记】
             let unlockTimer = null;
             if (isRendering) {
                 alert("正在渲染中，请稍候！");
@@ -1174,14 +1173,12 @@ export function initPage(Core = {}) {
             clearPreviewCacheResource();
             isRendering = true;
 
-            // 超时兜底：15秒强制解锁，防止异常卡死
+            // 超时兜底：15秒强制解锁
             unlockTimer = setTimeout(() => {
                 isRendering = false;
-                if (loadingMask) loadingMask.classList.remove("active");
                 console.warn("渲染超时，强制解除渲染锁");
             }, 15000);
 
-            const loadingMask = document.getElementById("export-render-loading");
             const previewModal = document.getElementById("export-preview-modal");
             const previewScrollWrap = previewModal?.querySelector(".preview-scroll-wrap");
             const downloadBtn = document.getElementById("preview-download-btn");
@@ -1190,6 +1187,17 @@ export function initPage(Core = {}) {
                 if (typeof html2canvas !== "function") {
                     throw new Error("缺少 html2canvas 库，无法导出图片，请检查html引入");
                 }
+
+                // =========【核心改动1：点击立刻打开预览弹窗，内置loading自动展示】=========
+                previewModal.classList.add("active");
+                // 重置预览区域：恢复loadingDOM（防止上一次图片残留）
+                previewScrollWrap.innerHTML = `
+                    <div class="preview-inner-loading">
+                        <div class="loading-spinner"></div>
+                        <p>正在生成预览，请稍候…</p>
+                    </div>
+                `;
+                if (downloadBtn) downloadBtn.disabled = true;
 
                 // --- 1. 清空快照容器 ---
                 const snapshotWrap = el.snapshotContainer;
@@ -1283,12 +1291,8 @@ export function initPage(Core = {}) {
                 }
                 const bgColor = ec.bg ?? "#ffffff";
 
-                // --- 7. 显示Loading ---
-                if (loadingMask) loadingMask.classList.add("active");
-                if (previewScrollWrap) previewScrollWrap.innerHTML = "";
-
                 // ========== 新增：渲染前性能优化 ==========
-                // 7a. 临时关闭高消耗样式（阴影、滤镜）—— 直接移除属性，避免 !important 兼容问题
+                // 7a. 临时关闭高消耗样式（阴影、滤镜）
                 snapshotWrap.style.removeProperty('box-shadow');
                 snapshotWrap.style.removeProperty('filter');
 
@@ -1296,14 +1300,14 @@ export function initPage(Core = {}) {
                 await new Promise(resolve => requestAnimationFrame(resolve));
                 await new Promise(resolve => requestAnimationFrame(resolve));
 
-                // 7c. 强制预加载快照内所有图片并重新触发加载（解决 complete 为 true 但未渲染问题）
+                // 7c. 强制预加载快照内所有图片
                 const snapshotImages = snapshotWrap.querySelectorAll('img');
                 await Promise.all(Array.from(snapshotImages).map(img => {
                     return new Promise(resolve => {
                         const src = img.src;
                         if (src) {
                             img.src = "";
-                            img.src = src;  // 重新赋值触发加载
+                            img.src = src;
                         }
                         if (img.complete) return resolve();
                         img.onload = resolve;
@@ -1314,10 +1318,10 @@ export function initPage(Core = {}) {
                 // 7d. 根据尺寸动态调整 scale
                 let renderScale = 1.5;
                 if (sizeValue === 'long') {
-                    renderScale = 1.2;  // 长图降低 scale 防内存溢出
+                    renderScale = 1.2;
                 }
 
-                // --- 8. 渲染快照（使用优化参数） ---
+                // --- 8. 渲染快照 ---
                 const renderCanvas = await html2canvas(snapshotWrap, {
                     backgroundColor: bgColor,
                     scale: renderScale,
@@ -1332,7 +1336,6 @@ export function initPage(Core = {}) {
                         if (!el.offsetParent) return true;
                         return false;
                     },
-                    // 克隆阶段禁用动画/过渡，并强制重新加载克隆图片（关键修复）
                     onclone: async (clonedDoc) => {
                         const allNodes = clonedDoc.querySelectorAll('*');
                         allNodes.forEach(node => {
@@ -1345,7 +1348,7 @@ export function initPage(Core = {}) {
                                 const src = img.src;
                                 if (src) {
                                     img.src = "";
-                                    img.src = src;  // 重新赋值触发克隆图片加载
+                                    img.src = src;
                                 }
                                 if (img.complete) return resolve();
                                 img.onload = resolve;
@@ -1384,13 +1387,9 @@ export function initPage(Core = {}) {
                 snapshotBlobCache = blob;
                 previewObjectUrl = URL.createObjectURL(blob);
 
-                // --- 11. 关闭Loading，打开预览 ---
-                if (loadingMask) loadingMask.classList.remove("active");
-                if (previewScrollWrap) {
-                    previewScrollWrap.innerHTML = `<img class="preview-img-item" src="${previewObjectUrl}" alt="导出预览">`;
-                }
+                // =========【核心改动2：渲染完成，移除loading，展示图片】=========
+                previewScrollWrap.innerHTML = `<img class="preview-img-item" src="${previewObjectUrl}" alt="导出预览">`;
                 if (downloadBtn) downloadBtn.disabled = false;
-                if (previewModal) previewModal.classList.add("active");
 
                 // 释放内存
                 renderCanvas.width = 0;
@@ -1398,16 +1397,19 @@ export function initPage(Core = {}) {
 
             } catch (err) {
                 console.error("渲染快照失败：", err);
-                if (loadingMask) loadingMask.classList.remove("active");
+                // 渲染失败：弹窗内替换为错误提示
+                previewScrollWrap.innerHTML = `
+                    <div style="padding:40px;text-align:center;color:#c0392b;">
+                        <p>图片渲染失败</p>
+                        <p style="font-size:14px;margin-top:8px;">画面过长建议精简内容后重试</p>
+                    </div>
+                `;
                 alert("渲染失败，若画面过长建议精简内容后重试");
-                // ✅【兜底】异常场景强制解锁
-                isRendering = false;
             } finally {
                 // 清除超时计时器
                 if (unlockTimer) clearTimeout(unlockTimer);
                 el.snapshotContainer.classList.remove('export-snapshot');
                 el.snapshotContainer.innerHTML = "";
-                // ✅正常流程解锁
                 isRendering = false;
             }
         });
