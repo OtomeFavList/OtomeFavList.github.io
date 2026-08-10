@@ -29,7 +29,7 @@ export let appData = {
         title: "#b33a3a",
         subTitle: "#b85878",
         text: "#333333",
-        gameName: "#c98fac",
+        gameName: "#000000",   // ✅ 修改为黑色，用户仍可自定义
         border: "#f6a5b8"
     },
     charImageSelect: {} // 持久存储角色选中立绘索引 key:"gameId-charId"
@@ -74,7 +74,7 @@ export function loadData() {
         appData.exportColor.title = appData.exportColor.title ?? "#b33a3a";
         appData.exportColor.subTitle = appData.exportColor.subTitle ?? "#b85878";
         appData.exportColor.text = appData.exportColor.text ?? "#333333";
-        appData.exportColor.gameName = appData.exportColor.gameName ?? "#c98fac";
+        appData.exportColor.gameName = appData.exportColor.gameName ?? "#000000"; // ✅ 黑色默认
         appData.exportColor.border = appData.exportColor.border ?? "#f6a5b8";
 
         // 【新增兜底：旧存档缺失局部开关字段，补默认false】
