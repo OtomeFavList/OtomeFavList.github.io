@@ -1,44 +1,273 @@
-// data/games.js
-// 聚合games/下所有独立游戏数据，自动合并全局数组
-// 新增游戏只新建games/gameXXX.js，仅需要在下方数组追加文件名，本文件其余代码永久不用修改
-const allGameFileNames = [
-    "game001.js", "game002.js", "game003.js", "game004.js", "game005.js",
-    "game006.js", "game007.js", "game008.js", "game009.js", "game010.js",
-    "game011.js", "game012.js", "game013.js", "game014.js", "game015.js",
-    "game016.js", "game017.js", "game018.js", "game019.js", "game020.js",
-    "game021.js", "game022.js", "game023.js", "game024.js", "game025.js",
-    "game026.js", "game027.js", "game028.js", "game029.js", "game030.js",
-    "game031.js", "game032.js", "game033.js", "game034.js", "game035.js",
-    "game036.js", "game037.js", "game038.js", "game039.js", "game040.js",
-    "game041.js", "game042.js", "game043.js", "game044.js", "game045.js",
-    "game046.js", "game047.js", "game048.js", "game049.js", "game050.js",
-    "game051.js", "game052.js", "game053.js", "game054.js", "game055.js",
-    "game056.js", "game057.js", "game058.js", "game059.js", "game060.js",
-    "game061.js", "game062.js", "game063.js", "game064.js"
-    // 后续新增游戏仅在此添加一行文件名即可
-];
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Otome FavList</title>
+<link rel="stylesheet" href="./css/main.css">
+<!-- html2canvas CDN（第三方库，保留全局引入） -->
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<!-- ✅必须 type="module"，games.js内部使用动态import，不能去掉module属性 -->
+<!-- 使用绝对路径 /data/games.js 确保从网站根目录加载 -->
+<script type="module" src="/data/games.js"></script>
+</head>
+<body>
 
-// 全局游戏数据存储容器
-window.gameDataList = [];
+<!-- ========== 交互页面（用户操作） ========== -->
+<div class="wrap">
+    <div class="site-title">
+        <h1>Otome FavList</h1>
+        <p class="title-sub-cn">日乙个人喜好表</p>
+        <p class="sub-desc text-gray-desc">选择你喜欢的角色，生成属于你的FavList。</p>
+    </div>
 
-// 使用网站根绝对路径，彻底消除模块相对路径错乱
-async function loadAllGames() {
-    const baseUrl = "./games/";
-    for (let fname of allGameFileNames) {
-        const src = baseUrl + fname;
-        try {
-            const mod = await import(src);
-            if (mod.gameData) {
-                window.gameDataList.push(mod.gameData);
+    <div class="big-card" id="card-setting">
+        <h2>一、设置</h2>
+        <div class="switch-row">
+            <label class="switch">
+                <input type="checkbox" id="global-hide-char">
+                <span class="slider"></span>
+            </label>
+            <div>
+                <span class="text-light-pink">全局显示隐藏角色</span>
+                <p class="switch-desc">开启后显示所有游戏隐藏角色，关闭则所有游戏默认隐藏，单个游戏可单独开启。切换此全局开关会触发剧透警告弹窗。</p>
+            </div>
+        </div>
+        <div class="switch-row">
+            <label class="switch">
+                <input type="checkbox" id="global-fd-game">
+                <span class="slider"></span>
+            </label>
+            <div>
+                <span class="text-light-pink">全局显示续作/FD角色</span>
+                <p class="switch-desc">开启后显示所有游戏续作、FD专属角色，关闭则所有游戏默认隐藏，单个游戏可单独开启。切换此全局开关会触发剧透警告弹窗。</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="big-card" id="card-base">
+        <h2>二、基础信息</h2>
+        <div class="form-row-double">
+            <div class="form-row">
+                <label class="text-light-pink">昵称</label>
+                <input type="text" id="input-nick" placeholder="填写你的昵称">
+            </div>
+            <div class="form-row">
+                <label class="text-light-pink">游玩总数</label>
+                <input type="number" id="input-count" placeholder="数字" min="0">
+            </div>
+        </div>
+        <div class="form-row-double">
+            <div class="form-row">
+                <label class="text-light-pink">入坑时间</label>
+                <input type="text" id="input-story" placeholder="例如：2020年">
+            </div>
+            <div class="form-row">
+                <label class="text-light-pink">入坑作品</label>
+                <input type="text" id="input-firstgame" placeholder="第一款日乙游戏">
+            </div>
+        </div>
+    </div>
+
+    <div class="big-card" id="card-game">
+        <h2>三、游戏列表</h2>
+        <div class="center-btn-block">
+            <button id="btn-add-game">+ 添加游戏</button>
+        </div>
+        <!-- 搜索面板：默认隐藏，JS通过 .active 控制显示 -->
+        <div class="game-search-box" id="search-panel">
+            <input type="text" id="game-search-input" placeholder="搜索游戏名称">
+            <div class="filter-group">
+                <!-- 筛选顺序：编剧 → 画师 → 发售年份 → 发行厂商 → 汉化厂商 -->
+                <select id="filter-writer">
+                    <option value="">筛选编剧</option>
+                </select>
+                <select id="filter-art">
+                    <option value="">筛选画师</option>
+                </select>
+                <select id="filter-year">
+                    <option value="">筛选发售年份</option>
+                </select>
+                <select id="filter-publisher">
+                    <option value="">筛选发行厂商</option>
+                </select>
+                <select id="filter-cn">
+                    <option value="">筛选汉化厂商</option>
+                </select>
+            </div>
+            <div class="game-list-select" id="game-select-list"></div>
+        </div>
+
+        <div id="added-game-container"></div>
+    </div>
+
+    <div class="big-card" id="card-export">
+        <h2>四、导出</h2>
+        <!-- ==========【新增】导出折叠内容开关 ========== -->
+        <div class="switch-row">
+            <label class="switch">
+                <input type="checkbox" id="export-fold-content">
+                <span class="slider"></span>
+            </label>
+            <div>
+                <span class="text-light-pink">导出折叠内容</span>
+                <p class="switch-desc">开启后生成并导出的图片会包含折叠的游戏内容，关闭则只生成并导出展开的游戏内容。</p>
+            </div>
+        </div>
+        <!-- 原有颜色选择区域 -->
+        <div class="color-set-row">
+            <div class="color-item">
+                <label class="text-light-pink">导出背景色</label>
+                <input type="color" id="color-bg" value="#fff7f9">
+            </div>
+            <div class="color-item">
+                <label class="text-light-pink">标题文字色</label>
+                <input type="color" id="color-title" value="#b33a3a">
+            </div>
+            <div class="color-item">
+                <label class="text-light-pink">小标题文字色</label>
+                <input type="color" id="color-subtitle" value="#b85878">
+            </div>
+            <div class="color-item">
+                <label class="text-light-pink">正文文字色</label>
+                <input type="color" id="color-text" value="#c98fac">
+            </div>
+            <div class="color-item">
+                <label class="text-light-pink">游戏名文字色</label>
+                <input type="color" id="color-gamename" value="#000000">
+            </div>
+            <div class="color-item">
+                <label class="text-light-pink">卡片边框色</label>
+                <input type="color" id="color-border" value="#f6a5b8">
+            </div>
+        </div>
+        <!-- 导出尺寸选项 -->
+        <div class="size-select">
+            <label class="text-light-pink">导出尺寸：</label>
+            <!-- 固定尺寸（启用分页） -->
+            <label><input type="radio" name="export-size" value="810,1080">810×1080</label>
+            <label><input type="radio" name="export-size" value="1080,1440">1080×1440</label>
+            <label><input type="radio" name="export-size" value="1080,1080">1080×1080</label>
+            <!-- 长图模式（不分页） -->
+            <label><input type="radio" name="export-size" value="long-810">810长图</label>
+            <label><input type="radio" name="export-size" value="long-1080" checked>1080长图</label>
+        </div>
+        <div class="center-btn-block">
+            <button id="btn-export">生成并导出图片</button>
+        </div>
+        <canvas id="export-canvas" style="display:none;"></canvas>
+    </div>
+
+    <div class="about-block">
+        <h2>About</h2>
+        <p>由于开发者个人没有接触所有游戏，因此会有部分游戏缺少隐藏角色。</p>
+        <p>如果发现角色遗漏（若涉及剧透烦请在邮件标题添加预警）、图片错误、功能异常，<br>
+或有希望新增的作品，欢迎通过邮箱联系。</p>
+        <p class="email-text">Email：<a href="mailto:otomefavlist@163.com">otomefavlist@163.com</a></p>
+    </div>
+</div>
+
+<!-- ========== 快照容器（导出截图专用，不可见） ========== -->
+<div id="snapshot-container" style="
+  opacity: 0;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 1080px;
+  padding: 20px;
+  pointer-events: none;
+  z-index: -999;
+"></div>
+
+<!-- 剧透警告弹窗：id="spoiler-modal" class="modal‑mask"，用 .active 控制显示 -->
+<div id="spoiler-modal" class="modal-mask">
+    <div class="modal-box">
+        <h3>⚠️剧透警告⚠️</h3>
+        <p class="text-gray-desc">注意！<br>开启后可能涉及：<br>剧情结局、最终攻略对象、真相路线，<br>是否继续？</p>
+        <div class="modal-btns">
+            <button id="spoiler-cancel">取消</button>
+            <button id="spoiler-confirm">确认</button>
+        </div>
+    </div>
+</div>
+
+<!-- ==========【新增】游戏数据加载进度弹窗 样式完全对齐剧透弹窗，仅单个确认按钮 ========== -->
+<div id="game-load-modal" class="modal-mask">
+    <div class="modal-box">
+        <h3>数据加载提示</h3>
+        <p class="text-gray-desc" id="load-progress-text">游戏数据正在加载 0/64<br>首次访问需加载图片，耗时较长，请稍候…</p>
+        <div class="modal-btns">
+            <button id="load-modal-confirm">确认</button>
+        </div>
+    </div>
+</div>
+
+<!-- 【新增】导出预览弹窗容器，复用modal-mask遮罩体系 -->
+<div id="export-preview-modal" class="modal-mask">
+    <div class="modal-preview-box">
+        <div class="modal-preview-head">
+            <h3>导出预览</h3>
+        </div>
+        <div class="preview-scroll-wrap">
+            <!-- 弹窗内置加载状态 -->
+            <div class="preview-inner-loading">
+                <div class="loading-spinner"></div>
+                <p>正在生成预览，请稍候…</p>
+            </div>
+            <!-- 预览图片动态插入 -->
+        </div>
+        <div class="modal-preview-footer">
+            <button id="preview-close-btn">关闭</button>
+            <button id="preview-regen-btn">重新生成</button>
+            <button id="preview-download-btn" disabled>导出图片</button>
+        </div>
+    </div>
+</div>
+
+<!-- 全局独立Loading遮罩已删除，所有加载状态移至预览弹窗内部 -->
+
+<script type="module">
+import { bootstrapCore } from "./js/main.js";
+
+(async function(){
+    await new Promise(resolve => document.addEventListener("DOMContentLoaded", resolve));
+
+    // 初始化加载弹窗DOM引用，暴露全局供games.js更新进度
+    window.gameLoadModalEl = document.getElementById("game-load-modal");
+    window.loadProgressTextEl = document.getElementById("load-progress-text");
+    window.loadModalConfirmBtn = document.getElementById("load-modal-confirm");
+
+    // 弹窗默认打开，加载完成前禁止关闭
+    if (window.gameLoadModalEl) {
+        window.gameLoadModalEl.classList.add("active");
+    }
+    if (window.loadModalConfirmBtn) {
+        window.loadModalConfirmBtn.disabled = true;
+    }
+
+    // 绑定确认按钮：加载全部完成后才可点击关闭弹窗
+    if (window.loadModalConfirmBtn) {
+        window.loadModalConfirmBtn.addEventListener("click", () => {
+            if (window.gameLoadModalEl) {
+                window.gameLoadModalEl.classList.remove("active");
             }
-            console.log("✅已加载：", src);
-        } catch (err) {
-            console.warn("⚠️该游戏文件加载跳过：", src, err);
-        }
+        });
     }
-    console.log("✅游戏加载流程执行完毕，总数量：", window.gameDataList.length);
-    if(typeof window.renderGameSelectList === "function"){
-        window.renderGameSelectList();
+
+    // 1. 【改造】不再等待所有游戏加载完成，先启动核心UI
+    await bootstrapCore();
+
+    // 2. 由 data/games.js 内部执行分批加载游戏，加载完成后解锁确认按钮
+    if (typeof window.startBatchLoadAllGames === "function") {
+        window.startBatchLoadAllGames();
     }
-}
-window.loadAllGames = loadAllGames;
+
+    // 3. UI层启动
+    if (typeof window.uiBootstrap === "function") {
+        await window.uiBootstrap();
+    }
+})();
+</script>
+
+</body>
+</html>
