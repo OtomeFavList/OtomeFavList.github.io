@@ -1,3 +1,4 @@
+```javascript
 // ===================== script.js UI交互层（模块化导出） =====================
 // 【重要说明】剧透弹窗、全局开关click事件全部迁移至main.js，本文件不再处理全局开关点击逻辑
 // 游戏卡片动态生成的局部开关：使用事件委托对接main.js剧透弹窗逻辑
@@ -423,9 +424,12 @@ export function initPage(Core = {}) {
         // =========【新增结束】=========
 
         html += `
-        <div class="added-game-card" data-gameid="${gameItem.gameId}">
+        <div class="added-game-card" data-gameid="${gameItem.gameId}" data-fold="${!!gameItem.fold}">
           <div class="game-card-head">
-            <h3>${gameInfo.name}</h3>
+            <div class="game-card-head-title-wrap">
+              <h3>${gameInfo.name}</h3>
+              ${gameItem.fold ? `<button class="game-fold-icon-expand" data-gid="${gameItem.gameId}">▼</button>` : ''}
+            </div>
             <div class="heart-rate" data-gid="${gameItem.gameId}">
               ${heartHtml}
             </div>
@@ -478,6 +482,22 @@ export function initPage(Core = {}) {
 
     // ==========【全局事件委托：角色立绘左右切换 + CP全部业务逻辑】==========
     document.addEventListener("click", async function (e) {
+      // ==========【新增】折叠状态：游戏标题旁图标展开按钮 ==========
+      const iconExpandBtn = e.target.closest(".game-fold-icon-expand");
+      if (iconExpandBtn) {
+          e.stopPropagation();
+          const gid = iconExpandBtn.dataset.gid;
+          const gameItem = appData.gameList?.find(g => g.gameId === gid);
+          if (!gameItem) return;
+          // 图标按钮只做【展开】，只把fold置false
+          gameItem.fold = false;
+          saveData();
+          requestAnimationFrame(()=>{
+              window.refreshGameCardUi();
+          });
+          return;
+      }
+
       const switchBtn = e.target.closest(".char-switch-btn");
       if (switchBtn) {
         e.stopPropagation();
@@ -1152,6 +1172,7 @@ export function initPage(Core = {}) {
   window.openCharSelectModal = openCharSelectModal;
   window.renderCharSelectList = renderCharSelectList;
 
-  // 不再在此处直接调用bootstrap，交给index.html时序控制
+  // 不再此处直接调用bootstrap，交给index.html时序控制
   window.uiBootstrap = bootstrap;
 }
+```
