@@ -356,7 +356,9 @@ export function initPage(Core = {}) {
       colorGamename: document.getElementById("color-gamename"),
       exportBtn: document.getElementById("btn-export"),
       canvas: document.getElementById("export-canvas"),
-      snapshotContainer: document.getElementById("snapshot-container")
+      snapshotContainer: document.getElementById("snapshot-container"),
+      // =========新增：导出折叠内容开关==========
+      exportFoldContentSwitch: document.getElementById("export-fold-content")
     };
 
     // ========== 预览弹窗元素 ==========
@@ -947,6 +949,11 @@ export function initPage(Core = {}) {
 
     if (el.colorBg) document.body.style.background = appData.exportColor?.bg ?? "#ffffff";
 
+    // =========【新增】渲染【导出折叠内容】开关初始状态 =========
+    if (el.exportFoldContentSwitch) {
+        el.exportFoldContentSwitch.checked = !!appData.exportFoldContent;
+    }
+
     refreshHideCharSwitch();
     refreshFDSwitch();
     fillFilterOptions(gameTemplateList);
@@ -965,7 +972,16 @@ export function initPage(Core = {}) {
         saveData();
         clearPreviewCacheResource(); // 基础信息变更，缓存失效
       }
-    })
+    });
+
+    // =========【新增】导出折叠内容开关事件 =========
+    if (el.exportFoldContentSwitch) {
+        el.exportFoldContentSwitch.addEventListener("change", function() {
+            appData.exportFoldContent = this.checked;
+            saveData();
+            clearPreviewCacheResource(); // 开关变更，预览缓存失效
+        });
+    }
 
     // ============【已修改：添加游戏按钮，支持再次点击关闭搜索面板】============
     if (el.addGameBtn) {
