@@ -191,6 +191,17 @@
     </div>
 </div>
 
+<!-- ==========【新增】游戏数据加载进度弹窗 样式完全对齐剧透弹窗，仅单个确认按钮 ========== -->
+<div id="game-load-modal" class="modal-mask">
+    <div class="modal-box">
+        <h3>数据加载提示</h3>
+        <p class="text-gray-desc" id="load-progress-text">游戏数据正在加载 0/64<br>首次访问需加载图片，耗时较长，请稍候…</p>
+        <div class="modal-btns">
+            <button id="load-modal-confirm">确认</button>
+        </div>
+    </div>
+</div>
+
 <!-- 【新增】导出预览弹窗容器，复用modal-mask遮罩体系 -->
 <div id="export-preview-modal" class="modal-mask">
     <div class="modal-preview-box">
@@ -221,18 +232,39 @@ import { bootstrapCore } from "./js/main.js";
 (async function(){
     await new Promise(resolve => document.addEventListener("DOMContentLoaded", resolve));
 
-    // 1. 加载游戏数据
+    // 获取加载弹窗元素
+    const loadModal = document.getElementById("game-load-modal");
+    const progressText = document.getElementById("load-progress-text");
+    const loadConfirmBtn = document.getElementById("load-modal-confirm");
+
+    // 页面初始锁定：显示加载弹窗
+    loadModal.classList.add("active");
+
+    // 监听游戏加载进度（全局回调，由data/games.js内注入进度通知）
+    window.onGameLoadProgress = (current, total) => {
+        progressText.innerHTML = `游戏数据正在加载 ${current}/${total}<br>首次访问需加载图片，耗时较长，请稍候…`;
+    };
+
+    // 1. 加载所有游戏文件（内部应通过并发批量加载并回调进度）
     if (typeof window.loadAllGames === "function") {
         await window.loadAllGames();
     }
 
-    // 2. bootstrapCore 内部自动 import script.js + initPage(Core)
-    await bootstrapCore();
+    // 加载完成，启用确认按钮
+    loadConfirmBtn.disabled = false;
 
-    // 3. 启动 UI 层（bootstrapCore 已调用 initPage 定义 window.uiBootstrap，此处执行）
-    if (typeof window.uiBootstrap === "function") {
-        await window.uiBootstrap();
-    }
+    // 点击确认关闭弹窗，继续初始化页面
+    loadConfirmBtn.onclick = async () => {
+        loadModal.classList.remove("active");
+        // 2. bootstrapCore
+        await bootstrapCore();
+        // 3. 启动UI
+        if (typeof window.uiBootstrap === "function") {
+            await window.uiBootstrap();
+        }
+        // 清理进度回调，防止内存残留
+        window.onGameLoadProgress = null;
+    };
 })();
 </script>
 
