@@ -1162,7 +1162,7 @@ export function initPage(Core = {}) {
       })
     }
 
-    // ========== 重写导出按钮：数据驱动快照组装 ==========
+    // ========== 重写导出按钮：数据驱动快照组装（带性能优化） ==========
     if (el.exportBtn && el.snapshotContainer) {
         el.exportBtn.addEventListener('click', async () => {
             if (isRendering) return;
@@ -1209,7 +1209,7 @@ export function initPage(Core = {}) {
                     snapshotWrap.insertAdjacentHTML('beforeend', baseHtml);
                 }
 
-                // --- 4. ③ 循环组装游戏卡片（全部展开） ---
+                // --- 4. ③ 循环组装游戏卡片（全部展开，跳过无角色/CP卡片） ---
                 let gameListHtml = `<div class="wrap">`;
                 for (const gameItem of appData.gameList) {
                     const gameInfo = gameTemplateList.find(g => g.id === gameItem.gameId);
@@ -1220,6 +1220,9 @@ export function initPage(Core = {}) {
                     const hasChar = !charHtml.includes("empty-hint");
                     const cpHtml = renderCP(gameItem, gameInfo, true);
                     const hasCp = !cpHtml.includes("empty-hint");
+
+                    // 如果该游戏没有任何角色或CP，直接跳过不渲染卡片
+                    if (!hasChar && !hasCp) continue;
 
                     let cardHtml = `<div class="added-game-card" data-fold="false">`;
                     // 游戏名称（无评分、无开关、无按钮）
@@ -1274,12 +1277,54 @@ export function initPage(Core = {}) {
                 if (loadingMask) loadingMask.classList.add("active");
                 if (previewScrollWrap) previewScrollWrap.innerHTML = "";
 
-                // --- 8. 渲染快照 ---
+                // ========== 新增：渲染前性能优化 ==========
+                // 7a. 临时关闭高消耗样式（阴影、滤镜）
+                snapshotWrap.style.setProperty('box-shadow', 'none', 'important');
+                snapshotWrap.style.setProperty('filter', 'none', 'important');
+
+                // 7b. 等待浏览器完成布局
+                await new Promise(resolve => requestAnimationFrame(resolve));
+
+                // 7c. 强制预加载快照内所有图片（并行）
+                const snapshotImages = snapshotWrap.querySelectorAll('img');
+                await Promise.all(Array.from(snapshotImages).map(img => {
+                    return new Promise(resolve => {
+                        if (img.complete) return resolve();
+                        img.onload = resolve;
+                        img.onerror = resolve;  // 图片404不阻塞渲染
+                    });
+                }));
+
+                // 7d. 根据尺寸动态调整 scale
+                let renderScale = 1.5;
+                if (sizeValue === 'long') {
+                    renderScale = 1.2;  // 长图降低 scale 防内存溢出
+                }
+
+                // --- 8. 渲染快照（使用优化参数） ---
                 const renderCanvas = await html2canvas(snapshotWrap, {
                     backgroundColor: bgColor,
-                    scale: 2,
+                    scale: renderScale,
                     useCORS: true,
-                    logging: false
+                    allowTaint: false,
+                    logging: false,
+                    imageTimeout: 6000,
+                    letterRendering: true,
+                    foreignObjectRendering: false,
+                    // 忽略携带 data-no-capture 或隐藏的元素
+                    ignoreElements: (el) => {
+                        if (el.hasAttribute('data-no-capture')) return true;
+                        if (!el.offsetParent) return true;
+                        return false;
+                    },
+                    // 克隆阶段禁用所有动画/过渡
+                    onclone: (clonedDoc) => {
+                        const allNodes = clonedDoc.querySelectorAll('*');
+                        allNodes.forEach(node => {
+                            node.style.transition = 'none';
+                            node.style.animation = 'none';
+                        });
+                    }
                 });
 
                 // --- 9. 尺寸裁剪 ---
