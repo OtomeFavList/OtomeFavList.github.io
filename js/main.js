@@ -28,7 +28,7 @@ export let appData = {
         bg: "#fff7f9",
         title: "#b33a3a",
         subTitle: "#b85878",
-        text: "#333333",
+        text: "#c98fac",
         gameName: "#000000",   // ✅ 修改为黑色，用户仍可自定义
         border: "#f6a5b8"
     },
@@ -73,7 +73,7 @@ export function loadData() {
         appData.exportColor.bg = appData.exportColor.bg ?? "#fff7f9";
         appData.exportColor.title = appData.exportColor.title ?? "#b33a3a";
         appData.exportColor.subTitle = appData.exportColor.subTitle ?? "#b85878";
-        appData.exportColor.text = appData.exportColor.text ?? "#333333";
+        appData.exportColor.text = appData.exportColor.text ?? "#c98fac";
         appData.exportColor.gameName = appData.exportColor.gameName ?? "#000000"; // ✅ 黑色默认
         appData.exportColor.border = appData.exportColor.border ?? "#f6a5b8";
 
