@@ -334,6 +334,9 @@ export function initPage(Core = {}) {
       colorTitle: document.getElementById("color-title"),
       colorText: document.getElementById("color-text"),
       colorBorder: document.getElementById("color-border"),
+      // =========新增：小标题色和游戏名色==========
+      colorSubtitle: document.getElementById("color-subtitle"),
+      colorGamename: document.getElementById("color-gamename"),
       exportBtn: document.getElementById("btn-export"),
       canvas: document.getElementById("export-canvas"),
       snapshotContainer: document.getElementById("snapshot-container")
@@ -844,10 +847,13 @@ export function initPage(Core = {}) {
     if (el.inputStory) el.inputStory.value = appData.baseInfo?.story ?? "";
     if (el.inputFirstgame) el.inputFirstgame.value = appData.baseInfo?.firstgame ?? "";
 
+    // ========= 扩展颜色绑定：6项 =========
     const colorBindList = [
       {dom: el.colorBg, dataKey: "bg"},
       {dom: el.colorTitle, dataKey: "title"},
+      {dom: el.colorSubtitle, dataKey: "subTitle"},
       {dom: el.colorText, dataKey: "text"},
+      {dom: el.colorGamename, dataKey: "gameName"},
       {dom: el.colorBorder, dataKey: "border"}
     ];
     colorBindList.forEach(item => {
@@ -857,6 +863,7 @@ export function initPage(Core = {}) {
         if(!appData.exportColor) appData.exportColor = {};
         appData.exportColor[item.dataKey] = item.dom.value;
         saveData();
+        // 仅背景色实时预览页面，其他颜色只在导出图片生效
         if (item.dataKey === "bg") document.body.style.background = item.dom.value;
       }
     });
@@ -1097,6 +1104,16 @@ export function initPage(Core = {}) {
           });
 
           el.snapshotContainer.classList.add('export-snapshot');
+
+          // =========【新增：把用户设置的6个颜色赋值给快照容器css变量】==========
+          const ec = appData.exportColor;
+          el.snapshotContainer.style.setProperty("--export-bg", ec.bg);
+          el.snapshotContainer.style.setProperty("--export-title", ec.title);
+          el.snapshotContainer.style.setProperty("--export-subtitle", ec.subTitle);
+          el.snapshotContainer.style.setProperty("--export-text", ec.text);
+          el.snapshotContainer.style.setProperty("--export-gamename", ec.gameName);
+          el.snapshotContainer.style.setProperty("--export-border", ec.border);
+
           const sizeRadio = document.querySelector('input[name="export-size"]:checked');
           if(!sizeRadio) throw new Error("未选中导出尺寸");
           let sizeValue = sizeRadio.value;
