@@ -35,6 +35,70 @@ export let appData = {
     charImageSelect: {} // 持久存储角色选中立绘索引 key:"gameId-charId"
 };
 
+// ===================== 导出画布 全局间距常量【严格匹配结构图px规范】 =====================
+export const LAYOUT_SPACE = {
+  BODY_PADDING: 20,
+  WRAP_GAP: 30,
+  SITE_TITLE_MT: 30,
+  SITE_TITLE_MB: 10,
+
+  BIG_CARD_PADDING: 24,
+  BIG_CARD_H2_MB: 20,
+
+  SWITCH_ROW_MARGIN: 14,
+  SWITCH_ROW_GAP: 12,
+
+  FORM_ROW_MARGIN: 16,
+  FORM_DOUBLE_GAP: 32,
+
+  CENTER_BTN_MARGIN: 16,
+  CENTER_BTN_GAP: 12,
+
+  GAME_SEARCH_PADDING: 16,
+  GAME_SEARCH_GAP: 10,
+  FILTER_GROUP_GAP: 8,
+
+  GAME_LIST_MARGIN: 12,
+  GAME_GRID_GAP: 14,
+
+  ADDED_GAME_CARD_PADDING: 16,
+  ADDED_GAME_CARD_MB: 14,
+
+  GAME_CARD_HEAD_MB: 12,
+  GAME_HEAD_INNER_GAP: 10,
+  HEART_GAP: 6,
+
+  GAME_CARD_BLOCK_MB: 24,
+  CHAR_ROW_GAP: 14,
+
+  CP_COLUMN_GAP: 16,
+  CP_MALE_GAP: 12,
+
+  CARD_BOTTOM_BTN_MT: 14,
+  CARD_BOTTOM_BTN_GAP: 10,
+
+  ABOUT_MT: 50,
+  ABOUT_PADDING: 20,
+  ABOUT_P_MARGIN: 8,
+
+  // 角色卡片固定尺寸（规范固定）
+  CHAR_CARD_W: 120,
+  CHAR_CARD_MIN_H: 168,
+  CHAR_IMG_BOX_RATIO: 1,
+  CHAR_IMG_BOX_MB: 8,
+  CHAR_CARD_INNER_PADDING: 8
+};
+
+// 样式常量（导出配色、圆角、边框宽度，同步appData.exportColor）
+export const LAYOUT_STYLE = {
+  BIG_CARD_BORDER_WIDTH: 2,
+  CARD_BORDER_WIDTH: 1,
+  BIG_CARD_RADIUS: 16,
+  GAME_CARD_RADIUS: 12,
+  CHAR_CARD_RADIUS: 10,
+  CHAR_IMG_RADIUS: 8
+};
+
 // ===================== 游戏模板数据兜底变量 =====================
 // 兜底：游戏数据模块加载失败时赋值空数组，彻底解决undefined报错
 export let gameTemplateList = [];
