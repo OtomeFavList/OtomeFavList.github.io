@@ -27,6 +27,9 @@ import {
   switchCharImageWithLoading
 } from './main.js';
 
+// ========== 导入原生Canvas绘制导出模块 ==========
+import { renderExportCanvas } from './export-canvas-render.js';
+
 // ========== 导出预览全局状态锁与缓存 ==========
 let isRendering = false;
 let snapshotBlobCache = null;
@@ -362,7 +365,6 @@ export function initPage(Core = {}) {
     const previewCloseBtn = document.getElementById("preview-close-btn");
     const previewRegenBtn = document.getElementById("preview-regen-btn");
     const previewDownloadBtn = document.getElementById("preview-download-btn");
-    // ❗ 移除了 loadingMask（export-render-loading）相关代码
 
     // ========== 预览弹窗按钮事件绑定 ==========
     if (previewModal) {
@@ -1162,8 +1164,8 @@ export function initPage(Core = {}) {
       })
     }
 
-    // ========== 导出按钮：先弹窗后渲染（内置加载） ==========
-    if (el.exportBtn && el.snapshotContainer) {
+    // ========== 导出按钮：先弹窗后渲染（原生Canvas绘制，无DOM捕获） ==========
+    if (el.exportBtn) {
         el.exportBtn.addEventListener('click', async () => {
             let unlockTimer = null;
             if (isRendering) {
@@ -1184,13 +1186,8 @@ export function initPage(Core = {}) {
             const downloadBtn = document.getElementById("preview-download-btn");
 
             try {
-                if (typeof html2canvas !== "function") {
-                    throw new Error("缺少 html2canvas 库，无法导出图片，请检查html引入");
-                }
-
-                // =========【核心改动1：点击立刻打开预览弹窗，内置loading自动展示】=========
+                // 打开预览弹窗并显示loading
                 previewModal.classList.add("active");
-                // 重置预览区域：恢复loadingDOM（防止上一次图片残留）
                 previewScrollWrap.innerHTML = `
                     <div class="preview-inner-loading">
                         <div class="loading-spinner"></div>
@@ -1199,217 +1196,41 @@ export function initPage(Core = {}) {
                 `;
                 if (downloadBtn) downloadBtn.disabled = true;
 
-                // --- 1. 清空快照容器 ---
-                const snapshotWrap = el.snapshotContainer;
-                snapshotWrap.innerHTML = "";
-
-                // --- 2. ① 插入全局标题 ---
-                snapshotWrap.insertAdjacentHTML('beforeend', `
-                    <div class="site-title">
-                        <h1>Otome FavList</h1>
-                    </div>
-                `);
-
-                // --- 3. ② 条件组装基础信息块 ---
-                const baseInfo = appData.baseInfo ?? {};
-                const baseInfoLines = [];
-                if (baseInfo.nick?.trim()) baseInfoLines.push(`昵称：${baseInfo.nick.trim()}`);
-                if (baseInfo.count?.trim()) baseInfoLines.push(`游玩总数：${baseInfo.count.trim()}`);
-                if (baseInfo.story?.trim()) baseInfoLines.push(`入坑时间：${baseInfo.story.trim()}`);
-                if (baseInfo.firstgame?.trim()) baseInfoLines.push(`入坑作品：${baseInfo.firstgame.trim()}`);
-
-                if (baseInfoLines.length > 0) {
-                    let baseHtml = `<div class="big-card"><h2>基础信息</h2>`;
-                    baseInfoLines.forEach(line => {
-                        baseHtml += `<div class="base-info-item">${line}</div>`;
-                    });
-                    baseHtml += `</div>`;
-                    snapshotWrap.insertAdjacentHTML('beforeend', baseHtml);
-                }
-
-                // --- 4. ③ 循环组装游戏卡片（全部展开，跳过无角色/CP卡片） ---
-                let gameListHtml = `<div class="wrap">`;
-                for (const gameItem of appData.gameList) {
-                    const gameInfo = gameTemplateList.find(g => g.id === gameItem.gameId);
-                    if (!gameInfo) continue;
-
-                    // 调用渲染函数，传入 true 表示快照模式（禁用切换按钮）
-                    const charHtml = renderSelectedChar(gameItem, gameInfo, true);
-                    const hasChar = !charHtml.includes("empty-hint");
-                    const cpHtml = renderCP(gameItem, gameInfo, true);
-                    const hasCp = !cpHtml.includes("empty-hint");
-
-                    // 如果该游戏没有任何角色或CP，直接跳过不渲染卡片
-                    if (!hasChar && !hasCp) continue;
-
-                    let cardHtml = `<div class="added-game-card" data-fold="false">`;
-                    // 游戏名称（无评分、无开关、无按钮）
-                    cardHtml += `<div class="game-card-head"><h3>${gameInfo.name}</h3></div>`;
-
-                    if (hasChar) {
-                        cardHtml += `
-                            <div class="game-card-block-item">
-                                <h4 class="snapshot-section-title">Character</h4>
-                                <div class="char-selected-row">${charHtml}</div>
-                            </div>`;
-                    }
-                    if (hasCp) {
-                        cardHtml += `
-                            <div class="game-card-block-item">
-                                <h4 class="snapshot-section-title">Couple</h4>
-                                <div class="cp-render-box">${cpHtml}</div>
-                            </div>`;
-                    }
-                    cardHtml += `</div>`;
-                    gameListHtml += cardHtml;
-                }
-                gameListHtml += `</div>`;
-                snapshotWrap.insertAdjacentHTML('beforeend', gameListHtml);
-
-                // --- 5. 应用导出色变量 ---
-                snapshotWrap.classList.add('export-snapshot');
-                const ec = appData.exportColor;
-                snapshotWrap.style.setProperty("--export-bg", ec.bg);
-                snapshotWrap.style.setProperty("--export-title", ec.title);
-                snapshotWrap.style.setProperty("--export-subtitle", ec.subTitle);
-                snapshotWrap.style.setProperty("--export-text", ec.text);
-                snapshotWrap.style.setProperty("--export-gamename", ec.gameName);
-                snapshotWrap.style.setProperty("--export-border", ec.border);
-
-                // --- 6. 获取导出尺寸 ---
+                // 获取导出尺寸配置
                 const sizeRadio = document.querySelector('input[name="export-size"]:checked');
                 if (!sizeRadio) throw new Error("未选中导出尺寸");
-                let sizeValue = sizeRadio.value;
-                let targetWidth, targetHeight;
-                if (sizeValue === 'long') {
-                    targetWidth = 1080;
-                    targetHeight = 0;
+                const sizeVal = sizeRadio.value;
+                let width, longMode = false;
+                if (sizeVal === "long") {
+                    width = 1080;
+                    longMode = true;
                 } else {
-                    const [w, h] = sizeValue.split(',').map(Number);
-                    targetWidth = w;
-                    targetHeight = h;
-                }
-                const bgColor = ec.bg ?? "#ffffff";
-
-                // ========== 新增：渲染前性能优化 ==========
-                // 7a. 临时关闭高消耗样式（阴影、滤镜）
-                snapshotWrap.style.removeProperty('box-shadow');
-                snapshotWrap.style.removeProperty('filter');
-
-                // 7b. 等待浏览器完成布局（双帧保障）
-                await new Promise(resolve => requestAnimationFrame(resolve));
-                await new Promise(resolve => requestAnimationFrame(resolve));
-
-                // 7c. 强制预加载快照内所有图片
-                const snapshotImages = snapshotWrap.querySelectorAll('img');
-                await Promise.all(Array.from(snapshotImages).map(img => {
-                    return new Promise(resolve => {
-                        const src = img.src;
-                        if (src) {
-                            img.src = "";
-                            img.src = src;
-                        }
-                        if (img.complete) return resolve();
-                        img.onload = resolve;
-                        img.onerror = resolve;
-                    });
-                }));
-
-                // 7d. 根据尺寸动态调整 scale
-                let renderScale = 1.5;
-                if (sizeValue === 'long') {
-                    renderScale = 1.2;
+                    const [w] = sizeVal.split(',').map(Number);
+                    width = w;
                 }
 
-                // --- 8. 渲染快照 ---
-                const renderCanvas = await html2canvas(snapshotWrap, {
-                    backgroundColor: bgColor,
-                    scale: renderScale,
-                    useCORS: true,
-                    allowTaint: false,
-                    logging: false,
-                    imageTimeout: 12000,
-                    letterRendering: true,
-                    foreignObjectRendering: false,
-                    ignoreElements: (el) => {
-                        if (el.hasAttribute('data-no-capture')) return true;
-                        if (!el.offsetParent) return true;
-                        return false;
-                    },
-                    onclone: async (clonedDoc) => {
-                        const allNodes = clonedDoc.querySelectorAll('*');
-                        allNodes.forEach(node => {
-                            node.style.transition = 'none';
-                            node.style.animation = 'none';
-                        });
-                        const cloneImgs = clonedDoc.querySelectorAll("img");
-                        await Promise.all(Array.from(cloneImgs).map(img => {
-                            return new Promise(resolve => {
-                                const src = img.src;
-                                if (src) {
-                                    img.src = "";
-                                    img.src = src;
-                                }
-                                if (img.complete) return resolve();
-                                img.onload = resolve;
-                                img.onerror = resolve;
-                            });
-                        }));
-                    }
-                });
+                // 【核心】调用原生Canvas绘制模块，返回Blob
+                const blob = await renderExportCanvas(width, longMode, appData, gameTemplateList);
+                if (!blob) throw new Error("Canvas绘制失败，未能生成图片");
 
-                // --- 9. 尺寸裁剪 ---
-                let finalCanvas;
-                if (targetHeight === 0) {
-                    finalCanvas = renderCanvas;
-                } else {
-                    if (!el.canvas) throw new Error("导出canvas元素缺失");
-                    const canvas = el.canvas;
-                    canvas.width = targetWidth;
-                    canvas.height = targetHeight;
-                    const ctx = canvas.getContext('2d');
-                    ctx.fillStyle = bgColor;
-                    ctx.fillRect(0, 0, targetWidth, targetHeight);
-                    const scale = Math.min(targetWidth / renderCanvas.width, targetHeight / renderCanvas.height);
-                    const drawW = renderCanvas.width * scale;
-                    const drawH = renderCanvas.height * scale;
-                    const offsetX = (targetWidth - drawW) / 2;
-                    const offsetY = (targetHeight - drawH) / 2;
-                    ctx.drawImage(renderCanvas, offsetX, offsetY, drawW, drawH);
-                    finalCanvas = canvas;
-                }
-
-                // --- 10. 生成Blob ---
-                const blob = await new Promise((resolve) => {
-                    finalCanvas.toBlob(resolve, "image/png");
-                });
-                if (!blob) throw new Error("画布生成图片失败");
                 snapshotBlobCache = blob;
                 previewObjectUrl = URL.createObjectURL(blob);
 
-                // =========【核心改动2：渲染完成，移除loading，展示图片】=========
+                // 渲染完成，替换loading为图片
                 previewScrollWrap.innerHTML = `<img class="preview-img-item" src="${previewObjectUrl}" alt="导出预览">`;
                 if (downloadBtn) downloadBtn.disabled = false;
 
-                // 释放内存
-                renderCanvas.width = 0;
-                if (targetHeight !== 0 && el.canvas) el.canvas.width = 0;
-
             } catch (err) {
-                console.error("渲染快照失败：", err);
-                // 渲染失败：弹窗内替换为错误提示
+                console.error("导出图片失败：", err);
                 previewScrollWrap.innerHTML = `
                     <div style="padding:40px;text-align:center;color:#c0392b;">
                         <p>图片渲染失败</p>
-                        <p style="font-size:14px;margin-top:8px;">画面过长建议精简内容后重试</p>
+                        <p style="font-size:14px;margin-top:8px;">${err.message || '请检查控制台错误信息'}</p>
                     </div>
                 `;
-                alert("渲染失败，若画面过长建议精简内容后重试");
+                alert("导出失败，请查看控制台错误。");
             } finally {
-                // 清除超时计时器
                 if (unlockTimer) clearTimeout(unlockTimer);
-                el.snapshotContainer.classList.remove('export-snapshot');
-                el.snapshotContainer.innerHTML = "";
                 isRendering = false;
             }
         });
