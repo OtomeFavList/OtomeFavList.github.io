@@ -1162,16 +1162,13 @@ export function initPage(Core = {}) {
       })
     }
 
-    // ========== 重写导出按钮：预览模式 ==========
+    // ========== 重写导出按钮：数据驱动快照组装 ==========
     if (el.exportBtn && el.snapshotContainer) {
         el.exportBtn.addEventListener('click', async () => {
-            // 1. 全局渲染锁
             if (isRendering) return;
-            // 2. 清空旧缓存
             clearPreviewCacheResource();
             isRendering = true;
 
-            // 获取弹窗元素
             const loadingMask = document.getElementById("export-render-loading");
             const previewModal = document.getElementById("export-preview-modal");
             const previewScrollWrap = previewModal?.querySelector(".preview-scroll-wrap");
@@ -1184,32 +1181,81 @@ export function initPage(Core = {}) {
                     return;
                 }
 
-                // ========== 原有渲染准备逻辑 ==========
+                // --- 1. 清空快照容器 ---
+                const snapshotWrap = el.snapshotContainer;
+                snapshotWrap.innerHTML = "";
+
+                // --- 2. ① 插入全局标题 ---
+                snapshotWrap.insertAdjacentHTML('beforeend', `
+                    <div class="site-title">
+                        <h1>Otome FavList</h1>
+                    </div>
+                `);
+
+                // --- 3. ② 条件组装基础信息块 ---
                 const baseInfo = appData.baseInfo ?? {};
-                const infoArr = [
-                    {el: el.inputNick, text: baseInfo.nick ? `昵称：${baseInfo.nick}` : null},
-                    {el: el.inputCount, text: baseInfo.count !== "" ? `游玩总数：${baseInfo.count}` : null},
-                    {el: el.inputStory, text: baseInfo.story ? `入坑时间：${baseInfo.story}` : null},
-                    {el: el.inputFirstgame, text: baseInfo.firstgame ? `入坑作品：${baseInfo.firstgame}` : null}
-                ];
+                const baseInfoLines = [];
+                if (baseInfo.nick?.trim()) baseInfoLines.push(`昵称：${baseInfo.nick.trim()}`);
+                if (baseInfo.count?.trim()) baseInfoLines.push(`游玩总数：${baseInfo.count.trim()}`);
+                if (baseInfo.story?.trim()) baseInfoLines.push(`入坑时间：${baseInfo.story.trim()}`);
+                if (baseInfo.firstgame?.trim()) baseInfoLines.push(`入坑作品：${baseInfo.firstgame.trim()}`);
 
-                const hideElements = [];
-                infoArr.forEach(item => {
-                    if (item.el && !item.text) {
-                        hideElements.push(item.el);
-                        item.el.style.display = "none";
+                if (baseInfoLines.length > 0) {
+                    let baseHtml = `<div class="big-card"><h2>基础信息</h2>`;
+                    baseInfoLines.forEach(line => {
+                        baseHtml += `<div class="base-info-item">${line}</div>`;
+                    });
+                    baseHtml += `</div>`;
+                    snapshotWrap.insertAdjacentHTML('beforeend', baseHtml);
+                }
+
+                // --- 4. ③ 循环组装游戏卡片（全部展开） ---
+                let gameListHtml = `<div class="wrap">`;
+                for (const gameItem of appData.gameList) {
+                    const gameInfo = gameTemplateList.find(g => g.id === gameItem.gameId);
+                    if (!gameInfo) continue;
+
+                    // 调用渲染函数，传入 true 表示快照模式（禁用切换按钮）
+                    const charHtml = renderSelectedChar(gameItem, gameInfo, true);
+                    const hasChar = !charHtml.includes("empty-hint");
+                    const cpHtml = renderCP(gameItem, gameInfo, true);
+                    const hasCp = !cpHtml.includes("empty-hint");
+
+                    let cardHtml = `<div class="added-game-card" data-fold="false">`;
+                    // 游戏名称（无评分、无开关、无按钮）
+                    cardHtml += `<div class="game-card-head"><h3>${gameInfo.name}</h3></div>`;
+
+                    if (hasChar) {
+                        cardHtml += `
+                            <div class="game-card-block-item">
+                                <h4 class="snapshot-section-title">Character</h4>
+                                <div class="char-selected-row">${charHtml}</div>
+                            </div>`;
                     }
-                });
+                    if (hasCp) {
+                        cardHtml += `
+                            <div class="game-card-block-item">
+                                <h4 class="snapshot-section-title">Couple</h4>
+                                <div class="cp-render-box">${cpHtml}</div>
+                            </div>`;
+                    }
+                    cardHtml += `</div>`;
+                    gameListHtml += cardHtml;
+                }
+                gameListHtml += `</div>`;
+                snapshotWrap.insertAdjacentHTML('beforeend', gameListHtml);
 
-                el.snapshotContainer.classList.add('export-snapshot');
+                // --- 5. 应用导出色变量 ---
+                snapshotWrap.classList.add('export-snapshot');
                 const ec = appData.exportColor;
-                el.snapshotContainer.style.setProperty("--export-bg", ec.bg);
-                el.snapshotContainer.style.setProperty("--export-title", ec.title);
-                el.snapshotContainer.style.setProperty("--export-subtitle", ec.subTitle);
-                el.snapshotContainer.style.setProperty("--export-text", ec.text);
-                el.snapshotContainer.style.setProperty("--export-gamename", ec.gameName);
-                el.snapshotContainer.style.setProperty("--export-border", ec.border);
+                snapshotWrap.style.setProperty("--export-bg", ec.bg);
+                snapshotWrap.style.setProperty("--export-title", ec.title);
+                snapshotWrap.style.setProperty("--export-subtitle", ec.subTitle);
+                snapshotWrap.style.setProperty("--export-text", ec.text);
+                snapshotWrap.style.setProperty("--export-gamename", ec.gameName);
+                snapshotWrap.style.setProperty("--export-border", ec.border);
 
+                // --- 6. 获取导出尺寸 ---
                 const sizeRadio = document.querySelector('input[name="export-size"]:checked');
                 if (!sizeRadio) throw new Error("未选中导出尺寸");
                 let sizeValue = sizeRadio.value;
@@ -1222,21 +1268,21 @@ export function initPage(Core = {}) {
                     targetWidth = w;
                     targetHeight = h;
                 }
-                const bgColor = el.colorBg?.value ?? "#ffffff";
+                const bgColor = ec.bg ?? "#ffffff";
 
-                // ========== 显示Loading ==========
+                // --- 7. 显示Loading ---
                 if (loadingMask) loadingMask.classList.add("active");
-                if (previewScrollWrap) previewScrollWrap.innerHTML = ""; // 清空预览
+                if (previewScrollWrap) previewScrollWrap.innerHTML = "";
 
-                // ========== 执行渲染 ==========
-                const renderCanvas = await html2canvas(el.snapshotContainer, {
+                // --- 8. 渲染快照 ---
+                const renderCanvas = await html2canvas(snapshotWrap, {
                     backgroundColor: bgColor,
                     scale: 2,
                     useCORS: true,
                     logging: false
                 });
 
-                // ========== 尺寸裁剪 ==========
+                // --- 9. 尺寸裁剪 ---
                 let finalCanvas;
                 if (targetHeight === 0) {
                     finalCanvas = renderCanvas;
@@ -1257,7 +1303,7 @@ export function initPage(Core = {}) {
                     finalCanvas = canvas;
                 }
 
-                // ========== 生成Blob缓存 ==========
+                // --- 10. 生成Blob ---
                 const blob = await new Promise((resolve) => {
                     finalCanvas.toBlob(resolve, "image/png");
                 });
@@ -1265,7 +1311,7 @@ export function initPage(Core = {}) {
                 snapshotBlobCache = blob;
                 previewObjectUrl = URL.createObjectURL(blob);
 
-                // ========== 关闭Loading，打开预览 ==========
+                // --- 11. 关闭Loading，打开预览 ---
                 if (loadingMask) loadingMask.classList.remove("active");
                 if (previewScrollWrap) {
                     previewScrollWrap.innerHTML = `<img class="preview-img-item" src="${previewObjectUrl}" alt="导出预览">`;
@@ -1273,7 +1319,7 @@ export function initPage(Core = {}) {
                 if (downloadBtn) downloadBtn.disabled = false;
                 if (previewModal) previewModal.classList.add("active");
 
-                // 释放渲染画布内存
+                // 释放内存
                 renderCanvas.width = 0;
                 if (targetHeight !== 0 && el.canvas) el.canvas.width = 0;
 
@@ -1282,11 +1328,9 @@ export function initPage(Core = {}) {
                 if (loadingMask) loadingMask.classList.remove("active");
                 alert("渲染失败，若画面过长建议精简内容后重试");
             } finally {
-                // 恢复页面样式
+                // 清理快照容器，移除样式类
                 el.snapshotContainer.classList.remove('export-snapshot');
-                document.querySelectorAll("#card-base .form-row input").forEach(input => {
-                    input.style.display = "";
-                });
+                el.snapshotContainer.innerHTML = "";   // 清空DOM
                 isRendering = false;
             }
         });
