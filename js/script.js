@@ -1162,12 +1162,24 @@ export function initPage(Core = {}) {
       })
     }
 
-    // ========== 重写导出按钮：数据驱动快照组装（带性能优化） ==========
+    // ========== 重写导出按钮：数据驱动快照组装（带性能优化 + 锁死防御修复） ==========
     if (el.exportBtn && el.snapshotContainer) {
         el.exportBtn.addEventListener('click', async () => {
-            if (isRendering) return;
+            // 【防御：增加超时解锁标记】
+            let unlockTimer = null;
+            if (isRendering) {
+                alert("正在渲染中，请稍候！");
+                return;
+            }
             clearPreviewCacheResource();
             isRendering = true;
+
+            // 超时兜底：15秒强制解锁，防止异常卡死
+            unlockTimer = setTimeout(() => {
+                isRendering = false;
+                if (loadingMask) loadingMask.classList.remove("active");
+                console.warn("渲染超时，强制解除渲染锁");
+            }, 15000);
 
             const loadingMask = document.getElementById("export-render-loading");
             const previewModal = document.getElementById("export-preview-modal");
@@ -1176,9 +1188,7 @@ export function initPage(Core = {}) {
 
             try {
                 if (typeof html2canvas !== "function") {
-                    alert("缺少 html2canvas 库，无法导出图片，请检查html引入");
-                    isRendering = false;
-                    return;
+                    throw new Error("缺少 html2canvas 库，无法导出图片，请检查html引入");
                 }
 
                 // --- 1. 清空快照容器 ---
@@ -1390,10 +1400,14 @@ export function initPage(Core = {}) {
                 console.error("渲染快照失败：", err);
                 if (loadingMask) loadingMask.classList.remove("active");
                 alert("渲染失败，若画面过长建议精简内容后重试");
+                // ✅【兜底】异常场景强制解锁
+                isRendering = false;
             } finally {
-                // 清理快照容器，移除样式类
+                // 清除超时计时器
+                if (unlockTimer) clearTimeout(unlockTimer);
                 el.snapshotContainer.classList.remove('export-snapshot');
-                el.snapshotContainer.innerHTML = "";   // 清空DOM
+                el.snapshotContainer.innerHTML = "";
+                // ✅正常流程解锁
                 isRendering = false;
             }
         });
