@@ -23,7 +23,15 @@ export let appData = {
     gameSpoilerRecord: {},
     baseInfo: { nick: "", count: "", story: "", firstgame: "" },
     gameList: [],
-    exportColor: { bg: "#fff7f9", title: "#b33a3a", text: "#c98fac", border: "#f6a5b8" },
+    // ========= 修改：新增 subTitle、gameName，设置默认值 =========
+    exportColor: {
+        bg: "#fff7f9",
+        title: "#b33a3a",
+        subTitle: "#b85878",
+        text: "#333333",
+        gameName: "#c98fac",
+        border: "#f6a5b8"
+    },
     charImageSelect: {} // 持久存储角色选中立绘索引 key:"gameId-charId"
 };
 
@@ -57,6 +65,17 @@ export function loadData() {
     try {
         const raw = localStorage.getItem(STORE_KEY);
         if (raw) appData = JSON.parse(raw);
+
+        // ========= 新增：兼容旧存档，缺失字段填充默认值 =========
+        if(!appData.exportColor) {
+            appData.exportColor = {};
+        }
+        appData.exportColor.bg = appData.exportColor.bg ?? "#fff7f9";
+        appData.exportColor.title = appData.exportColor.title ?? "#b33a3a";
+        appData.exportColor.subTitle = appData.exportColor.subTitle ?? "#b85878";
+        appData.exportColor.text = appData.exportColor.text ?? "#333333";
+        appData.exportColor.gameName = appData.exportColor.gameName ?? "#c98fac";
+        appData.exportColor.border = appData.exportColor.border ?? "#f6a5b8";
 
         // 【新增兜底：旧存档缺失局部开关字段，补默认false】
         if (Array.isArray(appData.gameList)) {
