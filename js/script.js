@@ -393,9 +393,11 @@ export function initPage(Core = {}) {
             });
         }
 
-        // 导出按钮
+        // 导出按钮（默认行为，会被导出逻辑覆盖）
+        // 注意：这里使用 addEventListener，但在导出逻辑中会重新赋值 onclick 以支持多页
         if (previewDownloadBtn) {
             previewDownloadBtn.addEventListener("click", () => {
+                // 这个监听器会被导出逻辑中的 onclick 覆盖，但保留以防万一
                 if (!snapshotBlobCache) return;
                 const link = document.createElement('a');
                 link.download = `Otome_FavList_${new Date().getTime()}.png`;
@@ -1164,7 +1166,7 @@ export function initPage(Core = {}) {
       })
     }
 
-    // ========== 导出按钮：先弹窗后渲染（原生Canvas绘制，无DOM捕获） ==========
+    // ========== 导出按钮：先弹窗后渲染（原生Canvas绘制，无DOM捕获，支持分页） ==========
     if (el.exportBtn) {
         el.exportBtn.addEventListener('click', async () => {
             let unlockTimer = null;
@@ -1200,28 +1202,50 @@ export function initPage(Core = {}) {
                 const sizeRadio = document.querySelector('input[name="export-size"]:checked');
                 if (!sizeRadio) throw new Error("未选中导出尺寸");
                 const sizeVal = sizeRadio.value;
-                let width, longMode = false;
-                if (sizeVal === "long") {
-                    width = 1080;
-                    longMode = true;
-                } else if (sizeVal === "long-810") {
-                    width = 810;
-                    longMode = true;
+
+                let targetWidth = 0;
+                let maxPageHeight = 0;
+                let isLongMode = false;
+
+                if (sizeVal === "long-810") {
+                    targetWidth = 810;
+                    isLongMode = true;
+                } else if (sizeVal === "long-1080") {
+                    targetWidth = 1080;
+                    isLongMode = true;
                 } else {
-                    const [w] = sizeVal.split(',').map(Number);
-                    width = w;
+                    // 固定尺寸，开启分页
+                    const [w, h] = sizeVal.split(',').map(Number);
+                    targetWidth = w;
+                    maxPageHeight = h;
                 }
 
-                // 【核心】调用原生Canvas绘制模块，返回Blob
-                const blob = await renderExportCanvas(width, longMode, appData, gameTemplateList);
-                if (!blob) throw new Error("Canvas绘制失败，未能生成图片");
+                // 【核心】调用原生Canvas绘制模块，返回 Blob 数组
+                const blobList = await renderExportCanvas(targetWidth, isLongMode, maxPageHeight, appData, gameTemplateList);
+                if (!Array.isArray(blobList) || blobList.length === 0) throw new Error("Canvas绘制失败，未能生成图片");
 
-                snapshotBlobCache = blob;
-                previewObjectUrl = URL.createObjectURL(blob);
+                // 缓存第一张用于预览
+                snapshotBlobCache = blobList[0];
+                previewObjectUrl = URL.createObjectURL(snapshotBlobCache);
 
-                // 渲染完成，替换loading为图片
+                // 渲染完成，替换loading为预览图
                 previewScrollWrap.innerHTML = `<img class="preview-img-item" src="${previewObjectUrl}" alt="导出预览">`;
                 if (downloadBtn) downloadBtn.disabled = false;
+
+                // === 重新绑定下载按钮，支持多页批量下载 ===
+                previewDownloadBtn.onclick = () => {
+                    if (!blobList || blobList.length === 0) return;
+                    const baseTime = new Date().getTime();
+                    blobList.forEach((blob, pageIdx) => {
+                        const link = document.createElement('a');
+                        const pageSuffix = blobList.length > 1 ? `_page${pageIdx+1}` : "";
+                        link.download = `Otome_FavList_${baseTime}${pageSuffix}.png`;
+                        link.href = URL.createObjectURL(blob);
+                        link.click();
+                    });
+                    previewModal.classList.remove("active");
+                    clearPreviewCacheResource();
+                };
 
             } catch (err) {
                 console.error("导出图片失败：", err);
