@@ -1278,11 +1278,12 @@ export function initPage(Core = {}) {
                 if (previewScrollWrap) previewScrollWrap.innerHTML = "";
 
                 // ========== 新增：渲染前性能优化 ==========
-                // 7a. 临时关闭高消耗样式（阴影、滤镜）
-                snapshotWrap.style.setProperty('box-shadow', 'none', 'important');
-                snapshotWrap.style.setProperty('filter', 'none', 'important');
+                // 7a. 临时关闭高消耗样式（阴影、滤镜）—— 直接移除属性，避免 !important 兼容问题
+                snapshotWrap.style.removeProperty('box-shadow');
+                snapshotWrap.style.removeProperty('filter');
 
-                // 7b. 等待浏览器完成布局
+                // 7b. 等待浏览器完成布局（双帧保障）
+                await new Promise(resolve => requestAnimationFrame(resolve));
                 await new Promise(resolve => requestAnimationFrame(resolve));
 
                 // 7c. 强制预加载快照内所有图片（并行）
@@ -1308,7 +1309,7 @@ export function initPage(Core = {}) {
                     useCORS: true,
                     allowTaint: false,
                     logging: false,
-                    imageTimeout: 6000,
+                    imageTimeout: 12000,          // 延长超时时间，避免大图超时空白
                     letterRendering: true,
                     foreignObjectRendering: false,
                     // 忽略携带 data-no-capture 或隐藏的元素
@@ -1317,13 +1318,22 @@ export function initPage(Core = {}) {
                         if (!el.offsetParent) return true;
                         return false;
                     },
-                    // 克隆阶段禁用所有动画/过渡
-                    onclone: (clonedDoc) => {
+                    // 克隆阶段禁用动画/过渡，并等待克隆图片加载完成（关键修复）
+                    onclone: async (clonedDoc) => {
                         const allNodes = clonedDoc.querySelectorAll('*');
                         allNodes.forEach(node => {
                             node.style.transition = 'none';
                             node.style.animation = 'none';
                         });
+                        // 等待克隆文档内所有图片加载完成
+                        const cloneImgs = clonedDoc.querySelectorAll("img");
+                        await Promise.all(Array.from(cloneImgs).map(img => {
+                            return new Promise(resolve => {
+                                if (img.complete) return resolve();
+                                img.onload = resolve;
+                                img.onerror = resolve;
+                            });
+                        }));
                     }
                 });
 
