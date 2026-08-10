@@ -182,6 +182,7 @@ export function getAvailableCharImages(char, globalHideSwitch, globalFDSwitch, l
 export async function preloadAndDecodeImage(src){
     const tempImg = new Image();
     tempImg.decoding = "async";
+    tempImg.crossOrigin = "anonymous"; // ✅ 新增：预加载也带上跨域属性
     tempImg.src = src;
     await tempImg.decode();
     return tempImg;
@@ -204,7 +205,7 @@ export function preloadImagesInIdle(srcList) {
         needPreload.forEach(src => {
             const img = new Image();
             img.decoding = "async";
-            img.crossOrigin = "anonymous"; // ✅ 新增：预加载时也带上跨域属性
+            img.crossOrigin = "anonymous"; // 预加载时也带上跨域属性
             img.src = src;
             img.onload = () => {
                 window._preloadedImgSet.add(src);
