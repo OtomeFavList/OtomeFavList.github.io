@@ -20,6 +20,8 @@ export const SPOILER_LOCAL_SWITCH_KEY = "local-switch-spoiler-date";
 export let appData = {
     globalHideChar: false,
     globalFD: false,
+    // ==========新增==========
+    exportFoldContent: true,
     gameSpoilerRecord: {},
     baseInfo: { nick: "", count: "", story: "", firstgame: "" },
     gameList: [],
@@ -129,6 +131,11 @@ export function loadData() {
     try {
         const raw = localStorage.getItem(STORE_KEY);
         if (raw) appData = JSON.parse(raw);
+
+        // =========新增兜底：旧存档不存在该字段，默认true =========
+        if(typeof appData.exportFoldContent !== "boolean"){
+            appData.exportFoldContent = true;
+        }
 
         // ========= 新增：兼容旧存档，缺失字段填充默认值 =========
         if(!appData.exportColor) {
