@@ -363,32 +363,39 @@ function preCalcLayoutHeight(targetWidth, appData, gameTemplateList, renderDataL
 }
 
 /**
- * 根据高度信息执行分页切割（修复：每张卡片都带间距）
+ * 根据高度信息执行分页切割
+ * 规则：
+ * 1. 第一页：固定包含头部 + 第0个游戏卡片（强制完整，不拆分）
+ * 2. 从第二页开始，正常按高度填充卡片，不拆分单个卡片
+ * 3. 每页渲染完成后自适应裁剪高度，无多余空白
  */
 function splitPagesByHeight(headerHeight, gameBlockHeights, maxH) {
   const pages = [];
   let ptr = 0;
   const totalGame = gameBlockHeights.length;
 
+  // ========== 第一页强制处理：头部 + 第0号游戏卡片（必须完整） ==========
+  if (totalGame > 0) {
+    const firstPage = {
+      isFirstPage: true,
+      gameIndexes: [0]
+    };
+    pages.push(firstPage);
+    ptr = 1; // 下一页从第1个卡片开始
+  }
+
+  // ========== 处理剩余游戏卡片（第二页及以后，原有分页逻辑） ==========
   while (ptr < totalGame) {
     const page = {
-      isFirstPage: pages.length === 0,
+      isFirstPage: false,
       gameIndexes: []
     };
-    let usedH = page.isFirstPage ? headerHeight : 0;
-
-    // 如果第一页头部高度超出页面最大高度，警告并继续（但只放头部，无卡片）
-    if (page.isFirstPage && usedH > maxH) {
-      console.warn(`头部高度 ${usedH}px 超出页面高度 ${maxH}px，头部将被截断，游戏卡片从第二页开始。`);
-      pages.push(page);
-      // 继续后续循环处理卡片
-      continue;
-    }
+    let usedH = 0; // 非首页没有头部高度
 
     while (ptr < totalGame) {
       const blockH = gameBlockHeights[ptr];
-      // 修复：每张卡片都加上底部间距，不再判断是否最后一张
       const nextH = blockH + LAYOUT_SPACE.ADDED_GAME_CARD_MB;
+      // 放不下则换页；放得下加入当前页
       if (usedH + nextH <= maxH) {
         usedH += nextH;
         page.gameIndexes.push(ptr);
@@ -398,12 +405,11 @@ function splitPagesByHeight(headerHeight, gameBlockHeights, maxH) {
       }
     }
 
-    // 如果当前页未放入任何卡片，但还有卡片未分配，强制放入一张（防止死循环）
+    // 当前页无法放入任何卡片 → 强制放入一张（防止死循环）
     if (page.gameIndexes.length === 0 && ptr < totalGame) {
       page.gameIndexes.push(ptr);
       ptr++;
     }
-
     pages.push(page);
   }
 
