@@ -710,7 +710,7 @@ button:hover{
     background:rgba(255,255,255,0.9);
 }
 
-/* ========== CP布局 cp-layout-row 【和main.js渲染class严格对应，25%｜75%】 ========== */
+/* ========== CP布局 cp-layout-row 【移除25%｜75%固定占比，左右分栏，间距对齐character】 ========== */
 .cp-group{
     margin:16px 0;
     padding-top:12px;
@@ -719,25 +719,25 @@ button:hover{
 .cp-layout-row{
     display:flex;
     align-items:flex-start;
-    gap:16px;
+    gap:14px;
     margin:12px 0;
     padding-bottom:18px;
     border-bottom:1px solid #eee;
     width:100%;
 }
 .heroine-column{
-    flex: 0 0 25%;
+    flex-shrink:0;
     display:flex;
     justify-content:center;
     align-items:flex-start;
 }
 .hero-list-column{
-    flex: 0 0 75%;
+    flex:1;
 }
-/* 关键：同一行卡片强制拉伸等高，替换原 align-items:flex-end */
+/* 卡片换行容器间距与角色区域统一 */
 .char-card-wrapper{
     display:flex;
-    gap:12px;
+    gap:14px;
     flex-wrap:wrap;
     align-items:stretch;
 }
