@@ -8,7 +8,7 @@ const gameData = {
     publisher: ["MariaCrown","PROTOTYPE"],
     cnStudio: "JOYOLAND",
     writer: [
-        {name:"葉月工リ力", lang:"zh"}
+        {name:"葉月エリカ", lang:"zh"}
     ],
     art: [
         {name:"らんぷみ", lang:"ja"}
