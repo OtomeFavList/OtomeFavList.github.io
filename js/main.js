@@ -74,7 +74,7 @@ export function loadData() {
         appData.exportColor.title = appData.exportColor.title ?? "#b33a3a";
         appData.exportColor.subTitle = appData.exportColor.subTitle ?? "#b85878";
         appData.exportColor.text = appData.exportColor.text ?? "#c98fac";
-        appData.exportColor.gameName = appData.exportColor.gameName ?? "#000000"; // ✅ 黑色默认
+        appData.exportColor.gameName = appData.exportColor.gameName ?? "#000000";
         appData.exportColor.border = appData.exportColor.border ?? "#f6a5b8";
 
         // 【新增兜底：旧存档缺失局部开关字段，补默认false】
@@ -82,24 +82,15 @@ export function loadData() {
             appData.gameList.forEach(g => {
                 if (typeof g.localHideChar !== "boolean") g.localHideChar = false;
                 if (typeof g.localFD !== "boolean") g.localFD = false;
-                // 新增：滑出面板展开状态兜底
                 if (typeof g.charPanelOpen !== "boolean") g.charPanelOpen = false;
                 if (typeof g.cpPanelOpen !== "boolean") g.cpPanelOpen = false;
                 if (typeof g.isFav !== "boolean") g.isFav = false;
-                // 兜底评分爱心字段
                 if (typeof g.loveRate !== "number") g.loveRate = 0;
-                // ============【新增：CP独立勾选池兜底】============
                 if (!Array.isArray(g.selectChars)) g.selectChars = [];
                 if (!Array.isArray(g.cpSelectIds)) g.cpSelectIds = [];
-
-                // ============【新增：Character模式 已选角色带下标存储兜底】============
                 if (!Array.isArray(g.selectCharItems)) {
                     g.selectCharItems = [];
                 }
-
-                // =====方案C：cpEditState 旧存档兼容兜底=====
-                // 注意：loadData阶段gameTemplateList还未加载，不能生成真实cpEditState；
-                // 此处只做占位，真实生成逻辑放在script.js renderCharSelectPanel的if(mode==="cp")内部
                 if(!Array.isArray(g.cpEditState)){
                     g.cpEditState = null;
                 }
@@ -213,6 +204,7 @@ export function preloadImagesInIdle(srcList) {
         needPreload.forEach(src => {
             const img = new Image();
             img.decoding = "async";
+            img.crossOrigin = "anonymous"; // ✅ 新增：预加载时也带上跨域属性
             img.src = src;
             img.onload = () => {
                 window._preloadedImgSet.add(src);
@@ -258,7 +250,7 @@ export async function switchCharImageWithLoading(wrap, nextSrc){
     wrap.dataset.isImgLoading = "1";
     // 插入loading DOM
     const loaderEl = document.createElement("div");
-    loaderEl.className = "img-loader-spinner";  // 修正为普通减号
+    loaderEl.className = "img-loader-spinner";
     wrap.appendChild(loaderEl);
 
     const tempImg = new Image();
@@ -266,7 +258,7 @@ export async function switchCharImageWithLoading(wrap, nextSrc){
 
     function clearLoading(){
         wrap.dataset.isImgLoading = "";
-        const el = wrap.querySelector(".img-loader-spinner"); // 修正为普通减号
+        const el = wrap.querySelector(".img-loader-spinner");
         if(el) el.remove();
     }
 
@@ -531,9 +523,10 @@ export function renderGameSelectItem(game) {
  * 渲染选中角色【适配 srcList 多图数组】
  * @param {Object} gameItem 当前已添加游戏条目(appData.gameList内)
  * @param {Object} gameInfo 游戏模板gameTemplateList内对象
+ * @param {boolean} isSnapshot 是否快照模式（true时禁用切换按钮，本函数无切换按钮故不处理）
  * @returns {string} html字符串
  */
-export function renderSelectedChar(gameItem, gameInfo) {
+export function renderSelectedChar(gameItem, gameInfo, isSnapshot = false) {
     if (!gameInfo?.charList || !gameItem) return `<div class="empty-hint">暂未添加角色</div>`;
 
     let html = "";
@@ -558,7 +551,7 @@ export function renderSelectedChar(gameItem, gameInfo) {
 
         preloadImagesInIdle(allSrc);
 
-        // 从持久化 selectCharItems 读取imgIndex，不再读取临时appData.charImageSelect
+        // 从持久化 selectCharItems 读取imgIndex
         const storedItem = gameItem.selectCharItems.find(s => s.charId === cid);
         let imgIndex = Number(storedItem?.imgIndex ?? 0);
         if (imgIndex >= allSrc.length) imgIndex = 0;
@@ -567,7 +560,7 @@ export function renderSelectedChar(gameItem, gameInfo) {
         html += `
             <div class="char-card-item selected" data-char-id="${char.id}" data-game-id="${gameInfo.id}" data-total-img="${allSrc.length}">
                 <div class="char-card-img-box ${allSrc.length > 1 ? 'char-has-multi-img' : ''}">
-                    <img src="${targetSrc}" alt="${char.name || ''}" decoding="async">
+                    <img src="${targetSrc}" alt="${char.name || ''}" decoding="async" crossorigin="anonymous">
                 </div>
                 <div class="char-card-name">${char.name || ""}</div>
             </div>
@@ -582,9 +575,10 @@ export function renderSelectedChar(gameItem, gameInfo) {
  * ✅修改：已选结果区男主、女主卡片移除切换按钮DOM，只保留图片盒子+img+名字；保留data-*与char-has-multi-img标记类
  * @param {Object} gameItem 当前已添加游戏条目
  * @param {Object} gameInfo 游戏模板对象
+ * @param {boolean} isSnapshot 是否快照模式（true时禁用切换按钮，本函数无切换按钮故不处理）
  * @returns {string} html字符串
  */
-export function renderCP(gameItem, gameInfo) {
+export function renderCP(gameItem, gameInfo, isSnapshot = false) {
     if (!gameInfo?.charList || !gameItem) return `<div class="empty-hint">暂未添加角色</div>`;
 
     let html = "";
@@ -608,7 +602,7 @@ export function renderCP(gameItem, gameInfo) {
 
         preloadImagesInIdle(fAllSrc);
 
-        // ✅修复：从cp自身存储取女主imgIndex，不再读取临时appData.charImageSelect
+        // ✅修复：从cp自身存储取女主imgIndex
         let fIndex = Number(cp.femaleImgIndex ?? 0);
         if (fIndex >= fAllSrc.length) fIndex = 0;
         const fTargetSrc = fAllSrc[fIndex];
@@ -633,7 +627,7 @@ export function renderCP(gameItem, gameInfo) {
             maleHtml += `
                 <div class="cp-selected-card-item" data-char-id="${mChar.id}" data-game-id="${gameInfo.id}" data-total-img="${mAllSrc.length}">
                     <div class="char-card-img-box ${mAllSrc.length > 1 ? 'char-has-multi-img' : ''}">
-                        <img src="${mTargetSrc}" alt="${mChar.name || ''}" decoding="async">
+                        <img src="${mTargetSrc}" alt="${mChar.name || ''}" decoding="async" crossorigin="anonymous">
                     </div>
                     <div class="char-card-name">${mChar.name || ""}</div>
                 </div>
@@ -645,7 +639,7 @@ export function renderCP(gameItem, gameInfo) {
                 <div class="heroine-column">
                     <div class="cp-selected-card-item" data-char-id="${fChar.id}" data-game-id="${gameInfo.id}" data-total-img="${fAllSrc.length}">
                         <div class="char-card-img-box ${fAllSrc.length > 1 ? 'char-has-multi-img' : ''}">
-                            <img src="${fTargetSrc}" alt="${fChar.name || ''}" decoding="async">
+                            <img src="${fTargetSrc}" alt="${fChar.name || ''}" decoding="async" crossorigin="anonymous">
                         </div>
                         <div class="char-card-name">${fChar.name || ""}</div>
                     </div>
