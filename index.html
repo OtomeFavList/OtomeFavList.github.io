@@ -183,6 +183,11 @@
             <h3>导出预览</h3>
         </div>
         <div class="preview-scroll-wrap">
+            <!-- 弹窗内置加载状态 -->
+            <div class="preview-inner-loading">
+                <div class="loading-spinner"></div>
+                <p>正在生成预览，请稍候…</p>
+            </div>
             <!-- 预览图片动态插入 -->
         </div>
         <div class="modal-preview-footer">
@@ -193,11 +198,7 @@
     </div>
 </div>
 
-<!-- 【新增】独立全屏Loading遮罩（渲染快照时显示，不属于预览弹窗内部） -->
-<div id="export-render-loading" class="export-loading-mask">
-    <div class="loading-spinner"></div>
-    <p>正在生成预览，请稍候…</p>
-</div>
+<!-- 全局独立Loading遮罩已删除，所有加载状态移至预览弹窗内部 -->
 
 <script type="module">
 import { bootstrapCore } from "./js/main.js";
