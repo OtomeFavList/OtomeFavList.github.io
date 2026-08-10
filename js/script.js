@@ -1204,6 +1204,9 @@ export function initPage(Core = {}) {
                 if (sizeVal === "long") {
                     width = 1080;
                     longMode = true;
+                } else if (sizeVal === "long-810") {
+                    width = 810;
+                    longMode = true;
                 } else {
                     const [w] = sizeVal.split(',').map(Number);
                     width = w;
