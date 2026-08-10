@@ -1231,7 +1231,7 @@ h2{
 .char-card-img-box {
     position: relative !important;
 }
-.img‑loader‑spinner {
+.img-loader-spinner {
     position: absolute;
     left: 0;
     top: 0;
@@ -1243,7 +1243,7 @@ h2{
     justify-content:center;
     z-index: 2;
 }
-.img‑loader‑spinner::after {
+.img-loader-spinner::after {
     content:"";
     width:32px;
     height:32px;
@@ -1260,7 +1260,7 @@ h2{
 /* ==========【新增】折叠状态游戏名旁图标展开按钮 ========== */
 .game-fold-icon-expand {
     position: absolute;
-    left: -34px;          /* ✅向左偏移，凸在标题容器外面 */
+    left: -34px;
     top: 50%;
     transform: translateY(-50%);
     display: none;
@@ -1270,14 +1270,15 @@ h2{
     font-size: 20px;
     color: #b33a3a;
     cursor: pointer;
-    padding: 0 4px;
+    padding: 0 !important;        /* 清除全局button默认padding */
     line-height: 1;
     width: 28px;
     height:28px;
 }
-/* ✅修改hover背景，和游戏选中项 #fff0f3 保持一致 */
+/* 提高权重，覆盖全局button:hover */
 .game-fold-icon-expand:hover{
-    background: #fff0f3;
+    background: #fff0f3 !important;
+    color: #b33a3a !important;
 }
 
 /* 标题容器开启相对定位，给左侧绝对定位按钮做参照 */
