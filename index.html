@@ -129,14 +129,16 @@
                 <input type="color" id="color-border" value="#f6a5b8">
             </div>
         </div>
-        <!-- 导出尺寸选项（已更新） -->
+        <!-- 导出尺寸选项 -->
         <div class="size-select">
             <label class="text-light-pink">导出尺寸：</label>
-            <label><input type="radio" name="export-size" value="810,1080" checked>810×1080</label>
+            <!-- 固定尺寸（启用分页） -->
+            <label><input type="radio" name="export-size" value="810,1080">810×1080</label>
             <label><input type="radio" name="export-size" value="1080,1440">1080×1440</label>
             <label><input type="radio" name="export-size" value="1080,1080">1080×1080</label>
+            <!-- 长图模式（不分页） -->
             <label><input type="radio" name="export-size" value="long-810">810长图</label>
-            <label><input type="radio" name="export-size" value="long">1080×高度不限（长图）</label>
+            <label><input type="radio" name="export-size" value="long-1080" checked>1080长图</label>
         </div>
         <div class="center-btn-block">
             <button id="btn-export">生成并导出图片</button>
