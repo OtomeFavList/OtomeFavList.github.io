@@ -1342,6 +1342,69 @@ h2{
     border-color: var(--export-border) !important;
 }
 
+/* ========== 快照模式新增规则 【重点】 ========== */
+.snapshot-container.export-snapshot {
+    --export-bg: #fff7f9;
+    --export-title: #b33a3a;
+    --export-subtitle: #b85878;
+    --export-text: #333333;
+    --export-gamename: #c98fac;
+    --export-border: #f6a5b8;
+    /* 新增：统一标题色变量 Character / Couple 三级标题 */
+    --export-section-title-color: var(--export-gamename);
+    background-color: var(--export-bg) !important;
+}
+
+/* 1. 快照模式：全局隐藏所有按钮、开关、交互控件【核心】 */
+.snapshot-container.export-snapshot button,
+.snapshot-container.export-snapshot .switch,
+.snapshot-container.export-snapshot .slider,
+.snapshot-container.export-snapshot .char-switch-btn,
+.snapshot-container.export-snapshot .panel-close-btn,
+.snapshot-container.export-snapshot .heart-rate,
+.snapshot-container.export-snapshot .card-bottom-buttons,
+.snapshot-container.export-snapshot .game-switch-row,
+.snapshot-container.export-snapshot .btn-character,
+.snapshot-container.export-snapshot .btn-couple,
+.snapshot-container.export-snapshot .game-fold-icon-expand {
+    display: none !important;
+}
+
+/* 2. 快照强制所有游戏卡片展开，无视data-fold折叠属性 */
+.snapshot-container.export-snapshot .added-game-card[data-fold] {
+    display: block !important;
+}
+.snapshot-container.export-snapshot .added-game-card .game-card-block-item {
+    display: block !important;
+}
+
+/* 3. 滑出面板（char-slide-panel）在快照模式全部隐藏，只保留最终渲染结果区域 */
+.snapshot-container.export-snapshot .char-slide-panel-char,
+.snapshot-container.export-snapshot .char-slide-panel-cp {
+    display: none !important;
+}
+
+/* 4. 新增：Character / Couple 三级标题样式（仅JS动态插入快照时使用） */
+.snapshot-container.export-snapshot .snapshot-section-title {
+    font-size: 18px;
+    margin: 12px 0 8px;
+    color: var(--export-section-title-color);
+    font-weight: bold;
+}
+
+/* 5. 隐藏设置区域、导出相关DOM（防止意外被捕获） */
+.snapshot-container.export-snapshot #card-setting,
+.snapshot-container.export-snapshot .color-set-row,
+.snapshot-container.export-snapshot .size-select,
+.snapshot-container.export-snapshot #btn-export {
+    display: none !important;
+}
+
+/* 6. 空提示文字样式微调（可选） */
+.snapshot-container.export-snapshot .empty-hint {
+    display: none !important;
+}
+
 /* ===================== 导出预览弹窗样式 复用modal-mask ===================== */
 /* 预览弹窗层级高于剧透弹窗(9999) → z-index:10000 */
 #export-preview-modal.modal-mask {
