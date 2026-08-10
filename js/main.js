@@ -229,7 +229,7 @@ export async function switchCharImage(domImg, nextSrc){
 
 /**
  * 带loading状态的角色图片切换
- * @param {HTMLElement} wrap .char‑card‑img-box容器
+ * @param {HTMLElement} wrap .char-card-img-box容器
  * @param {string} nextSrc 目标图片地址
  */
 export async function switchCharImageWithLoading(wrap, nextSrc){
@@ -239,7 +239,7 @@ export async function switchCharImageWithLoading(wrap, nextSrc){
     wrap.dataset.isImgLoading = "1";
     // 插入loading DOM
     const loaderEl = document.createElement("div");
-    loaderEl.className = "img‑loader‑spinner";
+    loaderEl.className = "img-loader-spinner";  // 修正为普通减号
     wrap.appendChild(loaderEl);
 
     const tempImg = new Image();
@@ -247,7 +247,7 @@ export async function switchCharImageWithLoading(wrap, nextSrc){
 
     function clearLoading(){
         wrap.dataset.isImgLoading = "";
-        const el = wrap.querySelector(".img‑loader‑spinner");
+        const el = wrap.querySelector(".img-loader-spinner"); // 修正为普通减号
         if(el) el.remove();
     }
 
