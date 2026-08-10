@@ -480,8 +480,7 @@ button:hover{
     margin-bottom:12px;
     flex-wrap:wrap;
     gap:10px;
-    /* ✅新增：给容器左侧预留空间，容纳向左凸的展开按钮 */
-    padding-left: 34px;
+    /* 已删除 padding-left:34px，不再内部缩进，按钮向外凸出 */
 }
 .heart-rate{
     display:flex;
@@ -1276,8 +1275,9 @@ h2{
     width: 28px;
     height:28px;
 }
+/* ✅修改hover背景，和游戏选中项 #fff0f3 保持一致 */
 .game-fold-icon-expand:hover{
-    background: rgba(179, 58, 58, 0.22);  /* ✅深红色半透，符合主题 */
+    background: #fff0f3;
 }
 
 /* 标题容器开启相对定位，给左侧绝对定位按钮做参照 */
