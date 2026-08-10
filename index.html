@@ -154,14 +154,14 @@
 
 <!-- ========== 快照容器（导出截图专用，不可见） ========== -->
 <div id="snapshot-container" style="
-  visibility: hidden;
-  position: absolute;
-  left: -9999px;
+  opacity: 0;
+  position: fixed;
+  left: 0;
   top: 0;
   width: 1080px;
   padding: 20px;
   pointer-events: none;
-  overflow: hidden;
+  z-index: -999;
 "></div>
 
 <!-- 剧透警告弹窗：id="spoiler-modal" class="modal‑mask"，用 .active 控制显示 -->
@@ -201,21 +201,19 @@
 
 <script type="module">
 import { bootstrapCore } from "./js/main.js";
-import { initPage } from "./js/script.js";
 
 (async function(){
     await new Promise(resolve => document.addEventListener("DOMContentLoaded", resolve));
 
-    // 1️⃣ 先加载所有游戏数据（填充 window.gameDataList）
+    // 1. 加载游戏数据
     if (typeof window.loadAllGames === "function") {
         await window.loadAllGames();
     }
 
-    // 2️⃣ 再初始化核心层（读取 window.gameDataList）
+    // 2. bootstrapCore 内部自动 import script.js + initPage(Core)
     await bootstrapCore();
 
-    // 3️⃣ 最后初始化 UI 层
-    initPage();
+    // 3. 启动 UI 层（bootstrapCore 已调用 initPage 定义 window.uiBootstrap，此处执行）
     if (typeof window.uiBootstrap === "function") {
         await window.uiBootstrap();
     }
