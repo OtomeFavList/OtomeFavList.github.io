@@ -382,8 +382,9 @@ button:hover{
     color: #ccc;
     cursor: pointer;
     transition: 0.2s;
+    font-family: system-ui, sans-serif;
+    font-variant-emoji: text;
 }
-
 .game-card-hearts .heart.active {
     color: #e895a8;
 }
@@ -492,6 +493,8 @@ button:hover{
     color:#ccc;
     cursor:pointer;
     transition:0.2s;
+    font-family: system-ui, sans-serif;
+    font-variant-emoji: text;
 }
 .heart.active{
     color:#e895a8;
