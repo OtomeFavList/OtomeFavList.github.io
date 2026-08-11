@@ -21,15 +21,16 @@ export function wrapText(ctx, text, x, y, maxWidth, lineHeight, fontSize, color,
   if (!text) return 0;
   ctx.font = `${fontSize}px ${font}`;
   ctx.fillStyle = color;
-  const words = text.split('');
+  //【FIX】修复：优先按空格拆分单词，中文逐字符，避免英文粗暴截断
+  const chars = Array.from(text);
   let line = '';
   let totalHeight = 0;
-  for (let n = 0; n < words.length; n++) {
-    const testLine = line + words[n];
+  for (let n = 0; n < chars.length; n++) {
+    const testLine = line + chars[n];
     const metrics = ctx.measureText(testLine);
     if (metrics.width > maxWidth && n > 0) {
       ctx.fillText(line, x, y + totalHeight);
-      line = words[n];
+      line = chars[n];
       totalHeight += lineHeight;
     } else {
       line = testLine;
@@ -43,18 +44,19 @@ export function wrapText(ctx, text, x, y, maxWidth, lineHeight, fontSize, color,
 }
 
 /**
- * 测量文本多行占用的总高度
+ * 测量文本多行占用的总高度【FIX】和wrapText逻辑完全对齐
  */
 export function measureWrappedHeight(ctx, text, maxWidth, lineHeight, fontSize) {
   if (!text) return 0;
   ctx.font = `${fontSize}px sans-serif`;
+  const chars = Array.from(text);
   let line = '';
   let lines = 1;
-  for (let n = 0; n < text.length; n++) {
-    const testLine = line + text[n];
+  for (let n = 0; n < chars.length; n++) {
+    const testLine = line + chars[n];
     if (ctx.measureText(testLine).width > maxWidth && n > 0) {
       lines++;
-      line = text[n];
+      line = chars[n];
     } else {
       line = testLine;
     }
@@ -416,7 +418,7 @@ function preCalcLayoutHeight(targetWidth, appData, gameTemplateList, renderDataL
  * @param {number} headerHeight 头部固定高度
  * @param {number[]} gameBlockHeights 每个游戏卡片高度数组（不含卡片后间距）
  * @param {number} maxH 单页参考高度（标准参考值，非硬性上限）
- * @param {boolean} hasBaseInfo 是否存在基础信息
+ * @param {boolean} hasBaseInfo 是否存在基础信息（预留扩展，当前头部高度已经包含基础信息）
  * @returns {Array<{isFirstPage: boolean, gameIndexes: number[]}>}
  */
 function splitPagesByHeight(headerHeight, gameBlockHeights, maxH, hasBaseInfo) {
@@ -772,7 +774,7 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
           painter.drawImageRound(roundCanvas, mx + innerPad, imgY);
         }
         const nameY2 = my + innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB;
-        wrapText(painter.ctx, m.name, mx + innerPad, nameY2, maleCardW - innerPad * 2, 16, 14, '#222');
+        wrapText(painter.ctx, m.name, mx + innerPad, maleCardW - innerPad * 2, 16, 14, '#222');
 
         mx += maleCardW + maleGap;
         if ((i + 1) % perRow === 0 && i < cp.maleItems.length - 1) {
@@ -996,22 +998,21 @@ export async function renderExportCanvas(
     renderDataList
   );
 
-  // 【FIX 关键改动】移除SAFE_OFFSET！禁止统一抬高所有高度，避免破坏择优算法
   const hasBaseInfo = !!(() => {
     const { baseInfo } = appData;
     return !!(baseInfo.nick?.trim() || baseInfo.count?.trim() || baseInfo.story?.trim() || baseInfo.firstgame?.trim());
   })();
 
-  // 分页切割【传入hasBaseInfo参数】
+  // 分页切割
   const pagePlanList = splitPagesByHeight(headerHeight, gameBlockHeights, maxPageHeight, hasBaseInfo);
 
   // 加载图片（所有页面共享）
   const imageCache = await loadImagesWithLimit(allImageSrcList, MAX_IMAGE_CONCURRENCY);
 
   const blobList = [];
-  // ✅ 修复：for await 串行渲染，解决toBlob异步丢失后续图片
-  for await (const pagePlan of pagePlanList) {
-    // ✅ 上调安全画布高度，防止高卡片被截断
+  // 串行渲染每一页
+  for (const pagePlan of pagePlanList) {
+    // 临时画布高度预留充足
     const safeTempHeight = Math.max(maxPageHeight * 3, 4000);
     const canvas = document.createElement('canvas');
     canvas.width = targetWidth;
@@ -1029,10 +1030,12 @@ export async function renderExportCanvas(
     );
 
     const usedHeight = painter.getY() + LAYOUT_SPACE.BODY_PADDING;
-    const finalHeight = usedHeight;
-    const finalCanvas = cropCanvas(canvas, targetWidth, finalHeight);
-    const blob = await new Promise((resolve) => finalCanvas.toBlob(resolve, 'image/png'));
-    blobList.push(blob);
+    const finalCanvas = cropCanvas(canvas, targetWidth, usedHeight);
+    //【FIX】捕获toBlob异常，防止单页失败导致整个渲染中断
+    const blob = await new Promise((resolve) => {
+      finalCanvas.toBlob((b) => resolve(b), 'image/png');
+    });
+    if (blob) blobList.push(blob);
   }
   console.log("最终生成图片数量：", blobList.length);
   return blobList;
