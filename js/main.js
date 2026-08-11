@@ -246,21 +246,43 @@ export function getAvailableCharImages(char, globalHideSwitch, globalFDSwitch, l
 }
 
 /**
- * 后台预加载并解码图片，解码完成后resolve，避免直接赋值src造成卡顿闪现
+ * 全局图片缓存Map：key=图片url，value=Promise<HTMLImageElement>
+ * 避免同一个url重复创建Image对象、重复请求
+ */
+export const imgCacheMap = new Map();
+
+/**
+ * 后台预加载并解码图片，复用缓存Promise，避免重复请求
  * @param {string} src
  * @returns {Promise<HTMLImageElement>}
  */
 export async function preloadAndDecodeImage(src){
-    const tempImg = new Image();
-    tempImg.decoding = "async";
-    tempImg.crossOrigin = "anonymous"; // ✅ 新增：预加载也带上跨域属性
-    tempImg.src = src;
-    await tempImg.decode();
-    return tempImg;
+    if (!src) throw new Error("empty src");
+    // 命中缓存Promise，直接复用
+    if(imgCacheMap.has(src)){
+        return imgCacheMap.get(src);
+    }
+    const promise = (async ()=>{
+        const tempImg = new Image();
+        tempImg.decoding = "async";
+        tempImg.crossOrigin = "anonymous";
+        tempImg.src = src;
+        try{
+            await tempImg.decode();
+            return tempImg;
+        }catch(err){
+            // 加载失败，清除缓存，允许下次重试
+            imgCacheMap.delete(src);
+            throw err;
+        }
+    })();
+    imgCacheMap.set(src, promise);
+    return promise;
 }
 
 /**
  * 浏览器空闲时后台预加载一批图片，仅做缓存，不渲染到页面
+ * 优化：并发控制、自动去重、失败不阻塞队列
  * @param {string[]} srcList 图片地址数组
  */
 export function preloadImagesInIdle(srcList) {
@@ -268,37 +290,32 @@ export function preloadImagesInIdle(srcList) {
 
     if (!window._preloadedImgSet) window._preloadedImgSet = new Set();
 
-    const needPreload = srcList.filter(src => src && !window._preloadedImgSet.has(src));
+    // 使用 imgCacheMap 去重，避免重复请求
+    const needPreload = [...new Set(srcList)].filter(src => 
+        src && !window._preloadedImgSet.has(src) && !imgCacheMap.has(src)
+    );
     if (needPreload.length === 0) return;
 
     const doPreload = async () => {
-        // 限制并发数量，一次最多6张，避免请求风暴
-        const batchSize = 6;
+        // 降低并发：6 → 4，防止大量图片同时发出请求触发浏览器请求队列阻塞
+        const batchSize = 4;
         for (let i = 0; i < needPreload.length; i += batchSize) {
             const batch = needPreload.slice(i, i + batchSize);
-            await Promise.all(batch.map(async (src) => {
-                return new Promise((resolve) => {
-                    const img = new Image();
-                    img.decoding = "async";
-                    img.crossOrigin = "anonymous";
-                    img.src = src;
-                    img.onload = () => {
-                        window._preloadedImgSet.add(src);
-                        resolve();
-                    };
-                    img.onerror = () => {
-                        // ❗失败不加入缓存，允许下次重新尝试加载
-                        resolve();
-                    };
-                });
+            await Promise.allSettled(batch.map(async (src) => {
+                try{
+                    await preloadAndDecodeImage(src);
+                    window._preloadedImgSet.add(src);
+                }catch(err){
+                    // 失败静默，不阻断后续预加载
+                }
             }));
         }
     };
 
     if (window.requestIdleCallback) {
-        requestIdleCallback(doPreload);
+        requestIdleCallback(doPreload, {timeout:200});
     } else {
-        setTimeout(doPreload, 80);
+        setTimeout(doPreload, 100);
     }
 }
 
@@ -313,6 +330,8 @@ export async function switchCharImage(domImg, nextSrc){
         domImg.src = nextSrc;
     }catch(err){
         console.error("图片切换失败", err);
+        // 降级：直接赋值src保证可用性
+        domImg.src = nextSrc;
     }
 }
 
@@ -627,7 +646,8 @@ export function renderSelectedChar(gameItem, gameInfo, isSnapshot = false) {
         availableImgUnits.forEach(u => allSrc.push(...u.srcList));
         if (allSrc.length === 0) return;
 
-        preloadImagesInIdle(allSrc);
+        // 移除立即预加载，改为由外部统一调度
+        // preloadImagesInIdle(allSrc);
 
         // 从持久化 selectCharItems 读取imgIndex
         const storedItem = gameItem.selectCharItems.find(s => s.charId === cid);
@@ -678,7 +698,8 @@ export function renderCP(gameItem, gameInfo, isSnapshot = false) {
         fAvailUnits.forEach(u => fAllSrc.push(...u.srcList));
         if (fAllSrc.length === 0) return;
 
-        preloadImagesInIdle(fAllSrc);
+        // 移除立即预加载
+        // preloadImagesInIdle(fAllSrc);
 
         // ✅修复：从cp自身存储取女主imgIndex
         let fIndex = Number(cp.femaleImgIndex ?? 0);
@@ -696,7 +717,8 @@ export function renderCP(gameItem, gameInfo, isSnapshot = false) {
             mAvailUnits.forEach(u => mAllSrc.push(...u.srcList));
             if (mAllSrc.length === 0) return;
 
-            preloadImagesInIdle(mAllSrc);
+            // 移除立即预加载
+            // preloadImagesInIdle(mAllSrc);
 
             let mIndex = Number(mi.imgIndex ?? 0);
             if (mIndex >= mAllSrc.length) mIndex = 0;
