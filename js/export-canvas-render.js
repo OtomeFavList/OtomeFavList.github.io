@@ -378,7 +378,7 @@ function calcHeaderVirtualHeight(targetWidth, appData) {
 }
 
 /**
- * 计算单个游戏卡片的内容高度（不包含卡片底部间距）
+ * 计算单个游戏卡片的内容高度（⚠️ 不含卡片底部与下一张卡片之间的间距 ADDED_GAME_CARD_MB）
  */
 function calcSingleGameBlockHeight(targetWidth, renderData) {
   const { gameInfo, charItems, cpItems } = renderData;
@@ -470,10 +470,9 @@ function preCalcLayoutHeight(targetWidth, appData, gameTemplateList, renderDataL
  * @param {number} headerHeight 头部固定高度
  * @param {number[]} gameBlockHeights 每个游戏卡片高度数组（不含卡片后间距）
  * @param {number} maxH 单页参考高度（标准参考值，非硬性上限）
- * @param {boolean} hasBaseInfo 是否存在基础信息（预留扩展，当前头部高度已经包含基础信息）
  * @returns {Array<{isFirstPage: boolean, gameIndexes: number[]}>}
  */
-function splitPagesByHeight(headerHeight, gameBlockHeights, maxH, hasBaseInfo) {
+function splitPagesByHeight(headerHeight, gameBlockHeights, maxH) {
   const pages = [];
   let ptr = 0;
   const totalGame = gameBlockHeights.length;
@@ -486,7 +485,7 @@ function splitPagesByHeight(headerHeight, gameBlockHeights, maxH, hasBaseInfo) {
   let sumH = 0;
   for (let i = ptr; i < totalGame; i++) {
     const blockH = gameBlockHeights[i];
-    if (i > ptr) sumH += CARD_GAP;
+    if (i !== ptr) sumH += CARD_GAP; // ✅ 修复点1：间距逻辑修正
     sumH += blockH;
     accumulateList.push(sumH);
   }
@@ -501,25 +500,26 @@ function splitPagesByHeight(headerHeight, gameBlockHeights, maxH, hasBaseInfo) {
     })
   }
 
-  // ✅ 重点修复：所有候选全部参与择优，不再过滤isFit！
+  // ✅ 所有候选全部参与择优，不再过滤isFit！
   candidates.sort((a, b) => {
+    // 规则1：距离参考高度差值更小优先
     if (a.diff !== b.diff) return a.diff - b.diff;
-    return b.count - a.count; // 差值相同，卡片数量更多优先
+    // 规则2：差值一样，卡片数量更多优先
+    return b.count - a.count;
   });
   const bestItem = candidates[0];
+  // ✅ 修复点3：强制兜底校验，确保至少1张且不超过剩余卡片
+  bestItem.count = Math.max(1, Math.min(bestItem.count, totalGame - ptr));
 
   const firstPageGameIndexes = [];
   for (let i = 0; i < bestItem.count; i++) {
     firstPageGameIndexes.push(ptr + i);
   }
-  // 业务强制规则：第一页至少保留第一张游戏卡片，极端容错
-  if (firstPageGameIndexes.length === 0) {
-    firstPageGameIndexes.push(ptr);
-  }
   pages.push({ isFirstPage: true, gameIndexes: firstPageGameIndexes });
-  ptr += bestItem.count;
   console.log("【第一页分页计算】参考可用高度：", firstPageAvailableH, "选中卡片数量：", bestItem.count, "占用高度：", bestItem.usedH, "差值：", bestItem.diff);
   console.log("第一页全部候选列表", candidates);
+  console.log(`ptr推进：${ptr} → ${ptr + bestItem.count}`);
+  ptr += bestItem.count;
 
   // ========== 处理【第二页及之后】：无头部，全部空间放游戏卡片，参考高度maxH ==========
   while (ptr < totalGame) {
@@ -527,7 +527,7 @@ function splitPagesByHeight(headerHeight, gameBlockHeights, maxH, hasBaseInfo) {
     let sumH2 = 0;
     for (let i = ptr; i < totalGame; i++) {
       const blockH = gameBlockHeights[i];
-      if (i > ptr) sumH2 += CARD_GAP;
+      if (i !== ptr) sumH2 += CARD_GAP; // ✅ 修复点1：间距逻辑修正
       sumH2 += blockH;
       accumulateList2.push(sumH2);
     }
@@ -542,12 +542,16 @@ function splitPagesByHeight(headerHeight, gameBlockHeights, maxH, hasBaseInfo) {
       })
     }
 
-    // ✅ 重点修复：全部候选参与择优，不限制是否超限
+    // ✅ 全部候选参与择优，不限制是否超限
     candidates2.sort((a, b) => {
       if (a.diff !== b.diff) return a.diff - b.diff;
       return b.count - a.count;
     });
     const bestItem2 = candidates2[0];
+    // ✅ 修复点3：强制兜底校验
+    const remainGame = totalGame - ptr;
+    bestItem2.count = Math.max(1, Math.min(bestItem2.count, remainGame));
+
     console.log("【后续页面分页计算】参考高度：", maxH, "选中卡片数量：", bestItem2.count, "占用高度：", bestItem2.usedH, "差值：", bestItem2.diff);
     console.log("当前页全部候选列表", candidates2);
 
@@ -556,6 +560,7 @@ function splitPagesByHeight(headerHeight, gameBlockHeights, maxH, hasBaseInfo) {
       pageGameIndexes.push(ptr + i);
     }
     pages.push({ isFirstPage: false, gameIndexes: pageGameIndexes });
+    console.log(`ptr推进：${ptr} → ${ptr + bestItem2.count}`);
     ptr += bestItem2.count;
   }
 
@@ -1040,6 +1045,12 @@ export async function renderExportCanvas(
     });
   }
 
+  // ✅ 修复点5：空数据拦截
+  if (renderDataList.length === 0) {
+    console.warn("没有可导出的游戏卡片");
+    return [];
+  }
+
   // ======== 长图模式 ========
   if (isLongMode) {
     const totalHeight = calcTotalVirtualHeight(targetWidth, appData, gameTemplateList, renderDataList);
@@ -1080,13 +1091,8 @@ export async function renderExportCanvas(
     renderDataList
   );
 
-  const hasBaseInfo = !!(() => {
-    const { baseInfo } = appData;
-    return !!(baseInfo.nick?.trim() || baseInfo.count?.trim() || baseInfo.story?.trim() || baseInfo.firstgame?.trim());
-  })();
-
-  // 分页切割
-  const pagePlanList = splitPagesByHeight(headerHeight, gameBlockHeights, maxPageHeight, hasBaseInfo);
+  // ✅ 修复点2：移除无用参数 hasBaseInfo
+  const pagePlanList = splitPagesByHeight(headerHeight, gameBlockHeights, maxPageHeight);
 
   // 加载图片（所有页面共享）
   const imageCache = await loadImagesWithLimit(allImageSrcList, MAX_IMAGE_CONCURRENCY);
