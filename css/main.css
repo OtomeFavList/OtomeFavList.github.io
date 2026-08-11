@@ -6,6 +6,10 @@
     /* 已移除GenJyuuGothic，消除缺失字体警告 */
     font-family: sans-serif,system-ui;
 }
+/* 额外优化：防止手机端横向滚动 */
+html {
+    overflow-x: hidden;
+}
 
 /* ========== 字体定义（全部已注释，不加载外部字体文件） ========== */
 /*
@@ -864,31 +868,66 @@ h2{
 
 /* ========== 移动端适配 max-width:768px ========== */
 @media (max-width:768px) {
-    .cp-layout-row{
-        flex-direction:column;
+    /* ---------- 需求①：手机端游戏待选封面缩小1/3 ---------- */
+    .game-option-item img {
+        width: 80px; /* 原120px → 80px，缩小1/3 */
     }
-    .heroine-column,
-    .hero-list-column{
-        flex: unset;
-        width:100%;
+
+    /* ---------- 需求②：手机端人物立绘缩小1/4 ---------- */
+    /* 统一所有角色卡片宽度为90px（原120px缩小1/4） */
+    .char-item,
+    .char-card-item,
+    .cp-female-card-btn,
+    .cp-male-item,
+    .cp-selected-card-item {
+        width: 90px;
+        min-height: 150px; /* 微调最小高度，适配新宽度 */
     }
-    .char-pool{
-        grid-template-columns:repeat(auto-fill,minmax(120px,1fr));
+    /* 角色池网格跟随调整 */
+    .char-pool {
+        grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
     }
+    .game-search-box .char-pool {
+        grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    }
+    /* 已选角色行内卡片自动适应（宽度由父容器控制，但保留宽度声明） */
+    .char-selected-row .char-card-item {
+        width: 90px;
+        min-height: 150px;
+    }
+
+    /* ---------- 需求③：取消Couple男女强制换行，排布和Character一致 ---------- */
+    /* 删除原冲突的 .cp-layout-row{flex-direction:column;} 和 .heroine-column,.hero-list-column{width:100%;} */
+    /* 重新设置并排布局 */
+    .cp-layout-row {
+        flex-direction: row;        /* 强制行排列（默认也是row，显式声明） */
+        flex-wrap: wrap;           /* 允许自动换行 */
+        gap: 10px;                /* 统一间距 */
+    }
+    .heroine-column {
+        flex: 0 0 auto;           /* 女主列宽度由内容撑开，不占满 */
+        width: auto;              /* 取消宽度100% */
+    }
+    .hero-list-column {
+        flex: 1;                  /* 男主列占据剩余空间 */
+        width: auto;              /* 取消宽度100% */
+    }
+    /* 女主容器内部保持flex-wrap，和Character一致 */
+    .heroine-box {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    /* ---------- 保留原有移动端样式 ---------- */
     .cp-select-btn-bar {
         justify-content: flex-end;
     }
-    /* 移动端不再需要标题左内边距，因为父容器已用 padding-left 留空 */
-    /* .game-card-head-title-wrap{
-        padding-left:32px;
-    } */
     .game-fold-icon-expand{
         width:26px;
         height:26px;
         font-size:18px;
     }
-    /* ❌ 已删除 .heart 兼容代码（text-rendering / -webkit-font-smoothing） */
-    /* 改用 SVG 后不再需要 */
+    /* 注意：.game-card-header-row 的移动端样式在另一个媒体查询中，未改动 */
 }
 
 /* ========== 按钮统一：新增游戏按钮与导出图片按钮尺寸对齐 ========== */
@@ -1560,4 +1599,61 @@ h2{
     height: 26px;
     display: block;
     flex-shrink: 0;
+}
+
+/* ========== 手机端统一适配修改 max-width:768px 【需求①②③④全部实现】 ========== */
+@media (max-width:768px) {
+    /* ===================== 需求④：所有大盒子自适应，禁止溢出，消除横向滚动 ===================== */
+    .big-card,
+    .game-card,
+    .char-slide-panel-char,
+    .char-slide-panel-cp,
+    .game-search-box,
+    .game-list-select {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    /* ===================== 需求①：游戏待选封面缩小1/3 120px → 80px ===================== */
+    .game-option-item img {
+        width: 80px !important;
+    }
+    .game-list-select {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+    }
+
+    /* ===================== 需求②：角色立绘卡片缩小1/4 120px → 90px ===================== */
+    .char-item,
+    .char-card-item,
+    .cp-female-card-btn,
+    .cp-male-item,
+    .cp-selected-card-item {
+        width: 90px !important;
+        min-height: 132px !important;
+    }
+    .char-pool {
+        grid-template-columns: repeat(auto-fill,minmax(90px,1fr)) !important;
+    }
+    /* 搜索面板内角色池同步缩小 */
+    .game-search-box .char-pool {
+        grid-template-columns: repeat(auto-fill,minmax(90px,1fr)) !important;
+    }
+
+    /* ===================== 需求③：取消CP男女强制换行，布局对齐Character ===================== */
+    /* 删除原有强制竖排，恢复横向弹性布局，允许自动换行 */
+    .cp-layout-row {
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        gap: 10px !important;
+    }
+    .heroine-column,
+    .hero-list-column {
+        flex: unset !important;
+        width: auto !important;
+    }
+    /* 女主容器内部卡片自动换行，和char-selected-row行为一致 */
+    .heroine-box {
+        flex-wrap: wrap !important;
+    }
 }
