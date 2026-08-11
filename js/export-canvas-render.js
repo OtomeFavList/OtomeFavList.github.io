@@ -873,7 +873,7 @@ function calcTotalVirtualHeight(targetWidth, appData, gameTemplateList, renderDa
  * 渲染导出图片（支持分页）
  * @param {number} targetWidth - 画布宽度
  * @param {boolean} isLongMode - 是否长图模式（不分页）
- * @param {number} maxPageHeight - 单页最大高度（固定尺寸模式）
+ * @param {number} maxPageHeight - 单页最大高度（固定尺寸模式，仅作参考）
  * @param {Object} appData - 全局数据
  * @param {Array} gameTemplateList - 游戏模板列表
  * @returns {Promise<Blob[]>}
@@ -1018,20 +1018,28 @@ export async function renderExportCanvas(
     renderDataList
   );
 
+  // 【可选优化：抵消预计算高度偏差】
+  const SAFE_OFFSET = 12;
+  const fixedHeaderH = headerHeight + SAFE_OFFSET;
+  const fixedGameHeights = gameBlockHeights.map(h => h + SAFE_OFFSET);
+
   // 分页切割
-  const pagePlanList = splitPagesByHeight(headerHeight, gameBlockHeights, maxPageHeight);
+  const pagePlanList = splitPagesByHeight(fixedHeaderH, fixedGameHeights, maxPageHeight);
 
   // 加载图片（所有页面共享）
   const imageCache = await loadImagesWithLimit(allImageSrcList, MAX_IMAGE_CONCURRENCY);
 
   const blobList = [];
   for (const pagePlan of pagePlanList) {
+    // 【修复1】使用超大临时画布，避免渲染过程中内容被画布边界截断
+    // 安全余量：maxPageHeight * 2，足够容纳一组游戏卡片，不会溢出
+    const safeTempHeight = maxPageHeight * 2;
     const canvas = document.createElement('canvas');
     canvas.width = targetWidth;
-    canvas.height = maxPageHeight;
-    const painter = new CanvasLayoutPainter(canvas, targetWidth, maxPageHeight, exportColor.bg);
+    canvas.height = safeTempHeight;
+    const painter = new CanvasLayoutPainter(canvas, targetWidth, safeTempHeight, exportColor.bg);
 
-    // 绘制当前页
+    // 绘制当前分页全部内容（完整渲染所有卡片，不会裁切）
     await drawFullContent(
       painter,
       targetWidth,
@@ -1042,10 +1050,10 @@ export async function renderExportCanvas(
       imageCache
     );
 
-    // 注意：页面画布高度为maxPageHeight（参考标准），允许渲染内容超出画布高度
-    // 最终会裁剪至实际渲染高度，游戏卡片不拆分，优先保证内容完整
+    // 测量实际渲染占用高度（底部增加安全边距）
     const usedHeight = painter.getY() + LAYOUT_SPACE.BODY_PADDING;
-    const finalHeight = Math.min(usedHeight, maxPageHeight);
+    // 【修复2】移除Math.min截断！不限制上限，保证卡片完整输出
+    const finalHeight = usedHeight;
     const finalCanvas = cropCanvas(canvas, targetWidth, finalHeight);
     const blob = await new Promise((resolve) => finalCanvas.toBlob(resolve, 'image/png'));
     blobList.push(blob);
