@@ -1107,3 +1107,18 @@ export async function renderExportCanvas(
       pagePlan.isFirstPage,
       pagePlan.gameIndexes,
       renderDataList,
+      appData,
+      imageCache
+    );
+
+    const usedHeight = painter.getY() + LAYOUT_SPACE.BODY_PADDING;
+    const finalCanvas = cropCanvas(canvas, targetWidth, usedHeight);
+    //【FIX】捕获toBlob异常，防止单页失败导致整个渲染中断
+    const blob = await new Promise((resolve) => {
+      finalCanvas.toBlob((b) => resolve(b), 'image/png');
+    });
+    if (blob) blobList.push(blob);
+  }
+  console.log("最终生成图片数量：", blobList.length);
+  return blobList;
+}
