@@ -183,15 +183,56 @@ export class CanvasLayoutPainter {
     this.ctx.drawImage(roundCanvas, x, y);
   }
 
+  // ========== 核心修改：矢量路径绘制爱心（彻底根治 emoji 问题） ==========
   drawHeartRate(x, y, rate, heartSize = 26, gap = 6, activeColor, grayColor) {
     const ctx = this.ctx;
-    ctx.font = `${heartSize}px sans-serif`;
-    ctx.textBaseline = 'top';
-    const heartChar = '♥';
     let currentX = x;
+    // 爱心贝塞尔路径（基于24x24坐标系，自动缩放）
+    const createHeartPath = (scale) => {
+      const path = new Path2D();
+      const s = scale / 24;
+      path.moveTo(12 * s, 21.35 * s);
+      path.bezierCurveTo(
+        5.4 * s, 15.36 * s,
+        2 * s, 12.28 * s,
+        2 * s, 8.5 * s
+      );
+      path.bezierCurveTo(
+        2 * s, 5.42 * s,
+        4.42 * s, 3 * s,
+        7.5 * s, 3 * s
+      );
+      path.bezierCurveTo(
+        9.24 * s, 3 * s,
+        10.91 * s, 3.81 * s,
+        12 * s, 5.09 * s
+      );
+      path.bezierCurveTo(
+        13.09 * s, 3.81 * s,
+        14.76 * s, 3 * s,
+        16.5 * s, 3 * s
+      );
+      path.bezierCurveTo(
+        19.58 * s, 3 * s,
+        22 * s, 5.42 * s,
+        22 * s, 8.5 * s
+      );
+      path.bezierCurveTo(
+        22 * s, 12.28 * s,
+        18.6 * s, 15.36 * s,
+        12 * s, 21.35 * s
+      );
+      path.closePath();
+      return path;
+    };
+
+    const heartPath = createHeartPath(heartSize);
     for (let i = 1; i <= 5; i++) {
+      ctx.save();
+      ctx.translate(currentX, y);
       ctx.fillStyle = i <= rate ? activeColor : grayColor;
-      ctx.fillText(heartChar, currentX, y);
+      ctx.fill(heartPath);
+      ctx.restore();
       currentX += heartSize + gap;
     }
   }
