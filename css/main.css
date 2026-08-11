@@ -377,17 +377,8 @@ button:hover{
     gap: 4px;
 }
 
-.game-card-hearts .heart {
-    font-size: 26px;
-    color: #ccc;
-    cursor: pointer;
-    transition: 0.2s;
-    font-family: system-ui, sans-serif;
-    font-variant-emoji: text;
-}
-.game-card-hearts .heart.active {
-    color: #e895a8;
-}
+/* ❌ 已删除 .game-card-hearts .heart 旧样式（含 font-variant-emoji） */
+/* ✅ 统一由下方全局 .heart SVG 样式接管 */
 
 .game-card-actions {
     display: flex;
@@ -488,17 +479,9 @@ button:hover{
     gap:6px;
     margin:8px 0;
 }
-.heart{
-    font-size:28px;
-    color:#ccc;
-    cursor:pointer;
-    transition:0.2s;
-    font-family: system-ui, sans-serif;
-    font-variant-emoji: text;
-}
-.heart.active{
-    color:#e895a8;
-}
+/* ❌ 已删除 .heart 旧样式（含 font-family / font-variant-emoji） */
+/* ✅ 统一由下方全局 .heart SVG 样式接管 */
+
 .game-switch-group{
     display:flex;
     align-items:center;
@@ -904,6 +887,8 @@ h2{
         height:26px;
         font-size:18px;
     }
+    /* ❌ 已删除 .heart 兼容代码（text-rendering / -webkit-font-smoothing） */
+    /* 改用 SVG 后不再需要 */
 }
 
 /* ========== 按钮统一：新增游戏按钮与导出图片按钮尺寸对齐 ========== */
@@ -1555,11 +1540,24 @@ h2{
     text-align:center;
 }
 
-/* ========== 防止移动端浏览器强制替换符号为emoji ========== */
-@media (max-width:768px) {
-    .heart {
-        /* 兜底，部分安卓浏览器强制禁用emoji渲染 */
-        text-rendering: optimizeLegibility;
-        -webkit-font-smoothing: antialiased;
-    }
+/* ================================================================ */
+/* ========== ✅ 【核心修改】爱心 SVG 样式（替代文本 Emoji） ========== */
+/* 删除所有旧 .heart / .game-card-hearts .heart 样式（含 font-variant-emoji） */
+/* 统一使用纯色 SVG 矢量爱心，彻底解决安卓浏览器强制转 Emoji 问题 */
+/* ================================================================ */
+.heart {
+    display: inline-flex;
+    align-items: center;
+    color: #cccccc;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.heart.active {
+    color: #e895a8;
+}
+.heart svg {
+    width: 26px;
+    height: 26px;
+    display: block;
+    flex-shrink: 0;
 }
