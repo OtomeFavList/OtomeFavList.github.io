@@ -463,7 +463,7 @@ export function initPage(Core = {}) {
 
         let heartHtml = "";
         for (let i = 1; i <= 5; i++) {
-          heartHtml += `<span class="heart ${gameItem.loveRate >= i ? 'active' : ''}" data-val="${i}">♥</span>`;
+          heartHtml += `<span class="heart ${gameItem.loveRate >= i ? 'active' : ''}" data-val="${i}">&hearts;</span>`;
         }
 
         // =========【新增：条件渲染本游戏局部开关】=========
