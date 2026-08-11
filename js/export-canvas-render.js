@@ -11,13 +11,16 @@ import {
 const MAX_IMAGE_CONCURRENCY = 8;
 //【优化】圆角离屏画布缓存：key = `${url}||${w}||${h}||${radius}`
 const roundImageCache = new Map();
+// ========== 字体规范【需求3】==========
+// 除顶部标题 Otome FavList 之外，所有文本默认思源柔黑体
+const FONT_SIYUAN = "Noto Sans SC, sans-serif";
 
 // ============================ 工具函数 ============================
 
 /**
  * 在 Canvas 上绘制自动换行文本
  */
-export function wrapText(ctx, text, x, y, maxWidth, lineHeight, fontSize, color, font = 'sans-serif') {
+export function wrapText(ctx, text, x, y, maxWidth, lineHeight, fontSize, color, font = FONT_SIYUAN) {
   if (!text) return 0;
   ctx.font = `${fontSize}px ${font}`;
   ctx.fillStyle = color;
@@ -48,7 +51,7 @@ export function wrapText(ctx, text, x, y, maxWidth, lineHeight, fontSize, color,
  */
 export function measureWrappedHeight(ctx, text, maxWidth, lineHeight, fontSize) {
   if (!text) return 0;
-  ctx.font = `${fontSize}px sans-serif`;
+  ctx.font = `${fontSize}px ${FONT_SIYUAN}`;
   const chars = Array.from(text);
   let line = '';
   let lines = 1;
@@ -168,17 +171,59 @@ export class CanvasLayoutPainter {
     }
   }
 
-  drawText(text, x, y, size, color, font = 'sans-serif') {
+  drawText(text, x, y, size, color, font = FONT_SIYUAN) {
     this.ctx.font = `${size}px ${font}`;
     this.ctx.fillStyle = color;
     this.ctx.fillText(text, x, y);
   }
 
-  drawTextCenter(text, centerX, y, size, color, font = 'sans-serif') {
+  drawTextCenter(text, centerX, y, size, color, font = FONT_SIYUAN) {
     this.ctx.font = `${size}px ${font}`;
     const w = this.ctx.measureText(text).width;
     this.ctx.fillStyle = color;
     this.ctx.fillText(text, centerX - w / 2, y);
+  }
+
+  /**
+   * 【新增】在指定矩形区域内自动换行文本 + 整体垂直居中（角色卡片底部名称区域专用）
+   * @param {string} text
+   * @param {number} boxX 区域左上角x
+   * @param {number} boxY 区域左上角y
+   * @param {number} boxW 区域宽度
+   * @param {number} boxH 区域高度
+   * @param {number} fontSize
+   * @param {string} color
+   * @param {number} lineHeight
+   */
+  drawTextWrapCenterInBox(text, boxX, boxY, boxW, boxH, fontSize, color, lineHeight = fontSize * 1.4) {
+    const ctx = this.ctx;
+    ctx.font = `${fontSize}px ${FONT_SIYUAN}`;
+    ctx.fillStyle = color;
+    const chars = Array.from(text);
+    let line = '';
+    const lines = [];
+    // 分行
+    for (let n = 0; n < chars.length; n++) {
+      const testLine = line + chars[n];
+      const metrics = ctx.measureText(testLine);
+      if (metrics.width > boxW && n > 0) {
+        lines.push(line);
+        line = chars[n];
+      } else {
+        line = testLine;
+      }
+    }
+    if (line) lines.push(line);
+    const totalTextH = lines.length * lineHeight;
+    // 垂直居中起始Y
+    const startY = boxY + (boxH - totalTextH) / 2;
+    let currentY = startY;
+    for (const l of lines) {
+      const lw = ctx.measureText(l).width;
+      const lx = boxX + (boxW - lw) / 2; // 水平居中
+      ctx.fillText(l, lx, currentY);
+      currentY += lineHeight;
+    }
   }
 
   drawImageRound(roundCanvas, x, y) {
@@ -524,8 +569,8 @@ async function drawHeaderBlock(painter, targetWidth, appData) {
   const wrapW = Math.min(WRAP_MAX_W, targetWidth - BODY_PAD * 2);
   const wrapX = Math.max(BODY_PAD, (targetWidth - wrapW) / 2);
 
-  // 标题
-  painter.drawTextCenter('Otome FavList', targetWidth / 2, painter.y, 42, exportColor.title);
+  // 标题【需求3：Otome FavList 保留原有字体，不强制思源黑体】
+  painter.drawTextCenter('Otome FavList', targetWidth / 2, painter.y, 42, exportColor.title, 'sans-serif');
   painter.shiftY(42 + LAYOUT_SPACE.SITE_TITLE_MT + LAYOUT_SPACE.SITE_TITLE_MB);
 
   // 基础信息卡片
@@ -664,7 +709,7 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
   painter.drawText(gameInfo.name, nameX, nameBaselineY, nameFontSize, exportColor.gameName);
 
   // 测量游戏名称宽度，爱心横向排列在名称右侧（和页面间距对齐 gap:14px）
-  painter.ctx.font = `${nameFontSize}px sans-serif`;
+  painter.ctx.font = `${nameFontSize}px ${FONT_SIYUAN}`;
   const nameTextWidth = painter.ctx.measureText(gameInfo.name).width;
   const heartStartX = nameX + nameTextWidth + 14;
   const heartY = nameBaselineY + (nameFontSize - HEART_SIZE) / 2;
@@ -712,8 +757,18 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
         const roundCanvas = createRoundImageCanvas(img, item.src, imgSize, imgSize, LAYOUT_STYLE.CHAR_IMG_RADIUS);
         painter.drawImageRound(roundCanvas, xPos + innerPad, imgY);
       }
-      const nameY = yPos + innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB;
-      wrapText(painter.ctx, item.name, xPos + innerPad, nameY, cardW - innerPad * 2, 16, 14, '#222');
+      const nameBoxY = yPos + innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB;
+      const nameBoxH = charCardHeight - (innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB) - innerPad;
+      //【需求1】角色名称在底部格子内上下左右居中
+      painter.drawTextWrapCenterInBox(
+        item.name,
+        xPos + innerPad,
+        nameBoxY,
+        cardW - innerPad * 2,
+        nameBoxH,
+        14,
+        '#222'
+      );
 
       xPos += cardW + gap;
       if ((i + 1) % perRow === 0 && i < charItems.length - 1) {
@@ -758,8 +813,17 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
         const roundCanvas = createRoundImageCanvas(femaleImg, cp.femaleSrc, imgSize, imgSize, LAYOUT_STYLE.CHAR_IMG_RADIUS);
         painter.drawImageRound(roundCanvas, femaleX + innerPad, imgY);
       }
-      const nameY = femaleY + innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB;
-      wrapText(painter.ctx, cp.femaleName, femaleX + innerPad, nameY, femaleCardW - innerPad * 2, 16, 14, '#222');
+      const fNameBoxY = femaleY + innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB;
+      const fNameBoxH = rowH - (innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB) - innerPad;
+      painter.drawTextWrapCenterInBox(
+        cp.femaleName,
+        femaleX + innerPad,
+        fNameBoxY,
+        femaleCardW - innerPad * 2,
+        fNameBoxH,
+        14,
+        '#222'
+      );
 
       const maleStartX = femaleX + femaleCardW + colGap;
       let mx = maleStartX;
@@ -773,8 +837,18 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
           const roundCanvas = createRoundImageCanvas(mImg, m.src, imgSize, imgSize, LAYOUT_STYLE.CHAR_IMG_RADIUS);
           painter.drawImageRound(roundCanvas, mx + innerPad, imgY);
         }
-        const nameY2 = my + innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB;
-        wrapText(painter.ctx, m.name, mx + innerPad, maleCardW - innerPad * 2, 16, 14, '#222');
+        //【需求2修复：原代码参数顺序错误，导致男角色名字无法渲染】
+        const mNameBoxY = my + innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB;
+        const mNameBoxH = rowH - (innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB) - innerPad;
+        painter.drawTextWrapCenterInBox(
+          m.name,
+          mx + innerPad,
+          mNameBoxY,
+          maleCardW - innerPad * 2,
+          mNameBoxH,
+          14,
+          '#222'
+        );
 
         mx += maleCardW + maleGap;
         if ((i + 1) % perRow === 0 && i < cp.maleItems.length - 1) {
