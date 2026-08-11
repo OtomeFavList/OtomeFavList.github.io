@@ -331,7 +331,8 @@ function calcSingleGameBlockHeight(targetWidth, renderData) {
     const maleCardWidth = LAYOUT_SPACE.CHAR_CARD_W;
     const maleGap = LAYOUT_SPACE.CP_MALE_GAP;
     const colGap = LAYOUT_SPACE.CP_COLUMN_GAP;
-    const maleContainerWidth = (gameCardW - cardInnerPad * 2) * 0.75 - colGap;
+    // 修复：男主可用宽度 = 总宽度 - 女主卡片宽度 - 间隙，不再乘以0.75
+    const maleContainerWidth = (gameCardW - cardInnerPad * 2) - femaleCardWidth - colGap;
 
     for (const cp of cpItems) {
       const fHeight = calcCharCardHeight(vCtx, cp.femaleName, femaleCardWidth, 14);
@@ -531,7 +532,8 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache) 
     const maleCardWidth = LAYOUT_SPACE.CHAR_CARD_W;
     const maleGap = LAYOUT_SPACE.CP_MALE_GAP;
     const colGap = LAYOUT_SPACE.CP_COLUMN_GAP;
-    const maleContainerWidth = (gameCardW - cardInnerPad * 2) * 0.75 - colGap;
+    // 修复：男主可用宽度 = 总宽度 - 女主卡片宽度 - 间隙，不再乘以0.75
+    const maleContainerWidth = (gameCardW - cardInnerPad * 2) - femaleCardWidth - colGap;
 
     for (const cp of cpItems) {
       const fHeight = calcCharCardHeight(painter.ctx, cp.femaleName, femaleCardWidth, 14);
@@ -626,7 +628,8 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache) 
 
     for (const cp of cpItems) {
       const fHeight = calcCharCardHeight(painter.ctx, cp.femaleName, femaleCardW, 14);
-      const maleContainerW = (gameCardW - cardInnerPad * 2) * 0.75 - colGap;
+      // 修复：男主可用宽度 = 总宽度 - 女主卡片宽度 - 间隙
+      const maleContainerW = (gameCardW - cardInnerPad * 2) - femaleCardW - colGap;
       const perRow = calcCardsPerRow(maleCardW, maleGap, maleContainerW);
       const maleRows = Math.ceil(cp.maleItems.length / perRow);
       let maxMaleH = LAYOUT_SPACE.CHAR_CARD_MIN_H;
