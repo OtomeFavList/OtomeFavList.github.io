@@ -300,7 +300,6 @@ button:hover{
 .game-list-select{
     max-height:320px;
     overflow-y:auto;
-    overflow-x:hidden; /* ✅新增：禁止列表横向滚动 */
     border:1px solid #eee;
     border-radius:10px;
     padding:10px;
@@ -326,7 +325,6 @@ button:hover{
     gap:12px;
     align-items:flex-start;
     background:#fff;
-    overflow-x:hidden; /* ✅兜底：防止极端超长内容横向溢出 */
 }
 .game-option-item:hover{
     background:#fff0f3;
@@ -341,19 +339,16 @@ button:hover{
 }
 .game-option-info{
     flex:1;
-    min-width:0;  /* ✅关键：弹性子元素允许收缩，消除弹性盒无限宽度bug */
 }
 .game-option-name{
     font-weight:bold;
     font-size:16px;
     margin-bottom:6px;
-    word-break: break-all; /* ✅长英文/日文强制换行 */
 }
 .game-option-info p{
     font-size:14px;
     line-height:1.6;
     color:#333;
-    word-break: break-all; /* ✅长日文、长文本自动换行，不会横向溢出 */
 }
 
 /* ========== 已添加游戏卡片 game-card ========== */
