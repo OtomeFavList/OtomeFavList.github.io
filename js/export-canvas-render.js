@@ -319,6 +319,9 @@ function calcHeaderVirtualHeight(targetWidth, appData) {
     cursorY += LAYOUT_SPACE.WRAP_GAP;
   }
 
+  // 优化：头部底部预留间隙，和绘制逻辑保持一致
+  cursorY += LAYOUT_SPACE.WRAP_GAP;
+
   return cursorY;
 }
 
@@ -405,14 +408,17 @@ function preCalcLayoutHeight(targetWidth, appData, gameTemplateList, renderDataL
 }
 
 /**
- * 根据高度信息执行分页切割【重构：最优数量选择算法】
+ * 根据高度信息执行分页切割【重构：严格遵循需求最优数量选择算法】
  * 规则：
- * 1. 第一页：固定包含头部 + 第0个游戏卡片（强制完整，不拆分）
- * 2. 从第二页开始，枚举可行游戏数量，选出「占用高度最接近maxH」的方案
- *    - 候选：从最多能放的数量向下枚举；
- *    - 计算每种方案总高度，对比maxH，abs差值最小优先；差值相等优先选更多卡片；
- * 3. 单个卡片高度超过maxH时强制单独一页，防止死循环
- * 4. 所有游戏卡片不拆分，整张为最小单元
+ * 1. 页面最小单元：单个完整游戏卡片，绝不拆分
+ * 2. 第一页：固定渲染头部，需要校验：头部高度 + N个游戏卡片（带卡片间距） ≤ maxH
+ * 3. 第二页及以后：不再绘制头部，只放置游戏卡片
+ * 4. 择优逻辑：枚举可行连续游戏数量，选出占用高度最接近maxH；差值相同优先选更多卡片
+ * 5. 若单个游戏卡片自身高度 > 当前页面可用高度：该卡片单独占一页（兜底防死循环）
+ * @param {number} headerHeight 头部固定高度
+ * @param {number[]} gameBlockHeights 每个游戏卡片高度数组（不含卡片后间距）
+ * @param {number} maxH 单页最大画布高度
+ * @returns {Array<{isFirstPage: boolean, gameIndexes: number[]}>}
  */
 function splitPagesByHeight(headerHeight, gameBlockHeights, maxH) {
   const pages = [];
@@ -420,59 +426,78 @@ function splitPagesByHeight(headerHeight, gameBlockHeights, maxH) {
   const totalGame = gameBlockHeights.length;
   const CARD_GAP = LAYOUT_SPACE.ADDED_GAME_CARD_MB;
 
-  // ========== 第一页强制处理：头部 + 第0号游戏卡片（必须完整） ==========
+  // ========== 处理【第一页】：带头部，可用高度 = maxH - headerHeight ==========
   if (totalGame > 0) {
-    const firstPage = {
-      isFirstPage: true,
-      gameIndexes: [0]
-    };
-    pages.push(firstPage);
-    ptr = 1; // 下一页从第1个卡片开始
-  }
-
-  // ========== 处理剩余游戏卡片（第二页及以后） ==========
-  while (ptr < totalGame) {
-    // 1. 先预计算：从ptr开始，最多连续可以取多少个游戏
-    let maxPossibleCount = 0;
-    let accumulateHeightList = [];
-    let currentSum = 0;
+    const firstPageAvailableH = maxH - headerHeight;
+    // 收集从ptr=0开始，连续n个游戏累加总高度（包含卡片间隙）
+    let accumulateList = [];
+    let sumH = 0;
     for (let i = ptr; i < totalGame; i++) {
       const blockH = gameBlockHeights[i];
-      const addH = blockH + CARD_GAP;
-      currentSum += addH;
-      accumulateHeightList.push(currentSum);
-      maxPossibleCount += 1;
+      if (i > ptr) sumH += CARD_GAP; // 第一个卡片前面不加间隙
+      sumH += blockH;
+      accumulateList.push(sumH);
     }
 
-    // 边界：哪怕一张卡片高度都超过maxH，也要单独一页
-    if (maxPossibleCount === 0) break;
-
-    let bestCount = 1;
+    let bestCount = 0;
     let minDiff = Infinity;
-    // 枚举所有可行数量：从最多能放的数量 → 1个
-    for (let candidateCount = maxPossibleCount; candidateCount >= 1; candidateCount--) {
-      const usedH = accumulateHeightList[candidateCount - 1];
-      const diff = Math.abs(usedH - maxH);
-      // 判定规则：差值更小 → 选中；差值相同，保留数量更多的方案
+    // 枚举：最多能放多少个游戏，向下遍历
+    for (let candidateCount = accumulateList.length; candidateCount >= 1; candidateCount--) {
+      const usedH = accumulateList[candidateCount - 1];
+      // 超出可用高度 → 直接跳过
+      if (usedH > firstPageAvailableH) continue;
+      const diff = Math.abs(usedH - firstPageAvailableH);
       if (diff < minDiff) {
         minDiff = diff;
         bestCount = candidateCount;
       }
     }
 
-    // 组装当前页索引列表
+    // 情况A：至少能放下1个游戏 → 第一页放入bestCount个游戏
+    if (bestCount > 0) {
+      const gameIndexes = [];
+      for (let i = 0; i < bestCount; i++) gameIndexes.push(ptr + i);
+      pages.push({ isFirstPage: true, gameIndexes });
+      ptr += bestCount;
+    }
+    // 情况B：头部+第一个游戏已经超出页面高度 → bestCount=0，第一页只渲染头部，不放游戏
+    else {
+      pages.push({ isFirstPage: true, gameIndexes: [] });
+    }
+  }
+
+  // ========== 处理【第二页及之后】：无头部，全部空间放游戏卡片 ==========
+  while (ptr < totalGame) {
+    let accumulateList = [];
+    let sumH = 0;
+    for (let i = ptr; i < totalGame; i++) {
+      const blockH = gameBlockHeights[i];
+      if (i > ptr) sumH += CARD_GAP;
+      sumH += blockH;
+      accumulateList.push(sumH);
+    }
+
+    let bestCount = 1;
+    let minDiff = Infinity;
+    for (let candidateCount = accumulateList.length; candidateCount >= 1; candidateCount--) {
+      const usedH = accumulateList[candidateCount - 1];
+      if (usedH > maxH) continue;
+      const diff = Math.abs(usedH - maxH);
+      if (diff < minDiff) {
+        minDiff = diff;
+        bestCount = candidateCount;
+      }
+    }
+
     const pageGameIndexes = [];
     for (let i = 0; i < bestCount; i++) {
       pageGameIndexes.push(ptr + i);
     }
-
-    pages.push({
-      isFirstPage: false,
-      gameIndexes: pageGameIndexes
-    });
+    pages.push({ isFirstPage: false, gameIndexes: pageGameIndexes });
     ptr += bestCount;
   }
 
+  console.log("分页方案：", JSON.parse(JSON.stringify(pages)));
   return pages;
 }
 
@@ -542,7 +567,7 @@ async function drawHeaderBlock(painter, targetWidth, appData) {
 /**
  * 绘制单个游戏卡片
  */
-async function drawSingleGameCard(painter, targetWidth, renderData, imageCache) {
+async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, isLastCard = false) {
   const { gameInfo, charItems, cpItems, gameItem } = renderData;
   const { exportColor } = renderData.appData || {};
 
@@ -738,9 +763,11 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache) 
     }
   }
 
-  // 卡片底部间距（实际绘制时每张卡片后都会加，以便分页时统一处理）
   painter.shiftY(cardH);
-  painter.shiftY(LAYOUT_SPACE.ADDED_GAME_CARD_MB);
+  // 只有不是页面最后一张卡片，才追加间隙
+  if (!isLastCard) {
+    painter.shiftY(LAYOUT_SPACE.ADDED_GAME_CARD_MB);
+  }
 }
 
 /**
@@ -761,9 +788,11 @@ async function drawFullContent(
     await drawHeaderBlock(painter, targetWidth, appData);
   }
 
-  for (const idx of gameIndexList) {
+  for (let i = 0; i < gameIndexList.length; i++) {
+    const idx = gameIndexList[i];
     const data = renderDataList[idx];
-    await drawSingleGameCard(painter, targetWidth, data, imageCache);
+    const isLast = (i === gameIndexList.length - 1);
+    await drawSingleGameCard(painter, targetWidth, data, imageCache, isLast);
   }
 }
 
@@ -787,13 +816,16 @@ function cropCanvas(canvas, width, height) {
 function calcTotalVirtualHeight(targetWidth, appData, gameTemplateList, renderDataList) {
   const headerH = calcHeaderVirtualHeight(targetWidth, appData);
   let total = headerH;
-  for (const data of renderDataList) {
+  renderDataList.forEach((data, idx) => {
     const cardH = calcSingleGameBlockHeight(targetWidth, data);
     total += cardH;
-    total += LAYOUT_SPACE.ADDED_GAME_CARD_MB; // 每张卡片后都添加间距
-  }
+    // 不是最后一张卡片才追加间隙
+    if(idx !== renderDataList.length - 1){
+      total += LAYOUT_SPACE.ADDED_GAME_CARD_MB;
+    }
+  });
   total += LAYOUT_SPACE.BODY_PADDING;
-  return total + 300; // 安全余量
+  return total + 50; // 减小安全余量，避免超长空白
 }
 
 // ============================ 主渲染函数 ============================
