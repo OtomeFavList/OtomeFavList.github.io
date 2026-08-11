@@ -20,9 +20,11 @@ const FONT_SIYUAN = "Noto Sans SC, sans-serif";
 /**
  * 在 Canvas 上绘制自动换行文本
  */
-export function wrapText(ctx, text, x, y, maxWidth, lineHeight, fontSize, color, font = FONT_SIYUAN) {
+export function wrapText(ctx, text, x, y, maxWidth, lineHeight, fontSize, color, font = FONT_SIYUAN, bold = false) {
   if (!text) return 0;
-  ctx.font = `${fontSize}px ${font}`;
+  // 【需求变更】支持加粗
+  const fontStr = bold ? `bold ${fontSize}px ${font}` : `${fontSize}px ${font}`;
+  ctx.font = fontStr;
   ctx.fillStyle = color;
   //【FIX】修复：优先按空格拆分单词，中文逐字符，避免英文粗暴截断
   const chars = Array.from(text);
@@ -49,9 +51,10 @@ export function wrapText(ctx, text, x, y, maxWidth, lineHeight, fontSize, color,
 /**
  * 测量文本多行占用的总高度【FIX】和wrapText逻辑完全对齐
  */
-export function measureWrappedHeight(ctx, text, maxWidth, lineHeight, fontSize) {
+export function measureWrappedHeight(ctx, text, maxWidth, lineHeight, fontSize, bold = false) {
   if (!text) return 0;
-  ctx.font = `${fontSize}px ${FONT_SIYUAN}`;
+  const fontStr = bold ? `bold ${fontSize}px ${FONT_SIYUAN}` : `${fontSize}px ${FONT_SIYUAN}`;
+  ctx.font = fontStr;
   const chars = Array.from(text);
   let line = '';
   let lines = 1;
@@ -171,14 +174,18 @@ export class CanvasLayoutPainter {
     }
   }
 
-  drawText(text, x, y, size, color, font = FONT_SIYUAN) {
-    this.ctx.font = `${size}px ${font}`;
+  // 【需求变更】新增bold参数控制字体加粗
+  drawText(text, x, y, size, color, font = FONT_SIYUAN, bold = false) {
+    const fontStr = bold ? `bold ${size}px ${font}` : `${size}px ${font}`;
+    this.ctx.font = fontStr;
     this.ctx.fillStyle = color;
     this.ctx.fillText(text, x, y);
   }
 
-  drawTextCenter(text, centerX, y, size, color, font = FONT_SIYUAN) {
-    this.ctx.font = `${size}px ${font}`;
+  // 【需求变更】新增bold参数控制字体加粗
+  drawTextCenter(text, centerX, y, size, color, font = FONT_SIYUAN, bold = false) {
+    const fontStr = bold ? `bold ${size}px ${font}` : `${size}px ${font}`;
+    this.ctx.font = fontStr;
     const w = this.ctx.measureText(text).width;
     this.ctx.fillStyle = color;
     this.ctx.fillText(text, centerX - w / 2, y);
@@ -339,7 +346,7 @@ function calcHeaderVirtualHeight(targetWidth, appData) {
   const WRAP_MAX_W = 1200;
   const wrapW = Math.min(WRAP_MAX_W, targetWidth - BODY_PAD * 2);
 
-  // 站点标题
+  // 站点标题【需求变更：标题加粗】
   cursorY += 42 + LAYOUT_SPACE.SITE_TITLE_MT + LAYOUT_SPACE.SITE_TITLE_MB;
 
   // 基础信息卡片
@@ -385,7 +392,7 @@ function calcSingleGameBlockHeight(targetWidth, renderData) {
   const cardInnerPad = LAYOUT_SPACE.ADDED_GAME_CARD_PADDING;
   const gameCardW = wrapW;
 
-  // 游戏名称高度
+  // 【需求变更】游戏名称高度（加粗不影响高度，字体大小不变）
   const nameFontSize = 22;
   const nameHeight = nameFontSize + LAYOUT_SPACE.GAME_CARD_HEAD_MB;
   const HEART_AREA_HEIGHT = 0;
@@ -569,8 +576,8 @@ async function drawHeaderBlock(painter, targetWidth, appData) {
   const wrapW = Math.min(WRAP_MAX_W, targetWidth - BODY_PAD * 2);
   const wrapX = Math.max(BODY_PAD, (targetWidth - wrapW) / 2);
 
-  // 标题【需求3：Otome FavList 保留原有字体，不强制思源黑体】
-  painter.drawTextCenter('Otome FavList', targetWidth / 2, painter.y, 42, exportColor.title, 'sans-serif');
+  // 标题【需求1：Otome FavList 加粗】
+  painter.drawTextCenter('Otome FavList', targetWidth / 2, painter.y, 42, exportColor.title, 'sans-serif', true);
   painter.shiftY(42 + LAYOUT_SPACE.SITE_TITLE_MT + LAYOUT_SPACE.SITE_TITLE_MB);
 
   // 基础信息卡片
@@ -606,7 +613,8 @@ async function drawHeaderBlock(painter, targetWidth, appData) {
     );
 
     let y = cardTop + innerPad;
-    painter.drawText('基础信息', cardX + innerPad, y, h2FontSize, exportColor.subTitle);
+    // 【需求1：小标题「基础信息」加粗】
+    painter.drawText('基础信息', cardX + innerPad, y, h2FontSize, exportColor.subTitle, FONT_SIYUAN, true);
     y += h2FontSize + LAYOUT_SPACE.BIG_CARD_H2_MB;
 
     baseLines.forEach(line => {
@@ -703,10 +711,10 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
 
   let drawY = cardTop + cardInnerPad;
 
-  // 游戏名称 + 爱心同行布局，超长名称自动换行降级
+  // 【需求3：游戏名称加粗】
   const nameX = cardX + cardInnerPad;
   const nameBaselineY = drawY;
-  painter.drawText(gameInfo.name, nameX, nameBaselineY, nameFontSize, exportColor.gameName);
+  painter.drawText(gameInfo.name, nameX, nameBaselineY, nameFontSize, exportColor.gameName, FONT_SIYUAN, true);
 
   // 测量游戏名称宽度，爱心横向排列在名称右侧（和页面间距对齐 gap:14px）
   painter.ctx.font = `${nameFontSize}px ${FONT_SIYUAN}`;
@@ -1099,18 +1107,3 @@ export async function renderExportCanvas(
       pagePlan.isFirstPage,
       pagePlan.gameIndexes,
       renderDataList,
-      appData,
-      imageCache
-    );
-
-    const usedHeight = painter.getY() + LAYOUT_SPACE.BODY_PADDING;
-    const finalCanvas = cropCanvas(canvas, targetWidth, usedHeight);
-    //【FIX】捕获toBlob异常，防止单页失败导致整个渲染中断
-    const blob = await new Promise((resolve) => {
-      finalCanvas.toBlob((b) => resolve(b), 'image/png');
-    });
-    if (blob) blobList.push(blob);
-  }
-  console.log("最终生成图片数量：", blobList.length);
-  return blobList;
-}
