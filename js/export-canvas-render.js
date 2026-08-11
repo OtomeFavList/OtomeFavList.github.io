@@ -364,16 +364,20 @@ function preCalcLayoutHeight(targetWidth, appData, gameTemplateList, renderDataL
 }
 
 /**
- * 根据高度信息执行分页切割
+ * 根据高度信息执行分页切割【重构：最优数量选择算法】
  * 规则：
  * 1. 第一页：固定包含头部 + 第0个游戏卡片（强制完整，不拆分）
- * 2. 从第二页开始，正常按高度填充卡片，不拆分单个卡片
- * 3. 每页渲染完成后自适应裁剪高度，无多余空白
+ * 2. 从第二页开始，枚举可行游戏数量，选出「占用高度最接近maxH」的方案
+ *    - 候选：从最多能放的数量向下枚举；
+ *    - 计算每种方案总高度，对比maxH，abs差值最小优先；差值相等优先选更多卡片；
+ * 3. 单个卡片高度超过maxH时强制单独一页，防止死循环
+ * 4. 所有游戏卡片不拆分，整张为最小单元
  */
 function splitPagesByHeight(headerHeight, gameBlockHeights, maxH) {
   const pages = [];
   let ptr = 0;
   const totalGame = gameBlockHeights.length;
+  const CARD_GAP = LAYOUT_SPACE.ADDED_GAME_CARD_MB;
 
   // ========== 第一页强制处理：头部 + 第0号游戏卡片（必须完整） ==========
   if (totalGame > 0) {
@@ -385,33 +389,47 @@ function splitPagesByHeight(headerHeight, gameBlockHeights, maxH) {
     ptr = 1; // 下一页从第1个卡片开始
   }
 
-  // ========== 处理剩余游戏卡片（第二页及以后，原有分页逻辑） ==========
+  // ========== 处理剩余游戏卡片（第二页及以后） ==========
   while (ptr < totalGame) {
-    const page = {
-      isFirstPage: false,
-      gameIndexes: []
-    };
-    let usedH = 0; // 非首页没有头部高度
+    // 1. 先预计算：从ptr开始，最多连续可以取多少个游戏
+    let maxPossibleCount = 0;
+    let accumulateHeightList = [];
+    let currentSum = 0;
+    for (let i = ptr; i < totalGame; i++) {
+      const blockH = gameBlockHeights[i];
+      const addH = blockH + CARD_GAP;
+      currentSum += addH;
+      accumulateHeightList.push(currentSum);
+      maxPossibleCount += 1;
+    }
 
-    while (ptr < totalGame) {
-      const blockH = gameBlockHeights[ptr];
-      const nextH = blockH + LAYOUT_SPACE.ADDED_GAME_CARD_MB;
-      // 放不下则换页；放得下加入当前页
-      if (usedH + nextH <= maxH) {
-        usedH += nextH;
-        page.gameIndexes.push(ptr);
-        ptr++;
-      } else {
-        break;
+    // 边界：哪怕一张卡片高度都超过maxH，也要单独一页
+    if (maxPossibleCount === 0) break;
+
+    let bestCount = 1;
+    let minDiff = Infinity;
+    // 枚举所有可行数量：从最多能放的数量 → 1个
+    for (let candidateCount = maxPossibleCount; candidateCount >= 1; candidateCount--) {
+      const usedH = accumulateHeightList[candidateCount - 1];
+      const diff = Math.abs(usedH - maxH);
+      // 判定规则：差值更小 → 选中；差值相同，保留数量更多的方案
+      if (diff < minDiff) {
+        minDiff = diff;
+        bestCount = candidateCount;
       }
     }
 
-    // 当前页无法放入任何卡片 → 强制放入一张（防止死循环）
-    if (page.gameIndexes.length === 0 && ptr < totalGame) {
-      page.gameIndexes.push(ptr);
-      ptr++;
+    // 组装当前页索引列表
+    const pageGameIndexes = [];
+    for (let i = 0; i < bestCount; i++) {
+      pageGameIndexes.push(ptr + i);
     }
-    pages.push(page);
+
+    pages.push({
+      isFirstPage: false,
+      gameIndexes: pageGameIndexes
+    });
+    ptr += bestCount;
   }
 
   return pages;
