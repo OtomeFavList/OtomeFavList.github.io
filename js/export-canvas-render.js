@@ -409,11 +409,13 @@ function preCalcLayoutHeight(targetWidth, appData, gameTemplateList, renderDataL
  * 2. 第一页：固定渲染头部，【强制至少包含1张游戏卡片】
  * 3. 第二页及以后：不再绘制头部，只放置游戏卡片
  * 4. 择优逻辑：枚举可行连续游戏数量，选出占用高度最接近参考高度；差值相同优先选更多卡片
+ *    ✅ 参考高度只是参考值，不是硬性上限！允许超出，对比差值择优
  * 5. 兜底：若单个游戏卡片自身高度 > 当前页面参考高度，该卡片单独占一页
+ * 6. 需求约束：hasBaseInfo = true 时，第一页必须输出标题+基础信息+第一张卡片，不可丢弃首卡
  * @param {number} headerHeight 头部固定高度
  * @param {number[]} gameBlockHeights 每个游戏卡片高度数组（不含卡片后间距）
  * @param {number} maxH 单页最大画布高度（参考标准，非硬性上限）
- * @param {boolean} hasBaseInfo 是否存在基础信息【FIX】用于需求规则绑定
+ * @param {boolean} hasBaseInfo 是否存在基础信息
  * @returns {Array<{isFirstPage: boolean, gameIndexes: number[]}>}
  */
 function splitPagesByHeight(headerHeight, gameBlockHeights, maxH, hasBaseInfo) {
@@ -423,7 +425,7 @@ function splitPagesByHeight(headerHeight, gameBlockHeights, maxH, hasBaseInfo) {
   const CARD_GAP = LAYOUT_SPACE.ADDED_GAME_CARD_MB;
   if(totalGame === 0) return pages;
 
-  // ========== 处理【第一页】：带头部，可用高度 = maxH - headerHeight ==========
+  // ========== 处理【第一页】：带头部，可用高度参考 = maxH - headerHeight ==========
   const firstPageAvailableH = maxH - headerHeight;
   const accumulateList = [];
   let sumH = 0;
@@ -440,25 +442,20 @@ function splitPagesByHeight(headerHeight, gameBlockHeights, maxH, hasBaseInfo) {
     candidates.push({
       count,
       usedH,
-      isFit: usedH <= firstPageAvailableH,
       diff: Math.abs(usedH - firstPageAvailableH)
     })
   }
 
-  let bestItem = null;
-  const fitCandidates = candidates.filter(c => c.isFit);
-  if(fitCandidates.length > 0){
-    fitCandidates.sort((a,b)=>{
-      if(a.diff !== b.diff) return a.diff - b.diff;
-      return b.count - a.count; // 差值相同，卡片多优先
-    })
-    bestItem = fitCandidates[0];
-  }else{
-    // 全部超限：强制选1张（业务需求：第一页必须至少一张游戏）
-    bestItem = candidates[0];
-  }
+  // ✅ 核心修复：不再过滤超出高度的候选，全部参与择优
+  candidates.sort((a,b)=>{
+    if(a.diff !== b.diff) return a.diff - b.diff;
+    return b.count - a.count; // 差值相同，卡片数量更多优先
+  });
+  let bestItem = candidates[0];
 
-  // 【FIX】需求规则落地：有基础信息时，至少保留第一张卡片（当前逻辑天然满足，注释留存）
+  // 需求约束：有基础信息，强制至少保留第一张卡片（天然满足count>=1，增加防御注释）
+  if(hasBaseInfo && bestItem.count < 1) bestItem = candidates[0];
+
   const firstPageGameIndexes = [];
   for(let i=0;i<bestItem.count;i++){
     firstPageGameIndexes.push(ptr + i);
@@ -466,7 +463,10 @@ function splitPagesByHeight(headerHeight, gameBlockHeights, maxH, hasBaseInfo) {
   pages.push({ isFirstPage: true, gameIndexes: firstPageGameIndexes });
   ptr += bestItem.count;
 
-  // ========== 处理【第二页及之后】：无头部，全部空间放游戏卡片 ==========
+  console.log(`【第一页分页计算】参考可用高度：${firstPageAvailableH}，选中卡片数量：${bestItem.count}，占用高度：${bestItem.usedH}，差值：${bestItem.diff}`);
+  console.log('第一页全部候选列表', candidates);
+
+  // ========== 处理【第二页及之后】：无头部，全部空间放游戏卡片，参考高度maxH ==========
   while (ptr < totalGame) {
     const accumulateList2 = [];
     let sumH2 = 0;
@@ -483,23 +483,16 @@ function splitPagesByHeight(headerHeight, gameBlockHeights, maxH, hasBaseInfo) {
       candidates2.push({
         count,
         usedH,
-        isFit: usedH <= maxH,
         diff: Math.abs(usedH - maxH)
       })
     }
 
-    let bestItem2 = null;
-    const fitCandidates2 = candidates2.filter(c => c.isFit);
-    if(fitCandidates2.length > 0){
-      fitCandidates2.sort((a,b)=>{
-        if(a.diff !== b.diff) return a.diff - b.diff;
-        return b.count - a.count;
-      })
-      bestItem2 = fitCandidates2[0];
-    }else{
-      // 全部超限，兜底只放1张
-      bestItem2 = candidates2[0];
-    }
+    // ✅ 核心修复：全部候选择优，不剔除超限项
+    candidates2.sort((a,b)=>{
+      if(a.diff !== b.diff) return a.diff - b.diff;
+      return b.count - a.count;
+    });
+    let bestItem2 = candidates2[0];
 
     const pageGameIndexes = [];
     for (let i = 0; i < bestItem2.count; i++) {
@@ -507,9 +500,12 @@ function splitPagesByHeight(headerHeight, gameBlockHeights, maxH, hasBaseInfo) {
     }
     pages.push({ isFirstPage: false, gameIndexes: pageGameIndexes });
     ptr += bestItem2.count;
+
+    console.log(`【后续页面分页计算】参考高度：${maxH}，选中卡片数量：${bestItem2.count}，占用高度：${bestItem2.usedH}，差值：${bestItem2.diff}`);
+    console.log('当前页全部候选列表', candidates2);
   }
 
-  console.log("分页方案：", JSON.parse(JSON.stringify(pages)));
+  console.log("✅ 最终分页方案：", JSON.parse(JSON.stringify(pages)));
   return pages;
 }
 
