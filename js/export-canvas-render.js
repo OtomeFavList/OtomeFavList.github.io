@@ -319,9 +319,7 @@ function calcHeaderVirtualHeight(targetWidth, appData) {
     cursorY += LAYOUT_SPACE.WRAP_GAP;
   }
 
-  // 优化：头部底部预留间隙，和绘制逻辑保持一致
   cursorY += LAYOUT_SPACE.WRAP_GAP;
-
   return cursorY;
 }
 
@@ -343,7 +341,6 @@ function calcSingleGameBlockHeight(targetWidth, renderData) {
   // 游戏名称高度
   const nameFontSize = 22;
   const nameHeight = nameFontSize + LAYOUT_SPACE.GAME_CARD_HEAD_MB;
-  // 名称与爱心同行，不再单独占用一整行高度
   const HEART_AREA_HEIGHT = 0;
 
   // Character 区域
@@ -374,7 +371,6 @@ function calcSingleGameBlockHeight(targetWidth, renderData) {
     const maleCardWidth = LAYOUT_SPACE.CHAR_CARD_W;
     const maleGap = LAYOUT_SPACE.CP_MALE_GAP;
     const colGap = LAYOUT_SPACE.CP_COLUMN_GAP;
-    // 修复：男主可用宽度 = 总宽度 - 女主卡片宽度 - 间隙，不再乘以0.75
     const maleContainerWidth = (gameCardW - cardInnerPad * 2) - femaleCardWidth - colGap;
 
     for (const cp of cpItems) {
@@ -410,16 +406,17 @@ function preCalcLayoutHeight(targetWidth, appData, gameTemplateList, renderDataL
  * 根据高度信息执行分页切割【重构：严格遵循需求最优数量选择算法】
  * 需求规则：
  * 1. 页面最小单元：单个完整游戏卡片，绝不拆分
- * 2. 第一页：固定渲染头部，【强制至少包含1张游戏卡片】，禁止空游戏列表
+ * 2. 第一页：固定渲染头部，【强制至少包含1张游戏卡片】
  * 3. 第二页及以后：不再绘制头部，只放置游戏卡片
  * 4. 择优逻辑：枚举可行连续游戏数量，选出占用高度最接近参考高度；差值相同优先选更多卡片
  * 5. 兜底：若单个游戏卡片自身高度 > 当前页面参考高度，该卡片单独占一页
  * @param {number} headerHeight 头部固定高度
  * @param {number[]} gameBlockHeights 每个游戏卡片高度数组（不含卡片后间距）
  * @param {number} maxH 单页最大画布高度（参考标准，非硬性上限）
+ * @param {boolean} hasBaseInfo 是否存在基础信息【FIX】用于需求规则绑定
  * @returns {Array<{isFirstPage: boolean, gameIndexes: number[]}>}
  */
-function splitPagesByHeight(headerHeight, gameBlockHeights, maxH) {
+function splitPagesByHeight(headerHeight, gameBlockHeights, maxH, hasBaseInfo) {
   const pages = [];
   let ptr = 0;
   const totalGame = gameBlockHeights.length;
@@ -428,7 +425,6 @@ function splitPagesByHeight(headerHeight, gameBlockHeights, maxH) {
 
   // ========== 处理【第一页】：带头部，可用高度 = maxH - headerHeight ==========
   const firstPageAvailableH = maxH - headerHeight;
-  // 预计算从ptr=0开始，取n个游戏累加高度（包含卡片间隙）
   const accumulateList = [];
   let sumH = 0;
   for (let i = ptr; i < totalGame; i++) {
@@ -438,7 +434,6 @@ function splitPagesByHeight(headerHeight, gameBlockHeights, maxH) {
     accumulateList.push(sumH);
   }
 
-  // 收集所有候选 [count, usedH, isFit]
   const candidates = [];
   for(let count = 1; count <= accumulateList.length; count++){
     const usedH = accumulateList[count - 1];
@@ -453,7 +448,6 @@ function splitPagesByHeight(headerHeight, gameBlockHeights, maxH) {
   let bestItem = null;
   const fitCandidates = candidates.filter(c => c.isFit);
   if(fitCandidates.length > 0){
-    // 存在合规候选：择优
     fitCandidates.sort((a,b)=>{
       if(a.diff !== b.diff) return a.diff - b.diff;
       return b.count - a.count; // 差值相同，卡片多优先
@@ -464,6 +458,7 @@ function splitPagesByHeight(headerHeight, gameBlockHeights, maxH) {
     bestItem = candidates[0];
   }
 
+  // 【FIX】需求规则落地：有基础信息时，至少保留第一张卡片（当前逻辑天然满足，注释留存）
   const firstPageGameIndexes = [];
   for(let i=0;i<bestItem.count;i++){
     firstPageGameIndexes.push(ptr + i);
@@ -633,7 +628,6 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
     const maleCardWidth = LAYOUT_SPACE.CHAR_CARD_W;
     const maleGap = LAYOUT_SPACE.CP_MALE_GAP;
     const colGap = LAYOUT_SPACE.CP_COLUMN_GAP;
-    // 修复：男主可用宽度 = 总宽度 - 女主卡片宽度 - 间隙，不再乘以0.75
     const maleContainerWidth = (gameCardW - cardInnerPad * 2) - femaleCardWidth - colGap;
 
     for (const cp of cpItems) {
@@ -675,14 +669,11 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
   painter.ctx.font = `${nameFontSize}px sans-serif`;
   const nameTextWidth = painter.ctx.measureText(gameInfo.name).width;
   const heartStartX = nameX + nameTextWidth + 14;
-  // 垂直居中：文字基线Y向上偏移，让爱心和文字居中对齐
   const heartY = nameBaselineY + (nameFontSize - HEART_SIZE) / 2;
 
-  // 边界判断：超出卡片宽度时，爱心自动换到下一行
   const rightLimit = gameCardW + cardX - cardInnerPad;
   const heartTotalWidth = HEART_SIZE * 5 + HEART_GAP * 4;
   if (heartStartX + heartTotalWidth > rightLimit) {
-    // 超出边界，回退成原来布局：爱心换行
     painter.drawHeartRate(
       nameX, drawY + nameFontSize,
       gameItem.loveRate || 0,
@@ -698,7 +689,6 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
     );
   }
 
-  // 名称+爱心整体占用高度下移
   drawY += nameFontSize + LAYOUT_SPACE.GAME_CARD_HEAD_MB;
 
   // ---- Character ----
@@ -751,7 +741,6 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
 
     for (const cp of cpItems) {
       const fHeight = calcCharCardHeight(painter.ctx, cp.femaleName, femaleCardW, 14);
-      // 修复：男主可用宽度 = 总宽度 - 女主卡片宽度 - 间隙
       const maleContainerW = (gameCardW - cardInnerPad * 2) - femaleCardW - colGap;
       const perRow = calcCardsPerRow(maleCardW, maleGap, maleContainerW);
       const maleRows = Math.ceil(cp.maleItems.length / perRow);
@@ -762,7 +751,6 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
       });
       const rowH = Math.max(fHeight, maxMaleH);
 
-      // 女主卡片
       const femaleX = cardX + cardInnerPad;
       const femaleY = drawY;
       painter.drawRoundRect(femaleX, femaleY, femaleCardW, rowH, LAYOUT_STYLE.CHAR_CARD_RADIUS, '#ffffff', '#eee', 1);
@@ -775,7 +763,6 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
       const nameY = femaleY + innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB;
       wrapText(painter.ctx, cp.femaleName, femaleX + innerPad, nameY, femaleCardW - innerPad * 2, 16, 14, '#222');
 
-      // 男主卡片
       const maleStartX = femaleX + femaleCardW + colGap;
       let mx = maleStartX;
       let my = drawY;
@@ -858,13 +845,12 @@ function calcTotalVirtualHeight(targetWidth, appData, gameTemplateList, renderDa
   renderDataList.forEach((data, idx) => {
     const cardH = calcSingleGameBlockHeight(targetWidth, data);
     total += cardH;
-    // 不是最后一张卡片才追加间隙
     if(idx !== renderDataList.length - 1){
       total += LAYOUT_SPACE.ADDED_GAME_CARD_MB;
     }
   });
   total += LAYOUT_SPACE.BODY_PADDING;
-  return total + 50; // 减小安全余量，避免超长空白
+  return total + 50;
 }
 
 // ============================ 主渲染函数 ============================
@@ -895,8 +881,6 @@ export async function renderExportCanvas(
   const renderDataList = [];
 
   for (const gameItem of gameList) {
-    // =========【新增过滤逻辑】=========
-    // 如果开关关闭 && 当前游戏处于折叠状态 → 跳过，不加入渲染列表
     if (!appData.exportFoldContent && gameItem.fold === true) {
       continue;
     }
@@ -972,7 +956,7 @@ export async function renderExportCanvas(
       charItems,
       cpItems,
       gameItem,
-      appData // 传递 appData 以便绘制时获取 exportColor
+      appData
     });
   }
 
@@ -984,15 +968,13 @@ export async function renderExportCanvas(
     canvas.height = totalHeight;
     const painter = new CanvasLayoutPainter(canvas, targetWidth, totalHeight, exportColor.bg);
 
-    // 加载图片
     const imageCache = await loadImagesWithLimit(allImageSrcList, MAX_IMAGE_CONCURRENCY);
 
-    // 绘制全部内容（所有卡片索引）
     const allIndexes = renderDataList.map((_, idx) => idx);
     await drawFullContent(
       painter,
       targetWidth,
-      true, // 绘制头部
+      true,
       allIndexes,
       renderDataList,
       appData,
@@ -1018,28 +1000,26 @@ export async function renderExportCanvas(
     renderDataList
   );
 
-  // 【可选优化：抵消预计算高度偏差】
-  const SAFE_OFFSET = 12;
-  const fixedHeaderH = headerHeight + SAFE_OFFSET;
-  const fixedGameHeights = gameBlockHeights.map(h => h + SAFE_OFFSET);
+  // 【FIX 关键改动】移除SAFE_OFFSET！禁止统一抬高所有高度，避免破坏择优算法
+  const hasBaseInfo = !!(() => {
+    const { baseInfo } = appData;
+    return !!(baseInfo.nick?.trim() || baseInfo.count?.trim() || baseInfo.story?.trim() || baseInfo.firstgame?.trim());
+  })();
 
-  // 分页切割
-  const pagePlanList = splitPagesByHeight(fixedHeaderH, fixedGameHeights, maxPageHeight);
+  // 分页切割【传入hasBaseInfo参数】
+  const pagePlanList = splitPagesByHeight(headerHeight, gameBlockHeights, maxPageHeight, hasBaseInfo);
 
   // 加载图片（所有页面共享）
   const imageCache = await loadImagesWithLimit(allImageSrcList, MAX_IMAGE_CONCURRENCY);
 
   const blobList = [];
   for (const pagePlan of pagePlanList) {
-    // 【修复1】使用超大临时画布，避免渲染过程中内容被画布边界截断
-    // 兜底安全高度：至少 2500px，确保极端长文本也不被截断
     const safeTempHeight = Math.max(maxPageHeight * 2, 2500);
     const canvas = document.createElement('canvas');
     canvas.width = targetWidth;
     canvas.height = safeTempHeight;
     const painter = new CanvasLayoutPainter(canvas, targetWidth, safeTempHeight, exportColor.bg);
 
-    // 绘制当前分页全部内容（完整渲染所有卡片，不会裁切）
     await drawFullContent(
       painter,
       targetWidth,
@@ -1050,9 +1030,7 @@ export async function renderExportCanvas(
       imageCache
     );
 
-    // 测量实际渲染占用高度（底部增加安全边距）
     const usedHeight = painter.getY() + LAYOUT_SPACE.BODY_PADDING;
-    // 【修复2】移除Math.min截断！不限制上限，保证卡片完整输出
     const finalHeight = usedHeight;
     const finalCanvas = cropCanvas(canvas, targetWidth, finalHeight);
     const blob = await new Promise((resolve) => finalCanvas.toBlob(resolve, 'image/png'));
