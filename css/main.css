@@ -1554,3 +1554,12 @@ h2{
     line-height:1.6;
     text-align:center;
 }
+
+/* ========== 防止移动端浏览器强制替换符号为emoji ========== */
+@media (max-width:768px) {
+    .heart {
+        /* 兜底，部分安卓浏览器强制禁用emoji渲染 */
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+    }
+}
