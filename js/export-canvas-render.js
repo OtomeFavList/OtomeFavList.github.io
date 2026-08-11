@@ -408,15 +408,15 @@ function preCalcLayoutHeight(targetWidth, appData, gameTemplateList, renderDataL
 
 /**
  * 根据高度信息执行分页切割【重构：严格遵循需求最优数量选择算法】
- * 规则：
+ * 需求规则：
  * 1. 页面最小单元：单个完整游戏卡片，绝不拆分
- * 2. 第一页：固定渲染头部，需要校验：头部高度 + N个游戏卡片（带卡片间距） ≤ maxH
+ * 2. 第一页：固定渲染头部，【强制至少包含1张游戏卡片】，禁止空游戏列表
  * 3. 第二页及以后：不再绘制头部，只放置游戏卡片
- * 4. 择优逻辑：枚举可行连续游戏数量，选出占用高度最接近maxH；差值相同优先选更多卡片
- * 5. 若单个游戏卡片自身高度 > 当前页面可用高度：该卡片单独占一页（兜底防死循环）
+ * 4. 择优逻辑：枚举可行连续游戏数量，选出占用高度最接近参考高度；差值相同优先选更多卡片
+ * 5. 兜底：若单个游戏卡片自身高度 > 当前页面参考高度，该卡片单独占一页
  * @param {number} headerHeight 头部固定高度
  * @param {number[]} gameBlockHeights 每个游戏卡片高度数组（不含卡片后间距）
- * @param {number} maxH 单页最大画布高度
+ * @param {number} maxH 单页最大画布高度（参考标准，非硬性上限）
  * @returns {Array<{isFirstPage: boolean, gameIndexes: number[]}>}
  */
 function splitPagesByHeight(headerHeight, gameBlockHeights, maxH) {
@@ -424,76 +424,94 @@ function splitPagesByHeight(headerHeight, gameBlockHeights, maxH) {
   let ptr = 0;
   const totalGame = gameBlockHeights.length;
   const CARD_GAP = LAYOUT_SPACE.ADDED_GAME_CARD_MB;
+  if(totalGame === 0) return pages;
 
   // ========== 处理【第一页】：带头部，可用高度 = maxH - headerHeight ==========
-  if (totalGame > 0) {
-    const firstPageAvailableH = maxH - headerHeight;
-    // 收集从ptr=0开始，连续n个游戏累加总高度（包含卡片间隙）
-    let accumulateList = [];
-    let sumH = 0;
-    for (let i = ptr; i < totalGame; i++) {
-      const blockH = gameBlockHeights[i];
-      if (i > ptr) sumH += CARD_GAP; // 第一个卡片前面不加间隙
-      sumH += blockH;
-      accumulateList.push(sumH);
-    }
-
-    let bestCount = 0;
-    let minDiff = Infinity;
-    // 枚举：最多能放多少个游戏，向下遍历
-    for (let candidateCount = accumulateList.length; candidateCount >= 1; candidateCount--) {
-      const usedH = accumulateList[candidateCount - 1];
-      // 超出可用高度 → 直接跳过
-      if (usedH > firstPageAvailableH) continue;
-      const diff = Math.abs(usedH - firstPageAvailableH);
-      if (diff < minDiff) {
-        minDiff = diff;
-        bestCount = candidateCount;
-      }
-    }
-
-    // 情况A：至少能放下1个游戏 → 第一页放入bestCount个游戏
-    if (bestCount > 0) {
-      const gameIndexes = [];
-      for (let i = 0; i < bestCount; i++) gameIndexes.push(ptr + i);
-      pages.push({ isFirstPage: true, gameIndexes });
-      ptr += bestCount;
-    }
-    // 情况B：头部+第一个游戏已经超出页面高度 → bestCount=0，第一页只渲染头部，不放游戏
-    else {
-      pages.push({ isFirstPage: true, gameIndexes: [] });
-    }
+  const firstPageAvailableH = maxH - headerHeight;
+  // 预计算从ptr=0开始，取n个游戏累加高度（包含卡片间隙）
+  const accumulateList = [];
+  let sumH = 0;
+  for (let i = ptr; i < totalGame; i++) {
+    const blockH = gameBlockHeights[i];
+    if (i > ptr) sumH += CARD_GAP;
+    sumH += blockH;
+    accumulateList.push(sumH);
   }
+
+  // 收集所有候选 [count, usedH, isFit]
+  const candidates = [];
+  for(let count = 1; count <= accumulateList.length; count++){
+    const usedH = accumulateList[count - 1];
+    candidates.push({
+      count,
+      usedH,
+      isFit: usedH <= firstPageAvailableH,
+      diff: Math.abs(usedH - firstPageAvailableH)
+    })
+  }
+
+  let bestItem = null;
+  const fitCandidates = candidates.filter(c => c.isFit);
+  if(fitCandidates.length > 0){
+    // 存在合规候选：择优
+    fitCandidates.sort((a,b)=>{
+      if(a.diff !== b.diff) return a.diff - b.diff;
+      return b.count - a.count; // 差值相同，卡片多优先
+    })
+    bestItem = fitCandidates[0];
+  }else{
+    // 全部超限：强制选1张（业务需求：第一页必须至少一张游戏）
+    bestItem = candidates[0];
+  }
+
+  const firstPageGameIndexes = [];
+  for(let i=0;i<bestItem.count;i++){
+    firstPageGameIndexes.push(ptr + i);
+  }
+  pages.push({ isFirstPage: true, gameIndexes: firstPageGameIndexes });
+  ptr += bestItem.count;
 
   // ========== 处理【第二页及之后】：无头部，全部空间放游戏卡片 ==========
   while (ptr < totalGame) {
-    let accumulateList = [];
-    let sumH = 0;
+    const accumulateList2 = [];
+    let sumH2 = 0;
     for (let i = ptr; i < totalGame; i++) {
       const blockH = gameBlockHeights[i];
-      if (i > ptr) sumH += CARD_GAP;
-      sumH += blockH;
-      accumulateList.push(sumH);
+      if (i > ptr) sumH2 += CARD_GAP;
+      sumH2 += blockH;
+      accumulateList2.push(sumH2);
     }
 
-    let bestCount = 1;
-    let minDiff = Infinity;
-    for (let candidateCount = accumulateList.length; candidateCount >= 1; candidateCount--) {
-      const usedH = accumulateList[candidateCount - 1];
-      if (usedH > maxH) continue;
-      const diff = Math.abs(usedH - maxH);
-      if (diff < minDiff) {
-        minDiff = diff;
-        bestCount = candidateCount;
-      }
+    const candidates2 = [];
+    for(let count = 1; count <= accumulateList2.length; count++){
+      const usedH = accumulateList2[count - 1];
+      candidates2.push({
+        count,
+        usedH,
+        isFit: usedH <= maxH,
+        diff: Math.abs(usedH - maxH)
+      })
+    }
+
+    let bestItem2 = null;
+    const fitCandidates2 = candidates2.filter(c => c.isFit);
+    if(fitCandidates2.length > 0){
+      fitCandidates2.sort((a,b)=>{
+        if(a.diff !== b.diff) return a.diff - b.diff;
+        return b.count - a.count;
+      })
+      bestItem2 = fitCandidates2[0];
+    }else{
+      // 全部超限，兜底只放1张
+      bestItem2 = candidates2[0];
     }
 
     const pageGameIndexes = [];
-    for (let i = 0; i < bestCount; i++) {
+    for (let i = 0; i < bestItem2.count; i++) {
       pageGameIndexes.push(ptr + i);
     }
     pages.push({ isFirstPage: false, gameIndexes: pageGameIndexes });
-    ptr += bestCount;
+    ptr += bestItem2.count;
   }
 
   console.log("分页方案：", JSON.parse(JSON.stringify(pages)));
@@ -1024,7 +1042,8 @@ export async function renderExportCanvas(
       imageCache
     );
 
-    // 裁剪到实际占用高度
+    // 注意：页面画布高度为maxPageHeight（参考标准），允许渲染内容超出画布高度
+    // 最终会裁剪至实际渲染高度，游戏卡片不拆分，优先保证内容完整
     const usedHeight = painter.getY() + LAYOUT_SPACE.BODY_PADDING;
     const finalHeight = Math.min(usedHeight, maxPageHeight);
     const finalCanvas = cropCanvas(canvas, targetWidth, finalHeight);
