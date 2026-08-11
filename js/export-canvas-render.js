@@ -1032,8 +1032,8 @@ export async function renderExportCanvas(
   const blobList = [];
   for (const pagePlan of pagePlanList) {
     // 【修复1】使用超大临时画布，避免渲染过程中内容被画布边界截断
-    // 安全余量：maxPageHeight * 2，足够容纳一组游戏卡片，不会溢出
-    const safeTempHeight = maxPageHeight * 2;
+    // 兜底安全高度：至少 2500px，确保极端长文本也不被截断
+    const safeTempHeight = Math.max(maxPageHeight * 2, 2500);
     const canvas = document.createElement('canvas');
     canvas.width = targetWidth;
     canvas.height = safeTempHeight;
