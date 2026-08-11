@@ -343,9 +343,8 @@ function calcSingleGameBlockHeight(targetWidth, renderData) {
   // 游戏名称高度
   const nameFontSize = 22;
   const nameHeight = nameFontSize + LAYOUT_SPACE.GAME_CARD_HEAD_MB;
-
-  // 爱心评分区域高度
-  const HEART_AREA_HEIGHT = 26 + 12;
+  // 名称与爱心同行，不再单独占用一整行高度
+  const HEART_AREA_HEIGHT = 0;
 
   // Character 区域
   let charAreaHeight = 0;
@@ -586,7 +585,7 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
   const nameHeight = nameFontSize + LAYOUT_SPACE.GAME_CARD_HEAD_MB;
   const HEART_SIZE = 26;
   const HEART_GAP = 6;
-  const HEART_AREA_HEIGHT = HEART_SIZE + 12;
+  const HEART_AREA_HEIGHT = 0;
 
   let charAreaHeight = 0;
   let charCardHeight = LAYOUT_SPACE.CHAR_CARD_MIN_H;
@@ -649,18 +648,40 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
 
   let drawY = cardTop + cardInnerPad;
 
-  // 游戏名称
-  painter.drawText(gameInfo.name, cardX + cardInnerPad, drawY, nameFontSize, exportColor.gameName);
-  drawY += nameFontSize + LAYOUT_SPACE.GAME_CARD_HEAD_MB;
+  // 游戏名称 + 爱心同行布局，超长名称自动换行降级
+  const nameX = cardX + cardInnerPad;
+  const nameBaselineY = drawY;
+  painter.drawText(gameInfo.name, nameX, nameBaselineY, nameFontSize, exportColor.gameName);
 
-  // 爱心评分
-  painter.drawHeartRate(
-    cardX + cardInnerPad, drawY,
-    gameItem.loveRate || 0,
-    HEART_SIZE, HEART_GAP,
-    '#e895a8', '#cccccc'
-  );
-  drawY += HEART_AREA_HEIGHT;
+  // 测量游戏名称宽度，爱心横向排列在名称右侧（和页面间距对齐 gap:14px）
+  painter.ctx.font = `${nameFontSize}px sans-serif`;
+  const nameTextWidth = painter.ctx.measureText(gameInfo.name).width;
+  const heartStartX = nameX + nameTextWidth + 14;
+  // 垂直居中：文字基线Y向上偏移，让爱心和文字居中对齐
+  const heartY = nameBaselineY + (nameFontSize - HEART_SIZE) / 2;
+
+  // 边界判断：超出卡片宽度时，爱心自动换到下一行
+  const rightLimit = gameCardW + cardX - cardInnerPad;
+  const heartTotalWidth = HEART_SIZE * 5 + HEART_GAP * 4;
+  if (heartStartX + heartTotalWidth > rightLimit) {
+    // 超出边界，回退成原来布局：爱心换行
+    painter.drawHeartRate(
+      nameX, drawY + nameFontSize,
+      gameItem.loveRate || 0,
+      HEART_SIZE, HEART_GAP,
+      '#e895a8', '#cccccc'
+    );
+  } else {
+    painter.drawHeartRate(
+      heartStartX, heartY,
+      gameItem.loveRate || 0,
+      HEART_SIZE, HEART_GAP,
+      '#e895a8', '#cccccc'
+    );
+  }
+
+  // 名称+爱心整体占用高度下移
+  drawY += nameFontSize + LAYOUT_SPACE.GAME_CARD_HEAD_MB;
 
   // ---- Character ----
   if (charItems.length > 0) {
