@@ -1225,8 +1225,8 @@ export function initPage(Core = {}) {
                 let maxPageHeight = 0;
                 let isLongMode = false;
 
-                if (sizeVal === "long-720") {
-                    targetWidth = 720;
+                if (sizeVal === "long-640") {
+                    targetWidth = 640;
                     isLongMode = true;
                 } else if (sizeVal === "long-810") {
                     targetWidth = 810;
