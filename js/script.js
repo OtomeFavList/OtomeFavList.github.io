@@ -935,8 +935,8 @@ export function initPage(Core = {}) {
       {dom: el.colorBg, dataKey: "bg", default:"#fff7f9"},
       {dom: el.colorTitle, dataKey: "title", default:"#b33a3a"},
       {dom: el.colorSubtitle, dataKey: "subTitle", default:"#b85878"},
-      {dom: el.colorText, dataKey: "text", default:"#333333"},
-      {dom: el.colorGamename, dataKey: "gameName", default:"#c98fac"},
+      {dom: el.colorText, dataKey: "text", default:"#c98fac"},
+      {dom: el.colorGamename, dataKey: "gameName", default:"#000000"},
       {dom: el.colorBorder, dataKey: "border", default:"#f6a5b8"}
     ];
     colorBindList.forEach(item => {
