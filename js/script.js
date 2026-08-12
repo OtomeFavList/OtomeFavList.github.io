@@ -33,14 +33,16 @@ import { renderExportCanvas } from './export-canvas-render.js';
 // ========== 导出预览全局状态锁与缓存 ==========
 let isRendering = false;
 let snapshotBlobCache = null;
-let previewObjectUrl = null;
+// 【新增】全局保存所有预览页面url列表，用于多页预览
+let previewPageUrlList = [];
 
 // 缓存使用完毕后释放资源公共函数
 function clearPreviewCacheResource() {
-    if (previewObjectUrl) {
-        URL.revokeObjectURL(previewObjectUrl);
-        previewObjectUrl = null;
-    }
+    // 释放所有分页图片资源
+    previewPageUrlList.forEach(url => {
+        if (url) URL.revokeObjectURL(url);
+    });
+    previewPageUrlList = [];
     snapshotBlobCache = null;
 }
 
@@ -1258,17 +1260,57 @@ export function initPage(Core = {}) {
                     maxPageHeight = h;
                 }
 
-
                 // 【核心】调用原生Canvas绘制模块，返回 Blob 数组
                 const blobList = await renderExportCanvas(targetWidth, isLongMode, maxPageHeight, appData, gameTemplateList);
                 if (!Array.isArray(blobList) || blobList.length === 0) throw new Error("Canvas绘制失败，未能生成图片");
 
-                // 缓存第一张用于预览
-                snapshotBlobCache = blobList[0];
-                previewObjectUrl = URL.createObjectURL(snapshotBlobCache);
+                // 多页预览状态
+                let currentPreviewPage = 0;
+                // 预生成所有页面 objectUrl，统一保存到全局数组
+                const pageObjectUrlList = blobList.map(blob => URL.createObjectURL(blob));
+                // 保存到全局用于资源释放
+                previewPageUrlList = pageObjectUrlList;
 
-                // 渲染完成，替换loading为预览图
-                previewScrollWrap.innerHTML = `<img class="preview-img-item" src="${previewObjectUrl}" alt="导出预览">`;
+                // 渲染预览区域：图片 + 分页控件
+                function renderPreviewPage(pageIndex) {
+                    currentPreviewPage = pageIndex;
+                    const totalPage = blobList.length;
+                    const currentUrl = pageObjectUrlList[currentPreviewPage];
+
+                    let paginationHtml = "";
+                    if(totalPage > 1) {
+                        paginationHtml = `
+                        <div class="preview-pagination-bar" style="margin-top:12px;display:flex;gap:12px;align-items:center;justify-content:center;">
+                            <button class="preview-prev-page" ${currentPreviewPage <= 0 ? 'disabled' : ''}>上一页</button>
+                            <span>第 ${currentPreviewPage+1} / ${totalPage} 页</span>
+                            <button class="preview-next-page" ${currentPreviewPage >= totalPage-1 ? 'disabled' : ''}>下一页</button>
+                        </div>
+                        `;
+                    }
+
+                    previewScrollWrap.innerHTML = `
+                        <img class="preview-img-item" src="${currentUrl}" alt="导出预览">
+                        ${paginationHtml}
+                    `;
+
+                    // 绑定分页切换事件
+                    const prevBtn = previewScrollWrap.querySelector(".preview-prev-page");
+                    const nextBtn = previewScrollWrap.querySelector(".preview-next-page");
+                    if(prevBtn) {
+                        prevBtn.onclick = () => {
+                            if(currentPreviewPage > 0) renderPreviewPage(currentPreviewPage - 1);
+                        }
+                    }
+                    if(nextBtn) {
+                        nextBtn.onclick = () => {
+                            if(currentPreviewPage < totalPage - 1) renderPreviewPage(currentPreviewPage + 1);
+                        }
+                    }
+                }
+
+                // 初始渲染第1页
+                renderPreviewPage(0);
+
                 if (downloadBtn) downloadBtn.disabled = false;
 
                 // === 重新绑定下载按钮，支持多页批量下载 ===
@@ -1284,6 +1326,7 @@ export function initPage(Core = {}) {
                     });
                     previewModal.classList.remove("active");
                     clearPreviewCacheResource();
+                    // 额外释放所有分页url资源（clear中已做）
                 };
 
             } catch (err) {
