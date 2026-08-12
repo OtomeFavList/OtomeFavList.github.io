@@ -1656,4 +1656,20 @@ h2{
     .heroine-box {
         flex-wrap: wrap !important;
     }
+    
+    /* ========== 修复待选游戏卡片文字溢出截断 bug ========== */
+    .game-option-item {
+        display: flex !important;
+        gap: 10px !important;
+        padding: 10px !important;
+        box-sizing: border-box !important;
+    }
+    .game-option-item .text-wrap {
+        flex: 1 !important;
+        min-width: 0 !important; /* 关键：允许弹性子元素收缩，不无限撑开 */
+    }
+    .game-option-item .text-wrap p {
+        word-break: break-all !important; /* 长日文/英文强制换行 */
+        white-space: normal !important;   /* 禁止单行不换行 */
+    }
 }
