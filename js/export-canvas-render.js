@@ -264,8 +264,18 @@ export class CanvasLayoutPainter {
     }
   }
 
-  drawImageRound(roundCanvas, x, y) {
-    this.ctx.drawImage(roundCanvas, x, y);
+  /**
+   * 绘制圆角离屏图片到主画布，并指定绘制尺寸（设计尺寸）
+   * @param {HTMLCanvasElement} roundCanvas 离屏画布
+   * @param {number} x 目标x
+   * @param {number} y 目标y
+   * @param {number} w 目标宽度（设计尺寸）
+   * @param {number} h 目标高度（设计尺寸）
+   */
+  drawImageRound(roundCanvas, x, y, w, h) {
+    // 离屏画布本身已放大 DPR 倍，但在这里我们明确指定目标尺寸为设计尺寸，
+    // 主 Canvas 的 scale 会将其放大到物理像素，避免双重放大。
+    this.ctx.drawImage(roundCanvas, x, y, w, h);
   }
 
   // ========== 核心修改：矢量路径绘制爱心（彻底根治 emoji 问题） ==========
@@ -827,7 +837,8 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
       if (img) {
         const imgY = yPos + innerPad;
         const roundCanvas = createRoundImageCanvas(img, item.src, imgSize, imgSize, LAYOUT_STYLE.CHAR_IMG_RADIUS);
-        painter.drawImageRound(roundCanvas, xPos + innerPad, imgY);
+        // 指定目标尺寸为设计尺寸 imgSize × imgSize，避免双重放大
+        painter.drawImageRound(roundCanvas, xPos + innerPad, imgY, imgSize, imgSize);
       }
       const nameBoxY = yPos + innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB;
       const nameBoxH = charCardHeight - (innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB) - innerPad;
@@ -887,7 +898,7 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
       if (femaleImg) {
         const imgY = femaleY + innerPad;
         const roundCanvas = createRoundImageCanvas(femaleImg, cp.femaleSrc, imgSize, imgSize, LAYOUT_STYLE.CHAR_IMG_RADIUS);
-        painter.drawImageRound(roundCanvas, femaleX + innerPad, imgY);
+        painter.drawImageRound(roundCanvas, femaleX + innerPad, imgY, imgSize, imgSize);
       }
       const fNameBoxY = femaleY + innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB;
       const fNameBoxH = rowH - (innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB) - innerPad;
@@ -911,7 +922,7 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
         if (mImg) {
           const imgY = my + innerPad;
           const roundCanvas = createRoundImageCanvas(mImg, m.src, imgSize, imgSize, LAYOUT_STYLE.CHAR_IMG_RADIUS);
-          painter.drawImageRound(roundCanvas, mx + innerPad, imgY);
+          painter.drawImageRound(roundCanvas, mx + innerPad, imgY, imgSize, imgSize);
         }
         //【需求2修复：原代码参数顺序错误，导致男角色名字无法渲染】
         const mNameBoxY = my + innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB;
