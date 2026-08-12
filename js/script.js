@@ -358,7 +358,9 @@ export function initPage(Core = {}) {
       canvas: document.getElementById("export-canvas"),
       snapshotContainer: document.getElementById("snapshot-container"),
       // =========新增：导出折叠内容开关==========
-      exportFoldContentSwitch: document.getElementById("export-fold-content")
+      exportFoldContentSwitch: document.getElementById("export-fold-content"),
+      // =========新增：恢复默认配色按钮==========
+      resetColorBtn: document.getElementById("btn-reset-color")
     };
 
     // ========== 预览弹窗元素 ==========
@@ -930,16 +932,16 @@ export function initPage(Core = {}) {
 
     // ========= 扩展颜色绑定：6项 =========
     const colorBindList = [
-      {dom: el.colorBg, dataKey: "bg"},
-      {dom: el.colorTitle, dataKey: "title"},
-      {dom: el.colorSubtitle, dataKey: "subTitle"},
-      {dom: el.colorText, dataKey: "text"},
-      {dom: el.colorGamename, dataKey: "gameName"},
-      {dom: el.colorBorder, dataKey: "border"}
+      {dom: el.colorBg, dataKey: "bg", default:"#fff7f9"},
+      {dom: el.colorTitle, dataKey: "title", default:"#b33a3a"},
+      {dom: el.colorSubtitle, dataKey: "subTitle", default:"#b85878"},
+      {dom: el.colorText, dataKey: "text", default:"#333333"},
+      {dom: el.colorGamename, dataKey: "gameName", default:"#c98fac"},
+      {dom: el.colorBorder, dataKey: "border", default:"#f6a5b8"}
     ];
     colorBindList.forEach(item => {
       if (!item.dom) return;
-      item.dom.value = appData.exportColor?.[item.dataKey] ?? "#ffffff";
+      item.dom.value = appData.exportColor?.[item.dataKey] ?? item.default;
       item.dom.oninput = () => {
         if(!appData.exportColor) appData.exportColor = {};
         appData.exportColor[item.dataKey] = item.dom.value;
@@ -948,6 +950,21 @@ export function initPage(Core = {}) {
         if (item.dataKey === "bg") document.body.style.background = item.dom.value;
       }
     });
+
+    // =========【新增：恢复默认配色按钮事件】==========
+    if(el.resetColorBtn){
+      el.resetColorBtn.addEventListener("click", ()=>{
+        // 重置每一项到默认值
+        colorBindList.forEach(item=>{
+          item.dom.value = item.default;
+          if(!appData.exportColor) appData.exportColor = {};
+          appData.exportColor[item.dataKey] = item.default;
+          if(item.dataKey === "bg") document.body.style.background = item.default;
+        });
+        saveData();
+        clearPreviewCacheResource();
+      })
+    }
 
     if (el.colorBg) document.body.style.background = appData.exportColor?.bg ?? "#ffffff";
 
