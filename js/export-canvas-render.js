@@ -984,26 +984,30 @@ async function drawFullContent(
 /**
  * 画布裁剪工具（兼容缩放画布）
  * 最终输出尺寸 = 设计尺寸，内部从高清画布缩回
- * @param {HTMLCanvasElement} sourceCanvas 原始放大画布
- * @param {number} designW 设计宽度（最终输出宽度）
- * @param {number} designH 设计高度（最终输出高度）
+ * @param {HTMLCanvasElement} sourceCanvas 原始放大画布（物理尺寸=designW*DPR）
+ * @param {number} designW 【最终输出宽度】用户指定设计尺寸（不乘DPR）
+ * @param {number} designH 【最终输出高度】用户指定设计尺寸（不乘DPR）
  */
 function cropCanvas(sourceCanvas, designW, designH) {
   const dpr = EXPORT_DPR;
-  const physW = designW * dpr;
-  const physH = designH * dpr;
-  // 目标画布尺寸为设计尺寸（用户指定）
+  // 源画布物理像素尺寸（内部高清画布大小）
+  const sourcePhysW = designW * dpr;
+  const sourcePhysH = designH * dpr;
+
+  // 关键改动：最终导出画布 = 原始设计尺寸，不再乘DPR
   const cropped = document.createElement('canvas');
   cropped.width = designW;
   cropped.height = designH;
+
   const ctx = cropped.getContext('2d');
   ctx.imageSmoothingEnabled = true;
   ctx.imageSmoothingQuality = "high";
-  // 从源画布（高清）截取物理区域，缩放到设计尺寸
+
+  // 将高清源画布缩放至目标设计尺寸输出
   ctx.drawImage(
     sourceCanvas,
-    0, 0, physW, physH,   // 源区域（物理像素）
-    0, 0, designW, designH // 目标区域（设计像素）
+    0, 0, sourcePhysW, sourcePhysH,
+    0, 0, designW, designH
   );
   return cropped;
 }
