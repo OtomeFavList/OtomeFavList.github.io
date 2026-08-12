@@ -1618,9 +1618,14 @@ h2{
     .game-option-item img {
         width: 80px !important;
     }
+    /* =========【重点修改】待选游戏列表自适应网格 ==========
+    最小宽度260px，最大宽度320px；空间足够自动排多列，空间不足自动回退单列
+    */
     .game-list-select {
-        grid-template-columns: 1fr !important;
+        display: grid !important;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 320px)) !important;
         gap: 10px !important;
+        justify-content: center !important; /* 多列模式下整体居中，不会贴左右边缘 */
     }
 
     /* ===================== 需求②：角色立绘卡片缩小1/4 120px → 90px ===================== */
@@ -1664,6 +1669,7 @@ h2{
         padding: 10px !important;
         box-sizing: border-box !important;
         overflow-x: hidden !important; /* 阻止卡片内部横向溢出 */
+        max-width: 320px !important; /* 单卡片宽度上限兜底 */
     }
     /* 注意：DOM对应类名是 game-option-info，不是 text-wrap！ */
     .game-option-info {
