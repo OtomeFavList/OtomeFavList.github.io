@@ -372,7 +372,7 @@ button:hover{
 .game-card-title {
     font-size: 22px;
     font-weight: 700;
-    color: #c98fac;
+    color: #000000;
     margin: 0;
 }
 
@@ -1344,8 +1344,8 @@ h2{
     --export-bg: #fff7f9;
     --export-title: #b33a3a;
     --export-subtitle: #b85878;
-    --export-text: #333333;
-    --export-gamename: #c98fac;
+    --export-text: #c98fac;
+    --export-gamename: #000000;
     --export-border: #f6a5b8;
 
     background-color: var(--export-bg) !important;
@@ -1378,8 +1378,8 @@ h2{
     --export-bg: #fff7f9;
     --export-title: #b33a3a;
     --export-subtitle: #b85878;
-    --export-text: #333333;
-    --export-gamename: #c98fac;
+    --export-text: #c98fac;
+    --export-gamename: #000000;
     --export-border: #f6a5b8;
     /* 新增：统一标题色变量 Character / Couple 三级标题 */
     --export-section-title-color: var(--export-gamename);
