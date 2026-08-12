@@ -1657,19 +1657,28 @@ h2{
         flex-wrap: wrap !important;
     }
     
-    /* ========== 修复待选游戏卡片文字溢出截断 bug ========== */
+    /* ========== 【修复】移动端待选游戏卡片右侧内容被裁切（仅移动端生效，不影响PC） ========== */
     .game-option-item {
         display: flex !important;
         gap: 10px !important;
         padding: 10px !important;
         box-sizing: border-box !important;
+        overflow-x: hidden !important; /* 阻止卡片内部横向溢出 */
     }
-    .game-option-item .text-wrap {
-        flex: 1 !important;
-        min-width: 0 !important; /* 关键：允许弹性子元素收缩，不无限撑开 */
+    /* 注意：DOM对应类名是 game-option-info，不是 text-wrap！ */
+    .game-option-info {
+        flex: 1 1 0 !important; /* flex:1 + 基础宽度0，弹性收缩核心 */
+        min-width: 0 !important;
     }
-    .game-option-item .text-wrap p {
-        word-break: break-all !important; /* 长日文/英文强制换行 */
-        white-space: normal !important;   /* 禁止单行不换行 */
+    .game-option-name {
+        font-size: 16px !important;
+        line-height: 1.4 !important;
+        word-break: break-word !important;
+    }
+    .game-option-info p {
+        font-size: 14px !important;
+        line-height: 1.5 !important;
+        word-break: break-all !important; /* 长日文、英文名称自动换行 */
+        white-space: normal !important;
     }
 }
