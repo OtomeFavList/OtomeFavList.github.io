@@ -421,7 +421,7 @@ function calcSingleGameBlockHeight(targetWidth, renderData) {
   if (cpItems.length > 0) {
     const titleH = 18 + 8;
     let totalCpHeight = titleH;
-    // ========== 【修改】存在Character区域时，额外增加8px间距 ==========
+    // ========== 新增：如果存在Character区域，增加和Character标题下方一致的8px间距 ==========
     if (charItems.length > 0) {
       totalCpHeight += 8;
     }
@@ -684,10 +684,6 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
   if (cpItems.length > 0) {
     const titleH = 18 + 8;
     let totalCpHeight = titleH;
-    // ========== 【修改】存在Character区域时，额外增加8px间距 ==========
-    if (charItems.length > 0) {
-      totalCpHeight += 8;
-    }
     const femaleCardWidth = LAYOUT_SPACE.CHAR_CARD_W;
     const maleCardWidth = LAYOUT_SPACE.CHAR_CARD_W;
     const maleGap = LAYOUT_SPACE.CP_MALE_GAP;
@@ -803,7 +799,7 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
 
   // ---- Couple ----
   if (cpItems.length > 0) {
-    // ========== 【修改】存在Character区域时，先下移8px ==========
+    // ========== 新增：如果存在Character区域，增加和Character标题下方一致的8px间距 ==========
     if (charItems.length > 0) {
       drawY += 8;
     }
@@ -1114,3 +1110,29 @@ export async function renderExportCanvas(
   for (const pagePlan of pagePlanList) {
     // 临时画布高度预留充足
     const safeTempHeight = Math.max(maxPageHeight * 3, 4000);
+    const canvas = document.createElement('canvas');
+    canvas.width = targetWidth;
+    canvas.height = safeTempHeight;
+    const painter = new CanvasLayoutPainter(canvas, targetWidth, safeTempHeight, exportColor.bg);
+
+    await drawFullContent(
+      painter,
+      targetWidth,
+      pagePlan.isFirstPage,
+      pagePlan.gameIndexes,
+      renderDataList,
+      appData,
+      imageCache
+    );
+
+    const usedHeight = painter.getY() + LAYOUT_SPACE.BODY_PADDING;
+    const finalCanvas = cropCanvas(canvas, targetWidth, usedHeight);
+    //【FIX】捕获toBlob异常，防止单页失败导致整个渲染中断
+    const blob = await new Promise((resolve) => {
+      finalCanvas.toBlob((b) => resolve(b), 'image/png');
+    });
+    if (blob) blobList.push(blob);
+  }
+  console.log("最终生成图片数量：", blobList.length);
+  return blobList;
+}
