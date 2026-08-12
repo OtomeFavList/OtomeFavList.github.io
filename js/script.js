@@ -1225,7 +1225,10 @@ export function initPage(Core = {}) {
                 let maxPageHeight = 0;
                 let isLongMode = false;
 
-                if (sizeVal === "long-810") {
+                if (sizeVal === "long-780") {
+                    targetWidth = 780;
+                    isLongMode = true;
+                } else if (sizeVal === "long-810") {
                     targetWidth = 810;
                     isLongMode = true;
                 } else if (sizeVal === "long-1080") {
@@ -1237,6 +1240,7 @@ export function initPage(Core = {}) {
                     targetWidth = w;
                     maxPageHeight = h;
                 }
+
 
                 // 【核心】调用原生Canvas绘制模块，返回 Blob 数组
                 const blobList = await renderExportCanvas(targetWidth, isLongMode, maxPageHeight, appData, gameTemplateList);
