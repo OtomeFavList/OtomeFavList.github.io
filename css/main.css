@@ -1683,6 +1683,35 @@ h2{
         word-break: break-all !important; /* 长日文、英文名称自动换行 */
         white-space: normal !important;
     }
+
+        /* ========== 【新增】移动端颜色选择弹窗适配，防止超出屏幕 ========== */
+    /* 匹配颜色选择弹窗modal-box（复用全局modal-box，仅针对颜色弹窗场景） */
+    .modal-box:has(.color-grid) {
+        width: min(92vw, 420px) !important;
+        max-height: 85vh !important;
+        overflow-y: auto !important;
+        box-sizing: border-box !important;
+    }
+    /* 颜色色块网格自适应缩放，防止横向溢出 */
+    .color-grid {
+        display: grid !important;
+        grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+        gap: 4px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    .color-grid > div {
+        aspect-ratio: 1 / 1 !important;
+        width: 100% !important;
+    }
+    /* 弹窗底部按钮自适应排布 */
+    .modal-box .color-modal-btns {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: flex-end !important;
+        gap: 12px !important;
+        margin-top: 16px !important;
+    }
 }
 
 /* 导出按钮区域单独纵向居中布局，不污染全局center-btn-block */
