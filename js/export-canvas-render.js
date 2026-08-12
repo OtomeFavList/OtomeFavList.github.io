@@ -9,9 +9,7 @@ import {
 
 // 最大并发图片加载数量，避免浏览器请求风暴
 const MAX_IMAGE_CONCURRENCY = 8;
-// DPR高清缩放系数，导出使用设备像素比提升清晰度
-const EXPORT_SCALE = window.devicePixelRatio || 1;
-//【优化】圆角离屏画布缓存：key = `${url}||${w}||${h}||${radius}||${scale}`
+//【优化】圆角离屏画布缓存：key = `${url}||${w}||${h}||${radius}`
 const roundImageCache = new Map();
 // ========== 字体规范【需求3】==========
 // 除顶部标题 Otome FavList 之外，所有文本默认思源柔黑体
@@ -73,26 +71,23 @@ export function measureWrappedHeight(ctx, text, maxWidth, lineHeight, fontSize, 
 }
 
 /**
- * 【修复】离屏画布生成圆角图片，缓存 key 包含宽高和圆角半径，支持 DPR 高清缩放
+ * 【修复】离屏画布生成圆角图片，缓存 key 包含宽高和圆角半径
  */
-function createRoundImageCanvas(img, srcUrl, w, h, radius, scale = 1) {
-  // 缓存key增加scale，不同倍率不能复用
-  const cacheKey = `${srcUrl}||${w}||${h}||${radius}||${scale}`;
+function createRoundImageCanvas(img, srcUrl, w, h, radius) {
+  const cacheKey = `${srcUrl}||${w}||${h}||${radius}`;
   if (roundImageCache.has(cacheKey)) {
     return roundImageCache.get(cacheKey);
   }
-  // 离屏画布物理尺寸放大scale倍
+
   const offCanvas = document.createElement('canvas');
-  offCanvas.width = w * scale;
-  offCanvas.height = h * scale;
+  offCanvas.width = w;
+  offCanvas.height = h;
   const offCtx = offCanvas.getContext('2d');
 
+  // =========【新增：离屏画布高清缩放】==========
   offCtx.imageSmoothingEnabled = true;
   offCtx.imageSmoothingQuality = "high";
   offCtx.webkitImageSmoothingEnabled = true;
-
-  // 上下文缩放，绘制坐标依然使用视觉尺寸w/h/radius
-  offCtx.scale(scale, scale);
 
   offCtx.beginPath();
   offCtx.moveTo(radius, 0);
@@ -106,7 +101,6 @@ function createRoundImageCanvas(img, srcUrl, w, h, radius, scale = 1) {
   offCtx.quadraticCurveTo(0, 0, radius, 0);
   offCtx.closePath();
   offCtx.clip();
-  // 原图拉伸到视觉尺寸w×h，内部scale已经放大画布
   offCtx.drawImage(img, 0, 0, w, h);
 
   roundImageCache.set(cacheKey, offCanvas);
@@ -142,28 +136,23 @@ async function loadImagesWithLimit(urlList, limit) {
 // ============================ Canvas 布局绘制器 ============================
 
 export class CanvasLayoutPainter {
-  constructor(canvas, visualWidth, visualHeight, bgColor, scale = 1) {
+  constructor(canvas, width, height, bgColor) {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
-    // 画布物理像素 = 视觉尺寸 × scale
-    this.scale = scale;
-    this.canvas.width = visualWidth * scale;
-    this.canvas.height = visualHeight * scale;
-    this.baseVisualWidth = visualWidth;
+    this.canvas.width = width;
+    this.canvas.height = height;
+    this.baseWidth = width;
     this.y = LAYOUT_SPACE.BODY_PADDING;
     this.bgColor = bgColor;
     this.ctx.textBaseline = 'top';
-
+    // =========【新增：高清图像平滑】==========
     this.ctx.imageSmoothingEnabled = true;
     this.ctx.imageSmoothingQuality = "high";
+    // 兼容webkit内核浏览器
     this.ctx.webkitImageSmoothingEnabled = true;
-
-    // 关键：全局缩放上下文，后续所有绘制全部使用【视觉像素】
-    this.ctx.scale(scale, scale);
-
-    // 背景填充使用视觉尺寸
+    // 填充背景
     this.ctx.fillStyle = this.bgColor;
-    this.ctx.fillRect(0, 0, visualWidth, visualHeight);
+    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
   }
 
   /** 重置 Y 坐标到起始位置（用于分页重绘） */
@@ -255,7 +244,6 @@ export class CanvasLayoutPainter {
   }
 
   drawImageRound(roundCanvas, x, y) {
-    // 离屏画布已经乘DPR，直接绘制
     this.ctx.drawImage(roundCanvas, x, y);
   }
 
@@ -817,7 +805,7 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
       painter.drawRoundRect(xPos, yPos, cardW, charCardHeight, LAYOUT_STYLE.CHAR_CARD_RADIUS, '#ffffff', '#eee', 1);
       if (img) {
         const imgY = yPos + innerPad;
-        const roundCanvas = createRoundImageCanvas(img, item.src, imgSize, imgSize, LAYOUT_STYLE.CHAR_IMG_RADIUS, painter.scale);
+        const roundCanvas = createRoundImageCanvas(img, item.src, imgSize, imgSize, LAYOUT_STYLE.CHAR_IMG_RADIUS);
         painter.drawImageRound(roundCanvas, xPos + innerPad, imgY);
       }
       const nameBoxY = yPos + innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB;
@@ -877,7 +865,7 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
       const femaleImg = imageCache.get(cp.femaleSrc);
       if (femaleImg) {
         const imgY = femaleY + innerPad;
-        const roundCanvas = createRoundImageCanvas(femaleImg, cp.femaleSrc, imgSize, imgSize, LAYOUT_STYLE.CHAR_IMG_RADIUS, painter.scale);
+        const roundCanvas = createRoundImageCanvas(femaleImg, cp.femaleSrc, imgSize, imgSize, LAYOUT_STYLE.CHAR_IMG_RADIUS);
         painter.drawImageRound(roundCanvas, femaleX + innerPad, imgY);
       }
       const fNameBoxY = femaleY + innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB;
@@ -901,7 +889,7 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
         painter.drawRoundRect(mx, my, maleCardW, rowH, LAYOUT_STYLE.CHAR_CARD_RADIUS, '#ffffff', '#eee', 1);
         if (mImg) {
           const imgY = my + innerPad;
-          const roundCanvas = createRoundImageCanvas(mImg, m.src, imgSize, imgSize, LAYOUT_STYLE.CHAR_IMG_RADIUS, painter.scale);
+          const roundCanvas = createRoundImageCanvas(mImg, m.src, imgSize, imgSize, LAYOUT_STYLE.CHAR_IMG_RADIUS);
           painter.drawImageRound(roundCanvas, mx + innerPad, imgY);
         }
         //【需求2修复：原代码参数顺序错误，导致男角色名字无法渲染】
@@ -962,26 +950,14 @@ async function drawFullContent(
 }
 
 /**
- * 画布裁剪工具（兼容缩放画布）
- * @param {HTMLCanvasElement} canvas 原始放大画布
- * @param {number} visualW 视觉宽度
- * @param {number} visualH 视觉高度
- * @param {number} scale 缩放系数
+ * 画布裁剪工具
  */
-function cropCanvas(canvas, visualW, visualH, scale) {
-  const physW = visualW * scale;
-  const physH = visualH * scale;
+function cropCanvas(canvas, width, height) {
   const cropped = document.createElement('canvas');
-  cropped.width = physW;
-  cropped.height = physH;
+  cropped.width = width;
+  cropped.height = height;
   const ctx = cropped.getContext('2d');
-  ctx.imageSmoothingEnabled = true;
-  ctx.imageSmoothingQuality = "high";
-  // 从大图截取物理区域
-  ctx.drawImage(canvas,
-    0, 0, physW, physH,
-    0, 0, physW, physH
-  );
+  ctx.drawImage(canvas, 0, 0, width, height, 0, 0, width, height);
   return cropped;
 }
 
@@ -1121,7 +1097,9 @@ export async function renderExportCanvas(
   if (isLongMode) {
     const totalHeight = calcTotalVirtualHeight(targetWidth, appData, gameTemplateList, renderDataList);
     const canvas = document.createElement('canvas');
-    const painter = new CanvasLayoutPainter(canvas, targetWidth, totalHeight, exportColor.bg, EXPORT_SCALE);
+    canvas.width = targetWidth;
+    canvas.height = totalHeight;
+    const painter = new CanvasLayoutPainter(canvas, targetWidth, totalHeight, exportColor.bg);
 
     const imageCache = await loadImagesWithLimit(allImageSrcList, MAX_IMAGE_CONCURRENCY);
 
@@ -1137,7 +1115,7 @@ export async function renderExportCanvas(
     );
 
     const finalHeight = painter.getY() + LAYOUT_SPACE.BODY_PADDING;
-    const finalCanvas = cropCanvas(canvas, targetWidth, finalHeight, EXPORT_SCALE);
+    const finalCanvas = cropCanvas(canvas, targetWidth, finalHeight);
     const blob = await new Promise((resolve) => finalCanvas.toBlob(resolve, 'image/png', 1));
     return [blob];
   }
@@ -1167,7 +1145,9 @@ export async function renderExportCanvas(
     // 临时画布高度预留充足（优化：提升至 maxPageHeight*4 和 6000 兜底）
     const safeTempHeight = Math.max(maxPageHeight * 4, 6000);
     const canvas = document.createElement('canvas');
-    const painter = new CanvasLayoutPainter(canvas, targetWidth, safeTempHeight, exportColor.bg, EXPORT_SCALE);
+    canvas.width = targetWidth;
+    canvas.height = safeTempHeight;
+    const painter = new CanvasLayoutPainter(canvas, targetWidth, safeTempHeight, exportColor.bg);
 
     await drawFullContent(
       painter,
@@ -1180,7 +1160,7 @@ export async function renderExportCanvas(
     );
 
     const usedHeight = painter.getY() + LAYOUT_SPACE.BODY_PADDING;
-    const finalCanvas = cropCanvas(canvas, targetWidth, usedHeight, EXPORT_SCALE);
+    const finalCanvas = cropCanvas(canvas, targetWidth, usedHeight);
     //【FIX】捕获toBlob异常，防止单页失败导致整个渲染中断
     const blob = await new Promise((resolve) => {
       finalCanvas.toBlob((b) => resolve(b), 'image/png', 1);
