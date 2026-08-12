@@ -1613,27 +1613,7 @@ h2{
         max-width: 100%;
         overflow-x: hidden;
     }
-    
-    /* 修复游戏列表文字溢出、右侧裁切问题 */
-    .game-option-item {
-        width: 100%;
-    }
-    .game-option-info {
-        flex: 1;
-        word-break: break-all;
-        overflow-wrap: break-word;
-        overflow-x: hidden;
-    }
-    .game-option-name {
-        word-break: break-all;
-        overflow-wrap: break-word;
-    }
-    .game-option-info p {
-        word-break: break-all;
-        overflow-wrap: break-word;
-    }
-}
-    
+
     /* ===================== 需求①：游戏待选封面缩小1/3 120px → 80px ===================== */
     .game-option-item img {
         width: 80px !important;
