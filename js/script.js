@@ -112,7 +112,7 @@ export function initPage(Core = {}) {
             <div class="char-item ${selected}" data-cid="${char.id}" data-char-id="${char.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}" data-panel-mode="char">
               <div class="char-card-img-box ${allSrc.length>1?'char-multi-img':''}">
                 ${allSrc.length>1?`<button class="char-switch-btn char-switch-prev" data-char-id="${char.id}" data-game-id="${gameId}" data-panel-mode="char">&lt;</button>`: ""}
-                <img src="${showSrc}" alt="${char.name}" decoding="async" loading="eager" style="image-rendering: -webkit-optimize-contrast;image-rendering: crisp-edges;">
+                <img src="${showSrc}" alt="${char.name}" decoding="async">
                 ${allSrc.length>1?`<button class="char-switch-btn char-switch-next" data-char-id="${char.id}" data-game-id="${gameId}" data-panel-mode="char">&gt;</button>`: ""}
               </div>
               <div class="char-card-name">${char.name}</div>
@@ -145,7 +145,7 @@ export function initPage(Core = {}) {
             <div class="char-item ${selected}" data-cid="${char.id}" data-char-id="${char.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}" data-panel-mode="char">
               <div class="char-card-img-box ${allSrc.length>1?'char-multi-img':''}">
                 ${allSrc.length>1?`<button class="char-switch-btn char-switch-prev" data-char-id="${char.id}" data-game-id="${gameId}" data-panel-mode="char">&lt;</button>`: ""}
-                <img src="${showSrc}" alt="${char.name}" decoding="async" loading="eager" style="image-rendering: -webkit-optimize-contrast;image-rendering: crisp-edges;">
+                <img src="${showSrc}" alt="${char.name}" decoding="async">
                 ${allSrc.length>1?`<button class="char-switch-btn char-switch-next" data-char-id="${char.id}" data-game-id="${gameId}" data-panel-mode="char">&gt;</button>`: ""}
               </div>
               <div class="char-card-name">${char.name}</div>
@@ -224,7 +224,7 @@ export function initPage(Core = {}) {
                     data-panel-mode="cp">
                     <div class="char-card-img-box ${allSrc.length>1?'char-multi-img':''}">
                         ${allSrc.length>1?`<button class="char-switch-btn char-switch-prev" data-char-id="${fChar.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}" data-panel-mode="cp">&lt;</button>`:""}
-                        <img src="${showSrc}" alt="${fChar.name}" decoding="async" loading="eager" style="image-rendering: -webkit-optimize-contrast;image-rendering: crisp-edges;">
+                        <img src="${showSrc}" alt="${fChar.name}" decoding="async">
                         ${allSrc.length>1?`<button class="char-switch-btn char-switch-next" data-char-id="${fChar.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}" data-panel-mode="cp">&gt;</button>`:""}
                     </div>
                     <div class="cp-female-name">${fChar.name}</div>
@@ -265,7 +265,7 @@ export function initPage(Core = {}) {
                                 data-panel-mode="cp">
                                 <div class="char-card-img-box ${mSrcArr.length>1?'char-multi-img':''}">
                                     ${mSrcArr.length>1?`<button class="char-switch-btn char-switch-prev" data-char-id="${mChar.id}" data-game-id="${gameId}" data-total-img="${mSrcArr.length}" data-panel-mode="cp">&lt;</button>`:""}
-                                    <img src="${mShowSrc}" alt="${mChar.name}" decoding="async" loading="eager" style="image-rendering: -webkit-optimize-contrast;image-rendering: crisp-edges;">
+                                    <img src="${mShowSrc}" alt="${mChar.name}" decoding="async">
                                     ${mSrcArr.length>1?`<button class="char-switch-btn char-switch-next" data-char-id="${mChar.id}" data-game-id="${gameId}" data-total-img="${mSrcArr.length}" data-panel-mode="cp">&gt;</button>`:""}
                                 </div>
                                 <div class="char-card-name">${mChar.name}</div>
