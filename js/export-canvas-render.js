@@ -9,7 +9,9 @@ import {
 
 // 最大并发图片加载数量，避免浏览器请求风暴
 const MAX_IMAGE_CONCURRENCY = 8;
-//【优化】圆角离屏画布缓存：key = `${url}||${w}||${h}||${radius}`
+// 导出高清倍率，统一控制，如需2倍清晰 = 2；3倍=3
+const EXPORT_DPR = 2;
+//【优化】圆角离屏画布缓存：key = `${url}||${w}||${h}||${radius}||${dpr}`
 const roundImageCache = new Map();
 // ========== 字体规范【需求3】==========
 // 除顶部标题 Otome FavList 之外，所有文本默认思源柔黑体
@@ -71,23 +73,28 @@ export function measureWrappedHeight(ctx, text, maxWidth, lineHeight, fontSize, 
 }
 
 /**
- * 【修复】离屏画布生成圆角图片，缓存 key 包含宽高和圆角半径
+ * 【修复】离屏画布生成圆角图片，缓存 key 包含宽高和圆角半径，并支持 DPR 高清缩放
  */
 function createRoundImageCanvas(img, srcUrl, w, h, radius) {
-  const cacheKey = `${srcUrl}||${w}||${h}||${radius}`;
+  // 缓存key追加DPR，不同倍率独立缓存
+  const cacheKey = `${srcUrl}||${w}||${h}||${radius}||${EXPORT_DPR}`;
   if (roundImageCache.has(cacheKey)) {
     return roundImageCache.get(cacheKey);
   }
 
   const offCanvas = document.createElement('canvas');
-  offCanvas.width = w;
-  offCanvas.height = h;
+  // 画布物理像素 = 设计尺寸 × DPR
+  offCanvas.width = w * EXPORT_DPR;
+  offCanvas.height = h * EXPORT_DPR;
   const offCtx = offCanvas.getContext('2d');
 
-  // =========【新增：离屏画布高清缩放】==========
+  // 高清平滑
   offCtx.imageSmoothingEnabled = true;
   offCtx.imageSmoothingQuality = "high";
   offCtx.webkitImageSmoothingEnabled = true;
+
+  // 缩放坐标系！所有绘图依旧使用原始设计坐标
+  offCtx.scale(EXPORT_DPR, EXPORT_DPR);
 
   offCtx.beginPath();
   offCtx.moveTo(radius, 0);
@@ -101,6 +108,7 @@ function createRoundImageCanvas(img, srcUrl, w, h, radius) {
   offCtx.quadraticCurveTo(0, 0, radius, 0);
   offCtx.closePath();
   offCtx.clip();
+  // drawImage 坐标保持原始 w h，不放大
   offCtx.drawImage(img, 0, 0, w, h);
 
   roundImageCache.set(cacheKey, offCanvas);
@@ -136,23 +144,36 @@ async function loadImagesWithLimit(urlList, limit) {
 // ============================ Canvas 布局绘制器 ============================
 
 export class CanvasLayoutPainter {
-  constructor(canvas, width, height, bgColor) {
+  constructor(canvas, designWidth, designHeight, bgColor) {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
-    this.canvas.width = width;
-    this.canvas.height = height;
-    this.baseWidth = width;
+    // 保存【设计尺寸】，所有绘图逻辑使用这套尺寸
+    this.designWidth = designWidth;
+    this.designHeight = designHeight;
+    this.baseWidth = designWidth;
     this.y = LAYOUT_SPACE.BODY_PADDING;
     this.bgColor = bgColor;
+
+    // ✅ DPR核心逻辑
+    const dpr = EXPORT_DPR;
+    // 画布实际像素 = 设计尺寸 × DPR
+    this.canvas.width = designWidth * dpr;
+    this.canvas.height = designHeight * dpr;
+    // CSS显示尺寸保持设计尺寸（如果页面显示canvas元素才需要，导出场景可保留规范写法）
+    this.canvas.style.width = `${designWidth}px`;
+    this.canvas.style.height = `${designHeight}px`;
+
+    this.ctx.scale(dpr, dpr);
     this.ctx.textBaseline = 'top';
-    // =========【新增：高清图像平滑】==========
+
+    // 高清平滑
     this.ctx.imageSmoothingEnabled = true;
     this.ctx.imageSmoothingQuality = "high";
-    // 兼容webkit内核浏览器
     this.ctx.webkitImageSmoothingEnabled = true;
-    // 填充背景
+
+    // 填充背景：使用【设计坐标】，不要乘DPR
     this.ctx.fillStyle = this.bgColor;
-    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    this.ctx.fillRect(0, 0, this.designWidth, this.designHeight);
   }
 
   /** 重置 Y 坐标到起始位置（用于分页重绘） */
@@ -950,14 +971,25 @@ async function drawFullContent(
 }
 
 /**
- * 画布裁剪工具
+ * 画布裁剪工具（兼容缩放画布）
+ * @param {HTMLCanvasElement} canvas 原始放大画布
+ * @param {number} designW 设计宽度
+ * @param {number} designH 设计高度
  */
-function cropCanvas(canvas, width, height) {
+function cropCanvas(canvas, designW, designH) {
+  const dpr = EXPORT_DPR;
+  const physW = designW * dpr;
+  const physH = designH * dpr;
   const cropped = document.createElement('canvas');
-  cropped.width = width;
-  cropped.height = height;
+  cropped.width = physW;
+  cropped.height = physH;
   const ctx = cropped.getContext('2d');
-  ctx.drawImage(canvas, 0, 0, width, height, 0, 0, width, height);
+  ctx.imageSmoothingEnabled = true;
+  ctx.imageSmoothingQuality = "high";
+  // 从源画布中截取物理区域（源画布本身已放大 dpr 倍）
+  // 源画布实际大小是 design * dpr，我们要裁剪 design * dpr 区域，然后绘制到新画布（已设定物理尺寸）
+  // 直接绘制即可，因为源画布物理尺寸和目标画布物理尺寸一致
+  ctx.drawImage(canvas, 0, 0, physW, physH);
   return cropped;
 }
 
@@ -1097,8 +1129,6 @@ export async function renderExportCanvas(
   if (isLongMode) {
     const totalHeight = calcTotalVirtualHeight(targetWidth, appData, gameTemplateList, renderDataList);
     const canvas = document.createElement('canvas');
-    canvas.width = targetWidth;
-    canvas.height = totalHeight;
     const painter = new CanvasLayoutPainter(canvas, targetWidth, totalHeight, exportColor.bg);
 
     const imageCache = await loadImagesWithLimit(allImageSrcList, MAX_IMAGE_CONCURRENCY);
@@ -1145,8 +1175,6 @@ export async function renderExportCanvas(
     // 临时画布高度预留充足（优化：提升至 maxPageHeight*4 和 6000 兜底）
     const safeTempHeight = Math.max(maxPageHeight * 4, 6000);
     const canvas = document.createElement('canvas');
-    canvas.width = targetWidth;
-    canvas.height = safeTempHeight;
     const painter = new CanvasLayoutPainter(canvas, targetWidth, safeTempHeight, exportColor.bg);
 
     await drawFullContent(
