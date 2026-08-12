@@ -15,6 +15,9 @@ const roundImageCache = new Map();
 // 除顶部标题 Otome FavList 之外，所有文本默认思源柔黑体
 const FONT_SIYUAN = "Noto Sans SC, sans-serif";
 
+// ========== 画质增强【新增】设备像素比高清渲染常量 ==========
+const DPR = Math.min(window.devicePixelRatio || 1, 2); // 限制最高2倍，防止内存爆炸
+
 // ============================ 工具函数 ============================
 
 /**
@@ -72,6 +75,7 @@ export function measureWrappedHeight(ctx, text, maxWidth, lineHeight, fontSize, 
 
 /**
  * 【修复】离屏画布生成圆角图片，缓存 key 包含宽高和圆角半径
+ * 【画质增强】应用DPR，高质量平滑
  */
 function createRoundImageCanvas(img, srcUrl, w, h, radius) {
   const cacheKey = `${srcUrl}||${w}||${h}||${radius}`;
@@ -80,9 +84,14 @@ function createRoundImageCanvas(img, srcUrl, w, h, radius) {
   }
 
   const offCanvas = document.createElement('canvas');
-  offCanvas.width = w;
-  offCanvas.height = h;
+  // 离屏画布同样应用DPR高清
+  offCanvas.width = w * DPR;
+  offCanvas.height = h * DPR;
   const offCtx = offCanvas.getContext('2d');
+  offCtx.scale(DPR, DPR);
+  // 离屏画布高质量平滑
+  offCtx.imageSmoothingEnabled = true;
+  offCtx.imageSmoothingQuality = 'high';
 
   offCtx.beginPath();
   offCtx.moveTo(radius, 0);
@@ -134,15 +143,25 @@ export class CanvasLayoutPainter {
   constructor(canvas, width, height, bgColor) {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
-    this.canvas.width = width;
-    this.canvas.height = height;
     this.baseWidth = width;
+    this.baseHeight = height;
+    this.DPR = DPR;
+    // 高清画布缩放
+    this.canvas.width = width * DPR;
+    this.canvas.height = height * DPR;
+    this.canvas.style.width = `${width}px`;
+    this.canvas.style.height = `${height}px`;
+    this.ctx.scale(DPR, DPR);
+
     this.y = LAYOUT_SPACE.BODY_PADDING;
     this.bgColor = bgColor;
     this.ctx.textBaseline = 'top';
+    // 【画质优化】开启高质量图像平滑
+    this.ctx.imageSmoothingEnabled = true;
+    this.ctx.imageSmoothingQuality = 'high';
     // 填充背景
     this.ctx.fillStyle = this.bgColor;
-    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    this.ctx.fillRect(0, 0, this.baseWidth, this.baseHeight);
   }
 
   /** 重置 Y 坐标到起始位置（用于分页重绘） */
@@ -234,6 +253,7 @@ export class CanvasLayoutPainter {
   }
 
   drawImageRound(roundCanvas, x, y) {
+    // 离屏画布已经乘DPR，直接绘制
     this.ctx.drawImage(roundCanvas, x, y);
   }
 
@@ -471,10 +491,6 @@ function preCalcLayoutHeight(targetWidth, appData, gameTemplateList, renderDataL
  * 4. 择优逻辑：枚举可行连续游戏数量，选出占用高度最接近参考高度；差值相同优先选更多卡片
  *    ⚠️ 参考高度仅为参考，允许实际高度超出参考高度，不强制限制上限
  * 5. 兜底：任何情况下一页至少1张卡片
- * 【修复重点】
- * ✅ 候选范围约束：优先寻找不超过参考高度的组合；若无，则再选择超出参考高度里最接近的
- * ✅ 避免一次性把所有游戏塞进第一页
- * ✅ 间距累加逻辑统一，消除计算偏差
  * @param {number} headerHeight 头部固定高度
  * @param {number[]} gameBlockHeights 每个游戏卡片高度数组（不含卡片后间距）
  * @param {number} maxH 单页参考高度（标准参考值，非硬性上限）
@@ -941,13 +957,19 @@ async function drawFullContent(
 
 /**
  * 画布裁剪工具
+ * 【画质增强】裁剪画布应用DPR和高清平滑
  */
 function cropCanvas(canvas, width, height) {
   const cropped = document.createElement('canvas');
-  cropped.width = width;
-  cropped.height = height;
+  cropped.width = width * DPR;
+  cropped.height = height * DPR;
+  cropped.style.width = `${width}px`;
+  cropped.style.height = `${height}px`;
   const ctx = cropped.getContext('2d');
-  ctx.drawImage(canvas, 0, 0, width, height, 0, 0, width, height);
+  ctx.scale(DPR, DPR);
+  ctx.imageSmoothingEnabled = true;
+  ctx.imageSmoothingQuality = 'high';
+  ctx.drawImage(canvas, 0, 0, width * DPR, height * DPR, 0, 0, width, height);
   return cropped;
 }
 
@@ -1106,7 +1128,7 @@ export async function renderExportCanvas(
 
     const finalHeight = painter.getY() + LAYOUT_SPACE.BODY_PADDING;
     const finalCanvas = cropCanvas(canvas, targetWidth, finalHeight);
-    const blob = await new Promise((resolve) => finalCanvas.toBlob(resolve, 'image/png'));
+    const blob = await new Promise((resolve) => finalCanvas.toBlob(resolve, 'image/png', 1.0));
     return [blob];
   }
 
@@ -1153,7 +1175,7 @@ export async function renderExportCanvas(
     const finalCanvas = cropCanvas(canvas, targetWidth, usedHeight);
     //【FIX】捕获toBlob异常，防止单页失败导致整个渲染中断
     const blob = await new Promise((resolve) => {
-      finalCanvas.toBlob((b) => resolve(b), 'image/png');
+      finalCanvas.toBlob((b) => resolve(b), 'image/png', 1.0);
     });
     if (blob) blobList.push(blob);
   }
