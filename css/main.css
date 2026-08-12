@@ -1694,3 +1694,8 @@ h2{
 .center-btn-block.export-btn-wrap .switch-desc {
     text-align: center;
 }
+
+/* 恢复默认按钮：左对齐，覆盖原有居中样式 */
+.center-btn-block.left-align-btn {
+    justify-content: flex-start !important;
+}
