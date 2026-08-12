@@ -1682,3 +1682,13 @@ h2{
         white-space: normal !important;
     }
 }
+
+/* 导出按钮区域单独纵向居中布局，不污染全局center-btn-block */
+.center-btn-block.export-btn-wrap {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+.center-btn-block.export-btn-wrap .switch-desc {
+    text-align: center;
+}
