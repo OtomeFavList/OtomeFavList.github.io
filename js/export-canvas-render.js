@@ -520,7 +520,7 @@ function splitPagesByHeight(headerHeight, gameBlockHeights, maxH) {
     })
   }
 
-  // 排序规则优化（关键修复！）
+  // 排序规则优化（关键修复！！！）
   // 1. 优先选择【不超过可用高度】的卡片组合；
   // 2. 同组内差值更小优先；差值相同，卡片数量更多优先
   // 3. 如果所有组合都超限，再在全部超限组合里择优
