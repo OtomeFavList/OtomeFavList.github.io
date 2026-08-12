@@ -266,6 +266,8 @@ export async function preloadAndDecodeImage(src){
         const tempImg = new Image();
         tempImg.decoding = "async";
         tempImg.crossOrigin = "anonymous";
+        // =========【新增】高清渲染提示 =========
+        tempImg.style.imageRendering = "auto";
         tempImg.src = src;
         try{
             await tempImg.decode();
