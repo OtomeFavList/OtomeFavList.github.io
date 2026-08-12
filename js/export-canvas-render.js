@@ -983,24 +983,28 @@ async function drawFullContent(
 
 /**
  * 画布裁剪工具（兼容缩放画布）
- * @param {HTMLCanvasElement} canvas 原始放大画布
- * @param {number} designW 设计宽度
- * @param {number} designH 设计高度
+ * 最终输出尺寸 = 设计尺寸，内部从高清画布缩回
+ * @param {HTMLCanvasElement} sourceCanvas 原始放大画布
+ * @param {number} designW 设计宽度（最终输出宽度）
+ * @param {number} designH 设计高度（最终输出高度）
  */
-function cropCanvas(canvas, designW, designH) {
+function cropCanvas(sourceCanvas, designW, designH) {
   const dpr = EXPORT_DPR;
   const physW = designW * dpr;
   const physH = designH * dpr;
+  // 目标画布尺寸为设计尺寸（用户指定）
   const cropped = document.createElement('canvas');
-  cropped.width = physW;
-  cropped.height = physH;
+  cropped.width = designW;
+  cropped.height = designH;
   const ctx = cropped.getContext('2d');
   ctx.imageSmoothingEnabled = true;
   ctx.imageSmoothingQuality = "high";
-  // 从源画布中截取物理区域（源画布本身已放大 dpr 倍）
-  // 源画布实际大小是 design * dpr，我们要裁剪 design * dpr 区域，然后绘制到新画布（已设定物理尺寸）
-  // 直接绘制即可，因为源画布物理尺寸和目标画布物理尺寸一致
-  ctx.drawImage(canvas, 0, 0, physW, physH);
+  // 从源画布（高清）截取物理区域，缩放到设计尺寸
+  ctx.drawImage(
+    sourceCanvas,
+    0, 0, physW, physH,   // 源区域（物理像素）
+    0, 0, designW, designH // 目标区域（设计像素）
+  );
   return cropped;
 }
 
