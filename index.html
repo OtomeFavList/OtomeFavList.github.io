@@ -114,6 +114,10 @@
                 <p class="switch-desc">开启后生成并导出的图片会包含折叠的游戏内容，关闭则只生成并导出展开的游戏内容。</p>
             </div>
         </div>
+        <!-- 恢复默认设置按钮（移到此处：导出折叠内容下方、导出背景色上方） -->
+        <div class="center-btn-block">
+            <button id="btn-reset-color">恢复默认设置</button>
+        </div>
         <!-- 原有颜色选择区域 -->
         <div class="color-set-row">
             <div class="color-item">
@@ -139,11 +143,6 @@
             <div class="color-item">
                 <label class="text-light-pink">卡片边框色</label>
                 <input type="color" id="color-border" value="#f6a5b8">
-            </div>
-            <!-- 新增：恢复默认设置按钮 -->
-            <div class="color-item">
-                <label class="text-light-pink">&nbsp;</label>
-                <button id="btn-reset-color">恢复默认设置</button>
             </div>
         </div>
         <!-- 导出尺寸选项 -->
