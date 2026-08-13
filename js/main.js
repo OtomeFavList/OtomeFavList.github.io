@@ -252,7 +252,7 @@ export function getAvailableCharImages(char, globalHideSwitch, globalFDSwitch, l
 export const imgCacheMap = new Map();
 
 // ============================================================
-// ① preloadAndDecodeImage 修改后（移除强制 decode）
+// ① preloadAndDecodeImage 修改后（移除强制 decode，添加跨域）
 // ============================================================
 export function preloadAndDecodeImage(src){
     if(!src){
@@ -268,6 +268,8 @@ export function preloadAndDecodeImage(src){
         const tempImg = new Image();
         // 异步解码
         tempImg.decoding = "async";
+        // ============ 新增关键一行：开启跨域匿名 ============
+        tempImg.crossOrigin = "anonymous";
 
         tempImg.onload = () => {
             // 不强制等待 decode，让浏览器自然解码
