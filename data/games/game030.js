@@ -13,7 +13,7 @@ const gameData = {
     art: [
         {name:"由良", lang:"zh"}
     ],
-    cover: "img/game/030.jpg", // 封面图路径，统一前缀img/
+    cover: "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/game/030.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 美琴
         {
@@ -23,7 +23,7 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/030/Mikoto.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/030/Mikoto.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 姬空木
@@ -34,7 +34,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/030/Himeutsugi.jpg","img/char/030/Himeutsugi2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/030/Himeutsugi.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/030/Himeutsugi2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 伊吕波
@@ -45,7 +46,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/030/Iroha.jpg","img/char/030/Iroha2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/030/Iroha.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/030/Iroha2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 唐红
@@ -56,7 +58,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/030/Karakurenai.jpg","img/char/030/Karakurenai2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/030/Karakurenai.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/030/Karakurenai2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 蛟
@@ -67,7 +70,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/030/Mizuchi.jpg","img/char/030/Mizuchi2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/030/Mizuchi.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/030/Mizuchi2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         }
     ]
