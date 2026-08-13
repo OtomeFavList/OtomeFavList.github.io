@@ -13,7 +13,7 @@ const gameData = {
     art: [
         {name:"のりた", lang:"ja"}
     ],
-    cover: "img/game/056.jpg", // 封面图路径，统一前缀img/
+    cover: "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/game/056.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 朱丽叶·露斯
         {
@@ -23,7 +23,7 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/056/Juliet.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/056/Juliet.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 亚设·汤普森
@@ -34,7 +34,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/056/Asher.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/056/Asher.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 普奇兰·洛厄尔
@@ -45,7 +45,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/056/Ciaran.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/056/Ciaran.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 加勒特·威尔金
@@ -56,7 +56,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/056/Garrett.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/056/Garrett.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 罗德斯·哈特菲尔德
@@ -67,7 +67,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/056/Rhodes.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/056/Rhodes.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         }
     ]
