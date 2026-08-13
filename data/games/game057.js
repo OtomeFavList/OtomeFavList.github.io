@@ -13,7 +13,7 @@ const gameData = {
     art: [
         {name:"らんぷみ", lang:"ja"}
     ],
-    cover: "img/game/057.jpg", // 封面图路径，统一前缀img/
+    cover: "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/game/057.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 凛
         {
@@ -23,7 +23,7 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/057/Rin.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/057/Rin.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 伊势屋惣一郎
@@ -34,7 +34,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/057/Iseya.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/057/Iseya.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 神乐屋彰人
@@ -45,7 +45,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/057/Kaguraya.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/057/Kaguraya.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 朔夜
@@ -56,7 +56,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/057/Sakuya.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/057/Sakuya.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 樱华屋时雨
@@ -67,7 +67,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/057/Shigure.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/057/Shigure.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 大月忍
@@ -78,7 +78,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/057/Shinobu.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/057/Shinobu.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 辰吉
@@ -89,7 +89,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/057/Tatsukichi.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/057/Tatsukichi.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         }
     ]
