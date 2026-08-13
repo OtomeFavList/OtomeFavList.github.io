@@ -4,7 +4,8 @@ import {
   LAYOUT_SPACE,
   LAYOUT_STYLE,
   getAvailableCharImages,
-  preloadAndDecodeImage
+  preloadAndDecodeImage,
+  preloadImageBitmap // <<==== 新增导入
 } from './main.js';
 
 // 最大并发图片加载数量，避免浏览器请求风暴
@@ -133,8 +134,11 @@ function createRoundImageCanvas(img, srcUrl, visualW, visualH, radius) {
   return offCanvas;
 }
 
+// ============================================================
+// ② 重写 loadImagesWithLimit：使用 preloadImageBitmap 获取高质量 ImageBitmap
+// ============================================================
 /**
- * 有限并发加载器
+ * 有限并发加载器，返回 ImageBitmap（高质量缩放）
  */
 async function loadImagesWithLimit(urlList, limit) {
   const uniqueUrls = [...new Set(urlList)];
@@ -145,8 +149,9 @@ async function loadImagesWithLimit(urlList, limit) {
     while (index < uniqueUrls.length) {
       const url = uniqueUrls[index++];
       try {
-        const img = await preloadAndDecodeImage(url);
-        resultMap.set(url, img);
+        // 使用 preloadImageBitmap 获取开启 high resizeQuality 的 ImageBitmap
+        const bitmap = await preloadImageBitmap(url);
+        resultMap.set(url, bitmap);
       } catch (err) {
         console.warn('图片加载失败：', url, err);
         resultMap.set(url, null);
