@@ -18,7 +18,7 @@ const gameData = {
     art: [
         {name:"藤理ト", lang:"zh"}
     ],
-    cover: "img/game/043.jpg", // 封面图路径，统一前缀img/
+    cover: "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/game/043.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 天沢朱里
         {
@@ -28,7 +28,8 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/043/Akari.jpg","img/char/043/Akari2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/043/Akari.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/043/Akari2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 虎走要司
@@ -39,7 +40,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/043/Kobase.jpg","img/char/043/Kobase2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/043/Kobase.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/043/Kobase2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 凑康平
@@ -50,7 +52,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/043/Minato.jpg","img/char/043/Minato2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/043/Minato.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/043/Minato2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 五月女光基
@@ -61,7 +64,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/043/Mitsuki.jpg","img/char/043/Mitsuki2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/043/Mitsuki.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/043/Mitsuki2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 吉冈绿郎
@@ -72,7 +76,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/043/Rokuro.jpg","img/char/043/Rokuro2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/043/Rokuro.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/043/Rokuro2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 碓井修也
@@ -83,7 +88,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/043/Shuya.jpg","img/char/043/Shuya2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/043/Shuya.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/043/Shuya2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 多井中法
@@ -94,7 +100,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/043/Tainaka.jpg","img/char/043/Tainaka2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/043/Tainaka.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/043/Tainaka2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 比嘉月彦
@@ -105,7 +112,8 @@ const gameData = {
             isHidden: true,
             isFD: false,
             images: [
-                { srcList: ["img/char/043/Higa.jpg","img/char/043/Higa2.jpg"], type: "base" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/043/Higa.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/043/Higa2.jpg"], type: "base" }
             ]
         },
         // YOFY
@@ -116,7 +124,7 @@ const gameData = {
             isHidden: true,
             isFD: false,
             images: [
-                { srcList: ["img/char/043/Yofy.jpg"], type: "base" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/043/Yofy.jpg"], type: "base" }
             ]
         }
     ]
