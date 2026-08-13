@@ -14,7 +14,7 @@ const gameData = {
     art: [
         {name:"ユウヤ", lang:"ja"}
     ],
-    cover: "img/game/049.jpg", // 封面图路径，统一前缀img/
+    cover: "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/game/049.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 明石亚未
         {
@@ -24,7 +24,8 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/049/Ami.jpg","img/char/049/Ami2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/049/Ami.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/049/Ami2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 春芳风花
@@ -35,7 +36,8 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/049/Fuuka.jpg","img/char/049/Fuuka2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/049/Fuuka.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/049/Fuuka2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 雪平实红
@@ -46,7 +48,8 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/049/Miku.jpg","img/char/049/Miku2.jpgg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/049/Miku.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/049/Miku2.jpgg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 碧木星利奈
@@ -57,7 +60,8 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/049/Serina.jpgg","img/char/049/Serina2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/049/Serina.jpgg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/049/Serina2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 栖川银之助
@@ -68,7 +72,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/049/Ginnosuke.jpg","img/char/049/Ginnosuke2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/049/Ginnosuke.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/049/Ginnosuke2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 市毛北斗
@@ -79,7 +84,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/049/Hokuto.jpg","img/char/049/Hokuto2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/049/Hokuto.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/049/Hokuto2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 美波天弥
@@ -90,7 +96,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/049/Tenya.jpg","img/char/049/Tenya2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/049/Tenya.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/049/Tenya2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 东里环
@@ -101,7 +108,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/049/Wataru.jpg","img/char/049/Wataru2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/049/Wataru.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/049/Wataru2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         }
     ]
