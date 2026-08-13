@@ -17,7 +17,7 @@ const roundImageCache = new Map();
 const FONT_SIYUAN = "Noto Sans SC, sans-serif";
 
 // ============================ 动态 DPR ============================
-let currentDPR = 3;
+let currentDPR = 2;
 
 function getExportDPR(width) {
   // 根据目标宽度选择合适的 DPR，保证清晰度同时控制文件大小
