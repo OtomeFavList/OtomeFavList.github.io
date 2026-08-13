@@ -17,7 +17,7 @@ const gameData = {
     art: [
         {name:"花邑まい", lang:"zh"}
     ],
-    cover: "img/game/007.jpg",
+    cover: "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/game/007.jpg",
     charList: [
         // 星野市香
         {
@@ -27,7 +27,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/007/Ichika.jpg","img/char/007/Ichika2.jpg"], type: "base" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/007/Ichika.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/007/Ichika2.jpg"], type: "base" }
             ]
         },
         // 柳爱时
@@ -38,7 +39,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/007/Aiji.jpg"], type: "base" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/007/Aiji.jpg"], type: "base" }
             ]
         },
         // 冈崎契
@@ -49,7 +50,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/007/Kei.jpg"], type: "base" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/007/Kei.jpg"], type: "base" }
             ]
         },
         // 榎本峰雄
@@ -60,7 +61,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/007/Mineo.jpg"], type: "base" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/007/Mineo.jpg"], type: "base" }
             ]
         },
         // 白石景之
@@ -71,7 +72,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/007/Shiraishi.jpg"], type: "base" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/007/Shiraishi.jpg"], type: "base" }
             ]
         },
         // 笹塚尊
@@ -82,7 +83,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/007/Takeru.jpg"], type: "base" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/007/Takeru.jpg"], type: "base" }
             ]
         }, // ✅补上逗号
         // 冴木弓弦
@@ -93,7 +94,7 @@ const gameData = {
             isHidden: true,
             isFD: true,
             images: [
-                { srcList: ["img/char/007/Yuzuru.jpg"], type: "base" } // ✅src → srcList
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/007/Yuzuru.jpg"], type: "base" } // ✅src → srcList
             ]
         },
         // 峰岸誠司
@@ -104,7 +105,7 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["img/char/007/Minegishi.jpg"], type: "base" } // ✅src → srcList
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/007/Minegishi.jpg"], type: "base" } // ✅src → srcList
             ]
         }, // ✅补上逗号
         // 吉成秀明
@@ -115,7 +116,7 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["img/char/007/Yoshinari.jpg"], type: "base" } // ✅src → srcList
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/007/Yoshinari.jpg"], type: "base" } // ✅src → srcList
             ]
         }
     ]
