@@ -13,7 +13,7 @@ const gameData = {
     art: [
         {name:"ユウヤ", lang:"ja"}
     ],
-    cover: "img/game/028.jpg", // 封面图路径，统一前缀img/
+    cover: "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/game/028.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 浅木春
         {
@@ -23,8 +23,9 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/028/Haru.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/028/Haru2.jpg","img/char/028/Haru3.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/028/Haru.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/028/Haru2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/028/Haru3.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 宫之杜博
@@ -35,8 +36,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/028/Hiroshi.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/028/Hiroshi2.jpg","img/char/028/Hiroshi3.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/028/Hiroshi.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/028/Hiroshi2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/028/Hiroshi3.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 宫之杜勇
@@ -47,8 +49,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/028/Isami.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/028/Isami2.jpg","img/char/028/Isami3.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/028/Isami.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/028/Isami2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/028/Isami3.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 宫之杜雅
@@ -59,8 +62,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/028/Masashi.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/028/Masashi2.jpg","img/char/028/Masashi3.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/028/Masashi.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/028/Masashi2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/028/Masashi3.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 宫之杜茂
@@ -71,8 +75,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/028/Shigeru.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/028/Shigeru2.jpg","img/char/028/Shigeru3.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/028/Shigeru.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/028/Shigeru2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/028/Shigeru3.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 宫之杜进
@@ -83,8 +88,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/028/Susumu.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/028/Susumu2.jpg","img/char/028/Susumu3.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/028/Susumu.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/028/Susumu2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/028/Susumu3.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 宫之杜正
@@ -95,8 +101,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/028/Tadashi.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/028/Tadashi2.jpg","img/char/028/Tadashi3.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/028/Tadashi.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/028/Tadashi2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/028/Tadashi3.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 宫之杜守
@@ -107,7 +114,8 @@ const gameData = {
             isHidden: true,
             isFD: true,
             images: [
-                { srcList: ["img/char/028/Mamoru.jpg","img/char/028/Mamoru2.jpg"], type: "base" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/028/Mamoru.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/028/Mamoru2.jpg"], type: "base" }
             ]
         },
         // 有田喜助
@@ -118,7 +126,8 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["img/char/028/Arita.jpg","img/char/028/Arita2.jpg"], type: "base" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/028/Arita.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/028/Arita2.jpg"], type: "base" }
             ]
         }
     ]
