@@ -18,7 +18,7 @@ const gameData = {
     art: [
         {name:"薄葉カゲロー", lang:"zh"}
     ],
-    cover: "img/game/032.jpg", // 封面图路径，统一前缀img/
+    cover: "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/game/032.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 露露
         {
@@ -28,8 +28,9 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/032/Lulu.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/032/Lulu2.jpg","img/char/032/Lulu3.png"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/032/Lulu.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/032/Lulu2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/032/Lulu3.png"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 阿尔贝罗
@@ -40,8 +41,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/032/Alvaro.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/032/Alvaro2.jpg","img/char/032/Alvaro3.png"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/032/Alvaro.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/032/Alvaro2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/032/Alvaro3.png"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 维拉尔
@@ -52,8 +54,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/032/Bilal.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/032/Bilal2.jpg","img/char/032/Bilal3.png"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/032/Bilal.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/032/Bilal2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/032/Bilal3.png"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 埃斯特
@@ -64,8 +67,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/032/Est.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/032/Est2.jpg","img/char/032/Est3.png"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/032/Est.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/032/Est2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/032/Est3.png"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 尤里乌斯
@@ -76,8 +80,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/032/Julius.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/032/Julius2.jpg","img/char/032/Julius3.png"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/032/Julius.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/032/Julius2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/032/Julius3.png"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 拉奇
@@ -88,8 +93,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/032/Lagi.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/032/Lagi2.jpg","img/char/032/Lagi3.png"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/032/Lagi.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/032/Lagi2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/032/Lagi3.png"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 诺埃尔
@@ -100,8 +106,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/032/Noel.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/032/Noel2.jpg","img/char/032/Noel3.png"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/032/Noel.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/032/Noel2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/032/Noel3.png"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 艾米
@@ -112,7 +119,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/032/Amy.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/032/Amy.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 埃尔伯特
@@ -123,7 +130,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/032/Elbert.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/032/Elbert.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 所罗·门
@@ -134,7 +141,8 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["img/char/032/Solo.jpg","img/char/032/Solo2.png"], type: "base" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/032/Solo.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/032/Solo2.png"], type: "base" }
             ]
         }
     ]
