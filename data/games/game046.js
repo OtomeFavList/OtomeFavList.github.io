@@ -16,7 +16,7 @@ const gameData = {
     art: [
         {name:"清白かりん", lang:"zh"}
     ],
-    cover: "img/game/046.jpg", // 封面图路径，统一前缀img/
+    cover: "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/game/046.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 亚普萝丝
         {
@@ -26,7 +26,9 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/046/Alfred.jpg","img/char/046/Alfred2.jpg","img/char/046/Alfred3.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/046/Alfred.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/046/Alfred2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/046/Alfred3.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 阿尔弗雷德·克雷斯维尔
@@ -37,7 +39,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/046/Alfred.jpg","img/char/046/Alfred2.jpg","img/char/046/Alfred3.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/046/Alfred.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/046/Alfred2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/046/Alfred3.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 亚斯科特·林代尔
@@ -48,7 +52,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/046/Ascot.jpg","img/char/046/Ascot2.jpg","img/char/046/Ascot3.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/046/Ascot.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/046/Ascot2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/046/Ascot3.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 爱德华·伯思斯坦
@@ -59,7 +65,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/046/Edward.jpg","img/char/046/Edward2.jpg","img/char/046/Edward3.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/046/Edward.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/046/Edward2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/046/Edward3.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 约翰
@@ -70,7 +78,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/046/John.jpg","img/char/046/John2.jpg","img/char/046/John3.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/046/John.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/046/John2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/046/John3.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 莱纳斯·沃德
@@ -81,7 +91,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/046/Linus.jpg","img/char/046/Linus2.jpg","img/char/046/Linus3.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/046/Linus.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/046/Linus2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/046/Linus3.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 卢卡斯·沙利文
@@ -92,7 +104,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/046/Lucas.jpg","img/char/046/Lucas2.jpg","img/char/046/Lucas3.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/046/Lucas.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/046/Lucas2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/046/Lucas3.png"], type: "base" },      // 默认基础图，始终加载
             ]
         }
     ]
