@@ -289,6 +289,50 @@ export function preloadAndDecodeImage(src){
 }
 
 // ============================================================
+// 新增 preloadImageBitmap（专供Canvas导出使用，启用高质量缩放）
+// ============================================================
+/**
+ * 预加载图片并生成高质量 createImageBitmap（专供Canvas导出使用）
+ * 解决Chrome PNG缩小插值模糊问题，启用 resizeQuality:"high"
+ * @param {string} src 图片地址
+ * @returns {Promise<ImageBitmap|null>}
+ */
+export function preloadImageBitmap(src) {
+    if (!src) {
+        return Promise.resolve(null);
+    }
+
+    // 复用上层图片缓存，避免重复网络请求
+    if (imgCacheMap.has(src)) {
+        return imgCacheMap.get(src).then(async (img) => {
+            if (!img) return null;
+            try {
+                // 关键：开启高质量缩放
+                return await createImageBitmap(img, {
+                    resizeQuality: "high"
+                });
+            } catch (e) {
+                console.warn(`createImageBitmap 不支持resizeQuality降级: ${src}`, e);
+                return await createImageBitmap(img);
+            }
+        });
+    }
+
+    // 先使用原有加载逻辑缓存图片
+    return preloadAndDecodeImage(src).then(async (img) => {
+        if (!img) return null;
+        try {
+            return await createImageBitmap(img, {
+                resizeQuality: "high"
+            });
+        } catch (e) {
+            console.warn(`createImageBitmap resizeQuality参数不被浏览器支持，降级: ${src}`, e);
+            return await createImageBitmap(img);
+        }
+    });
+}
+
+// ============================================================
 // ② preloadImagesInIdle 修改后
 // ============================================================
 export function preloadImagesInIdle(list, batchSize = 2){
@@ -930,6 +974,7 @@ function buildCoreContext() {
         getAllGameChar,
         getAvailableCharImages,
         preloadAndDecodeImage,
+        preloadImageBitmap, // <<=====新增
         preloadImagesInIdle,
         switchCharImage,
         switchCharImageWithLoading,
