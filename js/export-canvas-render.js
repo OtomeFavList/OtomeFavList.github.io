@@ -9,13 +9,25 @@ import {
 
 // 最大并发图片加载数量，避免浏览器请求风暴
 const MAX_IMAGE_CONCURRENCY = 8;
-// 导出高清倍率，统一控制，如需2倍清晰 = 2；3倍=3
-const EXPORT_DPR = 3;
-//【优化】圆角离屏画布缓存：key = `${url}||${w}||${h}||${radius}||${dpr}`
+//【优化】圆角离屏画布缓存：key = `${url}||${sourceW}x${sourceH}||${visualW}x${visualH}||${radius}||${dpr}`
 const roundImageCache = new Map();
 // ========== 字体规范【需求3】==========
 // 除顶部标题 Otome FavList 之外，所有文本默认思源柔黑体
 const FONT_SIYUAN = "Noto Sans SC, sans-serif";
+
+// ============================ 动态 DPR ============================
+let currentDPR = 3;
+
+function getExportDPR(width) {
+  // 根据目标宽度选择合适的 DPR，保证清晰度同时控制文件大小
+  if (width >= 1080) {
+    return 3;
+  }
+  if (width >= 810) {
+    return 3;
+  }
+  return 2; // 640 及以下使用 2 倍
+}
 
 // ============================ 工具函数 ============================
 
@@ -73,19 +85,23 @@ export function measureWrappedHeight(ctx, text, maxWidth, lineHeight, fontSize, 
 }
 
 /**
- * 【修复】离屏画布生成圆角图片，缓存 key 包含宽高和圆角半径，并支持 DPR 高清缩放
+ * 【修复】离屏画布生成圆角图片，使用原图尺寸保证高清
  */
-function createRoundImageCanvas(img, srcUrl, w, h, radius) {
-  // 缓存key追加DPR，不同倍率独立缓存
-  const cacheKey = `${srcUrl}||${w}||${h}||${radius}||${EXPORT_DPR}`;
+function createRoundImageCanvas(img, srcUrl, visualW, visualH, radius) {
+  const sourceW = img.naturalWidth || img.width || 1;
+  const sourceH = img.naturalHeight || img.height || 1;
+  const dpr = currentDPR;
+
+  // 缓存 key 包含原图尺寸、视觉尺寸、圆角半径和 DPR
+  const cacheKey = `${srcUrl}||${sourceW}x${sourceH}||${visualW}x${visualH}||${radius}||${dpr}`;
   if (roundImageCache.has(cacheKey)) {
     return roundImageCache.get(cacheKey);
   }
 
   const offCanvas = document.createElement('canvas');
-  // 画布物理像素 = 设计尺寸 × DPR
-  offCanvas.width = w * EXPORT_DPR;
-  offCanvas.height = h * EXPORT_DPR;
+  // 离屏画布物理像素 = 原图尺寸 × DPR
+  offCanvas.width = sourceW * dpr;
+  offCanvas.height = sourceH * dpr;
   const offCtx = offCanvas.getContext('2d');
 
   // 高清平滑
@@ -93,23 +109,25 @@ function createRoundImageCanvas(img, srcUrl, w, h, radius) {
   offCtx.imageSmoothingQuality = "high";
   offCtx.webkitImageSmoothingEnabled = true;
 
-  // 缩放坐标系！所有绘图依旧使用原始设计坐标
-  offCtx.scale(EXPORT_DPR, EXPORT_DPR);
+  // 缩放坐标系，使绘图坐标使用原图尺寸
+  offCtx.scale(dpr, dpr);
 
+  // 圆角裁剪路径（使用原图尺寸）
   offCtx.beginPath();
   offCtx.moveTo(radius, 0);
-  offCtx.lineTo(w - radius, 0);
-  offCtx.quadraticCurveTo(w, 0, w, radius);
-  offCtx.lineTo(w, h - radius);
-  offCtx.quadraticCurveTo(w, h, w - radius, h);
-  offCtx.lineTo(radius, h);
-  offCtx.quadraticCurveTo(0, h, 0, h - radius);
+  offCtx.lineTo(sourceW - radius, 0);
+  offCtx.quadraticCurveTo(sourceW, 0, sourceW, radius);
+  offCtx.lineTo(sourceW, sourceH - radius);
+  offCtx.quadraticCurveTo(sourceW, sourceH, sourceW - radius, sourceH);
+  offCtx.lineTo(radius, sourceH);
+  offCtx.quadraticCurveTo(0, sourceH, 0, sourceH - radius);
   offCtx.lineTo(0, radius);
   offCtx.quadraticCurveTo(0, 0, radius, 0);
   offCtx.closePath();
   offCtx.clip();
-  // drawImage 坐标保持原始 w h，不放大
-  offCtx.drawImage(img, 0, 0, w, h);
+
+  // 绘制原图（使用原图尺寸）
+  offCtx.drawImage(img, 0, 0, sourceW, sourceH);
 
   roundImageCache.set(cacheKey, offCanvas);
   return offCanvas;
@@ -154,8 +172,8 @@ export class CanvasLayoutPainter {
     this.y = LAYOUT_SPACE.BODY_PADDING;
     this.bgColor = bgColor;
 
-    // ✅ DPR核心逻辑
-    const dpr = EXPORT_DPR;
+    // 使用动态 DPR
+    const dpr = currentDPR;
     // 画布实际像素 = 设计尺寸 × DPR
     this.canvas.width = designWidth * dpr;
     this.canvas.height = designHeight * dpr;
@@ -273,9 +291,13 @@ export class CanvasLayoutPainter {
    * @param {number} h 目标高度（设计尺寸）
    */
   drawImageRound(roundCanvas, x, y, w, h) {
-    // 离屏画布本身已放大 DPR 倍，但在这里我们明确指定目标尺寸为设计尺寸，
-    // 主 Canvas 的 scale 会将其放大到物理像素，避免双重放大。
-    this.ctx.drawImage(roundCanvas, x, y, w, h);
+    // 明确指定源区域（整个离屏画布）和目标区域（设计尺寸）
+    // 主 Canvas 的 scale 会将其放大到物理像素
+    this.ctx.drawImage(
+      roundCanvas,
+      0, 0, roundCanvas.width, roundCanvas.height,
+      x, y, w, h
+    );
   }
 
   // ========== 核心修改：矢量路径绘制爱心（彻底根治 emoji 问题） ==========
@@ -982,33 +1004,26 @@ async function drawFullContent(
 }
 
 /**
- * 画布裁剪工具（兼容缩放画布）
- * 最终输出尺寸 = 设计尺寸，内部从高清画布缩回
+ * 画布裁剪工具：保持高清物理尺寸输出
  * @param {HTMLCanvasElement} sourceCanvas 原始放大画布（物理尺寸=designW*DPR）
- * @param {number} designW 【最终输出宽度】用户指定设计尺寸（不乘DPR）
- * @param {number} designH 【最终输出高度】用户指定设计尺寸（不乘DPR）
+ * @param {number} designW 设计宽度
+ * @param {number} designH 设计高度（实际使用高度）
  */
 function cropCanvas(sourceCanvas, designW, designH) {
-  const dpr = EXPORT_DPR;
-  // 源画布物理像素尺寸（内部高清画布大小）
-  const sourcePhysW = designW * dpr;
-  const sourcePhysH = designH * dpr;
+  const dpr = currentDPR;
+  const outputW = designW * dpr;
+  const outputH = designH * dpr;
 
-  // 关键改动：最终导出画布 = 原始设计尺寸，不再乘DPR
   const cropped = document.createElement('canvas');
-  cropped.width = designW;
-  cropped.height = designH;
+  cropped.width = outputW;
+  cropped.height = outputH;
 
   const ctx = cropped.getContext('2d');
   ctx.imageSmoothingEnabled = true;
   ctx.imageSmoothingQuality = "high";
 
-  // 将高清源画布缩放至目标设计尺寸输出
-  ctx.drawImage(
-    sourceCanvas,
-    0, 0, sourcePhysW, sourcePhysH,
-    0, 0, designW, designH
-  );
+  // 直接复制源画布的对应区域（源画布物理尺寸与输出一致）
+  ctx.drawImage(sourceCanvas, 0, 0, outputW, outputH, 0, 0, outputW, outputH);
   return cropped;
 }
 
@@ -1051,7 +1066,10 @@ export async function renderExportCanvas(
 ) {
   const { exportColor, gameList } = appData;
 
-  // 清空圆角缓存
+  // 设置当前 DPR
+  currentDPR = getExportDPR(targetWidth);
+
+  // 清空圆角缓存（因为 DPR 变化，缓存失效）
   roundImageCache.clear();
 
   // ======== 第一步：收集渲染数据和图片地址 ========
