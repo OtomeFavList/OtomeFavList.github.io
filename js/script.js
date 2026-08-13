@@ -1,4 +1,265 @@
-// ===================== script.js UI交互层（模块化导出） =====================
+# 一、问题根源定位
+
+## 现象复述
+
+进入Couple面板，点击女主卡片展开男主列表时，**女主图片被重复渲染两份**。
+
+## 根本原因
+
+```
+const charItem = e.target.closest(".char-slide-panel-char .char-item, .char-slide-panel-cp .char-item");
+if (charItem) {
+    const cid = charItem.dataset.cid;
+    const gameId = charItem.dataset.gameId;
+    const gameItem = appData.gameList?.find(g => g.gameId === gameId);
+    if (!gameItem) return;
+
+    const panelChar = charItem.closest(".char-slide-panel-char");
+    if (panelChar) {
+        // char模式逻辑
+    } else {
+        // cp模式保持原有逻辑不变
+        toggleCpItemSelect(gameItem, cid);
+        gameItem.cpPanelOpen = false;
+        saveData();
+        clearPreviewCacheResource();
+        requestAnimationFrame(() => {
+            window.refreshGameCardUi();
+        });
+        return;
+    }
+}
+```
+
+这段事件委托匹配规则**范围错误**：
+`.char-slide-panel-cp .char-item` 在cp面板里不存在！
+cp面板女主DOM类名是 `.cp-female-card-btn`，男主DOM是 `.cp-male-item`。
+但是选择器 `char-slide-panel-cp .char-item` 永远匹配不到；
+**真正致命逻辑：早期遗留代码把`toggleCpItemSelect`绑定在了错误选择器，而现在新版cp已经完全重构为`cp-female-card-btn / cp-male-item`草稿模式，但是这段旧分支没有被清理。**
+
+> 
+> 更深层连锁触发：
+
+1. 点击 `.cp-female-card-btn`（女主）执行 `cpFemaleBtn` 分支 → 修改 `st.openMalePanel = !st.openMalePanel`
+2. 执行 `refreshGameCardUi()` 整卡片重渲染面板
+3. **同时，点击女主图片内部`<img>`、外层容器，事件冒泡命中了【失效旧charItem选择器】下方的隐患？不，真正核心：**
+✅**真实根因：**
+你当前代码里**两套独立触发刷新逻辑**
+4. `cpFemaleBtn` 点击女主 → `refreshGameCardUi()`（正确，只负责展开/收起男主面板）
+5. **历史遗留废弃分支：`charItem` 选择器里的 `else` 分支是旧cp单选逻辑，现在已经完全不用，但这段代码存在，并且**存在DOM冒泡误判叠加刷新**；
+并且还有一个隐藏BUG：> 
+> 在 `renderCharSelectPanel` cp模式渲染HTML时，`cp-female-card-btn` 只是切换展开状态，**但是每次刷新整个面板会完整重绘所有女主DOM**，同时事件委托里，**点击女主图片时，没有阻止某条旧分支重复触发渲染**。
+
+# 终极精准根因（一行定位）
+
+```
+// 错误选择器
+const charItem = e.target.closest(".char-slide-panel-char .char-item, .char-slide-panel-cp .char-item");
+```
+
+`char-slide-panel-cp .char-item` 在当前cp面板HTML**不存在**，cp面板角色元素：
+
+- 女主：`.cp-female-card-btn`
+- 男主：`.cp-male-item`
+
+**但是！这段代码存在巨大隐患：当你点击cp面板内任意元素，如果事件冒泡产生匹配混淆，并且最重要：**
+**旧cp业务逻辑（toggleCpItemSelect）完全废弃，新版cp使用草稿模式、cpConfirmBtn统一提交，但是旧分支没有删除！**
+当点击女主时，事件冒泡流程叠加，**出现两次执行渲染**：
+
+1. cpFemaleBtn分支触发一次 `refreshGameCardUi()`
+2. 若元素冒泡意外命中旧charItem分支，再次触发刷新 → 面板重新渲染，女主图片重复生成。
+
+另外一个次要诱因：
+
+```
+cpPanelHtml += `
+<div class="cp-female-block" data-fid="${fChar.id}" data-gid="${gameId}">
+    <div class="cp-female-card-btn" ...>
+        <img>女主图片
+    </div>
+    ${state.openMalePanel ? `cp-male-select-wrap（男主列表）` : ""}
+</div>`
+```
+
+每次`refreshGameCardUi`会完整重建`cpPanelHtml`，**没有做局部DOM更新，是整段innerHTML覆盖重绘**。
+当**连续两次执行刷新**，渲染函数执行两次，HTML拼接两次 → 视觉上出现两张女主图片。
+
+# 核心修复方案
+
+1. **彻底删除废弃的旧cp charItem分支（最关键）**，新版cp不再使用`toggleCpItemSelect`，全部走草稿+确认按钮模式；
+2. 修正`charItem`选择器，**只匹配char模式面板内的.char-item**，剔除cp面板无效选择器；
+3. 保证：点击女主`.cp-female-card-btn`**仅执行一次刷新**，杜绝双重刷新；
+4. 校验：cp模式下不再进入任何旧cp单选分支。
+
+# 修改前后完整代码对比
+
+## 修改前（错误代码片段，位于全局click事件委托内部）
+
+```
+      // ✅ 卡片内滑出面板角色勾选事件委托【改动：调用main导出函数，区分面板类型】
+      const charItem = e.target.closest(".char-slide-panel-char .char-item, .char-slide-panel-cp .char-item");
+      if (charItem) {
+          const cid = charItem.dataset.cid;
+          const gameId = charItem.dataset.gameId;
+          const gameItem = appData.gameList?.find(g => g.gameId === gameId);
+          if (!gameItem) return;
+
+          const panelChar = charItem.closest(".char-slide-panel-char");
+          if (panelChar) {
+              // ========= char模式：仅操作本地草稿集合，不写真实数据 =========
+              const draftSet = panelChar._tempCharDraftSet;
+              if(!draftSet) return;
+              if(draftSet.has(cid)){
+                  draftSet.delete(cid);
+                  charItem.classList.remove("selected");
+              }else{
+                  draftSet.add(cid);
+                  charItem.classList.add("selected");
+              }
+              // ❗不保存、不关闭面板，等待用户点确认/取消
+              return;
+          } else {
+              // cp模式保持原有逻辑不变
+              toggleCpItemSelect(gameItem, cid);
+              gameItem.cpPanelOpen = false;
+              saveData();
+              clearPreviewCacheResource(); // 缓存失效
+              requestAnimationFrame(() => {
+                  window.refreshGameCardUi();
+              });
+              return;
+          }
+      }
+```
+
+## 修改后（修复代码）
+
+```
+      // ✅ 卡片内滑出面板角色勾选事件委托：仅处理char模式面板角色勾选
+      const charItem = e.target.closest(".char-slide-panel-char .char-item");
+      if (charItem) {
+          const cid = charItem.dataset.cid;
+          const gameId = charItem.dataset.gameId;
+          const gameItem = appData.gameList?.find(g => g.gameId === gameId);
+          if (!gameItem) return;
+
+          const panelChar = charItem.closest(".char-slide-panel-char");
+          if (panelChar) {
+              // ========= char模式：仅操作本地草稿集合，不写真实数据 =========
+              const draftSet = panelChar._tempCharDraftSet;
+              if(!draftSet) return;
+              if(draftSet.has(cid)){
+                  draftSet.delete(cid);
+                  charItem.classList.remove("selected");
+              }else{
+                  draftSet.add(cid);
+                  charItem.classList.add("selected");
+              }
+              // ❗不保存、不关闭面板，等待用户点确认/取消
+              return;
+          }
+          // 【移除旧cp废弃分支，新版cp全部使用cp-maleItem + 确认按钮草稿模式】
+          return;
+      }
+```
+
+# 完整替换区间（在你script.js精确位置）
+
+找到代码区域：
+
+```
+      // ✅ 卡片内滑出面板角色勾选事件委托【改动：调用main导出函数，区分面板类型】
+      const charItem = e.target.closest(......);
+      if (charItem) {
+          // ...一大段代码包含else旧cp逻辑
+      }
+```
+
+**整段替换为上面修复后的代码。**
+
+# 额外增强校验（防止依然出现重复渲染，可选建议）
+
+## 隐患补充：cpFemaleBtn 点击逻辑增加防重复执行锁
+
+当前代码：
+
+```
+      const cpFemaleBtn = e.target.closest(".cp-female-card-btn");
+      if(cpFemaleBtn){
+          e.stopPropagation();
+          const fid = cpFemaleBtn.dataset.fid;
+          const card = cpFemaleBtn.closest(".added-game-card");
+          const gid = card.dataset.gameid;
+          const gameItem = appData.gameList.find(g=>g.gameId === gid);
+          if(!gameItem) return;
+          const st = gameItem.cpEditState.find(s=>s.femaleId === fid);
+          if(st){
+              st.openMalePanel = !st.openMalePanel;
+          }
+          saveData();
+          clearPreviewCacheResource(); // 缓存失效
+          requestAnimationFrame(()=>{
+              window.refreshGameCardUi();
+          });
+          return;
+      }
+```
+
+### 优化版本（增加防抖动，避免快速多次点击触发多次渲染）
+
+```
+      // 建议在bootstrap顶层作用域新增变量（放在全局click外面）
+      let cpPanelRenderLock = false;
+
+      // 然后修改cpFemaleBtn分支
+      const cpFemaleBtn = e.target.closest(".cp-female-card-btn");
+      if(cpFemaleBtn){
+          e.stopPropagation();
+          if(cpPanelRenderLock) return;
+          cpPanelRenderLock = true;
+
+          const fid = cpFemaleBtn.dataset.fid;
+          const card = cpFemaleBtn.closest(".added-game-card");
+          const gid = card.dataset.gameid;
+          const gameItem = appData.gameList.find(g=>g.gameId === gid);
+          if(!gameItem) {
+              cpPanelRenderLock = false;
+              return;
+          }
+          const st = gameItem.cpEditState.find(s=>s.femaleId === fid);
+          if(st){
+              st.openMalePanel = !st.openMalePanel;
+          }
+          saveData();
+          clearPreviewCacheResource();
+          requestAnimationFrame(()=>{
+              window.refreshGameCardUi();
+              // 渲染完成释放锁
+              setTimeout(()=>{
+                  cpPanelRenderLock = false;
+              }, 80);
+          });
+          return;
+      }
+```
+
+> 
+> 作用：快速连续点击女主不会多次触发refreshGameCardUi，杜绝短时间多次重绘造成DOM重复。
+
+# 为什么这样修复就能解决“多出一张女主图片”
+
+1. 删除了**已经废弃的旧cp单选分支**，消除了第二条`refreshGameCardUi()`执行通路；
+2. charItem选择器不再包含cp面板，点击cp面板任何元素不会误入旧逻辑；
+3. 现在点击女主展开面板**只有唯一一条刷新执行链路**：`cpFemaleBtn → 单次refreshGameCardUi`；
+4. 不再存在“两次连续渲染面板HTML”，innerHTML不会拼接两次女主卡片，图片不会重复生成。
+
+# 操作执行顺序
+
+1. 先替换 `charItem` 选择器以及内部if-else代码（核心修复，必做）；
+2. 刷新页面测试Couple面板点击女主，观察是否还会重复出现女主图片；
+3. 如果仍偶发重复，再加上 `cpPanelRenderLock` 防抖动锁（可选增强）。
+
+请严格按照以上内容对script.js文件进行修复后输出完整代码：// ===================== script.js UI交互层（模块化导出） =====================
 // 【重要说明】剧透弹窗、全局开关click事件全部迁移至main.js，本文件不再处理全局开关点击逻辑
 // 游戏卡片动态生成的局部开关：使用事件委托对接main.js剧透弹窗逻辑
 // 改造：每个游戏卡片内部渲染两套独立滑出面板 char / cp；不再使用全局唯一char-slide-panel
