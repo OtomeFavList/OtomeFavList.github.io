@@ -23,7 +23,7 @@ const gameData = {
     art: [
         {name:"ユウヤ", lang:"ja"}
     ],
-    cover: "img/game/044.jpg", // 封面图路径，统一前缀img/
+    cover: "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/game/044.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 逸色珠沙
         {
@@ -33,7 +33,8 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/044/Misa.jpg","img/char/044/Misa2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/044/Misa.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/044/Misa2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 响
@@ -44,7 +45,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/044/Hibiki.jpg","img/char/044/Hibiki2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/044/Hibiki.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/044/Hibiki2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 狐春
@@ -55,7 +57,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/044/Koharu.jpg","img/char/044/Koharu2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/044/Koharu.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/044/Koharu2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 香羊
@@ -66,7 +69,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/044/Kouyou.jpg","img/char/044/Kouyou2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/044/Kouyou.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/044/Kouyou2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 红华
@@ -77,7 +81,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/044/Kureha.jpg","img/char/044/Kureha2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/044/Kureha.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/044/Kureha2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 魅勿鬽
@@ -88,7 +93,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/044/Minami.jpg","img/char/044/Minami2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/044/Minami.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/044/Minami2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 圣夜
@@ -99,7 +105,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/044/Seiya.jpg","img/char/044/Seiya2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/044/Seiya.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/044/Seiya2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 星绊
@@ -110,7 +117,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/044/Sena.jpg","img/char/044/Sena2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/044/Sena.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/044/Sena2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 幸麿
@@ -121,7 +129,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/044/Yukimaro.jpg","img/char/044/Yukimaro2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/044/Yukimaro.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/044/Yukimaro2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 桃嘉
@@ -132,7 +141,8 @@ const gameData = {
             isHidden: true,
             isFD: false,
             images: [
-                { srcList: ["img/char/044/Toka.jpg","img/char/044/Toka2.png"], type: "base" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/044/Toka.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/044/Toka2.png"], type: "base" }
             ]
         }
     ]
