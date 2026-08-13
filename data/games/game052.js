@@ -16,7 +16,7 @@ const gameData = {
     art: [
         {name:"煮たか", lang:"zh"}
     ],
-    cover: "img/game/052.jpg", // 封面图路径，统一前缀img/
+    cover: "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/game/052.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 塞西莉亚·法里亚斯·提米拉纳
         {
@@ -26,7 +26,11 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/052/Cecilia.jpg","img/char/052/Cecilia2.jpg","img/char/052/Cecilia3.png","img/char/052/Cecilia4.jpg","img/char/052/Cecilia5.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/052/Cecilia.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/052/Cecilia2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/052/Cecilia3.png",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/052/Cecilia4.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/052/Cecilia5.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 阿德尔·纳雷斯
@@ -37,7 +41,11 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/052/Adel.jpg","img/char/052/Adel2.jpg","img/char/052/Adel3.png","img/char/052/Adel4.jpg","img/char/052/Adel5.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/052/Adel.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/052/Adel2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/052/Adel3.png",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/052/Adel4.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/052/Adel5.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 约瑟菲·康奈希尔德·佐达利克
@@ -48,7 +56,11 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/052/Josephy.jpg","img/char/052/Josephy2.jpg","img/char/052Josephy3.png","img/char/052/Josephy4.jpg","img/char/052/Josephy5.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/052/Josephy.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/052/Josephy2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/052/Josephy3.png",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/052/Josephy4.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/052/Josephy5.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 齐亚·奈尔提
@@ -59,7 +71,11 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/052/Kiya.jpg","img/char/052/Kiya2.jpg","img/char/052/Kiya3.png","img/char/052/Kiya4.jpg","img/char/052/Kiya5.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/052/Kiya.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/052/Kiya2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/052/Kiya3.png",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/052/Kiya4.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/052/Kiya5.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 米兰·赫林
@@ -70,7 +86,11 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/052/Milan.jpg","img/char/052/Milan2.jpg","img/char/052/Milan3.png","img/char/052/Milan4.jpg","img/char/052/Milan5.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/052/Milan.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/052/Milan2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/052/Milan3.png",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/052/Milan4.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/052/Milan5.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 托比亚斯·哈贝克·弗莱
@@ -81,7 +101,11 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/052/Adel.jpg","img/char/052/Tobias2.jpg","img/char/052/Tobias3.png","img/char/052/Tobias4.jpg","img/char/052/Tobias5.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/052/Adel.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/052/Tobias2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/052/Tobias3.png",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/052/Tobias4.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/052/Tobias5.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         }
     ]
