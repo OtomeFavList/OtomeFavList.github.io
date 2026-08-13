@@ -13,7 +13,7 @@ const gameData = {
     art: [
         {name:"さらちよみ", lang:"ja"}
     ],
-    cover: "img/game/064.jpg", // 封面图路径，统一前缀img/
+    cover: "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/game/064.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 菲丽琪塔
         {
@@ -23,7 +23,8 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/064/Felicita.jpg","img/char/064/Felicita2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/064/Felicita.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/064/Felicita2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 但丁
@@ -34,7 +35,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/064/Dante.jpg","img/char/064/Dante2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/064/Dante.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/064/Dante2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 戴维特
@@ -45,7 +47,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/064/Debito.jpg","img/char/064/Debito2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/064/Debito.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/064/Debito2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 乔利
@@ -56,7 +59,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/064/Jolly.jpg","img/char/064/Jolly2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/064/Jolly.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/064/Jolly2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 利贝罗塔
@@ -67,7 +71,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/064/Liberta.jpg","img/char/064/Liberta2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/064/Liberta.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/064/Liberta2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 路卡
@@ -78,7 +83,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/064/Luca.jpg","img/char/064/Luca2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/064/Luca.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/064/Luca2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 诺瓦
@@ -89,7 +95,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/064/Nova.jpg","img/char/064/Nova2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/064/Nova.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/064/Nova2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 帕契
@@ -100,7 +107,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/064/Pace.jpg","img/char/064/Pace2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/064/Pace.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/064/Pace2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         }
     ]
