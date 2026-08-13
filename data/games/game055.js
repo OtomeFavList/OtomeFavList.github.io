@@ -18,7 +18,7 @@ const gameData = {
     art: [
         {name:"くらげ壱", lang:"ja"}
     ],
-    cover: "img/game/055.jpg", // 封面图路径，统一前缀img/
+    cover: "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/game/055.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 天野凪咲
         {
@@ -28,7 +28,8 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/055/Nagisa.jpg","img/char/055/Nagisa2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/055/Nagisa.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/055/Nagisa2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 埃尔文
@@ -39,7 +40,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/055/Alvin.jpg","img/char/055/Alvin2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/055/Alvin.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/055/Alvin2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 以利亚
@@ -50,7 +52,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/055/Elijah.jpg","img/char/055/Elijah2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/055/Elijah.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/055/Elijah2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 伊诺
@@ -61,7 +64,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/055/Eno.jpg","img/char/055/Eno2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/055/Eno.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/055/Eno2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 费恩
@@ -72,7 +76,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/055/Finn.jpg","img/char/055/Finn2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/055/Finn.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/055/Finn2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 米洛
@@ -83,7 +88,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/055/Milo.jpg","img/char/055/Milo2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/055/Milo.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/055/Milo2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 狄奥
@@ -94,7 +100,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/055/Theo.jpg","img/char/055/Theo2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/055/Theo.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/055/Theo2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         }
     ]
