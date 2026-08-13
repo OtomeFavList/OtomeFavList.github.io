@@ -10,7 +10,7 @@ import {
 // 最大并发图片加载数量，避免浏览器请求风暴
 const MAX_IMAGE_CONCURRENCY = 8;
 // 导出高清倍率，统一控制，如需2倍清晰 = 2；3倍=3
-const EXPORT_DPR = 2;
+const EXPORT_DPR = 3;
 //【优化】圆角离屏画布缓存：key = `${url}||${w}||${h}||${radius}||${dpr}`
 const roundImageCache = new Map();
 // ========== 字体规范【需求3】==========
