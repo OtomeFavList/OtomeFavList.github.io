@@ -19,7 +19,7 @@ const gameData = {
     art: [
         {name:"さとい", lang:"ja"}
     ],
-    cover: "img/game/036.jpg", // 封面图路径，统一前缀img/
+    cover: "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/game/036.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 小森唯
         {
@@ -29,7 +29,9 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/036/Yui.jpg","img/char/036/Yui2.jpg","img/char/036/Yui3.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Yui.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Yui2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Yui3.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 逆卷绫人
@@ -40,8 +42,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/036/Ayato.jpg","img/char/036/Ayato2.jpg","img/char/036/Ayato3.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/036/Ayato4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Ayato.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Ayato2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Ayato3.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Ayato4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 无神梓
@@ -52,8 +56,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/036/Azusa.jpg","img/char/036/Azusa2.jpg","img/char/036/Azusa3.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/036/Azusa4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Azusa.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Azusa2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Azusa3.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Azusa4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 逆卷奏人
@@ -64,8 +70,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/036/Kanato.jpg","img/char/036/Kanato2.jpg","img/char/036/Kanato3.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/036/Kanato4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Kanato.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Kanato2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Kanato3.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Kanato4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 无神皓
@@ -76,8 +84,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/036/Kou.jpg","img/char/036/Kou2.jpg","img/char/036/Kou3.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/036/Kou4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Kou.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Kou2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Kou3.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Kou4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 逆卷礼人
@@ -88,8 +98,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/036/Laito.jpg","img/char/036/Laito2.jpg","img/char/036/Laito3.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/036/Laito4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Laito.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Laito2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Laito3.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Laito4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 逆卷怜司
@@ -100,8 +112,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/036/Reiji.jpg","img/char/036/Reiji2.jpg","img/char/036/Reiji3.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/036/Reiji4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Reiji.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Reiji2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Reiji3.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Reiji4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 无神琉辉
@@ -112,8 +126,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/036/Ruki.jpg","img/char/036/Ruki2.jpg","img/char/036/Ruki3.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/036/Ruki4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Ruki.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Ruki2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Ruki3.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Ruki4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 逆卷修
@@ -124,8 +140,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/036/Shuu.jpg","img/char/036/Shuu2.jpg","img/char/036/Shuu3.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/036/Shuu4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Shuu.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Shuu2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Shuu3.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Shuu4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 逆卷昴
@@ -136,8 +154,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/036/Subaru.jpg","img/char/036/Subaru2.jpg","img/char/036/Subaru3.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/036/Subaru4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Subaru.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Subaru2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Subaru3.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Subaru4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 无神悠真
@@ -148,8 +168,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/036/Yuuma.jpg","img/char/036/Yuuma2.jpg","img/char/036/Yuuma3.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/036/Yuuma4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Yuuma.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Yuuma2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Yuuma3.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Yuuma4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 月浪卡拉
@@ -160,8 +182,10 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["img/char/036/Carla.jpg","img/char/036/Carla2.jpg","img/char/036/Carla3.jpg"], type: "base" },
-                { srcList: ["img/char/036/Carla4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Carla.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Carla2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Carla3.jpg"], type: "base" },
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Carla4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 月浪辛
@@ -172,8 +196,10 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["img/char/036/Shin.jpg","img/char/036/Shin2.jpg","img/char/036/Shin3.jpg"], type: "base" },
-                { srcList: ["img/char/036/Shin4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Shin.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Shin2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Shin3.jpg"], type: "base" },
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Shin4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 基诺
@@ -184,7 +210,8 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["img/char/036/Kino.jpg","img/char/036/Kino2.jpg"], type: "base" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Kino.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/036/Kino2.jpg"], type: "base" }
             ]
         }
     ]
