@@ -3,7 +3,7 @@
 // 无需额外配置，仅需要到 main.js 顶部 🚨gameIdList数组追加编号"002","003"...
 const gameData = {
     id: "game026", // 全局唯一ID，不可重复
-    name: "even if TEMPEST 黃昏中魔女如是说",
+    name: "even if TEMPEST 黄昏中魔女如是说",
     year: "2023",
     publisher: ["Voltage"],
     cnStudio: "JOYOLAND",
