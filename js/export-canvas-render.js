@@ -17,17 +17,12 @@ const roundImageCache = new Map();
 const FONT_SIYUAN = "Noto Sans SC, sans-serif";
 
 // ============================ 动态 DPR ============================
+// 【修改】固定 DPR 为 2，提升性能并减小图片体积
 let currentDPR = 2;
 
 function getExportDPR(width) {
-  // 根据目标宽度选择合适的 DPR，保证清晰度同时控制文件大小
-  if (width >= 1080) {
-    return 3;
-  }
-  if (width >= 810) {
-    return 3;
-  }
-  return 2; // 640 及以下使用 2 倍
+  // 始终返回 2，不再根据宽度动态调整
+  return 2;
 }
 
 // ============================ 工具函数 ============================
@@ -177,7 +172,7 @@ export class CanvasLayoutPainter {
     this.y = LAYOUT_SPACE.BODY_PADDING;
     this.bgColor = bgColor;
 
-    // 使用动态 DPR
+    // 使用固定 DPR = 2
     const dpr = currentDPR;
     // 画布实际像素 = 设计尺寸 × DPR
     this.canvas.width = designWidth * dpr;
@@ -1071,8 +1066,8 @@ export async function renderExportCanvas(
 ) {
   const { exportColor, gameList } = appData;
 
-  // 设置当前 DPR
-  currentDPR = getExportDPR(targetWidth);
+  // 设置当前 DPR（固定为 2）
+  currentDPR = getExportDPR(targetWidth); // 始终返回 2
 
   // 清空圆角缓存（因为 DPR 变化，缓存失效）
   roundImageCache.clear();
