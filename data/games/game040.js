@@ -14,7 +14,7 @@ const gameData = {
     art: [
         {name:"花羽彩", lang:"zh"}
     ],
-    cover: "img/game/040.jpg", // 封面图路径，统一前缀img/
+    cover: "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/game/040.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 拉奇娅·菲利茨
         {
@@ -24,7 +24,9 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/040/Latchia.jpg","img/char/040/Latchia2.jpg","img/char/040/Latchia3.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/040/Latchia.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/040/Latchia2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/040/Latchia3.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 利亚姆·耶布兰
@@ -35,7 +37,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/040/Liam.jpg","img/char/040/Liam2.jpg","img/char/040/Liam3.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/040/Liam.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/040/Liam2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/040/Liam3.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 库厄特·赫尔特林
@@ -46,7 +50,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/040/Quat.jpg","img/char/040/Quat2.jpg","img/char/040/Quat3.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/040/Quat.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/040/Quat2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/040/Quat3.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 鲁德尔·克洛伊兹
@@ -57,7 +63,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/040/Rudel.jpg","img/char/040/Rudel2.jpg","img/char/040/Rudel3.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/040/Rudel.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/040/Rudel2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/040/Rudel3.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 尤纳卡·基斯贝尔特
@@ -68,7 +76,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/040/Unka.jpg","img/char/040/Unka2.jpg","img/char/040/Unka3.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/040/Unka.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/040/Unka2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/040/Unka3.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 吉尔·哈尼什
@@ -79,7 +89,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/040/Zir.jpg","img/char/040/Zir2.jpg","img/char/040/Zir3.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/040/Zir.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/040/Zir2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/040/Zir3.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 加奈特
@@ -90,7 +102,7 @@ const gameData = {
             isHidden: true,
             isFD: false,
             images: [
-                { srcList: ["img/char/040/Gannet.jpg"], type: "base" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/040/Gannet.jpg"], type: "base" }
             ]
         }
     ]
