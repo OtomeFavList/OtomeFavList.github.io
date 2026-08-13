@@ -14,7 +14,7 @@ const gameData = {
     art: [
         {name:"一色箱", lang:"zh"}
     ],
-    cover: "img/game/004.jpg",
+    cover: "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/game/004.jpg",
     charList: [
         // 琪丝·提斯特拉
         {
@@ -24,8 +24,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/004/Cyrus.jpg","img/char/004/Cyrus2.jpg"], type: "base" },
-                { srcList: ["img/char/004/Cyrus3.jpg","img/char/004/Cyrus4.jpg"], type: "fd" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/004/Cyrus.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/004/Cyrus2.jpg"], type: "base" },
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/004/Cyrus3.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/004/Cyrus4.jpg"], type: "fd" }
             ]
         },
         // 亚达钧
@@ -36,8 +38,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/004/Adage.jpg","img/char/004/Adage2.jpg"], type: "base" },
-                { srcList: ["img/char/004/Adage3.jpg"], type: "fd" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/004/Adage.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/004/Adage2.jpg"], type: "base" },
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/004/Adage3.jpg"], type: "fd" }
             ]
         },
         // 埃尔托克里德·瓦伦丁
@@ -48,8 +51,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/004/Eltcreed.jpg","img/char/004/Eltcreed2.jpg"], type: "base" },
-                { srcList: ["img/char/004/Eltcreed3.jpg"], type: "fd" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/004/Eltcreed.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/004/Eltcreed2.jpg"], type: "base" },
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/004/Eltcreed3.jpg"], type: "fd" }
             ]
         },
         // 芬·尤克列斯
@@ -60,8 +64,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/004/Fin.jpg","img/char/004/Fin2.jpg"], type: "base" },
-                { srcList: ["img/char/004/Fin3.jpg","img/char/004/Fin4.jpg"], type: "fd" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/004/Fin.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/004/Fin2.jpg"], type: "base" },
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/004/Fin3.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/004/Fin4.jpg"], type: "fd" }
             ]
         },
         // 伊内斯·海因里希·海涅
@@ -72,8 +78,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/004/Ines.jpg","img/char/004/Ines2.jpg"], type: "base" },
-                { srcList: ["img/char/004/Ines3.jpg"], type: "fd" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/004/Ines.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/004/Ines2.jpg"], type: "base" },
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/004/Ines3.jpg"], type: "fd" }
             ]
         },
         // 乌尔利克·费里尔
@@ -84,8 +91,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/004/Ulrik.jpg","img/char/004/Ulrik2.jpg"], type: "base" },
-                { srcList: ["img/char/004/Ulrik3.jpg"], type: "fd" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/004/Ulrik.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/004/Ulrik2.jpg"], type: "base" },
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/004/Ulrik3.jpg"], type: "fd" }
             ]
         },
         // 尤尼·石英
@@ -96,8 +104,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/004/Yune.jpg","img/char/004/Yune2.jpg"], type: "base" },
-                { srcList: ["img/char/004/Yune3.jpg"], type: "fd" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/004/Yune.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/004/Yune2.jpg"], type: "base" },
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/004/Yune3.jpg"], type: "fd" }
             ]
         },
         // 杰里姆
@@ -108,7 +117,7 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["img/char/004/Jereme.jpg"], type: "base" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/004/Jereme.jpg"], type: "base" }
             ]
         },
         // 杰比特
@@ -119,7 +128,7 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["img/char/004/Jevite.jpg"], type: "base" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/004/Jevite.jpg"], type: "base" }
             ]
         },
         // 萨克森·布兰登堡
@@ -130,7 +139,7 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["img/char/004/Sachsen.jpg"], type: "base" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/004/Sachsen.jpg"], type: "base" }
             ]
         }
     ]
