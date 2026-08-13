@@ -13,7 +13,7 @@ const gameData = {
     art: [
         {name:"月野御豆", lang:"zh"}
     ],
-    cover: "img/game/020.jpg", // 封面图路径，统一前缀img/
+    cover: "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/game/020.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 娜拉
         {
@@ -23,7 +23,7 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/020/Naala.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/020/Naala.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 赛弗
@@ -34,7 +34,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/020/Cef.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/020/Cef.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 艾斯塔
@@ -45,7 +45,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/020/Esta.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/020/Esta.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 泽奇
@@ -56,7 +56,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/020/Jigi.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/020/Jigi.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 纳朗
@@ -67,7 +67,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/020/Naran.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/020/Naran.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 诺尔
@@ -78,7 +78,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/020/Nohl.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/020/Nohl.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 卢奇
@@ -89,7 +89,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/020/Ruzi.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/020/Ruzi.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 斯兰
@@ -100,7 +100,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/020/Suren.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/020/Suren.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 托亚
@@ -111,7 +111,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/020/Touya.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/020/Touya.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         }
     ]
