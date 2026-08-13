@@ -14,7 +14,7 @@ const gameData = {
     art: [
         {name:"さとい", lang:"ja"}
     ],
-    cover: "img/game/006.jpg",
+    cover: "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/game/006.jpg",
     charList: [
         // 奥林匹亚
         {
@@ -24,7 +24,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/006/Olympia.jpg","img/char/006/Olympia2.jpg"], type: "base" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/006/Olympia.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/006/Olympia2.jpg"], type: "base" }
             ]
         },
         // 朱砂
@@ -35,7 +36,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/006/Akaza.jpg","img/char/006/Akaza2.jpg"], type: "base" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/006/Akaza.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/006/Akaza2.jpg"], type: "base" }
             ]
         },
         // 天草四郎时贞
@@ -46,7 +48,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/006/Amakusa.jpg","img/char/006/Amakusa2.jpg"], type: "base" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/006/Amakusa.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/006/Amakusa2.jpg"], type: "base" }
             ]
         },
         // 火向
@@ -57,7 +60,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/006/Himuka.jpg","img/char/006/Himuka2.jpg"], type: "base" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/006/Himuka.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/006/Himuka2.jpg"], type: "base" }
             ]
         },
         // 玄叶
@@ -68,7 +72,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/006/Kuroba.jpg","img/char/006/Kuroba2.jpg"], type: "base" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/006/Kuroba.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/006/Kuroba2.jpg"], type: "base" }
             ]
         },
         // 璃空
@@ -79,7 +84,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/006/Rikuu.jpg","img/char/006/Rikuu2.jpg"], type: "base" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/006/Rikuu.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/006/Rikuu2.jpg"], type: "base" }
             ]
         }, // ←===【修复：补上这里缺失的逗号】===
         // 缘
@@ -90,7 +96,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/006/Yosuga.jpg","img/char/006/Yosuga2.jpg"], type: "base" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/006/Yosuga.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/006/Yosuga2.jpg"], type: "base" }
             ]
         }
     ]
