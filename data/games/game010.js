@@ -14,7 +14,7 @@ const gameData = {
     art: [
         {name:"さとい", lang:"ja"}
     ],
-    cover: "img/game/010.jpg",
+    cover: "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/game/010.jpg",
     charList: [
         // 久世鸫
         {
@@ -24,7 +24,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/010/Tsugumi.jpg","img/char/010/Tsugumi2.jpg"], type: "base" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/010/Tsugumi.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/010/Tsugumi2.jpg"], type: "base" }
             ]
         },
         // 鸿上滉
@@ -35,7 +36,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/010/Akira.jpg","img/char/010/Akira2.jpg"], type: "base" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/010/Akira.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/010/Akira2.jpg"], type: "base" }
             ]
         },
         // 星川翡翠
@@ -46,7 +48,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/010/Hoshikawa.jpg","img/char/010/Hoshikawa2.jpg"], type: "base" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/010/Hoshikawa.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/010/Hoshikawa2.jpg"], type: "base" }
             ]
         },
         // 汀紫鹤
@@ -57,7 +60,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/010/Migiwa.jpg","img/char/010/Migiwa2.jpg"], type: "base" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/010/Migiwa.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/010/Migiwa2.jpg"], type: "base" }
             ]
         },
         // 尾崎隼人
@@ -68,7 +72,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/010/Ozaki.jpg","img/char/010/Ozaki2.jpg"], type: "base" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/010/Ozaki.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/010/Ozaki2.jpg"], type: "base" }
             ]
         },
         // 鹭泽累
@@ -79,7 +84,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/010/Rui.jpg","img/char/010/Rui2.jpg"], type: "base" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/010/Rui.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/010/Rui2.jpg"], type: "base" }
             ]
         },
         // 鹈饲昌吾
@@ -90,7 +96,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/010/Ukai.jpg","img/char/010/Ukai2.jpg"], type: "base" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/010/Ukai.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/010/Ukai2.jpg"], type: "base" }
             ]
         }
     ]
