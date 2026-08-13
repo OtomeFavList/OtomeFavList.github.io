@@ -13,7 +13,7 @@ const gameData = {
     art: [
         {name:"さとい", lang:"ja"}
     ],
-    cover: "img/game/039.jpg", // 封面图路径，统一前缀img/
+    cover: "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/game/039.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 阎魔凛
         {
@@ -23,7 +23,9 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/039/Rin.jpg","img/char/039/Rin2.jpg","img/char/039/Rin3.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/039/Rin.jpg",
+                            "img/char/039/Rin2.jpg",
+                            "img/char/039/Rin3.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 石川五右卫门
