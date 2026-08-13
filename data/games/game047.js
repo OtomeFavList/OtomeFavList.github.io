@@ -13,7 +13,7 @@ const gameData = {
     art: [
         {name:"RiRi", lang:"en"}
     ],
-    cover: "img/game/047.jpg", // 封面图路径，统一前缀img/
+    cover: "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/game/047.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 雏菊
         {
@@ -23,7 +23,8 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/047/Hinagiku.jpg","img/char/047/Hinagiku2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/047/Hinagiku.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/047/Hinagiku2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 淡雪
@@ -34,7 +35,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/047/Awayuki.jpg","img/char/047/Awayuki2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/047/Awayuki.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/047/Awayuki2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 帷
@@ -45,7 +47,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/047/Tobari.jpg","img/char/047/Tobari2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/047/Tobari.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/047/Tobari2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 露草
@@ -56,7 +59,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/047/Tsuyukusa.jpg","img/char/047/Tsuyukusa2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/047/Tsuyukusa.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/047/Tsuyukusa2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 矢代
@@ -67,7 +71,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/047/Yashiro.jpg","img/char/047/Yashiro2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/047/Yashiro.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/047/Yashiro2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 依
@@ -78,7 +83,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/047/Yori.jpg","img/char/047/Yori2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/047/Yori.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/047/Yori2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         }
     ]
