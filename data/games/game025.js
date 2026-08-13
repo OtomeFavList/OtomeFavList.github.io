@@ -17,7 +17,7 @@ const gameData = {
     art: [
         {name:"薄葉カゲロー", lang:"zh"}
     ],
-    cover: "img/game/025.jpg", // 封面图路径，统一前缀img/
+    cover: "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/game/025.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 薇欧蕾特
         {
@@ -27,7 +27,7 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/025/Violette.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/025/Violette.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 吉斯兰
@@ -38,7 +38,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/025/Ghislain.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/025/Ghislain.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 尤贝尔
@@ -49,7 +49,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/025/Hubert.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/025/Hubert.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 雷欧
@@ -60,7 +60,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/025/Leon.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/025/Leon.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 路易
@@ -71,7 +71,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/025/Louis.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/025/Louis.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 奥菲
@@ -82,7 +82,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/025/Orpheus.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/025/Orpheus.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         }
     ]
