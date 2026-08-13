@@ -16,7 +16,7 @@ const gameData = {
     art: [
         {name:"和田ベコ", lang:"zh"}
     ],
-    cover: "img/game/060.jpg", // 封面图路径，统一前缀img/
+    cover: "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/game/060.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 藤枝音理
         {
@@ -26,7 +26,7 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/060/Neri.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/060/Neri.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 五十岚春
@@ -37,7 +37,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/060/Haru.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/060/Haru.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 加地一波
@@ -48,7 +48,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/060/Ichiha.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/060/Ichiha.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 鹭之宫零
@@ -59,7 +59,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/060/Rei.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/060/Rei.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 鹰岭陆
@@ -70,7 +70,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/060/Riku.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/060/Riku.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 七濑十矢
@@ -81,7 +81,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/060/Touya.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/060/Touya.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         }
     ]
