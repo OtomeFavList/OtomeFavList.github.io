@@ -13,7 +13,7 @@ const gameData = {
     art: [
         {name:"のりた", lang:"ja"}
     ],
-    cover: "img/game/026.jpg", // 封面图路径，统一前缀img/
+    cover: "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/game/026.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 安娜斯塔西娅·林赛尔
         {
@@ -23,7 +23,8 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/026/Anastasia.jpg","img/char/026/Anastasia2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/026/Anastasia.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/026/Anastasia2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 克莱奥斯·卡索洛克
@@ -34,7 +35,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/026/Crius.jpg","img/char/026/Crius2.jpg","img/char/026/Crius3.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/026/Crius.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/026/Crius2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/026/Crius3.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 路西恩·诺伊施本
@@ -45,7 +48,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/026/Lucien.jpg","img/char/026/Lucien2.jpg","img/char/026/Lucien3.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/026/Lucien.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/026/Lucien2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/026/Lucien3.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 提瑞尔·I·利斯特
@@ -56,7 +61,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/026/Tyril.jpg","img/char/026/Tyril2.jpg","img/char/026/Tyril3.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/026/Tyril.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/026/Tyril2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/026/Tyril3.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 泽恩·索菲尔德
@@ -67,7 +74,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/026/Zenn.jpg","img/char/026/Zenn2.jpg","img/char/026/Zenn3.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/026/Zenn.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/026/Zenn2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/026/Zenn3.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 伊什
@@ -78,7 +87,9 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["img/char/026/Majo.jpg","img/char/026/Majo2.jpg","img/char/026/Majo3.jpg"], type: "base" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/026/Majo.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/026/Majo2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/026/Majo3.jpg"], type: "base" }
             ]
         }
     ]
