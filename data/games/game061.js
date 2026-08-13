@@ -14,7 +14,7 @@ const gameData = {
     art: [
         {name:"ユウヤ", lang:"ja"}
     ],
-    cover: "img/game/061.jpg", // 封面图路径，统一前缀img/
+    cover: "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/game/061.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 天近绫乃
         {
@@ -24,7 +24,11 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/061/Ayano.jpg","img/char/061/Ayano2.png","img/char/061/Ayano3.jpg","img/char/061/Ayano4.jpg","img/char/061/Ayano5.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/061/Ayano.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/061/Ayano2.png",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/061/Ayano3.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/061/Ayano4.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/061/Ayano5.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 天近美铃
@@ -35,7 +39,11 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/061/Misuzu.jpg","img/char/061/Misuzu2.png","img/char/061/Misuzu3.jpg","img/char/061/Misuzu4.jpg","img/char/061/Misuzu5.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/061/Misuzu.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/061/Misuzu2.png",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/061/Misuzu3.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/061/Misuzu4.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/061/Misuzu5.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 月城茅
@@ -46,7 +54,11 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/061/Chigaya.jpg","img/char/061/Chigaya2.png","img/char/061/Chigaya3.jpg","img/char/061/Chigaya4.jpg","img/char/061/Chigaya5.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/061/Chigaya.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/061/Chigaya2.png",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/061/Chigaya3.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/061/Chigaya4.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/061/Chigaya5.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 海濑隼人
@@ -57,7 +69,11 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/061/Hayato.jpg","img/char/061/Hayato2.png","img/char/061/Hayato3.jpg","img/char/061/Hayato4.jpg","img/char/061/Hayato5.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/061/Hayato.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/061/Hayato2.png",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/061/Hayato3.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/061/Hayato4.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/061/Hayato5.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 风见琉佳
@@ -68,7 +84,11 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/061/Luka.jpg","img/char/061/Luka2.png","img/char/061/Luka3.jpg","img/char/061/Luka4.jpg","img/char/061/Luka5.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/061/Luka.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/061/Luka2.png",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/061/Luka3.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/061/Luka4.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/061/Luka5.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 花丘槙尾
@@ -79,7 +99,11 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/061/Makio.jpg","img/char/061/Makio2.png","img/char/061/Makio3.jpg","img/char/061/Makio4.jpg","img/char/061/Makio5.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/061/Makio.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/061/Makio2.png",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/061/Makio3.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/061/Makio4.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/061/Makio5.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 日向野骏
@@ -90,7 +114,11 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/061/Shun.jpg","img/char/061/Shun2.png","img/char/061/Shun3.jpg","img/char/061/Shun4.jpg","img/char/061/Shun5.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/061/Shun.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/061/Shun2.png",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/061/Shun3.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/061/Shun4.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/061/Shun5.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 空闲巴
@@ -101,7 +129,11 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/061/Tomoe.jpg","img/char/061/Tomoe2.png","img/char/061/Tomoe3.jpg","img/char/061/Tomoe4.jpg","img/char/061/Tomoe5.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/061/Tomoe.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/061/Tomoe2.png",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/061/Tomoe3.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/061/Tomoe4.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/061/Tomoe5.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 月城苇夜
@@ -112,7 +144,11 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/061/Yoshiya.jpg","img/char/061/Yoshiya2.png","img/char/061/Yoshiya3.jpg","img/char/061/Yoshiya4.jpg","img/char/061/Yoshiya5.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/061/Yoshiya.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/061/Yoshiya2.png",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/061/Yoshiya3.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/061/Yoshiya4.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/061/Yoshiya5.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 善知鸟全
@@ -123,7 +159,11 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/061/Zen.jpg","img/char/061/Zen2.png","img/char/061/Zen3.jpg","img/char/061/Zen4.jpg","img/char/061/Zen5.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/061/Zen.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/061/Zen2.png",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/061/Zen3.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/061/Zen4.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/061/Zen5.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         }
     ]
