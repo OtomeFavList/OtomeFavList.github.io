@@ -96,8 +96,25 @@ export function initPage(Core = {}) {
             imgsUnitList.forEach(u => allSrc.push(...u.srcList));
             if (allSrc.length === 0) return;
 
-            // 新增：加入预加载池
-            preloadSrcList.push(...allSrc);
+            // ★ 修改：只加入当前图片 + 前后相邻图片
+            if (allSrc.length > 0) {
+                const saveKey = `char-img-${gameId}-${char.id}`;
+                if(!appData.charImageSelect) appData.charImageSelect = {};
+                let imgIndex = Number(appData.charImageSelect?.[saveKey] ?? 0);
+                if (imgIndex >= allSrc.length) imgIndex = 0;
+
+                const currentSrc = allSrc[imgIndex];
+                if (currentSrc) preloadSrcList.push(currentSrc);
+
+                if (allSrc.length > 1) {
+                    const prevIndex = (imgIndex - 1 + allSrc.length) % allSrc.length;
+                    const nextIndex = (imgIndex + 1) % allSrc.length;
+                    const prevSrc = allSrc[prevIndex];
+                    const nextSrc = allSrc[nextIndex];
+                    if (prevSrc) preloadSrcList.push(prevSrc);
+                    if (nextSrc) preloadSrcList.push(nextSrc);
+                }
+            }
 
             // ★★★ 修改点：将 saveKey 改为带 char-img- 前缀 ★★★
             const saveKey = `char-img-${gameId}-${char.id}`;
@@ -112,7 +129,7 @@ export function initPage(Core = {}) {
             <div class="char-item ${selected}" data-cid="${char.id}" data-char-id="${char.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}" data-panel-mode="char">
               <div class="char-card-img-box ${allSrc.length>1?'char-multi-img':''}">
                 ${allSrc.length>1?`<button class="char-switch-btn char-switch-prev" data-char-id="${char.id}" data-game-id="${gameId}" data-panel-mode="char">&lt;</button>`: ""}
-                <img src="${showSrc}" alt="${char.name}" decoding="async">
+                <img src="${showSrc}" alt="${char.name}" loading="lazy" decoding="async">
                 ${allSrc.length>1?`<button class="char-switch-btn char-switch-next" data-char-id="${char.id}" data-game-id="${gameId}" data-panel-mode="char">&gt;</button>`: ""}
               </div>
               <div class="char-card-name">${char.name}</div>
@@ -129,8 +146,25 @@ export function initPage(Core = {}) {
             imgsUnitList.forEach(u => allSrc.push(...u.srcList));
             if (allSrc.length === 0) return;
 
-            // 新增
-            preloadSrcList.push(...allSrc);
+            // ★ 修改：只加入当前图片 + 前后相邻图片
+            if (allSrc.length > 0) {
+                const saveKey = `char-img-${gameId}-${char.id}`;
+                if(!appData.charImageSelect) appData.charImageSelect = {};
+                let imgIndex = Number(appData.charImageSelect?.[saveKey] ?? 0);
+                if (imgIndex >= allSrc.length) imgIndex = 0;
+
+                const currentSrc = allSrc[imgIndex];
+                if (currentSrc) preloadSrcList.push(currentSrc);
+
+                if (allSrc.length > 1) {
+                    const prevIndex = (imgIndex - 1 + allSrc.length) % allSrc.length;
+                    const nextIndex = (imgIndex + 1) % allSrc.length;
+                    const prevSrc = allSrc[prevIndex];
+                    const nextSrc = allSrc[nextIndex];
+                    if (prevSrc) preloadSrcList.push(prevSrc);
+                    if (nextSrc) preloadSrcList.push(nextSrc);
+                }
+            }
 
             // ★★★ 修改点：将 saveKey 改为带 char-img- 前缀 ★★★
             const saveKey = `char-img-${gameId}-${char.id}`;
@@ -145,7 +179,7 @@ export function initPage(Core = {}) {
             <div class="char-item ${selected}" data-cid="${char.id}" data-char-id="${char.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}" data-panel-mode="char">
               <div class="char-card-img-box ${allSrc.length>1?'char-multi-img':''}">
                 ${allSrc.length>1?`<button class="char-switch-btn char-switch-prev" data-char-id="${char.id}" data-game-id="${gameId}" data-panel-mode="char">&lt;</button>`: ""}
-                <img src="${showSrc}" alt="${char.name}" decoding="async">
+                <img src="${showSrc}" alt="${char.name}" loading="lazy" decoding="async">
                 ${allSrc.length>1?`<button class="char-switch-btn char-switch-next" data-char-id="${char.id}" data-game-id="${gameId}" data-panel-mode="char">&gt;</button>`: ""}
               </div>
               <div class="char-card-name">${char.name}</div>
@@ -203,8 +237,23 @@ export function initPage(Core = {}) {
             imgsUnitList.forEach(u=>allSrc.push(...u.srcList));
             if(allSrc.length === 0) return;
 
-            // 新增：女主全部立绘加入预加载
-            preloadSrcList.push(...allSrc);
+            // ★ 修改：只加入当前图片 + 前后相邻图片
+            if (allSrc.length > 0) {
+                let imgIndex = Number(state.femaleImgIndex ?? 0);
+                if (imgIndex >= allSrc.length) imgIndex = 0;
+
+                const currentSrc = allSrc[imgIndex];
+                if (currentSrc) preloadSrcList.push(currentSrc);
+
+                if (allSrc.length > 1) {
+                    const prevIndex = (imgIndex - 1 + allSrc.length) % allSrc.length;
+                    const nextIndex = (imgIndex + 1) % allSrc.length;
+                    const prevSrc = allSrc[prevIndex];
+                    const nextSrc = allSrc[nextIndex];
+                    if (prevSrc) preloadSrcList.push(prevSrc);
+                    if (nextSrc) preloadSrcList.push(nextSrc);
+                }
+            }
 
             //【修改点2：从cpEditState读取女主立绘下标，不再读appData.charImageSelect】
             let imgIndex = Number(state.femaleImgIndex ?? 0);
@@ -224,7 +273,7 @@ export function initPage(Core = {}) {
                     data-panel-mode="cp">
                     <div class="char-card-img-box ${allSrc.length>1?'char-multi-img':''}">
                         ${allSrc.length>1?`<button class="char-switch-btn char-switch-prev" data-char-id="${fChar.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}" data-panel-mode="cp">&lt;</button>`:""}
-                        <img src="${showSrc}" alt="${fChar.name}" decoding="async">
+                        <img src="${showSrc}" alt="${fChar.name}" loading="lazy" decoding="async">
                         ${allSrc.length>1?`<button class="char-switch-btn char-switch-next" data-char-id="${fChar.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}" data-panel-mode="cp">&gt;</button>`:""}
                     </div>
                     <div class="cp-female-name">${fChar.name}</div>
@@ -240,8 +289,29 @@ export function initPage(Core = {}) {
                             mImgs.forEach(u=>mSrcArr.push(...u.srcList));
                             if(mSrcArr.length===0) return "";
 
-                            // 新增：该男主全部立绘加入预加载池
-                            preloadSrcList.push(...mSrcArr);
+                            // ★ 修改：只加入当前图片 + 前后相邻图片
+                            if (mSrcArr.length > 0) {
+                                let mImgIndex = 0;
+                                if(draftMap && draftMap.has(mChar.id)){
+                                    mImgIndex = draftMap.get(mChar.id);
+                                }else{
+                                    const mSaveKey = `cp-img-${gameId}-${mChar.id}`;
+                                    mImgIndex = Number(appData.charImageSelect?.[mSaveKey] ?? 0);
+                                }
+                                if (mImgIndex >= mSrcArr.length) mImgIndex = 0;
+
+                                const currentSrc = mSrcArr[mImgIndex];
+                                if (currentSrc) preloadSrcList.push(currentSrc);
+
+                                if (mSrcArr.length > 1) {
+                                    const prevIndex = (mImgIndex - 1 + mSrcArr.length) % mSrcArr.length;
+                                    const nextIndex = (mImgIndex + 1) % mSrcArr.length;
+                                    const prevSrc = mSrcArr[prevIndex];
+                                    const nextSrc = mSrcArr[nextIndex];
+                                    if (prevSrc) preloadSrcList.push(prevSrc);
+                                    if (nextSrc) preloadSrcList.push(nextSrc);
+                                }
+                            }
 
                             //【修改点2】读取草稿map的imgIndex
                             let mImgIndex = 0;
@@ -265,7 +335,7 @@ export function initPage(Core = {}) {
                                 data-panel-mode="cp">
                                 <div class="char-card-img-box ${mSrcArr.length>1?'char-multi-img':''}">
                                     ${mSrcArr.length>1?`<button class="char-switch-btn char-switch-prev" data-char-id="${mChar.id}" data-game-id="${gameId}" data-total-img="${mSrcArr.length}" data-panel-mode="cp">&lt;</button>`:""}
-                                    <img src="${mShowSrc}" alt="${mChar.name}" decoding="async">
+                                    <img src="${mShowSrc}" alt="${mChar.name}" loading="lazy" decoding="async">
                                     ${mSrcArr.length>1?`<button class="char-switch-btn char-switch-next" data-char-id="${mChar.id}" data-game-id="${gameId}" data-total-img="${mSrcArr.length}" data-panel-mode="cp">&gt;</button>`:""}
                                 </div>
                                 <div class="char-card-name">${mChar.name}</div>
@@ -1041,7 +1111,7 @@ export function initPage(Core = {}) {
       const sortedGames = [...gameTemplateList].sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
       let html = "";
 
-      sortedGames.forEach(game => {
+      sortedGames.forEach((game, index) => {   // 增加 index
         if (!game) return;
         let match = true;
 
@@ -1100,8 +1170,8 @@ export function initPage(Core = {}) {
         }
 
         if (!match) return;
-        //传入排序副本 gameCopy
-        html += `<div class="game-option-item" data-game-id="${game.id}">` + renderGameSelectItem(gameCopy) + `</div>`;
+        //传入排序副本 gameCopy 和 index
+        html += `<div class="game-option-item" data-game-id="${game.id}">` + renderGameSelectItem(gameCopy, index) + `</div>`;
       })
 
       el.gameSelectList.innerHTML = html;
