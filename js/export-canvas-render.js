@@ -5,38 +5,26 @@ import {
   LAYOUT_STYLE,
   getAvailableCharImages,
   preloadAndDecodeImage,
-  preloadImageBitmap // <<==== 新增导入
+  preloadImageBitmap
 } from './main.js';
 
 // 最大并发图片加载数量，避免浏览器请求风暴
 const MAX_IMAGE_CONCURRENCY = 8;
 //【优化】圆角离屏画布缓存：key = `${url}||${sourceW}x${sourceH}||${visualW}x${visualH}||${radius}||${dpr}`
 const roundImageCache = new Map();
-// ========== 字体规范【需求3】==========
-// 除顶部标题 Otome FavList 之外，所有文本默认思源柔黑体
+// ========== 字体规范 ==========
 const FONT_SIYUAN = "Noto Sans SC, sans-serif";
 
-// ============================ 动态 DPR ============================
-// 【修改】固定 DPR 为 2，提升性能并减小图片体积
-let currentDPR = 2;
-
-function getExportDPR(width) {
-  // 始终返回 2，不再根据宽度动态调整
-  return 2;
-}
+// ============================ 固定 DPR = 3（需求：3倍画布渲染，最后缩小输出） ============================
+let currentDPR = 3;
 
 // ============================ 工具函数 ============================
 
-/**
- * 在 Canvas 上绘制自动换行文本
- */
 export function wrapText(ctx, text, x, y, maxWidth, lineHeight, fontSize, color, font = FONT_SIYUAN, bold = false) {
   if (!text) return 0;
-  // 【需求变更】支持加粗
   const fontStr = bold ? `bold ${fontSize}px ${font}` : `${fontSize}px ${font}`;
   ctx.font = fontStr;
   ctx.fillStyle = color;
-  //【FIX】修复：优先按空格拆分单词，中文逐字符，避免英文粗暴截断
   const chars = Array.from(text);
   let line = '';
   let totalHeight = 0;
@@ -58,9 +46,6 @@ export function wrapText(ctx, text, x, y, maxWidth, lineHeight, fontSize, color,
   return totalHeight;
 }
 
-/**
- * 测量文本多行占用的总高度【FIX】和wrapText逻辑完全对齐
- */
 export function measureWrappedHeight(ctx, text, maxWidth, lineHeight, fontSize, bold = false) {
   if (!text) return 0;
   const fontStr = bold ? `bold ${fontSize}px ${FONT_SIYUAN}` : `${fontSize}px ${FONT_SIYUAN}`;
@@ -80,35 +65,27 @@ export function measureWrappedHeight(ctx, text, maxWidth, lineHeight, fontSize, 
   return lines * lineHeight;
 }
 
-/**
- * 【修复】离屏画布生成圆角图片，使用原图尺寸保证高清
- */
 function createRoundImageCanvas(img, srcUrl, visualW, visualH, radius) {
   const sourceW = img.naturalWidth || img.width || 1;
   const sourceH = img.naturalHeight || img.height || 1;
   const dpr = currentDPR;
 
-  // 缓存 key 包含原图尺寸、视觉尺寸、圆角半径和 DPR
   const cacheKey = `${srcUrl}||${sourceW}x${sourceH}||${visualW}x${visualH}||${radius}||${dpr}`;
   if (roundImageCache.has(cacheKey)) {
     return roundImageCache.get(cacheKey);
   }
 
   const offCanvas = document.createElement('canvas');
-  // 离屏画布物理像素 = 原图尺寸 × DPR
   offCanvas.width = sourceW * dpr;
   offCanvas.height = sourceH * dpr;
   const offCtx = offCanvas.getContext('2d');
 
-  // 高清平滑
   offCtx.imageSmoothingEnabled = true;
   offCtx.imageSmoothingQuality = "high";
   offCtx.webkitImageSmoothingEnabled = true;
 
-  // 缩放坐标系，使绘图坐标使用原图尺寸
   offCtx.scale(dpr, dpr);
 
-  // 圆角裁剪路径（使用原图尺寸）
   offCtx.beginPath();
   offCtx.moveTo(radius, 0);
   offCtx.lineTo(sourceW - radius, 0);
@@ -122,19 +99,12 @@ function createRoundImageCanvas(img, srcUrl, visualW, visualH, radius) {
   offCtx.closePath();
   offCtx.clip();
 
-  // 绘制原图（使用原图尺寸）
   offCtx.drawImage(img, 0, 0, sourceW, sourceH);
 
   roundImageCache.set(cacheKey, offCanvas);
   return offCanvas;
 }
 
-// ============================================================
-// ② 重写 loadImagesWithLimit：使用 preloadImageBitmap 获取高质量 ImageBitmap
-// ============================================================
-/**
- * 有限并发加载器，返回 ImageBitmap（高质量缩放）
- */
 async function loadImagesWithLimit(urlList, limit) {
   const uniqueUrls = [...new Set(urlList)];
   const resultMap = new Map();
@@ -144,7 +114,6 @@ async function loadImagesWithLimit(urlList, limit) {
     while (index < uniqueUrls.length) {
       const url = uniqueUrls[index++];
       try {
-        // 使用 preloadImageBitmap 获取开启 high resizeQuality 的 ImageBitmap
         const bitmap = await preloadImageBitmap(url);
         resultMap.set(url, bitmap);
       } catch (err) {
@@ -165,36 +134,29 @@ export class CanvasLayoutPainter {
   constructor(canvas, designWidth, designHeight, bgColor) {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
-    // 保存【设计尺寸】，所有绘图逻辑使用这套尺寸
     this.designWidth = designWidth;
     this.designHeight = designHeight;
     this.baseWidth = designWidth;
     this.y = LAYOUT_SPACE.BODY_PADDING;
     this.bgColor = bgColor;
 
-    // 使用固定 DPR = 2
     const dpr = currentDPR;
-    // 画布实际像素 = 设计尺寸 × DPR
     this.canvas.width = designWidth * dpr;
     this.canvas.height = designHeight * dpr;
-    // CSS显示尺寸保持设计尺寸（如果页面显示canvas元素才需要，导出场景可保留规范写法）
     this.canvas.style.width = `${designWidth}px`;
     this.canvas.style.height = `${designHeight}px`;
 
     this.ctx.scale(dpr, dpr);
     this.ctx.textBaseline = 'top';
 
-    // 高清平滑
     this.ctx.imageSmoothingEnabled = true;
     this.ctx.imageSmoothingQuality = "high";
     this.ctx.webkitImageSmoothingEnabled = true;
 
-    // 填充背景：使用【设计坐标】，不要乘DPR
     this.ctx.fillStyle = this.bgColor;
     this.ctx.fillRect(0, 0, this.designWidth, this.designHeight);
   }
 
-  /** 重置 Y 坐标到起始位置（用于分页重绘） */
   resetY() {
     this.y = LAYOUT_SPACE.BODY_PADDING;
   }
@@ -223,7 +185,6 @@ export class CanvasLayoutPainter {
     }
   }
 
-  // 【需求变更】新增bold参数控制字体加粗
   drawText(text, x, y, size, color, font = FONT_SIYUAN, bold = false) {
     const fontStr = bold ? `bold ${size}px ${font}` : `${size}px ${font}`;
     this.ctx.font = fontStr;
@@ -231,7 +192,6 @@ export class CanvasLayoutPainter {
     this.ctx.fillText(text, x, y);
   }
 
-  // 【需求变更】新增bold参数控制字体加粗
   drawTextCenter(text, centerX, y, size, color, font = FONT_SIYUAN, bold = false) {
     const fontStr = bold ? `bold ${size}px ${font}` : `${size}px ${font}`;
     this.ctx.font = fontStr;
@@ -240,17 +200,6 @@ export class CanvasLayoutPainter {
     this.ctx.fillText(text, centerX - w / 2, y);
   }
 
-  /**
-   * 【新增】在指定矩形区域内自动换行文本 + 整体垂直居中（角色卡片底部名称区域专用）
-   * @param {string} text
-   * @param {number} boxX 区域左上角x
-   * @param {number} boxY 区域左上角y
-   * @param {number} boxW 区域宽度
-   * @param {number} boxH 区域高度
-   * @param {number} fontSize
-   * @param {string} color
-   * @param {number} lineHeight
-   */
   drawTextWrapCenterInBox(text, boxX, boxY, boxW, boxH, fontSize, color, lineHeight = fontSize * 1.4) {
     const ctx = this.ctx;
     ctx.font = `${fontSize}px ${FONT_SIYUAN}`;
@@ -258,7 +207,6 @@ export class CanvasLayoutPainter {
     const chars = Array.from(text);
     let line = '';
     const lines = [];
-    // 分行
     for (let n = 0; n < chars.length; n++) {
       const testLine = line + chars[n];
       const metrics = ctx.measureText(testLine);
@@ -271,28 +219,17 @@ export class CanvasLayoutPainter {
     }
     if (line) lines.push(line);
     const totalTextH = lines.length * lineHeight;
-    // 垂直居中起始Y
     const startY = boxY + (boxH - totalTextH) / 2;
     let currentY = startY;
     for (const l of lines) {
       const lw = ctx.measureText(l).width;
-      const lx = boxX + (boxW - lw) / 2; // 水平居中
+      const lx = boxX + (boxW - lw) / 2;
       ctx.fillText(l, lx, currentY);
       currentY += lineHeight;
     }
   }
 
-  /**
-   * 绘制圆角离屏图片到主画布，并指定绘制尺寸（设计尺寸）
-   * @param {HTMLCanvasElement} roundCanvas 离屏画布
-   * @param {number} x 目标x
-   * @param {number} y 目标y
-   * @param {number} w 目标宽度（设计尺寸）
-   * @param {number} h 目标高度（设计尺寸）
-   */
   drawImageRound(roundCanvas, x, y, w, h) {
-    // 明确指定源区域（整个离屏画布）和目标区域（设计尺寸）
-    // 主 Canvas 的 scale 会将其放大到物理像素
     this.ctx.drawImage(
       roundCanvas,
       0, 0, roundCanvas.width, roundCanvas.height,
@@ -300,11 +237,9 @@ export class CanvasLayoutPainter {
     );
   }
 
-  // ========== 核心修改：矢量路径绘制爱心（彻底根治 emoji 问题） ==========
   drawHeartRate(x, y, rate, heartSize = 26, gap = 6, activeColor, grayColor) {
     const ctx = this.ctx;
     let currentX = x;
-    // 爱心贝塞尔路径（基于24x24坐标系，自动缩放）
     const createHeartPath = (scale) => {
       const path = new Path2D();
       const s = scale / 24;
@@ -394,11 +329,8 @@ function calcCharAreaHeight(ctx, charItems, containerWidth, cardWidth, gap, font
   return { height, rows, maxCardHeight };
 }
 
-// ============================ 预计算高度（用于分页） ============================
+// ============================ 预计算高度 ============================
 
-/**
- * 计算头部区域高度（标题 + 基础信息卡片）
- */
 function calcHeaderVirtualHeight(targetWidth, appData) {
   const { baseInfo } = appData;
   const virtualCanvas = document.createElement('canvas');
@@ -409,10 +341,8 @@ function calcHeaderVirtualHeight(targetWidth, appData) {
   const WRAP_MAX_W = 1200;
   const wrapW = Math.min(WRAP_MAX_W, targetWidth - BODY_PAD * 2);
 
-  // 站点标题【需求变更：标题加粗】
   cursorY += 42 + LAYOUT_SPACE.SITE_TITLE_MT + LAYOUT_SPACE.SITE_TITLE_MB;
 
-  // 基础信息卡片
   const baseLines = [];
   if (baseInfo.nick?.trim()) baseLines.push(`昵称：${baseInfo.nick.trim()}`);
   if (baseInfo.count?.trim()) baseLines.push(`游玩总数：${baseInfo.count.trim()}`);
@@ -440,9 +370,6 @@ function calcHeaderVirtualHeight(targetWidth, appData) {
   return cursorY;
 }
 
-/**
- * 计算单个游戏卡片的内容高度（⚠️ 不含卡片底部与下一张卡片之间的间距 ADDED_GAME_CARD_MB）
- */
 function calcSingleGameBlockHeight(targetWidth, renderData) {
   const { gameInfo, charItems, cpItems } = renderData;
   const virtualCanvas = document.createElement('canvas');
@@ -455,12 +382,10 @@ function calcSingleGameBlockHeight(targetWidth, renderData) {
   const cardInnerPad = LAYOUT_SPACE.ADDED_GAME_CARD_PADDING;
   const gameCardW = wrapW;
 
-  // 【需求变更】游戏名称高度（加粗不影响高度，字体大小不变）
   const nameFontSize = 22;
   const nameHeight = nameFontSize + LAYOUT_SPACE.GAME_CARD_HEAD_MB;
   const HEART_AREA_HEIGHT = 0;
 
-  // Character 区域
   let charAreaHeight = 0;
   if (charItems.length > 0) {
     const titleH = 18 + 4;
@@ -479,12 +404,10 @@ function calcSingleGameBlockHeight(targetWidth, renderData) {
     charAreaHeight = area.height;
   }
 
-  // Couple 区域
   let cpAreaHeight = 0;
   if (cpItems.length > 0) {
     const titleH = 18 + 8;
     let totalCpHeight = titleH;
-    // ========== 新增：如果存在Character区域，增加和Character标题下方一致的8px间距 ==========
     if (charItems.length > 0) {
       totalCpHeight += 8;
     }
@@ -514,35 +437,12 @@ function calcSingleGameBlockHeight(targetWidth, renderData) {
   return totalCardH;
 }
 
-/**
- * 预计算所有区块高度（头部 + 每个游戏卡片）
- */
 function preCalcLayoutHeight(targetWidth, appData, gameTemplateList, renderDataList) {
   const headerHeight = calcHeaderVirtualHeight(targetWidth, appData);
   const gameBlockHeights = renderDataList.map(data => calcSingleGameBlockHeight(targetWidth, data));
   return { headerHeight, gameBlockHeights };
 }
 
-/**
- * 根据高度信息执行分页切割【重构：严格遵循需求最优数量选择算法】
- * 需求规则：
- * 1. 页面最小单元：单个完整游戏卡片，绝不拆分
- * 2. 第一页：固定渲染头部，【强制至少包含1张游戏卡片】
- *    - 有基础信息：标题+基础信息 + 至少第一张游戏卡片，哪怕整体超出参考高度也要保留
- *    - 无基础信息：标题 + 至少第一张游戏卡片
- * 3. 第二页及以后：不再绘制头部，只放置游戏卡片
- * 4. 择优逻辑：枚举可行连续游戏数量，选出占用高度最接近参考高度；差值相同优先选更多卡片
- *    ⚠️ 参考高度仅为参考，允许实际高度超出参考高度，不强制限制上限
- * 5. 兜底：任何情况下一页至少1张卡片
- * 【修复重点】
- * ✅ 候选范围约束：优先寻找不超过参考高度的组合；若无，则再选择超出参考高度里最接近的
- * ✅ 避免一次性把所有游戏塞进第一页
- * ✅ 间距累加逻辑统一，消除计算偏差
- * @param {number} headerHeight 头部固定高度
- * @param {number[]} gameBlockHeights 每个游戏卡片高度数组（不含卡片后间距）
- * @param {number} maxH 单页参考高度（标准参考值，非硬性上限）
- * @returns {Array<{isFirstPage: boolean, gameIndexes: number[]}>}
- */
 function splitPagesByHeight(headerHeight, gameBlockHeights, maxH) {
   const pages = [];
   let ptr = 0;
@@ -550,9 +450,7 @@ function splitPagesByHeight(headerHeight, gameBlockHeights, maxH) {
   const CARD_GAP = LAYOUT_SPACE.ADDED_GAME_CARD_MB;
   if (totalGame === 0) return pages;
 
-  // ========== 处理【第一页】：带头部，可用高度 = maxH - headerHeight ==========
   const firstPageAvailableH = maxH - headerHeight;
-  // 预计算：取ptr开始，依次取N张卡片总高度（包含卡片之间间隙）
   const accumulateList = [];
   let sumH = 0;
   for (let i = ptr; i < totalGame; i++) {
@@ -573,10 +471,6 @@ function splitPagesByHeight(headerHeight, gameBlockHeights, maxH) {
     })
   }
 
-  // 排序规则优化（关键修复！！！）
-  // 1. 优先选择【不超过可用高度】的卡片组合；
-  // 2. 同组内差值更小优先；差值相同，卡片数量更多优先
-  // 3. 如果所有组合都超限，再在全部超限组合里择优
   const fitCandidates = candidates.filter(c => !c.isOver);
   let targetCandidates;
   if (fitCandidates.length > 0) {
@@ -592,7 +486,6 @@ function splitPagesByHeight(headerHeight, gameBlockHeights, maxH) {
   }
 
   const bestItem = targetCandidates[0];
-  // 兜底校验
   bestItem.count = Math.max(1, Math.min(bestItem.count, totalGame - ptr));
 
   const firstPageGameIndexes = [];
@@ -603,7 +496,6 @@ function splitPagesByHeight(headerHeight, gameBlockHeights, maxH) {
   console.log("【第一页分页计算】参考可用高度：", firstPageAvailableH, "选中卡片数量：", bestItem.count, "占用高度：", bestItem.usedH, "差值：", bestItem.diff);
   ptr += bestItem.count;
 
-  // ========== 处理【第二页及之后】：无头部，全部空间放游戏卡片，参考高度maxH ==========
   while (ptr < totalGame) {
     const accumulateList2 = [];
     let sumH2 = 0;
@@ -625,7 +517,6 @@ function splitPagesByHeight(headerHeight, gameBlockHeights, maxH) {
       })
     }
 
-    // 和第一页相同择优逻辑
     const fitCandidates2 = candidates2.filter(c => !c.isOver);
     let targetCandidates2;
     if (fitCandidates2.length > 0) {
@@ -661,9 +552,6 @@ function splitPagesByHeight(headerHeight, gameBlockHeights, maxH) {
 
 // ============================ 绘制函数 ============================
 
-/**
- * 绘制头部区块（标题 + 基础信息）
- */
 async function drawHeaderBlock(painter, targetWidth, appData) {
   const { exportColor, baseInfo } = appData;
 
@@ -672,11 +560,9 @@ async function drawHeaderBlock(painter, targetWidth, appData) {
   const wrapW = Math.min(WRAP_MAX_W, targetWidth - BODY_PAD * 2);
   const wrapX = Math.max(BODY_PAD, (targetWidth - wrapW) / 2);
 
-  // 标题【需求1：Otome FavList 加粗】
   painter.drawTextCenter('Otome FavList', targetWidth / 2, painter.y, 42, exportColor.title, 'sans-serif', true);
   painter.shiftY(42 + LAYOUT_SPACE.SITE_TITLE_MT + LAYOUT_SPACE.SITE_TITLE_MB);
 
-  // 基础信息卡片
   const baseLines = [];
   if (baseInfo.nick?.trim()) baseLines.push(`昵称：${baseInfo.nick.trim()}`);
   if (baseInfo.count?.trim()) baseLines.push(`游玩总数：${baseInfo.count.trim()}`);
@@ -709,7 +595,6 @@ async function drawHeaderBlock(painter, targetWidth, appData) {
     );
 
     let y = cardTop + innerPad;
-    // 【需求1：小标题「基础信息」加粗】
     painter.drawText('基础信息', cardX + innerPad, y, h2FontSize, exportColor.subTitle, FONT_SIYUAN, true);
     y += h2FontSize + LAYOUT_SPACE.BIG_CARD_H2_MB;
 
@@ -723,9 +608,6 @@ async function drawHeaderBlock(painter, targetWidth, appData) {
   }
 }
 
-/**
- * 绘制单个游戏卡片
- */
 async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, isLastCard = false) {
   const { gameInfo, charItems, cpItems, gameItem } = renderData;
   const { exportColor } = renderData.appData || {};
@@ -740,7 +622,6 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
   const cardX = wrapX;
   const cardTop = painter.y;
 
-  // 计算卡片总高度
   const nameFontSize = 22;
   const nameHeight = nameFontSize + LAYOUT_SPACE.GAME_CARD_HEAD_MB;
   const HEART_SIZE = 26;
@@ -796,7 +677,6 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
   const totalCardH = cardInnerPad * 2 + nameHeight + HEART_AREA_HEIGHT + charAreaHeight + cpAreaHeight;
   const cardH = totalCardH;
 
-  // 绘制卡片背景
   painter.drawRoundRect(
     cardX, cardTop, gameCardW, cardH,
     LAYOUT_STYLE.GAME_CARD_RADIUS,
@@ -807,12 +687,10 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
 
   let drawY = cardTop + cardInnerPad;
 
-  // 【需求3：游戏名称加粗】
   const nameX = cardX + cardInnerPad;
   const nameBaselineY = drawY;
   painter.drawText(gameInfo.name, nameX, nameBaselineY, nameFontSize, exportColor.gameName, FONT_SIYUAN, true);
 
-  // 测量游戏名称宽度，爱心横向排列在名称右侧（和页面间距对齐 gap:14px）
   painter.ctx.font = `${nameFontSize}px ${FONT_SIYUAN}`;
   const nameTextWidth = painter.ctx.measureText(gameInfo.name).width;
   const heartStartX = nameX + nameTextWidth + 14;
@@ -838,7 +716,6 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
 
   drawY += nameFontSize + LAYOUT_SPACE.GAME_CARD_HEAD_MB;
 
-  // ---- Character ----
   if (charItems.length > 0) {
     painter.drawText('Character', cardX + cardInnerPad, drawY, 18, exportColor.gameName);
     drawY += 18 + 8;
@@ -859,12 +736,10 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
       if (img) {
         const imgY = yPos + innerPad;
         const roundCanvas = createRoundImageCanvas(img, item.src, imgSize, imgSize, LAYOUT_STYLE.CHAR_IMG_RADIUS);
-        // 指定目标尺寸为设计尺寸 imgSize × imgSize，避免双重放大
         painter.drawImageRound(roundCanvas, xPos + innerPad, imgY, imgSize, imgSize);
       }
       const nameBoxY = yPos + innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB;
       const nameBoxH = charCardHeight - (innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB) - innerPad;
-      //【需求1】角色名称在底部格子内上下左右居中
       painter.drawTextWrapCenterInBox(
         item.name,
         xPos + innerPad,
@@ -881,13 +756,10 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
         yPos += charCardHeight + gap;
       }
     }
-    const rows = Math.ceil(charItems.length / perRow);
     drawY = yPos + charCardHeight;
   }
 
-  // ---- Couple ----
   if (cpItems.length > 0) {
-    // ========== 新增：如果存在Character区域，增加和Character标题下方一致的8px间距 ==========
     if (charItems.length > 0) {
       drawY += 8;
     }
@@ -946,7 +818,6 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
           const roundCanvas = createRoundImageCanvas(mImg, m.src, imgSize, imgSize, LAYOUT_STYLE.CHAR_IMG_RADIUS);
           painter.drawImageRound(roundCanvas, mx + innerPad, imgY, imgSize, imgSize);
         }
-        //【需求2修复：原代码参数顺序错误，导致男角色名字无法渲染】
         const mNameBoxY = my + innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB;
         const mNameBoxH = rowH - (innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB) - innerPad;
         painter.drawTextWrapCenterInBox(
@@ -971,15 +842,11 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
   }
 
   painter.shiftY(cardH);
-  // 只有不是页面最后一张卡片，才追加间隙
   if (!isLastCard) {
     painter.shiftY(LAYOUT_SPACE.ADDED_GAME_CARD_MB);
   }
 }
 
-/**
- * 绘制完整内容（支持分页：控制是否绘制头部，以及绘制哪些游戏卡片）
- */
 async function drawFullContent(
   painter,
   targetWidth,
@@ -1003,35 +870,42 @@ async function drawFullContent(
   }
 }
 
+// ============================ 核心修改：cropCanvas（支持缩小输出） ============================
+
 /**
- * 画布裁剪工具：保持高清物理尺寸输出
+ * 画布裁剪 + 高清下采样
  * @param {HTMLCanvasElement} sourceCanvas 原始放大画布（物理尺寸=designW*DPR）
- * @param {number} designW 设计宽度
- * @param {number} designH 设计高度（实际使用高度）
+ * @param {number} designW 设计宽度（渲染时使用的逻辑宽度）
+ * @param {number} designH 设计高度（逻辑高度）
+ * @param {number} finalOutputWidth 最终输出图片宽度（640/810/1080）
  */
-function cropCanvas(sourceCanvas, designW, designH) {
+function cropCanvas(sourceCanvas, designW, designH, finalOutputWidth) {
   const dpr = currentDPR;
-  const outputW = designW * dpr;
-  const outputH = designH * dpr;
+  // 源画布物理像素
+  const sourcePhysicW = designW * dpr;
+  const sourcePhysicH = designH * dpr;
+  // 按比例算出最终输出高度
+  const finalOutputHeight = Math.round(sourcePhysicH * (finalOutputWidth / sourcePhysicW));
 
   const cropped = document.createElement('canvas');
-  cropped.width = outputW;
-  cropped.height = outputH;
+  cropped.width = finalOutputWidth;
+  cropped.height = finalOutputHeight;
 
   const ctx = cropped.getContext('2d');
   ctx.imageSmoothingEnabled = true;
   ctx.imageSmoothingQuality = "high";
 
-  // 直接复制源画布的对应区域（源画布物理尺寸与输出一致）
-  ctx.drawImage(sourceCanvas, 0, 0, outputW, outputH, 0, 0, outputW, outputH);
+  // 关键：3倍大画布 → 缩小绘制到目标尺寸，实现超采样
+  ctx.drawImage(
+    sourceCanvas,
+    0, 0, sourcePhysicW, sourcePhysicH,
+    0, 0, finalOutputWidth, finalOutputHeight
+  );
   return cropped;
 }
 
 // ============================ 长图高度计算 ============================
 
-/**
- * 计算长图总高度（修复：卡片高度 + 间距，确保画布足够）
- */
 function calcTotalVirtualHeight(targetWidth, appData, gameTemplateList, renderDataList) {
   const headerH = calcHeaderVirtualHeight(targetWidth, appData);
   let total = headerH;
@@ -1048,15 +922,6 @@ function calcTotalVirtualHeight(targetWidth, appData, gameTemplateList, renderDa
 
 // ============================ 主渲染函数 ============================
 
-/**
- * 渲染导出图片（支持分页）
- * @param {number} targetWidth - 画布宽度
- * @param {boolean} isLongMode - 是否长图模式（不分页）
- * @param {number} maxPageHeight - 单页最大高度（固定尺寸模式，仅作参考）
- * @param {Object} appData - 全局数据
- * @param {Array} gameTemplateList - 游戏模板列表
- * @returns {Promise<Blob[]>}
- */
 export async function renderExportCanvas(
   targetWidth,
   isLongMode,
@@ -1066,13 +931,12 @@ export async function renderExportCanvas(
 ) {
   const { exportColor, gameList } = appData;
 
-  // 设置当前 DPR（固定为 2）
-  currentDPR = getExportDPR(targetWidth); // 始终返回 2
+  // 强制固定DPR=3，全部使用3倍物理画布渲染，最终再缩放到目标宽度
+  currentDPR = 3;
 
-  // 清空圆角缓存（因为 DPR 变化，缓存失效）
+  // 清空圆角缓存（DPR固定，但保留清理以应对可能的变化）
   roundImageCache.clear();
 
-  // ======== 第一步：收集渲染数据和图片地址 ========
   const allImageSrcList = [];
   const renderDataList = [];
 
@@ -1089,7 +953,6 @@ export async function renderExportCanvas(
     const localHide = gameItem.localHideChar;
     const localFD = gameItem.localFD;
 
-    // Character 角色
     const charItems = [];
     if (Array.isArray(gameItem.selectChars)) {
       for (const cid of gameItem.selectChars) {
@@ -1107,7 +970,6 @@ export async function renderExportCanvas(
       }
     }
 
-    // CP 数据
     const cpItems = [];
     if (Array.isArray(gameItem.cpList)) {
       for (const cp of gameItem.cpList) {
@@ -1156,13 +1018,12 @@ export async function renderExportCanvas(
     });
   }
 
-  // ✅ 修复点5：空数据拦截
   if (renderDataList.length === 0) {
     console.warn("没有可导出的游戏卡片");
     return [];
   }
 
-  // ======== 长图模式 ========
+  // 长图模式
   if (isLongMode) {
     const totalHeight = calcTotalVirtualHeight(targetWidth, appData, gameTemplateList, renderDataList);
     const canvas = document.createElement('canvas');
@@ -1182,17 +1043,17 @@ export async function renderExportCanvas(
     );
 
     const finalHeight = painter.getY() + LAYOUT_SPACE.BODY_PADDING;
-    const finalCanvas = cropCanvas(canvas, targetWidth, finalHeight);
+    // 长图模式：最终输出宽度 = targetWidth
+    const finalCanvas = cropCanvas(canvas, targetWidth, finalHeight, targetWidth);
     const blob = await new Promise((resolve) => finalCanvas.toBlob(resolve, 'image/png', 1));
     return [blob];
   }
 
-  // ======== 固定尺寸分页模式 ========
+  // 固定尺寸分页模式
   if (!maxPageHeight || maxPageHeight <= 0) {
     throw new Error('分页模式必须传入有效页面高度');
   }
 
-  // 预计算高度
   const { headerHeight, gameBlockHeights } = preCalcLayoutHeight(
     targetWidth,
     appData,
@@ -1200,16 +1061,12 @@ export async function renderExportCanvas(
     renderDataList
   );
 
-  // ✅ 修复点2：移除无用参数 hasBaseInfo
   const pagePlanList = splitPagesByHeight(headerHeight, gameBlockHeights, maxPageHeight);
 
-  // 加载图片（所有页面共享）
   const imageCache = await loadImagesWithLimit(allImageSrcList, MAX_IMAGE_CONCURRENCY);
 
   const blobList = [];
-  // 串行渲染每一页
   for (const pagePlan of pagePlanList) {
-    // 临时画布高度预留充足（优化：提升至 maxPageHeight*4 和 6000 兜底）
     const safeTempHeight = Math.max(maxPageHeight * 4, 6000);
     const canvas = document.createElement('canvas');
     const painter = new CanvasLayoutPainter(canvas, targetWidth, safeTempHeight, exportColor.bg);
@@ -1225,8 +1082,8 @@ export async function renderExportCanvas(
     );
 
     const usedHeight = painter.getY() + LAYOUT_SPACE.BODY_PADDING;
-    const finalCanvas = cropCanvas(canvas, targetWidth, usedHeight);
-    //【FIX】捕获toBlob异常，防止单页失败导致整个渲染中断
+    // 分页模式：最终输出宽度 = targetWidth
+    const finalCanvas = cropCanvas(canvas, targetWidth, usedHeight, targetWidth);
     const blob = await new Promise((resolve) => {
       finalCanvas.toBlob((b) => resolve(b), 'image/png', 1);
     });
