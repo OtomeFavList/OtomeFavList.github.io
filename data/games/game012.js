@@ -21,7 +21,7 @@ const gameData = {
     art: [
         {name:"hagi", lang:"en"}
     ],
-    cover: "img/game/012.jpg",
+    cover: "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/game/012.jpg",
     charList: [
         // 晦光
         {
@@ -31,7 +31,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/012/Akari.jpg","img/char/012/Akari2.jpg"], type: "base" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/012/Akari.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/012/Akari2.jpg"], type: "base" }
             ]
         },
         // 恩德
@@ -42,7 +43,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/012/Ende.jpg","img/char/012/Ende2.jpg"], type: "base" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/012/Ende.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/012/Ende2.jpg"], type: "base" }
             ]
         },
         // 芬里尔
@@ -53,7 +55,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/012/Fenrir.jpg","img/char/012/Fenrir2.jpg","img/char/012/Fenrir3.jpg"], type: "base" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/012/Fenrir.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/012/Fenrir2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/012/Fenrir3.jpg"], type: "base" }
             ]
         },
         // 哈提
@@ -64,7 +68,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/012/Hati.jpg","img/char/012/Hati2.jpg"], type: "base" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/012/Hati.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/012/Hati2.jpg"], type: "base" }
             ]
         },
         // 海拉
@@ -75,7 +80,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/012/Hel.jpg","img/char/012/Hel2.jpg","img/char/012/Hel3.jpg"], type: "base" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/012/Hel.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/012/Hel2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/012/Hel3.jpg"], type: "base" }
             ]
         },
         // 耶梦加得
@@ -86,7 +93,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/012/Jorm.jpg","img/char/012/Jorm2.jpg","img/char/012/Jorm3.jpg"], type: "base" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/012/Jorm.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/012/Jorm2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/012/Jorm3.jpg"], type: "base" }
             ]
         }
     ]
