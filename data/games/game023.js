@@ -14,7 +14,7 @@ const gameData = {
     art: [
         {name:"石田翠", lang:"zh"}
     ],
-    cover: "img/game/023.jpg", // 封面图路径，统一前缀img/
+    cover: "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/game/023.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 立花希佐
         {
@@ -24,7 +24,8 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/023/Kisa.png","img/char/023/Kisa2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/023/Kisa.png",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/023/Kisa2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 睦实介
@@ -35,7 +36,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/023/Kai.png","img/char/023/Kai2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/023/Kai.png",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/023/Kai2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 白田美骑
@@ -46,7 +48,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/023/Mitsuki.png","img/char/023/Mitsuki2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/023/Mitsuki.png",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/023/Mitsuki2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 根地黑门
@@ -57,7 +60,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/023/Neji.png","img/char/023/Neji2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/023/Neji.png",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/023/Neji2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 高科更文
@@ -68,7 +72,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/023/Sarafumi.png","img/char/023/Sarafumi2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/023/Sarafumi.png",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/023/Sarafumi2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 世长创司郎
@@ -79,7 +84,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/023/Soushirou.png","img/char/023/Soushirou2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/023/Soushirou.png",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/023/Soushirou2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 织卷寿寿
@@ -90,7 +96,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/023/Suzu.png","img/char/023/Suzu2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/023/Suzu.png",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/023/Suzu2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 田中右宙为
@@ -101,7 +108,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/023/Chui.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/023/Chui.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 加斋中
@@ -112,7 +119,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/023/Kasai.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/023/Kasai.png"], type: "base" },      // 默认基础图，始终加载
             ]
         }
     ]
