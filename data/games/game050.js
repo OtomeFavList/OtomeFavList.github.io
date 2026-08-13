@@ -25,7 +25,7 @@ const gameData = {
     art: [
         {name:"ワカツキ", lang:"ja"}
     ],
-    cover: "img/game/050.jpg", // 封面图路径，统一前缀img/
+    cover: "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/game/050.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 来实春香
         {
@@ -35,7 +35,8 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/050/Haruka.jpg","img/char/050/Haruka2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/050/Haruka.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/050/Haruka2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 细波艾斯
@@ -46,7 +47,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/050/Ace.jpg","img/char/050/Ace2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/050/Ace.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/050/Ace2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 神里晓
@@ -57,7 +59,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/050/Kyou.jpg","img/char/050/Kyou2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/050/Kyou.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/050/Kyou2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 来实雅人
@@ -68,7 +71,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/050/Masato.jpg","img/char/050/Masato2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/050/Masato.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/050/Masato2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 弓仓音时
@@ -79,7 +83,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/050/Neji.jpg","img/char/050/Neji2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/050/Neji.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/050/Neji2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 指乃朱理
@@ -90,7 +95,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/050/Shuri.jpg","img/char/050/Shuri2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/050/Shuri.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/050/Shuri2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 九鬼辉
@@ -101,7 +107,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/050/Haruka.jpg","img/char/050/Haruka2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/050/Haruka.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/050/Haruka2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 九鬼光
@@ -112,7 +119,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/050/Hikaru.jpg","img/char/050/Hikaru2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/050/Hikaru.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/050/Hikaru2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 九鬼静
@@ -123,7 +131,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/050/Shizuka.jpg","img/char/050/Shizuka2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/050/Shizuka.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/050/Shizuka2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         }
     ]
