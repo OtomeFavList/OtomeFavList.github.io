@@ -31,7 +31,7 @@ const gameData = {
     art: [
         {name:"もちもちた", lang:"ja"}
     ],
-    cover: "img/game/029.jpg", // 封面图路径，统一前缀img/
+    cover: "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/game/029.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 爱日梨
         {
@@ -41,7 +41,8 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/029/Airi.jpg","img/char/029/Airi2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/029/Airi.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/029/Airi2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 露娜
@@ -52,7 +53,8 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/029/Luna.jpg","img/char/029/Luna2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/029/Luna.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/029/Luna2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 杰克
@@ -63,7 +65,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/029/Jack.jpg","img/char/029/Jack2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/029/Jack.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/029/Jack2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 卡农
@@ -74,7 +77,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/029/Kanon.jpg","img/char/029/Kanon2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/029/Kanon.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/029/Kanon2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 米涅特
@@ -85,7 +89,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/029/Minette.jpg","img/char/029/Minette2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/029/Minette.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/029/Minette2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 尼洛
@@ -96,7 +101,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/029/Nello.jpg","img/char/029/Nello2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/029/Nello.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/029/Nello2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 雷因
@@ -107,7 +113,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/029/Rain.jpg","img/char/029/Rain2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/029/Rain.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/029/Rain2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 斯诺
@@ -118,7 +125,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/029/Snow.jpg","img/char/029/Snow2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/029/Snow.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/029/Snow2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         }
     ]
