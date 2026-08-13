@@ -13,7 +13,7 @@ const gameData = {
     art: [
         {name:"雪広うたこ", lang:"zh"}
     ],
-    cover: "img/game/041.jpg", // 封面图路径，统一前缀img/
+    cover: "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/game/041.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 澄空翼
         {
@@ -23,7 +23,8 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/041/Tsubasa.jpg","img/char/041/Tsubasa2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/041/Tsubasa.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/041/Tsubasa2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 不动明谦
@@ -34,7 +35,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/041/Akane.jpg","img/char/041/Akane2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/041/Akane.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/041/Akane2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 金城刚士
@@ -45,7 +47,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/041/Goushi.jpg","img/char/041/Goushi2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/041/Goushi.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/041/Goushi2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 寺光遥日
@@ -56,7 +59,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/041/Haruhi.jpg","img/char/041/Haruhi2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/041/Haruhi.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/041/Haruhi2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 王茶利晖
@@ -67,7 +71,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/041/Hikaru.jpg","img/char/041/Hikaru2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/041/Hikaru.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/041/Hikaru2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 增长和南
@@ -78,7 +83,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/041/Kazuna.jpg","img/char/041/Kazuna2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/041/Kazuna.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/041/Kazuna2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 爱染健十
@@ -89,7 +95,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/041/Kento.jpg","img/char/041/Kento2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/041/Kento.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/041/Kento2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 释村帝人
@@ -100,7 +107,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/041/Mikado.jpg","img/char/041/Mikado2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/041/Mikado.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/041/Mikado2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 殿弥勒
@@ -111,7 +119,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/041/Miroku.jpg","img/char/041/Miroku2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/041/Miroku.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/041/Miroku2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 音济百太郎
@@ -122,7 +131,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/041/Momotarou.jpg","img/char/041/Momotarou2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/041/Momotarou.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/041/Momotarou2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 是国龙持
@@ -133,7 +143,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/041/Ryuuji.jpg","img/char/041/Ryuuji2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/041/Ryuuji.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/041/Ryuuji2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 野目龙广
@@ -144,7 +155,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/041/Tatsuhiro.jpg","img/char/041/Tatsuhiro2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/041/Tatsuhiro.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/041/Tatsuhiro2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 北门伦毘沙
@@ -155,7 +167,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/041/Tomohisa.jpg","img/char/041/Tomohisa2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/041/Tomohisa.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/041/Tomohisa2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 阿修悠太
@@ -166,7 +179,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/041/Yuuta.jpg","img/char/041/Yuuta2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/041/Yuuta.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/041/Yuuta2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 寺光唯月
@@ -177,7 +191,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/041/Yuzuki.jpg","img/char/041/Yuzuki2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/041/Yuzuki.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/041/Yuzuki2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         }
     ]
