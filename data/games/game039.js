@@ -24,8 +24,8 @@ const gameData = {
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
                 { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/039/Rin.jpg",
-                            "img/char/039/Rin2.jpg",
-                            "img/char/039/Rin3.png"], type: "base" },      // 默认基础图，始终加载
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/039/Rin2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/039/Rin3.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 石川五右卫门
@@ -36,7 +36,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/039/Goemon.jpg","img/char/039/Goemon2.jpg","img/char/039/Goemon3.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/039/Goemon.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/039/Goemon2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/039/Goemon3.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // JacK
@@ -47,7 +49,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/039/Jack.jpg","img/char/039/Jack2.jpg","img/char/039/Jack3.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/039/Jack.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/039/Jack2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/039/Jack3.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 宇贺菊之助
@@ -58,7 +62,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/039/Kikunosuke.jpg","img/char/039/Kikunosuke2.jpg","img/char/039/Kikunosuke3.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/039/Kikunosuke.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/039/Kikunosuke2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/039/Kikunosuke3.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 东洲斋写乐
@@ -69,7 +75,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/039/Sharaku.jpg","img/char/039/Sharaku2.jpg","img/char/039/Sharaku3.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/039/Sharaku.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/039/Sharaku2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/039/Sharaku3.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 村上誉那
@@ -80,7 +88,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/039/Yona.jpg","img/char/039/Yona2.jpg","img/char/039/Yona3.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/039/Yona.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/039/Yona2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/039/Yona3.png"], type: "base" },      // 默认基础图，始终加载
             ]
         }
     ]
