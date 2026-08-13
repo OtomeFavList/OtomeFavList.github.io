@@ -16,7 +16,7 @@ const gameData = {
         {name:"悌太", lang:"zh"},
         {name:"清白かりん", lang:"zh"}
     ],
-    cover: "img/game/018.jpg", // 封面图路径，统一前缀img/
+    cover: "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/game/018.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 小春
         {
@@ -26,7 +26,7 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/018/Koharu.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/018/Koharu.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 久我深琴
@@ -37,7 +37,7 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/018/Mikoto.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/018/Mikoto.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 不知火七海
@@ -48,7 +48,7 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/018/Nanami.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/018/Nanami.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 宿史晓人
@@ -59,7 +59,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/018/Akito.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/018/Akito.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 乙丸平士
@@ -70,7 +70,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/018/Heishi.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/018/Heishi.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 加贺见一月
@@ -81,7 +81,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/018/Itsuki.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/018/Itsuki.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 结贺驱
@@ -92,7 +92,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/018/Kakeru.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/018/Kakeru.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 远矢正宗
@@ -103,7 +103,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/018/Masamune.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/018/Masamune.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 吾妻夏彦
@@ -114,7 +114,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/018/Natsuhiko.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/018/Natsuhiko.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 二条朔也
@@ -125,7 +125,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/018/Sakuya.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/018/Sakuya.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 市之濑千里
@@ -136,7 +136,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/018/Senri.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/018/Senri.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 室星朗
@@ -147,7 +147,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/018/Ron.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/018/Ron.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         }
     ]
