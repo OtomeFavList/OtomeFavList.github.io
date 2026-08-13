@@ -23,7 +23,7 @@ const gameData = {
     art: [
         {name:"川人やすた", lang:"zh"}
     ],
-    cover: "img/game/024.jpg", // 封面图路径，统一前缀img/
+    cover: "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/game/024.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 山城历
         {
@@ -33,7 +33,8 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/024/Koyomi.jpg","img/char/024/Koyomi2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/024/Koyomi.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/024/Koyomi2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 骏河明人
@@ -44,7 +45,11 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/024/Akito.jpg","img/char/024/Akito2.jpg","img/char/024/Akito3.jpg","img/char/024/Akito4.jpg","img/char/024/Akito5.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/024/Akito.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/024/Akito2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/024/Akito3.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/024/Akito4.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/024/Akito5.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 卡米尔·赛谢林
@@ -55,7 +60,11 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/024/Camil.jpg","img/char/024/Camil2.jpg","img/char/024/Camil3.jpg","img/char/024/Camil4.jpg","img/char/024/Camil5.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/024/Camil.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/024/Camil2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/024/Camil3.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/024/Camil4.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/024/Camil5.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 日向忍
@@ -66,7 +75,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/024/Hyuuga.jpg","img/char/024/Hyuuga2.jpg","img/char/024/Hyuuga3.jpg","img/char/024/Hyuuga4.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/024/Hyuuga.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/024/Hyuuga2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/024/Hyuuga3.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/024/Hyuuga4.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 播磨奏
@@ -77,7 +89,11 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/024/Kanade.jpg","img/char/024/Kanade2.jpg","img/char/024/Kanade3.jpg","img/char/024/Kanade4.jpg","img/char/024/Kanade5.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/024/Kanade.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/024/Kanade2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/024/Kanade3.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/024/Kanade4.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/024/Kanade5.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 近江亮
@@ -88,7 +104,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/024/Ryou.jpg","img/char/024/Ryou2.jpg","img/char/024/Ryou3.jpg","img/char/024/Ryou4.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/024/Ryou.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/024/Ryou2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/024/Ryou3.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/024/Ryou4.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 出云紫苑
@@ -99,7 +118,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/024/Shion.jpg","img/char/024/Shion2.jpg","img/char/024/Shion3.jpg","img/char/024/Shion4.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/024/Shion.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/024/Shion2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/024/Shion3.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/024/Shion4.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 周防壮介
@@ -110,7 +132,11 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/024/Sousuke.jpg","img/char/024/Sousuke2.jpg","img/char/024/Sousuke3.jpg","img/char/024/Sousuke4.jpg","img/char/024/Sousuke5.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/024/Sousuke.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/024/Sousuke2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/024/Sousuke3.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/024/Sousuke4.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/024/Sousuke5.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 美作灯真
@@ -121,7 +147,11 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/024/Touma.jpg","img/char/024/Touma2.jpg","img/char/024/Touma3.jpg","img/char/024/Touma4.jpg","img/char/024/Touma5.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/024/Touma.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/024/Touma2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/024/Touma3.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/024/Touma4.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/024/Touma5.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         }
     ]
