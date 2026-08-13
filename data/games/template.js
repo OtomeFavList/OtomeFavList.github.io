@@ -17,7 +17,7 @@ const gameData = {
         {name:"日文原画", lang:"ja"},
         {name:"英文原画", lang:"en"}
     ],
-    cover: "img/game/0.jpg", // 封面图路径，统一前缀img/
+    cover: "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/game/0.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 女主模板 female
         {
