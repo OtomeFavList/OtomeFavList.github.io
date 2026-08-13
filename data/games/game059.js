@@ -24,7 +24,7 @@ const gameData = {
     art: [
         {name:"カズアキ", lang:"ja"}
     ],
-    cover: "img/game/059.jpg", // 封面图路径，统一前缀img/
+    cover: "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/game/059.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 朱音凜
         {
@@ -34,7 +34,9 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/059/Rin.jpg","img/char/059/Rin2.jpg","img/char/059/Rin3.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/059/Rin.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/059/Rin2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/059/Rin3.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 木邑浅葱
@@ -45,7 +47,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/059/Asagi.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/059/Asagi.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 伊吹萩之介
@@ -56,7 +58,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/059/Ibuki.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/059/Ibuki.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 芹野真夏
@@ -67,7 +69,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/059/Manatsu.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/059/Manatsu.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 花苏芳
@@ -78,7 +80,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/059/Suou.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/059/Suou.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 犬嶌谣
@@ -89,7 +91,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/059/Uta.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/059/Uta.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 犬嶌咏
@@ -100,7 +102,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/059/Yomi.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/059/Yomi.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         }
     ]
