@@ -90,7 +90,7 @@ const gameData = {
         },
         // 海棠鹰斗
         {
-            id: "g048_m05",
+            id: "g048_m06",
             name: "海棠鹰斗",
             gender: "male",
             isHidden: false,
@@ -113,7 +113,7 @@ const gameData = {
         },
         // 雷恩
         {
-            id: "g048_h01",
+            id: "g048_h02",
             name: "雷恩",
             gender: "male",
             isHidden: true,
