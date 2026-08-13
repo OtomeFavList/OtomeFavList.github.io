@@ -252,7 +252,7 @@ export function getAvailableCharImages(char, globalHideSwitch, globalFDSwitch, l
 export const imgCacheMap = new Map();
 
 // ============================================================
-// ① preloadAndDecodeImage 修改后
+// ① preloadAndDecodeImage 修改后（移除强制 decode）
 // ============================================================
 export function preloadAndDecodeImage(src){
     if(!src){
@@ -269,14 +269,8 @@ export function preloadAndDecodeImage(src){
         // 异步解码
         tempImg.decoding = "async";
 
-        tempImg.onload = async () => {
-            try{
-                if(tempImg.decode){
-                    await tempImg.decode();
-                }
-            }catch(e){
-                // decode 失败不影响图片继续使用
-            }
+        tempImg.onload = () => {
+            // 不强制等待 decode，让浏览器自然解码
             resolve(tempImg);
         };
 
@@ -420,7 +414,7 @@ export async function switchCharImageWithLoading(wrap, nextSrc){
 }
 
 // ============================================================
-// ④ 新增 preloadAdjacentImages
+// ④ 新增 preloadAdjacentImages（保留供按需调用）
 // ============================================================
 export function preloadAdjacentImages(srcList, index){
     if(
@@ -704,7 +698,7 @@ export function renderGameSelectItem(game, index) {
 }
 
 // ============================================================
-// ⑥ renderSelectedChar 修改后（增加preloadAdjacentImages，img标签去crossorigin加loading）
+// ⑥ renderSelectedChar 修改后（移除 preloadAdjacentImages 调用，img loading 改为 eager）
 // ============================================================
 export function renderSelectedChar(gameItem, gameInfo, isSnapshot = false) {
     if (!gameInfo?.charList || !gameItem) return `<div class="empty-hint">暂未添加角色</div>`;
@@ -735,13 +729,12 @@ export function renderSelectedChar(gameItem, gameInfo, isSnapshot = false) {
         if (imgIndex >= allSrc.length) imgIndex = 0;
         const targetSrc = allSrc[imgIndex];
 
-        // 新增：预热当前角色前后相邻立绘
-        preloadAdjacentImages(allSrc, imgIndex);
+        // 已移除 preloadAdjacentImages 调用，避免渲染时预加载大量图片
 
         html += `
             <div class="char-card-item selected" data-char-id="${char.id}" data-game-id="${gameInfo.id}" data-total-img="${allSrc.length}">
                 <div class="char-card-img-box ${allSrc.length > 1 ? 'char-has-multi-img' : ''}">
-                    <img src="${targetSrc}" alt="${char.name || ''}" loading="lazy" decoding="async">
+                    <img src="${targetSrc}" alt="${char.name || ''}" loading="eager" decoding="async">
                 </div>
                 <div class="char-card-name">${char.name || ""}</div>
             </div>
@@ -752,7 +745,7 @@ export function renderSelectedChar(gameItem, gameInfo, isSnapshot = false) {
 }
 
 // ============================================================
-// ⑦ renderCP 修改后（img标签去crossorigin加loading）
+// ⑦ renderCP 修改后（img loading 改为 eager）
 // ============================================================
 export function renderCP(gameItem, gameInfo, isSnapshot = false) {
     if (!gameInfo?.charList || !gameItem) return `<div class="empty-hint">暂未添加角色</div>`;
@@ -799,7 +792,7 @@ export function renderCP(gameItem, gameInfo, isSnapshot = false) {
             maleHtml += `
                 <div class="cp-selected-card-item" data-char-id="${mChar.id}" data-game-id="${gameInfo.id}" data-total-img="${mAllSrc.length}">
                     <div class="char-card-img-box ${mAllSrc.length > 1 ? 'char-has-multi-img' : ''}">
-                        <img src="${mTargetSrc}" alt="${mChar.name || ''}" loading="lazy" decoding="async">
+                        <img src="${mTargetSrc}" alt="${mChar.name || ''}" loading="eager" decoding="async">
                     </div>
                     <div class="char-card-name">${mChar.name || ""}</div>
                 </div>
@@ -811,7 +804,7 @@ export function renderCP(gameItem, gameInfo, isSnapshot = false) {
                 <div class="heroine-column">
                     <div class="cp-selected-card-item" data-char-id="${fChar.id}" data-game-id="${gameInfo.id}" data-total-img="${fAllSrc.length}">
                         <div class="char-card-img-box ${fAllSrc.length > 1 ? 'char-has-multi-img' : ''}">
-                            <img src="${fTargetSrc}" alt="${fChar.name || ''}" loading="lazy" decoding="async">
+                            <img src="${fTargetSrc}" alt="${fChar.name || ''}" loading="eager" decoding="async">
                         </div>
                         <div class="char-card-name">${fChar.name || ""}</div>
                     </div>
@@ -940,7 +933,7 @@ function buildCoreContext() {
         preloadImagesInIdle,
         switchCharImage,
         switchCharImageWithLoading,
-        preloadAdjacentImages,    // 新增导出
+        preloadAdjacentImages,    // 保留导出，供按需调用
         isTodayConfirmed,
         saveConfirmDate,
         localSwitchIsConfirmedToday,
