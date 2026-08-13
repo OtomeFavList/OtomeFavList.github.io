@@ -14,7 +14,7 @@ const gameData = {
     art: [
         {name:"悌太", lang:"zh"}
     ],
-    cover: "img/game/022.jpg", // 封面图路径，统一前缀img/
+    cover: "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/game/022.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 濑名阳爱
         {
@@ -24,7 +24,9 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/022/Hiyori.jpg","img/char/022/Hiyori2.jpg","img/char/022/Hiyori3.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/022/Hiyori.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/022/Hiyori2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/022/Hiyori3.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 陀宰明
@@ -35,7 +37,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/022/Dazai.jpg","img/char/022/Dazai2.jpg","img/char/022/Dazai3.jpg","img/char/022/Dazai4.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/022/Dazai.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/022/Dazai2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/022/Dazai3.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/022/Dazai4.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 获端圭人
@@ -46,7 +51,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/022/Ebana.jpg","img/char/022/Ebana2.jpg","img/char/022/Ebana3.jpg","img/char/022/Ebana4.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/022/Ebana.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/022/Ebana2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/022/Ebana3.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/022/Ebana4.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 双巳椋一
@@ -57,7 +65,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/022/Futami.jpg","img/char/022/Futami2.jpg","img/char/022/Futami3.jpg","img/char/022/Futami4.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/022/Futami.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/022/Futami2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/022/Futami3.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/022/Futami4.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 废寺拓海
@@ -68,7 +79,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/022/Haiji.jpg","img/char/022/Haiji2.jpg","img/char/022/Haiji3.jpg","img/char/022/Haiji4.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/022/Haiji.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/022/Haiji2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/022/Haiji3.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/022/Haiji4.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 射落水树
@@ -79,7 +93,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/022/Iochi.jpg","img/char/022/Iochi2.jpg","img/char/022/Iochi3.jpg","img/char/022/Iochi4.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/022/Iochi.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/022/Iochi2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/022/Iochi3.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/022/Iochi4.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 明濑境也
@@ -90,7 +107,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/022/Kyouya.jpg","img/char/022/Kyouya2.jpg","img/char/022/Kyouya3.jpg","img/char/022/Kyouya4.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/022/Kyouya.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/022/Kyouya2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/022/Kyouya3.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/022/Kyouya4.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 茅裂镇
@@ -101,7 +121,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/022/Mamoru.jpg","img/char/022/Mamoru2.jpg","img/char/022/Mamoru3.jpg","img/char/022/Mamoru4.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/022/Mamoru.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/022/Mamoru2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/022/Mamoru3.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/022/Mamoru4.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 凝部奏汰
@@ -112,7 +135,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/022/Souta.jpg","img/char/022/Souta2.jpg","img/char/022/Souta3.jpg","img/char/022/Souta4.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/022/Souta.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/022/Souta2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/022/Souta3.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/022/Souta4.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 万城灯星
@@ -123,7 +149,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/022/Tomose.jpg","img/char/022/Tomose2.jpg","img/char/022/Tomose3.jpg","img/char/022/Tomose4.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/022/Tomose.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/022/Tomose2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/022/Tomose3.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/022/Tomose4.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         }
     ]
