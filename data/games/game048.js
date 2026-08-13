@@ -14,7 +14,7 @@ const gameData = {
     art: [
         {name:"ナガオカ", lang:"ja"}
     ],
-    cover: "img/game/048.jpg", // 封面图路径，统一前缀img/
+    cover: "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/game/048.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 九楼抚子
         {
@@ -24,8 +24,8 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/048/Nadeshiko.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/048/Nadeshiko2.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Nadeshiko.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Nadeshiko2.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
             ]
         },
         // 英圆
@@ -36,8 +36,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/048/Madoka.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/048/Bishop.jpg","img/char/048/Madoka2.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Madoka.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Bishop.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Madoka2.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
             ]
         },
         // 英央
@@ -48,8 +49,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/048/Nakaba.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/048/Journalist.jpg","img/char/048/Nakaba2.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Nakaba.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Journalist.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Nakaba2.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
             ]
         },
         // 加纳理一郎
@@ -60,8 +62,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/048/Riichiro.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/048/Wanderer.jpg","img/char/048/Riichiro2.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Riichiro.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Wanderer.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Riichiro2.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
             ]
         },
         // 西园寺寅之助
@@ -72,8 +75,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/048/Saionji.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/048/Traitor.jpg","img/char/048/Saionji2.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Saionji.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Traitor.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Saionji2.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
             ]
         },
         // 时田终夜
@@ -84,8 +88,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/048/Shuya.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/048/Philosopher.jpg","img/char/048/Shuya2.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Shuya.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Philosopher.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Shuya2.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
             ]
         },
         // 海棠鹰斗
@@ -96,8 +101,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/048/Takato.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/048/Kaga.jpg","img/char/048/Takato2.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Takato.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Kaga.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Takato2.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
             ]
         },
         // 筱宫枫
@@ -108,7 +114,7 @@ const gameData = {
             isHidden: true,
             isFD: false,
             images: [
-                { srcList: ["img/char/048/Kaede.jpg"], type: "base" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Kaede.jpg"], type: "base" }
             ]
         },
         // 雷恩
@@ -119,7 +125,7 @@ const gameData = {
             isHidden: true,
             isFD: false,
             images: [
-                { srcList: ["img/char/048/Rook.jpg"], type: "base" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Rook.jpg"], type: "base" }
             ]
         }
     ]
