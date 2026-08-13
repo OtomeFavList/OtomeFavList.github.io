@@ -251,73 +251,87 @@ export function getAvailableCharImages(char, globalHideSwitch, globalFDSwitch, l
  */
 export const imgCacheMap = new Map();
 
-/**
- * 后台预加载并解码图片，复用缓存Promise，避免重复请求
- * @param {string} src
- * @returns {Promise<HTMLImageElement>}
- */
-export async function preloadAndDecodeImage(src){
-    if (!src) throw new Error("empty src");
-    // 命中缓存Promise，直接复用
+// ============================================================
+// ① preloadAndDecodeImage 修改后
+// ============================================================
+export function preloadAndDecodeImage(src){
+    if(!src){
+        return Promise.resolve(null);
+    }
+
+    // 已经加载/正在加载 → 直接复用
     if(imgCacheMap.has(src)){
         return imgCacheMap.get(src);
     }
-    const promise = (async ()=>{
+
+    const p = new Promise((resolve, reject) => {
         const tempImg = new Image();
+        // 异步解码
         tempImg.decoding = "async";
-        tempImg.crossOrigin = "anonymous";
-        // =========【新增】高清渲染提示 =========
-        tempImg.style.imageRendering = "auto";
-        tempImg.src = src;
-        try{
-            await tempImg.decode();
-            return tempImg;
-        }catch(err){
-            // 加载失败，清除缓存，允许下次重试
+
+        tempImg.onload = async () => {
+            try{
+                if(tempImg.decode){
+                    await tempImg.decode();
+                }
+            }catch(e){
+                // decode 失败不影响图片继续使用
+            }
+            resolve(tempImg);
+        };
+
+        tempImg.onerror = () => {
+            // 加载失败时，从缓存 Map 中删除
+            // 防止以后永远复用一个失败 Promise
             imgCacheMap.delete(src);
-            throw err;
-        }
-    })();
-    imgCacheMap.set(src, promise);
-    return promise;
+            reject(new Error(`Image load failed: ${src}`));
+        };
+        tempImg.src = src;
+    });
+
+    // 立即写入缓存
+    imgCacheMap.set(src, p);
+    return p;
 }
 
-/**
- * 浏览器空闲时后台预加载一批图片，仅做缓存，不渲染到页面
- * 优化：并发控制、自动去重、失败不阻塞队列
- * @param {string[]} srcList 图片地址数组
- */
-export function preloadImagesInIdle(srcList) {
-    if (!Array.isArray(srcList) || srcList.length === 0) return;
+// ============================================================
+// ② preloadImagesInIdle 修改后
+// ============================================================
+export function preloadImagesInIdle(list, batchSize = 2){
+    if(!Array.isArray(list) || !list.length) return;
 
-    if (!window._preloadedImgSet) window._preloadedImgSet = new Set();
+    const unique = [...new Set(list)].filter(Boolean);
 
-    // 使用 imgCacheMap 去重，避免重复请求
-    const needPreload = [...new Set(srcList)].filter(src => 
-        src && !window._preloadedImgSet.has(src) && !imgCacheMap.has(src)
-    );
-    if (needPreload.length === 0) return;
+    let index = 0;
 
-    const doPreload = async () => {
-        // 降低并发：6 → 4，防止大量图片同时发出请求触发浏览器请求队列阻塞
-        const batchSize = 4;
-        for (let i = 0; i < needPreload.length; i += batchSize) {
-            const batch = needPreload.slice(i, i + batchSize);
-            await Promise.allSettled(batch.map(async (src) => {
-                try{
-                    await preloadAndDecodeImage(src);
-                    window._preloadedImgSet.add(src);
-                }catch(err){
-                    // 失败静默，不阻断后续预加载
-                }
-            }));
+    const run = async (deadline) => {
+        while(index < unique.length){
+            // 浏览器已经没有空闲时间了
+            if(
+                deadline &&
+                typeof deadline.timeRemaining === "function" &&
+                deadline.timeRemaining() < 8
+            ){
+                requestIdleCallback(run, {timeout: 1000});
+                return;
+            }
+
+            const batch = unique.slice(index, index + batchSize);
+            index += batch.length;
+
+            await Promise.allSettled(
+                batch.map(src => preloadAndDecodeImage(src))
+            );
         }
     };
 
-    if (window.requestIdleCallback) {
-        requestIdleCallback(doPreload, {timeout:200});
-    } else {
-        setTimeout(doPreload, 100);
+    if("requestIdleCallback" in window){
+        requestIdleCallback(
+            run,
+            {timeout: 1000}
+        );
+    }else{
+        setTimeout(() => run(), 300);
     }
 }
 
@@ -337,40 +351,104 @@ export async function switchCharImage(domImg, nextSrc){
     }
 }
 
-/**
- * 带loading状态的角色图片切换
- * @param {HTMLElement} wrap .char-card-img-box容器
- * @param {string} nextSrc 目标图片地址
- */
+// ============================================================
+// ③ switchCharImageWithLoading 修改后
+// ============================================================
 export async function switchCharImageWithLoading(wrap, nextSrc){
-    // 防重复点击：正在加载直接返回
-    if(wrap.dataset.isImgLoading === "1") return;
+    if(!wrap || !nextSrc){
+        return;
+    }
+
+    // 防止连续快速点击
+    if(wrap.dataset.isImgLoading === "1"){
+        return;
+    }
 
     wrap.dataset.isImgLoading = "1";
-    // 插入loading DOM
-    const loaderEl = document.createElement("div");
-    loaderEl.className = "img-loader-spinner";
-    wrap.appendChild(loaderEl);
 
-    const tempImg = new Image();
-    tempImg.decoding = "async";
+    const loaderEl =
+        document.createElement("div");
+
+    loaderEl.className =
+        "img-loader-spinner";
+
+    wrap.appendChild(loaderEl);
 
     function clearLoading(){
         wrap.dataset.isImgLoading = "";
-        const el = wrap.querySelector(".img-loader-spinner");
-        if(el) el.remove();
+
+        const el =
+            wrap.querySelector(
+                ".img-loader-spinner"
+            );
+
+        if(el){
+            el.remove();
+        }
     }
 
-    tempImg.onload = function(){
-        const realImg = wrap.querySelector("img");
-        if(realImg) realImg.src = nextSrc;
+    try{
+        // 使用统一图片缓存
+        await preloadAndDecodeImage(nextSrc);
+
+        const realImg =
+            wrap.querySelector("img");
+
+        if(realImg){
+            realImg.src = nextSrc;
+            // 防止浏览器再次进行不必要的解码等待
+            realImg.decoding = "async";
+        }
+
+    }catch(error){
+        console.warn(
+            "图片加载失败:",
+            nextSrc,
+            error
+        );
+
+        const realImg =
+            wrap.querySelector("img");
+        // 即使 decode 失败，也允许浏览器直接显示
+        if(realImg){
+            realImg.src = nextSrc;
+        }
+
+    }finally{
         clearLoading();
-    };
-    tempImg.onerror = function(){
-        console.warn("图片加载失败", nextSrc);
-        clearLoading();
-    };
-    tempImg.src = nextSrc;
+    }
+}
+
+// ============================================================
+// ④ 新增 preloadAdjacentImages
+// ============================================================
+export function preloadAdjacentImages(srcList, index){
+    if(
+        !Array.isArray(srcList) ||
+        srcList.length <= 1
+    ){
+        return;
+    }
+
+    const targets = [];
+
+    // 前一张
+    const prevIndex =
+        (index - 1 + srcList.length) %
+        srcList.length;
+
+    // 后一张
+    const nextIndex =
+        (index + 1) %
+        srcList.length;
+
+    targets.push(srcList[prevIndex]);
+    targets.push(srcList[nextIndex]);
+
+    preloadImagesInIdle(
+        targets,
+        1
+    );
 }
 
 // ===================== 游戏模板加载模块（不再import游戏，读取全局已加载数据） =====================
@@ -569,9 +647,13 @@ export function fillFilterOptions(gameList) {
  * 【修复】硬编码输出顺序，不再依赖对象key顺序：编剧→画师→发售年份→发行厂商→汉化厂商
  * 布局：左侧封面，右侧竖排信息，移除名称旁发售年份
  * @param {Object} game 游戏模板对象
+ * @param {number} index 在列表中的索引（用于控制loading策略）
  * @returns {string} html字符串
  */
-export function renderGameSelectItem(game) {
+// ============================================================
+// ⑤ renderGameSelectItem 修改后（增加index参数，前6张eager）
+// ============================================================
+export function renderGameSelectItem(game, index) {
     if (!game) return "";
 
     // 编剧：对象数组副本排序拼接
@@ -609,8 +691,11 @@ export function renderGameSelectItem(game) {
         infoHtml += `<div>${t}</div>`;
     }
 
+    // 前6张 eager，其余 lazy
+    const loadingMode = (index < 6) ? "eager" : "lazy";
+
     return `
-        <img src="${game.cover || ''}" alt="${game.name || ''}" decoding="async">
+        <img src="${game.cover || ''}" alt="${game.name || ''}" loading="${loadingMode}" decoding="async">
         <div>
             <div class="game-option-name">${game.name || ""}</div>
             ${infoHtml}
@@ -618,13 +703,9 @@ export function renderGameSelectItem(game) {
     `;
 }
 
-/**
- * 渲染选中角色【适配 srcList 多图数组】
- * @param {Object} gameItem 当前已添加游戏条目(appData.gameList内)
- * @param {Object} gameInfo 游戏模板gameTemplateList内对象
- * @param {boolean} isSnapshot 是否快照模式（true时禁用切换按钮，本函数无切换按钮故不处理）
- * @returns {string} html字符串
- */
+// ============================================================
+// ⑥ renderSelectedChar 修改后（增加preloadAdjacentImages，img标签去crossorigin加loading）
+// ============================================================
 export function renderSelectedChar(gameItem, gameInfo, isSnapshot = false) {
     if (!gameInfo?.charList || !gameItem) return `<div class="empty-hint">暂未添加角色</div>`;
 
@@ -648,19 +729,19 @@ export function renderSelectedChar(gameItem, gameInfo, isSnapshot = false) {
         availableImgUnits.forEach(u => allSrc.push(...u.srcList));
         if (allSrc.length === 0) return;
 
-        // 移除立即预加载，改为由外部统一调度
-        // preloadImagesInIdle(allSrc);
-
         // 从持久化 selectCharItems 读取imgIndex
         const storedItem = gameItem.selectCharItems.find(s => s.charId === cid);
         let imgIndex = Number(storedItem?.imgIndex ?? 0);
         if (imgIndex >= allSrc.length) imgIndex = 0;
         const targetSrc = allSrc[imgIndex];
 
+        // 新增：预热当前角色前后相邻立绘
+        preloadAdjacentImages(allSrc, imgIndex);
+
         html += `
             <div class="char-card-item selected" data-char-id="${char.id}" data-game-id="${gameInfo.id}" data-total-img="${allSrc.length}">
                 <div class="char-card-img-box ${allSrc.length > 1 ? 'char-has-multi-img' : ''}">
-                    <img src="${targetSrc}" alt="${char.name || ''}" decoding="async" crossorigin="anonymous">
+                    <img src="${targetSrc}" alt="${char.name || ''}" loading="lazy" decoding="async">
                 </div>
                 <div class="char-card-name">${char.name || ""}</div>
             </div>
@@ -670,14 +751,9 @@ export function renderSelectedChar(gameItem, gameInfo, isSnapshot = false) {
     return html || `<div class="empty-hint">暂未添加角色</div>`;
 }
 
-/**
- * 渲染CP【严格25%｜75%布局｜适配srcList，移除内联style，交由css控制】
- * ✅修改：已选结果区男主、女主卡片移除切换按钮DOM，只保留图片盒子+img+名字；保留data-*与char-has-multi-img标记类
- * @param {Object} gameItem 当前已添加游戏条目
- * @param {Object} gameInfo 游戏模板对象
- * @param {boolean} isSnapshot 是否快照模式（true时禁用切换按钮，本函数无切换按钮故不处理）
- * @returns {string} html字符串
- */
+// ============================================================
+// ⑦ renderCP 修改后（img标签去crossorigin加loading）
+// ============================================================
 export function renderCP(gameItem, gameInfo, isSnapshot = false) {
     if (!gameInfo?.charList || !gameItem) return `<div class="empty-hint">暂未添加角色</div>`;
 
@@ -700,9 +776,6 @@ export function renderCP(gameItem, gameInfo, isSnapshot = false) {
         fAvailUnits.forEach(u => fAllSrc.push(...u.srcList));
         if (fAllSrc.length === 0) return;
 
-        // 移除立即预加载
-        // preloadImagesInIdle(fAllSrc);
-
         // ✅修复：从cp自身存储取女主imgIndex
         let fIndex = Number(cp.femaleImgIndex ?? 0);
         if (fIndex >= fAllSrc.length) fIndex = 0;
@@ -719,9 +792,6 @@ export function renderCP(gameItem, gameInfo, isSnapshot = false) {
             mAvailUnits.forEach(u => mAllSrc.push(...u.srcList));
             if (mAllSrc.length === 0) return;
 
-            // 移除立即预加载
-            // preloadImagesInIdle(mAllSrc);
-
             let mIndex = Number(mi.imgIndex ?? 0);
             if (mIndex >= mAllSrc.length) mIndex = 0;
             const mTargetSrc = mAllSrc[mIndex];
@@ -729,7 +799,7 @@ export function renderCP(gameItem, gameInfo, isSnapshot = false) {
             maleHtml += `
                 <div class="cp-selected-card-item" data-char-id="${mChar.id}" data-game-id="${gameInfo.id}" data-total-img="${mAllSrc.length}">
                     <div class="char-card-img-box ${mAllSrc.length > 1 ? 'char-has-multi-img' : ''}">
-                        <img src="${mTargetSrc}" alt="${mChar.name || ''}" decoding="async" crossorigin="anonymous">
+                        <img src="${mTargetSrc}" alt="${mChar.name || ''}" loading="lazy" decoding="async">
                     </div>
                     <div class="char-card-name">${mChar.name || ""}</div>
                 </div>
@@ -741,7 +811,7 @@ export function renderCP(gameItem, gameInfo, isSnapshot = false) {
                 <div class="heroine-column">
                     <div class="cp-selected-card-item" data-char-id="${fChar.id}" data-game-id="${gameInfo.id}" data-total-img="${fAllSrc.length}">
                         <div class="char-card-img-box ${fAllSrc.length > 1 ? 'char-has-multi-img' : ''}">
-                            <img src="${fTargetSrc}" alt="${fChar.name || ''}" decoding="async" crossorigin="anonymous">
+                            <img src="${fTargetSrc}" alt="${fChar.name || ''}" loading="lazy" decoding="async">
                         </div>
                         <div class="char-card-name">${fChar.name || ""}</div>
                     </div>
@@ -870,6 +940,7 @@ function buildCoreContext() {
         preloadImagesInIdle,
         switchCharImage,
         switchCharImageWithLoading,
+        preloadAdjacentImages,    // 新增导出
         isTodayConfirmed,
         saveConfirmDate,
         localSwitchIsConfirmedToday,
