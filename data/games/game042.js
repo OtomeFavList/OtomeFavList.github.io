@@ -14,7 +14,7 @@ const gameData = {
         {name:"アサダモチコ", lang:"ja"},
         {name:"ユウヤ", lang:"ja"}
     ],
-    cover: "img/game/042.jpg", // 封面图路径，统一前缀img/
+    cover: "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/game/042.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 席琳
         {
@@ -24,7 +24,8 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/042/Shirien.jpg","img/char/042/Shirien2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/042/Shirien.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/042/Shirien2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 杰米尔
@@ -35,7 +36,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/042/Jemiru.jpg","img/char/042/Jemiru2.jpg","img/char/042/Jemiru3.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/042/Jemiru.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/042/Jemiru2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/042/Jemiru3.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 鳞希骊
@@ -46,7 +49,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/042/Kirei.jpg","img/char/042/Kirei2.jpg","img/char/042/Kirei3.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/042/Kirei.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/042/Kirei2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/042/Kirei3.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 鳞皇骊
@@ -57,7 +62,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/042/Korei.jpg","img/char/042/Korei2.jpg","img/char/042/Korei3.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/042/Korei.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/042/Korei2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/042/Korei3.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 莱扎尔·沙纳萨
@@ -68,7 +75,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/042/Lizaru.jpg","img/char/042/Lizaru2.jpg","img/char/042/Lizaru3.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/042/Lizaru.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/042/Lizaru2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/042/Lizaru3.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 罗岚·克莱德尔
@@ -79,7 +88,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/042/Rollan.jpg","img/char/042/Rollan2.jpg","img/char/042/Rollan3.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/042/Rollan.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/042/Rollan2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/042/Rollan3.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 文斯·卢根
@@ -90,7 +101,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/042/Vince.jpg","img/char/042/Vince2.jpg","img/char/042/Vince3.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/042/Vince.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/042/Vince2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/042/Vince3.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         }
     ]
