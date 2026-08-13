@@ -17,7 +17,7 @@ const gameData = {
     art: [
         {name:"ユウヤ", lang:"ja"}
     ],
-    cover: "img/game/003.jpg",
+    cover: "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/game/003.jpg",
     charList: [
         // 淡木琴音
         {
@@ -27,7 +27,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/003/Awaki.jpg","img/char/003/Awaki2.jpg"], type: "base" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/003/Awaki.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/003/Awaki2.jpg"], type: "base" }
             ]
         },
         // 卡努斯·埃斯帕达
@@ -38,7 +39,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/003/Canus.jpg","img/char/003/Canus2.jpg"], type: "base" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/003/Canus.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/003/Canus2.jpg"], type: "base" }
             ]
         },
         // 伊格尼斯·卡里本库鲁斯
@@ -49,7 +51,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/003/Ignis.jpg","img/char/003/Ignis2.jpg"], type: "base" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/003/Ignis.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/003/Ignis2.jpg"], type: "base" }
             ]
         },
         // 伊尔·法多·德·里艾
@@ -60,7 +63,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/003/Il.jpg","img/char/003/Il2.jpg"], type: "base" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/003/Il.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/003/Il2.jpg"], type: "base" }
             ]
         },
         // 米歇尔·阿雷克斯
@@ -71,7 +75,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/003/Misyr.jpg","img/char/003/Misyr2.jpg"], type: "base" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/003/Misyr.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/003/Misyr2.jpg"], type: "base" }
             ]
         },
         // 凜堂香
@@ -82,7 +87,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/003/Rindou.jpg","img/char/003/Rindou2.jpg"], type: "base" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/003/Rindou.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/003/Rindou2.jpg"], type: "base" }
             ]
         }
     ]
