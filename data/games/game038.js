@@ -13,7 +13,7 @@ const gameData = {
     art: [
         {name:"蓮本リョウ", lang:"zh"}
     ],
-    cover: "img/game/038.jpg", // 封面图路径，统一前缀img/
+    cover: "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/game/038.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 娜雅
         {
@@ -23,7 +23,9 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["img/char/038/Naya.jpg","img/char/038/Naya2.jpg","img/char/038/Naya3.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/038/Naya.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/038/Naya2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/038/Naya3.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 玖燕来
@@ -34,7 +36,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/038/Enrai.jpg","img/char/038/Enrai2.jpg","img/char/038/Enrai3.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/038/Enrai.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/038/Enrai2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/038/Enrai3.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 斐伊
@@ -45,7 +49,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/038/Fey.jpg","img/char/038/Fey2.jpg","img/char/038/Fey3.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/038/Fey.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/038/Fey2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/038/Fey3.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 洛欧
@@ -56,7 +62,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/038/Ruwo.jpg","img/char/038/Ruwo2.jpg","img/char/038/Ruwo3.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/038/Ruwo.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/038/Ruwo2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/038/Ruwo3.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 胡青凛
@@ -67,7 +75,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/038/Seirin.jpg","img/char/038/Seirin2.jpg","img/char/038/Seirin3.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/038/Seirin.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/038/Seirin2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/038/Seirin3.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 臧布尼勒
@@ -78,7 +88,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/038/Zebenera.jpg","img/char/038/Zebenera2.jpg","img/char/038/Zebenera3.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["img/char/038/Zebenera.jpg",
+                            "img/char/038/Zebenera2.jpg",
+                            "img/char/038/Zebenera3.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 羯磨
@@ -89,7 +101,9 @@ const gameData = {
             isHidden: true,
             isFD: false,
             images: [
-                { srcList: ["img/char/038/Bicorn.jpg","img/char/038/Bicorn2.jpg","img/char/038/Bicorn3.png"], type: "base" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/038/Bicorn.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/038/Bicorn2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/038/Bicorn3.png"], type: "base" }
             ]
         },
         // 斐恩
@@ -100,7 +114,8 @@ const gameData = {
             isHidden: true,
             isFD: false,
             images: [
-                { srcList: ["img/char/038/Fuen.jpg","img/char/038/Fuen2.jpg"], type: "base" }
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/038/Fuen.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/038/Fuen2.jpg"], type: "base" }
             ]
         }
     ]
