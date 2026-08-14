@@ -101,11 +101,12 @@ const gameData = {
             isHidden: true,
             isFD: true,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/027/Ukyo.jpg"], type: "base" },
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/027/Ukyo2.jpg",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/027/Ukyo3.jpg",
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/027/Ukyo.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/027/Ukyo2.jpg"], type: "base" },
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/027/Ukyo3.jpg",
                             "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/027/Ukyo4.jpg",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/027/Ukyo5.jpg"], type: "fd" },     // 需要开启FD开关才展示的图片
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/027/Ukyo5.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/027/Ukyo6.jpg"], type: "fd" },     // 需要开启FD开关才展示的图片
             ]
         }
     ]
