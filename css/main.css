@@ -1631,7 +1631,7 @@ h2{
     .cp-female-card-btn,
     .cp-male-item,
     .cp-selected-card-item {
-        width: 90px !important;
+        width: 100px !important;
         min-height: 132px !important;
     }
     .char-pool {
