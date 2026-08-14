@@ -132,11 +132,15 @@ async function preGenerateAllRoundCanvas(imageCache, roundTaskList) {
   // 去重任务
   const taskMap = new Map();
   for (const task of roundTaskList) {
-    const {src, visualW, visualH, radius} = task;
+    const { src, visualW, visualH, radius } = task;
     const img = imageCache.get(src);
-    if (!img) continue;
-    const sourceW = img.naturalWidth || img.width || 1;
-    const sourceH = img.naturalHeight || img.height || 1;
+    // 预生成阶段必须确保图片存在
+    if (!img) {
+      console.warn("预生成圆角画布跳过：图片不存在", src);
+      continue;
+    }
+    const sourceW = img.width || 1;
+    const sourceH = img.height || 1;
     const dpr = currentDPR;
     const cacheKey = `${src}||${sourceW}x${sourceH}||${visualW}x${visualH}||${radius}||${dpr}`;
     if (!taskMap.has(cacheKey)) {
@@ -145,16 +149,19 @@ async function preGenerateAllRoundCanvas(imageCache, roundTaskList) {
   }
   // 串行预生成（移动端避免并发离屏画布抢占GPU）
   for (const task of taskMap.values()) {
-    const {src, visualW, visualH, radius} = task;
+    const { src, visualW, visualH, radius } = task;
     const img = imageCache.get(src);
     createRoundImageCanvas(img, src, visualW, visualH, radius);
     // 微小延迟，给移动端浏览器提交渲染任务的时间
-    await new Promise(r => setTimeout(r, 0));
+    await new Promise(r => setTimeout(r, 5));
   }
+  // 额外等待一轮渲染队列落地
+  await new Promise(r => requestAnimationFrame(r));
 }
 
 // ============================================================
 // 重写 loadImagesWithLimit：增加重试、尺寸校验、帧等待
+// 严格模式：任何一张图片加载失败即抛出异常，中断渲染
 // ============================================================
 async function loadImagesWithLimit(urlList, limit) {
   const uniqueUrls = [...new Set(urlList)];
@@ -193,17 +200,21 @@ async function loadImagesWithLimit(urlList, limit) {
   const workers = Array.from({ length: limit }, worker);
   await Promise.all(workers);
 
-  // 打印失败清单，方便调试
+  // ==========【改造重点】全局校验所有图片是否加载成功 ==========
   const failList = [];
   for (const [u, val] of resultMap.entries()) {
     if (!val) failList.push(u);
   }
   if (failList.length > 0) {
-    console.warn("以下图片加载失败：", failList);
+    console.error("❌ 存在图片加载失败，终止渲染：", failList);
+    // 严格模式：直接抛出异常，不再渲染
+    throw new Error(`图片加载失败：${failList.join(',')}`);
   }
 
-  // 等待浏览器完成bitmap光栅化落地
+  // 多层帧等待，给浏览器完成光栅化，解决bitmap resolve但绘制空白
   await new Promise(r => requestAnimationFrame(r));
+  await new Promise(r => requestAnimationFrame(r));
+  await new Promise(r => setTimeout(r, 30));
   return resultMap;
 }
 
@@ -815,10 +826,16 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
       painter.drawRoundRect(xPos, yPos, cardW, charCardHeight, LAYOUT_STYLE.CHAR_CARD_RADIUS, '#ffffff', '#eee', 1);
       if (img) {
         const imgY = yPos + innerPad;
-        const roundCanvas = createRoundImageCanvas(img, item.src, imgSize, imgSize, LAYOUT_STYLE.CHAR_IMG_RADIUS);
+        // ===== 关键修改：禁止实时创建，只从缓存读取 =====
+        const sourceW = img.width || 1;
+        const sourceH = img.height || 1;
+        const dpr = currentDPR;
+        const cacheKey = `${item.src}||${sourceW}x${sourceH}||${imgSize}x${imgSize}||${LAYOUT_STYLE.CHAR_IMG_RADIUS}||${dpr}`;
+        const roundCanvas = roundImageCache.get(cacheKey);
         if (roundCanvas) {
           painter.drawImageRound(roundCanvas, xPos + innerPad, imgY, imgSize, imgSize);
         }
+        // ===== 修改结束 =====
       }
       const nameBoxY = yPos + innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB;
       const nameBoxH = charCardHeight - (innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB) - innerPad;
@@ -878,10 +895,16 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
       const femaleImg = imageCache.get(cp.femaleSrc);
       if (femaleImg) {
         const imgY = femaleY + innerPad;
-        const roundCanvas = createRoundImageCanvas(femaleImg, cp.femaleSrc, imgSize, imgSize, LAYOUT_STYLE.CHAR_IMG_RADIUS);
+        // ===== 关键修改：禁止实时创建，只从缓存读取 =====
+        const sourceW = femaleImg.width || 1;
+        const sourceH = femaleImg.height || 1;
+        const dpr = currentDPR;
+        const cacheKey = `${cp.femaleSrc}||${sourceW}x${sourceH}||${imgSize}x${imgSize}||${LAYOUT_STYLE.CHAR_IMG_RADIUS}||${dpr}`;
+        const roundCanvas = roundImageCache.get(cacheKey);
         if (roundCanvas) {
           painter.drawImageRound(roundCanvas, femaleX + innerPad, imgY, imgSize, imgSize);
         }
+        // ===== 修改结束 =====
       }
       const fNameBoxY = femaleY + innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB;
       const fNameBoxH = rowH - (innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB) - innerPad;
@@ -904,10 +927,16 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
         painter.drawRoundRect(mx, my, maleCardW, rowH, LAYOUT_STYLE.CHAR_CARD_RADIUS, '#ffffff', '#eee', 1);
         if (mImg) {
           const imgY = my + innerPad;
-          const roundCanvas = createRoundImageCanvas(mImg, m.src, imgSize, imgSize, LAYOUT_STYLE.CHAR_IMG_RADIUS);
+          // ===== 关键修改：禁止实时创建，只从缓存读取 =====
+          const sourceW = mImg.width || 1;
+          const sourceH = mImg.height || 1;
+          const dpr = currentDPR;
+          const cacheKey = `${m.src}||${sourceW}x${sourceH}||${imgSize}x${imgSize}||${LAYOUT_STYLE.CHAR_IMG_RADIUS}||${dpr}`;
+          const roundCanvas = roundImageCache.get(cacheKey);
           if (roundCanvas) {
             painter.drawImageRound(roundCanvas, mx + innerPad, imgY, imgSize, imgSize);
           }
+          // ===== 修改结束 =====
         }
         const mNameBoxY = my + innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB;
         const mNameBoxH = rowH - (innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB) - innerPad;
@@ -1150,8 +1179,13 @@ export async function renderExportCanvas(
     const canvas = document.createElement('canvas');
     const painter = new CanvasLayoutPainter(canvas, targetWidth, totalHeight, exportColor.bg);
 
+    console.log("✅ 所有图片加载完成，开始预生成圆角画布");
     const imageCache = await loadImagesWithLimit(allImageSrcList, MAX_IMAGE_CONCURRENCY);
+    console.log("✅ ImageBitmap 全部就绪，开始批量生成圆角离屏画布");
     await preGenerateAllRoundCanvas(imageCache, roundCanvasTasks);
+    console.log("✅ 全部圆角画布预生成完成，正式启动绘制");
+    // 额外增加等待，给低性能设备缓冲
+    await new Promise(r => setTimeout(r, 50));
     await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
 
     const allIndexes = renderDataList.map((_, idx) => idx);
@@ -1185,8 +1219,12 @@ export async function renderExportCanvas(
 
   const pagePlanList = splitPagesByHeight(headerHeight, gameBlockHeights, maxPageHeight);
 
+  console.log("✅ 所有图片加载完成，开始预生成圆角画布");
   const imageCache = await loadImagesWithLimit(allImageSrcList, MAX_IMAGE_CONCURRENCY);
+  console.log("✅ ImageBitmap 全部就绪，开始批量生成圆角离屏画布");
   await preGenerateAllRoundCanvas(imageCache, roundCanvasTasks);
+  console.log("✅ 全部圆角画布预生成完成，正式启动绘制");
+  await new Promise(r => setTimeout(r, 50));
   await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
 
   const blobList = [];
