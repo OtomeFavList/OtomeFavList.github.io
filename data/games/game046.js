@@ -98,7 +98,7 @@ const gameData = {
         },
         // 卢卡斯·沙利文
         {
-            id: "g046_m05",
+            id: "g046_m06",
             name: "卢卡斯·沙利文",
             gender: "male",
             isHidden: false,
