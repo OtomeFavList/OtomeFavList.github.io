@@ -63,7 +63,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.devg/char/031/Shion.jpg",
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/031/Shion.jpg",
                             "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/031/Shion2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
