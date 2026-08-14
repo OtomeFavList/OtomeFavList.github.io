@@ -161,7 +161,7 @@ async function preGenerateAllRoundCanvas(imageCache, roundTaskList) {
 
 // ============================================================
 // 重写 loadImagesWithLimit：增加重试、尺寸校验、帧等待
-// 严格模式：任何一张图片加载失败即抛出异常，中断渲染
+// 移动端容错模式：失败图片不阻断渲染，控制台警告
 // ============================================================
 async function loadImagesWithLimit(urlList, limit) {
   const uniqueUrls = [...new Set(urlList)];
@@ -200,15 +200,15 @@ async function loadImagesWithLimit(urlList, limit) {
   const workers = Array.from({ length: limit }, worker);
   await Promise.all(workers);
 
-  // ==========【改造重点】全局校验所有图片是否加载成功 ==========
+  // ==========【移动端容错模式】失败图片不阻断渲染 ==========
   const failList = [];
   for (const [u, val] of resultMap.entries()) {
     if (!val) failList.push(u);
   }
   if (failList.length > 0) {
-    console.error("❌ 存在图片加载失败，终止渲染：", failList);
-    // 严格模式：直接抛出异常，不再渲染
-    throw new Error(`图片加载失败：${failList.join(',')}`);
+    console.warn("⚠️ 部分图片加载失败，继续渲染（空白占位）：", failList);
+    // 移动端禁用强阻断，PC如需严格模式可自行开启
+    // throw new Error(`图片加载失败：${failList.join(',')}`);
   }
 
   // 多层帧等待，给浏览器完成光栅化，解决bitmap resolve但绘制空白
@@ -826,7 +826,6 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
       painter.drawRoundRect(xPos, yPos, cardW, charCardHeight, LAYOUT_STYLE.CHAR_CARD_RADIUS, '#ffffff', '#eee', 1);
       if (img) {
         const imgY = yPos + innerPad;
-        // ===== 关键修改：禁止实时创建，只从缓存读取 =====
         const sourceW = img.width || 1;
         const sourceH = img.height || 1;
         const dpr = currentDPR;
@@ -834,8 +833,25 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
         const roundCanvas = roundImageCache.get(cacheKey);
         if (roundCanvas) {
           painter.drawImageRound(roundCanvas, xPos + innerPad, imgY, imgSize, imgSize);
+        } else {
+          // ===== 兜底：直接绘制原图，避免图片空白 =====
+          const radius = LAYOUT_STYLE.CHAR_IMG_RADIUS;
+          painter.ctx.save();
+          painter.ctx.beginPath();
+          painter.ctx.moveTo(xPos + innerPad + radius, imgY);
+          painter.ctx.lineTo(xPos + innerPad + imgSize - radius, imgY);
+          painter.ctx.quadraticCurveTo(xPos + innerPad + imgSize, imgY, xPos + innerPad + imgSize, imgY + radius);
+          painter.ctx.lineTo(xPos + innerPad + imgSize, imgY + imgSize - radius);
+          painter.ctx.quadraticCurveTo(xPos + innerPad + imgSize, imgY + imgSize, xPos + innerPad + imgSize - radius, imgY + imgSize);
+          painter.ctx.lineTo(xPos + innerPad + radius, imgY + imgSize);
+          painter.ctx.quadraticCurveTo(xPos + innerPad, imgY + imgSize, xPos + innerPad, imgY + imgSize - radius);
+          painter.ctx.lineTo(xPos + innerPad, imgY + radius);
+          painter.ctx.quadraticCurveTo(xPos + innerPad, imgY, xPos + innerPad + radius, imgY);
+          painter.ctx.closePath();
+          painter.ctx.clip();
+          painter.ctx.drawImage(img, xPos + innerPad, imgY, imgSize, imgSize);
+          painter.ctx.restore();
         }
-        // ===== 修改结束 =====
       }
       const nameBoxY = yPos + innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB;
       const nameBoxH = charCardHeight - (innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB) - innerPad;
@@ -895,7 +911,6 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
       const femaleImg = imageCache.get(cp.femaleSrc);
       if (femaleImg) {
         const imgY = femaleY + innerPad;
-        // ===== 关键修改：禁止实时创建，只从缓存读取 =====
         const sourceW = femaleImg.width || 1;
         const sourceH = femaleImg.height || 1;
         const dpr = currentDPR;
@@ -903,8 +918,25 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
         const roundCanvas = roundImageCache.get(cacheKey);
         if (roundCanvas) {
           painter.drawImageRound(roundCanvas, femaleX + innerPad, imgY, imgSize, imgSize);
+        } else {
+          // ===== 兜底：直接绘制原图，避免图片空白 =====
+          const radius = LAYOUT_STYLE.CHAR_IMG_RADIUS;
+          painter.ctx.save();
+          painter.ctx.beginPath();
+          painter.ctx.moveTo(femaleX + innerPad + radius, imgY);
+          painter.ctx.lineTo(femaleX + innerPad + imgSize - radius, imgY);
+          painter.ctx.quadraticCurveTo(femaleX + innerPad + imgSize, imgY, femaleX + innerPad + imgSize, imgY + radius);
+          painter.ctx.lineTo(femaleX + innerPad + imgSize, imgY + imgSize - radius);
+          painter.ctx.quadraticCurveTo(femaleX + innerPad + imgSize, imgY + imgSize, femaleX + innerPad + imgSize - radius, imgY + imgSize);
+          painter.ctx.lineTo(femaleX + innerPad + radius, imgY + imgSize);
+          painter.ctx.quadraticCurveTo(femaleX + innerPad, imgY + imgSize, femaleX + innerPad, imgY + imgSize - radius);
+          painter.ctx.lineTo(femaleX + innerPad, imgY + radius);
+          painter.ctx.quadraticCurveTo(femaleX + innerPad, imgY, femaleX + innerPad + radius, imgY);
+          painter.ctx.closePath();
+          painter.ctx.clip();
+          painter.ctx.drawImage(femaleImg, femaleX + innerPad, imgY, imgSize, imgSize);
+          painter.ctx.restore();
         }
-        // ===== 修改结束 =====
       }
       const fNameBoxY = femaleY + innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB;
       const fNameBoxH = rowH - (innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB) - innerPad;
@@ -927,7 +959,6 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
         painter.drawRoundRect(mx, my, maleCardW, rowH, LAYOUT_STYLE.CHAR_CARD_RADIUS, '#ffffff', '#eee', 1);
         if (mImg) {
           const imgY = my + innerPad;
-          // ===== 关键修改：禁止实时创建，只从缓存读取 =====
           const sourceW = mImg.width || 1;
           const sourceH = mImg.height || 1;
           const dpr = currentDPR;
@@ -935,8 +966,25 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
           const roundCanvas = roundImageCache.get(cacheKey);
           if (roundCanvas) {
             painter.drawImageRound(roundCanvas, mx + innerPad, imgY, imgSize, imgSize);
+          } else {
+            // ===== 兜底：直接绘制原图，避免图片空白 =====
+            const radius = LAYOUT_STYLE.CHAR_IMG_RADIUS;
+            painter.ctx.save();
+            painter.ctx.beginPath();
+            painter.ctx.moveTo(mx + innerPad + radius, imgY);
+            painter.ctx.lineTo(mx + innerPad + imgSize - radius, imgY);
+            painter.ctx.quadraticCurveTo(mx + innerPad + imgSize, imgY, mx + innerPad + imgSize, imgY + radius);
+            painter.ctx.lineTo(mx + innerPad + imgSize, imgY + imgSize - radius);
+            painter.ctx.quadraticCurveTo(mx + innerPad + imgSize, imgY + imgSize, mx + innerPad + imgSize - radius, imgY + imgSize);
+            painter.ctx.lineTo(mx + innerPad + radius, imgY + imgSize);
+            painter.ctx.quadraticCurveTo(mx + innerPad, imgY + imgSize, mx + innerPad, imgY + imgSize - radius);
+            painter.ctx.lineTo(mx + innerPad, imgY + radius);
+            painter.ctx.quadraticCurveTo(mx + innerPad, imgY, mx + innerPad + radius, imgY);
+            painter.ctx.closePath();
+            painter.ctx.clip();
+            painter.ctx.drawImage(mImg, mx + innerPad, imgY, imgSize, imgSize);
+            painter.ctx.restore();
           }
-          // ===== 修改结束 =====
         }
         const mNameBoxY = my + innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB;
         const mNameBoxH = rowH - (innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB) - innerPad;
