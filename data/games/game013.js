@@ -17,7 +17,7 @@ const gameData = {
     art: [
         {name:"miko", lang:"en"}
     ],
-    cover: "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/game/013.jpg",
+    cover: "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/game/013.jpg",
     charList: [
         // 卡尔迪娅·贝克福德
         {
@@ -27,8 +27,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/013/Cardia.jpg",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/013/Cardia2.jpg"], type: "base" }
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/013/Cardia.jpg",
+                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/013/Cardia2.jpg"], type: "base" }
             ]
         },
         // 维克多·弗兰肯斯坦
@@ -39,8 +39,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/013/Frankenstein.jpg",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/013/Frankenstein2.jpg"], type: "base" }
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/013/Frankenstein.jpg",
+                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/013/Frankenstein2.jpg"], type: "base" }
             ]
         },
         // 圣·日耳曼
@@ -51,8 +51,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/013/Germain.jpg",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/013/Germain2.jpg"], type: "base" }
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/013/Germain.jpg",
+                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/013/Germain2.jpg"], type: "base" }
             ]
         },
         // 因倍·巴比康
@@ -63,8 +63,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/013/Impey.jpg",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/013/Impey2.jpg"], type: "base" }
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/013/Impey.jpg",
+                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/013/Impey2.jpg"], type: "base" }
             ]
         },
         // 亚森·罗宾
@@ -75,9 +75,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/013/Lupin.jpg",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/013/Lupin2.jpg",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/013/Lupin3.jpg"], type: "base" }
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/013/Lupin.jpg",
+                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/013/Lupin2.jpg",
+                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/013/Lupin3.jpg"], type: "base" }
             ]
         },
         // 亚伯拉罕·范·海辛
@@ -88,8 +88,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/013/Van.jpg",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/013/Van2.jpg"], type: "base" }
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/013/Van.jpg",
+                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/013/Van2.jpg"], type: "base" }
             ]
         }
     ]
