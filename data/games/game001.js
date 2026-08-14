@@ -101,7 +101,7 @@ const gameData = {
             isHidden: true,
             isFD: true,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@mai/imgn/char/001/Henri.jpg",
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@mai/img/char/001/Henri.jpg",
                             "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/001/Henri2.jpg"], type: "base" }
             ]
         }
