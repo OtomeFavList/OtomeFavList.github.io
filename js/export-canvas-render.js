@@ -77,8 +77,8 @@ export function measureWrappedHeight(ctx, text, maxWidth, lineHeight, fontSize, 
  */
 function createRoundImageCanvas(img, srcUrl, visualW, visualH, radius) {
   if (!img) return null;
-  const sourceW = img.naturalWidth ?? img.width || 1;
-  const sourceH = img.naturalHeight ?? img.height || 1;
+  const sourceW = (img.naturalWidth ?? img.width) || 1;
+  const sourceH = (img.naturalHeight ?? img.height) || 1;
   if (sourceW <= 0 || sourceH <= 0) return null;
 
   const dpr = currentDPR;
@@ -144,8 +144,8 @@ async function preGenerateAllRoundCanvas(imageCache, roundTaskList) {
       console.warn("预生成圆角画布跳过：图片不存在", src);
       continue;
     }
-    const sourceW = img.naturalWidth ?? img.width || 1;
-    const sourceH = img.naturalHeight ?? img.height || 1;
+    const sourceW = (img.naturalWidth ?? img.width) || 1;
+    const sourceH = (img.naturalHeight ?? img.height) || 1;
     const dpr = currentDPR;
     const cacheKey = `${src}||${sourceW}x${sourceH}||${visualW}x${visualH}||${radius}||${dpr}`;
     if (!taskMap.has(cacheKey)) {
@@ -855,8 +855,8 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
       painter.drawRoundRect(xPos, yPos, cardW, charCardHeight, LAYOUT_STYLE.CHAR_CARD_RADIUS, '#ffffff', '#eee', 1);
       if (img) {
         const imgY = yPos + innerPad;
-        const sourceW = img.naturalWidth ?? img.width || 1;
-        const sourceH = img.naturalHeight ?? img.height || 1;
+        const sourceW = (img.naturalWidth ?? img.width) || 1;
+        const sourceH = (img.naturalHeight ?? img.height) || 1;
         const dpr = currentDPR;
         const cacheKey = `${item.src}||${sourceW}x${sourceH}||${imgSize}x${imgSize}||${LAYOUT_STYLE.CHAR_IMG_RADIUS}||${dpr}`;
         const roundCanvas = roundImageCache.get(cacheKey);
@@ -944,8 +944,8 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
       const femaleImg = imageCache.get(cp.femaleSrc);
       if (femaleImg) {
         const imgY = femaleY + innerPad;
-        const sourceW = femaleImg.naturalWidth ?? femaleImg.width || 1;
-        const sourceH = femaleImg.naturalHeight ?? femaleImg.height || 1;
+        const sourceW = (femaleImg.naturalWidth ?? femaleImg.width) || 1;
+        const sourceH = (femaleImg.naturalHeight ?? femaleImg.height) || 1;
         const dpr = currentDPR;
         const cacheKey = `${cp.femaleSrc}||${sourceW}x${sourceH}||${imgSize}x${imgSize}||${LAYOUT_STYLE.CHAR_IMG_RADIUS}||${dpr}`;
         const roundCanvas = roundImageCache.get(cacheKey);
@@ -995,8 +995,8 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
         painter.drawRoundRect(mx, my, maleCardW, rowH, LAYOUT_STYLE.CHAR_CARD_RADIUS, '#ffffff', '#eee', 1);
         if (mImg) {
           const imgY = my + innerPad;
-          const sourceW = mImg.naturalWidth ?? mImg.width || 1;
-          const sourceH = mImg.naturalHeight ?? mImg.height || 1;
+          const sourceW = (mImg.naturalWidth ?? mImg.width) || 1;
+          const sourceH = (mImg.naturalHeight ?? mImg.height) || 1;
           const dpr = currentDPR;
           const cacheKey = `${m.src}||${sourceW}x${sourceH}||${imgSize}x${imgSize}||${LAYOUT_STYLE.CHAR_IMG_RADIUS}||${dpr}`;
           const roundCanvas = roundImageCache.get(cacheKey);
