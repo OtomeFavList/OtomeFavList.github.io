@@ -431,6 +431,8 @@ export function initPage(Core = {}) {
       snapshotContainer: document.getElementById("snapshot-container"),
       // =========新增：导出折叠内容开关==========
       exportFoldContentSwitch: document.getElementById("export-fold-content"),
+      // =========新增：显示隐藏/续作FD角色名开关==========
+      exportShowHiddenFDNameSwitch: document.getElementById("export-show-hidden-fd-name"),
       // =========新增：恢复默认配色按钮==========
       resetColorBtn: document.getElementById("btn-reset-color")
     };
@@ -1036,6 +1038,10 @@ export function initPage(Core = {}) {
     if (el.exportFoldContentSwitch) {
         el.exportFoldContentSwitch.checked = !!appData.exportFoldContent;
     }
+    // =========【新增】渲染【显示隐藏/续作/FD角色名】开关初始状态（默认关闭） =========
+    if (el.exportShowHiddenFDNameSwitch) {
+        el.exportShowHiddenFDNameSwitch.checked = !!appData.exportShowHiddenFDName;
+    }
 
     refreshHideCharSwitch();
     refreshFDSwitch();
@@ -1063,6 +1069,14 @@ export function initPage(Core = {}) {
             appData.exportFoldContent = this.checked;
             saveData();
             clearPreviewCacheResource(); // 开关变更，预览缓存失效
+        });
+    }
+    // =========【新增】显示隐藏/续作FD角色名开关事件 =========
+    if (el.exportShowHiddenFDNameSwitch) {
+        el.exportShowHiddenFDNameSwitch.addEventListener("change", function() {
+            appData.exportShowHiddenFDName = this.checked;
+            saveData();
+            clearPreviewCacheResource();
         });
     }
 
