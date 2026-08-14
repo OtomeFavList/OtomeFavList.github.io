@@ -1732,3 +1732,12 @@ h2{
     padding:0;
     border:none;
 }
+/* 移动端缩小弹窗边距 */
+@media (max-width:768px){
+    .modal-guide-box {
+        width: 94vw;
+    }
+    .modal-guide-scroll {
+        padding:16px;
+    }
+}
