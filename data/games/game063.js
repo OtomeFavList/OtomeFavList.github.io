@@ -15,18 +15,18 @@ const gameData = {
     art: [
         {name:"スズケン", lang:"ja"}
     ],
-    cover: "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/game/063.jpg", // 封面图路径，统一前缀img/
+    cover: "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/game/063.jpg",
     charList: [
         // 山田花
         {
             id: "g063_f01",
             name: "山田花",
             gender: "female",
-            isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
-            isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
+            isHidden: false,
+            isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/063/Hana.jpg",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/063/Hana2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/063/Hana.jpg",
+                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/063/Hana2.jpg"], type: "base" },
             ]
         },
         // 文若
@@ -37,8 +37,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/063/Bunjaku.jpg",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/063/Bunjaku2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/063/Bunjaku.jpg",
+                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/063/Bunjaku2.jpg"], type: "base" },
             ]
         },
         // 仲谋
@@ -49,8 +49,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/063/Chuubou.jpg",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/063/Chuubou2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/063/Chuubou.jpg",
+                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/063/Chuubou2.jpg"], type: "base" },
             ]
         },
         // 玄德
@@ -61,8 +61,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/063/Gentoku.jpg",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/063/Gentoku2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/063/Gentoku.jpg",
+                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/063/Gentoku2.jpg"], type: "base" },
             ]
         },
         // 公瑾
@@ -73,8 +73,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/063/Koukin.jpg",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/063/Koukin2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/063/Koukin.jpg",
+                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/063/Koukin2.jpg"], type: "base" },
             ]
         },
         // 孔明
@@ -85,8 +85,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/063/Koumei.jpg",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/063/Koumei2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/063/Koumei.jpg",
+                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/063/Koumei2.jpg"], type: "base" },
             ]
         },
         // 孟德
@@ -97,8 +97,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/063/Moutoku.jpg",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/063/Moutoku2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/063/Moutoku.jpg",
+                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/063/Moutoku2.jpg"], type: "base" },
             ]
         },
         // 子龙
@@ -109,8 +109,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/063/Shiryuu.jpg",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/063/Shiryuu2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/063/Shiryuu.jpg",
+                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/063/Shiryuu2.jpg"], type: "base" },
             ]
         },
         // 云长
@@ -121,8 +121,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/063/Unchou.jpg",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/063/Unchou2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/063/Unchou.jpg",
+                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/063/Unchou2.jpg"], type: "base" },
             ]
         },
         // 翼德
@@ -133,8 +133,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/063/Yokutoku.jpg",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/063/Yokutoku2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/063/Yokutoku.jpg",
+                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/063/Yokutoku2.jpg"], type: "base" },
             ]
         }
     ]
