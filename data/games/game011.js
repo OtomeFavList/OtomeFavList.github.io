@@ -18,7 +18,7 @@ const gameData = {
     art: [
         {name:"読", lang:"zh"}
     ],
-    cover: "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/game/011.jpg",
+    cover: "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/game/011.jpg",
     charList: [
         // 源义经
         {
@@ -28,7 +28,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/011/Shanaou.jpg"], type: "base" }
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/011/Shanaou.jpg"], type: "base" }
             ]
         },
         // 武藏坊弁庆
@@ -39,7 +39,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/011/Benkei.jpg"], type: "base" }
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/011/Benkei.jpg"], type: "base" }
             ]
         },
         // 平教经
@@ -50,8 +50,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/011/Noritsune.jpg",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/011/Noritsune2.jpg"], type: "base" }
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/011/Noritsune.jpg",
+                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/011/Noritsune2.jpg"], type: "base" }
             ]
         },
         // 春玄
@@ -62,8 +62,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/011/Shungen.jpg",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/011/Shungen2.jpg"], type: "base" }
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/011/Shungen.jpg",
+                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/011/Shungen2.jpg"], type: "base" }
             ]
         },
         // 平知盛
@@ -74,7 +74,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/011/Tomomori.jpg"], type: "base" }
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/011/Tomomori.jpg"], type: "base" }
             ]
         },
         // 源赖朝
@@ -85,7 +85,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/011/Yoritomo.jpg"], type: "base" }
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/011/Yoritomo.jpg"], type: "base" }
             ]
         },
         // 佐佐木高纲
@@ -96,7 +96,7 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/011/Sasaki.jpg"], type: "base" }
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/011/Sasaki.jpg"], type: "base" }
             ]
         },
         // 平重衡
@@ -107,7 +107,7 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/011/Shigehira.jpg"], type: "base" }
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/011/Shigehira.jpg"], type: "base" }
             ]
         },
         // 佐藤忠信
@@ -118,7 +118,7 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/011/Tadanobu.jpg"], type: "base" }
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/011/Tadanobu.jpg"], type: "base" }
             ]
         },
         // 佐藤继信
@@ -129,7 +129,7 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/011/Tsugunobu.jpg"], type: "base" }
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/011/Tsugunobu.jpg"], type: "base" }
             ]
         }
     ]
