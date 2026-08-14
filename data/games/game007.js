@@ -94,7 +94,8 @@ const gameData = {
             isHidden: true,
             isFD: true,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/007/Yuzuru.jpg"], type: "base" } // ✅src → srcList
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/007/Yuzuru.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/007/Yuzuru2.jpg"], type: "base" } // ✅src → srcList
             ]
         },
         // 峰岸誠司
