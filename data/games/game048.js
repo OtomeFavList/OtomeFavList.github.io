@@ -14,18 +14,18 @@ const gameData = {
     art: [
         {name:"ナガオカ", lang:"ja"}
     ],
-    cover: "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/game/048.jpg", // 封面图路径，统一前缀img/
+    cover: "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/game/048.jpg",
     charList: [
         // 九楼抚子
         {
             id: "g048_f01",
             name: "九楼抚子",
             gender: "female",
-            isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
-            isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
+            isHidden: false,
+            isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Nadeshiko.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Nadeshiko2.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Nadeshiko.jpg"], type: "base" },
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Nadeshiko2.jpg"], type: "hidden" },
             ]
         },
         // 英圆
@@ -36,10 +36,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Madoka.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Bishop.jpg",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Bishop2.jpg",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Madoka2.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Madoka.jpg"], type: "base" },
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Bishop.jpg",
+                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Bishop2.jpg",
+                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Madoka2.jpg"], type: "hidden" },
             ]
         },
         // 英央
@@ -50,10 +50,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Nakaba.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Journalist.jpg",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Journalist2.jpg",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Nakaba2.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Nakaba.jpg"], type: "base" },
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Journalist.jpg",
+                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Journalist2.jpg",
+                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Nakaba2.jpg"], type: "hidden" },
             ]
         },
         // 加纳理一郎
@@ -64,10 +64,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Riichiro.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Wanderer.jpg",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Wanderer2.jpg",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Riichiro2.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Riichiro.jpg"], type: "base" },
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Wanderer.jpg",
+                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Wanderer2.jpg",
+                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Riichiro2.jpg"], type: "hidden" },
             ]
         },
         // 西园寺寅之助
@@ -78,10 +78,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Saionji.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Traitor.jpg",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Traitor2.jpg",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Saionji2.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Saionji.jpg"], type: "base" },
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Traitor.jpg",
+                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Traitor2.jpg",
+                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Saionji2.jpg"], type: "hidden" },
             ]
         },
         // 时田终夜
@@ -92,10 +92,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Shuya.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Philosopher.jpg",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Philosopher2.jpg",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Shuya2.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Shuya.jpg"], type: "base" },
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Philosopher.jpg",
+                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Philosopher2.jpg",
+                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Shuya2.jpg"], type: "hidden" },
             ]
         },
         // 海棠鹰斗
@@ -106,10 +106,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Takato.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Kaga.jpg",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Kaga2.jpg",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Takato2.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Takato.jpg"], type: "base" },
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Kaga.jpg",
+                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Kaga2.jpg",
+                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Takato2.jpg"], type: "hidden" },
             ]
         },
         // 筱宫枫
@@ -120,7 +120,7 @@ const gameData = {
             isHidden: true,
             isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Kaede.jpg"], type: "base" }
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Kaede.jpg"], type: "base" }
             ]
         },
         // 雷恩
@@ -131,8 +131,8 @@ const gameData = {
             isHidden: true,
             isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Rook.jpg",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Rook2.jpg"], type: "base" }
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Rook.jpg",
+                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Rook2.jpg"], type: "base" }
             ]
         }
     ]
