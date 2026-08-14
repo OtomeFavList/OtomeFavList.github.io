@@ -864,16 +864,21 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
       }
       const nameBoxY = yPos + innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB;
       const nameBoxH = charCardHeight - (innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB) - innerPad;
-      //【需求1】角色名称在底部格子内上下左右居中
-      painter.drawTextWrapCenterInBox(
-        item.name,
-        xPos + innerPad,
-        nameBoxY,
-        cardW - innerPad * 2,
-        nameBoxH,
-        14,
-        '#222'
-      );
+      
+      // ========== 【新增】判断是否绘制名字 ==========
+      const needDrawName = !(item.isHidden || item.isFD) || renderData.appData.exportShowHiddenFDName;
+      if (needDrawName) {
+        painter.drawTextWrapCenterInBox(
+          item.name,
+          xPos + innerPad,
+          nameBoxY,
+          cardW - innerPad * 2,
+          nameBoxH,
+          14,
+          '#222'
+        );
+      }
+      // ========== 新增结束 ==========
 
       xPos += cardW + gap;
       if ((i + 1) % perRow === 0 && i < charItems.length - 1) {
@@ -946,18 +951,23 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
           const roundCanvas = createRoundImageCanvas(mImg, m.src, imgSize, imgSize, LAYOUT_STYLE.CHAR_IMG_RADIUS);
           painter.drawImageRound(roundCanvas, mx + innerPad, imgY, imgSize, imgSize);
         }
-        //【需求2修复：原代码参数顺序错误，导致男角色名字无法渲染】
         const mNameBoxY = my + innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB;
         const mNameBoxH = rowH - (innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB) - innerPad;
-        painter.drawTextWrapCenterInBox(
-          m.name,
-          mx + innerPad,
-          mNameBoxY,
-          maleCardW - innerPad * 2,
-          mNameBoxH,
-          14,
-          '#222'
-        );
+        
+        // ========== 【新增】判断是否绘制名字 ==========
+        const needDrawName = !(m.isHidden || m.isFD) || renderData.appData.exportShowHiddenFDName;
+        if (needDrawName) {
+          painter.drawTextWrapCenterInBox(
+            m.name,
+            mx + innerPad,
+            mNameBoxY,
+            maleCardW - innerPad * 2,
+            mNameBoxH,
+            14,
+            '#222'
+          );
+        }
+        // ========== 新增结束 ==========
 
         mx += maleCardW + maleGap;
         if ((i + 1) % perRow === 0 && i < cp.maleItems.length - 1) {
@@ -1102,7 +1112,15 @@ export async function renderExportCanvas(
         const stored = gameItem.selectCharItems?.find(s => s.charId === cid);
         const idx = Number(stored?.imgIndex ?? 0);
         const src = allSrc[idx] || allSrc[0];
-        charItems.push({ id: char.id, name: char.name, src });
+        // ========== 修改点A：保存角色隐藏/FD标记 ==========
+        charItems.push({ 
+            id: char.id, 
+            name: char.name, 
+            src,
+            isHidden: !!char.isHidden,
+            isFD: !!char.isFD
+        });
+        // ========== 修改结束 ==========
         allImageSrcList.push(src);
       }
     }
@@ -1131,7 +1149,15 @@ export async function renderExportCanvas(
             if (mAllSrc.length === 0) continue;
             const mIdx = Number(mi.imgIndex ?? 0);
             const mSrc = mAllSrc[mIdx] || mAllSrc[0];
-            maleItems.push({ id: mChar.id, name: mChar.name, src: mSrc });
+            // ========== 修改点B：保存角色隐藏/FD标记 ==========
+            maleItems.push({ 
+                id: mChar.id, 
+                name: mChar.name, 
+                src: mSrc,
+                isHidden: !!mChar.isHidden,
+                isFD: !!mChar.isFD
+            });
+            // ========== 修改结束 ==========
             allImageSrcList.push(mSrc);
           }
         }
