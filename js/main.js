@@ -252,52 +252,47 @@ export function getAvailableCharImages(char, globalHideSwitch, globalFDSwitch, l
 export const imgCacheMap = new Map();
 
 // ============================================================
-// ① preloadAndDecodeImage 修改后（移除强制 decode，添加跨域）
+// ① preloadAndDecodeImage 修改后（强制顺序：先设置跨域，再赋值src）
 // ============================================================
 export function preloadAndDecodeImage(src){
     if(!src){
         return Promise.resolve(null);
     }
 
-    // 已经加载/正在加载 → 直接复用
     if(imgCacheMap.has(src)){
         return imgCacheMap.get(src);
     }
 
     const p = new Promise((resolve, reject) => {
         const tempImg = new Image();
-        // 异步解码
-        tempImg.decoding = "async";
-        // ============ 新增关键一行：开启跨域匿名 ============
+        // 【强制顺序】先设置crossOrigin、decoding，最后赋值src！
         tempImg.crossOrigin = "anonymous";
+        tempImg.decoding = "async";
 
         tempImg.onload = () => {
-            // 不强制等待 decode，让浏览器自然解码
             resolve(tempImg);
         };
-
         tempImg.onerror = () => {
-            // 加载失败时，从缓存 Map 中删除
-            // 防止以后永远复用一个失败 Promise
             imgCacheMap.delete(src);
             reject(new Error(`Image load failed: ${src}`));
         };
+        // 所有配置完成后再赋值src，杜绝浏览器提前发起请求
         tempImg.src = src;
     });
 
-    // 立即写入缓存
     imgCacheMap.set(src, p);
     return p;
 }
 
 // ============================================================
-// 新增 preloadImageBitmap（专供Canvas导出使用，启用高质量缩放）
+// 新增 preloadImageBitmap（专供Canvas导出使用，启用高质量缩放 + 降级兜底）
 // ============================================================
 /**
  * 预加载图片并生成高质量 createImageBitmap（专供Canvas导出使用）
  * 解决Chrome PNG缩小插值模糊问题，启用 resizeQuality:"high"
+ * 增加降级兜底，当createImageBitmap失败时返回原始HTMLImageElement
  * @param {string} src 图片地址
- * @returns {Promise<ImageBitmap|null>}
+ * @returns {Promise<ImageBitmap|HTMLImageElement|null>}
  */
 export function preloadImageBitmap(src) {
     if (!src) {
@@ -309,13 +304,17 @@ export function preloadImageBitmap(src) {
         return imgCacheMap.get(src).then(async (img) => {
             if (!img) return null;
             try {
-                // 关键：开启高质量缩放
                 return await createImageBitmap(img, {
                     resizeQuality: "high"
                 });
             } catch (e) {
-                console.warn(`createImageBitmap 不支持resizeQuality降级: ${src}`, e);
-                return await createImageBitmap(img);
+                console.warn(`createImageBitmap 降级: ${src}`, e);
+                try {
+                    return await createImageBitmap(img);
+                } catch {
+                    // iOS Safari终极兜底：返回原始Image，不再强制bitmap
+                    return img;
+                }
             }
         });
     }
@@ -328,8 +327,12 @@ export function preloadImageBitmap(src) {
                 resizeQuality: "high"
             });
         } catch (e) {
-            console.warn(`createImageBitmap resizeQuality参数不被浏览器支持，降级: ${src}`, e);
-            return await createImageBitmap(img);
+            console.warn(`createImageBitmap resizeQuality降级: ${src}`, e);
+            try {
+                return await createImageBitmap(img);
+            } catch {
+                return img;
+            }
         }
     });
 }
