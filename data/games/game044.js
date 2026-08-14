@@ -143,7 +143,7 @@ const gameData = {
             images: [
                 { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/044/Toka.jpg",
                             "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/044/Toka2.png",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/044/Toka3.png"], type: "base" }
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/044/Toka3.jpg"], type: "base" }
             ]
         }
     ]
