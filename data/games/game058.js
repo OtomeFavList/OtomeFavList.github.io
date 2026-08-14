@@ -18,17 +18,17 @@ const gameData = {
     art: [
         {name:"冨士原良 ", lang:"zh"}
     ],
-    cover: "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/game/058.jpg", // 封面图路径，统一前缀img/
+    cover: "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/game/058.jpg",
     charList: [
         // 上远野理绪
         {
             id: "g058_f01",
             name: "上远野理绪",
             gender: "female",
-            isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
-            isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
+            isHidden: false,
+            isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/058/Rio.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/058/Rio.jpg"], type: "base" },
             ]
         },
         // 香椎亚贵
@@ -39,8 +39,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/058/Aki.jpg",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/058/Aki2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/058/Aki.jpg",
+                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/058/Aki2.jpg"], type: "base" },
             ]
         },
         // 月野原久远
@@ -51,8 +51,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/058/Kuon.jpg",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/058/Kuon2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/058/Kuon.jpg",
+                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/058/Kuon2.jpg"], type: "base" },
             ]
         },
         // 香椎玲音
@@ -63,8 +63,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/058/Reon.jpg",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/058/Reon2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/058/Reon.jpg",
+                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/058/Reon2.jpg"], type: "base" },
             ]
         },
         // 百濑紬生
@@ -75,8 +75,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/058/Tsumugi.jpg",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/058/Tsumugi2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/058/Tsumugi.jpg",
+                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/058/Tsumugi2.jpg"], type: "base" },
             ]
         }
     ]
