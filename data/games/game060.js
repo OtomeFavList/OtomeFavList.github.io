@@ -75,7 +75,7 @@ const gameData = {
         },
         // 七濑十矢
         {
-            id: "g060_m04",
+            id: "g060_m05",
             name: "七濑十矢",
             gender: "male",
             isHidden: false,
