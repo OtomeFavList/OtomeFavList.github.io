@@ -12,6 +12,12 @@
     <!-- 使用绝对路径 /data/games.js 确保从网站根目录加载 -->
     <script type="module" src="/data/games.js">
     </script>
+    <!-- ==========【新增样式】弹窗打开锁定页面滚动 ========== -->
+    <style>
+        body.modal-lock {
+            overflow: hidden;
+        }
+    </style>
 </head>
 <body>
 
@@ -270,24 +276,11 @@ z-index: -999;
     <div class="modal-guide-box" style="background:#fff; border-radius:12px; border:2px solid #f6a5b8; width:min(92vw, 900px); max-height:85vh; display:flex; flex-direction:column; overflow:hidden;">
         <div class="modal-guide-scroll" style="flex:1; padding:24px 28px; overflow-y:auto;">
             <!-- ===== 标题 + 按钮行 ===== -->
-            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 4px;">
-                <h2 style="margin: 0; font-size: 24px; color: #b85878; border-left: 5px solid #b85878; padding-left: 12px; font-weight: bold;">
+            <div style="display: flex; align-items: center; justify-content: flex-end; flex-wrap: wrap; gap: 12px; margin-bottom: 4px;">
+                <h2 style="margin: 0; font-size: 24px; color: #b85878; border-left: 5px solid #b85878; padding-left: 12px; font-weight: bold; margin-right:auto;">
                     📖 使用指南
                 </h2>
                 <div style="display:flex;gap:10px;">
-                    <button id="intro-toggle-btn" style="
-                    padding: 8px 20px;
-                    border: 2px solid #f6a5b8;
-                    border-radius: 8px;
-                    background: #fff7f9;
-                    color: #b33a3a;
-                    font-size: 15px;
-                    font-weight: 600;
-                    cursor: pointer;
-                    transition: 0.2s;
-                " onmouseover="this.style.background='#fce8ed'" onmouseout="this.style.background='#fff7f9'">
-                收起 ↑
-            </button>
             <button id="guide-close-btn" style="
             padding: 8px 20px;
             border: 2px solid #ccc;
@@ -304,7 +297,7 @@ z-index: -999;
 </div>
 </div>
 
-<!-- ===== 可折叠内容区域 ===== -->
+<!-- ===== 内容区域（永久展开，移除折叠控制） ===== -->
 <div id="intro-content" style="margin-top: 16px;">
 
     <!-- 简介 -->
@@ -444,7 +437,6 @@ z-index: -999;
     </blockquote>
 
 </div>
-<!-- ===== 可折叠内容结束 ===== -->
 </div>
 </div>
 </div>
@@ -464,6 +456,7 @@ z-index: -999;
 
         // 页面初始锁定：显示加载弹窗
         loadModal.classList.add("active");
+        document.body.classList.add("modal-lock");
 
         // 监听游戏加载进度（全局回调，由data/games.js内注入进度通知）
         window.onGameLoadProgress = (current, total) => {
@@ -481,6 +474,7 @@ z-index: -999;
         // 点击确认关闭弹窗，继续初始化页面
         loadConfirmBtn.onclick = async () => {
             loadModal.classList.remove("active");
+            document.body.classList.remove("modal-lock");
             // 2. bootstrapCore
             await bootstrapCore();
             // 3. 启动UI
@@ -493,30 +487,25 @@ z-index: -999;
     })();
 </script>
 
-<!-- 使用指南弹窗交互 -->
+<!-- 使用指南弹窗交互（已移除收起展开逻辑） -->
 <script>
     (function() {
         const guideModal = document.getElementById('guide-modal');
         const openBtn = document.getElementById('open-guide-btn');
         const closeBtn = document.getElementById('guide-close-btn');
-        const toggleBtn = document.getElementById('intro-toggle-btn');
-        const introContent = document.getElementById('intro-content');
-        let isOpen = true;
 
         // 打开弹窗
         if (openBtn) {
             openBtn.addEventListener('click', () => {
                 guideModal.classList.add('active');
-                // 每次打开时重置为展开状态
-                isOpen = true;
-                introContent.style.display = 'block';
-                toggleBtn.textContent = '收起 ↑';
+                document.body.classList.add("modal-lock");
             });
         }
 
         // 关闭弹窗
         function closeGuideModal() {
             guideModal.classList.remove('active');
+            document.body.classList.remove("modal-lock");
         }
 
         if (closeBtn) {
@@ -531,17 +520,30 @@ z-index: -999;
                 }
             });
         }
-
-        // 收起/展开指南内容
-        if (toggleBtn && introContent) {
-            toggleBtn.addEventListener('click', () => {
-                isOpen = !isOpen;
-                introContent.style.display = isOpen ? 'block' : 'none';
-                toggleBtn.textContent = isOpen ? '收起 ↑' : '展开 ↓';
-            });
-        }
     })();
 </script>
 
+<!-- ======================【重要说明】====================== -->
+<!--
+⚠️ 注意：
+1. 我已经删掉指南弹窗的 #intro-toggle-btn 按钮、对应的折叠点击事件；指南内容永久展开
+2. 新增 body.modal-lock {overflow:hidden}
+3. 目前只处理了【使用指南弹窗】和【游戏加载弹窗】的滚动锁定
+👉 剩下三个弹窗：spoiler-modal、export-preview-modal
+你在 main.js 里控制弹窗 .active 显示/隐藏时，需要同步加上这两行：
+// 打开弹窗时
+document.body.classList.add("modal-lock");
+// 关闭弹窗时
+document.body.classList.remove("modal-lock");
+
+示例（main.js 通用弹窗模板）：
+modalEl.classList.add('active');
+document.body.classList.add("modal-lock");
+
+modalEl.classList.remove('active');
+document.body.classList.remove("modal-lock");
+
+如果你想要我直接写一套通用JS，统一监听所有.modal-mask打开关闭自动锁定滚动，我可以补上。
+-->
 </body>
 </html>
