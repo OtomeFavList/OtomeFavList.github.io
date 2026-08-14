@@ -13,17 +13,17 @@ const gameData = {
     art: [
         {name:"らんぷみ", lang:"ja"}
     ],
-    cover: "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/game/057.jpg", // 封面图路径，统一前缀img/
+    cover: "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/game/057.jpg",
     charList: [
         // 凛
         {
             id: "g057_f01",
             name: "凛",
             gender: "female",
-            isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
-            isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
+            isHidden: false,
+            isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/057/Rin.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/057/Rin.jpg"], type: "base" },
             ]
         },
         // 伊势屋惣一郎
@@ -34,7 +34,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/057/Iseya.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/057/Iseya.jpg"], type: "base" },
             ]
         },
         // 神乐屋彰人
@@ -45,7 +45,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/057/Kaguraya.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/057/Kaguraya.jpg"], type: "base" },
             ]
         },
         // 朔夜
@@ -56,7 +56,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/057/Sakuya.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/057/Sakuya.jpg"], type: "base" },
             ]
         },
         // 樱华屋时雨
@@ -67,7 +67,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/057/Shigure.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/057/Shigure.jpg"], type: "base" },
             ]
         },
         // 大月忍
@@ -78,7 +78,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/057/Shinobu.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/057/Shinobu.jpg"], type: "base" },
             ]
         },
         // 辰吉
@@ -89,7 +89,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/057/Tatsukichi.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/057/Tatsukichi.jpg"], type: "base" },
             ]
         }
     ]
