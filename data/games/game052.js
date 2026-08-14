@@ -101,7 +101,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/052/Adel.jpg",
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/052/Tobias.jpg",
                             "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/052/Tobias2.jpg",
                             "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/052/Tobias3.png",
                             "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/052/Tobias4.jpg",
