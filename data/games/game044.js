@@ -23,18 +23,18 @@ const gameData = {
     art: [
         {name:"ユウヤ", lang:"ja"}
     ],
-    cover: "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/game/044.jpg", // 封面图路径，统一前缀img/
+    cover: "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/game/044.jpg",
     charList: [
         // 逸色珠沙
         {
             id: "g044_f01",
             name: "逸色珠沙",
             gender: "female",
-            isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
-            isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
+            isHidden: false,
+            isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/044/Misa.jpg",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/044/Misa2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/char/044/Misa.jpg",
+                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/char/044/Misa2.png"], type: "base" },
             ]
         },
         // 响
@@ -45,8 +45,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/044/Hibiki.jpg",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/044/Hibiki2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/char/044/Hibiki.jpg",
+                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/char/044/Hibiki2.png"], type: "base" },
             ]
         },
         // 狐春
@@ -57,8 +57,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/044/Koharu.jpg",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/044/Koharu2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/char/044/Koharu.jpg",
+                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/char/044/Koharu2.png"], type: "base" },
             ]
         },
         // 香羊
@@ -69,8 +69,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/044/Kouyou.jpg",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/044/Kouyou2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/char/044/Kouyou.jpg",
+                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/char/044/Kouyou2.png"], type: "base" },
             ]
         },
         // 红华
@@ -81,8 +81,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/044/Kureha.jpg",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/044/Kureha2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/char/044/Kureha.jpg",
+                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/char/044/Kureha2.png"], type: "base" },
             ]
         },
         // 魅勿鬽
@@ -93,8 +93,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/044/Minami.jpg",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/044/Minami2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/char/044/Minami.jpg",
+                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/char/044/Minami2.png"], type: "base" },
             ]
         },
         // 圣夜
@@ -105,8 +105,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/044/Seiya.jpg",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/044/Seiya2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/char/044/Seiya.jpg",
+                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/char/044/Seiya2.png"], type: "base" },
             ]
         },
         // 星绊
@@ -117,8 +117,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/044/Sena.jpg",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/044/Sena2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/char/044/Sena.jpg",
+                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/char/044/Sena2.png"], type: "base" },
             ]
         },
         // 幸麿
@@ -129,8 +129,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/044/Yukimaro.jpg",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/044/Yukimaro2.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/char/044/Yukimaro.jpg",
+                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/char/044/Yukimaro2.png"], type: "base" },
             ]
         },
         // 桃嘉
@@ -141,9 +141,9 @@ const gameData = {
             isHidden: true,
             isFD: false,
             images: [
-                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/044/Toka.jpg",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/044/Toka2.png",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/044/Toka3.jpg"], type: "base" }
+                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/char/044/Toka.jpg",
+                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/char/044/Toka2.png",
+                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/char/044/Toka3.jpg"], type: "base" }
             ]
         }
     ]
