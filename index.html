@@ -523,27 +523,5 @@ z-index: -999;
     })();
 </script>
 
-<!-- ======================【重要说明】====================== -->
-<!--
-⚠️ 注意：
-1. 我已经删掉指南弹窗的 #intro-toggle-btn 按钮、对应的折叠点击事件；指南内容永久展开
-2. 新增 body.modal-lock {overflow:hidden}
-3. 目前只处理了【使用指南弹窗】和【游戏加载弹窗】的滚动锁定
-👉 剩下三个弹窗：spoiler-modal、export-preview-modal
-你在 main.js 里控制弹窗 .active 显示/隐藏时，需要同步加上这两行：
-// 打开弹窗时
-document.body.classList.add("modal-lock");
-// 关闭弹窗时
-document.body.classList.remove("modal-lock");
-
-示例（main.js 通用弹窗模板）：
-modalEl.classList.add('active');
-document.body.classList.add("modal-lock");
-
-modalEl.classList.remove('active');
-document.body.classList.remove("modal-lock");
-
-如果你想要我直接写一套通用JS，统一监听所有.modal-mask打开关闭自动锁定滚动，我可以补上。
--->
 </body>
 </html>
