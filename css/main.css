@@ -309,6 +309,11 @@ button:hover{
     gap:14px;
     background:#fff;
 }
+@media (max-width:768px) {
+    .game-list-select{
+        grid-template-columns:1fr;
+    }
+}
 
 /* ========== 游戏选项单项 game-option-item ========== */
 .game-option-item{
@@ -862,7 +867,68 @@ h2{
 }
 
 /* ========== 移动端适配 max-width:768px ========== */
-/* 已移除并合并到下方统一的 @media (max-width:900px) */
+@media (max-width:768px) {
+    /* ---------- 需求①：手机端游戏待选封面缩小1/3 ---------- */
+    .game-option-item img {
+        width: 80px; /* 原120px → 80px，缩小1/3 */
+    }
+
+    /* ---------- 需求②：手机端人物立绘缩小1/4 ---------- */
+    /* 统一所有角色卡片宽度为90px（原120px缩小1/4） */
+    .char-item,
+    .char-card-item,
+    .cp-female-card-btn,
+    .cp-male-item,
+    .cp-selected-card-item {
+        width: 90px;
+        min-height: 150px; /* 微调最小高度，适配新宽度 */
+    }
+    /* 角色池网格跟随调整 */
+    .char-pool {
+        grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    }
+    .game-search-box .char-pool {
+        grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    }
+    /* 已选角色行内卡片自动适应（宽度由父容器控制，但保留宽度声明） */
+    .char-selected-row .char-card-item {
+        width: 90px;
+        min-height: 150px;
+    }
+
+    /* ---------- 需求③：取消Couple男女强制换行，排布和Character一致 ---------- */
+    /* 删除原冲突的 .cp-layout-row{flex-direction:column;} 和 .heroine-column,.hero-list-column{width:100%;} */
+    /* 重新设置并排布局 */
+    .cp-layout-row {
+        flex-direction: row;        /* 强制行排列（默认也是row，显式声明） */
+        flex-wrap: wrap;           /* 允许自动换行 */
+        gap: 10px;                /* 统一间距 */
+    }
+    .heroine-column {
+        flex: 0 0 auto;           /* 女主列宽度由内容撑开，不占满 */
+        width: auto;              /* 取消宽度100% */
+    }
+    .hero-list-column {
+        flex: 1;                  /* 男主列占据剩余空间 */
+        width: auto;              /* 取消宽度100% */
+    }
+    /* 女主容器内部保持flex-wrap，和Character一致 */
+    .heroine-box {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    /* ---------- 保留原有移动端样式 ---------- */
+    .cp-select-btn-bar {
+        justify-content: flex-end;
+    }
+    .game-fold-icon-expand{
+        width:26px;
+        height:26px;
+        font-size:18px;
+    }
+    /* 注意：.game-card-header-row 的移动端样式在另一个媒体查询中，未改动 */
+}
 
 /* ========== 按钮统一：新增游戏按钮与导出图片按钮尺寸对齐 ========== */
 #btn-add-game,
@@ -903,7 +969,22 @@ h2{
 }
 
 /* =========手机端适配========= */
-/* 已移除并合并到下方统一的 @media (max-width:900px) */
+@media (max-width:768px) {
+    .game-card-header-row {
+        flex-direction:column;
+        align-items:flex-start;
+        gap:8px;
+    }
+    /* 手机第一行：游戏名称 + 爱心 */
+    .game-card-header-row > .game-card-title,
+    .game-card-header-row > .heart-rate {
+        display:flex;
+    }
+    /* 手机第二行：两个开关整行 */
+    .game-switch-group {
+        width:100%;
+    }
+}
 
 /* 角色选择面板item，和游戏选择item统一风格（旧废弃面板，保留类备用） */
 .char-select-item{
@@ -1013,7 +1094,7 @@ h2{
     word-break:break-word;
 }
 
-/* ✅修改：增加position:relative，替换原有cp‑male‑select‑wrap定义 */
+/* ✅修改：增加position:relative，替换原有cp‑male‑select-wrap定义 */
 .cp-male-select-wrap{
     min-height: 180px;
     border:none;
@@ -1520,10 +1601,9 @@ h2{
     flex-shrink: 0;
 }
 
-/* ========== 统一移动端适配 (max-width: 900px) ========== */
-/* 合并原 768px 和 900px 两个媒体查询，去除重复，以 900px 为统一断点 */
+/* ========== 手机端统一适配修改 max-width:900px 【需求①②③④全部实现】 ========== */
 @media (max-width:900px) {
-    /* 原 900px 规则（优先保留，带 !important 保证覆盖） */
+    /* ===================== 需求④：所有大盒子自适应，禁止溢出，消除横向滚动 ===================== */
     .big-card,
     .game-card,
     .char-slide-panel-char,
@@ -1533,14 +1613,19 @@ h2{
         max-width: 100%;
         overflow-x: hidden;
     }
+
+    /* ===================== 需求①：游戏待选封面缩小1/3 120px → 80px ===================== */
     .game-option-item img {
         width: 80px !important;
     }
+    /* 【重点修改】折叠屏大屏自动多列，窄屏单列；单卡片最大宽度360px，不设最小宽度 */
     .game-list-select {
         display: grid !important;
         grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr)) !important;
         gap: 10px !important;
     }
+
+    /* ===================== 需求②：角色立绘卡片缩小1/4 120px → 90px ===================== */
     .char-item,
     .char-card-item,
     .cp-female-card-btn,
@@ -1550,11 +1635,15 @@ h2{
         min-height: 132px !important;
     }
     .char-pool {
-        grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)) !important;
+        grid-template-columns: repeat(auto-fill,minmax(90px,1fr)) !important;
     }
+    /* 搜索面板内角色池同步缩小 */
     .game-search-box .char-pool {
-        grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)) !important;
+        grid-template-columns: repeat(auto-fill,minmax(90px,1fr)) !important;
     }
+
+    /* ===================== 需求③：取消CP男女强制换行，布局对齐Character ===================== */
+    /* 删除原有强制竖排，恢复横向弹性布局，允许自动换行 */
     .cp-layout-row {
         flex-direction: row !important;
         flex-wrap: wrap !important;
@@ -1565,19 +1654,22 @@ h2{
         flex: unset !important;
         width: auto !important;
     }
+    /* 女主容器内部卡片自动换行，和char-selected-row行为一致 */
     .heroine-box {
         flex-wrap: wrap !important;
-        gap: 10px;
     }
+    
+    /* ========== 【修复】移动端待选游戏卡片右侧内容被裁切（仅移动端生效，不影响PC） ========== */
     .game-option-item {
         display: flex !important;
         gap: 10px !important;
         padding: 10px !important;
         box-sizing: border-box !important;
-        overflow-x: hidden !important;
+        overflow-x: hidden !important; /* 阻止卡片内部横向溢出 */
     }
+    /* 注意：DOM对应类名是 game-option-info，不是 text-wrap！ */
     .game-option-info {
-        flex: 1 1 0 !important;
+        flex: 1 1 0 !important; /* flex:1 + 基础宽度0，弹性收缩核心 */
         min-width: 0 !important;
     }
     .game-option-name {
@@ -1588,36 +1680,8 @@ h2{
     .game-option-info p {
         font-size: 14px !important;
         line-height: 1.5 !important;
-        word-break: break-all !important;
+        word-break: break-all !important; /* 长日文、英文名称自动换行 */
         white-space: normal !important;
-    }
-
-    /* 原 768px 规则（未在 900px 中出现或值不同，在此补全） */
-    .char-selected-row .char-card-item {
-        width: 90px;
-        min-height: 150px;
-    }
-    .cp-select-btn-bar {
-        justify-content: flex-end;
-    }
-    .game-fold-icon-expand {
-        width: 26px;
-        height: 26px;
-        font-size: 18px;
-    }
-
-    /* 原第二个 768px 块（游戏卡片头部布局调整） */
-    .game-card-header-row {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
-    }
-    .game-card-header-row > .game-card-title,
-    .game-card-header-row > .heart-rate {
-        display: flex;
-    }
-    .game-switch-group {
-        width: 100%;
     }
 }
 
@@ -1655,6 +1719,7 @@ h2{
     padding: 24px;
     overflow-y: auto;
     overflow-x: hidden;
+    /* 滚动优化 */
     -webkit-overflow-scrolling: touch;
 }
 .modal-guide-box .modal-btns {
@@ -1666,4 +1731,13 @@ h2{
 .modal-guide-box .big-card {
     padding:0;
     border:none;
+}
+/* 移动端缩小弹窗边距 */
+@media (max-width:768px){
+    .modal-guide-box {
+        width: 94vw;
+    }
+    .modal-guide-scroll {
+        padding:16px;
+    }
 }
