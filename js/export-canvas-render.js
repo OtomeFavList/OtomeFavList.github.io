@@ -612,7 +612,7 @@ function splitPagesByHeight(headerHeight, gameBlockHeights, maxH) {
     firstPageGameIndexes.push(ptr + i);
   }
   pages.push({ isFirstPage: true, gameIndexes: firstPageGameIndexes });
-  console.log("【第一页分页计算】参考可用高度：", firstPageAvailableH, "选中卡片数量：", bestItem.count, "占用高度：", bestItem.usedH, "差值：", bestItem.diff);
+  // console.log("【第一页分页计算】参考可用高度：", firstPageAvailableH, "选中卡片数量：", bestItem.count, "占用高度：", bestItem.usedH, "差值：", bestItem.diff);
   ptr += bestItem.count;
 
   while (ptr < totalGame) {
@@ -654,18 +654,18 @@ function splitPagesByHeight(headerHeight, gameBlockHeights, maxH) {
     const remainGame = totalGame - ptr;
     bestItem2.count = Math.max(1, Math.min(bestItem2.count, remainGame));
 
-    console.log("【后续页面分页计算】参考高度：", maxH, "选中卡片数量：", bestItem2.count, "占用高度：", bestItem2.usedH, "差值：", bestItem2.diff);
+    // console.log("【后续页面分页计算】参考高度：", maxH, "选中卡片数量：", bestItem2.count, "占用高度：", bestItem2.usedH, "差值：", bestItem2.diff);
 
     const pageGameIndexes = [];
     for (let i = 0; i < bestItem2.count; i++) {
       pageGameIndexes.push(ptr + i);
     }
     pages.push({ isFirstPage: false, gameIndexes: pageGameIndexes });
-    console.log(`ptr推进：${ptr} → ${ptr + bestItem2.count}`);
+    // console.log(`ptr推进：${ptr} → ${ptr + bestItem2.count}`);
     ptr += bestItem2.count;
   }
 
-  console.log("✅ 最终分页方案：", JSON.parse(JSON.stringify(pages)));
+  // console.log("✅ 最终分页方案：", JSON.parse(JSON.stringify(pages)));
   return pages;
 }
 
@@ -1263,11 +1263,11 @@ export async function renderExportCanvas(
     const canvas = document.createElement('canvas');
     const painter = new CanvasLayoutPainter(canvas, targetWidth, totalHeight, exportColor.bg);
 
-    console.log("✅ 所有图片加载完成，开始预生成圆角画布");
+    // console.log("✅ 所有图片加载完成，开始预生成圆角画布");
     const imageCache = await loadImagesWithLimit(allImageSrcList, MAX_IMAGE_CONCURRENCY);
-    console.log("✅ ImageBitmap 全部就绪，开始批量生成圆角离屏画布");
+    // console.log("✅ ImageBitmap 全部就绪，开始批量生成圆角离屏画布");
     await preGenerateAllRoundCanvas(imageCache, roundCanvasTasks);
-    console.log("✅ 全部圆角画布预生成完成，正式启动绘制");
+    // console.log("✅ 全部圆角画布预生成完成，正式启动绘制");
     // 额外增加等待，给低性能设备缓冲
     await new Promise(r => setTimeout(r, 50));
     await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
@@ -1303,11 +1303,11 @@ export async function renderExportCanvas(
 
   const pagePlanList = splitPagesByHeight(headerHeight, gameBlockHeights, maxPageHeight);
 
-  console.log("✅ 所有图片加载完成，开始预生成圆角画布");
+  // console.log("✅ 所有图片加载完成，开始预生成圆角画布");
   const imageCache = await loadImagesWithLimit(allImageSrcList, MAX_IMAGE_CONCURRENCY);
-  console.log("✅ ImageBitmap 全部就绪，开始批量生成圆角离屏画布");
+  // console.log("✅ ImageBitmap 全部就绪，开始批量生成圆角离屏画布");
   await preGenerateAllRoundCanvas(imageCache, roundCanvasTasks);
-  console.log("✅ 全部圆角画布预生成完成，正式启动绘制");
+  // console.log("✅ 全部圆角画布预生成完成，正式启动绘制");
   await new Promise(r => setTimeout(r, 50));
   await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
 
@@ -1334,6 +1334,6 @@ export async function renderExportCanvas(
     });
     if (blob) blobList.push(blob);
   }
-  console.log("最终生成图片数量：", blobList.length);
+  // console.log("最终生成图片数量：", blobList.length);
   return blobList;
 }
