@@ -88,9 +88,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/038/Zebenera.jpg",
-                            "img/char/038/Zebenera2.jpg",
-                            "img/char/038/Zebenera3.png"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/038/Zebenera.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/038/Zebenera2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/038/Zebenera3.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 羯磨
@@ -115,7 +115,9 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/038/Fuen.jpg",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/038/Fuen2.jpg"], type: "base" }
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/038/Fuen2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/038/Fuen3.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/038/Fuen4.jpg",], type: "base" }
             ]
         }
     ]
