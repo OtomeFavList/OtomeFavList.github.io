@@ -1719,6 +1719,8 @@ h2{
     padding: 24px;
     overflow-y: auto;
     overflow-x: hidden;
+    /* 滚动优化 */
+    -webkit-overflow-scrolling: touch;
 }
 .modal-guide-box .modal-btns {
     padding:16px 20px;
