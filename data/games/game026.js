@@ -89,7 +89,8 @@ const gameData = {
             images: [
                 { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/026/Majo.jpg",
                             "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/026/Majo2.jpg",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/026/Majo3.jpg"], type: "base" }
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/026/Majo3.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/026/Majo4.jpg"], type: "base" }
             ]
         }
     ]
