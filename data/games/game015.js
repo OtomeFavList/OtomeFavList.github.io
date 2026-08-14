@@ -85,7 +85,8 @@ const gameData = {
             images: [
                 { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/015/Tomonari.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
-        },// 与市
+        },
+        // 与市
         {
             id: "g015_m06",
             name: "与市",
