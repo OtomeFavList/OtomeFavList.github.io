@@ -251,6 +251,22 @@ export function getAvailableCharImages(char, globalHideSwitch, globalFDSwitch, l
  */
 export const imgCacheMap = new Map();
 
+/**
+ * 清理图片缓存，释放内存
+ * 遍历所有缓存的Promise，加载完成后置空图片src，然后清空Map
+ */
+export function clearImgCache() {
+    for (const [key, promise] of imgCacheMap) {
+        promise.then(img => {
+            if (img && img.src) {
+                // 移除引用，让浏览器回收
+                img.src = '';
+            }
+        }).catch(() => {});
+    }
+    imgCacheMap.clear();
+}
+
 // ============================================================
 // ① preloadAndDecodeImage 修改后（强制顺序：先设置跨域，再赋值src）
 // ============================================================
@@ -991,7 +1007,8 @@ function buildCoreContext() {
         renderGameSelectItem,
         bindDynamicGameCardSwitchEvents,
         toggleCharItemSelect,
-        toggleCpItemSelect
+        toggleCpItemSelect,
+        clearImgCache // 新增：导出清理缓存函数
     };
     return Core;
 }
