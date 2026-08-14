@@ -12,6 +12,8 @@ import {
 const MAX_IMAGE_CONCURRENCY = 4;
 //【优化】圆角离屏画布缓存：key = `${url}||${sourceW}x${sourceH}||${visualW}x${visualH}||${radius}||${dpr}`
 const roundImageCache = new Map();
+// 新增：图片资源缓存，区分 ImageBitmap / HTMLImageElement 降级对象
+const rawImageResourceCache = new Map();
 // ========== 字体规范 ==========
 const FONT_SIYUAN = "Noto Sans SC, sans-serif";
 
@@ -71,14 +73,15 @@ export function measureWrappedHeight(ctx, text, maxWidth, lineHeight, fontSize, 
 
 /**
  * 离屏画布生成圆角图片，增加判空、清理和异常捕获
+ * 兼容 ImageBitmap / HTMLImageElement，修复移动端 scale+clip 空洞问题
  */
 function createRoundImageCanvas(img, srcUrl, visualW, visualH, radius) {
-  if (!img || img.width === 0 || img.height === 0) return null;
+  if (!img) return null;
+  const sourceW = img.naturalWidth ?? img.width || 1;
+  const sourceH = img.naturalHeight ?? img.height || 1;
+  if (sourceW <= 0 || sourceH <= 0) return null;
 
-  const sourceW = img.naturalWidth || img.width || 1;
-  const sourceH = img.naturalHeight || img.height || 1;
   const dpr = currentDPR;
-
   const cacheKey = `${srcUrl}||${sourceW}x${sourceH}||${visualW}x${visualH}||${radius}||${dpr}`;
   if (roundImageCache.has(cacheKey)) {
     return roundImageCache.get(cacheKey);
@@ -94,9 +97,11 @@ function createRoundImageCanvas(img, srcUrl, visualW, visualH, radius) {
   offCtx.imageSmoothingEnabled = true;
   offCtx.imageSmoothingQuality = "high";
   offCtx.webkitImageSmoothingEnabled = true;
-  offCtx.scale(dpr, dpr);
 
   try {
+    // 【移动端修复】scale 移到 clip 之前，坐标使用缩放后尺寸，规避魔改 Chromium 内核 clip 失效
+    offCtx.save();
+    offCtx.scale(dpr, dpr);
     offCtx.beginPath();
     offCtx.moveTo(radius, 0);
     offCtx.lineTo(sourceW - radius, 0);
@@ -110,6 +115,7 @@ function createRoundImageCanvas(img, srcUrl, visualW, visualH, radius) {
     offCtx.closePath();
     offCtx.clip();
     offCtx.drawImage(img, 0, 0, sourceW, sourceH);
+    offCtx.restore();
   } catch (e) {
     console.warn("离屏画布绘制异常", srcUrl, e);
     return null;
@@ -134,13 +140,12 @@ async function preGenerateAllRoundCanvas(imageCache, roundTaskList) {
   for (const task of roundTaskList) {
     const { src, visualW, visualH, radius } = task;
     const img = imageCache.get(src);
-    // 预生成阶段必须确保图片存在
     if (!img) {
       console.warn("预生成圆角画布跳过：图片不存在", src);
       continue;
     }
-    const sourceW = img.width || 1;
-    const sourceH = img.height || 1;
+    const sourceW = img.naturalWidth ?? img.width || 1;
+    const sourceH = img.naturalHeight ?? img.height || 1;
     const dpr = currentDPR;
     const cacheKey = `${src}||${sourceW}x${sourceH}||${visualW}x${visualH}||${radius}||${dpr}`;
     if (!taskMap.has(cacheKey)) {
@@ -151,12 +156,17 @@ async function preGenerateAllRoundCanvas(imageCache, roundTaskList) {
   for (const task of taskMap.values()) {
     const { src, visualW, visualH, radius } = task;
     const img = imageCache.get(src);
-    createRoundImageCanvas(img, src, visualW, visualH, radius);
-    // 微小延迟，给移动端浏览器提交渲染任务的时间
-    await new Promise(r => setTimeout(r, 5));
+    const canvas = createRoundImageCanvas(img, src, visualW, visualH, radius);
+    if (!canvas) {
+      console.warn("圆角画布创建失败，运行时将走实时clip兜底", src);
+    }
+    // 移动端加长间隔，给GPU提交任务时间
+    await new Promise(r => setTimeout(r, 12));
   }
-  // 额外等待一轮渲染队列落地
+  // 多层帧等待，低性能移动端充分刷新渲染队列
   await new Promise(r => requestAnimationFrame(r));
+  await new Promise(r => requestAnimationFrame(r));
+  await new Promise(r => setTimeout(r, 80));
 }
 
 // ============================================================
@@ -176,6 +186,7 @@ async function loadImagesWithLimit(urlList, limit) {
       if (!bitmap || bitmap.width === 0 || bitmap.height === 0) {
         throw new Error("bitmap empty size");
       }
+      rawImageResourceCache.set(url, { type: 'bitmap', data: bitmap });
       return bitmap;
     } catch (err) {
       if (retryCount > 0) {
@@ -183,8 +194,23 @@ async function loadImagesWithLimit(urlList, limit) {
         await new Promise(r => setTimeout(r, 150));
         return loadSingleUrl(url, retryCount - 1);
       }
-      console.error('图片加载最终失败：', url, err);
-      return null;
+      console.warn('ImageBitmap加载失败，尝试降级HTML Image：', url, err);
+      // 移动端降级：使用传统Image对象，规避各类浏览器bitmap渲染bug
+      try {
+        const img = new Image();
+        img.crossOrigin = "anonymous";
+        await new Promise((resolve, reject) => {
+          img.onload = resolve;
+          img.onerror = reject;
+          img.src = url;
+        });
+        rawImageResourceCache.set(url, { type: 'image', data: img });
+        return img;
+      } catch (imgErr) {
+        console.error('图片最终加载失败：', url, imgErr);
+        rawImageResourceCache.set(url, { type: 'fail', data: null });
+        return null;
+      }
     }
   }
 
@@ -239,9 +265,12 @@ export class CanvasLayoutPainter {
     this.ctx.scale(dpr, dpr);
     this.ctx.textBaseline = 'top';
 
+    // 图像平滑兼容补齐（移动端各浏览器）
     this.ctx.imageSmoothingEnabled = true;
     this.ctx.imageSmoothingQuality = "high";
     this.ctx.webkitImageSmoothingEnabled = true;
+    this.ctx.msImageSmoothingEnabled = true;
+    this.ctx.mozImageSmoothingEnabled = true;
 
     this.ctx.fillStyle = this.bgColor;
     this.ctx.fillRect(0, 0, this.designWidth, this.designHeight);
@@ -826,15 +855,15 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
       painter.drawRoundRect(xPos, yPos, cardW, charCardHeight, LAYOUT_STYLE.CHAR_CARD_RADIUS, '#ffffff', '#eee', 1);
       if (img) {
         const imgY = yPos + innerPad;
-        const sourceW = img.width || 1;
-        const sourceH = img.height || 1;
+        const sourceW = img.naturalWidth ?? img.width || 1;
+        const sourceH = img.naturalHeight ?? img.height || 1;
         const dpr = currentDPR;
         const cacheKey = `${item.src}||${sourceW}x${sourceH}||${imgSize}x${imgSize}||${LAYOUT_STYLE.CHAR_IMG_RADIUS}||${dpr}`;
         const roundCanvas = roundImageCache.get(cacheKey);
         if (roundCanvas) {
           painter.drawImageRound(roundCanvas, xPos + innerPad, imgY, imgSize, imgSize);
         } else {
-          // ===== 兜底：直接绘制原图，避免图片空白 =====
+          // ===== 移动端增强兜底：优先使用降级Image对象，规避bitmap渲染空白 =====
           const radius = LAYOUT_STYLE.CHAR_IMG_RADIUS;
           painter.ctx.save();
           painter.ctx.beginPath();
@@ -849,7 +878,11 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
           painter.ctx.quadraticCurveTo(xPos + innerPad, imgY, xPos + innerPad + radius, imgY);
           painter.ctx.closePath();
           painter.ctx.clip();
-          painter.ctx.drawImage(img, xPos + innerPad, imgY, imgSize, imgSize);
+
+          // 【重要修复】优先读取降级Image，华为等浏览器bitmap存在绘制空洞
+          const resourceInfo = rawImageResourceCache.get(item.src);
+          const drawTarget = resourceInfo?.type === 'image' ? resourceInfo.data : img;
+          painter.ctx.drawImage(drawTarget, xPos + innerPad, imgY, imgSize, imgSize);
           painter.ctx.restore();
         }
       }
@@ -911,15 +944,15 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
       const femaleImg = imageCache.get(cp.femaleSrc);
       if (femaleImg) {
         const imgY = femaleY + innerPad;
-        const sourceW = femaleImg.width || 1;
-        const sourceH = femaleImg.height || 1;
+        const sourceW = femaleImg.naturalWidth ?? femaleImg.width || 1;
+        const sourceH = femaleImg.naturalHeight ?? femaleImg.height || 1;
         const dpr = currentDPR;
         const cacheKey = `${cp.femaleSrc}||${sourceW}x${sourceH}||${imgSize}x${imgSize}||${LAYOUT_STYLE.CHAR_IMG_RADIUS}||${dpr}`;
         const roundCanvas = roundImageCache.get(cacheKey);
         if (roundCanvas) {
           painter.drawImageRound(roundCanvas, femaleX + innerPad, imgY, imgSize, imgSize);
         } else {
-          // ===== 兜底：直接绘制原图，避免图片空白 =====
+          // ===== 移动端增强兜底：优先使用降级Image对象 =====
           const radius = LAYOUT_STYLE.CHAR_IMG_RADIUS;
           painter.ctx.save();
           painter.ctx.beginPath();
@@ -934,7 +967,10 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
           painter.ctx.quadraticCurveTo(femaleX + innerPad, imgY, femaleX + innerPad + radius, imgY);
           painter.ctx.closePath();
           painter.ctx.clip();
-          painter.ctx.drawImage(femaleImg, femaleX + innerPad, imgY, imgSize, imgSize);
+
+          const resourceInfo = rawImageResourceCache.get(cp.femaleSrc);
+          const drawTarget = resourceInfo?.type === 'image' ? resourceInfo.data : femaleImg;
+          painter.ctx.drawImage(drawTarget, femaleX + innerPad, imgY, imgSize, imgSize);
           painter.ctx.restore();
         }
       }
@@ -959,15 +995,15 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
         painter.drawRoundRect(mx, my, maleCardW, rowH, LAYOUT_STYLE.CHAR_CARD_RADIUS, '#ffffff', '#eee', 1);
         if (mImg) {
           const imgY = my + innerPad;
-          const sourceW = mImg.width || 1;
-          const sourceH = mImg.height || 1;
+          const sourceW = mImg.naturalWidth ?? mImg.width || 1;
+          const sourceH = mImg.naturalHeight ?? mImg.height || 1;
           const dpr = currentDPR;
           const cacheKey = `${m.src}||${sourceW}x${sourceH}||${imgSize}x${imgSize}||${LAYOUT_STYLE.CHAR_IMG_RADIUS}||${dpr}`;
           const roundCanvas = roundImageCache.get(cacheKey);
           if (roundCanvas) {
             painter.drawImageRound(roundCanvas, mx + innerPad, imgY, imgSize, imgSize);
           } else {
-            // ===== 兜底：直接绘制原图，避免图片空白 =====
+            // ===== 移动端增强兜底：优先使用降级Image对象 =====
             const radius = LAYOUT_STYLE.CHAR_IMG_RADIUS;
             painter.ctx.save();
             painter.ctx.beginPath();
@@ -982,7 +1018,10 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
             painter.ctx.quadraticCurveTo(mx + innerPad, imgY, mx + innerPad + radius, imgY);
             painter.ctx.closePath();
             painter.ctx.clip();
-            painter.ctx.drawImage(mImg, mx + innerPad, imgY, imgSize, imgSize);
+
+            const resourceInfo = rawImageResourceCache.get(m.src);
+            const drawTarget = resourceInfo?.type === 'image' ? resourceInfo.data : mImg;
+            painter.ctx.drawImage(drawTarget, mx + innerPad, imgY, imgSize, imgSize);
             painter.ctx.restore();
           }
         }
@@ -1088,6 +1127,7 @@ export async function renderExportCanvas(
 
   currentDPR = getExportDPR(targetWidth);
   roundImageCache.clear();
+  rawImageResourceCache.clear();
 
   const allImageSrcList = [];
   const renderDataList = [];
