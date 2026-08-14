@@ -97,7 +97,8 @@ const gameData = {
             isFD: true,
             images: [
                 { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/009/Peter.jpg",
-                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/009/Peter2.jpg"], type: "base" } // ✅src→srcList
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/009/Peter2.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/009/Peter3.jpg"], type: "base" } // ✅src→srcList
             ]
         },
         // 伊萊·奧马尔
