@@ -38,6 +38,7 @@ const gameData = {
             images: [
                 { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Madoka.jpg"], type: "base" },      // 默认基础图，始终加载
                 { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Bishop.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Bishop2.jpg",
                             "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Madoka2.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
             ]
         },
@@ -51,6 +52,7 @@ const gameData = {
             images: [
                 { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Nakaba.jpg"], type: "base" },      // 默认基础图，始终加载
                 { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Journalist.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Journalist2.jpg",
                             "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Nakaba2.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
             ]
         },
@@ -64,6 +66,7 @@ const gameData = {
             images: [
                 { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Riichiro.jpg"], type: "base" },      // 默认基础图，始终加载
                 { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Wanderer.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Wanderer2.jpg",
                             "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Riichiro2.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
             ]
         },
@@ -77,6 +80,7 @@ const gameData = {
             images: [
                 { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Saionji.jpg"], type: "base" },      // 默认基础图，始终加载
                 { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Traitor.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Traitor2.jpg",
                             "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Saionji2.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
             ]
         },
@@ -90,6 +94,7 @@ const gameData = {
             images: [
                 { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Shuya.jpg"], type: "base" },      // 默认基础图，始终加载
                 { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Philosopher.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Philosopher2.jpg",
                             "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Shuya2.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
             ]
         },
@@ -103,6 +108,7 @@ const gameData = {
             images: [
                 { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Takato.jpg"], type: "base" },      // 默认基础图，始终加载
                 { srcList: ["https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Kaga.jpg",
+                            "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Kaga2.jpg",
                             "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev/char/048/Takato2.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
             ]
         },
