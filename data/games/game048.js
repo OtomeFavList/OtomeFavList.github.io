@@ -1,5 +1,8 @@
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
+// 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
+// 网页渲染时由 main.js 的 getWebImageUrl 拼接为 R2 完整 URL
+// Canvas 导出时由 export-canvas-render.js 的 convertR2ToJsDelivr 拼接为 jsDelivr URL
 // 无需额外配置，仅需要到 main.js 顶部 🚨gameIdList数组追加编号"002","003"...
 const gameData = {
     id: "game048", // 全局唯一ID，不可重复
@@ -14,7 +17,7 @@ const gameData = {
     art: [
         {name:"ナガオカ", lang:"ja"}
     ],
-    cover: "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/game/048.jpg",
+    cover: "game/048.jpg",
     charList: [
         // 九楼抚子
         {
@@ -24,8 +27,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Nadeshiko.jpg"], type: "base" },
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Nadeshiko2.jpg"], type: "hidden" },
+                { srcList: ["char/048/Nadeshiko.jpg"], type: "base" },
+                { srcList: ["char/048/Nadeshiko2.jpg"], type: "hidden" }
             ]
         },
         // 英圆
@@ -36,10 +39,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Madoka.jpg"], type: "base" },
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Bishop.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Bishop2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Madoka2.jpg"], type: "hidden" },
+                { srcList: ["char/048/Madoka.jpg"], type: "base" },
+                { srcList: ["char/048/Bishop.jpg",
+                            "char/048/Bishop2.jpg",
+                            "char/048/Madoka2.jpg"], type: "hidden" }
             ]
         },
         // 英央
@@ -50,10 +53,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Nakaba.jpg"], type: "base" },
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Journalist.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Journalist2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Nakaba2.jpg"], type: "hidden" },
+                { srcList: ["char/048/Nakaba.jpg"], type: "base" },
+                { srcList: ["char/048/Journalist.jpg",
+                            "char/048/Journalist2.jpg",
+                            "char/048/Nakaba2.jpg"], type: "hidden" }
             ]
         },
         // 加纳理一郎
@@ -64,10 +67,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Riichiro.jpg"], type: "base" },
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Wanderer.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Wanderer2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Riichiro2.jpg"], type: "hidden" },
+                { srcList: ["char/048/Riichiro.jpg"], type: "base" },
+                { srcList: ["char/048/Wanderer.jpg",
+                            "char/048/Wanderer2.jpg",
+                            "char/048/Riichiro2.jpg"], type: "hidden" }
             ]
         },
         // 西园寺寅之助
@@ -78,10 +81,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Saionji.jpg"], type: "base" },
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Traitor.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Traitor2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Saionji2.jpg"], type: "hidden" },
+                { srcList: ["char/048/Saionji.jpg"], type: "base" },
+                { srcList: ["char/048/Traitor.jpg",
+                            "char/048/Traitor2.jpg",
+                            "char/048/Saionji2.jpg"], type: "hidden" }
             ]
         },
         // 时田终夜
@@ -92,10 +95,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Shuya.jpg"], type: "base" },
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Philosopher.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Philosopher2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Shuya2.jpg"], type: "hidden" },
+                { srcList: ["char/048/Shuya.jpg"], type: "base" },
+                { srcList: ["char/048/Philosopher.jpg",
+                            "char/048/Philosopher2.jpg",
+                            "char/048/Shuya2.jpg"], type: "hidden" }
             ]
         },
         // 海棠鹰斗
@@ -106,10 +109,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Takato.jpg"], type: "base" },
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Kaga.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Kaga2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Takato2.jpg"], type: "hidden" },
+                { srcList: ["char/048/Takato.jpg"], type: "base" },
+                { srcList: ["char/048/Kaga.jpg",
+                            "char/048/Kaga2.jpg",
+                            "char/048/Takato2.jpg"], type: "hidden" }
             ]
         },
         // 筱宫枫
@@ -120,7 +123,7 @@ const gameData = {
             isHidden: true,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Kaede.jpg"], type: "base" }
+                { srcList: ["char/048/Kaede.jpg"], type: "base" }
             ]
         },
         // 雷恩
@@ -131,8 +134,8 @@ const gameData = {
             isHidden: true,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Rook.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/048/Rook2.jpg"], type: "base" }
+                { srcList: ["char/048/Rook.jpg",
+                            "char/048/Rook2.jpg"], type: "base" }
             ]
         }
     ]
