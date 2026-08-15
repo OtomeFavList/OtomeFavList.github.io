@@ -18,7 +18,7 @@ const gameData = {
     art: [
         {name:"藤理ト", lang:"zh"}
     ],
-    cover: "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/game/043.jpg",
+    cover: "game/043.jpg",
     charList: [
         // 天沢朱里
         {
@@ -28,8 +28,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/043/Akari.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/043/Akari2.jpg"], type: "base" },
+                { srcList: ["char/043/Akari.jpg",
+                            "char/043/Akari2.jpg"], type: "base" }
             ]
         },
         // 虎走要司
@@ -40,8 +40,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/043/Kobase.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/043/Kobase2.jpg"], type: "base" },
+                { srcList: ["char/043/Kobase.jpg",
+                            "char/043/Kobase2.jpg"], type: "base" }
             ]
         },
         // 凑康平
@@ -52,8 +52,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/043/Minato.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/043/Minato2.jpg"], type: "base" },
+                { srcList: ["char/043/Minato.jpg",
+                            "char/043/Minato2.jpg"], type: "base" }
             ]
         },
         // 五月女光基
@@ -64,8 +64,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/043/Mitsuki.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/043/Mitsuki2.jpg"], type: "base" },
+                { srcList: ["char/043/Mitsuki.jpg",
+                            "char/043/Mitsuki2.jpg"], type: "base" }
             ]
         },
         // 吉冈绿郎
@@ -76,8 +76,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/043/Rokuro.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/043/Rokuro2.jpg"], type: "base" },
+                { srcList: ["char/043/Rokuro.jpg",
+                            "char/043/Rokuro2.jpg"], type: "base" }
             ]
         },
         // 碓井修也
@@ -88,8 +88,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/043/Shuya.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/043/Shuya2.jpg"], type: "base" },
+                { srcList: ["char/043/Shuya.jpg",
+                            "char/043/Shuya2.jpg"], type: "base" }
             ]
         },
         // 多井中法
@@ -100,8 +100,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/043/Tainaka.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/043/Tainaka2.jpg"], type: "base" },
+                { srcList: ["char/043/Tainaka.jpg",
+                            "char/043/Tainaka2.jpg"], type: "base" }
             ]
         },
         // 比嘉月彦
@@ -112,8 +112,8 @@ const gameData = {
             isHidden: true,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/043/Higa.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/043/Higa2.jpg"], type: "base" }
+                { srcList: ["char/043/Higa.jpg",
+                            "char/043/Higa2.jpg"], type: "base" }
             ]
         },
         // YOFY
@@ -124,8 +124,8 @@ const gameData = {
             isHidden: true,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/043/Yofy.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/043/Yofy2.jpg"], type: "base" }
+                { srcList: ["char/043/Yofy.jpg",
+                            "char/043/Yofy2.jpg"], type: "base" }
             ]
         }
     ]
