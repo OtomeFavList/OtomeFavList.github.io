@@ -13,7 +13,7 @@ const gameData = {
     art: [
         {name:"永原キナミ", lang:"zh"}
     ],
-    cover: "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/game/017.jpg",
+    cover: "game/017.jpg",
     charList: [
         // 克洛伊
         {
@@ -23,7 +23,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/017/Chloe.jpg"], type: "base" }
+                { srcList: ["char/017/Chloe.jpg"], type: "base" }
             ]
         },
         // 奈杰
@@ -34,7 +34,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/017/Nagi.jpg"], type: "base" }
+                { srcList: ["char/017/Nagi.jpg"], type: "base" }
             ]
         },
         // 纳兹米
@@ -45,7 +45,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/017/Natsume.jpg"], type: "base" }
+                { srcList: ["char/017/Natsume.jpg"], type: "base" }
             ]
         },
         // 雷
@@ -56,7 +56,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/017/Ray.jpg"], type: "base" }
+                { srcList: ["char/017/Ray.jpg"], type: "base" }
             ]
         },
         // 斯巴
@@ -67,7 +67,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/017/Shiba.jpg"], type: "base" }
+                { srcList: ["char/017/Shiba.jpg"], type: "base" }
             ]
         }
     ]
