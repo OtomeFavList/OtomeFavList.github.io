@@ -13,7 +13,7 @@ const gameData = {
     art: [
         {name:"のりた", lang:"ja"}
     ],
-    cover: "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/game/026.jpg",
+    cover: "game/026.jpg",
     charList: [
         // 安娜斯塔西娅·林赛尔
         {
@@ -23,8 +23,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/026/Anastasia.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/026/Anastasia2.jpg"], type: "base" },
+                { srcList: ["char/026/Anastasia.jpg",
+                            "char/026/Anastasia2.jpg"], type: "base" }
             ]
         },
         // 克莱奥斯·卡索洛克
@@ -35,9 +35,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/026/Crius.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/026/Crius2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/026/Crius3.jpg"], type: "base" },
+                { srcList: ["char/026/Crius.jpg",
+                            "char/026/Crius2.jpg",
+                            "char/026/Crius3.jpg"], type: "base" }
             ]
         },
         // 路西恩·诺伊施本
@@ -48,9 +48,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/026/Lucien.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/026/Lucien2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/026/Lucien3.jpg"], type: "base" },
+                { srcList: ["char/026/Lucien.jpg",
+                            "char/026/Lucien2.jpg",
+                            "char/026/Lucien3.jpg"], type: "base" }
             ]
         },
         // 提瑞尔·I·利斯特
@@ -61,9 +61,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/026/Tyril.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/026/Tyril2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/026/Tyril3.jpg"], type: "base" },
+                { srcList: ["char/026/Tyril.jpg",
+                            "char/026/Tyril2.jpg",
+                            "char/026/Tyril3.jpg"], type: "base" }
             ]
         },
         // 泽恩·索菲尔德
@@ -74,9 +74,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/026/Zenn.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/026/Zenn2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/026/Zenn3.jpg"], type: "base" },
+                { srcList: ["char/026/Zenn.jpg",
+                            "char/026/Zenn2.jpg",
+                            "char/026/Zenn3.jpg"], type: "base" }
             ]
         },
         // 伊什
@@ -87,10 +87,10 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/026/Majo.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/026/Majo2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/026/Majo3.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/026/Majo4.jpg"], type: "base" }
+                { srcList: ["char/026/Majo.jpg",
+                            "char/026/Majo2.jpg",
+                            "char/026/Majo3.jpg",
+                            "char/026/Majo4.jpg"], type: "base" }
             ]
         }
     ]
