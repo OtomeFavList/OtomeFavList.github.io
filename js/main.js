@@ -40,14 +40,20 @@ export function getCanvasImageUrl(relPath) {
 
 /**
  * R2完整链接 → jsDelivr链接（专供Canvas导出模块转换）
- * @param {string} r2FullUrl
+ * 增强版：支持相对路径、R2完整URL、jsDelivr完整URL
+ * @param {string} path 相对路径或完整URL
  * @returns {string}
  */
-export function convertR2ToJsDelivr(r2FullUrl) {
-  const prefix = R2_BASE_URL + "/";
-  if (!r2FullUrl.startsWith(prefix)) return r2FullUrl;
-  const relativePath = r2FullUrl.slice(prefix.length);
-  return getCanvasImageUrl(relativePath);
+export function convertR2ToJsDelivr(path) {
+  // 如果是 R2 完整 URL，替换域名
+  if (path.startsWith(R2_BASE_URL + "/")) {
+    const relPath = path.slice(R2_BASE_URL.length + 1);
+    return getCanvasImageUrl(relPath);
+  }
+  // 如果是 jsDelivr 完整 URL，原样返回（兼容旧数据）
+  if (path.startsWith(JSD_BASE_URL)) return path;
+  // 否则视为相对路径，直接拼接 jsDelivr URL
+  return getCanvasImageUrl(path);
 }
 
 // ===================== 全局应用数据对象 =====================
@@ -772,7 +778,7 @@ export function renderGameSelectItem(game, index) {
     const loadingMode = (index < 6) ? "eager" : "lazy";
 
     return `
-        <img src="${game.cover || ''}" alt="${game.name || ''}" loading="${loadingMode}" decoding="async">
+        <img src="${getWebImageUrl(game.cover || '')}" alt="${game.name || ''}" loading="${loadingMode}" decoding="async">
         <div>
             <div class="game-option-name">${game.name || ""}</div>
             ${infoHtml}
@@ -817,7 +823,7 @@ export function renderSelectedChar(gameItem, gameInfo, isSnapshot = false) {
         html += `
             <div class="char-card-item selected" data-char-id="${char.id}" data-game-id="${gameInfo.id}" data-total-img="${allSrc.length}">
                 <div class="char-card-img-box ${allSrc.length > 1 ? 'char-has-multi-img' : ''}">
-                    <img src="${targetSrc}" alt="${char.name || ''}" loading="eager" decoding="async">
+                    <img src="${getWebImageUrl(targetSrc)}" alt="${char.name || ''}" loading="eager" decoding="async">
                 </div>
                 <div class="char-card-name">${char.name || ""}</div>
             </div>
@@ -875,7 +881,7 @@ export function renderCP(gameItem, gameInfo, isSnapshot = false) {
             maleHtml += `
                 <div class="cp-selected-card-item" data-char-id="${mChar.id}" data-game-id="${gameInfo.id}" data-total-img="${mAllSrc.length}">
                     <div class="char-card-img-box ${mAllSrc.length > 1 ? 'char-has-multi-img' : ''}">
-                        <img src="${mTargetSrc}" alt="${mChar.name || ''}" loading="eager" decoding="async">
+                        <img src="${getWebImageUrl(mTargetSrc)}" alt="${mChar.name || ''}" loading="eager" decoding="async">
                     </div>
                     <div class="char-card-name">${mChar.name || ""}</div>
                 </div>
@@ -887,7 +893,7 @@ export function renderCP(gameItem, gameInfo, isSnapshot = false) {
                 <div class="heroine-column">
                     <div class="cp-selected-card-item" data-char-id="${fChar.id}" data-game-id="${gameInfo.id}" data-total-img="${fAllSrc.length}">
                         <div class="char-card-img-box ${fAllSrc.length > 1 ? 'char-has-multi-img' : ''}">
-                            <img src="${fTargetSrc}" alt="${fChar.name || ''}" loading="eager" decoding="async">
+                            <img src="${getWebImageUrl(fTargetSrc)}" alt="${fChar.name || ''}" loading="eager" decoding="async">
                         </div>
                         <div class="char-card-name">${fChar.name || ""}</div>
                     </div>
