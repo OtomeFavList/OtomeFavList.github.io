@@ -13,7 +13,7 @@ const gameData = {
     art: [
         {name:"白皙", lang:"zh"}
     ],
-    cover: "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/game/033.jpg",
+    cover: "game/033.jpg",
     charList: [
         // 拉碧丝
         {
@@ -23,7 +23,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/033/Lapis.jpg"], type: "base" },
+                { srcList: ["char/033/Lapis.jpg"], type: "base" }
             ]
         },
         // 樫森光希
@@ -34,7 +34,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/033/Mitsuki.jpg"], type: "base" },
+                { srcList: ["char/033/Mitsuki.jpg"], type: "base" }
             ]
         },
         // 月石瑠羽
@@ -45,7 +45,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/033/Ruu.jpg"], type: "base" },
+                { srcList: ["char/033/Ruu.jpg"], type: "base" }
             ]
         },
         // 希尔·瑟瑞斯泰特
@@ -56,7 +56,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/033/Shell.jpg"], type: "base" },
+                { srcList: ["char/033/Shell.jpg"], type: "base" }
             ]
         },
         // 小坂四季
@@ -67,7 +67,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/033/Shiki.jpg"], type: "base" },
+                { srcList: ["char/033/Shiki.jpg"], type: "base" }
             ]
         },
         // 壬生心乃助
@@ -78,7 +78,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/033/Shinnosuke.jpg"], type: "base" },
+                { srcList: ["char/033/Shinnosuke.jpg"], type: "base" }
             ]
         },
         // 壬生惣太郎
@@ -89,7 +89,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/033/Soutarou.jpg"], type: "base" },
+                { srcList: ["char/033/Soutarou.jpg"], type: "base" }
             ]
         },
         // 卡鲁赛多尼·艾德克雷兹
@@ -100,7 +100,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/033/Chalcedony.jpg"], type: "base" },
+                { srcList: ["char/033/Chalcedony.jpg"], type: "base" }
             ]
         },
         // 尤克·艾德克雷兹
@@ -111,7 +111,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/033/Euc.jpg"], type: "base" },
+                { srcList: ["char/033/Euc.jpg"], type: "base" }
             ]
         },
         // 奥茵·艾德克雷兹
@@ -122,7 +122,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/033/Hauyne.jpg"], type: "base" },
+                { srcList: ["char/033/Hauyne.jpg"], type: "base" }
             ]
         },
         // 贾斯帕
@@ -133,7 +133,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/033/Jasper.jpg"], type: "base" },
+                { srcList: ["char/033/Jasper.jpg"], type: "base" }
             ]
         },
         // 莱斯·艾德克雷兹
@@ -144,7 +144,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/033/Lase.jpg"], type: "base" },
+                { srcList: ["char/033/Lase.jpg"], type: "base" }
             ]
         }
     ]
