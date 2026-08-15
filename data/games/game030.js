@@ -13,7 +13,7 @@ const gameData = {
     art: [
         {name:"由良", lang:"zh"}
     ],
-    cover: "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/game/030.jpg",
+    cover: "game/030.jpg",
     charList: [
         // 美琴
         {
@@ -23,7 +23,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/030/Mikoto.jpg"], type: "base" },
+                { srcList: ["char/030/Mikoto.jpg"], type: "base" }
             ]
         },
         // 姬空木
@@ -34,8 +34,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/030/Himeutsugi.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/030/Himeutsugi2.jpg"], type: "base" },
+                { srcList: ["char/030/Himeutsugi.jpg",
+                            "char/030/Himeutsugi2.jpg"], type: "base" }
             ]
         },
         // 伊吕波
@@ -46,8 +46,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/030/Iroha.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/030/Iroha2.jpg"], type: "base" },
+                { srcList: ["char/030/Iroha.jpg",
+                            "char/030/Iroha2.jpg"], type: "base" }
             ]
         },
         // 唐红
@@ -58,8 +58,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/030/Karakurenai.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/030/Karakurenai2.jpg"], type: "base" },
+                { srcList: ["char/030/Karakurenai.jpg",
+                            "char/030/Karakurenai2.jpg"], type: "base" }
             ]
         },
         // 蛟
@@ -70,8 +70,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/030/Mizuchi.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/030/Mizuchi2.jpg"], type: "base" },
+                { srcList: ["char/030/Mizuchi.jpg",
+                            "char/030/Mizuchi2.jpg"], type: "base" }
             ]
         }
     ]
