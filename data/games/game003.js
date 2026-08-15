@@ -17,7 +17,7 @@ const gameData = {
     art: [
         {name:"ユウヤ", lang:"ja"}
     ],
-    cover: "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/game/003.jpg",
+    cover: "game/003.jpg",
     charList: [
         // 淡木琴音
         {
@@ -27,8 +27,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/003/Awaki.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/003/Awaki2.jpg"], type: "base" }
+                { srcList: ["char/003/Awaki.jpg",
+                            "char/003/Awaki2.jpg"], type: "base" }
             ]
         },
         // 卡努斯·埃斯帕达
@@ -39,8 +39,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/003/Canus.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/003/Canus2.jpg"], type: "base" }
+                { srcList: ["char/003/Canus.jpg",
+                            "char/003/Canus2.jpg"], type: "base" }
             ]
         },
         // 伊格尼斯·卡里本库鲁斯
@@ -51,8 +51,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/003/Ignis.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/003/Ignis2.jpg"], type: "base" }
+                { srcList: ["char/003/Ignis.jpg",
+                            "char/003/Ignis2.jpg"], type: "base" }
             ]
         },
         // 伊尔·法多·德·里艾
@@ -63,8 +63,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/003/Il.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/003/Il2.jpg"], type: "base" }
+                { srcList: ["char/003/Il.jpg",
+                            "char/003/Il2.jpg"], type: "base" }
             ]
         },
         // 米歇尔·阿雷克斯
@@ -75,8 +75,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/003/Misyr.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/003/Misyr2.jpg"], type: "base" }
+                { srcList: ["char/003/Misyr.jpg",
+                            "char/003/Misyr2.jpg"], type: "base" }
             ]
         },
         // 凜堂香
@@ -87,8 +87,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/003/Rindou.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/003/Rindou2.jpg"], type: "base" }
+                { srcList: ["char/003/Rindou.jpg",
+                            "char/003/Rindou2.jpg"], type: "base" }
             ]
         }
     ]
