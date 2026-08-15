@@ -14,7 +14,7 @@ const gameData = {
     art: [
         {name:"石田翠", lang:"zh"}
     ],
-    cover: "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/game/023.jpg",
+    cover: "game/023.jpg",
     charList: [
         // 立花希佐
         {
@@ -24,8 +24,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/023/Kisa.png",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/023/Kisa2.png"], type: "base" },
+                { srcList: ["char/023/Kisa.png",
+                            "char/023/Kisa2.png"], type: "base" }
             ]
         },
         // 睦实介
@@ -36,8 +36,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/023/Kai.png",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/023/Kai2.png"], type: "base" },
+                { srcList: ["char/023/Kai.png",
+                            "char/023/Kai2.png"], type: "base" }
             ]
         },
         // 白田美骑
@@ -48,8 +48,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/023/Mitsuki.png",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/023/Mitsuki2.png"], type: "base" },
+                { srcList: ["char/023/Mitsuki.png",
+                            "char/023/Mitsuki2.png"], type: "base" }
             ]
         },
         // 根地黑门
@@ -60,8 +60,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/023/Neji.png",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/023/Neji2.png"], type: "base" },
+                { srcList: ["char/023/Neji.png",
+                            "char/023/Neji2.png"], type: "base" }
             ]
         },
         // 高科更文
@@ -72,8 +72,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/023/Sarafumi.png",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/023/Sarafumi2.png"], type: "base" },
+                { srcList: ["char/023/Sarafumi.png",
+                            "char/023/Sarafumi2.png"], type: "base" }
             ]
         },
         // 世长创司郎
@@ -84,8 +84,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/023/Soushirou.png",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/023/Soushirou2.png"], type: "base" },
+                { srcList: ["char/023/Soushirou.png",
+                            "char/023/Soushirou2.png"], type: "base" }
             ]
         },
         // 织卷寿寿
@@ -96,8 +96,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/023/Suzu.png",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/023/Suzu2.png"], type: "base" },
+                { srcList: ["char/023/Suzu.png",
+                            "char/023/Suzu2.png"], type: "base" }
             ]
         },
         // 田中右宙为
@@ -108,7 +108,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/023/Chui.png"], type: "base" },
+                { srcList: ["char/023/Chui.png"], type: "base" }
             ]
         },
         // 加斋中
@@ -119,7 +119,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/023/Kasai.png"], type: "base" },
+                { srcList: ["char/023/Kasai.png"], type: "base" }
             ]
         }
     ]
