@@ -1,9 +1,9 @@
 // data/games/game015.js
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
-// 无需额外配置，仅需要到 main.js 顶部 🚨gameIdList数组追加编号"002","003"...
+// 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
 const gameData = {
-    id: "game015", // 全局唯一ID，不可重复
+    id: "game015",
     name: "君于雪中希冀",
     year: "2022",
     publisher: ["Otomate"],
@@ -18,7 +18,7 @@ const gameData = {
         {name:"ナガオカ", lang:"ja"},
         {name:"Team.", lang:"en"}
     ],
-    cover: "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/game/015.jpg",
+    cover: "game/015.jpg",
     charList: [
         // 纱乃
         {
@@ -28,7 +28,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/015/Suzuno.jpg"], type: "base" },
+                { srcList: ["char/015/Suzuno.jpg"], type: "base" }
             ]
         },
         // 锦次
@@ -39,7 +39,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/015/Kinji.jpg"], type: "base" },
+                { srcList: ["char/015/Kinji.jpg"], type: "base" }
             ]
         },
         // 久贺源十郎
@@ -50,7 +50,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/015/Kuga.jpg"], type: "base" },
+                { srcList: ["char/015/Kuga.jpg"], type: "base" }
             ]
         },
         // 东条国孝
@@ -61,7 +61,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/015/Kunitaka.jpg"], type: "base" },
+                { srcList: ["char/015/Kunitaka.jpg"], type: "base" }
             ]
         },
         // 樱太郎
@@ -72,7 +72,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/015/Outarou.jpg"], type: "base" },
+                { srcList: ["char/015/Outarou.jpg"], type: "base" }
             ]
         },
         // 篁智成
@@ -83,7 +83,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/015/Tomonari.jpg"], type: "base" },
+                { srcList: ["char/015/Tomonari.jpg"], type: "base" }
             ]
         },
         // 与市
@@ -94,11 +94,11 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/015/Yoichi.jpg"], type: "base" },
+                { srcList: ["char/015/Yoichi.jpg"], type: "base" }
             ]
         }
     ]
 };
 
-// ✅新版导出！不要使用window.gameDataList.push！
+// ESModule导出
 export { gameData };
