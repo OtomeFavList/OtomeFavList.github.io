@@ -31,7 +31,7 @@ const gameData = {
     art: [
         {name:"もちもちた", lang:"ja"}
     ],
-    cover: "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/game/029.jpg",
+    cover: "game/029.jpg",
     charList: [
         // 爱日梨
         {
@@ -41,8 +41,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/029/Airi.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/029/Airi2.jpg"], type: "base" },
+                { srcList: ["char/029/Airi.jpg",
+                            "char/029/Airi2.jpg"], type: "base" }
             ]
         },
         // 露娜
@@ -53,8 +53,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/029/Luna.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/029/Luna2.jpg"], type: "base" },
+                { srcList: ["char/029/Luna.jpg",
+                            "char/029/Luna2.jpg"], type: "base" }
             ]
         },
         // 杰克
@@ -65,8 +65,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/029/Jack.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/029/Jack2.jpg"], type: "base" },
+                { srcList: ["char/029/Jack.jpg",
+                            "char/029/Jack2.jpg"], type: "base" }
             ]
         },
         // 卡农
@@ -77,8 +77,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/029/Kanon.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/029/Kanon2.jpg"], type: "base" },
+                { srcList: ["char/029/Kanon.jpg",
+                            "char/029/Kanon2.jpg"], type: "base" }
             ]
         },
         // 米涅特
@@ -89,8 +89,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/029/Minette.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/029/Minette2.jpg"], type: "base" },
+                { srcList: ["char/029/Minette.jpg",
+                            "char/029/Minette2.jpg"], type: "base" }
             ]
         },
         // 尼洛
@@ -101,8 +101,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/029/Nello.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/029/Nello2.jpg"], type: "base" },
+                { srcList: ["char/029/Nello.jpg",
+                            "char/029/Nello2.jpg"], type: "base" }
             ]
         },
         // 雷因
@@ -113,8 +113,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/029/Rain.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/029/Rain2.jpg"], type: "base" },
+                { srcList: ["char/029/Rain.jpg",
+                            "char/029/Rain2.jpg"], type: "base" }
             ]
         },
         // 斯诺
@@ -125,8 +125,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/029/Snow.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/029/Snow2.jpg"], type: "base" },
+                { srcList: ["char/029/Snow.jpg",
+                            "char/029/Snow2.jpg"], type: "base" }
             ]
         }
     ]
