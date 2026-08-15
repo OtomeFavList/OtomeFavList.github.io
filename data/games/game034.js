@@ -13,7 +13,7 @@ const gameData = {
     art: [
         {name:"ne-on", lang:"en"}
     ],
-    cover: "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/game/034.jpg",
+    cover: "game/034.jpg",
     charList: [
         // 姐崎希美
         {
@@ -23,7 +23,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/034/Nozomi.jpg"], type: "base" },
+                { srcList: ["char/034/Nozomi.jpg"], type: "base" }
             ]
         },
         // 仓口步
@@ -34,7 +34,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/034/Ayumu.jpg"], type: "base" },
+                { srcList: ["char/034/Ayumu.jpg"], type: "base" }
             ]
         },
         // 星名穗积
@@ -45,7 +45,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/034/Hozumi.jpg"], type: "base" },
+                { srcList: ["char/034/Hozumi.jpg"], type: "base" }
             ]
         },
         // 姐崎隼
@@ -56,7 +56,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/034/Shun.jpg"], type: "base" },
+                { srcList: ["char/034/Shun.jpg"], type: "base" }
             ]
         }
     ]
