@@ -13,7 +13,7 @@ const gameData = {
     art: [
         {name:"すめらぎ琥珀", lang:"ja"}
     ],
-    cover: "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/game/035.jpg",
+    cover: "game/035.jpg",
     charList: [
         // 特乌塔
         {
@@ -23,11 +23,11 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/035/Teuta.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/035/Teuta2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/035/Teuta3.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/035/Teuta4.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/035/Teuta5.jpg"], type: "base" },
+                { srcList: ["char/035/Teuta.jpg",
+                            "char/035/Teuta2.jpg",
+                            "char/035/Teuta3.jpg",
+                            "char/035/Teuta4.jpg",
+                            "char/035/Teuta5.jpg"], type: "base" }
             ]
         },
         // 赫尔贝奇卡
@@ -38,11 +38,11 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/035/Helvetica.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/035/Helvetica2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/035/Helvetica3.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/035/Helvetica4.jpg"], type: "base" },
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/035/Helvetica5.jpg"], type: "fd" }
+                { srcList: ["char/035/Helvetica.jpg",
+                            "char/035/Helvetica2.jpg",
+                            "char/035/Helvetica3.jpg",
+                            "char/035/Helvetica4.jpg"], type: "base" },
+                { srcList: ["char/035/Helvetica5.jpg"], type: "fd" }
             ]
         },
         // 林波
@@ -53,11 +53,11 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/035/Limbo.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/035/Limbo2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/035/Limbo3.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/035/Limbo4.jpg"], type: "base" },
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/035/Limbo5.jpg"], type: "fd" }
+                { srcList: ["char/035/Limbo.jpg",
+                            "char/035/Limbo2.jpg",
+                            "char/035/Limbo3.jpg",
+                            "char/035/Limbo4.jpg"], type: "base" },
+                { srcList: ["char/035/Limbo5.jpg"], type: "fd" }
             ]
         },
         // 莫茲
@@ -68,11 +68,11 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/035/Mozu.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/035/Mozu2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/035/Mozu3.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/035/Mozu4.jpg"], type: "base" },
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/035/Mozu5.jpg"], type: "fd" }
+                { srcList: ["char/035/Mozu.jpg",
+                            "char/035/Mozu2.jpg",
+                            "char/035/Mozu3.jpg",
+                            "char/035/Mozu4.jpg"], type: "base" },
+                { srcList: ["char/035/Mozu5.jpg"], type: "fd" }
             ]
         },
         // 斯卡克罗
@@ -83,11 +83,11 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/035/Scarecrow.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/035/Scarecrow2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/035/Scarecrow3.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/035/Scarecrow4.jpg"], type: "base" },
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/035/Scarecrow5.jpg"], type: "fd" }
+                { srcList: ["char/035/Scarecrow.jpg",
+                            "char/035/Scarecrow2.jpg",
+                            "char/035/Scarecrow3.jpg",
+                            "char/035/Scarecrow4.jpg"], type: "base" },
+                { srcList: ["char/035/Scarecrow5.jpg"], type: "fd" }
             ]
         },
         // 修
@@ -98,11 +98,11 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/035/Shu.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/035/Shu2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/035/Shu3.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/035/Shu4.jpg"], type: "base" },
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/035/Shu5.jpg"], type: "fd" }
+                { srcList: ["char/035/Shu.jpg",
+                            "char/035/Shu2.jpg",
+                            "char/035/Shu3.jpg",
+                            "char/035/Shu4.jpg"], type: "base" },
+                { srcList: ["char/035/Shu5.jpg"], type: "fd" }
             ]
         },
         // 亚当
@@ -113,9 +113,9 @@ const gameData = {
             isHidden: true,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/035/Adam.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/035/Adam2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/035/Adam3.jpg"], type: "base" }
+                { srcList: ["char/035/Adam.jpg",
+                            "char/035/Adam2.jpg",
+                            "char/035/Adam3.jpg"], type: "base" }
             ]
         }
     ]
