@@ -1,5 +1,8 @@
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
+// 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
+// 网页渲染时由 main.js 的 getWebImageUrl 拼接为 R2 完整 URL
+// Canvas 导出时由 export-canvas-render.js 的 convertR2ToJsDelivr 拼接为 jsDelivr URL
 // 无需额外配置，仅需要到 main.js 顶部 🚨gameIdList数组追加编号"002","003"...
 const gameData = {
     id: "game053", // 全局唯一ID，不可重复
@@ -13,7 +16,7 @@ const gameData = {
     art: [
         {name:"カズキヨネ", lang:"ja"}
     ],
-    cover: "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/game/053.jpg",
+    cover: "game/053.jpg",
     charList: [
         // 春日珠纪
         {
@@ -23,7 +26,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/053/Tamaki.jpg"], type: "base" },
+                { srcList: ["char/053/Tamaki.jpg"], type: "base" }
             ]
         },
         // 鸦取真弘
@@ -34,7 +37,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/053/Mahiro.jpg"], type: "base" },
+                { srcList: ["char/053/Mahiro.jpg"], type: "base" }
             ]
         },
         // 狗谷辽
@@ -45,7 +48,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/053/Ryou.jpg"], type: "base" },
+                { srcList: ["char/053/Ryou.jpg"], type: "base" }
             ]
         },
         // 犬戒慎司
@@ -56,7 +59,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/053/Shinji.jpg"], type: "base" },
+                { srcList: ["char/053/Shinji.jpg"], type: "base" }
             ]
         },
         // 大蛇草
@@ -67,7 +70,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/053/Suguru.jpg"], type: "base" },
+                { srcList: ["char/053/Suguru.jpg"], type: "base" }
             ]
         },
         // 鬼崎拓磨
@@ -78,7 +81,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/053/Takuma.jpg"], type: "base" },
+                { srcList: ["char/053/Takuma.jpg"], type: "base" }
             ]
         },
         // 狐邑祐一
@@ -89,7 +92,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/053/Yuuichi.jpg"], type: "base" },
+                { srcList: ["char/053/Yuuichi.jpg"], type: "base" }
             ]
         }
     ]
