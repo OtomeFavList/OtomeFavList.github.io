@@ -14,7 +14,7 @@ const gameData = {
     art: [
         {name:"藤丸豆ノ介", lang:"zh"}
     ],
-    cover: "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/game/021.jpg",
+    cover: "game/021.jpg",
     charList: [
         // 爱丽丝·利德尔
         {
@@ -24,8 +24,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/021/Alice.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/021/Alice2.png"], type: "base" },
+                { srcList: ["char/021/Alice.jpg",
+                            "char/021/Alice2.png"], type: "base" }
             ]
         },
         // 布拉德·都普雷
@@ -36,10 +36,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/021/Blood.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/021/Blood2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/021/Blood3.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/021/Blood4.png"], type: "base" },
+                { srcList: ["char/021/Blood.jpg",
+                            "char/021/Blood2.jpg",
+                            "char/021/Blood3.jpg",
+                            "char/021/Blood4.png"], type: "base" }
             ]
         },
         // 崔德尔·迪
@@ -50,10 +50,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/021/Dee.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/021/Dee2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/021/Dee3.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/021/Dee4.png"], type: "base" },
+                { srcList: ["char/021/Dee.jpg",
+                            "char/021/Dee2.jpg",
+                            "char/021/Dee3.jpg",
+                            "char/021/Dee4.png"], type: "base" }
             ]
         },
         // 崔德尔·达姆
@@ -64,10 +64,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/021/Dum.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/021/Dum2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/021/Dum3.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/021/Dum4.png"], type: "base" },
+                { srcList: ["char/021/Dum.jpg",
+                            "char/021/Dum2.jpg",
+                            "char/021/Dum3.jpg",
+                            "char/021/Dum4.png"], type: "base" }
             ]
         },
         // 艾略特·玛奇
@@ -78,10 +78,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/021/Elliot.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/021/Elliot2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/021/Elliot3.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/021/Elliot4.png"], type: "base" },
+                { srcList: ["char/021/Elliot.jpg",
+                            "char/021/Elliot2.jpg",
+                            "char/021/Elliot3.jpg",
+                            "char/021/Elliot4.png"], type: "base" }
             ]
         },
         // 路易斯·可萝
@@ -92,10 +92,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/021/Lewis.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/021/Lewis2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/021/Lewis3.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/021/Lewis4.png"], type: "base" },
+                { srcList: ["char/021/Lewis.jpg",
+                            "char/021/Lewis2.jpg",
+                            "char/021/Lewis3.jpg",
+                            "char/021/Lewis4.png"], type: "base" }
             ]
         },
         // 奎恩·希尔凡
@@ -106,10 +106,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/021/Quin.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/021/Quin2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/021/Quin3.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/021/Quin4.png"], type: "base" },
+                { srcList: ["char/021/Quin.jpg",
+                            "char/021/Quin2.jpg",
+                            "char/021/Quin3.jpg",
+                            "char/021/Quin4.png"], type: "base" }
             ]
         },
         // 艾斯
@@ -120,10 +120,10 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/021/Ace.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/021/Ace2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/021/Ace3.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/021/Ace4.png"], type: "base" }
+                { srcList: ["char/021/Ace.jpg",
+                            "char/021/Ace2.jpg",
+                            "char/021/Ace3.jpg",
+                            "char/021/Ace4.png"], type: "base" }
             ]
         },
         // 波利斯·艾瑞
@@ -134,10 +134,10 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/021/Boris.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/021/Boris2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/021/Boris3.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/021/Boris4.png"], type: "base" }
+                { srcList: ["char/021/Boris.jpg",
+                            "char/021/Boris2.jpg",
+                            "char/021/Boris3.jpg",
+                            "char/021/Boris4.png"], type: "base" }
             ]
         },
         // 格雷·林谷马克
@@ -148,10 +148,10 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/021/Gray.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/021/Gray2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/021/Gray3.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/021/Gray4.png"], type: "base" }
+                { srcList: ["char/021/Gray.jpg",
+                            "char/021/Gray2.jpg",
+                            "char/021/Gray3.jpg",
+                            "char/021/Gray4.png"], type: "base" }
             ]
         },
         // 汉尼瓦·葛特
@@ -162,10 +162,10 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/021/Hannibal.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/021/Hannibal2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/021/Hannibal3.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/021/Hannibal4.png"], type: "base" }
+                { srcList: ["char/021/Hannibal.jpg",
+                            "char/021/Hannibal2.jpg",
+                            "char/021/Hannibal3.jpg",
+                            "char/021/Hannibal4.png"], type: "base" }
             ]
         },
         // Joker
@@ -176,10 +176,10 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/021/Joker.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/021/Joker2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/021/Joker3.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/021/Joker4.png"], type: "base" }
+                { srcList: ["char/021/Joker.jpg",
+                            "char/021/Joker2.jpg",
+                            "char/021/Joker3.jpg",
+                            "char/021/Joker4.png"], type: "base" }
             ]
         },
         // 奈特梅尔·哥德夏洛克
@@ -190,10 +190,10 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/021/Nightmare.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/021/Nightmare2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/021/Nightmare3.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/021/Nightmare4.png"], type: "base" }
+                { srcList: ["char/021/Nightmare.jpg",
+                            "char/021/Nightmare2.jpg",
+                            "char/021/Nightmare3.jpg",
+                            "char/021/Nightmare4.png"], type: "base" }
             ]
         }
     ]
