@@ -14,7 +14,7 @@ const gameData = {
     art: [
         {name:"ユウヤ", lang:"ja"}
     ],
-    cover: "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/game/009.jpg",
+    cover: "game/009.jpg",
     charList: [
         // 莉涅特·米勒
         {
@@ -24,8 +24,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/009/Lynette.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/009/Lynette2.jpg"], type: "base" }
+                { srcList: ["char/009/Lynette.jpg",
+                            "char/009/Lynette2.jpg"], type: "base" }
             ]
         },
         // 艾伦·梅尔维尔
@@ -36,8 +36,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/009/Allan.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/009/Allan2.jpg"], type: "base" }
+                { srcList: ["char/009/Allan.jpg",
+                            "char/009/Allan2.jpg"], type: "base" }
             ]
         },
         // 吉尔·洛夫克拉夫特
@@ -48,8 +48,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/009/Gill.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/009/Gill2.jpg"], type: "base" }
+                { srcList: ["char/009/Gill.jpg",
+                            "char/009/Gill2.jpg"], type: "base" }
             ]
         },
         // 萤彩院·Ｆ·琉辉
@@ -60,8 +60,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/009/Keisaiin.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/009/Keisaiin2.jpg"], type: "base" }
+                { srcList: ["char/009/Keisaiin.jpg",
+                            "char/009/Keisaiin2.jpg"], type: "base" }
             ]
         },
         // 劳尔·亚克尼特
@@ -72,8 +72,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/009/Raul.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/009/Raul2.jpg"], type: "base" }
+                { srcList: ["char/009/Raul.jpg",
+                            "char/009/Raul2.jpg"], type: "base" }
             ]
         },
         // 薛尔比·史奈尔
@@ -84,10 +84,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/009/Shelby.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/009/Shelby2.jpg"], type: "base" }
+                { srcList: ["char/009/Shelby.jpg",
+                            "char/009/Shelby2.jpg"], type: "base" }
             ]
-        }, // ✅补逗号
+        },
         // 彼得·弗拉修
         {
             id: "g009_h01",
@@ -96,9 +96,9 @@ const gameData = {
             isHidden: true,
             isFD: true,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/009/Peter.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/009/Peter2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/009/Peter3.jpg"], type: "base" }
+                { srcList: ["char/009/Peter.jpg",
+                            "char/009/Peter2.jpg",
+                            "char/009/Peter3.jpg"], type: "base" }
             ]
         },
         // 伊萊·奧马尔
@@ -109,9 +109,9 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/009/Eli.png"], type: "base" }
+                { srcList: ["char/009/Eli.png"], type: "base" }
             ]
-        }, // ✅补逗号
+        },
         // 梅列尼斯·莱文
         {
             id: "g009_fd02",
@@ -120,9 +120,9 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/009/Merenice.jpg"], type: "base" }
+                { srcList: ["char/009/Merenice.jpg"], type: "base" }
             ]
-        }, // ✅补逗号
+        },
         // 欧文·赫里欧
         {
             id: "g009_fd03",
@@ -131,8 +131,8 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/009/Owen.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/009/Owen2.jpg"], type: "base" }
+                { srcList: ["char/009/Owen.jpg",
+                            "char/009/Owen2.jpg"], type: "base" }
             ]
         }
     ]
