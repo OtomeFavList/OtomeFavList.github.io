@@ -1520,10 +1520,10 @@ h2{
     flex-shrink: 0;
 }
 
-/* ========== 统一移动端适配 (max-width: 900px) ========== */
-/* 合并原 768px 和 900px 两个媒体查询，去除重复，以 900px 为统一断点 */
-@media (max-width:900px) {
-    /* 原 900px 规则（优先保留，带 !important 保证覆盖） */
+/* ========== 统一移动端适配 (≤ 1200px) ========== */
+/* 所有移动端设备（手机、平板、折叠屏）共享的排版、尺寸、防溢出 */
+@media (max-width:1200px) {
+    /* 防溢出 */
     .big-card,
     .game-card,
     .char-slide-panel-char,
@@ -1533,14 +1533,13 @@ h2{
         max-width: 100%;
         overflow-x: hidden;
     }
+
+    /* 游戏封面缩小 */
     .game-option-item img {
         width: 80px !important;
     }
-    .game-list-select {
-        display: grid !important;
-        grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr)) !important;
-        gap: 10px !important;
-    }
+
+    /* 角色卡片缩小 */
     .char-item,
     .char-card-item,
     .cp-female-card-btn,
@@ -1549,12 +1548,16 @@ h2{
         width: 100px !important;
         min-height: 132px !important;
     }
+
+    /* 角色池网格缩小 */
     .char-pool {
         grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)) !important;
     }
     .game-search-box .char-pool {
         grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)) !important;
     }
+
+    /* CP 布局弹性换行 */
     .cp-layout-row {
         flex-direction: row !important;
         flex-wrap: wrap !important;
@@ -1569,6 +1572,8 @@ h2{
         flex-wrap: wrap !important;
         gap: 10px;
     }
+
+    /* 移动端待选游戏卡片内容防裁切 */
     .game-option-item {
         display: flex !important;
         gap: 10px !important;
@@ -1592,7 +1597,7 @@ h2{
         white-space: normal !important;
     }
 
-    /* 原 768px 规则（未在 900px 中出现或值不同，在此补全） */
+    /* 其他移动端视觉微调（原 900px 中保留的） */
     .char-selected-row .char-card-item {
         width: 90px;
         min-height: 150px;
@@ -1605,8 +1610,6 @@ h2{
         height: 26px;
         font-size: 18px;
     }
-
-    /* 原第二个 768px 块（游戏卡片头部布局调整） */
     .game-card-header-row {
         flex-direction: column;
         align-items: flex-start;
@@ -1621,55 +1624,27 @@ h2{
     }
 }
 
-/* 导出按钮区域单独纵向居中布局，不污染全局center-btn-block */
-.center-btn-block.export-btn-wrap {
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-}
-.center-btn-block.export-btn-wrap .switch-desc {
-    text-align: center;
-}
+/* ========== 列数控制（分层） ========== */
 
-/* 恢复默认按钮：左对齐，覆盖原有居中样式 */
-.center-btn-block.left-align-btn {
-    justify-content: flex-start !important;
-}
-
-/* ===================== 使用指南弹窗样式（更大更长，滚动） ===================== */
-#guide-modal.modal-mask {
-    z-index: 10001; /* 高于预览弹窗 */
-}
-.modal-guide-box {
-    background:#ffffff;
-    border-radius:12px;
-    border:2px solid #f6a5b8;
-    width: min(92vw, 960px);
-    max-height: 86vh;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-}
-.guide-scroll-wrap {
-    flex: 1;
-    padding: 24px;
-    overflow-y: auto;
-    overflow-x: hidden;
-    -webkit-overflow-scrolling: touch;
-}
-.modal-guide-box .modal-btns {
-    padding:16px 20px;
-    border-top:1px solid #eee;
-    margin-top:0;
-}
-/* 弹窗内卡片移除外边距，防止双重间距 */
-.modal-guide-box .big-card {
-    padding:0;
-    border:none;
-}
-/* 移动端缩小弹窗边距 */
-@media (max-width:768px){
+/* ① 普通手机（≤ 768px）：强制单列 */
+@media (max-width:768px) {
+    .game-list-select {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+    }
+    /* 弹窗内边距（保留你原有的 768 弹窗优化） */
     .modal-guide-scroll {
-        padding:16px;
+        padding: 16px;
     }
 }
+
+/* ② 折叠屏 + 平板（769px ~ 1200px）：弹性多列 */
+@media (min-width:769px) and (max-width:1200px) {
+    .game-list-select {
+        display: grid !important;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
+        gap: 14px !important;
+    }
+}
+
+/* ③ 桌面（> 1200px）：无需额外代码，使用默认样式 */
