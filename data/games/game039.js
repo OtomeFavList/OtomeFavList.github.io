@@ -13,7 +13,7 @@ const gameData = {
     art: [
         {name:"さとい", lang:"ja"}
     ],
-    cover: "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/game/039.jpg",
+    cover: "game/039.jpg",
     charList: [
         // 阎魔凛
         {
@@ -23,9 +23,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/039/Rin.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/039/Rin2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/039/Rin3.png"], type: "base" },
+                { srcList: ["char/039/Rin.jpg",
+                            "char/039/Rin2.jpg",
+                            "char/039/Rin3.png"], type: "base" }
             ]
         },
         // 石川五右卫门
@@ -36,9 +36,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/039/Goemon.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/039/Goemon2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/039/Goemon3.png"], type: "base" },
+                { srcList: ["char/039/Goemon.jpg",
+                            "char/039/Goemon2.jpg",
+                            "char/039/Goemon3.png"], type: "base" }
             ]
         },
         // JacK
@@ -49,9 +49,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/039/Jack.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/039/Jack2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/039/Jack3.png"], type: "base" },
+                { srcList: ["char/039/Jack.jpg",
+                            "char/039/Jack2.jpg",
+                            "char/039/Jack3.png"], type: "base" }
             ]
         },
         // 宇贺菊之助
@@ -62,9 +62,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/039/Kikunosuke.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/039/Kikunosuke2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/039/Kikunosuke3.png"], type: "base" },
+                { srcList: ["char/039/Kikunosuke.jpg",
+                            "char/039/Kikunosuke2.jpg",
+                            "char/039/Kikunosuke3.png"], type: "base" }
             ]
         },
         // 东洲斋写乐
@@ -75,9 +75,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/039/Sharaku.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/039/Sharaku2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/039/Sharaku3.png"], type: "base" },
+                { srcList: ["char/039/Sharaku.jpg",
+                            "char/039/Sharaku2.jpg",
+                            "char/039/Sharaku3.png"], type: "base" }
             ]
         },
         // 村上誉那
@@ -88,9 +88,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/039/Yona.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/039/Yona2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/039/Yona3.png"], type: "base" },
+                { srcList: ["char/039/Yona.jpg",
+                            "char/039/Yona2.jpg",
+                            "char/039/Yona3.png"], type: "base" }
             ]
         }
     ]
