@@ -1,5 +1,8 @@
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
+// 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
+// 网页渲染时由 main.js 的 getWebImageUrl 拼接为 R2 完整 URL
+// Canvas 导出时由 export-canvas-render.js 的 convertR2ToJsDelivr 拼接为 jsDelivr URL
 // 无需额外配置，仅需要到 main.js 顶部 🚨gameIdList数组追加编号"002","003"...
 const gameData = {
     id: "game046", // 全局唯一ID，不可重复
@@ -16,7 +19,7 @@ const gameData = {
     art: [
         {name:"清白かりん", lang:"zh"}
     ],
-    cover: "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/game/046.jpg",
+    cover: "game/046.jpg",
     charList: [
         // 亚普萝丝
         {
@@ -26,9 +29,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/046/Alfred.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/046/Alfred2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/046/Alfred3.png"], type: "base" },
+                { srcList: ["char/046/Alfred.jpg",
+                            "char/046/Alfred2.jpg",
+                            "char/046/Alfred3.png"], type: "base" }
             ]
         },
         // 阿尔弗雷德·克雷斯维尔
@@ -39,9 +42,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/046/Alfred.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/046/Alfred2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/046/Alfred3.png"], type: "base" },
+                { srcList: ["char/046/Alfred.jpg",
+                            "char/046/Alfred2.jpg",
+                            "char/046/Alfred3.png"], type: "base" }
             ]
         },
         // 亚斯科特·林代尔
@@ -52,9 +55,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/046/Ascot.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/046/Ascot2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/046/Ascot3.png"], type: "base" },
+                { srcList: ["char/046/Ascot.jpg",
+                            "char/046/Ascot2.jpg",
+                            "char/046/Ascot3.png"], type: "base" }
             ]
         },
         // 爱德华·伯思斯坦
@@ -65,9 +68,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/046/Edward.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/046/Edward2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/046/Edward3.png"], type: "base" },
+                { srcList: ["char/046/Edward.jpg",
+                            "char/046/Edward2.jpg",
+                            "char/046/Edward3.png"], type: "base" }
             ]
         },
         // 约翰
@@ -78,9 +81,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/046/John.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/046/John2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/046/John3.png"], type: "base" },
+                { srcList: ["char/046/John.jpg",
+                            "char/046/John2.jpg",
+                            "char/046/John3.png"], type: "base" }
             ]
         },
         // 莱纳斯·沃德
@@ -91,9 +94,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/046/Linus.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/046/Linus2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/046/Linus3.png"], type: "base" },
+                { srcList: ["char/046/Linus.jpg",
+                            "char/046/Linus2.jpg",
+                            "char/046/Linus3.png"], type: "base" }
             ]
         },
         // 卢卡斯·沙利文
@@ -104,9 +107,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/046/Lucas.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/046/Lucas2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/046/Lucas3.png"], type: "base" },
+                { srcList: ["char/046/Lucas.jpg",
+                            "char/046/Lucas2.jpg",
+                            "char/046/Lucas3.png"], type: "base" }
             ]
         }
     ]
