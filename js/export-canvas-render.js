@@ -5,7 +5,8 @@ import {
   LAYOUT_STYLE,
   getAvailableCharImages,
   preloadAndDecodeImage,
-  preloadImageBitmap
+  preloadImageBitmap,
+  convertR2ToJsDelivr
 } from './main.js';
 
 // 最大并发图片加载数量，降低并发减少移动端解码资源竞争
@@ -1163,14 +1164,16 @@ export async function renderExportCanvas(
         const stored = gameItem.selectCharItems?.find(s => s.charId === cid);
         const idx = Number(stored?.imgIndex ?? 0);
         const src = allSrc[idx] || allSrc[0];
+        // 转换为 Canvas 专用的 jsDelivr 地址
+        const canvasSrc = convertR2ToJsDelivr(src);
         charItems.push({
           id: char.id,
           name: char.name,
-          src,
+          src: canvasSrc,
           isHidden: !!char.isHidden,
           isFD: !!char.isFD
         });
-        allImageSrcList.push(src);
+        allImageSrcList.push(canvasSrc);
       }
     }
 
@@ -1185,6 +1188,8 @@ export async function renderExportCanvas(
         if (fAllSrc.length === 0) continue;
         const fIdx = Number(cp.femaleImgIndex ?? 0);
         const fSrc = fAllSrc[fIdx] || fAllSrc[0];
+        // 转换为 Canvas 专用的 jsDelivr 地址
+        const canvasFSrc = convertR2ToJsDelivr(fSrc);
 
         const maleItems = [];
         if (Array.isArray(cp.maleItems)) {
@@ -1197,23 +1202,25 @@ export async function renderExportCanvas(
             if (mAllSrc.length === 0) continue;
             const mIdx = Number(mi.imgIndex ?? 0);
             const mSrc = mAllSrc[mIdx] || mAllSrc[0];
+            // 转换为 Canvas 专用的 jsDelivr 地址
+            const canvasMSrc = convertR2ToJsDelivr(mSrc);
             maleItems.push({
               id: mChar.id,
               name: mChar.name,
-              src: mSrc,
+              src: canvasMSrc,
               isHidden: !!mChar.isHidden,
               isFD: !!mChar.isFD
             });
-            allImageSrcList.push(mSrc);
+            allImageSrcList.push(canvasMSrc);
           }
         }
         if (maleItems.length > 0) {
           cpItems.push({
             femaleName: fChar.name,
-            femaleSrc: fSrc,
+            femaleSrc: canvasFSrc,
             maleItems: maleItems
           });
-          allImageSrcList.push(fSrc);
+          allImageSrcList.push(canvasFSrc);
         }
       }
     }
