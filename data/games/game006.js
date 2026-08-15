@@ -14,7 +14,7 @@ const gameData = {
     art: [
         {name:"さとい", lang:"ja"}
     ],
-    cover: "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/game/006.jpg",
+    cover: "game/006.jpg",
     charList: [
         // 奥林匹亚
         {
@@ -24,8 +24,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/006/Olympia.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/006/Olympia2.jpg"], type: "base" }
+                { srcList: ["char/006/Olympia.jpg",
+                            "char/006/Olympia2.jpg"], type: "base" }
             ]
         },
         // 朱砂
@@ -36,8 +36,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/006/Akaza.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/006/Akaza2.jpg"], type: "base" }
+                { srcList: ["char/006/Akaza.jpg",
+                            "char/006/Akaza2.jpg"], type: "base" }
             ]
         },
         // 天草四郎时贞
@@ -48,8 +48,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/006/Amakusa.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/006/Amakusa2.jpg"], type: "base" }
+                { srcList: ["char/006/Amakusa.jpg",
+                            "char/006/Amakusa2.jpg"], type: "base" }
             ]
         },
         // 火向
@@ -60,8 +60,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/006/Himuka.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/006/Himuka2.jpg"], type: "base" }
+                { srcList: ["char/006/Himuka.jpg",
+                            "char/006/Himuka2.jpg"], type: "base" }
             ]
         },
         // 玄叶
@@ -72,8 +72,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/006/Kuroba.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/006/Kuroba2.jpg"], type: "base" }
+                { srcList: ["char/006/Kuroba.jpg",
+                            "char/006/Kuroba2.jpg"], type: "base" }
             ]
         },
         // 璃空
@@ -84,10 +84,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/006/Rikuu.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/006/Rikuu2.jpg"], type: "base" }
+                { srcList: ["char/006/Rikuu.jpg",
+                            "char/006/Rikuu2.jpg"], type: "base" }
             ]
-        }, // ←===【修复：补上这里缺失的逗号】===
+        },
         // 缘
         {
             id: "g006_m06",
@@ -96,8 +96,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/006/Yosuga.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/006/Yosuga2.jpg"], type: "base" }
+                { srcList: ["char/006/Yosuga.jpg",
+                            "char/006/Yosuga2.jpg"], type: "base" }
             ]
         }
     ]
