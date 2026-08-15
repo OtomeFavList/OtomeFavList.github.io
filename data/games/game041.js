@@ -13,7 +13,7 @@ const gameData = {
     art: [
         {name:"雪広うたこ", lang:"zh"}
     ],
-    cover: "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/game/041.jpg",
+    cover: "game/041.jpg",
     charList: [
         // 澄空翼
         {
@@ -23,8 +23,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/041/Tsubasa.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/041/Tsubasa2.png"], type: "base" },
+                { srcList: ["char/041/Tsubasa.jpg",
+                            "char/041/Tsubasa2.png"], type: "base" }
             ]
         },
         // 不动明谦
@@ -35,8 +35,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/041/Akane.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/041/Akane2.png"], type: "base" },
+                { srcList: ["char/041/Akane.jpg",
+                            "char/041/Akane2.png"], type: "base" }
             ]
         },
         // 金城刚士
@@ -47,8 +47,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/041/Goushi.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/041/Goushi2.png"], type: "base" },
+                { srcList: ["char/041/Goushi.jpg",
+                            "char/041/Goushi2.png"], type: "base" }
             ]
         },
         // 寺光遥日
@@ -59,8 +59,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/041/Haruhi.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/041/Haruhi2.png"], type: "base" },
+                { srcList: ["char/041/Haruhi.jpg",
+                            "char/041/Haruhi2.png"], type: "base" }
             ]
         },
         // 王茶利晖
@@ -71,8 +71,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/041/Hikaru.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/041/Hikaru2.png"], type: "base" },
+                { srcList: ["char/041/Hikaru.jpg",
+                            "char/041/Hikaru2.png"], type: "base" }
             ]
         },
         // 增长和南
@@ -83,8 +83,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/041/Kazuna.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/041/Kazuna2.png"], type: "base" },
+                { srcList: ["char/041/Kazuna.jpg",
+                            "char/041/Kazuna2.png"], type: "base" }
             ]
         },
         // 爱染健十
@@ -95,8 +95,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/041/Kento.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/041/Kento2.png"], type: "base" },
+                { srcList: ["char/041/Kento.jpg",
+                            "char/041/Kento2.png"], type: "base" }
             ]
         },
         // 释村帝人
@@ -107,8 +107,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/041/Mikado.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/041/Mikado2.png"], type: "base" },
+                { srcList: ["char/041/Mikado.jpg",
+                            "char/041/Mikado2.png"], type: "base" }
             ]
         },
         // 殿弥勒
@@ -119,8 +119,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/041/Miroku.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/041/Miroku2.png"], type: "base" },
+                { srcList: ["char/041/Miroku.jpg",
+                            "char/041/Miroku2.png"], type: "base" }
             ]
         },
         // 音济百太郎
@@ -131,8 +131,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/041/Momotarou.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/041/Momotarou2.png"], type: "base" },
+                { srcList: ["char/041/Momotarou.jpg",
+                            "char/041/Momotarou2.png"], type: "base" }
             ]
         },
         // 是国龙持
@@ -143,8 +143,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/041/Ryuuji.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/041/Ryuuji2.png"], type: "base" },
+                { srcList: ["char/041/Ryuuji.jpg",
+                            "char/041/Ryuuji2.png"], type: "base" }
             ]
         },
         // 野目龙广
@@ -155,8 +155,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/041/Tatsuhiro.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/041/Tatsuhiro2.png"], type: "base" },
+                { srcList: ["char/041/Tatsuhiro.jpg",
+                            "char/041/Tatsuhiro2.png"], type: "base" }
             ]
         },
         // 北门伦毘沙
@@ -167,8 +167,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/041/Tomohisa.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/041/Tomohisa2.png"], type: "base" },
+                { srcList: ["char/041/Tomohisa.jpg",
+                            "char/041/Tomohisa2.png"], type: "base" }
             ]
         },
         // 阿修悠太
@@ -179,8 +179,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/041/Yuuta.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/041/Yuuta2.png"], type: "base" },
+                { srcList: ["char/041/Yuuta.jpg",
+                            "char/041/Yuuta2.png"], type: "base" }
             ]
         },
         // 寺光唯月
@@ -191,8 +191,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/041/Yuzuki.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/041/Yuzuki2.png"], type: "base" },
+                { srcList: ["char/041/Yuzuki.jpg",
+                            "char/041/Yuzuki2.png"], type: "base" }
             ]
         }
     ]
