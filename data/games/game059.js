@@ -1,5 +1,8 @@
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
+// 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
+// 网页渲染时由 main.js 的 getWebImageUrl 拼接为 R2 完整 URL
+// Canvas 导出时由 export-canvas-render.js 的 convertR2ToJsDelivr 拼接为 jsDelivr URL
 // 无需额外配置，仅需要到 main.js 顶部 🚨gameIdList数组追加编号"002","003"...
 const gameData = {
     id: "game059", // 全局唯一ID，不可重复
@@ -19,12 +22,12 @@ const gameData = {
         {name:"株式会社エッジワークス", lang:"zh"},
         {name:"みなづきともこ", lang:"ja"},
         {name:"ゆずみやともめ", lang:"ja"},
-        {name:"もち大福", lang:"ja"},
+        {name:"もち大福", lang:"ja"}
     ],
     art: [
         {name:"カズアキ", lang:"ja"}
     ],
-    cover: "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/game/059.jpg",
+    cover: "game/059.jpg",
     charList: [
         // 朱音凜
         {
@@ -34,9 +37,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/059/Rin.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/059/Rin2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/059/Rin3.jpg"], type: "base" },
+                { srcList: ["char/059/Rin.jpg",
+                            "char/059/Rin2.jpg",
+                            "char/059/Rin3.jpg"], type: "base" }
             ]
         },
         // 木邑浅葱
@@ -47,7 +50,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/059/Asagi.jpg"], type: "base" },
+                { srcList: ["char/059/Asagi.jpg"], type: "base" }
             ]
         },
         // 伊吹萩之介
@@ -58,7 +61,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/059/Ibuki.jpg"], type: "base" },
+                { srcList: ["char/059/Ibuki.jpg"], type: "base" }
             ]
         },
         // 芹野真夏
@@ -69,7 +72,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/059/Manatsu.jpg"], type: "base" },
+                { srcList: ["char/059/Manatsu.jpg"], type: "base" }
             ]
         },
         // 花苏芳
@@ -80,7 +83,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/059/Suou.jpg"], type: "base" },
+                { srcList: ["char/059/Suou.jpg"], type: "base" }
             ]
         },
         // 犬嶌谣
@@ -91,7 +94,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/059/Uta.jpg"], type: "base" },
+                { srcList: ["char/059/Uta.jpg"], type: "base" }
             ]
         },
         // 犬嶌咏
@@ -102,7 +105,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/059/Yomi.jpg"], type: "base" },
+                { srcList: ["char/059/Yomi.jpg"], type: "base" }
             ]
         }
     ]
