@@ -1,5 +1,8 @@
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
+// 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
+// 网页渲染时由 main.js 的 getWebImageUrl 拼接为 R2 完整 URL
+// Canvas 导出时由 export-canvas-render.js 的 convertR2ToJsDelivr 拼接为 jsDelivr URL
 // 无需额外配置，仅需要到 main.js 顶部 🚨gameIdList数组追加编号"002","003"...
 const gameData = {
     id: "game060", // 全局唯一ID，不可重复
@@ -11,12 +14,12 @@ const gameData = {
         {name:"夏野景", lang:"zh"},
         {name:"宙地", lang:"zh"},
         {name:"伽那ノ光", lang:"zh"},
-        {name:"喜屋武米助", lang:"zh"},
+        {name:"喜屋武米助", lang:"zh"}
     ],
     art: [
         {name:"和田ベコ", lang:"zh"}
     ],
-    cover: "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/game/060.jpg",
+    cover: "game/060.jpg",
     charList: [
         // 藤枝音理
         {
@@ -26,7 +29,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/060/Neri.jpg"], type: "base" },
+                { srcList: ["char/060/Neri.jpg"], type: "base" }
             ]
         },
         // 五十岚春
@@ -37,7 +40,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/060/Haru.jpg"], type: "base" },
+                { srcList: ["char/060/Haru.jpg"], type: "base" }
             ]
         },
         // 加地一波
@@ -48,7 +51,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/060/Ichiha.jpg"], type: "base" },
+                { srcList: ["char/060/Ichiha.jpg"], type: "base" }
             ]
         },
         // 鹭之宫零
@@ -59,7 +62,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/060/Rei.jpg"], type: "base" },
+                { srcList: ["char/060/Rei.jpg"], type: "base" }
             ]
         },
         // 鹰岭陆
@@ -70,7 +73,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/060/Riku.jpg"], type: "base" },
+                { srcList: ["char/060/Riku.jpg"], type: "base" }
             ]
         },
         // 七濑十矢
@@ -81,7 +84,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/060/Touya.jpg"], type: "base" },
+                { srcList: ["char/060/Touya.jpg"], type: "base" }
             ]
         }
     ]
