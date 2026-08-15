@@ -14,7 +14,7 @@ const gameData = {
         {name:"アサダモチコ", lang:"ja"},
         {name:"ユウヤ", lang:"ja"}
     ],
-    cover: "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/game/042.jpg",
+    cover: "game/042.jpg",
     charList: [
         // 席琳
         {
@@ -24,8 +24,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/042/Shirien.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/042/Shirien2.jpg"], type: "base" },
+                { srcList: ["char/042/Shirien.jpg",
+                            "char/042/Shirien2.jpg"], type: "base" }
             ]
         },
         // 杰米尔
@@ -36,9 +36,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/042/Jemiru.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/042/Jemiru2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/042/Jemiru3.jpg"], type: "base" },
+                { srcList: ["char/042/Jemiru.jpg",
+                            "char/042/Jemiru2.jpg",
+                            "char/042/Jemiru3.jpg"], type: "base" }
             ]
         },
         // 鳞希骊
@@ -49,9 +49,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/042/Kirei.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/042/Kirei2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/042/Kirei3.jpg"], type: "base" },
+                { srcList: ["char/042/Kirei.jpg",
+                            "char/042/Kirei2.jpg",
+                            "char/042/Kirei3.jpg"], type: "base" }
             ]
         },
         // 鳞皇骊
@@ -62,9 +62,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/042/Korei.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/042/Korei2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/042/Korei3.jpg"], type: "base" },
+                { srcList: ["char/042/Korei.jpg",
+                            "char/042/Korei2.jpg",
+                            "char/042/Korei3.jpg"], type: "base" }
             ]
         },
         // 莱扎尔·沙纳萨
@@ -75,9 +75,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/042/Lizaru.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/042/Lizaru2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/042/Lizaru3.jpg"], type: "base" },
+                { srcList: ["char/042/Lizaru.jpg",
+                            "char/042/Lizaru2.jpg",
+                            "char/042/Lizaru3.jpg"], type: "base" }
             ]
         },
         // 罗岚·克莱德尔
@@ -88,9 +88,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/042/Rollan.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/042/Rollan2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/042/Rollan3.jpg"], type: "base" },
+                { srcList: ["char/042/Rollan.jpg",
+                            "char/042/Rollan2.jpg",
+                            "char/042/Rollan3.jpg"], type: "base" }
             ]
         },
         // 文斯·卢根
@@ -101,9 +101,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/042/Vince.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/042/Vince2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/042/Vince3.jpg"], type: "base" },
+                { srcList: ["char/042/Vince.jpg",
+                            "char/042/Vince2.jpg",
+                            "char/042/Vince3.jpg"], type: "base" }
             ]
         }
     ]
