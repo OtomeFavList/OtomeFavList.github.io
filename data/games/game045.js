@@ -1,5 +1,8 @@
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
+// 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
+// 网页渲染时由 main.js 的 getWebImageUrl 拼接为 R2 完整 URL
+// Canvas 导出时由 export-canvas-render.js 的 convertR2ToJsDelivr 拼接为 jsDelivr URL
 // 无需额外配置，仅需要到 main.js 顶部 🚨gameIdList数组追加编号"002","003"...
 const gameData = {
     id: "game045", // 全局唯一ID，不可重复
@@ -17,7 +20,7 @@ const gameData = {
         {name:"朱玖", lang:"zh"},
         {name:"miko", lang:"en"}
     ],
-    cover: "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/game/045.jpg",
+    cover: "game/045.jpg",
     charList: [
         // 蒂法莉娅
         {
@@ -27,8 +30,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/045/Tifalia.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/045/Tifalia2.jpg"], type: "base" },
+                { srcList: ["char/045/Tifalia.jpg",
+                            "char/045/Tifalia2.jpg"], type: "base" }
             ]
         },
         // 伊昂
@@ -39,8 +42,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/045/Ion.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/045/Ion2.jpg"], type: "base" },
+                { srcList: ["char/045/Ion.jpg",
+                            "char/045/Ion2.jpg"], type: "base" }
             ]
         },
         // 帕斯哈里亚
@@ -51,8 +54,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/045/Paschalia.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/045/Paschalia2.jpg"], type: "base" },
+                { srcList: ["char/045/Paschalia.jpg",
+                            "char/045/Paschalia2.jpg"], type: "base" }
             ]
         },
         // 拉蒂
@@ -63,9 +66,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/045/Radie.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/045/Radie2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/045/Radie3.jpg"], type: "base" },
+                { srcList: ["char/045/Radie.jpg",
+                            "char/045/Radie2.jpg",
+                            "char/045/Radie3.jpg"], type: "base" }
             ]
         },
         // 威利欧
@@ -76,8 +79,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/045/Vilio.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/045/Vilio2.jpg"], type: "base" },
+                { srcList: ["char/045/Vilio.jpg",
+                            "char/045/Vilio2.jpg"], type: "base" }
             ]
         },
         // 札弗拉
@@ -88,8 +91,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/045/Zafora.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/045/Zafora2.jpg"], type: "base" },
+                { srcList: ["char/045/Zafora.jpg",
+                            "char/045/Zafora2.jpg"], type: "base" }
             ]
         },
         // 吉尼亚
@@ -100,9 +103,9 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/045/Jinnia.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/045/Jinnia2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/045/Jinnia3.jpg"], type: "base" }
+                { srcList: ["char/045/Jinnia.jpg",
+                            "char/045/Jinnia2.jpg",
+                            "char/045/Jinnia3.jpg"], type: "base" }
             ]
         },
         // 里昂
@@ -113,8 +116,8 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/045/Liyan.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/045/Liyan2.jpg"], type: "base" }
+                { srcList: ["char/045/Liyan.jpg",
+                            "char/045/Liyan2.jpg"], type: "base" }
             ]
         }
     ]
