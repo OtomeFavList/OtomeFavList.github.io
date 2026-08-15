@@ -1,9 +1,9 @@
 // data/games/game018.js
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
-// 无需额外配置，仅需要到 main.js 顶部 🚨gameIdList数组追加编号"002","003"...
+// 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
 const gameData = {
-    id: "game018", // 全局唯一ID，不可重复
+    id: "game018",
     name: "命运九重奏",
     year: "2023",
     publisher: ["Otomate"],
@@ -16,7 +16,7 @@ const gameData = {
         {name:"悌太", lang:"zh"},
         {name:"清白かりん", lang:"zh"}
     ],
-    cover: "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/game/018.jpg",
+    cover: "game/018.jpg",
     charList: [
         // 小春
         {
@@ -26,7 +26,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/018/Koharu.jpg"], type: "base" },
+                { srcList: ["char/018/Koharu.jpg"], type: "base" }
             ]
         },
         // 久我深琴
@@ -37,7 +37,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/018/Mikoto.jpg"], type: "base" },
+                { srcList: ["char/018/Mikoto.jpg"], type: "base" }
             ]
         },
         // 不知火七海
@@ -48,7 +48,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/018/Nanami.jpg"], type: "base" },
+                { srcList: ["char/018/Nanami.jpg"], type: "base" }
             ]
         },
         // 宿史晓人
@@ -59,7 +59,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/018/Akito.jpg"], type: "base" },
+                { srcList: ["char/018/Akito.jpg"], type: "base" }
             ]
         },
         // 乙丸平士
@@ -70,7 +70,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/018/Heishi.jpg"], type: "base" },
+                { srcList: ["char/018/Heishi.jpg"], type: "base" }
             ]
         },
         // 加贺见一月
@@ -81,7 +81,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/018/Itsuki.jpg"], type: "base" },
+                { srcList: ["char/018/Itsuki.jpg"], type: "base" }
             ]
         },
         // 结贺驱
@@ -92,7 +92,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/018/Kakeru.jpg"], type: "base" },
+                { srcList: ["char/018/Kakeru.jpg"], type: "base" }
             ]
         },
         // 远矢正宗
@@ -103,7 +103,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/018/Masamune.jpg"], type: "base" },
+                { srcList: ["char/018/Masamune.jpg"], type: "base" }
             ]
         },
         // 吾妻夏彦
@@ -114,7 +114,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/018/Natsuhiko.jpg"], type: "base" },
+                { srcList: ["char/018/Natsuhiko.jpg"], type: "base" }
             ]
         },
         // 二条朔也
@@ -125,7 +125,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/018/Sakuya.jpg"], type: "base" },
+                { srcList: ["char/018/Sakuya.jpg"], type: "base" }
             ]
         },
         // 市之濑千里
@@ -136,7 +136,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/018/Senri.jpg"], type: "base" },
+                { srcList: ["char/018/Senri.jpg"], type: "base" }
             ]
         },
         // 室星朗
@@ -147,11 +147,11 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/018/Ron.jpg"], type: "base" },
+                { srcList: ["char/018/Ron.jpg"], type: "base" }
             ]
         }
     ]
 };
 
-// ✅新版导出！不要使用window.gameDataList.push！
+// ESModule导出
 export { gameData };
