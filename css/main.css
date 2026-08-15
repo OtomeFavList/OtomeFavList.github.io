@@ -1520,6 +1520,7 @@ h2{
     flex-shrink: 0;
 }
 
+/* ===================== 导出模块按钮调整 ===================== */
 /* 导出按钮区域单独纵向居中布局，不污染全局center-btn-block */
 .center-btn-block.export-btn-wrap {
     flex-direction: column;
@@ -1528,6 +1529,10 @@ h2{
 }
 .center-btn-block.export-btn-wrap .switch-desc {
     text-align: center;
+}
+/* 恢复默认按钮：左对齐，覆盖原有居中样式 */
+.center-btn-block.left-align-btn {
+    justify-content: flex-start !important;
 }
 
 /* ===================== 使用指南弹窗样式（更大更长，滚动） ===================== */
