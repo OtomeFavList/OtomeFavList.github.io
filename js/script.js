@@ -97,7 +97,7 @@ export function initPage(Core = {}) {
             imgsUnitList.forEach(u => allSrc.push(...u.srcList));
             if (allSrc.length === 0) return;
 
-            // ★ 修改：只加入当前图片 + 前后相邻图片
+            // ★ 修改：只加入当前图片 + 前后相邻图片（用完整 URL）
             if (allSrc.length > 0) {
                 const saveKey = `char-img-${gameId}-${char.id}`;
                 if(!appData.charImageSelect) appData.charImageSelect = {};
@@ -105,15 +105,15 @@ export function initPage(Core = {}) {
                 if (imgIndex >= allSrc.length) imgIndex = 0;
 
                 const currentSrc = allSrc[imgIndex];
-                if (currentSrc) preloadSrcList.push(currentSrc);
+                if (currentSrc) preloadSrcList.push(getWebImageUrl(currentSrc));
 
                 if (allSrc.length > 1) {
                     const prevIndex = (imgIndex - 1 + allSrc.length) % allSrc.length;
                     const nextIndex = (imgIndex + 1) % allSrc.length;
                     const prevSrc = allSrc[prevIndex];
                     const nextSrc = allSrc[nextIndex];
-                    if (prevSrc) preloadSrcList.push(prevSrc);
-                    if (nextSrc) preloadSrcList.push(nextSrc);
+                    if (prevSrc) preloadSrcList.push(getWebImageUrl(prevSrc));
+                    if (nextSrc) preloadSrcList.push(getWebImageUrl(nextSrc));
                 }
             }
 
@@ -147,7 +147,7 @@ export function initPage(Core = {}) {
             imgsUnitList.forEach(u => allSrc.push(...u.srcList));
             if (allSrc.length === 0) return;
 
-            // ★ 修改：只加入当前图片 + 前后相邻图片
+            // ★ 修改：只加入当前图片 + 前后相邻图片（用完整 URL）
             if (allSrc.length > 0) {
                 const saveKey = `char-img-${gameId}-${char.id}`;
                 if(!appData.charImageSelect) appData.charImageSelect = {};
@@ -155,15 +155,15 @@ export function initPage(Core = {}) {
                 if (imgIndex >= allSrc.length) imgIndex = 0;
 
                 const currentSrc = allSrc[imgIndex];
-                if (currentSrc) preloadSrcList.push(currentSrc);
+                if (currentSrc) preloadSrcList.push(getWebImageUrl(currentSrc));
 
                 if (allSrc.length > 1) {
                     const prevIndex = (imgIndex - 1 + allSrc.length) % allSrc.length;
                     const nextIndex = (imgIndex + 1) % allSrc.length;
                     const prevSrc = allSrc[prevIndex];
                     const nextSrc = allSrc[nextIndex];
-                    if (prevSrc) preloadSrcList.push(prevSrc);
-                    if (nextSrc) preloadSrcList.push(nextSrc);
+                    if (prevSrc) preloadSrcList.push(getWebImageUrl(prevSrc));
+                    if (nextSrc) preloadSrcList.push(getWebImageUrl(nextSrc));
                 }
             }
 
@@ -238,21 +238,21 @@ export function initPage(Core = {}) {
             imgsUnitList.forEach(u=>allSrc.push(...u.srcList));
             if(allSrc.length === 0) return;
 
-            // ★ 修改：只加入当前图片 + 前后相邻图片
+            // ★ 修改：只加入当前图片 + 前后相邻图片（用完整 URL）
             if (allSrc.length > 0) {
                 let imgIndex = Number(state.femaleImgIndex ?? 0);
                 if (imgIndex >= allSrc.length) imgIndex = 0;
 
                 const currentSrc = allSrc[imgIndex];
-                if (currentSrc) preloadSrcList.push(currentSrc);
+                if (currentSrc) preloadSrcList.push(getWebImageUrl(currentSrc));
 
                 if (allSrc.length > 1) {
                     const prevIndex = (imgIndex - 1 + allSrc.length) % allSrc.length;
                     const nextIndex = (imgIndex + 1) % allSrc.length;
                     const prevSrc = allSrc[prevIndex];
                     const nextSrc = allSrc[nextIndex];
-                    if (prevSrc) preloadSrcList.push(prevSrc);
-                    if (nextSrc) preloadSrcList.push(nextSrc);
+                    if (prevSrc) preloadSrcList.push(getWebImageUrl(prevSrc));
+                    if (nextSrc) preloadSrcList.push(getWebImageUrl(nextSrc));
                 }
             }
 
@@ -290,7 +290,7 @@ export function initPage(Core = {}) {
                             mImgs.forEach(u=>mSrcArr.push(...u.srcList));
                             if(mSrcArr.length===0) return "";
 
-                            // ★ 修改：只加入当前图片 + 前后相邻图片
+                            // ★ 修改：只加入当前图片 + 前后相邻图片（用完整 URL）
                             if (mSrcArr.length > 0) {
                                 let mImgIndex = 0;
                                 if(draftMap && draftMap.has(mChar.id)){
@@ -302,15 +302,15 @@ export function initPage(Core = {}) {
                                 if (mImgIndex >= mSrcArr.length) mImgIndex = 0;
 
                                 const currentSrc = mSrcArr[mImgIndex];
-                                if (currentSrc) preloadSrcList.push(currentSrc);
+                                if (currentSrc) preloadSrcList.push(getWebImageUrl(currentSrc));
 
                                 if (mSrcArr.length > 1) {
                                     const prevIndex = (mImgIndex - 1 + mSrcArr.length) % mSrcArr.length;
                                     const nextIndex = (mImgIndex + 1) % mSrcArr.length;
                                     const prevSrc = mSrcArr[prevIndex];
                                     const nextSrc = mSrcArr[nextIndex];
-                                    if (prevSrc) preloadSrcList.push(prevSrc);
-                                    if (nextSrc) preloadSrcList.push(nextSrc);
+                                    if (prevSrc) preloadSrcList.push(getWebImageUrl(prevSrc));
+                                    if (nextSrc) preloadSrcList.push(getWebImageUrl(nextSrc));
                                 }
                             }
 
@@ -678,10 +678,31 @@ export function initPage(Core = {}) {
         availImgUnits.forEach(unit => allSrc.push(...unit.srcList));
         if (allSrc.length <= 1) return;
 
-        const saveKey = `${panelMode}-img-${gameId}-${charId}`;
-        if(!appData.charImageSelect) appData.charImageSelect = {};
-        let currentIndex = Number(appData.charImageSelect?.[saveKey] ?? 0);
+        // ========== 修复：区分 char/CP女主/CP男主 ==========
+        let currentIndex;
+        let saveKey = "";
+        const isCpFemaleCard = charCard.classList.contains("cp-female-card-btn");
 
+        if (panelMode === "char") {
+            // char普通角色：char-img-{gid}-{cid}
+            saveKey = `char-img-${gameId}-${charId}`;
+            if(!appData.charImageSelect) appData.charImageSelect = {};
+            currentIndex = Number(appData.charImageSelect?.[saveKey] ?? 0);
+        } else if (panelMode === "cp") {
+            if (isCpFemaleCard) {
+                // CP女主：唯一数据源 cpEditState.femaleImgIndex
+                const targetGameItem = appData.gameList?.find(g=>g.gameId === gameId);
+                const st = targetGameItem?.cpEditState.find(s=>s.femaleId === charId);
+                currentIndex = Number(st?.femaleImgIndex ?? 0);
+            } else {
+                // CP男主：cp-img-{gid}-{cid}
+                saveKey = `cp-img-${gameId}-${charId}`;
+                if(!appData.charImageSelect) appData.charImageSelect = {};
+                currentIndex = Number(appData.charImageSelect?.[saveKey] ?? 0);
+            }
+        }
+
+        // 下标自增/自减
         if (switchBtn.classList.contains("char-switch-next")) {
           currentIndex++;
           if (currentIndex >= allSrc.length) currentIndex = 0;
@@ -690,41 +711,46 @@ export function initPage(Core = {}) {
           if (currentIndex < 0) currentIndex = allSrc.length - 1;
         }
 
-        appData.charImageSelect[saveKey] = currentIndex;
-
-        //【修改点3】cp模式同步写入草稿map；如果是女主，回写到cpEditState.femaleImgIndex
-        if(panelMode === "cp"){
+        // ========== 分支回写持久化数据 ==========
+        if (panelMode === "char") {
+            appData.charImageSelect[saveKey] = currentIndex;
+        } else if (panelMode === "cp") {
             const cpPanel = charCard.closest(".char-slide-panel-cp");
             const fid = charCard.dataset.fid;
             const targetGameItem = appData.gameList?.find(g=>g.gameId === gameId);
-            if(targetGameItem){
-                const st = targetGameItem.cpEditState.find(s=>s.femaleId === fid);
-                // 女主卡片：保存女主自身立绘下标
-                if(st && charCard.classList.contains("cp-female-card-btn")){
-                    st.femaleImgIndex = currentIndex;
-                }
-            }
-            if(cpPanel && cpPanel._tempCpDraftMap && fid){
-                const draftMap = cpPanel._tempCpDraftMap[fid];
-                if(draftMap){
-                    draftMap.set(charId, currentIndex);
+
+            if (isCpFemaleCard) {
+                // CP女主：写入cpEditState.femaleImgIndex，禁止写入charImageSelect
+                const st = targetGameItem?.cpEditState.find(s=>s.femaleId === charId);
+                if(st) st.femaleImgIndex = currentIndex;
+            } else {
+                // CP男主：写入charImageSelect + 同步草稿Map
+                appData.charImageSelect[saveKey] = currentIndex;
+                if(cpPanel && cpPanel._tempCpDraftMap && fid){
+                    const draftMap = cpPanel._tempCpDraftMap[fid];
+                    if(draftMap){
+                        draftMap.set(charId, currentIndex);
+                    }
                 }
             }
         }
 
         saveData();
+
         // ========== 替换为带loading切换函数 ==========
         const imgBox = charCard.querySelector(".char-card-img-box");
         if(imgBox){
-            await switchCharImageWithLoading(imgBox, allSrc[currentIndex]);
-            // ========== 后备：强制更新图片 src（解决加载失败时图片不变的问题）==========
+            // ★★★ 修复：将相对路径转为完整 R2 URL ★★★
+            const fullUrl = getWebImageUrl(allSrc[currentIndex]);
+            await switchCharImageWithLoading(imgBox, fullUrl);
+            // ========== 后备：强制更新图片 src ==========
             const imgDom = imgBox.querySelector("img");
-            if (imgDom && imgDom.src !== allSrc[currentIndex]) {
-                imgDom.src = allSrc[currentIndex];
+            if (imgDom && imgDom.src !== fullUrl) {
+                imgDom.src = fullUrl;
             }
         }
         // =========【新增调试日志】=========
-        console.log("saveKey", saveKey,"set index",currentIndex,"src",allSrc[currentIndex]);
+        console.log("mode",panelMode,"charId",charId,"currentIndex",currentIndex,"src",allSrc[currentIndex]);
         return; //处理完图片切换直接return，不再往下执行cp逻辑
       }
 
