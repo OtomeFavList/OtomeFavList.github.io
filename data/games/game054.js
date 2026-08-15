@@ -1,5 +1,8 @@
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
+// 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
+// 网页渲染时由 main.js 的 getWebImageUrl 拼接为 R2 完整 URL
+// Canvas 导出时由 export-canvas-render.js 的 convertR2ToJsDelivr 拼接为 jsDelivr URL
 // 无需额外配置，仅需要到 main.js 顶部 🚨gameIdList数组追加编号"002","003"...
 const gameData = {
     id: "game054", // 全局唯一ID，不可重复
@@ -19,7 +22,7 @@ const gameData = {
     art: [
         {name:"御堂マヰカ", lang:"zh"}
     ],
-    cover: "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/game/054.jpg",
+    cover: "game/054.jpg",
     charList: [
         // 莱蒂西娅
         {
@@ -29,7 +32,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/054/Laetitia.jpg"], type: "base" },
+                { srcList: ["char/054/Laetitia.jpg"], type: "base" }
             ]
         },
         // 迪兰·纪拜尔
@@ -40,7 +43,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/054/Dylan.jpg"], type: "base" },
+                { srcList: ["char/054/Dylan.jpg"], type: "base" }
             ]
         },
         // 埃利亚斯·贝尔耶
@@ -51,7 +54,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/054/Elias.jpg"], type: "base" },
+                { srcList: ["char/054/Elias.jpg"], type: "base" }
             ]
         },
         // 伊维尔
@@ -62,7 +65,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/054/Hiver.jpg"], type: "base" },
+                { srcList: ["char/054/Hiver.jpg"], type: "base" }
             ]
         },
         // 奥斯卡·希尔维斯特
@@ -73,7 +76,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/054/Oscar.jpg"], type: "base" },
+                { srcList: ["char/054/Oscar.jpg"], type: "base" }
             ]
         },
         // 雷吉斯·德·卢佩提
@@ -84,7 +87,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/054/Régis.jpg"], type: "base" },
+                { srcList: ["char/054/Régis.jpg"], type: "base" }
             ]
         }
     ]
