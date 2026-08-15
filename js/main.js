@@ -16,6 +16,40 @@ export const STORE_KEY = "otome-favlist-data";
 export const SPOILER_DATE_KEY = "spoiler-confirm-date"; // 全局剧透确认日期
 export const SPOILER_LOCAL_SWITCH_KEY = "local-switch-spoiler-date";
 
+// ===================== 图片URL域名配置 =====================
+export const R2_BASE_URL = "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev";
+export const JSD_BASE_URL = "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img";
+
+/**
+ * 由相对路径生成网页展示R2图片地址
+ * @param {string} relPath 相对路径 game/xxx.jpg char/xxx.jpg
+ * @returns {string} R2完整URL
+ */
+export function getWebImageUrl(relPath) {
+  return `${R2_BASE_URL}/${relPath}`;
+}
+
+/**
+ * 由相对路径生成Canvas导出使用jsDelivr地址
+ * @param {string} relPath
+ * @returns {string} jsDelivr URL
+ */
+export function getCanvasImageUrl(relPath) {
+  return `${JSD_BASE_URL}/${relPath}`;
+}
+
+/**
+ * R2完整链接 → jsDelivr链接（专供Canvas导出模块转换）
+ * @param {string} r2FullUrl
+ * @returns {string}
+ */
+export function convertR2ToJsDelivr(r2FullUrl) {
+  const prefix = R2_BASE_URL + "/";
+  if (!r2FullUrl.startsWith(prefix)) return r2FullUrl;
+  const relativePath = r2FullUrl.slice(prefix.length);
+  return getCanvasImageUrl(relativePath);
+}
+
 // ===================== 全局应用数据对象 =====================
 export let appData = {
     globalHideChar: false,
