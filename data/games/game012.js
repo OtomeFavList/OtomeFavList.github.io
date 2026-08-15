@@ -1,7 +1,7 @@
 // data/games/game012.js
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
-// 仅需要在 games.js 的 allGameFiles数组追加本文件路径
+// 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
 const gameData = {
     id: "game012",
     name: "谎月香格里拉",
@@ -21,7 +21,7 @@ const gameData = {
     art: [
         {name:"hagi", lang:"en"}
     ],
-    cover: "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/game/012.jpg",
+    cover: "game/012.jpg",
     charList: [
         // 晦光
         {
@@ -31,8 +31,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/012/Akari.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/012/Akari2.jpg"], type: "base" }
+                { srcList: ["char/012/Akari.jpg",
+                            "char/012/Akari2.jpg"], type: "base" }
             ]
         },
         // 恩德
@@ -43,8 +43,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/012/Ende.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/012/Ende2.jpg"], type: "base" }
+                { srcList: ["char/012/Ende.jpg",
+                            "char/012/Ende2.jpg"], type: "base" }
             ]
         },
         // 芬里尔
@@ -55,9 +55,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/012/Fenrir.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/012/Fenrir2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/012/Fenrir3.jpg"], type: "base" }
+                { srcList: ["char/012/Fenrir.jpg",
+                            "char/012/Fenrir2.jpg",
+                            "char/012/Fenrir3.jpg"], type: "base" }
             ]
         },
         // 哈提
@@ -68,8 +68,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/012/Hati.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/012/Hati2.jpg"], type: "base" }
+                { srcList: ["char/012/Hati.jpg",
+                            "char/012/Hati2.jpg"], type: "base" }
             ]
         },
         // 海拉
@@ -80,9 +80,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/012/Hel.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/012/Hel2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/012/Hel3.jpg"], type: "base" }
+                { srcList: ["char/012/Hel.jpg",
+                            "char/012/Hel2.jpg",
+                            "char/012/Hel3.jpg"], type: "base" }
             ]
         },
         // 耶梦加得
@@ -93,9 +93,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/012/Jorm.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/012/Jorm2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/012/Jorm3.jpg"], type: "base" }
+                { srcList: ["char/012/Jorm.jpg",
+                            "char/012/Jorm2.jpg",
+                            "char/012/Jorm3.jpg"], type: "base" }
             ]
         }
     ]
