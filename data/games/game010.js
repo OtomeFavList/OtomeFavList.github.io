@@ -1,7 +1,7 @@
 // data/games/game010.js
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
-// 仅需要在 games.js 的 allGameFiles数组追加本文件路径
+// 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
 const gameData = {
     id: "game010",
     name: "冷然之天秤：帝都幻惑绮谭",
@@ -14,7 +14,7 @@ const gameData = {
     art: [
         {name:"さとい", lang:"ja"}
     ],
-    cover: "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/game/010.jpg",
+    cover: "game/010.jpg",
     charList: [
         // 久世鸫
         {
@@ -24,8 +24,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/010/Tsugumi.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/010/Tsugumi2.jpg"], type: "base" }
+                { srcList: ["char/010/Tsugumi.jpg",
+                            "char/010/Tsugumi2.jpg"], type: "base" }
             ]
         },
         // 鸿上滉
@@ -36,8 +36,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/010/Akira.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/010/Akira2.jpg"], type: "base" }
+                { srcList: ["char/010/Akira.jpg",
+                            "char/010/Akira2.jpg"], type: "base" }
             ]
         },
         // 星川翡翠
@@ -48,8 +48,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/010/Hoshikawa.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/010/Hoshikawa2.jpg"], type: "base" }
+                { srcList: ["char/010/Hoshikawa.jpg",
+                            "char/010/Hoshikawa2.jpg"], type: "base" }
             ]
         },
         // 汀紫鹤
@@ -60,8 +60,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/010/Migiwa.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/010/Migiwa2.jpg"], type: "base" }
+                { srcList: ["char/010/Migiwa.jpg",
+                            "char/010/Migiwa2.jpg"], type: "base" }
             ]
         },
         // 尾崎隼人
@@ -72,8 +72,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/010/Ozaki.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/010/Ozaki2.jpg"], type: "base" }
+                { srcList: ["char/010/Ozaki.jpg",
+                            "char/010/Ozaki2.jpg"], type: "base" }
             ]
         },
         // 鹭泽累
@@ -84,8 +84,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/010/Rui.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/010/Rui2.jpg"], type: "base" }
+                { srcList: ["char/010/Rui.jpg",
+                            "char/010/Rui2.jpg"], type: "base" }
             ]
         },
         // 鹈饲昌吾
@@ -96,8 +96,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/010/Ukai.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/010/Ukai2.jpg"], type: "base" }
+                { srcList: ["char/010/Ukai.jpg",
+                            "char/010/Ukai2.jpg"], type: "base" }
             ]
         }
     ]
