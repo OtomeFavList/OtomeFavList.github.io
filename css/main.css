@@ -1530,6 +1530,44 @@ h2{
     text-align: center;
 }
 
+/* ===================== 使用指南弹窗样式（更大更长，滚动） ===================== */
+#guide-modal.modal-mask {
+    z-index: 10001; /* 高于预览弹窗 */
+}
+.modal-guide-box {
+    background:#ffffff;
+    border-radius:12px;
+    border:2px solid #f6a5b8;
+    width: min(92vw, 960px);
+    max-height: 86vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+.guide-scroll-wrap {
+    flex: 1;
+    padding: 24px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+.modal-guide-box .modal-btns {
+    padding:16px 20px;
+    border-top:1px solid #eee;
+    margin-top:0;
+}
+/* 弹窗内卡片移除外边距，防止双重间距 */
+.modal-guide-box .big-card {
+    padding:0;
+    border:none;
+}
+/* 移动端缩小弹窗边距 */
+@media (max-width:768px){
+    .modal-guide-scroll {
+        padding:16px;
+}
+}
+
 /* ========== 统一移动端适配 (≤ 1200px) ========== */
 /* 所有移动端设备（手机、平板、折叠屏）共享的排版、尺寸、防溢出 */
 @media (max-width:1200px) {
