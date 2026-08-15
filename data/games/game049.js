@@ -1,5 +1,8 @@
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
+// 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
+// 网页渲染时由 main.js 的 getWebImageUrl 拼接为 R2 完整 URL
+// Canvas 导出时由 export-canvas-render.js 的 convertR2ToJsDelivr 拼接为 jsDelivr URL
 // 无需额外配置，仅需要到 main.js 顶部 🚨gameIdList数组追加编号"002","003"...
 const gameData = {
     id: "game049", // 全局唯一ID，不可重复
@@ -14,7 +17,7 @@ const gameData = {
     art: [
         {name:"ユウヤ", lang:"ja"}
     ],
-    cover: "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/game/049.jpg",
+    cover: "game/049.jpg",
     charList: [
         // 明石亚未
         {
@@ -24,8 +27,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/049/Ami.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/049/Ami2.jpg"], type: "base" },
+                { srcList: ["char/049/Ami.jpg",
+                            "char/049/Ami2.jpg"], type: "base" }
             ]
         },
         // 春芳风花
@@ -36,8 +39,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/049/Fuuka.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/049/Fuuka2.jpg"], type: "base" },
+                { srcList: ["char/049/Fuuka.jpg",
+                            "char/049/Fuuka2.jpg"], type: "base" }
             ]
         },
         // 雪平实红
@@ -48,8 +51,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/049/Miku.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/049/Miku2.jpgg"], type: "base" },
+                { srcList: ["char/049/Miku.jpg",
+                            "char/049/Miku2.jpgg"], type: "base" }
             ]
         },
         // 碧木星利奈
@@ -60,8 +63,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/049/Serina.jpgg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/049/Serina2.jpg"], type: "base" },
+                { srcList: ["char/049/Serina.jpgg",
+                            "char/049/Serina2.jpg"], type: "base" }
             ]
         },
         // 栖川银之助
@@ -72,8 +75,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/049/Ginnosuke.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/049/Ginnosuke2.jpg"], type: "base" },
+                { srcList: ["char/049/Ginnosuke.jpg",
+                            "char/049/Ginnosuke2.jpg"], type: "base" }
             ]
         },
         // 市毛北斗
@@ -84,8 +87,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/049/Hokuto.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/049/Hokuto2.jpg"], type: "base" },
+                { srcList: ["char/049/Hokuto.jpg",
+                            "char/049/Hokuto2.jpg"], type: "base" }
             ]
         },
         // 美波天弥
@@ -96,8 +99,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/049/Tenya.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/049/Tenya2.jpg"], type: "base" },
+                { srcList: ["char/049/Tenya.jpg",
+                            "char/049/Tenya2.jpg"], type: "base" }
             ]
         },
         // 东里环
@@ -108,8 +111,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/049/Wataru.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/049/Wataru2.jpg"], type: "base" },
+                { srcList: ["char/049/Wataru.jpg",
+                            "char/049/Wataru2.jpg"], type: "base" }
             ]
         }
     ]
