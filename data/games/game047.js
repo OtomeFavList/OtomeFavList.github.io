@@ -1,5 +1,8 @@
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
+// 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
+// 网页渲染时由 main.js 的 getWebImageUrl 拼接为 R2 完整 URL
+// Canvas 导出时由 export-canvas-render.js 的 convertR2ToJsDelivr 拼接为 jsDelivr URL
 // 无需额外配置，仅需要到 main.js 顶部 🚨gameIdList数组追加编号"002","003"...
 const gameData = {
     id: "game047", // 全局唯一ID，不可重复
@@ -13,7 +16,7 @@ const gameData = {
     art: [
         {name:"RiRi", lang:"en"}
     ],
-    cover: "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/game/047.jpg",
+    cover: "game/047.jpg",
     charList: [
         // 雏菊
         {
@@ -23,8 +26,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/047/Hinagiku.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/047/Hinagiku2.jpg"], type: "base" },
+                { srcList: ["char/047/Hinagiku.jpg",
+                            "char/047/Hinagiku2.jpg"], type: "base" }
             ]
         },
         // 淡雪
@@ -35,8 +38,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/047/Awayuki.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/047/Awayuki2.jpg"], type: "base" },
+                { srcList: ["char/047/Awayuki.jpg",
+                            "char/047/Awayuki2.jpg"], type: "base" }
             ]
         },
         // 帷
@@ -47,8 +50,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/047/Tobari.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/047/Tobari2.jpg"], type: "base" },
+                { srcList: ["char/047/Tobari.jpg",
+                            "char/047/Tobari2.jpg"], type: "base" }
             ]
         },
         // 露草
@@ -59,8 +62,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/047/Tsuyukusa.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/047/Tsuyukusa2.jpg"], type: "base" },
+                { srcList: ["char/047/Tsuyukusa.jpg",
+                            "char/047/Tsuyukusa2.jpg"], type: "base" }
             ]
         },
         // 矢代
@@ -71,8 +74,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/047/Yashiro.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/047/Yashiro2.jpg"], type: "base" },
+                { srcList: ["char/047/Yashiro.jpg",
+                            "char/047/Yashiro2.jpg"], type: "base" }
             ]
         },
         // 依
@@ -83,8 +86,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/047/Yori.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/047/Yori2.jpg"], type: "base" },
+                { srcList: ["char/047/Yori.jpg",
+                            "char/047/Yori2.jpg"], type: "base" }
             ]
         }
     ]
