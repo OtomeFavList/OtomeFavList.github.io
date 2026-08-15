@@ -14,7 +14,7 @@ const gameData = {
     art: [
         {name:"RiRi", lang:"en"}
     ],
-    cover: "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/game/001.jpg",
+    cover: "game/001.jpg",
     charList: [
         // 莉莉安娜
         {
@@ -24,8 +24,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/001/Liliana.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/001/Liliana2.jpg"], type: "base" }
+                { srcList: ["char/001/Liliana.jpg",
+                            "char/001/Liliana2.jpg"], type: "base" }
             ]
         },
         // 但丁·法尔宗
@@ -36,9 +36,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/001/Dante.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/001/Dante2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/001/Dante3.jpg"], type: "base" }
+                { srcList: ["char/001/Dante.jpg",
+                            "char/001/Dante2.jpg",
+                            "char/001/Dante3.jpg"], type: "base" }
             ]
         },
         // 吉尔伯特·烈福
@@ -49,9 +49,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/001/Gilbert.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/001/Gilbert2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/001/Gilbert3.jpg"], type: "base" }
+                { srcList: ["char/001/Gilbert.jpg",
+                            "char/001/Gilbert2.jpg",
+                            "char/001/Gilbert3.jpg"], type: "base" }
             ]
         },
         // 尼古拉·法兰捷斯卡
@@ -62,9 +62,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/001/Nicola.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/001/Nicola2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/001/Nicola3.jpg"], type: "base" }
+                { srcList: ["char/001/Nicola.jpg",
+                            "char/001/Nicola2.jpg",
+                            "char/001/Nicola3.jpg"], type: "base" }
             ]
         },
         // 奥罗克
@@ -75,9 +75,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/001/Orlok.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/001/Orlok2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/001/Orlok3.jpg"], type: "base" }
+                { srcList: ["char/001/Orlok.jpg",
+                            "char/001/Orlok2.jpg",
+                            "char/001/Orlok3.jpg"], type: "base" }
             ]
         },
         // 杨
@@ -88,9 +88,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/001/Yang.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/001/Yang2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/001/Yang3.jpg"], type: "base" }
+                { srcList: ["char/001/Yang.jpg",
+                            "char/001/Yang2.jpg",
+                            "char/001/Yang3.jpg"], type: "base" }
             ]
         },
         // 亨利·兰伯特
@@ -101,8 +101,8 @@ const gameData = {
             isHidden: true,
             isFD: true,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@mai/img/char/001/Henri.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/001/Henri2.jpg"], type: "base" }
+                { srcList: ["char/001/Henri.jpg",
+                            "char/001/Henri2.jpg"], type: "base" }
             ]
         }
     ]
