@@ -1520,6 +1520,16 @@ h2{
     flex-shrink: 0;
 }
 
+/* 导出按钮区域单独纵向居中布局，不污染全局center-btn-block */
+.center-btn-block.export-btn-wrap {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+.center-btn-block.export-btn-wrap .switch-desc {
+    text-align: center;
+}
+
 /* ========== 统一移动端适配 (≤ 1200px) ========== */
 /* 所有移动端设备（手机、平板、折叠屏）共享的排版、尺寸、防溢出 */
 @media (max-width:1200px) {
