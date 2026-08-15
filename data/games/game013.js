@@ -1,7 +1,7 @@
 // data/games/game013.js
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
-// 仅需要在 games.js 的 allGameFiles数组追加本文件路径
+// 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
 const gameData = {
     id: "game013",
     name: "Code:Realize ~创世的公主~",
@@ -17,7 +17,7 @@ const gameData = {
     art: [
         {name:"miko", lang:"en"}
     ],
-    cover: "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/game/013.jpg",
+    cover: "game/013.jpg",
     charList: [
         // 卡尔迪娅·贝克福德
         {
@@ -27,8 +27,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/013/Cardia.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/013/Cardia2.jpg"], type: "base" }
+                { srcList: ["char/013/Cardia.jpg",
+                            "char/013/Cardia2.jpg"], type: "base" }
             ]
         },
         // 维克多·弗兰肯斯坦
@@ -39,8 +39,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/013/Frankenstein.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/013/Frankenstein2.jpg"], type: "base" }
+                { srcList: ["char/013/Frankenstein.jpg",
+                            "char/013/Frankenstein2.jpg"], type: "base" }
             ]
         },
         // 圣·日耳曼
@@ -51,8 +51,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/013/Germain.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/013/Germain2.jpg"], type: "base" }
+                { srcList: ["char/013/Germain.jpg",
+                            "char/013/Germain2.jpg"], type: "base" }
             ]
         },
         // 因倍·巴比康
@@ -63,8 +63,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/013/Impey.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/013/Impey2.jpg"], type: "base" }
+                { srcList: ["char/013/Impey.jpg",
+                            "char/013/Impey2.jpg"], type: "base" }
             ]
         },
         // 亚森·罗宾
@@ -75,9 +75,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/013/Lupin.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/013/Lupin2.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/013/Lupin3.jpg"], type: "base" }
+                { srcList: ["char/013/Lupin.jpg",
+                            "char/013/Lupin2.jpg",
+                            "char/013/Lupin3.jpg"], type: "base" }
             ]
         },
         // 亚伯拉罕·范·海辛
@@ -88,8 +88,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/013/Van.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/013/Van2.jpg"], type: "base" }
+                { srcList: ["char/013/Van.jpg",
+                            "char/013/Van2.jpg"], type: "base" }
             ]
         }
     ]
