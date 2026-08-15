@@ -1,9 +1,9 @@
 // data/games/game019.js
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
-// 无需额外配置，仅需要到 main.js 顶部 🚨gameIdList数组追加编号"002","003"...
+// 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
 const gameData = {
-    id: "game019", // 全局唯一ID，不可重复
+    id: "game019",
     name: "薄樱鬼 真改 风华传",
     year: "2022",
     publisher: ["Otomate"],
@@ -15,7 +15,7 @@ const gameData = {
     art: [
         {name:"四季咲組", lang:"zh"}
     ],
-    cover: "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/game/019.jpg",
+    cover: "game/019.jpg",
     charList: [
         // 雪村千鹤
         {
@@ -25,7 +25,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/019/Chizuru.jpg"], type: "base" },
+                { srcList: ["char/019/Chizuru.jpg"], type: "base" }
             ]
         },
         // 斋藤一
@@ -36,7 +36,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/019/Hajime.jpg"], type: "base" },
+                { srcList: ["char/019/Hajime.jpg"], type: "base" }
             ]
         },
         // 原田左之助
@@ -47,7 +47,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/019/Harada.jpg"], type: "base" },
+                { srcList: ["char/019/Harada.jpg"], type: "base" }
             ]
         },
         // 藤堂平助
@@ -58,7 +58,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/019/Heisuke.jpg"], type: "base" },
+                { srcList: ["char/019/Heisuke.jpg"], type: "base" }
             ]
         },
         // 伊庭八郎
@@ -69,7 +69,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/019/Iba.jpg"], type: "base" },
+                { srcList: ["char/019/Iba.jpg"], type: "base" }
             ]
         },
         // 风间千景
@@ -80,7 +80,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/019/Kazama.jpg"], type: "base" },
+                { srcList: ["char/019/Kazama.jpg"], type: "base" }
             ]
         },
         // 山南敬助
@@ -91,7 +91,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/019/Keisuke.jpg"], type: "base" },
+                { srcList: ["char/019/Keisuke.jpg"], type: "base" }
             ]
         },
         // 坂本龙马
@@ -102,7 +102,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/019/Ryouma.jpg"], type: "base" },
+                { srcList: ["char/019/Ryouma.jpg"], type: "base" }
             ]
         },
         // 永仓新八
@@ -113,10 +113,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/019/Shinpachi.jpg"], type: "base" },
+                { srcList: ["char/019/Shinpachi.jpg"], type: "base" }
             ]
         },
-      // 冲田总司
+        // 冲田总司
         {
             id: "g019_m09",
             name: "冲田总司",
@@ -124,10 +124,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/019/Souji.jpg"], type: "base" },
+                { srcList: ["char/019/Souji.jpg"], type: "base" }
             ]
         },
-      // 相马主计
+        // 相马主计
         {
             id: "g019_m10",
             name: "相马主计",
@@ -135,10 +135,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/019/Souma.jpg"], type: "base" },
+                { srcList: ["char/019/Souma.jpg"], type: "base" }
             ]
         },
-      // 土方岁三
+        // 土方岁三
         {
             id: "g019_m11",
             name: "土方岁三",
@@ -146,22 +146,22 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/019/Toshizou.jpg"], type: "base" },
+                { srcList: ["char/019/Toshizou.jpg"], type: "base" }
             ]
         },
-      // 山崎烝‌
+        // 山崎烝
         {
             id: "g019_m12",
-            name: "山崎烝‌",
+            name: "山崎烝",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/019/Yamazaki.jpg"], type: "base" },
+                { srcList: ["char/019/Yamazaki.jpg"], type: "base" }
             ]
         }
     ]
 };
 
-// ✅新版导出！不要使用window.gameDataList.push！
+// ESModule导出
 export { gameData };
