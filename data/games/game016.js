@@ -1,9 +1,9 @@
 // data/games/game016.js
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
-// 无需额外配置，仅需要到 main.js 顶部 🚨gameIdList数组追加编号"002","003"...
+// 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
 const gameData = {
-    id: "game016", // 全局唯一ID，不可重复
+    id: "game016",
     name: "终远的威尔修 -ErroR:salvation-",
     year: "2022",
     publisher: ["Otomate"],
@@ -16,7 +16,7 @@ const gameData = {
     art: [
         {name:"読", lang:"zh"}
     ],
-    cover: "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/game/016.jpg",
+    cover: "game/016.jpg",
     charList: [
         // 瑟蕾思
         {
@@ -26,8 +26,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/016/Ceres.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/016/Ceres2.jpg"], type: "base" },
+                { srcList: ["char/016/Ceres.jpg",
+                            "char/016/Ceres2.jpg"], type: "base" }
             ]
         },
         // 阿道夫
@@ -38,8 +38,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/016/Adolphe.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/016/Adolphe2.jpg"], type: "base" },
+                { srcList: ["char/016/Adolphe.jpg",
+                            "char/016/Adolphe2.jpg"], type: "base" }
             ]
         },
         // 安库
@@ -50,8 +50,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/016/Ankou.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/016/Ankou2.jpg"], type: "base" },
+                { srcList: ["char/016/Ankou.jpg",
+                            "char/016/Ankou2.jpg"], type: "base" }
             ]
         },
         // 璐卡·普鲁斯特
@@ -62,8 +62,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/016/Lucas.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/016/Lucas2.jpg"], type: "base" },
+                { srcList: ["char/016/Lucas.jpg",
+                            "char/016/Lucas2.jpg"], type: "base" }
             ]
         },
         // 马蒂斯·克洛德
@@ -74,8 +74,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/016/Mathis.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/016/Mathis2.jpg"], type: "base" },
+                { srcList: ["char/016/Mathis.jpg",
+                            "char/016/Mathis2.jpg"], type: "base" }
             ]
         },
         // 席安·布洛菲沃思
@@ -86,8 +86,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/016/Scien.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/016/Scien2.jpg"], type: "base" },
+                { srcList: ["char/016/Scien.jpg",
+                            "char/016/Scien2.jpg"], type: "base" }
             ]
         },
         // 伊孚
@@ -98,12 +98,12 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/016/Yves.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/016/Yves2.jpg"], type: "base" },
+                { srcList: ["char/016/Yves.jpg",
+                            "char/016/Yves2.jpg"], type: "base" }
             ]
         }
     ]
 };
 
-// ✅新版导出！不要使用window.gameDataList.push！
+// ESModule导出
 export { gameData };
