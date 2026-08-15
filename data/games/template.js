@@ -17,7 +17,7 @@ const gameData = {
         {name:"日文原画", lang:"ja"},
         {name:"英文原画", lang:"en"}
     ],
-    cover: "cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/game/0.jpg", // 封面图路径，统一前缀img/
+    cover: "game/0.jpg", // 封面图路径，统一前缀img/
     charList: [
         // 女主模板 female
         {
@@ -27,10 +27,10 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/001/Liliana.jpg",
-                            "img/char/g001_f0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g001_f0_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g001_f0_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["char/001/Liliana.jpg",
+                            "char/g001_f0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/g001_f0_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
+                { srcList: ["char/g001_f0_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 普通可攻略男主 male
@@ -41,10 +41,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/001/Dante.jpg",
-                            "img/char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["img/char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["img/char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["char/001/Dante.jpg",
+                            "char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
+                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 普通可攻略男主 male
