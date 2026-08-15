@@ -15,9 +15,9 @@ const gameData = {
         {name:"いわた志信", lang:"ja"}
     ],
     art: [
-        {name:"薄葉カゲロー", lang:"zh"},
+        {name:"薄葉カゲロー", lang:"zh"}
     ],
-    cover: "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/game/031.jpg",
+    cover: "game/031.jpg",
     charList: [
         // 东条云雀
         {
@@ -27,8 +27,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/031/Hibari.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/031/Hibari2.jpg"], type: "base" },
+                { srcList: ["char/031/Hibari.jpg",
+                            "char/031/Hibari2.jpg"], type: "base" }
             ]
         },
         // 光森一哉
@@ -39,8 +39,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/031/Ichiya.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/031/Ichiya2.jpg"], type: "base" },
+                { srcList: ["char/031/Ichiya.jpg",
+                            "char/031/Ichiya2.jpg"], type: "base" }
             ]
         },
         // 八神那由太
@@ -51,8 +51,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/031/Nayuta.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/031/Nayuta2.jpg"], type: "base" },
+                { srcList: ["char/031/Nayuta.jpg",
+                            "char/031/Nayuta2.jpg"], type: "base" }
             ]
         },
         // 黛汐音
@@ -63,8 +63,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/031/Shion.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/031/Shion2.jpg"], type: "base" },
+                { srcList: ["char/031/Shion.jpg",
+                            "char/031/Shion2.jpg"], type: "base" }
             ]
         },
         // 石动大我
@@ -75,8 +75,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/031/Taiga.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/031/Taiga2.jpg"], type: "base" },
+                { srcList: ["char/031/Taiga.jpg",
+                            "char/031/Taiga2.jpg"], type: "base" }
             ]
         },
         // 春日
@@ -87,8 +87,8 @@ const gameData = {
             isHidden: true,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/031/Kasuga.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/031/Kasuga2.jpg"], type: "base" }
+                { srcList: ["char/031/Kasuga.jpg",
+                            "char/031/Kasuga2.jpg"], type: "base" }
             ]
         }
     ]
