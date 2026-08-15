@@ -1,5 +1,8 @@
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
+// 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
+// 网页渲染时由 main.js 的 getWebImageUrl 拼接为 R2 完整 URL
+// Canvas 导出时由 export-canvas-render.js 的 convertR2ToJsDelivr 拼接为 jsDelivr URL
 // 无需额外配置，仅需要到 main.js 顶部 🚨gameIdList数组追加编号"002","003"...
 const gameData = {
     id: "game056", // 全局唯一ID，不可重复
@@ -13,7 +16,7 @@ const gameData = {
     art: [
         {name:"のりた", lang:"ja"}
     ],
-    cover: "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/game/056.jpg",
+    cover: "game/056.jpg",
     charList: [
         // 朱丽叶·露斯
         {
@@ -23,7 +26,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/056/Juliet.jpg"], type: "base" },
+                { srcList: ["char/056/Juliet.jpg"], type: "base" }
             ]
         },
         // 亚设·汤普森
@@ -34,7 +37,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/056/Asher.jpg"], type: "base" },
+                { srcList: ["char/056/Asher.jpg"], type: "base" }
             ]
         },
         // 奇兰·洛厄尔
@@ -45,7 +48,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/056/Ciaran.jpg"], type: "base" },
+                { srcList: ["char/056/Ciaran.jpg"], type: "base" }
             ]
         },
         // 加勒特·威尔金
@@ -56,7 +59,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/056/Garrett.jpg"], type: "base" },
+                { srcList: ["char/056/Garrett.jpg"], type: "base" }
             ]
         },
         // 罗德斯·哈特菲尔德
@@ -67,7 +70,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/056/Rhodes.jpg"], type: "base" },
+                { srcList: ["char/056/Rhodes.jpg"], type: "base" }
             ]
         }
     ]
