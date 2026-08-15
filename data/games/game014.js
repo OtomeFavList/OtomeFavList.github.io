@@ -1,9 +1,9 @@
 // data/games/game014.js
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
-// 无需额外配置，仅需要到 main.js 顶部 🚨gameIdList数组追加编号"002","003"...
+// 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
 const gameData = {
-    id: "game014", // 全局唯一ID，不可重复
+    id: "game014",
     name: "与魔共舞",
     year: "2022",
     publisher: ["Rejet"],
@@ -20,7 +20,7 @@ const gameData = {
     art: [
         {name:"前田浩孝", lang:"zh"}
     ],
-    cover: "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/game/014.jpg",
+    cover: "game/014.jpg",
     charList: [
         // 立华律香
         {
@@ -30,7 +30,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/014/Ritsuka.jpg"], type: "base" },
+                { srcList: ["char/014/Ritsuka.jpg"], type: "base" }
             ]
         },
         // 立华林多
@@ -41,7 +41,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/014/Lindo.jpg"], type: "base" },
+                { srcList: ["char/014/Lindo.jpg"], type: "base" }
             ]
         },
         // 南那城梅吉
@@ -52,7 +52,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/014/Mage.jpg"], type: "base" },
+                { srcList: ["char/014/Mage.jpg"], type: "base" }
             ]
         },
         // 钩贯雷姆
@@ -63,7 +63,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/014/Rem.jpg"], type: "base" },
+                { srcList: ["char/014/Rem.jpg"], type: "base" }
             ]
         },
         // 罗恩
@@ -74,7 +74,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/014/Roen.jpg"], type: "base" },
+                { srcList: ["char/014/Roen.jpg"], type: "base" }
             ]
         },
         // 枣坂四季
@@ -85,7 +85,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/014/Shiki.jpg"], type: "base" },
+                { srcList: ["char/014/Shiki.jpg"], type: "base" }
             ]
         },
         // 楚神乌列
@@ -96,11 +96,11 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/014/Urie.jpg"], type: "base" },
+                { srcList: ["char/014/Urie.jpg"], type: "base" }
             ]
         }
     ]
 };
 
-// ✅新版导出！不要使用window.gameDataList.push！
+// ESModule导出
 export { gameData };
