@@ -1,5 +1,8 @@
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
+// 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
+// 网页渲染时由 main.js 的 getWebImageUrl 拼接为 R2 完整 URL
+// Canvas 导出时由 export-canvas-render.js 的 convertR2ToJsDelivr 拼接为 jsDelivr URL
 // 无需额外配置，仅需要到 main.js 顶部 🚨gameIdList数组追加编号"002","003"...
 const gameData = {
     id: "game055", // 全局唯一ID，不可重复
@@ -18,7 +21,7 @@ const gameData = {
     art: [
         {name:"くらげ壱", lang:"ja"}
     ],
-    cover: "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/game/055.jpg",
+    cover: "game/055.jpg",
     charList: [
         // 天野凪咲
         {
@@ -28,8 +31,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/055/Nagisa.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/055/Nagisa2.jpg"], type: "base" },
+                { srcList: ["char/055/Nagisa.jpg",
+                            "char/055/Nagisa2.jpg"], type: "base" }
             ]
         },
         // 埃尔文
@@ -40,8 +43,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/055/Alvin.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/055/Alvin2.jpg"], type: "base" },
+                { srcList: ["char/055/Alvin.jpg",
+                            "char/055/Alvin2.jpg"], type: "base" }
             ]
         },
         // 以利亚
@@ -52,8 +55,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/055/Elijah.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/055/Elijah2.jpg"], type: "base" },
+                { srcList: ["char/055/Elijah.jpg",
+                            "char/055/Elijah2.jpg"], type: "base" }
             ]
         },
         // 伊诺
@@ -64,8 +67,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/055/Eno.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/055/Eno2.jpg"], type: "base" },
+                { srcList: ["char/055/Eno.jpg",
+                            "char/055/Eno2.jpg"], type: "base" }
             ]
         },
         // 费恩
@@ -76,8 +79,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/055/Finn.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/055/Finn2.jpg"], type: "base" },
+                { srcList: ["char/055/Finn.jpg",
+                            "char/055/Finn2.jpg"], type: "base" }
             ]
         },
         // 米洛
@@ -88,8 +91,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/055/Milo.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/055/Milo2.jpg"], type: "base" },
+                { srcList: ["char/055/Milo.jpg",
+                            "char/055/Milo2.jpg"], type: "base" }
             ]
         },
         // 狄奥
@@ -100,8 +103,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/055/Theo.jpg",
-                            "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img/char/055/Theo2.jpg"], type: "base" },
+                { srcList: ["char/055/Theo.jpg",
+                            "char/055/Theo2.jpg"], type: "base" }
             ]
         }
     ]
