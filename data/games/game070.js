@@ -19,76 +19,76 @@ const gameData = {
     ],
     cover: "game/070.jpg", // 相对路径，游戏封面
     charList: [
-        // 女主模板 female
+        // 花莳市子
         {
             id: "g070_f01",
-            name: "女主A",
+            name: "花莳市子",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/070/Ichiko.jpg",
+                            "char/070/Ichiko2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 迦具土日野
         {
             id: "g070_m01",
-            name: "男主1",
+            name: "迦具土日野",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/070/Hino.jpg",
+                            "char/070/Hino2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 甘梨伊空
         {
             id: "g070_m02",
-            name: "男主2",
+            name: "甘梨伊空",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/070/Isora.jpg",
+                            "char/070/Isora2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 建比良宗介
         {
             id: "g070_m03",
-            name: "男主3",
+            name: "建比良宗介",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/070/Sosuke.jpg",
+                            "char/070/Sosuke2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 栉奈雫斗逢
         {
             id: "g070_m04",
-            name: "男主4",
+            name: "栉奈雫斗逢",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/070/Toa.jpg",
+                            "char/070/Toa2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 从云结月
         {
             id: "g070_m05",
-            name: "男主5",
+            name: "从云结月",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/070/Yuzuki.jpg",
+                            "char/070/Yuzuki2.jpg"], type: "base" },
             ]
         }
     ]
