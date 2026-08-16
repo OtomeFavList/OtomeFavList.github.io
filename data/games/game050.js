@@ -110,8 +110,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/050/Haruka.jpg",
-                            "char/050/Haruka2.jpg"], type: "base" }
+                { srcList: ["char/050/Akira.jpg",
+                            "char/050/Akira2.jpg"], type: "base" }
             ]
         },
         // 九鬼光
