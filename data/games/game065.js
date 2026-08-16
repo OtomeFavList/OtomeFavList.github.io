@@ -9,119 +9,131 @@ const gameData = {
     name: "十三支演义 偃月三国传",
     year: "2023",
     publisher: ["Otomate","RED"],
-    cnStudio: "汉化组/汉化厂商",
+    cnStudio: "JOYOLAND",
     writer: [
-        {name:"中文编剧", lang:"zh"},
-        {name:"日文编剧", lang:"ja"},
-        {name:"英文编剧", lang:"en"}
+        {name:"広井王子", lang:"zh"},
+        {name:"阿智太郎", lang:"zh"},
+        {name:"伊東愛", lang:"zh"},
+        {name:"藤野莞司", lang:"zh"},
+        {name:"岡本雲珠子", lang:"zh"},
+        {name:"鈴木英仁", lang:"zh"},
+        {name:"秋月ひろ", lang:"zh"},
+        {name:"恵村まお", lang:"zh"},
+        {name:"恵莉ひなこ", lang:"zh"},
+        {name:"伊達真樹", lang:"zh"},
+        {name:"潮文音", lang:"zh"},
+        {name:"やまだ有見", lang:"ja"},
+        {name:"ひづめ", lang:"ja"}
     ],
     art: [
-        {name:"中文原画", lang:"zh"},
-        {name:"日文原画", lang:"ja"},
-        {name:"英文原画", lang:"en"}
+        {name:"悌太", lang:"zh"}
     ],
     cover: "game/065.jpg", // 相对路径，游戏封面
     charList: [
-        // 女主模板 female
+        // 关羽
         {
-            id: "g0_f01",
+            id: "g065_f01",
             name: "女主A",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/Liliana.jpg",
-                            "char/g001_f0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/065/Kanu.jpg",
+                            "char/065/Kanu2.jpg"], type: "base" }
             ]
         },
-        // 普通可攻略男主 male
+        // 张飞
         {
-            id: "g0_m01",
-            name: "男主1",
+            id: "g065_m01",
+            name: "张飞",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/001/Dante.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/065/Chouhi.jpg",
+                            "char/065/Chouhi2.jpg"], type: "base" }
             ]
         },
-        // 普通可攻略男主 male
+        // 赵云
         {
-            id: "g0_m02",
-            name: "男主2",
+            id: "g065_m02",
+            name: "赵云",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
+                { srcList: ["char/065/Chouun.jpg",
+                            "char/065/Chouun2.jpg"], type: "base" }
             ]
         },
-        // 普通可攻略男主 male
+        // 张辽
         {
-            id: "g0_m03",
-            name: "男主3",
+            id: "g065_m03",
+            name: "张辽",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
+                { srcList: ["char/065/Cyouryou.jpg",
+                            "char/065/Cyouryou2.jpg"], type: "base" }
             ]
         },
-        // 普通可攻略男主 male
+        // 夏侯惇
         {
-            id: "g0_m04",
-            name: "男主4",
+            id: "g065_m04",
+            name: "夏侯惇",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
+                { srcList: ["char/065/Kakouton.jpg",
+                            "char/065/Kakouton2.jpg"], type: "base" }
             ]
         },
-        // 普通可攻略男主 male
+        // 刘备
         {
-            id: "g0_m05",
-            name: "男主5",
+            id: "g065_m05",
+            name: "刘备",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
+                { srcList: ["char/065/Ryuubi.jpg",
+                            "char/065/Ryuubi.jpg"], type: "base" }
             ]
         },
-        // 隐藏角色（isHidden=true → 开关开启才显示整个角色卡片）
+        // 曹操
         {
-            id: "g0_h01",
-            name: "隐藏攻略角色",
-            gender: "male",
-            isHidden: true,
-            isFD: false,
-            images: [
-                { srcList: ["char/g001_h01_1.jpg"], type: "base" }
-            ]
-        },
-        // FD续作限定角色（isFD=true → FD开关开启才显示整个角色卡片）
-        {
-            id: "g0_fd01",
-            name: "续作FD新增角色",
+            id: "g065_m06",
+            name: "曹操",
             gender: "male",
             isHidden: false,
-            isFD: true,
+            isFD: false,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/065/Sousou.jpg",
+                            "char/065/Sousou.jpg"], type: "base" }
+            ]
+        },
+        // 诸葛亮
+        {
+            id: "g065_m07",
+            name: "诸葛亮",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            images: [
+                { srcList: ["char/065/Syokatsu.jpg"], type: "base" }
+            ]
+        },
+        // 周瑜
+        {
+            id: "g065_m08",
+            name: "周瑜",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            images: [
+                { srcList: ["char/065/Syuuyu.jpg"], type: "base" }
             ]
         }
     ]
