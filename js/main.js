@@ -12,7 +12,7 @@ const gameIdList = [
 ];
 
 // 全局存储key
-export const STORE_KEY = "otome-favlist-data";
+export const STORE_KEY = "otome-favlist-data-v1.1";
 export const SPOILER_DATE_KEY = "spoiler-confirm-date"; // 全局剧透确认日期
 export const SPOILER_LOCAL_SWITCH_KEY = "local-switch-spoiler-date";
 
