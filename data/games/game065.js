@@ -32,8 +32,6 @@ const gameData = {
             images: [
                 { srcList: ["char/001/Liliana.jpg",
                             "char/g001_f0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["char/g001_f0_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["char/g001_f0_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 普通可攻略男主 male
@@ -46,8 +44,6 @@ const gameData = {
             images: [
                 { srcList: ["char/001/Dante.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
         // 普通可攻略男主 male
