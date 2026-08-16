@@ -99,7 +99,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/065/Ryuubi.jpg",
-                            "char/065/Ryuubi.jpg"], type: "base" }
+                            "char/065/Ryuubi2.jpg"], type: "base" }
             ]
         },
         // 曹操
@@ -111,7 +111,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/065/Sousou.jpg",
-                            "char/065/Sousou.jpg"], type: "base" }
+                            "char/065/Sousou2.jpg"], type: "base" }
             ]
         },
         // 诸葛亮
