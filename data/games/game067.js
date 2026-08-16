@@ -26,8 +26,13 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/Liliana.jpg",
-                            "char/g001_f0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/067/Yurika.jpg",
+                            "char/067/Yurika2.jpg",
+                            "char/067/Yurika3.jpg",
+                            "char/067/Yurika4.jpg",
+                            "char/067/Yurika5.jpg",
+                            "char/067/Yurika6.jpg",
+                            "char/067/Yurika7.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 小红帽
@@ -38,8 +43,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/001/Dante.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/067/Akazukin.jpg",
+                            "char/067/Akazukin2.jpg",
+                            "char/067/Akazukin3.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 爱丽丝
@@ -50,8 +56,13 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/067/Alice.jpg",
+                            "char/067/Alice2.jpg",
+                            "char/067/Alice3.jpg",
+                            "char/067/Alice4.jpg",
+                            "char/067/Alice5.jpg",
+                            "char/067/Alice6.jpg",
+                            "char/067/Alice7.jpg"], type: "base" },
             ]
         },
         // 仙杜瑞拉
@@ -62,8 +73,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/067/Cinderella.jpg",
+                            "char/067/Cinderella2.jpg",
+                            "char/067/Cinderella3.jpg"], type: "base" },
             ]
         },
         // 格莱特
@@ -74,8 +86,11 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/067/Gretel.jpg",
+                            "char/067/Gretel2.jpg",
+                            "char/067/Gretel3.jpg",
+                            "char/067/Gretel4.jpg",
+                            "char/067/Gretel5.jpg"], type: "base" },
             ]
         },
         // 辉夜姬
@@ -86,8 +101,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/067/Kaguya.jpg",
+                            "char/067/Kaguya2.jpg",
+                            "char/067/Kaguya3.jpg"], type: "base" },
             ]
         },
         // 魔法师
@@ -98,8 +114,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/067/Mahoutsukai.jpg",
+                            "char/067/Mahoutsukai2.jpg",
+                            "char/067/Mahoutsukai3.jpg",
+                            "char/067/Mahoutsukai4.jpg"], type: "base" },
             ]
         },
         // 白雪
@@ -110,8 +128,12 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/067/Shirayuki.jpg",
+                            "char/067/Shirayuki2.jpg",
+                            "char/067/Shirayuki3.jpg",
+                            "char/067/Shirayuki4.jpg",
+                            "char/067/Shirayuki5.jpg",
+                            "char/067/Shirayuki6.jpg"], type: "base" },
             ]
         }
     ]
