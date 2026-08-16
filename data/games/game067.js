@@ -7,125 +7,111 @@
 const gameData = {
     id: "game067", // 全局唯一ID，不可重复，如 game001
     name: "大正×对称爱丽丝 all in one",
-    year: "20",
-    publisher: ["原厂发行商"],
-    cnStudio: "汉化组/汉化厂商",
+    year: "2026",
+    publisher: ["Primula"],
+    cnStudio: "JOYOLAND",
     writer: [
-        {name:"中文编剧", lang:"zh"},
-        {name:"日文编剧", lang:"ja"},
-        {name:"英文编剧", lang:"en"}
+        {name:"藤文", lang:"zh"}
     ],
     art: [
-        {name:"中文原画", lang:"zh"},
-        {name:"日文原画", lang:"ja"},
-        {name:"英文原画", lang:"en"}
+        {name:"めろ", lang:"ja"}
     ],
     cover: "game/067.jpg", // 相对路径，游戏封面
     charList: [
-        // 女主模板 female
+        // 有栖百合花
         {
-            id: "g0_f01",
-            name: "女主A",
+            id: "g067_f01",
+            name: "有栖百合花",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
                 { srcList: ["char/001/Liliana.jpg",
                             "char/g001_f0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["char/g001_f0_3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["char/g001_f0_4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
-        // 普通可攻略男主 male
+        // 小红帽
         {
-            id: "g0_m01",
-            name: "男主1",
+            id: "g067_m01",
+            name: "小红帽",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
                 { srcList: ["char/001/Dante.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
-        // 普通可攻略男主 male
+        // 爱丽丝
         {
-            id: "g0_m02",
-            name: "男主2",
+            id: "g067_m02",
+            name: "爱丽丝",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
-        // 普通可攻略男主 male
+        // 仙杜瑞拉
         {
-            id: "g0_m03",
-            name: "男主3",
+            id: "g067_m03",
+            name: "仙杜瑞拉",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
-        // 普通可攻略男主 male
+        // 格莱特
         {
-            id: "g0_m04",
-            name: "男主4",
+            id: "g067_m04",
+            name: "格莱特",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
-        // 普通可攻略男主 male
+        // 辉夜姬
         {
-            id: "g0_m05",
-            name: "男主5",
+            id: "g067_m05",
+            name: "辉夜姬",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
-        // 隐藏角色（isHidden=true → 开关开启才显示整个角色卡片）
+        // 魔法师
         {
-            id: "g0_h01",
-            name: "隐藏攻略角色",
-            gender: "male",
-            isHidden: true,
-            isFD: false,
-            images: [
-                { srcList: ["char/g001_h01_1.jpg"], type: "base" }
-            ]
-        },
-        // FD续作限定角色（isFD=true → FD开关开启才显示整个角色卡片）
-        {
-            id: "g0_fd01",
-            name: "续作FD新增角色",
+            id: "g067_m06",
+            name: "魔法师",
             gender: "male",
             isHidden: false,
-            isFD: true,
+            isFD: false,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/g0_m01_1.jpg",
+                            "char/g001_m0_2.jpg"], type: "base" },
+            ]
+        },
+        // 白雪
+        {
+            id: "g067_m07",
+            name: "白雪",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            images: [
+                { srcList: ["char/g0_m01_1.jpg",
+                            "char/g001_m0_2.jpg"], type: "base" },
             ]
         }
     ]
