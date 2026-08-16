@@ -33,7 +33,7 @@ const gameData = {
         // 关羽
         {
             id: "g065_f01",
-            name: "女主A",
+            name: "关羽",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
