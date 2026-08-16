@@ -54,8 +54,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/066/Gekkamaru.jpg",
+                            "char/066/Gekkamaru2.jpg",
+                            "char/066/Gekkamaru3.jpg"], type: "base" },
             ]
         },
         // 石川五右卫门
@@ -66,8 +67,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/066/Goemon.jpg",
+                            "char/066/Goemon2.jpg",
+                            "char/066/Goemon3.jpg"], type: "base" },
             ]
         },
         // 服部半藏
@@ -78,8 +80,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/066/Hattori.jpg",
+                            "char/066/Hattori2.jpg",
+                            "char/066/Hattori3.jpg"], type: "base" },
             ]
         },
         // 黑雪
@@ -90,8 +93,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/066/Kuroyuki.jpg",
+                            "char/066/Kuroyuki2.jpg",
+                            "char/066/Kuroyuki3.jpg"], type: "base" },
             ]
         }
     ]
