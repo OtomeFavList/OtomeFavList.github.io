@@ -1,0 +1,104 @@
+// ==========【单个游戏独立数据模板｜新版ESModule】==========
+// 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
+// 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
+// 网页渲染时由 main.js 的 getWebImageUrl 拼接为 R2 完整 URL
+// Canvas 导出时由 export-canvas-render.js 的 convertR2ToJsDelivr 拼接为 jsDelivr URL
+// 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
+const gameData = {
+    id: "game069", // 全局唯一ID，不可重复，如 game001
+    name: "灰鹰幻境",
+    year: "2018",
+    publisher: ["Otomate"],
+    cnStudio: "JOYOLAND",
+    writer: [
+        {name:"鈴木俊行", lang:"zh"},
+        {name:"雨宮うた", lang:"zh"}
+    ],
+    art: [
+        {name:"結賀さとる", lang:"zh"}
+    ],
+    cover: "game/069.jpg", // 相对路径，游戏封面
+    charList: [
+        // 杰德
+        {
+            id: "g069_f01",
+            name: "杰德",
+            gender: "female",
+            isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
+            isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
+            images: [
+                { srcList: ["char/069/Jed.jpg",
+                            "char/069/Jed2.jpg",
+                            "char/069/Jed3.jpg"], type: "base" },      // 默认基础图，始终加载
+            ]
+        },
+        // 休
+        {
+            id: "g069_m01",
+            name: "休",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            images: [
+                { srcList: ["char/069/Hugh.jpg",
+                            "char/069/Hugh2.jpg",
+                            "char/069/Hugh3.jpg"], type: "base" },      // 默认基础图，始终加载
+            ]
+        },
+        // 拉凡
+        {
+            id: "g069_m02",
+            name: "拉凡",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            images: [
+                { srcList: ["char/069/Lavan.jpg",
+                            "char/069/Lavan2.jpg",
+                            "char/069/Lavan.3jpg"], type: "base" },
+            ]
+        },
+        // 莱维
+        {
+            id: "g069_m03",
+            name: "莱维",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            images: [
+                { srcList: ["char/069/Levi.jpg",
+                            "char/069/Levi2.jpg",
+                            "char/069/Levi3.jpg"], type: "base" },
+            ]
+        },
+        // 卢格斯
+        {
+            id: "g069_m04",
+            name: "卢格斯",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            images: [
+                { srcList: ["char/069/Lugus.jpg",
+                            "char/069/Lugus2.jpg",
+                            "char/069/Lugus3.jpg"], type: "base" },
+            ]
+        },
+        // 塔之主
+        {
+            id: "g069_m05",
+            name: "塔之主",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            images: [
+                { srcList: ["char/069/Tower.jpg",
+                            "char/069/Tower2.jpg",
+                            "char/069/Tower3.jpg"], type: "base" },
+            ]
+        }
+    ]
+};
+
+// ✅新版导出！不要使用window.gameDataList.push！
+export { gameData };
