@@ -11,31 +11,72 @@ const gameIdList = [
     //新增游戏在这里追加
 ];
 
-// 全局存储key
-export const STORE_KEY = "otome-favlist-data-v1.1";
-export const SPOILER_DATE_KEY = "spoiler-confirm-date"; // 全局剧透确认日期
-export const SPOILER_LOCAL_SWITCH_KEY = "local-switch-spoiler-date";
+// ===================== 全局存储key【不再随意修改！】 =====================
+export const STORE_KEY = "otome-favlist-data";               // 主存储键，永不改变
+export const DATA_VERSION = 1.1;                              // 数据版本号，用于迁移
+export const OLD_STORE_KEYS = [                               // 历史遗留 key，用于自动迁移
+    "otome-favlist-data-v1",
+    "otome-favlist-data-v1.1"
+];
+export const SPOILER_DATE_KEY = "spoiler-confirm-date";       // 全局剧透确认日期
+export const SPOILER_LOCAL_SWITCH_KEY = "local-switch-spoiler-date"; // 局部开关确认日期
 
 // ===================== 图片URL域名配置 =====================
 export const R2_BASE_URL = "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev";
 export const JSD_BASE_URL = "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img";
 
+// ===================== 路径标准化工具（根治 URL 二次拼接） =====================
 /**
- * 由相对路径生成网页展示R2图片地址
- * @param {string} relPath 相对路径 game/xxx.jpg char/xxx.jpg
- * @returns {string} R2完整URL
+ * 路径标准化：统一输出相对路径
+ * 支持：
+ * 1. 相对路径 char/xxx.jpg → 直接返回
+ * 2. R2完整URL → 提取相对路径
+ * 3. jsDelivr完整URL → 提取相对路径
+ * @param {string} src
+ * @returns {string|null} 清洗后的相对路径
  */
-export function getWebImageUrl(relPath) {
-  return `${R2_BASE_URL}/${relPath}`;
+export function normalizeImageRelPath(src) {
+    if (!src || typeof src !== "string") return null;
+    const s = src.trim();
+    // 已经是相对路径，不含http
+    if (!s.startsWith("http")) {
+        return s;
+    }
+    // R2链接提取路径
+    if (s.startsWith(R2_BASE_URL + "/")) {
+        return s.slice(R2_BASE_URL.length + 1);
+    }
+    // jsDelivr链接提取路径
+    if (s.startsWith(JSD_BASE_URL + "/")) {
+        return s.slice(JSD_BASE_URL.length + 1);
+    }
+    // 无法识别的外部链接，直接返回原值（兜底）
+    return s;
 }
 
 /**
- * 由相对路径生成Canvas导出使用jsDelivr地址
- * @param {string} relPath
- * @returns {string} jsDelivr URL
+ * 安全生成页面展示R2地址（自动兼容旧数据完整URL）
+ * @param {string} relPath 相对路径或完整URL
+ * @returns {string} 可用的图片URL
+ */
+export function getWebImageUrl(relPath) {
+    const cleanPath = normalizeImageRelPath(relPath);
+    if (!cleanPath) return "";
+    // 如果清洗后仍然是完整http链接，直接返回（外部图兜底）
+    if (cleanPath.startsWith("http")) return cleanPath;
+    return `${R2_BASE_URL}/${cleanPath}`;
+}
+
+/**
+ * 安全生成Canvas jsDelivr地址（自动兼容旧数据完整URL）
+ * @param {string} relPath 相对路径或完整URL
+ * @returns {string} 可用的图片URL
  */
 export function getCanvasImageUrl(relPath) {
-  return `${JSD_BASE_URL}/${relPath}`;
+    const cleanPath = normalizeImageRelPath(relPath);
+    if (!cleanPath) return "";
+    if (cleanPath.startsWith("http")) return cleanPath;
+    return `${JSD_BASE_URL}/${cleanPath}`;
 }
 
 /**
@@ -45,15 +86,15 @@ export function getCanvasImageUrl(relPath) {
  * @returns {string}
  */
 export function convertR2ToJsDelivr(path) {
-  // 如果是 R2 完整 URL，替换域名
-  if (path.startsWith(R2_BASE_URL + "/")) {
-    const relPath = path.slice(R2_BASE_URL.length + 1);
-    return getCanvasImageUrl(relPath);
-  }
-  // 如果是 jsDelivr 完整 URL，原样返回（兼容旧数据）
-  if (path.startsWith(JSD_BASE_URL)) return path;
-  // 否则视为相对路径，直接拼接 jsDelivr URL
-  return getCanvasImageUrl(path);
+    // 如果是 R2 完整 URL，替换域名
+    if (path.startsWith(R2_BASE_URL + "/")) {
+        const relPath = path.slice(R2_BASE_URL.length + 1);
+        return getCanvasImageUrl(relPath);
+    }
+    // 如果是 jsDelivr 完整 URL，原样返回（兼容旧数据）
+    if (path.startsWith(JSD_BASE_URL)) return path;
+    // 否则视为相对路径，直接拼接 jsDelivr URL
+    return getCanvasImageUrl(path);
 }
 
 // ===================== 全局应用数据对象 =====================
@@ -165,12 +206,44 @@ export function saveData() {
 }
 
 /**
- * 从localStorage读取并恢复appData，捕获解析异常
+ * 从localStorage读取并恢复appData，自动迁移旧存档
  */
 export function loadData() {
     try {
-        const raw = localStorage.getItem(STORE_KEY);
-        if (raw) appData = JSON.parse(raw);
+        let raw = localStorage.getItem(STORE_KEY);
+        // 主key无数据，尝试迁移所有旧版本key
+        if (!raw) {
+            for (const oldKey of OLD_STORE_KEYS) {
+                const oldRaw = localStorage.getItem(oldKey);
+                if (oldRaw) {
+                    raw = oldRaw;
+                    console.log(`✅发现旧存档 ${oldKey}，执行迁移到主键 ${STORE_KEY}`);
+                    // 迁移写入主key
+                    localStorage.setItem(STORE_KEY, raw);
+                    // 可选：迁移成功后清理旧key（注释掉可保留双份存档）
+                    // localStorage.removeItem(oldKey);
+                    break;
+                }
+            }
+        }
+
+        // 初始化默认数据
+        let savedData = null;
+        if (raw) savedData = JSON.parse(raw);
+
+        if (savedData && typeof savedData === "object") {
+            appData = { ...appData, ...savedData };
+        }
+
+        // ========== 版本迁移逻辑 ==========
+        if (appData._version === undefined || appData._version < DATA_VERSION) {
+            console.log("📌执行数据结构升级迁移 (version:", appData._version, "→", DATA_VERSION, ")");
+            // 此处无需清洗图片路径，因为 getWebImageUrl 已做运行时归一化，
+            // 只需标记新版本并保存，后续字段补齐由下方兜底完成。
+            appData._version = DATA_VERSION;
+            // 迁移完成自动保存一次清洗后数据
+            saveData();
+        }
 
         // =========新增兜底：旧存档不存在该字段，默认true =========
         if(typeof appData.exportFoldContent !== "boolean"){
@@ -314,6 +387,7 @@ export function preloadAndDecodeImage(src){
         };
         tempImg.onerror = () => {
             imgCacheMap.delete(src);
+            console.error(`[图片加载失败]`, src);
             reject(new Error(`Image load failed: ${src}`));
         };
         // 所有配置完成后再赋值src，杜绝浏览器提前发起请求
