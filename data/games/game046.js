@@ -29,9 +29,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/046/Alfred.jpg",
-                            "char/046/Alfred2.jpg",
-                            "char/046/Alfred3.png"], type: "base" }
+                { srcList: ["char/046/Applause.jpg",
+                            "char/046/Applause2.jpg",
+                            "char/046/Applause3.png"], type: "base" }
             ]
         },
         // 阿尔弗雷德·克雷斯维尔
