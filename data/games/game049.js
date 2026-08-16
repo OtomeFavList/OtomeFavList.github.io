@@ -52,7 +52,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/049/Miku.jpg",
-                            "char/049/Miku2.jpgg"], type: "base" }
+                            "char/049/Miku2.jpg"], type: "base" }
             ]
         },
         // 碧木星利奈
@@ -63,7 +63,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/049/Serina.jpgg",
+                { srcList: ["char/049/Serina.jpg",
                             "char/049/Serina2.jpg"], type: "base" }
             ]
         },
