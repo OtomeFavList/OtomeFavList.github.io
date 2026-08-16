@@ -55,7 +55,7 @@ const gameData = {
             images: [
                 { srcList: ["char/069/Lavan.jpg",
                             "char/069/Lavan2.jpg",
-                            "char/069/Lavan.3jpg"], type: "base" },
+                            "char/069/Lavan3.jpg"], type: "base" },
             ]
         },
         // 莱维
