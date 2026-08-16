@@ -188,42 +188,25 @@ export function loadData() {
         appData.exportColor.gameName = appData.exportColor.gameName ?? "#000000";
         appData.exportColor.border = appData.exportColor.border ?? "#f6a5b8";
 
-        // ========= 数据迁移：兼容旧存档，补全缺失字段 =========
+        // 【新增兜底：旧存档缺失局部开关字段，补默认false】
         if (Array.isArray(appData.gameList)) {
             appData.gameList.forEach(g => {
-                // 基础字段补全
                 if (typeof g.localHideChar !== "boolean") g.localHideChar = false;
                 if (typeof g.localFD !== "boolean") g.localFD = false;
                 if (typeof g.charPanelOpen !== "boolean") g.charPanelOpen = false;
                 if (typeof g.cpPanelOpen !== "boolean") g.cpPanelOpen = false;
                 if (typeof g.isFav !== "boolean") g.isFav = false;
                 if (typeof g.loveRate !== "number") g.loveRate = 0;
-                if (typeof g.fold !== "boolean") g.fold = false;
                 if (!Array.isArray(g.selectChars)) g.selectChars = [];
                 if (!Array.isArray(g.cpSelectIds)) g.cpSelectIds = [];
-                if (!Array.isArray(g.selectCharItems)) g.selectCharItems = [];
-                if (!Array.isArray(g.cpList)) g.cpList = [];
-                if (!Array.isArray(g.maleItems)) g.maleItems = [];
-
-                // ★ 修复：cpEditState 必须为数组，不能为 null
-                if (!Array.isArray(g.cpEditState)) {
-                    g.cpEditState = [];
+                if (!Array.isArray(g.selectCharItems)) {
+                    g.selectCharItems = [];
                 }
-
-                // ★ 确保每个 cp 条目包含 femaleImgIndex 且 maleItems 为数组
-                g.cpEditState.forEach(st => {
-                    if (typeof st.femaleImgIndex !== "number") {
-                        st.femaleImgIndex = 0;
-                    }
-                    if (!Array.isArray(st.maleItems)) {
-                        st.maleItems = [];
-                    }
-                    st.maleItems.forEach(mi => {
-                        if (typeof mi.imgIndex !== "number") {
-                            mi.imgIndex = 0;
-                        }
-                    });
-                });
+                if(!Array.isArray(g.cpEditState)){
+                    g.cpEditState = null;
+                }
+                if(!Array.isArray(g.cpList)) g.cpList = [];
+                if(!Array.isArray(g.maleItems)) g.maleItems = [];
             });
         }
     } catch (e) {
