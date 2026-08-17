@@ -1714,4 +1714,9 @@ h2{
   border-radius: 6px;
   resize: vertical;
   font-size: 14px;
+  box-sizing: border-box;
+}
+.game-custom-text-wrap textarea:focus {
+  outline: none;
+  border-color: #f6a5b8;
 }
