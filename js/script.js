@@ -1040,44 +1040,50 @@ export function initPage(Core = {}) {
     if (el.inputStory) el.inputStory.value = appData.baseInfo?.story ?? "";
     if (el.inputFirstgame) el.inputFirstgame.value = appData.baseInfo?.firstgame ?? "";
 
-    // ========= 扩展颜色绑定：7项 =========
+    // ========= 扩展颜色绑定：7项（增加CSS变量支持） =========
     const colorBindList = [
-      {dom: el.colorBg, dataKey: "bg", default:"#fff7f9"},
-      {dom: el.colorTitle, dataKey: "title", default:"#b33a3a"},
-      {dom: el.colorSubtitle, dataKey: "subTitle", default:"#b85878"},
-      {dom: el.colorBaseInfoText, dataKey: "baseInfoText", default:"#c98fac"},
-      {dom: el.colorGamename, dataKey: "gameName", default:"#000000"},
-      {dom: el.colorCustomText, dataKey: "customText", default:"#c98fac"},
-      {dom: el.colorBorder, dataKey: "border", default:"#f6a5b8"}
+      {dom: el.colorBg, dataKey: "bg", cssVar: "--export-bg", default:"#fff7f9"},
+      {dom: el.colorTitle, dataKey: "title", cssVar: "--export-title", default:"#b33a3a"},
+      {dom: el.colorSubtitle, dataKey: "subTitle", cssVar: "--export-subtitle", default:"#b85878"},
+      {dom: el.colorBaseInfoText, dataKey: "baseInfoText", cssVar: "--export-baseinfotext", default:"#c98fac"},
+      {dom: el.colorGamename, dataKey: "gameName", cssVar: "--export-gamename", default:"#000000"},
+      {dom: el.colorCustomText, dataKey: "customText", cssVar: "--export-customtext", default:"#c98fac"},
+      {dom: el.colorBorder, dataKey: "border", cssVar: "--export-border", default:"#f6a5b8"}
     ];
+
     colorBindList.forEach(item => {
       if (!item.dom) return;
-      item.dom.value = appData.exportColor?.[item.dataKey] ?? item.default;
+      const initColor = appData.exportColor?.[item.dataKey] ?? item.default;
+      item.dom.value = initColor;
+      // 页面初始化时设置CSS变量
+      document.body.style.setProperty(item.cssVar, initColor);
+
       item.dom.oninput = () => {
         if(!appData.exportColor) appData.exportColor = {};
         appData.exportColor[item.dataKey] = item.dom.value;
+        // 实时更新CSS变量，页面立刻生效
+        document.body.style.setProperty(item.cssVar, item.dom.value);
         saveData();
-        clearPreviewCacheResource(); // 配色变更，缓存失效
-        if (item.dataKey === "bg") document.body.style.background = item.dom.value;
+        clearPreviewCacheResource();
       }
     });
 
     // =========【新增：恢复默认配色按钮事件】==========
     if(el.resetColorBtn){
       el.resetColorBtn.addEventListener("click", ()=>{
-        // 重置每一项到默认值
         colorBindList.forEach(item=>{
           item.dom.value = item.default;
           if(!appData.exportColor) appData.exportColor = {};
           appData.exportColor[item.dataKey] = item.default;
-          if(item.dataKey === "bg") document.body.style.background = item.default;
+          // 同步更新CSS变量
+          document.body.style.setProperty(item.cssVar, item.default);
         });
         saveData();
         clearPreviewCacheResource();
       })
     }
 
-    if (el.colorBg) document.body.style.background = appData.exportColor?.bg ?? "#ffffff";
+    // 注意：不再单独设置 body.style.background，由CSS变量统一控制
 
     // =========【新增】渲染【导出折叠内容】开关初始状态 =========
     if (el.exportFoldContentSwitch) {
