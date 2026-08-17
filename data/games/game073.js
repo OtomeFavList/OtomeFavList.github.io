@@ -27,7 +27,7 @@ const gameData = {
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
                 { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
+                            "char/001/女主A2.jpg"], type: "base" }      // 默认基础图，始终加载
             ]
         },
         // 查理
@@ -39,9 +39,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["char/001/男主13.jpg"], type: "hidden" },
-                { srcList: ["char/001/男主14.jpg"], type: "fd" }
+                            "char/001/男主12.jpg"], type: "base" }      // 默认基础图，始终加载
             ]
         },
         // 藤田五郎
@@ -53,9 +51,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
+                            "char/g001_m0_2.jpg"], type: "base" }
             ]
         },
         // 泉镜花
@@ -67,9 +63,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
+                            "char/g001_m0_2.jpg"], type: "base" }
             ]
         },
         // 森鸥外
@@ -81,9 +75,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
+                            "char/g001_m0_2.jpg"], type: "base" }
             ]
         },
         // 川上音二郎
@@ -95,9 +87,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
+                            "char/g001_m0_2.jpg"], type: "base" }
             ]
         },
         // 菱田春草
@@ -109,9 +99,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
+                            "char/g001_m0_2.jpg"], type: "base" }
             ]
         },
         // 岩崎桃介
@@ -123,9 +111,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
+                            "char/g001_m0_2.jpg"], type: "base" }
             ]
         },
         // 小泉八云
@@ -137,9 +123,11 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                            "char/g001_m0_2.jpg"], type: "base" }
+            ]
         }
     ]
 };
 
-// ✅新版导出！ta };
+// ✅新版导出！不要使用window.gameDataList.push！
+export { gameData };
