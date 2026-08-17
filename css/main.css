@@ -1705,6 +1705,9 @@ h2{
 /* ========== 自定义文本输入框样式（新增） ========== */
 .game-custom-text-wrap {
   margin-top: 10px;
+  /* 防止布局塌陷 */
+  min-height: 44px;
+  width: 100%;
 }
 .game-custom-text-wrap textarea {
   width: 100%;
@@ -1715,8 +1718,15 @@ h2{
   resize: vertical;
   font-size: 14px;
   box-sizing: border-box;
+  /* 强制不被父容器裁切 */
+  overflow: visible;
 }
 .game-custom-text-wrap textarea:focus {
   outline: none;
   border-color: #f6a5b8;
+}
+
+/* ========== 新增：父容器解除overflow裁切【关键修复】 ========== */
+.game-card-head {
+  overflow: visible !important;
 }
