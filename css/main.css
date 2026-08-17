@@ -1705,7 +1705,6 @@ h2{
 /* ========== 自定义文本输入框样式（新增） ========== */
 .game-custom-text-wrap {
   margin-top: 10px;
-  /* 防止布局塌陷 */
   min-height: 44px;
   width: 100%;
 }
@@ -1718,18 +1717,26 @@ h2{
   resize: vertical;
   font-size: 14px;
   box-sizing: border-box;
-  /* 强制不被父容器裁切 */
-  overflow: visible;
+  /* textarea自身滚动，不要写overflow:visible！textarea不支持visible */
+  overflow: auto;
 }
 .game-custom-text-wrap textarea:focus {
   outline: none;
   border-color: #f6a5b8;
 }
 
-/* ========== 新增：父容器解除overflow裁切【关键修复】 ========== */
+/* ========== 父容器全部解除overflow裁切【关键修复】 ========== */
 .game-card-head {
   overflow: visible !important;
 }
+/* 新增：Character、Couple区块解除overflow隐藏 */
+.char-section {
+  overflow: visible !important;
+}
+.cp-group {
+  overflow: visible !important;
+}
+
 /* 卡片折叠时隐藏角色区块（原有逻辑补齐，防止布局异常） */
 .added-game-card[data-fold="true"] .game-card-block-item {
   display: none;
