@@ -853,7 +853,7 @@ h2{
     color: inherit;
 }
 .text-light-pink{
-    color: var(--export-customtext, #c98fac);
+    color: #c98fac;
     font-weight:normal !important;
 }
 .text-black{
@@ -863,10 +863,19 @@ h2{
     color:#666;
     font-weight:normal;
 }
-
-/* ========== 基础信息文字颜色 ========== */
+/* ========== 基础信息文字颜色【常态页面 + 快照统一使用CSS变量，实时生效】 ========== */
 .base-info-item {
     color: var(--export-baseinfotext, #c98fac);
+}
+/* ========== 新增：页面常态下游戏卡片标题使用游戏名变量（和快照规则统一） ========== */
+.added-game-card > .game-card-head .game-card-head-title-wrap h3 {
+    color: var(--export-gamename, #000000);
+}
+/* ========== 新增：仅三处自定义输出文本绑定自定义文本色（页面常态 + 导出快照共用） ========== */
+.game-head-text-output,
+.game-char-text-output,
+.game-cp-text-output {
+    color: var(--export-customtext, #c98fac);
 }
 
 /* ========== 移动端适配 max-width:768px ========== */
