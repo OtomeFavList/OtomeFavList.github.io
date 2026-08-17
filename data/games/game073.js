@@ -26,8 +26,7 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" }      // 默认基础图，始终加载
+                { srcList: ["char/073/Mei.jpg"], type: "base" }      // 默认基础图，始终加载
             ]
         },
         // 查理
@@ -38,8 +37,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" }      // 默认基础图，始终加载
+                { srcList: ["char/073/Charlie.jpg",
+                            "char/073/Charlie2.jpg"], type: "base" }      // 默认基础图，始终加载
             ]
         },
         // 藤田五郎
@@ -50,8 +49,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" }
+                { srcList: ["char/073/Gorou.jpg",
+                            "char/073/Gorou2.jpg"], type: "base" }
             ]
         },
         // 泉镜花
@@ -62,8 +61,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" }
+                { srcList: ["char/073/Kyouka.jpg",
+                            "char/073/Kyouka2.jpg"], type: "base" }
             ]
         },
         // 森鸥外
@@ -74,8 +73,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" }
+                { srcList: ["char/073/Mori.jpg",
+                            "char/073/Mori2.jpg"], type: "base" }
             ]
         },
         // 川上音二郎
@@ -86,8 +85,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" }
+                { srcList: ["char/073/Otojirou.jpg",
+                            "char/073/Otojirou2.jpg"], type: "base" }
             ]
         },
         // 菱田春草
@@ -98,8 +97,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" }
+                { srcList: ["char/073/Shunsou.jpg",
+                            "char/073/Shunsou2.jpg"], type: "base" }
             ]
         },
         // 岩崎桃介
@@ -110,8 +109,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" }
+                { srcList: ["char/073/Tousuke.jpg",
+                            "char/073/Tousuke2.jpg"], type: "base" }
             ]
         },
         // 小泉八云
@@ -122,8 +121,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" }
+                { srcList: ["char/073/Yakumo.jpg",
+                            "char/073/Yakumo2.jpg"], type: "base" }
             ]
         }
     ]
