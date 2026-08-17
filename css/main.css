@@ -1730,3 +1730,7 @@ h2{
 .game-card-head {
   overflow: visible !important;
 }
+/* 卡片折叠时隐藏角色区块（原有逻辑补齐，防止布局异常） */
+.added-game-card[data-fold="true"] .game-card-block-item {
+  display: none;
+}
