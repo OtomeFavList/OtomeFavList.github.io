@@ -1214,7 +1214,8 @@ export function initPage(Core = {}) {
 
         if (keyword && !game.name?.toLowerCase().includes(keyword)) match = false;
         if (filterYear && game.year != filterYear) match = false;
-        if (filterPub && game.publisher != filterPub) match = false;
+        // 发行厂商筛选：数组包含匹配，对齐编剧、画师筛选逻辑
+        if (filterPub && (!Array.isArray(game.publisher) || !game.publisher.includes(filterPub))) match = false;
         if (filterCn && game.cnStudio != filterCn) match = false;
 
         // ========== writer / art 对象数组匹配逻辑，读取原始game，保持不变 ==========
