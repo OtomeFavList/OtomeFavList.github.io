@@ -284,6 +284,10 @@ export function loadData() {
                 }
                 if(!Array.isArray(g.cpList)) g.cpList = [];
                 if(!Array.isArray(g.maleItems)) g.maleItems = [];
+                // ==========新增自定义文本兜底==========
+                if (typeof g.gameHeadText !== "string") g.gameHeadText = "";
+                if (typeof g.charSectionText !== "string") g.charSectionText = "";
+                if (typeof g.cpSectionText !== "string") g.cpSectionText = "";
             });
         }
     } catch (e) {
