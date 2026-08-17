@@ -1279,7 +1279,6 @@ h2{
     --export-customtext: #c98fac;
     --export-gamename: #000000;
     --export-border: #f6a5b8;
-
     background-color: var(--export-bg) !important;
 }
 /* 大标题 Otome FavList */
@@ -1296,10 +1295,10 @@ h2{
     color: var(--export-baseinfotext) !important;
 }
 /* 【游戏卡片内游戏名称】 */
-.snapshot-container.export-snapshot .added-game-card h3 {
+.snapshot-container.export-snapshot .added-game-card > .game-card-head .game-card-head-title-wrap h3 {
     color: var(--export-gamename) !important;
 }
-/* 【游戏卡片用户自定义文本】仅三处用户手动输入文字 */
+/* 【游戏卡片用户自定义文本】★严格限定：只作用三处自定义输出文本，不影响任何其他文字 */
 .snapshot-container.export-snapshot .game-head-text-output,
 .snapshot-container.export-snapshot .game-char-text-output,
 .snapshot-container.export-snapshot .game-cp-text-output {
