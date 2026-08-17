@@ -578,7 +578,6 @@ export function initPage(Core = {}) {
         const charTextHtml = `<div class="game-custom-text-wrap"><textarea class="game-char-text-input" data-gid="${gameItem.gameId}" placeholder="自定义文字（Character区域下方）">${gameItem.charSectionText || ''}</textarea></div>`;
         const cpTextHtml = `<div class="game-custom-text-wrap"><textarea class="game-cp-text-input" data-gid="${gameItem.gameId}" placeholder="自定义文字（Couple区域下方）">${gameItem.cpSectionText || ''}</textarea></div>`;
 
-        // ========== 修改：将 charTextHtml 和 cpTextHtml 移到对应区块外部，独立于角色容器 ==========
         html += `
         <div class="added-game-card" data-gameid="${gameItem.gameId}" data-fold="${!!gameItem.fold}">
           <div class="game-card-head">
@@ -592,18 +591,19 @@ export function initPage(Core = {}) {
             ${switchRowHtml}
             ${headTextHtml}
           </div>
+          <!-- ✅全部移出game-card-head，作为added-game-card直接子节点 -->
           <div class="game-card-block-item char-section block-margin-gap">
             <button class="btn-character" data-gid="${gameItem.gameId}">选择角色 Character</button>
             ${getInnerSlidePanelHtml("char")}
             <div class="game-card-empty-tip char-card-wrapper char-selected-row" data-gid="${gameItem.gameId}">${renderSelectedChar(gameItem, gameInfo) || `<div class="empty-hint">暂未选择角色</div>`}</div>
+            ${charTextHtml}
           </div>
-          ${charTextHtml}
           <div class="game-card-block-item cp-group block-margin-gap">
             <button class="btn-couple" data-gid="${gameItem.gameId}">选择角色 Couple</button>
             ${getInnerSlidePanelHtml("cp")}
             <div class="game-card-empty-tip cp-render-box" data-gid="${gameItem.gameId}">${renderCP(gameItem, gameInfo) || `<div class="empty-hint">暂未选择角色</div>`}</div>
+            ${cpTextHtml}
           </div>
-          ${cpTextHtml}
           <div class="card-bottom-buttons block-margin-gap">
             <button class="btn-fold fold-game btn-gray-bg" data-gid="${gameItem.gameId}">折叠</button>
             <button class="btn-del del-game btn-gray-bg" data-gid="${gameItem.gameId}">删除</button>
