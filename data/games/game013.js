@@ -91,6 +91,30 @@ const gameData = {
                 { srcList: ["char/013/Van.jpg",
                             "char/013/Van2.jpg"], type: "base" }
             ]
+        },
+        // 菲尼斯
+        {
+            id: "g013_fd01",
+            name: "菲尼斯",
+            gender: "male",
+            isHidden: false,
+            isFD: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg",
+                            "char/g001_fd01_1.jpg",
+                            "char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        / 夏尔摩斯
+        {
+            id: "g013_fd01",
+            name: "夏尔摩斯",
+            gender: "male",
+            isHidden: false,
+            isFD: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
         }
     ]
 };
