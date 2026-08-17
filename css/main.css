@@ -1741,3 +1741,7 @@ h2{
 .added-game-card[data-fold="true"] .game-card-block-item {
   display: none;
 }
+/* 游戏折叠状态，同时隐藏独立的自定义文本框 */
+.added-game-card[data-fold="true"] .game-custom-text-wrap {
+  display: none !important;
+}
