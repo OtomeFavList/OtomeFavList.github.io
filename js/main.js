@@ -243,6 +243,7 @@ export function loadData() {
             // appData 仅存储角色ID和索引（selectCharItems、charImageSelect），
             // 并未持久化存储图片URL字符串，因此无需在迁移时清洗图片路径。
             // 运行时兼容函数 getWebImageUrl / getCanvasImageUrl 已确保新旧数据一致。
+            // 只需标记新版本并保存，后续字段补齐由下方兜底完成。
             appData._version = DATA_VERSION;
             // 迁移完成自动保存一次清洗后数据
             saveData();
