@@ -105,9 +105,9 @@ const gameData = {
                             "char/013/Finis3.jpg"], type: "base" }
             ]
         },
-        / 夏尔摩斯
+        // 夏尔摩斯
         {
-            id: "g013_fd01",
+            id: "g013_fd02",      // ★ 修改：唯一ID
             name: "夏尔摩斯",
             gender: "male",
             isHidden: false,
