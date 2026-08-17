@@ -853,8 +853,10 @@ h2{
     color: inherit;
 }
 .text-light-pink{
-    color: #c98fac;
     font-weight:normal !important;
+}
+.text-light-pink:not(.base-info-item) {
+    color: #c98fac;
 }
 .text-black{
     color: #222222;
@@ -865,7 +867,7 @@ h2{
 }
 /* ========== 基础信息文字颜色【常态页面 + 快照统一使用CSS变量，实时生效】 ========== */
 .base-info-item {
-    color: var(--export-baseinfotext, #c98fac) !important;
+    color: var(--export-baseinfotext, #c98fac);
 }
 /* ========== 新增：页面常态下游戏卡片标题使用游戏名变量（和快照规则统一） ========== */
 .added-game-card > .game-card-head .game-card-head-title-wrap h3 {
