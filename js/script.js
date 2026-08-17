@@ -422,9 +422,9 @@ export function initPage(Core = {}) {
       inputFirstgame: document.getElementById("input-firstgame"),
       colorBg: document.getElementById("color-bg"),
       colorTitle: document.getElementById("color-title"),
-      colorText: document.getElementById("color-text"),
+      colorBaseInfoText: document.getElementById("color-baseinfotext"),
+      colorCustomText: document.getElementById("color-customtext"),
       colorBorder: document.getElementById("color-border"),
-      // =========新增：小标题色和游戏名色==========
       colorSubtitle: document.getElementById("color-subtitle"),
       colorGamename: document.getElementById("color-gamename"),
       exportBtn: document.getElementById("btn-export"),
@@ -1040,13 +1040,14 @@ export function initPage(Core = {}) {
     if (el.inputStory) el.inputStory.value = appData.baseInfo?.story ?? "";
     if (el.inputFirstgame) el.inputFirstgame.value = appData.baseInfo?.firstgame ?? "";
 
-    // ========= 扩展颜色绑定：6项 =========
+    // ========= 扩展颜色绑定：7项 =========
     const colorBindList = [
       {dom: el.colorBg, dataKey: "bg", default:"#fff7f9"},
       {dom: el.colorTitle, dataKey: "title", default:"#b33a3a"},
       {dom: el.colorSubtitle, dataKey: "subTitle", default:"#b85878"},
-      {dom: el.colorText, dataKey: "text", default:"#c98fac"},
+      {dom: el.colorBaseInfoText, dataKey: "baseInfoText", default:"#c98fac"},
       {dom: el.colorGamename, dataKey: "gameName", default:"#000000"},
+      {dom: el.colorCustomText, dataKey: "customText", default:"#c98fac"},
       {dom: el.colorBorder, dataKey: "border", default:"#f6a5b8"}
     ];
     colorBindList.forEach(item => {
