@@ -238,8 +238,11 @@ export function loadData() {
         // ========== 版本迁移逻辑 ==========
         if (appData._version === undefined || appData._version < DATA_VERSION) {
             console.log("📌执行数据结构升级迁移 (version:", appData._version, "→", DATA_VERSION, ")");
-            // 此处无需清洗图片路径，因为 getWebImageUrl 已做运行时归一化，
-            // 只需标记新版本并保存，后续字段补齐由下方兜底完成。
+            // ========= 架构说明 =========
+            // 当前业务中，图片URL全部来源于静态游戏模板（gameTemplateList），
+            // appData 仅存储角色ID和索引（selectCharItems、charImageSelect），
+            // 并未持久化存储图片URL字符串，因此无需在迁移时清洗图片路径。
+            // 运行时兼容函数 getWebImageUrl / getCanvasImageUrl 已确保新旧数据一致。
             appData._version = DATA_VERSION;
             // 迁移完成自动保存一次清洗后数据
             saveData();
