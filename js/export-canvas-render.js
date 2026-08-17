@@ -749,7 +749,7 @@ async function drawHeaderBlock(painter, targetWidth, appData) {
     y += h2FontSize + LAYOUT_SPACE.BIG_CARD_H2_MB;
 
     baseLines.forEach(line => {
-      const usedH = wrapText(painter.ctx, line, cardX + innerPad, y, maxLineWidth, lineHeight, lineFontSize, exportColor.text);
+      const usedH = wrapText(painter.ctx, line, cardX + innerPad, y, maxLineWidth, lineHeight, lineFontSize, exportColor.baseInfoText);
       y += usedH;
     });
 
@@ -891,7 +891,7 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
           textMaxW,
           lineHeight,
           textSize,
-          exportColor.text
+          exportColor.customText
       );
       // 文字底部增加间距
       const textH = measureWrappedHeight(
@@ -996,7 +996,7 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
           textMaxW,
           lineHeight,
           textSize,
-          exportColor.text
+          exportColor.customText
       );
       const textH = measureWrappedHeight(
           painter.ctx,
@@ -1168,7 +1168,7 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
           textMaxW,
           lineHeight,
           textSize,
-          exportColor.text
+          exportColor.customText
       );
       const textH = measureWrappedHeight(
           painter.ctx,
