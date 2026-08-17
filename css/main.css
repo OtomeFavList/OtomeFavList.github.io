@@ -90,7 +90,7 @@ html {
 
 /* ========== body基础 ========== */
 body{
-    background: #fff7f9;
+    background: var(--export-bg, #fff7f9);
     padding:20px;
     transition:background 0.2s;
 }
@@ -105,7 +105,7 @@ body{
     font-size:42px;
     font-weight:900;
     letter-spacing:1px;
-    color: #b33a3a;
+    color: var(--export-title, #b33a3a);
 }
 .title-sub-cn{
     font-size:16px;
@@ -132,7 +132,7 @@ body{
 /* ========== 大卡片组件 big-card ========== */
 .big-card{
     background:#ffffff;
-    border:2px solid #f6a5b8;
+    border:2px solid var(--export-border, #f6a5b8);
     border-radius:16px;
     padding:24px;
     transition:border-color 0.2s;
@@ -140,9 +140,9 @@ body{
 .big-card h2{
     margin-bottom:20px;
     font-size:24px;
-    border-left:5px solid #b85878;
+    border-left:5px solid var(--export-subtitle, #b85878);
     padding-left:12px;
-    color: #b85878;
+    color: var(--export-subtitle, #b85878);
     font-weight:bold;
 }
 
@@ -472,6 +472,7 @@ button:hover{
     flex-wrap:wrap;
     gap:10px;
     /* 已删除 padding-left:34px，不再内部缩进，按钮向外凸出 */
+    overflow: visible !important;
 }
 .heart-rate{
     display:flex;
@@ -493,6 +494,7 @@ button:hover{
     margin:16px 0;
     padding:12px 0;
     border-top:1px solid #eee;
+    overflow: visible !important;
 }
 .char-title{
     font-weight:normal;
@@ -700,6 +702,7 @@ button:hover{
     margin:16px 0;
     padding-top:12px;
     border-top:1px solid #eee;
+    overflow: visible !important;
 }
 .cp-layout-row{
     display:flex;
@@ -844,13 +847,13 @@ input[type="checkbox"] {
 
 /* ========== 文本颜色公共类 ========== */
 h1{
-    color: #b33a3a;
+    color: var(--export-title, #b33a3a);
 }
 h2{
     color: inherit;
 }
 .text-light-pink{
-    color: #c98fac;
+    color: var(--export-customtext, #c98fac);
     font-weight:normal !important;
 }
 .text-black{
@@ -859,6 +862,11 @@ h2{
 .text-gray-desc{
     color:#666;
     font-weight:normal;
+}
+
+/* ========== 基础信息文字颜色 ========== */
+.base-info-item {
+    color: var(--export-baseinfotext, #c98fac);
 }
 
 /* ========== 移动端适配 max-width:768px ========== */
@@ -886,6 +894,8 @@ h2{
 .added-game-card {
     padding:16px;
     margin-bottom:14px;
+    background:#ffffff;
+    border:1px solid var(--export-border, #f6a5b8);
 }
 .game-card-header-row {
     display:flex;
@@ -1254,8 +1264,10 @@ h2{
 .added-game-card[data-fold="true"] .game-card-block-item,
 .added-game-card[data-fold="true"] .card-bottom-buttons,
 /* ✅需求①：折叠时隐藏两个单独显示开关 */
-.added-game-card[data-fold="true"] .game-switch-row {
-    display: none;
+.added-game-card[data-fold="true"] .game-switch-row,
+/* 折叠时同时隐藏独立的自定义文本框 */
+.added-game-card[data-fold="true"] .game-custom-text-wrap {
+    display: none !important;
 }
 
 /* ========== 导出图片快照模式：自定义配色（仅生成图片时生效，普通页面不受影响） ========== */
@@ -1723,25 +1735,4 @@ h2{
 .game-custom-text-wrap textarea:focus {
   outline: none;
   border-color: #f6a5b8;
-}
-
-/* ========== 父容器全部解除overflow裁切【关键修复】 ========== */
-.game-card-head {
-  overflow: visible !important;
-}
-/* 新增：Character、Couple区块解除overflow隐藏 */
-.char-section {
-  overflow: visible !important;
-}
-.cp-group {
-  overflow: visible !important;
-}
-
-/* 卡片折叠时隐藏角色区块（原有逻辑补齐，防止布局异常） */
-.added-game-card[data-fold="true"] .game-card-block-item {
-  display: none;
-}
-/* 游戏折叠状态，同时隐藏独立的自定义文本框 */
-.added-game-card[data-fold="true"] .game-custom-text-wrap {
-  display: none !important;
 }
