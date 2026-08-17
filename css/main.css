@@ -1275,7 +1275,8 @@ h2{
     --export-bg: #fff7f9;
     --export-title: #b33a3a;
     --export-subtitle: #b85878;
-    --export-text: #c98fac;
+    --export-baseinfotext: #c98fac;
+    --export-customtext: #c98fac;
     --export-gamename: #000000;
     --export-border: #f6a5b8;
 
@@ -1290,13 +1291,19 @@ h2{
     color: var(--export-subtitle) !important;
     border-left-color: var(--export-subtitle) !important;
 }
-/* 正文：昵称、游玩总数、入坑时间、入坑作品 */
+/* 【基础信息文字】昵称、游玩总数、入坑时间、入坑作品 */
 .snapshot-container.export-snapshot .base-info-item {
-    color: var(--export-text) !important;
+    color: var(--export-baseinfotext) !important;
 }
-/* 游戏卡片内游戏名称 */
+/* 【游戏卡片内游戏名称】 */
 .snapshot-container.export-snapshot .added-game-card h3 {
     color: var(--export-gamename) !important;
+}
+/* 【游戏卡片用户自定义文本】仅三处用户手动输入文字 */
+.snapshot-container.export-snapshot .game-head-text-output,
+.snapshot-container.export-snapshot .game-char-text-output,
+.snapshot-container.export-snapshot .game-cp-text-output {
+    color: var(--export-customtext) !important;
 }
 /* 卡片边框（big-card、added‑game‑card） */
 .snapshot-container.export-snapshot .big-card,
@@ -1309,7 +1316,8 @@ h2{
     --export-bg: #fff7f9;
     --export-title: #b33a3a;
     --export-subtitle: #b85878;
-    --export-text: #c98fac;
+    --export-baseinfotext: #c98fac;
+    --export-customtext: #c98fac;
     --export-gamename: #000000;
     --export-border: #f6a5b8;
     /* 新增：统一标题色变量 Character / Couple 三级标题 */
