@@ -490,8 +490,9 @@ function calcHeaderVirtualHeight(targetWidth, appData) {
   return cursorY;
 }
 
+// ============================ 【修改后】calcSingleGameBlockHeight ============================
 function calcSingleGameBlockHeight(targetWidth, renderData) {
-  const { gameInfo, charItems, cpItems } = renderData;
+  const { gameInfo, charItems, cpItems, gameItem } = renderData;
   const virtualCanvas = document.createElement('canvas');
   const vCtx = virtualCanvas.getContext('2d');
 
@@ -501,10 +502,32 @@ function calcSingleGameBlockHeight(targetWidth, renderData) {
 
   const cardInnerPad = LAYOUT_SPACE.ADDED_GAME_CARD_PADDING;
   const gameCardW = wrapW;
+  const textMaxW = gameCardW - cardInnerPad * 2;
+  const textSize = 15;
+  const lineHeight = textSize * 1.45;
 
   const nameFontSize = 22;
   const nameHeight = nameFontSize + LAYOUT_SPACE.GAME_CARD_HEAD_MB;
   const HEART_AREA_HEIGHT = 0;
+
+  // =========【新增：三处自定义文本高度预计算】=========
+  let headTextHeight = 0;
+  if (gameItem.gameHeadText?.trim()) {
+    headTextHeight = measureWrappedHeight(vCtx, gameItem.gameHeadText.trim(), textMaxW, lineHeight, textSize);
+    headTextHeight += 12; // 和绘制代码保持一致的底部间距
+  }
+
+  let charSectionTextHeight = 0;
+  if (gameItem.charSectionText?.trim()) {
+    charSectionTextHeight = measureWrappedHeight(vCtx, gameItem.charSectionText.trim(), textMaxW, lineHeight, textSize);
+    charSectionTextHeight += 8 + 16; // drawY+8 + 文字底部间距
+  }
+
+  let cpSectionTextHeight = 0;
+  if (gameItem.cpSectionText?.trim()) {
+    cpSectionTextHeight = measureWrappedHeight(vCtx, gameItem.cpSectionText.trim(), textMaxW, lineHeight, textSize);
+    cpSectionTextHeight += 8 + 10; // drawY+8 + 文字底部间距
+  }
 
   let charAreaHeight = 0;
   if (charItems.length > 0) {
@@ -553,7 +576,14 @@ function calcSingleGameBlockHeight(targetWidth, renderData) {
     cpAreaHeight = totalCpHeight;
   }
 
-  const totalCardH = cardInnerPad * 2 + nameHeight + HEART_AREA_HEIGHT + charAreaHeight + cpAreaHeight;
+  // =========【修改：叠加三处自定义文本高度】=========
+  const totalCardH = cardInnerPad * 2
+    + nameHeight + HEART_AREA_HEIGHT
+    + headTextHeight
+    + charAreaHeight
+    + charSectionTextHeight
+    + cpAreaHeight
+    + cpSectionTextHeight;
   return totalCardH;
 }
 
@@ -794,8 +824,19 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
     cpAreaHeight = totalCpHeight;
   }
 
-  const totalCardH = cardInnerPad * 2 + nameHeight + HEART_AREA_HEIGHT + charAreaHeight + cpAreaHeight;
-  const cardH = totalCardH;
+  // 注意：此处 totalCardH 将与 calcSingleGameBlockHeight 计算结果一致，
+  // 但由于绘制时动态累加 drawY，这里使用预计算的 cardH 来移动 painter.y，
+  // 确保卡片的整体高度与预计算匹配。
+  // 我们仍然使用预计算函数得到的高度，但为了与修改后的 calcSingleGameBlockHeight 保持同步，
+  // 这里重新计算一次以确保完全一致（或直接调用 calcSingleGameBlockHeight）。
+  // 为避免重复计算，我们可以直接使用外部传入的 cardH，但 drawSingleGameCard 没有 cardH 参数。
+  // 因此，我们在函数内部重新计算，或者使用一个临时计算。
+  // 为了保持代码一致，我们将在此处重新计算 totalCardH，使用相同的逻辑。
+  // 但由于我们修改了 calcSingleGameBlockHeight，我们可以直接调用它。
+  // 但要注意该函数需要 targetWidth 和 renderData，我们在此处调用。
+  // 为避免重复调用，我们直接计算。
+  // 但为了简洁，我们可以复用 calcSingleGameBlockHeight。
+  const cardH = calcSingleGameBlockHeight(targetWidth, renderData);
 
   painter.drawRoundRect(
     cardX, cardTop, gameCardW, cardH,
@@ -1197,7 +1238,10 @@ function calcTotalVirtualHeight(targetWidth, appData, gameTemplateList, renderDa
     }
   });
   total += LAYOUT_SPACE.BODY_PADDING;
-  return total + 50;
+  total += 50;
+  // 【新增安全余量 20px】防止文字换行微小误差裁切
+  total += 20;
+  return total;
 }
 
 // ============================ 主渲染函数 ============================
