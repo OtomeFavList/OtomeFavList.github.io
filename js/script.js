@@ -791,9 +791,9 @@ export function initPage(Core = {}) {
       }
 
       // ============================================================
-      // ★★★ 修改点：cpMaleItem 点击逻辑（修复：草稿无记录时读取全局缓存） ★★★
+      // ★★★ 修改点：cpMaleItem 点击逻辑（增加面板限定选择器，与Character逻辑对齐） ★★★
       // ============================================================
-      const cpMaleItem = e.target.closest(".cp-male-item");
+      const cpMaleItem = e.target.closest(".char-slide-panel-cp .cp-male-item");
       if(cpMaleItem){
           e.stopPropagation();
           const fid = cpMaleItem.dataset.fid;
@@ -805,19 +805,13 @@ export function initPage(Core = {}) {
           if(!draftMap || !draftMap[fid]) return;
           const draftCharMap = draftMap[fid];
 
-          // ✅ 与 char 模式逻辑完全统一：先判断是否存在，直接增删并同步 class
           if(draftCharMap.has(mid)){
               draftCharMap.delete(mid);
               cpMaleItem.classList.remove("selected");
           }else{
-              // 修复：草稿不存在时，优先读取全局保存的cp-img下标，没有再默认0
-              let currentIdx;
-              if (draftCharMap.has(mid)) {
-                  currentIdx = draftCharMap.get(mid);
-              } else {
-                  const mSaveKey = `cp-img-${gameId}-${mid}`;
-                  currentIdx = Number(appData.charImageSelect?.[mSaveKey] ?? 0);
-              }
+              // 精简：直接读取全局保存的cp-img下标，不再重复判断
+              const mSaveKey = `cp-img-${gameId}-${mid}`;
+              const currentIdx = Number(appData.charImageSelect?.[mSaveKey] ?? 0);
               draftCharMap.set(mid, currentIdx);
               cpMaleItem.classList.add("selected");
           }
