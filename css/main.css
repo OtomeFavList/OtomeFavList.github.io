@@ -865,7 +865,7 @@ h2{
 }
 /* ========== 基础信息文字颜色【常态页面 + 快照统一使用CSS变量，实时生效】 ========== */
 .base-info-item {
-    color: var(--export-baseinfotext, #c98fac);
+    color: var(--export-baseinfotext, #c98fac) !important;
 }
 /* ========== 新增：页面常态下游戏卡片标题使用游戏名变量（和快照规则统一） ========== */
 .added-game-card > .game-card-head .game-card-head-title-wrap h3 {
