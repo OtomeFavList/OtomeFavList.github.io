@@ -1701,3 +1701,22 @@ h2{
 }
 
 /* ③ 桌面（> 1200px）：无需额外代码，使用默认样式 */
+
+/* ========== 自定义文本输入框样式（新增） ========== */
+.game-custom-text-wrap {
+  margin-top: 10px;
+}
+.game-custom-text-wrap textarea {
+  width: 100%;
+  min-height: 44px;
+  padding: 6px 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  resize: vertical;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+.game-custom-text-wrap textarea:focus {
+  outline: none;
+  border-color: #f6a5b8;
+}
