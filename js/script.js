@@ -775,7 +775,9 @@ export function initPage(Core = {}) {
           return;
       }
 
-      //【修改点4】点击男主item：优先从draftMap读取已更新下标，不再读DOM属性
+      // ============================================================
+      // ★★★ 修改点：cpMaleItem 点击逻辑（对齐 char 模式，单击直接切换） ★★★
+      // ============================================================
       const cpMaleItem = e.target.closest(".cp-male-item");
       if(cpMaleItem){
           e.stopPropagation();
@@ -787,17 +789,16 @@ export function initPage(Core = {}) {
           if(!draftMap || !draftMap[fid]) return;
           const draftCharMap = draftMap[fid];
 
+          // ✅ 与 char 模式逻辑完全统一：先判断是否存在，直接增删并同步 class
           if(draftCharMap.has(mid)){
               draftCharMap.delete(mid);
+              cpMaleItem.classList.remove("selected");
           }else{
-              // 优先取草稿map中已经被切换按钮更新的下标；没有则0
-              let currentIdx = 0;
-              if(draftCharMap.has(mid)){
-                  currentIdx = draftCharMap.get(mid);
-              }
+              // 优先取草稿 map 中已存在的下标，不存在则默认 0
+              let currentIdx = draftCharMap.get(mid) ?? 0;
               draftCharMap.set(mid, currentIdx);
+              cpMaleItem.classList.add("selected");
           }
-          cpMaleItem.classList.toggle("selected", draftCharMap.has(mid));
           return;
       }
 
