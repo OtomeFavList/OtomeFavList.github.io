@@ -573,6 +573,12 @@ export function initPage(Core = {}) {
         const switchRowHtml = switchRowInnerHtml ? `<div class="game-switch-row">${switchRowInnerHtml}</div>` : "";
         // =========【新增结束】=========
 
+        // ========== 新增三个自定义文本区域的HTML（已消除换行空白） ==========
+        const headTextHtml = `<div class="game-custom-text-wrap"><textarea class="game-head-text-input" data-gid="${gameItem.gameId}" placeholder="自定义文字（游戏标题下方）">${gameItem.gameHeadText || ''}</textarea></div>`;
+        const charTextHtml = `<div class="game-custom-text-wrap"><textarea class="game-char-text-input" data-gid="${gameItem.gameId}" placeholder="自定义文字（Character区域下方）">${gameItem.charSectionText || ''}</textarea></div>`;
+        const cpTextHtml = `<div class="game-custom-text-wrap"><textarea class="game-cp-text-input" data-gid="${gameItem.gameId}" placeholder="自定义文字（Couple区域下方）">${gameItem.cpSectionText || ''}</textarea></div>`;
+
+        // ========== 修改：将 charTextHtml 和 cpTextHtml 移到对应区块外部，独立于角色容器 ==========
         html += `
         <div class="added-game-card" data-gameid="${gameItem.gameId}" data-fold="${!!gameItem.fold}">
           <div class="game-card-head">
@@ -584,18 +590,20 @@ export function initPage(Core = {}) {
               ${heartHtml}
             </div>
             ${switchRowHtml}
+            ${headTextHtml}
           </div>
-          <!-- ✅全部移出game-card-head，作为added-game-card直接子节点 -->
           <div class="game-card-block-item char-section block-margin-gap">
             <button class="btn-character" data-gid="${gameItem.gameId}">选择角色 Character</button>
             ${getInnerSlidePanelHtml("char")}
             <div class="game-card-empty-tip char-card-wrapper char-selected-row" data-gid="${gameItem.gameId}">${renderSelectedChar(gameItem, gameInfo) || `<div class="empty-hint">暂未选择角色</div>`}</div>
           </div>
+          ${charTextHtml}
           <div class="game-card-block-item cp-group block-margin-gap">
             <button class="btn-couple" data-gid="${gameItem.gameId}">选择角色 Couple</button>
             ${getInnerSlidePanelHtml("cp")}
             <div class="game-card-empty-tip cp-render-box" data-gid="${gameItem.gameId}">${renderCP(gameItem, gameInfo) || `<div class="empty-hint">暂未选择角色</div>`}</div>
           </div>
+          ${cpTextHtml}
           <div class="card-bottom-buttons block-margin-gap">
             <button class="btn-fold fold-game btn-gray-bg" data-gid="${gameItem.gameId}">折叠</button>
             <button class="btn-del del-game btn-gray-bg" data-gid="${gameItem.gameId}">删除</button>
@@ -632,6 +640,13 @@ export function initPage(Core = {}) {
 
     // ==========【全局事件委托：角色立绘左右切换 + CP全部业务逻辑】==========
     document.addEventListener("click", async function (e) {
+      // ==========【新增：自定义文本输入框点击不处理，避免干扰】==========
+      const textInput = e.target.closest(".game-head-text-input,.game-char-text-input,.game-cp-text-input");
+      if (textInput) {
+          // 不阻止默认行为，仅忽略点击事件，由input事件处理
+          return;
+      }
+
       // ==========【新增】折叠状态：游戏标题旁图标展开按钮 ==========
       const iconExpandBtn = e.target.closest(".game-fold-icon-expand");
       if (iconExpandBtn) {
@@ -775,29 +790,37 @@ export function initPage(Core = {}) {
           return;
       }
 
-      //【修改点4】点击男主item：优先从draftMap读取已更新下标，不再读DOM属性
+      // ============================================================
+      // ★★★ 修改点：cpMaleItem 点击逻辑（修复：草稿无记录时读取全局缓存） ★★★
+      // ============================================================
       const cpMaleItem = e.target.closest(".cp-male-item");
       if(cpMaleItem){
           e.stopPropagation();
           const fid = cpMaleItem.dataset.fid;
           const mid = cpMaleItem.dataset.mid;
+          const gameId = cpMaleItem.dataset.gameId;
           const panel = cpMaleItem.closest(".char-slide-panel-cp");
           if(!panel) return;
           const draftMap = panel._tempCpDraftMap;
           if(!draftMap || !draftMap[fid]) return;
           const draftCharMap = draftMap[fid];
 
+          // ✅ 与 char 模式逻辑完全统一：先判断是否存在，直接增删并同步 class
           if(draftCharMap.has(mid)){
               draftCharMap.delete(mid);
+              cpMaleItem.classList.remove("selected");
           }else{
-              // 优先取草稿map中已经被切换按钮更新的下标；没有则0
-              let currentIdx = 0;
-              if(draftCharMap.has(mid)){
+              // 修复：草稿不存在时，优先读取全局保存的cp-img下标，没有再默认0
+              let currentIdx;
+              if (draftCharMap.has(mid)) {
                   currentIdx = draftCharMap.get(mid);
+              } else {
+                  const mSaveKey = `cp-img-${gameId}-${mid}`;
+                  currentIdx = Number(appData.charImageSelect?.[mSaveKey] ?? 0);
               }
               draftCharMap.set(mid, currentIdx);
+              cpMaleItem.classList.add("selected");
           }
-          cpMaleItem.classList.toggle("selected", draftCharMap.has(mid));
           return;
       }
 
@@ -1237,7 +1260,11 @@ export function initPage(Core = {}) {
             selectChars: [],
             cpSelectIds: [],
             cpList: [],
-            cpEditState: []
+            cpEditState: [],
+            // =========新增自定义文本字段==========
+            gameHeadText: "",
+            charSectionText: "",
+            cpSectionText: ""
           };
           if(!appData.gameList) appData.gameList = [];
           appData.gameList.push(newGameData);
@@ -1452,6 +1479,27 @@ export function initPage(Core = {}) {
     if (typeof bindDynamicGameCardSwitchEvents === "function") {
       bindDynamicGameCardSwitchEvents();
     }
+
+    // ==========【新增：自定义文本输入实时保存】==========
+    document.addEventListener("input", function(e) {
+        const target = e.target;
+        const gid = target.dataset.gid;
+        if(!gid) return;
+        const gameItem = appData.gameList.find(g=>g.gameId === gid);
+        if(!gameItem) return;
+
+        if(target.classList.contains("game-head-text-input")){
+            gameItem.gameHeadText = target.value;
+        }else if(target.classList.contains("game-char-text-input")){
+            gameItem.charSectionText = target.value;
+        }else if(target.classList.contains("game-cp-text-input")){
+            gameItem.cpSectionText = target.value;
+        } else {
+            return;
+        }
+        saveData();
+        clearPreviewCacheResource(); // 文字变更，导出缓存失效
+    });
 
     window.refreshGameCardUi();
   }

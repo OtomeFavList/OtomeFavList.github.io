@@ -238,7 +238,11 @@ export function loadData() {
         // ========== 版本迁移逻辑 ==========
         if (appData._version === undefined || appData._version < DATA_VERSION) {
             console.log("📌执行数据结构升级迁移 (version:", appData._version, "→", DATA_VERSION, ")");
-            // 此处无需清洗图片路径，因为 getWebImageUrl 已做运行时归一化，
+            // ========= 架构说明 =========
+            // 当前业务中，图片URL全部来源于静态游戏模板（gameTemplateList），
+            // appData 仅存储角色ID和索引（selectCharItems、charImageSelect），
+            // 并未持久化存储图片URL字符串，因此无需在迁移时清洗图片路径。
+            // 运行时兼容函数 getWebImageUrl / getCanvasImageUrl 已确保新旧数据一致。
             // 只需标记新版本并保存，后续字段补齐由下方兜底完成。
             appData._version = DATA_VERSION;
             // 迁移完成自动保存一次清洗后数据
@@ -280,6 +284,10 @@ export function loadData() {
                 }
                 if(!Array.isArray(g.cpList)) g.cpList = [];
                 if(!Array.isArray(g.maleItems)) g.maleItems = [];
+                // ==========新增自定义文本兜底==========
+                if (typeof g.gameHeadText !== "string") g.gameHeadText = "";
+                if (typeof g.charSectionText !== "string") g.charSectionText = "";
+                if (typeof g.cpSectionText !== "string") g.cpSectionText = "";
             });
         }
     } catch (e) {

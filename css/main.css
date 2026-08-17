@@ -1701,3 +1701,47 @@ h2{
 }
 
 /* ③ 桌面（> 1200px）：无需额外代码，使用默认样式 */
+
+/* ========== 自定义文本输入框样式（新增） ========== */
+.game-custom-text-wrap {
+  margin-top: 10px;
+  min-height: 44px;
+  width: 100%;
+}
+.game-custom-text-wrap textarea {
+  width: 100%;
+  min-height: 44px;
+  padding: 6px 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  resize: vertical;
+  font-size: 14px;
+  box-sizing: border-box;
+  /* textarea自身滚动，不要写overflow:visible！textarea不支持visible */
+  overflow: auto;
+}
+.game-custom-text-wrap textarea:focus {
+  outline: none;
+  border-color: #f6a5b8;
+}
+
+/* ========== 父容器全部解除overflow裁切【关键修复】 ========== */
+.game-card-head {
+  overflow: visible !important;
+}
+/* 新增：Character、Couple区块解除overflow隐藏 */
+.char-section {
+  overflow: visible !important;
+}
+.cp-group {
+  overflow: visible !important;
+}
+
+/* 卡片折叠时隐藏角色区块（原有逻辑补齐，防止布局异常） */
+.added-game-card[data-fold="true"] .game-card-block-item {
+  display: none;
+}
+/* 游戏折叠状态，同时隐藏独立的自定义文本框 */
+.added-game-card[data-fold="true"] .game-custom-text-wrap {
+  display: none !important;
+}

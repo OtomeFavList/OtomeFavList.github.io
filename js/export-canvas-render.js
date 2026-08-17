@@ -836,6 +836,33 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
 
   drawY += nameFontSize + LAYOUT_SPACE.GAME_CARD_HEAD_MB;
 
+  // ========== 绘制【游戏标题爱心下方自定义文字】 ==========
+  if (renderData.gameItem.gameHeadText?.trim()) {
+      const textX = cardX + cardInnerPad;
+      const textMaxW = gameCardW - cardInnerPad * 2;
+      const textSize = 15;
+      const lineHeight = textSize * 1.45;
+      wrapText(
+          painter.ctx,
+          renderData.gameItem.gameHeadText.trim(),
+          textX,
+          drawY,
+          textMaxW,
+          lineHeight,
+          textSize,
+          exportColor.text
+      );
+      // 文字底部增加间距
+      const textH = measureWrappedHeight(
+          painter.ctx,
+          renderData.gameItem.gameHeadText.trim(),
+          textMaxW,
+          lineHeight,
+          textSize
+      );
+      drawY += textH + 12;
+  }
+
   // ---- Character ----
   if (charItems.length > 0) {
     painter.drawText('Character', cardX + cardInnerPad, drawY, 18, exportColor.gameName);
@@ -912,6 +939,32 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
       }
     }
     drawY = yPos + charCardHeight;
+  }
+
+  // ========== 绘制【Character区域下方自定义文字】 ==========
+  if (renderData.gameItem.charSectionText?.trim()) {
+      const textX = cardX + cardInnerPad;
+      const textMaxW = gameCardW - cardInnerPad * 2;
+      const textSize = 15;
+      const lineHeight = textSize * 1.45;
+      wrapText(
+          painter.ctx,
+          renderData.gameItem.charSectionText.trim(),
+          textX,
+          drawY + 8,
+          textMaxW,
+          lineHeight,
+          textSize,
+          exportColor.text
+      );
+      const textH = measureWrappedHeight(
+          painter.ctx,
+          renderData.gameItem.charSectionText.trim(),
+          textMaxW,
+          lineHeight,
+          textSize
+      );
+      drawY += textH + 16;
   }
 
   // ---- Couple ----
@@ -1057,6 +1110,32 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
       drawY = my + rowH;
       drawY += 12;
     }
+  }
+
+  // ========== 绘制【Couple区域下方自定义文字】 ==========
+  if (renderData.gameItem.cpSectionText?.trim()) {
+      const textX = cardX + cardInnerPad;
+      const textMaxW = gameCardW - cardInnerPad * 2;
+      const textSize = 15;
+      const lineHeight = textSize * 1.45;
+      wrapText(
+          painter.ctx,
+          renderData.gameItem.cpSectionText.trim(),
+          textX,
+          drawY + 8,
+          textMaxW,
+          lineHeight,
+          textSize,
+          exportColor.text
+      );
+      const textH = measureWrappedHeight(
+          painter.ctx,
+          renderData.gameItem.cpSectionText.trim(),
+          textMaxW,
+          lineHeight,
+          textSize
+      );
+      drawY += textH + 10;
   }
 
   painter.shiftY(cardH);
