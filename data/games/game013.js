@@ -100,9 +100,9 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg",
-                            "char/g001_fd01_1.jpg",
-                            "char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/013/Finis.jpg",
+                            "char/013/Finis2.jpg",
+                            "char/013/Finis3.jpg"], type: "base" }
             ]
         },
         / 夏尔摩斯
@@ -113,7 +113,7 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/013/Sholmes.jpg"], type: "base" }
             ]
         }
     ]
