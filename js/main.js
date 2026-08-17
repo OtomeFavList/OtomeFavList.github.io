@@ -111,7 +111,8 @@ export let appData = {
         bg: "#fff7f9",
         title: "#b33a3a",
         subTitle: "#b85878",
-        text: "#c98fac",
+        baseInfoText: "#c98fac",
+        customText: "#c98fac",
         gameName: "#000000",   // ✅ 修改为黑色，用户仍可自定义
         border: "#f6a5b8"
     },
@@ -261,7 +262,13 @@ export function loadData() {
         appData.exportColor.bg = appData.exportColor.bg ?? "#fff7f9";
         appData.exportColor.title = appData.exportColor.title ?? "#b33a3a";
         appData.exportColor.subTitle = appData.exportColor.subTitle ?? "#b85878";
-        appData.exportColor.text = appData.exportColor.text ?? "#c98fac";
+        // 兼容旧存档：存在旧text字段则迁移到baseInfoText
+        if(appData.exportColor.text !== undefined && appData.exportColor.baseInfoText === undefined){
+            appData.exportColor.baseInfoText = appData.exportColor.text;
+        }
+        appData.exportColor.baseInfoText = appData.exportColor.baseInfoText ?? "#c98fac";
+        // 新增自定义文本色，默认和基础信息色一致
+        appData.exportColor.customText = appData.exportColor.customText ?? appData.exportColor.baseInfoText;
         appData.exportColor.gameName = appData.exportColor.gameName ?? "#000000";
         appData.exportColor.border = appData.exportColor.border ?? "#f6a5b8";
 
