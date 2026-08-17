@@ -6,126 +6,126 @@
 // 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
 const gameData = {
     id: "game071", // 全局唯一ID，不可重复，如 game001
-    name: "示例乙女游戏",
-    year: "20",
-    publisher: ["原厂发行商"],
-    cnStudio: "汉化组/汉化厂商",
+    name: "副作用之瞳",
+    year: "2021",
+    publisher: ["Frontier Works","Otomate"],
+    cnStudio: "JoyMoe",
     writer: [
-        {name:"中文编剧", lang:"zh"},
-        {name:"日文编剧", lang:"ja"},
-        {name:"英文编剧", lang:"en"}
+        {name:"紅原香", lang:"zh"},
+        {name:"若宮たすく", lang:"zh"},
+        {name:"深瀬カエル", lang:"zh"}
     ],
     art: [
-        {name:"中文原画", lang:"zh"},
-        {name:"日文原画", lang:"ja"},
-        {name:"英文原画", lang:"en"}
+        {name:"さらちよみ", lang:"ja"}
     ],
-    cover: "game/0.jpg", // 相对路径，游戏封面
+    cover: "game/071.jpg", // 相对路径，游戏封面
     charList: [
-        // 女主模板 female
+        // 东地葵
         {
-            id: "g0_f01",
-            name: "女主A",
+            id: "g071_f01",
+            name: "东地葵",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["char/001/女主A3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["char/001/女主A4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["char/071/Aoi.jpg",
+                            "char/071/Aoi2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 东地枣
         {
-            id: "g0_m01",
-            name: "男主1",
+            id: "g071_f02",
+            name: "东地枣",
+            gender: "female",
+            isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
+            isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
+            images: [
+                { srcList: ["char/071/Natsume.jpg",
+                            "char/071/Natsume2.jpg"], type: "base" },      // 默认基础图，始终加载
+            ]
+        },
+        // 东地樱
+        {
+            id: "g071_f03",
+            name: "东地樱",
+            gender: "female",
+            isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
+            isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
+            images: [
+                { srcList: ["char/071/Sakura.jpg",
+                            "char/071/Sakura2.jpg"], type: "base" },      // 默认基础图，始终加载
+            ]
+        },
+        // 翠川智裕
+        {
+            id: "g071_m01",
+            name: "翠川智裕",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["char/001/男主13.jpg"], type: "hidden" },
-                { srcList: ["char/001/男主14.jpg"], type: "fd" }
+                { srcList: ["char/071/Chihiro.jpg",
+                            "char/071/Chihiro2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 榊原洸
         {
-            id: "g0_m02",
-            name: "男主2",
+            id: "g071_m02",
+            name: "榊原洸",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
+                { srcList: ["char/071/Kou.jpg",
+                            "char/071/Kou2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 小野泽正人
         {
-            id: "g0_m03",
-            name: "男主3",
+            id: "g071_m03",
+            name: "小野泽正人",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
+                { srcList: ["char/071/Masato.jpg",
+                            "char/071/Masato2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 仙波亘
         {
-            id: "g0_m04",
-            name: "男主4",
+            id: "g071_m04",
+            name: "仙波亘",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
+                { srcList: ["char/071/Wataru.jpg",
+                            "char/071/Wataru2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 望月要介
         {
-            id: "g0_m05",
-            name: "男主5",
+            id: "g071_m05",
+            name: "望月要介",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
+                { srcList: ["char/071/Yousuke.jpg",
+                            "char/071/Yousuke2.jpg"], type: "base" },
             ]
         },
-        // 隐藏角色（isHidden=true → 开关开启才显示整个角色卡片）
+        // 榊原悠
         {
-            id: "g0_h01",
-            name: "隐藏攻略角色",
-            gender: "male",
-            isHidden: true,
-            isFD: false,
-            images: [
-                { srcList: ["char/g001_h01_1.jpg"], type: "base" }
-            ]
-        },
-        // FD续作限定角色（isFD=true → FD开关开启才显示整个角色卡片）
-        {
-            id: "g0_fd01",
-            name: "续作FD新增角色",
+            id: "g071_m06",
+            name: "榊原悠",
             gender: "male",
             isHidden: false,
-            isFD: true,
+            isFD: false,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/071/Yuu.jpg",
+                            "char/071/Yuu2.jpg"], type: "base" },
             ]
         }
     ]
