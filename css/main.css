@@ -270,7 +270,7 @@ button:hover{
     gap:10px;
     align-items:stretch;
     padding:16px;
-    border:1px solid #f6a5b8;
+    /* border:1px solid #f6a5b8; */
     border-radius:12px;
     background:#fff;
 }
@@ -895,7 +895,8 @@ h2{
     padding:16px;
     margin-bottom:14px;
     background:#ffffff;
-    border:1px solid var(--export-border, #f6a5b8);
+    /* 删除粉色边框 */
+    /* border:1px solid var(--export-border, #f6a5b8); */
 }
 .game-card-header-row {
     display:flex;
