@@ -776,13 +776,14 @@ export function initPage(Core = {}) {
       }
 
       // ============================================================
-      // ★★★ 修改点：cpMaleItem 点击逻辑（对齐 char 模式，单击直接切换） ★★★
+      // ★★★ 修改点：cpMaleItem 点击逻辑（修复：草稿无记录时读取全局缓存） ★★★
       // ============================================================
       const cpMaleItem = e.target.closest(".cp-male-item");
       if(cpMaleItem){
           e.stopPropagation();
           const fid = cpMaleItem.dataset.fid;
           const mid = cpMaleItem.dataset.mid;
+          const gameId = cpMaleItem.dataset.gameId;
           const panel = cpMaleItem.closest(".char-slide-panel-cp");
           if(!panel) return;
           const draftMap = panel._tempCpDraftMap;
@@ -794,8 +795,14 @@ export function initPage(Core = {}) {
               draftCharMap.delete(mid);
               cpMaleItem.classList.remove("selected");
           }else{
-              // 优先取草稿 map 中已存在的下标，不存在则默认 0
-              let currentIdx = draftCharMap.get(mid) ?? 0;
+              // 修复：草稿不存在时，优先读取全局保存的cp-img下标，没有再默认0
+              let currentIdx;
+              if (draftCharMap.has(mid)) {
+                  currentIdx = draftCharMap.get(mid);
+              } else {
+                  const mSaveKey = `cp-img-${gameId}-${mid}`;
+                  currentIdx = Number(appData.charImageSelect?.[mSaveKey] ?? 0);
+              }
               draftCharMap.set(mid, currentIdx);
               cpMaleItem.classList.add("selected");
           }
