@@ -906,7 +906,7 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
 
   // ---- Character ----
   if (charItems.length > 0) {
-    painter.drawText('Character', cardX + cardInnerPad, drawY, 18, '#222');
+    painter.drawText('Character', cardX + cardInnerPad, drawY, 18, '#000');
     drawY += 18 + 8;
 
     const cardW = LAYOUT_SPACE.CHAR_CARD_W;
@@ -1014,7 +1014,7 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
     if (charItems.length > 0) {
       drawY += 8;
     }
-    painter.drawText('Couple', cardX + cardInnerPad, drawY, 18, '#222');
+    painter.drawText('Couple', cardX + cardInnerPad, drawY, 18, '#000');
     drawY += 18 + 8;
 
     const femaleCardW = LAYOUT_SPACE.CHAR_CARD_W;
