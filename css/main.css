@@ -1807,23 +1807,26 @@ h2{
 @media (max-width:768px) {
     .game-custom-text-wrap {
         position: relative;
-        overflow: hidden;    /* 新增：移动端强制裁切溢出三角 */
-        border-radius: 6px;   /* 新增：同步圆角，保证裁切和容器圆角一致 */
+        overflow: hidden;
+        border-radius: 6px;
+        /* 提升裁切兼容性 */
+        -webkit-overflow-scrolling: touch;
     }
     .game-custom-text-wrap textarea {
         padding-bottom: 32px;
         resize: none;
         box-sizing: border-box;
-        /* ❗删除 position:relative;
-           textarea不要作为定位基准，父容器才是绝对定位参照物！ */
     }
     .game-custom-text-wrap .resize-handle {
         position: absolute;
-        width: 32px;
-        height: 32px;
+        /* 缩小可点击区域，贴合角落，避免大面积溢出 */
+        width: 20px;
+        height: 20px;
         right: 0;
         bottom: 0;
         background: transparent;
+        /* 扩大点击热区，防止缩小后不好点 */
+        padding: 12px;
     }
     .game-custom-text-wrap .resize-handle::after {
         content: "";
@@ -1832,6 +1835,7 @@ h2{
         height: 16px;
         background-color: #b33a3a;
         clip-path: polygon(100% 0, 100% 100%, 0 100%);
+        /* 紧贴右下角，不偏移 */
         right: 0;
         bottom: 0;
     }
