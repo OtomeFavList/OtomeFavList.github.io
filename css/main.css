@@ -1756,26 +1756,87 @@ h2{
   border-color: #f6a5b8;
 }
 
-/* ========== 自定义文本框 textarea 右下角拖拽抓手强化 ========== */
+/* ========== 自定义文本框 textarea 右下角拖拽手柄强化（需求实现） ========== */
 .game-custom-text-wrap textarea {
-    /* 保留原有属性，追加resize样式 */
+    /* 开启原生垂直拖拽，保留原有resize:vertical */
     resize: vertical;
+    /* 关键：给右下角留出空间放自定义指示器 */
+    position: relative;
+    /* 原生默认拖拽标记隐藏，我们用伪元素替代 */
+    background-image: none;
 }
-/* 通用webkit（Chrome、安卓浏览器、微信内置浏览器、Edge、Safari）拖拽手柄美化 */
-.game-custom-text-wrap textarea::-webkit-resizer {
-    background-image: linear-gradient(135deg, transparent 50%, #b33a3a 50%, #b33a3a 60%, transparent 60%);
-    background-size: 14px 14px;
+/* 伪元素模拟右下角深红色斜杠拖拽标识 */
+.game-custom-text-wrap textarea::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 16px;
+    height: 16px;
+    pointer-events: none;
+    /* 深红色斜杠，三条斜线，和PC原生resize手柄视觉一致 */
+    background: linear-gradient(
+        -45deg,
+        transparent 33%,
+        #b33a3a 33%,
+        #b33a3a 42%,
+        transparent 42%,
+        transparent 55%,
+        #b33a3a 55%,
+        #b33a3a 64%,
+        transparent 64%,
+        transparent 77%,
+        #b33a3a 77%,
+        #b33a3a 86%,
+        transparent 86%
+    );
+    background-size: 16px 16px;
     background-repeat: no-repeat;
-    background-position: bottom right;
 }
-/* Firefox专属拖拽手柄样式 */
-.game-custom-text-wrap textarea {
-    scrollbar-color: #b33a3a transparent;
+/* 修复：textarea不支持::after伪元素！改用外层容器实现 */
+.game-custom-text-wrap {
+    position: relative;
 }
-/* 增强移动端触摸区域，让抓手更容易点到 */
-@media (max-width:1200px) {
-    .game-custom-text-wrap textarea::-webkit-resizer {
-        background-size: 18px 18px;
+.game-custom-text-wrap .resize-handle-marker {
+    display: none;
+    position: absolute;
+    right: 6px;
+    bottom: 6px;
+    width: 16px;
+    height: 16px;
+    pointer-events: none;
+    background: linear-gradient(
+        -45deg,
+        transparent 33%,
+        #b33a3a 33%,
+        #b33a3a 42%,
+        transparent 42%,
+        transparent 55%,
+        #b33a3a 55%,
+        #b33a3a 64%,
+        transparent 64%,
+        transparent 77%,
+        #b33a3a 77%,
+        #b33a3a 86%,
+        transparent 86%
+    );
+    background-size: 16px 16px;
+    background-repeat: no-repeat;
+}
+.game-custom-text-wrap textarea ~ .resize-handle-marker {
+    display: block;
+}
+/* 快照导出模式隐藏拖拽标记（和所有交互控件规则统一） */
+.snapshot-container.export-snapshot .resize-handle-marker {
+    display: none !important;
+}
+/* 移动端适当放大拖拽标记，更容易触摸点击 */
+@media (max-width:768px) {
+    .game-custom-text-wrap .resize-handle-marker {
+        width: 20px;
+        height: 20px;
+        right: 8px;
+        bottom: 8px;
     }
 }
 
