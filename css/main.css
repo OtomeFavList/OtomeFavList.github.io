@@ -1811,16 +1811,17 @@ h2{
     .game-custom-text-wrap textarea {
         padding-bottom: 32px;
         resize: none;
-        box-sizing: border-box; /* 强制内盒模型，padding不会撑大尺寸 */
+        box-sizing: border-box;
     }
     .game-custom-text-wrap .resize-handle {
         position: absolute;
         width: 32px;
         height: 32px;
-        /* 对齐到textarea右下角，抵消父容器可能存在的间隙 */
-        right: 0px;
-        bottom: 0px;
+        right: 0;
+        top: 0;
         background: transparent;
+        /* 向上偏移，贴合textarea底边 */
+        transform: translateY(calc(100% - 32px));
     }
     .game-custom-text-wrap .resize-handle::after {
         content: "";
