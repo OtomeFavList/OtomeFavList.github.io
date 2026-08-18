@@ -1803,7 +1803,7 @@ h2{
 .snapshot-container.export-snapshot .resize-handle {
     display: none !important;
 }
-/* 移动端放大三角与热区：紧贴右下角，不再居中偏移 */
+/* 移动端放大三角与热区：紧贴textarea右下角 */
 @media (max-width:768px) {
     .game-custom-text-wrap {
         position: relative;
@@ -1817,11 +1817,13 @@ h2{
         position: absolute;
         width: 32px;
         height: 32px;
-        right: 0;
-        top: 0;
-        background: transparent;
-        /* 向上偏移，贴合textarea底边 */
+        /* 先固定在右侧，垂直方向靠transform锚定到textarea底部 */
+        right: 0px;
+        top: 0px;
+        /* 关键：移动到 textarea 底部 */
         transform: translateY(calc(100% - 32px));
+        background: transparent;
+        pointer-events: auto;
     }
     .game-custom-text-wrap .resize-handle::after {
         content: "";
