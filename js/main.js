@@ -14,7 +14,7 @@ const gameIdList = [
 
 // ===================== 全局存储key【不再随意修改！】 =====================
 export const STORE_KEY = "otome-favlist-data";               // 主存储键，永不改变
-export const DATA_VERSION = 1.2;                              // 数据版本号，用于迁移（从1.1升级）
+export const DATA_VERSION = 2;                              // 数据版本号，用于迁移（从1.1升级）
 export const OLD_STORE_KEYS = [                               // 历史遗留 key，用于自动迁移
     "otome-favlist-data-v1",
     "otome-favlist-data-v1.1"
@@ -280,9 +280,9 @@ export function loadData() {
         if (tempData._version === undefined || tempData._version < DATA_VERSION) {
             console.log("📌执行数据结构升级迁移", tempData._version ?? "无版本号", "→", DATA_VERSION);
             // ===== 增量版本迁移分支，按版本从小到大依次编写 =====
-            // 1.1 → 1.2 迁移：charImageSelect key改名 gameId-charId → char-img-gameId-charId
-            if (tempData._version < 1.2) {
-                console.log("🔧执行 1.1 → 1.2 迁移：转换charImageSelect存储键名");
+            // 1.1 → 2 迁移：charImageSelect key改名 gameId-charId → char-img-gameId-charId
+            if (tempData._version < 2) {
+                console.log("🔧执行 1.1 → 2 迁移：转换charImageSelect存储键名");
                 if (tempData.charImageSelect) {
                     const newCharImgSelect = {};
                     Object.entries(tempData.charImageSelect).forEach(([key, val]) => {
@@ -298,10 +298,9 @@ export function loadData() {
                 needSaveAfterMigrate = true;
             }
             // 后续升级示例：
-            // if (tempData._version < 1.3) {
-            //    1.2 → 1.3 迁移代码写此处
+            // if (tempData._version < 3) {
+            //    2 → 3 迁移代码写此处
             // }
-
             // 全部迁移完成后，更新为最新版本号
             tempData._version = DATA_VERSION;
         }
