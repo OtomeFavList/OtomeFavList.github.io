@@ -24,9 +24,18 @@ export const SPOILER_LOCAL_SWITCH_KEY = "local-switch-spoiler-date"; // 局部�
 
 // ===================== 图片URL域名配置 =====================
 export const R2_BASE_URL = "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev";
-export const JSD_BASE_URL = "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io@main/img";
+// 【修复】移除 @main，避免 301 重定向
+export const JSD_BASE_URL = "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io/img";
 
 // ===================== 路径标准化工具（根治 URL 二次拼接） =====================
+/**
+ * 清洗旧版带 @main 的 jsDelivr 地址（向后兼容）
+ */
+export function cleanOldJsdUrl(url) {
+    if (!url || typeof url !== "string") return url;
+    return url.replace(/\/gh\/OtomeFavList\/OtomeFavList.github.io@main\//, "/gh/OtomeFavList/OtomeFavList.github.io/");
+}
+
 /**
  * 路径标准化：统一输出相对路径
  * 支持：
@@ -39,6 +48,11 @@ export const JSD_BASE_URL = "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavLi
 export function normalizeImageRelPath(src) {
     if (!src || typeof src !== "string") return null;
     const s = src.trim();
+    // 直接拦截 raw 地址（排查异常数据源）
+    if (s.includes("raw.githubusercontent.com")) {
+        console.error("❌ normalizeImageRelPath 检测到 raw.githubusercontent.com 地址，已丢弃", src);
+        return null;
+    }
     // 已经是相对路径，不含http
     if (!s.startsWith("http")) {
         return s;
@@ -47,9 +61,10 @@ export function normalizeImageRelPath(src) {
     if (s.startsWith(R2_BASE_URL + "/")) {
         return s.slice(R2_BASE_URL.length + 1);
     }
-    // jsDelivr链接提取路径
-    if (s.startsWith(JSD_BASE_URL + "/")) {
-        return s.slice(JSD_BASE_URL.length + 1);
+    // jsDelivr链接提取路径（兼容旧版带@main的地址）
+    const cleaned = cleanOldJsdUrl(s);
+    if (cleaned.startsWith(JSD_BASE_URL + "/")) {
+        return cleaned.slice(JSD_BASE_URL.length + 1);
     }
     // 无法识别的外部链接，直接返回原值（兜底）
     return s;
@@ -61,7 +76,9 @@ export function normalizeImageRelPath(src) {
  * @returns {string} 可用的图片URL
  */
 export function getWebImageUrl(relPath) {
-    const cleanPath = normalizeImageRelPath(relPath);
+    // 清洗可能的旧地址
+    const cleaned = cleanOldJsdUrl(relPath);
+    const cleanPath = normalizeImageRelPath(cleaned);
     if (!cleanPath) return "";
     // 如果清洗后仍然是完整http链接，直接返回（外部图兜底）
     if (cleanPath.startsWith("http")) return cleanPath;
@@ -74,9 +91,15 @@ export function getWebImageUrl(relPath) {
  * @returns {string} 可用的图片URL
  */
 export function getCanvasImageUrl(relPath) {
-    const cleanPath = normalizeImageRelPath(relPath);
+    // 清洗可能的旧地址
+    const cleaned = cleanOldJsdUrl(relPath);
+    const cleanPath = normalizeImageRelPath(cleaned);
     if (!cleanPath) return "";
     if (cleanPath.startsWith("http")) return cleanPath;
+    // 同源优先：若部署在 GitHub Pages，直接使用相对路径，彻底规避跨域
+    if (location.hostname === "otomefavlist.github.io") {
+        return `/${cleanPath}`;
+    }
     return `${JSD_BASE_URL}/${cleanPath}`;
 }
 
