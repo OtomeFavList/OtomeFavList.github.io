@@ -1759,7 +1759,6 @@ h2{
 /* ========== 关闭原生resize，自制垂直拖拽控件 ========== */
 .game-custom-text-wrap {
     position: relative;
-    /* ========== 三角不溢出 ========== */
     overflow: hidden;
     border-radius: 6px;
 }
@@ -1772,8 +1771,8 @@ h2{
 /* 可视化拖拽手柄：实心红色下三角，紧贴右下角 */
 .game-custom-text-wrap .resize-handle {
     position: absolute;
-    right: 0px;     /* 完全贴右 */
-    bottom: 0px;    /* 完全贴下 */
+    right: 0px;
+    bottom: 0px;
     width: 24px;
     height: 24px;
     cursor: ns-resize;
@@ -1809,9 +1808,6 @@ h2{
         position: relative;
         overflow: hidden;
         border-radius: 6px;
-        /* 修复移动端webkit内核圆角裁切失效 */
-        -webkit-border-radius: 6px;
-        -webkit-overflow-scrolling: touch;
     }
     .game-custom-text-wrap .resize-handle {
         position: absolute;
@@ -1821,12 +1817,13 @@ h2{
         height: 32px;
         background: transparent;
         pointer-events: auto;
+        /* 删除 clip-path: inset() 圆角裁切 */
     }
     .game-custom-text-wrap .resize-handle::after {
         content: "";
         position: absolute;
         right: 0px;
-        bottom: 4px;
+        bottom: 4px;    /* 紧贴底部 */
         width: 16px;
         height: 16px;
         background-color: #b33a3a;
