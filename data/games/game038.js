@@ -117,9 +117,7 @@ const gameData = {
                 { srcList: ["char/038/Fuen.jpg",
                             "char/038/Fuen2.jpg",
                             "char/038/Fuen3.jpg",
-                            "char/038/Fuen4.jpg",
-                            "char/Default.jpg",
-                            "char/Default2.jpg"], type: "base" }
+                            "char/038/Fuen4.jpg"], type: "base" }
             ]
         }
     ]
