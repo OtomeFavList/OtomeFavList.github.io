@@ -637,8 +637,9 @@ function calcSingleGameBlockHeight(targetWidth, renderData) {
       const perRow = calcCardsPerRow(maleCardWidth, maleGap, maleContainerWidth);
       const maleRows = Math.ceil(cp.maleItems.length / perRow);
       const maleAreaH = maleRows * maxMaleH + (maleRows - 1) * maleGap;
-      const rowH = Math.max(fHeight, maleAreaH) + (LAYOUT_SPACE.CP_ROW_MARGIN || 16);
-      totalCpHeight += rowH;
+      // ----- 修改点：将间距移入 totalCpHeight 累加 -----
+      const rowH = Math.max(fHeight, maleAreaH);
+      totalCpHeight += rowH + (LAYOUT_SPACE.CP_ROW_MARGIN || 16);
     }
     cpAreaHeight = totalCpHeight;
   }
@@ -1220,7 +1221,7 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
         }
       }
       drawY = my + rowH;
-      drawY += 12;
+      // ----- 修改点：移除多余固定留白，消除couple有无文字时上下间距不一致问题 -----
     }
   }
 
