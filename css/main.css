@@ -1804,32 +1804,86 @@ h2{
     display: none !important;
 }
 /* 移动端放大三角与热区：紧贴textarea右下角 */
-@media (max-width:1200px) {
-    .game-custom-text-wrap {
+/* 针对 ≤768px 手机 */
+@media (max-width:768px) {
+    /* 使用更高特异性选择器，无需 !important */
+    .added-game-card .game-custom-text-wrap {
         position: relative;
-        overflow: hidden; /* 保留，但作为辅助 */
+        overflow: hidden;
         border-radius: 6px;
     }
-    
-    .game-custom-text-wrap .resize-handle {
+
+    .added-game-card .game-custom-text-wrap textarea {
+        resize: none;
+        padding-bottom: 32px;
+        border-radius: 6px;
+        position: static;
+        box-sizing: border-box;
+    }
+
+    .added-game-card .game-custom-text-wrap .resize-handle {
         position: absolute;
         right: 0;
         bottom: 0;
         width: 32px;
         height: 32px;
         background: transparent;
-        pointer-events: auto; /* 保持可交互 */
+        margin: 0;
+        padding: 0;
     }
-    
-    .game-custom-text-wrap .resize-handle::after {
+
+    .added-game-card .game-custom-text-wrap .resize-handle::after {
         content: "";
         position: absolute;
-        right: 4px;  /* 关键：向右缩进 4px */
-        bottom: 4px; /* 关键：向下缩进 4px */
+        right: 0;      /* 紧贴右边 */
+        bottom: 0;     /* 紧贴下边 */
         width: 16px;
         height: 16px;
         background-color: #b33a3a;
         clip-path: polygon(100% 0, 100% 100%, 0 100%);
+        margin: 0;
+        padding: 0;
+    }
+}
+
+/* 针对 769~1200px 平板（可选，与上面保持一致） */
+@media (min-width:769px) and (max-width:1200px) {
+    .added-game-card .game-custom-text-wrap {
+        position: relative;
+        overflow: hidden;
+        border-radius: 6px;
+    }
+
+    .added-game-card .game-custom-text-wrap textarea {
+        resize: none;
+        padding-bottom: 32px;
+        border-radius: 6px;
+        position: static;
+        box-sizing: border-box;
+    }
+
+    .added-game-card .game-custom-text-wrap .resize-handle {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 32px;
+        height: 32px;
+        background: transparent;
+        margin: 0;
+        padding: 0;
+    }
+
+    .added-game-card .game-custom-text-wrap .resize-handle::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 16px;
+        height: 16px;
+        background-color: #b33a3a;
+        clip-path: polygon(100% 0, 100% 100%, 0 100%);
+        margin: 0;
+        padding: 0;
     }
 }
 
