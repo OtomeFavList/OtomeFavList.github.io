@@ -135,7 +135,9 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/048/Rook.jpg",
-                            "char/048/Rook2.jpg"], type: "base" }
+                            "char/048/Rook2.jpg",
+                            "char/Default.jpg",
+                            "char/Default2.jpg"], type: "base" }
             ]
         }
     ]
