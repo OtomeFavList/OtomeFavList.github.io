@@ -57,6 +57,8 @@ async function canvasPreloadImageBitmap(src) {
 
 // ========== 字体规范 ==========
 const FONT_SIYUAN = "Noto Sans SC, sans-serif";
+// 角色图片底部到角色名称垂直间距，参考角色卡片行间间距统一视觉
+const CHAR_IMG_NAME_GAP = LAYOUT_SPACE.CHAR_ROW_GAP;
 
 // ============================ 固定 DPR = 2 ============================
 let currentDPR = 2;
@@ -460,7 +462,8 @@ function calcCharCardHeight(ctx, charName, cardWidth, fontSize = 14) {
   const imgSize = cardWidth - innerPad * 2;
   const nameMaxWidth = cardWidth - innerPad * 2;
   const nameHeight = measureWrappedHeight(ctx, charName, nameMaxWidth, fontSize * 1.4, fontSize);
-  const totalHeight = innerPad * 2 + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB + nameHeight + innerPad;
+  // 【修改】图文间距改为 CHAR_IMG_NAME_GAP，和卡片行间行距保持一致
+  const totalHeight = innerPad * 2 + imgSize + CHAR_IMG_NAME_GAP + nameHeight + innerPad;
   return Math.max(totalHeight, LAYOUT_SPACE.CHAR_CARD_MIN_H);
 }
 
@@ -1031,8 +1034,9 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
           painter.ctx.restore();
         }
       }
-      const nameBoxY = yPos + innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB;
-      const nameBoxH = charCardHeight - (innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB) - innerPad;
+      // 【修改】图片到文字间距统一使用 CHAR_IMG_NAME_GAP
+      const nameBoxY = yPos + innerPad + imgSize + CHAR_IMG_NAME_GAP;
+      const nameBoxH = charCardHeight - (innerPad + imgSize + CHAR_IMG_NAME_GAP) - innerPad;
       
       const needDrawName = !(item.isHidden || item.isFD) || renderData.appData.exportShowHiddenFDName;
       if (needDrawName) {
@@ -1146,8 +1150,9 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
           painter.ctx.restore();
         }
       }
-      const fNameBoxY = femaleY + innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB;
-      const fNameBoxH = rowH - (innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB) - innerPad;
+      // 【修改】图片到文字间距统一使用 CHAR_IMG_NAME_GAP
+      const fNameBoxY = femaleY + innerPad + imgSize + CHAR_IMG_NAME_GAP;
+      const fNameBoxH = rowH - (innerPad + imgSize + CHAR_IMG_NAME_GAP) - innerPad;
       painter.drawTextWrapCenterInBox(
         cp.femaleName,
         femaleX + innerPad,
@@ -1198,8 +1203,9 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
             painter.ctx.restore();
           }
         }
-        const mNameBoxY = my + innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB;
-        const mNameBoxH = rowH - (innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB) - innerPad;
+        // 【修改】图片到文字间距统一使用 CHAR_IMG_NAME_GAP
+        const mNameBoxY = my + innerPad + imgSize + CHAR_IMG_NAME_GAP;
+        const mNameBoxH = rowH - (innerPad + imgSize + CHAR_IMG_NAME_GAP) - innerPad;
         
         const needDrawName = !(m.isHidden || m.isFD) || renderData.appData.exportShowHiddenFDName;
         if (needDrawName) {
@@ -1220,7 +1226,8 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
           my += rowH + maleGap;
         }
       }
-      drawY = my + rowH;
+      // 【修复】以女性卡片基准Y计算，消除男性多行带来的不定额外空白，和预计算高度对齐
+      drawY = femaleY + rowH;
       // ----- 移除多余固定留白，消除couple有无文字时上下间距不一致问题 -----
     }
   }
