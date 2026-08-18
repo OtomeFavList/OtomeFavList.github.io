@@ -589,13 +589,13 @@ function calcSingleGameBlockHeight(targetWidth, renderData) {
   let charSectionTextHeight = 0;
   if (gameItem.charSectionText?.trim()) {
     charSectionTextHeight = measureWrappedHeight(vCtx, gameItem.charSectionText.trim(), textMaxW, lineHeight, textSize);
-    charSectionTextHeight += 8 + 13; // drawY+8 + 文字底部间距【同步改为13】
+    charSectionTextHeight += 8 + 13; // drawY+8 + 文字底部间距
   }
 
   let cpSectionTextHeight = 0;
   if (gameItem.cpSectionText?.trim()) {
     cpSectionTextHeight = measureWrappedHeight(vCtx, gameItem.cpSectionText.trim(), textMaxW, lineHeight, textSize);
-    cpSectionTextHeight += 8 + 13; // drawY+8 + 文字底部间距【同步改为13】
+    cpSectionTextHeight += 8 + 13; // drawY+8 + 文字底部间距
   }
 
   let charAreaHeight = 0;
