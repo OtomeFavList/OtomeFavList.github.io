@@ -587,13 +587,13 @@ function calcSingleGameBlockHeight(targetWidth, renderData) {
   let charSectionTextHeight = 0;
   if (gameItem.charSectionText?.trim()) {
     charSectionTextHeight = measureWrappedHeight(vCtx, gameItem.charSectionText.trim(), textMaxW, lineHeight, textSize);
-    charSectionTextHeight += 14 + 13; // drawY+14 + 文字底部间距
+    charSectionTextHeight += 13 + 13; // drawY+14 + 文字底部间距
   }
 
   let cpSectionTextHeight = 0;
   if (gameItem.cpSectionText?.trim()) {
     cpSectionTextHeight = measureWrappedHeight(vCtx, gameItem.cpSectionText.trim(), textMaxW, lineHeight, textSize);
-    cpSectionTextHeight += 14 + 13; // drawY+14 + 文字底部间距
+    cpSectionTextHeight += 13 + 13; // drawY+14 + 文字底部间距
   }
 
   let charAreaHeight = 0;
@@ -1066,7 +1066,7 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
           painter.ctx,
           renderData.gameItem.charSectionText.trim(),
           textX,
-          drawY + 14,
+          drawY + 13,
           textMaxW,
           lineHeight,
           textSize,
@@ -1235,7 +1235,7 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
           painter.ctx,
           renderData.gameItem.cpSectionText.trim(),
           textX,
-          drawY + 14,
+          drawY + 13,
           textMaxW,
           lineHeight,
           textSize,
