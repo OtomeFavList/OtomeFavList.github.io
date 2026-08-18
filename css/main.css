@@ -1759,6 +1759,9 @@ h2{
 /* ========== 【修改后】关闭原生resize，自制垂直拖拽控件 ========== */
 .game-custom-text-wrap {
     position: relative;
+    /* ========== 三角不溢出 ========== */
+    overflow: hidden;
+    border-radius: 6px;
 }
 /* 关闭浏览器原生拖拽！根源解决拖拽失效 */
 .game-custom-text-wrap textarea {
