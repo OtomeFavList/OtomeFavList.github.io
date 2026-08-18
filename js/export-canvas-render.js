@@ -462,7 +462,6 @@ function calcCharCardHeight(ctx, charName, cardWidth, fontSize = 14) {
   const imgSize = cardWidth - innerPad * 2;
   const nameMaxWidth = cardWidth - innerPad * 2;
   const nameHeight = measureWrappedHeight(ctx, charName, nameMaxWidth, fontSize * 1.4, fontSize);
-  // 【修改】图文间距改为 CHAR_IMG_NAME_GAP，和卡片行间行距保持一致
   const totalHeight = innerPad * 2 + imgSize + CHAR_IMG_NAME_GAP + nameHeight + innerPad;
   return Math.max(totalHeight, LAYOUT_SPACE.CHAR_CARD_MIN_H);
 }
@@ -1034,7 +1033,6 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
           painter.ctx.restore();
         }
       }
-      // 【修改】图片到文字间距统一使用 CHAR_IMG_NAME_GAP
       const nameBoxY = yPos + innerPad + imgSize + CHAR_IMG_NAME_GAP;
       const nameBoxH = charCardHeight - (innerPad + imgSize + CHAR_IMG_NAME_GAP) - innerPad;
       
@@ -1111,7 +1109,8 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
         const h = calcCharCardHeight(painter.ctx, m.name, maleCardW, 14);
         if (h > maxMaleH) maxMaleH = h;
       });
-      const rowH = Math.max(fHeight, maxMaleH);
+      const maleAreaH = maleRows * maxMaleH + (maleRows - 1) * maleGap;
+      const rowH = Math.max(fHeight, maleAreaH) + (LAYOUT_SPACE.CP_ROW_MARGIN || 16);
 
       const femaleX = cardX + cardInnerPad;
       const femaleY = drawY;
@@ -1150,7 +1149,6 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
           painter.ctx.restore();
         }
       }
-      // 【修改】图片到文字间距统一使用 CHAR_IMG_NAME_GAP
       const fNameBoxY = femaleY + innerPad + imgSize + CHAR_IMG_NAME_GAP;
       const fNameBoxH = rowH - (innerPad + imgSize + CHAR_IMG_NAME_GAP) - innerPad;
       painter.drawTextWrapCenterInBox(
@@ -1203,7 +1201,6 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
             painter.ctx.restore();
           }
         }
-        // 【修改】图片到文字间距统一使用 CHAR_IMG_NAME_GAP
         const mNameBoxY = my + innerPad + imgSize + CHAR_IMG_NAME_GAP;
         const mNameBoxH = rowH - (innerPad + imgSize + CHAR_IMG_NAME_GAP) - innerPad;
         
@@ -1226,9 +1223,8 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
           my += rowH + maleGap;
         }
       }
-      // 【修复】以女性卡片基准Y计算，消除男性多行带来的不定额外空白，和预计算高度对齐
+      // 修复：以女性卡片基准Y计算，消除男性多行带来的不定额外空白，和预计算高度对齐
       drawY = femaleY + rowH;
-      // ----- 移除多余固定留白，消除couple有无文字时上下间距不一致问题 -----
     }
   }
 
