@@ -1803,25 +1803,33 @@ h2{
 .snapshot-container.export-snapshot .resize-handle {
     display: none !important;
 }
-/* 移动端放大三角与热区【修改版：三角向上移动，防止溢出框外】 */
+/* 移动端放大三角与热区：紧贴右下角，不再居中偏移 */
 @media (max-width:768px) {
+    .game-custom-text-wrap {
+        /* 给父容器设置相对定位，让内部元素以它为基准 */
+        position: relative;
+    }
+    .game-custom-text-wrap textarea {
+        padding-bottom: 32px; /* 预留三角区域，防止文字被遮挡 */
+        resize: none; /* 禁用原生拖拽，避免冲突 */
+    }
     .game-custom-text-wrap .resize-handle {
+        position: absolute;
         width: 32px;
         height: 32px;
         right: 0px;
-        bottom: 0px;
-    }
-    .game-custom-text-wrap textarea {
-        padding-bottom: 32px;
+        bottom: 0px;  /* 热区容器紧贴textarea右下角 */
+        background: transparent;
     }
     .game-custom-text-wrap .resize-handle::after {
+        content: ""; /* 伪元素必须加content，否则不渲染 */
+        position: absolute; /* 三角自身绝对定位 */
         width: 16px;
         height: 16px;
         background-color: #b33a3a;
         clip-path: polygon(100% 0, 100% 100%, 0 100%);
-        /* 三角图形同步向上微调，不贴底 */
         right: 0px;
-        bottom: 0px;
+        bottom: 0px;  /* 三角图形紧贴热区右下角 */
     }
 }
 
