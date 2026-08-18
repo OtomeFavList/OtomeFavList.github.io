@@ -564,9 +564,10 @@ export function initPage(Core = {}) {
         // =========【新增结束】=========
 
         // ========== 新增三个自定义文本区域的HTML（已消除换行空白） ==========
-        const headTextHtml = `<div class="game-custom-text-wrap"><textarea class="game-head-text-input" data-gid="${gameItem.gameId}" placeholder="自定义文字（游戏标题下方）">${gameItem.gameHeadText || ''}</textarea></div>`;
-        const charTextHtml = `<div class="game-custom-text-wrap"><textarea class="game-char-text-input" data-gid="${gameItem.gameId}" placeholder="自定义文字（Character区域下方）">${gameItem.charSectionText || ''}</textarea></div>`;
-        const cpTextHtml = `<div class="game-custom-text-wrap"><textarea class="game-cp-text-input" data-gid="${gameItem.gameId}" placeholder="自定义文字（Couple区域下方）">${gameItem.cpSectionText || ''}</textarea></div>`;
+        // 【修改点1】统一 placeholder 为 "自定义文本"，并在 textarea 后追加 <span class="resize-handle-marker"></span>
+        const headTextHtml = `<div class="game-custom-text-wrap"><textarea class="game-head-text-input" data-gid="${gameItem.gameId}" placeholder="自定义文本">${gameItem.gameHeadText || ''}</textarea><span class="resize-handle-marker"></span></div>`;
+        const charTextHtml = `<div class="game-custom-text-wrap"><textarea class="game-char-text-input" data-gid="${gameItem.gameId}" placeholder="自定义文本">${gameItem.charSectionText || ''}</textarea><span class="resize-handle-marker"></span></div>`;
+        const cpTextHtml = `<div class="game-custom-text-wrap"><textarea class="game-cp-text-input" data-gid="${gameItem.gameId}" placeholder="自定义文本">${gameItem.cpSectionText || ''}</textarea><span class="resize-handle-marker"></span></div>`;
 
         html += `
         <div class="added-game-card" data-gameid="${gameItem.gameId}" data-fold="${!!gameItem.fold}">
