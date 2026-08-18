@@ -791,10 +791,15 @@ export function initPage(Core = {}) {
       }
 
       // ============================================================
-      // ★★★ 修改点：cpMaleItem 点击逻辑（增加面板限定选择器，与Character逻辑对齐） ★★★
+      // ★★★ 修改点：cpMaleItem 点击逻辑（增加切换按钮判断，与Character逻辑对齐） ★★★
       // ============================================================
       const cpMaleItem = e.target.closest(".char-slide-panel-cp .cp-male-item");
       if(cpMaleItem){
+          // ★新增：如果点击目标是立绘切换按钮，直接退出，不执行选中逻辑
+          const switchBtn = e.target.closest(".char-switch-btn");
+          if (switchBtn) {
+              return;
+          }
           e.stopPropagation();
           const fid = cpMaleItem.dataset.fid;
           const mid = cpMaleItem.dataset.mid;
