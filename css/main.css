@@ -1765,7 +1765,7 @@ h2{
     height: 40px;
     border: 1px solid #b33a3a;
     border-radius: 8px;
-    background: #ffffff;
+    background: transparent;
     color: #b33a3a;
     font-size: 20px;
     cursor: pointer;
@@ -1776,10 +1776,13 @@ h2{
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    opacity: 1;
+    pointer-events: auto;
 }
+/* 提高权重，覆盖全局button:hover，和展开按钮hover规则完全一致 */
 .float-scroll-btn:hover {
-    background: #b33a3a;
-    color: #fff !important;
+    background: #992e2e !important;
+    color: #b33a3a !important;
 }
 /* 快照导出模式自动隐藏（和所有交互按钮规则保持一致） */
 .snapshot-container.export-snapshot .float-scroll-btn {
