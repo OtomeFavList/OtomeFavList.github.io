@@ -14,7 +14,7 @@ const gameIdList = [
 
 // ===================== 全局存储key【不再随意修改！】 =====================
 export const STORE_KEY = "otome-favlist-data";               // 主存储键，永不改变
-export const DATA_VERSION = 1.1;                              // 数据版本号，用于迁移
+export const DATA_VERSION = 1.2;                              // 数据版本号，用于迁移（从1.1升级）
 export const OLD_STORE_KEYS = [                               // 历史遗留 key，用于自动迁移
     "otome-favlist-data-v1",
     "otome-favlist-data-v1.1"
@@ -278,7 +278,7 @@ export function loadData() {
         // ========== 【独立版本迁移区块】未来所有版本升级逻辑写在这里 ==========
         let needSaveAfterMigrate = false;
         if (tempData._version === undefined || tempData._version < DATA_VERSION) {
-            console.log("📌执行数据结构升级迁移", tempData._version, "→", DATA_VERSION);
+            console.log("📌执行数据结构升级迁移", tempData._version ?? "无版本号", "→", DATA_VERSION);
             // --------------------------
             // 示例：未来版本升级在这里写迁移逻辑
             // if (tempData._version < 1.2) { 1.1→1.2数据转换代码 }
