@@ -98,7 +98,9 @@ const gameData = {
             images: [
                 { srcList: ["char/009/Peter.jpg",
                             "char/009/Peter2.jpg",
-                            "char/009/Peter3.jpg"], type: "base" }
+                            "char/009/Peter3.jpg",
+                            "char/Default.jpg",
+                            "char/Default2.jpg"], type: "base" }
             ]
         },
         // 伊萊·奧马尔
