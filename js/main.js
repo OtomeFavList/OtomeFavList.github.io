@@ -279,13 +279,31 @@ export function loadData() {
         let needSaveAfterMigrate = false;
         if (tempData._version === undefined || tempData._version < DATA_VERSION) {
             console.log("📌执行数据结构升级迁移", tempData._version ?? "无版本号", "→", DATA_VERSION);
-            // --------------------------
-            // 示例：未来版本升级在这里写迁移逻辑
-            // if (tempData._version < 1.2) { 1.1→1.2数据转换代码 }
-            // --------------------------
-            // 兼容：从旧key迁移过来的数据没有版本号，统一升级
+            // ===== 增量版本迁移分支，按版本从小到大依次编写 =====
+            // 1.1 → 1.2 迁移：charImageSelect key改名 gameId-charId → char-img-gameId-charId
+            if (tempData._version < 1.2) {
+                console.log("🔧执行 1.1 → 1.2 迁移：转换charImageSelect存储键名");
+                if (tempData.charImageSelect) {
+                    const newCharImgSelect = {};
+                    Object.entries(tempData.charImageSelect).forEach(([key, val]) => {
+                        if (!key.startsWith("char-img-")) {
+                            const newKey = `char-img-${key}`;
+                            newCharImgSelect[newKey] = val;
+                        } else {
+                            newCharImgSelect[key] = val;
+                        }
+                    });
+                    tempData.charImageSelect = newCharImgSelect;
+                }
+                needSaveAfterMigrate = true;
+            }
+            // 后续升级示例：
+            // if (tempData._version < 1.3) {
+            //    1.2 → 1.3 迁移代码写此处
+            // }
+
+            // 全部迁移完成后，更新为最新版本号
             tempData._version = DATA_VERSION;
-            needSaveAfterMigrate = true;
         }
 
         // ===================== 【新增：存量脏图片链接一次性清洗迁移逻辑】 =====================
@@ -403,21 +421,6 @@ export function loadData() {
                 if (typeof g.charSectionText !== "string") g.charSectionText = "";
                 if (typeof g.cpSectionText !== "string") g.cpSectionText = "";
             });
-        }
-
-        // 【自动迁移旧charImageSelect key格式】将 "gameId-charId" → "char-img-gameId-charId"
-        if (tempData.charImageSelect && (migrateFromOldKey || tempData._version < 1.2)) {
-            const newCharImgSelect = {};
-            Object.entries(tempData.charImageSelect).forEach(([key, val]) => {
-                if (!key.startsWith("char-img-")) {
-                    const newKey = `char-img-${key}`;
-                    newCharImgSelect[newKey] = val;
-                } else {
-                    newCharImgSelect[key] = val;
-                }
-            });
-            tempData.charImageSelect = newCharImgSelect;
-            needSaveAfterMigrate = true;
         }
 
         // 迁移完成，写入全局appData
