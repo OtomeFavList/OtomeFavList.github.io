@@ -4,8 +4,6 @@ import {
   LAYOUT_SPACE,
   LAYOUT_STYLE,
   getAvailableCharImages,
-  preloadAndDecodeImage,
-  preloadImageBitmap,
   convertR2ToJsDelivr
 } from './main.js';
 
@@ -15,6 +13,48 @@ const MAX_IMAGE_CONCURRENCY = 4;
 const roundImageCache = new Map();
 // 新增：图片资源缓存，区分 ImageBitmap / HTMLImageElement 降级对象
 const rawImageResourceCache = new Map();
+
+// ===================== 修复：Canvas模块独立图片缓存（不和UI共用！）=====================
+const canvasImgCache = new Map();
+
+// Canvas专用：独立加载，不依赖main.js全局缓存
+async function canvasPreloadAndDecode(src) {
+    if (!src) return null;
+    if (canvasImgCache.has(src)) {
+        return canvasImgCache.get(src);
+    }
+    const p = new Promise((resolve, reject) => {
+        const img = new Image();
+        img.crossOrigin = "anonymous";
+        img.decoding = "async";
+        img.onload = () => resolve(img);
+        img.onerror = () => {
+            canvasImgCache.delete(src);
+            console.error(`[Canvas专用加载失败]`, src);
+            reject(new Error(`Image load failed: ${src}`));
+        };
+        img.src = src;
+    });
+    canvasImgCache.set(src, p);
+    return p;
+}
+
+async function canvasPreloadImageBitmap(src) {
+    const img = await canvasPreloadAndDecode(src);
+    if (!img) return null;
+    try {
+        return await createImageBitmap(img, { resizeQuality: "high" });
+    } catch (e) {
+        console.warn(`createImageBitmap 降级: ${src}`, e);
+        try {
+            return await createImageBitmap(img);
+        } catch {
+            // iOS Safari终极兜底：返回原始Image
+            return img;
+        }
+    }
+}
+
 // ========== 字体规范 ==========
 const FONT_SIYUAN = "Noto Sans SC, sans-serif";
 
@@ -182,7 +222,7 @@ async function loadImagesWithLimit(urlList, limit) {
   // 单张图片加载，最多重试2次
   async function loadSingleUrl(url, retryCount = 2) {
     try {
-      const bitmap = await preloadImageBitmap(url);
+      const bitmap = await canvasPreloadImageBitmap(url);
       // 移动端严格校验bitmap有效尺寸
       if (!bitmap || bitmap.width === 0 || bitmap.height === 0) {
         throw new Error("bitmap empty size");
@@ -198,13 +238,8 @@ async function loadImagesWithLimit(urlList, limit) {
       console.warn('ImageBitmap加载失败，尝试降级HTML Image：', url, err);
       // 移动端降级：使用传统Image对象，规避各类浏览器bitmap渲染bug
       try {
-        const img = new Image();
-        img.crossOrigin = "anonymous";
-        await new Promise((resolve, reject) => {
-          img.onload = resolve;
-          img.onerror = reject;
-          img.src = url;
-        });
+        const img = await canvasPreloadAndDecode(url);
+        if (!img) throw new Error('canvasPreloadAndDecode returned null');
         rawImageResourceCache.set(url, { type: 'image', data: img });
         return img;
       } catch (imgErr) {
@@ -824,18 +859,6 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
     cpAreaHeight = totalCpHeight;
   }
 
-  // 注意：此处 totalCardH 将与 calcSingleGameBlockHeight 计算结果一致，
-  // 但由于绘制时动态累加 drawY，这里使用预计算的 cardH 来移动 painter.y，
-  // 确保卡片的整体高度与预计算匹配。
-  // 我们仍然使用预计算函数得到的高度，但为了与修改后的 calcSingleGameBlockHeight 保持同步，
-  // 这里重新计算一次以确保完全一致（或直接调用 calcSingleGameBlockHeight）。
-  // 为避免重复计算，我们可以直接使用外部传入的 cardH，但 drawSingleGameCard 没有 cardH 参数。
-  // 因此，我们在函数内部重新计算，或者使用一个临时计算。
-  // 为了保持代码一致，我们将在此处重新计算 totalCardH，使用相同的逻辑。
-  // 但由于我们修改了 calcSingleGameBlockHeight，我们可以直接调用它。
-  // 但要注意该函数需要 targetWidth 和 renderData，我们在此处调用。
-  // 为避免重复调用，我们直接计算。
-  // 但为了简洁，我们可以复用 calcSingleGameBlockHeight。
   const cardH = calcSingleGameBlockHeight(targetWidth, renderData);
 
   painter.drawRoundRect(
@@ -893,7 +916,6 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
           textSize,
           exportColor.customText
       );
-      // 文字底部增加间距
       const textH = measureWrappedHeight(
           painter.ctx,
           renderData.gameItem.gameHeadText.trim(),
@@ -930,14 +952,12 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
         const radius = LAYOUT_STYLE.CHAR_IMG_RADIUS;
         const cacheKey = `${item.src}||${sourceW}x${sourceH}||${radius}||${dpr}`;
         let roundCanvas = roundImageCache.get(cacheKey);
-        // 缓存不存在则实时生成
         if (!roundCanvas) {
           roundCanvas = createRoundImageCanvas(img, item.src, radius);
         }
         if (roundCanvas) {
           painter.drawImageRound(roundCanvas, xPos + innerPad, imgY, imgSize, imgSize);
         } else {
-          // 终极兜底：直接 clip 绘制原图
           painter.ctx.save();
           painter.ctx.beginPath();
           painter.ctx.moveTo(xPos + innerPad + radius, imgY);
@@ -1005,7 +1025,6 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
           lineHeight,
           textSize
       );
-      // ========== 修改处：16 → 13 ==========
       drawY += textH + 13;
   }
 
@@ -1054,7 +1073,6 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
         if (roundCanvas) {
           painter.drawImageRound(roundCanvas, femaleX + innerPad, imgY, imgSize, imgSize);
         } else {
-          // 终极兜底：直接 clip 绘制原图
           painter.ctx.save();
           painter.ctx.beginPath();
           painter.ctx.moveTo(femaleX + innerPad + radius, imgY);
@@ -1107,7 +1125,6 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
           if (roundCanvas) {
             painter.drawImageRound(roundCanvas, mx + innerPad, imgY, imgSize, imgSize);
           } else {
-            // 终极兜底：直接 clip 绘制原图
             painter.ctx.save();
             painter.ctx.beginPath();
             painter.ctx.moveTo(mx + innerPad + radius, imgY);
@@ -1177,7 +1194,6 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
           lineHeight,
           textSize
       );
-      // ========== 修改处：10 → 13 ==========
       drawY += textH + 13;
   }
 
@@ -1241,7 +1257,6 @@ function calcTotalVirtualHeight(targetWidth, appData, gameTemplateList, renderDa
   });
   total += LAYOUT_SPACE.BODY_PADDING;
   total += 50;
-  // 【新增安全余量 20px】防止文字换行微小误差裁切
   total += 20;
   return total;
 }
@@ -1260,6 +1275,7 @@ export async function renderExportCanvas(
   currentDPR = getExportDPR(targetWidth);
   roundImageCache.clear();
   rawImageResourceCache.clear();
+  canvasImgCache.clear(); // 清空Canvas独立缓存，避免之前导出残留
 
   const allImageSrcList = [];
   const renderDataList = [];
@@ -1289,8 +1305,12 @@ export async function renderExportCanvas(
         const stored = gameItem.selectCharItems?.find(s => s.charId === cid);
         const idx = Number(stored?.imgIndex ?? 0);
         const src = allSrc[idx] || allSrc[0];
-        // 转换为 Canvas 专用的 jsDelivr 地址
         const canvasSrc = convertR2ToJsDelivr(src);
+        // 兜底防火墙：拒绝R2地址进入Canvas加载队列
+        if (canvasSrc && !canvasSrc.startsWith('http') || canvasSrc.startsWith('https://pub-')) {
+          console.error("❌ 禁止加入R2地址到Canvas加载队列", canvasSrc);
+          continue;
+        }
         charItems.push({
           id: char.id,
           name: char.name,
@@ -1313,8 +1333,11 @@ export async function renderExportCanvas(
         if (fAllSrc.length === 0) continue;
         const fIdx = Number(cp.femaleImgIndex ?? 0);
         const fSrc = fAllSrc[fIdx] || fAllSrc[0];
-        // 转换为 Canvas 专用的 jsDelivr 地址
         const canvasFSrc = convertR2ToJsDelivr(fSrc);
+        if (canvasFSrc && !canvasFSrc.startsWith('http') || canvasFSrc.startsWith('https://pub-')) {
+          console.error("❌ 禁止加入R2地址到Canvas加载队列", canvasFSrc);
+          continue;
+        }
 
         const maleItems = [];
         if (Array.isArray(cp.maleItems)) {
@@ -1327,8 +1350,11 @@ export async function renderExportCanvas(
             if (mAllSrc.length === 0) continue;
             const mIdx = Number(mi.imgIndex ?? 0);
             const mSrc = mAllSrc[mIdx] || mAllSrc[0];
-            // 转换为 Canvas 专用的 jsDelivr 地址
             const canvasMSrc = convertR2ToJsDelivr(mSrc);
+            if (canvasMSrc && !canvasMSrc.startsWith('http') || canvasMSrc.startsWith('https://pub-')) {
+              console.error("❌ 禁止加入R2地址到Canvas加载队列", canvasMSrc);
+              continue;
+            }
             maleItems.push({
               id: mChar.id,
               name: mChar.name,
@@ -1395,12 +1421,8 @@ export async function renderExportCanvas(
     const canvas = document.createElement('canvas');
     const painter = new CanvasLayoutPainter(canvas, targetWidth, totalHeight, exportColor.bg);
 
-    // console.log("✅ 所有图片加载完成，开始预生成圆角画布");
     const imageCache = await loadImagesWithLimit(allImageSrcList, MAX_IMAGE_CONCURRENCY);
-    // console.log("✅ ImageBitmap 全部就绪，开始批量生成圆角离屏画布");
     await preGenerateAllRoundCanvas(imageCache, roundCanvasTasks);
-    // console.log("✅ 全部圆角画布预生成完成，正式启动绘制");
-    // 额外增加等待，给低性能设备缓冲
     await new Promise(r => setTimeout(r, 50));
     await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
 
@@ -1435,11 +1457,8 @@ export async function renderExportCanvas(
 
   const pagePlanList = splitPagesByHeight(headerHeight, gameBlockHeights, maxPageHeight);
 
-  // console.log("✅ 所有图片加载完成，开始预生成圆角画布");
   const imageCache = await loadImagesWithLimit(allImageSrcList, MAX_IMAGE_CONCURRENCY);
-  // console.log("✅ ImageBitmap 全部就绪，开始批量生成圆角离屏画布");
   await preGenerateAllRoundCanvas(imageCache, roundCanvasTasks);
-  // console.log("✅ 全部圆角画布预生成完成，正式启动绘制");
   await new Promise(r => setTimeout(r, 50));
   await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
 
@@ -1466,6 +1485,5 @@ export async function renderExportCanvas(
     });
     if (blob) blobList.push(blob);
   }
-  // console.log("最终生成图片数量：", blobList.length);
   return blobList;
 }
