@@ -1508,11 +1508,16 @@ export function initPage(Core = {}) {
             });
         });
 
-        // 滚动监听，靠近目标时隐藏按钮
+        // 滚动监听修改逻辑：
+        // 只有【添加游戏按钮完全落在视口范围内】才隐藏悬浮按钮
+        // 滚动到添加按钮上方 或者 添加按钮在视口下方 → 都显示悬浮按钮
         function toggleFloatBtnVis() {
             const rect = targetAddBtn.getBoundingClientRect();
-            // 目标按钮进入视口上半区域，隐藏悬浮按钮
-            if (rect.top < window.innerHeight * 0.3) {
+            const winH = window.innerHeight;
+            // 判断条件：目标按钮完整可见（顶部≥0 并且底部≤窗口高度）
+            const targetFullyVisible = rect.top >= 0 && rect.bottom <= winH;
+
+            if (targetFullyVisible) {
                 backToAddBtn.style.opacity = "0";
                 backToAddBtn.style.pointerEvents = "none";
             } else {
