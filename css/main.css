@@ -1755,3 +1755,43 @@ h2{
   outline: none;
   border-color: #f6a5b8;
 }
+
+/* ========== 右下角悬浮回到添加游戏按钮 ========== */
+.float-scroll-btn {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    width: 40px;
+    height: 40px;
+    border: 1px solid #b33a3a;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #b33a3a;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 0 !important;
+    line-height: 1;
+    z-index: 998;
+    transition: 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.float-scroll-btn:hover {
+    background: #b33a3a;
+    color: #fff !important;
+}
+/* 快照导出模式自动隐藏（和所有交互按钮规则保持一致） */
+.snapshot-container.export-snapshot .float-scroll-btn {
+    display: none !important;
+}
+/* 移动端微调位置，避免被底部遮挡 */
+@media (max-width:768px) {
+    .float-scroll-btn {
+        right: 16px;
+        bottom: 16px;
+        width: 36px;
+        height: 36px;
+        font-size: 18px;
+    }
+}
