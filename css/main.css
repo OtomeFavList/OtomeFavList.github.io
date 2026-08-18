@@ -1809,10 +1809,10 @@ h2{
         width: 32px;
         height: 32px;
         right: 0px;
-        bottom: 4px;  /* 三角整体向上偏移，远离容器底边，不再戳出框 */
+        bottom: 0px;
     }
     .game-custom-text-wrap textarea {
-        padding-bottom: 36px; /* 同步加大底部内边距，预留三角空间 */
+        padding-bottom: 32px;
     }
     .game-custom-text-wrap .resize-handle::after {
         width: 16px;
@@ -1820,8 +1820,8 @@ h2{
         background-color: #b33a3a;
         clip-path: polygon(100% 0, 100% 100%, 0 100%);
         /* 三角图形同步向上微调，不贴底 */
-        right: 4px;
-        bottom: 4px;
+        right: 0px;
+        bottom: 0px;
     }
 }
 
