@@ -1761,12 +1761,14 @@ h2{
     position: relative;
     overflow: hidden;
 }
+
 /* 关闭浏览器原生拖拽！根源解决拖拽失效 */
 .game-custom-text-wrap textarea {
     resize: none !important;
     overflow: auto;
     padding-bottom: 26px; /* 减小底部留空，避免文字被遮挡 */
 }
+
 /* 可视化拖拽手柄：实心红色下三角，紧贴右下角 */
 .game-custom-text-wrap .resize-handle {
     position: absolute;
@@ -1776,10 +1778,12 @@ h2{
     height: 24px;
     cursor: ns-resize;
     z-index: 2;
-    display: flex;
+    /* ❗删除 flex，避免浏览器渲染分歧 */
+    /* display: flex;
     align-items: flex-end;
-    justify-content: flex-end;
+    justify-content: flex-end; */
 }
+
 /* 红色三角图形 */
 .game-custom-text-wrap .resize-handle::after {
     content: "";
@@ -1793,21 +1797,25 @@ h2{
     right: 0;
     bottom: 0;
 }
+
 /* 拖拽激活状态样式 */
 .game-custom-text-wrap .resize-handle:active::after {
     opacity: 0.7;
 }
+
 /* 快照模式统一隐藏拖拽控件 */
 .snapshot-container.export-snapshot .resize-handle {
     display: none !important;
 }
+
 /* 移动端放大三角与热区：紧贴textarea右下角 */
 @media (max-width:1200px) {
     .game-custom-text-wrap {
         position: relative;
         overflow: hidden;
-        border-radius: 6px;
+        /* ❗移除 border-radius，全局统一无圆角 */
     }
+
     .game-custom-text-wrap .resize-handle {
         position: absolute;
         right: 0;
@@ -1816,13 +1824,13 @@ h2{
         height: 32px;
         background: transparent;
         pointer-events: auto;
-        /* 删除 clip-path: inset() 圆角裁切 */
     }
+
     .game-custom-text-wrap .resize-handle::after {
         content: "";
         position: absolute;
         right: 0px;
-        bottom: 4px;    /* 紧贴底部 */
+        bottom: 4px;
         width: 16px;
         height: 16px;
         background-color: #b33a3a;
