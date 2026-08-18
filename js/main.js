@@ -151,7 +151,7 @@ export let appData = {
         gameName: "#000000",   // ✅ 修改为黑色，用户仍可自定义
         border: "#f6a5b8"
     },
-    charImageSelect: {} // 持久存储角色选中立绘索引 key:"gameId-charId"
+    charImageSelect: {} // 持久存储角色选中立绘索引 key:"char-img-gameId-charId"
 };
 
 // ===================== 导出画布 全局间距常量【严格匹配结构图px规范】 =====================
