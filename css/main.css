@@ -1812,18 +1812,16 @@ h2{
         padding-bottom: 32px;
         resize: none;
         box-sizing: border-box;
+        /* 核心改动：textarea自身作为定位基准 */
+        position: relative;
     }
     .game-custom-text-wrap .resize-handle {
         position: absolute;
         width: 32px;
         height: 32px;
-        /* 先固定在右侧，垂直方向靠transform锚定到textarea底部 */
-        right: 0px;
-        top: 0px;
-        /* 关键：移动到 textarea 底部 */
-        transform: translateY(calc(100% - 32px));
+        right: 0;
+        bottom: 0;
         background: transparent;
-        pointer-events: auto;
     }
     .game-custom-text-wrap .resize-handle::after {
         content: "";
@@ -1832,8 +1830,8 @@ h2{
         height: 16px;
         background-color: #b33a3a;
         clip-path: polygon(100% 0, 100% 100%, 0 100%);
-        right: 0px;
-        bottom: 0px;
+        right: 0;
+        bottom: 0;
     }
 }
 
