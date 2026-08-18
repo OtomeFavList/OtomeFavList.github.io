@@ -143,7 +143,9 @@ const gameData = {
             images: [
                 { srcList: ["char/044/Toka.jpg",
                             "char/044/Toka2.png",
-                            "char/044/Toka3.jpg"], type: "base" }
+                            "char/044/Toka3.jpg",
+                            "char/Default.jpg",
+                            "char/Default2.jpg"], type: "base" }
             ]
         }
     ]
