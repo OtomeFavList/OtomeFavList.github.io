@@ -647,6 +647,11 @@ export function initPage(Core = {}) {
           return;
       }
 
+      // ==========【新增：图片点击冒泡兼容，解决cp面板点击图片需要两次】==========
+      if(e.target.tagName === "IMG"){
+          // 允许事件向上冒泡至父级char-item / cp-male-item，不拦截
+      }
+
       // ==========【新增】折叠状态：游戏标题旁图标展开按钮 ==========
       const iconExpandBtn = e.target.closest(".game-fold-icon-expand");
       if (iconExpandBtn) {
