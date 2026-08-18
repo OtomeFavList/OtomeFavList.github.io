@@ -1804,91 +1804,32 @@ h2{
     display: none !important;
 }
 /* 移动端放大三角与热区：紧贴textarea右下角 */
-@media (max-width:768px) {
-    /* 父容器：强制裁剪溢出三角，同步圆角，提升权重 */
-    .game-custom-text-wrap {
-        position: relative !important;
-        overflow: hidden !important;
-        border-radius: 6px !important; /* 与 textarea 圆角保持一致 */
-    }
-
-    /* 文本框：关闭原生 resize，底部留空给三角 */
-    .game-custom-text-wrap textarea {
-        resize: none !important;
-        padding-bottom: 32px !important;
-        box-sizing: border-box !important;
-        border-radius: 6px !important; /* 确保与父容器圆角相同 */
-        position: static !important;   /* 避免干扰父容器定位 */
-    }
-
-    /* 手柄容器：绝对定位，紧贴右下角 */
-    .game-custom-text-wrap .resize-handle {
-        position: absolute !important;
-        width: 32px !important;
-        height: 32px !important;
-        right: 0 !important;
-        bottom: 0 !important;
-        background: transparent !important;
-        margin: 0 !important;
-        padding: 0 !important;
-    }
-
-    /* 三角图形：内嵌直角三角，完全位于父容器内部 */
-    .game-custom-text-wrap .resize-handle::after {
-        content: "" !important;
-        position: absolute !important;
-        width: 16px !important;
-        height: 16px !important;
-        background-color: #b33a3a !important;
-        clip-path: polygon(100% 0, 100% 100%, 0 100%) !important;
-        right: 0 !important;
-        bottom: 0 !important;
-        margin: 0 !important;
-        padding: 0 !important;
-    }
-}
-
-/* ========== 确保三角在折叠手机、平板设备上不溢出 ========== */
 @media (max-width:1200px) {
-    .added-game-card .game-custom-text-wrap,
     .game-custom-text-wrap {
-        position: relative !important;
-        overflow: hidden !important;
-        border-radius: 6px !important;
+        position: relative;
+        overflow: hidden; /* 保留，但作为辅助 */
+        border-radius: 6px;
     }
-    .added-game-card .game-custom-text-wrap textarea,
-    .game-custom-text-wrap textarea {
-        resize: none !important;
-        padding-bottom: 32px !important;
-        border-radius: 6px !important;
-        position: static !important;
-        overflow: auto !important;
-        box-sizing: border-box !important;
-    }
-    .added-game-card .game-custom-text-wrap .resize-handle,
+    
     .game-custom-text-wrap .resize-handle {
-        position: absolute !important;
-        width: 32px !important;
-        height: 32px !important;
-        right: 0 !important;
-        bottom: 0 !important;
-        background: transparent !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        z-index: 2 !important;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 32px;
+        height: 32px;
+        background: transparent;
+        pointer-events: auto; /* 保持可交互 */
     }
-    .added-game-card .game-custom-text-wrap .resize-handle::after,
+    
     .game-custom-text-wrap .resize-handle::after {
-        content: "" !important;
-        position: absolute !important;
-        width: 16px !important;
-        height: 16px !important;
-        background-color: #b33a3a !important;
-        clip-path: polygon(100% 0, 100% 100%, 0 100%) !important;
-        right: 0 !important;
-        bottom: 0 !important;
-        margin: 0 !important;
-        padding: 0 !important;
+        content: "";
+        position: absolute;
+        right: 4px;  /* 关键：向右缩进 4px */
+        bottom: 4px; /* 关键：向下缩进 4px */
+        width: 16px;
+        height: 16px;
+        background-color: #b33a3a;
+        clip-path: polygon(100% 0, 100% 100%, 0 100%);
     }
 }
 
