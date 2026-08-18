@@ -1221,8 +1221,6 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
         }
       }
       drawY = my + rowH;
-      // =========【修复】同步预计算，追加Couple行间距 =========
-      drawY += (LAYOUT_SPACE.CP_ROW_MARGIN || 16);
       // ----- 移除多余固定留白，消除couple有无文字时上下间距不一致问题 -----
     }
   }
