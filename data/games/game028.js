@@ -116,7 +116,9 @@ const gameData = {
             images: [
                 { srcList: ["char/028/Mamoru.jpg",
                             "char/028/Mamoru2.jpg",
-                            "char/028/Mamoru3.jpg"], type: "base" }
+                            "char/028/Mamoru3.jpg",
+                            "char/Default.jpg",
+                            "char/Default2.jpg"], type: "base" }
             ]
         },
         // 有田喜助
