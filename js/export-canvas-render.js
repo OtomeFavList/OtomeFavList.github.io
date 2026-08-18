@@ -525,6 +525,25 @@ function calcHeaderVirtualHeight(targetWidth, appData) {
   return cursorY;
 }
 
+// ========== 【新增】测量游戏标题行（含爱心）高度，自动处理爱心换行 ==========
+function measureGameTitleWithHeartHeight(vCtx, cardX, gameCardW, gameName) {
+  const nameFontSize = 22;
+  const HEART_SIZE = 26;
+  const HEART_GAP = 6;
+  const cardInnerPad = LAYOUT_SPACE.ADDED_GAME_CARD_PADDING;
+  const fontStr = `bold ${nameFontSize}px ${FONT_SIYUAN}`;
+  vCtx.font = fontStr;
+  const nameTextWidth = vCtx.measureText(gameName).width;
+  const nameX = cardX + cardInnerPad;
+  const heartStartX = nameX + nameTextWidth + 14;
+  const rightLimit = gameCardW + cardX - cardInnerPad;
+  const heartTotalWidth = HEART_SIZE * 5 + HEART_GAP * 4;
+  const heartWrap = heartStartX + heartTotalWidth > rightLimit;
+  const baseHeight = nameFontSize;
+  const gapBottom = LAYOUT_SPACE.GAME_CARD_HEAD_MB;
+  return heartWrap ? (baseHeight + HEART_SIZE + gapBottom) : (baseHeight + gapBottom);
+}
+
 // ============================ 【修改后】calcSingleGameBlockHeight ============================
 function calcSingleGameBlockHeight(targetWidth, renderData) {
   const { gameInfo, charItems, cpItems, gameItem } = renderData;
@@ -534,6 +553,8 @@ function calcSingleGameBlockHeight(targetWidth, renderData) {
   const BODY_PAD = LAYOUT_SPACE.BODY_PADDING;
   const WRAP_MAX_W = 1200;
   const wrapW = Math.min(WRAP_MAX_W, targetWidth - BODY_PAD * 2);
+  const wrapX = Math.max(BODY_PAD, (targetWidth - wrapW) / 2);
+  const cardX = wrapX;
 
   const cardInnerPad = LAYOUT_SPACE.ADDED_GAME_CARD_PADDING;
   const gameCardW = wrapW;
@@ -541,8 +562,8 @@ function calcSingleGameBlockHeight(targetWidth, renderData) {
   const textSize = 15;
   const lineHeight = textSize * 1.45;
 
-  const nameFontSize = 22;
-  const nameHeight = nameFontSize + LAYOUT_SPACE.GAME_CARD_HEAD_MB;
+  // =========【修改：动态计算标题高度】=========
+  const nameHeight = measureGameTitleWithHeartHeight(vCtx, cardX, gameCardW, gameInfo.name);
   const HEART_AREA_HEIGHT = 0;
 
   // =========【新增：三处自定义文本高度预计算】=========
