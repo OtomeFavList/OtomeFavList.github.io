@@ -82,20 +82,26 @@ export function getCanvasImageUrl(relPath) {
 
 /**
  * R2完整链接 → jsDelivr链接（专供Canvas导出模块转换）
- * 增强版：支持相对路径、R2完整URL、jsDelivr完整URL
+ * 增强版：增加强校验，彻底杜绝R2地址泄漏
  * @param {string} path 相对路径或完整URL
  * @returns {string}
  */
 export function convertR2ToJsDelivr(path) {
-    // 如果是 R2 完整 URL，替换域名
-    if (path.startsWith(R2_BASE_URL + "/")) {
-        const relPath = path.slice(R2_BASE_URL.length + 1);
-        return getCanvasImageUrl(relPath);
+    if (!path) return "";
+    // 标准化提取相对路径
+    const rel = normalizeImageRelPath(path);
+    // 标准化后如果依然是http链接，代表无法识别，非法链接，告警
+    if (rel.startsWith("http")) {
+        console.error("❌ convertR2ToJsDelivr 无法转换的外部图片地址:", path);
+        return "";
     }
-    // 如果是 jsDelivr 完整 URL，原样返回（兼容旧数据）
-    if (path.startsWith(JSD_BASE_URL)) return path;
-    // 否则视为相对路径，直接拼接 jsDelivr URL
-    return getCanvasImageUrl(path);
+    const jsdUrl = getCanvasImageUrl(rel);
+    // 二次防御：确保输出绝对不能是R2域名
+    if (jsdUrl.startsWith(R2_BASE_URL)) {
+        console.error("❌ 转换函数异常，输出R2地址！原始path:", path);
+        return "";
+    }
+    return jsdUrl;
 }
 
 // ===================== 全局应用数据对象 =====================
