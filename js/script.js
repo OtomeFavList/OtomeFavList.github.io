@@ -796,16 +796,15 @@ export function initPage(Core = {}) {
       }
 
       // ============================================================
-      // ★★★ 修改点：cpMaleItem 点击逻辑（增加切换按钮判断，与Character逻辑对齐） ★★★
+      // ★★★ 修改点：cpMaleItem 点击逻辑（对齐Character面板交互） ★★★
       // ============================================================
       const cpMaleItem = e.target.closest(".char-slide-panel-cp .cp-male-item");
       if(cpMaleItem){
-          // ★新增：如果点击目标是立绘切换按钮，直接退出，不执行选中逻辑
+          // 交互规则对齐character面板：点击切换按钮 → 仅切换立绘，不选中角色
           const switchBtn = e.target.closest(".char-switch-btn");
           if (switchBtn) {
               return;
           }
-          e.stopPropagation();
           const fid = cpMaleItem.dataset.fid;
           const mid = cpMaleItem.dataset.mid;
           const gameId = cpMaleItem.dataset.gameId;
@@ -814,7 +813,6 @@ export function initPage(Core = {}) {
           const draftMap = panel._tempCpDraftMap;
           if(!draftMap || !draftMap[fid]) return;
           const draftCharMap = draftMap[fid];
-
           if(draftCharMap.has(mid)){
               draftCharMap.delete(mid);
               cpMaleItem.classList.remove("selected");
@@ -825,6 +823,8 @@ export function initPage(Core = {}) {
               draftCharMap.set(mid, currentIdx);
               cpMaleItem.classList.add("selected");
           }
+          // 仅在确认执行选中逻辑后阻止冒泡，和char-item逻辑统一
+          e.stopPropagation();
           return;
       }
 
