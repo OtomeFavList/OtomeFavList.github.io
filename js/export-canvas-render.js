@@ -57,8 +57,6 @@ async function canvasPreloadImageBitmap(src) {
 
 // ========== 字体规范 ==========
 const FONT_SIYUAN = "Noto Sans SC, sans-serif";
-// 角色图片底部到角色名称垂直间距，参考角色卡片行间间距统一视觉
-const CHAR_IMG_NAME_GAP = LAYOUT_SPACE.CHAR_ROW_GAP;
 
 // ============================ 固定 DPR = 2 ============================
 let currentDPR = 2;
@@ -462,7 +460,9 @@ function calcCharCardHeight(ctx, charName, cardWidth, fontSize = 14) {
   const imgSize = cardWidth - innerPad * 2;
   const nameMaxWidth = cardWidth - innerPad * 2;
   const nameHeight = measureWrappedHeight(ctx, charName, nameMaxWidth, fontSize * 1.4, fontSize);
-  const totalHeight = innerPad * 2 + imgSize + CHAR_IMG_NAME_GAP + nameHeight + innerPad;
+  // 使用角色换行行距作为图片与文字间距，统一视觉
+  const IMG_NAME_GAP = LAYOUT_SPACE.CHAR_ROW_GAP;
+  const totalHeight = innerPad * 2 + imgSize + IMG_NAME_GAP + nameHeight + innerPad;
   return Math.max(totalHeight, LAYOUT_SPACE.CHAR_CARD_MIN_H);
 }
 
@@ -640,8 +640,13 @@ function calcSingleGameBlockHeight(targetWidth, renderData) {
       const maleRows = Math.ceil(cp.maleItems.length / perRow);
       const maleAreaH = maleRows * maxMaleH + (maleRows - 1) * maleGap;
       // ----- 将间距移入 totalCpHeight 累加 -----
-      const rowH = Math.max(fHeight, maleAreaH);
-      totalCpHeight += rowH + (LAYOUT_SPACE.CP_ROW_MARGIN || 16);
+      const baseRowH = Math.max(fHeight, maleAreaH);
+      // 最后一组cp不追加行间距，消除多余空白
+      if (cp !== cpItems[cpItems.length - 1]) {
+        totalCpHeight += baseRowH + (LAYOUT_SPACE.CP_ROW_MARGIN || 16);
+      } else {
+        totalCpHeight += baseRowH;
+      }
     }
     cpAreaHeight = totalCpHeight;
   }
@@ -1033,8 +1038,9 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
           painter.ctx.restore();
         }
       }
-      const nameBoxY = yPos + innerPad + imgSize + CHAR_IMG_NAME_GAP;
-      const nameBoxH = charCardHeight - (innerPad + imgSize + CHAR_IMG_NAME_GAP) - innerPad;
+      const IMG_NAME_GAP = LAYOUT_SPACE.CHAR_ROW_GAP;
+      const nameBoxY = yPos + innerPad + imgSize + IMG_NAME_GAP;
+      const nameBoxH = charCardHeight - (innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB) - innerPad;
       
       const needDrawName = !(item.isHidden || item.isFD) || renderData.appData.exportShowHiddenFDName;
       if (needDrawName) {
@@ -1109,8 +1115,7 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
         const h = calcCharCardHeight(painter.ctx, m.name, maleCardW, 14);
         if (h > maxMaleH) maxMaleH = h;
       });
-      const maleAreaH = maleRows * maxMaleH + (maleRows - 1) * maleGap;
-      const rowH = Math.max(fHeight, maleAreaH) + (LAYOUT_SPACE.CP_ROW_MARGIN || 16);
+      const rowH = Math.max(fHeight, maxMaleH);
 
       const femaleX = cardX + cardInnerPad;
       const femaleY = drawY;
@@ -1149,8 +1154,9 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
           painter.ctx.restore();
         }
       }
-      const fNameBoxY = femaleY + innerPad + imgSize + CHAR_IMG_NAME_GAP;
-      const fNameBoxH = rowH - (innerPad + imgSize + CHAR_IMG_NAME_GAP) - innerPad;
+      const IMG_NAME_GAP = LAYOUT_SPACE.CHAR_ROW_GAP;
+      const fNameBoxY = femaleY + innerPad + imgSize + IMG_NAME_GAP;
+      const fNameBoxH = rowH - (innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB) - innerPad;
       painter.drawTextWrapCenterInBox(
         cp.femaleName,
         femaleX + innerPad,
@@ -1201,8 +1207,9 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
             painter.ctx.restore();
           }
         }
-        const mNameBoxY = my + innerPad + imgSize + CHAR_IMG_NAME_GAP;
-        const mNameBoxH = rowH - (innerPad + imgSize + CHAR_IMG_NAME_GAP) - innerPad;
+        const IMG_NAME_GAP = LAYOUT_SPACE.CHAR_ROW_GAP;
+        const mNameBoxY = my + innerPad + imgSize + IMG_NAME_GAP;
+        const mNameBoxH = rowH - (innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB) - innerPad;
         
         const needDrawName = !(m.isHidden || m.isFD) || renderData.appData.exportShowHiddenFDName;
         if (needDrawName) {
@@ -1223,8 +1230,11 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
           my += rowH + maleGap;
         }
       }
-      // 修复：以女性卡片基准Y计算，消除男性多行带来的不定额外空白，和预计算高度对齐
-      drawY = femaleY + rowH;
+      drawY = my + rowH;
+      // 仅非最后一组cp添加行间距，和预计算高度逻辑对齐，消除额外空白
+      if (cp !== cpItems[cpItems.length - 1]) {
+        drawY += (LAYOUT_SPACE.CP_ROW_MARGIN || 16);
+      }
     }
   }
 
