@@ -1807,8 +1807,11 @@ h2{
 @media (max-width:1200px) {
     .game-custom-text-wrap {
         position: relative;
-        overflow: hidden; /* 保留，但作为辅助 */
+        overflow: hidden;
         border-radius: 6px;
+        /* 修复移动端webkit内核圆角裁切失效 */
+        -webkit-border-radius: 6px;
+        -webkit-overflow-scrolling: touch;
     }
     
     .game-custom-text-wrap .resize-handle {
@@ -1818,14 +1821,14 @@ h2{
         width: 32px;
         height: 32px;
         background: transparent;
-        pointer-events: auto; /* 保持可交互 */
+        pointer-events: auto;
     }
     
     .game-custom-text-wrap .resize-handle::after {
         content: "";
         position: absolute;
         right: 0px;
-        bottom: 4px; /* 关键：向下缩进 4px */
+        bottom: 4px;
         width: 16px;
         height: 16px;
         background-color: #b33a3a;
