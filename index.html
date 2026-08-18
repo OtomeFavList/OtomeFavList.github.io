@@ -305,7 +305,7 @@ z-index: -999;
 </div>
 </div>
 
-<!-- ===== 内容区域移除折叠控制） ===== -->
+<!-- ===== 内容区域（移除折叠控制） ===== -->
 <div id="intro-content" style="margin-top: 16px;">
 
     <!-- 简介 -->
@@ -325,24 +325,25 @@ z-index: -999;
     <h3 style="font-size: 19px; color: #b85878; margin: 0 0 12px 0; font-weight: bold;">✨ 功能特色</h3>
     <ul style="font-size: 15px; line-height: 1.9; color: #444; padding-left: 22px; margin-bottom: 20px; list-style-type: disc;">
         <li><strong>游戏库管理</strong>：内置 70+ 款日乙游戏（持续更新），支持按编剧、画师、发行年份、厂商等筛选。</li>
+        <li><strong>剧透保护</strong>：全局/单游戏控制隐藏角色、续作/FD角色的显示，开启前会弹出剧透警告。</li>
+        <li><strong>评分系统</strong>：每款游戏可给予 1~5 颗爱心评分。</li>
         <li><strong>角色选择</strong>：
             <ul style="padding-left: 22px; margin-top: 2px; list-style-type: circle;">
                 <li><strong>Character 模式</strong>：为游戏卡片添加你喜欢的角色（支持多立绘切换）。</li>
                 <li><strong>Couple 模式</strong>：为女主角搭配男主角，组成 CP 。</li>
             </ul>
         </li>
-        <li><strong>剧透保护</strong>：全局/单游戏控制隐藏角色、续作/FD角色的显示，开启前会弹出剧透警告。</li>
-        <li><strong>评分系统</strong>：每款游戏可给予 1~5 颗爱心评分。</li>
+        <li><strong>自定义文本</strong>：每个游戏卡片可添加三段自由文本（分别位于游戏标题、Character 区域、Couple 区域下方），用于记录个人感想，文本会随导出图片一同保存。</li>
         <li><strong>高度自定义导出</strong>：
             <ul style="padding-left: 22px; margin-top: 2px; list-style-type: circle;">
                 <li>多种尺寸：固定比例（如 640×853、810×1080）或长图模式（640/810/1080 宽）。</li>
-                <li>自由配色：背景色、标题色、正文色、边框色等均可调整。</li>
+                <li>自由配色：背景色、标题色、正文色、边框色等均可调整，且实时预览效果。</li>
                 <li>导出折叠内容（开关控制是否包含折叠的游戏卡片）。</li>
                 <li>隐藏角色名称的单独开关（适合仅展示剪影，防止剧透）。</li>
             </ul>
         </li>
         <li><strong>预览及分页导出</strong>：生成图片前先预览，多页内容自动分页并支持批量下载。</li>
-        <li><strong>本地数据持久化</strong>：所有配置（游戏列表、角色选择等）自动保存到浏览器本地，刷新页面不丢失。</li>
+        <li><strong>本地数据持久化</strong>：所有配置（游戏列表、角色选择、自定义文本等）自动保存到浏览器本地，刷新页面不丢失。</li>
     </ul>
 
     <hr style="border: none; border-top: 2px solid #f6d8e0; margin: 20px 0;">
@@ -363,24 +364,37 @@ z-index: -999;
         <li>点击任意游戏卡片即可添加至列表。</li>
     </ul>
 
-    <h4 style="font-size: 16px; color: #b33a3a; margin: 12px 0 4px 0; font-weight: 600;">3. 选择角色</h4>
+    <h4 style="font-size: 16px; color: #b33a3a; margin: 12px 0 4px 0; font-weight: 600;">3. 评分</h4>
+    <p style="font-size: 15px; line-height: 1.8; color: #555; margin: 0 0 12px 0;">
+        游戏名称右侧有五颗爱心，点击即可为该游戏评分（1~5 颗爱心）。
+    </p>
+
+    <h4 style="font-size: 16px; color: #b33a3a; margin: 12px 0 4px 0; font-weight: 600;">4. 选择角色</h4>
     <p style="font-size: 15px; line-height: 1.8; color: #555; margin: 0 0 4px 0;">
         每个已添加的游戏卡片下方有两个按钮：
     </p>
     <ul style="font-size: 15px; line-height: 1.8; color: #444; padding-left: 22px; margin: 0 0 12px 0; list-style-type: disc;">
-        <li><strong>选择角色 Character</strong>：勾选你喜欢的对象（可多选，按照选择的顺序进行添加），点击确认保存。</li>
+        <li><strong>选择角色 Character</strong>：勾选你喜欢的角色（可多选，按照选择的顺序进行添加），点击确认保存。</li>
         <li><strong>选择角色 Couple</strong>：点击女主卡片展开男主列表，勾选你心仪的 CP 组合，确认后保存。</li>
     </ul>
     <blockquote style="font-size: 14px; line-height: 1.7; color: #666; background: #fff7f9; border-left: 4px solid #e895a8; padding: 8px 16px; margin: 4px 0 12px 0;">
         💡 角色立绘支持多张图片切换（例如动作、服装差分或FD ver），点击左右箭头即可。
     </blockquote>
 
-    <h4 style="font-size: 16px; color: #b33a3a; margin: 12px 0 4px 0; font-weight: 600;">4. 评分</h4>
-    <p style="font-size: 15px; line-height: 1.8; color: #555; margin: 0 0 12px 0;">
-        游戏名称右侧有五颗爱心，点击即可为该游戏评分（1~5 颗爱心）。
+    <h4 style="font-size: 16px; color: #b33a3a; margin: 12px 0 4px 0; font-weight: 600;">5. 添加自定义文本</h4>
+    <p style="font-size: 15px; line-height: 1.8; color: #555; margin: 0 0 4px 0;">
+        在每个游戏卡片中各有三个文本框分别位于游戏标题、Character 区域、Couple 区域下方：
     </p>
+    <ul style="font-size: 15px; line-height: 1.8; color: #444; padding-left: 22px; margin: 0 0 12px 0; list-style-type: disc;">
+        <li><strong>游戏标题下方文本框</strong>：适合填写对整部游戏的短评或印象。</li>
+        <li><strong>Character 区域下方文本框</strong>：可针对所选角色添加感想等内容。</li>
+        <li><strong>Couple 区域下方文本框</strong>：可针对所选 CP 组合添加感想等内容。</li>
+    </ul>
+    <blockquote style="font-size: 14px; line-height: 1.7; color: #666; background: #fff7f9; border-left: 4px solid #e895a8; padding: 8px 16px; margin: 4px 0 12px 0;">
+        💡 文本内容支持换行且会自动保存，随导出图片一同呈现。
+    </blockquote>
 
-    <h4 style="font-size: 16px; color: #b33a3a; margin: 12px 0 4px 0; font-weight: 600;">5. 自定义导出设置</h4>
+    <h4 style="font-size: 16px; color: #b33a3a; margin: 12px 0 4px 0; font-weight: 600;">6. 自定义导出设置</h4>
     <ul style="font-size: 15px; line-height: 1.8; color: #444; padding-left: 22px; margin: 0 0 12px 0; list-style-type: disc;">
         <li><strong>导出折叠内容</strong>：开启后，即使游戏卡片处于折叠状态，也会在生成的图片中完整显示。</li>
         <li><strong>导出隐藏/续作/FD 角色名</strong>：关闭后，角色名不会出现在图片中（仅显示相应角色图片），适合搭配剪影图使用。</li>
@@ -388,7 +402,7 @@ z-index: -999;
         <li><strong>尺寸</strong>：支持多种固定尺寸及长图模式，满足不同社交平台需求。</li>
     </ul>
 
-    <h4 style="font-size: 16px; color: #b33a3a; margin: 12px 0 4px 0; font-weight: 600;">6. 生成并导出图片</h4>
+    <h4 style="font-size: 16px; color: #b33a3a; margin: 12px 0 4px 0; font-weight: 600;">7. 生成并导出图片</h4>
     <p style="font-size: 15px; line-height: 1.8; color: #555; margin: 0 0 20px 0;">
         点击「生成并导出图片」→ 预览弹窗出现 → 确认无误后点击「导出图片」即可下载（多页时自动分批下载）。
     </p>
