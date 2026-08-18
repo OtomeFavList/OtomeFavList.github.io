@@ -314,7 +314,7 @@ export function initPage(Core = {}) {
                                 }
                             }
 
-                            //【修改点2】读取草稿map的imgIndex
+                            //【修改点2】读取草稿map的imgIndex（草稿Map仅保存已选中角色）
                             let mImgIndex = 0;
                             if(draftMap && draftMap.has(mChar.id)){
                                 mImgIndex = draftMap.get(mChar.id);
@@ -744,11 +744,12 @@ export function initPage(Core = {}) {
                 const st = targetGameItem?.cpEditState.find(s=>s.femaleId === charId);
                 if(st) st.femaleImgIndex = currentIndex;
             } else {
-                // CP男主：写入charImageSelect + 同步草稿Map
+                // CP男主：写入全局存储；仅角色已选中时同步更新草稿Map
                 appData.charImageSelect[saveKey] = currentIndex;
                 if(cpPanel && cpPanel._tempCpDraftMap && fid){
                     const draftMap = cpPanel._tempCpDraftMap[fid];
-                    if(draftMap){
+                    if(draftMap && draftMap.has(charId)){
+                        // 只有当前角色已经被选中，才同步草稿中的下标
                         draftMap.set(charId, currentIndex);
                     }
                 }
