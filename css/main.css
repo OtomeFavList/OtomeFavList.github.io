@@ -1756,7 +1756,7 @@ h2{
   border-color: #f6a5b8;
 }
 
-/* ========== 【全新方案】关闭原生resize，自制垂直拖拽控件 ========== */
+/* ========== 【修改后】关闭原生resize，自制垂直拖拽控件 ========== */
 .game-custom-text-wrap {
     position: relative;
 }
@@ -1764,13 +1764,13 @@ h2{
 .game-custom-text-wrap textarea {
     resize: none !important;
     overflow: auto;
-    padding-bottom: 32px; /* 底部预留空间，不被三角遮挡文字 */
+    padding-bottom: 26px; /* 减小底部留空，避免文字被遮挡 */
 }
-/* 可视化拖拽手柄：实心红色下三角 */
+/* 可视化拖拽手柄：实心红色下三角，紧贴右下角 */
 .game-custom-text-wrap .resize-handle {
     position: absolute;
-    right: 4px;
-    bottom: 4px;
+    right: 0px;     /* 完全贴右 */
+    bottom: 0px;    /* 完全贴下 */
     width: 24px;
     height: 24px;
     cursor: ns-resize;
@@ -1778,19 +1778,19 @@ h2{
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
-    /* 扩大触摸热区容器 */
 }
-/* 红色三角图形 */
+/* 红色三角图形【修改后：紧贴右下角直角三角】 */
 .game-custom-text-wrap .resize-handle::after {
     content: "";
     display: block;
     width: 0;
     height: 0;
-    border-left: 10px solid transparent;
+    /* 只保留右下实色三角形，其余透明 */
     border-top: 10px solid transparent;
+    border-left: 10px solid transparent;
     border-right: 10px solid #b33a3a;
     border-bottom: 10px solid #b33a3a;
-    transform: rotate(-45deg);
+    transform: none; /* 取消旋转，直接显示直角三角 */
     transform-origin: bottom right;
 }
 /* 拖拽激活状态样式 */
@@ -1806,17 +1806,18 @@ h2{
     .game-custom-text-wrap .resize-handle {
         width: 32px;
         height: 32px;
-        right: 2px;
-        bottom: 2px;
+        right: 0px;     /* 紧贴右 */
+        bottom: 0px;    /* 紧贴下 */
     }
     .game-custom-text-wrap textarea {
-        padding-bottom: 38px;
+        padding-bottom: 32px; /* 移动端稍大 */
     }
     .game-custom-text-wrap .resize-handle::after {
-        border-left: 12px solid transparent;
         border-top: 12px solid transparent;
+        border-left: 12px solid transparent;
         border-right: 12px solid #b33a3a;
         border-bottom: 12px solid #b33a3a;
+        transform: none;
     }
 }
 
