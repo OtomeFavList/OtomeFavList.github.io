@@ -564,11 +564,10 @@ export function initPage(Core = {}) {
         // =========【新增结束】=========
 
         // ========== 新增三个自定义文本区域的HTML（已消除换行空白） ==========
-        // 【修改点1】统一 placeholder 为 "自定义文本"，并在 textarea 后追加 <span class="resize-handle-marker"></span>
-        // 【修改点2】增加透明触摸热区 <span class="touch-resize-hitbox"></span>
-        const headTextHtml = `<div class="game-custom-text-wrap"><textarea class="game-head-text-input" data-gid="${gameItem.gameId}" placeholder="自定义文本">${gameItem.gameHeadText || ''}</textarea><span class="resize-handle-marker"></span><span class="touch-resize-hitbox"></span></div>`;
-        const charTextHtml = `<div class="game-custom-text-wrap"><textarea class="game-char-text-input" data-gid="${gameItem.gameId}" placeholder="自定义文本">${gameItem.charSectionText || ''}</textarea><span class="resize-handle-marker"></span><span class="touch-resize-hitbox"></span></div>`;
-        const cpTextHtml = `<div class="game-custom-text-wrap"><textarea class="game-cp-text-input" data-gid="${gameItem.gameId}" placeholder="自定义文本">${gameItem.cpSectionText || ''}</textarea><span class="resize-handle-marker"></span><span class="touch-resize-hitbox"></span></div>`;
+        // 【修改点1】统一 placeholder 为 "自定义文本"，并在 textarea 后追加 <span class="resize-handle"></span>
+        const headTextHtml = `<div class="game-custom-text-wrap"><textarea class="game-head-text-input" data-gid="${gameItem.gameId}" placeholder="自定义文本">${gameItem.gameHeadText || ''}</textarea><span class="resize-handle"></span></div>`;
+        const charTextHtml = `<div class="game-custom-text-wrap"><textarea class="game-char-text-input" data-gid="${gameItem.gameId}" placeholder="自定义文本">${gameItem.charSectionText || ''}</textarea><span class="resize-handle"></span></div>`;
+        const cpTextHtml = `<div class="game-custom-text-wrap"><textarea class="game-cp-text-input" data-gid="${gameItem.gameId}" placeholder="自定义文本">${gameItem.cpSectionText || ''}</textarea><span class="resize-handle"></span></div>`;
 
         html += `
         <div class="added-game-card" data-gameid="${gameItem.gameId}" data-fold="${!!gameItem.fold}">
@@ -1532,6 +1531,74 @@ export function initPage(Core = {}) {
         toggleFloatBtnVis();
     }
 
+    // ==========【新增】自制textarea垂直拖拽逻辑（PC+移动端touch兼容） ==========
+    function bindTextareaResizeHandler() {
+        document.querySelectorAll('.game-custom-text-wrap .resize-handle').forEach(handle => {
+            // 防止重复绑定
+            if(handle.dataset.resizeBinded === "1") return;
+            handle.dataset.resizeBinded = "1";
+
+            const wrap = handle.closest('.game-custom-text-wrap');
+            const textarea = wrap.querySelector('textarea');
+            let startY = 0;
+            let startHeight = 0;
+            let isDragging = false;
+
+            // 统一开始拖拽
+            function dragStart(y) {
+                isDragging = true;
+                startY = y;
+                startHeight = textarea.clientHeight;
+                document.body.style.cursor = "ns-resize";
+                // 禁止页面滚动干扰拖拽
+                document.body.style.touchAction = "none";
+            }
+            // 拖拽进行
+            function dragMove(y) {
+                if (!isDragging) return;
+                const deltaY = y - startY;
+                const newHeight = Math.max(44, startHeight + deltaY);
+                textarea.style.height = newHeight + "px";
+            }
+            // 拖拽结束
+            function dragEnd() {
+                if (!isDragging) return;
+                isDragging = false;
+                document.body.style.cursor = "";
+                document.body.style.touchAction = "";
+            }
+
+            // 鼠标事件
+            handle.addEventListener('mousedown', (e) => {
+                e.preventDefault();
+                dragStart(e.clientY);
+            });
+            // 触摸事件（移动端核心）
+            handle.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                dragStart(e.touches[0].clientY);
+            });
+
+            // 全局移动/结束监听
+            document.addEventListener('mousemove', (e) => dragMove(e.clientY));
+            document.addEventListener('mouseup', dragEnd);
+            document.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                dragMove(e.touches[0].clientY);
+            });
+            document.addEventListener('touchend', dragEnd);
+        });
+    }
+    // 每次刷新卡片UI后重新绑定拖拽控件
+    const originRefresh = window.refreshGameCardUi;
+    window.refreshGameCardUi = function() {
+        originRefresh();
+        requestAnimationFrame(()=>{
+            bindTextareaResizeHandler();
+        });
+    }
+
+    // 初始执行一次刷新渲染
     window.refreshGameCardUi();
   }
 
