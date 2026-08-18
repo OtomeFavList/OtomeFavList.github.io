@@ -1795,3 +1795,9 @@ h2{
         font-size: 18px;
     }
 }
+.float-scroll-btn {
+    /* 原有样式保留，追加 */
+    opacity: 1;
+    pointer-events: auto;
+    transition: opacity 0.2s ease, background 0.2s ease;
+}
