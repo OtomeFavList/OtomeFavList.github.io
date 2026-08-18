@@ -1779,19 +1779,18 @@ h2{
     align-items: flex-end;
     justify-content: flex-end;
 }
-/* 红色三角图形【修改后：紧贴右下角直角三角】 */
+/* 红色三角图形【B样式：右下角内嵌直角三角】 */
 .game-custom-text-wrap .resize-handle::after {
     content: "";
     display: block;
-    width: 0;
-    height: 0;
-    /* 只保留右下实色三角形，其余透明 */
-    border-top: 10px solid transparent;
-    border-left: 10px solid transparent;
-    border-right: 10px solid #b33a3a;
-    border-bottom: 10px solid #b33a3a;
-    transform: none; /* 取消旋转，直接显示直角三角 */
-    transform-origin: bottom right;
+    width: 14px;
+    height: 14px;
+    background-color: #b33a3a;
+    /* 裁剪为右下角直角三角形 */
+    clip-path: polygon(100% 0, 100% 100%, 0 100%);
+    position: absolute;
+    right: 0;
+    bottom: 0;
 }
 /* 拖拽激活状态样式 */
 .game-custom-text-wrap .resize-handle:active::after {
@@ -1813,11 +1812,10 @@ h2{
         padding-bottom: 32px; /* 移动端稍大 */
     }
     .game-custom-text-wrap .resize-handle::after {
-        border-top: 12px solid transparent;
-        border-left: 12px solid transparent;
-        border-right: 12px solid #b33a3a;
-        border-bottom: 12px solid #b33a3a;
-        transform: none;
+        width: 16px;
+        height: 16px;
+        background-color: #b33a3a;
+        clip-path: polygon(100% 0, 100% 100%, 0 100%);
     }
 }
 
