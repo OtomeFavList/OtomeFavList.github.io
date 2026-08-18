@@ -1497,6 +1497,34 @@ export function initPage(Core = {}) {
         clearPreviewCacheResource(); // 文字变更，导出缓存失效
     });
 
+    // ========== 新增：右下角悬浮按钮 - 滚动到【添加游戏按钮】 ==========
+    const backToAddBtn = document.getElementById('back-to-add-btn');
+    const targetAddBtn = document.getElementById('btn-add-game');
+    if (backToAddBtn && targetAddBtn) {
+        backToAddBtn.addEventListener('click', function() {
+            targetAddBtn.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        });
+
+        // 滚动监听，靠近目标时隐藏按钮
+        function toggleFloatBtnVis() {
+            const rect = targetAddBtn.getBoundingClientRect();
+            // 目标按钮进入视口上半区域，隐藏悬浮按钮
+            if (rect.top < window.innerHeight * 0.3) {
+                backToAddBtn.style.opacity = "0";
+                backToAddBtn.style.pointerEvents = "none";
+            } else {
+                backToAddBtn.style.opacity = "1";
+                backToAddBtn.style.pointerEvents = "auto";
+            }
+        }
+        window.addEventListener('scroll', toggleFloatBtnVis);
+        // 初始化执行一次
+        toggleFloatBtnVis();
+    }
+
     window.refreshGameCardUi();
   }
 
