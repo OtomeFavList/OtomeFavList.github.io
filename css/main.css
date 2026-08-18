@@ -1756,6 +1756,29 @@ h2{
   border-color: #f6a5b8;
 }
 
+/* ========== 自定义文本框 textarea 右下角拖拽抓手强化 ========== */
+.game-custom-text-wrap textarea {
+    /* 保留原有属性，追加resize样式 */
+    resize: vertical;
+}
+/* 通用webkit（Chrome、安卓浏览器、微信内置浏览器、Edge、Safari）拖拽手柄美化 */
+.game-custom-text-wrap textarea::-webkit-resizer {
+    background-image: linear-gradient(135deg, transparent 50%, #b33a3a 50%, #b33a3a 60%, transparent 60%);
+    background-size: 14px 14px;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+}
+/* Firefox专属拖拽手柄样式 */
+.game-custom-text-wrap textarea {
+    scrollbar-color: #b33a3a transparent;
+}
+/* 增强移动端触摸区域，让抓手更容易点到 */
+@media (max-width:1200px) {
+    .game-custom-text-wrap textarea::-webkit-resizer {
+        background-size: 18px 18px;
+    }
+}
+
 /* ========== 右下角悬浮回到添加游戏按钮 ========== */
 .float-scroll-btn {
     position: fixed;
