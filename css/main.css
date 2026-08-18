@@ -1807,13 +1807,15 @@ h2{
 @media (max-width:768px) {
     .game-custom-text-wrap {
         position: relative;
+        overflow: hidden;    /* 新增：移动端强制裁切溢出三角 */
+        border-radius: 6px;   /* 新增：同步圆角，保证裁切和容器圆角一致 */
     }
     .game-custom-text-wrap textarea {
         padding-bottom: 32px;
         resize: none;
         box-sizing: border-box;
-        /* 核心改动：textarea自身作为定位基准 */
-        position: relative;
+        /* ❗删除 position:relative;
+           textarea不要作为定位基准，父容器才是绝对定位参照物！ */
     }
     .game-custom-text-wrap .resize-handle {
         position: absolute;
