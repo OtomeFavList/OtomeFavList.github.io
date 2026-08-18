@@ -193,6 +193,8 @@ export const LAYOUT_STYLE = {
 // ===================== 游戏模板数据兜底变量 =====================
 // 兜底：游戏数据模块加载失败时赋值空数组，彻底解决undefined报错
 export let gameTemplateList = [];
+// 【新增】游戏模板加载就绪标记
+export let gameTemplateReady = false;
 
 // ===================== 角色编辑弹窗全局状态变量 =====================
 export let currentEditGameId = null;
@@ -213,75 +215,70 @@ export function saveData() {
     localStorage.setItem(STORE_KEY, JSON.stringify(appData));
 }
 
-/**
- * 从localStorage读取并恢复appData，自动迁移旧存档
- */
+// ============================================================
+// 【重构】loadData：隔离旧数据、独立迁移区块、深度合并、自动清理缓存
+// ============================================================
 export function loadData() {
     try {
         let raw = localStorage.getItem(STORE_KEY);
+        let migrateFromOldKey = false;
         // 主key无数据，尝试迁移所有旧版本key
         if (!raw) {
             for (const oldKey of OLD_STORE_KEYS) {
                 const oldRaw = localStorage.getItem(oldKey);
                 if (oldRaw) {
                     raw = oldRaw;
+                    migrateFromOldKey = true;
                     console.log(`✅发现旧存档 ${oldKey}，执行迁移到主键 ${STORE_KEY}`);
-                    // 迁移写入主key
                     localStorage.setItem(STORE_KEY, raw);
-                    // 可选：迁移成功后清理旧key（注释掉可保留双份存档）
-                    // localStorage.removeItem(oldKey);
                     break;
                 }
             }
         }
 
-        // 初始化默认数据
-        let savedData = null;
-        if (raw) savedData = JSON.parse(raw);
+        // 临时对象隔离原始存储数据，不直接污染全局appData
+        let loadedRaw = null;
+        if (raw) loadedRaw = JSON.parse(raw);
 
-        if (savedData && typeof savedData === "object") {
-            appData = { ...appData, ...savedData };
+        // 【1】基础合并：先复制默认模板，再融合用户数据（规避顶层浅覆盖嵌套对象）
+        const tempData = structuredClone(appData);
+        if (loadedRaw && typeof loadedRaw === "object") {
+            // 顶层键覆盖，嵌套对象后续单独兼容补齐
+            Object.assign(tempData, loadedRaw);
         }
 
-        // ========== 版本迁移逻辑 ==========
-        if (appData._version === undefined || appData._version < DATA_VERSION) {
-            console.log("📌执行数据结构升级迁移 (version:", appData._version, "→", DATA_VERSION, ")");
-            // ========= 架构说明 =========
-            // 当前业务中，图片URL全部来源于静态游戏模板（gameTemplateList），
-            // appData 仅存储角色ID和索引（selectCharItems、charImageSelect），
-            // 并未持久化存储图片URL字符串，因此无需在迁移时清洗图片路径。
-            // 运行时兼容函数 getWebImageUrl / getCanvasImageUrl 已确保新旧数据一致。
-            // 只需标记新版本并保存，后续字段补齐由下方兜底完成。
-            appData._version = DATA_VERSION;
-            // 迁移完成自动保存一次清洗后数据
-            saveData();
+        // ========== 【独立版本迁移区块】未来所有版本升级逻辑写在这里 ==========
+        let needSaveAfterMigrate = false;
+        if (tempData._version === undefined || tempData._version < DATA_VERSION) {
+            console.log("📌执行数据结构升级迁移", tempData._version, "→", DATA_VERSION);
+            // --------------------------
+            // 示例：未来版本升级在这里写迁移逻辑
+            // if (tempData._version < 1.2) { 1.1→1.2数据转换代码 }
+            // --------------------------
+            // 兼容：从旧key迁移过来的数据没有版本号，统一升级
+            tempData._version = DATA_VERSION;
+            needSaveAfterMigrate = true;
         }
 
-        // =========新增兜底：旧存档不存在该字段，默认true =========
-        if(typeof appData.exportFoldContent !== "boolean"){
-            appData.exportFoldContent = true;
+        // ========== 全局字段兜底（统一放在迁移完成后） ==========
+        if (typeof tempData.exportFoldContent !== "boolean") {
+            tempData.exportFoldContent = true;
         }
+        if (!tempData.exportColor) tempData.exportColor = {};
+        tempData.exportColor.bg = tempData.exportColor.bg ?? "#fff7f9";
+        tempData.exportColor.title = tempData.exportColor.title ?? "#b33a3a";
+        tempData.exportColor.subTitle = tempData.exportColor.subTitle ?? "#b85878";
+        if (tempData.exportColor.text !== undefined && tempData.exportColor.baseInfoText === undefined) {
+            tempData.exportColor.baseInfoText = tempData.exportColor.text;
+        }
+        tempData.exportColor.baseInfoText = tempData.exportColor.baseInfoText ?? "#c98fac";
+        tempData.exportColor.customText = tempData.exportColor.customText ?? tempData.exportColor.baseInfoText;
+        tempData.exportColor.gameName = tempData.exportColor.gameName ?? "#000000";
+        tempData.exportColor.border = tempData.exportColor.border ?? "#f6a5b8";
 
-        // ========= 新增：兼容旧存档，缺失字段填充默认值 =========
-        if(!appData.exportColor) {
-            appData.exportColor = {};
-        }
-        appData.exportColor.bg = appData.exportColor.bg ?? "#fff7f9";
-        appData.exportColor.title = appData.exportColor.title ?? "#b33a3a";
-        appData.exportColor.subTitle = appData.exportColor.subTitle ?? "#b85878";
-        // 兼容旧存档：存在旧text字段则迁移到baseInfoText
-        if(appData.exportColor.text !== undefined && appData.exportColor.baseInfoText === undefined){
-            appData.exportColor.baseInfoText = appData.exportColor.text;
-        }
-        appData.exportColor.baseInfoText = appData.exportColor.baseInfoText ?? "#c98fac";
-        // 新增自定义文本色，默认和基础信息色一致
-        appData.exportColor.customText = appData.exportColor.customText ?? appData.exportColor.baseInfoText;
-        appData.exportColor.gameName = appData.exportColor.gameName ?? "#000000";
-        appData.exportColor.border = appData.exportColor.border ?? "#f6a5b8";
-
-        // 【新增兜底：旧存档缺失局部开关字段，补默认false】
-        if (Array.isArray(appData.gameList)) {
-            appData.gameList.forEach(g => {
+        // gameList成员兜底
+        if (Array.isArray(tempData.gameList)) {
+            tempData.gameList.forEach(g => {
                 if (typeof g.localHideChar !== "boolean") g.localHideChar = false;
                 if (typeof g.localFD !== "boolean") g.localFD = false;
                 if (typeof g.charPanelOpen !== "boolean") g.charPanelOpen = false;
@@ -290,20 +287,42 @@ export function loadData() {
                 if (typeof g.loveRate !== "number") g.loveRate = 0;
                 if (!Array.isArray(g.selectChars)) g.selectChars = [];
                 if (!Array.isArray(g.cpSelectIds)) g.cpSelectIds = [];
-                if (!Array.isArray(g.selectCharItems)) {
-                    g.selectCharItems = [];
-                }
-                if(!Array.isArray(g.cpEditState)){
-                    g.cpEditState = null;
-                }
-                if(!Array.isArray(g.cpList)) g.cpList = [];
-                if(!Array.isArray(g.maleItems)) g.maleItems = [];
-                // ==========新增自定义文本兜底==========
+                if (!Array.isArray(g.selectCharItems)) g.selectCharItems = [];
+                if (!Array.isArray(g.cpEditState)) g.cpEditState = null;
+                if (!Array.isArray(g.cpList)) g.cpList = [];
+                if (!Array.isArray(g.maleItems)) g.maleItems = [];
                 if (typeof g.gameHeadText !== "string") g.gameHeadText = "";
                 if (typeof g.charSectionText !== "string") g.charSectionText = "";
                 if (typeof g.cpSectionText !== "string") g.cpSectionText = "";
             });
         }
+
+        // 【自动迁移旧charImageSelect key格式】将 "gameId-charId" → "char-img-gameId-charId"
+        if (tempData.charImageSelect && (migrateFromOldKey || tempData._version < 1.2)) {
+            const newCharImgSelect = {};
+            Object.entries(tempData.charImageSelect).forEach(([key, val]) => {
+                if (!key.startsWith("char-img-")) {
+                    const newKey = `char-img-${key}`;
+                    newCharImgSelect[newKey] = val;
+                } else {
+                    newCharImgSelect[key] = val;
+                }
+            });
+            tempData.charImageSelect = newCharImgSelect;
+            needSaveAfterMigrate = true;
+        }
+
+        // 迁移完成，写入全局appData
+        appData = tempData;
+
+        // 迁移产生变更才持久化
+        if (needSaveAfterMigrate) {
+            saveData();
+        }
+
+        // ✅ 数据重载时清空图片缓存，防止旧URL缓存阻塞Canvas渲染
+        imgCacheMap.clear();
+
     } catch (e) {
         console.error("读取本地存储失败：", e);
     }
@@ -389,12 +408,12 @@ export const imgCacheMap = new Map();
 // ============================================================
 // ① preloadAndDecodeImage 修改后（强制顺序：先设置跨域，再赋值src）
 // ============================================================
-export function preloadAndDecodeImage(src){
-    if(!src){
+export function preloadAndDecodeImage(src) {
+    if (!src) {
         return Promise.resolve(null);
     }
 
-    if(imgCacheMap.has(src)){
+    if (imgCacheMap.has(src)) {
         return imgCacheMap.get(src);
     }
 
@@ -476,22 +495,22 @@ export function preloadImageBitmap(src) {
 // ============================================================
 // ② preloadImagesInIdle 修改后
 // ============================================================
-export function preloadImagesInIdle(list, batchSize = 2){
-    if(!Array.isArray(list) || !list.length) return;
+export function preloadImagesInIdle(list, batchSize = 2) {
+    if (!Array.isArray(list) || !list.length) return;
 
     const unique = [...new Set(list)].filter(Boolean);
 
     let index = 0;
 
     const run = async (deadline) => {
-        while(index < unique.length){
+        while (index < unique.length) {
             // 浏览器已经没有空闲时间了
-            if(
+            if (
                 deadline &&
                 typeof deadline.timeRemaining === "function" &&
                 deadline.timeRemaining() < 8
-            ){
-                requestIdleCallback(run, {timeout: 1000});
+            ) {
+                requestIdleCallback(run, { timeout: 1000 });
                 return;
             }
 
@@ -504,12 +523,12 @@ export function preloadImagesInIdle(list, batchSize = 2){
         }
     };
 
-    if("requestIdleCallback" in window){
+    if ("requestIdleCallback" in window) {
         requestIdleCallback(
             run,
-            {timeout: 1000}
+            { timeout: 1000 }
         );
-    }else{
+    } else {
         setTimeout(() => run(), 300);
     }
 }
@@ -519,11 +538,11 @@ export function preloadImagesInIdle(list, batchSize = 2){
  * @param {HTMLImageElement} domImg 页面真实img DOM
  * @param {string} nextSrc 新图片地址
  */
-export async function switchCharImage(domImg, nextSrc){
-    try{
+export async function switchCharImage(domImg, nextSrc) {
+    try {
         await preloadAndDecodeImage(nextSrc);
         domImg.src = nextSrc;
-    }catch(err){
+    } catch (err) {
         console.error("图片切换失败", err);
         // 降级：直接赋值src保证可用性
         domImg.src = nextSrc;
@@ -533,13 +552,13 @@ export async function switchCharImage(domImg, nextSrc){
 // ============================================================
 // ③ switchCharImageWithLoading 修改后
 // ============================================================
-export async function switchCharImageWithLoading(wrap, nextSrc){
-    if(!wrap || !nextSrc){
+export async function switchCharImageWithLoading(wrap, nextSrc) {
+    if (!wrap || !nextSrc) {
         return;
     }
 
     // 防止连续快速点击
-    if(wrap.dataset.isImgLoading === "1"){
+    if (wrap.dataset.isImgLoading === "1") {
         return;
     }
 
@@ -553,7 +572,7 @@ export async function switchCharImageWithLoading(wrap, nextSrc){
 
     wrap.appendChild(loaderEl);
 
-    function clearLoading(){
+    function clearLoading() {
         wrap.dataset.isImgLoading = "";
 
         const el =
@@ -561,25 +580,25 @@ export async function switchCharImageWithLoading(wrap, nextSrc){
                 ".img-loader-spinner"
             );
 
-        if(el){
+        if (el) {
             el.remove();
         }
     }
 
-    try{
+    try {
         // 使用统一图片缓存
         await preloadAndDecodeImage(nextSrc);
 
         const realImg =
             wrap.querySelector("img");
 
-        if(realImg){
+        if (realImg) {
             realImg.src = nextSrc;
             // 防止浏览器再次进行不必要的解码等待
             realImg.decoding = "async";
         }
 
-    }catch(error){
+    } catch (error) {
         console.warn(
             "图片加载失败:",
             nextSrc,
@@ -589,11 +608,11 @@ export async function switchCharImageWithLoading(wrap, nextSrc){
         const realImg =
             wrap.querySelector("img");
         // 即使 decode 失败，也允许浏览器直接显示
-        if(realImg){
+        if (realImg) {
             realImg.src = nextSrc;
         }
 
-    }finally{
+    } finally {
         clearLoading();
     }
 }
@@ -601,11 +620,11 @@ export async function switchCharImageWithLoading(wrap, nextSrc){
 // ============================================================
 // ④ 新增 preloadAdjacentImages（保留供按需调用）
 // ============================================================
-export function preloadAdjacentImages(srcList, index){
-    if(
+export function preloadAdjacentImages(srcList, index) {
+    if (
         !Array.isArray(srcList) ||
         srcList.length <= 1
-    ){
+    ) {
         return;
     }
 
@@ -635,11 +654,13 @@ export async function loadAllGameTemplates() {
     // 等待全局window.gameDataList就绪（data/games.js已经完成全部import）
     if (!Array.isArray(window.gameDataList)) {
         gameTemplateList = [];
+        gameTemplateReady = false;
         console.warn("window.gameDataList不存在，游戏模板为空");
         return;
     }
     // 直接赋值，不再重复导入游戏脚本
     gameTemplateList = [...window.gameDataList];
+    gameTemplateReady = true;
     console.log("✅main.js读取全局游戏模板，数量：", gameTemplateList.length);
 }
 
@@ -714,28 +735,28 @@ export function sortFilterOptionList(arr) {
  */
 export function sortStaffByLang(list) {
     if (!Array.isArray(list)) return [];
-    const langOrder = { zh:0, ja:1, en:2 };
-    return [...list].sort((a,b)=>{
+    const langOrder = { zh: 0, ja: 1, en: 2 };
+    return [...list].sort((a, b) => {
         const oA = langOrder[a.lang] ?? 99;
         const oB = langOrder[b.lang] ?? 99;
         //第一层 lang优先级 zh-ja-en
-        if(oA !== oB) return oA - oB;
+        if (oA !== oB) return oA - oB;
 
         const nameA = a.name;
         const nameB = b.name;
-        if(a.lang === "zh"){
-            return nameA.localeCompare(nameB,"zh-CN");
-        }else if(a.lang === "ja"){
-            return nameA.localeCompare(nameB,"ja-JP");
-        }else if(a.lang === "en"){
+        if (a.lang === "zh") {
+            return nameA.localeCompare(nameB, "zh-CN");
+        } else if (a.lang === "ja") {
+            return nameA.localeCompare(nameB, "ja-JP");
+        } else if (a.lang === "en") {
             // en：首字母相同，小写排在大写前面
             const lowerA = nameA.toLowerCase();
             const lowerB = nameB.toLowerCase();
-            if(lowerA !== lowerB){
-                return lowerA.localeCompare(lowerB,"en");
-            }else{
+            if (lowerA !== lowerB) {
+                return lowerA.localeCompare(lowerB, "en");
+            } else {
                 //小写charCode更小，a在A前面
-                return nameA.localeCompare(nameB,"en");
+                return nameA.localeCompare(nameB, "en");
             }
         }
         return nameA.localeCompare(nameB);
@@ -751,7 +772,9 @@ export function sortStaffByLang(list) {
 export function fillFilterOptions(gameList) {
     if (!Array.isArray(gameList) || gameList.length === 0) return;
 
-    const yearSet = new Set(), pubSet = new Set(), cnSet = new Set();
+    const yearSet = new Set(),
+        pubSet = new Set(),
+        cnSet = new Set();
     let writerObjList = [];
     let artObjList = [];
 
@@ -759,20 +782,20 @@ export function fillFilterOptions(gameList) {
         if (!g) return;
         yearSet.add(g.year);
 
-        if(Array.isArray(g.publisher)){
+        if (Array.isArray(g.publisher)) {
             g.publisher.forEach(name => name && pubSet.add(name));
         }
         cnSet.add(g.cnStudio);
 
         if (Array.isArray(g.writer)) {
             g.writer.forEach(obj => {
-                if(obj?.name) writerObjList.push({name:obj.name, lang:obj.lang});
+                if (obj?.name) writerObjList.push({ name: obj.name, lang: obj.lang });
             });
         }
 
         if (Array.isArray(g.art)) {
             g.art.forEach(obj => {
-                if(obj?.name) artObjList.push({name:obj.name, lang:obj.lang});
+                if (obj?.name) artObjList.push({ name: obj.name, lang: obj.lang });
             });
         }
     });
@@ -791,13 +814,13 @@ export function fillFilterOptions(gameList) {
     // 对象数组先去重，再按lang规则排序，再提取name字符串
     const writerSortedObjs = sortStaffByLang(uniqueStaffByName(writerObjList));
     const artSortedObjs = sortStaffByLang(uniqueStaffByName(artObjList));
-    const writerSorted = writerSortedObjs.map(o=>o.name);
-    const artSorted = artSortedObjs.map(o=>o.name);
+    const writerSorted = writerSortedObjs.map(o => o.name);
+    const artSorted = artSortedObjs.map(o => o.name);
 
     const pubSorted = sortFilterOptionList([...pubSet]);
     const cnSorted = sortFilterOptionList([...cnSet]);
     // 发售年份：数字升序，旧年份在上
-    const yearSorted = [...yearSet].sort((a,b)=>Number(a)-Number(b));
+    const yearSorted = [...yearSet].sort((a, b) => Number(a) - Number(b));
 
     const fillSelect = (id, dataArr) => {
         const sel = document.getElementById(id);
@@ -839,7 +862,7 @@ export function renderGameSelectItem(game, index) {
     let writerText = "无";
     if (Array.isArray(game.writer) && game.writer.length > 0) {
         const sortedWriterObjs = sortStaffByLang(game.writer);
-        const writerNameArr = sortedWriterObjs.map(item=>item.name);
+        const writerNameArr = sortedWriterObjs.map(item => item.name);
         writerText = writerNameArr.join("、");
     }
 
@@ -847,13 +870,13 @@ export function renderGameSelectItem(game, index) {
     let artText = "无";
     if (Array.isArray(game.art) && game.art.length > 0) {
         const sortedArtObjs = sortStaffByLang(game.art);
-        const artNameArr = sortedArtObjs.map(item=>item.name);
-        artText = sortedArtObjs.map(item=>item.name).join("、");
+        const artNameArr = sortedArtObjs.map(item => item.name);
+        artText = sortedArtObjs.map(item => item.name).join("、");
     }
 
     // 发行厂商：数组拼接
     let pubText = "无";
-    if(Array.isArray(game.publisher) && game.publisher.length > 0){
+    if (Array.isArray(game.publisher) && game.publisher.length > 0) {
         pubText = game.publisher.join("、");
     }
 
@@ -866,7 +889,7 @@ export function renderGameSelectItem(game, index) {
     lines.push(`汉化厂商：${game.cnStudio || "无"}`);
 
     let infoHtml = "";
-    for(const t of lines){
+    for (const t of lines) {
         infoHtml += `<div>${t}</div>`;
     }
 
@@ -1020,20 +1043,20 @@ export function getAllGameChar(gameInfo) {
 
     // 修复：isHidden + isFD 双标记角色，任意开关开启即可显示；全部关闭才隐藏
     chars = chars.filter(c => {
-        if(!c) return false;
+        if (!c) return false;
         //普通角色，无隐藏/FD标记，永远显示
-        if(!c.isHidden && !c.isFD) return true;
+        if (!c.isHidden && !c.isFD) return true;
 
         //仅隐藏角色
-        if(c.isHidden && !c.isFD){
+        if (c.isHidden && !c.isFD) {
             return showHide;
         }
         //仅FD角色
-        if(!c.isHidden && c.isFD){
+        if (!c.isHidden && c.isFD) {
             return showFD;
         }
         //同时是隐藏+FD角色：任意一个开关打开就显示，两个都关才隐藏
-        if(c.isHidden && c.isFD){
+        if (c.isHidden && c.isFD) {
             return showHide || showFD;
         }
         return true;
@@ -1062,7 +1085,7 @@ export function toggleCharItemSelect(gameItem, charId, gameId) {
         // 取消勾选：同时删除两套数组对应项
         gameItem.selectChars.splice(idx, 1);
         const itemIdx = gameItem.selectCharItems.findIndex(s => s.charId === charId);
-        if(itemIdx >=0) gameItem.selectCharItems.splice(itemIdx,1);
+        if (itemIdx >= 0) gameItem.selectCharItems.splice(itemIdx, 1);
     } else {
         // 勾选：使用传入的 gameId 构造存储键，统一带 char-img- 前缀
         const saveKey = `char-img-${gameId}-${charId}`;
@@ -1101,6 +1124,7 @@ function buildCoreContext() {
     const Core = {
         appData,
         gameTemplateList,
+        gameTemplateReady, // 新增就绪标记
         currentEditGameId,
         charPoolMode,
         loadAllGameTemplates,
@@ -1115,11 +1139,11 @@ function buildCoreContext() {
         getAllGameChar,
         getAvailableCharImages,
         preloadAndDecodeImage,
-        preloadImageBitmap, // <<=====新增
+        preloadImageBitmap,
         preloadImagesInIdle,
         switchCharImage,
         switchCharImageWithLoading,
-        preloadAdjacentImages,    // 保留导出，供按需调用
+        preloadAdjacentImages,
         isTodayConfirmed,
         saveConfirmDate,
         localSwitchIsConfirmedToday,
@@ -1205,7 +1229,8 @@ function wrapClickHandler(e) {
         const gameId = cardEl.dataset.gameId;
         const charId = cardEl.dataset.charId;
         const totalImg = Number(cardEl.dataset.totalImg) || 1;
-        const saveKey = `${gameId}-${charId}`;
+        // ★★★ 修改点：统一使用 char-img- 前缀 ★★★
+        const saveKey = `char-img-${gameId}-${charId}`;
         let currentIdx = Number(appData.charImageSelect[saveKey] ?? 0);
 
         if (switchBtn.classList.contains("char-switch-prev")) {
@@ -1223,7 +1248,7 @@ function wrapClickHandler(e) {
     }
 
     // 点击遮罩空白关闭弹窗
-    if(e.target === spoilerModal){
+    if (e.target === spoilerModal) {
         spoilerModal.classList.remove("active");
         window.pendingGlobalSwitch = null;
         window.pendingGameOp = null;
@@ -1278,7 +1303,7 @@ function bindGlobalSwitchSpoilerEvents() {
             appData.globalHideChar = false;
             saveData();
             renderGlobalSwitchDom();
-            if(window.refreshGameCardUi) window.refreshGameCardUi();
+            if (window.refreshGameCardUi) window.refreshGameCardUi();
             return;
         }
         // 用户想要打开：不修改勾选，弹出弹窗
@@ -1295,7 +1320,7 @@ function bindGlobalSwitchSpoilerEvents() {
             appData.globalFD = false;
             saveData();
             renderGlobalSwitchDom();
-            if(window.refreshGameCardUi) window.refreshGameCardUi();
+            if (window.refreshGameCardUi) window.refreshGameCardUi();
             return;
         }
         window.pendingGlobalSwitch = "fdGame";
