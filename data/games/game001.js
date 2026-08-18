@@ -103,8 +103,8 @@ const gameData = {
             images: [
                 { srcList: ["char/001/Henri.jpg",
                             "char/001/Henri2.jpg",
-                            "img/char/Default.jpg",
-                            "img/char/Default2.jpg"], type: "base" }
+                            "char/Default.jpg",
+                            "char/Default2.jpg"], type: "base" }
             ]
         }
     ]
