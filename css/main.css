@@ -1848,6 +1848,50 @@ h2{
     }
 }
 
+/* ========== 确保三角在折叠手机、平板设备上不溢出 ========== */
+@media (max-width:1200px) {
+    .added-game-card .game-custom-text-wrap,
+    .game-custom-text-wrap {
+        position: relative !important;
+        overflow: hidden !important;
+        border-radius: 6px !important;
+    }
+    .added-game-card .game-custom-text-wrap textarea,
+    .game-custom-text-wrap textarea {
+        resize: none !important;
+        padding-bottom: 32px !important;
+        border-radius: 6px !important;
+        position: static !important;
+        overflow: auto !important;
+        box-sizing: border-box !important;
+    }
+    .added-game-card .game-custom-text-wrap .resize-handle,
+    .game-custom-text-wrap .resize-handle {
+        position: absolute !important;
+        width: 32px !important;
+        height: 32px !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        background: transparent !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        z-index: 2 !important;
+    }
+    .added-game-card .game-custom-text-wrap .resize-handle::after,
+    .game-custom-text-wrap .resize-handle::after {
+        content: "" !important;
+        position: absolute !important;
+        width: 16px !important;
+        height: 16px !important;
+        background-color: #b33a3a !important;
+        clip-path: polygon(100% 0, 100% 100%, 0 100%) !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+}
+
 /* ========== 右下角悬浮回到添加游戏按钮 ========== */
 .float-scroll-btn {
     position: fixed;
