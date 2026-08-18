@@ -211,18 +211,18 @@ export function initPage(Core = {}) {
             }));
         }
 
-        // 【修改点1】tempCpDraftMap改为 Map<mid,imgIndex>
+        // 【重构草稿结构：对齐Character，草稿只保存选中ID Set，不缓存imgIndex】
         const tempCpDraftMap = {};
         femaleChars.forEach(fChar=>{
             const state = gameItem.cpEditState.find(s=>s.femaleId === fChar.id);
             if(state){
-                const m = new Map();
+                const selectedMidSet = new Set();
                 if(Array.isArray(state.maleItems)){
                     state.maleItems.forEach(mi=>{
-                        m.set(mi.charId, mi.imgIndex ?? 0);
+                        selectedMidSet.add(mi.charId);
                     })
                 }
-                tempCpDraftMap[fChar.id] = m;
+                tempCpDraftMap[fChar.id] = selectedMidSet;
             }
         });
 
@@ -292,15 +292,10 @@ export function initPage(Core = {}) {
 
                             // ★ 修改：只加入当前图片 + 前后相邻图片（用完整 URL）
                             if (mSrcArr.length > 0) {
-                                let mImgIndex = 0;
-                                if(draftMap && draftMap.has(mChar.id)){
-                                    mImgIndex = draftMap.get(mChar.id);
-                                }else{
-                                    const mSaveKey = `cp-img-${gameId}-${mChar.id}`;
-                                    mImgIndex = Number(appData.charImageSelect?.[mSaveKey] ?? 0);
-                                }
+                                // 预加载用，不影响逻辑
+                                const mSaveKey = `cp-img-${gameId}-${mChar.id}`;
+                                let mImgIndex = Number(appData.charImageSelect?.[mSaveKey] ?? 0);
                                 if (mImgIndex >= mSrcArr.length) mImgIndex = 0;
-
                                 const currentSrc = mSrcArr[mImgIndex];
                                 if (currentSrc) preloadSrcList.push(getWebImageUrl(currentSrc));
 
@@ -314,14 +309,9 @@ export function initPage(Core = {}) {
                                 }
                             }
 
-                            //【修改点2】读取草稿map的imgIndex（草稿Map仅保存已选中角色）
-                            let mImgIndex = 0;
-                            if(draftMap && draftMap.has(mChar.id)){
-                                mImgIndex = draftMap.get(mChar.id);
-                            }else{
-                                const mSaveKey = `cp-img-${gameId}-${mChar.id}`;
-                                mImgIndex = Number(appData.charImageSelect?.[mSaveKey] ?? 0);
-                            }
+                            // 【修改】草稿只存ID，渲染始终读取全局最新下标
+                            const mSaveKey = `cp-img-${gameId}-${mChar.id}`;
+                            let mImgIndex = Number(appData.charImageSelect?.[mSaveKey] ?? 0);
                             if(mImgIndex >= mSrcArr.length) mImgIndex = 0;
                             const mShowSrc = mSrcArr[mImgIndex];
                             const mSel = draftMap.has(mChar.id) ? "selected" : "";
@@ -744,15 +734,8 @@ export function initPage(Core = {}) {
                 const st = targetGameItem?.cpEditState.find(s=>s.femaleId === charId);
                 if(st) st.femaleImgIndex = currentIndex;
             } else {
-                // CP男主：写入全局存储；仅角色已选中时同步更新草稿Map
+                // CP男主：写入全局存储；草稿不再缓存imgIndex，无需同步草稿
                 appData.charImageSelect[saveKey] = currentIndex;
-                if(cpPanel && cpPanel._tempCpDraftMap && fid){
-                    const draftMap = cpPanel._tempCpDraftMap[fid];
-                    if(draftMap && draftMap.has(charId)){
-                        // 只有当前角色已经被选中，才同步草稿中的下标
-                        draftMap.set(charId, currentIndex);
-                    }
-                }
             }
         }
 
@@ -813,18 +796,15 @@ export function initPage(Core = {}) {
           if(!panel) return;
           const draftMap = panel._tempCpDraftMap;
           if(!draftMap || !draftMap[fid]) return;
-          const draftCharMap = draftMap[fid];
-          if(draftCharMap.has(mid)){
-              draftCharMap.delete(mid);
+          const selectedMidSet = draftMap[fid];
+          if(selectedMidSet.has(mid)){
+              selectedMidSet.delete(mid);
               cpMaleItem.classList.remove("selected");
           }else{
-              // 精简：直接读取全局保存的cp-img下标，不再重复判断
-              const mSaveKey = `cp-img-${gameId}-${mid}`;
-              const currentIdx = Number(appData.charImageSelect?.[mSaveKey] ?? 0);
-              draftCharMap.set(mid, currentIdx);
+              // 草稿仅记录选中ID，不再缓存imgIndex；下标确认时实时读取全局
+              selectedMidSet.add(mid);
               cpMaleItem.classList.add("selected");
           }
-          // 仅在确认执行选中逻辑后阻止冒泡，和char-item逻辑统一
           e.stopPropagation();
           return;
       }
@@ -843,13 +823,16 @@ export function initPage(Core = {}) {
 
           const st = gameItem.cpEditState.find(s=>s.femaleId === fid);
           if(!st) return;
-          const draftCharMap = draftMap[fid];
+          const selectedMidSet = draftMap[fid];
           st.maleItems = [];
-          draftCharMap.forEach((imgIdx, cid)=>{
-              st.maleItems.push({charId:cid, imgIndex: imgIdx});
+          // ✅对齐Character逻辑：确认时实时读取全局最新立绘下标
+          selectedMidSet.forEach(cid=>{
+              const mSaveKey = `cp-img-${gid}-${cid}`;
+              const latestImgIndex = Number(appData.charImageSelect?.[mSaveKey] ?? 0);
+              st.maleItems.push({charId:cid, imgIndex: latestImgIndex});
           });
           // 旧字段兼容保留，不再业务读取
-          st.maleIds = Array.from(draftCharMap.keys());
+          st.maleIds = Array.from(selectedMidSet.keys());
 
           gameItem.cpEditState.forEach(item=>{
               item.openMalePanel = false;
