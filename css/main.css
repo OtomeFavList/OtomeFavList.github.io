@@ -1809,11 +1809,9 @@ h2{
         position: relative;
         overflow: hidden;
         border-radius: 6px;
-        /* 修复移动端webkit内核圆角裁切失效 */
         -webkit-border-radius: 6px;
         -webkit-overflow-scrolling: touch;
     }
-    
     .game-custom-text-wrap .resize-handle {
         position: absolute;
         right: 0;
@@ -1822,8 +1820,9 @@ h2{
         height: 32px;
         background: transparent;
         pointer-events: auto;
+        /* 裁剪handle区域，防止三角跑出圆角 */
+        clip-path: inset(0 0 0 0 round 6px);
     }
-    
     .game-custom-text-wrap .resize-handle::after {
         content: "";
         position: absolute;
