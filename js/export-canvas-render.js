@@ -525,7 +525,7 @@ function calcHeaderVirtualHeight(targetWidth, appData) {
   return cursorY;
 }
 
-// ========== 【新增】测量游戏标题行（含爱心）高度，自动处理爱心换行 ==========
+// ========== 【修改后】测量游戏标题行（含爱心）高度，自动处理名称换行 + 爱心换行 ==========
 function measureGameTitleWithHeartHeight(vCtx, cardX, gameCardW, gameName) {
   const nameFontSize = 22;
   const HEART_SIZE = 26;
@@ -533,15 +533,26 @@ function measureGameTitleWithHeartHeight(vCtx, cardX, gameCardW, gameName) {
   const cardInnerPad = LAYOUT_SPACE.ADDED_GAME_CARD_PADDING;
   const fontStr = `bold ${nameFontSize}px ${FONT_SIYUAN}`;
   vCtx.font = fontStr;
-  const nameTextWidth = vCtx.measureText(gameName).width;
+  const textMaxWidth = gameCardW - cardInnerPad * 2;
+  // 【新增】先测量游戏名称自动换行高度
+  const nameLineHeight = nameFontSize * 1.3;
+  const nameWrapHeight = measureWrappedHeight(vCtx, gameName, textMaxWidth, nameLineHeight, nameFontSize, true);
+
   const nameX = cardX + cardInnerPad;
+  const nameTextWidth = vCtx.measureText(gameName).width;
   const heartStartX = nameX + nameTextWidth + 14;
   const rightLimit = gameCardW + cardX - cardInnerPad;
   const heartTotalWidth = HEART_SIZE * 5 + HEART_GAP * 4;
   const heartWrap = heartStartX + heartTotalWidth > rightLimit;
-  const baseHeight = nameFontSize;
-  const gapBottom = LAYOUT_SPACE.GAME_CARD_HEAD_MB;
-  return heartWrap ? (baseHeight + HEART_SIZE + gapBottom) : (baseHeight + gapBottom);
+
+  let totalTitleHeight = nameWrapHeight;
+  // 爱心换行，追加一行爱心高度
+  if (heartWrap) {
+    totalTitleHeight += HEART_SIZE;
+  }
+  // 追加标题底部间距
+  totalTitleHeight += LAYOUT_SPACE.GAME_CARD_HEAD_MB;
+  return totalTitleHeight;
 }
 
 // ============================ 【修改后】calcSingleGameBlockHeight ============================
@@ -814,6 +825,7 @@ async function drawHeaderBlock(painter, targetWidth, appData) {
   }
 }
 
+// ============================ 【修改后】drawSingleGameCard ============================
 async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, isLastCard = false) {
   const { gameInfo, charItems, cpItems, gameItem } = renderData;
   const { exportColor } = renderData.appData || {};
@@ -829,10 +841,10 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
   const cardTop = painter.y;
 
   const nameFontSize = 22;
-  const nameHeight = nameFontSize + LAYOUT_SPACE.GAME_CARD_HEAD_MB;
   const HEART_SIZE = 26;
   const HEART_GAP = 6;
-  const HEART_AREA_HEIGHT = 0;
+  const nameLineHeight = nameFontSize * 1.3;
+  const textMaxWidth = gameCardW - cardInnerPad * 2;
 
   let charAreaHeight = 0;
   let charCardHeight = LAYOUT_SPACE.CHAR_CARD_MIN_H;
@@ -894,32 +906,52 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
 
   const nameX = cardX + cardInnerPad;
   const nameBaselineY = drawY;
-  painter.drawText(gameInfo.name, nameX, nameBaselineY, nameFontSize, exportColor.gameName, FONT_SIYUAN, true);
 
-  painter.ctx.font = `${nameFontSize}px ${FONT_SIYUAN}`;
+  // ========== 【修改】绘制游戏标题，自动换行 ==========
+  const usedNameHeight = wrapText(
+    painter.ctx,
+    gameInfo.name,
+    nameX,
+    nameBaselineY,
+    textMaxWidth,
+    nameLineHeight,
+    nameFontSize,
+    exportColor.gameName,
+    FONT_SIYUAN,
+    true
+  );
+
+  // 判断爱心是否需要换行
+  painter.ctx.font = `bold ${nameFontSize}px ${FONT_SIYUAN}`;
   const nameTextWidth = painter.ctx.measureText(gameInfo.name).width;
   const heartStartX = nameX + nameTextWidth + 14;
-  const heartY = nameBaselineY + (nameFontSize - HEART_SIZE) / 2;
-
   const rightLimit = gameCardW + cardX - cardInnerPad;
   const heartTotalWidth = HEART_SIZE * 5 + HEART_GAP * 4;
+
+  let heartDrawY;
   if (heartStartX + heartTotalWidth > rightLimit) {
+    // 爱心换行：绘制在名称下方
+    heartDrawY = nameBaselineY + usedNameHeight;
     painter.drawHeartRate(
-      nameX, drawY + nameFontSize,
+      nameX, heartDrawY,
       gameItem.loveRate || 0,
       HEART_SIZE, HEART_GAP,
       '#e895a8', '#cccccc'
     );
   } else {
+    // 爱心同行：垂直居中在第一行
+    heartDrawY = nameBaselineY + (nameFontSize - HEART_SIZE) / 2;
     painter.drawHeartRate(
-      heartStartX, heartY,
+      heartStartX, heartDrawY,
       gameItem.loveRate || 0,
       HEART_SIZE, HEART_GAP,
       '#e895a8', '#cccccc'
     );
   }
 
-  drawY += nameFontSize + LAYOUT_SPACE.GAME_CARD_HEAD_MB;
+  // ========== 【关键】drawY 移动真实总标题高度 ==========
+  const totalTitleHeight = measureGameTitleWithHeartHeight(painter.ctx, cardX, gameCardW, gameInfo.name);
+  drawY += totalTitleHeight;
 
   // ========== 绘制【游戏标题爱心下方自定义文字】 ==========
   if (renderData.gameItem.gameHeadText?.trim()) {
