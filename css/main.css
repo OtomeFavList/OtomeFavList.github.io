@@ -1782,7 +1782,7 @@ h2{
     align-items: flex-end;
     justify-content: flex-end;
 }
-/* 红色三角图形【B样式：右下角内嵌直角三角】 */
+/* 红色三角图形 */
 .game-custom-text-wrap .resize-handle::after {
     content: "";
     display: block;
@@ -1803,22 +1803,25 @@ h2{
 .snapshot-container.export-snapshot .resize-handle {
     display: none !important;
 }
-/* 移动端放大三角与热区 */
+/* 移动端放大三角与热区【修改版：三角向上移动，防止溢出框外】 */
 @media (max-width:768px) {
     .game-custom-text-wrap .resize-handle {
         width: 32px;
         height: 32px;
-        right: 0px;     /* 紧贴右 */
-        bottom: 0px;    /* 紧贴下 */
+        right: 0px;
+        bottom: 4px;  /* 三角整体向上偏移，远离容器底边，不再戳出框 */
     }
     .game-custom-text-wrap textarea {
-        padding-bottom: 32px; /* 移动端稍大 */
+        padding-bottom: 36px; /* 同步加大底部内边距，预留三角空间 */
     }
     .game-custom-text-wrap .resize-handle::after {
         width: 16px;
         height: 16px;
         background-color: #b33a3a;
         clip-path: polygon(100% 0, 100% 100%, 0 100%);
+        /* 三角图形同步向上微调，不贴底 */
+        right: 4px;
+        bottom: 4px;
     }
 }
 
