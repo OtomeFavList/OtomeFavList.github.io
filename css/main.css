@@ -1805,29 +1805,34 @@ h2{
 }
 /* 移动端放大三角与热区：紧贴textarea右下角 */
 @media (max-width:768px) {
+    /* 父容器：裁剪溢出三角，同步圆角 */
     .game-custom-text-wrap {
         position: relative;
         overflow: hidden;
-        border-radius: 6px;
-        /* 提升裁切兼容性 */
-        -webkit-overflow-scrolling: touch;
+        border-radius: 6px; /* 与 textarea 圆角一致 */
     }
+
+    /* 文本框：取消原生 resize，底部留空给三角 */
     .game-custom-text-wrap textarea {
-        padding-bottom: 32px;
-        resize: none;
+        resize: none !important;
+        padding-bottom: 32px; /* 保证文字不被三角遮挡 */
         box-sizing: border-box;
+        /* 移除 position:relative，避免干扰父容器定位 */
+        position: static;
     }
+
+    /* 手柄容器：绝对定位，紧贴右下角 */
     .game-custom-text-wrap .resize-handle {
         position: absolute;
-        /* 缩小可点击区域，贴合角落，避免大面积溢出 */
-        width: 20px;
-        height: 20px;
+        width: 32px;
+        height: 32px;
         right: 0;
         bottom: 0;
         background: transparent;
-        /* 扩大点击热区，防止缩小后不好点 */
-        padding: 12px;
+        /* 无需额外 margin/padding */
     }
+
+    /* 三角图形：内嵌直角三角，完全位于父容器内部 */
     .game-custom-text-wrap .resize-handle::after {
         content: "";
         position: absolute;
@@ -1835,7 +1840,6 @@ h2{
         height: 16px;
         background-color: #b33a3a;
         clip-path: polygon(100% 0, 100% 100%, 0 100%);
-        /* 紧贴右下角，不偏移 */
         right: 0;
         bottom: 0;
     }
