@@ -17,7 +17,7 @@ const allGameFileNames = [
     "game061.js", "game062.js", "game063.js", "game064.js", "game065.js",
     "game066.js", "game067.js", "game068.js", "game069.js", "game070.js",
     "game071.js", "game072.js", "game073.js", "game074.js"
-    // 后续新增游戏仅在此添加一行文件名即可
+    // 后续新增游戏仅在此添加文件名
 ];
 
 // 全局游戏数据存储容器
