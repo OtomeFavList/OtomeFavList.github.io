@@ -1793,7 +1793,6 @@ h2{
     background-size: 16px 16px;
     background-repeat: no-repeat;
 }
-/* 修复：textarea不支持::after伪元素！改用外层容器实现 */
 .game-custom-text-wrap {
     position: relative;
 }
@@ -1805,6 +1804,7 @@ h2{
     width: 16px;
     height: 16px;
     pointer-events: none;
+    /* ✅修复：删除灰色线条，全部斜线统一使用 #b33a3a 红色 */
     background: linear-gradient(
         -45deg,
         transparent 33%,
@@ -1830,13 +1830,36 @@ h2{
 .snapshot-container.export-snapshot .resize-handle-marker {
     display: none !important;
 }
-/* 移动端适当放大拖拽标记，更容易触摸点击 */
+/* ==========【新增】扩大移动端触摸热区解决方案 ========== */
+.game-custom-text-wrap .touch-resize-hitbox {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    /* 扩大点击范围，移动端更容易摸到 */
+    width: 36px;
+    height: 36px;
+    z-index: 2;
+    /* 透明，不影响视觉，仅用于捕获触摸 */
+    background: transparent;
+    cursor: ns-resize;
+    /* 允许触摸事件穿透到textarea原生拖拽区域 */
+    pointer-events: auto;
+}
+/* 导出快照模式隐藏触摸热区 */
+.snapshot-container.export-snapshot .touch-resize-hitbox {
+    display: none !important;
+}
 @media (max-width:768px) {
     .game-custom-text-wrap .resize-handle-marker {
         width: 20px;
         height: 20px;
         right: 8px;
         bottom: 8px;
+    }
+    /* 移动端同步放大触摸热区 */
+    .game-custom-text-wrap .touch-resize-hitbox {
+        width: 42px;
+        height: 42px;
     }
 }
 
