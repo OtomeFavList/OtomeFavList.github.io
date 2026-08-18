@@ -30,10 +30,11 @@ export const JSD_BASE_URL = "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavLi
 // ===================== 路径标准化工具（根治 URL 二次拼接） =====================
 /**
  * 清洗旧版带 @main 的 jsDelivr 地址（向后兼容）
+ * 优化：使用更通用的正则，兼容URL中间出现@main
  */
 export function cleanOldJsdUrl(url) {
     if (!url || typeof url !== "string") return url;
-    return url.replace(/\/gh\/OtomeFavList\/OtomeFavList.github.io@main\//, "/gh/OtomeFavList/OtomeFavList.github.io/");
+    return url.replace(/(OtomeFavList\/OtomeFavList.github.io)@main/g, "$1");
 }
 
 /**
@@ -66,8 +67,9 @@ export function normalizeImageRelPath(src) {
     if (cleaned.startsWith(JSD_BASE_URL + "/")) {
         return cleaned.slice(JSD_BASE_URL.length + 1);
     }
-    // 无法识别的外部链接，直接返回原值（兜底）
-    return s;
+    // 无法识别的外部链接直接丢弃，禁止非法地址向下流转
+    console.error("❌ normalizeImageRelPath 无法识别的外部图片链接，已丢弃", s);
+    return null;
 }
 
 /**
@@ -87,6 +89,7 @@ export function getWebImageUrl(relPath) {
 
 /**
  * 安全生成Canvas jsDelivr地址（自动兼容旧数据完整URL）
+ * 统一使用jsDelivr，禁止Canvas直接读取GitHub Pages源文件
  * @param {string} relPath 相对路径或完整URL
  * @returns {string} 可用的图片URL
  */
@@ -96,10 +99,7 @@ export function getCanvasImageUrl(relPath) {
     const cleanPath = normalizeImageRelPath(cleaned);
     if (!cleanPath) return "";
     if (cleanPath.startsWith("http")) return cleanPath;
-    // 同源优先：若部署在 GitHub Pages，直接使用相对路径，彻底规避跨域
-    if (location.hostname === "otomefavlist.github.io") {
-        return `/${cleanPath}`;
-    }
+    // 统一使用jsDelivr，规避跨域
     return `${JSD_BASE_URL}/${cleanPath}`;
 }
 
@@ -111,10 +111,15 @@ export function getCanvasImageUrl(relPath) {
  */
 export function convertR2ToJsDelivr(path) {
     if (!path) return "";
+    // 拦截raw地址流入转换函数，便于定位异常数据源
+    if (path.includes("raw.githubusercontent.com")) {
+        console.error("❌ convertR2ToJsDelivr 检测到raw地址流入！", path);
+        return "";
+    }
     // 标准化提取相对路径
     const rel = normalizeImageRelPath(path);
     // 标准化后如果依然是http链接，代表无法识别，非法链接，告警
-    if (rel.startsWith("http")) {
+    if (rel && rel.startsWith("http")) {
         console.error("❌ convertR2ToJsDelivr 无法转换的外部图片地址:", path);
         return "";
     }
