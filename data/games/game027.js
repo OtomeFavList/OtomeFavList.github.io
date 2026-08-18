@@ -102,7 +102,9 @@ const gameData = {
             isFD: true,
             images: [
                 { srcList: ["char/027/Ukyo.jpg",
-                            "char/027/Ukyo2.jpg"], type: "base" },
+                            "char/027/Ukyo2.jpg",
+                            "char/Default.jpg",
+                            "char/Default2.jpg"], type: "base" },
                 { srcList: ["char/027/Ukyo3.jpg",
                             "char/027/Ukyo4.jpg",
                             "char/027/Ukyo5.jpg",
