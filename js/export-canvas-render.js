@@ -460,9 +460,7 @@ function calcCharCardHeight(ctx, charName, cardWidth, fontSize = 14) {
   const imgSize = cardWidth - innerPad * 2;
   const nameMaxWidth = cardWidth - innerPad * 2;
   const nameHeight = measureWrappedHeight(ctx, charName, nameMaxWidth, fontSize * 1.4, fontSize);
-  // 使用角色换行行距作为图片与文字间距，统一视觉
-  const IMG_NAME_GAP = LAYOUT_SPACE.CHAR_ROW_GAP;
-  const totalHeight = innerPad * 2 + imgSize + IMG_NAME_GAP + nameHeight + innerPad;
+  const totalHeight = innerPad * 2 + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB + nameHeight + innerPad;
   return Math.max(totalHeight, LAYOUT_SPACE.CHAR_CARD_MIN_H);
 }
 
@@ -589,13 +587,13 @@ function calcSingleGameBlockHeight(targetWidth, renderData) {
   let charSectionTextHeight = 0;
   if (gameItem.charSectionText?.trim()) {
     charSectionTextHeight = measureWrappedHeight(vCtx, gameItem.charSectionText.trim(), textMaxW, lineHeight, textSize);
-    charSectionTextHeight += 8 + 13; // drawY+8 + 文字底部间距
+    charSectionTextHeight += 8 + 13; // drawY+8 + 文字底部间距【同步改为13】
   }
 
   let cpSectionTextHeight = 0;
   if (gameItem.cpSectionText?.trim()) {
     cpSectionTextHeight = measureWrappedHeight(vCtx, gameItem.cpSectionText.trim(), textMaxW, lineHeight, textSize);
-    cpSectionTextHeight += 8 + 13; // drawY+8 + 文字底部间距
+    cpSectionTextHeight += 8 + 13; // drawY+8 + 文字底部间距【同步改为13】
   }
 
   let charAreaHeight = 0;
@@ -640,13 +638,8 @@ function calcSingleGameBlockHeight(targetWidth, renderData) {
       const maleRows = Math.ceil(cp.maleItems.length / perRow);
       const maleAreaH = maleRows * maxMaleH + (maleRows - 1) * maleGap;
       // ----- 将间距移入 totalCpHeight 累加 -----
-      const baseRowH = Math.max(fHeight, maleAreaH);
-      // 最后一组cp不追加行间距，消除多余空白
-      if (cp !== cpItems[cpItems.length - 1]) {
-        totalCpHeight += baseRowH + (LAYOUT_SPACE.CP_ROW_MARGIN || 16);
-      } else {
-        totalCpHeight += baseRowH;
-      }
+      const rowH = Math.max(fHeight, maleAreaH);
+      totalCpHeight += rowH + (LAYOUT_SPACE.CP_ROW_MARGIN || 16);
     }
     cpAreaHeight = totalCpHeight;
   }
@@ -1038,8 +1031,7 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
           painter.ctx.restore();
         }
       }
-      const IMG_NAME_GAP = LAYOUT_SPACE.CHAR_ROW_GAP;
-      const nameBoxY = yPos + innerPad + imgSize + IMG_NAME_GAP;
+      const nameBoxY = yPos + innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB;
       const nameBoxH = charCardHeight - (innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB) - innerPad;
       
       const needDrawName = !(item.isHidden || item.isFD) || renderData.appData.exportShowHiddenFDName;
@@ -1154,8 +1146,7 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
           painter.ctx.restore();
         }
       }
-      const IMG_NAME_GAP = LAYOUT_SPACE.CHAR_ROW_GAP;
-      const fNameBoxY = femaleY + innerPad + imgSize + IMG_NAME_GAP;
+      const fNameBoxY = femaleY + innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB;
       const fNameBoxH = rowH - (innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB) - innerPad;
       painter.drawTextWrapCenterInBox(
         cp.femaleName,
@@ -1207,8 +1198,7 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
             painter.ctx.restore();
           }
         }
-        const IMG_NAME_GAP = LAYOUT_SPACE.CHAR_ROW_GAP;
-        const mNameBoxY = my + innerPad + imgSize + IMG_NAME_GAP;
+        const mNameBoxY = my + innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB;
         const mNameBoxH = rowH - (innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB) - innerPad;
         
         const needDrawName = !(m.isHidden || m.isFD) || renderData.appData.exportShowHiddenFDName;
@@ -1231,10 +1221,7 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
         }
       }
       drawY = my + rowH;
-      // 仅非最后一组cp添加行间距，和预计算高度逻辑对齐，消除额外空白
-      if (cp !== cpItems[cpItems.length - 1]) {
-        drawY += (LAYOUT_SPACE.CP_ROW_MARGIN || 16);
-      }
+      // ----- 移除多余固定留白，消除couple有无文字时上下间距不一致问题 -----
     }
   }
 
