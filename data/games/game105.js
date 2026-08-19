@@ -41,3 +41,17 @@ Nintendo Switch版 5,995 円（税込）
 音乐: CUBE(株式会社キューブ)
 链接: ErogameScape VNDB
 官方网站: konami.jp/gs/game/Girls_Side/
+
+ときめきメモリアル Girl's Side 1st Love
+中文名: 心跳回忆 女生版 初恋
+开发: KONAMI
+发行: KONAMI
+制作人: 内田明理
+别名: ガールズサイドファーストラブ
+平台: NDS
+游戏类型: 学園恋愛シミュレーション
+游玩人数: 1
+发行日期: 2007-02-15
+售价: 5,478 円（税込）
+导演: 三野太郎
+官方网站: konami.com/games/girls_side/1st_Love/
