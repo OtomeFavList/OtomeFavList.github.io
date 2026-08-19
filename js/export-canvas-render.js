@@ -180,7 +180,7 @@ async function loadImagesWithLimit(urlList, limit) {
   const resultMap = new Map();
   let index = 0;
 
-  // 单张图片加载，最多重试2次
+  // 单张图片加载，最多重试2次，拉长重试间隔，适配国内网络抖动
   async function loadSingleUrl(url, retryCount = 2) {
     try {
       const bitmap = await preloadImageBitmap(url);
@@ -192,8 +192,9 @@ async function loadImagesWithLimit(urlList, limit) {
       return bitmap;
     } catch (err) {
       if (retryCount > 0) {
-        console.warn(`图片加载重试[${retryCount}]:`, url, err);
-        await new Promise(r => setTimeout(r, 150));
+        console.warn(`图片加载重试[剩余${retryCount}次]:`, url, err);
+        // 国内网络阻断场景，拉长重试间隔，不要150ms快速重试
+        await new Promise(r => setTimeout(r, 600));
         return loadSingleUrl(url, retryCount - 1);
       }
       console.warn('ImageBitmap加载失败，尝试降级HTML Image：', url, err);
@@ -228,17 +229,19 @@ async function loadImagesWithLimit(urlList, limit) {
   for (const [u, val] of resultMap.entries()) {
     if (!val) failList.push(u);
   }
+  // 将失败列表附加到返回对象，上层可以拿到失败url
+  const returnObj = {
+    resultMap,
+    failList
+  };
   if (failList.length > 0) {
     console.warn("⚠️ 部分图片加载失败，继续渲染（空白占位）：", failList);
-    // 移动端禁用强阻断，PC如需严格模式可自行开启
-    // throw new Error(`图片加载失败：${failList.join(',')}`);
   }
-
   // 多层帧等待，给浏览器完成光栅化，解决bitmap resolve但绘制空白
   await new Promise(r => requestAnimationFrame(r));
   await new Promise(r => requestAnimationFrame(r));
   await new Promise(r => setTimeout(r, 30));
-  return resultMap;
+  return returnObj;
 }
 
 // ============================ Canvas 布局绘制器 ============================
@@ -1435,7 +1438,10 @@ export async function renderExportCanvas(
     const canvas = document.createElement('canvas');
     const painter = new CanvasLayoutPainter(canvas, targetWidth, totalHeight, exportColor.bg);
 
-    const imageCache = await loadImagesWithLimit(allImageSrcList, MAX_IMAGE_CONCURRENCY);
+    const loadRet = await loadImagesWithLimit(allImageSrcList, MAX_IMAGE_CONCURRENCY);
+    const imageCache = loadRet.resultMap;
+    const imageFailList = loadRet.failList;
+
     await preGenerateAllRoundCanvas(imageCache, roundCanvasTasks);
     await new Promise(r => setTimeout(r, 50));
     await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
@@ -1454,7 +1460,9 @@ export async function renderExportCanvas(
     const finalHeight = painter.getY() + LAYOUT_SPACE.BODY_PADDING;
     const finalCanvas = cropCanvas(canvas, targetWidth, finalHeight);
     const blob = await new Promise((resolve) => finalCanvas.toBlob(resolve, 'image/png', 1));
-    return [blob];
+    const res = [blob];
+    res.imageFailList = imageFailList;
+    return res;
   }
 
   // 固定尺寸分页模式
@@ -1471,7 +1479,10 @@ export async function renderExportCanvas(
 
   const pagePlanList = splitPagesByHeight(headerHeight, gameBlockHeights, maxPageHeight);
 
-  const imageCache = await loadImagesWithLimit(allImageSrcList, MAX_IMAGE_CONCURRENCY);
+  const loadRet = await loadImagesWithLimit(allImageSrcList, MAX_IMAGE_CONCURRENCY);
+  const imageCache = loadRet.resultMap;
+  const imageFailList = loadRet.failList;
+
   await preGenerateAllRoundCanvas(imageCache, roundCanvasTasks);
   await new Promise(r => setTimeout(r, 50));
   await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
@@ -1499,5 +1510,6 @@ export async function renderExportCanvas(
     });
     if (blob) blobList.push(blob);
   }
+  blobList.imageFailList = imageFailList;
   return blobList;
 }
