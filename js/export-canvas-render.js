@@ -1212,7 +1212,7 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
           lineHeight,
           textSize
       );
-      drawY += textH + 13;
+      drawY += textH;
   }
 
   painter.shiftY(cardH);
