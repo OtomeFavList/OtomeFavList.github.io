@@ -4,6 +4,8 @@ import {
   LAYOUT_SPACE,
   LAYOUT_STYLE,
   getAvailableCharImages,
+  preloadAndDecodeImage,
+  preloadImageBitmap,
   convertR2ToJsDelivr
 } from './main.js';
 
@@ -13,47 +15,6 @@ const MAX_IMAGE_CONCURRENCY = 4;
 const roundImageCache = new Map();
 // 新增：图片资源缓存，区分 ImageBitmap / HTMLImageElement 降级对象
 const rawImageResourceCache = new Map();
-
-// ===================== 修复：Canvas模块独立图片缓存（不和UI共用！）=====================
-const canvasImgCache = new Map();
-
-// Canvas专用：独立加载，不依赖main.js全局缓存
-async function canvasPreloadAndDecode(src) {
-    if (!src) return null;
-    if (canvasImgCache.has(src)) {
-        return canvasImgCache.get(src);
-    }
-    const p = new Promise((resolve, reject) => {
-        const img = new Image();
-        img.crossOrigin = "anonymous";
-        img.decoding = "async";
-        img.onload = () => resolve(img);
-        img.onerror = () => {
-            canvasImgCache.delete(src);
-            console.error(`[Canvas专用加载失败]`, src);
-            reject(new Error(`Image load failed: ${src}`));
-        };
-        img.src = src;
-    });
-    canvasImgCache.set(src, p);
-    return p;
-}
-
-async function canvasPreloadImageBitmap(src) {
-    const img = await canvasPreloadAndDecode(src);
-    if (!img) return null;
-    try {
-        return await createImageBitmap(img, { resizeQuality: "high" });
-    } catch (e) {
-        console.warn(`createImageBitmap 降级: ${src}`, e);
-        try {
-            return await createImageBitmap(img);
-        } catch {
-            // iOS Safari终极兜底：返回原始Image
-            return img;
-        }
-    }
-}
 
 // ========== 字体规范 ==========
 const FONT_SIYUAN = "Noto Sans SC, sans-serif";
@@ -222,7 +183,7 @@ async function loadImagesWithLimit(urlList, limit) {
   // 单张图片加载，最多重试2次
   async function loadSingleUrl(url, retryCount = 2) {
     try {
-      const bitmap = await canvasPreloadImageBitmap(url);
+      const bitmap = await preloadImageBitmap(url);
       // 移动端严格校验bitmap有效尺寸
       if (!bitmap || bitmap.width === 0 || bitmap.height === 0) {
         throw new Error("bitmap empty size");
@@ -238,8 +199,8 @@ async function loadImagesWithLimit(urlList, limit) {
       console.warn('ImageBitmap加载失败，尝试降级HTML Image：', url, err);
       // 移动端降级：使用传统Image对象，规避各类浏览器bitmap渲染bug
       try {
-        const img = await canvasPreloadAndDecode(url);
-        if (!img) throw new Error('canvasPreloadAndDecode returned null');
+        const img = await preloadAndDecodeImage(url);
+        await new Promise(resolve => requestAnimationFrame(resolve));
         rawImageResourceCache.set(url, { type: 'image', data: img });
         return img;
       } catch (imgErr) {
@@ -1329,7 +1290,6 @@ export async function renderExportCanvas(
   currentDPR = getExportDPR(targetWidth);
   roundImageCache.clear();
   rawImageResourceCache.clear();
-  canvasImgCache.clear(); // 清空Canvas独立缓存，避免之前导出残留
 
   const allImageSrcList = [];
   const renderDataList = [];
