@@ -4,8 +4,7 @@ import {
   LAYOUT_SPACE,
   LAYOUT_STYLE,
   getAvailableCharImages,
-  convertR2ToJsDelivr,
-  getCanvasFallbackUrl
+  convertR2ToJsDelivr
 } from './main.js';
 
 // 最大并发图片加载数量，降低并发减少移动端解码资源竞争
@@ -236,41 +235,17 @@ async function loadImagesWithLimit(urlList, limit) {
         await new Promise(r => setTimeout(r, 150));
         return loadSingleUrl(url, retryCount - 1);
       }
-
       console.warn('ImageBitmap加载失败，尝试降级HTML Image：', url, err);
-      let fallbackUrl = null;
-
-      // =========【新增：jsDelivr失败，尝试R2 CORS兜底地址】 =========
-      if(url.startsWith("https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io/img/")){
-          // 提取相对路径
-          const relPath = url.replace("https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io/img/","");
-          fallbackUrl = getCanvasFallbackUrl(relPath);
-          console.warn(`🔁 jsDelivr加载失败，尝试R2兜底地址: ${fallbackUrl}`);
-      }
-
-      // 第一降级：HTML Image 当前url
+      // 移动端降级：使用传统Image对象，规避各类浏览器bitmap渲染bug
       try {
         const img = await canvasPreloadAndDecode(url);
         if (!img) throw new Error('canvasPreloadAndDecode returned null');
         rawImageResourceCache.set(url, { type: 'image', data: img });
         return img;
       } catch (imgErr) {
-          // jsDelivr失败，尝试R2兜底
-          if(fallbackUrl){
-              try{
-                  const fallbackImg = await canvasPreloadAndDecode(fallbackUrl);
-                  if(fallbackImg){
-                      console.log(`✅ R2兜底地址加载成功 ${fallbackUrl}`);
-                      rawImageResourceCache.set(url, { type: 'image', data: fallbackImg });
-                      return fallbackImg;
-                  }
-              }catch(fallbackErr){
-                  console.error(`❌ R2兜底地址同样加载失败 ${fallbackUrl}`, fallbackErr);
-              }
-          }
-          console.error('图片最终加载失败：', url, imgErr);
-          rawImageResourceCache.set(url, { type: 'fail', data: null });
-          return null;
+        console.error('图片最终加载失败：', url, imgErr);
+        rawImageResourceCache.set(url, { type: 'fail', data: null });
+        return null;
       }
     }
   }
