@@ -307,80 +307,85 @@ export function loadData() {
 
         // ===================== 【新增：存量脏图片链接一次性清洗迁移逻辑】 =====================
         if (Array.isArray(tempData.gameList)) {
-            let hasDirtyUrl = false;
-            // 遍历每条游戏记录
-            tempData.gameList.forEach(gameItem => {
-                if (!Array.isArray(gameItem.selectCharItems)) return;
-                // 遍历选中角色条目，只处理图片相关索引，不改动charId等业务数据
-                gameItem.selectCharItems.forEach(charItem => {
-                    const gameInfo = gameTemplateList.find(g => g.id === gameItem.gameId);
-                    if (!gameInfo?.charList || !charItem?.charId) return;
-                    const targetChar = gameInfo.charList.find(c => c.id === charItem.charId);
-                    if (!targetChar?.images || !Array.isArray(targetChar.images)) return;
+            // 防护兜底：如果游戏模板还未就绪，直接跳过清洗，避免脏链接残留
+            if (!gameTemplateReady || !Array.isArray(gameTemplateList) || gameTemplateList.length === 0) {
+                console.warn("⚠️ loadData：游戏模板未就绪，跳过存量图片链接清洗，将在下一次页面加载执行");
+            } else {
+                let hasDirtyUrl = false;
+                // 遍历每条游戏记录
+                tempData.gameList.forEach(gameItem => {
+                    if (!Array.isArray(gameItem.selectCharItems)) return;
+                    // 遍历选中角色条目，只处理图片相关索引，不改动charId等业务数据
+                    gameItem.selectCharItems.forEach(charItem => {
+                        const gameInfo = gameTemplateList.find(g => g.id === gameItem.gameId);
+                        if (!gameInfo?.charList || !charItem?.charId) return;
+                        const targetChar = gameInfo.charList.find(c => c.id === charItem.charId);
+                        if (!targetChar?.images || !Array.isArray(targetChar.images)) return;
 
-                    // 获取该角色全部可用图片src列表
-                    let allSrcList = [];
-                    targetChar.images.forEach(imgUnit => {
-                        if (Array.isArray(imgUnit.srcList)) {
-                            allSrcList.push(...imgUnit.srcList);
+                        // 获取该角色全部可用图片src列表
+                        let allSrcList = [];
+                        targetChar.images.forEach(imgUnit => {
+                            if (Array.isArray(imgUnit.srcList)) {
+                                allSrcList.push(...imgUnit.srcList);
+                            }
+                        });
+
+                        // 校验当前存储索引是否越界，同时清洗源数据里残留脏链接（持久层清理）
+                        const cleanSrcList = allSrcList
+                            .map(src => normalizeImageRelPath(src))
+                            .filter(Boolean); // normalize返回null代表非法链接，直接剔除
+
+                        if (cleanSrcList.length === 0) {
+                            return;
                         }
-                    });
-
-                    // 校验当前存储索引是否越界，同时清洗源数据里残留脏链接（持久层清理）
-                    const cleanSrcList = allSrcList
-                        .map(src => normalizeImageRelPath(src))
-                        .filter(Boolean); // normalize返回null代表非法链接，直接剔除
-
-                    if (cleanSrcList.length === 0) {
-                        return;
-                    }
-                    // 索引超出范围则重置为0
-                    if (typeof charItem.imgIndex !== "number" || charItem.imgIndex >= cleanSrcList.length) {
-                        charItem.imgIndex = 0;
-                        hasDirtyUrl = true;
-                    }
-                });
-            });
-
-            // 额外兜底：遍历cp内女主、男主立绘索引（CP模块同样清理脏路径风险）
-            tempData.gameList.forEach(gameItem => {
-                if (!Array.isArray(gameItem.cpList)) return;
-                gameItem.cpList.forEach(cp => {
-                    if (!cp.femaleId) return;
-                    const gameInfo = gameTemplateList.find(g => g.id === gameItem.gameId);
-                    if (!gameInfo?.charList) return;
-                    const fChar = gameInfo.charList.find(c => c.id === cp.femaleId);
-                    if (fChar?.images) {
-                        let fSrcList = [];
-                        fChar.images.forEach(u => Array.isArray(u.srcList) && fSrcList.push(...u.srcList));
-                        const cleanFList = fSrcList.map(normalizeImageRelPath).filter(Boolean);
-                        if (cleanFList.length > 0 && cp.femaleImgIndex >= cleanFList.length) {
-                            cp.femaleImgIndex = 0;
+                        // 索引超出范围则重置为0
+                        if (typeof charItem.imgIndex !== "number" || charItem.imgIndex >= cleanSrcList.length) {
+                            charItem.imgIndex = 0;
                             hasDirtyUrl = true;
                         }
-                    }
+                    });
+                });
 
-                    if (!Array.isArray(cp.maleItems)) return;
-                    cp.maleItems.forEach(mi => {
-                        if (!mi.charId) return;
-                        const mChar = gameInfo.charList.find(c => c.id === mi.charId);
-                        if (mChar?.images) {
-                            let mSrcList = [];
-                            mChar.images.forEach(u => Array.isArray(u.srcList) && mSrcList.push(...u.srcList));
-                            const cleanMList = mSrcList.map(normalizeImageRelPath).filter(Boolean);
-                            if (cleanMList.length > 0 && mi.imgIndex >= cleanMList.length) {
-                                mi.imgIndex = 0;
+                // 额外兜底：遍历cp内女主、男主立绘索引（CP模块同样清理脏路径风险）
+                tempData.gameList.forEach(gameItem => {
+                    if (!Array.isArray(gameItem.cpList)) return;
+                    gameItem.cpList.forEach(cp => {
+                        if (!cp.femaleId) return;
+                        const gameInfo = gameTemplateList.find(g => g.id === gameItem.gameId);
+                        if (!gameInfo?.charList) return;
+                        const fChar = gameInfo.charList.find(c => c.id === cp.femaleId);
+                        if (fChar?.images) {
+                            let fSrcList = [];
+                            fChar.images.forEach(u => Array.isArray(u.srcList) && fSrcList.push(...u.srcList));
+                            const cleanFList = fSrcList.map(normalizeImageRelPath).filter(Boolean);
+                            if (cleanFList.length > 0 && cp.femaleImgIndex >= cleanFList.length) {
+                                cp.femaleImgIndex = 0;
                                 hasDirtyUrl = true;
                             }
                         }
+
+                        if (!Array.isArray(cp.maleItems)) return;
+                        cp.maleItems.forEach(mi => {
+                            if (!mi.charId) return;
+                            const mChar = gameInfo.charList.find(c => c.id === mi.charId);
+                            if (mChar?.images) {
+                                let mSrcList = [];
+                                mChar.images.forEach(u => Array.isArray(u.srcList) && mSrcList.push(...u.srcList));
+                                const cleanMList = mSrcList.map(normalizeImageRelPath).filter(Boolean);
+                                if (cleanMList.length > 0 && mi.imgIndex >= cleanMList.length) {
+                                    mi.imgIndex = 0;
+                                    hasDirtyUrl = true;
+                                }
+                            }
+                        });
                     });
                 });
-            });
 
-            // 关键：检测到脏数据，标记需要持久化保存清洗后数据
-            if (hasDirtyUrl) {
-                console.log("🧹存量脏图片链接/越界索引已清理，将永久写入清洗后数据");
-                needSaveAfterMigrate = true;
+                // 关键：检测到脏数据，标记需要持久化保存清洗后数据
+                if (hasDirtyUrl) {
+                    console.log("🧹存量脏图片链接/越界索引已清理，将永久写入清洗后数据");
+                    needSaveAfterMigrate = true;
+                }
             }
         }
         // ===================== 【清洗迁移逻辑结束】 =====================
@@ -1493,10 +1498,10 @@ function bindGlobalSwitchSpoilerEvents() {
  * 对外暴露启动入口，供index.html调用
  */
 export async function bootstrapCore() {
-    // 1.读取本地存储数据
-    loadData();
-    // 2.加载全部游戏模板数据（读取全局window.gameDataList，由data/games.js提前加载完毕）
+    // 【修复时序BUG】先加载游戏模板，再执行loadData，保证loadData内部脏url清洗可以拿到gameTemplateList
     await loadAllGameTemplates();
+    // 1.读取本地存储数据 + 执行存量脏图片链接清洗迁移
+    loadData();
     // 3.组装核心上下文对象，传给UI层script.js
     const Core = buildCoreContext();
     // 动态导入，消除顶层import循环依赖
