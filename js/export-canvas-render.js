@@ -16,15 +16,6 @@ const roundImageCache = new Map();
 // 新增：图片资源缓存，区分 ImageBitmap / HTMLImageElement 降级对象
 const rawImageResourceCache = new Map();
 
-// 【新增】全局复用虚拟测量canvas，避免频繁创建销毁离屏对象
-let _virtualMeasureCanvas = null;
-function getVirtualMeasureCtx() {
-  if (!_virtualMeasureCanvas) {
-    _virtualMeasureCanvas = document.createElement('canvas');
-  }
-  return _virtualMeasureCanvas.getContext('2d');
-}
-
 // ========== 字体规范 ==========
 const FONT_SIYUAN = "Noto Sans SC, sans-serif";
 
@@ -163,7 +154,8 @@ async function preGenerateAllRoundCanvas(imageCache, roundTaskList) {
       taskMap.set(cacheKey, { src, radius });
     }
   }
-  // 串行预生成，移除每张图强制12ms延时
+
+  // 串行预生成（移动端避免并发离屏画布抢占GPU）
   for (const task of taskMap.values()) {
     const { src, radius } = task;
     const img = imageCache.get(src);
@@ -171,9 +163,12 @@ async function preGenerateAllRoundCanvas(imageCache, roundTaskList) {
     if (!canvas) {
       console.warn("预生成圆角画布创建失败，运行时尝试实时生成", src);
     }
+    // 移动端加长间隔，给GPU提交任务时间
+    await new Promise(r => setTimeout(r, 12));
   }
-  // 仅保留一次帧同步，删除setTimeout(50)
+  // 多层帧等待，低性能移动端充分刷新渲染队列
   await new Promise(r => requestAnimationFrame(r));
+  await new Promise(r => setTimeout(r, 50));
 }
 
 // ============================================================
@@ -234,6 +229,7 @@ async function loadImagesWithLimit(urlList, limit) {
   for (const [u, val] of resultMap.entries()) {
     if (!val) failList.push(u);
   }
+  // 将失败列表附加到返回对象，上层可以拿到失败url
   const returnObj = {
     resultMap,
     failList
@@ -241,8 +237,10 @@ async function loadImagesWithLimit(urlList, limit) {
   if (failList.length > 0) {
     console.warn("⚠️ 部分图片加载失败，继续渲染（空白占位）：", failList);
   }
-  // 只保留一次帧同步；移除多余RAF与setTimeout(30)
+  // 多层帧等待，给浏览器完成光栅化，解决bitmap resolve但绘制空白
   await new Promise(r => requestAnimationFrame(r));
+  await new Promise(r => requestAnimationFrame(r));
+  await new Promise(r => setTimeout(r, 30));
   return returnObj;
 }
 
@@ -454,7 +452,8 @@ function calcCharAreaHeight(ctx, charItems, containerWidth, cardWidth, gap, font
 
 function calcHeaderVirtualHeight(targetWidth, appData) {
   const { baseInfo } = appData;
-  const vCtx = getVirtualMeasureCtx();
+  const virtualCanvas = document.createElement('canvas');
+  const vCtx = virtualCanvas.getContext('2d');
   let cursorY = LAYOUT_SPACE.BODY_PADDING;
 
   const BODY_PAD = LAYOUT_SPACE.BODY_PADDING;
@@ -523,7 +522,8 @@ function measureGameTitleWithHeartHeight(vCtx, cardX, gameCardW, gameName) {
 // ============================ 【修改后】calcSingleGameBlockHeight ============================
 function calcSingleGameBlockHeight(targetWidth, renderData) {
   const { gameInfo, charItems, cpItems, gameItem } = renderData;
-  const vCtx = getVirtualMeasureCtx();
+  const virtualCanvas = document.createElement('canvas');
+  const vCtx = virtualCanvas.getContext('2d');
 
   const BODY_PAD = LAYOUT_SPACE.BODY_PADDING;
   const WRAP_MAX_W = 1200;
@@ -1443,6 +1443,8 @@ export async function renderExportCanvas(
     const imageFailList = loadRet.failList;
 
     await preGenerateAllRoundCanvas(imageCache, roundCanvasTasks);
+    await new Promise(r => setTimeout(r, 50));
+    await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
 
     const allIndexes = renderDataList.map((_, idx) => idx);
     await drawFullContent(
@@ -1482,6 +1484,8 @@ export async function renderExportCanvas(
   const imageFailList = loadRet.failList;
 
   await preGenerateAllRoundCanvas(imageCache, roundCanvasTasks);
+  await new Promise(r => setTimeout(r, 50));
+  await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
 
   const blobList = [];
   for (const pagePlan of pagePlanList) {
