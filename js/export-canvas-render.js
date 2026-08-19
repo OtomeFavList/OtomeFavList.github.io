@@ -4,6 +4,8 @@ import {
   LAYOUT_SPACE,
   LAYOUT_STYLE,
   getAvailableCharImages,
+  preloadAndDecodeImage,
+  preloadImageBitmap,
   convertR2ToJsDelivr
 } from './main.js';
 
@@ -13,47 +15,6 @@ const MAX_IMAGE_CONCURRENCY = 4;
 const roundImageCache = new Map();
 // 新增：图片资源缓存，区分 ImageBitmap / HTMLImageElement 降级对象
 const rawImageResourceCache = new Map();
-
-// ===================== 修复：Canvas模块独立图片缓存（不和UI共用！）=====================
-const canvasImgCache = new Map();
-
-// Canvas专用：独立加载，不依赖main.js全局缓存
-async function canvasPreloadAndDecode(src) {
-    if (!src) return null;
-    if (canvasImgCache.has(src)) {
-        return canvasImgCache.get(src);
-    }
-    const p = new Promise((resolve, reject) => {
-        const img = new Image();
-        img.crossOrigin = "anonymous";
-        img.decoding = "async";
-        img.onload = () => resolve(img);
-        img.onerror = () => {
-            canvasImgCache.delete(src);
-            console.error(`[Canvas专用加载失败]`, src);
-            reject(new Error(`Image load failed: ${src}`));
-        };
-        img.src = src;
-    });
-    canvasImgCache.set(src, p);
-    return p;
-}
-
-async function canvasPreloadImageBitmap(src) {
-    const img = await canvasPreloadAndDecode(src);
-    if (!img) return null;
-    try {
-        return await createImageBitmap(img, { resizeQuality: "high" });
-    } catch (e) {
-        console.warn(`createImageBitmap 降级: ${src}`, e);
-        try {
-            return await createImageBitmap(img);
-        } catch {
-            // iOS Safari终极兜底：返回原始Image
-            return img;
-        }
-    }
-}
 
 // ========== 字体规范 ==========
 const FONT_SIYUAN = "Noto Sans SC, sans-serif";
@@ -219,10 +180,10 @@ async function loadImagesWithLimit(urlList, limit) {
   const resultMap = new Map();
   let index = 0;
 
-  // 单张图片加载，最多重试2次
+  // 单张图片加载，最多重试2次，拉长重试间隔，适配国内网络抖动
   async function loadSingleUrl(url, retryCount = 2) {
     try {
-      const bitmap = await canvasPreloadImageBitmap(url);
+      const bitmap = await preloadImageBitmap(url);
       // 移动端严格校验bitmap有效尺寸
       if (!bitmap || bitmap.width === 0 || bitmap.height === 0) {
         throw new Error("bitmap empty size");
@@ -231,15 +192,16 @@ async function loadImagesWithLimit(urlList, limit) {
       return bitmap;
     } catch (err) {
       if (retryCount > 0) {
-        console.warn(`图片加载重试[${retryCount}]:`, url, err);
-        await new Promise(r => setTimeout(r, 150));
+        console.warn(`图片加载重试[剩余${retryCount}次]:`, url, err);
+        // 国内网络阻断场景，拉长重试间隔，不要150ms快速重试
+        await new Promise(r => setTimeout(r, 600));
         return loadSingleUrl(url, retryCount - 1);
       }
       console.warn('ImageBitmap加载失败，尝试降级HTML Image：', url, err);
       // 移动端降级：使用传统Image对象，规避各类浏览器bitmap渲染bug
       try {
-        const img = await canvasPreloadAndDecode(url);
-        if (!img) throw new Error('canvasPreloadAndDecode returned null');
+        const img = await preloadAndDecodeImage(url);
+        await new Promise(resolve => requestAnimationFrame(resolve));
         rawImageResourceCache.set(url, { type: 'image', data: img });
         return img;
       } catch (imgErr) {
@@ -267,17 +229,19 @@ async function loadImagesWithLimit(urlList, limit) {
   for (const [u, val] of resultMap.entries()) {
     if (!val) failList.push(u);
   }
+  // 将失败列表附加到返回对象，上层可以拿到失败url
+  const returnObj = {
+    resultMap,
+    failList
+  };
   if (failList.length > 0) {
     console.warn("⚠️ 部分图片加载失败，继续渲染（空白占位）：", failList);
-    // 移动端禁用强阻断，PC如需严格模式可自行开启
-    // throw new Error(`图片加载失败：${failList.join(',')}`);
   }
-
   // 多层帧等待，给浏览器完成光栅化，解决bitmap resolve但绘制空白
   await new Promise(r => requestAnimationFrame(r));
   await new Promise(r => requestAnimationFrame(r));
   await new Promise(r => setTimeout(r, 30));
-  return resultMap;
+  return returnObj;
 }
 
 // ============================ Canvas 布局绘制器 ============================
@@ -587,13 +551,13 @@ function calcSingleGameBlockHeight(targetWidth, renderData) {
   let charSectionTextHeight = 0;
   if (gameItem.charSectionText?.trim()) {
     charSectionTextHeight = measureWrappedHeight(vCtx, gameItem.charSectionText.trim(), textMaxW, lineHeight, textSize);
-    charSectionTextHeight += 8 + 13; // drawY+8 + 文字底部间距
+    charSectionTextHeight += 13 + 13; // drawY+13 + 文字底部间距
   }
 
   let cpSectionTextHeight = 0;
   if (gameItem.cpSectionText?.trim()) {
     cpSectionTextHeight = measureWrappedHeight(vCtx, gameItem.cpSectionText.trim(), textMaxW, lineHeight, textSize);
-    cpSectionTextHeight += 8; // drawY+8，无底部间距
+    cpSectionTextHeight += 13 + 13; // drawY+13 + 文字底部间距
   }
 
   let charAreaHeight = 0;
@@ -637,8 +601,9 @@ function calcSingleGameBlockHeight(targetWidth, renderData) {
       const perRow = calcCardsPerRow(maleCardWidth, maleGap, maleContainerWidth);
       const maleRows = Math.ceil(cp.maleItems.length / perRow);
       const maleAreaH = maleRows * maxMaleH + (maleRows - 1) * maleGap;
-      const rowH = Math.max(fHeight, maleAreaH) + (LAYOUT_SPACE.CP_ROW_MARGIN || 16);
-      totalCpHeight += rowH;
+      // ----- 将间距移入 totalCpHeight 累加 -----
+      const rowH = Math.max(fHeight, maleAreaH);
+      totalCpHeight += rowH + (LAYOUT_SPACE.CP_ROW_MARGIN || 16);
     }
     cpAreaHeight = totalCpHeight;
   }
@@ -1065,7 +1030,7 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
           painter.ctx,
           renderData.gameItem.charSectionText.trim(),
           textX,
-          drawY + 8,
+          drawY + 13,
           textMaxW,
           lineHeight,
           textSize,
@@ -1220,11 +1185,11 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
         }
       }
       drawY = my + rowH;
-      drawY += 12;
+      // ----- 移除多余固定留白，消除couple有无文字时上下间距不一致问题 -----
     }
   }
 
-  // ========== 绘制【Couple区域下方自定义文字】（已删除底部间距） ==========
+  // ========== 绘制【Couple区域下方自定义文字】 ==========
   if (renderData.gameItem.cpSectionText?.trim()) {
       const textX = cardX + cardInnerPad;
       const textMaxW = gameCardW - cardInnerPad * 2;
@@ -1234,7 +1199,7 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
           painter.ctx,
           renderData.gameItem.cpSectionText.trim(),
           textX,
-          drawY + 8,
+          drawY + 13,
           textMaxW,
           lineHeight,
           textSize,
@@ -1247,7 +1212,7 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
           lineHeight,
           textSize
       );
-      drawY += textH; // 已删除 +13 底部间距
+      drawY += textH + 13;
   }
 
   painter.shiftY(cardH);
@@ -1328,7 +1293,6 @@ export async function renderExportCanvas(
   currentDPR = getExportDPR(targetWidth);
   roundImageCache.clear();
   rawImageResourceCache.clear();
-  canvasImgCache.clear(); // 清空Canvas独立缓存，避免之前导出残留
 
   const allImageSrcList = [];
   const renderDataList = [];
@@ -1474,7 +1438,10 @@ export async function renderExportCanvas(
     const canvas = document.createElement('canvas');
     const painter = new CanvasLayoutPainter(canvas, targetWidth, totalHeight, exportColor.bg);
 
-    const imageCache = await loadImagesWithLimit(allImageSrcList, MAX_IMAGE_CONCURRENCY);
+    const loadRet = await loadImagesWithLimit(allImageSrcList, MAX_IMAGE_CONCURRENCY);
+    const imageCache = loadRet.resultMap;
+    const imageFailList = loadRet.failList;
+
     await preGenerateAllRoundCanvas(imageCache, roundCanvasTasks);
     await new Promise(r => setTimeout(r, 50));
     await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
@@ -1493,7 +1460,9 @@ export async function renderExportCanvas(
     const finalHeight = painter.getY() + LAYOUT_SPACE.BODY_PADDING;
     const finalCanvas = cropCanvas(canvas, targetWidth, finalHeight);
     const blob = await new Promise((resolve) => finalCanvas.toBlob(resolve, 'image/png', 1));
-    return [blob];
+    const res = [blob];
+    res.imageFailList = imageFailList;
+    return res;
   }
 
   // 固定尺寸分页模式
@@ -1510,7 +1479,10 @@ export async function renderExportCanvas(
 
   const pagePlanList = splitPagesByHeight(headerHeight, gameBlockHeights, maxPageHeight);
 
-  const imageCache = await loadImagesWithLimit(allImageSrcList, MAX_IMAGE_CONCURRENCY);
+  const loadRet = await loadImagesWithLimit(allImageSrcList, MAX_IMAGE_CONCURRENCY);
+  const imageCache = loadRet.resultMap;
+  const imageFailList = loadRet.failList;
+
   await preGenerateAllRoundCanvas(imageCache, roundCanvasTasks);
   await new Promise(r => setTimeout(r, 50));
   await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
@@ -1538,5 +1510,6 @@ export async function renderExportCanvas(
     });
     if (blob) blobList.push(blob);
   }
+  blobList.imageFailList = imageFailList;
   return blobList;
 }
