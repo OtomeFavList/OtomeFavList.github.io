@@ -11,6 +11,9 @@ import {
 
 // 最大并发图片加载数量，降低并发减少移动端解码资源竞争
 const MAX_IMAGE_CONCURRENCY = 4;
+//【IOS环境检测：Safari / iOS Chrome(WebKit内核)】
+const IS_IOS_WEBKIT = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
 //【优化】圆角离屏画布缓存：key = `${url}||${sourceW}x${sourceH}||${radius}||${dpr}`
 const roundImageCache = new Map();
 // 新增：图片资源缓存，区分 ImageBitmap / HTMLImageElement 降级对象
@@ -39,7 +42,8 @@ export function wrapText(ctx, text, x, y, maxWidth, lineHeight, fontSize, color,
   for (let n = 0; n < chars.length; n++) {
     const testLine = line + chars[n];
     const metrics = ctx.measureText(testLine);
-    if (metrics.width > maxWidth && n > 0) {
+    const mWidth = Number.isFinite(metrics.width) ? metrics.width : 0;
+    if (mWidth > maxWidth && n > 0) {
       ctx.fillText(line, x, y + totalHeight);
       line = chars[n];
       totalHeight += lineHeight;
@@ -63,7 +67,9 @@ export function measureWrappedHeight(ctx, text, maxWidth, lineHeight, fontSize, 
   let lines = 1;
   for (let n = 0; n < chars.length; n++) {
     const testLine = line + chars[n];
-    if (ctx.measureText(testLine).width > maxWidth && n > 0) {
+    const metrics = ctx.measureText(testLine);
+    const mWidth = Number.isFinite(metrics.width) ? metrics.width : 0;
+    if (mWidth > maxWidth && n > 0) {
       lines++;
       line = chars[n];
     } else {
@@ -84,12 +90,14 @@ function createRoundImageCanvas(img, srcUrl, radius) {
   const sourceH = (img.naturalHeight ?? img.height) || 1;
   if (sourceW <= 0 || sourceH <= 0) return null;
   const dpr = currentDPR;
-  // =========【补丁3‑1】IOS安全熔断：单张离屏画布像素上限阈值，超过直接不生成缓存，走实时clip降级 ==========
-  const MAX_OFFSCREEN_PX = 4096 * 4096;
-  const pxTotal = (sourceW * dpr) * (sourceH * dpr);
-  if(pxTotal > MAX_OFFSCREEN_PX){
-    console.warn("离屏画布像素超限，跳过圆角缓存，使用实时绘制", srcUrl);
-    return null;
+  // =========【补丁3‑1】仅IOS安全熔断：单张离屏画布像素上限阈值，超过直接不生成缓存，走实时clip降级 ==========
+  if(IS_IOS_WEBKIT){
+    const MAX_OFFSCREEN_PX = 4096 * 4096;
+    const pxTotal = (sourceW * dpr) * (sourceH * dpr);
+    if(pxTotal > MAX_OFFSCREEN_PX){
+      console.warn("离屏画布像素超限(IOS)，跳过圆角缓存，使用实时绘制", srcUrl);
+      return null;
+    }
   }
   const cacheKey = `${srcUrl}||${sourceW}x${sourceH}||${radius}||${dpr}`;
   if (roundImageCache.has(cacheKey)) {
@@ -167,23 +175,26 @@ async function preGenerateAllRoundCanvas(imageCache, roundTaskList) {
     if (!canvas) {
       console.warn("预生成圆角画布创建失败，运行时尝试实时生成", src);
     }
-    // 移动端加长间隔，给GPU提交任务时间
-    await new Promise(r => setTimeout(r, 12));
+    // IOS加大离屏画布生成间隔，缓解GPU队列拥堵
+    const delayMs = IS_IOS_WEBKIT ? 30 : 12;
+    await new Promise(r => setTimeout(r, delayMs));
   }
   // 多层帧等待，低性能移动端充分刷新渲染队列
   await new Promise(r => requestAnimationFrame(r));
   await new Promise(r => setTimeout(r, 50));
-  // =========【补丁7】限制圆角离屏缓存最大数量，防止IOS内存爆炸 ==========
-  const MAX_ROUND_CACHE = 80;
-  if(roundImageCache.size > MAX_ROUND_CACHE){
-    const needDelete = roundImageCache.size - MAX_ROUND_CACHE;
-    let delCount = 0;
-    for(const [key, c] of roundImageCache){
-      if(delCount >= needDelete) break;
-      c.width = 0;
-      c.height = 0;
-      roundImageCache.delete(key);
-      delCount++;
+  // =========【补丁7】仅IOS：限制圆角离屏缓存最大数量，防止IOS内存爆炸 ==========
+  if(IS_IOS_WEBKIT){
+    const MAX_ROUND_CACHE = 80;
+    if(roundImageCache.size > MAX_ROUND_CACHE){
+      const needDelete = roundImageCache.size - MAX_ROUND_CACHE;
+      let delCount = 0;
+      for(const [key, c] of roundImageCache){
+        if(delCount >= needDelete) break;
+        c.width = 0;
+        c.height = 0;
+        roundImageCache.delete(key);
+        delCount++;
+      }
     }
   }
 }
@@ -204,6 +215,10 @@ async function loadImagesWithLimit(urlList, limit) {
       // 移动端严格校验bitmap有效尺寸
       if (!bitmap || bitmap.width === 0 || bitmap.height === 0) {
         throw new Error("bitmap empty size");
+      }
+      // IOS额外帧等待，解决bitmap resolve但显存未就绪绘制空白
+      if(IS_IOS_WEBKIT){
+        await new Promise(r => requestAnimationFrame(r));
       }
       rawImageResourceCache.set(url, { type: 'bitmap', data: bitmap });
       return bitmap;
@@ -997,8 +1012,14 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
           roundCanvas = createRoundImageCanvas(img, item.src, radius);
         }
         if (roundCanvas) {
-          painter.drawImageRound(roundCanvas, xPos + innerPad, imgY, imgSize, imgSize);
-        } else {
+          try {
+            painter.drawImageRound(roundCanvas, xPos + innerPad, imgY, imgSize, imgSize);
+          } catch(e) {
+            if(IS_IOS_WEBKIT) console.warn("IOS绘制圆角离屏画布异常，回退clip", e);
+            roundCanvas = null;
+          }
+        }
+        if (!roundCanvas) {
           // =========【补丁4】降级clip分支强制try-finally保证restore ==========
           painter.ctx.save();
           try {
@@ -1116,8 +1137,14 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
           roundCanvas = createRoundImageCanvas(femaleImg, cp.femaleSrc, radius);
         }
         if (roundCanvas) {
-          painter.drawImageRound(roundCanvas, femaleX + innerPad, imgY, imgSize, imgSize);
-        } else {
+          try {
+            painter.drawImageRound(roundCanvas, femaleX + innerPad, imgY, imgSize, imgSize);
+          } catch(e) {
+            if(IS_IOS_WEBKIT) console.warn("IOS绘制圆角离屏画布异常，回退clip", e);
+            roundCanvas = null;
+          }
+        }
+        if (!roundCanvas) {
           painter.ctx.save();
           try {
             painter.ctx.beginPath();
@@ -1171,8 +1198,14 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
             roundCanvas = createRoundImageCanvas(mImg, m.src, radius);
           }
           if (roundCanvas) {
-            painter.drawImageRound(roundCanvas, mx + innerPad, imgY, imgSize, imgSize);
-          } else {
+            try {
+              painter.drawImageRound(roundCanvas, mx + innerPad, imgY, imgSize, imgSize);
+            } catch(e) {
+              if(IS_IOS_WEBKIT) console.warn("IOS绘制圆角离屏画布异常，回退clip", e);
+              roundCanvas = null;
+            }
+          }
+          if (!roundCanvas) {
             painter.ctx.save();
             try {
               painter.ctx.beginPath();
@@ -1324,14 +1357,16 @@ export async function renderExportCanvas(
   const { exportColor, gameList } = appData;
 
   currentDPR = getExportDPR(targetWidth);
-  // ==========【补丁1】释放ImageBitmap资源，避免IOS内存泄漏 ==========
-  for (const [k, res] of rawImageResourceCache.entries()) {
-    if(res?.type === 'bitmap' && res.data && typeof res.data.close === 'function'){
-      try { res.data.close(); } catch(e){}
+  // ==========【补丁1】仅IOS：释放ImageBitmap资源，避免IOS内存泄漏 ==========
+  if(IS_IOS_WEBKIT){
+    for (const [k, res] of rawImageResourceCache.entries()) {
+      if(res?.type === 'bitmap' && res.data && typeof res.data.close === 'function'){
+        try { res.data.close(); } catch(e){}
+      }
     }
+    roundImageCache.clear();
+    rawImageResourceCache.clear();
   }
-  roundImageCache.clear();
-  rawImageResourceCache.clear();
 
   const allImageSrcList = [];
   const renderDataList = [];
@@ -1478,10 +1513,12 @@ export async function renderExportCanvas(
     const realCanvasW = targetWidth * dpr;
     const realCanvasH = totalHeight * dpr;
     const totalPixel = realCanvasW * realCanvasH;
-    // =========【补丁5】IOS长图画布像素预警，超过阈值控制台警告，建议使用分页模式 ==========
-    const SAFARI_MAX_PX = 32 * 1024 * 1024;
-    if(totalPixel > SAFARI_MAX_PX){
-      console.warn(`⚠️ IOS画布总像素超限风险：${totalPixel}，建议切换分页导出，长图可能渲染失败/toBlob返回null`);
+    // =========【补丁5】仅IOS长图画布像素预警，超过阈值控制台警告，建议使用分页模式 ==========
+    if(IS_IOS_WEBKIT){
+      const SAFARI_MAX_PX = 32 * 1024 * 1024;
+      if(totalPixel > SAFARI_MAX_PX){
+        console.warn(`⚠️ IOS画布总像素超限风险：${totalPixel}，建议切换分页导出，长图可能渲染失败/toBlob返回null`);
+      }
     }
     const canvas = document.createElement('canvas');
     const painter = new CanvasLayoutPainter(canvas, targetWidth, totalHeight, exportColor.bg);
@@ -1507,7 +1544,13 @@ export async function renderExportCanvas(
 
     const finalHeight = painter.getY() + LAYOUT_SPACE.BODY_PADDING;
     const finalCanvas = cropCanvas(canvas, targetWidth, finalHeight);
-    const blob = await new Promise((resolve) => finalCanvas.toBlob(resolve, 'image/png', 1));
+    let blob = await new Promise((resolve) => finalCanvas.toBlob(resolve, 'image/png', 1));
+    // IOS toBlob null 简易重试
+    if(IS_IOS_WEBKIT && !blob){
+      console.warn("IOS toBlob 返回null，进行重试");
+      await new Promise(r => setTimeout(r, 100));
+      blob = await new Promise((resolve) => finalCanvas.toBlob(resolve, 'image/png', 1));
+    }
     const res = [blob];
     res.imageFailList = imageFailList;
     return res;
@@ -1537,7 +1580,15 @@ export async function renderExportCanvas(
 
   const blobList = [];
   for (const pagePlan of pagePlanList) {
-    const safeTempHeight = Math.max(maxPageHeight * 4, 6000);
+    let safeTempHeight = Math.max(maxPageHeight * 4, 6000);
+    // IOS临时画布高度硬上限，防止canvas尺寸被WebKit静默置0
+    if(IS_IOS_WEBKIT){
+      const IOS_TEMP_CANVAS_MAX = 12000;
+      if(safeTempHeight > IOS_TEMP_CANVAS_MAX){
+        console.warn("IOS分页临时高度超出安全上限，截断", safeTempHeight);
+        safeTempHeight = IOS_TEMP_CANVAS_MAX;
+      }
+    }
     const canvas = document.createElement('canvas');
     const painter = new CanvasLayoutPainter(canvas, targetWidth, safeTempHeight, exportColor.bg);
 
@@ -1553,15 +1604,25 @@ export async function renderExportCanvas(
 
     const usedHeight = painter.getY() + LAYOUT_SPACE.BODY_PADDING;
     const finalCanvas = cropCanvas(canvas, targetWidth, usedHeight);
-    const blob = await new Promise((resolve) => {
+    let blob = await new Promise((resolve) => {
       finalCanvas.toBlob((b) => resolve(b), 'image/png', 1);
     });
+    // IOS toBlob null 简易重试
+    if(IS_IOS_WEBKIT && !blob){
+      console.warn("IOS分页toBlob 返回null，进行重试");
+      await new Promise(r => setTimeout(r,100));
+      blob = await new Promise((resolve) => {
+        finalCanvas.toBlob((b) => resolve(b), 'image/png', 1);
+      });
+    }
     if (blob) blobList.push(blob);
-    // =========【补丁6】单页绘制完成立刻释放临时画布，降低IOS多页内存峰值 ==========
-    canvas.width = 0;
-    canvas.height = 0;
-    finalCanvas.width = 0;
-    finalCanvas.height = 0;
+    // =========【补丁6】仅IOS：单页绘制完成立刻释放临时画布，降低IOS多页内存峰值 ==========
+    if(IS_IOS_WEBKIT){
+      canvas.width = 0;
+      canvas.height = 0;
+      finalCanvas.width = 0;
+      finalCanvas.height = 0;
+    }
   }
   blobList.imageFailList = imageFailList;
   return blobList;
