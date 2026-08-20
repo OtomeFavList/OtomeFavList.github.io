@@ -83,24 +83,27 @@ function createRoundImageCanvas(img, srcUrl, radius) {
   const sourceW = (img.naturalWidth ?? img.width) || 1;
   const sourceH = (img.naturalHeight ?? img.height) || 1;
   if (sourceW <= 0 || sourceH <= 0) return null;
-
   const dpr = currentDPR;
+  // =========【补丁3‑1】IOS安全熔断：单张离屏画布像素上限阈值，超过直接不生成缓存，走实时clip降级 ==========
+  const MAX_OFFSCREEN_PX = 4096 * 4096;
+  const pxTotal = (sourceW * dpr) * (sourceH * dpr);
+  if(pxTotal > MAX_OFFSCREEN_PX){
+    console.warn("离屏画布像素超限，跳过圆角缓存，使用实时绘制", srcUrl);
+    return null;
+  }
   const cacheKey = `${srcUrl}||${sourceW}x${sourceH}||${radius}||${dpr}`;
   if (roundImageCache.has(cacheKey)) {
     return roundImageCache.get(cacheKey);
   }
-
   const offCanvas = document.createElement('canvas');
   offCanvas.width = sourceW * dpr;
   offCanvas.height = sourceH * dpr;
   const offCtx = offCanvas.getContext('2d');
   if (!offCtx) return null;
-
   offCtx.clearRect(0, 0, offCanvas.width, offCanvas.height);
   offCtx.imageSmoothingEnabled = true;
   offCtx.imageSmoothingQuality = "high";
   offCtx.webkitImageSmoothingEnabled = true;
-
   try {
     offCtx.save();
     offCtx.scale(dpr, dpr);
@@ -120,9 +123,11 @@ function createRoundImageCanvas(img, srcUrl, radius) {
     offCtx.restore();
   } catch (e) {
     console.warn("离屏画布绘制异常", srcUrl, e);
+    // =========【补丁3‑2】异常时销毁失败画布，不要留在内存 ==========
+    offCanvas.width = 0;
+    offCanvas.height = 0;
     return null;
   }
-
   roundImageCache.set(cacheKey, offCanvas);
   return offCanvas;
 }
@@ -154,7 +159,6 @@ async function preGenerateAllRoundCanvas(imageCache, roundTaskList) {
       taskMap.set(cacheKey, { src, radius });
     }
   }
-
   // 串行预生成（移动端避免并发离屏画布抢占GPU）
   for (const task of taskMap.values()) {
     const { src, radius } = task;
@@ -169,6 +173,19 @@ async function preGenerateAllRoundCanvas(imageCache, roundTaskList) {
   // 多层帧等待，低性能移动端充分刷新渲染队列
   await new Promise(r => requestAnimationFrame(r));
   await new Promise(r => setTimeout(r, 50));
+  // =========【补丁7】限制圆角离屏缓存最大数量，防止IOS内存爆炸 ==========
+  const MAX_ROUND_CACHE = 80;
+  if(roundImageCache.size > MAX_ROUND_CACHE){
+    const needDelete = roundImageCache.size - MAX_ROUND_CACHE;
+    let delCount = 0;
+    for(const [key, c] of roundImageCache){
+      if(delCount >= needDelete) break;
+      c.width = 0;
+      c.height = 0;
+      roundImageCache.delete(key);
+      delCount++;
+    }
+  }
 }
 
 // ============================================================
@@ -486,6 +503,9 @@ function calcHeaderVirtualHeight(targetWidth, appData) {
   }
 
   cursorY += LAYOUT_SPACE.WRAP_GAP;
+  // ==========【补丁2‑1】用完销毁虚拟画布，释放IOS显存 ==========
+  virtualCanvas.width = 0;
+  virtualCanvas.height = 0;
   return cursorY;
 }
 
@@ -616,6 +636,9 @@ function calcSingleGameBlockHeight(targetWidth, renderData) {
     + charSectionTextHeight
     + cpAreaHeight
     + cpSectionTextHeight;
+  // ==========【补丁2‑2】测量完成销毁虚拟画布 ==========
+  virtualCanvas.width = 0;
+  virtualCanvas.height = 0;
   return totalCardH;
 }
 
@@ -976,23 +999,27 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
         if (roundCanvas) {
           painter.drawImageRound(roundCanvas, xPos + innerPad, imgY, imgSize, imgSize);
         } else {
+          // =========【补丁4】降级clip分支强制try-finally保证restore ==========
           painter.ctx.save();
-          painter.ctx.beginPath();
-          painter.ctx.moveTo(xPos + innerPad + radius, imgY);
-          painter.ctx.lineTo(xPos + innerPad + imgSize - radius, imgY);
-          painter.ctx.quadraticCurveTo(xPos + innerPad + imgSize, imgY, xPos + innerPad + imgSize, imgY + radius);
-          painter.ctx.lineTo(xPos + innerPad + imgSize, imgY + imgSize - radius);
-          painter.ctx.quadraticCurveTo(xPos + innerPad + imgSize, imgY + imgSize, xPos + innerPad + imgSize - radius, imgY + imgSize);
-          painter.ctx.lineTo(xPos + innerPad + radius, imgY + imgSize);
-          painter.ctx.quadraticCurveTo(xPos + innerPad, imgY + imgSize, xPos + innerPad, imgY + imgSize - radius);
-          painter.ctx.lineTo(xPos + innerPad, imgY + radius);
-          painter.ctx.quadraticCurveTo(xPos + innerPad, imgY, xPos + innerPad + radius, imgY);
-          painter.ctx.closePath();
-          painter.ctx.clip();
-          const resourceInfo = rawImageResourceCache.get(item.src);
-          const drawTarget = resourceInfo?.type === 'image' ? resourceInfo.data : img;
-          painter.ctx.drawImage(drawTarget, xPos + innerPad, imgY, imgSize, imgSize);
-          painter.ctx.restore();
+          try {
+            painter.ctx.beginPath();
+            painter.ctx.moveTo(xPos + innerPad + radius, imgY);
+            painter.ctx.lineTo(xPos + innerPad + imgSize - radius, imgY);
+            painter.ctx.quadraticCurveTo(xPos + innerPad + imgSize, imgY, xPos + innerPad + imgSize, imgY + radius);
+            painter.ctx.lineTo(xPos + innerPad + imgSize, imgY + imgSize - radius);
+            painter.ctx.quadraticCurveTo(xPos + innerPad + imgSize, imgY + imgSize, xPos + innerPad + imgSize - radius, imgY + imgSize);
+            painter.ctx.lineTo(xPos + innerPad + radius, imgY + imgSize);
+            painter.ctx.quadraticCurveTo(xPos + innerPad, imgY + imgSize, xPos + innerPad, imgY + imgSize - radius);
+            painter.ctx.lineTo(xPos + innerPad, imgY + radius);
+            painter.ctx.quadraticCurveTo(xPos + innerPad, imgY, xPos + innerPad + radius, imgY);
+            painter.ctx.closePath();
+            painter.ctx.clip();
+            const resourceInfo = rawImageResourceCache.get(item.src);
+            const drawTarget = resourceInfo?.type === 'image' ? resourceInfo.data : img;
+            painter.ctx.drawImage(drawTarget, xPos + innerPad, imgY, imgSize, imgSize);
+          } finally {
+            painter.ctx.restore();
+          }
         }
       }
       const nameBoxY = yPos + innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB;
@@ -1092,22 +1119,25 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
           painter.drawImageRound(roundCanvas, femaleX + innerPad, imgY, imgSize, imgSize);
         } else {
           painter.ctx.save();
-          painter.ctx.beginPath();
-          painter.ctx.moveTo(femaleX + innerPad + radius, imgY);
-          painter.ctx.lineTo(femaleX + innerPad + imgSize - radius, imgY);
-          painter.ctx.quadraticCurveTo(femaleX + innerPad + imgSize, imgY, femaleX + innerPad + imgSize, imgY + radius);
-          painter.ctx.lineTo(femaleX + innerPad + imgSize, imgY + imgSize - radius);
-          painter.ctx.quadraticCurveTo(femaleX + innerPad + imgSize, imgY + imgSize, femaleX + innerPad + imgSize - radius, imgY + imgSize);
-          painter.ctx.lineTo(femaleX + innerPad + radius, imgY + imgSize);
-          painter.ctx.quadraticCurveTo(femaleX + innerPad, imgY + imgSize, femaleX + innerPad, imgY + imgSize - radius);
-          painter.ctx.lineTo(femaleX + innerPad, imgY + radius);
-          painter.ctx.quadraticCurveTo(femaleX + innerPad, imgY, femaleX + innerPad + radius, imgY);
-          painter.ctx.closePath();
-          painter.ctx.clip();
-          const resourceInfo = rawImageResourceCache.get(cp.femaleSrc);
-          const drawTarget = resourceInfo?.type === 'image' ? resourceInfo.data : femaleImg;
-          painter.ctx.drawImage(drawTarget, femaleX + innerPad, imgY, imgSize, imgSize);
-          painter.ctx.restore();
+          try {
+            painter.ctx.beginPath();
+            painter.ctx.moveTo(femaleX + innerPad + radius, imgY);
+            painter.ctx.lineTo(femaleX + innerPad + imgSize - radius, imgY);
+            painter.ctx.quadraticCurveTo(femaleX + innerPad + imgSize, imgY, femaleX + innerPad + imgSize, imgY + radius);
+            painter.ctx.lineTo(femaleX + innerPad + imgSize, imgY + imgSize - radius);
+            painter.ctx.quadraticCurveTo(femaleX + innerPad + imgSize, imgY + imgSize, femaleX + innerPad + imgSize - radius, imgY + imgSize);
+            painter.ctx.lineTo(femaleX + innerPad + radius, imgY + imgSize);
+            painter.ctx.quadraticCurveTo(femaleX + innerPad, imgY + imgSize, femaleX + innerPad, imgY + imgSize - radius);
+            painter.ctx.lineTo(femaleX + innerPad, imgY + radius);
+            painter.ctx.quadraticCurveTo(femaleX + innerPad, imgY, femaleX + innerPad + radius, imgY);
+            painter.ctx.closePath();
+            painter.ctx.clip();
+            const resourceInfo = rawImageResourceCache.get(cp.femaleSrc);
+            const drawTarget = resourceInfo?.type === 'image' ? resourceInfo.data : femaleImg;
+            painter.ctx.drawImage(drawTarget, femaleX + innerPad, imgY, imgSize, imgSize);
+          } finally {
+            painter.ctx.restore();
+          }
         }
       }
       const fNameBoxY = femaleY + innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB;
@@ -1144,22 +1174,25 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
             painter.drawImageRound(roundCanvas, mx + innerPad, imgY, imgSize, imgSize);
           } else {
             painter.ctx.save();
-            painter.ctx.beginPath();
-            painter.ctx.moveTo(mx + innerPad + radius, imgY);
-            painter.ctx.lineTo(mx + innerPad + imgSize - radius, imgY);
-            painter.ctx.quadraticCurveTo(mx + innerPad + imgSize, imgY, mx + innerPad + imgSize, imgY + radius);
-            painter.ctx.lineTo(mx + innerPad + imgSize, imgY + imgSize - radius);
-            painter.ctx.quadraticCurveTo(mx + innerPad + imgSize, imgY + imgSize, mx + innerPad + imgSize - radius, imgY + imgSize);
-            painter.ctx.lineTo(mx + innerPad + radius, imgY + imgSize);
-            painter.ctx.quadraticCurveTo(mx + innerPad, imgY + imgSize, mx + innerPad, imgY + imgSize - radius);
-            painter.ctx.lineTo(mx + innerPad, imgY + radius);
-            painter.ctx.quadraticCurveTo(mx + innerPad, imgY, mx + innerPad + radius, imgY);
-            painter.ctx.closePath();
-            painter.ctx.clip();
-            const resourceInfo = rawImageResourceCache.get(m.src);
-            const drawTarget = resourceInfo?.type === 'image' ? resourceInfo.data : mImg;
-            painter.ctx.drawImage(drawTarget, mx + innerPad, imgY, imgSize, imgSize);
-            painter.ctx.restore();
+            try {
+              painter.ctx.beginPath();
+              painter.ctx.moveTo(mx + innerPad + radius, imgY);
+              painter.ctx.lineTo(mx + innerPad + imgSize - radius, imgY);
+              painter.ctx.quadraticCurveTo(mx + innerPad + imgSize, imgY, mx + innerPad + imgSize, imgY + radius);
+              painter.ctx.lineTo(mx + innerPad + imgSize, imgY + imgSize - radius);
+              painter.ctx.quadraticCurveTo(mx + innerPad + imgSize, imgY + imgSize, mx + innerPad + imgSize - radius, imgY + imgSize);
+              painter.ctx.lineTo(mx + innerPad + radius, imgY + imgSize);
+              painter.ctx.quadraticCurveTo(mx + innerPad, imgY + imgSize, mx + innerPad, imgY + imgSize - radius);
+              painter.ctx.lineTo(mx + innerPad, imgY + radius);
+              painter.ctx.quadraticCurveTo(mx + innerPad, imgY, mx + innerPad + radius, imgY);
+              painter.ctx.closePath();
+              painter.ctx.clip();
+              const resourceInfo = rawImageResourceCache.get(m.src);
+              const drawTarget = resourceInfo?.type === 'image' ? resourceInfo.data : mImg;
+              painter.ctx.drawImage(drawTarget, mx + innerPad, imgY, imgSize, imgSize);
+            } finally {
+              painter.ctx.restore();
+            }
           }
         }
         const mNameBoxY = my + innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB;
@@ -1291,6 +1324,12 @@ export async function renderExportCanvas(
   const { exportColor, gameList } = appData;
 
   currentDPR = getExportDPR(targetWidth);
+  // ==========【补丁1】释放ImageBitmap资源，避免IOS内存泄漏 ==========
+  for (const [k, res] of rawImageResourceCache.entries()) {
+    if(res?.type === 'bitmap' && res.data && typeof res.data.close === 'function'){
+      try { res.data.close(); } catch(e){}
+    }
+  }
   roundImageCache.clear();
   rawImageResourceCache.clear();
 
@@ -1435,6 +1474,15 @@ export async function renderExportCanvas(
   // 长图模式
   if (isLongMode) {
     const totalHeight = calcTotalVirtualHeight(targetWidth, appData, gameTemplateList, renderDataList);
+    const dpr = currentDPR;
+    const realCanvasW = targetWidth * dpr;
+    const realCanvasH = totalHeight * dpr;
+    const totalPixel = realCanvasW * realCanvasH;
+    // =========【补丁5】IOS长图画布像素预警，超过阈值控制台警告，建议使用分页模式 ==========
+    const SAFARI_MAX_PX = 32 * 1024 * 1024;
+    if(totalPixel > SAFARI_MAX_PX){
+      console.warn(`⚠️ IOS画布总像素超限风险：${totalPixel}，建议切换分页导出，长图可能渲染失败/toBlob返回null`);
+    }
     const canvas = document.createElement('canvas');
     const painter = new CanvasLayoutPainter(canvas, targetWidth, totalHeight, exportColor.bg);
 
@@ -1509,6 +1557,11 @@ export async function renderExportCanvas(
       finalCanvas.toBlob((b) => resolve(b), 'image/png', 1);
     });
     if (blob) blobList.push(blob);
+    // =========【补丁6】单页绘制完成立刻释放临时画布，降低IOS多页内存峰值 ==========
+    canvas.width = 0;
+    canvas.height = 0;
+    finalCanvas.width = 0;
+    finalCanvas.height = 0;
   }
   blobList.imageFailList = imageFailList;
   return blobList;
