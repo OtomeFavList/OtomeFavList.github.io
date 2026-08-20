@@ -373,7 +373,8 @@ export class CanvasLayoutPainter {
     const startY = boxY + (boxH - totalTextH) / 2;
     let currentY = startY;
     for (const l of lines) {
-      const lw = ctx.measureText(l).width;
+      const mt = ctx.measureText(l);
+      const lw = Number.isFinite(mt.width) ? mt.width : 0;
       const lx = boxX + (boxW - lw) / 2;
       ctx.fillText(l, lx, currentY);
       currentY += lineHeight;
