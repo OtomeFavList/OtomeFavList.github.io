@@ -1,21 +1,46 @@
-UN:LOGICAL
-开发: ティズクリエイション株式会社、LicoBiTs
-发行: ブロッコリー
-剧本: 谷本透／尾河依／入賀ましろ／株式会社シナリオテクノロジーカガミ／砂原有季
-音乐: MANYO(まにょっ、Little Wing、六浦館)
-人物设定: 花邑まい
-主题歌演出: PENGUIN RESEARCH
-原画: 花邑まい
-SD原画: うた
-企画: ティズクリエイション株式会社
-制作人: 島れいこ
-别名: アンロジカル
-平台: Nintendo Switch
-游戏类型: 女性向け恋愛ADV
-游玩人数: 1人
-发行日期: 2026-01-22
-售价: 通常版：8,580円（税込）
-限定版：限定 Revelation BOX（リベレーションボックス）：12,980円（税込）
-ダウンロード版：8,580円（税込）
-链接: ErogameScape
-官方网站: licobits-game.com/unlogical/
+BLACK WOLVES SAGA -Weiβ und Schwarz- for Nintendo Switch
+
+
+BLACK WOLVES SAGA -Weiβ und Schwarz-
+开发: Rejet、オトメイト
+发行: Rejet、アイディアファクトリー株式会社、オトメイト
+主题歌演出: lasah
+原画: 黒裄
+原作: Rejet
+别名: BLACK WOLVES SAGA -Weiβ und Schwarz- for Nintendo Switch
+平台:
+Nintendo Switch PSV
+官方网站: otomate.jp/bws/wus/
+  
+BLACK WOLVES SAGA -Bloody Nightmare-
+中文名: 黑狼传说 血色梦魇
+开发: Rejet
+发行: Rejet
+音乐: 光田康典、土屋俊輔、亀岡夏海
+人物设定: 黒裄
+主题歌作曲: 光田康典、亀岡夏海
+主题歌作词: 岩崎大介
+主题歌演出: lasah
+插入歌演出: lasah、梶裕貴
+原画: 黒裄
+程序: 細谷博子
+剧本: 山田かのこ
+插入歌作曲: 土屋俊輔
+插入歌作词: 土屋俊輔
+导演: 伊東紗希
+链接: ErogameScape VNDB
+官方网站: rejetweb.jp/bws/top/
+  
+BLACK WOLVES SAGA -Last Hope-
+开发: オトメイト、Rejet
+发行: オトメイト、アイディアファクトリー株式会社
+剧本: 山田かのこ、SOM、砂原有季
+音乐: 土屋俊輔、光田康典
+人物设定: 黒裄
+主题歌作曲: 土屋俊輔、亀岡夏海
+主题歌作词: lasah、岩崎大介、亀岡夏海
+主题歌演出: 梶裕貴、lasah
+插入歌演出: lasah
+原画: 黒裄
+导演: 伊東紗希
+官方网站: rejetweb.jp/bw
