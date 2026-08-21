@@ -1,17 +1,17 @@
-OVER REQUIEMZ
-中文名：奧茲國安魂曲
-开发: Kogado Girls Project、オトメイト、工画堂スタジオ
-发行: アイディアファクトリー株式会社、欢乐百世
-音乐: 鞠
-人物设定: 風李たゆ
-主题歌作曲: 鞠
-主题歌演出: ヒサノ
-原画: 風李たゆ
-动画制作: Mju:z
-导演: 細谷博子
-企画: 細谷博子
-剧本: 七霧花男
-otomate.jp/over_requiemz/
+// OVER REQUIEMZ
+// 中文名：奧茲國安魂曲
+// 开发: Kogado Girls Project、オトメイト、工画堂スタジオ
+// 发行: アイディアファクトリー株式会社、欢乐百世
+// 音乐: 鞠
+// 人物设定: 風李たゆ
+// 主题歌作曲: 鞠
+// 主题歌演出: ヒサノ
+// 原画: 風李たゆ
+// 动画制作: Mju:z
+// 导演: 細谷博子
+// 企画: 細谷博子
+// 剧本: 七霧花男
+// otomate.jp/over_requiemz/
 
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
@@ -25,7 +25,7 @@ const gameData = {
     name: "OVER REQUIEMZ",
     year: "2025",
     publisher: ["Kogado Studio","Otomate"],
-    cnStudio: "JOYOLAND",
+    cnStudio: "暂无",
     writer: [
         {name:"七霧花男", lang:"zh"}
     ],
