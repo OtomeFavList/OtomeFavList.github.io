@@ -19,26 +19,23 @@
 // 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
 // 官中发售以后，需要修改：游戏名、发售年份、汉化厂商、封面图、角色名
 const gameData = {
-    id: "game0", // 全局唯一ID，不可重复，如 game001
-    name: "示例乙女游戏",
-    year: "20",
-    publisher: ["原厂发行商"],
-    cnStudio: "汉化组/汉化厂商",
+    id: "game083", // 全局唯一ID，不可重复，如 game001
+    name: "Panic Palette",
+    year: "2025",
+    publisher: ["TAKUYO"],
+    cnStudio: "暂无",
     writer: [
-        {name:"中文编剧", lang:"zh"},
-        {name:"日文编剧", lang:"ja"},
-        {name:"英文编剧", lang:"en"}
+        {name:"井上愁", lang:"zh"},
+        {name:"藤元", lang:"zh"},
     ],
     art: [
-        {name:"中文原画", lang:"zh"},
-        {name:"日文原画", lang:"ja"},
-        {name:"英文原画", lang:"en"}
+        {name:"仁神ユキタカ", lang:"zh"}
     ],
-    cover: "game/0.jpg", // 相对路径，游戏封面
+    cover: "game/083.jpg", // 相对路径，游戏封面
     charList: [
         // 依藤亜貴
         {
-            id: "g0_f01",
+            id: "g083_f01",
             name: "依藤亜貴",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
@@ -46,13 +43,11 @@ const gameData = {
             images: [
                 { srcList: ["char/001/女主A.jpg",
                             "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["char/001/女主A3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["char/001/女主A4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 烏羽一徒
         {
-            id: "g0_m01",
+            id: "g083_m01",
             name: "烏羽一徒",
             gender: "male",
             isHidden: false,
@@ -60,13 +55,11 @@ const gameData = {
             images: [
                 { srcList: ["char/001/男主1.jpg",
                             "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["char/001/男主13.jpg"], type: "hidden" },
-                { srcList: ["char/001/男主14.jpg"], type: "fd" }
             ]
         },
         // 真朱柑
         {
-            id: "g0_m02",
+            id: "g083_m02",
             name: "真朱柑",
             gender: "male",
             isHidden: false,
@@ -74,13 +67,11 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
         // 乃凪範尚
         {
-            id: "g0_m03",
+            id: "g083_m03",
             name: "乃凪範尚",
             gender: "male",
             isHidden: false,
@@ -88,13 +79,11 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
         // 内沼葛
         {
-            id: "g0_m04",
+            id: "g083_m04",
             name: "内沼葛",
             gender: "male",
             isHidden: false,
@@ -102,13 +91,11 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
         // 白原尋也
         {
-            id: "g0_m05",
+            id: "g083_m05",
             name: "白原尋也",
             gender: "male",
             isHidden: false,
@@ -116,13 +103,11 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
         // 黄朽葉宰
         {
-            id: "g0_m06",
+            id: "g083_m06",
             name: "黄朽葉宰",
             gender: "male",
             isHidden: false,
@@ -130,8 +115,6 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         }
     ]
