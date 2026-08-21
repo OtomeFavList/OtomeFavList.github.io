@@ -16,26 +16,22 @@
 // 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
 // 官中发售以后，需要修改：游戏名、发售年份、汉化厂商、封面图、角色名
 const gameData = {
-    id: "game0", // 全局唯一ID，不可重复，如 game001
-    name: "示例乙女游戏",
-    year: "20",
-    publisher: ["原厂发行商"],
-    cnStudio: "汉化组/汉化厂商",
+    id: "game082", // 全局唯一ID，不可重复，如 game001
+    name: "Cendrillon palikA",
+    year: "2018",
+    publisher: ["Otomate"],
+    cnStudio: "暂无",
     writer: [
-        {name:"中文编剧", lang:"zh"},
-        {name:"日文编剧", lang:"ja"},
-        {name:"英文编剧", lang:"en"}
+        {name:"佐々木麿", lang:"zh"}
     ],
     art: [
-        {name:"中文原画", lang:"zh"},
-        {name:"日文原画", lang:"ja"},
-        {name:"英文原画", lang:"en"}
+        {name:"清白かりん", lang:"zh"}
     ],
-    cover: "game/0.jpg", // 相对路径，游戏封面
+    cover: "game/082.jpg", // 相对路径，游戏封面
     charList: [
         // 玻ヰ璃＝ラリック
         {
-            id: "g0_f01",
+            id: "g082_f01",
             name: "玻ヰ璃＝ラリック",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
@@ -43,13 +39,11 @@ const gameData = {
             images: [
                 { srcList: ["char/001/女主A.jpg",
                             "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["char/001/女主A3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["char/001/女主A4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 廻螺＝アマルリック
         {
-            id: "g0_m01",
+            id: "g082_m01",
             name: "廻螺＝アマルリック",
             gender: "male",
             isHidden: false,
@@ -57,13 +51,11 @@ const gameData = {
             images: [
                 { srcList: ["char/001/男主1.jpg",
                             "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["char/001/男主13.jpg"], type: "hidden" },
-                { srcList: ["char/001/男主14.jpg"], type: "fd" }
             ]
         },
         // 普歌紫歌＝ガレ
         {
-            id: "g0_m02",
+            id: "g082_m02",
             name: "歌紫歌＝ガレ",
             gender: "male",
             isHidden: false,
@@ -71,13 +63,11 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
         // 黒禰＝スピネル
         {
-            id: "g0_m03",
+            id: "g082_m03",
             name: "黒禰＝スピネル",
             gender: "male",
             isHidden: false,
@@ -85,13 +75,11 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
         // 泣虎＝ピオニー
         {
-            id: "g0_m04",
+            id: "g082_m04",
             name: "泣虎＝ピオニー",
             gender: "male",
             isHidden: false,
@@ -99,13 +87,11 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
         // 綸燈＝ウェステリア
         {
-            id: "g0_m05",
+            id: "g082_m05",
             name: "綸燈＝ウェステリア",
             gender: "male",
             isHidden: false,
@@ -113,13 +99,11 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
         // 紫鳶＝クリノクロア
         {
-            id: "g0_m06",
+            id: "g082_m06",
             name: "紫鳶＝クリノクロア",
             gender: "male",
             isHidden: false,
@@ -127,13 +111,11 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
         // 憂漣＝ミュラー
         {
-            id: "g0_m07",
+            id: "g082_m07",
             name: "憂漣＝ミュラー",
             gender: "male",
             isHidden: false,
@@ -141,8 +123,6 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         }
     ]
