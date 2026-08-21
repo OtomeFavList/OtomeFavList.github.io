@@ -43,8 +43,8 @@ otomate.jp/toki/fd/
 // 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
 const gameData = {
     id: "game076", // 全局唯一ID，不可重复，如 game001
-    name: "示例乙女游戏",
-    year: "2026",
+    name: "十鬼之绊",
+    year: "2025",
     publisher: ["原厂发行商"],
     cnStudio: "汉化组/汉化厂商",
     writer: [
@@ -59,9 +59,9 @@ const gameData = {
     ],
     cover: "game/076.jpg", // 相对路径，游戏封面
     charList: [
-        // 涼森 奈
+        // 涼森雪奈
         {
-            id: "g0_f01",
+            id: "g076_f01",
             name: "涼森雪奈",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
@@ -69,13 +69,11 @@ const gameData = {
             images: [
                 { srcList: ["char/001/女主A.jpg",
                             "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["char/001/女主A3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["char/001/女主A4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 普通可攻略男主 male
         {
-            id: "g0_m01",
+            id: "g076_m01",
             name: "男主1",
             gender: "male",
             isHidden: false,
@@ -83,13 +81,11 @@ const gameData = {
             images: [
                 { srcList: ["char/001/男主1.jpg",
                             "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["char/001/男主13.jpg"], type: "hidden" },
-                { srcList: ["char/001/男主14.jpg"], type: "fd" }
             ]
         },
         // 普通可攻略男主 male
         {
-            id: "g0_m02",
+            id: "g076_m02",
             name: "男主2",
             gender: "male",
             isHidden: false,
@@ -97,13 +93,11 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
         // 普通可攻略男主 male
         {
-            id: "g0_m03",
+            id: "g076_m03",
             name: "男主3",
             gender: "male",
             isHidden: false,
@@ -111,13 +105,11 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
         // 普通可攻略男主 male
         {
-            id: "g0_m04",
+            id: "g076_m04",
             name: "男主4",
             gender: "male",
             isHidden: false,
@@ -125,13 +117,11 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
         // 普通可攻略男主 male
         {
-            id: "g0_m05",
+            id: "g076_m05",
             name: "男主5",
             gender: "male",
             isHidden: false,
@@ -139,30 +129,6 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
-            ]
-        },
-        // 隐藏角色（isHidden=true → 开关开启才显示整个角色卡片）
-        {
-            id: "g0_h01",
-            name: "隐藏攻略角色",
-            gender: "male",
-            isHidden: true,
-            isFD: false,
-            images: [
-                { srcList: ["char/g001_h01_1.jpg"], type: "base" }
-            ]
-        },
-        // FD续作限定角色（isFD=true → FD开关开启才显示整个角色卡片）
-        {
-            id: "g0_fd01",
-            name: "续作FD新增角色",
-            gender: "male",
-            isHidden: false,
-            isFD: true,
-            images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
             ]
         }
     ]
