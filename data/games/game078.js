@@ -25,91 +25,77 @@
 // 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
 // 官中发售以后，需要修改：游戏名、发售年份、汉化厂商、封面图、角色名
 const gameData = {
-    id: "game0", // 全局唯一ID，不可重复，如 game001
-    name: "示例乙女游戏",
-    year: "20",
-    publisher: ["原厂发行商"],
-    cnStudio: "汉化组/汉化厂商",
+    id: "game078", // 全局唯一ID，不可重复，如 game001
+    name: "ネオンクラッシュ -Echoes of the Lost-",
+    year: "2025",
+    publisher: ["Voltage"],
+    cnStudio: "暂无",
     writer: [
-        {name:"中文编剧", lang:"zh"},
-        {name:"日文编剧", lang:"ja"},
-        {name:"英文编剧", lang:"en"}
+        {name:"吉村りりか", lang:"zh"}
     ],
     art: [
-        {name:"中文原画", lang:"zh"},
-        {name:"日文原画", lang:"ja"},
-        {name:"英文原画", lang:"en"}
+        {name:"多花緒", lang:"zh"}
     ],
-    cover: "game/0.jpg", // 相对路径，游戏封面
+    cover: "game/078.jpg", // 相对路径，游戏封面
     charList: [
-        // リュウ・クロア
+        // リュウ·クロア
         {
-            id: "g0_f01",
-            name: "リュウ・クロア",
+            id: "g078_f01",
+            name: "リュウ·クロア",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
                 { srcList: ["char/001/女主A.jpg",
                             "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["char/001/女主A3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["char/001/女主A4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
-        // カンテ・ラウド
+        // カンテ·ラウド
         {
-            id: "g0_m01",
-            name: "カンテ・ラウド",
+            id: "g078_m01",
+            name: "カンテ·ラウド",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
                 { srcList: ["char/001/男主1.jpg",
                             "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["char/001/男主13.jpg"], type: "hidden" },
-                { srcList: ["char/001/男主14.jpg"], type: "fd" }
             ]
         },
-        // ソディック・モネ
+        // ソディック·モネ
         {
-            id: "g0_m02",
-            name: "ソディック・モネ",
+            id: "g078_m02",
+            name: "ソディック·モネ",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
-        // ソン・マシロ
+        // ソン·マシロ
         {
-            id: "g0_m03",
-            name: "ソン・マシロ",
+            id: "g078_m03",
+            name: "ソン·マシロ",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
-        // チョウ・ヒヨク
+        // チョウ·ヒヨク
         {
-            id: "g0_m04",
-            name: "チョウ・ヒヨク",
+            id: "g078_m04",
+            name: "チョウ·ヒヨク",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         }
     ]
