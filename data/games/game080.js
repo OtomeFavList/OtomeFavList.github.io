@@ -35,7 +35,7 @@ const gameData = {
         {name:"浦井アンナ", lang:"zh"},
         {name:"やまだ有見", lang:"ja"},
         {name:"かなた春香", lang:"ja"},
-        {name:"こたに白子", lang:"ja"},
+        {name:"こたに白子", lang:"ja"}
     ],
     art: [
         {name:"双葉はづき", lang:"zh"}
