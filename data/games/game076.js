@@ -49,10 +49,16 @@ const gameData = {
     publisher: ["Design Factory","Otomate"],
     cnStudio: "暂无",
     writer: [
-            {name:"中文原画", lang:"zh"},
+        {name:"長野和泉", lang:"zh"},
+        {name:"春河ミライ", lang:"zh"},
+        {name:"春日直登", lang:"zh"},
+        {name:"里家雅猛", lang:"zh"},
+        {name:"七海ユウリ", lang:"zh"},
+        {name:"茂木あや", lang:"zh"}
     ],
     art: [
-         {name:"miko", lang:"en"}
+        {name:"うた", lang:"ja"},
+        {name:"miko", lang:"en"}
     ],
     cover: "game/076.jpg", // 相对路径，游戏封面
     charList: [
