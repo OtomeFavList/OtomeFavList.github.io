@@ -545,6 +545,38 @@ z-index: -999;
     })();
 </script>
 
+<!-- 防图片保存JS防护 -->
+<script>
+(function(){
+    // 1. 拦截右键上下文菜单；允许输入框/文本域右键
+    document.addEventListener('contextmenu', function(e){
+        const tag = e.target.tagName;
+        if(tag === 'INPUT' || tag === 'TEXTAREA'){
+            return;
+        }
+        e.preventDefault();
+        return false;
+    });
+    // 2. 拦截图片拖拽
+    document.addEventListener('dragstart', function(e){
+        if(e.target.tagName === 'IMG'){
+            e.preventDefault();
+            return false;
+        }
+    });
+    // 3. 移动端：长按弹出菜单禁止
+    document.addEventListener('touchstart', function(e){
+        // 输入框放行
+        const tag = e.target.tagName;
+        if(tag === 'INPUT' || tag === 'TEXTAREA'){
+            return;
+        }
+    }, {passive:true});
+    // 禁止图片长按呼出系统菜单（webkit内核：Safari、微信、华为浏览器）
+    document.documentElement.style.webkitTouchCallout = 'none';
+})();
+</script>
+
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "b88bc20591cc4e0b8702b7339c4d0e6d"}'></script><!-- End Cloudflare Web Analytics -->
     
 </body>
