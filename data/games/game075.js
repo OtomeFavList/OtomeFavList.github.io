@@ -19,6 +19,7 @@ otomate.jp/over_requiemz/
 // 网页渲染时由 main.js 的 getWebImageUrl 拼接为 R2 完整 URL
 // Canvas 导出时由 export-canvas-render.js 的 convertR2ToJsDelivr 拼接为 jsDelivr URL
 // 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
+// 官中发售以后，需要修改：游戏名、发售年份、汉化厂商、封面图、角色名
 const gameData = {
     id: "game075", // 全局唯一ID，不可重复，如 game001
     name: "OVER REQUIEMZ",
