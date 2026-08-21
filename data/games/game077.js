@@ -31,10 +31,10 @@
 // 官中发售以后，需要修改：游戏名、发售年份、汉化厂商、封面图、角色名
 const gameData = {
     id: "game0", // 全局唯一ID，不可重复，如 game001
-    name: "示例乙女游戏",
+    name: "DYNAMIC CHORD feat.Liar-S Remaster edition",
     year: "20",
-    publisher: ["原厂发行商"],
-    cnStudio: "汉化组/汉化厂商",
+    publisher: ["dramatic create","honeybee black"],
+    cnStudio: "暂无",
     writer: [
         {name:"中文编剧", lang:"zh"},
         {name:"日文编剧", lang:"ja"},
