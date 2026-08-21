@@ -26,7 +26,7 @@ const gameData = {
     cnStudio: "暂无",
     writer: [
         {name:"井上愁", lang:"zh"},
-        {name:"藤元", lang:"zh"},
+        {name:"藤元", lang:"zh"}
     ],
     art: [
         {name:"仁神ユキタカ", lang:"zh"}
