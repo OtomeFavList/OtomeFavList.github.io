@@ -72,10 +72,10 @@ const gameData = {
                             "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 千歳
         {
             id: "g076_m01",
-            name: "男主1",
+            name: "千歳",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -84,10 +84,10 @@ const gameData = {
                             "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 千岳
         {
             id: "g076_m02",
-            name: "男主2",
+            name: "千岳",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -96,10 +96,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 千耶
         {
             id: "g076_m03",
-            name: "男主3",
+            name: "千耶",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -108,10 +108,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 千鬼丸
         {
             id: "g076_m04",
-            name: "男主4",
+            name: "千鬼丸",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -120,11 +120,11 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 秦
         {
             id: "g076_m05",
             name: "男主5",
-            gender: "male",
+            gender: "秦",
             isHidden: false,
             isFD: false,
             images: [
