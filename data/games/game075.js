@@ -21,19 +21,15 @@ otomate.jp/over_requiemz/
 // 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
 const gameData = {
     id: "game075", // 全局唯一ID，不可重复，如 game001
-    name: "示例乙女游戏",
+    name: "OVER REQUIEMZ",
     year: "2025",
-    publisher: ["原厂发行商"],
-    cnStudio: "汉化组/汉化厂商",
+    publisher: ["Kogado Studio","Otomate"],
+    cnStudio: "JOYOLAND",
     writer: [
-        {name:"中文编剧", lang:"zh"},
-        {name:"日文编剧", lang:"ja"},
-        {name:"英文编剧", lang:"en"}
+        {name:"七霧花男", lang:"zh"}
     ],
     art: [
-        {name:"中文原画", lang:"zh"},
-        {name:"日文原画", lang:"ja"},
-        {name:"英文原画", lang:"en"}
+        {name:"風李たゆ", lang:"zh"}
     ],
     cover: "game/075.jpg", // 相对路径，游戏封面
     charList: [
