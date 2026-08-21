@@ -121,7 +121,7 @@ const gameData = {
         },
         // 裏ありす
         {
-            id: "g0_m05",
+            id: "g0_m06",
             name: "三月ウサギ",
             gender: "male",
             isHidden: false,
