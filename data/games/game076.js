@@ -46,17 +46,13 @@ const gameData = {
     id: "game076", // 全局唯一ID，不可重复，如 game001
     name: "十鬼之绊",
     year: "2025",
-    publisher: ["原厂发行商"],
-    cnStudio: "汉化组/汉化厂商",
+    publisher: ["Design Factory","Otomate"],
+    cnStudio: "暂无",
     writer: [
-        {name:"中文编剧", lang:"zh"},
-        {name:"日文编剧", lang:"ja"},
-        {name:"英文编剧", lang:"en"}
+            {name:"中文原画", lang:"zh"},
     ],
     art: [
-        {name:"中文原画", lang:"zh"},
-        {name:"日文原画", lang:"ja"},
-        {name:"英文原画", lang:"en"}
+         {name:"miko", lang:"en"}
     ],
     cover: "game/076.jpg", // 相对路径，游戏封面
     charList: [
