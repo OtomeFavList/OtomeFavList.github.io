@@ -1,12 +1,12 @@
-Cendrillon palikA
-中文名: 灰姑娘的玻璃鞋
-开发: オトメイト
-发行: アイディアファクトリー株式会社、欢乐百世
-剧本: 佐々木麿
-音乐: 加川狂介
-原画: 清白かりん
-导演: コイデユウリ
-otomate.jp/cendrillon_palika/
+// Cendrillon palikA
+// 中文名: 灰姑娘的玻璃鞋
+// 开发: オトメイト
+// 发行: アイディアファクトリー株式会社、欢乐百世
+// 剧本: 佐々木麿
+// 音乐: 加川狂介
+// 原画: 清白かりん
+// 导演: コイデユウリ
+// otomate.jp/cendrillon_palika/
 
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
@@ -33,10 +33,10 @@ const gameData = {
     ],
     cover: "game/0.jpg", // 相对路径，游戏封面
     charList: [
-        // 女主模板 female
+        // 玻ヰ璃＝ラリック
         {
             id: "g0_f01",
-            name: "女主A",
+            name: "玻ヰ璃＝ラリック",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
@@ -47,10 +47,10 @@ const gameData = {
                 { srcList: ["char/001/女主A4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
-        // 普通可攻略男主 male
+        // 廻螺＝アマルリック
         {
             id: "g0_m01",
-            name: "男主1",
+            name: "廻螺＝アマルリック",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -61,10 +61,10 @@ const gameData = {
                 { srcList: ["char/001/男主14.jpg"], type: "fd" }
             ]
         },
-        // 普通可攻略男主 male
+        // 普歌紫歌＝ガレ
         {
             id: "g0_m02",
-            name: "男主2",
+            name: "歌紫歌＝ガレ",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -75,10 +75,10 @@ const gameData = {
                 { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
-        // 普通可攻略男主 male
+        // 黒禰＝スピネル
         {
             id: "g0_m03",
-            name: "男主3",
+            name: "黒禰＝スピネル",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -89,10 +89,10 @@ const gameData = {
                 { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
-        // 普通可攻略男主 male
+        // 泣虎＝ピオニー
         {
             id: "g0_m04",
-            name: "男主4",
+            name: "泣虎＝ピオニー",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -103,10 +103,10 @@ const gameData = {
                 { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
-        // 普通可攻略男主 male
+        // 綸燈＝ウェステリア
         {
             id: "g0_m05",
-            name: "男主5",
+            name: "綸燈＝ウェステリア",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -117,26 +117,32 @@ const gameData = {
                 { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
-        // 隐藏角色（isHidden=true → 开关开启才显示整个角色卡片）
+        // 紫鳶＝クリノクロア
         {
-            id: "g0_h01",
-            name: "隐藏攻略角色",
-            gender: "male",
-            isHidden: true,
-            isFD: false,
-            images: [
-                { srcList: ["char/g001_h01_1.jpg"], type: "base" }
-            ]
-        },
-        // FD续作限定角色（isFD=true → FD开关开启才显示整个角色卡片）
-        {
-            id: "g0_fd01",
-            name: "续作FD新增角色",
+            id: "g0_m06",
+            name: "紫鳶＝クリノクロア",
             gender: "male",
             isHidden: false,
-            isFD: true,
+            isFD: false,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/g0_m01_1.jpg",
+                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
+                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
+            ]
+        },
+        // 憂漣＝ミュラー
+        {
+            id: "g0_m07",
+            name: "憂漣＝ミュラー",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            images: [
+                { srcList: ["char/g0_m01_1.jpg",
+                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
+                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         }
     ]
