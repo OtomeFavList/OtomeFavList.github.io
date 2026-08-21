@@ -989,7 +989,7 @@ export function renderGameSelectItem(game, index) {
         artText = sortedArtObjs.map(item => item.name).join("、");
     }
 
-    // 发行厂商：数组拼接
+    // 开发厂商：数组拼接
     let pubText = "无";
     if (Array.isArray(game.publisher) && game.publisher.length > 0) {
         pubText = game.publisher.join("、");
@@ -1000,7 +1000,7 @@ export function renderGameSelectItem(game, index) {
     lines.push(`编剧：${writerText}`);
     lines.push(`画师：${artText}`);
     lines.push(`发售年份：${game.year || "无"}`);
-    lines.push(`发行厂商：${pubText}`);
+    lines.push(`开发厂商：${pubText}`);
     lines.push(`汉化厂商：${game.cnStudio || "无"}`);
 
     let infoHtml = "";
