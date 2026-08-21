@@ -22,7 +22,7 @@ otomate.jp/over_requiemz/
 const gameData = {
     id: "game075", // 全局唯一ID，不可重复，如 game001
     name: "示例乙女游戏",
-    year: "2026",
+    year: "2025",
     publisher: ["原厂发行商"],
     cnStudio: "汉化组/汉化厂商",
     writer: [
