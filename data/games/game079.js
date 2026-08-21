@@ -1,7 +1,7 @@
 // ALICE=ALICE
 // 开发: Rejet
 // 发行: Rejet
-// // 剧本: 株式会社Polkadot（真崎結衣、やまだ有見、小和泉いづみ、 有栖川あやみ、かなた春香、こたに白子）吉村りりか、田中彼方、瀬多海人、栗屋歌兎
+// 剧本: 株式会社Polkadot（真崎結衣、やまだ有見、小和泉いづみ、有栖川あやみ、かなた春香、こたに白子）吉村りりか、田中彼方、瀬多海人、栗屋歌兎
 // 人物设定: スオウ
 // 主题歌作曲: MIKOTO
 // 主题歌作词: 岩崎大介
@@ -18,119 +18,103 @@
 // 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
 // 官中发售以后，需要修改：游戏名、发售年份、汉化厂商、封面图、角色名
 const gameData = {
-    id: "game0", // 全局唯一ID，不可重复，如 game001
-    name: "示例乙女游戏",
-    year: "20",
-    publisher: ["原厂发行商"],
-    cnStudio: "汉化组/汉化厂商",
+    id: "game079", // 全局唯一ID，不可重复，如 game001
+    name: "ALICE=ALICE",
+    year: "2014",
+    publisher: ["Rejet"],
+    cnStudio: "暂无",
     writer: [
-        {name:"中文编剧", lang:"zh"},
-        {name:"日文编剧", lang:"ja"},
-        {name:"英文编剧", lang:"en"}
+        {name:"真崎結衣", lang:"zh"},
+        {name:"小和泉いづみ", lang:"zh"},
+        {name:"有栖川あやみ", lang:"zh"},
+        {name:"吉村りりか", lang:"zh"},
+        {name:"田中彼方", lang:"zh"},
+        {name:"瀬多海人", lang:"zh"},
+        {name:"栗屋歌兎", lang:"zh"},
+        {name:"やまだ有見", lang:"ja"},
+        {name:"かなた春香", lang:"ja"},
+        {name:"こたに白子", lang:"ja"}
     ],
     art: [
-        {name:"中文原画", lang:"zh"},
-        {name:"日文原画", lang:"ja"},
-        {name:"英文原画", lang:"en"}
+        {name:"スオウ", lang:"ja"}
     ],
-    cover: "game/0.jpg", // 相对路径，游戏封面
+    cover: "game/079.jpg", // 相对路径，游戏封面
     charList: [
         // 桜庭アスカ
         {
-            id: "g0_f01",
+            id: "g079_f01",
             name: "桜庭アスカ",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["char/001/女主A3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["char/001/女主A4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["char/001/女主A.jpg"], type: "base" }
             ]
         },
         // 帽子屋
         {
-            id: "g0_m01",
+            id: "g079_m01",
             name: "帽子屋",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["char/001/男主13.jpg"], type: "hidden" },
-                { srcList: ["char/001/男主14.jpg"], type: "fd" }
+                { srcList: ["char/001/男主1.jpg"], type: "base" }
             ]
         },
         // チェシャ猫
         {
-            id: "g0_m02",
+            id: "g079_m02",
             name: "チェシャ猫",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
+                { srcList: ["char/g0_m01_1.jpg"], type: "base" }
             ]
         },
         // キング
         {
-            id: "g0_m03",
+            id: "g079_m03",
             name: "キング",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
+                { srcList: ["char/g0_m01_1.jpg"], type: "base" }
             ]
         },
         // 黒うさぎ
         {
-            id: "g0_m04",
+            id: "g079_m04",
             name: "黒うさぎ",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
+                { srcList: ["char/g0_m01_1.jpg"], type: "base" }
             ]
         },
         // 三月ウサギ
         {
-            id: "g0_m05",
+            id: "g079_m05",
             name: "三月ウサギ",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
+                { srcList: ["char/g0_m01_1.jpg"], type: "base" }
             ]
         },
         // 裏ありす
         {
-            id: "g0_m06",
+            id: "g079_m06",
             name: "三月ウサギ",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
+                { srcList: ["char/g0_m01_1.jpg"], type: "base" }
             ]
         }
     ]
