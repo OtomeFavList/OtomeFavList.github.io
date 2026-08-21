@@ -1887,10 +1887,30 @@ h2{
     transition: opacity 0.2s ease, background 0.2s ease;
 }
 
-/* ========== 图片防护 ========== */
-.protect-img {
-  user-select: none;           /* 禁止选中 */
-  -webkit-user-select: none;
-  -webkit-user-drag: none;     /* safari禁止拖拽图片 */
-  draggable: false;            /* html属性也可以写在标签上 */
+/* ========== 防图片保存、选中、拖拽 CSS防护 ========== */
+/* 禁止图片拖拽 */
+img {
+    -webkit-user-drag: none;
+    user-drag: none;
+    user-select: none;
+}
+/* 禁止整个页面文本/图片选中，保留输入框、textarea可选中文字 */
+body {
+    user-select: none;
+    -webkit-user-select: none;
+}
+input,
+textarea {
+    user-select: text !important;
+    -webkit-user-select: text !important;
+}
+/* 禁止图片右键菜单的快捷保存；增加蒙版占位方案（可选） */
+.char-card-img-box img,
+.game-option-item img,
+.cp-female-card-btn img,
+.cp-male-item img,
+.char-item img,
+.char-card-item img,
+.cp-selected-card-item img {
+    pointer-events: none;
 }
