@@ -18,17 +18,17 @@ const gameData = {
     id: "game085", // 全局唯一ID，不可重复，如 game001
     name: "BYAKKO ~四神部隊炎恋記~",
     year: "2025",
-    publisher: ["原厂发行商"],
-    cnStudio: "汉化组/汉化厂商",
+    publisher: ["Otomate"],
+    cnStudio: "暂无",
     writer: [
-        {name:"中文编剧", lang:"zh"},
-        {name:"日文编剧", lang:"ja"},
-        {name:"英文编剧", lang:"en"}
+        {name:"嶋野まち", lang:"zh"},
+        {name:"影山千博", lang:"zh"},
+        {name:"彩月レイ", lang:"zh"},
+        {name:"呉西しの", lang:"zh"},
+        {name:"景山千博", lang:"zh"}
     ],
     art: [
-        {name:"中文原画", lang:"zh"},
-        {name:"日文原画", lang:"ja"},
-        {name:"英文原画", lang:"en"}
+        {name:"煮たか", lang:"zh"}
     ],
     cover: "game/085.jpg", // 相对路径，游戏封面
     charList: [
