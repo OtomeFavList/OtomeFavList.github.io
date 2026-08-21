@@ -46,10 +46,10 @@ const gameData = {
                             "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // クロード・グレイン
+        // クロード·グレイン
         {
             id: "g075_m01",
-            name: "クロード・グレイン",
+            name: "クロード·グレイン",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -70,10 +70,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // モリィ・ウッドランド
+        // モリィ·ウッドランド
         {
             id: "g075_m03",
-            name: "モリィ・ウッドランド",
+            name: "モリィ·ウッドランド",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -82,10 +82,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // ノイル・ベスティア
+        // ノイル·ベスティア
         {
             id: "g075_m04",
-            name: "ノイル・ベスティア",
+            name: "ノイル·ベスティア",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -94,10 +94,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // カイゼ・オズマ
+        // カイゼ·オズマ
         {
             id: "g075_m05",
-            name: "カイゼ・オズマ",
+            name: "カイゼ·オズマ",
             gender: "male",
             isHidden: false,
             isFD: false,
