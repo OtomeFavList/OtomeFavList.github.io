@@ -1886,3 +1886,11 @@ h2{
     pointer-events: auto;
     transition: opacity 0.2s ease, background 0.2s ease;
 }
+
+/* ========== 图片防护 ========== */
+.protect-img {
+  user-select: none;           /* 禁止选中 */
+  -webkit-user-select: none;
+  -webkit-user-drag: none;     /* safari禁止拖拽图片 */
+  draggable: false;            /* html属性也可以写在标签上 */
+}
