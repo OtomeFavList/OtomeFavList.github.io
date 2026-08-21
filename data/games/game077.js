@@ -7,7 +7,7 @@
 // honeybee-cd.com/dynamic/switch-liar/
 
 // DYNAMIC CHORD feat.Liar-S
-// 剧本: Plot：高木彩佳；执笔：もち大福、株式会社エッジワークス（浅生柚子；相川暁子、森田彩莉、桜ゆづき、葉山いずみ）
+// 剧本: Plot：高木彩佳；执笔：もち大福、株式会社エッジワークス（浅生柚子、相川暁子、森田彩莉、桜ゆづき、葉山いずみ）
 // honeybee-cd.com/dynamic/liar/index.html
 
 // DYNAMIC CHORD feat.Liar-S Append Disc
@@ -17,7 +17,7 @@
 // DYNAMIC CHORD feat.Liar-S V edition
 // 开发: honeybee black
 // 发行: honeybee black
-// 剧本: もち大福、株式会社エッジワークス、桜 ゆづき、森田彩莉、浅生柚子、相川暁子、葉山いずみ
+// 剧本: もち大福、株式会社エッジワークス、桜ゆづき、森田彩莉、浅生柚子、相川暁子、葉山いずみ
 // 人物设定: 冨士原良
 // 原画: 冨士原良
 // honeybee-cd.com/dynamic/vita-liar/index.html
@@ -30,26 +30,28 @@
 // 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
 // 官中发售以后，需要修改：游戏名、发售年份、汉化厂商、封面图、角色名
 const gameData = {
-    id: "game0", // 全局唯一ID，不可重复，如 game001
+    id: "game077", // 全局唯一ID，不可重复，如 game001
     name: "DYNAMIC CHORD feat.Liar-S Remaster edition",
-    year: "20",
+    year: "2025",
     publisher: ["dramatic create","honeybee black"],
     cnStudio: "暂无",
     writer: [
-        {name:"中文编剧", lang:"zh"},
-        {name:"日文编剧", lang:"ja"},
-        {name:"英文编剧", lang:"en"}
+        {name:"高木彩佳", lang:"zh"},
+        {name:"浅生柚子", lang:"zh"},
+        {name:"相川暁子", lang:"zh"},
+        {name:"森田彩莉", lang:"zh"},
+        {name:"桜ゆづき", lang:"zh"},
+        {name:"葉山いずみ", lang:"zh"},
+        {name:"もち大福", lang:"ja"}
     ],
     art: [
-        {name:"中文原画", lang:"zh"},
-        {name:"日文原画", lang:"ja"},
-        {name:"英文原画", lang:"en"}
+        {name:"冨士原良", lang:"zh"}
     ],
-    cover: "game/0.jpg", // 相对路径，游戏封面
+    cover: "game/077.jpg", // 相对路径，游戏封面
     charList: [
         // 双海仁菜
         {
-            id: "g0_f01",
+            id: "g077_f01",
             name: "双海仁菜",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
@@ -57,13 +59,11 @@ const gameData = {
             images: [
                 { srcList: ["char/001/女主A.jpg",
                             "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["char/001/女主A3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["char/001/女主A4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 榛名宗太郎
         {
-            id: "g0_m01",
+            id: "g077_m01",
             name: "榛名宗太郎",
             gender: "male",
             isHidden: false,
@@ -71,13 +71,11 @@ const gameData = {
             images: [
                 { srcList: ["char/001/男主1.jpg",
                             "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["char/001/男主13.jpg"], type: "hidden" },
-                { srcList: ["char/001/男主14.jpg"], type: "fd" }
             ]
         },
         // 檜山朔良
         {
-            id: "g0_m02",
+            id: "g077_m02",
             name: "檜山朔良",
             gender: "male",
             isHidden: false,
@@ -85,13 +83,11 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
         // 珠洲乃千哉
         {
-            id: "g0_m03",
+            id: "g077_m03",
             name: "珠洲乃千哉",
             gender: "male",
             isHidden: false,
@@ -99,13 +95,11 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
         // 結崎芹
         {
-            id: "g0_m04",
+            id: "g077_m04",
             name: "結崎芹",
             gender: "male",
             isHidden: false,
@@ -113,8 +107,6 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         }
     ]
