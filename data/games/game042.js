@@ -5,7 +5,7 @@ const gameData = {
     id: "game042", // 全局唯一ID，不可重复
     name: "蛇香之夜~Trap of MUSK~",
     year: "2024",
-    publisher: ["Frontier Work","Otomate"],
+    publisher: ["Frontier Works","Otomate"],
     cnStudio: "JOYOLAND",
     writer: [
         {name:"吉村りりか", lang:"zh"}
