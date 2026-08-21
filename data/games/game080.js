@@ -1,17 +1,17 @@
-BAD MEDICINE
-中文名: 危险老师的特别授课
-开发: Rejet
-发行: Rejet
-剧本: 桜葉ユウ、砂原有季、やまだ有見、小和泉いづみ、関涼子、有栖川あやみ、かなた春香、こたに白子、浦井アンナ
-音乐: ZIZZ STUDIO(ジズスタジオ、ZIZZ)
-人物设定: 双葉はづき
-主题歌作曲: MIKOTO
-主题歌作词: 岩崎大介
-主题歌演出: 高橋広樹、高橋直純
-原画: 双葉はづき
-导演: 越川愛
-rejetweb.jp/bm/
-rejetweb.jp/aa-bm/
+// BAD MEDICINE
+// 中文名: 危险老师的特别授课
+// 开发: Rejet
+// 发行: Rejet
+// 剧本: 桜葉ユウ、砂原有季、やまだ有見、小和泉いづみ、関涼子、有栖川あやみ、かなた春香、こたに白子、浦井アンナ
+// 音乐: ZIZZ STUDIO(ジズスタジオ、ZIZZ)
+// 人物设定: 双葉はづき
+// 主题歌作曲: MIKOTO
+// 主题歌作词: 岩崎大介
+// 主题歌演出: 高橋広樹、高橋直純
+// 原画: 双葉はづき
+// 导演: 越川愛
+// rejetweb.jp/bm/
+// rejetweb.jp/aa-bm/
 
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
@@ -38,10 +38,10 @@ const gameData = {
     ],
     cover: "game/0.jpg", // 相对路径，游戏封面
     charList: [
-        // 女主模板 female
+        // 川奈ヒナ
         {
             id: "g0_f01",
-            name: "女主A",
+            name: "川奈ヒナ",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
@@ -52,10 +52,10 @@ const gameData = {
                 { srcList: ["char/001/女主A4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
-        // 普通可攻略男主 male
+        // 加修レム
         {
             id: "g0_m01",
-            name: "男主1",
+            name: "加修レム",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -66,10 +66,10 @@ const gameData = {
                 { srcList: ["char/001/男主14.jpg"], type: "fd" }
             ]
         },
-        // 普通可攻略男主 male
+        // 葛葉翔
         {
             id: "g0_m02",
-            name: "男主2",
+            name: "葛葉翔",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -80,10 +80,10 @@ const gameData = {
                 { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
-        // 普通可攻略男主 male
+        // 凪原大貴
         {
             id: "g0_m03",
-            name: "男主3",
+            name: "凪原大貴",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -94,10 +94,10 @@ const gameData = {
                 { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
-        // 普通可攻略男主 male
+        // 志奴要
         {
             id: "g0_m04",
-            name: "男主4",
+            name: "志奴要",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -108,10 +108,10 @@ const gameData = {
                 { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
-        // 普通可攻略男主 male
+        // 東條海里
         {
             id: "g0_m05",
-            name: "男主5",
+            name: "東條海里",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -122,26 +122,18 @@ const gameData = {
                 { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
-        // 隐藏角色（isHidden=true → 开关开启才显示整个角色卡片）
+        // 柳遼太
         {
-            id: "g0_h01",
-            name: "隐藏攻略角色",
-            gender: "male",
-            isHidden: true,
-            isFD: false,
-            images: [
-                { srcList: ["char/g001_h01_1.jpg"], type: "base" }
-            ]
-        },
-        // FD续作限定角色（isFD=true → FD开关开启才显示整个角色卡片）
-        {
-            id: "g0_fd01",
-            name: "续作FD新增角色",
+            id: "g0_m06",
+            name: "柳遼太",
             gender: "male",
             isHidden: false,
-            isFD: true,
+            isFD: false,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/g0_m01_1.jpg",
+                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
+                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         }
     ]
