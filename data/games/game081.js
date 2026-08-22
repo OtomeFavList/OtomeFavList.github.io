@@ -41,7 +41,7 @@ const gameData = {
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
                 { srcList: ["char/081/Lucia0.jpg",
-                            "char/081/Lucia1.jpg",
+                            "char/081/Lucia1.png",
                             "char/081/Lucia2.jpg",
                             "char/081/Lucia3.jpg",
                             "char/081/Lucia4.jpg",
@@ -57,7 +57,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/081/Alexei0.jpg",
-                            "char/081/Alexei1.jpg",
+                            "char/081/Alexei1.png",
                             "char/081/Alexei2.jpg",
                             "char/081/Alexei3.jpg",
                             "char/081/Alexei4.jpg",
@@ -73,7 +73,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/081/Isaiah0.jpg",
-                            "char/081/Isaiah1.jpg",
+                            "char/081/Isaiah1.png",
                             "char/081/Isaiah2.jpg",
                             "char/081/Isaiah3.jpg",
                             "char/081/Isaiah4.jpg",
@@ -89,7 +89,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/081/Lars0.jpg",
-                            "char/081/Lars1.jpg",
+                            "char/081/Lars1.png",
                             "char/081/Lars2.jpg",
                             "char/081/Lars3.jpg",
                             "char/081/Lars4.jpg",
@@ -105,7 +105,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/081/Ricardo0.jpg",
-                            "char/081/Ricardo1.jpg",
+                            "char/081/Ricardo1.png",
                             "char/081/Ricardo2.jpg",
                             "char/081/Ricardo3.jpg",
                             "char/081/Ricardo4.jpg",
@@ -121,7 +121,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/081/Sion0.jpg",
-                            "char/081/Sion1.jpg",
+                            "char/081/Sion1.png",
                             "char/081/Sion2.jpg",
                             "char/081/Sion3.jpg",
                             "char/081/Sion4.jpg",
