@@ -109,7 +109,7 @@ const gameData = {
         // 裏ありす
         {
             id: "g079_m06",
-            name: "三月ウサギ",
+            name: "裏ありす",
             gender: "male",
             isHidden: false,
             isFD: false,
