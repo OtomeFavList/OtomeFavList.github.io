@@ -26,8 +26,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/037/Hinako.jpg",
-                            "char/037/Hinako2.jpg",
-                            // "char/037/Hinako3.png"], type: "base" }
+                            "char/037/Hinako2.jpg"], type: "base" }
             ]
         },
         // 鬼岛凤凰
@@ -39,8 +38,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/037/Houou.jpg",
-                            "char/037/Houou2.jpg",
-                            // "char/037/Houou3.png"], type: "base" }
+                            "char/037/Houou2.jpg"], type: "base" }
             ]
         },
         // 吉良麟太郎
@@ -52,8 +50,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/037/Rintarou.jpg",
-                            "char/037/Rintarou2.jpg",
-                            // "char/037/Rintarou3.png"], type: "base" }
+                            "char/037/Rintarou2.jpg"], type: "base" }
             ]
         },
         // 金春贵之
@@ -65,8 +62,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/037/Takayuki.jpg",
-                            "char/037/Takayuki2.jpg",
-                            // "char/037/Takayuki3.png"], type: "base" }
+                            "char/037/Takayuki2.jpg"], type: "base" }
             ]
         },
         // 箕轮斗斗丸
@@ -78,8 +74,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/037/Totomaru.jpg",
-                            "char/037/Totomaru2.jpg",
-                            // "char/037/Totomaru3.png"], type: "base" }
+                            "char/037/Totomaru2.jpg"], type: "base" }
             ]
         },
         // 未良子裕太
@@ -91,8 +86,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/037/Yuuta.jpg",
-                            "char/037/Yuuta2.jpg",
-                            // "char/037/Yuuta3.png"], type: "base" }
+                            "char/037/Yuuta2.jpg"], type: "base" }
             ]
         },
         // 相乐天马
@@ -105,8 +99,7 @@ const gameData = {
             images: [
                 { srcList: ["char/037/Tenma.jpg",
                             "char/037/Tenma2.jpg",
-                            "char/037/Tenma3.jpg",
-                            // "char/037/Tenma4.png"], type: "base" }
+                            "char/037/Tenma3.jpg"], type: "base" }
             ]
         }
     ]
