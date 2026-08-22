@@ -28,7 +28,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/061/Ayano.jpg",
-                            "char/061/Ayano2.png",
+                            // "char/061/Ayano2.png",
                             "char/061/Ayano3.jpg",
                             "char/061/Ayano4.jpg",
                             "char/061/Ayano5.jpg"], type: "base" }
@@ -43,7 +43,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/061/Misuzu.jpg",
-                            "char/061/Misuzu2.png",
+                            // "char/061/Misuzu2.png",
                             "char/061/Misuzu3.jpg",
                             "char/061/Misuzu4.jpg",
                             "char/061/Misuzu5.jpg"], type: "base" }
@@ -58,7 +58,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/061/Chigaya.jpg",
-                            "char/061/Chigaya2.png",
+                            // "char/061/Chigaya2.png",
                             "char/061/Chigaya3.jpg",
                             "char/061/Chigaya4.jpg",
                             "char/061/Chigaya5.jpg"], type: "base" }
@@ -73,7 +73,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/061/Hayato.jpg",
-                            "char/061/Hayato2.png",
+                            // "char/061/Hayato2.png",
                             "char/061/Hayato3.jpg",
                             "char/061/Hayato4.jpg",
                             "char/061/Hayato5.jpg"], type: "base" }
@@ -88,7 +88,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/061/Luka.jpg",
-                            "char/061/Luka2.png",
+                            // "char/061/Luka2.png",
                             "char/061/Luka3.jpg",
                             "char/061/Luka4.jpg",
                             "char/061/Luka5.jpg"], type: "base" }
@@ -103,7 +103,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/061/Makio.jpg",
-                            "char/061/Makio2.png",
+                            // "char/061/Makio2.png",
                             "char/061/Makio3.jpg",
                             "char/061/Makio4.jpg",
                             "char/061/Makio5.jpg"], type: "base" }
@@ -118,7 +118,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/061/Shun.jpg",
-                            "char/061/Shun2.png",
+                            // "char/061/Shun2.png",
                             "char/061/Shun3.jpg",
                             "char/061/Shun4.jpg",
                             "char/061/Shun5.jpg"], type: "base" }
@@ -133,7 +133,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/061/Tomoe.jpg",
-                            "char/061/Tomoe2.png",
+                            // "char/061/Tomoe2.png",
                             "char/061/Tomoe3.jpg",
                             "char/061/Tomoe4.jpg",
                             "char/061/Tomoe5.jpg"], type: "base" }
@@ -148,7 +148,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/061/Yoshiya.jpg",
-                            "char/061/Yoshiya2.png",
+                            // "char/061/Yoshiya2.png",
                             "char/061/Yoshiya3.jpg",
                             "char/061/Yoshiya4.jpg",
                             "char/061/Yoshiya5.jpg"], type: "base" }
@@ -163,7 +163,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/061/Zen.jpg",
-                            "char/061/Zen2.png",
+                            // "char/061/Zen2.png",
                             "char/061/Zen3.jpg",
                             "char/061/Zen4.jpg",
                             "char/061/Zen5.jpg"], type: "base" }
