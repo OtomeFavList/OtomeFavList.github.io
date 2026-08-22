@@ -67,10 +67,10 @@ const gameData = {
     ],
     cover: "game/089.jpg", // 相对路径，游戏封面
     charList: [
-        // 女主模板 female
+        // 朝日奈絵麻
         {
             id: "g089_f01",
-            name: "女主A",
+            name: "朝日奈絵麻",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
@@ -79,10 +79,10 @@ const gameData = {
                             "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 朝日奈梓
         {
-            id: "g0_m01",
-            name: "男主1",
+            id: "g089_m01",
+            name: "朝日奈梓",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -91,10 +91,10 @@ const gameData = {
                             "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 朝日奈風斗
         {
-            id: "g0_m02",
-            name: "男主2",
+            id: "g089_m02",
+            name: "朝日奈風斗",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -103,10 +103,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 朝日奈光
         {
-            id: "g0_m03",
-            name: "男主3",
+            id: "g089_m03",
+            name: "朝日奈光",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -115,10 +115,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 朝日奈祈織
         {
-            id: "g0_m04",
-            name: "男主4",
+            id: "g089_m04",
+            name: "朝日奈祈織",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -127,10 +127,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 朝日奈要
         {
-            id: "g0_m05",
-            name: "男主5",
+            id: "g089_m05",
+            name: "朝日奈要",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -139,10 +139,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 朝日奈琉生
         {
-            id: "g0_m06",
-            name: "男主5",
+            id: "g089_m06",
+            name: "朝日奈琉生",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -151,10 +151,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 朝日奈雅臣
         {
-            id: "g0_m07",
-            name: "男主5",
+            id: "g089_m07",
+            name: "朝日奈雅臣",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -163,10 +163,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 朝日奈棗
         {
-            id: "g0_m08",
-            name: "男主5",
+            id: "g089_m08",
+            name: "朝日奈棗",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -175,10 +175,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 朝日奈昴
         {
-            id: "g0_m09",
-            name: "男主5",
+            id: "g089_m09",
+            name: "朝日奈昴",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -187,10 +187,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 朝日奈椿
         {
-            id: "g0_m10",
-            name: "男主5",
+            id: "g089_m10",
+            name: "朝日奈椿",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -199,10 +199,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 朝日奈右京
         {
-            id: "g0_m11",
-            name: "男主5",
+            id: "g089_m11",
+            name: "朝日奈右京",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -211,10 +211,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 朝日奈弥
         {
-            id: "g0_m12",
-            name: "男主5",
+            id: "g089_m12",
+            name: "朝日奈弥",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -223,10 +223,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 朝日奈侑介
         {
-            id: "g0_m13",
-            name: "男主5",
+            id: "g089_m13",
+            name: "朝日奈侑介",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -235,10 +235,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 隐藏角色（isHidden=true → 开关开启才显示整个角色卡片）
+        // ジュリ
         {
-            id: "g0_h01",
-            name: "隐藏攻略角色",
+            id: "g089_h01",
+            name: "ジュリ",
             gender: "male",
             isHidden: true,
             isFD: false,
