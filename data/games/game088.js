@@ -35,24 +35,20 @@ const gameData = {
     id: "game088", // 全局唯一ID，不可重复，如 game001
     name: "Side Kicks!beyond",
     year: "2025",
-    publisher: ["原厂发行商"],
-    cnStudio: "汉化组/汉化厂商",
+    publisher: ["eXtend"],
+    cnStudio: "暂无",
     writer: [
-        {name:"中文编剧", lang:"zh"},
-        {name:"日文编剧", lang:"ja"},
-        {name:"英文编剧", lang:"en"}
+        {name:"minetaka", lang:"en"}
     ],
     art: [
-        {name:"中文原画", lang:"zh"},
-        {name:"日文原画", lang:"ja"},
-        {name:"英文原画", lang:"en"}
+        {name:"すめらぎ琥珀", lang:"ja"}
     ],
     cover: "game/088.jpg", // 相对路径，游戏封面
     charList: [
-        // 女主模板 female
+        // 女イノリ
         {
             id: "g088_f01",
-            name: "女主A",
+            name: "イノリ",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
@@ -61,10 +57,10 @@ const gameData = {
                             "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // チカ
         {
             id: "g088_m01",
-            name: "男主1",
+            name: "チカ",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -73,10 +69,10 @@ const gameData = {
                             "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // ヒバリ
         {
             id: "g088_m02",
-            name: "男主2",
+            name: "ヒバリ",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -85,10 +81,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // ノラ
         {
             id: "g088_m03",
-            name: "男主3",
+            name: "ノラ",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -97,10 +93,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // リコ
         {
             id: "g088_m04",
-            name: "男主4",
+            name: "リコ",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -109,10 +105,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // シシバ
         {
             id: "g088_m05",
-            name: "男主5",
+            name: "シシバ",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -121,10 +117,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // タテワキ
         {
             id: "g088_m06",
-            name: "男主5",
+            name: "タテワキ",
             gender: "male",
             isHidden: false,
             isFD: false,
