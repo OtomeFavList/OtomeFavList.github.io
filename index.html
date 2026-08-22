@@ -102,7 +102,7 @@
     <div class="game-search-box" id="search-panel">
         <input type="text" id="game-search-input" placeholder="搜索游戏名称">
         <div class="filter-group">
-            <!-- 筛选顺序：编剧 → 画师 → 发售年份 → 发行厂商 → 汉化厂商 -->
+            <!-- 筛选顺序：编剧 → 画师 → 发售年份 → 开发厂商 → 汉化厂商 -->
             <select id="filter-writer">
                 <option value="">筛选编剧</option>
             </select>
@@ -491,7 +491,7 @@ z-index: -999;
 
         // 监听游戏加载进度（全局回调，由data/games.js内注入进度通知）
         window.onGameLoadProgress = (current, total) => {
-            progressText.innerHTML = `游戏数据正在加载 ${current}/${total}<br>首次访问需加载图片，耗时较长，请稍候…`;
+            progressText.innerHTML = `游戏数据正在加载 ${current}/${total}<br>加载图片耗时较长，请稍候…`;
         };
 
         // 1. 加载所有游戏文件（内部应通过并发批量加载并回调进度）
