@@ -70,8 +70,8 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/076/Yukina.jpg",
+                            "char/076/Yukina2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 千歳
@@ -82,8 +82,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/076/Chitose.jpg",
+                            "char/076/Chitose2.jpg",
+                            "char/076/Chitose3.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 千岳
@@ -94,8 +95,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/076/Kazutake.jpg",
+                            "char/076/Kazutake2.jpg",
+                            "char/076/Kazutake3.jpg",], type: "base" },
             ]
         },
         // 千耶
@@ -106,8 +108,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/076/Kazuya.jpg",
+                            "char/076/Kazuya2.jpg",
+                            "char/076/Kazuya3.jpg"], type: "base" },
             ]
         },
         // 千鬼丸
@@ -118,8 +121,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/076/Senkimaru.jpg",
+                            "char/076/Senkimaru2.jpg"], type: "base" },
             ]
         },
         // 秦
@@ -130,8 +133,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["img/char/076/Shin.jpg",
+                            "img/char/076/Shin2.jpg",
+                            "img/char/076/Shin3.jpg"], type: "base" },
             ]
         }
     ]
