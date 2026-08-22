@@ -1,15 +1,15 @@
-DistortedCode -生者の残り香-
-开发: TAKUYO
-发行: TAKUYO
-人物设定: あとりちや
-原画: あとりちや
-导演: ちひろ、関口琴子
-别名: ディストーテッドコード
-平台: Nintendo Switch
-游戏类型: 乙女向けホラーアドベンチャー
-剧本: ちひろ
-企画: ちひろ
-takuyo.co.jp/products/distortedcode/index.html
+// DistortedCode -生者の残り香-
+// 开发: TAKUYO
+// 发行: TAKUYO
+// 人物设定: あとりちや
+// 原画: あとりちや
+// 导演: ちひろ、関口琴子
+// 别名: ディストーテッドコード
+// 平台: Nintendo Switch
+// 游戏类型: 乙女向けホラーアドベンチャー
+// 剧本: ちひろ
+// 企画: ちひろ
+// takuyo.co.jp/products/distortedcode/index.html
 
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
@@ -32,74 +32,64 @@ const gameData = {
     ],
     cover: "game/087.jpg", // 相对路径，游戏封面
     charList: [
-        // 女主模板 female
+        // 伴星澪
         {
             id: "g087_f01",
-            name: "女主A",
+            name: "伴星澪",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
                 { srcList: ["char/001/女主A.jpg",
                             "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["char/001/女主A3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["char/001/女主A4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
-        // 普通可攻略男主 male
+        // 二ノ瀬隼人
         {
             id: "g087_m01",
-            name: "男主1",
+            name: "二ノ瀬隼人",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
                 { srcList: ["char/001/男主1.jpg",
                             "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["char/001/男主13.jpg"], type: "hidden" },
-                { srcList: ["char/001/男主14.jpg"], type: "fd" }
             ]
         },
-        // 普通可攻略男主 male
+        // 間宮仁章
         {
             id: "g087_m02",
-            name: "男主2",
+            name: "間宮仁章",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
-        // 普通可攻略男主 male
+        // 鳴海誠一
         {
             id: "g087_m03",
-            name: "男主3",
+            name: "鳴海誠一",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
-        // 普通可攻略男主 male
+        // 要邦孝
         {
             id: "g087_m04",
-            name: "男主4",
+            name: "要邦孝",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         }
     ]
