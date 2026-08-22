@@ -48,7 +48,7 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg"], type: "base" }
+                { srcList: ["char/079/Sakuraba.jpg"], type: "base" }
             ]
         },
         // 帽子屋
@@ -59,7 +59,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/001/男主1.jpg"], type: "base" }
+                { srcList: ["char/079/Boushiya.jpg"], type: "base" }
             ]
         },
         // チェシャ猫
@@ -70,7 +70,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg"], type: "base" }
+                { srcList: ["char/079/Chesire.jpg"], type: "base" }
             ]
         },
         // キング
@@ -81,7 +81,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg"], type: "base" }
+                { srcList: ["char/079/King.jpg"], type: "base" }
             ]
         },
         // 黒うさぎ
@@ -92,7 +92,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg"], type: "base" }
+                { srcList: ["char/079/Kuro.jpg"], type: "base" }
             ]
         },
         // 三月ウサギ
@@ -103,7 +103,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg"], type: "base" }
+                { srcList: ["char/079/Sangatsu.jpg"], type: "base" }
             ]
         },
         // 裏ありす
@@ -114,7 +114,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg"], type: "base" }
+                { srcList: ["char/079/Ura.jpg"], type: "base" }
             ]
         }
     ]
