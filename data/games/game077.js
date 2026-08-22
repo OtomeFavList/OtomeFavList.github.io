@@ -57,8 +57,8 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/077/Nina.jpg",
+                            "char/077/Nina2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 榛名宗太郎
@@ -69,8 +69,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/077/Haruna.jpg",
+                            "char/077/Haruna2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 檜山朔良
@@ -81,8 +81,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/077/Hinoyama.jpg",
+                            "char/077/Hinoyama2.jpg"], type: "base" },
             ]
         },
         // 珠洲乃千哉
@@ -93,8 +93,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/077/Suzuno.jpg",
+                            "char/077/Suzuno2.jpg"], type: "base" },
             ]
         },
         // 結崎芹
@@ -105,8 +105,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/077/Yuisaki.jpg",
+                            "char/077/Yuisaki2.jpg"], type: "base" },
             ]
         }
     ]
