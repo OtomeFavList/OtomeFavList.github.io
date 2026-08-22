@@ -35,10 +35,10 @@ const gameData = {
     ],
     cover: "game/086.jpg", // 相对路径，游戏封面
     charList: [
-        // 女主模板 female
+        // 零崎紘可
         {
             id: "g086_f01",
-            name: "女主A",
+            name: "零崎紘可",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
@@ -47,10 +47,10 @@ const gameData = {
                             "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 壱園央助
         {
             id: "g086_m01",
-            name: "男主1",
+            name: "壱園央助",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -59,10 +59,10 @@ const gameData = {
                             "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 玖折巡
         {
             id: "g086_m02",
-            name: "男主2",
+            name: "玖折巡",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -71,10 +71,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 弐藤光
         {
             id: "g086_m03",
-            name: "男主3",
+            name: "弐藤光",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -83,10 +83,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 陸平崇樹
         {
             id: "g086_m04",
-            name: "男主4",
+            name: "陸平崇樹",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -95,10 +95,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 漆原景太郎
         {
             id: "g086_m05",
-            name: "男主5",
+            name: "漆原景太郎",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -107,10 +107,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 肆形有比
         {
             id: "g086_m06",
-            name: "男主5",
+            name: "肆形有比",
             gender: "male",
             isHidden: false,
             isFD: false,
