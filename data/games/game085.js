@@ -40,8 +40,10 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/085/Yuzuriha.jpg",
+                            "char/085/Yuzuriha2.jpg",
+                            "char/085/Yuzuriha3.png",
+                            "char/085/Yuzuriha4.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 秋月栄次郎
@@ -80,8 +82,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: [
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/085/Ishiya.jpg",
+                            "char/085/Ishiya2.jpg",
+                            "char/085/Ishiya3.png",
+                            "char/085/Ishiya4.png"], type: "base" },
             ]
         },
         // 神崎宗十郎
@@ -92,8 +96,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/085/Kanzaki.jpg",
+                            "char/085/Kanzaki2.jpg",
+                            "char/085/Kanzaki3.png",
+                            "char/085/Kanzaki4.png"], type: "base" },
             ]
         },
         // 岡本三郎
@@ -104,8 +110,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/085/Okamoto.jpg",
+                            "char/085/Okamoto2.jpg",
+                            "char/085/Okamoto3.png",
+                            "char/085/Okamoto4.png"], type: "base" },
             ]
         },
         // 山瀬大蔵
@@ -116,8 +124,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/085/Yamase.jpg",
+                            "char/085/Yamase2.jpg",
+                            "char/085/Yamase3.png",
+                            "char/085/Yamase4.png"], type: "base" },
             ]
         }
     ]
