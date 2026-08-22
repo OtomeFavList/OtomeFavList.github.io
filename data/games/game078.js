@@ -46,8 +46,11 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/078/Liu.jpg",
+                            "char/078/Liu2.jpg",
+                            "char/078/Liu3.jpg",
+                            "char/078/Liu4.jpg",
+                            "char/078/Liu5.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // カンテ·ラウド
@@ -58,8 +61,12 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/078/Gante.jpg",
+                            "char/078/Gante2.jpg",
+                            "char/078/Gante3.jpg",
+                            "char/078/Gante4.jpg",
+                            "char/078/Gante5.jpg",
+                            "char/078/Gante6.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // ソディック·モネ
@@ -70,8 +77,12 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/078/Sodyk.jpg",
+                            "char/078/Sodyk2.jpg",
+                            "char/078/Sodyk3.jpg",
+                            "char/078/Sodyk4.jpg",
+                            "char/078/Sodyk5.jpg",
+                            "char/078/Sodyk6.jpg"], type: "base" },
             ]
         },
         // ソン·マシロ
@@ -82,8 +93,12 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/078/Sun.jpg",
+                            "char/078/Sun2.jpg",
+                            "char/078/Sun3.jpg",
+                            "char/078/Sun4.jpg",
+                            "char/078/Sun5.jpg",
+                            "char/078/Sun6.jpg"], type: "base" },
             ]
         },
         // チョウ·ヒヨク
@@ -94,8 +109,12 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/078/Zhang.jpg",
+                            "char/078/Zhang2.jpg",
+                            "char/078/Zhang3.jpg",
+                            "char/078/Zhang4.jpg",
+                            "char/078/Zhang5.jpg",
+                            "char/078/Zhang6.jpg"], type: "base" },
             ]
         }
     ]
