@@ -43,7 +43,7 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/084/Fiena.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // エマニュエル·ド・ボーモン
@@ -54,7 +54,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/001/男主1.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/084/Emmanuel.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // イスマイール
@@ -65,7 +65,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg"], type: "base" },
+                { srcList: ["char/084/Ismail.jpg"], type: "base" },
             ]
         },
         // メロディー
@@ -76,7 +76,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg"], type: "base" },
+                { srcList: ["char/084/Melody.jpg"], type: "base" },
             ]
         },
         // オリヴィエ·パケ
@@ -87,7 +87,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg"], type: "base" },
+                { srcList: ["char/084/Olivier.jpg"], type: "base" },
             ]
         }
     ]
