@@ -52,8 +52,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/085/Akizuki.jpg",
+                            "char/085/Akizuki2.jpg",
+                            "char/085/Akizuki3.png",
+                            "char/085/Akizuki4.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 飯山貞吉
@@ -64,8 +66,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/085/Iiyama.jpg",
+                            "char/085/Iiyama2.jpg",
+                            "char/085/Iiyama3.png",
+                            "char/085/Iiyama4.png"], type: "base" },
             ]
         },
         // 石谷虎之助
@@ -76,7 +80,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
+                { srcList: [
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
