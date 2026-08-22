@@ -40,8 +40,12 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/081/Lucia0.jpg",
+                            "char/081/Lucia1.jpg",
+                            "char/081/Lucia2.jpg",
+                            "char/081/Lucia3.jpg",
+                            "char/081/Lucia4.jpg",
+                            "char/081/Lucia5.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // アレクセイ·エルディール
@@ -52,8 +56,12 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/081/Alexei0.jpg",
+                            "char/081/Alexei1.jpg",
+                            "char/081/Alexei2.jpg",
+                            "char/081/Alexei3.jpg",
+                            "char/081/Alexei4.jpg",
+                            "char/081/Alexei5.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // イザヤ·クライン
@@ -64,8 +72,12 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/081/Isaiah0.jpg",
+                            "char/081/Isaiah1.jpg",
+                            "char/081/Isaiah2.jpg",
+                            "char/081/Isaiah3.jpg",
+                            "char/081/Isaiah4.jpg",
+                            "char/081/Isaiah5.jpg"], type: "base" },
             ]
         },
         // ラルス·クロッツ
@@ -76,8 +88,12 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/081/Lars0.jpg",
+                            "char/081/Lars1.jpg",
+                            "char/081/Lars2.jpg",
+                            "char/081/Lars3.jpg",
+                            "char/081/Lars4.jpg",
+                            "char/081/Lars5.jpg"], type: "base" },
             ]
         },
         // リカルド·サンテ
@@ -88,11 +104,15 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/081/Ricardo0.jpg",
+                            "char/081/Ricardo1.jpg",
+                            "char/081/Ricardo2.jpg",
+                            "char/081/Ricardo3.jpg",
+                            "char/081/Ricardo4.jpg",
+                            "char/081/Ricardo5.jpg",], type: "base" },
             ]
         },
-        // 普シオン·カルド
+        // シオン·カルド
         {
             id: "g081_m05",
             name: "シオン·カルド",
@@ -100,8 +120,12 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/081/Sion0.jpg",
+                            "char/081/Sion1.jpg",
+                            "char/081/Sion2.jpg",
+                            "char/081/Sion3.jpg",
+                            "char/081/Sion4.jpg",
+                            "char/081/Sion5.jpg"], type: "base" },
             ]
         }
     ]
