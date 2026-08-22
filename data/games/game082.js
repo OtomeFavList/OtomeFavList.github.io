@@ -37,8 +37,9 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/082/Lalique.jpg",
+                            "char/082/Lalique2.jpg",
+                            "char/082/Lalique3.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 廻螺＝アマルリック
@@ -49,11 +50,11 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/082/Ela.jpg",
+                            "char/082/Ela2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普歌紫歌＝ガレ
+        // 歌紫歌＝ガレ
         {
             id: "g082_m02",
             name: "歌紫歌＝ガレ",
@@ -61,8 +62,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/082/Kashika.jpg",
+                            "char/082/Kashika2.jpg"], type: "base" },
             ]
         },
         // 黒禰＝スピネル
@@ -73,8 +74,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/082/Klone.jpg",
+                            "char/082/Klone2.jpg"], type: "base" },
             ]
         },
         // 泣虎＝ピオニー
@@ -85,8 +86,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/082/Natra.jpg",
+                            "char/082/Natra2.jpg",
+                            "char/082/Natra3.jpg"], type: "base" },
             ]
         },
         // 綸燈＝ウェステリア
@@ -97,8 +99,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/082/Rindo.jpg",
+                            "char/082/Rindo2.jpg",
+                            "char/082/Rindo3.jpg"], type: "base" },
             ]
         },
         // 紫鳶＝クリノクロア
@@ -109,8 +112,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/082/Shien.jpg",
+                            "char/082/Shien2.jpg"], type: "base" },
             ]
         },
         // 憂漣＝ミュラー
@@ -121,8 +124,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/082/Ulen.jpg",
+                            "char/082/Ulen2.jpg"], type: "base" },
             ]
         }
     ]
