@@ -50,8 +50,7 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/080/Hina.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 加修レム
@@ -62,8 +61,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/080/Kashu.jpg",
+                            "char/080/Kashu2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 葛葉翔
@@ -74,8 +73,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/080/Kuzuha.jpg",
+                            "char/080/Kuzuha2.jpg"], type: "base" },
             ]
         },
         // 凪原大貴
@@ -86,8 +85,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/080/Nagihara.jpg",
+                            "char/080/Nagihara2.jpg"], type: "base" },
             ]
         },
         // 志奴要
@@ -98,8 +97,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/080/Shido.jpg",
+                            "char/080/Shido2.jpg"], type: "base" },
             ]
         },
         // 東條海里
@@ -110,8 +109,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/080/Toujou.jpg",
+                            "char/080/Toujou2.jpg"], type: "base" },
             ]
         },
         // 柳遼太
@@ -122,8 +121,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/080/Yanagi.jpg",
+                            "char/080/Yanagi2.jpg"], type: "base" },
             ]
         }
     ]
