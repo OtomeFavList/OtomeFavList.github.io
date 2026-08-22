@@ -41,8 +41,8 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/083/Akit.jpg",
+                            "char/083/Akit2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 烏羽一徒
@@ -53,8 +53,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/083/Karasut.jpg",
+                            "char/083/Karasut2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 真朱柑
@@ -65,8 +65,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/083/Kout.jpg",
+                            "char/083/Kout2.jpg"], type: "base" },
             ]
         },
         // 乃凪範尚
@@ -77,8 +77,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/083/Nait.jpg",
+                            "char/083/Nait2.jpg"], type: "base" },
             ]
         },
         // 内沼葛
@@ -89,8 +89,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/083/Nuit.jpg",
+                            "char/083/Nuit2.jpg"], type: "base" },
             ]
         },
         // 白原尋也
@@ -101,8 +101,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/083/Shiraharat.jpg",
+                            "char/083/Shiraharat2.jpg"], type: "base" },
             ]
         },
         // 黄朽葉宰
@@ -113,8 +113,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/083/Tsukasat.jpg",
+                            "char/083/Tsukasat2.jpg"], type: "base" },
             ]
         }
     ]
