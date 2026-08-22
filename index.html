@@ -250,7 +250,7 @@ z-index: -999;
 <div id="game-load-modal" class="modal-mask">
     <div class="modal-box">
         <h3>提示</h3>
-        <p class="text-gray-desc" id="load-progress-text">游戏数据正在加载 0/64<br>首次访问需加载图片，耗时较长，请稍候…</p>
+        <p class="text-gray-desc" id="load-progress-text">游戏数据正在加载 0/64<br>首次访问需加载图片，耗时较长，<br>请稍候…</p>
         <div class="modal-btns">
             <button id="load-modal-confirm">确认</button>
         </div>
@@ -438,6 +438,15 @@ z-index: -999;
     </p>
     <p style="font-size: 14px; line-height: 1.8; color: #666; margin: 0 0 20px 0; padding-left: 20px;">
         A：所有数据保存在浏览器 localStorage 中，清除浏览器缓存或使用无痕模式会导致数据丢失。建议定期导出图片。
+    </p>
+
+    <p style="font-size: 15px; line-height: 1.8; color: #555; margin: 0 0 4px 0;">
+        <strong style="color: #b33a3a;">❗IOS 设备无法导出长图</strong>
+    </p>
+    <p style="font-size: 14px; line-height: 1.8; color: #666; margin: 0 0 20px 0; padding-left: 20px;">
+        已针对IOS系统增加补丁。iOS系统存在对内核和总像素的硬性限制，补丁只能缓解、降低触发概率，无法完全杜绝，<br>
+        且IOS系统强制在苹果商店上架的应用使用同一套渲染引擎，所以更换浏览器也无法解决。<br>
+        建议IOS设备使用分页导出；若要使用长图导出，请通过导出折叠内容的开关来控制图片长度，使图片不超出上限就可以成功生成并导出。
     </p>
 
     <hr style="border: none; border-top: 2px solid #f6d8e0; margin: 20px 0;">
