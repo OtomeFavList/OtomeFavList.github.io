@@ -1,66 +1,66 @@
-DYNAMIC CHORD feat.KYOHSO Remaster Edition
-开发: honeybee black
-发行: dramatic create、アリスマティック
-人物设定: 冨士原良
-主题歌演出: 森久保祥太郎
-原画: 冨士原良
-平台: Nintendo Switch
-游戏类型: 甘く激しく魂震えるバンド恋愛ADV
-游玩人数: 1
-发行日期: 2025-11-27
-售价: 7,480 円（税込）
-官方网站: honeybee-cd.com/dynamic/switch-kyohso/index.html
+// DYNAMIC CHORD feat.KYOHSO Remaster Edition
+// 开发: honeybee black
+// 发行: dramatic create、アリスマティック
+// 人物设定: 冨士原良
+// 主题歌演出: 森久保祥太郎
+// 原画: 冨士原良
+// 平台: Nintendo Switch
+// 游戏类型: 甘く激しく魂震えるバンド恋愛ADV
+// 游玩人数: 1
+// 发行日期: 2025-11-27
+// 售价: 7,480 円（税込）
+// 官方网站: honeybee-cd.com/dynamic/switch-kyohso/index.html
 
-DYNAMIC CHORD feat.KYOHSO
-开发: honeybee black
-发行: honeybee black
-剧本: Plot：石川奈津季、中村幸代（なかむらさちよ）；执笔：柚子みかん（なかむらさちよ）、さつき、株式会社エッジワークス（浅生柚子；相川暁子、春名佳純、水井としえ；みなづきともこ、ふくだりょうこ、伊原恵）
-人物设定: 冨士原良
-主题歌演出: 森久保祥太郎
-原画: 冨士原良
-平台: PC
-游戏类型: 甘く激しく魂震えるバンド恋愛ADV
-游玩人数: 1
-发行日期: 2015-06-26
-售价:
-通常版 4,104 円
-初回限定A盤 6,264 円
-初回限定B盤 5,724 円
-链接: ErogameScape VNDB
-官方网站: honeybee-cd.com/dynamic/kyoh/index.html
+// DYNAMIC CHORD feat.KYOHSO
+// 开发: honeybee black
+// 发行: honeybee black
+// 剧本: Plot：石川奈津季、中村幸代（なかむらさちよ）；执笔：柚子みかん（なかむらさちよ）、さつき、株式会社エッジワークス（浅生柚子；相川暁子、春名佳純、水井としえ；みなづきともこ、ふくだりょうこ、伊原恵）
+// 人物设定: 冨士原良
+// 主题歌演出: 森久保祥太郎
+// 原画: 冨士原良
+// 平台: PC
+// 游戏类型: 甘く激しく魂震えるバンド恋愛ADV
+// 游玩人数: 1
+// 发行日期: 2015-06-26
+// 售价:
+// 通常版 4,104 円
+// 初回限定A盤 6,264 円
+// 初回限定B盤 5,724 円
+// 链接: ErogameScape VNDB
+// 官方网站: honeybee-cd.com/dynamic/kyoh/index.html
 
-DYNAMIC CHORD feat.KYOHSO Append Disc
-开发: honeybee black
-发行: honeybee black
-人物设定: 冨士原良
-主题歌演出: 森久保祥太郎
-原画: 冨士原良
-平台: PC
-游玩人数: 1
-发行日期:
-初回限定版 2016-07-29
-通常版 2016-07-29
-售价:
-初回限定版 5,830 円（税込）
-通常版 4,180 円（税込）
-剧本: 相川暁子
-官方网站: honeybee-cd.com/dynamic/kyoh/index.html
+// DYNAMIC CHORD feat.KYOHSO Append Disc
+// 开发: honeybee black
+// 发行: honeybee black
+// 人物设定: 冨士原良
+// 主题歌演出: 森久保祥太郎
+// 原画: 冨士原良
+// 平台: PC
+// 游玩人数: 1
+// 发行日期:
+// 初回限定版 2016-07-29
+// 通常版 2016-07-29
+// 售价:
+// 初回限定版 5,830 円（税込）
+// 通常版 4,180 円（税込）
+// 剧本: 相川暁子
+// 官方网站: honeybee-cd.com/dynamic/kyoh/index.html
 
-DYNAMIC CHORD feat.KYOHSO V edition
-开发: honeybee black
-发行: honeybee black
-人物设定: 冨士原良
-主题歌演出: 森久保祥太郎
-原画: 冨士原良
-导演: 中澤工
-平台: PSV
-游戏类型: 甘く激しく魂震えるバンド恋愛ADV
-游玩人数: 1
-发行日期: 2017-03-30
-售价:
-通常版 5,800円＋税
-限定版 7,800円＋税
-官方网站: honeybee-cd.com/dynamic/vita-kyoh/index.html
+// DYNAMIC CHORD feat.KYOHSO V edition
+// 开发: honeybee black
+// 发行: honeybee black
+// 人物设定: 冨士原良
+// 主题歌演出: 森久保祥太郎
+// 原画: 冨士原良
+// 导演: 中澤工
+// 平台: PSV
+// 游戏类型: 甘く激しく魂震えるバンド恋愛ADV
+// 游玩人数: 1
+// 发行日期: 2017-03-30
+// 售价:
+// 通常版 5,800円＋税
+// 限定版 7,800円＋税
+// 官方网站: honeybee-cd.com/dynamic/vita-kyoh/index.html
 
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
@@ -74,21 +74,29 @@ const gameData = {
     name: "DYNAMIC CHORD feat.KYOHSO Remaster Edition",
     year: "2025",
     publisher: ["honeybee black"],
-    cnStudio: "汉化组/汉化厂商",
+    cnStudio: "暂无",
     writer: [
-        {name:"中文编剧", lang:"zh"},
-        {name:"日文编剧", lang:"ja"},
-        {name:"英文编剧", lang:"en"}
+        {name:"石川奈津季", lang:"zh"},
+        {name:"中村幸代", lang:"zh"},
+        {name:"柚子みかん", lang:"zh"},
+        {name:"浅生柚子", lang:"zh"},
+        {name:"相川暁子", lang:"zh"},
+        {name:"春名佳純", lang:"zh"},
+        {name:"水井としえ", lang:"zh"},
+        {name:"伊原恵", lang:"zh"},
+        {name:"さつき", lang:"ja"},
+        {name:"みなづきともこ", lang:"ja"},
+        {name:"ふくだりょうこ", lang:"ja"}
     ],
     art: [
         {name:"冨士原良", lang:"zh"},
     ],
     cover: "game/095.jpg", // 相对路径，游戏封面
     charList: [
-        // 女主模板 female
+        // 霧下このは
         {
             id: "g095_f01",
-            name: "女主A",
+            name: "霧下このは",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
@@ -97,10 +105,10 @@ const gameData = {
                             "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 城坂依都
         {
             id: "g0_m01",
-            name: "男主1",
+            name: "城坂依都",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -109,10 +117,10 @@ const gameData = {
                             "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 諏宮篠宗
         {
             id: "g0_m02",
-            name: "男主2",
+            name: "諏宮篠宗",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -121,10 +129,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 英時明
         {
             id: "g0_m03",
-            name: "男主3",
+            name: "英時明",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -133,10 +141,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 黒谷優
         {
             id: "g0_m04",
-            name: "男主4",
+            name: "黒谷優",
             gender: "male",
             isHidden: false,
             isFD: false,
