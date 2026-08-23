@@ -58,10 +58,10 @@ const gameData = {
                             "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 宗像戒
         {
             id: "g093_m01",
-            name: "男主1",
+            name: "宗像戒",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -70,10 +70,10 @@ const gameData = {
                             "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 雅火
         {
             id: "g093_m02",
-            name: "男主2",
+            name: "雅火",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -82,10 +82,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 永守藍
         {
             id: "g093_m03",
-            name: "男主3",
+            name: "永守藍",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -94,10 +94,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 弥坂奏壱
         {
             id: "g093_m04",
-            name: "男主4",
+            name: "弥坂奏壱",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -106,10 +106,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // ユーリ
         {
             id: "g093_m05",
-            name: "男主5",
+            name: "ユーリ",
             gender: "male",
             isHidden: false,
             isFD: false,
