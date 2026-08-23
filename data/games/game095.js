@@ -81,9 +81,7 @@ const gameData = {
         {name:"英文编剧", lang:"en"}
     ],
     art: [
-        {name:"中文原画", lang:"zh"},
-        {name:"日文原画", lang:"ja"},
-        {name:"英文原画", lang:"en"}
+        {name:"冨士原良", lang:"zh"},
     ],
     cover: "game/095.jpg", // 相对路径，游戏封面
     charList: [
