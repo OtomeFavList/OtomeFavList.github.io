@@ -8,7 +8,7 @@ const gameData = {
     id: "game047", // 全局唯一ID，不可重复
     name: "璃梦泡影之世外浮城",
     year: "2025",
-    publisher: ["BROCCOLI"],
+    publisher: ["LicoBiTs"],
     cnStudio: "GSE",
     writer: [
         {name:"かずら林檎", lang:"ja"}
