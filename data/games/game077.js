@@ -33,7 +33,7 @@ const gameData = {
     id: "game077", // 全局唯一ID，不可重复，如 game001
     name: "DYNAMIC CHORD feat.Liar-S Remaster edition",
     year: "2025",
-    publisher: ["dramatic create","honeybee black"],
+    publisher: ["honeybee black"],
     cnStudio: "暂无",
     writer: [
         {name:"高木彩佳", lang:"zh"},
