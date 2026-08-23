@@ -8,7 +8,7 @@ const gameData = {
     id: "game058", // 全局唯一ID，不可重复
     name: "DYNAMIC CHORD 动态和弦 feat.[rêve parfait] Remaster edition",
     year: "2026",
-    publisher: ["dramatic create","honeybee black"],
+    publisher: ["honeybee black"],
     cnStudio: "JOYOLAND",
     writer: [
         {name:"柚子みかん", lang:"zh"},
