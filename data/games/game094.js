@@ -68,112 +68,136 @@ const gameData = {
     ],
     cover: "game/094.jpg", // 相对路径，游戏封面
     charList: [
-        // フィオナ・ガーランド
+        // フィオナ·ガーランド
         {
             id: "g094_f01",
-            name: "フィオナ・ガーランド",
+            name: "フィオナ·ガーランド",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/001/女主A.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // アルル·V·フェルノア
         {
             id: "g094_m01",
-            name: "男主1",
+            name: "アルル·V·フェルノア",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/001/男主1.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // オージェ·フォン·ガバルディ
         {
             id: "g094_m02",
-            name: "男主2",
+            name: "オージェ·フォン·ガバルディ",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/g0_m01_1.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // ギラン·ギノー
         {
             id: "g094_m03",
-            name: "男主3",
+            name: "ギラン·ギノー",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/g0_m01_1.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // メヨーヨ·フォン·ガバルディ
         {
             id: "g094_m04",
-            name: "男主4",
+            name: "メヨーヨ·フォン·ガバルディ",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/g0_m01_1.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // ネッソ·ガーランド
         {
             id: "g094_m05",
-            name: "男主5",
+            name: "ネッソ·ガーランド",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/g0_m01_1.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // ラス·ヴォガード
         {
             id: "g094_m06",
-            name: "男主5",
+            name: "ラス·ヴォガード",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/g0_m01_1.jpg"], type: "base" },
             ]
         },
-      // 普通可攻略男主 male
+        // ザラ·スキーンズ
         {
             id: "g094_m07",
-            name: "男主5",
+            name: "ザラ·スキーンズ",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/g0_m01_1.jpg"], type: "base" },
             ]
         },
-      // 普通可攻略男主 male
+        // ユリアン
         {
-            id: "g094_m08",
-            name: "男主5",
+            id: "g094_fd01",
+            name: "ユリアン",
             gender: "male",
             isHidden: false,
-            isFD: false,
+            isFD: true,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // パール
+        {
+            id: "g094_fd02",
+            name: "パール",
+            gender: "male",
+            isHidden: false,
+            isFD: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // リッチー
+        {
+            id: "g094_fd03",
+            name: "リッチー",
+            gender: "male",
+            isHidden: false,
+            isFD: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // エルザ·クリフォード
+        {
+            id: "g094_fd04",
+            name: "エルザ·クリフォード",
+            gender: "male",
+            isHidden: false,
+            isFD: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
             ]
         }
     ]
