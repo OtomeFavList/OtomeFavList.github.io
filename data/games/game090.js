@@ -33,26 +33,30 @@ Blackish House sideA→
 // 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
 // 官中发售以后，需要修改：游戏名、发售年份、汉化厂商、封面图、角色名
 const gameData = {
-    id: "game0", // 全局唯一ID，不可重复，如 game001
-    name: "示例乙女游戏",
-    year: "20",
-    publisher: ["原厂发行商"],
+    id: "game090", // 全局唯一ID，不可重复，如 game001
+    name: "Blackish House sideA→ -Retour-",
+    year: "2025",
+    publisher: ["honeybee black"],
     cnStudio: "汉化组/汉化厂商",
     writer: [
-        {name:"中文编剧", lang:"zh"},
-        {name:"日文编剧", lang:"ja"},
-        {name:"英文编剧", lang:"en"}
+        {name:"中村幸代", lang:"zh"},
+        {name:"乙月ありさ", lang:"zh"},
+        {name:"伊原恵", lang:"zh"},
+        {name:"桜ゆづき", lang:"zh"},
+        {name:"柿本悠理", lang:"zh"},
+        {name:"煌矢まな", lang:"zh"},
+        {name:"谷村知子", lang:"zh"},
+        {name:"みなづきともこ", lang:"ja"},
+        {name:"ゆずみやともめ", lang:"ja"}
     ],
     art: [
-        {name:"中文原画", lang:"zh"},
-        {name:"日文原画", lang:"ja"},
-        {name:"英文原画", lang:"en"}
+        {name:"カズアキ", lang:"ja"}
     ],
-    cover: "game/0.jpg", // 相对路径，游戏封面
+    cover: "game/090.jpg", // 相对路径，游戏封面
     charList: [
         // 女主模板 female
         {
-            id: "g0_f01",
+            id: "g090_f01",
             name: "女主A",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
