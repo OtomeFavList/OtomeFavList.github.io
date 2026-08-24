@@ -31,21 +31,17 @@ const gameData = {
     publisher: ["Otomate"],
     cnStudio: "暂无",
     writer: [
-        {name:"中文编剧", lang:"zh"},
-        {name:"日文编剧", lang:"ja"},
-        {name:"英文编剧", lang:"en"}
+        {name:"暂无", lang:"zh"}
     ],
     art: [
-        {name:"中文原画", lang:"zh"},
-        {name:"日文原画", lang:"ja"},
-        {name:"英文原画", lang:"en"}
+        {name:"薄葉カゲロー", lang:"zh"}
     ],
     cover: "game/101.jpg", // 相对路径，游戏封面
     charList: [
-        // 女主模板 female
+        // サラ·デュドネ
         {
             id: "g101_f01",
-            name: "女主A",
+            name: "サラ·デュドネ",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
@@ -54,10 +50,10 @@ const gameData = {
                             "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // アレクサンドル·シラージ
         {
             id: "g101_m01",
-            name: "男主1",
+            name: "アレクサンドル·シラージ",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -66,10 +62,10 @@ const gameData = {
                             "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // ジョナス·フィッツジェラルド
         {
             id: "g101_m02",
-            name: "男主2",
+            name: "ジョナス·フィッツジェラルド",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -78,10 +74,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // マエル·ド·ラヴァル
         {
             id: "g101_m03",
-            name: "男主3",
+            name: "マエル·ド·ラヴァル",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -90,10 +86,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // ラファエル·ナーダシュディ
         {
             id: "g101_m04",
-            name: "男主4",
+            name: "ラファエル·ナーダシュディ",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -102,10 +98,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // ザビーネ·アルブレヒト
         {
             id: "g101_m05",
-            name: "男主5",
+            name: "ザビーネ·アルブレヒト",
             gender: "male",
             isHidden: false,
             isFD: false,
