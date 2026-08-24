@@ -75,7 +75,7 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/090/Hina.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 阿久根セラ
@@ -86,7 +86,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/001/男主1.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/091/Akune.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 有村乃亜
@@ -97,7 +97,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg"], type: "base" },
+                { srcList: ["char/091/Arimura.jpg"], type: "base" },
             ]
         },
         // 桜坂悠翔
@@ -108,7 +108,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg"], type: "base" },
+                { srcList: ["char/091/Ousaka.jpg"], type: "base" },
             ]
         },
         // 結城那由多
@@ -119,7 +119,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg"], type: "base" },
+                { srcList: ["char/091/Yuuki.jpg"], type: "base" },
             ]
         },
     ]
