@@ -153,11 +153,11 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["har/092/Yukito.jpg",
-                            "har/092/Yukito2.jpg",
-                            "har/092/Yukito3.jpg",
-                            "har/092/Yukito4.jpg",
-                            "har/092/Yukito5.jpg"], type: "base" },
+                { srcList: ["char/092/Yukito.jpg",
+                            "char/092/Yukito2.jpg",
+                            "char/092/Yukito3.jpg",
+                            "char/092/Yukito4.jpg",
+                            "char/092/Yukito5.jpg"], type: "base" },
             ]
         }
     ]
