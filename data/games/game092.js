@@ -66,7 +66,7 @@ const gameData = {
     id: "game092", // 全局唯一ID，不可重复，如 game001
     name: "Glass Heart Princess",
     year: "2026",
-    publisher: ["Design Factory","Otomate"],
+    publisher: ["Otomate"],
     cnStudio: "暂无",
     writer: [
         {name:"吉村りりか", lang:"zh"},
