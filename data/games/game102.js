@@ -53,8 +53,8 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/102/Tsubame.jpg",
+                            "char/102/Tsubame2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 甘城奏汰
@@ -65,8 +65,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/102/Amagi.jpg",
+                            "char/102/Amagi2.jpg",
+                            "char/102/Amagi3.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // クラン
@@ -77,8 +78,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/102/Clan.jpg",
+                            "char/102/Clan2.jpg",
+                            "char/102/Clan3.png"], type: "base" },
             ]
         },
         // 時透晴生
@@ -89,8 +91,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/102/Haruki.jpg",
+                            "char/102/Haruki2.jpg",
+                            "char/102/Haruki3.png"], type: "base" },
             ]
         },
         // 柊翔琉
@@ -101,8 +104,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/102/Hiiragi.jpg",
+                            "char/102/Hiiragi2.jpg",
+                            "char/102/Hiiragi3.png"], type: "base" },
             ]
         },
         // 永末尋斗
@@ -113,8 +117,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/102/Hiroto.jpg",
+                            "char/102/Hiroto2.jpg",
+                            "char/102/Hiroto3.png"], type: "base" },
             ]
         },
         // 紗武郁実
@@ -125,8 +130,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/102/Ikumi.jpg",
+                            "char/102/Ikumi2.jpg",
+                            "char/102/Ikumi3.png"], type: "base" },
             ]
         },
         // ミラ
@@ -137,8 +143,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/102/Milla.jpg",
+                            "char/102/Milla2.jpg",
+                            "char/102/Milla3.png"], type: "base" },
             ]
         },
         // 仲大路蓮
@@ -149,8 +156,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/102/Renn.jpg",
+                            "char/102/Renn2.jpg",
+                            "char/102/Renn3.png"], type: "base" },
             ]
         },
         // 司良堂達治
@@ -161,8 +169,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/102/Tatsuji..jpg",
+                            "char/102/Tatsuji.2.jpg",
+                            "char/102/Tatsuji.3.png"], type: "base" },
             ]
         }
     ]
