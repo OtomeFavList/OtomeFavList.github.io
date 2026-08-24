@@ -62,7 +62,7 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/090/Hina.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 姫崎藤吾
@@ -73,8 +73,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/090/Kisaki.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 久世円
@@ -85,7 +84,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg"], type: "base" },
+                { srcList: ["char/090/Kuze.jpg"], type: "base" },
             ]
         },
         // 宇賀神澪
@@ -96,7 +95,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg"], type: "base" },
+                { srcList: ["char/090/Rei.jpg"], type: "base" },
             ]
         },
         // 椎葉剛
@@ -107,7 +106,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg"], type: "base" },
+                { srcList: ["char/090/Shiiba.jpg"], type: "base" },
             ]
         }
     ]
