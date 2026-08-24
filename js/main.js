@@ -139,6 +139,7 @@ export function convertR2ToJsDelivr(path) {
 export let appData = {
     globalHideChar: false,
     globalFD: false,
+    globalSubChar: false, // ✅新增：全局次要角色开关，默认关闭
     // ==========新增==========
     exportFoldContent: true,
     gameSpoilerRecord: {},
@@ -302,7 +303,7 @@ export function loadData() {
             }
             // 后续升级示例：
             // if (tempData._version < 3) {
-            //    2 → 3 迁移代码写此处
+            //   2 → 3 迁移代码写此处
             // }
             // 全部迁移完成后，更新为最新版本号
             tempData._version = DATA_VERSION;
@@ -414,6 +415,7 @@ export function loadData() {
             tempData.gameList.forEach(g => {
                 if (typeof g.localHideChar !== "boolean") g.localHideChar = false;
                 if (typeof g.localFD !== "boolean") g.localFD = false;
+                if (typeof g.localSubChar !== "boolean") g.localSubChar = false; // ✅新增兜底，旧存档自动补false
                 if (typeof g.charPanelOpen !== "boolean") g.charPanelOpen = false;
                 if (typeof g.cpPanelOpen !== "boolean") g.cpPanelOpen = false;
                 if (typeof g.isFav !== "boolean") g.isFav = false;
@@ -1158,32 +1160,33 @@ export function getAllGameChar(gameInfo) {
     const gameItem = appData.gameList.find(g => g?.gameId === gameInfo.id);
     const showHide = appData.globalHideChar || gameItem?.localHideChar;
     const showFD = appData.globalFD || gameItem?.localFD;
+    const showSub = appData.globalSubChar || (gameItem?.localSubChar ?? false); // ✅新增次要角色判断
 
-    // 修复：isHidden + isFD 双标记角色，任意开关开启即可显示；全部关闭才隐藏
     chars = chars.filter(c => {
         if (!c) return false;
-        //普通角色，无隐藏/FD标记，永远显示
-        if (!c.isHidden && !c.isFD) return true;
+        const isSub = c.isSub ?? false; // ✅兼容不写isSub字段，默认false
 
-        //仅隐藏角色
+        // ---- 次要角色过滤：isSub=true时，必须showSub为true才放行 ----
+        if (isSub) {
+            if (!showSub) return false;
+        }
+
+        // ===== 原有 isHidden / isFD 逻辑保持完全不变 =====
+        if (!c.isHidden && !c.isFD) return true;
         if (c.isHidden && !c.isFD) {
             return showHide;
         }
-        //仅FD角色
         if (!c.isHidden && c.isFD) {
             return showFD;
         }
-        //同时是隐藏+FD角色：任意一个开关打开就显示，两个都关才隐藏
         if (c.isHidden && c.isFD) {
             return showHide || showFD;
         }
         return true;
     });
 
-    // ✅修复两处 localeCompare 语言标签，替换为标准 zh-CN
     const female = chars.filter(c => c.gender === "female").sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
     const male = chars.filter(c => c.gender === "male").sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
-
     return [...female, ...male];
 }
 
@@ -1281,9 +1284,11 @@ function buildCoreContext() {
 function renderGlobalSwitchDom() {
     const hideCharInput = document.getElementById("global-hide-char");
     const fdInput = document.getElementById("global-fd-game");
+    const subCharInput = document.getElementById("global-sub-char"); // ✅新增
     // 加固：严格读取appData，不读取DOM旧状态
     if (hideCharInput) hideCharInput.checked = !!appData.globalHideChar;
     if (fdInput) fdInput.checked = !!appData.globalFD;
+    if (subCharInput) subCharInput.checked = !!appData.globalSubChar; // ✅新增
 }
 
 // 模块顶层事件处理函数，解决removeEventListener无效
@@ -1292,8 +1297,20 @@ function wrapClickHandler(e) {
     if (!spoilerModal) return;
 
     // -------- 游戏局部开关处理 --------
-    const targetInput = e.target.closest(".game-hide-char,.game-fd-switch,.modal-local-hide-char,.modal-local-fd");
+    const targetInput = e.target.closest(".game-hide-char,.game-fd-switch,.game-sub-switch,.modal-local-hide-char,.modal-local-fd");
     if (targetInput) {
+        // ✅新增：局部次要角色开关，无剧透弹窗，直接切换
+        if (targetInput.classList.contains("game-sub-switch")) {
+            e.preventDefault();
+            const idx = Number(targetInput.dataset.gameidx);
+            const gameItem = appData.gameList[idx];
+            if (!gameItem) return;
+            gameItem.localSubChar = !gameItem.localSubChar;
+            saveData();
+            if (window.refreshGameCardUi) window.refreshGameCardUi();
+            return;
+        }
+
         // ✅修复：只要命中局部开关，直接阻止浏览器原生checkbox切换，全部JS接管
         e.preventDefault();
 
@@ -1399,6 +1416,7 @@ export function bindDynamicGameCardSwitchEvents() {
 function bindGlobalSwitchSpoilerEvents() {
     const hideCharInput = document.getElementById("global-hide-char");
     const fdInput = document.getElementById("global-fd-game");
+    const subCharInput = document.getElementById("global-sub-char"); // ✅新增
     const spoilerModal = document.getElementById("spoiler-modal");
     const spoilerConfirmBtn = document.getElementById("spoiler-confirm");
     const spoilerCancelBtn = document.getElementById("spoiler-cancel");
@@ -1410,6 +1428,7 @@ function bindGlobalSwitchSpoilerEvents() {
     // 获取包裹input的label元素
     const labelHideChar = hideCharInput.closest("label.switch");
     const labelFD = fdInput.closest("label.switch");
+    const labelSubChar = subCharInput.closest("label.switch");
 
     // --------全局隐藏角色开关 使用label click，阻止默认行为--------
     labelHideChar.addEventListener("click", function (e) {
@@ -1443,6 +1462,16 @@ function bindGlobalSwitchSpoilerEvents() {
         }
         window.pendingGlobalSwitch = "fdGame";
         spoilerModal.classList.add("active");
+    });
+
+    // --------全局次要角色开关（无剧透弹窗，直接切换）--------
+    labelSubChar.addEventListener("click", function (e) {
+        e.preventDefault();
+        // 直接取反，不弹剧透弹窗
+        appData.globalSubChar = !appData.globalSubChar;
+        saveData();
+        renderGlobalSwitchDom();
+        if (window.refreshGameCardUi) window.refreshGameCardUi();
     });
 
     // 弹窗确认【扩展：同时处理全局 / 动态卡片局部】
