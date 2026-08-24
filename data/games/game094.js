@@ -76,7 +76,7 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/094/Fiona.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // アルル·V·フェルノア
@@ -87,7 +87,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/001/男主1.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/094/Arles.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // オージェ·フォン·ガバルディ
@@ -98,7 +98,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg"], type: "base" },
+                { srcList: ["char/094/Auger.jpg"], type: "base" },
             ]
         },
         // ギラン·ギノー
@@ -109,7 +109,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg"], type: "base" },
+                { srcList: ["char/094/Guillan.jpg"], type: "base" },
             ]
         },
         // メヨーヨ·フォン·ガバルディ
@@ -120,7 +120,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg"], type: "base" },
+                { srcList: ["char/094/Mejojo.jpg"], type: "base" },
             ]
         },
         // ネッソ·ガーランド
@@ -131,7 +131,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg"], type: "base" },
+                { srcList: ["char/094/Nesso.jpg"], type: "base" },
             ]
         },
         // ラス·ヴォガード
@@ -142,7 +142,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg"], type: "base" },
+                { srcList: ["char/094/Rath.jpg"], type: "base" },
             ]
         },
         // ザラ·スキーンズ
@@ -153,7 +153,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg"], type: "base" },
+                { srcList: ["char/094/Zara.jpg"], type: "base" },
             ]
         },
         // ユリアン
@@ -164,7 +164,7 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/094/Julian.jpg"], type: "base" }
             ]
         },
         // パール
@@ -175,7 +175,7 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/094/Pearl.jpg"], type: "base" }
             ]
         },
         // リッチー
@@ -186,7 +186,7 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/094/Richie.jpg"], type: "base" }
             ]
         },
         // エルザ·クリフォード
@@ -197,7 +197,7 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/094/Elza.jpg"], type: "base" }
             ]
         }
     ]
