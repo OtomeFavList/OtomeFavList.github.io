@@ -17,7 +17,7 @@ const gameIdList = [
 
 // ===================== 全局存储key【不再随意修改！】 =====================
 export const STORE_KEY = "otome-favlist-data";               // 主存储键，永不改变
-export const DATA_VERSION = 2;                              // 数据版本号，用于迁移（从1.1升级）
+export const DATA_VERSION = 3;                              // 数据版本号，用于迁移（2→3：新增globalSubChar / localSubChar字段）
 export const OLD_STORE_KEYS = [                               // 历史遗留 key，用于自动迁移
     "otome-favlist-data-v1",
     "otome-favlist-data-v1.1"
@@ -301,10 +301,12 @@ export function loadData() {
                 }
                 needSaveAfterMigrate = true;
             }
-            // 后续升级示例：
-            // if (tempData._version < 3) {
-            //   2 → 3 迁移代码写此处
-            // }
+            // ===== 2 → 3 迁移：新增 globalSubChar / localSubChar 字段 =====
+            if (tempData._version < 3) {
+                console.log("🔧执行 2 → 3 迁移：新增次要角色开关字段");
+                // 字段不需要转换，后面兜底逻辑自动补默认false
+                needSaveAfterMigrate = true;
+            }
             // 全部迁移完成后，更新为最新版本号
             tempData._version = DATA_VERSION;
         }
