@@ -53,68 +53,62 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/001/女主A.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // キャル·アイ·ミガット
         {
             id: "g096_m01",
-            name: "男主1",
+            name: "キャル·アイ·ミガット",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/001/男主1.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // フィン·シディム·スターニス
         {
             id: "g096_m02",
-            name: "男主2",
+            name: "フィン·シディム·スターニス",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/g0_m01_1.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // グラン·エリコ·プレゼンス
         {
             id: "g096_m03",
-            name: "男主3",
+            name: "グラン·エリコ·プレゼンス",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/g0_m01_1.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // シルヴァ
         {
             id: "g096_m04",
-            name: "男主4",
+            name: "シルヴァ",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/g0_m01_1.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // ヴィクトル·エリコ·ミガット
         {
             id: "g096_m05",
-            name: "男主5",
+            name: "ヴィクトル·エリコ·ミガット",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/g0_m01_1.jpg"], type: "base" },
             ]
         }
     ]
