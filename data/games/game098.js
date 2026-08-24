@@ -44,8 +44,10 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/098/Sayo.jpg",
+                            "char/098/Sayo2.jpg",
+                            "char/098/Sayo3.jpg",
+                            "char/098/Sayo4.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 山科瑛
@@ -56,8 +58,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/098/Akira.jpg",
+                            "char/098/Akira2.jpg",
+                            "char/098/Akira3.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 棗陽凪
@@ -68,8 +71,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/098/Hinagi.jpg",
+                            "char/098/Hinagi2.jpg",
+                            "char/098/Hinagi3.jpg",
+                            "char/098/Hinagi4.jpg"], type: "base" },
             ]
         },
         // 日下部恭也
@@ -80,8 +85,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/098/Kyouya.jpg",
+                            "char/098/Kyouya2.jpg",
+                            "char/098/Kyouya3.jpg",
+                            "char/098/Kyouya4.jpg"], type: "base" },
             ]
         },
         // 瀬尾叶多
@@ -92,8 +99,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/098/Seo.jpg",
+                            "char/098/Seo2.jpg",
+                            "char/098/Seo3.jpg",
+                            "char/098/Seo4.jpg"], type: "base" },
             ]
         },
         // 露木理都
@@ -104,8 +113,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/098/Tsuyuki.jpg",
+                            "char/098/Tsuyuki2.jpg",
+                            "char/098/Tsuyuki3.jpg",
+                            "char/098/Tsuyuki4.jpg"], type: "base" },
             ]
         }
     ]
