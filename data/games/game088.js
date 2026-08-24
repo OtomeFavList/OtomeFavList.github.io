@@ -64,7 +64,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/088/Chika.jpg], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/088/Chika.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // ヒバリ
