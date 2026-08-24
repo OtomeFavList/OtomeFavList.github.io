@@ -43,8 +43,9 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/086/Hiroka.jpg",
+                            "char/086/Hiroka2.png",
+                            "char/086/Hiroka3.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 壱園央助
@@ -55,8 +56,11 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/086/Ichizono.jpg",
+                            "char/086/Ichizono2.jpg",
+                            "char/086/Ichizono3.jpg",
+                            "char/086/Ichizono4.png",
+                            "char/086/Ichizono5.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 玖折巡
@@ -67,8 +71,11 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/086/Kuori.jpg",
+                            "char/086/Kuori2.jpg",
+                            "char/086/Kuori3.jpg",
+                            "char/086/Kuori4.png",
+                            "char/086/Kuori5.png"], type: "base" },
             ]
         },
         // 弐藤光
@@ -79,8 +86,11 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/086/Nitou.jpg",
+                            "char/086/Nitou2.jpg",
+                            "char/086/Nitou3.jpg",
+                            "char/086/Nitou4.png",
+                            "char/086/Nitou5.png"], type: "base" },
             ]
         },
         // 陸平崇樹
@@ -91,8 +101,11 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/086/Rokuhira.jpg",
+                            "char/086/Rokuhira2.jpg",
+                            "char/086/Rokuhira3.jpg",
+                            "char/086/Rokuhira4.png",
+                            "char/086/Rokuhira5.png"], type: "base" },
             ]
         },
         // 漆原景太郎
@@ -103,8 +116,11 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/086/Shichihara.jpg",
+                            "char/086/Shichihara2.jpg",
+                            "char/086/Shichihara3.jpg",
+                            "char/086/Shichihara4.png",
+                            "char/086/Shichihara5.png"], type: "base" },
             ]
         },
         // 肆形有比
@@ -115,8 +131,11 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/086/Shikata.jpg",
+                            "char/086/Shikata2.jpg",
+                            "char/086/Shikata3.jpg",
+                            "char/086/Shikata4.png",
+                            "char/086/Shikata5.png"], type: "base" },
             ]
         }
     ]
