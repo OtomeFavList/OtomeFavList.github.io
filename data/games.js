@@ -19,6 +19,8 @@ const allGameFileNames = [
     "game071.js", "game072.js", "game073.js", "game074.js", "game075.js",
     "game076.js", "game077.js", "game078.js", "game079.js", "game080.js",
     "game081.js", "game082.js", "game083.js", "game084.js", "game085.js",
+    "game086.js", "game087.js", "game088.js", "game089.js", "game090.js",
+    "game091.js", "game092.js", "game093.js", "game094.js", "game095.js",
     // 后续新增游戏仅在此添加文件名
 ];
 
