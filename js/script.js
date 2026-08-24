@@ -538,8 +538,21 @@ export function initPage(Core = {}) {
         // =========【新增：条件渲染本游戏局部开关】=========
         const hasLocalHideChar = gameInfo.charList.some(c => c.isHidden === true);
         const hasLocalFDChar = gameInfo.charList.some(c => c.isFD === true);
-
+        const hasLocalSubChar = gameInfo.charList.some(c => c.isSub === true); // ✅判断该游戏是否存在次要角色
         let switchRowInnerHtml = "";
+
+        // ✅需求：【单独显示本游戏次要角色】放在【单独显示本游戏隐藏角色】前面
+        if(hasLocalSubChar){
+            switchRowInnerHtml += `
+            <div>
+                <label class="switch">
+                    <input type="checkbox" class="game-sub-switch" data-gameidx="${index}" ${(gameItem.localSubChar ?? false) ? 'checked' : ''}>
+                    <span class="slider"></span>
+                </label>
+                <span>单独显示本游戏次要角色</span>
+            </div>`;
+        }
+
         if(hasLocalHideChar){
             switchRowInnerHtml += `
             <div>
@@ -1253,6 +1266,7 @@ export function initPage(Core = {}) {
             cpPanelOpen: false,
             localHideChar: false,
             localFD: false,
+            localSubChar: false, // ✅新增，新建游戏默认关闭次要角色开关
             loveRate: 0,
             selectChars: [],
             cpSelectIds: [],
