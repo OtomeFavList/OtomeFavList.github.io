@@ -85,8 +85,8 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/092/Kyouko.jpg",
+                            "char/092/Kyouko2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 道明寺凱
@@ -97,8 +97,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/092/Gai.jpg",
+                            "char/092/Gai2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 星野彼方
@@ -109,8 +109,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/092/Hoshino.jpg",
+                            "char/092/Hoshino2.jpg",
+                            "char/092/Hoshino3.jpg",
+                            "char/092/Hoshino4.jpg"], type: "base" },
             ]
         },
         // 柾木真之介
@@ -121,8 +123,11 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/092/Masaki.jpg",
+                            "char/092/Masaki2.jpg",
+                            "char/092/Masaki3.jpg",
+                            "char/092/Masaki4.jpg",
+                            "char/092/Masaki5.jpg"], type: "base" },
             ]
         },
         // 朝比奈天馬
@@ -133,8 +138,11 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/092/Tenma.jpg",
+                            "char/092/Tenma2.jpg",
+                            "char/092/Tenma3.jpg",
+                            "char/092/Tenma4.jpg",
+                            "char/092/Tenma5.jpg"], type: "base" },
             ]
         },
         // 烏丸幸斗
@@ -145,8 +153,11 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["har/092/Yukito.jpg",
+                            "har/092/Yukito2.jpg",
+                            "har/092/Yukito3.jpg",
+                            "har/092/Yukito4.jpg",
+                            "har/092/Yukito5.jpg"], type: "base" },
             ]
         }
     ]
