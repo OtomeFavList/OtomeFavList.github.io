@@ -75,8 +75,7 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/089/Ema.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 朝日奈梓
@@ -87,8 +86,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/089/Azusa.jpg",
+                            "char/089/Azusa2.jpg",
+                            "char/089/Azusa3.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 朝日奈風斗
@@ -99,8 +99,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/089/Fuuto.jpg",
+                            "char/089/Fuuto2.jpg",
+                            "char/089/Fuuto3.jpg"], type: "base" },
             ]
         },
         // 朝日奈光
@@ -111,8 +112,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/089/Hikaru.jpg",
+                            "char/089/Hikaru2.jpg",
+                            "char/089/Hikaru3.jpg"], type: "base" },
             ]
         },
         // 朝日奈祈織
@@ -123,8 +125,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/089/Iori.jpg",
+                            "char/089/Iori2.jpg",
+                            "char/089/Iori3.jpg"], type: "base" },
             ]
         },
         // 朝日奈要
@@ -135,8 +138,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/089/Kaname.jpg",
+                            "char/089/Kaname2.jpg",
+                            "char/089/Kaname3.jpg"], type: "base" },
             ]
         },
         // 朝日奈琉生
@@ -147,8 +151,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/089/Louis.jpg",
+                            "char/089/Louis2.jpg",
+                            "char/089/Louis3.jpg"], type: "base" },
             ]
         },
         // 朝日奈雅臣
@@ -159,8 +164,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/089/Masaomi.jpg",
+                            "char/089/Masaomi2.jpg",
+                            "char/089/Masaomi3.jpg"], type: "base" },
             ]
         },
         // 朝日奈棗
@@ -171,8 +177,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/089/Natsume.jpg",
+                            "char/089/Natsume2.jpg",
+                            "char/089/Natsume3.jpg"], type: "base" },
             ]
         },
         // 朝日奈昴
@@ -183,8 +190,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/089/Subaru.jpg",
+                            "char/089/Subaru2.jpg",
+                            "char/089/Subaru3.jpg"], type: "base" },
             ]
         },
         // 朝日奈椿
@@ -195,8 +203,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/089/Tsubaki.jpg",
+                            "char/089/Tsubaki2.jpg",
+                            "char/089/Tsubaki3.jpg"], type: "base" },
             ]
         },
         // 朝日奈右京
@@ -207,8 +216,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/089/Ukyou.jpg",
+                            "char/089/Ukyou2.jpg",
+                            "char/089/Ukyou3.jpg"], type: "base" },
             ]
         },
         // 朝日奈弥
@@ -219,8 +229,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/089/Wataru.jpg",
+                            "char/089/Wataru2.jpg",
+                            "char/089/Wataru3.jpg"], type: "base" },
             ]
         },
         // 朝日奈侑介
@@ -231,8 +242,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/089/Yuusuke.jpg",
+                            "char/089/Yuusuke2.jpg",
+                            "char/089/Yuusuke3.jpg"], type: "base" },
             ]
         },
         // ジュリ
@@ -243,8 +255,8 @@ const gameData = {
             isHidden: true,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/089/Juli.jpg",
+                            "char/089/Juli2.jpg"], type: "base" },
             ]
         }
     ]
