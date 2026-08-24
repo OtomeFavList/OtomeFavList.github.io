@@ -102,7 +102,20 @@ const gameData = {
             isFD: true,
             images: [
                 { srcList: ["char/001/Henri.jpg",
-                            "char/001/Henri2.jpg"], type: "base" }
+                            "char/001/Henri2.jpg",
+                            "char/001/Henri3.jpg"], type: "base" }
+            ]
+        },
+        // 利奥·卡凡尼斯
+        {
+            id: "g001_s01",
+            name: "利奥·卡凡尼斯",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/001/Leo.jpg"], type: "base" }
             ]
         }
     ]
