@@ -541,7 +541,7 @@ export function initPage(Core = {}) {
         const hasLocalSubChar = gameInfo.charList.some(c => c.isSub === true); // ✅判断该游戏是否存在次要角色
         let switchRowInnerHtml = "";
 
-        // ✅需求：【单独显示本游戏次要角色】放在【单独显示本游戏隐藏角色】前面
+        // 【单独显示本游戏次要角色】放在【单独显示本游戏隐藏角色】前面
         if(hasLocalSubChar){
             switchRowInnerHtml += `
             <div>
