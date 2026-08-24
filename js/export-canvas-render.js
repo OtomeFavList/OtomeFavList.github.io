@@ -1405,9 +1405,9 @@ export async function renderExportCanvas(
         const idx = Number(stored?.imgIndex ?? 0);
         const src = allSrc[idx] || allSrc[0];
         const canvasSrc = convertR2ToJsDelivr(src);
-        // 兜底防火墙：拒绝R2地址进入Canvas加载队列
-        if (canvasSrc && !canvasSrc.startsWith('http') || canvasSrc.startsWith('https://pub-')) {
-          console.error("❌ 禁止加入R2地址到Canvas加载队列", canvasSrc);
+        // 兜底防火墙：拒绝R2 / raw github 地址进入Canvas加载队列
+        if (canvasSrc && (!canvasSrc.startsWith('http') || canvasSrc.startsWith('https://pub-') || canvasSrc.includes("raw.githubusercontent.com"))) {
+          console.error("❌ 禁止加入R2/raw地址到Canvas加载队列", canvasSrc);
           continue;
         }
         charItems.push({
@@ -1433,8 +1433,8 @@ export async function renderExportCanvas(
         const fIdx = Number(cp.femaleImgIndex ?? 0);
         const fSrc = fAllSrc[fIdx] || fAllSrc[0];
         const canvasFSrc = convertR2ToJsDelivr(fSrc);
-        if (canvasFSrc && !canvasFSrc.startsWith('http') || canvasFSrc.startsWith('https://pub-')) {
-          console.error("❌ 禁止加入R2地址到Canvas加载队列", canvasFSrc);
+        if (canvasFSrc && (!canvasFSrc.startsWith('http') || canvasFSrc.startsWith('https://pub-') || canvasFSrc.includes("raw.githubusercontent.com"))) {
+          console.error("❌ 禁止加入R2/raw地址到Canvas加载队列", canvasFSrc);
           continue;
         }
 
@@ -1455,8 +1455,8 @@ export async function renderExportCanvas(
             const mIdx = Number(mi.imgIndex ?? 0);
             const mSrc = mAllSrc[mIdx] || mAllSrc[0];
             const canvasMSrc = convertR2ToJsDelivr(mSrc);
-            if (canvasMSrc && !canvasMSrc.startsWith('http') || canvasMSrc.startsWith('https://pub-')) {
-              console.error("❌ 禁止加入R2地址到Canvas加载队列", canvasMSrc);
+            if (canvasMSrc && (!canvasMSrc.startsWith('http') || canvasMSrc.startsWith('https://pub-') || canvasMSrc.includes("raw.githubusercontent.com"))) {
+              console.error("❌ 禁止加入R2/raw地址到Canvas加载队列", canvasMSrc);
               continue;
             }
             maleItems.push({
