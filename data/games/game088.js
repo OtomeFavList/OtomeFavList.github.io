@@ -53,8 +53,7 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/088/Inori.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // チカ
@@ -65,8 +64,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/088/Chika.jpg], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // ヒバリ
@@ -77,8 +75,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/088/Hibari.jpg"], type: "base" },
             ]
         },
         // ノラ
@@ -89,8 +86,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/088/Nora.jpg"], type: "base" },
             ]
         },
         // リコ
@@ -101,8 +97,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/088/Rico.jpg"], type: "base" },
             ]
         },
         // シシバ
@@ -113,8 +108,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/088/Shishiba.jpg"], type: "base" },
             ]
         },
         // タテワキ
@@ -125,8 +119,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/088/Tatewaki.jpg"], type: "base" },
             ]
         }
     ]
