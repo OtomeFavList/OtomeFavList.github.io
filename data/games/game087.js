@@ -40,8 +40,8 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/087/Mio.jpg",
+                            "char/087/Mio2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 二ノ瀬隼人
@@ -52,8 +52,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/087/Kan.jpg",
+                            "char/087/Kan2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 間宮仁章
@@ -64,8 +64,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/087/Mam.jpg",
+                            "char/087/Mam2.jpg"], type: "base" },
             ]
         },
         // 鳴海誠一
@@ -76,8 +76,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/087/Nar.jpg",
+                            "char/087/Nar2.jpg"], type: "base" },
             ]
         },
         // 要邦孝
@@ -88,8 +88,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/087/Nin.jpg",
+                            "char/087/Nin2.jpg"], type: "base" },
             ]
         }
     ]
