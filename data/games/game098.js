@@ -26,124 +26,86 @@ const gameData = {
     id: "game098", // 全局唯一ID，不可重复，如 game001
     name: "君に惑い、君に溺れる。",
     year: "2026",
-    publisher: ["Design Factory","Otomate"],
-    cnStudio: "汉化组/汉化厂商",
+    publisher: ["Otomate"],
+    cnStudio: "暂无",
     writer: [
-        {name:"中文编剧", lang:"zh"},
-        {name:"日文编剧", lang:"ja"},
-        {name:"Re,AER", lang:"en"}
+        {name:"合同会社Re,AER", lang:"en"}
     ],
     art: [
-        {name:"董火", lang:"zh"},
-        {name:"日文原画", lang:"ja"},
-        {name:"英文原画", lang:"en"}
+        {name:"董火", lang:"zh"}
     ],
     cover: "game/098.jpg", // 相对路径，游戏封面
     charList: [
-        // 女主模板 female
+        // 露木紗世
         {
-            id: "g0_f01",
-            name: "女主A",
+            id: "g098_f01",
+            name: "露木紗世",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
                 { srcList: ["char/001/女主A.jpg",
                             "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["char/001/女主A3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["char/001/女主A4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
-        // 普通可攻略男主 male
+        // 山科瑛
         {
-            id: "g0_m01",
-            name: "男主1",
+            id: "g098_m01",
+            name: "山科瑛",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
                 { srcList: ["char/001/男主1.jpg",
                             "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["char/001/男主13.jpg"], type: "hidden" },
-                { srcList: ["char/001/男主14.jpg"], type: "fd" }
             ]
         },
-        // 普通可攻略男主 male
+        // 棗陽凪
         {
-            id: "g0_m02",
-            name: "男主2",
+            id: "g098_m02",
+            name: "棗陽凪",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
-        // 普通可攻略男主 male
+        // 日下部恭也
         {
-            id: "g0_m03",
-            name: "男主3",
+            id: "g098_m03",
+            name: "日下部恭也",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
-        // 普通可攻略男主 male
+        // 瀬尾叶多
         {
-            id: "g0_m04",
-            name: "男主4",
+            id: "g098_m04",
+            name: "瀬尾叶多",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
-        // 普通可攻略男主 male
+        // 露木理都
         {
-            id: "g0_m05",
-            name: "男主5",
+            id: "g098_m05",
+            name: "露木理都",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
-            ]
-        },
-        // 隐藏角色（isHidden=true → 开关开启才显示整个角色卡片）
-        {
-            id: "g0_h01",
-            name: "隐藏攻略角色",
-            gender: "male",
-            isHidden: true,
-            isFD: false,
-            images: [
-                { srcList: ["char/g001_h01_1.jpg"], type: "base" }
-            ]
-        },
-        // FD续作限定角色（isFD=true → FD开关开启才显示整个角色卡片）
-        {
-            id: "g0_fd01",
-            name: "续作FD新增角色",
-            gender: "male",
-            isHidden: false,
-            isFD: true,
-            images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
             ]
         }
     ]
