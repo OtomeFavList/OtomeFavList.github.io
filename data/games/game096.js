@@ -53,7 +53,7 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/096/Garika.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // キャル·アイ·ミガット
@@ -64,7 +64,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/001/男主1.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/096/Cal.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // フィン·シディム·スターニス
@@ -75,7 +75,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg"], type: "base" },
+                { srcList: ["char/096/Fin.jpg"], type: "base" },
             ]
         },
         // グラン·エリコ·プレゼンス
@@ -86,7 +86,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg"], type: "base" },
+                { srcList: ["char/096/Gran.jpg"], type: "base" },
             ]
         },
         // シルヴァ
@@ -97,7 +97,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg"], type: "base" },
+                { srcList: ["char/096/Silva.jpg"], type: "base" },
             ]
         },
         // ヴィクトル·エリコ·ミガット
@@ -108,7 +108,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg"], type: "base" },
+                { srcList: ["char/096/Victor.jpg"], type: "base" },
             ]
         }
     ]
