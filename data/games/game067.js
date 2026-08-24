@@ -93,10 +93,10 @@ const gameData = {
                             "char/067/Gretel5.jpg"], type: "base" },
             ]
         },
-        // 辉夜姬
+        // 辉夜
         {
             id: "g067_m05",
-            name: "辉夜姬",
+            name: "辉夜",
             gender: "male",
             isHidden: false,
             isFD: false,
