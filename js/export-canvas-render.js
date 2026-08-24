@@ -1384,12 +1384,19 @@ export async function renderExportCanvas(
     const globalFD = appData.globalFD;
     const localHide = gameItem.localHideChar;
     const localFD = gameItem.localFD;
+    // ✅新增次要角色开关
+    const showSub = appData.globalSubChar || (gameItem.localSubChar ?? false);
 
     const charItems = [];
     if (Array.isArray(gameItem.selectChars)) {
       for (const cid of gameItem.selectChars) {
         const char = gameInfo.charList?.find(c => c.id === cid);
         if (!char) continue;
+        const isSub = char.isSub ?? false;
+        // ✅isSub=true 且开关全部关闭：直接跳过该角色，不进入导出
+        if(isSub && !showSub){
+          continue;
+        }
         const avail = getAvailableCharImages(char, globalHide, globalFD, localHide, localFD);
         let allSrc = [];
         avail.forEach(u => allSrc.push(...u.srcList));
@@ -1436,6 +1443,11 @@ export async function renderExportCanvas(
           for (const mi of cp.maleItems) {
             const mChar = gameInfo.charList?.find(c => c.id === mi.charId);
             if (!mChar) continue;
+            const isSub = mChar.isSub ?? false;
+            // ✅ 次要角色过滤：isSub=true并且开关全部关闭，跳过该cp男性角色
+            if(isSub && !showSub){
+              continue;
+            }
             const mAvail = getAvailableCharImages(mChar, globalHide, globalFD, localHide, localFD);
             let mAllSrc = [];
             mAvail.forEach(u => mAllSrc.push(...u.srcList));
