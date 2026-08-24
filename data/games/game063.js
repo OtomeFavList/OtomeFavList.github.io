@@ -8,7 +8,7 @@ const gameData = {
     id: "game063", // 全局唯一ID，不可重复
     name: "三国恋战记 ~少女的兵法！~",
     year: "2026",
-    publisher: ["Daisy²","PROTOTYPE"],
+    publisher: ["Daisy²"],
     cnStudio: "JOYOLAND",
     writer: [
         {name:"宙地", lang:"zh"},
