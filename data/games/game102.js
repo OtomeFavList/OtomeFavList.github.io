@@ -169,9 +169,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/102/Tatsuji..jpg",
-                            "char/102/Tatsuji.2.jpg",
-                            "char/102/Tatsuji.3.png"], type: "base" },
+                { srcList: ["char/102/Tatsuji.jpg",
+                            "char/102/Tatsuji2.jpg",
+                            "char/102/Tatsuji3.png"], type: "base" },
             ]
         }
     ]
