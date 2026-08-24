@@ -29,9 +29,9 @@ const gameData = {
     name: "薄桜鬼異聞 ベレジンスキーの魔女",
     year: "2026",
     publisher: ["Otomate"],
-    cnStudio: "未知",
+    cnStudio: "暂无",
     writer: [
-        {name:"暂无", lang:"zh"}
+        {name:"未知", lang:"zh"}
     ],
     art: [
         {name:"薄葉カゲロー", lang:"zh"}
