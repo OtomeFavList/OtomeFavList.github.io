@@ -2,6 +2,7 @@ My9Swallows TOPSTARS LEAGUE
 开发: オトメイト
 发行: オトメイト、アイディアファクトリー
 剧本: メインシナリオ：紅原香 シナリオ：中山智美、暦野まち（詠野万知子）、坂本はしら、堂島チロル
+原画：凪月つばさ
 音乐: TrioDesign
 主题歌作曲: 杉浦勇紀
 主题歌作词: 杉浦勇紀
@@ -27,127 +28,141 @@ My9Swallows TOPSTARS LEAGUE
 // 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
 // 官中发售以后，需要修改：游戏名、发售年份、汉化厂商、封面图、角色名
 const gameData = {
-    id: "game1", // 全局唯一ID，不可重复，如 game001
-    name: "示例乙女游戏",
-    year: "20",
-    publisher: ["原厂发行商"],
-    cnStudio: "汉化组/汉化厂商",
+    id: "game102", // 全局唯一ID，不可重复，如 game001
+    name: "My9Swallows TOPSTARS LEAGUE",
+    year: "2024",
+    publisher: ["Otomate"],
+    cnStudio: "暂无",
     writer: [
-        {name:"中文编剧", lang:"zh"},
-        {name:"日文编剧", lang:"ja"},
-        {name:"英文编剧", lang:"en"}
+        {name:"紅原香", lang:"zh"},
+        {name:"中山智美", lang:"zh"},
+        {name:"暦野まち", lang:"zh"},
+        {name:"坂本はしら", lang:"zh"},
+        {name:"堂島チロル", lang:"zh"}
     ],
     art: [
-        {name:"中文原画", lang:"zh"},
-        {name:"日文原画", lang:"ja"},
-        {name:"英文原画", lang:"en"}
+        {name:"凪月つばさ", lang:"zh"}
     ],
-    cover: "game/1.jpg", // 相对路径，游戏封面
+    cover: "game/102.jpg", // 相对路径，游戏封面
     charList: [
-        // 女主模板 female
+        // 杉沢つばめ
         {
-            id: "g1_f01",
-            name: "女主A",
+            id: "g102_f01",
+            name: "杉沢つばめ",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
                 { srcList: ["char/001/女主A.jpg",
                             "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["char/001/女主A3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["char/001/女主A4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
-        // 普通可攻略男主 male
+        // 甘城奏汰
         {
-            id: "g1_m01",
-            name: "男主1",
+            id: "g102_m01",
+            name: "甘城奏汰",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
                 { srcList: ["char/001/男主1.jpg",
                             "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["char/001/男主13.jpg"], type: "hidden" },
-                { srcList: ["char/001/男主14.jpg"], type: "fd" }
             ]
         },
-        // 普通可攻略男主 male
+        // クラン
         {
-            id: "g1_m02",
-            name: "男主2",
+            id: "g102_m02",
+            name: "クラン",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
-        // 普通可攻略男主 male
+        // 時透晴生
         {
-            id: "g1_m03",
-            name: "男主3",
+            id: "g102_m03",
+            name: "時透晴生",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
-        // 普通可攻略男主 male
+        // 柊翔琉
         {
-            id: "g1_m04",
-            name: "男主4",
+            id: "g102_m04",
+            name: "柊翔琉",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
-        // 普通可攻略男主 male
+        // 永末尋斗
         {
-            id: "g1_m05",
-            name: "男主5",
+            id: "g102_m05",
+            name: "永末尋斗",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
-        // 隐藏角色（isHidden=true → 开关开启才显示整个角色卡片）
+        // 紗武郁実
         {
-            id: "g1_h01",
-            name: "隐藏攻略角色",
-            gender: "male",
-            isHidden: true,
-            isFD: false,
-            images: [
-                { srcList: ["char/g001_h01_1.jpg"], type: "base" }
-            ]
-        },
-        // FD续作限定角色（isFD=true → FD开关开启才显示整个角色卡片）
-        {
-            id: "g1_fd01",
-            name: "续作FD新增角色",
+            id: "g102_m06",
+            name: "紗武郁実",
             gender: "male",
             isHidden: false,
-            isFD: true,
+            isFD: false,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/g0_m01_1.jpg",
+                            "char/g001_m0_2.jpg"], type: "base" },
+            ]
+        },
+        // ミラ
+        {
+            id: "g102_m07",
+            name: "ミラ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            images: [
+                { srcList: ["char/g0_m01_1.jpg",
+                            "char/g001_m0_2.jpg"], type: "base" },
+            ]
+        },
+        // 仲大路蓮
+        {
+            id: "g102_m08",
+            name: "仲大路蓮",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            images: [
+                { srcList: ["char/g0_m01_1.jpg",
+                            "char/g001_m0_2.jpg"], type: "base" },
+            ]
+        },
+        // 司良堂達治
+        {
+            id: "g102_m09",
+            name: "司良堂達治",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            images: [
+                { srcList: ["char/g0_m01_1.jpg",
+                            "char/g001_m0_2.jpg"], type: "base" },
             ]
         }
     ]
