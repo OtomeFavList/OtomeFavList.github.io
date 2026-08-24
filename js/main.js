@@ -304,7 +304,8 @@ export function loadData() {
             // ===== 2 → 3 迁移：新增 globalSubChar / localSubChar 字段 =====
             if (tempData._version < 3) {
                 console.log("🔧执行 2 → 3 迁移：新增次要角色开关字段");
-                // 字段不需要转换，后面兜底逻辑自动补默认false
+                // 标记：从旧版本升级到ver3，下一次模板就绪后强制完整清洗图片脏链接
+                tempData._triggerImageCleanOnce = true;
                 needSaveAfterMigrate = true;
             }
             // 全部迁移完成后，更新为最新版本号
@@ -1584,8 +1585,49 @@ export async function bootstrapCore() {
     if(gameTemplateReady && Array.isArray(gameTemplateList) && gameTemplateList.length>0){
         console.log("🔧 二次补跑存量图片脏链接清洗");
         let hasDirtyUrl = false;
+        // ver3升级一次性强制清洗标记
+        const forceCleanAll = !!appData._triggerImageCleanOnce;
+
         if(Array.isArray(appData.gameList)){
             appData.gameList.forEach(gameItem => {
+                // ==========新增：清理对象内raw字符串（永久清除localStorage脏数据）==========
+                if(Array.isArray(gameItem.selectCharItems)){
+                    gameItem.selectCharItems.forEach(s=>{
+                        for(const key in s){
+                            const val = s[key];
+                            if(typeof val === "string" && val.includes("raw.githubusercontent.com")){
+                                console.error("🧹二次补跑清除raw字符串 selectCharItems", val);
+                                s[key] = null;
+                                hasDirtyUrl = true;
+                            }
+                        }
+                    })
+                }
+                if(Array.isArray(gameItem.cpList)){
+                    gameItem.cpList.forEach(cp=>{
+                        for(const key in cp){
+                            const val = cp[key];
+                            if(typeof val === "string" && val.includes("raw.githubusercontent.com")){
+                                console.error("🧹二次补跑清除raw字符串 cp字段", val);
+                                cp[key]=null;
+                                hasDirtyUrl = true;
+                            }
+                        }
+                        if(Array.isArray(cp.maleItems)){
+                            cp.maleItems.forEach(mi=>{
+                                for(const key in mi){
+                                    const val = mi[key];
+                                    if(typeof val === "string" && val.includes("raw.githubusercontent.com")){
+                                        console.error("🧹二次补跑清除raw字符串 maleItems", val);
+                                        mi[key]=null;
+                                        hasDirtyUrl = true;
+                                    }
+                                }
+                            })
+                        }
+                    })
+                }
+                // ==========以上新增raw字符串清理，下面原有索引校验逻辑完全保留==========
                 if (!Array.isArray(gameItem.selectCharItems)) return;
                 const gameInfo = gameTemplateList.find(g => g.id === gameItem.gameId);
                 if (!gameInfo?.charList || !gameItem?.charId) return;
@@ -1640,6 +1682,14 @@ export async function bootstrapCore() {
                 }
             })
         }
+
+        // ver3升级标记消费，只执行一次
+        if(forceCleanAll){
+            console.log("🔧 ver3版本升级，执行一次性全量图片脏数据清洗");
+            appData._triggerImageCleanOnce = false;
+            hasDirtyUrl = true;
+        }
+
         if(hasDirtyUrl){
             console.log("🧹二次补跑：检测到脏索引/脏链接，保存清洗后appData");
             saveData();
