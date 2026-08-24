@@ -35,10 +35,10 @@ const gameData = {
     ],
     cover: "game/100.jpg", // 相对路径，游戏封面
     charList: [
-        // 女主模板 female
+        // ヨルカ·ユールウッド
         {
             id: "g100_f01",
-            name: "女主A",
+            name: "ヨルカ·ユールウッド",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
@@ -47,10 +47,10 @@ const gameData = {
                             "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // ユージーン
         {
             id: "g100_m01",
-            name: "男主1",
+            name: "ユージーン",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -59,10 +59,10 @@ const gameData = {
                             "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // ヒース·クレセント
         {
             id: "g100_m02",
-            name: "男主2",
+            name: "ヒース·クレセント",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -71,10 +71,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // カノア·フォルティス
         {
             id: "g100_m03",
-            name: "男主3",
+            name: "カノア·フォルティス",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -83,10 +83,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // オルセム·ヘルハンド
         {
             id: "g100_m04",
-            name: "男主4",
+            name: "オルセム·ヘルハンド",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -95,10 +95,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // ティルケット·ハルムショー
         {
             id: "g100_m05",
-            name: "男主5",
+            name: "ティルケット·ハルムショー",
             gender: "male",
             isHidden: false,
             isFD: false,
