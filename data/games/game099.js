@@ -43,8 +43,8 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/099/Sophia.jpg",
+                            "char/099/Sophia2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // クロノール
@@ -55,8 +55,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/099/Cronoll.jpg",
+                            "char/099/Cronoll2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // フラトニス·ライラプス
@@ -67,8 +67,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/099/Flatnis.jpg",
+                            "char/099/Flatnis2.jpg"], type: "base" },
             ]
         },
         // God
@@ -79,8 +79,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/099/God.jpg",
+                            "char/099/God2.jpg"], type: "base" },
             ]
         },
         // リーズ·ルネ·シャナ
@@ -91,8 +91,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/099/Lise.jpg",
+                            "char/099/Lise2.jpg"], type: "base" },
             ]
         },
         // レクス·ド·クラーシェル
@@ -103,8 +103,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/099/Rex.jpg",
+                            "char/099/Rex2.jpg"], type: "base" },
             ]
         },
         // ヴァーデス
@@ -115,8 +115,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/099/Vardis.jpg",
+                            "char/099/Vardis2.jpg"], type: "base" },
             ]
         }
     ]
