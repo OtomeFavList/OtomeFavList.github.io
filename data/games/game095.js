@@ -101,8 +101,8 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/095/Konoha.jpg",
+                            "char/095/Konoha2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 城坂依都
@@ -113,8 +113,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/095/Kisaka.jpg",
+                            "char/095/Kisaka2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 諏宮篠宗
@@ -125,8 +125,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/095/Sumiya.jpg",
+                            "char/095/Sumiya2.jpg"], type: "base" },
             ]
         },
         // 英時明
@@ -137,8 +137,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/095/Tokiharu.jpg",
+                            "char/095/Tokiharu2.jpg"], type: "base" },
             ]
         },
         // 黒谷優
@@ -149,8 +149,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/095/Yuu.jpg",
+                            "char/095/Yuu2.jpg"], type: "base" },
             ]
         }
     ]
