@@ -8,7 +8,7 @@ const gameData = {
     id: "game057", // 全局唯一ID，不可重复
     name: "吉原彼岸花 久远之契",
     year: "2026",
-    publisher: ["MariaCrown","PROTOTYPE"],
+    publisher: ["MariaCrown"],
     cnStudio: "JOYOLAND",
     writer: [
         {name:"葉月エリカ", lang:"zh"}
