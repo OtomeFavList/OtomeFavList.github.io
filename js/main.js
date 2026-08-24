@@ -396,7 +396,7 @@ export function loadData() {
         }
         // ===================== 【清洗迁移逻辑结束】 =====================
 
-        // ==========【补丁B：浅层内存拦截，模板未就绪也阻断raw地址，防止直接渲染raw请求】==========
+        // ==========【补丁1：浅层内存拦截，模板未就绪也阻断raw地址，防止直接渲染raw请求】==========
         if(Array.isArray(tempData.gameList)){
             tempData.gameList.forEach(gameItem=>{
                 // selectCharItems
@@ -437,7 +437,7 @@ export function loadData() {
                 }
             })
         }
-        // ==========【补丁B结束】
+        // ==========【补丁1结束】
 
         // ========== 全局字段兜底（统一放在迁移完成后） ==========
         if (typeof tempData.exportFoldContent !== "boolean") {
@@ -1580,7 +1580,7 @@ export async function bootstrapCore() {
     // 1.读取本地存储数据 + 执行存量脏图片链接清洗迁移
     loadData();
 
-    // ==========【补丁A】模板加载完成后，二次补执行脏数据清洗，解决第一次loadData时模板未就绪跳过清洗的时序竞争 ==========
+    // ==========【补丁2】模板加载完成后，二次补执行脏数据清洗，解决第一次loadData时模板未就绪跳过清洗的时序竞争 ==========
     if(gameTemplateReady && Array.isArray(gameTemplateList) && gameTemplateList.length>0){
         console.log("🔧 二次补跑存量图片脏链接清洗");
         let hasDirtyUrl = false;
@@ -1646,11 +1646,11 @@ export async function bootstrapCore() {
             imgCacheMap.clear();
         }
     }
-    // ==========【补丁A结束】
+    // ==========【补丁2结束】
 
-    // 3.组装核心上下文对象，传给UI层script.js
+    // 2.组装核心上下文对象，传给UI层script.js
     const Core = buildCoreContext();
-    // 动态导入，消除顶层import循环依赖
+    // 3.动态导入，消除顶层import循环依赖
     const { initPage } = await import("./script.js");
     initPage(Core);
     // 4.渲染全局开关初始勾选状态
