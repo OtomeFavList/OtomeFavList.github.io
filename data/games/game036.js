@@ -14,7 +14,7 @@ const gameData = {
         {name:"加納高子", lang:"zh"},
         {name:"吉村りりか", lang:"zh"},
         {name:"やまだ有見", lang:"ja"},
-        {name:"ウサギリス", lang:"ja"}
+        {name:"ウサギリス株式会社", lang:"ja"}
     ],
     art: [
         {name:"さとい", lang:"ja"}
