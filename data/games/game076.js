@@ -46,7 +46,7 @@ const gameData = {
     id: "game076", // 全局唯一ID，不可重复，如 game001
     name: "十鬼之绊",
     year: "2025",
-    publisher: ["Design Factory","Otomate"],
+    publisher: ["Otomate"],
     cnStudio: "暂无",
     writer: [
         {name:"長野和泉", lang:"zh"},
