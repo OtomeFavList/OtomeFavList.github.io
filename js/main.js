@@ -54,7 +54,7 @@ export function normalizeImageRelPath(src) {
     const s = src.trim();
     // 直接拦截 raw 地址（排查异常数据源）
     if (s.includes("raw.githubusercontent.com")) {
-        console.error("❌ normalizeImageRelPath 检测到 raw.githubusercontent.com 地址，已丢弃", src);
+        console.error("❌ normalizeImageRelPath 检测到 raw.githubusercontent.com 地址，已丢弃", src, new Error().stack);
         return null;
     }
     // 已经是相对路径，不含http
@@ -395,6 +395,49 @@ export function loadData() {
             }
         }
         // ===================== 【清洗迁移逻辑结束】 =====================
+
+        // ==========【补丁B：浅层内存拦截，模板未就绪也阻断raw地址，防止直接渲染raw请求】==========
+        if(Array.isArray(tempData.gameList)){
+            tempData.gameList.forEach(gameItem=>{
+                // selectCharItems
+                if(Array.isArray(gameItem.selectCharItems)){
+                    gameItem.selectCharItems.forEach(s=>{
+                        // 这里只拦截url字符串出现在对象字段；本项目imgIndex是数字，这里仅防御扩展
+                        for(const key in s){
+                            const val = s[key];
+                            if(typeof val === "string" && val.includes("raw.githubusercontent.com")){
+                                console.error("🛡️ loadData浅层拦截丢弃raw地址 selectCharItems",val);
+                                s[key] = null;
+                            }
+                        }
+                    })
+                }
+                // cpList
+                if(Array.isArray(gameItem.cpList)){
+                    gameItem.cpList.forEach(cp=>{
+                        for(const key in cp){
+                            const val = cp[key];
+                            if(typeof val === "string" && val.includes("raw.githubusercontent.com")){
+                                console.error("🛡️ loadData浅层拦截丢弃raw地址 cp字段",val);
+                                cp[key]=null;
+                            }
+                        }
+                        if(Array.isArray(cp.maleItems)){
+                            cp.maleItems.forEach(mi=>{
+                                for(const key in mi){
+                                    const val = mi[key];
+                                    if(typeof val === "string" && val.includes("raw.githubusercontent.com")){
+                                        console.error("🛡️ loadData浅层拦截丢弃raw地址 maleItems",val);
+                                        mi[key]=null;
+                                    }
+                                }
+                            })
+                        }
+                    })
+                }
+            })
+        }
+        // ==========【补丁B结束】
 
         // ========== 全局字段兜底（统一放在迁移完成后） ==========
         if (typeof tempData.exportFoldContent !== "boolean") {
@@ -1536,6 +1579,75 @@ export async function bootstrapCore() {
     await loadAllGameTemplates();
     // 1.读取本地存储数据 + 执行存量脏图片链接清洗迁移
     loadData();
+
+    // ==========【补丁A】模板加载完成后，二次补执行脏数据清洗，解决第一次loadData时模板未就绪跳过清洗的时序竞争 ==========
+    if(gameTemplateReady && Array.isArray(gameTemplateList) && gameTemplateList.length>0){
+        console.log("🔧 二次补跑存量图片脏链接清洗");
+        let hasDirtyUrl = false;
+        if(Array.isArray(appData.gameList)){
+            appData.gameList.forEach(gameItem => {
+                if (!Array.isArray(gameItem.selectCharItems)) return;
+                const gameInfo = gameTemplateList.find(g => g.id === gameItem.gameId);
+                if (!gameInfo?.charList || !gameItem?.charId) return;
+                gameItem.selectCharItems.forEach(charItem => {
+                    const targetChar = gameInfo.charList.find(c => c.id === charItem.charId);
+                    if (!targetChar?.images || !Array.isArray(targetChar.images)) return;
+                    let allSrcList = [];
+                    targetChar.images.forEach(imgUnit => {
+                        if (Array.isArray(imgUnit.srcList)) {
+                            allSrcList.push(...imgUnit.srcList);
+                        }
+                    });
+                    const cleanSrcList = allSrcList
+                        .map(src => normalizeImageRelPath(src))
+                        .filter(Boolean);
+                    if (cleanSrcList.length === 0) return;
+                    if (typeof charItem.imgIndex !== "number" || charItem.imgIndex >= cleanSrcList.length) {
+                        charItem.imgIndex = 0;
+                        hasDirtyUrl = true;
+                    }
+                });
+                // cp女主男主索引校验
+                if(Array.isArray(gameItem.cpList)){
+                    gameItem.cpList.forEach(cp=>{
+                        const gameInfo = gameTemplateList.find(g => g.id === gameItem.gameId);
+                        if(!gameInfo?.charList) return;
+                        const fChar = gameInfo.charList.find(c=>c.id === cp.femaleId);
+                        if(fChar?.images){
+                            let fSrcList=[];
+                            fChar.images.forEach(u=>Array.isArray(u.srcList)&&fSrcList.push(...u.srcList));
+                            const cleanFList = fSrcList.map(normalizeImageRelPath).filter(Boolean);
+                            if(cleanFList.length>0 && cp.femaleImgIndex >= cleanFList.length){
+                                cp.femaleImgIndex = 0;
+                                hasDirtyUrl=true;
+                            }
+                        }
+                        if(Array.isArray(cp.maleItems)){
+                            cp.maleItems.forEach(mi=>{
+                                const mChar = gameInfo.charList.find(c=>c.id===mi.charId);
+                                if(mChar?.images){
+                                    let mSrcList=[];
+                                    mChar.images.forEach(u=>Array.isArray(u.srcList)&&mSrcList.push(...u.srcList));
+                                    const cleanMList = mSrcList.map(normalizeImageRelPath).filter(Boolean);
+                                    if(cleanMList.length>0 && mi.imgIndex >= cleanMList.length){
+                                        mi.imgIndex = 0;
+                                        hasDirtyUrl=true;
+                                    }
+                                }
+                            })
+                        }
+                    })
+                }
+            })
+        }
+        if(hasDirtyUrl){
+            console.log("🧹二次补跑：检测到脏索引/脏链接，保存清洗后appData");
+            saveData();
+            imgCacheMap.clear();
+        }
+    }
+    // ==========【补丁A结束】
+
     // 3.组装核心上下文对象，传给UI层script.js
     const Core = buildCoreContext();
     // 动态导入，消除顶层import循环依赖
