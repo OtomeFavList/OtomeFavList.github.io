@@ -438,7 +438,7 @@ export function loadData() {
                 }
             })
         }
-        // ==========【补丁1结束】
+        // ==========【补丁1结束】==========
 
         // ========== 全局字段兜底（统一放在迁移完成后） ==========
         if (typeof tempData.exportFoldContent !== "boolean") {
@@ -1696,7 +1696,7 @@ export async function bootstrapCore() {
             imgCacheMap.clear();
         }
     }
-    // ==========【补丁2结束】
+    // ==========【补丁2结束】==========
 
     // 2.组装核心上下文对象，传给UI层script.js
     const Core = buildCoreContext();
