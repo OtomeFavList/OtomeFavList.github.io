@@ -815,35 +815,76 @@ input[type="checkbox"] {
     border-radius:6px;
 }
 
-/* ==========【新增】自定义文本字体大小滑块 ========== */
+/* ==========【修改】自定义文本字体大小滑块（横向布局，对齐导出背景色行样式） ========== */
 .font-size-set-row {
     margin:16px 0;
     display:flex;
-    flex-direction:column;
-    gap:8px;
-    max-width:420px;
-}
-.font-size-set-row label {
-    font-size:14px;
-    color:#444;
-}
-.font-size-set-row input[type="range"] {
-    width:100%;
-}
-.font-size-value-display {
-    font-size:13px;
-    color:#666;
+    flex-direction:row;
+    align-items:center;
+    gap:14px;
+    flex-wrap:wrap;
+    max-width:600px;
 }
 
-/* ========== 导出尺寸选择 size-select ========== */
-.size-select{
-    margin:16px 0;
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
+.font-size-set-row label {
+    font-size:14px;
+    /* 使用导出背景主题色，和导出背景色标签颜色统一 */
+    color: var(--export-border, #f6a5b8);
+    white-space:nowrap;
 }
-.size-select label {
-    color:#c98fac;
+
+.font-size-set-row input[type="range"] {
+    flex:1;
+    min-width:140px;
+    /* 滑块轨道样式，全程统一主题色 e895a8（同switch开关选中色） */
+    -webkit-appearance: none;
+    height:6px;
+    border-radius:3px;
+    background:#ddd;
+    outline:none;
+}
+/* webkit内核（Chrome、Safari）滑块拖动条 */
+.font-size-set-row input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance:none;
+    width:18px;
+    height:18px;
+    border-radius:50%;
+    background:#e895a8;
+    border:none;
+    cursor:pointer;
+}
+.font-size-set-row input[type="range"]::-webkit-slider-runnable-track {
+    height:6px;
+    border-radius:3px;
+}
+/* moz火狐 */
+.font-size-set-row input[type="range"]::-moz-range-track {
+    height:6px;
+    border-radius:3px;
+    background:#ddd;
+}
+.font-size-set-row input[type="range"]::-moz-range-thumb {
+    width:18px;
+    height:18px;
+    border-radius:50%;
+    background:#e895a8;
+    border:none;
+    cursor:pointer;
+}
+/* 无论hover、active、拖动，thumb都保持 #e895a8，不变色 */
+.font-size-set-row input[type="range"]::-webkit-slider-thumb:hover,
+.font-size-set-row input[type="range"]::-webkit-slider-thumb:active {
+    background:#e895a8;
+}
+.font-size-set-row input[type="range"]::-moz-range-thumb:hover,
+.font-size-set-row input[type="range"]::-moz-range-thumb:active {
+    background:#e895a8;
+}
+
+.font-size-value-display {
+    font-size:13px;
+    color: var(--export-border, #f6a5b8);
+    white-space:nowrap;
 }
 
 /* ========== About模块 about-block ========== */
