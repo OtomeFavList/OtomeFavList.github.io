@@ -830,28 +830,38 @@ input[type="checkbox"] {
     color:#c98fac;
     white-space:nowrap;
 }
-
 .font-size-value-display {
     font-size:16px;
     color:#c98fac;
     white-space:nowrap;
 }
-
 .font-size-set-row input[type="range"] {
     flex:1;
     min-width:140px;
-    /* 修改前 height:6px; */
-    height:2px; /* 改成细轨道，实际轨道高度 */
-    background:#fff7f9;
+    height:6px;
+    /* ❗删除background，轨道背景交给伪元素，不要写在input本体 */
+    background:transparent;
     border-radius:999px;
     outline:none;
     -webkit-appearance:none;
     appearance:none;
-    /* 上下padding保留，给thumb圆点留出空间，避免被裁切 */
+    /* 保留padding给thumb圆点提供点击热区，不要删掉！ */
     padding:10px 0;
 }
 
-/* Webkit滑块圆点修复：缩小尺寸 + 设置margin居中对齐，防止溢出轨道 */
+/* 关键修复：WebKit滑块容器，强制限制内部容器高度，防止padding把轨道撑粗 */
+.font-size-set-row input[type="range"]::-webkit-slider-container {
+    height:6px;
+}
+
+/* 轨道底色（未填充部分） */
+.font-size-set-row input[type="range"]::-webkit-slider-runnable-track {
+    height:6px;
+    background:#fff7f9;
+    border-radius:999px;
+}
+
+/* ✅Webkit滑块圆点修复 */
 .font-size-set-row input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance:none;
     appearance:none;
@@ -861,15 +871,7 @@ input[type="checkbox"] {
     background:#e895a8;
     border:none;
     cursor:pointer;
-    /* 修改前 margin-top:-5px;
-    轨道现在2px，需要重新计算居中：(16px圆点 - 2px轨道)/2 /‑>‑7px */
-    margin-top:-7px;
-}
-
-.font-size-set-row input[type="range"]::-webkit-slider-runnable-track {
-    /* 修改前 height:6px; */
-    height:2px; /* 同步修改webkit轨道高度 */
-    border-radius:999px;
+    margin-top:-5px;
 }
 
 /* firefox 样式 */
@@ -881,17 +883,13 @@ input[type="checkbox"] {
     border:none;
     cursor:pointer;
 }
-
 .font-size-set-row input[type="range"]::-moz-range-track {
-    /* 修改前 height:6px; */
-    height:2px; /* firefox细轨道 */
+    height:6px;
     background:#fff7f9;
     border-radius:999px;
 }
-
 .font-size-set-row input[type="range"]::-moz-range-progress {
-    /* 修改前 height:6px; */
-    height:2px; /* firefox已拖动部分的进度条高度 */
+    height:6px;
     background:#e895a8;
     border-radius:999px;
 }
