@@ -604,7 +604,7 @@ function calcSingleGameBlockHeight(targetWidth, renderData) {
   let headTextHeight = 0;
   if (gameItem.gameHeadText?.trim()) {
     headTextHeight = measureWrappedHeight(vCtx, gameItem.gameHeadText.trim(), textMaxW, lineHeight, textSize);
-    headTextHeight += 12 + 12; // ✅上下固定12px，和另外两处文本统一
+    headTextHeight += 12 + 12; // 保持原有间距，不强制修改
   }
 
   let charSectionTextHeight = 0;
@@ -627,20 +627,15 @@ function calcSingleGameBlockHeight(targetWidth, renderData) {
         );
     }
     const realTextH = measureWrappedHeight(vCtx, gameItem.charSectionText.trim(), textMaxW, lineHeight, textSize);
-    if(canRight){
-        charSectionTextHeight = realTextH + 12 + 12;
-    }else{
-        charSectionTextHeight = realTextH + 12 + 12;
-    }
+    // 统一间距：top=14, bottom=8
+    charSectionTextHeight = realTextH + 14 + 8;
   }
 
   let cpSectionTextHeight = 0;
   if (gameItem.cpSectionText?.trim()) {
     let canRight = false;
-    // ✅修复①：cpItems为空 / firstCp.maleItems为空 直接禁用右置
     if(renderData.appData.exportCustomTextRight && cpItems.length>0){
         const firstCp = cpItems[0];
-        // maleItems为空直接禁止右置，彻底规避访问空数组报错
         if(firstCp.maleItems && firstCp.maleItems.length > 0){
             const femaleCardWidth = LAYOUT_SPACE.CHAR_CARD_W;
             const maleGap = LAYOUT_SPACE.CP_MALE_GAP;
@@ -659,10 +654,11 @@ function calcSingleGameBlockHeight(targetWidth, renderData) {
     }
     const realTextH = measureWrappedHeight(vCtx, gameItem.cpSectionText.trim(), textMaxW, lineHeight, textSize);
     if(canRight){
-        // ✅右置模式：上下都预留固定12px，和绘制逻辑对齐，防止向下溢出④
-        cpSectionTextHeight = realTextH + 12 + 12;
+        // 右置模式：仅上方14px，无底部间距
+        cpSectionTextHeight = realTextH + 14;
     }else{
-        cpSectionTextHeight = realTextH + 12 + 12; // 上下固定12px，⑤不再跟随字号放大
+        // 普通模式：top=14, bottom=8
+        cpSectionTextHeight = realTextH + 14 + 8;
     }
   }
 
@@ -1153,11 +1149,10 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
     if (canRight) {
         const totalRowW = charItems.length * cardW + (charItems.length - 1) * gap;
         const textX = cardX + cardInnerPad + totalRowW + gap;
-        // ✅修复②③：角色行的顶部Y，保存角色绘制开始前的yPos（角色行最顶端）
         const charRowTopY = drawY;
-        // ✅顶部固定12px留白，文字和角色卡片顶部对齐
-        const textY = charRowTopY + 12;
-        const textMaxW = innerContainerW - totalRowW - gap;
+        const textY = charRowTopY + 14; // top=14
+        let textMaxW = innerContainerW - totalRowW - gap;
+        textMaxW = Math.max(20, textMaxW); // 最小宽度保护
         wrapText(
             painter.ctx,
             renderData.gameItem.charSectionText.trim(),
@@ -1175,8 +1170,7 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
             lineHeight,
             textSize
         );
-        // ✅上下各12px，和预计算高度完全对齐
-        drawY = Math.max(drawY, textY + textH + 12);
+        drawY = Math.max(drawY, textY + textH + 8); // bottom=8
     } else {
         const textX = cardX + cardInnerPad;
         const textMaxW = innerContainerW;
@@ -1184,7 +1178,7 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
             painter.ctx,
             renderData.gameItem.charSectionText.trim(),
             textX,
-            drawY + 12,
+            drawY + 14, // top=14
             textMaxW,
             lineHeight,
             textSize,
@@ -1197,7 +1191,7 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
             lineHeight,
             textSize
         );
-        drawY += textH + 12;
+        drawY += textH + 8; // bottom=8
     }
   }
 
@@ -1383,21 +1377,11 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
         const totalMaleRowW = firstCp.maleItems.length * LAYOUT_SPACE.CHAR_CARD_W + (firstCp.maleItems.length - 1) * maleGap;
         const maleStartX = cardX + cardInnerPad + femaleCardW + colGap;
         const textX = maleStartX + totalMaleRowW + maleGap;
-        // ✅修复③：couple行的顶部Y，drawY是couple行绘制之前的起始Y
-        const cpRowTopY = drawY - (Math.max(
-            calcCharCardHeight(painter.ctx, firstCp.femaleName, femaleCardW, 14),
-            (()=>{
-                let maxH = LAYOUT_SPACE.CHAR_CARD_MIN_H;
-                firstCp.maleItems.forEach(m=>{
-                    const h = calcCharCardHeight(painter.ctx, m.name, LAYOUT_SPACE.CHAR_CARD_W,14);
-                    if(h>maxH) maxH = h;
-                });
-                return maxH;
-            })()
-        ));
-        // ✅顶部固定12px，和couple卡片顶部对齐
-        const textY = cpRowTopY + 12;
-        const textMaxW = (gameCardW - cardInnerPad * 2) - (femaleCardW + colGap + totalMaleRowW + maleGap);
+        // 直接使用 drawY 作为 couple 卡片行的顶部
+        const cpRowTopY = drawY;
+        const textY = cpRowTopY + 14; // top=14
+        let textMaxW = (gameCardW - cardInnerPad * 2) - (femaleCardW + colGap + totalMaleRowW + maleGap);
+        textMaxW = Math.max(20, textMaxW); // 最小宽度保护
         wrapText(
             painter.ctx,
             renderData.gameItem.cpSectionText.trim(),
@@ -1415,8 +1399,8 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
             lineHeight,
             textSize
         );
-        // ✅上下12px，取最大值，防止文字比couple卡片高，drawY被文字撑开
-        drawY = Math.max(drawY, textY + textH + 12);
+        // 右置模式：无底部间距
+        drawY = Math.max(drawY, textY + textH);
     } else {
         const textX = cardX + cardInnerPad;
         const textMaxW = gameCardW - cardInnerPad * 2;
@@ -1424,7 +1408,7 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
             painter.ctx,
             renderData.gameItem.cpSectionText.trim(),
             textX,
-            drawY + 12,
+            drawY + 14, // top=14
             textMaxW,
             lineHeight,
             textSize,
@@ -1437,7 +1421,7 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
             lineHeight,
             textSize
         );
-        drawY += textH + 12;
+        drawY += textH + 8; // bottom=8
     }
   }
 
