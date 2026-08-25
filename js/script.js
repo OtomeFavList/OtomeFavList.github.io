@@ -1111,10 +1111,22 @@ export function initPage(Core = {}) {
         el.sliderCustomTextFont.value = safeInit;
         el.customTextFontValueDisplay.textContent = `${safeInit}px`;
 
+        // ✅封装更新进度条百分比函数
+        function updateSliderProgress(sliderEl) {
+            const min = Number(sliderEl.min);
+            const max = Number(sliderEl.max);
+            const val = Number(sliderEl.value);
+            const percent = ((val - min) / (max - min)) * 100;
+            sliderEl.style.setProperty('--slider-progress', `${percent}%`);
+        }
+        // 初始化设置进度
+        updateSliderProgress(el.sliderCustomTextFont);
+
         el.sliderCustomTextFont.oninput = () => {
             const val = Number(el.sliderCustomTextFont.value);
             appData.exportCustomTextFontSize = val;
             el.customTextFontValueDisplay.textContent = `${val}px`;
+            updateSliderProgress(el.sliderCustomTextFont); // ✅实时更新进度渐变
             saveData();
             clearPreviewCacheResource();
         };
