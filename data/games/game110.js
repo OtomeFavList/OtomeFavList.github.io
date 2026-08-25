@@ -36,7 +36,7 @@ const gameData = {
         },
         // 普通可攻略男主 male
         {
-            id: "g1_m01",
+            id: "g110_m01",
             name: "男主1",
             gender: "male",
             isHidden: false,
@@ -51,7 +51,7 @@ const gameData = {
         },
         // 普通可攻略男主 male
         {
-            id: "g1_m02",
+            id: "g110_m02",
             name: "男主2",
             gender: "male",
             isHidden: false,
@@ -66,7 +66,7 @@ const gameData = {
         },
         // 普通可攻略男主 male
         {
-            id: "g1_m03",
+            id: "g110_m03",
             name: "男主3",
             gender: "male",
             isHidden: false,
@@ -81,7 +81,7 @@ const gameData = {
         },
         // 普通可攻略男主 male
         {
-            id: "g1_m04",
+            id: "g110_m04",
             name: "男主4",
             gender: "male",
             isHidden: false,
@@ -96,7 +96,37 @@ const gameData = {
         },
         // 普通可攻略男主 male
         {
-            id: "g1_m05",
+            id: "g110_m05",
+            name: "男主5",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            images: [
+                { srcList: ["char/g0_m01_1.jpg",
+                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
+                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
+            ]
+        },
+        // 普通可攻略男主 male
+        {
+            id: "g110_m06",
+            name: "男主5",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            images: [
+                { srcList: ["char/g0_m01_1.jpg",
+                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
+                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
+            ]
+        },
+        // 普通可攻略男主 male
+        {
+            id: "g110_m07",
             name: "男主5",
             gender: "male",
             isHidden: false,
@@ -111,7 +141,67 @@ const gameData = {
         },
         // FD续作限定角色（isFD=true → FD开关开启才显示整个角色卡片）
         {
-            id: "g1_fd01",
+            id: "g110_fd01",
+            name: "续作FD新增角色",
+            gender: "male",
+            isHidden: false,
+            isFD: true,
+            isSub: false,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // FD续作限定角色（isFD=true → FD开关开启才显示整个角色卡片）
+        {
+            id: "g110_fd02",
+            name: "续作FD新增角色",
+            gender: "male",
+            isHidden: false,
+            isFD: true,
+            isSub: false,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // FD续作限定角色（isFD=true → FD开关开启才显示整个角色卡片）
+        {
+            id: "g110_fd03",
+            name: "续作FD新增角色",
+            gender: "male",
+            isHidden: false,
+            isFD: true,
+            isSub: false,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // FD续作限定角色（isFD=true → FD开关开启才显示整个角色卡片）
+        {
+            id: "g110_fd04",
+            name: "续作FD新增角色",
+            gender: "male",
+            isHidden: false,
+            isFD: true,
+            isSub: false,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // FD续作限定角色（isFD=true → FD开关开启才显示整个角色卡片）
+        {
+            id: "g110_fd05",
+            name: "续作FD新增角色",
+            gender: "male",
+            isHidden: false,
+            isFD: true,
+            isSub: false,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // FD续作限定角色（isFD=true → FD开关开启才显示整个角色卡片）
+        {
+            id: "g110_fd06",
             name: "续作FD新增角色",
             gender: "male",
             isHidden: false,
