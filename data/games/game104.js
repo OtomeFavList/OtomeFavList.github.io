@@ -1,19 +1,20 @@
-真紅の焔 真田忍法帳
-中文名: 真红之焰 真田忍法帐
-开发: オトメイト、デザインファクトリー
-发行: アイディアファクトリー株式会社
-剧本: 長野和泉、中山智美
-音乐: 杉浦勇紀
-人物设定: 四季咲組
-主题歌作曲: 佐々木李子、高橋浩一郎
-主题歌作词: 佐々木李子、テルジヨシザワ
-主题歌演出: 佐々木李子
-插入歌演出: 佐々木李子
-原画: 四季咲組
-导演: 藤澤経清
-别名: 真紅の焔 真田忍法帳 for Nintendo Switch
-英文版 Homura: The Crimson Warriors
-官方网站: otomate.jp/kurenai/
+// 真紅の焔 真田忍法帳
+// 中文名: 真红之焰 真田忍法帐
+// 开发: オトメイト、デザインファクトリー
+// 发行: アイディアファクトリー株式会社
+// 剧本: 長野和泉、中山智美
+// 音乐: 杉浦勇紀
+// 人物设定: 四季咲組
+// 主题歌作曲: 佐々木李子、高橋浩一郎
+// 主题歌作词: 佐々木李子、テルジヨシザワ
+// 主题歌演出: 佐々木李子
+// 插入歌演出: 佐々木李子
+// 原画: 四季咲組
+// 导演: 藤澤経清
+// 别名: 真紅の焔 真田忍法帳 for Nintendo Switch
+// 英文版 Homura: The Crimson Warriors
+// 官方网站: otomate.jp/kurenai/
+// https://www.otomate.jp/kurenai/switch/chara/
 
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
@@ -23,27 +24,24 @@
 // 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
 // 官中发售以后，需要修改：游戏名、发售年份、汉化厂商、封面图、角色名
 const gameData = {
-    id: "game1", // 全局唯一ID，不可重复，如 game001
-    name: "示例乙女游戏",
-    year: "20",
-    publisher: ["原厂发行商"],
-    cnStudio: "汉化组/汉化厂商",
+    id: "game104", // 全局唯一ID，不可重复，如 game001
+    name: "真紅の焔 真田忍法帳",
+    year: "2024",
+    publisher: ["otomate"],
+    cnStudio: "暂无",
     writer: [
-        {name:"中文编剧", lang:"zh"},
-        {name:"日文编剧", lang:"ja"},
-        {name:"英文编剧", lang:"en"}
+        {name:"長野和泉", lang:"zh"},
+        {name:"中山智美", lang:"zh"}
     ],
     art: [
-        {name:"中文原画", lang:"zh"},
-        {name:"日文原画", lang:"ja"},
-        {name:"英文原画", lang:"en"}
+        {name:"四季咲組", lang:"zh"}
     ],
-    cover: "game/1.jpg", // 相对路径，游戏封面
+    cover: "game/104.jpg", // 相对路径，游戏封面
     charList: [
-        // 女主模板 female
+        // 望月六実
         {
-            id: "g1_f01",
-            name: "女主A",
+            id: "g104_f01",
+            name: "望月六実",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,    // true=续作/FD专属角色，开关控制是否展示该角色
@@ -51,13 +49,11 @@ const gameData = {
             images: [
                 { srcList: ["char/001/女主A.jpg",
                             "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["char/001/女主A3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["char/001/女主A4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 普通可攻略男主 male
         {
-            id: "g1_m01",
+            id: "g104_m01",
             name: "男主1",
             gender: "male",
             isHidden: false,
@@ -66,13 +62,11 @@ const gameData = {
             images: [
                 { srcList: ["char/001/男主1.jpg",
                             "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["char/001/男主13.jpg"], type: "hidden" },
-                { srcList: ["char/001/男主14.jpg"], type: "fd" }
             ]
         },
         // 普通可攻略男主 male
         {
-            id: "g1_m02",
+            id: "g104_m02",
             name: "男主2",
             gender: "male",
             isHidden: false,
@@ -81,13 +75,11 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
         // 普通可攻略男主 male
         {
-            id: "g1_m03",
+            id: "g104_m03",
             name: "男主3",
             gender: "male",
             isHidden: false,
@@ -96,13 +88,11 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
         // 普通可攻略男主 male
         {
-            id: "g1_m04",
+            id: "g104_m04",
             name: "男主4",
             gender: "male",
             isHidden: false,
@@ -111,13 +101,11 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
         // 普通可攻略男主 male
         {
-            id: "g1_m05",
+            id: "g104_m05",
             name: "男主5",
             gender: "male",
             isHidden: false,
@@ -126,44 +114,6 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
-            ]
-        },
-        // 隐藏角色（isHidden=true → 开关开启才显示整个角色卡片）
-        {
-            id: "g1_h01",
-            name: "隐藏攻略角色",
-            gender: "male",
-            isHidden: true,
-            isFD: false,
-            isSub: true,
-            images: [
-                { srcList: ["char/g001_h01_1.jpg"], type: "base" }
-            ]
-        },
-        // FD续作限定角色（isFD=true → FD开关开启才显示整个角色卡片）
-        {
-            id: "g1_fd01",
-            name: "续作FD新增角色",
-            gender: "male",
-            isHidden: false,
-            isFD: true,
-            isSub: true,
-            images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
-            ]
-        },
-        // 配角角色（isSub=true → 开关开启才显示整个角色卡片）
-        {
-            id: "g1_fd01",
-            name: "配角",
-            gender: "male",
-            isHidden: false,
-            isFD: false,
-            isSub: true,
-            images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
             ]
         }
     ]
