@@ -815,6 +815,26 @@ input[type="checkbox"] {
     border-radius:6px;
 }
 
+/* ==========【新增】自定义文本字体大小滑块 ========== */
+.font-size-set-row {
+    margin:16px 0;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    max-width:420px;
+}
+.font-size-set-row label {
+    font-size:14px;
+    color:#444;
+}
+.font-size-set-row input[type="range"] {
+    width:100%;
+}
+.font-size-value-display {
+    font-size:13px;
+    color:#666;
+}
+
 /* ========== 导出尺寸选择 size-select ========== */
 .size-select{
     margin:16px 0;
