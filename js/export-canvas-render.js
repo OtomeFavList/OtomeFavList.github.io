@@ -594,7 +594,8 @@ function calcSingleGameBlockHeight(targetWidth, renderData) {
 
   // =========【修改：读取自定义导出文本字号，默认16px】=========
   const textSize = renderData.appData.exportCustomTextFontSize ?? 16;
-  const lineHeight = textSize * 1.45;
+  // ✅修复②④：自定义文本行高上限锁死14px，字号再大也不会超过14
+  const lineHeight = Math.min(textSize * 1.45, 14);
 
   // =========【修改：动态计算标题高度】=========
   const nameHeight = measureGameTitleWithHeartHeight(vCtx, cardX, gameCardW, gameInfo.name);
@@ -653,13 +654,8 @@ function calcSingleGameBlockHeight(targetWidth, renderData) {
         }
     }
     const realTextH = measureWrappedHeight(vCtx, gameItem.cpSectionText.trim(), textMaxW, lineHeight, textSize);
-    // ✅修复③：右置模式同样增加底部固定8px外边距，与绘制逻辑对齐
-    if(canRight){
-        cpSectionTextHeight = realTextH + 14 + 8;
-    }else{
-        // 普通模式：top=14, bottom=8
-        cpSectionTextHeight = realTextH + 14 + 8;
-    }
+    // 右置/普通模式 间距统一 top:14 bottom:8，和绘制逻辑对齐
+    cpSectionTextHeight = realTextH + 14 + 8;
   }
 
   let charAreaHeight = 0;
@@ -1028,7 +1024,8 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
       const textX = cardX + cardInnerPad;
       const textMaxW = gameCardW - cardInnerPad * 2;
       const textSize = renderData.appData.exportCustomTextFontSize ?? 16;
-      const lineHeight = textSize * 1.45;
+      // 行高上限14px
+      const lineHeight = Math.min(textSize * 1.45, 14);
       wrapText(
           painter.ctx,
           renderData.gameItem.gameHeadText.trim(),
@@ -1138,7 +1135,7 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
   // ========== 绘制【Character区域下方自定义文字】 ==========
   if (renderData.gameItem.charSectionText?.trim()) {
     const textSize = renderData.appData.exportCustomTextFontSize ?? 16;
-    const lineHeight = textSize * 1.45;
+    const lineHeight = Math.min(textSize * 1.45, 14);
     const innerContainerW = gameCardW - cardInnerPad * 2;
     const cardW = LAYOUT_SPACE.CHAR_CARD_W;
     const gap = LAYOUT_SPACE.CHAR_ROW_GAP;
@@ -1149,8 +1146,8 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
     if (canRight) {
         const totalRowW = charItems.length * cardW + (charItems.length - 1) * gap;
         const textX = cardX + cardInnerPad + totalRowW + gap;
-        // ✅修复①：取角色行**起始Y**，不是绘制完成后的drawY
-        const charRowTopY = yPos;
+        // ✅修复①：角色行起始Y使用进入角色绘制区的drawY，不再使用循环内部变量yPos
+        const charRowTopY = drawY;
         const textY = charRowTopY + 14; // top=14
         let textMaxW = innerContainerW - totalRowW - gap;
         textMaxW = Math.max(20, textMaxW); // 最小宽度保护
@@ -1360,7 +1357,7 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
   // ========== 绘制【Couple区域下方自定义文字】 ==========
   if (renderData.gameItem.cpSectionText?.trim()) {
     const textSize = renderData.appData.exportCustomTextFontSize ?? 16;
-    const lineHeight = textSize * 1.45;
+    const lineHeight = Math.min(textSize * 1.45, 14);
     const femaleCardW = LAYOUT_SPACE.CHAR_CARD_W;
     const maleGap = LAYOUT_SPACE.CP_MALE_GAP;
     const colGap = LAYOUT_SPACE.CP_COLUMN_GAP;
