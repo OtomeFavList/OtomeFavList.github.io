@@ -1413,10 +1413,58 @@ export function initPage(Core = {}) {
             try {
                 // 打开预览弹窗并显示loading
                 previewModal.classList.add("active");
+
+                // ==========【新增：渲染耗时预估计算】==========
+                // 1. 判断是否IOS WebKit（与export‑canvas‑render.js保持完全一致检测逻辑）
+                const IS_IOS_WEBKIT = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+                const isAndroid = /Android/.test(navigator.userAgent);
+
+                // 2. 统计参与导出的有效游戏卡片数量（对齐renderExportCanvas过滤逻辑）
+                let validGameCount = 0;
+                let totalImageCount = 0;
+                appData.gameList.forEach(gameItem => {
+                    // 和renderExportCanvas保持一样过滤：不导出折叠卡片
+                    if (!appData.exportFoldContent && gameItem.fold === true) {
+                        return;
+                    }
+                    validGameCount += 1;
+
+                    // 统计本游戏图片数量 char + cp
+                    let imgCnt = 0;
+                    // char角色图片
+                    if(Array.isArray(gameItem.selectChars)) imgCnt += gameItem.selectChars.length;
+                    // cp：女主 + 每个男主
+                    if(Array.isArray(gameItem.cpList)){
+                        gameItem.cpList.forEach(cp=>{
+                            imgCnt += 1; //女主
+                            if(Array.isArray(cp.maleItems)) imgCnt += cp.maleItems.length;
+                        })
+                    }
+                    totalImageCount += imgCnt;
+                });
+
+                // 3. 分平台设置耗时系数
+                let gameCardCost, imgCost;
+                if(IS_IOS_WEBKIT){
+                    gameCardCost = 0.75;
+                    imgCost = 0.45;
+                }else if(isAndroid){
+                    gameCardCost = 0.35;
+                    imgCost = 0.22;
+                }else{
+                    // PC
+                    gameCardCost = 0.22;
+                    imgCost = 0.14;
+                }
+                // 计算总预估秒，向上取整，最小1秒
+                let estimateSec = Math.ceil(validGameCount * gameCardCost + totalImageCount * imgCost);
+                estimateSec = Math.max(1, estimateSec);
+                // ==========【新增结束】==========
+
                 previewScrollWrap.innerHTML = `
                     <div class="preview-inner-loading">
                         <div class="loading-spinner"></div>
-                        <p>正在生成预览，请稍候…</p>
+                        <p>正在生成预览，请稍候…<br>预计耗时：${estimateSec}s</p>
                     </div>
                 `;
                 if (downloadBtn) downloadBtn.disabled = true;
