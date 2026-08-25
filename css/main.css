@@ -2000,3 +2000,11 @@ textarea {
 .cp-selected-card-item img {
     pointer-events: none;
 }
+
+/* ========== 增加 background-image 渐变 ========== */
+.font-size-set-row input[type="range"] {
+    /* 新增这两行，其余保留原有 */
+    background-image: linear-gradient(#e895a8, #e895a8);
+    background-size: var(--slider-progress, 0%) 100%;
+    background-repeat: no-repeat;
+}
