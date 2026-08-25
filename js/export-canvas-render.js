@@ -605,12 +605,12 @@ function calcSingleGameBlockHeight(targetWidth, renderData) {
   let headTextHeight = 0;
   if (gameItem.gameHeadText?.trim()) {
     headTextHeight = measureWrappedHeight(vCtx, gameItem.gameHeadText.trim(), textMaxW, lineHeight, textSize);
-    headTextHeight += 12 + 12; // 保持原有间距，不强制修改
+    headTextHeight += 12 + 12; // 保持原有间距
   }
 
   let charSectionTextHeight = 0;
   if (gameItem.charSectionText?.trim()) {
-    // 判断是否满足右置条件
+    // 判断是否满足右置条件（仅用于逻辑一致性，高度计算统一）
     let canRight = false;
     if(renderData.appData.exportCustomTextRight && charItems.length>0){
         const perRow = calcCardsPerRow(
@@ -628,8 +628,8 @@ function calcSingleGameBlockHeight(targetWidth, renderData) {
         );
     }
     const realTextH = measureWrappedHeight(vCtx, gameItem.charSectionText.trim(), textMaxW, lineHeight, textSize);
-    // ✅和真实绘制同步：移除top14，只保留bottom 8
-    charSectionTextHeight = realTextH + 0 + 8;
+    // char文本：上14，下8
+    charSectionTextHeight = realTextH + 14 + 8;
   }
 
   let cpSectionTextHeight = 0;
@@ -654,8 +654,8 @@ function calcSingleGameBlockHeight(targetWidth, renderData) {
         }
     }
     const realTextH = measureWrappedHeight(vCtx, gameItem.cpSectionText.trim(), textMaxW, lineHeight, textSize);
-    const rawHeight = realTextH + 0 + 8;
-    cpSectionTextHeight = Math.min(rawHeight, textSize * 16);
+    // cp文本：只算上边距14，无下边距8
+    cpSectionTextHeight = realTextH + 14;
   }
 
   let charAreaHeight = 0;
@@ -960,23 +960,33 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
 
   // ========= 获取预计算卡片高度，并生成运行时安全高度 =========
   const cardH = calcSingleGameBlockHeight(targetWidth, renderData);
-  // 从renderData重新读取，复用预计算逻辑，保证运行时安全高度和虚拟测量完全对齐
-  const {gameItem: dataGameItem, charItems: dataCharItems, cpItems: dataCpItems} = renderData;
-  const textSize = renderData.appData.exportCustomTextFontSize ??16;
-  const lineHeight = textSize >16 ? textSize*1.25 : textSize*1.45;
+
+  // ✅运行时完整还原所有模块高度，和calcSingleGameBlockHeight累加逻辑完全对齐，消除预计算与渲染偏差
+  const textSize = renderData.appData.exportCustomTextFontSize ?? 16;
+  const lineHeight = textSize > 16 ? textSize * 1.25 : textSize * 1.45;
 
   let runtimeContentH = cardInnerPad * 2;
   runtimeContentH += measureGameTitleWithHeartHeight(painter.ctx, cardX, gameCardW, gameInfo.name);
-  if(dataGameItem.gameHeadText?.trim()){
-      runtimeContentH += measureWrappedHeight(painter.ctx, dataGameItem.gameHeadText.trim(), gameCardW-cardInnerPad*2, lineHeight, textSize)+12+12;
+
+  // headText高度
+  if(gameItem.gameHeadText?.trim()){
+    const h = measureWrappedHeight(painter.ctx, gameItem.gameHeadText.trim(), gameCardW - cardInnerPad*2, lineHeight, textSize);
+    runtimeContentH += h + 12 + 12;
   }
-  if(dataCharItems.length>0 && dataGameItem.charSectionText?.trim()){
-      runtimeContentH += measureWrappedHeight(painter.ctx, dataGameItem.charSectionText.trim(), gameCardW-cardInnerPad*2, lineHeight, textSize)+8;
+  runtimeContentH += charAreaHeight;
+  // charSectionText高度（top14 + bottom8）
+  if(gameItem.charSectionText?.trim()){
+    const h = measureWrappedHeight(painter.ctx, gameItem.charSectionText.trim(), gameCardW - cardInnerPad*2, lineHeight, textSize);
+    runtimeContentH += h + 14 + 8;
   }
-  if(dataCpItems.length>0 && dataGameItem.cpSectionText?.trim()){
-      runtimeContentH += measureWrappedHeight(painter.ctx, dataGameItem.cpSectionText.trim(), gameCardW-cardInnerPad*2, lineHeight, textSize)+8;
+  runtimeContentH += cpAreaHeight;
+  // cpSectionText高度（仅top14，无bottom8）
+  if(gameItem.cpSectionText?.trim()){
+    const h = measureWrappedHeight(painter.ctx, gameItem.cpSectionText.trim(), gameCardW - cardInnerPad*2, lineHeight, textSize);
+    runtimeContentH += h + 14;
   }
-  // ✅runtimeContentH现在包含全部自定义文本高度，safeCardH不会偏小溢出，也不会无端多出大片空白
+
+  // 取两者最大值：预计算高度 / 实时测量内容高度；杜绝空白溢出
   const safeCardH = Math.max(runtimeContentH, cardH);
 
   painter.drawRoundRect(
@@ -1068,10 +1078,9 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
   // ---- Character ----
   if (charItems.length > 0) {
     painter.drawText('Character', cardX + cardInnerPad, drawY, 18, '#000');
+    // ✅在drawY偏移之前记录角色卡片区域真实顶部Y
+    const charBlockStartY = drawY + 18 + 8;
     drawY += 18 + 8;
-
-    // ========= 保存角色区域起始Y，用于右置文本修复 yPos is not defined =========
-    const charBlockStartY = drawY;
 
     const cardW = LAYOUT_SPACE.CHAR_CARD_W;
     const gap = LAYOUT_SPACE.CHAR_ROW_GAP;
@@ -1169,7 +1178,7 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
           const textX = cardX + cardInnerPad + totalRowW + gap;
           // ✅修复①：使用保存的角色块起始Y，消除 yPos is not defined
           const charRowTopY = charBlockStartY;
-          const textY = charRowTopY + 0; // ✅修复③：移除偏移，文字顶部对齐角色卡片顶部边框
+          const textY = charRowTopY + 14; // top=14
           let textMaxW = innerContainerW - totalRowW - gap;
           textMaxW = Math.max(20, textMaxW); // 最小宽度保护
           wrapText(
@@ -1197,7 +1206,7 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
               painter.ctx,
               renderData.gameItem.charSectionText.trim(),
               textX,
-              drawY, // ✅修复③，去除+14
+              drawY + 14, // top=14
               textMaxW,
               lineHeight,
               textSize,
@@ -1221,9 +1230,10 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
       drawY += 8;
     }
     painter.drawText('Couple', cardX + cardInnerPad, drawY, 18, '#000');
+    // ✅偏移前记录cp卡片真实顶部Y
+    const cpBlockStartY = drawY + 18 + 8;
     drawY += 18 + 8;
-    // =========【补丁新增：记录Couple块起始顶部Y，用于右置文本，对齐Character逻辑】=========
-    const cpBlockStartY = drawY;
+
     const femaleCardW = LAYOUT_SPACE.CHAR_CARD_W;
     const maleCardW = LAYOUT_SPACE.CHAR_CARD_W;
     const maleGap = LAYOUT_SPACE.CP_MALE_GAP;
@@ -1398,9 +1408,9 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
         const totalMaleRowW = firstCp.maleItems.length * LAYOUT_SPACE.CHAR_CARD_W + (firstCp.maleItems.length - 1) * maleGap;
         const maleStartX = cardX + cardInnerPad + femaleCardW + colGap;
         const textX = maleStartX + totalMaleRowW + maleGap;
-        // ✅修复②：使用couple块真正顶部，和character行为保持一致
+        // ✅使用保存的cp块顶部Y，不再使用已经走到底部的drawY
         const cpRowTopY = cpBlockStartY;
-        const textY = cpRowTopY + 0; // ✅修复③：移除+14偏移，文字顶部和角色卡片顶部边框齐平
+        const textY = cpRowTopY + 14; // top=14
         let textMaxW = (gameCardW - cardInnerPad * 2) - (femaleCardW + colGap + totalMaleRowW + maleGap);
         textMaxW = Math.max(20, textMaxW); // 最小宽度保护
         wrapText(
@@ -1420,8 +1430,8 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
             lineHeight,
             textSize
         );
-        // ✅右置模式增加底部固定8px外边距，与预计算高度完全对齐
-        drawY = Math.max(drawY, textY + textH + 8);
+        // 右置模式无下边距8px
+        drawY = Math.max(drawY, textY + textH);
     } else {
         const textX = cardX + cardInnerPad;
         const textMaxW = gameCardW - cardInnerPad * 2;
@@ -1429,7 +1439,7 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
             painter.ctx,
             renderData.gameItem.cpSectionText.trim(),
             textX,
-            drawY, // ✅修复③，去除+14
+            drawY + 14, // top=14
             textMaxW,
             lineHeight,
             textSize,
@@ -1442,7 +1452,8 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
             lineHeight,
             textSize
         );
-        drawY += textH + 8; // bottom=8
+        // 普通模式也无下边距8px
+        drawY += textH;
     }
   }
 
