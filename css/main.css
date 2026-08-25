@@ -821,68 +821,61 @@ input[type="checkbox"] {
     display:flex;
     flex-direction:row;
     align-items:center;
-    gap:14px;
+    gap:12px;
+    max-width:520px;
     flex-wrap:wrap;
-    max-width:600px;
 }
 
 .font-size-set-row label {
     font-size:14px;
-    color: var(--export-border, #f6a5b8);
+    color:#c98fac;  /* 和基础信息色#c98fac统一 */
     white-space:nowrap;
 }
 
 .font-size-set-row input[type="range"] {
     flex:1;
     min-width:140px;
+}
+
+.font-size-value-display {
+    font-size:13px;
+    color:#666;
+    white-space:nowrap;
+}
+
+/* ========== range滑块整体样式，轨道统一 #f6a5b8，和开关滑块同色 ========== */
+/* webkit(chrome、edge、safari) */
+.font-size-set-row input[type="range"] {
     -webkit-appearance: none;
     height:6px;
+    background:#f6a5b8; /* 无论是否拖动，轨道底色统一 #f6a5b8 */
     border-radius:3px;
-    background:#ddd;
     outline:none;
 }
-/* webkit内核（Chrome、Safari）滑块拖动条 */
 .font-size-set-row input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance:none;
     width:18px;
     height:18px;
     border-radius:50%;
-    background:#f6a5b8;
-    border:none;
+    background:#ffffff;
+    border:2px solid #f6a5b8;
     cursor:pointer;
 }
-.font-size-set-row input[type="range"]::-webkit-slider-runnable-track {
-    height:6px;
-    border-radius:3px;
-}
-/* moz火狐 */
+
+/* firefox */
 .font-size-set-row input[type="range"]::-moz-range-track {
     height:6px;
+    background:#f6a5b8;
     border-radius:3px;
-    background:#ddd;
+    border:none;
 }
 .font-size-set-row input[type="range"]::-moz-range-thumb {
     width:18px;
     height:18px;
     border-radius:50%;
-    background:#f6a5b8;
-    border:none;
+    background:#ffffff;
+    border:2px solid #f6a5b8;
     cursor:pointer;
-}
-/* 无论hover、active、拖动，thumb都保持 #e895a8，不变色 */
-.font-size-set-row input[type="range"]::-webkit-slider-thumb:hover,
-.font-size-set-row input[type="range"]::-webkit-slider-thumb:active {
-    background:#f6a5b8;
-}
-.font-size-set-row input[type="range"]::-moz-range-thumb:hover,
-.font-size-set-row input[type="range"]::-moz-range-thumb:active {
-    background:#f6a5b8;
-}
-
-.font-size-value-display {
-    font-size:13px;
-    color: var(--export-border, #f6a5b8);
-    white-space:nowrap;
 }
 
 /* ========== About模块 about-block ========== */
