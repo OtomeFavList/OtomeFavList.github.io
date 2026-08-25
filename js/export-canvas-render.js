@@ -583,19 +583,19 @@ function calcSingleGameBlockHeight(targetWidth, renderData) {
   let headTextHeight = 0;
   if (gameItem.gameHeadText?.trim()) {
     headTextHeight = measureWrappedHeight(vCtx, gameItem.gameHeadText.trim(), textMaxW, lineHeight, textSize);
-    headTextHeight += 12; // 和绘制代码保持一致的底部间距
+    headTextHeight += 14 + 8; // 上14，下8
   }
 
   let charSectionTextHeight = 0;
   if (gameItem.charSectionText?.trim()) {
     charSectionTextHeight = measureWrappedHeight(vCtx, gameItem.charSectionText.trim(), textMaxW, lineHeight, textSize);
-    charSectionTextHeight += 13 + 13; // drawY+13 + 文字底部间距
+    charSectionTextHeight += 14 + 8; // 上14，下8
   }
 
   let cpSectionTextHeight = 0;
   if (gameItem.cpSectionText?.trim()) {
     cpSectionTextHeight = measureWrappedHeight(vCtx, gameItem.cpSectionText.trim(), textMaxW, lineHeight, textSize);
-    cpSectionTextHeight += 13 + 13; // drawY+13 + 文字底部间距
+    cpSectionTextHeight += 14; // 上14，下0（couple特殊，无下边距）
   }
 
   let charAreaHeight = 0;
@@ -969,7 +969,7 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
           painter.ctx,
           renderData.gameItem.gameHeadText.trim(),
           textX,
-          drawY,
+          drawY + 14, // 上14
           textMaxW,
           lineHeight,
           textSize,
@@ -982,7 +982,7 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
           lineHeight,
           textSize
       );
-      drawY += textH + 12;
+      drawY += textH + 8; // 下8
   }
 
   // ---- Character ----
@@ -1081,7 +1081,7 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
           painter.ctx,
           renderData.gameItem.charSectionText.trim(),
           textX,
-          drawY + 13,
+          drawY + 14, // 上14
           textMaxW,
           lineHeight,
           textSize,
@@ -1094,7 +1094,7 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
           lineHeight,
           textSize
       );
-      drawY += textH + 13;
+      drawY += textH + 8; // 下8
   }
 
   // ---- Couple ----
@@ -1268,7 +1268,7 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
           painter.ctx,
           renderData.gameItem.cpSectionText.trim(),
           textX,
-          drawY + 13,
+          drawY + 14, // 上14
           textMaxW,
           lineHeight,
           textSize,
@@ -1281,7 +1281,7 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
           lineHeight,
           textSize
       );
-      drawY += textH + 13;
+      drawY += textH; // 下0（couple特殊，无下边距）
   }
 
   painter.shiftY(cardH);
