@@ -825,7 +825,6 @@ input[type="checkbox"] {
     flex-wrap:wrap;
     max-width:480px;
 }
-
 .font-size-set-row label {
     font-size:16px;
     color:#c98fac;
@@ -841,13 +840,14 @@ input[type="checkbox"] {
 .font-size-set-row input[type="range"] {
     flex:1;
     min-width:140px;
-    height:6px;
+    /* 修改前 height:6px; */
+    height:2px; /* 改成细轨道，实际轨道高度 */
     background:#fff7f9;
     border-radius:999px;
     outline:none;
     -webkit-appearance:none;
     appearance:none;
-    /* 给range容器留上下内边距，给thumb圆点预留空间，防止溢出 */
+    /* 上下padding保留，给thumb圆点留出空间，避免被裁切 */
     padding:10px 0;
 }
 
@@ -855,25 +855,27 @@ input[type="checkbox"] {
 .font-size-set-row input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance:none;
     appearance:none;
-    width:16px;  /* 原20px → 缩小 */
-    height:16px; /* 原20px → 缩小 */
+    width:16px;
+    height:16px;
     border-radius:50%;
     background:#e895a8;
     border:none;
     cursor:pointer;
-    /* 核心：负margin抵消，让圆点垂直居中在6px轨道上，不会上下溢出 */
-    margin-top:-5px;
+    /* 修改前 margin-top:-5px;
+    轨道现在2px，需要重新计算居中：(16px圆点 - 2px轨道)/2 /‑>‑7px */
+    margin-top:-7px;
 }
 
 .font-size-set-row input[type="range"]::-webkit-slider-runnable-track {
-    height:6px;
+    /* 修改前 height:6px; */
+    height:2px; /* 同步修改webkit轨道高度 */
     border-radius:999px;
 }
 
 /* firefox 样式 */
 .font-size-set-row input[type="range"]::-moz-range-thumb {
-    width:16px; /* 原20px */
-    height:16px; /* 原20px */
+    width:16px;
+    height:16px;
     border-radius:50%;
     background:#e895a8;
     border:none;
@@ -881,13 +883,15 @@ input[type="checkbox"] {
 }
 
 .font-size-set-row input[type="range"]::-moz-range-track {
-    height:6px;
+    /* 修改前 height:6px; */
+    height:2px; /* firefox细轨道 */
     background:#fff7f9;
     border-radius:999px;
 }
 
 .font-size-set-row input[type="range"]::-moz-range-progress {
-    height:6px;
+    /* 修改前 height:6px; */
+    height:2px; /* firefox已拖动部分的进度条高度 */
     background:#e895a8;
     border-radius:999px;
 }
