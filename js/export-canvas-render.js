@@ -580,11 +580,11 @@ function calcSingleGameBlockHeight(targetWidth, renderData) {
   const HEART_AREA_HEIGHT = 0;
 
   // =========【补丁：固定间隔，间隔不再随字号变化】=========
-  const FIX_GAMEHEAD_TOP = 12;
+  const FIX_GAMEHEAD_TOP = 2;
   const FIX_GAMEHEAD_BOTTOM = 12;
-  const FIX_CHARSEC_TOP = 13;
-  const FIX_CHARSEC_BOTTOM = 13;
-  const FIX_CPSEC_TOP = 13;
+  const FIX_CHARSEC_TOP = 14;
+  const FIX_CHARSEC_BOTTOM = 6;
+  const FIX_CPSEC_TOP = 14;
   // cpSectionText特殊：底部间距0px
   const FIX_CPSEC_BOTTOM = 0;
 
@@ -969,7 +969,7 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
 
   // ========== 绘制【游戏标题爱心下方自定义文字】 ==========
   if (renderData.gameItem.gameHeadText?.trim()) {
-      const FIX_GAMEHEAD_TOP = 12;
+      const FIX_GAMEHEAD_TOP = 2;
       const FIX_GAMEHEAD_BOTTOM = 12;
       const textX = cardX + cardInnerPad;
       const textMaxW = gameCardW - cardInnerPad * 2;
@@ -1087,8 +1087,8 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
 
   // ========== 绘制【Character区域下方自定义文字】 ==========
   if (renderData.gameItem.charSectionText?.trim()) {
-      const FIX_CHARSEC_TOP = 13;
-      const FIX_CHARSEC_BOTTOM = 13;
+      const FIX_CHARSEC_TOP = 14;
+      const FIX_CHARSEC_BOTTOM = 6;
       const textX = cardX + cardInnerPad;
       const textMaxW = gameCardW - cardInnerPad * 2;
       const textSize = renderData.appData.exportCustomTextFontSize ?? 16;
@@ -1278,7 +1278,7 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
 
   // ========== 绘制【Couple区域下方自定义文字】 ==========
   if (renderData.gameItem.cpSectionText?.trim()) {
-      const FIX_CPSEC_TOP = 13;
+      const FIX_CPSEC_TOP = 14;
       const FIX_CPSEC_BOTTOM = 0; // couple自定义文本底部无额外间距
       const textX = cardX + cardInnerPad;
       const textMaxW = gameCardW - cardInnerPad * 2;
