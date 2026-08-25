@@ -636,12 +636,8 @@ function calcSingleGameBlockHeight(targetWidth, renderData) {
     }
     // ✅使用对应模式的真实最大宽度做换行高度测量
     const realTextH = measureWrappedHeight(vCtx, gameItem.charSectionText.trim(), charTextMeasureMaxW, lineHeight, textSize);
-    // char文本：右置模式同行悬浮，不计入垂直高度；普通模式上14，下8
-    if(canRight){
-        charSectionTextHeight = 0;
-    }else{
-        charSectionTextHeight = realTextH + 14 + 8;
-    }
+    // char文本：上14，下8（保留原有边距不变）
+    charSectionTextHeight = realTextH + 14 + 8;
   }
 
   let cpSectionTextHeight = 0;
@@ -674,12 +670,8 @@ function calcSingleGameBlockHeight(targetWidth, renderData) {
     }
     // ✅使用对应模式真实最大宽度测量换行高度
     const realTextH = measureWrappedHeight(vCtx, gameItem.cpSectionText.trim(), cpTextMeasureMaxW, lineHeight, textSize);
-    // cp文本：右置同行悬浮不计入高度；普通模式只算上边距14，无下边距8
-    if(canRight){
-        cpSectionTextHeight = 0;
-    }else{
-        cpSectionTextHeight = realTextH + 14;
-    }
+    // cp文本：只算上边距14，无下边距8（原有逻辑不变）
+    cpSectionTextHeight = realTextH + 14;
   }
 
   let charAreaHeight = 0;
@@ -738,16 +730,85 @@ function calcSingleGameBlockHeight(targetWidth, renderData) {
     + charSectionTextHeight
     + cpAreaHeight
     + cpSectionTextHeight;
+
+  // ============ 新增：计算右置模式文本的实际垂直高度(仅用于容器撑开，不参与布局累加) ============
+  let charRightTextMaxH = 0;
+  if(renderData.appData.exportCustomTextRight && gameItem.charSectionText?.trim() && charItems.length>0){
+      const perRow = calcCardsPerRow(
+          LAYOUT_SPACE.CHAR_CARD_W,
+          LAYOUT_SPACE.CHAR_ROW_GAP,
+          gameCardW - cardInnerPad * 2
+      );
+      const canRightLocal = canPlaceTextRight(
+          charItems.length,
+          perRow,
+          gameCardW - cardInnerPad * 2,
+          LAYOUT_SPACE.CHAR_CARD_W,
+          LAYOUT_SPACE.CHAR_ROW_GAP,
+          LAYOUT_SPACE.CHAR_CARD_W
+      );
+      if(canRightLocal){
+          const totalRowW = charItems.length * LAYOUT_SPACE.CHAR_CARD_W + (charItems.length - 1) * LAYOUT_SPACE.CHAR_ROW_GAP;
+          const charTextMeasureMaxW = Math.max(20, (gameCardW - cardInnerPad * 2) - totalRowW - LAYOUT_SPACE.CHAR_ROW_GAP);
+          const textH = measureWrappedHeight(vCtx, gameItem.charSectionText.trim(), charTextMeasureMaxW, lineHeight, textSize);
+          // 右置文本起始Y = charBlockStartY(虚拟画布中角色块顶部)，无上下边距；文本底部 = startY + textH
+          const virtualCharBlockTop = cardInnerPad + nameHeight + (gameItem.gameHeadText?.trim() ? (measureWrappedHeight(vCtx, gameItem.gameHeadText.trim(), textMaxW, lineHeight, textSize)+12+12) : 0) + 18 + 8;
+          charRightTextMaxH = virtualCharBlockTop + textH;
+      }
+  }
+
+  let cpRightTextMaxH = 0;
+  if(renderData.appData.exportCustomTextRight && gameItem.cpSectionText?.trim() && cpItems.length>0){
+      const firstCp = cpItems[0];
+      if(firstCp.maleItems && firstCp.maleItems.length >0){
+          const femaleCardWidth = LAYOUT_SPACE.CHAR_CARD_W;
+          const maleGap = LAYOUT_SPACE.CP_MALE_GAP;
+          const colGap = LAYOUT_SPACE.CP_COLUMN_GAP;
+          const maleContainerWidth = (gameCardW - cardInnerPad * 2) - femaleCardWidth - colGap;
+          const perRow = calcCardsPerRow(LAYOUT_SPACE.CHAR_CARD_W, maleGap, maleContainerWidth);
+          const canRightLocal = canPlaceTextRight(
+              firstCp.maleItems.length,
+              perRow,
+              maleContainerWidth,
+              LAYOUT_SPACE.CHAR_CARD_W,
+              maleGap,
+              LAYOUT_SPACE.CHAR_CARD_W
+          );
+          if(canRightLocal){
+              const totalMaleRowW = firstCp.maleItems.length * LAYOUT_SPACE.CHAR_CARD_W + (firstCp.maleItems.length -1)*maleGap;
+              const cpTextMeasureMaxW = Math.max(20, maleContainerWidth - totalMaleRowW - maleGap);
+              const textH = measureWrappedHeight(vCtx, gameItem.cpSectionText.trim(), cpTextMeasureMaxW, lineHeight, textSize);
+              // 虚拟画布cp块顶部
+              const addCharOffset = charItems.length>0 ? (charAreaHeight + 8) : 0;
+              const virtualCpBlockTop = cardInnerPad + nameHeight
+                  + (gameItem.gameHeadText?.trim() ? (measureWrappedHeight(vCtx, gameItem.gameHeadText.trim(), textMaxW, lineHeight, textSize)+12+12) :0 )
+                  + charAreaHeight
+                  + (renderData.appData.exportCustomTextRight && charItems.length>0 ? 0 : (gameItem.charSectionText?.trim() ? (measureWrappedHeight(vCtx, gameItem.charSectionText.trim(), textMaxW, lineHeight, textSize)+14+8):0))
+                  + addCharOffset
+                  + 18 + 8;
+              cpRightTextMaxH = virtualCpBlockTop + textH;
+          }
+      }
+  }
+
   // ==========【补丁2‑2】测量完成销毁虚拟画布 ==========
   virtualCanvas.width = 0;
   virtualCanvas.height = 0;
-  return totalCardH;
+
+  // ✅修改返回，返回对象，不再单纯返回数字
+  return {
+      totalCardH,
+      charRightTextMaxH,
+      cpRightTextMaxH
+  };
 }
 
 function preCalcLayoutHeight(targetWidth, appData, gameTemplateList, renderDataList) {
   const headerHeight = calcHeaderVirtualHeight(targetWidth, appData);
-  const gameBlockHeights = renderDataList.map(data => calcSingleGameBlockHeight(targetWidth, data));
-  return { headerHeight, gameBlockHeights };
+  const gameBlockMetaList = renderDataList.map(data => calcSingleGameBlockHeight(targetWidth, data));
+  // 分页逻辑只使用原始卡片高度，不介入右置文本高度（分页预计算保守，渲染阶段再撑开容器）
+  const gameBlockHeights = gameBlockMetaList.map(m => m.totalCardH);
+  return { headerHeight, gameBlockHeights, gameBlockMetaList };
 }
 
 function splitPagesByHeight(headerHeight, gameBlockHeights, maxH) {
@@ -983,7 +1044,8 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
   }
 
   // ========= 获取预计算卡片高度，并生成运行时安全高度 =========
-  const cardH = calcSingleGameBlockHeight(targetWidth, renderData);
+  const blockMeta = calcSingleGameBlockHeight(targetWidth, renderData);
+  const cardH = blockMeta.totalCardH;
 
   // ✅运行时完整还原所有模块高度，和calcSingleGameBlockHeight累加逻辑完全对齐，消除预计算与渲染偏差
   const textSize = renderData.appData.exportCustomTextFontSize ?? 16;
@@ -1000,45 +1062,20 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
   runtimeContentH += charAreaHeight;
   // charSectionText高度（top14 + bottom8）
   if(gameItem.charSectionText?.trim()){
-      // 复制右置判断逻辑，和渲染保持一致
-      let canRight = false;
-      const innerContainerW = gameCardW - cardInnerPad * 2;
-      const cardW = LAYOUT_SPACE.CHAR_CARD_W;
-      const gap = LAYOUT_SPACE.CHAR_ROW_GAP;
-      const perRow = calcCardsPerRow(cardW, gap, innerContainerW);
-      canRight = renderData.appData.exportCustomTextRight
-          && canPlaceTextRight(charItems.length, perRow, innerContainerW, cardW, gap, cardW);
-
-      const h = measureWrappedHeight(painter.ctx, gameItem.charSectionText.trim(), gameCardW - cardInnerPad*2, lineHeight, textSize);
-      if(!canRight){
-          runtimeContentH += h + 14 + 8;
-      }
-      // canRight=true：不加，同行悬浮，不增加卡片垂直尺寸
+    const h = measureWrappedHeight(painter.ctx, gameItem.charSectionText.trim(), gameCardW - cardInnerPad*2, lineHeight, textSize);
+    runtimeContentH += h + 14 + 8;
   }
   runtimeContentH += cpAreaHeight;
   // cpSectionText高度（仅top14，无bottom8）
   if(gameItem.cpSectionText?.trim()){
-      let canRight = false;
-      if (cpItems.length > 0 && renderData.appData.exportCustomTextRight) {
-          const firstCp = cpItems[0];
-          if (firstCp.maleItems && firstCp.maleItems.length > 0) {
-              const femaleCardW = LAYOUT_SPACE.CHAR_CARD_W;
-              const maleGap = LAYOUT_SPACE.CP_MALE_GAP;
-              const colGap = LAYOUT_SPACE.CP_COLUMN_GAP;
-              const maleContainerW = (gameCardW - cardInnerPad * 2) - femaleCardW - colGap;
-              const perRow = calcCardsPerRow(LAYOUT_SPACE.CHAR_CARD_W, maleGap, maleContainerW);
-              canRight = canPlaceTextRight(firstCp.maleItems.length, perRow, maleContainerW, LAYOUT_SPACE.CHAR_CARD_W, maleGap, LAYOUT_SPACE.CHAR_CARD_W);
-          }
-      }
-      const h = measureWrappedHeight(painter.ctx, gameItem.cpSectionText.trim(), gameCardW - cardInnerPad*2, lineHeight, textSize);
-      if(!canRight){
-          runtimeContentH += h + 14;
-      }
-      // canRight=true：不加，同行悬浮
+    const h = measureWrappedHeight(painter.ctx, gameItem.cpSectionText.trim(), gameCardW - cardInnerPad*2, lineHeight, textSize);
+    runtimeContentH += h + 14;
   }
 
-  // 取两者最大值：预计算高度 / 实时测量内容高度；杜绝空白溢出
-  const safeCardH = Math.max(runtimeContentH, cardH);
+  // ==========新增：右置模式文本的实际底部高度，容器必须撑开，避免文本被边框截断，产生底部大片空白 =========
+  const maxRightTextBottom = Math.max(blockMeta.charRightTextMaxH, blockMeta.cpRightTextMaxH);
+  // runtimeContentH：普通模式总高度；maxRightTextBottom：右置文本渲染到底部的Y坐标（相对于卡片左上角）
+  const safeCardH = Math.max(runtimeContentH, cardH, maxRightTextBottom);
 
   painter.drawRoundRect(
     cardX, cardTop, gameCardW, safeCardH,
@@ -1564,7 +1601,8 @@ function calcTotalVirtualHeight(targetWidth, appData, gameTemplateList, renderDa
   const headerH = calcHeaderVirtualHeight(targetWidth, appData);
   let total = headerH;
   renderDataList.forEach((data, idx) => {
-    const cardH = calcSingleGameBlockHeight(targetWidth, data);
+    const meta = calcSingleGameBlockHeight(targetWidth, data);
+    const cardH = meta.totalCardH;
     total += cardH;
     if (idx !== renderDataList.length - 1) {
       total += LAYOUT_SPACE.ADDED_GAME_CARD_MB;
@@ -1804,7 +1842,7 @@ export async function renderExportCanvas(
     throw new Error('分页模式必须传入有效页面高度');
   }
 
-  const { headerHeight, gameBlockHeights } = preCalcLayoutHeight(
+  const { headerHeight, gameBlockHeights, gameBlockMetaList } = preCalcLayoutHeight(
     targetWidth,
     appData,
     gameTemplateList,
