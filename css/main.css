@@ -821,75 +821,74 @@ input[type="checkbox"] {
     display:flex;
     flex-direction:row;
     align-items:center;
-    gap:20px;
-    max-width:420px;
+    gap:20px; /* 和 color‑set‑row 内部item gap保持一致，参考导出背景色、标题文字色间距 */
+    flex-wrap:wrap; /* 小于1200px自动换行，防止溢出 */
+    max-width:480px;
 }
-
 .font-size-set-row label {
     font-size:16px;
-    color: var(--export-baseinfotext, #c98fac);
-    white-space: nowrap;
+    color:#c98fac; /* 和基础信息色统一 */
+    white-space:nowrap;
 }
-
-.font-size-set-row .font-size-value-display {
+.font-size-value-display {
     font-size:16px;
-    color: var(--export-baseinfotext, #c98fac);
-    white-space: nowrap;
+    color:#c98fac; /* 和基础信息色统一 */
+    white-space:nowrap;
 }
-
 .font-size-set-row input[type="range"] {
     flex:1;
-    width:auto;
-    -webkit-appearance: none;
-    appearance: none;
+    min-width:140px;
     height:6px;
+    /* 轨道底色：未拖动部分 #fff7f9 */
     background:#fff7f9;
-    border-radius:3px;
+    border-radius:999px;
     outline:none;
+    -webkit-appearance:none;
+    appearance:none;
 }
-
-/* webkit：滑块轨道已拖动部分 */
-.font-size-set-row input[type="range"]::-webkit-slider-runnable-track {
-    height:6px;
-    border-radius:3px;
-    background:#fff7f9;
-}
+/* 滑块圆点（Webkit:Safari/Chrome），和页面switch开关滑块颜色 #e895a8 */
 .font-size-set-row input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance:none;
-    width:18px;
-    height:18px;
+    appearance:none;
+    width:20px;
+    height:20px;
     border-radius:50%;
     background:#e895a8;
     border:none;
-    margin-top:-6px;
     cursor:pointer;
 }
-.font-size-set-row input[type="range"]::-webkit-slider-runnable-track::-webkit-slider-progress {
+/* 已经拖动过的进度填充颜色 #e895a8 webkit */
+.font-size-set-row input[type="range"]::-webkit-slider-runnable-track {
+    height:6px;
+    border-radius:999px;
+}
+/* firefox 样式 */
+.font-size-set-row input[type="range"]::-moz-range-thumb {
+    width:20px;
+    height:20px;
+    border-radius:50%;
     background:#e895a8;
+    border:none;
+    cursor:pointer;
 }
-/* 兼容webkit进度条着色 */
-.font-size-set-row input[type="range"] {
-    background: linear-gradient(to right, #e895a8 0%, #e895a8 var(--range-progress, 5.55%), #fff7f9 var(--range-progress,5.55%), #fff7f9 100%);
-}
-
-/* firefox */
 .font-size-set-row input[type="range"]::-moz-range-track {
     height:6px;
-    border-radius:3px;
     background:#fff7f9;
-}
-.font-size-set-row input[type="range"]::-moz-range-thumb {
-    width:18px;
-    height:18px;
-    border-radius:50%;
-    background:#e895a8;
-    border:none;
-    cursor:pointer;
+    border-radius:999px;
 }
 .font-size-set-row input[type="range"]::-moz-range-progress {
-    background-color:#e895a8;
     height:6px;
-    border-radius:3px;
+    background:#e895a8;
+    border-radius:999px;
+}
+/* 移动端小于1200px自动换行，flex-wrap已经开启，这里微调最小宽度保证换行后布局正常 */
+@media (max-width:1200px) {
+    .font-size-set-row {
+        max-width:100%;
+    }
+    .font-size-set-row input[type="range"] {
+        min-width:120px;
+    }
 }
 
 /* ========== 导出尺寸选择 size-select ========== */
