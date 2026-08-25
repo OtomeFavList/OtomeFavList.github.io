@@ -839,29 +839,24 @@ input[type="checkbox"] {
     flex:1;
     min-width:140px;
     height:6px;
-    /* ❗删除background，轨道背景交给伪元素，不要写在input本体 */
     background:transparent;
     border-radius:999px;
     outline:none;
     -webkit-appearance:none;
     appearance:none;
-    /* 保留padding给thumb圆点提供点击热区，不要删掉！ */
     padding:10px 0;
 }
 
-/* 关键修复：WebKit滑块容器，强制限制内部容器高度，防止padding把轨道撑粗 */
 .font-size-set-row input[type="range"]::-webkit-slider-container {
     height:6px;
 }
 
-/* 轨道底色（未填充部分） */
 .font-size-set-row input[type="range"]::-webkit-slider-runnable-track {
     height:6px;
-    background:#fff7f9;
     border-radius:999px;
+    background: linear-gradient(to right, #e895a8 var(--slider-progress,0%), #fff7f9 var(--slider-progress,0%));
 }
 
-/* ✅Webkit滑块圆点修复 */
 .font-size-set-row input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance:none;
     appearance:none;
@@ -874,7 +869,6 @@ input[type="checkbox"] {
     margin-top:-5px;
 }
 
-/* firefox 样式 */
 .font-size-set-row input[type="range"]::-moz-range-thumb {
     width:16px;
     height:16px;
