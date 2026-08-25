@@ -840,11 +840,10 @@ input[type="checkbox"] {
 .font-size-set-row input[type="range"] {
     flex:1;
     width:auto;
-    /* 统一滑块主题色 #e895a8，webkit + firefox两套 */
     -webkit-appearance: none;
     appearance: none;
     height:6px;
-    background:#f1d2d9;
+    background:#fff7f9;
     border-radius:3px;
     outline:none;
 }
@@ -853,7 +852,7 @@ input[type="checkbox"] {
 .font-size-set-row input[type="range"]::-webkit-slider-runnable-track {
     height:6px;
     border-radius:3px;
-    background:#f1d2d9;
+    background:#fff7f9;
 }
 .font-size-set-row input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance:none;
@@ -870,14 +869,14 @@ input[type="checkbox"] {
 }
 /* 兼容webkit进度条着色 */
 .font-size-set-row input[type="range"] {
-    background: linear-gradient(to right, #e895a8 0%, #e895a8 var(--range-progress, 5.55%), #f1d2d9 var(--range-progress,5.55%), #f1d2d9 100%);
+    background: linear-gradient(to right, #e895a8 0%, #e895a8 var(--range-progress, 5.55%), #fff7f9 var(--range-progress,5.55%), #fff7f9 100%);
 }
 
 /* firefox */
 .font-size-set-row input[type="range"]::-moz-range-track {
     height:6px;
     border-radius:3px;
-    background:#f1d2d9;
+    background:#fff7f9;
 }
 .font-size-set-row input[type="range"]::-moz-range-thumb {
     width:18px;
