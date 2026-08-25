@@ -825,6 +825,8 @@ input[type="checkbox"] {
     flex-wrap:wrap;
     max-width:480px;
     padding:10px 0;
+    /* ✅新增：用于Firefox伪元素进度条定位 */
+    position: relative;
 }
 .font-size-set-row label {
     font-size:16px;
@@ -845,14 +847,21 @@ input[type="checkbox"] {
     outline:none;
     -webkit-appearance:none;
     appearance:none;
+    /* firefox下，轨道底色交给伪元素，input本身背景透明 */
+    z-index: 2;
+    position: relative;
 }
+/* ========== WebKit Chrome/Safari 原有逻辑保留不变 ========== */
 .font-size-set-row input[type="range"]::-webkit-slider-container {
     height:6px;
 }
 .font-size-set-row input[type="range"]::-webkit-slider-runnable-track {
     height:6px;
     border-radius:999px;
-    background: linear-gradient(to right, #e895a8 var(--slider-progress,0%), #fff7f9 var(--slider-progress,0%));
+    background-color: #fff7f9;
+    background-image: linear-gradient(to right, #e895a8 0%, #e895a8 100%);
+    background-repeat: no-repeat;
+    background-size: var(--slider-progress,0%) 100%;
 }
 .font-size-set-row input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance:none;
@@ -865,6 +874,37 @@ input[type="checkbox"] {
     cursor:pointer;
     margin-top:-5px;
 }
+
+/* ========== Firefox 兼容：使用父级伪元素绘制进度条 ========== */
+.font-size-set-row::before {
+    content:"";
+    position:absolute;
+    left:0;
+    top:50%;
+    transform: translateY(-50%);
+    height:6px;
+    border-radius:999px;
+    background:#fff7f9;
+    width:100%;
+    z-index:1;
+}
+.font-size-set-row::after {
+    content:"";
+    position:absolute;
+    left:0;
+    top:50%;
+    transform: translateY(-50%);
+    height:6px;
+    border-radius:999px;
+    background:#e895a8;
+    width:var(--slider-progress,0%);
+    z-index:1;
+}
+.font-size-set-row input[type="range"]::-moz-range-track {
+    /* firefox原生轨道置透明，完全交给父伪元素渲染 */
+    background: transparent;
+    height:6px;
+}
 .font-size-set-row input[type="range"]::-moz-range-thumb {
     width:16px;
     height:16px;
@@ -872,21 +912,6 @@ input[type="checkbox"] {
     background:#e895a8;
     border:none;
     cursor:pointer;
-}
-.font-size-set-row input[type="range"]::-moz-range-track {
-    height:6px;
-    background:#fff7f9;
-    border-radius:999px;
-}
-.font-size-set-row input[type="range"]::-webkit-slider-runnable-track {
-    height:6px;
-    border-radius:999px;
-    /* 不使用gradient+css变量，改用双层背景：底层底色，上层使用伪元素方案行不通；改用背景叠加，使用两个叠加层，用background‑size实现进度 */
-    background-color: #fff7f9;
-    background-image: linear-gradient(to right, #e895a8 0%, #e895a8 100%);
-    background-repeat: no-repeat;
-    /* width由 --slider‑progress 控制 */
-    background-size: var(--slider-progress,0%) 100%;
 }
 
 @media (max-width:1200px) {
