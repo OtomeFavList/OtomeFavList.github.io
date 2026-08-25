@@ -424,6 +424,8 @@ export function initPage(Core = {}) {
       exportFoldContentSwitch: document.getElementById("export-fold-content"),
       // =========新增：显示隐藏/续作FD角色名开关==========
       exportShowHiddenFDNameSwitch: document.getElementById("export-show-hidden-fd-name"),
+      // =========新增：自定义文本右置开关==========
+      exportCustomTextRightSwitch: document.getElementById("export-custom-text-right"),
       // =========新增：恢复默认配色按钮==========
       resetColorBtn: document.getElementById("btn-reset-color"),
       // =========【新增】自定义文本字号滑块 ==========
@@ -1096,6 +1098,9 @@ export function initPage(Core = {}) {
             el.sliderCustomTextFont.value = defaultFs;
             el.customTextFontValueDisplay.textContent = `${defaultFs}px`;
         }
+        // 重置自定义文本右置为false
+        appData.exportCustomTextRight = false;
+        if(el.exportCustomTextRightSwitch) el.exportCustomTextRightSwitch.checked = false;
 
         saveData();
         clearPreviewCacheResource();
@@ -1146,6 +1151,10 @@ export function initPage(Core = {}) {
     if (el.exportShowHiddenFDNameSwitch) {
         el.exportShowHiddenFDNameSwitch.checked = !!appData.exportShowHiddenFDName;
     }
+    // =========【新增】自定义文本右置开关初始化 =========
+    if (el.exportCustomTextRightSwitch) {
+        el.exportCustomTextRightSwitch.checked = !!appData.exportCustomTextRight;
+    }
 
     refreshHideCharSwitch();
     refreshFDSwitch();
@@ -1179,6 +1188,14 @@ export function initPage(Core = {}) {
     if (el.exportShowHiddenFDNameSwitch) {
         el.exportShowHiddenFDNameSwitch.addEventListener("change", function() {
             appData.exportShowHiddenFDName = this.checked;
+            saveData();
+            clearPreviewCacheResource();
+        });
+    }
+    // =========【新增】自定义文本右置开关事件 =========
+    if (el.exportCustomTextRightSwitch) {
+        el.exportCustomTextRightSwitch.addEventListener("change", function() {
+            appData.exportCustomTextRight = this.checked;
             saveData();
             clearPreviewCacheResource();
         });
