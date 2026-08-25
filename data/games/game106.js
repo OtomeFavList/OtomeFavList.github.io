@@ -44,18 +44,18 @@ const gameData = {
     publisher: ["KONAMI"],
     cnStudio: "暂无",
     writer: [
-        {name:"中文编剧", lang:"zh"},
-        {name:"日文编剧", lang:"ja"},
-        {name:"英文编剧", lang:"en"}
+        {name:"田島あきこ", lang:"zh"},
+        {name:"古館純子", lang:"zh"},
+        {name:"星宮すみれ", lang:"zh"}
     ],
     art: [
         {name:"小松原里枝子", lang:"zh"}
     ],
-    cover: "game/1.jpg", // 相对路径，游戏封面
+    cover: "game/106.jpg", // 相对路径，游戏封面
     charList: [
         // 普通可攻略男主 male
         {
-            id: "g1_m01",
+            id: "g106_m01",
             name: "男主1",
             gender: "male",
             isHidden: false,
@@ -64,13 +64,11 @@ const gameData = {
             images: [
                 { srcList: ["char/001/男主1.jpg",
                             "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["char/001/男主13.jpg"], type: "hidden" },
-                { srcList: ["char/001/男主14.jpg"], type: "fd" }
             ]
         },
         // 普通可攻略男主 male
         {
-            id: "g1_m02",
+            id: "g106_m02",
             name: "男主2",
             gender: "male",
             isHidden: false,
@@ -79,13 +77,11 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
         // 普通可攻略男主 male
         {
-            id: "g1_m03",
+            id: "g106_m03",
             name: "男主3",
             gender: "male",
             isHidden: false,
@@ -94,13 +90,11 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
         // 普通可攻略男主 male
         {
-            id: "g1_m04",
+            id: "g106_m04",
             name: "男主4",
             gender: "male",
             isHidden: false,
@@ -109,13 +103,11 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
         // 普通可攻略男主 male
         {
-            id: "g1_m05",
+            id: "g106_m05",
             name: "男主5",
             gender: "male",
             isHidden: false,
@@ -124,44 +116,84 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
-        // 隐藏角色（isHidden=true → 开关开启才显示整个角色卡片）
+         // 普通可攻略男主 male
         {
-            id: "g1_h01",
-            name: "隐藏攻略角色",
-            gender: "male",
-            isHidden: true,
-            isFD: false,
-            isSub: true,
-            images: [
-                { srcList: ["char/g001_h01_1.jpg"], type: "base" }
-            ]
-        },
-        // FD续作限定角色（isFD=true → FD开关开启才显示整个角色卡片）
-        {
-            id: "g1_fd01",
-            name: "续作FD新增角色",
-            gender: "male",
-            isHidden: false,
-            isFD: true,
-            isSub: true,
-            images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
-            ]
-        },
-        // 配角角色（isSub=true → 开关开启才显示整个角色卡片）
-        {
-            id: "g1_fd01",
-            name: "配角",
+            id: "g106_m06",
+            name: "男主5",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/g0_m01_1.jpg",
+                            "char/g001_m0_2.jpg"], type: "base" },
+            ]
+        },
+        // 普通可攻略男主 male
+        {
+            id: "g106_m07",
+            name: "男主5",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/g0_m01_1.jpg",
+                            "char/g001_m0_2.jpg"], type: "base" },
+            ]
+        },
+        // 普通可攻略男主 male
+        {
+            id: "g106_m08",
+            name: "男主5",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/g0_m01_1.jpg",
+                            "char/g001_m0_2.jpg"], type: "base" },
+            ]
+        },
+        // 普通可攻略男主 male
+        {
+            id: "g106_m09",
+            name: "男主5",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/g0_m01_1.jpg",
+                            "char/g001_m0_2.jpg"], type: "base" },
+            ]
+        },
+        // 普通可攻略男主 male
+        {
+            id: "g106_m10",
+            name: "男主5",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/g0_m01_1.jpg",
+                            "char/g001_m0_2.jpg"], type: "base" },
+            ]
+        },
+        // 普通可攻略男主 male
+        {
+            id: "g106_m11",
+            name: "男主5",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/g0_m01_1.jpg",
+                            "char/g001_m0_2.jpg"], type: "base" },
             ]
         }
     ]
