@@ -653,9 +653,9 @@ function calcSingleGameBlockHeight(targetWidth, renderData) {
         }
     }
     const realTextH = measureWrappedHeight(vCtx, gameItem.cpSectionText.trim(), textMaxW, lineHeight, textSize);
+    // ✅修复③：右置模式同样增加底部固定8px外边距，与绘制逻辑对齐
     if(canRight){
-        // 右置模式：仅上方14px，无底部间距
-        cpSectionTextHeight = realTextH + 14;
+        cpSectionTextHeight = realTextH + 14 + 8;
     }else{
         // 普通模式：top=14, bottom=8
         cpSectionTextHeight = realTextH + 14 + 8;
@@ -1149,7 +1149,8 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
     if (canRight) {
         const totalRowW = charItems.length * cardW + (charItems.length - 1) * gap;
         const textX = cardX + cardInnerPad + totalRowW + gap;
-        const charRowTopY = drawY;
+        // ✅修复①：取角色行**起始Y**，不是绘制完成后的drawY
+        const charRowTopY = yPos;
         const textY = charRowTopY + 14; // top=14
         let textMaxW = innerContainerW - totalRowW - gap;
         textMaxW = Math.max(20, textMaxW); // 最小宽度保护
@@ -1399,8 +1400,8 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
             lineHeight,
             textSize
         );
-        // 右置模式：无底部间距
-        drawY = Math.max(drawY, textY + textH);
+        // ✅右置模式增加底部固定8px外边距，与预计算高度完全对齐
+        drawY = Math.max(drawY, textY + textH + 8);
     } else {
         const textX = cardX + cardInnerPad;
         const textMaxW = gameCardW - cardInnerPad * 2;
