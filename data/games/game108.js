@@ -45,10 +45,10 @@ const gameData = {
     ],
     cover: "game/108.jpg", // 相对路径，游戏封面
     charList: [
-        // 普通可攻略男主 male
+        // 白羽大地
         {
             id: "g108_m01",
-            name: "男主1",
+            name: "白羽大地",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -58,10 +58,10 @@ const gameData = {
                             "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 本多行
         {
             id: "g108_m02",
-            name: "男主2",
+            name: "本多行",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -71,10 +71,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 氷室一紀
         {
             id: "g108_m03",
-            name: "男主3",
+            name: "氷室一紀",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -84,10 +84,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 大成功
         {
             id: "g108_m04",
-            name: "男主4",
+            name: "大成功",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -97,10 +97,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        /// 普通可攻略男主 male
+        /// 御影小次郎
         {
             id: "g108_m05",
-            name: "男主5",
+            name: "御影小次郎",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -110,10 +110,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 七ツ森実
         {
             id: "g108_m06",
-            name: "男主5",
+            name: "七ツ森実",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -123,10 +123,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 颯砂希
         {
             id: "g108_m07",
-            name: "男主5",
+            name: "颯砂希",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -136,10 +136,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 風真玲太
         {
             id: "g108_m08",
-            name: "男主5",
+            name: "風真玲太",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -149,10 +149,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 柊夜ノ介
         {
             id: "g108_m09",
-            name: "男主5",
+            name: "柊夜ノ介",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -162,10 +162,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 巴征道
         {
             id: "g108_m10",
-            name: "男主5",
+            name: "巴征道",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -175,10 +175,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 隐藏角色（isHidden=true → 开关开启才显示整个角色卡片）
+        // 白羽空也
         {
             id: "g108_h01",
-            name: "隐藏攻略角色",
+            name: "白羽空也",
             gender: "male",
             isHidden: true,
             isFD: false,
