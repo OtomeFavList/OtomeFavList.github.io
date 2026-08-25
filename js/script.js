@@ -1117,7 +1117,11 @@ export function initPage(Core = {}) {
             const max = Number(sliderEl.max);
             const val = Number(sliderEl.value);
             const percent = ((val - min) / (max - min)) * 100;
-            sliderEl.style.setProperty('--slider-progress', `${percent}%`);
+            // 重点：向父容器 .font‑size‑set‑row 设置变量，不要设置给input本身
+            const rowWrap = sliderEl.closest('.font-size-set-row');
+            if(rowWrap){
+                rowWrap.style.setProperty('--slider-progress', `${percent}%`);
+            }
         }
         // 初始化设置进度
         updateSliderProgress(el.sliderCustomTextFont);
