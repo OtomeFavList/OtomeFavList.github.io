@@ -51,10 +51,10 @@ const gameData = {
                             "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 筧十蔵
         {
             id: "g104_m01",
-            name: "男主1",
+            name: "筧十蔵",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -64,10 +64,10 @@ const gameData = {
                             "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 由利鎌之介
         {
             id: "g104_m02",
-            name: "男主2",
+            name: "由利鎌之介",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -77,10 +77,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 霧隠才蔵
         {
             id: "g104_m03",
-            name: "男主3",
+            name: "霧隠才蔵",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -90,10 +90,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 猿飛佐助
         {
             id: "g104_m04",
-            name: "男主4",
+            name: "猿飛佐助",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -103,10 +103,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 真田信繁
         {
             id: "g104_m05",
-            name: "男主5",
+            name: "真田信繁",
             gender: "male",
             isHidden: false,
             isFD: false,
