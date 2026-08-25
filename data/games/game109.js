@@ -52,10 +52,10 @@ const gameData = {
                             "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // シャルル·パラディール
         {
             id: "g109_m01",
-            name: "男主1",
+            name: "シャルル·パラディール",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -65,10 +65,10 @@ const gameData = {
                             "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // エヴァン·クロフォード
         {
             id: "g109_m02",
-            name: "男主2",
+            name: "エヴァン·クロフォード",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -78,10 +78,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // ジャック·レスター
         {
             id: "g109_m03",
-            name: "男主3",
+            name: "ジャック·レスター",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -91,10 +91,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // レオン·ヴィトリー
         {
             id: "g109_m04",
-            name: "男主4",
+            name: "レオン·ヴィトリー",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -104,10 +104,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // ルディ·ロシュフォール
         {
             id: "g109_m05",
-            name: "男主5",
+            name: "ルディ·ロシュフォール",
             gender: "male",
             isHidden: false,
             isFD: false,
