@@ -90,7 +90,7 @@ const gameData = {
             gender: "male",
             isHidden: false,
             isFD: false,
-            isSub: true,
+            isSub: false,
             images: [
                 { srcList: ["char/001/男主1.jpg",
                             "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
@@ -103,7 +103,7 @@ const gameData = {
             gender: "male",
             isHidden: false,
             isFD: false,
-            isSub: true,
+            isSub: false,
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
@@ -116,7 +116,7 @@ const gameData = {
             gender: "male",
             isHidden: false,
             isFD: false,
-            isSub: true,
+            isSub: false,
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
@@ -129,7 +129,7 @@ const gameData = {
             gender: "male",
             isHidden: false,
             isFD: false,
-            isSub: true,
+            isSub: false,
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
@@ -142,7 +142,7 @@ const gameData = {
             gender: "male",
             isHidden: false,
             isFD: false,
-            isSub: true,
+            isSub: false,
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
@@ -155,7 +155,7 @@ const gameData = {
             gender: "male",
             isHidden: false,
             isFD: false,
-            isSub: true,
+            isSub: false,
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
@@ -168,7 +168,7 @@ const gameData = {
             gender: "male",
             isHidden: false,
             isFD: false,
-            isSub: true,
+            isSub: false,
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
@@ -181,7 +181,7 @@ const gameData = {
             gender: "male",
             isHidden: false,
             isFD: false,
-            isSub: true,
+            isSub: false,
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
@@ -194,7 +194,7 @@ const gameData = {
             gender: "male",
             isHidden: false,
             isFD: false,
-            isSub: true,
+            isSub: false,
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
@@ -207,7 +207,7 @@ const gameData = {
             gender: "male",
             isHidden: false,
             isFD: false,
-            isSub: true,
+            isSub: false,
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
