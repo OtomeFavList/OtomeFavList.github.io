@@ -821,67 +821,77 @@ input[type="checkbox"] {
     display:flex;
     flex-direction:row;
     align-items:center;
-    gap:20px; /* 和 color‑set‑row 内部item gap保持一致，参考导出背景色、标题文字色间距 */
-    flex-wrap:wrap; /* 小于1200px自动换行，防止溢出 */
+    gap:20px;
+    flex-wrap:wrap;
     max-width:480px;
 }
+
 .font-size-set-row label {
     font-size:16px;
-    color:#c98fac; /* 和基础信息色统一 */
+    color:#c98fac;
     white-space:nowrap;
 }
+
 .font-size-value-display {
     font-size:16px;
-    color:#c98fac; /* 和基础信息色统一 */
+    color:#c98fac;
     white-space:nowrap;
 }
+
 .font-size-set-row input[type="range"] {
     flex:1;
     min-width:140px;
     height:6px;
-    /* 轨道底色：未拖动部分 #fff7f9 */
     background:#fff7f9;
     border-radius:999px;
     outline:none;
     -webkit-appearance:none;
     appearance:none;
+    /* 给range容器留上下内边距，给thumb圆点预留空间，防止溢出 */
+    padding:10px 0;
 }
-/* 滑块圆点（Webkit:Safari/Chrome），和页面switch开关滑块颜色 #e895a8 */
+
+/* Webkit滑块圆点修复：缩小尺寸 + 设置margin居中对齐，防止溢出轨道 */
 .font-size-set-row input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance:none;
     appearance:none;
-    width:20px;
-    height:20px;
+    width:16px;  /* 原20px → 缩小 */
+    height:16px; /* 原20px → 缩小 */
     border-radius:50%;
     background:#e895a8;
     border:none;
     cursor:pointer;
+    /* 核心：负margin抵消，让圆点垂直居中在6px轨道上，不会上下溢出 */
+    margin-top:-5px;
 }
-/* 已经拖动过的进度填充颜色 #e895a8 webkit */
+
 .font-size-set-row input[type="range"]::-webkit-slider-runnable-track {
     height:6px;
     border-radius:999px;
 }
+
 /* firefox 样式 */
 .font-size-set-row input[type="range"]::-moz-range-thumb {
-    width:20px;
-    height:20px;
+    width:16px; /* 原20px */
+    height:16px; /* 原20px */
     border-radius:50%;
     background:#e895a8;
     border:none;
     cursor:pointer;
 }
+
 .font-size-set-row input[type="range"]::-moz-range-track {
     height:6px;
     background:#fff7f9;
     border-radius:999px;
 }
+
 .font-size-set-row input[type="range"]::-moz-range-progress {
     height:6px;
     background:#e895a8;
     border-radius:999px;
 }
-/* 移动端小于1200px自动换行，flex-wrap已经开启，这里微调最小宽度保证换行后布局正常 */
+
 @media (max-width:1200px) {
     .font-size-set-row {
         max-width:100%;
