@@ -889,19 +889,22 @@ input[type="checkbox"] {
 }
 /* ========== 【关键修复】仅Firefox渲染伪元素轨道，Chrome/Safari完全不生成这一层 ========== */
 @-moz-document url-prefix() {
-    .font-size-set-row::before {
+    .font-size-set-row input[type="range"] {
+        position: relative;
+    }
+    .font-size-set-row input[type="range"]::before {
         content:"";
         position:absolute;
         left:0;
+        right:0;
         top:50%;
         transform: translateY(-50%);
         height:6px;
         border-radius:999px;
         background:#fff7f9;
-        width:100%;
-        z-index:1;
+        z-index:-1;
     }
-    .font-size-set-row::after {
+    .font-size-set-row input[type="range"]::after {
         content:"";
         position:absolute;
         left:0;
@@ -911,10 +914,9 @@ input[type="checkbox"] {
         border-radius:999px;
         background:#e895a8;
         width:var(--slider-progress,0%);
-        z-index:1;
+        z-index:-1;
     }
 }
-
 @media (max-width:1200px) {
     .font-size-set-row {
         max-width:100%;
