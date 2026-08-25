@@ -425,7 +425,10 @@ export function initPage(Core = {}) {
       // =========新增：显示隐藏/续作FD角色名开关==========
       exportShowHiddenFDNameSwitch: document.getElementById("export-show-hidden-fd-name"),
       // =========新增：恢复默认配色按钮==========
-      resetColorBtn: document.getElementById("btn-reset-color")
+      resetColorBtn: document.getElementById("btn-reset-color"),
+      // =========【新增】自定义文本字号滑块 ==========
+      sliderCustomTextFont: document.getElementById("slider-custom-text-font"),
+      customTextFontValueDisplay: document.getElementById("custom-text-font-value")
     };
 
     // ========== 预览弹窗元素 ==========
@@ -1086,9 +1089,35 @@ export function initPage(Core = {}) {
           // 同步更新CSS变量
           document.body.style.setProperty(item.cssVar, item.default);
         });
+        // =========【新增：重置自定义文本字体大小回到16px】==========
+        if(el.sliderCustomTextFont && el.customTextFontValueDisplay){
+            const defaultFs = 16;
+            appData.exportCustomTextFontSize = defaultFs;
+            el.sliderCustomTextFont.value = defaultFs;
+            el.customTextFontValueDisplay.textContent = `${defaultFs}px`;
+        }
+
         saveData();
         clearPreviewCacheResource();
       })
+    }
+
+    // =========【新增：自定义导出文本字号滑块初始化】==========
+    if(el.sliderCustomTextFont && el.customTextFontValueDisplay){
+        // 初始化，默认16，范围14‑42
+        const initFontSize = Number(appData.exportCustomTextFontSize ?? 16);
+        const safeInit = Math.max(14, Math.min(42, initFontSize));
+        appData.exportCustomTextFontSize = safeInit;
+        el.sliderCustomTextFont.value = safeInit;
+        el.customTextFontValueDisplay.textContent = `${safeInit}px`;
+
+        el.sliderCustomTextFont.oninput = () => {
+            const val = Number(el.sliderCustomTextFont.value);
+            appData.exportCustomTextFontSize = val;
+            el.customTextFontValueDisplay.textContent = `${val}px`;
+            saveData();
+            clearPreviewCacheResource();
+        };
     }
 
     // 注意：不再单独设置 body.style.background，由CSS变量统一控制
