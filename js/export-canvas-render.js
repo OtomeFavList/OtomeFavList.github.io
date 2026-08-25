@@ -36,8 +36,8 @@ export function wrapText(ctx, text, x, y, maxWidth, lineHeight, fontSize, color,
   const fontStr = bold ? `bold ${fontSize}px ${font}` : `${fontSize}px ${font}`;
   ctx.font = fontStr;
   ctx.fillStyle = color;
-  // ==========【新增补丁】行空隙上限14px ==========
-  const gap = Math.min(lineHeight - fontSize, 14);
+  // ==========【新增补丁】行空隙上限12px ==========
+  const gap = Math.min(lineHeight - fontSize, 12);
   const safeLineHeight = fontSize + gap;
   const chars = Array.from(text);
   let line = '';
@@ -65,8 +65,8 @@ export function measureWrappedHeight(ctx, text, maxWidth, lineHeight, fontSize, 
   if (!text) return 0;
   const fontStr = bold ? `bold ${fontSize}px ${FONT_SIYUAN}` : `${fontSize}px ${FONT_SIYUAN}`;
   ctx.font = fontStr;
-  // ==========【新增补丁】行空隙上限14px，和绘制逻辑保持一致 ==========
-  const gap = Math.min(lineHeight - fontSize, 14);
+  // ==========【新增补丁】行空隙上限12px，和绘制逻辑保持一致 ==========
+  const gap = Math.min(lineHeight - fontSize, 12);
   const safeLineHeight = fontSize + gap;
   const chars = Array.from(text);
   let line = '';
