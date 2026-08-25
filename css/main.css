@@ -1956,7 +1956,7 @@ textarea {
     user-select: text !important;
     -webkit-user-select: text !important;
 }
-/* 禁止图片右键菜单的快捷保存；增加蒙版占位方案（可选） */
+/* 禁止图片右键菜单的快捷保存；增加蒙版占位方案 */
 .char-card-img-box img,
 .game-option-item img,
 .cp-female-card-btn img,
