@@ -139,7 +139,7 @@ const gameData = {
         },
         // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
         {
-            id: "g1_sub01",
+            id: "g1_s01",
             name: "配角",
             gender: "male",
             isHidden: false,
