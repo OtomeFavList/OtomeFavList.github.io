@@ -59,7 +59,8 @@ const gameData = {
             name: "女主A",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
-            isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
+            isFD: false,    // true=续作/FD专属角色，开关控制是否展示该角色
+            isSub: true,    // true=配角，开关控制是否展示该角色
             images: [
                 { srcList: ["char/001/女主A.jpg",
                             "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
@@ -74,6 +75,7 @@ const gameData = {
             gender: "male",
             isHidden: false,
             isFD: false,
+            isSub: true,
             images: [
                 { srcList: ["char/001/男主1.jpg",
                             "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
@@ -88,6 +90,7 @@ const gameData = {
             gender: "male",
             isHidden: false,
             isFD: false,
+            isSub: true,
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
@@ -102,6 +105,7 @@ const gameData = {
             gender: "male",
             isHidden: false,
             isFD: false,
+            isSub: true,
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
@@ -116,6 +120,7 @@ const gameData = {
             gender: "male",
             isHidden: false,
             isFD: false,
+            isSub: true,
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
@@ -130,6 +135,7 @@ const gameData = {
             gender: "male",
             isHidden: false,
             isFD: false,
+            isSub: true,
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
@@ -144,6 +150,7 @@ const gameData = {
             gender: "male",
             isHidden: true,
             isFD: false,
+            isSub: true,
             images: [
                 { srcList: ["char/g001_h01_1.jpg"], type: "base" }
             ]
@@ -155,6 +162,19 @@ const gameData = {
             gender: "male",
             isHidden: false,
             isFD: true,
+            isSub: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // 配角角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g1_fd01",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
             images: [
                 { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
             ]
