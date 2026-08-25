@@ -1225,13 +1225,15 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
   }
 
   // ---- Couple ----
+  // ✅初始化 cpBlockStartY 兜底值，防止 cpItems 为空时变量未定义
+  let cpBlockStartY = drawY;
   if (cpItems.length > 0) {
     if (charItems.length > 0) {
       drawY += 8;
     }
     painter.drawText('Couple', cardX + cardInnerPad, drawY, 18, '#000');
     // ✅偏移前记录cp卡片真实顶部Y
-    const cpBlockStartY = drawY + 18 + 8;
+    cpBlockStartY = drawY + 18 + 8;
     drawY += 18 + 8;
 
     const femaleCardW = LAYOUT_SPACE.CHAR_CARD_W;
@@ -1430,8 +1432,9 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
             lineHeight,
             textSize
         );
-        // 右置模式无下边距8px
-        drawY = Math.max(drawY, textY + textH);
+        // ✅修复②：右置模式不向下推进drawY（文本同行右侧悬浮，不增加垂直空间）
+        // 原代码：drawY = Math.max(drawY, textY + textH); 已移除
+        // 保持 drawY 不变，由 cp 卡片本身底部决定
     } else {
         const textX = cardX + cardInnerPad;
         const textMaxW = gameCardW - cardInnerPad * 2;
