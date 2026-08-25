@@ -821,43 +821,76 @@ input[type="checkbox"] {
     display:flex;
     flex-direction:row;
     align-items:center;
-    gap:20px;  /* 和color‑set‑row的gap:20px保持一致（导出背景色、标题文字色间距） */
-    max-width:100%;
-    flex-wrap:wrap;
+    gap:20px;
+    max-width:420px;
 }
 
 .font-size-set-row label {
-    font-size:14px;
-    color:#c98fac;
-    font-weight:bold;
-    white-space:nowrap;
+    font-size:16px;
+    color: var(--export-baseinfotext, #c98fac);
+    white-space: nowrap;
+}
+
+.font-size-set-row .font-size-value-display {
+    font-size:16px;
+    color: var(--export-baseinfotext, #c98fac);
+    white-space: nowrap;
 }
 
 .font-size-set-row input[type="range"] {
-    flex: 1;
-    max-width:320px;
-    /* 修改滑块激活轨道颜色 #e895a8，webkit / moz两套 */
+    flex:1;
+    width:auto;
+    /* 统一滑块主题色 #e895a8，webkit + firefox两套 */
+    -webkit-appearance: none;
+    appearance: none;
+    height:6px;
+    background:#f1d2d9;
+    border-radius:3px;
+    outline:none;
 }
 
-/* Webkit(chrome/safari)：滑块已拖动部分颜色 */
+/* webkit：滑块轨道已拖动部分 */
 .font-size-set-row input[type="range"]::-webkit-slider-runnable-track {
-    background: #e895a8;
+    height:6px;
+    border-radius:3px;
+    background:#f1d2d9;
 }
 .font-size-set-row input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance:none;
-    appearance:none;
+    width:18px;
+    height:18px;
+    border-radius:50%;
+    background:#e895a8;
+    border:none;
+    margin-top:-6px;
+    cursor:pointer;
+}
+.font-size-set-row input[type="range"]::-webkit-slider-runnable-track::-webkit-slider-progress {
+    background:#e895a8;
+}
+/* 兼容webkit进度条着色 */
+.font-size-set-row input[type="range"] {
+    background: linear-gradient(to right, #e895a8 0%, #e895a8 var(--range-progress, 5.55%), #f1d2d9 var(--range-progress,5.55%), #f1d2d9 100%);
 }
 
-/* Firefox */
+/* firefox */
+.font-size-set-row input[type="range"]::-moz-range-track {
+    height:6px;
+    border-radius:3px;
+    background:#f1d2d9;
+}
+.font-size-set-row input[type="range"]::-moz-range-thumb {
+    width:18px;
+    height:18px;
+    border-radius:50%;
+    background:#e895a8;
+    border:none;
+    cursor:pointer;
+}
 .font-size-set-row input[type="range"]::-moz-range-progress {
     background-color:#e895a8;
-}
-
-.font-size-value-display {
-    font-size:14px;
-    color:#c98fac;
-    font-weight:normal;
-    white-space:nowrap;
+    height:6px;
+    border-radius:3px;
 }
 
 /* ========== 导出尺寸选择 size-select ========== */
