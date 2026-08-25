@@ -819,20 +819,45 @@ input[type="checkbox"] {
 .font-size-set-row {
     margin:16px 0;
     display:flex;
-    flex-direction:column;
-    gap:8px;
-    max-width:420px;
+    flex-direction:row;
+    align-items:center;
+    gap:20px;  /* 和color‑set‑row的gap:20px保持一致（导出背景色、标题文字色间距） */
+    max-width:100%;
+    flex-wrap:wrap;
 }
+
 .font-size-set-row label {
     font-size:14px;
-    color:#444;
+    color:#c98fac;
+    font-weight:bold;
+    white-space:nowrap;
 }
+
 .font-size-set-row input[type="range"] {
-    width:100%;
+    flex: 1;
+    max-width:320px;
+    /* 修改滑块激活轨道颜色 #e895a8，webkit / moz两套 */
 }
+
+/* Webkit(chrome/safari)：滑块已拖动部分颜色 */
+.font-size-set-row input[type="range"]::-webkit-slider-runnable-track {
+    background: #e895a8;
+}
+.font-size-set-row input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance:none;
+    appearance:none;
+}
+
+/* Firefox */
+.font-size-set-row input[type="range"]::-moz-range-progress {
+    background-color:#e895a8;
+}
+
 .font-size-value-display {
-    font-size:13px;
-    color:#666;
+    font-size:14px;
+    color:#c98fac;
+    font-weight:normal;
+    white-space:nowrap;
 }
 
 /* ========== 导出尺寸选择 size-select ========== */
