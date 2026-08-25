@@ -32,42 +32,32 @@ Nintendo Switch版 5,995 円（税込）
 // 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
 // 官中发售以后，需要修改：游戏名、发售年份、汉化厂商、封面图、角色名
 const gameData = {
-    id: "game1", // 全局唯一ID，不可重复，如 game001
-    name: "示例乙女游戏",
-    year: "20",
-    publisher: ["原厂发行商"],
-    cnStudio: "汉化组/汉化厂商",
+    id: "game107", // 全局唯一ID，不可重复，如 game001
+    name: "ときめきメモリアル Girl's Side 3rd Story",
+    year: "2024",
+    publisher: ["KONAMI"],
+    cnStudio: "暂无",
     writer: [
-        {name:"中文编剧", lang:"zh"},
-        {name:"日文编剧", lang:"ja"},
-        {name:"英文编剧", lang:"en"}
+        {name:"内田明理", lang:"zh"},
+        {name:"田島あきこ", lang:"zh"},
+        {name:"小松原里枝子", lang:"zh"},
+        {name:"神山敬介", lang:"zh"},
+        {name:"松岡功", lang:"zh"},
+        {name:"川名良昌", lang:"zh"},
+        {name:"株式会社エム·ツー", lang:"zh"},
+        {name:"有限会社codeX", lang:"zh"},
+        {name:"ちゃい", lang:"ja"},
+        {name:"コーデックス", lang:"ja"}
     ],
     art: [
-        {name:"中文原画", lang:"zh"},
-        {name:"日文原画", lang:"ja"},
-        {name:"英文原画", lang:"en"}
+        {name:"小松原里枝子", lang:"zh"}
     ],
-    cover: "game/1.jpg", // 相对路径，游戏封面
+    cover: "game/107.jpg", // 相对路径，游戏封面
     charList: [
-        // 女主模板 female
+        // 大迫力
         {
-            id: "g1_f01",
-            name: "女主A",
-            gender: "female",
-            isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
-            isFD: false,    // true=续作/FD专属角色，开关控制是否展示该角色
-            isSub: false,    // true=配角，开关控制是否展示该角色
-            images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["char/001/女主A3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["char/001/女主A4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
-            ]
-        },
-        // 普通可攻略男主 male
-        {
-            id: "g1_m01",
-            name: "男主1",
+            id: "g107_m01",
+            name: "大迫力",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -75,14 +65,12 @@ const gameData = {
             images: [
                 { srcList: ["char/001/男主1.jpg",
                             "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["char/001/男主13.jpg"], type: "hidden" },
-                { srcList: ["char/001/男主14.jpg"], type: "fd" }
             ]
         },
-        // 普通可攻略男主 male
+        // 不二山嵐
         {
-            id: "g1_m02",
-            name: "男主2",
+            id: "g107_m02",
+            name: "不二山嵐",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -90,14 +78,12 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
-        // 普通可攻略男主 male
+        // 新名旬平
         {
-            id: "g1_m03",
-            name: "男主3",
+            id: "g107_m03",
+            name: "新名旬平",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -105,14 +91,12 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
-        // 普通可攻略男主 male
+        // 紺野玉緒
         {
-            id: "g1_m04",
-            name: "男主4",
+            id: "g107_m04",
+            name: "紺野玉緒",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -120,14 +104,12 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
-        // 普通可攻略男主 male
+        // 桜井琉夏
         {
-            id: "g1_m05",
-            name: "男主5",
+            id: "g107_m05",
+            name: "桜井琉夏",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -135,44 +117,45 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
-        // 隐藏角色（isHidden=true → 开关开启才显示整个角色卡片）
+        // 桜井琥一
         {
-            id: "g1_h01",
-            name: "隐藏攻略角色",
+            id: "g107_m06",
+            name: "桜井琥一",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            images: [
+                { srcList: ["char/g0_m01_1.jpg",
+                            "char/g001_m0_2.jpg"], type: "base" },
+            ]
+        },
+        // 設楽聖司
+        {
+            id: "g107_m07",
+            name: "設楽聖司",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            images: [
+                { srcList: ["char/g0_m01_1.jpg",
+                            "char/g001_m0_2.jpg"], type: "base" },
+            ]
+        },
+        // 蓮見達也
+        {
+            id: "g107_h01",
+            name: "蓮見達也",
             gender: "male",
             isHidden: true,
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g001_h01_1.jpg"], type: "base" }
-            ]
-        },
-        // FD续作限定角色（isFD=true → FD开关开启才显示整个角色卡片）
-        {
-            id: "g1_fd01",
-            name: "续作FD新增角色",
-            gender: "male",
-            isHidden: false,
-            isFD: true,
-            isSub: false,
-            images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
-            ]
-        },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
-        {
-            id: "g1_s01",
-            name: "配角",
-            gender: "male",
-            isHidden: false,
-            isFD: false,
-            isSub: true,
-            images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/g0_m01_1.jpg",
+                            "char/g001_m0_2.jpg"], type: "base" },
             ]
         }
     ]
