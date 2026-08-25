@@ -636,8 +636,12 @@ function calcSingleGameBlockHeight(targetWidth, renderData) {
     }
     // ✅使用对应模式的真实最大宽度做换行高度测量
     const realTextH = measureWrappedHeight(vCtx, gameItem.charSectionText.trim(), charTextMeasureMaxW, lineHeight, textSize);
-    // char文本：上14，下8（保留原有边距不变）
-    charSectionTextHeight = realTextH + 14 + 8;
+    // char文本：右置模式同行悬浮，不计入垂直高度；普通模式上14，下8
+    if(canRight){
+        charSectionTextHeight = 0;
+    }else{
+        charSectionTextHeight = realTextH + 14 + 8;
+    }
   }
 
   let cpSectionTextHeight = 0;
@@ -670,8 +674,12 @@ function calcSingleGameBlockHeight(targetWidth, renderData) {
     }
     // ✅使用对应模式真实最大宽度测量换行高度
     const realTextH = measureWrappedHeight(vCtx, gameItem.cpSectionText.trim(), cpTextMeasureMaxW, lineHeight, textSize);
-    // cp文本：只算上边距14，无下边距8（原有逻辑不变）
-    cpSectionTextHeight = realTextH + 14;
+    // cp文本：右置同行悬浮不计入高度；普通模式只算上边距14，无下边距8
+    if(canRight){
+        cpSectionTextHeight = 0;
+    }else{
+        cpSectionTextHeight = realTextH + 14;
+    }
   }
 
   let charAreaHeight = 0;
@@ -992,14 +1000,41 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
   runtimeContentH += charAreaHeight;
   // charSectionText高度（top14 + bottom8）
   if(gameItem.charSectionText?.trim()){
-    const h = measureWrappedHeight(painter.ctx, gameItem.charSectionText.trim(), gameCardW - cardInnerPad*2, lineHeight, textSize);
-    runtimeContentH += h + 14 + 8;
+      // 复制右置判断逻辑，和渲染保持一致
+      let canRight = false;
+      const innerContainerW = gameCardW - cardInnerPad * 2;
+      const cardW = LAYOUT_SPACE.CHAR_CARD_W;
+      const gap = LAYOUT_SPACE.CHAR_ROW_GAP;
+      const perRow = calcCardsPerRow(cardW, gap, innerContainerW);
+      canRight = renderData.appData.exportCustomTextRight
+          && canPlaceTextRight(charItems.length, perRow, innerContainerW, cardW, gap, cardW);
+
+      const h = measureWrappedHeight(painter.ctx, gameItem.charSectionText.trim(), gameCardW - cardInnerPad*2, lineHeight, textSize);
+      if(!canRight){
+          runtimeContentH += h + 14 + 8;
+      }
+      // canRight=true：不加，同行悬浮，不增加卡片垂直尺寸
   }
   runtimeContentH += cpAreaHeight;
   // cpSectionText高度（仅top14，无bottom8）
   if(gameItem.cpSectionText?.trim()){
-    const h = measureWrappedHeight(painter.ctx, gameItem.cpSectionText.trim(), gameCardW - cardInnerPad*2, lineHeight, textSize);
-    runtimeContentH += h + 14;
+      let canRight = false;
+      if (cpItems.length > 0 && renderData.appData.exportCustomTextRight) {
+          const firstCp = cpItems[0];
+          if (firstCp.maleItems && firstCp.maleItems.length > 0) {
+              const femaleCardW = LAYOUT_SPACE.CHAR_CARD_W;
+              const maleGap = LAYOUT_SPACE.CP_MALE_GAP;
+              const colGap = LAYOUT_SPACE.CP_COLUMN_GAP;
+              const maleContainerW = (gameCardW - cardInnerPad * 2) - femaleCardW - colGap;
+              const perRow = calcCardsPerRow(LAYOUT_SPACE.CHAR_CARD_W, maleGap, maleContainerW);
+              canRight = canPlaceTextRight(firstCp.maleItems.length, perRow, maleContainerW, LAYOUT_SPACE.CHAR_CARD_W, maleGap, LAYOUT_SPACE.CHAR_CARD_W);
+          }
+      }
+      const h = measureWrappedHeight(painter.ctx, gameItem.cpSectionText.trim(), gameCardW - cardInnerPad*2, lineHeight, textSize);
+      if(!canRight){
+          runtimeContentH += h + 14;
+      }
+      // canRight=true：不加，同行悬浮
   }
 
   // 取两者最大值：预计算高度 / 实时测量内容高度；杜绝空白溢出
