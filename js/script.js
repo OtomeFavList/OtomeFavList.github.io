@@ -1095,6 +1095,8 @@ export function initPage(Core = {}) {
             appData.exportCustomTextFontSize = defaultFs;
             el.sliderCustomTextFont.value = defaultFs;
             el.customTextFontValueDisplay.textContent = `${defaultFs}px`;
+            // 修复：重置时重新计算滑块进度百分比，更新轨道渐变
+            updateSliderProgress(el.sliderCustomTextFont);
         }
 
         saveData();
