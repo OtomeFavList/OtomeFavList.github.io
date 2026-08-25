@@ -570,7 +570,9 @@ function calcSingleGameBlockHeight(targetWidth, renderData) {
   const cardInnerPad = LAYOUT_SPACE.ADDED_GAME_CARD_PADDING;
   const gameCardW = wrapW;
   const textMaxW = gameCardW - cardInnerPad * 2;
-  const textSize = 15;
+
+  // =========【修改：读取自定义导出文本字号，默认16px】=========
+  const textSize = renderData.appData.exportCustomTextFontSize ?? 16;
   const lineHeight = textSize * 1.45;
 
   // =========【修改：动态计算标题高度】=========
@@ -961,7 +963,7 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
   if (renderData.gameItem.gameHeadText?.trim()) {
       const textX = cardX + cardInnerPad;
       const textMaxW = gameCardW - cardInnerPad * 2;
-      const textSize = 15;
+      const textSize = renderData.appData.exportCustomTextFontSize ?? 16;
       const lineHeight = textSize * 1.45;
       wrapText(
           painter.ctx,
@@ -1073,7 +1075,7 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
   if (renderData.gameItem.charSectionText?.trim()) {
       const textX = cardX + cardInnerPad;
       const textMaxW = gameCardW - cardInnerPad * 2;
-      const textSize = 15;
+      const textSize = renderData.appData.exportCustomTextFontSize ?? 16;
       const lineHeight = textSize * 1.45;
       wrapText(
           painter.ctx,
@@ -1260,7 +1262,7 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
   if (renderData.gameItem.cpSectionText?.trim()) {
       const textX = cardX + cardInnerPad;
       const textMaxW = gameCardW - cardInnerPad * 2;
-      const textSize = 15;
+      const textSize = renderData.appData.exportCustomTextFontSize ?? 16;
       const lineHeight = textSize * 1.45;
       wrapText(
           painter.ctx,
