@@ -6,26 +6,24 @@
 // 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
 // 官中发售以后，需要修改：游戏名、发售年份、汉化厂商、封面图、角色名
 const gameData = {
-    id: "game1", // 全局唯一ID，不可重复，如 game001
-    name: "示例乙女游戏",
-    year: "20",
-    publisher: ["原厂发行商"],
+    id: "game110", // 全局唯一ID，不可重复，如 game001
+    name: "うたの☆プリンスさまっ♪ Repeat LOVE",
+    year: "2019",
+    publisher: ["BROCCOLI"],
     cnStudio: "汉化组/汉化厂商",
     writer: [
-        {name:"中文编剧", lang:"zh"},
-        {name:"日文编剧", lang:"ja"},
-        {name:"英文编剧", lang:"en"}
+        {name:"武口碧", lang:"zh"},
+        {name:"神城咲弥", lang:"zh"},
+        {name:"クレイ·シーゴット", lang:"ja"}
     ],
     art: [
-        {name:"中文原画", lang:"zh"},
-        {name:"日文原画", lang:"ja"},
-        {name:"英文原画", lang:"en"}
+        {name:"工画堂スタジオ", lang:"zh"}
     ],
-    cover: "game/1.jpg", // 相对路径，游戏封面
+    cover: "game/110.jpg", // 相对路径，游戏封面
     charList: [
         // 女主模板 female
         {
-            id: "g1_f01",
+            id: "g110_f01",
             name: "女主A",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
