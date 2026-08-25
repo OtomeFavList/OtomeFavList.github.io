@@ -850,9 +850,11 @@ input[type="checkbox"] {
     z-index:2;
     position:relative;
 }
+
 .font-size-set-row input[type="range"]::-webkit-slider-container {
     height:6px;
 }
+
 /* WebKit Chrome/Safari 保留原有background‑size方案 */
 .font-size-set-row input[type="range"]::-webkit-slider-runnable-track {
     height:6px;
@@ -862,6 +864,7 @@ input[type="checkbox"] {
     background-repeat: no-repeat;
     background-size: var(--slider-progress,0%) 100%;
 }
+
 .font-size-set-row input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance:none;
     appearance:none;
@@ -873,6 +876,7 @@ input[type="checkbox"] {
     cursor:pointer;
     margin-top:-5px;
 }
+
 .font-size-set-row input[type="range"]::-moz-range-thumb {
     width:16px;
     height:16px;
@@ -881,37 +885,40 @@ input[type="checkbox"] {
     border:none;
     cursor:pointer;
 }
-/* Firefox原生轨道置透明，交给父容器伪元素绘制 */
+
+/* Firefox原生轨道置透明 */
 .font-size-set-row input[type="range"]::-moz-range-track {
     height:6px;
     background: transparent;
     border-radius:999px;
 }
-/* Firefox：底色层 */
-.font-size-set-row::before {
-    content:"";
-    position:absolute;
-    left:0;
-    top:50%;
-    transform: translateY(-50%);
-    height:6px;
-    border-radius:999px;
-    background:#fff7f9;
-    width:100%;
-    z-index:1;
-}
-/* Firefox：粉色进度层，复用--slider-progress变量 */
-.font-size-set-row::after {
-    content:"";
-    position:absolute;
-    left:0;
-    top:50%;
-    transform: translateY(-50%);
-    height:6px;
-    border-radius:999px;
-    background:#e895a8;
-    width:var(--slider-progress,0%);
-    z-index:1;
+
+/* ========== 【关键修复】仅Firefox渲染伪元素轨道，Chrome/Safari完全不生成这一层 ========== */
+@-moz-document url-prefix() {
+    .font-size-set-row::before {
+        content:"";
+        position:absolute;
+        left:0;
+        top:50%;
+        transform: translateY(-50%);
+        height:6px;
+        border-radius:999px;
+        background:#fff7f9;
+        width:100%;
+        z-index:1;
+    }
+    .font-size-set-row::after {
+        content:"";
+        position:absolute;
+        left:0;
+        top:50%;
+        transform: translateY(-50%);
+        height:6px;
+        border-radius:999px;
+        background:#e895a8;
+        width:var(--slider-progress,0%);
+        z-index:1;
+    }
 }
 
 @media (max-width:1200px) {
