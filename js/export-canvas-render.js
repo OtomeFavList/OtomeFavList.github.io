@@ -465,6 +465,27 @@ function calcCardsPerRow(cardWidth, gap, containerWidth) {
   return Math.max(1, Math.floor((containerWidth + gap) / (cardWidth + gap)));
 }
 
+/**
+ * 判断：是否满足【自定义文本右置】条件
+ * @param {number} itemCount 当前行角色数量
+ * @param {number} perRow 每行最大卡片数
+ * @param {number} containerWidth 容器可用宽度
+ * @param {number} cardWidth 卡片宽
+ * @param {number} gap 卡片间隙
+ * @param {number} textRequireMinWidth 文本需要预留最小宽度（至少一张卡片宽度）
+ * @returns {boolean} true=可以右置
+ */
+function canPlaceTextRight(itemCount, perRow, containerWidth, cardWidth, gap, textRequireMinWidth) {
+    // 条件1：全部角色只占1行
+    if (itemCount === 0) return false;
+    if (Math.ceil(itemCount / perRow) !== 1) return false;
+    // 当前行已经占用的总宽度
+    const usedW = itemCount * cardWidth + (itemCount - 1) * gap;
+    const remainW = containerWidth - usedW;
+    // 剩余空间 >= 至少一张角色卡片宽度，才允许右置
+    return remainW >= textRequireMinWidth;
+}
+
 function calcCharAreaHeight(ctx, charItems, containerWidth, cardWidth, gap, fontSize, hasTitle, titleHeight, titleMarginBottom) {
   if (!charItems || charItems.length === 0) return { height: 0, rows: 0 };
   const cardsPerRow = calcCardsPerRow(cardWidth, gap, containerWidth);
@@ -588,14 +609,60 @@ function calcSingleGameBlockHeight(targetWidth, renderData) {
 
   let charSectionTextHeight = 0;
   if (gameItem.charSectionText?.trim()) {
-    charSectionTextHeight = measureWrappedHeight(vCtx, gameItem.charSectionText.trim(), textMaxW, lineHeight, textSize);
-    charSectionTextHeight += 13 + 13; // drawY+13 + 文字底部间距
+    // 判断是否满足右置条件
+    let canRight = false;
+    if(renderData.appData.exportCustomTextRight && charItems.length>0){
+        const perRow = calcCardsPerRow(
+            LAYOUT_SPACE.CHAR_CARD_W,
+            LAYOUT_SPACE.CHAR_ROW_GAP,
+            gameCardW - cardInnerPad * 2
+        );
+        canRight = canPlaceTextRight(
+            charItems.length,
+            perRow,
+            gameCardW - cardInnerPad * 2,
+            LAYOUT_SPACE.CHAR_CARD_W,
+            LAYOUT_SPACE.CHAR_ROW_GAP,
+            LAYOUT_SPACE.CHAR_CARD_W
+        );
+    }
+    if(canRight){
+        // 右置模式：文本放在右侧，不增加垂直高度，只保留极小底部margin
+        charSectionTextHeight = 13;
+    }else{
+        // 向下排版，原有逻辑不变
+        charSectionTextHeight = measureWrappedHeight(vCtx, gameItem.charSectionText.trim(), textMaxW, lineHeight, textSize);
+        charSectionTextHeight += 13 + 13;
+    }
   }
 
   let cpSectionTextHeight = 0;
   if (gameItem.cpSectionText?.trim()) {
-    cpSectionTextHeight = measureWrappedHeight(vCtx, gameItem.cpSectionText.trim(), textMaxW, lineHeight, textSize);
-    cpSectionTextHeight += 13 + 13; // drawY+13 + 文字底部间距
+    let canRight = false;
+    if(renderData.appData.exportCustomTextRight && cpItems.length>0){
+        // cp模式：取每个cp单元内部男性行每行最大卡片数，判断该行是否只有一行
+        const femaleCardWidth = LAYOUT_SPACE.CHAR_CARD_W;
+        const maleGap = LAYOUT_SPACE.CP_MALE_GAP;
+        const colGap = LAYOUT_SPACE.CP_COLUMN_GAP;
+        const maleContainerWidth = (gameCardW - cardInnerPad * 2) - femaleCardWidth - colGap;
+        // 只取第一个cp项做判断（绘制逻辑同样只针对每一个cp块）
+        const firstCp = cpItems[0];
+        const perRow = calcCardsPerRow(LAYOUT_SPACE.CHAR_CARD_W, maleGap, maleContainerWidth);
+        canRight = canPlaceTextRight(
+            firstCp.maleItems.length,
+            perRow,
+            maleContainerWidth,
+            LAYOUT_SPACE.CHAR_CARD_W,
+            maleGap,
+            LAYOUT_SPACE.CHAR_CARD_W
+        );
+    }
+    if(canRight){
+        cpSectionTextHeight = 13;
+    }else{
+        cpSectionTextHeight = measureWrappedHeight(vCtx, gameItem.cpSectionText.trim(), textMaxW, lineHeight, textSize);
+        cpSectionTextHeight += 13 + 13;
+    }
   }
 
   let charAreaHeight = 0;
@@ -1073,28 +1140,59 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
 
   // ========== 绘制【Character区域下方自定义文字】 ==========
   if (renderData.gameItem.charSectionText?.trim()) {
-      const textX = cardX + cardInnerPad;
-      const textMaxW = gameCardW - cardInnerPad * 2;
-      const textSize = renderData.appData.exportCustomTextFontSize ?? 16;
-      const lineHeight = textSize * 1.45;
-      wrapText(
-          painter.ctx,
-          renderData.gameItem.charSectionText.trim(),
-          textX,
-          drawY + 13,
-          textMaxW,
-          lineHeight,
-          textSize,
-          exportColor.customText
-      );
-      const textH = measureWrappedHeight(
-          painter.ctx,
-          renderData.gameItem.charSectionText.trim(),
-          textMaxW,
-          lineHeight,
-          textSize
-      );
-      drawY += textH + 13;
+    const textSize = renderData.appData.exportCustomTextFontSize ?? 16;
+    const lineHeight = textSize * 1.45;
+    const innerContainerW = gameCardW - cardInnerPad * 2;
+    const cardW = LAYOUT_SPACE.CHAR_CARD_W;
+    const gap = LAYOUT_SPACE.CHAR_ROW_GAP;
+    const perRow = calcCardsPerRow(cardW, gap, innerContainerW);
+    const canRight = renderData.appData.exportCustomTextRight
+        && canPlaceTextRight(charItems.length, perRow, innerContainerW, cardW, gap, cardW);
+
+    if (canRight) {
+        // 右置模式：文本放在最后一张角色卡片右侧，上边沿对齐角色行顶部yPos
+        // 计算整行角色总宽度
+        const totalRowW = charItems.length * cardW + (charItems.length - 1) * gap;
+        const textX = cardX + cardInnerPad + totalRowW + gap;
+        // yPos：角色行的起始y（drawY是Character标题结束后的y，角色绘制起始yPos = drawY）
+        const textY = drawY;
+        // 剩余区域作为文本最大换行宽度
+        const textMaxW = innerContainerW - totalRowW - gap;
+        wrapText(
+            painter.ctx,
+            renderData.gameItem.charSectionText.trim(),
+            textX,
+            textY,
+            textMaxW,
+            lineHeight,
+            textSize,
+            exportColor.customText
+        );
+        // 右置模式：drawY只向下移动很小间距，不移动文本高度，由角色卡片高度决定行高度
+        drawY += 13;
+    } else {
+        // 向下排版原有逻辑不变
+        const textX = cardX + cardInnerPad;
+        const textMaxW = innerContainerW;
+        wrapText(
+            painter.ctx,
+            renderData.gameItem.charSectionText.trim(),
+            textX,
+            drawY + 13,
+            textMaxW,
+            lineHeight,
+            textSize,
+            exportColor.customText
+        );
+        const textH = measureWrappedHeight(
+            painter.ctx,
+            renderData.gameItem.charSectionText.trim(),
+            textMaxW,
+            lineHeight,
+            textSize
+        );
+        drawY += textH + 13;
+    }
   }
 
   // ---- Couple ----
@@ -1260,28 +1358,70 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
 
   // ========== 绘制【Couple区域下方自定义文字】 ==========
   if (renderData.gameItem.cpSectionText?.trim()) {
-      const textX = cardX + cardInnerPad;
-      const textMaxW = gameCardW - cardInnerPad * 2;
-      const textSize = renderData.appData.exportCustomTextFontSize ?? 16;
-      const lineHeight = textSize * 1.45;
-      wrapText(
-          painter.ctx,
-          renderData.gameItem.cpSectionText.trim(),
-          textX,
-          drawY + 13,
-          textMaxW,
-          lineHeight,
-          textSize,
-          exportColor.customText
-      );
-      const textH = measureWrappedHeight(
-          painter.ctx,
-          renderData.gameItem.cpSectionText.trim(),
-          textMaxW,
-          lineHeight,
-          textSize
-      );
-      drawY += textH + 13;
+    const textSize = renderData.appData.exportCustomTextFontSize ?? 16;
+    const lineHeight = textSize * 1.45;
+    const femaleCardW = LAYOUT_SPACE.CHAR_CARD_W;
+    const maleGap = LAYOUT_SPACE.CP_MALE_GAP;
+    const colGap = LAYOUT_SPACE.CP_COLUMN_GAP;
+    const maleContainerW = (gameCardW - cardInnerPad * 2) - femaleCardW - colGap;
+    const firstCp = cpItems[0];
+    const perRow = calcCardsPerRow(LAYOUT_SPACE.CHAR_CARD_W, maleGap, maleContainerW);
+    const canRight = renderData.appData.exportCustomTextRight
+        && canPlaceTextRight(firstCp.maleItems.length, perRow, maleContainerW, LAYOUT_SPACE.CHAR_CARD_W, maleGap, LAYOUT_SPACE.CHAR_CARD_W);
+
+    if (canRight) {
+        // couple右置：放在男性角色行的右侧，y对齐男性角色行起始my
+        const totalMaleRowW = firstCp.maleItems.length * LAYOUT_SPACE.CHAR_CARD_W + (firstCp.maleItems.length - 1) * maleGap;
+        const maleStartX = cardX + cardInnerPad + femaleCardW + colGap;
+        const textX = maleStartX + totalMaleRowW + maleGap;
+        // drawY是当前cp行结束后的y，my = drawY - rowH；行起始y
+        const rowH = Math.max(
+            calcCharCardHeight(painter.ctx, firstCp.femaleName, femaleCardW, 14),
+            (()=>{
+                let maxH = LAYOUT_SPACE.CHAR_CARD_MIN_H;
+                firstCp.maleItems.forEach(m=>{
+                    const h = calcCharCardHeight(painter.ctx, m.name, LAYOUT_SPACE.CHAR_CARD_W,14);
+                    if(h>maxH) maxH = h;
+                });
+                return maxH;
+            })()
+        );
+        const textY = drawY - rowH;
+        const textMaxW = (gameCardW - cardInnerPad * 2) - (femaleCardW + colGap + totalMaleRowW + maleGap);
+        wrapText(
+            painter.ctx,
+            renderData.gameItem.cpSectionText.trim(),
+            textX,
+            textY,
+            textMaxW,
+            lineHeight,
+            textSize,
+            exportColor.customText
+        );
+        drawY += 13;
+    } else {
+        // 向下排版原有逻辑不变
+        const textX = cardX + cardInnerPad;
+        const textMaxW = gameCardW - cardInnerPad * 2;
+        wrapText(
+            painter.ctx,
+            renderData.gameItem.cpSectionText.trim(),
+            textX,
+            drawY + 13,
+            textMaxW,
+            lineHeight,
+            textSize,
+            exportColor.customText
+        );
+        const textH = measureWrappedHeight(
+            painter.ctx,
+            renderData.gameItem.cpSectionText.trim(),
+            textMaxW,
+            lineHeight,
+            textSize
+        );
+        drawY += textH + 13;
+    }
   }
 
   painter.shiftY(cardH);
