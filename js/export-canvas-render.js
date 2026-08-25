@@ -636,8 +636,14 @@ function calcSingleGameBlockHeight(targetWidth, renderData) {
     }
     // ✅使用对应模式的真实最大宽度做换行高度测量
     const realTextH = measureWrappedHeight(vCtx, gameItem.charSectionText.trim(), charTextMeasureMaxW, lineHeight, textSize);
-    // char文本：上14，下8（保留原有边距不变）
-    charSectionTextHeight = realTextH + 14 + 8;
+    // =========【补丁：区分右置/普通模式】=========
+    if(canRight){
+        // 右置模式：charSectionTextHeight不参与卡片总高度累加，仅用于计算右侧文本底部坐标
+        charSectionTextHeight = 0;
+    }else{
+        // 普通模式：上14，下8，正常参与高度累加
+        charSectionTextHeight = realTextH + 14 + 8;
+    }
   }
 
   let cpSectionTextHeight = 0;
@@ -670,8 +676,14 @@ function calcSingleGameBlockHeight(targetWidth, renderData) {
     }
     // ✅使用对应模式真实最大宽度测量换行高度
     const realTextH = measureWrappedHeight(vCtx, gameItem.cpSectionText.trim(), cpTextMeasureMaxW, lineHeight, textSize);
-    // cp文本：只算上边距14，无下边距8（原有逻辑不变）
-    cpSectionTextHeight = realTextH + 14;
+    // =========【补丁：区分右置/普通模式】=========
+    if(canRight){
+        // 右置模式：cpSectionTextHeight不参与卡片总高度累加
+        cpSectionTextHeight = 0;
+    }else{
+        // 普通模式：只算上边距14，无下边距8
+        cpSectionTextHeight = realTextH + 14;
+    }
   }
 
   let charAreaHeight = 0;
@@ -753,7 +765,8 @@ function calcSingleGameBlockHeight(targetWidth, renderData) {
           const textH = measureWrappedHeight(vCtx, gameItem.charSectionText.trim(), charTextMeasureMaxW, lineHeight, textSize);
           // 右置文本起始Y = charBlockStartY(虚拟画布中角色块顶部)，无上下边距；文本底部 = startY + textH
           const virtualCharBlockTop = cardInnerPad + nameHeight + (gameItem.gameHeadText?.trim() ? (measureWrappedHeight(vCtx, gameItem.gameHeadText.trim(), textMaxW, lineHeight, textSize)+12+12) : 0) + 18 + 8;
-          charRightTextMaxH = virtualCharBlockTop + textH;
+          // ✅修复：对齐渲染代码 textY = charRowTopY +14；结束追加 +8 下边距
+          charRightTextMaxH = virtualCharBlockTop + 14 + textH + 8;
       }
   }
 
@@ -786,7 +799,8 @@ function calcSingleGameBlockHeight(targetWidth, renderData) {
                   + (renderData.appData.exportCustomTextRight && charItems.length>0 ? 0 : (gameItem.charSectionText?.trim() ? (measureWrappedHeight(vCtx, gameItem.charSectionText.trim(), textMaxW, lineHeight, textSize)+14+8):0))
                   + addCharOffset
                   + 18 + 8;
-              cpRightTextMaxH = virtualCpBlockTop + textH;
+              // ✅修复：couple右置，仅上边距14，无下边距8px，严格对齐渲染逻辑
+              cpRightTextMaxH = virtualCpBlockTop + 14 + textH;
           }
       }
   }
