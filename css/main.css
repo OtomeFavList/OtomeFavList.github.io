@@ -815,67 +815,35 @@ input[type="checkbox"] {
     border-radius:6px;
 }
 
-/* ==========【修改】自定义文本字体大小滑块 ========== */
+/* ==========【新增】自定义文本字体大小滑块 ========== */
 .font-size-set-row {
     margin:16px 0;
     display:flex;
-    flex-direction:row;
-    align-items:center;
-    gap:12px;
-    max-width:520px;
-    flex-wrap:wrap;
+    flex-direction:column;
+    gap:8px;
+    max-width:420px;
 }
-
 .font-size-set-row label {
     font-size:14px;
-    color:#c98fac;  /* 和基础信息色#c98fac统一 */
-    white-space:nowrap;
+    color:#444;
 }
-
 .font-size-set-row input[type="range"] {
-    flex:1;
-    min-width:140px;
+    width:100%;
 }
-
 .font-size-value-display {
     font-size:13px;
     color:#666;
-    white-space:nowrap;
 }
 
-/* ========== range滑块整体样式，轨道统一 #f6a5b8，和开关滑块同色 ========== */
-/* webkit(chrome、edge、safari) */
-.font-size-set-row input[type="range"] {
-    -webkit-appearance: none;
-    height:6px;
-    background:#f6a5b8; /* 无论是否拖动，轨道底色统一 #f6a5b8 */
-    border-radius:3px;
-    outline:none;
+/* ========== 导出尺寸选择 size-select ========== */
+.size-select{
+    margin:16px 0;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
 }
-.font-size-set-row input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance:none;
-    width:18px;
-    height:18px;
-    border-radius:50%;
-    background:#ffffff;
-    border:2px solid #f6a5b8;
-    cursor:pointer;
-}
-
-/* firefox */
-.font-size-set-row input[type="range"]::-moz-range-track {
-    height:6px;
-    background:#f6a5b8;
-    border-radius:3px;
-    border:none;
-}
-.font-size-set-row input[type="range"]::-moz-range-thumb {
-    width:18px;
-    height:18px;
-    border-radius:50%;
-    background:#ffffff;
-    border:2px solid #f6a5b8;
-    cursor:pointer;
+.size-select label {
+    color:#c98fac;
 }
 
 /* ========== About模块 about-block ========== */
@@ -1956,7 +1924,7 @@ textarea {
     user-select: text !important;
     -webkit-user-select: text !important;
 }
-/* 禁止图片右键菜单的快捷保存；增加蒙版占位方案 */
+/* 禁止图片右键菜单的快捷保存；增加蒙版占位方案（可选） */
 .char-card-img-box img,
 .game-option-item img,
 .cp-female-card-btn img,
