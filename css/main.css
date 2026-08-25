@@ -825,7 +825,7 @@ input[type="checkbox"] {
     flex-wrap:wrap;
     max-width:480px;
     padding:10px 0;
-    /* ✅新增：用于Firefox伪元素进度条定位 */
+    /* Firefox伪元素定位必需 */
     position: relative;
 }
 .font-size-set-row label {
@@ -847,14 +847,13 @@ input[type="checkbox"] {
     outline:none;
     -webkit-appearance:none;
     appearance:none;
-    /* firefox下，轨道底色交给伪元素，input本身背景透明 */
-    z-index: 2;
-    position: relative;
+    z-index:2;
+    position:relative;
 }
-/* ========== WebKit Chrome/Safari 原有逻辑保留不变 ========== */
 .font-size-set-row input[type="range"]::-webkit-slider-container {
     height:6px;
 }
+/* WebKit Chrome/Safari 保留原有background‑size方案 */
 .font-size-set-row input[type="range"]::-webkit-slider-runnable-track {
     height:6px;
     border-radius:999px;
@@ -874,8 +873,21 @@ input[type="checkbox"] {
     cursor:pointer;
     margin-top:-5px;
 }
-
-/* ========== Firefox 兼容：使用父级伪元素绘制进度条 ========== */
+.font-size-set-row input[type="range"]::-moz-range-thumb {
+    width:16px;
+    height:16px;
+    border-radius:50%;
+    background:#e895a8;
+    border:none;
+    cursor:pointer;
+}
+/* Firefox原生轨道置透明，交给父容器伪元素绘制 */
+.font-size-set-row input[type="range"]::-moz-range-track {
+    height:6px;
+    background: transparent;
+    border-radius:999px;
+}
+/* Firefox：底色层 */
 .font-size-set-row::before {
     content:"";
     position:absolute;
@@ -888,6 +900,7 @@ input[type="checkbox"] {
     width:100%;
     z-index:1;
 }
+/* Firefox：粉色进度层，复用--slider-progress变量 */
 .font-size-set-row::after {
     content:"";
     position:absolute;
@@ -899,19 +912,6 @@ input[type="checkbox"] {
     background:#e895a8;
     width:var(--slider-progress,0%);
     z-index:1;
-}
-.font-size-set-row input[type="range"]::-moz-range-track {
-    /* firefox原生轨道置透明，完全交给父伪元素渲染 */
-    background: transparent;
-    height:6px;
-}
-.font-size-set-row input[type="range"]::-moz-range-thumb {
-    width:16px;
-    height:16px;
-    border-radius:50%;
-    background:#e895a8;
-    border:none;
-    cursor:pointer;
 }
 
 @media (max-width:1200px) {
