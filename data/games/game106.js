@@ -66,10 +66,10 @@ const gameData = {
                             "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 氷上格
         {
             id: "g106_m02",
-            name: "男主2",
+            name: "氷上格",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -79,10 +79,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 赤城一雪
         {
             id: "g106_m03",
-            name: "男主3",
+            name: "赤城一雪",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -92,10 +92,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 針谷幸之進
         {
             id: "g106_m04",
-            name: "男主4",
+            name: "針谷幸之進",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -105,10 +105,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 真咲元春
         {
             id: "g106_m05",
-            name: "男主5",
+            name: "真咲元春",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -118,10 +118,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-         // 普通可攻略男主 male
+         // 志波勝己
         {
             id: "g106_m06",
-            name: "男主5",
+            name: "志波勝己",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -131,10 +131,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 天地翔太
         {
             id: "g106_m07",
-            name: "男主5",
+            name: "天地翔太",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -144,10 +144,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 古森拓
         {
             id: "g106_m08",
-            name: "男主5",
+            name: "古森拓",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -157,10 +157,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 佐伯瑛
         {
             id: "g106_m09",
-            name: "男主5",
+            name: "佐伯瑛",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -170,10 +170,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 若王子貴文
         {
             id: "g106_m10",
-            name: "男主5",
+            name: "若王子貴文",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -183,7 +183,7 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 真嶋太郎
         {
             id: "g106_m11",
             name: "男主5",
