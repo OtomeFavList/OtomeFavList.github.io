@@ -826,19 +826,16 @@ input[type="checkbox"] {
     max-width:480px;
     padding:10px 0;
 }
-
 .font-size-set-row label {
     font-size:16px;
     color:#c98fac;
     white-space:nowrap;
 }
-
 .font-size-value-display {
     font-size:16px;
     color:#c98fac;
     white-space:nowrap;
 }
-
 .font-size-set-row input[type="range"] {
     flex:1;
     min-width:140px;
@@ -849,17 +846,14 @@ input[type="checkbox"] {
     -webkit-appearance:none;
     appearance:none;
 }
-
 .font-size-set-row input[type="range"]::-webkit-slider-container {
     height:6px;
 }
-
 .font-size-set-row input[type="range"]::-webkit-slider-runnable-track {
     height:6px;
     border-radius:999px;
     background: linear-gradient(to right, #e895a8 var(--slider-progress,0%), #fff7f9 var(--slider-progress,0%));
 }
-
 .font-size-set-row input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance:none;
     appearance:none;
@@ -871,7 +865,6 @@ input[type="checkbox"] {
     cursor:pointer;
     margin-top:-5px;
 }
-
 .font-size-set-row input[type="range"]::-moz-range-thumb {
     width:16px;
     height:16px;
@@ -880,17 +873,20 @@ input[type="checkbox"] {
     border:none;
     cursor:pointer;
 }
-
 .font-size-set-row input[type="range"]::-moz-range-track {
     height:6px;
     background:#fff7f9;
     border-radius:999px;
 }
-
-.font-size-set-row input[type="range"]::-moz-range-progress {
+.font-size-set-row input[type="range"]::-webkit-slider-runnable-track {
     height:6px;
-    background:#e895a8;
     border-radius:999px;
+    /* 不使用gradient+css变量，改用双层背景：底层底色，上层使用伪元素方案行不通；改用背景叠加，使用两个叠加层，用background‑size实现进度 */
+    background-color: #fff7f9;
+    background-image: linear-gradient(to right, #e895a8 0%, #e895a8 100%);
+    background-repeat: no-repeat;
+    /* width由 --slider‑progress 控制 */
+    background-size: var(--slider-progress,0%) 100%;
 }
 
 @media (max-width:1200px) {
