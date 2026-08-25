@@ -1443,22 +1443,28 @@ export function initPage(Core = {}) {
                     totalImageCount += imgCnt;
                 });
 
-                // 3. 分平台设置耗时系数
-                let gameCardCost, imgCost;
+                // 3. 分平台设置耗时系数【修改：包含重试、画布串行延时】
+                let gameCardCost, imgCost, networkBufferSec;
                 if(IS_IOS_WEBKIT){
-                    gameCardCost = 0.75;
-                    imgCost = 0.45;
+                    gameCardCost = 1.10;
+                    imgCost = 0.85;
+                    networkBufferSec = 3.5;   // IOS：图片重试 + 圆角画布串行sleep，额外大缓冲
                 }else if(isAndroid){
-                    gameCardCost = 0.35;
-                    imgCost = 0.22;
+                    gameCardCost = 0.55;
+                    imgCost = 0.40;
+                    networkBufferSec = 2.0;
                 }else{
                     // PC
-                    gameCardCost = 0.22;
-                    imgCost = 0.14;
+                    gameCardCost = 0.35;
+                    imgCost = 0.25;
+                    networkBufferSec = 1.2;
                 }
-                // 计算总预估秒，向上取整，最小1秒
-                let estimateSec = Math.ceil(validGameCount * gameCardCost + totalImageCount * imgCost);
-                estimateSec = Math.max(1, estimateSec);
+                // 基础计算
+                let baseEstimate = validGameCount * gameCardCost + totalImageCount * imgCost;
+                // 叠加网络抖动缓冲
+                let estimateSec = Math.ceil(baseEstimate + networkBufferSec);
+                // 上下限保护：最小1s，最大不超过35s，避免极端图片数量显示巨大数字
+                estimateSec = Math.max(1, Math.min(35, estimateSec));
                 // ==========【新增结束】==========
 
                 previewScrollWrap.innerHTML = `
