@@ -1111,23 +1111,10 @@ export function initPage(Core = {}) {
         el.sliderCustomTextFont.value = safeInit;
         el.customTextFontValueDisplay.textContent = `${safeInit}px`;
 
-        // 【新增】webkit进度条渐变更新函数
-        function updateRangeProgress(el) {
-            const min = Number(el.min);
-            const max = Number(el.max);
-            const val = Number(el.value);
-            const pct = ((val - min) / (max - min)) * 100;
-            el.style.setProperty('--range-progress', pct + '%');
-        }
-        // 页面初始化设置进度百分比
-        updateRangeProgress(el.sliderCustomTextFont);
-
         el.sliderCustomTextFont.oninput = () => {
             const val = Number(el.sliderCustomTextFont.value);
             appData.exportCustomTextFontSize = val;
             el.customTextFontValueDisplay.textContent = `${val}px`;
-            // 【新增】拖动时实时更新css变量实现进度着色
-            updateRangeProgress(el.sliderCustomTextFont);
             saveData();
             clearPreviewCacheResource();
         };
