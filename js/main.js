@@ -142,7 +142,6 @@ export let appData = {
     globalSubChar: false, // ✅新增：全局次要角色开关，默认关闭
     // ==========新增==========
     exportFoldContent: true,
-    exportCustomTextRight: false, // ✅新增：自定义文本右置开关，默认关闭
     gameSpoilerRecord: {},
     baseInfo: { nick: "", count: "", story: "", firstgame: "" },
     gameList: [],
@@ -439,15 +438,11 @@ export function loadData() {
                 }
             })
         }
-        // ==========【补丁1结束】 ==========
+        // ==========【补丁1结束】
 
         // ========== 全局字段兜底（统一放在迁移完成后） ==========
         if (typeof tempData.exportFoldContent !== "boolean") {
             tempData.exportFoldContent = true;
-        }
-        // ✅新增兜底：旧存档没有 exportCustomTextRight 则赋值 false
-        if (typeof tempData.exportCustomTextRight !== "boolean") {
-            tempData.exportCustomTextRight = false;
         }
         if (!tempData.exportColor) tempData.exportColor = {};
         tempData.exportColor.bg = tempData.exportColor.bg ?? "#fff7f9";
@@ -1701,7 +1696,7 @@ export async function bootstrapCore() {
             imgCacheMap.clear();
         }
     }
-    // ==========【补丁2结束】 ==========
+    // ==========【补丁2结束】
 
     // 2.组装核心上下文对象，传给UI层script.js
     const Core = buildCoreContext();
