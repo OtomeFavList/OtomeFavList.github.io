@@ -75,7 +75,7 @@ const gameData = {
     charList: [
         // 冬浦めぐみ
         {
-            id: "g1_f01",
+            id: "g103_f01",
             name: "冬浦めぐみ",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
@@ -84,14 +84,12 @@ const gameData = {
             images: [
                 { srcList: ["char/001/女主A.jpg",
                             "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["char/001/女主A3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["char/001/女主A4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
-        // 普通可攻略男主 male
+        // 神楽坂響
         {
-            id: "g1_m01",
-            name: "男主1",
+            id: "g103_m01",
+            name: "神楽坂響",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -99,14 +97,12 @@ const gameData = {
             images: [
                 { srcList: ["char/001/男主1.jpg",
                             "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["char/001/男主13.jpg"], type: "hidden" },
-                { srcList: ["char/001/男主14.jpg"], type: "fd" }
             ]
         },
-        // 普通可攻略男主 male
+        // 榛名望
         {
-            id: "g1_m02",
-            name: "男主2",
+            id: "g103_m02",
+            name: "榛名望",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -114,14 +110,12 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
-        // 普通可攻略男主 male
+        // 望月理也
         {
-            id: "g1_m03",
-            name: "男主3",
+            id: "g103_m03",
+            name: "望月理也",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -129,14 +123,12 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
-        // 普通可攻略男主 male
+        // 猪口渉
         {
-            id: "g1_m04",
-            name: "男主4",
+            id: "g103_m04",
+            name: "猪口渉",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -144,8 +136,6 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         }
     ]
