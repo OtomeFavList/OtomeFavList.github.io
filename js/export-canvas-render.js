@@ -612,6 +612,7 @@ function calcSingleGameBlockHeight(targetWidth, renderData) {
   if (gameItem.charSectionText?.trim()) {
     // 判断是否满足右置条件（仅用于逻辑一致性，高度计算统一）
     let canRight = false;
+    let charTextMeasureMaxW = textMaxW;
     if(renderData.appData.exportCustomTextRight && charItems.length>0){
         const perRow = calcCardsPerRow(
             LAYOUT_SPACE.CHAR_CARD_W,
@@ -626,15 +627,23 @@ function calcSingleGameBlockHeight(targetWidth, renderData) {
             LAYOUT_SPACE.CHAR_ROW_GAP,
             LAYOUT_SPACE.CHAR_CARD_W
         );
+        // ✅右置模式：使用真实渲染的可用窄宽度，和drawSingleGameCard保持完全一致
+        if(canRight){
+            const totalRowW = charItems.length * LAYOUT_SPACE.CHAR_CARD_W + (charItems.length - 1) * LAYOUT_SPACE.CHAR_ROW_GAP;
+            charTextMeasureMaxW = (gameCardW - cardInnerPad * 2) - totalRowW - LAYOUT_SPACE.CHAR_ROW_GAP;
+            charTextMeasureMaxW = Math.max(20, charTextMeasureMaxW);
+        }
     }
-    const realTextH = measureWrappedHeight(vCtx, gameItem.charSectionText.trim(), textMaxW, lineHeight, textSize);
-    // char文本：上14，下8
+    // ✅使用对应模式的真实最大宽度做换行高度测量
+    const realTextH = measureWrappedHeight(vCtx, gameItem.charSectionText.trim(), charTextMeasureMaxW, lineHeight, textSize);
+    // char文本：上14，下8（保留原有边距不变）
     charSectionTextHeight = realTextH + 14 + 8;
   }
 
   let cpSectionTextHeight = 0;
   if (gameItem.cpSectionText?.trim()) {
     let canRight = false;
+    let cpTextMeasureMaxW = textMaxW;
     if(renderData.appData.exportCustomTextRight && cpItems.length>0){
         const firstCp = cpItems[0];
         if(firstCp.maleItems && firstCp.maleItems.length > 0){
@@ -651,10 +660,17 @@ function calcSingleGameBlockHeight(targetWidth, renderData) {
                 maleGap,
                 LAYOUT_SPACE.CHAR_CARD_W
             );
+            // ✅右置模式：使用渲染时真实可用窄宽度，与drawSingleGameCard逻辑对齐
+            if(canRight){
+                const totalMaleRowW = firstCp.maleItems.length * LAYOUT_SPACE.CHAR_CARD_W + (firstCp.maleItems.length - 1) * maleGap;
+                cpTextMeasureMaxW = maleContainerWidth - totalMaleRowW - maleGap;
+                cpTextMeasureMaxW = Math.max(20, cpTextMeasureMaxW);
+            }
         }
     }
-    const realTextH = measureWrappedHeight(vCtx, gameItem.cpSectionText.trim(), textMaxW, lineHeight, textSize);
-    // cp文本：只算上边距14，无下边距8
+    // ✅使用对应模式真实最大宽度测量换行高度
+    const realTextH = measureWrappedHeight(vCtx, gameItem.cpSectionText.trim(), cpTextMeasureMaxW, lineHeight, textSize);
+    // cp文本：只算上边距14，无下边距8（原有逻辑不变）
     cpSectionTextHeight = realTextH + 14;
   }
 
