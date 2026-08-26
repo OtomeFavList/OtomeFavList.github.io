@@ -33,8 +33,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/108/Daichi.jpg",
+                            "char/108/Daichi2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 本多行
@@ -46,8 +46,11 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/108/Iku.jpg",
+                            "char/108/Iku2.jpg",
+                            "char/108/Iku3.jpg",
+                            "char/108/Iku4.jpg",
+                            "char/108/Iku5.jpg"], type: "base" },
             ]
         },
         // 氷室一紀
@@ -59,8 +62,10 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/108/Inori.jpg",
+                            "char/108/Inori2.jpg",
+                            "char/108/Inori3.jpg",
+                            "char/108/Inori4.jpg"], type: "base" },
             ]
         },
         // 大成功
@@ -72,8 +77,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/108/Isao.jpg",
+                            "char/108/Isao2.jpg"], type: "base" },
             ]
         },
         /// 御影小次郎
@@ -85,8 +90,9 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/108/Kojirou.jpg",
+                            "char/108/Kojirou2.jpg",
+                            "char/108/Kojirou3.jpg"], type: "base" },
             ]
         },
         // 七ツ森実
@@ -98,8 +104,11 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/108/Minoru.jpg",
+                            "char/108/Minoru2.jpg",
+                            "char/108/Minoru3.jpg",
+                            "char/108/Minoru4.jpg",
+                            "char/108/Minoru5.jpg"], type: "base" },
             ]
         },
         // 颯砂希
@@ -111,8 +120,11 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/108/Nozomu.jpg",
+                            "char/108/Nozomu2.jpg",
+                            "char/108/Nozomu3.jpg",
+                            "char/108/Nozomu4.jpg",
+                            "char/108/Nozomu5.jpg"], type: "base" },
             ]
         },
         // 風真玲太
@@ -124,8 +136,11 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/108/Ryouta.jpg",
+                            "char/108/Ryouta2.jpg",
+                            "char/108/Ryouta3.jpg",
+                            "char/108/Ryouta4.jpg",
+                            "char/108/Ryouta5.jpg"], type: "base" },
             ]
         },
         // 柊夜ノ介
@@ -137,8 +152,11 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/108/Yanosuke.jpg",
+                            "char/108/Yanosuke2.jpg",
+                            "char/108/Yanosuke3.jpg",
+                            "char/108/Yanosuke4.jpg",
+                            "char/108/Yanosuke5.jpg"], type: "base" },
             ]
         },
         // 巴征道
@@ -150,8 +168,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/108/Yukimichi.jpg",
+                            "char/108/Yukimichi2.jpg"], type: "base" },
             ]
         },
         // 白羽空也
@@ -163,7 +181,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g001_h01_1.jpg"], type: "base" }
+                { srcList: ["char/108/Kuuya.jpg"], type: "base" }
             ]
         }
     ]
