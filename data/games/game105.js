@@ -83,48 +83,9 @@ const gameData = {
     ],
     cover: "game/105.jpg", // 相对路径，游戏封面
     charList: [
-        // 蒼樹千晴
-        {
-            id: "g105_m01",
-            name: "蒼樹千晴",
-            gender: "male",
-            isHidden: false,
-            isFD: false,
-            isSub: false,
-            images: [
-                { srcList: ["char/105/Chiharu.jpg",
-                            "char/105/Chiharu2.jpg",
-                            "char/105/Chiharu3.jpg"], type: "base" },      // 默认基础图，始终加载
-            ]
-        },
-        // 天之橋一鶴
-        {
-            id: "g105_m02",
-            name: "天之橋一鶴",
-            gender: "male",
-            isHidden: false,
-            isFD: false,
-            isSub: false,
-            images: [
-                { srcList: ["char/105/Ikkaku.jpg"], type: "base" },
-            ]
-        },
-        // 天童壬
-        {
-            id: "g105_m03",
-            name: "天童壬",
-            gender: "male",
-            isHidden: false,
-            isFD: false,
-            isSub: false,
-            images: [
-                { srcList: ["char/105/Jin.jpg",
-                            "char/105/Jin2.jpgg"], type: "base" },
-            ]
-        },
         // 鈴鹿和馬
         {
-            id: "g105_m04",
+            id: "g105_m01",
             name: "鈴鹿和馬",
             gender: "male",
             isHidden: false,
@@ -137,7 +98,7 @@ const gameData = {
         },
         // 葉月珪
         {
-            id: "g105_m05",
+            id: "g105_m02",
             name: "葉月珪",
             gender: "male",
             isHidden: false,
@@ -150,7 +111,7 @@ const gameData = {
         },
         // 姫条まどか
         {
-            id: "g105_m06",
+            id: "g105_m03",
             name: "姫条まどか",
             gender: "male",
             isHidden: false,
@@ -163,7 +124,7 @@ const gameData = {
         },
         // 氷室零一
         {
-            id: "g105_m07",
+            id: "g105_m04",
             name: "氷室零一",
             gender: "male",
             isHidden: false,
@@ -176,7 +137,7 @@ const gameData = {
         },
         // 守村桜弥
         {
-            id: "g105_m08",
+            id: "g105_m05",
             name: "守村桜弥",
             gender: "male",
             isHidden: false,
@@ -190,7 +151,7 @@ const gameData = {
         },
         // 三原色
         {
-            id: "g105_m09",
+            id: "g105_m06",
             name: "三原色",
             gender: "male",
             isHidden: false,
@@ -203,7 +164,7 @@ const gameData = {
         },
         // 日比谷渉
         {
-            id: "g105_m10",
+            id: "g105_m07",
             name: "日比谷渉",
             gender: "male",
             isHidden: false,
@@ -212,6 +173,45 @@ const gameData = {
             images: [
                 { srcList: ["char/105/Wataru.jpg",
                             "char/105/Wataru2.jpg"], type: "base" },
+            ]
+        },
+        // 蒼樹千晴
+        {
+            id: "g105_h01",
+            name: "蒼樹千晴",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            images: [
+                { srcList: ["char/105/Chiharu.jpg",
+                            "char/105/Chiharu2.jpg",
+                            "char/105/Chiharu3.jpg"], type: "base" },      // 默认基础图，始终加载
+            ]
+        },
+        // 天之橋一鶴
+        {
+            id: "g105_h02",
+            name: "天之橋一鶴",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            images: [
+                { srcList: ["char/105/Ikkaku.jpg"], type: "base" },
+            ]
+        },
+        // 天童壬
+        {
+            id: "g105_h03",
+            name: "天童壬",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            images: [
+                { srcList: ["char/105/Jin.jpg",
+                            "char/105/Jin2.jpgg"], type: "base" },
             ]
         }
     ]
