@@ -92,8 +92,9 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/105/Chiharu.jpg",
+                            "char/105/Chiharu2.jpg",
+                            "char/105/Chiharu3.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 天之橋一鶴
@@ -105,8 +106,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/105/Ikkaku.jpg"], type: "base" },
             ]
         },
         // 天童壬
@@ -118,8 +118,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/105/Jin.jpg",
+                            "char/105/Jin2.jpgg"], type: "base" },
             ]
         },
         // 鈴鹿和馬
@@ -131,8 +131,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/105/Kazuma.jpg",
+                            "char/105/Kazuma2.jpg"], type: "base" },
             ]
         },
         // 葉月珪
@@ -144,8 +144,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/105/Kei.jpg",
+                            "char/105/Kei2.jpgg"], type: "base" },
             ]
         },
         // 姫条まどか
@@ -157,8 +157,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/105/Madoka.jpg",
+                            "char/105/Madoka2.jpg"], type: "base" },
             ]
         },
         // 氷室零一
@@ -170,8 +170,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/105/Reiichi.jpg",
+                            "char/105/Reiichi2.jpg"], type: "base" },
             ]
         },
         // 守村桜弥
@@ -183,8 +183,9 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/105/Sakuya.jpg",
+                            "char/105/Sakuya2.jpg",
+                            "char/105/Sakuya3.jpg"], type: "base" },
             ]
         },
         // 三原色
@@ -196,8 +197,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/105/Shiki.jpg",
+                            "char/105/Shiki2.jpg"], type: "base" },
             ]
         },
         // 日比谷渉
@@ -209,8 +210,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/105/Wataru.jpg",
+                            "char/105/Wataru2.jpg"], type: "base" },
             ]
         }
     ]
