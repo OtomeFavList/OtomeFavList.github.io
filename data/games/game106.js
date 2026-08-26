@@ -152,7 +152,7 @@ const gameData = {
         // 真嶋太郎
         {
             id: "g106_h03",
-            name: "男主5",
+            name: "真嶋太郎",
             gender: "male",
             isHidden: true,
             isFD: false,
