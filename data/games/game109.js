@@ -1,22 +1,3 @@
-// Le Mirage Mystique
-// 开发: ティズクリエイション株式会社、LicoBiTs
-// 发行: 株式会社ブロッコリー
-// 剧本: メインシナリオ：いちの恵理（かずら本舗）、シナリオディレクション：かずら林檎（かずら本舗）
-// 音乐: 和田俊輔
-// 人物设定: およ
-// 原画: およ
-// 监修: かずら林檎
-// 企画: ティズクリエイション株式会社
-// 制作人: 高村旭
-// 别名: ル ミラージュ ミスティーク
-// 平台: Nintendo Switch
-// 游戏类型: 女性向け恋愛ADV
-// 游玩人数: 1人
-// 发行日期: 2026-09-17
-// 导演: 佐東樹
-// 链接: X
-// 官方网站: licobits-game.com/mirage/
-
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
 // 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
@@ -48,8 +29,8 @@ const gameData = {
             isFD: false,    // true=续作/FD专属角色，开关控制是否展示该角色
             isSub: false,    // true=配角，开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/109/Aria.jpg",
+                            "char/109/Aria2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // シャルル·パラディール
@@ -61,8 +42,9 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/109/Charles.jpg",
+                            "char/109/Charles2.jpg",
+                            "char/109/Charles3.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // エヴァン·クロフォード
@@ -74,8 +56,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/109/Evan.jpg",
+                            "char/109/Evan2.jpg"], type: "base" },
             ]
         },
         // ジャック·レスター
@@ -87,8 +69,9 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/109/Jack.jpg",
+                            "char/109/Jack2.jpg",
+                            "char/109/Jack3.jpg"], type: "base" },
             ]
         },
         // レオン·ヴィトリー
@@ -100,8 +83,9 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/109/Leon.jpg",
+                            "char/109/Leon2.jpg",
+                            "char/109/Leon3.jpg"], type: "base" },
             ]
         },
         // ルディ·ロシュフォール
@@ -113,8 +97,9 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/109/Rudy.jpg",
+                            "char/109/Rudy2.jpg",
+                            "char/109/Rudy3.jpg"], type: "base" },
             ]
         }
     ]
