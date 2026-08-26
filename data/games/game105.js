@@ -122,7 +122,7 @@ const gameData = {
             id: "g105_h01",
             name: "蒼樹千晴",
             gender: "male",
-            isHidden: false,
+            isHidden: true,
             isFD: false,
             isSub: false,
             images: [
@@ -136,7 +136,7 @@ const gameData = {
             id: "g105_h02",
             name: "天之橋一鶴",
             gender: "male",
-            isHidden: false,
+            isHidden: true,
             isFD: false,
             isSub: false,
             images: [
@@ -148,7 +148,7 @@ const gameData = {
             id: "g105_h03",
             name: "天童壬",
             gender: "male",
-            isHidden: false,
+            isHidden: true,
             isFD: false,
             isSub: false,
             images: [
