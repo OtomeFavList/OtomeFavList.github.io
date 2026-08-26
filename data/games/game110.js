@@ -34,10 +34,10 @@ const gameData = {
                             "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 愛島セシル
         {
             id: "g110_m01",
-            name: "男主1",
+            name: "愛島セシル",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -49,10 +49,10 @@ const gameData = {
                 { srcList: ["char/001/男主14.jpg"], type: "fd" }
             ]
         },
-        // 普通可攻略男主 male
+        // 一ノ瀬トキヤ
         {
             id: "g110_m02",
-            name: "男主2",
+            name: "一ノ瀬トキヤ",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -64,10 +64,10 @@ const gameData = {
                 { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
-        // 普通可攻略男主 male
+        // 聖川真斗
         {
             id: "g110_m03",
-            name: "男主3",
+            name: "聖川真斗",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -79,10 +79,10 @@ const gameData = {
                 { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
-        // 普通可攻略男主 male
+        // 四ノ宮那月
         {
             id: "g110_m04",
-            name: "男主4",
+            name: "四ノ宮那月",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -94,10 +94,10 @@ const gameData = {
                 { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
-        // 普通可攻略男主 male
+        // 一十木音也
         {
             id: "g110_m05",
-            name: "男主5",
+            name: "一十木音也",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -109,10 +109,10 @@ const gameData = {
                 { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
-        // 普通可攻略男主 male
+        // 神宮寺レン
         {
             id: "g110_m06",
-            name: "男主5",
+            name: "神宮寺レン",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -124,10 +124,10 @@ const gameData = {
                 { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
-        // 普通可攻略男主 male
+        // 来栖翔
         {
             id: "g110_m07",
-            name: "男主5",
+            name: "来栖翔",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -139,10 +139,10 @@ const gameData = {
                 { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
-        // FD续作限定角色（isFD=true → FD开关开启才显示整个角色卡片）
+        // 美風藍
         {
             id: "g110_fd01",
-            name: "续作FD新增角色",
+            name: "美風藍",
             gender: "male",
             isHidden: false,
             isFD: true,
@@ -151,10 +151,10 @@ const gameData = {
                 { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
             ]
         },
-        // FD续作限定角色（isFD=true → FD开关开启才显示整个角色卡片）
+        // カミュ
         {
             id: "g110_fd02",
-            name: "续作FD新增角色",
+            name: "カミュ",
             gender: "male",
             isHidden: false,
             isFD: true,
@@ -163,10 +163,10 @@ const gameData = {
                 { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
             ]
         },
-        // FD续作限定角色（isFD=true → FD开关开启才显示整个角色卡片）
+        // 黒崎蘭丸
         {
             id: "g110_fd03",
-            name: "续作FD新增角色",
+            name: "黒崎蘭丸",
             gender: "male",
             isHidden: false,
             isFD: true,
@@ -175,10 +175,10 @@ const gameData = {
                 { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
             ]
         },
-        // FD续作限定角色（isFD=true → FD开关开启才显示整个角色卡片）
+        // 早乙女光男
         {
             id: "g110_fd04",
-            name: "续作FD新增角色",
+            name: "早乙女光男",
             gender: "male",
             isHidden: false,
             isFD: true,
@@ -187,10 +187,10 @@ const gameData = {
                 { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
             ]
         },
-        // FD续作限定角色（isFD=true → FD开关开启才显示整个角色卡片）
+        // 寿嶺二
         {
             id: "g110_fd05",
-            name: "续作FD新增角色",
+            name: "寿嶺二",
             gender: "male",
             isHidden: false,
             isFD: true,
@@ -199,10 +199,22 @@ const gameData = {
                 { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
             ]
         },
-        // FD续作限定角色（isFD=true → FD开关开启才显示整个角色卡片）
+        // 月宮林檎
         {
             id: "g110_fd06",
-            name: "续作FD新增角色",
+            name: "月宮林檎",
+            gender: "male",
+            isHidden: false,
+            isFD: true,
+            isSub: false,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // 日向龍也
+        {
+            id: "g110_fd07",
+            name: "日向龍也",
             gender: "male",
             isHidden: false,
             isFD: true,
