@@ -1,35 +1,3 @@
-// ときめきメモリアル Girl's Side 2nd Kiss
-// 中文名: 心跳回忆女生版2
-// 开发: KONAMI
-// 发行: KONAMI
-// 人物设定: 小松原里枝子
-// 导演: 内田明理
-// 别名: ときメモ GS2
-// GS2
-// ときめきメモリアル Girl’s Side 2nd Season
-// ときめきメモリアル Girl’s Side 2nd Season for Nintendo Switch
-// 平台:
-// PS2 NDS Nintendo Switch
-// 游戏类型: 学園恋愛シミュレーション
-// 游玩人数: 1
-// 发行日期:
-// PS2初回生産版 2006-08-03
-// PS2通常版 2006-08-03
-// PS2特別版 2006-08-07
-// NDS版 2008-02-14
-// Nintendo Switch版 2024-02-14
-// 售价:
-// PS2初回生産版 7,678 円（税込）
-// PS2通常版 7,678 円（税込）
-// PS2特別版 10,780 円（税込）
-// NDS版 7,128 円（税込）
-// Nintendo Switch版 5,995 円（税込）
-// 主题歌作曲: スターダストレビュー、大浦祐一、根本要
-// 主题歌作词: 大浦祐一、根本要
-// 主题歌演出: スターダストレビュー、大浦祐一
-// 链接: ErogameScape VNDB
-// 官方网站: konami.com/game/Girls_Side/2nd_Season/
-  
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
 // 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
@@ -79,21 +47,9 @@ const gameData = {
                             "char/106/Itaru2.jpg"], type: "base" },
             ]
         },
-        // 赤城一雪
-        {
-            id: "g106_m03",
-            name: "赤城一雪",
-            gender: "male",
-            isHidden: false,
-            isFD: false,
-            isSub: false,
-            images: [
-                { srcList: ["char/106/Kazuyuki.jpg"], type: "base" },
-            ]
-        },
         // 針谷幸之進
         {
-            id: "g106_m04",
+            id: "g106_m03",
             name: "針谷幸之進",
             gender: "male",
             isHidden: false,
@@ -106,7 +62,7 @@ const gameData = {
         },
         // 真咲元春
         {
-            id: "g106_m05",
+            id: "g106_m04",
             name: "真咲元春",
             gender: "male",
             isHidden: false,
@@ -119,7 +75,7 @@ const gameData = {
         },
          // 志波勝己
         {
-            id: "g106_m06",
+            id: "g106_m05",
             name: "志波勝己",
             gender: "male",
             isHidden: false,
@@ -131,7 +87,7 @@ const gameData = {
         },
         // 天地翔太
         {
-            id: "g106_m07",
+            id: "g106_m06",
             name: "天地翔太",
             gender: "male",
             isHidden: false,
@@ -142,21 +98,9 @@ const gameData = {
                             "char/106/Shouta2.jpg"], type: "base" },
             ]
         },
-        // 古森拓
-        {
-            id: "g106_m08",
-            name: "古森拓",
-            gender: "male",
-            isHidden: false,
-            isFD: false,
-            isSub: false,
-            images: [
-                { srcList: ["char/106/Taku.jpg"], type: "base" },
-            ]
-        },
         // 佐伯瑛
         {
-            id: "g106_m09",
+            id: "g106_m07",
             name: "佐伯瑛",
             gender: "male",
             isHidden: false,
@@ -169,7 +113,7 @@ const gameData = {
         },
         // 若王子貴文
         {
-            id: "g106_m10",
+            id: "g106_m08",
             name: "若王子貴文",
             gender: "male",
             isHidden: false,
@@ -180,9 +124,33 @@ const gameData = {
                             "char/106/Wakaouji2.jpg"], type: "base" },
             ]
         },
-        // 真嶋太郎
+        // 赤城一雪
         {
             id: "g106_h01",
+            name: "赤城一雪",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            images: [
+                { srcList: ["char/106/Kazuyuki.jpg"], type: "base" },
+            ]
+        },
+        // 古森拓
+        {
+            id: "g106_h02",
+            name: "古森拓",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            images: [
+                { srcList: ["char/106/Taku.jpg"], type: "base" },
+            ]
+        },
+        // 真嶋太郎
+        {
+            id: "g106_h03",
             name: "男主5",
             gender: "male",
             isHidden: true,
