@@ -102,8 +102,9 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/107/Sakurai.jpg",
+                            "char/107/Sakurai2.jpg",
+                            "char/107/Sakurai3.jpg"], type: "base" },
             ]
         },
         // 設楽聖司
@@ -115,8 +116,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/107/Seiji.jpg",
+                            "char/107/Seiji2.jpg"], type: "base" },
             ]
         },
         // 平健太
