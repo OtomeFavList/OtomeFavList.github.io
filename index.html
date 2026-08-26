@@ -508,7 +508,7 @@ z-index: -999;
 
         // 监听游戏加载进度（全局回调，由data/games.js内注入进度通知）
         window.onGameLoadProgress = (current, total) => {
-            progressText.innerHTML = `游戏数据正在加载 ${current}/${total}<br>加载图片耗时较长，请稍候…`;
+            progressText.innerHTML = `游戏数据正在加载 ${current}/${total}，请稍候…`;
         };
 
         // 1. 加载所有游戏文件（内部应通过并发批量加载并回调进度）
