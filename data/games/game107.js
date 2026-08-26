@@ -63,8 +63,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/107/Chikara.jpg",
+                            "char/107/Chikara2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 不二山嵐
@@ -76,8 +76,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/107/Fujiyama.jpg",
+                            "char/107/Fujiyama2.jpg"], type: "base" },
             ]
         },
         // 新名旬平
@@ -89,8 +89,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/107/Junpei.jpg",
+                            "char/107/Junpei2.jpg"], type: "base" },
             ]
         },
         // 紺野玉緒
@@ -102,8 +102,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/107/Konno.jpg",
+                            "char/107/Konno2.jpg"], type: "base" },
             ]
         },
         // 桜井琉夏
@@ -115,8 +115,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/107/Ruka.jpg",
+                            "char/107/Ruka2.jpg"], type: "base" },
             ]
         },
         // 桜井琥一
