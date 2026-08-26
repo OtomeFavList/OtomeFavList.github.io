@@ -1399,7 +1399,7 @@ export async function renderExportCanvas(
     rawImageResourceCache.clear();
   }
 
-  const allImageSrcList = [];
+  let allImageSrcList = [];
   const renderDataList = [];
 
   for (const gameItem of gameList) {
@@ -1435,9 +1435,13 @@ export async function renderExportCanvas(
         const idx = Number(stored?.imgIndex ?? 0);
         const src = allSrc[idx] || allSrc[0];
         const canvasSrc = convertR2ToJsDelivr(src);
-        // 兜底防火墙：拒绝R2 / raw github 地址进入Canvas加载队列
-        if (canvasSrc && (!canvasSrc.startsWith('http') || canvasSrc.startsWith('https://pub-') || canvasSrc.includes("raw.githubusercontent.com"))) {
-          console.error("❌ 禁止加入R2/raw地址到Canvas加载队列", canvasSrc);
+        // =========【修改点A-1】防火墙：禁止空值、非http、R2 pub地址、github raw地址进入图片队列 ==========
+        const isBlockedUrl = (!canvasSrc)
+          || (!canvasSrc.startsWith('http'))
+          || canvasSrc.startsWith('https://pub-')
+          || canvasSrc.includes('raw.githubusercontent.com');
+        if (isBlockedUrl) {
+          console.error("❌ 禁止加入R2/raw地址到Canvas加载队列，已跳过", canvasSrc);
           continue;
         }
         charItems.push({
@@ -1463,8 +1467,13 @@ export async function renderExportCanvas(
         const fIdx = Number(cp.femaleImgIndex ?? 0);
         const fSrc = fAllSrc[fIdx] || fAllSrc[0];
         const canvasFSrc = convertR2ToJsDelivr(fSrc);
-        if (canvasFSrc && (!canvasFSrc.startsWith('http') || canvasFSrc.startsWith('https://pub-') || canvasFSrc.includes("raw.githubusercontent.com"))) {
-          console.error("❌ 禁止加入R2/raw地址到Canvas加载队列", canvasFSrc);
+        // =========【修改点A-2】防火墙：禁止空值、非http、R2 pub地址、github raw地址进入图片队列 ==========
+        const isBlockedUrlF = (!canvasFSrc)
+          || (!canvasFSrc.startsWith('http'))
+          || canvasFSrc.startsWith('https://pub-')
+          || canvasFSrc.includes('raw.githubusercontent.com');
+        if (isBlockedUrlF) {
+          console.error("❌ 禁止加入R2/raw地址到Canvas加载队列，已跳过", canvasFSrc);
           continue;
         }
 
@@ -1485,8 +1494,13 @@ export async function renderExportCanvas(
             const mIdx = Number(mi.imgIndex ?? 0);
             const mSrc = mAllSrc[mIdx] || mAllSrc[0];
             const canvasMSrc = convertR2ToJsDelivr(mSrc);
-            if (canvasMSrc && (!canvasMSrc.startsWith('http') || canvasMSrc.startsWith('https://pub-') || canvasMSrc.includes("raw.githubusercontent.com"))) {
-              console.error("❌ 禁止加入R2/raw地址到Canvas加载队列", canvasMSrc);
+            // =========【修改点A-3】防火墙：禁止空值、非http、R2 pub地址、github raw地址进入图片队列 ==========
+            const isBlockedUrlM = (!canvasMSrc)
+              || (!canvasMSrc.startsWith('http'))
+              || canvasMSrc.startsWith('https://pub-')
+              || canvasMSrc.includes('raw.githubusercontent.com');
+            if (isBlockedUrlM) {
+              console.error("❌ 禁止加入R2/raw地址到Canvas加载队列，已跳过", canvasMSrc);
               continue;
             }
             maleItems.push({
@@ -1520,25 +1534,46 @@ export async function renderExportCanvas(
     });
   }
 
+  // =========【补丁8】兜底防火墙：再次清洗图片源列表，剔除null/空/R2/raw地址，防止上层逻辑穿透 ==========
+  const SAFE_URL_PATTERN = /^(http|https):\/\//;
+  const BLOCK_RAW_PATTERN = /raw\.githubusercontent\.com/;
+  const BLOCK_R2_PUB_PATTERN = /^https:\/\/pub-/;
+  allImageSrcList = allImageSrcList.filter(src => {
+    if(!src) return false;
+    if(!SAFE_URL_PATTERN.test(src)) return false;
+    if(BLOCK_R2_PUB_PATTERN.test(src)) return false;
+    if(BLOCK_RAW_PATTERN.test(src)) return false;
+    return true;
+  });
+  // 去重
+  allImageSrcList = [...new Set(allImageSrcList)];
+
   // ===================== 收集所有圆角图片绘制任务（只记录 src 和 radius） =====================
   const roundCanvasTasks = [];
   for (const data of renderDataList) {
     for (const item of data.charItems) {
-      roundCanvasTasks.push({
-        src: item.src,
-        radius: LAYOUT_STYLE.CHAR_IMG_RADIUS
-      });
-    }
-    for (const cp of data.cpItems) {
-      roundCanvasTasks.push({
-        src: cp.femaleSrc,
-        radius: LAYOUT_STYLE.CHAR_IMG_RADIUS
-      });
-      for (const m of cp.maleItems) {
+      // 防御过滤
+      if(item.src && SAFE_URL_PATTERN.test(item.src) && !BLOCK_R2_PUB_PATTERN.test(item.src) && !BLOCK_RAW_PATTERN.test(item.src)){
         roundCanvasTasks.push({
-          src: m.src,
+          src: item.src,
           radius: LAYOUT_STYLE.CHAR_IMG_RADIUS
         });
+      }
+    }
+    for (const cp of data.cpItems) {
+      if(cp.femaleSrc && SAFE_URL_PATTERN.test(cp.femaleSrc) && !BLOCK_R2_PUB_PATTERN.test(cp.femaleSrc) && !BLOCK_RAW_PATTERN.test(cp.femaleSrc)){
+        roundCanvasTasks.push({
+          src: cp.femaleSrc,
+          radius: LAYOUT_STYLE.CHAR_IMG_RADIUS
+        });
+      }
+      for (const m of cp.maleItems) {
+        if(m.src && SAFE_URL_PATTERN.test(m.src) && !BLOCK_R2_PUB_PATTERN.test(m.src) && !BLOCK_RAW_PATTERN.test(m.src)){
+          roundCanvasTasks.push({
+            src: m.src,
+            radius: LAYOUT_STYLE.CHAR_IMG_RADIUS
+          });
+        }
       }
     }
   }
