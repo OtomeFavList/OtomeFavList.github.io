@@ -119,17 +119,52 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 蓮見達也
+        // 平健太
         {
             id: "g107_h01",
+            name: "平健太",
+            gender: "male",
+            isHidden: true,
+            isFD: false,
+            isSub: false,
+            images: [
+                { srcList: ["char/107/Kenta.jpg"], type: "base" }
+            ]
+        },
+        // 藍沢秋吾
+        {
+            id: "g107_h02",
+            name: "藍沢秋吾",
+            gender: "male",
+            isHidden: true,
+            isFD: false,
+            isSub: false,
+            images: [
+                { srcList: ["char/107/Shugo.jpg"], type: "base" }
+            ]
+        },
+        // 春日太陽
+        {
+            id: "g107_h03",
+            name: "春日太陽",
+            gender: "male",
+            isHidden: true,
+            isFD: false,
+            isSub: false,
+            images: [
+                { srcList: ["char/107/Taiyo.jpg"], type: "base" }
+            ]
+        },
+        // 蓮見達也
+        {
+            id: "g107_h04",
             name: "蓮見達也",
             gender: "male",
             isHidden: true,
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/107/Tatsuya.jpg"], type: "base" },
             ]
         }
     ]
