@@ -7,7 +7,7 @@
 // 官中发售以后，需要修改：游戏名、发售年份、汉化厂商、封面图、角色名
 const gameData = {
     id: "game108", // 全局唯一ID，不可重复，如 game001
-    name: "ときめきメモリアル Girl’s Side 4th Heart",
+    name: "ときめきメモリアル Girl's Side 4th Heart",
     year: "2021",
     publisher: ["KONAMI"],
     cnStudio: "暂无",
