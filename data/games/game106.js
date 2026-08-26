@@ -62,8 +62,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/106/Christopher.jpg",
+                            "char/106/Christopher2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 氷上格
@@ -75,8 +75,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/106/Itaru.jpg",
+                            "char/106/Itaru2.jpg"], type: "base" },
             ]
         },
         // 赤城一雪
@@ -88,8 +88,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/106/Kazuyuki.jpg"], type: "base" },
             ]
         },
         // 針谷幸之進
@@ -101,8 +100,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/106/Kounoshin.jpg",
+                            "char/106/Kounoshin2.jpg"], type: "base" },
             ]
         },
         // 真咲元春
@@ -114,8 +113,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/106/Motoharu.jpg",
+                            "char/106/Motoharu2.jpg"], type: "base" },
             ]
         },
          // 志波勝己
@@ -127,8 +126,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/106/Shiba.jpg"], type: "base" },
             ]
         },
         // 天地翔太
@@ -140,8 +138,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/106/Shouta.jpg",
+                            "char/106/Shouta2.jpg"], type: "base" },
             ]
         },
         // 古森拓
@@ -153,8 +151,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/106/Taku.jpg"], type: "base" },
             ]
         },
         // 佐伯瑛
@@ -166,8 +163,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/106/Teru.jpg",
+                            "char/106/Teru2.jpg"], type: "base" },
             ]
         },
         // 若王子貴文
@@ -179,8 +176,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/106/Wakaouji.jpg",
+                            "char/106/Wakaouji2.jpg"], type: "base" },
             ]
         },
         // 真嶋太郎
@@ -192,8 +189,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/106/Tarou.jpg"], type: "base" },
             ]
         }
     ]
