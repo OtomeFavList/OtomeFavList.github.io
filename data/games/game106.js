@@ -129,7 +129,7 @@ const gameData = {
             id: "g106_h01",
             name: "赤城一雪",
             gender: "male",
-            isHidden: false,
+            isHidden: true,
             isFD: false,
             isSub: false,
             images: [
@@ -141,7 +141,7 @@ const gameData = {
             id: "g106_h02",
             name: "古森拓",
             gender: "male",
-            isHidden: false,
+            isHidden: true,
             isFD: false,
             isSub: false,
             images: [
