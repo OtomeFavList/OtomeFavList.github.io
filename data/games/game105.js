@@ -48,7 +48,7 @@ const gameData = {
             isSub: false,
             images: [
                 { srcList: ["char/105/Kei.jpg",
-                            "char/105/Kei2.jpgg"], type: "base" },
+                            "char/105/Kei2.jpg"], type: "base" },
             ]
         },
         // 姫条まどか
