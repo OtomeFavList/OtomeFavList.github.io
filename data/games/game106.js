@@ -82,7 +82,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/106/Shiba.jpg"], type: "base" },
+                { srcList: ["char/106/Shiba.jpg",
+                            "char/106/Shiba2.jpg"], type: "base" },
             ]
         },
         // 天地翔太
