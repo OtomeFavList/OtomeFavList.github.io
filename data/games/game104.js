@@ -47,8 +47,8 @@ const gameData = {
             isFD: false,    // true=续作/FD专属角色，开关控制是否展示该角色
             isSub: false,    // true=配角，开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/104/Mutsumi.jpg",
+                            "char/104/Mutsumi2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 筧十蔵
@@ -60,8 +60,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/104/Jyuzou.jpg",
+                            "char/104/Jyuzou2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 由利鎌之介
@@ -73,8 +73,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/104/Kamanosuke.jpg",
+                            "char/104/Kamanosuke2.jpg"], type: "base" },
             ]
         },
         // 霧隠才蔵
@@ -86,8 +86,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/104/Saizou.jpg",
+                            "char/104/Saizou2.jpg"], type: "base" },
             ]
         },
         // 猿飛佐助
@@ -99,8 +99,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/104/Sasuke.jpg",
+                            "char/104/Sasuke2.jpg"], type: "base" },
             ]
         },
         // 真田信繁
@@ -112,8 +112,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/104/Shigenobu.jpg",
+                            "char/104/Shigenobu2.jpg"], type: "base" },
             ]
         }
     ]
