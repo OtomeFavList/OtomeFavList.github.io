@@ -30,8 +30,8 @@ const gameData = {
             isFD: false,    // true=续作/FD专属角色，开关控制是否展示该角色
             isSub: false,    // true=配角，开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/110/Haruka.jpg",
+                            "char/110/Haruka2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 愛島セシル
@@ -43,10 +43,14 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["char/001/男主13.jpg"], type: "hidden" },
-                { srcList: ["char/001/男主14.jpg"], type: "fd" }
+                { srcList: ["img/char/110/Cecil.jpg",
+                            "img/char/110/Cecil2.jpg",
+                            "img/char/110/Cecil3.jpg",
+                            "img/char/110/Cecil4.jpg",
+                            "img/char/110/Cecil5.jpg",
+                            "img/char/110/Cecil6.png",
+                            "img/char/110/Cecil7.jpg",
+                            "img/char/110/Cecil8.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 一ノ瀬トキヤ
@@ -58,10 +62,14 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
+                { srcList: ["img/char/110/Ichinose.jpg",
+                            "img/char/110/Ichinose2.jpg",
+                            "img/char/110/Ichinose3.jpg",
+                            "img/char/110/Ichinose4.jpg",
+                            "img/char/110/Ichinose5.jpg",
+                            "img/char/110/Ichinose6.png",
+                            "img/char/110/Ichinose7.jpg",
+                            "img/char/110/Ichinose8.jpg"], type: "base" },
             ]
         },
         // 聖川真斗
@@ -73,10 +81,14 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
+                { srcList: ["img/char/110/Masato.jpg",
+                            "img/char/110/Masato2.jpg",
+                            "img/char/110/Masato3.jpg",
+                            "img/char/110/Masato4.jpg",
+                            "img/char/110/Masato5.jpg",
+                            "img/char/110/Masato6.png",
+                            "img/char/110/Masato7.jpg",
+                            "img/char/110/Masato8.jpg"], type: "base" },
             ]
         },
         // 四ノ宮那月
@@ -88,10 +100,14 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
+                { srcList: ["img/char/110/Natsuki.jpg",
+                            "img/char/110/Natsuki2.jpg",
+                            "img/char/110/Natsuki3.jpg",
+                            "img/char/110/Natsuki4.jpg",
+                            "img/char/110/Natsuki5.jpg",
+                            "img/char/110/Natsuki6.png",
+                            "img/char/110/Natsuki7.jpg",
+                            "img/char/110/Natsuki8.jpg"], type: "base" },
             ]
         },
         // 一十木音也
@@ -103,10 +119,14 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
+                { srcList: ["img/char/110/Otoya.jpg",
+                            "img/char/110/Otoya2.jpg",
+                            "img/char/110/Otoya3.jpg",
+                            "img/char/110/Otoya4.jpg",
+                            "img/char/110/Otoya5.jpg",
+                            "img/char/110/Otoya6.png",
+                            "img/char/110/Otoya7.jpg",
+                            "img/char/110/Otoya8.jpg"], type: "base" },
             ]
         },
         // 神宮寺レン
@@ -118,10 +138,14 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
+                { srcList: ["img/char/110/Ren.jpg",
+                            "img/char/110/Ren2.jpg",
+                            "img/char/110/Ren3.jpg",
+                            "img/char/110/Ren4.jpg",
+                            "img/char/110/Ren5.jpg",
+                            "img/char/110/Ren6.png",
+                            "img/char/110/Ren7.jpg",
+                            "img/char/110/Ren8.jpg"], type: "base" },
             ]
         },
         // 来栖翔
@@ -133,10 +157,14 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
+                { srcList: ["img/char/110/Shou.jpg",
+                            "img/char/110/Shou2.jpg",
+                            "img/char/110/Shou3.jpg",
+                            "img/char/110/Shou4.jpg",
+                            "img/char/110/Shou5.jpg",
+                            "img/char/110/Shou6.png",
+                            "img/char/110/Shou7.jpg",
+                            "img/char/110/Shou8.jpg"], type: "base" },
             ]
         },
         // 美風藍
@@ -148,7 +176,11 @@ const gameData = {
             isFD: true,
             isSub: false,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/110/Ai.jpg",
+                            "char/110/Ai2.jpg",
+                            "char/110/Ai3.jpg",
+                            "char/110/Ai4.jpg",
+                            "char/110/Ai5.jpg"], type: "base" }
             ]
         },
         // カミュ
@@ -160,7 +192,11 @@ const gameData = {
             isFD: true,
             isSub: false,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/110/Camus.jpg",
+                            "char/110/Camus2.jpg",
+                            "char/110/Camus3.jpg",
+                            "char/110/Camus4.jpg",
+                            "char/110/Camus5.jpg"], type: "base" }
             ]
         },
         // 黒崎蘭丸
@@ -172,7 +208,11 @@ const gameData = {
             isFD: true,
             isSub: false,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/110/Kurosaki.jpg",
+                            "char/110/Kurosaki2.jpg",
+                            "char/110/Kurosaki3.jpg",
+                            "char/110/Kurosaki4.jpg",
+                            "char/110/Kurosaki5.jpg"], type: "base" }
             ]
         },
         // 早乙女光男
@@ -184,7 +224,8 @@ const gameData = {
             isFD: true,
             isSub: false,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/110/Mitsuo.jpg",
+                            "char/110/Mitsuo2.jpg"], type: "base" }
             ]
         },
         // 寿嶺二
@@ -196,7 +237,11 @@ const gameData = {
             isFD: true,
             isSub: false,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/110/Reiji.jpg",
+                            "char/110/Reiji2.jpg",
+                            "char/110/Reiji3.jpg",
+                            "char/110/Reiji4.jpg",
+                            "char/110/Reiji5.jpg"], type: "base" }
             ]
         },
         // 月宮林檎
@@ -208,7 +253,10 @@ const gameData = {
             isFD: true,
             isSub: false,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/110/Ringo.jpg",
+                            "char/110/Ringo2.jpg",
+                            "char/110/Ringo3.jpg",
+                            "char/110/Ringo4.jpg"], type: "base" }
             ]
         },
         // 日向龍也
@@ -220,7 +268,10 @@ const gameData = {
             isFD: true,
             isSub: false,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/110/Ryuuya.jpg",
+                            "char/110/Ryuuya2.jpg",
+                            "char/110/Ryuuya3.jpg",
+                            "char/110/Ryuuya4.jpg"], type: "base" }
             ]
         }
     ]
