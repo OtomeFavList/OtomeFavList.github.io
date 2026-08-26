@@ -10,7 +10,7 @@ const gameData = {
     name: "うたの☆プリンスさまっ♪ Repeat LOVE",
     year: "2019",
     publisher: ["BROCCOLI"],
-    cnStudio: "汉化组/汉化厂商",
+    cnStudio: "暂无",
     writer: [
         {name:"武口碧", lang:"zh"},
         {name:"神城咲弥", lang:"zh"},
