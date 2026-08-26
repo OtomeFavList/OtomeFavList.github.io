@@ -153,7 +153,7 @@ const gameData = {
             isSub: false,
             images: [
                 { srcList: ["char/105/Jin.jpg",
-                            "char/105/Jin2.jpgg"], type: "base" },
+                            "char/105/Jin2.jpg"], type: "base" },
             ]
         }
     ]
