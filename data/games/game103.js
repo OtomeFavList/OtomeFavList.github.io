@@ -80,8 +80,8 @@ const gameData = {
             isFD: false,    // true=续作/FD专属角色，开关控制是否展示该角色
             isSub: false,    // true=配角，开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/103/Megumi.jpg",
+                            "char/103/Megumi2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 神楽坂響
@@ -93,8 +93,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/103/Hibiki.jpg",
+                            "char/103/Hibiki2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 榛名望
@@ -106,8 +106,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/103/Nozomu.jpg",
+                            "char/103/Nozomu2.jpg"], type: "base" },
             ]
         },
         // 望月理也
@@ -119,8 +119,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/103/Satoya.jpg",
+                            "char/103/Satoya2.jpg"], type: "base" },
             ]
         },
         // 猪口渉
@@ -132,8 +132,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/103/Wataru.jpg",
+                            "char/103/Wataru2.jpg"], type: "base" },
             ]
         }
     ]
