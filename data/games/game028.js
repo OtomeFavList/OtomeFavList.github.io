@@ -5,7 +5,7 @@ const gameData = {
     id: "game028", // 全局唯一ID，不可重复
     name: "华彩煌煌，吾之一族 摩登时代",
     year: "2023",
-    publisher: ["Otomate"],
+    publisher: ["ichicolumn","Otomate"],
     cnStudio: "GSE",
     writer: [
         {name:"高木亜由美", lang:"zh"}
