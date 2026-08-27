@@ -39,27 +39,25 @@
 // 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
 // 官中发售以后，需要修改：游戏名、发售年份、汉化厂商、封面图、角色名
 const gameData = {
-    id: "game1", // 全局唯一ID，不可重复，如 game001
-    name: "示例乙女游戏",
-    year: "20",
-    publisher: ["原厂发行商"],
-    cnStudio: "汉化组/汉化厂商",
+    id: "game128", // 全局唯一ID，不可重复，如 game001
+    name: "神々の悪戯 Unite Edition",
+    year: "2022",
+    publisher: ["BROCCOLI"],
+    cnStudio: "暂无",
     writer: [
-        {name:"中文编剧", lang:"zh"},
-        {name:"日文编剧", lang:"ja"},
-        {name:"英文编剧", lang:"en"}
+        {name:"武口碧", lang:"zh"},
+        {name:"櫻間ろに", lang:"zh"},
+        {name:"ひらやま", lang:"ja"}
     ],
     art: [
-        {name:"中文原画", lang:"zh"},
-        {name:"日文原画", lang:"ja"},
-        {name:"英文原画", lang:"en"}
+        {name:"カズキヨネ", lang:"ja"}
     ],
-    cover: "game/1.jpg", // 相对路径，游戏封面
+    cover: "game/128.jpg", // 相对路径，游戏封面
     charList: [
-        // 女主模板 female
+        // 草薙結衣
         {
-            id: "g1_f01",
-            name: "女主A",
+            id: "g128_f01",
+            name: "草薙結衣",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,    // true=续作/FD专属角色，开关控制是否展示该角色
@@ -67,14 +65,12 @@ const gameData = {
             images: [
                 { srcList: ["char/001/女主A.jpg",
                             "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["char/001/女主A3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["char/001/女主A4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
-        // 普通可攻略男主 male
+        // 戸塚陽
         {
-            id: "g1_m01",
-            name: "男主1",
+            id: "g128_m01",
+            name: "戸塚陽1",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -82,13 +78,11 @@ const gameData = {
             images: [
                 { srcList: ["char/001/男主1.jpg",
                             "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["char/001/男主13.jpg"], type: "hidden" },
-                { srcList: ["char/001/男主14.jpg"], type: "fd" }
             ]
         },
-        // 普通可攻略男主 male
+        // アヌビス·マアト
         {
-            id: "g1_m02",
+            id: "アヌビス·マアト",
             name: "男主2",
             gender: "male",
             isHidden: false,
@@ -97,14 +91,12 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
-        // 普通可攻略男主 male
+        // アポロン·アガナ·ベレア
         {
-            id: "g1_m03",
-            name: "男主3",
+            id: "g128_m03",
+            name: "アポロン·アガナ·ベレア",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -112,14 +104,12 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
-        // 普通可攻略男主 male
+        // バルドル·フリングホルニ
         {
-            id: "g1_m04",
-            name: "男主4",
+            id: "g128_m04",
+            name: "バルドル·フリングホルニ",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -127,14 +117,12 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
-        // 普通可攻略男主 male
+        // ディオニュソス·テュルソス
         {
-            id: "g1_m05",
-            name: "男主5",
+            id: "g128_m05",
+            name: "ディオニュソス·テュルソス",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -142,44 +130,97 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
-        // 隐藏角色（isHidden=true → 开关开启才显示整个角色卡片）
+        // ハデス·アイドネウス
         {
-            id: "g1_h01",
-            name: "隐藏攻略角色",
-            gender: "male",
-            isHidden: true,
-            isFD: false,
-            isSub: false,
-            images: [
-                { srcList: ["char/g001_h01_1.jpg"], type: "base" }
-            ]
-        },
-        // FD续作限定角色（isFD=true → FD开关开启才显示整个角色卡片）
-        {
-            id: "g1_fd01",
-            name: "续作FD新增角色",
-            gender: "male",
-            isHidden: false,
-            isFD: true,
-            isSub: false,
-            images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
-            ]
-        },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
-        {
-            id: "g1_s01",
-            name: "配角",
+            id: "g128_m06",
+            name: "ハデス·アイドネウス",
             gender: "male",
             isHidden: false,
             isFD: false,
-            isSub: true,
+            isSub: false,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/g0_m01_1.jpg",
+                            "char/g001_m0_2.jpg"], type: "base" },
+            ]
+        },
+        // ロキ·レーヴァテイン
+        {
+            id: "g128_m07",
+            name: "ロキ·レーヴァテイン",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            images: [
+                { srcList: ["char/g0_m01_1.jpg",
+                            "char/g001_m0_2.jpg"], type: "base" },
+            ]
+        },
+        // メリッサ
+        {
+            id: "g128_m08",
+            name: "メリッサ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            images: [
+                { srcList: ["char/g0_m01_1.jpg",
+                            "char/g001_m0_2.jpg"], type: "base" },
+            ]
+        },
+        // 戸塚尊
+        {
+            id: "g128_m09",
+            name: "戸塚尊",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            images: [
+                { srcList: ["char/g0_m01_1.jpg",
+                            "char/g001_m0_2.jpg"], type: "base" },
+            ]
+        },
+        // トール·メギンギョルズ
+        {
+            id: "g128_m10",
+            name: "トール·メギンギョルズ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            images: [
+                { srcList: ["char/g0_m01_1.jpg",
+                            "char/g001_m0_2.jpg"], type: "base" },
+            ]
+        },
+        // トト·カドゥケウス
+        {
+            id: "g128_m11",
+            name: "トト·カドゥケウス",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            images: [
+                { srcList: ["char/g0_m01_1.jpg",
+                            "char/g001_m0_2.jpg"], type: "base" },
+            ]
+        },
+        // 戸塚月人
+        {
+            id: "g128_m12",
+            name: "戸塚月人",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            images: [
+                { srcList: ["char/g0_m01_1.jpg",
+                            "char/g001_m0_2.jpg"], type: "base" },
             ]
         }
     ]
