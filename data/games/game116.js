@@ -83,10 +83,10 @@ const gameData = {
                             "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // ヘンリク
         {
             id: "g116_m01",
-            name: "男主1",
+            name: "ヘンリク",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -96,10 +96,10 @@ const gameData = {
                             "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // ユゼフ
         {
             id: "g116_m02",
-            name: "男主2",
+            name: "ユゼフ",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -109,10 +109,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // ルドヴィク
         {
             id: "g116_m03",
-            name: "男主3",
+            name: "ルドヴィク",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -122,10 +122,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // ミアーシュ
         {
             id: "g116_m04",
-            name: "男主4",
+            name: "ミアーシュ",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -135,10 +135,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // リシャルト
         {
             id: "g116_m05",
-            name: "男主5",
+            name: "リシャルト",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -159,6 +159,30 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
+            ]
+        },
+        // タルメ
+        {
+            id: "g116_fd01",
+            name: "タルメ",
+            gender: "male",
+            isHidden: false,
+            isFD: true,
+            isSub: false,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+    // 魔術師
+        {
+            id: "g116_fd02",
+            name: "魔術師",
+            gender: "male",
+            isHidden: false,
+            isFD: true,
+            isSub: false,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
             ]
         }
     ]
