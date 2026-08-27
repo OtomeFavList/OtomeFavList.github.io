@@ -9,7 +9,7 @@ DesperaDrops
 平台: Nintendo Switch
 官方网站: d3p.co.jp/desperadrops/
 
-  // ==========【单个游戏独立数据模板｜新版ESModule】==========
+// ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
 // 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
 // 网页渲染时由 main.js 的 getWebImageUrl 拼接为 R2 完整 URL
