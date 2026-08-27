@@ -20,27 +20,24 @@ http://www.takuyo.co.jp/products/himehibi2/
 // 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
 // 官中发售以后，需要修改：游戏名、发售年份、汉化厂商、封面图、角色名
 const gameData = {
-    id: "game1", // 全局唯一ID，不可重复，如 game001
+    id: "game134", // 全局唯一ID，不可重复，如 game001
     name: "ひめひび -New Princess Days!!- 続!二学期",
-    year: "20",
-    publisher: ["原厂发行商"],
-    cnStudio: "汉化组/汉化厂商",
+    year: "2020",
+    publisher: ["TAKUYO"],
+    cnStudio: "暂无",
     writer: [
-        {name:"中文编剧", lang:"zh"},
-        {name:"日文编剧", lang:"ja"},
-        {name:"英文编剧", lang:"en"}
+        {name:"柚木隼人", lang:"zh"},
+        {name:"ゆずしお", lang:"ja"}
     ],
     art: [
-        {name:"中文原画", lang:"zh"},
-        {name:"日文原画", lang:"ja"},
-        {name:"英文原画", lang:"en"}
+        {name:"仁神ユキタカ", lang:"zh"}
     ],
-    cover: "game/1.jpg", // 相对路径，游戏封面
+    cover: "game/134.jpg", // 相对路径，游戏封面
     charList: [
-        // 女主模板 female
+        // 上河菜々美
         {
-            id: "g1_f01",
-            name: "女主A",
+            id: "g134_f01",
+            name: "上河菜々美",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,    // true=续作/FD专属角色，开关控制是否展示该角色
@@ -48,14 +45,12 @@ const gameData = {
             images: [
                 { srcList: ["char/001/女主A.jpg",
                             "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["char/001/女主A3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["char/001/女主A4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
-        // 普通可攻略男主 male
+        // 上河明良
         {
-            id: "g1_m01",
-            name: "男主1",
+            id: "g134_m01",
+            name: "上河明良",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -63,14 +58,12 @@ const gameData = {
             images: [
                 { srcList: ["char/001/男主1.jpg",
                             "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["char/001/男主13.jpg"], type: "hidden" },
-                { srcList: ["char/001/男主14.jpg"], type: "fd" }
             ]
         },
-        // 普通可攻略男主 male
+        // 神代アルバート
         {
-            id: "g1_m02",
-            name: "男主2",
+            id: "g134_m02",
+            name: "神代アルバート",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -78,14 +71,12 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
-        // 普通可攻略男主 male
+        // 小日向風太
         {
-            id: "g1_m03",
-            name: "男主3",
+            id: "g134_m03",
+            name: "小日向風太",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -93,14 +84,12 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
-        // 普通可攻略男主 male
+        // 橘伊吹
         {
-            id: "g1_m04",
-            name: "男主4",
+            id: "g134_m04",
+            name: "橘伊吹",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -108,14 +97,12 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
-        // 普通可攻略男主 male
+        // 小泉顕
         {
-            id: "g1_m05",
-            name: "男主5",
+            id: "g134_m05",
+            name: "小泉顕",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -123,44 +110,19 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
-        // 隐藏角色（isHidden=true → 开关开启才显示整个角色卡片）
+        // 桐山大楽
         {
-            id: "g1_h01",
-            name: "隐藏攻略角色",
-            gender: "male",
-            isHidden: true,
-            isFD: false,
-            isSub: false,
-            images: [
-                { srcList: ["char/g001_h01_1.jpg"], type: "base" }
-            ]
-        },
-        // FD续作限定角色（isFD=true → FD开关开启才显示整个角色卡片）
-        {
-            id: "g1_fd01",
-            name: "续作FD新增角色",
-            gender: "male",
-            isHidden: false,
-            isFD: true,
-            isSub: false,
-            images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
-            ]
-        },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
-        {
-            id: "g1_s01",
-            name: "配角",
+            id: "g134_m06",
+            name: "桐山大楽",
             gender: "male",
             isHidden: false,
             isFD: false,
-            isSub: true,
+            isSub: false,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/g0_m01_1.jpg",
+                            "char/g001_m0_2.jpg"], type: "base" },
             ]
         }
     ]
