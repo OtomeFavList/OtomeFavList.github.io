@@ -35,10 +35,10 @@ const gameData = {
     ],
     cover: "game/120.jpg", // 相对路径，游戏封面
     charList: [
-        // 女主模板 female
+        // 小鳥遊ユウキ
         {
             id: "g120_f01",
-            name: "女主A",
+            name: "小鳥遊ユウキ",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,    // true=续作/FD专属角色，开关控制是否展示该角色
@@ -48,10 +48,10 @@ const gameData = {
                             "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 間宮アユム
         {
             id: "g120_m01",
-            name: "男主1",
+            name: "間宮アユム",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -61,10 +61,10 @@ const gameData = {
                             "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 日向
         {
             id: "g120_m02",
-            name: "男主2",
+            name: "日向",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -74,10 +74,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 伊吹
         {
             id: "g120_m03",
-            name: "男主3",
+            name: "伊吹",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -87,10 +87,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 栖原カムイ
         {
             id: "g120_m04",
-            name: "男主4",
+            name: "栖原カムイ",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -100,10 +100,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 新記ミハヤ
         {
             id: "g120_m05",
-            name: "男主5",
+            name: "新記ミハヤ",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -113,10 +113,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 冨司リョウ
         {
             id: "g120_m06",
-            name: "男主5",
+            name: "冨司リョウ",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -126,10 +126,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 高遠トキオ
         {
             id: "g120_m07",
-            name: "男主5",
+            name: "高遠トキオ",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -139,10 +139,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 雪波
         {
             id: "g120_m08",
-            name: "男主5",
+            name: "雪波",
             gender: "male",
             isHidden: false,
             isFD: false,
