@@ -8,3 +8,4 @@
 http://www.takuyo.co.jp/products/himehibi_switch/
 http://www.takuyo.co.jp/products/himehibi/himehibi_portable.html
 http://www.takuyo.co.jp/products/himehibi/himehibivita/
+takuyo.co.jp/products/himehibi/index.html
