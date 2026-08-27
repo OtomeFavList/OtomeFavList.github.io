@@ -45,10 +45,10 @@ const gameData = {
     ],
     cover: "game/129.jpg", // 相对路径，游戏封面
     charList: [
-        // 女主模板 female
+        // イチゴ
         {
             id: "g129_f01",
-            name: "女主A",
+            name: "イチゴ",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,    // true=续作/FD专属角色，开关控制是否展示该角色
@@ -58,10 +58,10 @@ const gameData = {
                             "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // アモン
         {
             id: "g129_m01",
-            name: "男主1",
+            name: "アモン",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -69,14 +69,12 @@ const gameData = {
             images: [
                 { srcList: ["char/001/男主1.jpg",
                             "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["char/001/男主13.jpg"], type: "hidden" },
-                { srcList: ["char/001/男主14.jpg"], type: "fd" }
             ]
         },
-        // 普通可攻略男主 male
+        // 長谷川
         {
-            id: "g1_m02",
-            name: "男主2",
+            id: "g129_m02",
+            name: "長谷川",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -84,14 +82,12 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
-        // 普通可攻略男主 male
+        // イズナ
         {
-            id: "g1_m03",
-            name: "男主3",
+            id: "g129_m03",
+            name: "イズナ",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -99,14 +95,12 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
-        // 普通可攻略男主 male
+        // クラマ
         {
-            id: "g1_m04",
-            name: "男主4",
+            id: "g129_m04",
+            name: "クラマ",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -114,14 +108,12 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
-        // 普通可攻略男主 male
+        // ノイン
         {
-            id: "g1_m05",
-            name: "男主5",
+            id: "g129_m05",
+            name: "ノイン",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -129,44 +121,19 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
-        // 隐藏角色（isHidden=true → 开关开启才显示整个角色卡片）
+        // ツキミ
         {
-            id: "g1_h01",
-            name: "隐藏攻略角色",
-            gender: "male",
-            isHidden: true,
-            isFD: false,
-            isSub: false,
-            images: [
-                { srcList: ["char/g001_h01_1.jpg"], type: "base" }
-            ]
-        },
-        // FD续作限定角色（isFD=true → FD开关开启才显示整个角色卡片）
-        {
-            id: "g1_fd01",
-            name: "续作FD新增角色",
-            gender: "male",
-            isHidden: false,
-            isFD: true,
-            isSub: false,
-            images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
-            ]
-        },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
-        {
-            id: "g1_s01",
-            name: "配角",
+            id: "g129_m06",
+            name: "ツキミ",
             gender: "male",
             isHidden: false,
             isFD: false,
-            isSub: true,
+            isSub: false,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/g0_m01_1.jpg",
+                            "char/g001_m0_2.jpg"], type: "base" },
             ]
         }
     ]
