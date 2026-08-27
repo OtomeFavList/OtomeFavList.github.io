@@ -55,10 +55,10 @@ const gameData = {
                             "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 浅木詠一郎
         {
             id: "g115_m01",
-            name: "男主1",
+            name: "浅木詠一郎",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -68,10 +68,10 @@ const gameData = {
                             "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 真木野春三
         {
             id: "g115_m02",
-            name: "男主2",
+            name: "真木野春三",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -81,10 +81,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 上久保数馬
         {
             id: "g115_m03",
-            name: "男主3",
+            name: "上久保数馬",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -94,10 +94,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 西嶋理玖
         {
             id: "g115_m04",
-            name: "男主4",
+            name: "西嶋理玖",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -107,10 +107,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 瀬名由稀人
         {
             id: "g115_m05",
-            name: "男主5",
+            name: "瀬名由稀人",
             gender: "male",
             isHidden: false,
             isFD: false,
