@@ -1,34 +1,22 @@
-逆転吉原
-中文名: 逆转吉原
-发行: Dogenzaka Lab
-人物设定: Hs
-原画: Hs
-别名: The Men of Yoshiwara
-开发: スマホカレシ
-官方网站: d3p.co.jp/sumakare/gyakuten/
-
-男遊郭
-开发: ひつじぐも、株式会社ブリッジ、ディースリー・パブリッシャー
-剧本: かほく麻緒、島田類、ひつじぐも
-音乐: 浅乃一
-人物设定: Hs
-主题歌作曲: AZ-MIX、タナカノブマサ、ロア健治、田中智之、浅乃一、野見山美貴、麿
-主题歌作词: yumico、サカモトヨシキ、タナカノブマサ、ロア健治、麿
-主题歌演出: 久野藍、柿原徹也、森久保祥太郎、置鮎龍太郎、野島健児、鳥海浩輔、黒田崇矢
-原画: Hs
-平台: PSV
-官方网站: d3p.co.jp/otokoyukaku/vita/
-  
-逆転吉原～扇屋編～
-中文名: 逆转吉原～扇屋编～
-开发: Dogenzaka Lab
-发行: Dogenzaka Lab、ディースリー・パブリッシャー
-人物设定: Hs
-原画: Hs
-别名: The Men of Yoshiwara: Ohgiya
-艶恋絵巻
-The Rosy Script
-官方网站: d3p.co.jp/ohgiya/
+Lover Pretend
+中文名: 伪装恋人
+开发: オトメイト、Design Factory、デザインファクトリー
+发行: アイディアファクトリー株式会社
+剧本: 青木ひろえ、小縞なお、有野幸、いわた志信
+音乐: 折倉俊則(I.L.C -Image Leaf Craft-)
+人物设定: 藤理ト
+主题歌作曲: 折倉俊則
+主题歌演出: 中恵光城
+原画: 藤理ト
+SD原画: うた
+制作人: いわた志信
+别名: ラバプリ
+平台: Nintendo Switch
+导演: 青木ひろえ
+系统总监: 椎名あとり
+主题歌作词: mao
+链接: ErogameScape
+官方网站: otomate.jp/lp/
 
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
