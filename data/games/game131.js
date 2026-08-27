@@ -48,10 +48,10 @@ const gameData = {
                             "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 古橋旺一郎
         {
             id: "g131_m01",
-            name: "男主1",
+            name: "古橋旺一郎",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -61,10 +61,10 @@ const gameData = {
                             "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 密原誠丞
         {
             id: "g131_m02",
-            name: "男主2",
+            name: "密原誠丞",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -74,10 +74,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 久瀬蒼馬
         {
             id: "g131_m03",
-            name: "男主3",
+            name: "久瀬蒼馬",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -87,10 +87,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 日之世武尊
         {
             id: "g131_m04",
-            name: "男主4",
+            name: "日之世武尊",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -100,10 +100,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 真井知己
         {
             id: "g131_m05",
-            name: "男主5",
+            name: "真井知己",
             gender: "male",
             isHidden: false,
             isFD: false,
