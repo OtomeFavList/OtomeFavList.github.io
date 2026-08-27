@@ -19,7 +19,7 @@ takuyo.co.jp/products/himehibi/index.html
 // 官中发售以后，需要修改：游戏名、发售年份、汉化厂商、封面图、角色名
 const gameData = {
     id: "game1", // 全局唯一ID，不可重复，如 game001
-    name: "示例乙女游戏",
+    name: "ひめひび -Princess Days-",
     year: "20",
     publisher: ["原厂发行商"],
     cnStudio: "汉化组/汉化厂商",
