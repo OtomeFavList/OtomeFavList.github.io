@@ -107,13 +107,10 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
-            ]
-        },
+77               {       },
         // 普通可攻略男主 male
         {
-            id: "g1_m04",
+            id: "g117_m04",
             name: "男主4",
             gender: "male",
             isHidden: false,
@@ -122,13 +119,11 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
         // 普通可攻略男主 male
         {
-            id: "g1_m05",
+            id: "g117_m05",
             name: "男主5",
             gender: "male",
             isHidden: false,
@@ -137,7 +132,8 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-               {       },
+            ]
+        }
         // 普通可攻略男主 male
         {
             id: "g117_m06",
