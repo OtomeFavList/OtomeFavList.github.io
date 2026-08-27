@@ -6,7 +6,7 @@ const gameData = {
     id: "game011",
     name: "毘卢遮那战姬 ~源平飞花梦想~",
     year: "2022",
-    publisher: ["Otomate"],
+    publisher: ["Otomate","RED"],
     cnStudio: "JSD",
     writer: [
         {name:"伊東愛", lang:"zh"},
