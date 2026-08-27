@@ -18,19 +18,15 @@
 // 官中发售以后，需要修改：游戏名、发售年份、汉化厂商、封面图、角色名
 const gameData = {
     id: "game1", // 全局唯一ID，不可重复，如 game001
-    name: "示例乙女游戏",
-    year: "20",
-    publisher: ["原厂发行商"],
+    name: "崩坏世界的指引之人",
+    year: "2026",
+    publisher: ["Primula"],
     cnStudio: "汉化组/汉化厂商",
     writer: [
-        {name:"中文编剧", lang:"zh"},
-        {name:"日文编剧", lang:"ja"},
-        {name:"英文编剧", lang:"en"}
+        {name:"中山智美", lang:"zh"}
     ],
     art: [
-        {name:"中文原画", lang:"zh"},
-        {name:"日文原画", lang:"ja"},
-        {name:"英文原画", lang:"en"}
+        {name:"じく", lang:"ja"}
     ],
     cover: "game/1.jpg", // 相对路径，游戏封面
     charList: [
