@@ -9,7 +9,7 @@ const gameData = {
     id: "game104", // 全局唯一ID，不可重复，如 game001
     name: "真紅の焔 真田忍法帳",
     year: "2024",
-    publisher: ["otomate"],
+    publisher: ["Otomate"],
     cnStudio: "暂无",
     writer: [
         {name:"長野和泉", lang:"zh"},
