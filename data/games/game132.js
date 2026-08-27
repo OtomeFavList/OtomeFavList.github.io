@@ -48,10 +48,10 @@ const gameData = {
                             "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 皇千晴
         {
             id: "g132_m01",
-            name: "男主1",
+            name: "皇千晴",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -61,10 +61,10 @@ const gameData = {
                             "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 八十八騎一角
         {
             id: "g132_m02",
-            name: "男主2",
+            name: "八十八騎一角",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -74,10 +74,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 荒城政宗
         {
             id: "g132_m03",
-            name: "男主3",
+            name: "荒城政宗",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -87,10 +87,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 紙袋中人
         {
             id: "g132_m04",
-            name: "男主4",
+            name: "紙袋中人",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -100,10 +100,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 仙僧供夢慈
         {
             id: "g132_m05",
-            name: "男主5",
+            name: "仙僧供夢慈",
             gender: "male",
             isHidden: false,
             isFD: false,
