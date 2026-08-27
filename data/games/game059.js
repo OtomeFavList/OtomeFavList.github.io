@@ -8,7 +8,7 @@ const gameData = {
     id: "game059", // 全局唯一ID，不可重复
     name: "妖怪饭 ~大碗开动！~",
     year: "2026",
-    publisher: ["EDIA","honeybee"],
+    publisher: ["honeybee"],
     cnStudio: "JSD",
     writer: [
         {name:"泉りお", lang:"zh"},
