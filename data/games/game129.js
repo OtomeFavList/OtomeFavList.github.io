@@ -30,26 +30,24 @@
 // 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
 // 官中发售以后，需要修改：游戏名、发售年份、汉化厂商、封面图、角色名
 const gameData = {
-    id: "game1", // 全局唯一ID，不可重复，如 game001
-    name: "示例乙女游戏",
-    year: "20",
-    publisher: ["原厂发行商"],
-    cnStudio: "汉化组/汉化厂商",
+    id: "game129", // 全局唯一ID，不可重复，如 game001
+    name: "殺し屋とストロベリー Plus",
+    year: "2022",
+    publisher: ["BROCCOLI"],
+    cnStudio: "暂无",
     writer: [
-        {name:"中文编剧", lang:"zh"},
-        {name:"日文编剧", lang:"ja"},
-        {name:"英文编剧", lang:"en"}
+        {name:"望月柚枝", lang:"zh"},
+        {name:"ナミサキ シキ", lang:"ja"},
+        {name:"isora", lang:"en"}
     ],
     art: [
-        {name:"中文原画", lang:"zh"},
-        {name:"日文原画", lang:"ja"},
-        {name:"英文原画", lang:"en"}
+        {name:"カズキヨネ", lang:"ja"}
     ],
-    cover: "game/1.jpg", // 相对路径，游戏封面
+    cover: "game/129.jpg", // 相对路径，游戏封面
     charList: [
         // 女主模板 female
         {
-            id: "g1_f01",
+            id: "g129_f01",
             name: "女主A",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
@@ -58,13 +56,11 @@ const gameData = {
             images: [
                 { srcList: ["char/001/女主A.jpg",
                             "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["char/001/女主A3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["char/001/女主A4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 普通可攻略男主 male
         {
-            id: "g1_m01",
+            id: "g129_m01",
             name: "男主1",
             gender: "male",
             isHidden: false,
