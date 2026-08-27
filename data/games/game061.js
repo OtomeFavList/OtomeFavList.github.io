@@ -8,7 +8,7 @@ const gameData = {
     id: "game061", // 全局唯一ID，不可重复
     name: "麻烦清理专家咖啡店-the mystic lover-",
     year: "2026",
-    publisher: ["EDIA","MintLip"],
+    publisher: ["MintLip"],
     cnStudio: "JSD",
     writer: [
         {name:"雨宮うた", lang:"zh"},
