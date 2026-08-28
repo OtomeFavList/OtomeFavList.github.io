@@ -8,7 +8,7 @@
 const gameData = {
     id: "game119", // 全局唯一ID，不可重复，如 game001
     name: "遥远时空7",
-    year: "20",
+    year: "2020",
     publisher: ["KOEI"],
     cnStudio: "KOEI",
     writer: [
