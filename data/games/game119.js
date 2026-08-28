@@ -101,7 +101,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/119/Sasaki.jpgg"], type: "base" },
+                { srcList: ["char/119/Sasaki.jpg"], type: "base" },
             ]
         },
         // 天野五月
