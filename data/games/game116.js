@@ -33,8 +33,9 @@ const gameData = {
             isFD: false,    // true=续作/FD专属角色，开关控制是否展示该角色
             isSub: false,    // true=配角，开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/116/Julia.jpg",
+                            "char/116/Julia2.jpg",
+                            "char/116/Julia3.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // ヘンリク
