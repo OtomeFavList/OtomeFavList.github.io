@@ -44,8 +44,8 @@ const gameData = {
             isFD: false,    // true=续作/FD专属角色，开关控制是否展示该角色
             isSub: false,    // true=配角，开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/120/Yuuki.jpg",
+                            "char/120/Yuuki2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 間宮アユム
@@ -57,8 +57,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/120/Ayumu.jpg",
+                            "char/120/Ayumu2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 日向
@@ -70,8 +70,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/120/Hyuuga.jpg"], type: "base" },
             ]
         },
         // 伊吹
@@ -83,8 +82,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/120/Ibuki.jpg",
+                            "char/120/Ibuki2.jpg"], type: "base" },
             ]
         },
         // 栖原カムイ
@@ -96,8 +95,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/120/Kamui.jpg",
+                            "char/120/Kamui2.jpg"], type: "base" },
             ]
         },
         // 新記ミハヤ
@@ -109,8 +108,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/120/Mihaya.jpg",
+                            "char/120/Mihaya2.jpg"], type: "base" },
             ]
         },
         // 冨司リョウ
@@ -122,8 +121,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/120/Ryou.jpg"], type: "base" },
             ]
         },
         // 高遠トキオ
@@ -135,8 +133,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/120/Tokio.jpg",
+                            "char/120/Tokio2.jpg"], type: "base" },
             ]
         },
         // 雪波
@@ -148,8 +146,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/120/Yukinami.jpg"], type: "base" },
             ]
         }
     ]
