@@ -39,8 +39,7 @@ const gameData = {
             isFD: false,    // true=续作/FD专属角色，开关控制是否展示该角色
             isSub: false,    // true=配角，开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/118/Mika.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // アッシュ·マイヤー
@@ -52,8 +51,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/118/Ash.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // カミュ·アインハルト
@@ -65,8 +63,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/118/Camu.jpg"], type: "base" },
             ]
         },
         // ジブ·ヴァルツァー
@@ -78,8 +75,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/118/Gib.jpg"], type: "base" },
             ]
         },
         // ハミエル·ルイス
@@ -91,8 +87,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/118/Hamiel.jpg"], type: "base" },
             ]
         },
         // ラミー·カリエール
@@ -104,8 +99,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/118/Ramie.jpg"], type: "base" },
             ]
         },
         // サリィ·デル·テスタ
@@ -117,8 +111,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/118/Sally.jpg"], type: "base" },
             ]
         }
     ]
