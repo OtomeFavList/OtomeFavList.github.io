@@ -1,34 +1,3 @@
-猛獣使いと王子様 ～Flower ＆ Snow～
-开发: オトメイト
-发行: Design Factory、アイディアファクトリー、デザインファクトリー
-原画: miko
-剧本: 山崎浅吏
-链接: ErogameScape VNDB
-官方网站: otomate.jp/beast/flower_snow/
-
-猛獣使いと王子様
-开发: design factory、オトメイト、デザインファクトリー
-发行: design factory、アイディアファクトリー株式会社、オトメイト、デザインファクトリー
-剧本: シナリオライター：山崎浅吏 サブライター：ちゃい、森田彩莉、吉村りりか、ムネオカミエ、桜葉ユウ
-主题歌作词: こだまさおり、瀬名
-主题歌演出: 結城アイラ
-原画: miko、佐倉たくと
-导演: 中村和騎
-人物设定: miko
-主题歌作曲: TODA KOHEI、瀬名
-官方网站: otomate.jp/beast_psp
-
-猛獣使いと王子様 ～Snow Bride～
-开发: オトメイト、Design Factory、デザインファクトリー
-发行: アイディアファクトリー株式会社、オトメイト、Design Factory、デザインファクトリー
-剧本: 山本浅吏、山崎浅吏
-主题歌作词: しほり
-主题歌演出: 結城アイラ
-原画: miko、佐倉たくと
-人物设定: miko
-主题歌作曲: TODA KOHEI
-官方网站: otomate.jp/beast_fd_psp/
-
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
 // 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
