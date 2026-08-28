@@ -44,8 +44,8 @@ const gameData = {
             isFD: false,    // true=续作/FD专属角色，开关控制是否展示该角色
             isSub: false,    // true=配角，开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/111/Tama.jpg",
+                            "char/111/Tama2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 神谷一颯
@@ -57,8 +57,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/111/Kamiya.jpg",
+                            "char/111/Kamiya2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // キティ
@@ -70,8 +70,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/111/Kitty.jpg",
+                            "char/111/Kitty2.jpg"], type: "base" },
             ]
         },
         // コタロウ
@@ -83,8 +83,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/111/Kotarou.jpg",
+                            "char/111/Kotarou2.jpg"], type: "base" },
             ]
         },
         // くーにゃん
@@ -96,8 +96,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/111/KuNyan.jpg",
+                            "char/111/KuNyan2.jpg"], type: "base" },
             ]
         },
         // シェド
@@ -109,8 +109,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/111/Shed.jpg",
+                            "char/111/Shed2.jpg"], type: "base" },
             ]
         },
         // ユズ
@@ -122,8 +122,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/111/Yuzu.jpg",
+                            "char/111/Yuzu2.jpg"], type: "base" },
             ]
         }
     ]
