@@ -32,7 +32,7 @@ const gameData = {
             isSub: false,    // true=配角，开关控制是否展示该角色
             images: [
                 { srcList: ["char/115/Chiyuki.jpg",
-                            "char/115/Chiyuki.jpg"], type: "base" },      // 默认基础图，始终加载
+                            "char/115/Chiyuki2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 浅木詠一郎
