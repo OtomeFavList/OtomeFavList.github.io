@@ -49,8 +49,7 @@ const gameData = {
             isFD: false,    // true=续作/FD专属角色，开关控制是否展示该角色
             isSub: false,    // true=配角，开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/114/Fuka.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // アルファーニ
@@ -62,8 +61,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/114/Alfani.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // アクセル
@@ -75,8 +73,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/114/Axel.jpg"], type: "base" },
             ]
         },
         // シーザー
@@ -88,8 +85,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/114/Caesar.jpg"], type: "base" },
             ]
         },
         // カラミア
@@ -101,8 +97,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/114/Caramia.jpg"], type: "base" },
             ]
         },
         // ドリアン·グレイ
@@ -114,8 +109,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/114/Dorian.jpg"], type: "base" },
             ]
         },
         // ハーメルン
@@ -127,8 +121,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/114/Hameln.jpg"], type: "base" },
             ]
         },
         // キリエ
@@ -140,8 +133,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/114/Kyrie.jpg"], type: "base" },
             ]
         },
         // マンボイ
@@ -153,8 +145,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/114/Manboy.jpg"], type: "base" },
             ]
         },
         // パシェ
@@ -166,8 +157,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/114/Pashet.jpg"], type: "base" },
             ]
         },
         // ロビン·フッド
@@ -179,8 +169,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/114/Robin.jpg"], type: "base" },
             ]
         },
         // スカーレット
@@ -192,8 +181,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/114/Scarlet.jpg"], type: "base" },
             ]
         },
         // ソウ
@@ -205,8 +193,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/114/So.jpg"], type: "base" },
             ]
         }
     ]
