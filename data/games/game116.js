@@ -92,8 +92,10 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/116/Henryk.jpg",
+                            "char/116/Henryk2.jpg",
+                            "char/116/Henryk3.jpg",
+                            "char/116/Henryk4.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // ユゼフ
@@ -105,8 +107,10 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/116/Jozef.jpg",
+                            "char/116/Jozef2.jpg",
+                            "char/116/Jozef3.jpg",
+                            "char/116/Jozef4.jpg"], type: "base" },
             ]
         },
         // ルドヴィク
@@ -118,8 +122,10 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/116/Ludwik.jpg",
+                            "char/116/Ludwik2.jpg",
+                            "char/116/Ludwik3.jpg",
+                            "char/116/Ludwik4.jpg"], type: "base" },
             ]
         },
         // ミアーシュ
@@ -131,8 +137,10 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/116/Mias.jpg",
+                            "char/116/Mias2.jpg",
+                            "char/116/Mias3.jpg",
+                            "char/116/Mias4.jpg"], type: "base" },
             ]
         },
         // リシャルト
@@ -144,21 +152,10 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
-            ]
-        },
-        // 普通可攻略男主 male
-        {
-            id: "g116_m06",
-            name: "男主5",
-            gender: "male",
-            isHidden: false,
-            isFD: false,
-            isSub: false,
-            images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/116/Ryszard.jpg",
+                            "char/116/Ryszard2.jpg",
+                            "char/116/Ryszard3.jpg",
+                            "char/116/Ryszard4.jpg"], type: "base" },
             ]
         },
         // タルメ
@@ -170,10 +167,11 @@ const gameData = {
             isFD: true,
             isSub: false,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/116/Czarny.jpg",
+                            "char/116/Czarny2.jpg"], type: "base" },
             ]
         },
-    // 魔術師
+        // 魔術師
         {
             id: "g116_fd02",
             name: "魔術師",
@@ -182,7 +180,10 @@ const gameData = {
             isFD: true,
             isSub: false,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/116/Czarodziej.jpg",
+                            "char/116/Czarodziej2.jpg",
+                            "char/116/Czarodziej3.jpg",
+                            "char/116/Czarodziej4.jpg"], type: "base" },
             ]
         }
     ]
