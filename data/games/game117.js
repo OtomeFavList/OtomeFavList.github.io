@@ -64,8 +64,9 @@ const gameData = {
             isFD: false,    // true=续作/FD专属角色，开关控制是否展示该角色
             isSub: false,    // true=配角，开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/117/Tiana.jpg",
+                            "char/117/Tiana2.jpg",
+                            "char/117/Tiana3.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // アルフレード
@@ -77,8 +78,10 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/117/Alfred.jpg",
+                            "char/117/Alfred2.jpg",
+                            "char/117/Alfred3.jpg",
+                            "char/117/Alfred4.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // エリク
@@ -90,8 +93,10 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/117/Erik.jpg",
+                            "char/117/Erik2.jpg",
+                            "char/117/Erik3.jpg",
+                            "char/117/Erik4.jpg"], type: "base" },
             ]
         },
         // クラウス
@@ -103,8 +108,10 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/117/Klaus.jpg",
+                            "char/117/Klaus2.jpg",
+                            "char/117/Klaus3.jpg",
+                            "char/117/Klaus4.jpg"], type: "base" },
             ]
         },
         // ルシア
@@ -116,8 +123,10 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/117/Lucia.jpg",
+                            "char/117/Lucia2.jpg",
+                            "char/117/Lucia3.jpg",
+                            "char/117/Lucia4.jpg"], type: "base" },
             ]
         },
         // マティアス
@@ -129,10 +138,12 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/117/Matheus.jpg",
+                            "char/117/Matheus2.jpg",
+                            "char/117/Matheus3.jpg",
+                            "char/117/Matheus4.jpg"], type: "base" },
             ]
-        }
+        },
         // シルビオ
         {
             id: "g117_m06",
@@ -142,8 +153,10 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/117/Silvio.jpg",
+                            "char/117/Silvio2.jpg",
+                            "char/117/Silvio3.jpg",
+                            "char/117/Silvio4.jpg"], type: "base" },
             ]
         }
     ]
