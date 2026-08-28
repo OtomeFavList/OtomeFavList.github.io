@@ -42,8 +42,7 @@ const gameData = {
             isFD: false,    // true=续作/FD专属角色，开关控制是否展示该角色
             isSub: false,    // true=配角，开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/119/Nanao.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 黑田长政
@@ -55,8 +54,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/119/Kuroda.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 宫本武藏
@@ -68,8 +66,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/119/Musashi.jpg"], type: "base" },
             ]
         },
         // 直江兼续
@@ -81,8 +78,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/119/Naoe.jpg"], type: "base" },
 
             ]
         },
@@ -95,8 +91,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/119/Okuni.jpg"], type: "base" },
             ]
         },
         // 真田幸村
@@ -108,8 +103,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/119/Sanada.jpg"], type: "base" },
             ]
         },
         // 佐佐木大和
@@ -121,8 +115,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/119/Sasaki.jpgg"], type: "base" },
             ]
         },
         // 天野五月
@@ -134,8 +127,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/119/Satsuki.jpg"], type: "base" },
             ]
         },
         // 柳生宗矩
@@ -147,8 +139,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/119/Yagyuu.jpg"], type: "base" },
             ]
         }
     ]
