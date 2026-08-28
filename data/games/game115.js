@@ -51,8 +51,8 @@ const gameData = {
             isFD: false,    // true=续作/FD专属角色，开关控制是否展示该角色
             isSub: false,    // true=配角，开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/115/Chiyuki.jpg",
+                            "char/115/Chiyuki.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 浅木詠一郎
@@ -64,8 +64,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/115/Asagi.jpg",
+                            "char/115/Asagi2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 真木野春三
@@ -77,8 +77,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/115/Harumi.jpg",
+                            "char/115/Harumi2.jpg"], type: "base" },
             ]
         },
         // 上久保数馬
@@ -90,8 +90,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/115/Kazuma.jpg",
+                            "char/115/Kazuma2.jpg"], type: "base" },
             ]
         },
         // 西嶋理玖
@@ -103,8 +103,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/115/Riku.jpg",
+                            "char/115/Riku2.jpg"], type: "base" },
             ]
         },
         // 瀬名由稀人
@@ -116,8 +116,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/115/Sena.jpg",
+                            "char/115/Sena2.jpg"], type: "base" },
             ]
         }
     ]
