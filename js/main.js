@@ -572,50 +572,6 @@ export function getAvailableCharImages(char, globalHideSwitch, globalFDSwitch, l
  */
 export const imgCacheMap = new Map();
 
-// ===================== 图源故障降级补丁：jsDelivr <-> Cloudflare Worker代理切换 =====================
-export const IMG_PROXY_WORKER_BASE = "https://otome-img-proxy.otomefavlist.workers.dev";
-// 每个原始url的失败统计 {failCount:number, useProxy:boolean}
-const urlFailStat = new Map();
-const MAX_FAIL_SWITCH = 3;
-
-/**
- * 根据原始jsd地址，获取当前应该使用的真实请求地址（自动切换代理/原始）
- * @param {string} originalJsdUrl 原始cdn.jsdelivr.net完整url
- * @returns {string} 实际发起请求的url
- */
-function getEffectiveImageUrl(originalJsdUrl) {
-    if (!originalJsdUrl) return originalJsdUrl;
-    const stat = urlFailStat.get(originalJsdUrl) ?? { failCount: 0, useProxy: false };
-    if (stat.useProxy) {
-        // 替换域名：cdn.jsdelivr.net → worker域名，path完全保留
-        const targetPath = new URL(originalJsdUrl).pathname;
-        return IMG_PROXY_WORKER_BASE + targetPath;
-    } else {
-        return originalJsdUrl;
-    }
-}
-
-/**
- * 上报图片请求失败，更新计数器，触发切换逻辑
- * @param {string} originalJsdUrl
- */
-export function reportImageLoadFail(originalJsdUrl) {
-    if (!originalJsdUrl) return;
-    let stat = urlFailStat.get(originalJsdUrl);
-    if (!stat) {
-        stat = { failCount: 0, useProxy: false };
-        urlFailStat.set(originalJsdUrl, stat);
-    }
-    stat.failCount += 1;
-    // 达到阈值切换源，同时重置失败计数
-    if (stat.failCount >= MAX_FAIL_SWITCH) {
-        stat.useProxy = !stat.useProxy;
-        stat.failCount = 0;
-        console.log(`[图源切换] ${originalJsdUrl} → ${stat.useProxy ? "Worker代理" : "原始jsDelivr"}`);
-    }
-}
-// ===================== 图源降级补丁结束 =====================
-
 // ============================================================
 // ① preloadAndDecodeImage 修改后（强制顺序：先设置跨域，再赋值src）
 // ============================================================
@@ -623,31 +579,29 @@ export function preloadAndDecodeImage(src) {
     if (!src) {
         return Promise.resolve(null);
     }
-    // 缓存key依旧使用原始src，上层业务完全无感知
+
     if (imgCacheMap.has(src)) {
         return imgCacheMap.get(src);
     }
-    // 根据故障统计，选择原始地址 / worker代理地址
-    const actualReqSrc = getEffectiveImageUrl(src);
 
     const p = new Promise((resolve, reject) => {
         const tempImg = new Image();
         // 【强制顺序】先设置crossOrigin、decoding，最后赋值src！
         tempImg.crossOrigin = "anonymous";
         tempImg.decoding = "async";
+
         tempImg.onload = () => {
             resolve(tempImg);
         };
         tempImg.onerror = () => {
             imgCacheMap.delete(src);
-            // 上报原始src，做故障计数与图源切换
-            reportImageLoadFail(src);
-            console.error(`[图片加载失败] original:${src} actualReq:${actualReqSrc}`);
+            console.error(`[图片加载失败]`, src);
             reject(new Error(`Image load failed: ${src}`));
         };
-        // 使用经过切换逻辑后的真实地址发起网络请求
-        tempImg.src = actualReqSrc;
+        // 所有配置完成后再赋值src，杜绝浏览器提前发起请求
+        tempImg.src = src;
     });
+
     imgCacheMap.set(src, p);
     return p;
 }
