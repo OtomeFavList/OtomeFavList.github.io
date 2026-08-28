@@ -1,14 +1,3 @@
-崩坏世界的指引之人
-开发: Primula
-剧本: 中山智美
-音乐: solfa
-人物设定: じく
-原画: じく
-导演: 犬小屋権太
-企画: Primula
-别名: Navigatore of the Ruined World
-官方网站: primula.jpn.com/hounavi/index.html
-
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
 // 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
