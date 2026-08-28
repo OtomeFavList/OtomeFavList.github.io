@@ -1,24 +1,3 @@
-OZMAFIA!!-vivace-
-开发: Poni-Pachet
-发行: dramatic create（ヒューネックス株式会社）
-剧本: ゆーます
-人物设定: さとい
-原画: さとい
-原作: Poni-Pachet SY
-别名: オズマフィア!!-ヴィヴァーチェ-
-官方网站: dramaticcreate.com/ozmafia/
-
-OZMAFIA!!
-开发: Poni-Pachet
-发行: Poni-Pachet
-剧本: ゆーます
-音乐: project lights
-人物设定: さとい
-插入歌演出: Lira
-原画: さとい
-别名: オズマフィア
-官方网站: oz.ponipa.com/index.html
-
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
 // 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
