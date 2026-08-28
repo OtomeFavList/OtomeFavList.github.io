@@ -44,8 +44,9 @@ const gameData = {
             isFD: false,    // true=续作/FD专属角色，开关控制是否展示该角色
             isSub: false,    // true=配角，开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/112/Yuma.jpg",
+                            "char/112/Yuma2.jpg",
+                            "char/112/Yuma3.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 煌仁
@@ -57,8 +58,10 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/112/Akihito.jpg",
+                            "char/112/Akihito2.jpg",
+                            "char/112/Akihito3.jpg",
+                            "char/112/Akihito4.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 千暁
@@ -70,8 +73,10 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/112/Chiaki.jpg",
+                            "char/112/Chiaki2.jpg",
+                            "char/112/Chiaki3.jpg",
+                            "char/112/Chiaki4.png"], type: "base" },
             ]
         },
         // 雅玖
@@ -83,8 +88,10 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/112/Gaku.jpg",
+                            "char/112/Gaku2.jpg",
+                            "char/112/Gaku3.jpg",
+                            "char/112/Gaku4.png"], type: "base" },
             ]
         },
         // 佐吉
@@ -96,8 +103,10 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/112/Sakichi.jpg",
+                            "char/112/Sakichi2.jpg",
+                            "char/112/Sakichi3.jpg",
+                            "char/112/Sakichi4.png"], type: "base" },
             ]
         },
         // 芦屋総佑
@@ -109,8 +118,9 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/112/Sousuke.jpg",
+                            "char/112/Sousuke2.jpg",
+                            "char/112/Sousuke3.png"], type: "base" },
             ]
         }
     ]
