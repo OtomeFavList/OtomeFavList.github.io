@@ -20,10 +20,10 @@ https://www.gamecity.ne.jp/corda-octave/?utm_source=chatgpt.com
 // 官中发售以后，需要修改：游戏名、发售年份、汉化厂商、封面图、角色名
 const gameData = {
     id: "game1", // 全局唯一ID，不可重复，如 game001
-    name: "示例乙女游戏",
+    name: "金色のコルダ3",
     year: "20",
-    publisher: ["原厂发行商"],
-    cnStudio: "汉化组/汉化厂商",
+    publisher: ["KOEI"],
+    cnStudio: "暂无",
     writer: [
         {name:"中文编剧", lang:"zh"},
         {name:"日文编剧", lang:"ja"},
