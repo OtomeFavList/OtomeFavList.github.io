@@ -6,7 +6,8 @@
 人物设定: 呉由姫
 官方网站:https://www.gamecity.ne.jp/corda3/vita_characters.html?utm_source=chatgpt.com
 https://www.gamecity.ne.jp/corda3/anothersky/?utm_source=chatgpt.com 
-https://www.gamecity.ne.jp/corda4/?utm_source=chatgpt.com
+https://www.gamecity.ne.jp/corda4/chara.html
+https://www.gamecity.ne.jp/event/2018/corda15th/cast/?utm_source=chatgpt.com
 https://www.gamecity.ne.jp/corda-octave/?utm_source=chatgpt.com
 
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
