@@ -26,6 +26,10 @@ const allGameFileNames = [
     "game106.js", "game107.js", "game108.js", "game109.js", "game110.js",
     "game111.js", "game112.js", "game113.js", "game114.js", "game115.js",
     "game116.js", "game117.js", "game118.js", "game119.js", "game120.js",
+    "game121.js", "game122.js", "game123.js", "game124.js", "game125.js",
+    "game126.js", "game127.js", "game128.js", "game129.js", "game130.js",
+    "game131.js", "game132.js", "game133.js", "game134.js", "game135.js",
+    "game136.js", "game137.js", "game138.js", "game139.js", "game140.js",
     // 后续新增游戏仅在此添加文件名
 ];
 
