@@ -28,8 +28,8 @@ const gameData = {
             isFD: false,    // true=续作/FD专属角色，开关控制是否展示该角色
             isSub: false,    // true=配角，开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/137/Amane.jpg",
+                            "char/137/Amane2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 安曇ネオ
@@ -41,8 +41,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/137/Azumi.jpg",
+                            "char/137/Azumi2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 小鳥遊キセキ
@@ -54,8 +54,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/137/Kiseki.jpg",
+                            "char/137/Kiseki2.jpg"], type: "base" },
             ]
         },
         // 陸リョクハ
@@ -67,8 +67,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/137/Ryokuha.jpg",
+                            "char/137/Ryokuha2.jpg"], type: "base" },
             ]
         },
         // 帯刀シーマ
@@ -80,8 +80,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/137/Shiima.jpg",
+                            "char/137/Shiima2.jpg"], type: "base" },
             ]
         },
         // 氷鉋テラ
@@ -93,8 +93,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/137/Tera.jpg",
+                            "char/137/Tera2.jpg"], type: "base" },
             ]
         },
         // ？？？
@@ -106,7 +106,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g001_h01_1.jpg"], type: "base" }
+                { srcList: ["char/137/？？？.jpg"], type: "base" }
             ]
         }
     ]
