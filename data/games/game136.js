@@ -28,8 +28,8 @@ const gameData = {
             isFD: false,    // true=续作/FD专属角色，开关控制是否展示该角色
             isSub: false,    // true=配角，开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/136/Yuriko.jpg",
+                            "char/136/Yuriko2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 藤田均
@@ -41,8 +41,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/136/Fujita.jpg",
+                            "char/136/Fujita2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 尾崎秀雄
@@ -54,8 +54,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/136/Hideo.jpg",
+                            "char/136/Hideo2.jpg"], type: "base" },
             ]
         },
         // 真島芳樹
@@ -67,8 +67,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/136/Majima.jpg"], type: "base" },
             ]
         },
         // 野宮瑞人
@@ -80,8 +79,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/136/Mizuhito.jpg"], type: "base" },
             ]
         },
         // 斯波純一
@@ -93,8 +91,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/136/Shiba.jpg",
+                            "char/136/Shiba2.jpg"], type: "base" },
             ]
         },
         // 天海鏡子
@@ -106,8 +104,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/136/Kyouko.jpg",
+                            "char/136/Kyouko2.jpg"], type: "base" },
             ]
         }
     ]
