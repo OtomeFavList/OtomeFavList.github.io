@@ -7,7 +7,7 @@
 // 官中发售以后，需要修改：游戏名、发售年份、汉化厂商、封面图、角色名
 const gameData = {
     id: "game136", // 全局唯一ID，不可重复，如 game001
-    name: "蝶の毒 華の鎖",
+    name: "蝶の毒 華の鎖~大正艶恋異聞~",
     year: "2020",
     publisher: ["Aromarie"],
     cnStudio: "暂无",
