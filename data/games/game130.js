@@ -1,28 +1,3 @@
-DYNAMIC CHORD feat.apple-polisher Remaster Edition
-https://dramaticcreate.com/dynamic/ns_app/?utm_source=chatgpt.com
-
-DYNAMIC CHORD feat.apple-polisher
-开发: honeybee black
-发行: honeybee black
-剧本: 中村幸代（なかむらさちよ）、新井菜津美（Plot）；浅生柚子、柚子みかん（なかむらさちよ）、絹夏（执笔）
-人物设定: 冨士原良
-主题歌演出: 蒼井翔太
-插入歌演出: 蒼井翔太
-原画: 冨士原良
-官方网站: honeybee-cd.com/dynamic/app/index.html
-
-DYNAMIC CHORD feat.apple-polisher V
-开发: honeybee black
-发行: dramatic create
-人物设定: 冨士原良
-主题歌演出: 蒼井翔太
-插入歌演出: 蒼井翔太
-原画: 冨士原良
-剧本: 浅生柚子
-官方网站: honeybee-cd.com/dynamic/vita-app/
-
-https://www.honeybee-cd.com/dynamic/app/?utm_source=chatgpt.com
-
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
 // 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
@@ -57,10 +32,7 @@ const gameData = {
             isFD: false,    // true=续作/FD专属角色，开关控制是否展示该角色
             isSub: false,    // true=配角，开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["char/001/女主A3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["char/001/女主A4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["char/130/Miu.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 音石夕星
@@ -72,8 +44,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/130/Otoishi.jpg",
+                            "char/130/Otoishi2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 青井有紀
@@ -85,8 +57,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/130/Yuki.jpg",
+                            "char/130/Yuki2.jpg"], type: "base" },
             ]
         },
         // 黒沢忍
@@ -98,8 +70,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/130/Kurosawa.jpg",
+                            "char/130/Kurosawa2.jpg"], type: "base" },
             ]
         },
         // 天城成海
@@ -111,8 +83,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/130/Narumi.jpg",
+                            "char/130/Narumi2.jpg"], type: "base" },
             ]
         }
     ]
