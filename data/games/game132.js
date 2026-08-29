@@ -1,17 +1,3 @@
-ひめひび Another Princess Days ～ White or Black ～
-开发: TAKUYO
-发行: TAKUYO
-剧本: 井上愁、関口琴子、白鳥ユアン
-主题歌作曲: FAVORITE STEPS、安斎孝秋
-主题歌作词: FAVORITE STEPS、コツキミヤ
-主题歌演出: 若林倫香、紫苑雪
-人物设定: ふづき
-原画: ふづき
-制作总指挥: 田口茂宏
-音乐: タナカノブマサ
-链接: ErogameScape VNDB
-官方网站: takuyo.co.jp/products/himehibi_wb/
-
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
 // 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
@@ -44,8 +30,7 @@ const gameData = {
             isFD: false,    // true=续作/FD专属角色，开关控制是否展示该角色
             isSub: false,    // true=配角，开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/132/Emi.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 皇千晴
@@ -57,8 +42,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/132/Chiharu.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 八十八騎一角
@@ -70,8 +54,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/132/Kazumi.jpg"], type: "base" },
             ]
         },
         // 荒城政宗
@@ -83,8 +66,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/132/Masamune.jpg"], type: "base" },
             ]
         },
         // 紙袋中人
@@ -96,8 +78,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/132/Nakahito.jpg"], type: "base" },
             ]
         },
         // 仙僧供夢慈
@@ -109,8 +90,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/132/Yumeji.jpg"], type: "base" },
             ]
         }
     ]
