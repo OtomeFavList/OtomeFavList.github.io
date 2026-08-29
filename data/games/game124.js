@@ -1,41 +1,3 @@
-ゆのはなSpRING！ ～Mellow Times～ for Nintendo Switch
-中文名: 温泉之花！ ～Mellow Times～ for Nintendo Switch
-开发: オトメイト、デザインファクトリー
-发行: Design Factory、アイディアファクトリー株式会社、デザインファクトリー
-人物设定: RiRi
-主题歌作曲: 後藤康二
-主题歌演出: KENN
-原画: RiRi
-导演: 高村旭
-剧本: ふくだ りょうこ、有野幸、皆川千尋
-主题歌作词: 小川マキ
-官方网站: otomate.jp/yunohana_spring/switch/
-
-ゆのはなSpRING！
-开发: オトメイト、Design Factory、デザインファクトリー
-发行: Design Factory、アイディアファクトリー株式会社、デザインファクトリー
-剧本: 皆川千尋、有野幸、春夏秋冬よもひろ、ふくだりょうこ、夏越ちか
-人物设定: RiRi
-主题歌作曲: 後藤康二
-主题歌演出: KENN
-原画: RiRi
-导演: 高村旭
-音乐: 菱田拓海
-主题歌作词: 小川マキ
-链接: ErogameScape VNDB
-官方网站: otomate.jp/yunohana_spring/
-
-ゆのはなSpRING！ ～Cherishing Time～
-中文名: 温泉之花～Cherishing Time～
-开发: オトメイト、デザインファクトリー株式会社
-发行: アイディアファクトリー株式会社、デザインファクトリー株式会社
-剧本: 夏越ちか、有野幸、御門蓮、佐々木麿
-人物设定: RiRi
-主题歌演出: 霜月はるか、結良まり、Duca
-原画: RiRi
-导演: 高村旭
-官方网站: otomate.jp/yunohana_spring/ct/
-
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
 // 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
@@ -72,8 +34,7 @@ const gameData = {
             isFD: false,    // true=续作/FD专属角色，开关控制是否展示该角色
             isSub: false,    // true=配角，开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/124/Yunoha.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 二葉爽一郎
@@ -85,8 +46,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/124/Futaba.jpg",
+                            "char/124/Futaba2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 泉高平
@@ -98,8 +59,10 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/124/Izumi.jpg",
+                            "char/124/Izumi2.jpg",
+                            "char/124/Izumi3.jpg",
+                            "char/124/Izumi4.jpg"], type: "base" },
             ]
         },
         // 香賀梅ノ介
@@ -111,8 +74,9 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/124/Kaga.jpg",
+                            "char/124/Kaga2.jpg",
+                            "char/124/Kaga3.jpg"], type: "base" },
             ]
         },
         // 片桐金太郎
@@ -124,8 +88,9 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/124/Kintarou.jpg",
+                            "char/124/Kintarou2.jpg",
+                            "char/124/Kintarou3.jpg"], type: "base" },
             ]
         },
         // 佐伯宏太
@@ -137,8 +102,10 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/124/Kouta.jpg",
+                            "char/124/Kouta2.jpg",
+                            "char/124/Kouta3.jpg",
+                            "char/124/Kouta4.jpg"], type: "base" },
             ]
         },
         // 葛城直昌
@@ -150,8 +117,10 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/124/Naomasa.jpg",
+                            "char/124/Naomasa2.jpg",
+                            "char/124/Naomasa3.jpg",
+                            "char/124/Naomasa4.jpg"], type: "base" },
             ]
         }
     ]
