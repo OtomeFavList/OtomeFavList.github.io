@@ -5,16 +5,7 @@
 音乐: YUKI NAKANO
 人物设定: 呉由姫
 别名: 金色琴弦
-官方网站: gamecity.ne.jp/corda/countdown_pc/index.htm
-
-
-gamecity.ne.jp/ps2/corda2/index02.htm
-gamecity.ne.jp/psp/corda2/
-
-gamecity.ne.jp/ps2/corda2/encore/
-gamecity.ne.jp/psp/corda2/encore/
-
-gamecity.ne.jp/corda2ff/
+官方网站: https://www.gamecity.ne.jp/corda/20th/#inline
 
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
@@ -24,20 +15,16 @@ gamecity.ne.jp/corda2ff/
 // 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
 // 官中发售以后，需要修改：游戏名、发售年份、汉化厂商、封面图、角色名
 const gameData = {
-    id: "game1", // 全局唯一ID，不可重复，如 game001
-    name: "示例乙女游戏",
-    year: "20",
-    publisher: ["原厂发行商"],
-    cnStudio: "汉化组/汉化厂商",
+    id: "game139", // 全局唯一ID，不可重复，如 game001
+    name: "金色のコルダ",
+    year: "2005",
+    publisher: ["KOEI"],
+    cnStudio: "暂无",
     writer: [
-        {name:"中文编剧", lang:"zh"},
-        {name:"日文编剧", lang:"ja"},
-        {name:"英文编剧", lang:"en"}
+        {name:"加藤正人", lang:"zh"}
     ],
     art: [
-        {name:"中文原画", lang:"zh"},
-        {name:"日文原画", lang:"ja"},
-        {name:"英文原画", lang:"en"}
+        {name:"呉由姫", lang:"zh"}
     ],
     cover: "game/1.jpg", // 相对路径，游戏封面
     charList: [
