@@ -25,8 +25,7 @@ import {
   toggleCpItemSelect,
   switchCharImage,
   switchCharImageWithLoading,
-  getWebImageUrl,
-  sortFilterOptionList   // =====================【补丁新增导入】=====================
+  getWebImageUrl
 } from './main.js';
 
 // ========== 导入原生Canvas绘制导出模块 ==========
@@ -1228,14 +1227,8 @@ export function initPage(Core = {}) {
       const filterWriter = document.getElementById("filter-writer")?.value || "";
       const filterArt = document.getElementById("filter-art")?.value || "";
 
-      // =====================【补丁修改：使用中日英排序工具】=====================
-      // 使用全局中日英排序工具：中文→日文五十音→英文
-      const gameNameList = [...gameTemplateList].map(g => g.name);
-      const sortedNameList = sortFilterOptionList(gameNameList);
-      // 根据排好的名称数组还原游戏对象顺序
-      const sortedGames = sortedNameList.map(name => gameTemplateList.find(g => g.name === name)).filter(Boolean);
-      // =====================【补丁修改结束】===================================
-
+      // 修复：把zh-CN（软连字符）改为标准 zh-CN
+      const sortedGames = [...gameTemplateList].sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
       let html = "";
 
       sortedGames.forEach((game, index) => {   // 增加 index
