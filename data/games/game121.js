@@ -1,45 +1,3 @@
-忍び、恋うつつ
-中文名: 恋爱忍法帖
-开发: オトメイト
-发行: アイディアファクトリー株式会社
-剧本: 株式会社エッジワークス、ムネオカミエ、狐塚冬里、カナエアリス
-人物设定: 中村龍徳
-主题歌作曲: 川上博之、rino
-主题歌演出: 織田かおり
-原画: 中村龍徳
-导演: 藤村マオ
-官方网站: otomate.jp/nin_koi/
-switch版网站：
-
-忍び、恋うつつ ― 雪月花恋絵巻 ―
-开发: オトメイト
-剧本: 狐塚冬里、桜葉ユウ、カナエアリス、ムネオカミエ
-主题歌作曲: myu
-主题歌演出: 織田かおり
-原画: 中村龍徳
-官方网站: otomate.jp/nin_koi/vita/
-
-忍び、恋うつつ ― 甘蜜花絵巻 ―
-开发: オトメイト
-发行: アイディアファクトリー株式会社
-剧本: カナエアリス
-人物设定: 中村龍徳
-主题歌演出: ヒサノ
-原画: 中村龍徳
-主题歌作曲: 鞠
-主题歌作词: 言乃葉たま
-链接: ErogameScape VNDB
-官方网站: otomate.jp/nin_koi/kanmitsu/
-
-忍び、恋うつつ ― 万花彩絵巻 ―
-开发: オトメイト
-发行: アイディアファクトリー株式会社
-人物设定: 中村龍徳
-主题歌演出: ヒサノ
-平台:
-PS4 Nintendo Switch
-官方网站: otomate.jp/nin_koi/banka/
-
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
 // 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
@@ -49,14 +7,13 @@ PS4 Nintendo Switch
 // 官中发售以后，需要修改：游戏名、发售年份、汉化厂商、封面图、角色名
 const gameData = {
     id: "game121", // 全局唯一ID，不可重复，如 game001
-    name: "忍び、恋うつつ",
+    name: "忍び、恋うつつ-",
     year: "2020",
     publisher: ["Otomate"],
     cnStudio: "暂无",
     writer: [
         {name:"株式会社エッジワークス", lang:"zh"},
         {name:"狐塚冬里", lang:"zh"},
-        {name:"桜葉ユウ", lang:"zh"},
         {name:"ムネオカミエ", lang:"ja"},
         {name:"カナエアリス", lang:"ja"}
     ],
@@ -74,8 +31,8 @@ const gameData = {
             isFD: false,    // true=续作/FD专属角色，开关控制是否展示该角色
             isSub: false,    // true=配角，开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/121/Kaede.jpg",
+                            "char/121/Kaede2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 穴山大介
@@ -87,8 +44,11 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/121/Daisuke.jpg",
+                            "char/121/Daisuke2.jpg",
+                            "char/121/Daisuke3.jpg",
+                            "char/121/Daisuke4.jpg",
+                            "char/121/Daisuke5.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 我来也
@@ -100,8 +60,11 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/121/Garaiya.jpg",
+                            "char/121/Garaiya2.jpg",
+                            "char/121/Garaiya3.jpg",
+                            "char/121/Garaiya4.jpg",
+                            "char/121/Garaiya5.png"], type: "base" },
             ]
         },
         // 服部半蔵
@@ -113,8 +76,11 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/121/Hanzou.jpg",
+                            "char/121/Hanzou2.jpg",
+                            "char/121/Hanzou3.jpg",
+                            "char/121/Hanzou4.jpg",
+                            "char/121/Hanzou5.png"], type: "base" },
             ]
         },
         // 豊臣秀虎
@@ -126,8 +92,11 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/121/Hidetora.jpg",
+                            "char/121/Hidetora2.jpg",
+                            "char/121/Hidetora3.jpg",
+                            "char/121/Hidetora4.jpg",
+                            "char/121/Hidetora5.png"], type: "base" },
             ]
         },
         // 霧隠蔵人
@@ -139,8 +108,11 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/121/Kuroudo.jpg",
+                            "char/121/Kuroudo2.jpg",
+                            "char/121/Kuroudo3.jpg",
+                            "char/121/Kuroudo4.jpg",
+                            "char/121/Kuroudo5.png"], type: "base" },
             ]
         },
         // 真田幸影
@@ -152,8 +124,11 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/121/Sanada.jpg",
+                            "char/121/Sanada2.jpg",
+                            "char/121/Sanada3.jpg",
+                            "char/121/Sanada4.jpg",
+                            "char/121/Sanada5.png"], type: "base" },
             ]
         },
         // 猿飛咲助
@@ -165,8 +140,11 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/121/Sarutobi.jpg",
+                            "char/121/Sarutobi2.jpg",
+                            "char/121/Sarutobi3.jpg",
+                            "char/121/Sarutobi4.jpg",
+                            "char/121/Sarutobi5.png"], type: "base" },
             ]
         },
         // 霧隠忠人
@@ -178,8 +156,11 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/121/Tadahito.jpg",
+                            "char/121/Tadahito2.jpg",
+                            "char/121/Tadahito3.jpg",
+                            "char/121/Tadahito4.jpg",
+                            "char/121/Tadahito5.png"], type: "base" },
             ]
         },
         // 宇喜多義家
@@ -191,8 +172,11 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/121/Ukita.jpg",
+                            "char/121/Ukita2.jpg",
+                            "char/121/Ukita3.jpg",
+                            "char/121/Ukita4.jpg",
+                            "char/121/Ukita5.png"], type: "base" },
             ]
         },
         // 由利鎌清
@@ -204,8 +188,11 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/121/Yuri.jpg",
+                            "char/121/Yuri2.jpg",
+                            "char/121/Yuri3.jpg",
+                            "char/121/Yuri4.jpg",
+                            "char/121/Yuri5.png"], type: "base" },
             ]
         },
     ]
