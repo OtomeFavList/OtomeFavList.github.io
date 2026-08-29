@@ -1,45 +1,3 @@
-神凪ノ杜 五月雨綴り
-开发: Matatabi
-发行: Matatabi、ワークマン
-主题歌作曲: 髙木隆次、高木隆次
-主题歌作词: 月宮うさぎ
-主题歌演出: Annabel
-平台:
-PSV Nintendo Switch
-剧本: 朝比奈夏樹
-人物设定: 豌豆まめ丸
-原画: 豌豆まめ丸
-背景: meiz
-企画: 恵曇あや
-音乐: 有限会社ジェオ
-官方网站: matatabi.tv/kannagi/
-
-神凪ノ杜 妖狐奇譚
-开发: Matatabi
-剧本: 朝比奈夏樹
-人物设定: 豌豆まめ丸
-主题歌作曲: 髙木隆次、高木隆次
-主题歌作词: 月宮うさぎ
-主题歌演出: Annabel
-原画: 豌豆まめ丸
-导演: 恵曇あや
-音乐: 有限会社ジェオ
-链接: ErogameScape VNDB Getchu
-官方网站: matatabi.tv/kannagi/
-
-神凪ノ杜 龍神奇譚
-开发: Matatabi
-剧本: 朝比奈夏樹
-音乐: 須藤祐
-人物设定: 豌豆まめ丸
-主题歌作曲: 髙木隆次、高木隆次
-主题歌作词: 月宮うさぎ
-主题歌演出: Annabel
-原画: 豌豆まめ丸
-企画: 恵曇あや
-链接: ErogameScape VNDB Getchu
-官方网站: matatabi.tv/kannagi/
-
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
 // 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
@@ -70,8 +28,8 @@ const gameData = {
             isFD: false,    // true=续作/FD专属角色，开关控制是否展示该角色
             isSub: false,    // true=配角，开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/138/Mizuki.jpg",
+                            "char/138/Mizuki2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 旭
@@ -83,8 +41,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/138/Asahi.jpg",
+                            "char/138/Asahi2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 日向
@@ -96,8 +54,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/138/Hinata.jpg",
+                            "char/138/Hinata2.jpg"], type: "base" },
             ]
         },
         // 市丸
@@ -109,8 +67,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/138/Ichimaru.jpg",
+                            "char/138/Ichimaru2.jpg"], type: "base" },
             ]
         },
         // 仁科直
@@ -122,8 +80,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/138/Nao.jpg",
+                            "char/138/Nao2.jpg"], type: "base" },
             ]
         },
         // 東雲
@@ -135,8 +93,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/138/Shinonome.jpg",
+                            "char/138/Shinonome2.jpg"], type: "base" },
             ]
         },
         // 沢木宋太
@@ -148,8 +106,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/138/Souta.jpg",
+                            "char/138/Souta2.jpg"], type: "base" },
             ]
         }
     ]
