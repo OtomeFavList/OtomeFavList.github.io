@@ -845,7 +845,7 @@ export function syncSingleGameSwitch(type, status) {
 }
 
 /**
- * 筛选下拉排序：中文拼音A-Z → 英文A-Z(忽略大小写) → 日文五十音(平假名优先，片假名转平假名)
+ * 筛选下拉排序：中文拼音A-Z → 日文五十音(平假名优先，片假名转平假名) → 英文A-Z(忽略大小写)
  * @param {string[]} arr 原始字符串数组
  * @returns {string[]} 排好序的数组
  */
@@ -892,8 +892,8 @@ export function sortFilterOptionList(arr) {
     groups.ja.sort(sortJa);
     groups.other.sort();
 
-    // 按顺序合并：zh → en → ja → other
-    return [...groups.zh, ...groups.en, ...groups.ja, ...groups.other];
+    // 按顺序合并：zh → ja → en → other
+    return [...groups.zh, ...groups.ja, ...groups.en, ...groups.other];
 }
 
 /**
@@ -935,7 +935,7 @@ export function sortStaffByLang(list) {
 // ===================== 筛选下拉菜单填充函数 =====================
 /**
  * 【修复】筛选下拉填充：保留HTML原生顶部placeholder option，只追加数据选项，不再覆盖HTML提示文字
- * 排序规则：中文A-Z →英文A-Z →日文五十音；发售年份数字降序
+ * 排序规则：中文A-Z →日文五十音 →英文A-Z；发售年份数字降序
  * @param {Array} gameList 游戏模板数组
  */
 export function fillFilterOptions(gameList) {
