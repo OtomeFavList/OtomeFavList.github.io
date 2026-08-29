@@ -43,10 +43,10 @@ const gameData = {
                             "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 柚木梓馬
         {
             id: "g139_m01",
-            name: "男主1",
+            name: "柚木梓馬",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -56,10 +56,10 @@ const gameData = {
                             "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 普通可攻略男主 male
+        // 金澤紘人
         {
             id: "g139_m02",
-            name: "男主2",
+            name: "金澤紘人",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -69,10 +69,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 火原和樹
         {
             id: "g139_m03",
-            name: "男主3",
+            name: "火原和樹",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -82,10 +82,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 志水桂一
         {
             id: "g139_m04",
-            name: "男主4",
+            name: "志水桂一",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -95,10 +95,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 月森蓮
         {
             id: "g139_m05",
-            name: "男主5",
+            name: "月森蓮",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -108,10 +108,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 土浦梁太郎
         {
             id: "g139_m06",
-            name: "男主5",
+            name: "土浦梁太郎",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -121,10 +121,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 王崎信武
         {
             id: "g139_m07",
-            name: "男主5",
+            name: "王崎信武",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -134,10 +134,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         }
-        // FD续作限定角色（isFD=true → FD开关开启才显示整个角色卡片）
+        // 吉羅暁彦
         {
             id: "g139_fd01",
-            name: "续作FD新增角色",
+            name: "吉羅暁彦",
             gender: "male",
             isHidden: false,
             isFD: true,
@@ -147,10 +147,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // FD续作限定角色（isFD=true → FD开关开启才显示整个角色卡片）
+        // 加地葵
         {
             id: "g139_fd02",
-            name: "续作FD新增角色",
+            name: "加地葵",
             gender: "male",
             isHidden: false,
             isFD: true,
@@ -160,10 +160,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // FD续作限定角色（isFD=true → FD开关开启才显示整个角色卡片）
+        // 不動翔麻
         {
             id: "g139_fd03",
-            name: "续作FD新增角色",
+            name: "不動翔麻",
             gender: "male",
             isHidden: false,
             isFD: true,
@@ -173,10 +173,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // FD续作限定角色（isFD=true → FD开关开启才显示整个角色卡片）
+        // 衛藤桐也
         {
             id: "g139_fd04",
-            name: "续作FD新增角色",
+            name: "衛藤桐也",
             gender: "male",
             isHidden: false,
             isFD: true,
