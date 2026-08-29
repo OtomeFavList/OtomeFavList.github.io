@@ -174,7 +174,7 @@ const gameData = {
             images: [
                 { srcList: ["char/139/Fudou.jpg",
                             "char/139/Fudou2.jpg",
-                            "char/139/Fudou2.jpg"], type: "base" },
+                            "char/139/Fudou3.jpg"], type: "base" },
             ]
         },
         // 衛藤桐也
