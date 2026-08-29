@@ -6,7 +6,6 @@
 人物设定: 呉由姫
 官方网站:https://www.gamecity.ne.jp/corda3/vita_characters.html?utm_source=chatgpt.com
 https://www.gamecity.ne.jp/corda3/anothersky/?utm_source=chatgpt.com 
-http://www.gamecity.ne.jp/corda3/anothersky/smart/index.htm?utm_source=chatgpt.com
 https://www.gamecity.ne.jp/corda4/?utm_source=chatgpt.com
 https://www.gamecity.ne.jp/corda-octave/?utm_source=chatgpt.com
 
@@ -19,7 +18,7 @@ https://www.gamecity.ne.jp/corda-octave/?utm_source=chatgpt.com
 // 官中发售以后，需要修改：游戏名、发售年份、汉化厂商、封面图、角色名
 const gameData = {
     id: "game140", // 全局唯一ID，不可重复，如 game001
-    name: "金色のコルダ3",
+    name: "金色のコルダ３フルボイスSpecial",
     year: "2018",
     publisher: ["KOEI"],
     cnStudio: "暂无",
