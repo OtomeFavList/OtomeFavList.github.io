@@ -1,14 +1,3 @@
-Princess Arthur
-开发: オトメイト
-剧本: 片桐由摩
-人物设定: 東夕陽
-主题歌作曲: love solfege、松本慎一郎
-主题歌作词: 紺野比奈子、葉月ゆら
-主题歌演出: 真理絵
-原画: 東夕陽
-导演: 大野博規
-https://www.otomate.jp/pa/switch/
-
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
 // 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
@@ -39,8 +28,9 @@ const gameData = {
             isFD: false,    // true=续作/FD专属角色，开关控制是否展示该角色
             isSub: false,    // true=配角，开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/126/Aru.jpg",
+                            "char/126/Aru2.jpg",
+                            "char/126/Aru3.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // ガラハッド
@@ -52,8 +42,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/126/Galahad.jpg",
+                            "char/126/Galahad2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // ガウェイン
@@ -65,8 +55,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/126/Gawain.jpg",
+                            "char/126/Gawain2.jpg"], type: "base" },
             ]
         },
         // ランスロット
@@ -78,8 +68,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/126/Lancelot.jpg",
+                            "char/126/Lancelot2.jpg"], type: "base" },
             ]
         },
         // マーリン
@@ -91,8 +81,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/126/Merlin.jpg",
+                            "char/126/Merlin2.jpg"], type: "base" },
             ]
         },
         // モードレッド
@@ -104,8 +94,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/126/Mordred.jpg",
+                            "char/126/Mordred2.jpg"], type: "base" },
             ]
         },
         // トリスタン
@@ -117,8 +107,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/126/Tristan.jpg",
+                            "char/126/Tristan2.jpg"], type: "base" },
             ]
         }
     ]
