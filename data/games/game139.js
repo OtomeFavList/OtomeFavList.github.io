@@ -28,12 +28,12 @@ const gameData = {
     art: [
         {name:"呉由姫", lang:"zh"}
     ],
-    cover: "game/1.jpg", // 相对路径，游戏封面
+    cover: "game/139.jpg", // 相对路径，游戏封面
     charList: [
-        // 女主模板 female
+        // 日野香穂子
         {
-            id: "g1_f01",
-            name: "女主A",
+            id: "g139_f01",
+            name: "日野香穂子",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,    // true=续作/FD专属角色，开关控制是否展示该角色
@@ -41,13 +41,11 @@ const gameData = {
             images: [
                 { srcList: ["char/001/女主A.jpg",
                             "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["char/001/女主A3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["char/001/女主A4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 普通可攻略男主 male
         {
-            id: "g1_m01",
+            id: "g139_m01",
             name: "男主1",
             gender: "male",
             isHidden: false,
@@ -56,13 +54,11 @@ const gameData = {
             images: [
                 { srcList: ["char/001/男主1.jpg",
                             "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["char/001/男主13.jpg"], type: "hidden" },
-                { srcList: ["char/001/男主14.jpg"], type: "fd" }
             ]
         },
         // 普通可攻略男主 male
         {
-            id: "g1_m02",
+            id: "g139_m02",
             name: "男主2",
             gender: "male",
             isHidden: false,
@@ -71,13 +67,11 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
         // 普通可攻略男主 male
         {
-            id: "g1_m03",
+            id: "g139_m03",
             name: "男主3",
             gender: "male",
             isHidden: false,
@@ -86,13 +80,11 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
         // 普通可攻略男主 male
         {
-            id: "g1_m04",
+            id: "g139_m04",
             name: "男主4",
             gender: "male",
             isHidden: false,
@@ -101,13 +93,11 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
         // 普通可攻略男主 male
         {
-            id: "g1_m05",
+            id: "g139_m05",
             name: "男主5",
             gender: "male",
             isHidden: false,
@@ -116,44 +106,84 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
             ]
         },
-        // 隐藏角色（isHidden=true → 开关开启才显示整个角色卡片）
+        // 普通可攻略男主 male
         {
-            id: "g1_h01",
-            name: "隐藏攻略角色",
+            id: "g139_m06",
+            name: "男主5",
             gender: "male",
-            isHidden: true,
+            isHidden: false,
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g001_h01_1.jpg"], type: "base" }
+                { srcList: ["char/g0_m01_1.jpg",
+                            "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
+        // 普通可攻略男主 male
+        {
+            id: "g139_m07",
+            name: "男主5",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            images: [
+                { srcList: ["char/g0_m01_1.jpg",
+                            "char/g001_m0_2.jpg"], type: "base" },
+            ]
+        }
         // FD续作限定角色（isFD=true → FD开关开启才显示整个角色卡片）
         {
-            id: "g1_fd01",
+            id: "g139_fd01",
             name: "续作FD新增角色",
             gender: "male",
             isHidden: false,
             isFD: true,
             isSub: false,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/g0_m01_1.jpg",
+                            "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // FD续作限定角色（isFD=true → FD开关开启才显示整个角色卡片）
         {
-            id: "g1_s01",
-            name: "配角",
+            id: "g139_fd02",
+            name: "续作FD新增角色",
             gender: "male",
             isHidden: false,
-            isFD: false,
-            isSub: true,
+            isFD: true,
+            isSub: false,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/g0_m01_1.jpg",
+                            "char/g001_m0_2.jpg"], type: "base" },
+            ]
+        },
+        // FD续作限定角色（isFD=true → FD开关开启才显示整个角色卡片）
+        {
+            id: "g139_fd03",
+            name: "续作FD新增角色",
+            gender: "male",
+            isHidden: false,
+            isFD: true,
+            isSub: false,
+            images: [
+                { srcList: ["char/g0_m01_1.jpg",
+                            "char/g001_m0_2.jpg"], type: "base" },
+            ]
+        },
+        // FD续作限定角色（isFD=true → FD开关开启才显示整个角色卡片）
+        {
+            id: "g139_fd04",
+            name: "续作FD新增角色",
+            gender: "male",
+            isHidden: false,
+            isFD: true,
+            isSub: false,
+            images: [
+                { srcList: ["char/g0_m01_1.jpg",
+                            "char/g001_m0_2.jpg"], type: "base" },
             ]
         }
     ]
