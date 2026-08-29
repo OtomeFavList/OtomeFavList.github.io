@@ -1234,9 +1234,19 @@ export function getAllGameChar(gameInfo) {
         return true;
     });
 
-    const female = chars.filter(c => c.gender === "female").sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
-    const male = chars.filter(c => c.gender === "male").sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
+    // ===================== 【补丁修改：使用中日英排序工具】 =====================
+    const femaleRaw = chars.filter(c => c.gender === "female");
+    const femaleNames = femaleRaw.map(c => c.name);
+    const sortedFemaleNames = sortFilterOptionList(femaleNames);
+    const female = sortedFemaleNames.map(n => femaleRaw.find(c => c.name === n)).filter(Boolean);
+
+    const maleRaw = chars.filter(c => c.gender === "male");
+    const maleNames = maleRaw.map(c => c.name);
+    const sortedMaleNames = sortFilterOptionList(maleNames);
+    const male = sortedMaleNames.map(n => maleRaw.find(c => c.name === n)).filter(Boolean);
+
     return [...female, ...male];
+    // ===================== 【补丁修改结束】 ===================================
 }
 
 // ===================== 角色/CP待选勾选切换工具【新增】 =====================
