@@ -2,15 +2,13 @@
 中文名: 金色琴弦 3
 开发: コーエーテクモホールディングス、ルビーパーティー
 发行: コーエーテクモホールディングス、コーエーテクモゲームス
-剧本: 杉原希
+剧本: Ruby Party
 人物设定: 呉由姫
-官方网站: gamecity.ne.jp/corda3/
-
-gamecity.ne.jp/corda3/special/
-
-gamecity.ne.jp/corda3/anothersky/index.htm
-
-gamecity.ne.jp/corda4/
+官方网站:https://www.gamecity.ne.jp/corda3/m/?utm_source=chatgpt.com
+https://www.gamecity.ne.jp/corda3/vita_characters.html?utm_source=chatgpt.com
+https://www.gamecity.ne.jp/corda3/anothersky/?utm_source=chatgpt.com 
+http://www.gamecity.ne.jp/corda3/anothersky/smart/index.htm?utm_source=chatgpt.com
+https://www.gamecity.ne.jp/corda4/?utm_source=chatgpt.com
 
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
