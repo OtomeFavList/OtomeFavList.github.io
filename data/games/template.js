@@ -10,7 +10,7 @@ const gameData = {
     name: "示例乙女游戏",
     year: "20",
     publisher: ["原厂发行商"],
-    cnStudio: "汉化组/汉化厂商",
+    cnStudio: "汉化厂商",
     writer: [
         {name:"中文编剧", lang:"zh"},
         {name:"日文编剧", lang:"ja"},
@@ -125,7 +125,7 @@ const gameData = {
                 { srcList: ["char/g001_h01_1.jpg"], type: "base" }
             ]
         },
-        // FD续作限定角色（isFD=true → FD开关开启才显示整个角色卡片）
+        // 续作FD限定角色（isFD=true → FD开关开启才显示整个角色卡片）
         {
             id: "g1_fd01",
             name: "续作FD新增角色",
