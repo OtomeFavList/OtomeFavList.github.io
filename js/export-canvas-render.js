@@ -1378,14 +1378,12 @@ function calcTotalVirtualHeight(targetWidth, appData, gameTemplateList, renderDa
 
 // ============================ 主渲染函数 ============================
 
-// ===================== 【补丁新增：进度回调入参 onRenderProgress(percent:number) 0~100，可选，不破坏原有调用】 =====================
 export async function renderExportCanvas(
   targetWidth,
   isLongMode,
   maxPageHeight,
   appData,
-  gameTemplateList,
-  onRenderProgress = null
+  gameTemplateList
 ) {
   const { exportColor, gameList } = appData;
 
@@ -1606,15 +1604,8 @@ export async function renderExportCanvas(
     const loadRet = await loadImagesWithLimit(allImageSrcList, MAX_IMAGE_CONCURRENCY);
     const imageCache = loadRet.resultMap;
     const imageFailList = loadRet.failList;
-    // =====================【补丁：图片加载阶段完成，权重40】=====================
-    if(typeof onRenderProgress === "function"){
-        onRenderProgress(40);
-    }
+
     await preGenerateAllRoundCanvas(imageCache, roundCanvasTasks);
-    // =====================【补丁：圆角画布预生成完成，累计权重 40+15=55】=====================
-    if(typeof onRenderProgress === "function"){
-        onRenderProgress(55);
-    }
     await new Promise(r => setTimeout(r, 50));
     await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
 
@@ -1628,10 +1619,6 @@ export async function renderExportCanvas(
       appData,
       imageCache
     );
-    // =====================【补丁：长图绘制完成，累计到100】=====================
-    if(typeof onRenderProgress === "function"){
-        onRenderProgress(100);
-    }
 
     const finalHeight = painter.getY() + LAYOUT_SPACE.BODY_PADDING;
     const finalCanvas = cropCanvas(canvas, targetWidth, finalHeight);
@@ -1664,22 +1651,13 @@ export async function renderExportCanvas(
   const loadRet = await loadImagesWithLimit(allImageSrcList, MAX_IMAGE_CONCURRENCY);
   const imageCache = loadRet.resultMap;
   const imageFailList = loadRet.failList;
-  // =====================【补丁：图片加载阶段完成，权重40】=====================
-  if(typeof onRenderProgress === "function"){
-      onRenderProgress(40);
-  }
+
   await preGenerateAllRoundCanvas(imageCache, roundCanvasTasks);
-  // =====================【补丁：圆角画布预生成完成，累计权重 40+15=55】=====================
-  if(typeof onRenderProgress === "function"){
-      onRenderProgress(55);
-  }
   await new Promise(r => setTimeout(r, 50));
   await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
 
   const blobList = [];
-  const totalPageCount = pagePlanList.length;
-  for (let pageIndex = 0; pageIndex < totalPageCount; pageIndex++) {
-    const pagePlan = pagePlanList[pageIndex];
+  for (const pagePlan of pagePlanList) {
     let safeTempHeight = Math.max(maxPageHeight * 4, 6000);
     // IOS临时画布高度硬上限，防止canvas尺寸被WebKit静默置0
     if(IS_IOS_WEBKIT){
@@ -1691,6 +1669,7 @@ export async function renderExportCanvas(
     }
     const canvas = document.createElement('canvas');
     const painter = new CanvasLayoutPainter(canvas, targetWidth, safeTempHeight, exportColor.bg);
+
     await drawFullContent(
       painter,
       targetWidth,
@@ -1700,13 +1679,6 @@ export async function renderExportCanvas(
       appData,
       imageCache
     );
-    // =====================【补丁：分页绘制进度计算，55 ~ 100区间，共45权重】=====================
-    if(typeof onRenderProgress === "function"){
-        // 已完成页数 / 总页数 *45 + 55
-        const pageProgress = 55 + ((pageIndex + 1) / totalPageCount) * 45;
-        const clamped = Math.min(100, Math.round(pageProgress));
-        onRenderProgress(clamped);
-    }
 
     const usedHeight = painter.getY() + LAYOUT_SPACE.BODY_PADDING;
     const finalCanvas = cropCanvas(canvas, targetWidth, usedHeight);
