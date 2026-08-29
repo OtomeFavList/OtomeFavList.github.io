@@ -113,7 +113,7 @@ const gameData = {
             images: [
                 { srcList: ["char/140/Kyouya.jpg",
                             "char/140/Kyouya2.png",
-                            "char/140/Kyouya2.jpg"], type: "base" },
+                            "char/140/Kyouya3.jpg"], type: "base" },
             ]
         },
         // 冥加玲士
