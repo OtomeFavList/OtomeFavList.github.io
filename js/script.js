@@ -26,7 +26,7 @@ import {
   switchCharImage,
   switchCharImageWithLoading,
   getWebImageUrl,
-  sortFilterOptionList
+  sortFilterOptionList   // =====================【补丁新增导入】=====================
 } from './main.js';
 
 // ========== 导入原生Canvas绘制导出模块 ==========
