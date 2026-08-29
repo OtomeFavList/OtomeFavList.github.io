@@ -4,8 +4,7 @@
 发行: コーエーテクモホールディングス、コーエーテクモゲームス
 剧本: Ruby Party
 人物设定: 呉由姫
-官方网站:https://www.gamecity.ne.jp/corda3/m/?utm_source=chatgpt.com
-https://www.gamecity.ne.jp/corda3/vita_characters.html?utm_source=chatgpt.com
+官方网站:https://www.gamecity.ne.jp/corda3/vita_characters.html?utm_source=chatgpt.com
 https://www.gamecity.ne.jp/corda3/anothersky/?utm_source=chatgpt.com 
 http://www.gamecity.ne.jp/corda3/anothersky/smart/index.htm?utm_source=chatgpt.com
 https://www.gamecity.ne.jp/corda4/?utm_source=chatgpt.com
@@ -19,26 +18,24 @@ https://www.gamecity.ne.jp/corda-octave/?utm_source=chatgpt.com
 // 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
 // 官中发售以后，需要修改：游戏名、发售年份、汉化厂商、封面图、角色名
 const gameData = {
-    id: "game1", // 全局唯一ID，不可重复，如 game001
+    id: "game140", // 全局唯一ID，不可重复，如 game001
     name: "金色のコルダ3",
-    year: "20",
+    year: "2018",
     publisher: ["KOEI"],
     cnStudio: "暂无",
     writer: [
         {name:"中文编剧", lang:"zh"},
         {name:"日文编剧", lang:"ja"},
-        {name:"英文编剧", lang:"en"}
+        {name:"Ruby Party", lang:"en"}
     ],
     art: [
-        {name:"中文原画", lang:"zh"},
-        {name:"日文原画", lang:"ja"},
-        {name:"英文原画", lang:"en"}
+        {name:"呉由姫", lang:"zh"}
     ],
-    cover: "game/1.jpg", // 相对路径，游戏封面
+    cover: "game/140.jpg", // 相对路径，游戏封面
     charList: [
         // 女主模板 female
         {
-            id: "g1_f01",
+            id: "g140_f01",
             name: "女主A",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
@@ -47,8 +44,6 @@ const gameData = {
             images: [
                 { srcList: ["char/001/女主A.jpg",
                             "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["char/001/女主A3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["char/001/女主A4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 普通可攻略男主 male
