@@ -1,17 +1,3 @@
-明治活劇 ハイカラ流星組 －成敗しませう、世直し稼業－
-开发: イチカラム、株式会社イチカラム、アイディアファクトリー
-发行: アイディアファクトリー株式会社、オトメイト
-剧本: 高木亜由美
-音乐: TrioDesign
-人物设定: 清白かりん
-主题歌作曲: 志倉千代丸
-主题歌作词: 志倉千代丸
-主题歌演出: +α/あるふぁきゅん.、亜咲花、+α/あるふぁきゅん。
-原画: 清白かりん
-监修: 高木亜由美
-企画: 高木亜由美
-官方网站: otomate.jp/haikara/
-
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
 // 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
@@ -42,8 +28,9 @@ const gameData = {
             isFD: false,    // true=续作/FD专属角色，开关控制是否展示该角色
             isSub: false,    // true=配角，开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/125/Kei.jpg",
+                            "char/125/Kei2.jpg",
+                            "char/125/Kei3.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 守田楓花
@@ -55,8 +42,10 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/125/Fuuka.jpg",
+                            "char/125/Fuuka2.jpg",
+                            "char/125/Fuuka3.jpg",
+                            "char/125/Fuuka4.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 松原銀之助
@@ -68,8 +57,10 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/125/Ginnosuke.jpg",
+                            "char/125/Ginnosuke2.jpg",
+                            "char/125/Ginnosuke3.jpg",
+                            "char/125/Ginnosuke4.jpg"], type: "base" },
             ]
         },
         // 咲村賢
@@ -81,8 +72,10 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/125/Ken.jpg",
+                            "char/125/Ken2.jpg",
+                            "char/125/Ken3.jpg",
+                            "char/125/Ken4.jpg"], type: "base" },
             ]
         },
         // 南郷久史
@@ -94,8 +87,10 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/125/Nangou.jpg",
+                            "char/125/Nangou2.jpg",
+                            "char/125/Nangou3.jpg",
+                            "char/125/Nangou4.jpg"], type: "base" },
             ]
         },
         // 中井徳治郎
@@ -107,8 +102,10 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/125/Tokujirou.jpg",
+                            "char/125/Tokujirou2.jpg",
+                            "char/125/Tokujirou3.jpg",
+                            "char/125/Tokujirou4.jpg"], type: "base" },
             ]
         }
     ]
