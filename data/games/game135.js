@@ -1,18 +1,3 @@
-死神と少女
-中文名: 死神与少女
-开发: TAKUYO
-发行: TAKUYO
-剧本: 藤元（藤文）
-音乐: 森藤晶司
-人物设定: すみ兵
-主题歌作曲: love solfege、松本慎一郎
-主题歌作词: Simona Stanzani Pini、紺野比奈子
-主题歌演出: 綾野えいり、love solfege
-原画: すみ兵
-程序: 五十嵐亮太
-链接: ErogameScape VNDB
-官方网站: takuyo.co.jp/products/shinigami/
-
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
 // 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
@@ -43,8 +28,7 @@ const gameData = {
             isFD: false,    // true=续作/FD专属角色，开关控制是否展示该角色
             isSub: false,    // true=配角，开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/135/Sayo.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 蒼
@@ -56,8 +40,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/135/Ao.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 千代
@@ -69,8 +52,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/135/Chiyo.jpg"], type: "base" },
             ]
         },
         // 日生光
@@ -82,8 +64,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/135/Mitsuru.jpg"], type: "base" },
             ]
         },
         // 桐島七葵
@@ -95,8 +76,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/135/Nanaki.jpg"], type: "base" },
             ]
         },
         // 遠野十夜
@@ -108,8 +88,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/135/Tooya.jpg"], type: "base" },
             ]
         }
     ]
