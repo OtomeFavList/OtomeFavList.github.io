@@ -1,15 +1,3 @@
-戦場の円舞曲
-开发: オトメイト
-发行: アイディアファクトリー株式会社
-剧本: 片桐由摩
-音乐: 堀江晶太(kemu、塚本けむ)
-人物设定: 武村ゆみこ
-主题歌作曲: 堀江晶太
-主题歌演出: アキノ、bless4
-原画: 武村ゆみこ
-导演: 大野博規
-官方网站: otomate.jp/waltz/
-
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
 // 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
@@ -40,8 +28,7 @@ const gameData = {
             isFD: false,    // true=续作/FD专属角色，开关控制是否展示该角色
             isSub: false,    // true=配角，开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/123/Lan.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // アベル
@@ -53,8 +40,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/123/Abel.jpg",
+                            "char/123/Abel2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // ラスティン
@@ -66,8 +53,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/123/Lustin.jpg",
+                            "char/123/Lustin2.jpg"], type: "base" },
             ]
         },
         // 魔剣ヴィルヘルム
@@ -79,8 +66,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/123/Maken.jpg"], type: "base" },
             ]
         },
         // ニケ
@@ -92,8 +78,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/123/Nike.jpg"], type: "base" },
             ]
         },
         // パシュ
@@ -105,8 +90,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/123/Pash.jpg",
+                            "char/123/Pash2.jpg"], type: "base" },
             ]
         },
         // ティファレト
@@ -118,8 +103,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/123/Tifalet.jpg"], type: "base" },
             ]
         },
         // ヴィルヘルム
@@ -131,8 +115,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/123/Wilhelm.jpg",
+                            "char/123/Wilhelm2.jpg"], type: "base" },
             ]
         }
     ]
