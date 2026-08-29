@@ -1,17 +1,3 @@
-ひめひび -New Princess Days!!- 続! 二学期
-发行: TAKUYO
-剧本: 柚木隼人、ゆずしお
-人物设定: 仁神ユキタカ
-主题歌作曲: 森藤晶司
-主题歌作词: CAO、アキレスKEN
-主题歌演出: flaque
-原画: 仁神ユキタカ
-http://www.takuyo.co.jp/products/himehibi2_switch/
-http://www.takuyo.co.jp/products/himehibi2/
-
-ひめひび 続！二学期-New Princess Days!!-
-官方网站: takuyo.co.jp/products/himehibi/himehibivita/index.html
-
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
 // 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
@@ -43,8 +29,7 @@ const gameData = {
             isFD: false,    // true=续作/FD专属角色，开关控制是否展示该角色
             isSub: false,    // true=配角，开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/134/Nanami.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 上河明良
@@ -56,8 +41,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/134/Akira.jpg",
+                            "char/134/Akira2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 神代アルバート
@@ -69,8 +54,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/134/Albert.jpg",
+                            "char/134/Albert2.jpg"], type: "base" },
             ]
         },
         // 小日向風太
@@ -82,8 +67,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/134/Fuuta.jpg",
+                            "char/134/Fuuta2.jpg"], type: "base" },
             ]
         },
         // 橘伊吹
@@ -95,8 +80,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/134/Ibuki.jpg",
+                            "char/134/Ibuki2.jpg"], type: "base" },
             ]
         },
         // 小泉顕
@@ -108,8 +93,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/134/Ken.jpg",
+                            "char/134/Ken2.jpg"], type: "base" },
             ]
         },
         // 桐山大楽
@@ -121,8 +106,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/134/Taira.jpg",
+                            "char/134/Taira2.jpg"], type: "base" },
             ]
         }
     ]
