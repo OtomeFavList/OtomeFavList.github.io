@@ -58,10 +58,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 陸リョクハ
         {
             id: "g137_m03",
-            name: "男主3",
+            name: "陸リョクハ",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -71,10 +71,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 帯刀シーマ
         {
             id: "g137_m04",
-            name: "男主4",
+            name: "帯刀シーマ",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -84,10 +84,10 @@ const gameData = {
                             "char/g001_m0_2.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 氷鉋テラ
         {
             id: "g137_m05",
-            name: "男主5",
+            name: "氷鉋テラ",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -95,6 +95,18 @@ const gameData = {
             images: [
                 { srcList: ["char/g0_m01_1.jpg",
                             "char/g001_m0_2.jpg"], type: "base" },
+            ]
+        },
+        // ？？？
+        {
+            id: "g137_h01",
+            name: "？？？",
+            gender: "male",
+            isHidden: true,
+            isFD: false,
+            isSub: false,
+            images: [
+                { srcList: ["char/g001_h01_1.jpg"], type: "base" }
             ]
         }
     ]
