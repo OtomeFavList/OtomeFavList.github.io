@@ -30,8 +30,7 @@ const gameData = {
             isFD: false,    // true=续作/FD专属角色，开关控制是否展示该角色
             isSub: false,    // true=配角，开关控制是否展示该角色
             images: [
-                { srcList: ["char/128/Akira.jpg",
-                            "char/128/Akira2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/128/Yui.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 戸塚陽
@@ -43,8 +42,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/128/Akira.jpg",
+                            "char/128/Akira2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // アヌビス·マアト
@@ -56,8 +55,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/128/Anubis.jpg",
+                            "char/128/Anubis2.jpg"], type: "base" },
             ]
         },
         // アポロン·アガナ·ベレア
@@ -69,8 +68,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/128/Apollon.jpg",
+                            "char/128/Apollon2.jpg"], type: "base" },
             ]
         },
         // バルドル·フリングホルニ
@@ -82,8 +81,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/128/Balder.jpg",
+                            "char/128/Balder2.jpg"], type: "base" },
             ]
         },
         // ディオニュソス·テュルソス
@@ -95,8 +94,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/128/Dionysus.jpg",
+                            "char/128/Dionysus2.jpg"], type: "base" },
             ]
         },
         // ハデス·アイドネウス
@@ -108,8 +107,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/128/Hades.jpg",
+                            "char/128/Hades2.jpg"], type: "base" },
             ]
         },
         // ロキ·レーヴァテイン
@@ -121,8 +120,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/128/Loki.jpg",
+                            "char/128/Loki2.jpg"], type: "base" },
             ]
         },
         // メリッサ
@@ -134,8 +133,9 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/128/Melissa.jpg",
+                            "char/128/Melissa2.jpg",
+                            "char/128/Melissa3.jpg"], type: "base" },
             ]
         },
         // 戸塚尊
@@ -147,8 +147,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/128/Takeru.jpg",
+                            "char/128/Takeru2.jpg"], type: "base" },
             ]
         },
         // トール·メギンギョルズ
@@ -160,8 +160,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/128/Thor.jpg",
+                            "char/128/Thor2.jpg"], type: "base" },
             ]
         },
         // トト·カドゥケウス
@@ -173,8 +173,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/128/Thoth.jpg",
+                            "char/128/Thoth2.jpg"], type: "base" },
             ]
         },
         // 戸塚月人
@@ -186,8 +186,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/128/Tsukito.jpg",
+                            "char/128/Tsukito2.jpg"], type: "base" },
             ]
         }
     ]
