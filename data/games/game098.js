@@ -29,7 +29,7 @@ const gameData = {
     publisher: ["Otomate"],
     cnStudio: "暂无",
     writer: [
-        {name:"合同会社Re,AER", lang:"en"}
+        {name:"合同会社Re,AER", lang:"zh"}
     ],
     art: [
         {name:"董火", lang:"zh"}
