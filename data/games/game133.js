@@ -1,15 +1,3 @@
-ひめひび 1学期 -Princess Days-
-开发: TAKUYO
-剧本: 柚木隼人 小野真太郎　藤元（藤文）　Nao@猫の手
-主题歌作曲: 森藤晶司
-原画: 仁神ユキタカ
-主题歌作词: CAO、アキレスKEN
-主题歌演出: flaque
-http://www.takuyo.co.jp/products/himehibi_switch/
-http://www.takuyo.co.jp/products/himehibi/himehibi_portable.html
-http://www.takuyo.co.jp/products/himehibi/himehibivita/
-takuyo.co.jp/products/himehibi/index.html
-
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
 // 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
@@ -43,8 +31,7 @@ const gameData = {
             isFD: false,    // true=续作/FD专属角色，开关控制是否展示该角色
             isSub: false,    // true=配角，开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/133/Koi.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 夏八木光
@@ -56,8 +43,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/133/Hikaru.jpg",
+                            "char/133/Hikaru2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 速水尚仁
@@ -69,8 +56,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/133/Naohito.jpg",
+                            "char/133/Naohito2.jpg"], type: "base" },
             ]
         },
         // 柏木林斗
@@ -82,8 +69,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/133/Rinto.jpg"], type: "base" },
             ]
         },
         // 月元忍
@@ -95,8 +81,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/133/Shinobu.jpg",
+                            "char/133/Shinobu2.jpg"], type: "base" },
             ]
         },
         // 天城寺雅哉
@@ -108,8 +94,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/133/Tenjouji.jpg",
+                            "char/133/Tenjouji2.jpg"], type: "base" },
             ]
         },
         // 高城大和
@@ -121,8 +107,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/133/Yamato.jpg",
+                            "char/133/Yamato2.jpg"], type: "base" },
             ]
         }
     ]
