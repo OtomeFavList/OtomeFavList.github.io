@@ -1,27 +1,3 @@
-殺し屋とストロベリー Plus
-开发: ブロッコリー
-发行: ブロッコリー
-游戏类型: 裏社会×恋愛ADV
-剧本: isora、ナミサキシキ
-导演: ナミサキシキ
-官方网站: korosuto.com/plus/
-
-殺し屋とストロベリー
-中文名: 杀手与草莓
-开发: ブロッコリー
-发行: ブロッコリー
-剧本: isora、ナミサキ シキ、望月柚枝
-人物设定: カズキヨネ
-主题歌作曲: bermei.inazawa
-主题歌作词: lasah
-主题歌演出: lasah
-原作: ブロッコリー
-别名: Killer and Strawberry
-殺スト
-导演: ナミサキシキ
-链接: ErogameScape VNDB
-官方网站: korosuto.com/
-
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
 // 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
@@ -54,8 +30,7 @@ const gameData = {
             isFD: false,    // true=续作/FD专属角色，开关控制是否展示该角色
             isSub: false,    // true=配角，开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/129/Ichigo.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // アモン
@@ -67,8 +42,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/129/Amon.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 長谷川
@@ -80,8 +54,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/129/Hasegawa.jpg"], type: "base" },
             ]
         },
         // イズナ
@@ -93,8 +66,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/129/Izuna.jpg"], type: "base" },
             ]
         },
         // クラマ
@@ -106,8 +78,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/129/Kurama.jpg"], type: "base" },
             ]
         },
         // ノイン
@@ -119,8 +90,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/129/Noin.jpg"], type: "base" },
             ]
         },
         // ツキミ
@@ -132,8 +102,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/129/Tsukimi.jpg"], type: "base" },
             ]
         }
     ]
