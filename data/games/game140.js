@@ -42,7 +42,8 @@ const gameData = {
             isSub: false,
             images: [
                 { srcList: ["char/140/Arata.jpg",
-                            "char/140/Arata2.png"], type: "base" },      // 默认基础图，始终加载
+                            "char/140/Arata2.png"
+                            "char/140/Arata3.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 東金千秋
@@ -55,7 +56,8 @@ const gameData = {
             isSub: false,
             images: [
                 { srcList: ["char/140/Chiaki.jpg",
-                            "char/140/Chiaki2.png"], type: "base" },
+                            "char/140/Chiaki2.png"
+                            "char/140/Chiaki3.jpg"], type: "base" },
             ]
         },
         // 榊大地
@@ -68,7 +70,8 @@ const gameData = {
             isSub: false,
             images: [
                 { srcList: ["char/140/Daichi.jpg",
-                            "char/140/Daichi2.png"], type: "base" },
+                            "char/140/Daichi2.png"
+                            "char/140/Daichi3.jpg"], type: "base" },
             ]
         },
         // 水嶋悠人
@@ -81,7 +84,8 @@ const gameData = {
             isSub: false,
             images: [
                 { srcList: ["char/140/Haruto.jpg",
-                            "char/140/Haruto2.png"], type: "base" },
+                            "char/140/Haruto2.png"
+                            "char/140/Haruto3.jpg"], type: "base" },
             ]
         },
         // 土岐蓬生
@@ -94,7 +98,8 @@ const gameData = {
             isSub: false,
             images: [
                 { srcList: ["char/140/Housei.jpg",
-                            "char/140/Housei2.png"], type: "base" },
+                            "char/140/Housei2.png"
+                            "char/140/Housei3.jpg"], type: "base" },
             ]
         },
         // 如月響也
@@ -107,7 +112,8 @@ const gameData = {
             isSub: false,
             images: [
                 { srcList: ["char/140/Kyouya.jpg",
-                            "char/140/Kyouya2.png"], type: "base" },
+                            "char/140/Kyouya2.png"
+                            "char/140/Kyouya2.jpg"], type: "base" },
             ]
         },
         // 冥加玲士
@@ -120,7 +126,8 @@ const gameData = {
             isSub: false,
             images: [
                 { srcList: ["char/140/Reiji.jpg",
-                            "char/140/Reiji2.png"], type: "base" },
+                            "char/140/Reiji2.png"
+                            "char/140/Reiji3.jpg"], type: "base" },
             ]
         },
         // 如月律
@@ -133,7 +140,8 @@ const gameData = {
             isSub: false,
             images: [
                 { srcList: ["char/140/Ritsu.jpg",
-                            "char/140/Ritsu2.png"], type: "base" },
+                            "char/140/Ritsu2.png"
+                            "char/140/Ritsu3.jpg"], type: "base" },
             ]
         },
         // 天宮静
@@ -146,7 +154,8 @@ const gameData = {
             isSub: false,
             images: [
                 { srcList: ["char/140/Sei.jpg",
-                            "char/140/Sei2.png"], type: "base" },
+                            "char/140/Sei2.png"
+                            "char/140/Sei3.jpg"], type: "base" },
             ]
         },
         // 火積司郎
@@ -159,7 +168,8 @@ const gameData = {
             isSub: false,
             images: [
                 { srcList: ["char/140/Shirou.jpg",
-                            "char/140/Shirou2.png"], type: "base" },
+                            "char/140/Shirou2.png"
+                            "char/140/Shirou3.jpg"], type: "base" },
             ]
         },
         // 七海宗介
@@ -172,7 +182,8 @@ const gameData = {
             isSub: false,
             images: [
                 { srcList: ["char/140/Sousuke.jpg",
-                            "char/140/Sousuke2.png"], type: "base" },
+                            "char/140/Sousuke2.png"
+                            "char/140/Sousuke3.jpg"], type: "base" },
             ]
         },
         // 八木沢雪広
@@ -185,7 +196,8 @@ const gameData = {
             isSub: false,
             images: [
                 { srcList: ["char/140/Yukihiro.jpg",
-                            "char/140/Yukihiro2.png"], type: "base" },
+                            "char/140/Yukihiro2.png"
+                            "char/140/Yukihiro3.jpg"], type: "base" },
             ]
         },
         // 円城寺阿蘭
