@@ -1469,13 +1469,27 @@ export function initPage(Core = {}) {
                 estimateSec = Math.max(1, Math.min(35, estimateSec));
                 // ==========【新增结束】==========
 
+                // =====================【补丁新增：渲染进度UI补丁 开始】 =====================
+                // 渲染进度监听，只在本次渲染生命周期有效，渲染结束移除监听
+                let progressHandler;
+                progressHandler = function(e) {
+                  const p = e.detail.percent.toFixed(0);
+                  const progressDom = previewScrollWrap.querySelector('.render-progress-text');
+                  if(progressDom){
+                    progressDom.textContent = `进度：${p}%`;
+                  }
+                };
+                window.addEventListener('canvas-render-progress', progressHandler);
+
                 previewScrollWrap.innerHTML = `
                     <div class="preview-inner-loading">
                         <div class="loading-spinner"></div>
                         <p>正在生成预览，请稍候…<br>预计耗时：${estimateSec}s</p>
+                        <p class="render-progress-text" style="margin-top:8px;font-size:14px;">进度：0%</p>
                     </div>
                 `;
                 if (downloadBtn) downloadBtn.disabled = true;
+                // =====================【补丁新增：渲染进度UI补丁 结束】 =====================
 
                 // 获取导出尺寸配置
                 const sizeRadio = document.querySelector('input[name="export-size"]:checked');
@@ -1581,6 +1595,11 @@ export function initPage(Core = {}) {
                 `;
                 alert("导出失败，请查看控制台错误。");
             } finally {
+                // =====================【补丁新增：清理进度事件监听】 =====================
+                if(typeof progressHandler !== 'undefined'){
+                    window.removeEventListener('canvas-render-progress', progressHandler);
+                }
+                // ===================== 补丁结束 =====================
                 if (unlockTimer) clearTimeout(unlockTimer);
                 isRendering = false;
             }
