@@ -1,15 +1,3 @@
-金色のコルダ3
-中文名: 金色琴弦 3
-开发: コーエーテクモホールディングス、ルビーパーティー
-发行: コーエーテクモホールディングス、コーエーテクモゲームス
-剧本: Ruby Party
-人物设定: 呉由姫
-官方网站:https://www.gamecity.ne.jp/corda3/smart/c01.htm
-https://www.gamecity.ne.jp/corda3/vita_characters.html?utm_source=chatgpt.com
-https://www.gamecity.ne.jp/corda3/anothersky/?utm_source=chatgpt.com 
-https://www.gamecity.ne.jp/corda4/chara.html
-https://www.gamecity.ne.jp/corda-octave/?utm_source=chatgpt.com
-
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
 // 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
@@ -40,8 +28,8 @@ const gameData = {
             isFD: false,    // true=续作/FD专属角色，开关控制是否展示该角色
             isSub: false,    // true=配角，开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/140/Kanade.jpg",
+                            "char/140/Kanade2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 水嶋新
@@ -53,8 +41,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/140/Arata.jpg",
+                            "char/140/Arata2.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 東金千秋
@@ -66,8 +54,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/140/Chiaki.jpg",
+                            "char/140/Chiaki2.png"], type: "base" },
             ]
         },
         // 榊大地
@@ -79,8 +67,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/140/Daichi.jpg",
+                            "char/140/Daichi2.png"], type: "base" },
             ]
         },
         // 水嶋悠人
@@ -92,8 +80,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/140/Haruto.jpg",
+                            "char/140/Haruto2.png"], type: "base" },
             ]
         },
         // 土岐蓬生
@@ -105,8 +93,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/140/Housei.jpg",
+                            "char/140/Housei2.png"], type: "base" },
             ]
         },
         // 如月響也
@@ -118,8 +106,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/140/Kyouya.jpg",
+                            "char/140/Kyouya2.png"], type: "base" },
             ]
         },
         // 冥加玲士
@@ -131,8 +119,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/140/Reiji.jpg",
+                            "char/140/Reiji2.png"], type: "base" },
             ]
         },
         // 如月律
@@ -144,8 +132,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/140/Ritsu.jpg",
+                            "char/140/Ritsu2.png"], type: "base" },
             ]
         },
         // 天宮静
@@ -157,8 +145,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/140/Sei.jpg",
+                            "char/140/Sei2.png"], type: "base" },
             ]
         },
         // 火積司郎
@@ -170,8 +158,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/140/Shirou.jpg",
+                            "char/140/Shirou2.png"], type: "base" },
             ]
         },
         // 七海宗介
@@ -183,8 +171,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/140/Sousuke.jpg",
+                            "char/140/Sousuke2.png"], type: "base" },
             ]
         },
         // 八木沢雪広
@@ -196,8 +184,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/140/Yukihiro.jpg",
+                            "char/140/Yukihiro2.png"], type: "base" },
             ]
         },
         // 円城寺阿蘭
@@ -209,8 +197,7 @@ const gameData = {
             isFD: true,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/140/Aran.jpg"], type: "base" },
             ]
         },
         // 氷渡貴史
@@ -222,8 +209,7 @@ const gameData = {
             isFD: true,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/140/Hido.jpg"], type: "base" },
             ]
         },
         // 芹沢睦
@@ -235,8 +221,7 @@ const gameData = {
             isFD: true,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/140/Mutsumi.jpg"], type: "base" },
             ]
         },
         // 長嶺雅紀
@@ -248,8 +233,7 @@ const gameData = {
             isFD: true,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/140/Nagamine.jpg"], type: "base" },
             ]
         },
         // 支倉仁亜
@@ -261,8 +245,8 @@ const gameData = {
             isFD: true,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/140/Nia.jpg",
+                            "char/140/Nia2.png"], type: "base" },
             ]
         },
         // 支倉宇宙
@@ -274,8 +258,8 @@ const gameData = {
             isFD: true,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/140/Sora.jpg",
+                            "char/140/Sora2.png"], type: "base" },
             ]
         },
         // 須永巧
@@ -287,8 +271,7 @@ const gameData = {
             isFD: true,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/140/Sunaga.jpg"], type: "base" },
             ]
         },
         // トーノ
@@ -300,8 +283,8 @@ const gameData = {
             isFD: true,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/140/Tono.jpg",
+                            "char/140/Tono2.png"], type: "base" },
             ]
         }
     ]
