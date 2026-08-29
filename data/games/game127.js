@@ -1,49 +1,3 @@
-片恋いコントラスト ―collection of branch―
-开发: オトメイト
-剧本: みぞおち鳩子(一巻)／紫藤零(二巻)／黒澤琴音(株式会社イチカラム) 追加：高木亜由美(株式会社イチカラム)
-别名: トリコリティ アイズ　-トゥインクル ショータイム-
-平台: Nintendo Switch
-游戏类型: 女性向け恋愛ADV
-シナリオ統括: 高木亜由美
-导演: 鈴花なみ(IDEA FACTORY)
-官方网站: otomate.jp/triangle/contrast/switch/special
-
-片恋いコントラスト ―way of parting― 第一巻
-开发: オトメイト
-发行: アイディアファクトリー、フロンティアワークス
-剧本: みぞおち鳩子
-人物设定: ウダジョ
-主题歌作曲: 半田麻里子、黒川陽介、松岡純也、MANYO
-主题歌作词: 巽明子、井筒日美
-主题歌演出: Suara、YURiKA
-原画: ウダジョ
-导演: 谷口歌奈
-官方网站: otomate.jp/triangle/contrast/
-
-片恋いコントラスト ―way of parting― 第二巻
-开发: オトメイト
-发行: アイディアファクトリー、フロンティアワークス
-人物设定: ウダジョ
-主题歌作曲: 半田麻里子、黒川陽介、松岡純也、MANYO
-主题歌作词: 巽明子、井筒日美
-主题歌演出: Suara、YURiKA
-原画: ウダジョ
-导演: 谷口歌奈
-剧本: 紫藤零
-官方网站: otomate.jp/triangle/contrast/
-
-片恋いコントラスト ―way of parting― 第三巻
-开发: オトメイト
-发行: アイディアファクトリー、フロンティアワークス
-人物设定: ウダジョ
-主题歌作曲: 半田麻里子、黒川陽介、松岡純也、MANYO
-主题歌作词: 巽明子、井筒日美
-主题歌演出: Suara、YURiKA
-原画: ウダジョ
-导演: 谷口歌奈
-剧本: 黒澤琴音
-官方网站: otomate.jp/triangle/contrast/
-
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
 // 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
@@ -61,7 +15,6 @@ const gameData = {
         {name:"紫藤零", lang:"zh"},
         {name:"黒澤琴音", lang:"zh"},
         {name:"高木亜由美", lang:"zh"},
-        {name:"谷口歌奈", lang:"zh"},
         {name:"みぞおち鳩子", lang:"ja"}
     ],
     art: [
@@ -78,8 +31,8 @@ const gameData = {
             isFD: false,    // true=续作/FD专属角色，开关控制是否展示该角色
             isSub: false,    // true=配角，开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/127/Saeko.jpg",
+                            "char/127/Saeko2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 椎葉亜樹那
@@ -91,60 +44,70 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
-            ]
-        },
-        // 普通可攻略男主 male
-        {
-            id: "g127_m02",
-            name: "男主2",
-            gender: "male",
-            isHidden: false,
-            isFD: false,
-            isSub: false,
-            images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/127/Akina.jpg",
+                            "char/127/Akina2.jpg",
+                            "char/127/Akina3.jpg",
+                            "char/127/Akina4.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 樫永和兎
         {
-            id: "g127_m03",
+            id: "g127_m02",
             name: "樫永和兎",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/127/Kazuto.jpg",
+                            "char/127/Kazuto2.jpg",
+                            "char/127/Kazuto3.jpg",
+                            "char/127/Kazuto4.jpg"], type: "base" },
             ]
         },
         // 楠見清孝
         {
-            id: "g127_m04",
+            id: "g127_m03",
             name: "楠見清孝",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/127/Kusumi.jpg",
+                            "char/127/Kusumi2.jpg",
+                            "char/127/Kusumi3.jpg",
+                            "char/127/Kusumi4.jpg"], type: "base" },
             ]
         },
         // 楡居凪
         {
-            id: "g127_m05",
+            id: "g127_m04",
             name: "楡居凪",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/127/Nagi.jpg",
+                            "char/127/Nagi2.jpg",
+                            "char/127/Nagi3.jpg",
+                            "char/127/Nagi4.jpg"], type: "base" },
+            ]
+        },
+        // 檜渡鈴太朗
+        {
+            id: "g127_m05",
+            name: "檜渡鈴太朗",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            images: [
+                { srcList: ["char/127/Rintarou.jpg",
+                            "char/127/Rintarou2.jpg",
+                            "char/127/Rintarou3.jpg",
+                            "char/127/Rintarou4.jpg"], type: "base" },
             ]
         },
         // 桐阪保
@@ -156,8 +119,10 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
+                { srcList: ["char/127/Tamotsu.jpg",
+                            "char/127/Tamotsu2.jpg",
+                            "char/127/Tamotsu3.jpg",
+                            "char/127/Tamotsu4.jpg"], type: "base" },
             ]
         }
     ]
