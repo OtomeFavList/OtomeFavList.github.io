@@ -1469,10 +1469,13 @@ export function initPage(Core = {}) {
                 estimateSec = Math.max(1, Math.min(35, estimateSec));
                 // ==========【新增结束】==========
 
+                // =====================【补丁新增：进度DOM节点】 =====================
                 previewScrollWrap.innerHTML = `
                     <div class="preview-inner-loading">
                         <div class="loading-spinner"></div>
                         <p>正在生成预览，请稍候…<br>预计耗时：${estimateSec}s</p>
+                        <!-- =====================【补丁新增：真实渲染百分比显示节点】 ===================== -->
+                        <p class="render-real-progress" style="margin-top:8px;font-weight:bold;">进度：0%</p>
                     </div>
                 `;
                 if (downloadBtn) downloadBtn.disabled = true;
@@ -1502,8 +1505,21 @@ export function initPage(Core = {}) {
                     maxPageHeight = h;
                 }
 
-                // 【核心】调用原生Canvas绘制模块，返回 Blob 数组
-                const blobList = await renderExportCanvas(targetWidth, isLongMode, maxPageHeight, appData, gameTemplateList);
+                // =====================【补丁：传入进度回调，更新页面上的百分比DOM】 =====================
+                const blobList = await renderExportCanvas(
+                    targetWidth,
+                    isLongMode,
+                    maxPageHeight,
+                    appData,
+                    gameTemplateList,
+                    (percent) => {
+                        // 回调：percent 0‑100
+                        const progressDom = previewScrollWrap.querySelector(".render-real-progress");
+                        if(progressDom){
+                            progressDom.textContent = `进度：${percent}%`;
+                        }
+                    }
+                );
                 if (!Array.isArray(blobList) || blobList.length === 0) throw new Error("Canvas绘制失败，未能生成图片");
 
                 // 多页预览状态
