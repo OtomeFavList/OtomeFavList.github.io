@@ -11,6 +11,21 @@ import {
 
 // 最大并发图片加载数量，降低并发减少移动端解码资源竞争
 const MAX_IMAGE_CONCURRENCY = 4;
+// ===================== 【补丁新增：渲染进度上报 开始】 =====================
+/**
+ * 派发渲染进度事件，percent:0~100
+ * 不修改原有业务逻辑，仅向外抛出自定义事件供UI层展示
+ */
+function emitRenderProgress(percent) {
+  const evt = new CustomEvent('canvas-render-progress', {
+    detail: {
+      percent: Math.min(100, Math.max(0, Number(percent)))
+    }
+  });
+  window.dispatchEvent(evt);
+}
+// ===================== 【补丁新增：渲染进度上报 结束】 =====================
+
 //【IOS环境检测：Safari / iOS Chrome(WebKit内核)】
 const IS_IOS_WEBKIT = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
@@ -174,6 +189,8 @@ async function preGenerateAllRoundCanvas(imageCache, roundTaskList) {
     }
   }
   // 串行预生成（移动端避免并发离屏画布抢占GPU）
+  let roundTaskIndex = 0;
+  const totalRoundTask = taskMap.size;
   for (const task of taskMap.values()) {
     const { src, radius } = task;
     const img = imageCache.get(src);
@@ -184,6 +201,14 @@ async function preGenerateAllRoundCanvas(imageCache, roundTaskList) {
     // IOS加大离屏画布生成间隔，缓解GPU队列拥堵
     const delayMs = IS_IOS_WEBKIT ? 30 : 12;
     await new Promise(r => setTimeout(r, delayMs));
+    // ===================== 【补丁新增：圆角画布阶段进度】 =====================
+    roundTaskIndex += 1;
+    if(totalRoundTask > 0){
+      // 图片加载占45，本阶段区间：45 ~ 60
+      const roundStagePercent = 45 + (roundTaskIndex / totalRoundTask) * 15;
+      emitRenderProgress(roundStagePercent);
+    }
+    // ===================== 补丁结束 =====================
   }
   // 多层帧等待，低性能移动端充分刷新渲染队列
   await new Promise(r => requestAnimationFrame(r));
@@ -256,6 +281,14 @@ async function loadImagesWithLimit(urlList, limit) {
       if (resultMap.has(url)) continue;
       const bitmap = await loadSingleUrl(url);
       resultMap.set(url, bitmap);
+      // ===================== 【补丁新增：图片加载阶段进度】 =====================
+      const doneCount = resultMap.size;
+      const totalImg = uniqueUrls.length;
+      if(totalImg > 0){
+        const imgStagePercent = (doneCount / totalImg) * 45;
+        emitRenderProgress(imgStagePercent);
+      }
+      // ===================== 补丁结束 =====================
     }
   }
 
@@ -1338,6 +1371,15 @@ async function drawFullContent(
     const data = renderDataList[idx];
     const isLast = (i === gameIndexList.length - 1);
     await drawSingleGameCard(painter, targetWidth, data, imageCache, isLast);
+    // ===================== 【补丁新增：绘制阶段进度 长图/分页共用】 =====================
+    const drawDone = i + 1;
+    const drawTotal = gameIndexList.length;
+    if(drawTotal > 0){
+      // 绘制阶段权重40，区间60‑100
+      const drawPercent = 60 + (drawDone / drawTotal) * 40;
+      emitRenderProgress(drawPercent);
+    }
+    // ===================== 补丁结束 =====================
   }
 }
 
@@ -1629,6 +1671,8 @@ export async function renderExportCanvas(
       await new Promise(r => setTimeout(r, 100));
       blob = await new Promise((resolve) => finalCanvas.toBlob(resolve, 'image/png', 1));
     }
+    // ===================== 【补丁新增：强制100%】 =====================
+    emitRenderProgress(100);
     const res = [blob];
     res.imageFailList = imageFailList;
     return res;
@@ -1657,7 +1701,10 @@ export async function renderExportCanvas(
   await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
 
   const blobList = [];
+  let pageIndex = 0;
+  const totalPageCount = pagePlanList.length;
   for (const pagePlan of pagePlanList) {
+    pageIndex += 1;
     let safeTempHeight = Math.max(maxPageHeight * 4, 6000);
     // IOS临时画布高度硬上限，防止canvas尺寸被WebKit静默置0
     if(IS_IOS_WEBKIT){
@@ -1701,7 +1748,15 @@ export async function renderExportCanvas(
       finalCanvas.width = 0;
       finalCanvas.height = 0;
     }
+    // ===================== 【补丁新增：分页模式总进度上报】 =====================
+    if(totalPageCount > 0){
+      const pagePercent = 60 + (pageIndex / totalPageCount) * 40;
+      emitRenderProgress(pagePercent);
+    }
+    // ===================== 补丁结束 =====================
   }
+  // ===================== 【补丁新增：强制100%】 =====================
+  emitRenderProgress(100);
   blobList.imageFailList = imageFailList;
   return blobList;
 }
