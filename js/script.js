@@ -1095,16 +1095,28 @@ export function initPage(Core = {}) {
             appData.exportCustomTextFontSize = defaultFs;
             el.sliderCustomTextFont.value = defaultFs;
             el.customTextFontValueDisplay.textContent = `${defaultFs}px`;
-            // 修复：重置时重新计算滑块进度百分比，更新轨道渐变
+            // ✅必须调用，刷新 --slider-progress CSS变量，修复轨道颜色残留粉色
             updateSliderProgress(el.sliderCustomTextFont);
         }
-
         saveData();
         clearPreviewCacheResource();
       })
     }
 
     // =========【新增：自定义导出文本字号滑块初始化】==========
+    // ✅提升到bootstrap函数顶层，全局可访问，不再嵌套在if判断内部
+    function updateSliderProgress(sliderEl) {
+        const min = Number(sliderEl.min);
+        const max = Number(sliderEl.max);
+        const val = Number(sliderEl.value);
+        const percent = ((val - min) / (max - min)) * 100;
+        // 重点：向父容器 .font‑size‑set‑row 设置变量，不要设置给input本身
+        const rowWrap = sliderEl.closest('.font-size-set-row');
+        if(rowWrap){
+            rowWrap.style.setProperty('--slider-progress', `${percent}%`);
+        }
+    }
+
     if(el.sliderCustomTextFont && el.customTextFontValueDisplay){
         // 初始化，默认16，范围14‑42
         const initFontSize = Number(appData.exportCustomTextFontSize ?? 16);
@@ -1113,21 +1125,8 @@ export function initPage(Core = {}) {
         el.sliderCustomTextFont.value = safeInit;
         el.customTextFontValueDisplay.textContent = `${safeInit}px`;
 
-        // ✅封装更新进度条百分比函数
-        function updateSliderProgress(sliderEl) {
-            const min = Number(sliderEl.min);
-            const max = Number(sliderEl.max);
-            const val = Number(sliderEl.value);
-            const percent = ((val - min) / (max - min)) * 100;
-            // 重点：向父容器 .font‑size‑set‑row 设置变量，不要设置给input本身
-            const rowWrap = sliderEl.closest('.font-size-set-row');
-            if(rowWrap){
-                rowWrap.style.setProperty('--slider-progress', `${percent}%`);
-            }
-        }
         // 初始化设置进度
         updateSliderProgress(el.sliderCustomTextFont);
-
         el.sliderCustomTextFont.oninput = () => {
             const val = Number(el.sliderCustomTextFont.value);
             appData.exportCustomTextFontSize = val;
