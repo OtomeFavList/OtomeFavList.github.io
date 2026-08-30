@@ -25,7 +25,8 @@ import {
   toggleCpItemSelect,
   switchCharImage,
   switchCharImageWithLoading,
-  getWebImageUrl
+  getWebImageUrl,
+  sortFilterOptionList   // =====================【补丁新增导入】=====================
 } from './main.js';
 
 // ========== 导入原生Canvas绘制导出模块 ==========
@@ -1227,8 +1228,14 @@ export function initPage(Core = {}) {
       const filterWriter = document.getElementById("filter-writer")?.value || "";
       const filterArt = document.getElementById("filter-art")?.value || "";
 
-      // 修复：把zh-CN（软连字符）改为标准 zh-CN
-      const sortedGames = [...gameTemplateList].sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
+      // =====================【补丁修改：使用中日英排序工具】=====================
+      // 使用全局中日英排序工具：中文→日文五十音→英文
+      const gameNameList = [...gameTemplateList].map(g => g.name);
+      const sortedNameList = sortFilterOptionList(gameNameList);
+      // 根据排好的名称数组还原游戏对象顺序
+      const sortedGames = sortedNameList.map(name => gameTemplateList.find(g => g.name === name)).filter(Boolean);
+      // =====================【补丁修改结束】===================================
+
       let html = "";
 
       sortedGames.forEach((game, index) => {   // 增加 index
@@ -1632,9 +1639,12 @@ export function initPage(Core = {}) {
         clearPreviewCacheResource(); // 文字变更，导出缓存失效
     });
 
-    // ========== 新增：右下角悬浮按钮 - 滚动到【添加游戏按钮】 ==========
+    // ========== 右下角悬浮按钮 - 滚动到【添加游戏按钮】&滚动到最后游戏卡片 ==========
     const backToAddBtn = document.getElementById('back-to-add-btn');
+    const scrollToLastGameBtn = document.getElementById('scroll-to-last-game-btn');
     const targetAddBtn = document.getElementById('btn-add-game');
+    const addedGameContainer = document.getElementById('added-game-container');
+
     if (backToAddBtn && targetAddBtn) {
         backToAddBtn.addEventListener('click', function() {
             targetAddBtn.scrollIntoView({
@@ -1642,16 +1652,32 @@ export function initPage(Core = {}) {
                 block: 'start'
             });
         });
+    }
 
-        // 滚动监听修改逻辑：
-        // 只有【添加游戏按钮完全落在视口范围内】才隐藏悬浮按钮
-        // 滚动到添加按钮上方 或者 添加按钮在视口下方 → 都显示悬浮按钮
-        function toggleFloatBtnVis() {
-            const rect = targetAddBtn.getBoundingClientRect();
-            const winH = window.innerHeight;
-            // 判断条件：目标按钮完整可见（顶部≥0 并且底部≤窗口高度）
-            const targetFullyVisible = rect.top >= 0 && rect.bottom <= winH;
+    if (scrollToLastGameBtn) {
+        // ▼按钮点击：滚动到最后一张游戏卡片
+        scrollToLastGameBtn.addEventListener('click', function () {
+            const lastGameCard = document.querySelector('.added-game-card:last-of-type');
+            if(lastGameCard){
+                lastGameCard.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    }
 
+    // 滚动监听修改逻辑：
+    // backToAddBtn(▲)：添加游戏按钮完整可见 → 隐藏；否则显示
+    // scrollToLastGameBtn(▼)：添加游戏按钮完整可见 → 显示；否则隐藏
+    function toggleFloatBtnVis() {
+        const rect = targetAddBtn.getBoundingClientRect();
+        const winH = window.innerHeight;
+        // 判断条件：目标按钮完整可见（顶部≥0 并且底部≤窗口高度）
+        const targetFullyVisible = rect.top >= 0 && rect.bottom <= winH;
+
+        // ▲回到添加游戏按钮
+        if(backToAddBtn){
             if (targetFullyVisible) {
                 backToAddBtn.style.opacity = "0";
                 backToAddBtn.style.pointerEvents = "none";
@@ -1660,10 +1686,24 @@ export function initPage(Core = {}) {
                 backToAddBtn.style.pointerEvents = "auto";
             }
         }
-        window.addEventListener('scroll', toggleFloatBtnVis);
-        // 初始化执行一次
-        toggleFloatBtnVis();
+
+        // ▼滚动到最后一张游戏卡片，显示条件与▲完全相反
+        if(scrollToLastGameBtn){
+            if(targetFullyVisible){
+                scrollToLastGameBtn.style.opacity = "1";
+                scrollToLastGameBtn.style.pointerEvents = "auto";
+            }else{
+                scrollToLastGameBtn.style.opacity = "0";
+                scrollToLastGameBtn.style.pointerEvents = "none";
+            }
+        }
     }
+
+    window.addEventListener('scroll', toggleFloatBtnVis);
+    // 窗口大小变化也要更新显隐
+    window.addEventListener('resize', toggleFloatBtnVis);
+    // 初始化执行一次
+    toggleFloatBtnVis();
 
     // ==========【新增】自制textarea垂直拖拽逻辑（PC+移动端touch兼容） ==========
     function bindTextareaResizeHandler() {
