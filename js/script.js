@@ -1445,29 +1445,48 @@ export function initPage(Core = {}) {
                     totalImageCount += imgCnt;
                 });
 
-                // 3. 分平台设置耗时系数【修改：包含重试、画布串行延时】
-                let gameCardCost, imgCost, networkBufferSec;
+                // ==========【修改后：预估计算纳入图源降级、重试、圆角画布串行开销】==========
+                // 3. 分平台设置耗时系数，纳入：jsdelivr超时降级COS、单图最多2次重试、圆角画布串行延时、IOS离屏画布sleep开销
+                let gameCardCost, imgCost, networkBufferSec, roundCanvasOverheadSec;
                 if(IS_IOS_WEBKIT){
                     gameCardCost = 1.10;
                     imgCost = 0.85;
-                    networkBufferSec = 3.5;   // IOS：图片重试 + 圆角画布串行sleep，额外大缓冲
+                    // IOS：jsdelivr超时(600ms) + 重试2次 + COS降级请求 + 圆角画布每一张30ms串行sleep
+                    networkBufferSec = 4.8;
+                    roundCanvasOverheadSec = Math.min(8, totalImageCount * 0.030);
                 }else if(isAndroid){
                     gameCardCost = 0.55;
                     imgCost = 0.40;
-                    networkBufferSec = 2.0;
+                    // Android：重试+降级，圆角画布12ms间隔
+                    networkBufferSec = 2.6;
+                    roundCanvasOverheadSec = Math.min(4, totalImageCount * 0.012);
                 }else{
-                    // PC
+                    // PC：网络重试降级，圆角画布小延时
                     gameCardCost = 0.35;
                     imgCost = 0.25;
-                    networkBufferSec = 1.2;
+                    networkBufferSec = 1.8;
+                    roundCanvasOverheadSec = Math.min(2.5, totalImageCount * 0.012);
                 }
-                // 基础计算
+
+                // 基础渲染耗时
                 let baseEstimate = validGameCount * gameCardCost + totalImageCount * imgCost;
-                // 叠加网络抖动缓冲
-                let estimateSec = Math.ceil(baseEstimate + networkBufferSec);
-                // 上下限保护：最小1s，最大不超过35s，避免极端图片数量显示巨大数字
-                estimateSec = Math.max(1, Math.min(35, estimateSec));
-                // ==========【新增结束】==========
+
+                // 【重点】叠加图片重试降级开销：每张图片理论最大会经历 jsdelivr超时(600ms) + COS请求
+                // 不按全部图片都降级来算，取30%图片触发降级作为现实网络场景的经验值
+                const fallbackProbability = 0.30;
+                const fallbackPerImageSec = 0.6;
+                let fallbackEstimate = totalImageCount * fallbackProbability * fallbackPerImageSec;
+
+                // 总预估
+                let estimateSec = Math.ceil(baseEstimate + networkBufferSec + roundCanvasOverheadSec + fallbackEstimate);
+
+                // 上下限保护，调大IOS上限，PC保持原有上限
+                if(IS_IOS_WEBKIT){
+                    estimateSec = Math.max(2, Math.min(45, estimateSec));
+                }else{
+                    estimateSec = Math.max(1, Math.min(35, estimateSec));
+                }
+                // ==========【修改结束】==========
 
                 // =====================【补丁新增：渲染进度UI补丁 开始】 =====================
                 // 渲染进度监听，只在本次渲染生命周期有效，渲染结束移除监听
