@@ -33,6 +33,11 @@ export const R2_BASE_URL = "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev"
 // 【修复】移除 @main，避免 301 重定向
 export const JSD_BASE_URL = "https://cdn.jsdelivr.net/gh/OtomeFavList/OtomeFavList.github.io/img";
 
+// 腾讯云COS备用源，仅jsd超时/请求失败才使用
+export const TENCENT_COS_BASE_URL = "https://otome-images-1471675741.cos.ap-guangzhou.myqcloud.com";
+// jsd请求超时阈值(毫秒)，超时触发COS降级，4500ms兼顾跨境网络与用户体验
+export const JSD_FALLBACK_TIMEOUT = 4500;
+
 // ===================== 路径标准化工具（根治 URL 二次拼接） =====================
 /**
  * 清洗旧版带 @main 的 jsDelivr 地址（向后兼容）
@@ -575,32 +580,82 @@ export function getAvailableCharImages(char, globalHideSwitch, globalFDSwitch, l
 export const imgCacheMap = new Map();
 
 // ============================================================
-// ① preloadAndDecodeImage 修改后（强制顺序：先设置跨域，再赋值src）
+// ① preloadAndDecodeImage 修改后（带腾讯云COS降级）
 // ============================================================
 export function preloadAndDecodeImage(src) {
     if (!src) {
         return Promise.resolve(null);
     }
-
     if (imgCacheMap.has(src)) {
         return imgCacheMap.get(src);
     }
 
+    // 提取相对路径，用于构造腾讯云COS降级地址
+    const relPath = normalizeImageRelPath(src);
+    const cosFallbackUrl = relPath ? `${TENCENT_COS_BASE_URL}/${relPath}` : null;
+
     const p = new Promise((resolve, reject) => {
-        const tempImg = new Image();
-        // 【强制顺序】先设置crossOrigin、decoding，最后赋值src！
+        let tempImg = new Image();
+        let timeoutTimer = null;
+        let isFallbackTriggered = false;
+
+        const cleanTimer = () => {
+            if(timeoutTimer){
+                clearTimeout(timeoutTimer);
+                timeoutTimer = null;
+            }
+        };
+
+        // 主源加载成功
         tempImg.crossOrigin = "anonymous";
         tempImg.decoding = "async";
-
         tempImg.onload = () => {
+            cleanTimer();
             resolve(tempImg);
         };
-        tempImg.onerror = () => {
-            imgCacheMap.delete(src);
-            console.error(`[图片加载失败]`, src);
-            reject(new Error(`Image load failed: ${src}`));
+
+        // 主源失败：onerror 或者超时都会走到降级
+        const triggerFallback = (reason) => {
+            if(isFallbackTriggered) return;
+            isFallbackTriggered = true;
+            cleanTimer();
+            console.warn(`[图片主源jsDelivr失败，触发腾讯云COS降级] src:${src} reason:${reason}`);
+
+            // 销毁旧图片对象，终止原有网络请求
+            tempImg.onload = null;
+            tempImg.onerror = null;
+            tempImg.src = "";
+
+            if(!cosFallbackUrl){
+                imgCacheMap.delete(src);
+                reject(new Error(`Image main source failed, no fallback available: ${src}`));
+                return;
+            }
+
+            // 发起腾讯云COS备用源请求
+            const cosImg = new Image();
+            cosImg.crossOrigin = "anonymous";
+            cosImg.decoding = "async";
+            cosImg.onload = () => {
+                resolve(cosImg);
+            };
+            cosImg.onerror = () => {
+                imgCacheMap.delete(src);
+                console.error(`[图片主源+备用COS全部加载失败]`, src, cosFallbackUrl);
+                reject(new Error(`Image main & fallback failed: ${src}`));
+            };
+            cosImg.src = cosFallbackUrl;
         };
-        // 所有配置完成后再赋值src，杜绝浏览器提前发起请求
+
+        tempImg.onerror = () => {
+            triggerFallback("onerror");
+        };
+
+        // 设置jsd超时计时器
+        timeoutTimer = setTimeout(()=>{
+            triggerFallback("timeout");
+        }, JSD_FALLBACK_TIMEOUT);
+
         tempImg.src = src;
     });
 
