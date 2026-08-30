@@ -1949,8 +1949,32 @@ h2{
     }
 }
 
-/* ========== 右下角悬浮回到添加游戏按钮 ========== */
-.float-scroll-btn {
+/* ========== 右下角悬浮回到添加游戏按钮 ▲【back‑to‑add-btn】 ========== */
+.float-scroll-btn.back-to-add {
+    position: fixed;
+    right: 24px;
+    bottom: 72px; /* 向上挪，给下方▼按钮留出位置 */
+    width: 40px;
+    height: 40px;
+    border: 1px solid #b33a3a;
+    border-radius: 8px;
+    background: transparent;
+    color: #b33a3a;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 0 !important;
+    line-height: 1;
+    z-index: 998;
+    transition: 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* ==========右下角悬浮滚动到最后一张角色卡 ▼【scroll‑to‑last‑game-btn】放在▲上方 ========== */
+.float-scroll-btn.scroll-last-card {
     position: fixed;
     right: 24px;
     bottom: 24px;
@@ -1972,8 +1996,10 @@ h2{
     opacity: 1;
     pointer-events: auto;
 }
+
 /* 提高权重，覆盖全局button:hover，和展开按钮hover规则完全一致 */
-.float-scroll-btn:hover {
+.float-scroll-btn.back-to-add:hover,
+.float-scroll-btn.scroll-last-card:hover {
     background: #992e2e !important;
     color: #b33a3a !important;
 }
@@ -1983,7 +2009,14 @@ h2{
 }
 /* 移动端微调位置，避免被底部遮挡 */
 @media (max-width:768px) {
-    .float-scroll-btn {
+    .float-scroll-btn.back-to-add {
+        right: 16px;
+        bottom: 64px;
+        width: 36px;
+        height: 36px;
+        font-size: 18px;
+    }
+    .float-scroll-btn.scroll-last-card {
         right: 16px;
         bottom: 16px;
         width: 36px;
