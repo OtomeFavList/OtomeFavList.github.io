@@ -1679,43 +1679,8 @@ export function initPage(Core = {}) {
         });
     }
 
-    // 滚动监听修改逻辑：
-    // backToAddBtn(▲)：添加游戏按钮完整可见 → 隐藏；否则显示
-    // scrollToLastGameBtn(▼)：添加游戏按钮完整可见 → 显示；否则隐藏
-    function toggleFloatBtnVis() {
-        const rect = targetAddBtn.getBoundingClientRect();
-        const winH = window.innerHeight;
-        // 判断条件：目标按钮完整可见（顶部≥0 并且底部≤窗口高度）
-        const targetFullyVisible = rect.top >= 0 && rect.bottom <= winH;
-
-        // ▲回到添加游戏按钮
-        if(backToAddBtn){
-            if (targetFullyVisible) {
-                backToAddBtn.style.opacity = "0";
-                backToAddBtn.style.pointerEvents = "none";
-            } else {
-                backToAddBtn.style.opacity = "1";
-                backToAddBtn.style.pointerEvents = "auto";
-            }
-        }
-
-        // ▼滚动到最后一张游戏卡片，显示条件与▲完全相反
-        if(scrollToLastGameBtn){
-            if(targetFullyVisible){
-                scrollToLastGameBtn.style.opacity = "1";
-                scrollToLastGameBtn.style.pointerEvents = "auto";
-            }else{
-                scrollToLastGameBtn.style.opacity = "0";
-                scrollToLastGameBtn.style.pointerEvents = "none";
-            }
-        }
-    }
-
-    window.addEventListener('scroll', toggleFloatBtnVis);
-    // 窗口大小变化也要更新显隐
-    window.addEventListener('resize', toggleFloatBtnVis);
-    // 初始化执行一次
-    toggleFloatBtnVis();
+    /* 【补丁修改】移除滚动控制按钮显隐逻辑，两个按钮永久可见；保留原有点击逻辑不变 */
+    // 按钮点击逻辑完全保留不变，只删除显示隐藏相关代码
 
     // ==========【新增】自制textarea垂直拖拽逻辑（PC+移动端touch兼容） ==========
     function bindTextareaResizeHandler() {
