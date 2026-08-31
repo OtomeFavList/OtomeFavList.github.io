@@ -14,10 +14,14 @@
     <!-- 使用绝对路径 /data/games.js 确保从网站根目录加载 -->
     <script type="module" src="/data/games.js">
     </script>
-    <!-- ==========【新增样式】弹窗打开锁定页面滚动 ========== -->
+    <!-- ==========【新增样式】弹窗打开锁定页面滚动 + .wrap gap ========== -->
     <style>
         body.modal-lock {
             overflow: hidden;
+        }
+        /* 恢复 .wrap 间距 */
+        .wrap {
+            gap: 30px;
         }
     </style>
 </head>
@@ -747,7 +751,7 @@ z-index: -999;
 
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "b88bc20591cc4e0b8702b7339c4d0e6d"}'></script><!-- End Cloudflare Web Analytics -->
 
-<!-- ========== 新增模式切换JS ========== -->
+<!-- ========== 【新增】模式切换逻辑 ========== -->
 <script>
 (function(){
     const btns = document.querySelectorAll('.mode-switch-wrap .mode-btn');
