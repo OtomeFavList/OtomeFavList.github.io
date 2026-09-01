@@ -90,6 +90,138 @@ const gameData = {
                 { srcList: ["char/003/Rindou.jpg",
                             "char/003/Rindou2.jpg"], type: "base" }
             ]
+        },
+        // 阿倍狩也
+        {
+            id: "g003_s01",
+            name: "阿倍狩也",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // 阿斯莫德
+        {
+            id: "g003_s02",
+            name: "阿斯莫德",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // 索利图斯
+        {
+            id: "g003_s03",
+            name: "索利图斯",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // 德罗米
+        {
+            id: "g003_s04",
+            name: "德罗米",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // 艾皮洛基
+        {
+            id: "g003_s05",
+            name: "艾皮洛基",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // 克洛洛
+        {
+            id: "g003_s06",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // 御门彰
+        {
+            id: "g003_s07",
+            name: "御门彰",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // 诺亚
+        {
+            id: "g003_s08",
+            name: "诺亚",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // 淡木草庵
+        {
+            id: "g003_s09",
+            name: "淡木草庵",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // 缇塔妮亚
+        {
+            id: "g003_s10",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // 温尼亚
+        {
+            id: "g003_s11",
+            name: "温尼亚",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
         }
     ]
 };
