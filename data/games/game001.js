@@ -106,16 +106,257 @@ const gameData = {
                             "char/001/Henri3.jpg"], type: "base" }
             ]
         },
-        // 利奥·卡凡尼斯
+        // 塞巴斯蒂安·加列
         {
             id: "g001_s01",
+            name: "塞巴斯蒂安·加列",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/001/.jpg"], type: "base" }
+            ]
+        }
+        ,
+        // 艾琳娜·克罗切
+        {
+            id: "g001_s02",
+            name: "艾琳娜·克罗切",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/001/.jpg"], type: "base" }
+            ]
+        },
+        // 埃米利奥
+        {
+            id: "g001_s03",
+            name: "埃米利奥",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/001/.jpg"], type: "base" }
+            ]
+        },
+        // 尤金
+        {
+            id: "g001_s04",
+            name: "尤金",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/001/.jpg"], type: "base" }
+            ]
+        },
+        // 飞
+        {
+            id: "g001_s05",
+            name: "飞",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/001/.jpg"], type: "base" }
+            ]
+        },
+        // 茱莉亚·切斯缇
+        {
+            id: "g001_s06",
+            name: "茱莉亚·切斯缇",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/001/.jpg"], type: "base" }
+            ]
+        },
+        // 杰克·艾弗瑞
+        {
+            id: "g001_s07",
+            name: "杰克·艾弗瑞",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/001/.jpg"], type: "base" }
+            ]
+        },
+        // 约翰·史坦纳
+        {
+            id: "g001_s08",
+            name: "约翰·史坦纳",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/001/.jpg"], type: "base" }
+            ]
+        },
+        // 约瑟夫·冯·罗斯伯格
+        {
+            id: "g001_s09",
+            name: "约瑟夫·冯·罗斯伯格",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/001/.jpg"], type: "base" }
+            ]
+        },
+        // 兰
+        {
+            id: "g001_s10",
+            name: "兰",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/001/.jpg"], type: "base" }
+            ]
+        },
+        // 李
+        {
+            id: "g001_s11",
+            name: "李",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/001/.jpg"], type: "base" }
+            ]
+        },
+        // 利奥·卡凡尼斯
+        {
+            id: "g001_s12",
             name: "利奥·卡凡尼斯",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             images: [
-                { srcList: ["char/001/Leo.jpg"], type: "base" }
+                { srcList: ["char/001/.jpg"], type: "base" }
+            ]
+        },
+        // 卢卡
+        {
+            id: "g001_s13",
+            name: "卢卡",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/001/.jpg"], type: "base" }
+            ]
+        },
+        // 马可·卡尔德罗尼
+        {
+            id: "g001_s14",
+            name: "马可·卡尔德罗尼",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/001/.jpg"], type: "base" }
+            ]
+        },
+        // 奥利弗·哈斯
+        {
+            id: "g001_s15",
+            name: "奥利弗·哈斯",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/001/.jpg"], type: "base" }
+            ]
+        },
+        // 劳尔·基兰达奥
+        {
+            id: "g001_s16",
+            name: "劳尔·基兰达奥",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/001/.jpg"], type: "base" }
+            ]
+        },
+        // 罗伯特·德·费奥
+        {
+            id: "g001_s17",
+            name: "罗伯特·德·费奥",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/001/.jpg"], type: "base" }
+            ]
+        },
+        // 睿
+        {
+            id: "g001_s18",
+            name: "睿",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/001/.jpg"], type: "base" }
+            ]
+        },
+        // 苏菲亚
+        {
+            id: "g001_s19",
+            name: "苏菲亚",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/001/.jpg"], type: "base" }
+            ]
+        },
+        // 堤欧
+        {
+            id: "g001_s20",
+            name: "堤欧",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/001/.jpg"], type: "base" }
+            ]
+        },
+        // 袁
+        {
+            id: "g001_s21",
+            name: "袁",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/001/.jpg"], type: "base" }
             ]
         }
     ]
