@@ -90,10 +90,22 @@ const gameData = {
                             "char/002/Shuu2.jpg"], type: "base" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 常磐悦也
         {
-            id: "g1_s01",
-            name: "配角",
+            id: "g002_h01",
+            name: "常磐悦也",
+            gender: "male",
+            isHidden: true,
+            isFD: false,
+            isSub: false,
+            images: [
+                { srcList: ["char/g001_h01_1.jpg"], type: "base" }
+            ]
+        },
+        // 玻闰
+        {
+            id: "g002_s01",
+            name: "玻闰",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -102,10 +114,10 @@ const gameData = {
                 { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 茨木
         {
-            id: "g1_s02",
-            name: "配角",
+            id: "g002_s02",
+            name: "茨木",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -114,10 +126,106 @@ const gameData = {
                 { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 金华
         {
-            id: "g1_s03",
-            name: "配角",
+            id: "g002_s03",
+            name: "金华",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // 皓鵺
+        {
+            id: "g002_s04",
+            name: "皓鵺",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // 狐狐
+        {
+            id: "g002_s05",
+            name: "狐狐",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // 大蛇
+        {
+            id: "g002_s06",
+            name: "大蛇",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // 酒呑
+        {
+            id: "g002_s07",
+            name: "酒呑",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // 八云匡
+        {
+            id: "g002_s08",
+            name: "八云匡",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // 高尾
+        {
+            id: "g002_s09",
+            name: "高尾",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // 玉藻
+        {
+            id: "g002_s10",
+            name: "玉藻",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // 濑见季尭
+        {
+            id: "g002_s11",
+            name: "濑见季尭",
             gender: "male",
             isHidden: false,
             isFD: false,
