@@ -141,6 +141,42 @@ const gameData = {
             images: [
                 { srcList: ["char/004/Sachsen.jpg"], type: "base" }
             ]
+        },
+        // 菲茨杰拉德·埃文斯
+        {
+            id: "g004_s01",
+            name: "菲茨杰拉德·埃文斯",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // 拜斯·加维瑟
+        {
+            id: "g004_s02",
+            name: "拜斯·加维瑟",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // 科尔达·哈斯
+        {
+            id: "g004_s03",
+            name: "科尔达·哈斯",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
         }
     ]
 };
