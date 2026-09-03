@@ -99,7 +99,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/g001_h01_1.jpg"], type: "base" }
+                { srcList: ["char/002/Tokiwa.jpg"], type: "base" }
             ]
         },
         // 玻闰
@@ -111,7 +111,7 @@ const gameData = {
             isFD: false,
             isSub: true,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/002/Hajun.jpg"], type: "base" }
             ]
         },
         // 茨木
@@ -123,7 +123,7 @@ const gameData = {
             isFD: false,
             isSub: true,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/002/Ibaragi.jpg"], type: "base" }
             ]
         },
         // 金华
@@ -135,7 +135,7 @@ const gameData = {
             isFD: false,
             isSub: true,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/002/Kinka.jpg"], type: "base" }
             ]
         },
         // 皓鵺
@@ -147,7 +147,7 @@ const gameData = {
             isFD: false,
             isSub: true,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/002/Kohya.jpg"], type: "base" }
             ]
         },
         // 狐狐
@@ -159,7 +159,7 @@ const gameData = {
             isFD: false,
             isSub: true,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/002/Kokko.jpg"], type: "base" }
             ]
         },
         // 大蛇
@@ -171,7 +171,7 @@ const gameData = {
             isFD: false,
             isSub: true,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/002/Orochi.jpg"], type: "base" }
             ]
         },
         // 酒呑
@@ -183,7 +183,7 @@ const gameData = {
             isFD: false,
             isSub: true,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/002/Shuten.jpg"], type: "base" }
             ]
         },
         // 八云匡
@@ -195,7 +195,7 @@ const gameData = {
             isFD: false,
             isSub: true,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/002/Tadashi.jpg"], type: "base" }
             ]
         },
         // 高尾
@@ -207,7 +207,7 @@ const gameData = {
             isFD: false,
             isSub: true,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/002/Takao.jpg"], type: "base" }
             ]
         },
         // 玉藻
@@ -219,7 +219,7 @@ const gameData = {
             isFD: false,
             isSub: true,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/002/Tamamo.jpg"], type: "base" }
             ]
         },
         // 濑见季尭
@@ -231,7 +231,7 @@ const gameData = {
             isFD: false,
             isSub: true,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/002/Tokitaka.jpg"], type: "base" }
             ]
         }
     ]
