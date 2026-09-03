@@ -100,7 +100,7 @@ const gameData = {
             isFD: false,
             isSub: true,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/003/Abe.jpg"], type: "base" }
             ]
         },
         // 阿斯莫德
@@ -112,7 +112,7 @@ const gameData = {
             isFD: false,
             isSub: true,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/003/Asmodeus.jpg"], type: "base" }
             ]
         },
         // 索利图斯
@@ -124,7 +124,7 @@ const gameData = {
             isFD: false,
             isSub: true,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/003/Assistant.jpg"], type: "base" }
             ]
         },
         // 德罗米
@@ -136,7 +136,7 @@ const gameData = {
             isFD: false,
             isSub: true,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/003/Dromi.jpg"], type: "base" }
             ]
         },
         // 艾皮洛基
@@ -148,7 +148,7 @@ const gameData = {
             isFD: false,
             isSub: true,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/003/Epilogi.jpg"], type: "base" }
             ]
         },
         // 克洛洛
@@ -160,7 +160,7 @@ const gameData = {
             isFD: false,
             isSub: true,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/003/Kororo.jpg"], type: "base" }
             ]
         },
         // 御门彰
@@ -172,7 +172,7 @@ const gameData = {
             isFD: false,
             isSub: true,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/003/Mikado.jpg"], type: "base" }
             ]
         },
         // 诺亚
@@ -184,7 +184,7 @@ const gameData = {
             isFD: false,
             isSub: true,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/003/Noah.jpg"], type: "base" }
             ]
         },
         // 淡木草庵
@@ -196,7 +196,7 @@ const gameData = {
             isFD: false,
             isSub: true,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/003/Souan.jpg"], type: "base" }
             ]
         },
         // 缇塔妮亚
@@ -208,7 +208,7 @@ const gameData = {
             isFD: false,
             isSub: true,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/003/Titania.jpg"], type: "base" }
             ]
         },
         // 温尼亚
@@ -220,7 +220,7 @@ const gameData = {
             isFD: false,
             isSub: true,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/003/Venia.jpg"], type: "base" }
             ]
         }
     ]
