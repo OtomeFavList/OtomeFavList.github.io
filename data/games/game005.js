@@ -134,6 +134,42 @@ const gameData = {
                 { srcList: ["char/005/Yue.jpg",
                             "char/005/Yue2.png"], type: "base" }
             ]
+        },
+        // 赛勒斯
+        {
+            id: "g005_s01",
+            name: "赛勒斯",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/005/Cyrus.jpg"], type: "base" }
+            ]
+        },
+        // 玲娜
+        {
+            id: "g005_s02",
+            name: "玲娜",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/005/Reina.jpg"], type: "base" }
+            ]
+        },
+        // 平良
+        {
+            id: "g005_s03",
+            name: "平良",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/005/Taira.jpg"], type: "base" }
+            ]
         }
     ]
 };
