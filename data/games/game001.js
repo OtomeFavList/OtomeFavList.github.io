@@ -115,7 +115,7 @@ const gameData = {
             isFD: false,
             isSub: true,
             images: [
-                { srcList: ["char/001/.jpg"], type: "base" }
+                { srcList: ["char/001/Anonymous.jpg"], type: "base" }
             ]
         }
         ,
@@ -128,7 +128,7 @@ const gameData = {
             isFD: false,
             isSub: true,
             images: [
-                { srcList: ["char/001/.jpg"], type: "base" }
+                { srcList: ["char/001/Elena.jpg"], type: "base" }
             ]
         },
         // 埃米利奥
@@ -140,7 +140,7 @@ const gameData = {
             isFD: false,
             isSub: true,
             images: [
-                { srcList: ["char/001/.jpg"], type: "base" }
+                { srcList: ["char/001/Emilio.jpg"], type: "base" }
             ]
         },
         // 尤金
@@ -152,7 +152,7 @@ const gameData = {
             isFD: false,
             isSub: true,
             images: [
-                { srcList: ["char/001/.jpg"], type: "base" }
+                { srcList: ["char/001/Eugene.jpg"], type: "base" }
             ]
         },
         // 飞
@@ -164,7 +164,7 @@ const gameData = {
             isFD: false,
             isSub: true,
             images: [
-                { srcList: ["char/001/.jpg"], type: "base" }
+                { srcList: ["char/001/Fei.jpg"], type: "base" }
             ]
         },
         // 茱莉亚·切斯缇
@@ -176,7 +176,7 @@ const gameData = {
             isFD: false,
             isSub: true,
             images: [
-                { srcList: ["char/001/.jpg"], type: "base" }
+                { srcList: ["char/001/Giulia.jpg"], type: "base" }
             ]
         },
         // 杰克·艾弗瑞
@@ -188,7 +188,7 @@ const gameData = {
             isFD: false,
             isSub: true,
             images: [
-                { srcList: ["char/001/.jpg"], type: "base" }
+                { srcList: ["char/001/Jack.jpg"], type: "base" }
             ]
         },
         // 约翰·史坦纳
@@ -200,7 +200,7 @@ const gameData = {
             isFD: false,
             isSub: true,
             images: [
-                { srcList: ["char/001/.jpg"], type: "base" }
+                { srcList: ["char/001/Johann.jpg"], type: "base" }
             ]
         },
         // 约瑟夫·冯·罗斯伯格
@@ -212,7 +212,7 @@ const gameData = {
             isFD: false,
             isSub: true,
             images: [
-                { srcList: ["char/001/.jpg"], type: "base" }
+                { srcList: ["char/001/Josef.jpg"], type: "base" }
             ]
         },
         // 兰
@@ -224,7 +224,7 @@ const gameData = {
             isFD: false,
             isSub: true,
             images: [
-                { srcList: ["char/001/.jpg"], type: "base" }
+                { srcList: ["char/001/Lan.jpg"], type: "base" }
             ]
         },
         // 李
@@ -236,7 +236,7 @@ const gameData = {
             isFD: false,
             isSub: true,
             images: [
-                { srcList: ["char/001/.jpg"], type: "base" }
+                { srcList: ["char/001/Lee.jpg"], type: "base" }
             ]
         },
         // 利奥·卡凡尼斯
@@ -248,7 +248,7 @@ const gameData = {
             isFD: false,
             isSub: true,
             images: [
-                { srcList: ["char/001/.jpg"], type: "base" }
+                { srcList: ["char/001/Leo.jpg"], type: "base" }
             ]
         },
         // 卢卡
@@ -260,7 +260,7 @@ const gameData = {
             isFD: false,
             isSub: true,
             images: [
-                { srcList: ["char/001/.jpg"], type: "base" }
+                { srcList: ["char/001/Luca.jpg"], type: "base" }
             ]
         },
         // 马可·卡尔德罗尼
@@ -272,7 +272,7 @@ const gameData = {
             isFD: false,
             isSub: true,
             images: [
-                { srcList: ["char/001/.jpg"], type: "base" }
+                { srcList: ["char/001/Marco.jpg"], type: "base" }
             ]
         },
         // 奥利弗·哈斯
@@ -284,7 +284,7 @@ const gameData = {
             isFD: false,
             isSub: true,
             images: [
-                { srcList: ["char/001/.jpg"], type: "base" }
+                { srcList: ["char/001/Oliver.jpg"], type: "base" }
             ]
         },
         // 劳尔·基兰达奥
@@ -296,7 +296,7 @@ const gameData = {
             isFD: false,
             isSub: true,
             images: [
-                { srcList: ["char/001/.jpg"], type: "base" }
+                { srcList: ["char/001/Raul.jpg"], type: "base" }
             ]
         },
         // 罗伯特·德·费奥
@@ -308,7 +308,7 @@ const gameData = {
             isFD: false,
             isSub: true,
             images: [
-                { srcList: ["char/001/.jpg"], type: "base" }
+                { srcList: ["char/001/Roberto.jpg"], type: "base" }
             ]
         },
         // 睿
@@ -320,7 +320,7 @@ const gameData = {
             isFD: false,
             isSub: true,
             images: [
-                { srcList: ["char/001/.jpg"], type: "base" }
+                { srcList: ["char/001/Rui.jpg"], type: "base" }
             ]
         },
         // 苏菲亚
@@ -332,7 +332,7 @@ const gameData = {
             isFD: false,
             isSub: true,
             images: [
-                { srcList: ["char/001/.jpg"], type: "base" }
+                { srcList: ["char/001/Sofia.jpg"], type: "base" }
             ]
         },
         // 堤欧
@@ -344,7 +344,7 @@ const gameData = {
             isFD: false,
             isSub: true,
             images: [
-                { srcList: ["char/001/.jpg"], type: "base" }
+                { srcList: ["char/001/Teo.jpg"], type: "base" }
             ]
         },
         // 袁
@@ -356,7 +356,7 @@ const gameData = {
             isFD: false,
             isSub: true,
             images: [
-                { srcList: ["char/001/.jpg"], type: "base" }
+                { srcList: ["char/001/Yuan.jpg"], type: "base" }
             ]
         }
     ]
