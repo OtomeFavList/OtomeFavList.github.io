@@ -99,6 +99,174 @@ const gameData = {
                 { srcList: ["char/006/Yosuga.jpg",
                             "char/006/Yosuga2.jpg"], type: "base" }
             ]
+        },
+        // 明日羽
+        {
+            id: "g006_s01",
+            name: "明日羽",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/006/Asuha.jpg"], type: "base" }
+            ]
+        },
+        // 卡梅莉亚
+        {
+            id: "g006_s02",
+            name: "卡梅莉亚",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/006/Camelia.jpg"], type: "base" }
+            ]
+        },
+        // 大福
+        {
+            id: "g006_s03",
+            name: "大福",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/006/Daifuku.jpg"], type: "base" }
+            ]
+        },
+        // 道摩大师
+        {
+            id: "g006_s04",
+            name: "道摩大师",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/006/Douma.jpg"], type: "base" }
+            ]
+        },
+        // 海浬
+        {
+            id: "g006_s05",
+            name: "海浬",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/006/Hairi.jpg"], type: "base" }
+            ]
+        },
+        // 慈眼大师
+        {
+            id: "g006_s06",
+            name: "慈眼大师",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/006/Jigen.jpg"], type: "base" }
+            ]
+        },
+        // 茱莉叶
+        {
+            id: "g006_s07",
+            name: "茱莉叶",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/006/Juliet.jpg"], type: "base" }
+            ]
+        },
+        // 刈稲
+        {
+            id: "g006_s08",
+            name: "刈稲",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/006/Kaina.jpg"], type: "base" }
+            ]
+        },
+        // 柑南
+        {
+            id: "g006_s09",
+            name: "柑南",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/006/Kanan.jpg"], type: "base" }
+            ]
+        },
+        // 薙草
+        {
+            id: "g006_s10",
+            name: "薙草",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/006/Nagusa.jpg"], type: "base" }
+            ]
+        },
+        // 帕里斯
+        {
+            id: "g006_s11",
+            name: "帕里斯",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/006/Paris.jpg"], type: "base" }
+            ]
+        },
+        // 叉梗
+        {
+            id: "g006_s12",
+            name: "叉梗",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/006/Sakyou.jpg"], type: "base" }
+            ]
+        },
+        // 珠蓝大姐
+        {
+            id: "g006_s13",
+            name: "珠蓝大姐",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/006/Shura.jpg"], type: "base" }
+            ]
+        },
+        // 月黄泉
+        {
+            id: "g006_s14",
+            name: "月黄泉",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/006/Tsukuyomi.jpg"], type: "base" }
+            ]
         }
     ]
 };
