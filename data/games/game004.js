@@ -151,7 +151,7 @@ const gameData = {
             isFD: false,
             isSub: true,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/004/Evans.jpg"], type: "base" }
             ]
         },
         // 拜斯·加维瑟
@@ -163,7 +163,7 @@ const gameData = {
             isFD: false,
             isSub: true,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/004/Gawiser.jpg"], type: "base" }
             ]
         },
         // 科尔达·哈斯
@@ -175,7 +175,7 @@ const gameData = {
             isFD: false,
             isSub: true,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/004/Hass.jpg"], type: "base" }
             ]
         }
     ]
