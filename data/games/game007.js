@@ -28,7 +28,8 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/007/Ichika.jpg",
-                            "char/007/Ichika2.jpg"], type: "base" }
+                            "char/007/Ichika2.jpg",
+                            "char/007/Ichika3.jpg"], type: "base" }
             ]
         },
         // 柳爱时
@@ -118,6 +119,246 @@ const gameData = {
             isFD: true,
             images: [
                 { srcList: ["char/007/Yoshinari.jpg"], type: "base" }
+            ]
+        },
+        // HANA
+        {
+            id: "g007_s01",
+            name: "HANA",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/007/Hana.jpg"], type: "base" }
+            ]
+        },
+        // 一色康弘
+        {
+            id: "g007_s02",
+            name: "一色康弘",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/007/Isshiki.jpg"], type: "base" }
+            ]
+        },
+        // 星野香月
+        {
+            id: "g007_s03",
+            name: "星野香月",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/007/Kazuki.jpg"], type: "base" }
+            ]
+        },
+        // 御国礼
+        {
+            id: "g007_s04",
+            name: "御国礼",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/007/Mikuni.jpg"], type: "base" }
+            ]
+        },
+        // 望田政信
+        {
+            id: "g007_s05",
+            name: "望田政信",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/007/Mochida.jpg"], type: "base" }
+            ]
+        },
+        // 森丘创
+        {
+            id: "g007_s06",
+            name: "森丘创",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/007/Morioka.jpg"], type: "base" }
+            ]
+        },
+        // 向井绘里子
+        {
+            id: "g007_s07",
+            name: "向井绘里子",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/007/Mukai.jpg"], type: "base" }
+            ]
+        },
+        // 绪方智树
+        {
+            id: "g007_s08",
+            name: "绪方智树",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/007/Ogata.jpg"], type: "base" }
+            ]
+        },
+        // 樱川寿
+        {
+            id: "g007_s09",
+            name: "樱川寿",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/007/Sakuragawa.jpg"], type: "base" }
+            ]
+        },
+        // 山条圭介
+        {
+            id: "g007_s10",
+            name: "山条圭介",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/007/Sanjou.jpg"], type: "base" }
+            ]
+        },
+        // 佐竹建造
+        {
+            id: "g007_s11",
+            name: "佐竹建造",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/007/Satake.jpg"], type: "base" }
+            ]
+        },
+        // 濑良秋人
+        {
+            id: "g007_s12",
+            name: "濑良秋人",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/007/Sera.jpg"], type: "base" }
+            ]
+        },
+        // 宇野诗音
+        {
+            id: "g007_s13",
+            name: "宇野诗音",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/007/Shion.jpg"], type: "base" }
+            ]
+        },
+        // 染谷友香
+        {
+            id: "g007_s14",
+            name: "染谷友香",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/007/Someya.jpg"], type: "base" }
+            ]
+        },
+        // 相田学
+        {
+            id: "g007_s15",
+            name: "相田学",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/007/Souda.jpg"], type: "base" }
+            ]
+        },
+        // 菅原理香
+        {
+            id: "g007_s16",
+            name: "菅原理香",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/007/Sugawara.jpg"], type: "base" }
+            ]
+        },
+        // 宇野铃音
+        {
+            id: "g007_s17",
+            name: "宇野铃音",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/007/Suzune.jpg"], type: "base" }
+            ]
+        },
+        // 橘千圣
+        {
+            id: "g007_s18",
+            name: "橘千圣",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/007/Tachibana.jpg"], type: "base" }
+            ]
+        },
+        // 鹰枝勇作
+        {
+            id: "g007_s19",
+            name: "鹰枝勇作",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/007/Takaeda.jpg"], type: "base" }
+            ]
+        },
+        // 柳优时
+        {
+            id: "g007_s20",
+            name: "柳优时",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/007/Yuuji.jpg"], type: "base" }
             ]
         }
     ]
