@@ -109,7 +109,7 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["char/009/Eli.png"], type: "base" }
+                { srcList: ["char/009/Eli.jpg"], type: "base" }
             ]
         },
         // 梅列尼斯·莱文
