@@ -91,6 +91,7 @@ const gameData = {
         {
             id: "g007_h01",
             name: "冴木弓弦",
+            hiddenName: "Zero",
             gender: "male",
             isHidden: true,
             isFD: true,
