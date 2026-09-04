@@ -99,8 +99,8 @@ const gameData = {
             images: [
                 { srcList: ["char/009/Peter.jpg",
                             "char/009/Peter2.jpg",
-                            "char/009/Peter3.jpg",
                             "char/009/Peter4.jpg",
+                            "char/009/Peter3.jpg",
                             "char/009/Peter5.jpg"], type: "base" }
             ]
         },
