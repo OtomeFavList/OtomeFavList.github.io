@@ -366,7 +366,7 @@ const gameData = {
             images: [
                 { srcList: ["char/001/Yuan.jpg"], type: "base" }
             ]
-        },
+        }
     ]
 };
 
