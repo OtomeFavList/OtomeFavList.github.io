@@ -97,7 +97,7 @@ const gameData = {
             gender: "male",
             isHidden: true,
             isFD: false,
-            isSub: false,
+            isSub: true,
             images: [
                 { srcList: ["char/002/Tokiwa.jpg"], type: "base" }
             ]
