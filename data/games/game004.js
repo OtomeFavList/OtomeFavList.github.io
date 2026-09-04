@@ -138,6 +138,7 @@ const gameData = {
             gender: "male",
             isHidden: false,
             isFD: true,
+            isSub: true,
             images: [
                 { srcList: ["char/004/Sachsen.jpg"], type: "base" }
             ]
