@@ -101,12 +101,11 @@ const gameData = {
             gender: "male",
             isHidden: true,
             isFD: true,
+            isSub: true,
             images: [
                 { srcList: ["char/001/Henri.jpg"], type: "base" }
                 { srcList: ["char/001/Henri2.jpg",
-                            "char/001/Henri3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["char/001/Henri2.jpg",
-                            "char/001/Henri3.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                            "char/001/Henri3.jpg"], type: "hidden-fd" }
             ]
         },
         // 艾琳娜·克罗切
