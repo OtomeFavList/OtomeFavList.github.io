@@ -102,6 +102,7 @@ const gameData = {
             isHidden: true,
             isFD: true,
             isSub: true,
+            isFdSub: false,
             images: [
                 { srcList: ["char/001/Henri.jpg"], type: "base" }
                 { srcList: ["char/001/Henri2.jpg",
