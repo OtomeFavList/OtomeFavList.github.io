@@ -38,6 +38,7 @@ const gameData = {
                             "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
                 { srcList: ["char/001/女主A3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
                 { srcList: ["char/001/女主A4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["char/001/女主A5.jpg"], type: "hidden-fd" }   // 开启隐藏开关或FD开关展示的图片
             ]
         },
         // 普通可攻略男主 male
@@ -50,10 +51,11 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/001/男主1.jpg",
-                            "char/001/男主12.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["char/001/男主13.jpg"], type: "hidden" },
-                { srcList: ["char/001/男主14.jpg"], type: "fd" }
+                { srcList: ["char/001/男主A.jpg",
+                            "char/001/男主A2.jpg"], type: "base" },
+                { srcList: ["char/001/男主A3.jpg"], type: "hidden" },
+                { srcList: ["char/001/男主A4.jpg"], type: "fd" }
+                { srcList: ["char/001/男主A5.jpg"], type: "hidden-fd" }
             ]
         },
         // 普通可攻略男主 male
@@ -66,10 +68,11 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
+                { srcList: ["char/001/男主B.jpg",
+                            "char/001/男主B2.jpg"], type: "base" },
+                { srcList: ["char/001/男主B3.jpg"], type: "hidden" },
+                { srcList: ["char/001/男主B4.jpg"], type: "fd" }
+                { srcList: ["char/001/男主B5.jpg"], type: "hidden-fd" }
             ]
         },
         // 普通可攻略男主 male
@@ -82,10 +85,11 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
+                { srcList: ["char/001/男主C.jpg",
+                            "char/001/男主C2.jpg"], type: "base" },
+                { srcList: ["char/001/男主C3.jpg"], type: "hidden" },
+                { srcList: ["char/001/男主C4.jpg"], type: "fd" }
+                { srcList: ["char/001/男主C5.jpg"], type: "hidden-fd" }
             ]
         },
         // 普通可攻略男主 male
@@ -98,10 +102,11 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
+                { srcList: ["char/001/男主D.jpg",
+                            "char/001/男主D2.jpg"], type: "base" },
+                { srcList: ["char/001/男主D3.jpg"], type: "hidden" },
+                { srcList: ["char/001/男主D4.jpg"], type: "fd" }
+                { srcList: ["char/001/男主D5.jpg"], type: "hidden-fd" }
             ]
         },
         // 普通可攻略男主 male
@@ -114,10 +119,11 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/g0_m01_1.jpg",
-                            "char/g001_m0_2.jpg"], type: "base" },
-                { srcList: ["char/g0_m01_3.jpg"], type: "hidden" },
-                { srcList: ["char/g0_m01_4.jpg"], type: "fd" }
+                { srcList: ["char/001/男主F.jpg",
+                            "char/001/男主F2.jpg"], type: "base" },
+                { srcList: ["char/001/男主F3.jpg"], type: "hidden" },
+                { srcList: ["char/001/男主F4.jpg"], type: "fd" }
+                { srcList: ["char/001/男主F5.jpg"], type: "hidden-fd" }
             ]
         },
         // 隐藏角色（isHidden=true → 开关开启才显示整个角色卡片）
@@ -156,7 +162,7 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
             ]
         }
         ,
@@ -170,7 +176,7 @@ const gameData = {
             isSub: false,
             isFdSub: true,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/g001_fS01_1.jpg"], type: "base" }
             ]
         }
     ]
