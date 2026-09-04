@@ -106,22 +106,9 @@ const gameData = {
                             "char/001/Henri3.jpg"], type: "base" }
             ]
         },
-        // 塞巴斯蒂安·加列
-        {
-            id: "g001_s01",
-            name: "塞巴斯蒂安·加列",
-            gender: "male",
-            isHidden: false,
-            isFD: false,
-            isSub: true,
-            images: [
-                { srcList: ["char/001/Anonymous.jpg"], type: "base" }
-            ]
-        }
-        ,
         // 艾琳娜·克罗切
         {
-            id: "g001_s02",
+            id: "g001_s01",
             name: "艾琳娜·克罗切",
             gender: "male",
             isHidden: false,
@@ -133,7 +120,7 @@ const gameData = {
         },
         // 埃米利奥
         {
-            id: "g001_s03",
+            id: "g001_s02",
             name: "埃米利奥",
             gender: "male",
             isHidden: false,
@@ -143,21 +130,9 @@ const gameData = {
                 { srcList: ["char/001/Emilio.jpg"], type: "base" }
             ]
         },
-        // 尤金
-        {
-            id: "g001_s04",
-            name: "尤金",
-            gender: "male",
-            isHidden: false,
-            isFD: false,
-            isSub: true,
-            images: [
-                { srcList: ["char/001/Eugene.jpg"], type: "base" }
-            ]
-        },
         // 飞
         {
-            id: "g001_s05",
+            id: "g001_s03",
             name: "飞",
             gender: "male",
             isHidden: false,
@@ -169,7 +144,7 @@ const gameData = {
         },
         // 茱莉亚·切斯缇
         {
-            id: "g001_s06",
+            id: "g001_s04",
             name: "茱莉亚·切斯缇",
             gender: "male",
             isHidden: false,
@@ -179,33 +154,9 @@ const gameData = {
                 { srcList: ["char/001/Giulia.jpg"], type: "base" }
             ]
         },
-        // 杰克·艾弗瑞
-        {
-            id: "g001_s07",
-            name: "杰克·艾弗瑞",
-            gender: "male",
-            isHidden: false,
-            isFD: false,
-            isSub: true,
-            images: [
-                { srcList: ["char/001/Jack.jpg"], type: "base" }
-            ]
-        },
-        // 约翰·史坦纳
-        {
-            id: "g001_s08",
-            name: "约翰·史坦纳",
-            gender: "male",
-            isHidden: false,
-            isFD: false,
-            isSub: true,
-            images: [
-                { srcList: ["char/001/Johann.jpg"], type: "base" }
-            ]
-        },
         // 约瑟夫·冯·罗斯伯格
         {
-            id: "g001_s09",
+            id: "g001_s05",
             name: "约瑟夫·冯·罗斯伯格",
             gender: "male",
             isHidden: false,
@@ -217,7 +168,7 @@ const gameData = {
         },
         // 兰
         {
-            id: "g001_s10",
+            id: "g001_s06",
             name: "兰",
             gender: "male",
             isHidden: false,
@@ -229,7 +180,7 @@ const gameData = {
         },
         // 李
         {
-            id: "g001_s11",
+            id: "g001_s07",
             name: "李",
             gender: "male",
             isHidden: false,
@@ -241,7 +192,7 @@ const gameData = {
         },
         // 利奥·卡凡尼斯
         {
-            id: "g001_s12",
+            id: "g001_s08",
             name: "利奥·卡凡尼斯",
             gender: "male",
             isHidden: false,
@@ -253,7 +204,7 @@ const gameData = {
         },
         // 卢卡
         {
-            id: "g001_s13",
+            id: "g001_s09",
             name: "卢卡",
             gender: "male",
             isHidden: false,
@@ -265,7 +216,7 @@ const gameData = {
         },
         // 马可·卡尔德罗尼
         {
-            id: "g001_s14",
+            id: "g001_s10",
             name: "马可·卡尔德罗尼",
             gender: "male",
             isHidden: false,
@@ -277,7 +228,7 @@ const gameData = {
         },
         // 奥利弗·哈斯
         {
-            id: "g001_s15",
+            id: "g001_s11",
             name: "奥利弗·哈斯",
             gender: "male",
             isHidden: false,
@@ -287,21 +238,9 @@ const gameData = {
                 { srcList: ["char/001/Oliver.jpg"], type: "base" }
             ]
         },
-        // 劳尔·基兰达奥
-        {
-            id: "g001_s16",
-            name: "劳尔·基兰达奥",
-            gender: "male",
-            isHidden: false,
-            isFD: false,
-            isSub: true,
-            images: [
-                { srcList: ["char/001/Raul.jpg"], type: "base" }
-            ]
-        },
         // 罗伯特·德·费奥
         {
-            id: "g001_s17",
+            id: "g001_s12",
             name: "罗伯特·德·费奥",
             gender: "male",
             isHidden: false,
@@ -311,21 +250,9 @@ const gameData = {
                 { srcList: ["char/001/Roberto.jpg"], type: "base" }
             ]
         },
-        // 睿
-        {
-            id: "g001_s18",
-            name: "睿",
-            gender: "male",
-            isHidden: false,
-            isFD: false,
-            isSub: true,
-            images: [
-                { srcList: ["char/001/Rui.jpg"], type: "base" }
-            ]
-        },
         // 苏菲亚
         {
-            id: "g001_s19",
+            id: "g001_s13",
             name: "苏菲亚",
             gender: "male",
             isHidden: false,
@@ -335,30 +262,110 @@ const gameData = {
                 { srcList: ["char/001/Sofia.jpg"], type: "base" }
             ]
         },
+        // 塞巴斯蒂安·加列
+        {
+            id: "g001_fs01",
+            name: "塞巴斯蒂安·加列",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/001/Anonymous.jpg"], type: "base" }
+            ]
+        },
+        // 尤金
+        {
+            id: "g001_fs02",
+            name: "尤金",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/001/Eugene.jpg"], type: "base" }
+            ]
+        },
+        // 杰克·艾弗瑞
+        {
+            id: "g001_fs03",
+            name: "杰克·艾弗瑞",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/001/Jack.jpg"], type: "base" }
+            ]
+        },
+        // 约翰·史坦纳
+        {
+            id: "g001_fs04",
+            name: "约翰·史坦纳",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/001/Johann.jpg"], type: "base" }
+            ]
+        },
+        // 劳尔·基兰达奥
+        {
+            id: "g001_fs05",
+            name: "劳尔·基兰达奥",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/001/Raul.jpg"], type: "base" }
+            ]
+        },
+        // 睿
+        {
+            id: "g001_fs06",
+            name: "睿",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/001/Rui.jpg"], type: "base" }
+            ]
+        },
         // 堤欧
         {
-            id: "g001_s20",
+            id: "g001_fs07",
             name: "堤欧",
             gender: "male",
             isHidden: false,
             isFD: false,
-            isSub: true,
+            isSub: false,
+            isFdSub: true,
             images: [
                 { srcList: ["char/001/Teo.jpg"], type: "base" }
             ]
         },
         // 袁
         {
-            id: "g001_s21",
+            id: "g001_fs08",
             name: "袁",
             gender: "male",
             isHidden: false,
             isFD: false,
-            isSub: true,
+            isSub: false,
+            isFdSub: true,
             images: [
                 { srcList: ["char/001/Yuan.jpg"], type: "base" }
             ]
-        }
+        },
     ]
 };
 
