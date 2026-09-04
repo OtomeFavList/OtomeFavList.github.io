@@ -152,21 +152,9 @@ const gameData = {
                             "char/009/Claris2.jpg"], type: "base" }
             ]
         },
-        // 伊萊·奧马尔
-        {
-            id: "g009_s03",
-            name: "伊萊·奧马尔",
-            gender: "male",
-            isHidden: false,
-            isFD: false,
-            isSub: true,
-            images: [
-                { srcList: ["char/009/Eli.jpg"], type: "base" }
-            ]
-        },
         // 玛斯
         {
-            id: "g009_s04",
+            id: "g009_s03",
             name: "玛斯",
             gender: "male",
             isHidden: false,
@@ -179,7 +167,7 @@ const gameData = {
         },
         // 米奈娃
         {
-            id: "g009_s05",
+            id: "g009_s04",
             name: "米奈娃",
             gender: "male",
             isHidden: false,
@@ -190,45 +178,9 @@ const gameData = {
                             "char/009/Minerva2.jpg"], type: "base" }
             ]
         },
-        // 雷·安德
-        {
-            id: "g009_s06",
-            name: "雷·安德",
-            gender: "male",
-            isHidden: false,
-            isFD: false,
-            isSub: true,
-            images: [
-                { srcList: ["char/009/Ray.jpg"], type: "base" }
-            ]
-        },
-        // 罗宾·布雷特
-        {
-            id: "g009_s07",
-            name: "配角",
-            gender: "male",
-            isHidden: false,
-            isFD: false,
-            isSub: true,
-            images: [
-                { srcList: ["char/009/Robin.jpg"], type: "base" }
-            ]
-        },
-        // 西尔维·史考特
-        {
-            id: "g009_s08",
-            name: "西尔维·史考特",
-            gender: "male",
-            isHidden: false,
-            isFD: false,
-            isSub: true,
-            images: [
-                { srcList: ["char/009/Sylvie.jpg"], type: "base" }
-            ]
-        },
         // 宙斯
         {
-            id: "g009_s09",
+            id: "g009_s05",
             name: "宙斯",
             gender: "male",
             isHidden: false,
@@ -236,6 +188,58 @@ const gameData = {
             isSub: true,
             images: [
                 { srcList: ["char/009/Zeus.jpg"], type: "base" }
+            ]
+        },
+        // 伊萊·奧马尔
+        {
+            id: "g009_fs01",
+            name: "伊萊·奧马尔",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/g001_fS01_1.jpg"], type: "base" }
+            ]
+        },
+        // 雷·安德
+        {
+            id: "g009_fs02",
+            name: "雷·安德",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/g001_fS01_1.jpg"], type: "base" }
+            ]
+        },
+        // 罗宾·布雷特
+        {
+            id: "g009_fs03",
+            name: "罗宾·布雷特",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/g001_fS01_1.jpg"], type: "base" }
+            ]
+        },
+        // 西尔维·史考特
+        {
+            id: "g009_fs04",
+            name: "西尔维·史考特",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/g001_fS01_1.jpg"], type: "base" }
             ]
         }
     ]
