@@ -37,7 +37,7 @@ const gameData = {
                 { srcList: ["char/001/女主A.jpg",
                             "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
                 { srcList: ["char/001/女主A3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["char/001/女主A4.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
+                { srcList: ["char/001/女主A4.jpg"], type: "fd" },          // 需要开启FD开关才展示的图片
                 { srcList: ["char/001/女主A5.jpg"], type: "hidden-fd" }   // 开启隐藏开关或FD开关展示的图片
             ]
         },
@@ -54,7 +54,7 @@ const gameData = {
                 { srcList: ["char/001/男主A.jpg",
                             "char/001/男主A2.jpg"], type: "base" },
                 { srcList: ["char/001/男主A3.jpg"], type: "hidden" },
-                { srcList: ["char/001/男主A4.jpg"], type: "fd" }
+                { srcList: ["char/001/男主A4.jpg"], type: "fd" },
                 { srcList: ["char/001/男主A5.jpg"], type: "hidden-fd" }
             ]
         },
@@ -71,7 +71,7 @@ const gameData = {
                 { srcList: ["char/001/男主B.jpg",
                             "char/001/男主B2.jpg"], type: "base" },
                 { srcList: ["char/001/男主B3.jpg"], type: "hidden" },
-                { srcList: ["char/001/男主B4.jpg"], type: "fd" }
+                { srcList: ["char/001/男主B4.jpg"], type: "fd" },
                 { srcList: ["char/001/男主B5.jpg"], type: "hidden-fd" }
             ]
         },
@@ -88,7 +88,7 @@ const gameData = {
                 { srcList: ["char/001/男主C.jpg",
                             "char/001/男主C2.jpg"], type: "base" },
                 { srcList: ["char/001/男主C3.jpg"], type: "hidden" },
-                { srcList: ["char/001/男主C4.jpg"], type: "fd" }
+                { srcList: ["char/001/男主C4.jpg"], type: "fd" },
                 { srcList: ["char/001/男主C5.jpg"], type: "hidden-fd" }
             ]
         },
@@ -105,7 +105,7 @@ const gameData = {
                 { srcList: ["char/001/男主D.jpg",
                             "char/001/男主D2.jpg"], type: "base" },
                 { srcList: ["char/001/男主D3.jpg"], type: "hidden" },
-                { srcList: ["char/001/男主D4.jpg"], type: "fd" }
+                { srcList: ["char/001/男主D4.jpg"], type: "fd" },
                 { srcList: ["char/001/男主D5.jpg"], type: "hidden-fd" }
             ]
         },
@@ -122,7 +122,7 @@ const gameData = {
                 { srcList: ["char/001/男主F.jpg",
                             "char/001/男主F2.jpg"], type: "base" },
                 { srcList: ["char/001/男主F3.jpg"], type: "hidden" },
-                { srcList: ["char/001/男主F4.jpg"], type: "fd" }
+                { srcList: ["char/001/男主F4.jpg"], type: "fd" },
                 { srcList: ["char/001/男主F5.jpg"], type: "hidden-fd" }
             ]
         },
