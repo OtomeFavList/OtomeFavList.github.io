@@ -1,7 +1,5 @@
 // data/games/game007.js
-// ==========【单个游戏独立数据模板｜新版ESModule】==========
-// 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
-// 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
+// ⚠️已核对信息，FD官网ver未制作
 const gameData = {
     id: "game007",
     name: "Collar×Malice",
