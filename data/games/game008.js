@@ -110,6 +110,222 @@ const gameData = {
                 { srcList: ["char/008/Tsuzuramaru.jpg",
                             "char/008/Tsuzuramaru2.jpg"], type: "base" }
             ]
+        },
+        // 鹭原京濑
+        {
+            id: "g008_s01",
+            name: "鹭原京濑",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/008/Chikaze.jpg"], type: "base" }
+            ]
+        },
+        // 刀镞附
+        {
+            id: "g008_s02",
+            name: "刀镞附",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/008/Habakitsuki.jpg"], type: "base" }
+            ]
+        },
+        // 八目
+        {
+            id: "g008_s03",
+            name: "八目",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/008/Hachimoku.jpg"], type: "base" }
+            ]
+        },
+        // 八幡
+        {
+            id: "g008_s04",
+            name: "八幡",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/008/Hatsuma.jpg"], type: "base" }
+            ]
+        },
+        // 服部半藏
+        {
+            id: "g008_s05",
+            name: "服部半藏",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/008/Hattori.jpg"], type: "base" }
+            ]
+        },
+        // 鼓法眼
+        {
+            id: "g008_s06",
+            name: "鼓法眼",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/008/Hougen.jpg"], type: "base" }
+            ]
+        },
+        // 药师院神威
+        {
+            id: "g008_s07",
+            name: "药师院神威",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/008/Kamui.jpg"], type: "base" }
+            ]
+        },
+        // 冠
+        {
+            id: "g008_s08",
+            name: "冠",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/008/Kamuro.jpg"], type: "base" }
+            ]
+        },
+        // 迦楼罗
+        {
+            id: "g008_s09",
+            name: "迦楼罗",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/008/Karura.jpg"], type: "base" }
+            ]
+        },
+        // 斑
+        {
+            id: "g008_s10",
+            name: "斑",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/008/Madara.jpg"], type: "base" }
+            ]
+        },
+        // 松平辰影
+        {
+            id: "g008_s11",
+            name: "松平辰影",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/008/Matsudaira.jpg"], type: "base" }
+            ]
+        },
+        // 七重
+        {
+            id: "g008_s12",
+            name: "七重",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/008/Nanae.jpg"], type: "base" }
+            ]
+        },
+        // 阿松
+        {
+            id: "g008_s13",
+            name: "阿松",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/008/Omatsu.jpg"], type: "base" }
+            ]
+        },
+        // 椎仓仪
+        {
+            id: "g008_s14",
+            name: "椎仓仪",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/008/Shiguragi.jpg"], type: "base" }
+            ]
+        },
+        // 田一
+        {
+            id: "g008_s15",
+            name: "田一",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/008/Taichi.jpg"], type: "base" }
+            ]
+        },
+        // 德川家光
+        {
+            id: "g008_s16",
+            name: "德川家光",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/008/Tokugawa.jpg"], type: "base" }
+            ]
+        },
+        // 柳生三厳
+        {
+            id: "g008_s17",
+            name: "柳生三厳",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/008/Yagyuu.jpg"], type: "base" }
+            ]
+        },
+        // 斩铁
+        {
+            id: "g008_s18",
+            name: "斩铁",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/008/Zantetsu.jpg"], type: "base" }
+            ]
         }
     ]
 };
