@@ -94,6 +94,7 @@ const gameData = {
             gender: "male",
             isHidden: true,
             isFD: true,
+            isSub: true,
             images: [
                 { srcList: ["char/007/Yuzuru.jpg",
                             "char/007/Yuzuru2.jpg"], type: "base" }
@@ -106,6 +107,7 @@ const gameData = {
             gender: "male",
             isHidden: false,
             isFD: true,
+            isSub: true,
             images: [
                 { srcList: ["char/007/Minegishi.jpg"], type: "base" }
             ]
@@ -117,6 +119,7 @@ const gameData = {
             gender: "male",
             isHidden: false,
             isFD: true,
+            isSub: true,
             images: [
                 { srcList: ["char/007/Yoshinari.jpg"], type: "base" }
             ]
@@ -277,21 +280,9 @@ const gameData = {
                 { srcList: ["char/007/Shion.jpg"], type: "base" }
             ]
         },
-        // 染谷友香
-        {
-            id: "g007_s14",
-            name: "染谷友香",
-            gender: "male",
-            isHidden: false,
-            isFD: false,
-            isSub: true,
-            images: [
-                { srcList: ["char/007/Someya.jpg"], type: "base" }
-            ]
-        },
         // 相田学
         {
-            id: "g007_s15",
+            id: "g007_s14",
             name: "相田学",
             gender: "male",
             isHidden: false,
@@ -303,7 +294,7 @@ const gameData = {
         },
         // 菅原理香
         {
-            id: "g007_s16",
+            id: "g007_s15",
             name: "菅原理香",
             gender: "male",
             isHidden: false,
@@ -315,7 +306,7 @@ const gameData = {
         },
         // 宇野铃音
         {
-            id: "g007_s17",
+            id: "g007_s16",
             name: "宇野铃音",
             gender: "male",
             isHidden: false,
@@ -325,21 +316,9 @@ const gameData = {
                 { srcList: ["char/007/Suzune.jpg"], type: "base" }
             ]
         },
-        // 橘千圣
-        {
-            id: "g007_s18",
-            name: "橘千圣",
-            gender: "male",
-            isHidden: false,
-            isFD: false,
-            isSub: true,
-            images: [
-                { srcList: ["char/007/Tachibana.jpg"], type: "base" }
-            ]
-        },
         // 鹰枝勇作
         {
-            id: "g007_s19",
+            id: "g007_s17",
             name: "鹰枝勇作",
             gender: "male",
             isHidden: false,
@@ -349,14 +328,41 @@ const gameData = {
                 { srcList: ["char/007/Takaeda.jpg"], type: "base" }
             ]
         },
+        // 染谷友香
+        {
+            id: "g007_fs01",
+            name: "染谷友香",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/007/Someya.jpg"], type: "base" }
+            ]
+        },
+        // 橘千圣
+        {
+            id: "g007_fs02",
+            name: "橘千圣",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/007/Tachibana.jpg"], type: "base" }
+            ]
+        },
         // 柳优时
         {
-            id: "g007_s20",
+            id: "g007_fs03",
             name: "柳优时",
             gender: "male",
             isHidden: false,
             isFD: false,
-            isSub: true,
+            isSub: false,
+            isFdSub: true,
             images: [
                 { srcList: ["char/007/Yuuji.jpg"], type: "base" }
             ]
