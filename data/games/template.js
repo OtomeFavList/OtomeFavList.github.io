@@ -161,7 +161,7 @@ const gameData = {
         ,
         // 续作/FD次要角色（isFdSub=true → 开关开启才显示整个角色卡片）
         {
-            id: "g1_s01",
+            id: "g1_fs01",
             name: "配角",
             gender: "male",
             isHidden: false,
