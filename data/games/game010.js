@@ -99,6 +99,294 @@ const gameData = {
                 { srcList: ["char/010/Ukai.jpg",
                             "char/010/Ukai2.jpg"], type: "base" }
             ]
+        },
+        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g010_s01",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g010_s02",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g010_s03",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g010_s04",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g010_s05",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g010_s06",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g010_s07",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g010_s08",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g010_s09",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g010_s10",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g010_s11",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g010_s12",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g010_s13",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g010_s14",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g010_s15",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g010_s16",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g010_s17",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g010_s18",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g010_s19",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g010_s20",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g010_s21",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g010_s22",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g010_s23",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
+        },
+        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g010_s24",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+            ]
         }
     ]
 };
