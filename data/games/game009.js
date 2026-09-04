@@ -92,9 +92,10 @@ const gameData = {
         {
             id: "g009_h01",
             name: "彼得·弗拉修",
+            hiddenName: ["小唧","彼得·弗拉修"],
             gender: "male",
             isHidden: true,
-            isFD: true,
+            isFD: false,
             images: [
                 { srcList: ["char/009/Peter.jpg",
                             "char/009/Peter2.jpg",
