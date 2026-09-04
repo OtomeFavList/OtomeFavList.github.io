@@ -96,14 +96,17 @@ const gameData = {
         // 亨利·兰伯特
         {
             id: "g001_h01",
-            name: "亨利·兰伯特",
+            name: "经理人",
+            hiddenName: "亨利·兰伯特",
             gender: "male",
             isHidden: true,
             isFD: true,
             images: [
-                { srcList: ["char/001/Henri.jpg",
-                            "char/001/Henri2.jpg",
-                            "char/001/Henri3.jpg"], type: "base" }
+                { srcList: ["char/001/Henri.jpg"], type: "base" }
+                { srcList: ["char/001/Henri2.jpg",
+                            "char/001/Henri3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
+                { srcList: ["char/001/Henri2.jpg",
+                            "char/001/Henri3.jpg"], type: "fd" }          // 需要开启FD开关才展示的图片
             ]
         },
         // 艾琳娜·克罗切
