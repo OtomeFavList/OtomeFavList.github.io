@@ -619,7 +619,7 @@ button:hover{
     display:block;
     decoding:async;
 }
-.char-card-item .char-card-name {
+.char-card-name{
     font-size:14px;
     color:#222;
     line-height:1.4;
