@@ -27,11 +27,12 @@ const gameData = {
         {
             id: "g1_f01",
             name: "女主A",
+            hiddenName: "隐藏真名",    // 补丁新增：可选，不写则无隐藏名
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
-            isFD: false,    // true=续作/FD专属角色，开关控制是否展示该角色
+            isFD: false,    // true=续作/FD新增角色，开关控制是否展示该角色
             isSub: false,    // true=配角，开关控制是否展示该角色
-            isFdSub: false,
+            isFdSub: false,    // true=续作/FD新增配角，开关控制是否展示该角色
             images: [
                 { srcList: ["char/001/女主A.jpg",
                             "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
@@ -43,6 +44,7 @@ const gameData = {
         {
             id: "g1_m01",
             name: "男主1",
+            isHidden: false,
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -59,6 +61,7 @@ const gameData = {
         {
             id: "g1_m02",
             name: "男主2",
+            isHidden: false,
             gender: "male",
             isHidden: false,
             isFD: false,
