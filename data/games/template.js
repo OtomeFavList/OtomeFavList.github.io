@@ -44,7 +44,6 @@ const gameData = {
         {
             id: "g1_m01",
             name: "男主1",
-            isHidden: false,
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -61,7 +60,6 @@ const gameData = {
         {
             id: "g1_m02",
             name: "男主2",
-            isHidden: false,
             gender: "male",
             isHidden: false,
             isFD: false,
