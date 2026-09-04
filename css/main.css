@@ -1300,7 +1300,7 @@ h2{
     display:block;
     decoding:async;
 }
-.cp-selected-card-item .char-card-name {
+.cp-selected-card-item .char-card-name{
     font-size:14px;
     color:#222;
     line-height:1.4;
