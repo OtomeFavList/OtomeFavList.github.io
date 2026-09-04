@@ -200,7 +200,7 @@ const gameData = {
             isSub: false,
             isFdSub: true,
             images: [
-                { srcList: ["char/g001_fS01_1.jpg"], type: "base" }
+                { srcList: ["char/009/Eli.jpg"], type: "base" }
             ]
         },
         // 雷·安德
@@ -213,7 +213,7 @@ const gameData = {
             isSub: false,
             isFdSub: true,
             images: [
-                { srcList: ["char/g001_fS01_1.jpg"], type: "base" }
+                { srcList: ["char/009/Ray.jpg"], type: "base" }
             ]
         },
         // 罗宾·布雷特
@@ -226,7 +226,7 @@ const gameData = {
             isSub: false,
             isFdSub: true,
             images: [
-                { srcList: ["char/g001_fS01_1.jpg"], type: "base" }
+                { srcList: ["char/009/Robin.jpg"], type: "base" }
             ]
         },
         // 西尔维·史考特
@@ -239,7 +239,7 @@ const gameData = {
             isSub: false,
             isFdSub: true,
             images: [
-                { srcList: ["char/g001_fS01_1.jpg"], type: "base" }
+                { srcList: ["char/009/Sylvie.jpg"], type: "base" }
             ]
         }
     ]
