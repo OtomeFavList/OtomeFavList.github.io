@@ -168,8 +168,7 @@ const gameData = {
             images: [
                 { srcList: ["char/g001_S01_1.jpg"], type: "base" }
             ]
-        }
-        ,
+        },
         // 续作/FD次要角色（isFdSub=true → 开关开启才显示整个角色卡片）
         {
             id: "g1_fs01",
