@@ -88,7 +88,7 @@ const gameData = {
                             "char/009/Shelby2.jpg"], type: "base" }
             ]
         },
-        // 彼得·弗拉修
+        // 朱彼特
         {
             id: "g009_h01",
             name: "彼得·弗拉修",
