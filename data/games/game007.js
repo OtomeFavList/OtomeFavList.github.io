@@ -95,8 +95,9 @@ const gameData = {
             isFD: true,
             isSub: true,
             images: [
-                { srcList: ["char/007/Yuzuru.jpg",
-                            "char/007/Yuzuru2.jpg"], type: "base" }
+                { srcList: ["char/007/Yuzuru.jpg"], type: "base" },
+                { srcList: ["char/007/Yuzuru2.jpg"], type: "hidden-fd" }
+                
             ]
         },
         // 峰岸誠司
