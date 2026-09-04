@@ -164,7 +164,8 @@ export let appData = {
         gameName: "#000000",   // ✅ 修改为黑色，用户仍可自定义
         border: "#f6a5b8"
     },
-    charImageSelect: {} // 持久存储角色选中立绘索引 key:"char-img-gameId-charId"
+    charImageSelect: {}, // 持久存储角色选中立绘索引 key:"char-img-gameId-charId"
+    charNameSelect: {}   // ✅补丁新增：持久存储角色选中名字索引 key:"char-name-gameId-charId"，0=正常名 1=隐藏名
 };
 
 // ===================== 导出画布 全局间距常量【严格匹配结构图px规范】 =====================
@@ -465,13 +466,17 @@ export function loadData() {
         tempData.exportColor.gameName = tempData.exportColor.gameName ?? "#000000";
         tempData.exportColor.border = tempData.exportColor.border ?? "#f6a5b8";
 
+        // ✅补丁新增：charNameSelect 兜底
+        if (!tempData.charNameSelect || typeof tempData.charNameSelect !== "object") {
+            tempData.charNameSelect = {};
+        }
         // gameList成员兜底
         if (Array.isArray(tempData.gameList)) {
             tempData.gameList.forEach(g => {
                 if (typeof g.localHideChar !== "boolean") g.localHideChar = false;
                 if (typeof g.localFD !== "boolean") g.localFD = false;
-                if (typeof g.localSubChar !== "boolean") g.localSubChar = false; // ✅新增兜底，旧存档自动补false
-                if (typeof g.localFdSubChar !== "boolean") g.localFdSubChar = false; // ✅补丁新增：单游戏续作/FD次要角色开关兜底
+                if (typeof g.localSubChar !== "boolean") g.localSubChar = false;
+                if (typeof g.localFdSubChar !== "boolean") g.localFdSubChar = false;
                 if (typeof g.charPanelOpen !== "boolean") g.charPanelOpen = false;
                 if (typeof g.cpPanelOpen !== "boolean") g.cpPanelOpen = false;
                 if (typeof g.isFav !== "boolean") g.isFav = false;
@@ -479,6 +484,10 @@ export function loadData() {
                 if (!Array.isArray(g.selectChars)) g.selectChars = [];
                 if (!Array.isArray(g.cpSelectIds)) g.cpSelectIds = [];
                 if (!Array.isArray(g.selectCharItems)) g.selectCharItems = [];
+                // ✅补丁新增：selectCharItems 每项兜底 nameIndex
+                g.selectCharItems.forEach(item => {
+                    if (typeof item.nameIndex !== "number") item.nameIndex = 0;
+                });
                 if (!Array.isArray(g.cpEditState)) g.cpEditState = null;
                 if (!Array.isArray(g.cpList)) g.cpList = [];
                 if (!Array.isArray(g.maleItems)) g.maleItems = [];
@@ -573,6 +582,22 @@ export function getAvailableCharImages(char, globalHideSwitch, globalFDSwitch, l
                 return false;
         }
     });
+}
+
+/**
+ * ✅补丁新增：获取角色当前应显示的名字
+ * @param {Object} char 角色对象
+ * @param {number} nameIndex 0=正常名 1=隐藏名
+ * @param {boolean} showHide 隐藏开关是否开启（全局||单游戏）
+ * @returns {string} 显示用名字
+ */
+export function getCharDisplayName(char, nameIndex, showHide) {
+    if (!char) return "";
+    const hasHidden = !!char.hiddenName;
+    // 无隐藏名 或 隐藏开关未开启 → 始终显示正常名
+    if (!hasHidden || !showHide) return char.name || "";
+    // 有隐藏名且开关开启 → 根据索引选择
+    return Number(nameIndex) === 1 ? (char.hiddenName || char.name || "") : (char.name || "");
 }
 
 /**
@@ -1163,20 +1188,34 @@ export function renderSelectedChar(gameItem, gameInfo, isSnapshot = false) {
         availableImgUnits.forEach(u => allSrc.push(...u.srcList));
         if (allSrc.length === 0) return;
 
-        // 从持久化 selectCharItems 读取imgIndex
         const storedItem = gameItem.selectCharItems.find(s => s.charId === cid);
         let imgIndex = Number(storedItem?.imgIndex ?? 0);
         if (imgIndex >= allSrc.length) imgIndex = 0;
         const targetSrc = allSrc[imgIndex];
 
-        // 已移除 preloadAdjacentImages 调用，避免渲染时预加载大量图片
+        // ========== ✅补丁新增：角色名切换逻辑 ==========
+        const showHide = globalHide || localHide;
+        const hasHiddenName = !!char.hiddenName;
+        const canSwitchName = hasHiddenName && showHide;
+        let nameIndex = Number(storedItem?.nameIndex ?? 0);
+        if (nameIndex !== 0 && nameIndex !== 1) nameIndex = 0;
+        const displayName = getCharDisplayName(char, nameIndex, showHide);
+        const nameMultiClass = canSwitchName ? "char-name-multi" : "";
+        const nameSwitchBtns = canSwitchName ? `
+            <button class="char-name-switch-btn char-name-switch-prev" data-char-id="${char.id}" data-game-id="${gameInfo.id}">&lt;</button>
+            <button class="char-name-switch-btn char-name-switch-next" data-char-id="${char.id}" data-game-id="${gameInfo.id}">&gt;</button>
+        ` : "";
+        // ========== 补丁结束 ==========
 
         html += `
             <div class="char-card-item selected" data-char-id="${char.id}" data-game-id="${gameInfo.id}" data-total-img="${allSrc.length}">
                 <div class="char-card-img-box ${allSrc.length > 1 ? 'char-has-multi-img' : ''}">
-                    <img src="${getWebImageUrl(targetSrc)}" alt="${char.name || ''}" loading="eager" decoding="async">
+                    <img src="${getWebImageUrl(targetSrc)}" alt="${displayName}" loading="eager" decoding="async">
                 </div>
-                <div class="char-card-name">${char.name || ""}</div>
+                <div class="char-card-name ${nameMultiClass}">
+                    ${nameSwitchBtns}
+                    <span class="char-name-text">${displayName}</span>
+                </div>
             </div>
         `;
     });
@@ -1209,10 +1248,23 @@ export function renderCP(gameItem, gameInfo, isSnapshot = false) {
         fAvailUnits.forEach(u => fAllSrc.push(...u.srcList));
         if (fAllSrc.length === 0) return;
 
-        // ✅修复：从cp自身存储取女主imgIndex
         let fIndex = Number(cp.femaleImgIndex ?? 0);
         if (fIndex >= fAllSrc.length) fIndex = 0;
         const fTargetSrc = fAllSrc[fIndex];
+
+        // ========== ✅补丁新增：女主名字切换 ==========
+        const fShowHide = globalHide || localHide;
+        const fHasHiddenName = !!fChar.hiddenName;
+        const fCanSwitch = fHasHiddenName && fShowHide;
+        let fNameIndex = Number(cp.femaleNameIndex ?? 0);
+        if (fNameIndex !== 0 && fNameIndex !== 1) fNameIndex = 0;
+        const fDisplayName = getCharDisplayName(fChar, fNameIndex, fShowHide);
+        const fNameMultiClass = fCanSwitch ? "char-name-multi" : "";
+        const fNameSwitchBtns = fCanSwitch ? `
+            <button class="char-name-switch-btn char-name-switch-prev" data-char-id="${fChar.id}" data-game-id="${gameInfo.id}" data-cp-female="1">&lt;</button>
+            <button class="char-name-switch-btn char-name-switch-next" data-char-id="${fChar.id}" data-game-id="${gameInfo.id}" data-cp-female="1">&gt;</button>
+        ` : "";
+        // ========== 补丁结束 ==========
 
         let maleHtml = "";
         if (!Array.isArray(cp.maleItems)) cp.maleItems = [];
@@ -1229,12 +1281,29 @@ export function renderCP(gameItem, gameInfo, isSnapshot = false) {
             if (mIndex >= mAllSrc.length) mIndex = 0;
             const mTargetSrc = mAllSrc[mIndex];
 
+            // ========== ✅补丁新增：男主名字切换 ==========
+            const mShowHide = globalHide || localHide;
+            const mHasHiddenName = !!mChar.hiddenName;
+            const mCanSwitch = mHasHiddenName && mShowHide;
+            let mNameIndex = Number(mi.nameIndex ?? 0);
+            if (mNameIndex !== 0 && mNameIndex !== 1) mNameIndex = 0;
+            const mDisplayName = getCharDisplayName(mChar, mNameIndex, mShowHide);
+            const mNameMultiClass = mCanSwitch ? "char-name-multi" : "";
+            const mNameSwitchBtns = mCanSwitch ? `
+                <button class="char-name-switch-btn char-name-switch-prev" data-char-id="${mChar.id}" data-game-id="${gameInfo.id}">&lt;</button>
+                <button class="char-name-switch-btn char-name-switch-next" data-char-id="${mChar.id}" data-game-id="${gameInfo.id}">&gt;</button>
+            ` : "";
+            // ========== 补丁结束 ==========
+
             maleHtml += `
                 <div class="cp-selected-card-item" data-char-id="${mChar.id}" data-game-id="${gameInfo.id}" data-total-img="${mAllSrc.length}">
                     <div class="char-card-img-box ${mAllSrc.length > 1 ? 'char-has-multi-img' : ''}">
-                        <img src="${getWebImageUrl(mTargetSrc)}" alt="${mChar.name || ''}" loading="eager" decoding="async">
+                        <img src="${getWebImageUrl(mTargetSrc)}" alt="${mDisplayName}" loading="eager" decoding="async">
                     </div>
-                    <div class="char-card-name">${mChar.name || ""}</div>
+                    <div class="char-card-name ${mNameMultiClass}">
+                        ${mNameSwitchBtns}
+                        <span class="char-name-text">${mDisplayName}</span>
+                    </div>
                 </div>
             `;
         });
@@ -1244,9 +1313,12 @@ export function renderCP(gameItem, gameInfo, isSnapshot = false) {
                 <div class="heroine-column">
                     <div class="cp-selected-card-item" data-char-id="${fChar.id}" data-game-id="${gameInfo.id}" data-total-img="${fAllSrc.length}">
                         <div class="char-card-img-box ${fAllSrc.length > 1 ? 'char-has-multi-img' : ''}">
-                            <img src="${getWebImageUrl(fTargetSrc)}" alt="${fChar.name || ''}" loading="eager" decoding="async">
+                            <img src="${getWebImageUrl(fTargetSrc)}" alt="${fDisplayName}" loading="eager" decoding="async">
                         </div>
-                        <div class="char-card-name">${fChar.name || ""}</div>
+                        <div class="char-card-name ${fNameMultiClass}">
+                            ${fNameSwitchBtns}
+                            <span class="char-name-text">${fDisplayName}</span>
+                        </div>
                     </div>
                 </div>
                 <div class="hero-list-column">
@@ -1365,6 +1437,7 @@ function buildCoreContext() {
         renderCP,
         getAllGameChar,
         getAvailableCharImages,
+        getCharDisplayName,  // ✅补丁新增
         preloadAndDecodeImage,
         preloadImageBitmap,
         preloadImagesInIdle,
@@ -1500,6 +1573,61 @@ function wrapClickHandler(e) {
         if (window.refreshGameCardUi) window.refreshGameCardUi();
         return;
     }
+
+    // -------- ✅补丁新增：已选角色卡片 角色名切换按钮处理 --------
+    const nameSwitchBtn = e.target.closest(".char-name-switch-prev,.char-name-switch-next");
+    if (nameSwitchBtn) {
+        const cardEl = nameSwitchBtn.closest(".char-card-item, .cp-selected-card-item");
+        if (!cardEl) return;
+        const gameId = cardEl.dataset.gameId;
+        const charId = cardEl.dataset.charId;
+        const isCpFemale = !!nameSwitchBtn.dataset.cpFemale;
+        const gameItem = appData.gameList.find(g => g.gameId === gameId);
+        if (!gameItem) return;
+        if (isCpFemale) {
+            // CP女主：名字索引写入 cpList.femaleNameIndex
+            if (Array.isArray(gameItem.cpList)) {
+                gameItem.cpList.forEach(cp => {
+                    if (cp.femaleId === charId) {
+                        cp.femaleNameIndex = Number(cp.femaleNameIndex ?? 0) === 1 ? 0 : 1;
+                    }
+                });
+            }
+            // 同步 cpEditState
+            if (Array.isArray(gameItem.cpEditState)) {
+                gameItem.cpEditState.forEach(st => {
+                    if (st.femaleId === charId) {
+                        st.femaleNameIndex = Number(st.femaleNameIndex ?? 0) === 1 ? 0 : 1;
+                    }
+                });
+            }
+        } else {
+            // Character角色 / CP男主：名字只有2个选项，toggle
+            const saveKey = `char-name-${gameId}-${charId}`;
+            if (!appData.charNameSelect) appData.charNameSelect = {};
+            const newIdx = Number(appData.charNameSelect[saveKey] ?? 0) === 1 ? 0 : 1;
+            appData.charNameSelect[saveKey] = newIdx;
+            // 同步到 selectCharItems
+            if (Array.isArray(gameItem.selectCharItems)) {
+                const item = gameItem.selectCharItems.find(s => s.charId === charId);
+                if (item) item.nameIndex = newIdx;
+            }
+            // 同步到 cpList.maleItems
+            if (Array.isArray(gameItem.cpList)) {
+                gameItem.cpList.forEach(cp => {
+                    if (Array.isArray(cp.maleItems)) {
+                        cp.maleItems.forEach(mi => {
+                            if (mi.charId === charId) mi.nameIndex = newIdx;
+                        });
+                    }
+                });
+            }
+        }
+        saveData();
+        if (window.refreshGameCardUi) window.refreshGameCardUi();
+        return;
+    }
+    // -------- 补丁结束 --------
 
     // 点击遮罩空白关闭弹窗
     if (e.target === spoilerModal) {
