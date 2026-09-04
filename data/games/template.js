@@ -45,6 +45,7 @@ const gameData = {
         {
             id: "g1_m01",
             name: "男主1",
+            hiddenName: "隐藏真名",    // 补丁新增：可选，不写则无隐藏名
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -130,6 +131,7 @@ const gameData = {
         {
             id: "g1_h01",
             name: "隐藏攻略角色",
+            hiddenName: "隐藏真名",    // 补丁新增：可选，不写则无隐藏名
             gender: "male",
             isHidden: true,
             isFD: false,
@@ -143,6 +145,7 @@ const gameData = {
         {
             id: "g1_fd01",
             name: "续作FD新增角色",
+            hiddenName: "隐藏真名",    // 补丁新增：可选，不写则无隐藏名
             gender: "male",
             isHidden: false,
             isFD: true,
@@ -156,6 +159,7 @@ const gameData = {
         {
             id: "g1_s01",
             name: "配角",
+            hiddenName: "隐藏真名",    // 补丁新增：可选，不写则无隐藏名
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -170,6 +174,7 @@ const gameData = {
         {
             id: "g1_fs01",
             name: "配角",
+            hiddenName: "隐藏真名",    // 补丁新增：可选，不写则无隐藏名
             gender: "male",
             isHidden: false,
             isFD: false,
