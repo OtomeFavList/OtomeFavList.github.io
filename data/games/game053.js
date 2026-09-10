@@ -21,7 +21,7 @@ const gameData = {
         // 春日珠纪
         {
             id: "g053_f01",
-            name: "女主A",
+            name: "春日珠纪",
             gender: "female",
             isHidden: false,
             isFD: false,
@@ -32,7 +32,7 @@ const gameData = {
         // 鸦取真弘
         {
             id: "g053_m01",
-            name: "男主1",
+            name: "鸦取真弘",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -43,7 +43,7 @@ const gameData = {
         // 狗谷辽
         {
             id: "g053_m02",
-            name: "男主1",
+            name: "狗谷辽",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -54,7 +54,7 @@ const gameData = {
         // 犬戒慎司
         {
             id: "g053_m03",
-            name: "男主1",
+            name: "犬戒慎司",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -65,7 +65,7 @@ const gameData = {
         // 大蛇草
         {
             id: "g053_m04",
-            name: "男主1",
+            name: "大蛇草",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -76,7 +76,7 @@ const gameData = {
         // 鬼崎拓磨
         {
             id: "g053_m05",
-            name: "男主1",
+            name: "鬼崎拓磨",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -87,7 +87,7 @@ const gameData = {
         // 狐邑祐一
         {
             id: "g053_m06",
-            name: "男主1",
+            name: "狐邑祐一",
             gender: "male",
             isHidden: false,
             isFD: false,
