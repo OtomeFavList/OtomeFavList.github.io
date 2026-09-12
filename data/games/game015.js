@@ -96,6 +96,110 @@ const gameData = {
             images: [
                 { srcList: ["char/015/Yoichi.jpg"], type: "base" }
             ]
+        },
+        // 比弥卫
+        {
+            id: "g015_s01",
+            name: "比弥卫",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/015/Hibie.jpg"], type: "base" }
+            ]
+        },
+        // 比弥那
+        {
+            id: "g015_s02",
+            name: "比弥那",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/015/Hibina.jpg"], type: "base" }
+            ]
+        },
+        // 小豆
+        {
+            id: "g015_s03",
+            name: "小豆",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/015/Komame.jpg"], type: "base" }
+            ]
+        },
+        // 川村京士郎
+        {
+            id: "g015_s04",
+            name: "川村京士郎",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/015/Kyoushirou.jpg"], type: "base" }
+            ]
+        },
+        // 三春
+        {
+            id: "g015_s05",
+            name: "三春",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/015/Miharu.jpg"], type: "base" }
+            ]
+        },
+        // 宫地三茂
+        {
+            id: "g015_s06",
+            name: "宫地三茂",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/015/Miyaji.jpg"], type: "base" }
+            ]
+        },
+        // 德川吉宗
+        {
+            id: "g015_s07",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/015/Tokugawa.jpg"], type: "base" }
+            ]
+        },
+        // 薮田清彦
+        {
+            id: "g015_s08",
+            name: "薮田清彦",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/015/Yabuta.jpg"], type: "base" }
+            ]
         }
     ]
 };
