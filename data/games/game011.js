@@ -95,6 +95,7 @@ const gameData = {
             gender: "male",
             isHidden: false,
             isFD: true,
+            isSub: true,
             images: [
                 { srcList: ["char/011/Sasaki.jpg"], type: "base" }
             ]
@@ -106,6 +107,7 @@ const gameData = {
             gender: "male",
             isHidden: false,
             isFD: true,
+            isSub: true,
             images: [
                 { srcList: ["char/011/Shigehira.jpg"], type: "base" }
             ]
@@ -117,6 +119,7 @@ const gameData = {
             gender: "male",
             isHidden: false,
             isFD: true,
+            isSub: true,
             images: [
                 { srcList: ["char/011/Tadanobu.jpg"], type: "base" }
             ]
@@ -128,8 +131,113 @@ const gameData = {
             gender: "male",
             isHidden: false,
             isFD: true,
+            isSub: true,
             images: [
                 { srcList: ["char/011/Tsugunobu.jpg"], type: "base" }
+            ]
+        },
+        // 藤原秀衡
+        {
+            id: "g011_s01",
+            name: "藤原秀衡",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/011/Hidehira.png"], type: "base" }
+            ]
+        },
+        // 梶原景时
+        {
+            id: "g011_s02",
+            name: "梶原景时",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/011/Kagetoki.jpg"], type: "base" }
+            ]
+        },
+        // 觉日
+        {
+            id: "g011_s03",
+            name: "觉日",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/011/Kakunichi.jpg"], type: "base" }
+            ]
+        },
+        // 吉次信高
+        {
+            id: "g011_s04",
+            name: "吉次信高",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/011/Kichiji.jpg"], type: "base" }
+            ]
+        },
+        // 平清盛
+        {
+            id: "g011_s05",
+            name: "平清盛",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/011/Kiyomori.jpg"], type: "base" }
+            ]
+        },
+        // 平教盛
+        {
+            id: "g011_s06",
+            name: "平教盛",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/011/Norimori.jpg"], type: "base" }
+            ]
+        },
+        // 藤原泰衡
+        {
+            id: "g011_s07",
+            name: "藤原泰衡",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/011/Yasuhira.jpg"], type: "base" }
+            ]
+        },
+        // 源义仲
+        {
+            id: "g011_s08",
+            name: "源义仲",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/011/Yoshinaka.jpg"], type: "base" }
             ]
         }
     ]
