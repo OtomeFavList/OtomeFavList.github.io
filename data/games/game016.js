@@ -101,6 +101,110 @@ const gameData = {
                 { srcList: ["char/016/Yves.jpg",
                             "char/016/Yves2.jpg"], type: "base" }
             ]
+        },
+        // 卡普希诺
+        {
+            id: "g016_s01",
+            name: "卡普希诺",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/016/Capucine.jpg"], type: "base" }
+            ]
+        },
+        // 妲尤
+        {
+            id: "g016_s02",
+            name: "妲尤",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/016/Dahut.jpg"], type: "base" }
+            ]
+        },
+        // 雨果
+        {
+            id: "g016_s03",
+            name: "雨果",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/016/Hugo.jpg"], type: "base" }
+            ]
+        },
+        // 琴
+        {
+            id: "g016_s04",
+            name: "琴",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/016/Jean.jpg"], type: "base" }
+            ]
+        },
+        // 娜迪雅·普鲁斯特
+        {
+            id: "g016_s05",
+            name: "娜迪雅·普鲁斯特",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/016/Nadia.jpg"], type: "base" }
+            ]
+        },
+        // 莎乐美
+        {
+            id: "g016_s06",
+            name: "莎乐美",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/016/Salome.jpg"], type: "base" }
+            ]
+        },
+        // 漂流者
+        {
+            id: "g016_fs01",
+            name: "漂流者",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/016/Drifter.jpg"], type: "base" }
+            ]
+        },
+        // 史比奈儿
+        {
+            id: "g016_fs02",
+            name: "史比奈儿",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/016/Spinel.jpg"], type: "base" }
+            ]
         }
     ]
 };
