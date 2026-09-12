@@ -30,7 +30,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/014/Ritsuka.jpg"], type: "base" }
+                { srcList: ["char/014/Ritsuka.jpg",
+                            "char/014/Ritsuka2.jpg"], type: "base" }
             ]
         },
         // 立华林多
@@ -41,7 +42,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/014/Lindo.jpg"], type: "base" }
+                { srcList: ["char/014/Lindo.jpg",
+                            "char/014/Lindo2.jpg",
+                            "char/014/Lindo3.jpg"], type: "base" }
             ]
         },
         // 南那城梅吉
@@ -52,7 +55,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/014/Mage.jpg"], type: "base" }
+                { srcList: ["char/014/Mage.jpg",
+                            "char/014/Mage2.jpg",
+                            "char/014/Mage3.jpg"], type: "base" }
             ]
         },
         // 钩贯雷姆
@@ -63,7 +68,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/014/Rem.jpg"], type: "base" }
+                { srcList: ["char/014/Rem.jpg",
+                            "char/014/Rem2.jpg",
+                            "char/014/Rem3.jpg"], type: "base" }
             ]
         },
         // 罗恩
@@ -74,7 +81,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/014/Roen.jpg"], type: "base" }
+                { srcList: ["char/014/Roen.jpg",
+                            "char/014/Roen2.jpg",
+                            "char/014/Roen3.jpg",
+                            "char/014/Pomeranian.jpg"], type: "base" }
             ]
         },
         // 枣坂四季
@@ -85,7 +95,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/014/Shiki.jpg"], type: "base" }
+                { srcList: ["char/014/Shiki.jpg",
+                            "char/014/Shiki2.jpg",
+                            "char/014/Shiki3.jpg"], type: "base" }
             ]
         },
         // 楚神乌列
@@ -96,7 +108,49 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/014/Urie.jpg"], type: "base" }
+                { srcList: ["char/014/Urie.jpg",
+                            "char/014/Urie2.jpg",
+                            "char/014/Urie.jpg"], type: "base" }
+            ]
+        },
+        // 葛叶亚津奈
+        {
+            id: "g014_s01",
+            name: "葛叶亚津奈",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/014/Azuna.jpg"], type: "base" }
+            ]
+        },
+        // 杰奇
+        {
+            id: "g014_s02",
+            name: "杰奇",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/014/Jek.jpg",
+                            "char/014/Jek2.jpg"], type: "base" }
+            ]
+        },
+        // 立华真理亚
+        {
+            id: "g014_s03",
+            name: "立华真理亚",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/014/Maria.jpg"], type: "base" }
             ]
         }
     ]
