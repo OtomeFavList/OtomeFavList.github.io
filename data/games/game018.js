@@ -189,7 +189,8 @@ const gameData = {
         // 艾因
         {
             id: "g018_s01",
-            name: "爱音",
+            name: "艾因",
+            hiddenName: ["爱音"],
             gender: "male",
             isHidden: false,
             isFD: false,
