@@ -44,7 +44,8 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/012/Ende.jpg",
-                            "char/012/Ende2.jpg"], type: "base" }
+                            "char/012/Ende2.jpg",
+                            "char/012/Ende3.jpg"], type: "base" }
             ]
         },
         // 芬里尔
@@ -57,7 +58,8 @@ const gameData = {
             images: [
                 { srcList: ["char/012/Fenrir.jpg",
                             "char/012/Fenrir2.jpg",
-                            "char/012/Fenrir3.jpg"], type: "base" }
+                            "char/012/Fenrir3.jpg",
+                            "char/012/Fenrir4.jpg"], type: "base" }
             ]
         },
         // 哈提
@@ -69,7 +71,8 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/012/Hati.jpg",
-                            "char/012/Hati2.jpg"], type: "base" }
+                            "char/012/Hati2.jpg",
+                            "char/012/Hati3.jpg"], type: "base" }
             ]
         },
         // 海拉
@@ -82,7 +85,8 @@ const gameData = {
             images: [
                 { srcList: ["char/012/Hel.jpg",
                             "char/012/Hel2.jpg",
-                            "char/012/Hel3.jpg"], type: "base" }
+                            "char/012/Hel3.jpg",
+                            "char/012/Hel4.jpg"], type: "base" }
             ]
         },
         // 耶梦加得
@@ -95,7 +99,8 @@ const gameData = {
             images: [
                 { srcList: ["char/012/Jorm.jpg",
                             "char/012/Jorm2.jpg",
-                            "char/012/Jorm3.jpg"], type: "base" }
+                            "char/012/Jorm3.jpg",
+                            "char/012/Jorm4.jpg"], type: "base" }
             ]
         }
     ]
