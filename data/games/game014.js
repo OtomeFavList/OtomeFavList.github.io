@@ -110,7 +110,7 @@ const gameData = {
             images: [
                 { srcList: ["char/014/Urie.jpg",
                             "char/014/Urie2.jpg",
-                            "char/014/Urie.jpg"], type: "base" }
+                            "char/014/Urie3.jpg"], type: "base" }
             ]
         },
         // 葛叶亚津奈
