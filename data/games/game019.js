@@ -76,7 +76,7 @@ const gameData = {
                             "char/019/Heisuke3.jpg",
                             "char/019/Heisuke4.jpg",
                             "char/019/Heisuke5.jpg"], type: "base" },
-                { srcList: ["char/019/Harada6.jpg"], type: "fd" }
+                { srcList: ["char/019/Heisuke6.jpg"], type: "fd" }
             ]
         },
         // 伊庭八郎
