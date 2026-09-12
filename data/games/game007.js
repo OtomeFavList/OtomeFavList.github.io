@@ -1,5 +1,5 @@
 // data/games/game007.js
-// ⚠️已核对信息，FD官网ver未制作
+// ⚠️已核对信息，FD官网差分未制作
 const gameData = {
     id: "game007",
     name: "Collar×Malice",
