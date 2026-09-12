@@ -18,7 +18,7 @@ const gameData = {
         {name:"こたに白子", lang:"ja"}
     ],
     art: [
-        {name:"前田浩孝", lang:"zh"}
+        {name:"Brain's Base", lang:"en"}
     ],
     cover: "game/014.jpg",
     charList: [
