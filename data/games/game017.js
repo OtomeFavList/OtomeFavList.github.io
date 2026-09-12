@@ -69,6 +69,58 @@ const gameData = {
             images: [
                 { srcList: ["char/017/Shiba.jpg"], type: "base" }
             ]
+        },
+        // 艾莉卡
+        {
+            id: "g017_s01",
+            name: "艾莉卡",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/017/Erica.jpg"], type: "base" }
+            ]
+        },
+        // 由莉亚
+        {
+            id: "g017_s02",
+            name: "由莉亚",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/017/Julia.jpg"], type: "base" }
+            ]
+        },
+        // 奥莉维亚
+        {
+            id: "g017_s03",
+            name: "奥莉维亚",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/017/Olivia.jpg"], type: "base" }
+            ]
+        },
+        // 罗宾
+        {
+            id: "g017_s04",
+            name: "罗宾",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/017/Robin.jpg"], type: "base" }
+            ]
         }
     ]
 };
