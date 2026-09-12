@@ -103,20 +103,84 @@ const gameData = {
                             "char/012/Jorm4.jpg"], type: "base" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 洛基
         {
-            id: "g1_s01",
-            name: "配角",
-            hiddenName: ["隐藏真名1","隐藏真名2"],    // 补丁新增：可选，不写则无隐藏名
+            id: "g012_s01",
+            name: "洛基",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/012/Loki.jpg"], type: "base" }
             ]
         },
+        // 奥尔森
+        {
+            id: "g012_s02",
+            name: "奥尔森",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/012/Olsen.jpg"], type: "base" }
+            ]
+        },
+        // 斯洛特拉
+        {
+            id: "g012_s03",
+            name: "斯洛特拉",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/012/Snotra.jpg"], type: "base" }
+            ]
+        },
+        // 索尼娅
+        {
+            id: "g012_s04",
+            name: "索尼娅",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/012/Sonia.jpg"], type: "base" }
+            ]
+        },
+        // 泰特拉
+        {
+            id: "g012_s05",
+            name: "泰特拉",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/012/Tetra.jpg"], type: "base" }
+            ]
+        },
+        // 蒂尔
+        {
+            id: "g012_s06",
+            name: "蒂尔",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/012/Tyr.jpg"], type: "base" }
+            ]
+        }
     ]
 };
 
