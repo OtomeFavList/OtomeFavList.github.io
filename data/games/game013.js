@@ -99,21 +99,232 @@ const gameData = {
             gender: "male",
             isHidden: false,
             isFD: true,
+            isSub: true,
             images: [
                 { srcList: ["char/013/Finis.jpg",
-                            "char/013/Finis2.jpg",
-                            "char/013/Finis3.jpg"], type: "base" }
+                            "char/013/Finis3.jpg"], type: "base" },
+                { srcList: ["char/013/Finis2.jpg"], type: "fd" }
             ]
         },
         // 夏尔摩斯
         {
-            id: "g013_fd02",      // ★ 修改：唯一ID
+            id: "g013_fd02",
             name: "夏尔摩斯",
             gender: "male",
             isHidden: false,
             isFD: true,
+            isSub: true,
             images: [
                 { srcList: ["char/013/Sholmes.jpg"], type: "base" }
+            ]
+        },
+        // 吉米·A·阿利斯特
+        {
+            id: "g013_s01",
+            name: "吉米·A·阿利斯特",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/013/Arester.jpg"], type: "base" }
+            ]
+        },
+        // 兰巴尔·莱昂哈特
+        {
+            id: "g013_s02",
+            name: "兰巴尔·莱昂哈特",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/013/Leonhardt.jpg"], type: "base" }
+            ]
+        },
+        // 桂妮维亚
+        {
+            id: "g013_s03",
+            name: "桂妮维亚",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/013/Gwenhwyfar.jpg"], type: "base" }
+            ]
+        },
+        // 尼摩
+        {
+            id: "g013_s04",
+            name: "尼摩",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/013/Nemo.jpg"], type: "base" }
+            ]
+        },
+        // 欧姆尼布斯
+        {
+            id: "g013_s05",
+            name: "欧姆尼布斯",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/013/Omnibus.jpg"], type: "base" }
+            ]
+        },
+        // 茜茜
+        {
+            id: "g013_s06",
+            name: "茜茜",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/013/Sissy.jpg",
+                            "char/013/Sissy2.jpg"], type: "base" }
+            ]
+        },
+        // 亚历山德丽娜·维多利亚
+        {
+            id: "g013_s07",
+            name: "亚历山德丽娜·维多利亚",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/013/Victoria.jpg"], type: "base" }
+            ]
+        },
+        // 艾吉耶男爵
+        {
+            id: "g013_fs01",
+            name: "艾吉耶男爵",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/013/Aiguille.jpg"], type: "base" }
+            ]
+        },
+        // 汉赛斯·海克森豪斯
+        {
+            id: "g013_fs02",
+            name: "汉赛斯·海克森豪斯",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/013/Apostles.jpg"], type: "base" }
+            ]
+        },
+        // 阿维多·克鲁德雷
+        {
+            id: "g013_fs03",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/013/Avido.jpg"], type: "base" }
+            ]
+        },
+        // 坎特雷拉
+        {
+            id: "g013_fs04",
+            name: "坎特雷拉",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/013/Cantarella.jpg"], type: "base" }
+            ]
+        },
+        // 大流士·戈登
+        {
+            id: "g013_fs05",
+            name: "大流士·戈登",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/013/Darius.jpg"], type: "base" }
+            ]
+        },
+        // 麦尔斯·斯特兰德
+        {
+            id: "g013_fs06",
+            name: "麦尔斯·斯特兰德",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/013/Miles.jpg"], type: "base" }
+            ]
+        },
+        // 帕西·蒙布朗
+        {
+            id: "g013_fs07",
+            name: "帕西·蒙布朗",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/013/Passy.jpg"], type: "base" }
+            ]
+        },
+        // 夏丽·戈登
+        {
+            id: "g013_fs08",
+            name: "夏丽·戈登",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/013/Shirley.jpg"], type: "base" }
+            ]
+        },
+        // 约翰·H·华生
+        {
+            id: "g013_fs09",
+            name: "约翰·H·华生",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/013/Watson.jpg"], type: "base" }
             ]
         }
     ]
