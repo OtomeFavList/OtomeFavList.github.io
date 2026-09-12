@@ -16,7 +16,7 @@ const gameData = {
         {name:"春森よしちか", lang:"zh"}
     ],
     art: [
-        {name:"読", lang:"zh"}
+        {name:"田中亜季", lang:"zh"}
     ],
     cover: "game/011.jpg",
     charList: [
