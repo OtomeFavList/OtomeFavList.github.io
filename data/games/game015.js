@@ -15,8 +15,7 @@ const gameData = {
         {name:"みぞおち鳩子", lang:"ja"}
     ],
     art: [
-        {name:"ナガオカ", lang:"ja"},
-        {name:"Team.", lang:"en"}
+        {name:"Team.ナガオカ", lang:"en"}
     ],
     cover: "game/015.jpg",
     charList: [
