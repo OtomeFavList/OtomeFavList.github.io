@@ -193,8 +193,8 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/013/Sissy.jpg",
-                            "char/013/Sissy2.jpg"], type: "base" }
+                { srcList: ["char/013/Sissy.jpg"], type: "base" },
+                { srcList: ["char/013/Sissy2.jpg"], type: "fd" }
             ]
         },
         // 亚历山德丽娜·维多利亚
