@@ -189,10 +189,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/019/Toshizou.jpg"],
+                { srcList: ["char/019/Toshizou.jpg",
                             "char/019/Toshizou2.jpg",
                             "char/019/Toshizou3.jpg",
-                            "char/019/Toshizou4.jpg", type: "base" },
+                            "char/019/Toshizou4.jpg"], type: "base" },
                 { srcList: ["char/019/Toshizou5.jpg"], type: "fd" }
             ]
         },
