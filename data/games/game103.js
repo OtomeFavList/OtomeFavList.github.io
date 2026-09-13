@@ -18,7 +18,7 @@ const gameData = {
         {name:"犬小屋煙突", lang:"zh"}
     ],
     art: [
-        {name:"ヒロセ アヅミ", lang:"ja"}
+        {name:"ヒロセアヅミ", lang:"ja"}
     ],
     cover: "game/103.jpg", // 相对路径，游戏封面
     charList: [
