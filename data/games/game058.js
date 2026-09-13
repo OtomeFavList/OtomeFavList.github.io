@@ -19,7 +19,7 @@ const gameData = {
         {name:"ふくだりょうこ", lang:"ja"}
     ],
     art: [
-        {name:"冨士原良 ", lang:"zh"}
+        {name:"冨士原良", lang:"zh"}
     ],
     cover: "game/058.jpg",
     charList: [
