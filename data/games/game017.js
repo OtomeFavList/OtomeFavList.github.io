@@ -124,5 +124,5 @@ const gameData = {
     ]
 };
 
-// ESModule导出，和其他游戏保持一致
+// ESModule导出
 export { gameData };
