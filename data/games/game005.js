@@ -172,5 +172,5 @@ const gameData = {
     ]
 };
 
-// 移除旧全局push写法！使用ESModule导出
+// ESModule导出
 export { gameData };
