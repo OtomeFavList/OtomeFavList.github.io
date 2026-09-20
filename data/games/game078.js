@@ -26,10 +26,10 @@
 // 官中发售以后，需要修改：游戏名、发售年份、汉化厂商、封面图、角色名
 const gameData = {
     id: "game078", // 全局唯一ID，不可重复，如 game001
-    name: "ネオンクラッシュ -Echoes of the Lost-",
+    name: "霓虹三国 -Echoes of the Lost-",
     year: "2025",
     publisher: ["Voltage"],
-    cnStudio: "暂无",
+    cnStudio: "JOYOLAND",
     writer: [
         {name:"吉村りりか", lang:"zh"}
     ],
@@ -38,10 +38,10 @@ const gameData = {
     ],
     cover: "game/078.jpg", // 相对路径，游戏封面
     charList: [
-        // リュウ·クロア
+        // 刘·玄娅
         {
             id: "g078_f01",
-            name: "リュウ·クロア",
+            name: "刘·玄娅",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
@@ -53,10 +53,10 @@ const gameData = {
                             "char/078/Liu5.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // カンテ·ラウド
+        // 关特·云德
         {
             id: "g078_m01",
-            name: "カンテ·ラウド",
+            name: "关特·云德",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -69,10 +69,10 @@ const gameData = {
                             "char/078/Gante6.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // ソディック·モネ
+        // 曹德·孟奈
         {
             id: "g078_m02",
-            name: "ソディック·モネ",
+            name: "曹德·孟奈",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -85,10 +85,10 @@ const gameData = {
                             "char/078/Sodyk6.jpg"], type: "base" },
             ]
         },
-        // ソン·マシロ
+        // 孙·真白
         {
             id: "g078_m03",
-            name: "ソン·マシロ",
+            name: "孙·真白",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -101,10 +101,10 @@ const gameData = {
                             "char/078/Sun6.jpg"], type: "base" },
             ]
         },
-        // チョウ·ヒヨク
+        // 张·飞翼
         {
             id: "g078_m04",
-            name: "チョウ·ヒヨク",
+            name: "张·飞翼",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -120,5 +120,5 @@ const gameData = {
     ]
 };
 
-// ✅新版导出！不要使用window.gameDataList.push！
+// 新版导出！不要使用window.gameDataList.push！
 export { gameData };
