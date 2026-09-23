@@ -26,7 +26,7 @@
 // 官中发售以后，需要修改：游戏名、发售年份、汉化厂商、封面图、角色名
 const gameData = {
     id: "game078", // 全局唯一ID，不可重复，如 game001
-    name: "霓虹三国 -Echoes of the Lost-",
+    name: "霓虹三国-Echoes of the Lost-",
     year: "2025",
     publisher: ["Voltage"],
     cnStudio: "JOYOLAND",
