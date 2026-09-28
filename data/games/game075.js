@@ -22,12 +22,12 @@
 // 官中发售以后，需要修改：游戏名、发售年份、汉化厂商、封面图、角色名
 const gameData = {
     id: "game075", // 全局唯一ID，不可重复，如 game001
-    name: "OVER REQUIEMZ",
-    year: "2025",
+    name: "奥兹国安魂曲",
+    year: "2026",
     publisher: ["Kogado Studio","Otomate"],
-    cnStudio: "暂无",
+    cnStudio: "JOYOLAND",
     writer: [
-        {name:"七霧花男", lang:"zh"}
+        {name:"根岸十郎", lang:"zh"}
     ],
     art: [
         {name:"風李たゆ", lang:"zh"}
