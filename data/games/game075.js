@@ -34,10 +34,10 @@ const gameData = {
     ],
     cover: "game/075.jpg", // 相对路径，游戏封面
     charList: [
-        // ユヒル
+        // 言京
         {
             id: "g075_f01",
-            name: "ユヒル",
+            name: "言京",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
@@ -46,10 +46,10 @@ const gameData = {
                             "char/075/Yuhiru2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // クロード·グレイン
+        // 克劳德·格莱因
         {
             id: "g075_m01",
-            name: "クロード·グレイン",
+            name: "克劳德·格莱因",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -59,10 +59,10 @@ const gameData = {
                             "char/075/Claude3.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // ドロシー
+        // 多萝西
         {
             id: "g075_m02",
-            name: "ドロシー",
+            name: "多萝西",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -72,10 +72,10 @@ const gameData = {
                             "char/075/Dorothy3.jpg"], type: "base" },
             ]
         },
-        // モリィ·ウッドランド
+        // 莫利·伍德兰
         {
             id: "g075_m03",
-            name: "モリィ·ウッドランド",
+            name: "莫利·伍德兰",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -85,10 +85,10 @@ const gameData = {
                             "char/075/Molly3.jpg"], type: "base" },
             ]
         },
-        // ノイル·ベスティア
+        // 诺伊尔·贝斯蒂亚
         {
             id: "g075_m04",
-            name: "ノイル·ベスティア",
+            name: "诺伊尔·贝斯蒂亚",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -98,10 +98,10 @@ const gameData = {
                             "char/075/Noil3.jpg"], type: "base" },
             ]
         },
-        // カイゼ·オズマ
+        // 凯泽·奥兹玛
         {
             id: "g075_m05",
-            name: "カイゼ·オズマ",
+            name: "凯泽·奥兹玛",
             gender: "male",
             isHidden: false,
             isFD: false,
