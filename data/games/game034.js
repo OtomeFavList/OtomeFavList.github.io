@@ -58,6 +58,20 @@ const gameData = {
             images: [
                 { srcList: ["char/034/Shun.jpg"], type: "base" }
             ]
+        },
+        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g1_s04",
+            name: "配角",
+            hiddenName: ["隐藏真名1","隐藏真名2"],    // 补丁新增：可选，不写则无隐藏名
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+            ]
         }
     ]
 };
