@@ -153,6 +153,34 @@ const gameData = {
                             "char/024/Touma4.jpg",
                             "char/024/Touma5.jpg"], type: "base" }
             ]
+        },
+        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g1_s01",
+            name: "配角",
+            hiddenName: ["隐藏真名1","隐藏真名2"],    // 补丁新增：可选，不写则无隐藏名
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+            ]
+        },
+        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g1_s01",
+            name: "配角",
+            hiddenName: ["隐藏真名1","隐藏真名2"],    // 补丁新增：可选，不写则无隐藏名
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+            ]
         }
     ]
 };
