@@ -2,7 +2,7 @@
 // ✅已核对信息
 const gameData = {
     id: "game017",
-    name: "暗之眷属",
+    name: "暗之眷属 -FANTASY ON DARK-",
     year: "2023",
     publisher: ["HuneX"],
     cnStudio: "GSE",
