@@ -284,7 +284,7 @@ const gameData = {
         // 小肚肚
         {
             id: "g023_s15",
-            name: "配角",
+            name: "小肚肚",
             gender: "male",
             isHidden: false,
             isFD: false,
