@@ -2,7 +2,7 @@
 // ✅已核对信息
 const gameData = {
     id: "game021", // 全局唯一ID，不可重复
-    name: "黑桃国的爱丽丝 ~Wonderful White World~",
+    name: "黑桃国的爱丽丝~Wonderful White World~",
     year: "2023",
     publisher: ["Otomate"],
     cnStudio: "GSE",
