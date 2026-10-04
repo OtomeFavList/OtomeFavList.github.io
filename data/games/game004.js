@@ -2,7 +2,7 @@
 // ✅已核对信息
 const gameData = {
     id: "game004",
-    name: "蒸汽监狱",
+    name: "蒸汽监狱 Steam Prison",
     year: "2021",
     publisher: ["HuneX"],
     cnStudio: "GSE",
