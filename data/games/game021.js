@@ -1,15 +1,13 @@
-// ==========【单个游戏独立数据模板｜新版ESModule】==========
-// 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
-// 无需额外配置，仅需要到 main.js 顶部 🚨gameIdList数组追加编号"002","003"...
+// data/games/game021.js
+// ✅已核对信息
 const gameData = {
     id: "game021", // 全局唯一ID，不可重复
-    name: "黑桃国的爱丽丝~Wonderful White World~",
+    name: "黑桃国的爱丽丝 ~Wonderful White World~",
     year: "2023",
     publisher: ["Otomate"],
     cnStudio: "GSE",
     writer: [
-        {name:"七瀬みお", lang:"zh"},
-        {name:"仰木サヤ", lang:"zh"}
+        {name:"七瀬みお", lang:"zh"}
     ],
     art: [
         {name:"藤丸豆ノ介", lang:"zh"}
