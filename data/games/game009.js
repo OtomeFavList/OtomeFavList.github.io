@@ -2,7 +2,7 @@
 // ✅已核对信息
 const gameData = {
     id: "game009",
-    name: "共生丘比特",
+    name: "Cupid Parasite-共生丘比特-",
     year: "2021",
     publisher: ["Otomate"],
     cnStudio: "GSE",
