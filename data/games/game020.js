@@ -2,7 +2,7 @@
 // ✅已核对信息
 const gameData = {
     id: "game020",
-    name: "不可逾越的红花~双月~",
+    name: "不可逾越的红花 ~双月~",
     year: "2023",
     publisher: ["Operetta Due"],
     cnStudio: "dramatic create",
