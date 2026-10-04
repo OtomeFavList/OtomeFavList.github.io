@@ -85,18 +85,121 @@ const gameData = {
                 { srcList: ["char/025/Orpheus.jpg"], type: "base" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 扬羽
         {
-            id: "g1_s09",
-            name: "配角",
-            hiddenName: ["隐藏真名1","隐藏真名2"],    // 补丁新增：可选，不写则无隐藏名
+            id: "g025_s01",
+            name: "扬羽",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/025/Ageha.jpg"], type: "base" }
+            ]
+        },
+        // 茜
+        {
+            id: "g025_s02",
+            name: "茜",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/025/Akane.jpg"], type: "base" }
+            ]
+        },
+        // 浅葱
+        {
+            id: "g025_s03",
+            name: "浅葱",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/025/Asagi.jpg"], type: "base" }
+            ]
+        },
+        // 邦·博纳尔
+        {
+            id: "g025_s04",
+            name: "邦·博纳尔",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/025/Bon.jpg"], type: "base" }
+            ]
+        },
+        // 恩玖夫人
+        {
+            id: "g025_s05",
+            name: "恩玖夫人",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/025/Enge.jpg"], type: "base" }
+            ]
+        },
+        // 米蕾娜
+        {
+            id: "g025_s06",
+            name: "米蕾娜",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/025/Milene.jpg"], type: "base" }
+            ]
+        },
+        // 瑠璃
+        {
+            id: "g025_s07",
+            name: "瑠璃",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/025/Ruri.jpg"], type: "base" }
+            ]
+        },
+        // 褄红
+        {
+            id: "g025_s08",
+            name: "褄红",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/025/Tsumabeni.jpg"], type: "base" }
+            ]
+        },
+        // 里波
+        {
+            id: "g025_s09",
+            name: "里波",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/025/Uranami.jpg"], type: "base" }
             ]
         }
     ]
