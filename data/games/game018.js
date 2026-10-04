@@ -2,7 +2,7 @@
 // ✅已核对信息
 const gameData = {
     id: "game018",
-    name: "命运九重奏",
+    name: "命运九重奏 -NORN9 LOFN-",
     year: "2023",
     publisher: ["Otomate"],
     cnStudio: "GSE",
