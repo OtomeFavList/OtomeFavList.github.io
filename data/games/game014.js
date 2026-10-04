@@ -2,7 +2,7 @@
 // ✅已核对信息
 const gameData = {
     id: "game014",
-    name: "与魔共舞",
+    name: "与魔共舞 Dance with Devils",
     year: "2022",
     publisher: ["Rejet"],
     cnStudio: "JOYOLAND",
