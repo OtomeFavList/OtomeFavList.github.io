@@ -25,7 +25,9 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/021/Alice.jpg",
-                            "char/021/Alice2.png"], type: "base" }
+                            "char/021/Alice2.jpg",
+                            "char/021/Alice3.jpg",
+                            "char/021/Alice4.png"], type: "base" }
             ]
         },
         // 布拉德·都普雷
@@ -196,32 +198,31 @@ const gameData = {
                             "char/021/Nightmare4.png"], type: "base" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 彼得·怀特
         {
-            id: "g1_s01",
-            name: "配角",
-            hiddenName: ["隐藏真名1","隐藏真名2"],    // 补丁新增：可选，不写则无隐藏名
+            id: "g021_s01",
+            name: "彼得·怀特",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/021/Peter.jpg",
+                            "char/021/Peter2.jpg"], type: "base" }
             ]
         },
-        // 续作/FD次要角色（isFdSub=true → 开关开启才显示整个角色卡片）
+        // 尤利乌斯
         {
-            id: "g1_fs01",
-            name: "配角",
-            hiddenName: ["隐藏真名1","隐藏真名2"],    // 补丁新增：可选，不写则无隐藏名
+            id: "g021_fs01",
+            name: "尤利乌斯",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: false,
             isFdSub: true,
             images: [
-                { srcList: ["char/g001_fS01_1.jpg"], type: "base" }
+                { srcList: ["char/021/Julius.jpg"], type: "base" }
             ]
         }
     ]
