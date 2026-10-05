@@ -42,7 +42,9 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/029/Airi.jpg",
-                            "char/029/Airi2.jpg"], type: "base" }
+                            "char/029/Airi2.jpg",
+                            "char/029/Airi3.jpg",
+                            "char/029/Airi4.jpg"], type: "base" }
             ]
         },
         // 露娜
@@ -54,7 +56,9 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/029/Luna.jpg",
-                            "char/029/Luna2.jpg"], type: "base" }
+                            "char/029/Luna2.jpg",
+                            "char/029/Luna3.jpg",
+                            "char/029/Luna4.jpg"], type: "base" }
             ]
         },
         // 杰克
@@ -66,7 +70,9 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/029/Jack.jpg",
-                            "char/029/Jack2.jpg"], type: "base" }
+                            "char/029/Jack2.jpg",
+                            "char/029/Jack3.jpg",
+                            "char/029/Jack4.jpg"], type: "base" }
             ]
         },
         // 卡农
@@ -78,7 +84,9 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/029/Kanon.jpg",
-                            "char/029/Kanon2.jpg"], type: "base" }
+                            "char/029/Kanon2.jpg",
+                            "char/029/Kanon3.jpg",
+                            "char/029/Kanon4.jpg"], type: "base" }
             ]
         },
         // 米涅特
@@ -90,7 +98,9 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/029/Minette.jpg",
-                            "char/029/Minette2.jpg"], type: "base" }
+                            "char/029/Minette2.jpg",
+                            "char/029/Minette3.jpg",
+                            "char/029/Minette4.jpg"], type: "base" }
             ]
         },
         // 尼洛
@@ -102,7 +112,9 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/029/Nello.jpg",
-                            "char/029/Nello2.jpg"], type: "base" }
+                            "char/029/Nello2.jpg",
+                            "char/029/Nello3.jpg",
+                            "char/029/Nello4.jpg"], type: "base" }
             ]
         },
         // 雷因
@@ -114,7 +126,9 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/029/Rain.jpg",
-                            "char/029/Rain2.jpg"], type: "base" }
+                            "char/029/Rain2.jpg",
+                            "char/029/Rain3.jpg",
+                            "char/029/Rain4.jpg"], type: "base" }
             ]
         },
         // 斯诺
@@ -126,14 +140,145 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/029/Snow.jpg",
-                            "char/029/Snow2.jpg"], type: "base" }
+                            "char/029/Snow2.jpg",
+                            "char/029/Snow3.jpg",
+                            "char/029/Snow4.jpg"], type: "base" }
+            ]
+        },
+        // 浅葱
+        {
+            id: "g029_s01",
+            name: "浅葱",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+            ]
+        },
+        // 达姆
+        {
+            id: "g029_s02",
+            name: "达姆",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+            ]
+        },
+        // 迪
+        {
+            id: "g029_s03",
+            name: "迪",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
             ]
         },
         // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
         {
-            id: "g1_s11",
+            id: "g029_s04",
             name: "配角",
-            hiddenName: ["隐藏真名1","隐藏真名2"],    // 补丁新增：可选，不写则无隐藏名
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+            ]
+        },
+        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g029_s05",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+            ]
+        },
+        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g029_s06",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+            ]
+        },
+        // 娜兹娜
+        {
+            id: "g029_s07",
+            name: "娜兹娜",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+            ]
+        },
+        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g029_s08",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+            ]
+        },
+        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g029_s09",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+            ]
+        },
+        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g029_s10",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+            ]
+        },
+        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g029_s11",
+            name: "配角",
             gender: "male",
             isHidden: false,
             isFD: false,
