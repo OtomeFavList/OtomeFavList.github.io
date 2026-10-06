@@ -1,5 +1,6 @@
 // data/games/game029.js
 // ✅已核对信息
+// ℹ️配角名未校对
 const gameData = {
     id: "game029", // 全局唯一ID，不可重复
     name: "白与黑的爱丽丝",
