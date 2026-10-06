@@ -1,5 +1,6 @@
 // data/games/game032.js
 // ✅已核对信息
+// ℹ️R2FD内容未校对
 const gameData = {
     id: "game032", // 全局唯一ID，不可重复
     name: "幸运之杖 R",
