@@ -1,5 +1,6 @@
 // data/games/game035.js
 // ✅已核对信息
+// ℹ️续作内容未汉化
 const gameData = {
     id: "game035", // 全局唯一ID，不可重复
     name: "BUSTAFELLOWS",
