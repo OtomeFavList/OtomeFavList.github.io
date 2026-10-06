@@ -1,4 +1,4 @@
-// data/games/game027.js
+// data/games/game028.js
 // ✅已核对信息
 const gameData = {
     id: "game028", // 全局唯一ID，不可重复
