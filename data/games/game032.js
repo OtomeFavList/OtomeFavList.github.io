@@ -381,7 +381,7 @@ const gameData = {
             isSub: false,
             isFdSub: true,
             images: [
-                { srcList: ["char/032/Rasheed.jpg], type: "base" }
+                { srcList: ["char/032/Rasheed.jpg"], type: "base" }
             ]
         },
         // 萨拉曼达
