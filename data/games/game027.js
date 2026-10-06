@@ -8,11 +8,11 @@ const gameData = {
     cnStudio: "GSE",
     writer: [
         {name:"望月柚枝", lang:"zh"},
-        {name:"果村なずな", lang:"zh"},
-        {name:"やまだ有見", lang:"ja"}
+        {name:"果村なずな", lang:"zh"}
     ],
     art: [
-        {name:"花邑まい", lang:"zh"}
+        {name:"花邑まい", lang:"zh"},
+        {name:"夏目ウタ", lang:"zh"}
     ],
     cover: "game/027.jpg",
     charList: [
