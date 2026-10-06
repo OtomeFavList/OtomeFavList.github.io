@@ -126,7 +126,7 @@ const gameData = {
             isHidden: false,
             isFD: true,
             images: [
-                { srcList: ["char/028/Arita.jpg"], type: "base" },
+                { srcList: ["char/028/Arita.png"], type: "base" },
                 { srcList: ["char/028/Arita2.jpg",
                             "char/028/Arita3.jpg"], type: "fd" }
             ]
