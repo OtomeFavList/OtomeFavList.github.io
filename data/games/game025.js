@@ -1,5 +1,6 @@
 // data/games/game025.js
 // ✅已核对信息
+// ℹ️部分配角名未校对
 const gameData = {
     id: "game025", // 全局唯一ID，不可重复
     name: "花之女王",
