@@ -23,7 +23,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/030/Mikoto.jpg"], type: "base" }
+                { srcList: ["char/030/Mikoto.jpg",
+                            "char/030/Mikoto2.jpg",
+                            "char/030/Mikoto3.jpg"], type: "base" }
             ]
         },
         // 姬空木
@@ -35,7 +37,9 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/030/Himeutsugi.jpg",
-                            "char/030/Himeutsugi2.jpg"], type: "base" }
+                            "char/030/Himeutsugi2.jpg",
+                            "char/030/Himeutsugi3.jpg",
+                            "char/030/Himeutsugi4.jpg"], type: "base" }
             ]
         },
         // 伊吕波
@@ -47,7 +51,8 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/030/Iroha.jpg",
-                            "char/030/Iroha2.jpg"], type: "base" }
+                            "char/030/Iroha2.jpg",
+                            "char/030/Iroha3.jpg"], type: "base" }
             ]
         },
         // 唐红
@@ -59,7 +64,8 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/030/Karakurenai.jpg",
-                            "char/030/Karakurenai2.jpg"], type: "base" }
+                            "char/030/Karakurenai2.jpg",
+                            "char/030/Karakurenai3.jpg"], type: "base" }
             ]
         },
         // 蛟
@@ -71,21 +77,113 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/030/Mizuchi.jpg",
-                            "char/030/Mizuchi2.jpg"], type: "base" }
+                            "char/030/Mizuchi2.jpg",
+                            "char/030/Mizuchi3.jpg",
+                            "char/030/Mizuchi4.jpg"], type: "base" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 宇津都
         {
-            id: "g1_s09",
-            name: "配角",
-            hiddenName: ["隐藏真名1","隐藏真名2"],    // 补丁新增：可选，不写则无隐藏名
+            id: "g030_m04",
+            name: "宇津都",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            images: [
+                { srcList: ["char/030/Utsutsu.jpg"], type: "base" }
+            ]
+        },
+        // 金时花
+        {
+            id: "g030_s01",
+            name: "金时花",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/030/Awahana.jpg"], type: "base" }
+            ]
+        },
+        // 日向
+        {
+            id: "g030_s02",
+            name: "日向",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/030/Hinata.jpg"], type: "base" }
+            ]
+        },
+        // いめ
+        {
+            id: "g030_s03",
+            name: "いめ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/030/Ime.jpg"], type: "base" }
+            ]
+        },
+        // 阿波花
+        {
+            id: "g030_s04",
+            name: "阿波花",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/030/Kintokiana.jpg"], type: "base" }
+            ]
+        },
+        // 斧定九郎
+        {
+            id: "g030_s05",
+            name: "斧定九郎",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/030/Kurou.jpg",
+                            "char/030/Kurou2.jpg"], type: "base" }
+            ]
+        },
+        // 百岁
+        {
+            id: "g030_s06",
+            name: "百岁",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/030/Momotose.jpg",
+                            "char/030/Momotose2.jpg"], type: "base" }
+            ]
+        },
+        // 尼诺
+        {
+            id: "g030_s07",
+            name: "尼诺",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/030/Nino.jpg"], type: "base" }
             ]
         }
     ]
