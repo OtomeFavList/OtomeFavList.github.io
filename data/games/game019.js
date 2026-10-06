@@ -300,7 +300,7 @@ const gameData = {
         // 君菊
         {
             id: "g019_s07",
-            name: "配角",
+            name: "君菊",
             gender: "male",
             isHidden: false,
             isFD: false,
