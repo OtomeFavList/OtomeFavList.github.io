@@ -116,7 +116,7 @@ const gameData = {
         // 恩达
         {
             id: "g026_s02",
-            name: "恩迪",
+            name: "恩达",
             gender: "male",
             isHidden: false,
             isFD: false,
