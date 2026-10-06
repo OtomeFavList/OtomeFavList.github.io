@@ -22,7 +22,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/033/Lapis.jpg"], type: "base" }
+                { srcList: ["char/033/Lapis.png"], type: "base" }
             ]
         },
         // 樫森光希
@@ -44,7 +44,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/033/Ruu.jpg"], type: "base" }
+                { srcList: ["char/033/Ruu.png"], type: "base" }
             ]
         },
         // 希尔·瑟瑞斯泰特
@@ -55,7 +55,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/033/Shell.jpg"], type: "base" }
+                { srcList: ["char/033/Shell.png"], type: "base" }
             ]
         },
         // 小坂四季
@@ -66,7 +66,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/033/Shiki.jpg"], type: "base" }
+                { srcList: ["char/033/Shiki.png"], type: "base" }
             ]
         },
         // 壬生心乃助
@@ -110,7 +110,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/033/Euc.jpg"], type: "base" }
+                { srcList: ["char/033/Euc.png"], type: "base" }
             ]
         },
         // 奥茵·艾德克雷兹
