@@ -175,7 +175,7 @@ const gameData = {
         // 德川吉宗
         {
             id: "g015_s07",
-            name: "配角",
+            name: "德川吉宗",
             gender: "male",
             isHidden: false,
             isFD: false,
