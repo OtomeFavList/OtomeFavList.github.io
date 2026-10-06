@@ -113,7 +113,7 @@ const gameData = {
                 { srcList: ["char/026/Conrad.jpg"], type: "base" }
             ]
         },
-        // 恩迪
+        // 恩达
         {
             id: "g026_s02",
             name: "恩迪",
@@ -289,8 +289,8 @@ const gameData = {
             gender: "male",
             isHidden: false,
             isFD: false,
-            isSub: false,
-            isFdSub: true,
+            isSub: true,
+            isFdSub: false,
             images: [
                 { srcList: ["char/026/Harrison.jpg"], type: "base" }
             ]
@@ -302,8 +302,8 @@ const gameData = {
             gender: "male",
             isHidden: false,
             isFD: false,
-            isSub: false,
-            isFdSub: true,
+            isSub: true,
+            isFdSub: false,
             images: [
                 { srcList: ["char/026/James.jpg"], type: "base" }
             ]
