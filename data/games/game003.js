@@ -101,10 +101,10 @@ const gameData = {
                 { srcList: ["char/003/Abe.jpg"], type: "base" }
             ]
         },
-        // 阿斯莫德
+        // 魔族青年
         {
             id: "g003_s02",
-            name: "阿斯莫德",
+            name: "魔族青年",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -113,10 +113,10 @@ const gameData = {
                 { srcList: ["char/003/Asmodeus.jpg"], type: "base" }
             ]
         },
-        // 索利图斯
+        // 御门的助手
         {
             id: "g003_s03",
-            name: "索利图斯",
+            name: "御门的助手",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -152,7 +152,7 @@ const gameData = {
         // 克洛洛
         {
             id: "g003_s06",
-            name: "配角",
+            name: "克洛洛",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -200,7 +200,7 @@ const gameData = {
         // 缇塔妮亚
         {
             id: "g003_s10",
-            name: "配角",
+            name: "缇塔妮亚",
             gender: "male",
             isHidden: false,
             isFD: false,
