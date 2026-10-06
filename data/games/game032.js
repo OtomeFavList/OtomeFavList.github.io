@@ -162,7 +162,7 @@ const gameData = {
             images: [
                 { srcList: ["char/032/Solo.jpg",
                             "char/032/Solo2.png"], type: "base" },
-                { srcList: ["char/032/Solo3.png""], type: "fd" }
+                { srcList: ["char/032/Solo3.png"], type: "fd" }
             ]
         },
         // 阿黛蕾
