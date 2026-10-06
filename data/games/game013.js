@@ -211,7 +211,7 @@ const gameData = {
         },
         // 德拉克鲁瓦二世
         {
-            id: "g013_s07",
+            id: "g013_s08",
             name: "德拉克鲁瓦二世",
             gender: "male",
             isHidden: false,
