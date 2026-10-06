@@ -1,11 +1,10 @@
-// ==========【单个游戏独立数据模板｜新版ESModule】==========
-// 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
-// 无需额外配置，仅需要到 main.js 顶部 🚨gameIdList数组追加编号"002","003"...
+// data/games/game029.js
+// ✅已核对信息
 const gameData = {
     id: "game029", // 全局唯一ID，不可重复
     name: "白与黑的爱丽丝",
     year: "2023",
-    publisher: ["Otomate"],
+    publisher: ["Otomate","工画堂スタジオ"],
     cnStudio: "JSD",
     writer: [
         {name:"関涼子", lang:"zh"},
@@ -308,5 +307,5 @@ const gameData = {
     ]
 };
 
-// ✅新版导出！不要使用window.gameDataList.push！
+// ESModule导出
 export { gameData };
