@@ -1,5 +1,6 @@
 // data/games/game012.js
 // ✅已核对信息
+// ℹ️配角名未校对
 const gameData = {
     id: "game012",
     name: "谎月香格里拉",
