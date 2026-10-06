@@ -155,7 +155,7 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/029/Asagi.jpg"], type: "base" }
             ]
         },
         // 达姆
@@ -168,7 +168,7 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/029/Damu.jpg"], type: "base" }
             ]
         },
         // 迪
@@ -181,111 +181,128 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/029/Dei.jpg"], type: "base" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 卡尔米亚
         {
             id: "g029_s04",
-            name: "配角",
+            name: "卡尔米亚",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/029/Kalmia.jpg"], type: "base" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 米丝蒂
         {
             id: "g029_s05",
-            name: "配角",
+            name: "米丝蒂",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/029/Misty.jpg"], type: "base" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 美羽
         {
             id: "g029_s06",
-            name: "配角",
+            name: "美羽",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/029/Miu.jpg",
+                            "char/029/Miu2.jpg"], type: "base" }
             ]
         },
-        // 娜兹娜
+        // 奈因
         {
             id: "g029_s07",
-            name: "娜兹娜",
+            name: "奈因",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/029/Nain.jpg",
+                            "char/029/Nain2.jpg"], type: "base" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 奈津菜
         {
             id: "g029_s08",
-            name: "配角",
+            name: "奈津菜",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/029/Nazuna.jpg",
+                            "char/029/Nazuna2.jpg"], type: "base" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 拉特
         {
             id: "g029_s09",
-            name: "配角",
+            name: "拉特",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/029/Ratte.jpg"], type: "base" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 琉唯
         {
             id: "g029_s10",
-            name: "配角",
+            name: "琉唯",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/029/Rui.jpg"], type: "base" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 史黛拉
         {
             id: "g029_s11",
-            name: "配角",
+            name: "史黛拉",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/029/Stella.jpg"], type: "base" }
+            ]
+        },
+        // 洋平
+        {
+            id: "g029_s12",
+            name: "洋平",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/029/Yohei.jpg",
+                            "char/029/Yohei2.jpg"], type: "base" }
             ]
         }
     ]
