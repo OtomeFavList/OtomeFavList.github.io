@@ -130,8 +130,8 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/027/Orion.jpg",
-                            "char/027/Orion2.jpg"], type: "base" }
+                { srcList: ["char/027/Orion.jpg"], type: "base" },
+                { srcList: ["char/027/Orion2.jpg"], type: "fd" }
             ]
         },
         // RIKA
