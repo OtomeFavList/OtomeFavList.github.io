@@ -65,10 +65,10 @@ const gameData = {
                             "char/013/Impey2.jpg"], type: "base" }
             ]
         },
-        // 亚森·罗宾
+        // 亚森·鲁邦
         {
             id: "g013_m04",
-            name: "亚森·罗宾",
+            name: "亚森·鲁邦",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -78,10 +78,10 @@ const gameData = {
                             "char/013/Lupin3.jpg"], type: "base" }
             ]
         },
-        // 亚伯拉罕·范·海辛
+        // 亚伯拉罕·凡赫辛
         {
             id: "g013_m05",
-            name: "亚伯拉罕·范·海辛",
+            name: "亚伯拉罕·凡赫辛",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -104,10 +104,10 @@ const gameData = {
                 { srcList: ["char/013/Finis2.jpg"], type: "fd" }
             ]
         },
-        // 夏尔摩斯
+        // 海尔洛克·夏尔摩斯
         {
             id: "g013_fd02",
-            name: "夏尔摩斯",
+            name: "海尔洛克·夏尔摩斯",
             gender: "male",
             isHidden: false,
             isFD: true,
@@ -116,10 +116,10 @@ const gameData = {
                 { srcList: ["char/013/Sholmes.jpg"], type: "base" }
             ]
         },
-        // 吉米·A·阿利斯特
+        // 杰米·A·阿雷斯特
         {
             id: "g013_s01",
-            name: "吉米·A·阿利斯特",
+            name: "杰米·A·阿雷斯特",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -129,10 +129,10 @@ const gameData = {
                 { srcList: ["char/013/Arester.jpg"], type: "base" }
             ]
         },
-        // 兰巴尔·莱昂哈特
+        // 兰帕尔·雷欧哈特
         {
             id: "g013_s02",
-            name: "兰巴尔·莱昂哈特",
+            name: "兰帕尔·雷欧哈特",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -155,10 +155,10 @@ const gameData = {
                 { srcList: ["char/013/Gwenhwyfar.jpg"], type: "base" }
             ]
         },
-        // 尼摩
+        // 尼莫
         {
             id: "g013_s04",
-            name: "尼摩",
+            name: "尼莫",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -168,10 +168,10 @@ const gameData = {
                 { srcList: ["char/013/Nemo.jpg"], type: "base" }
             ]
         },
-        // 欧姆尼布斯
+        // 奥姆尼布斯
         {
             id: "g013_s05",
-            name: "欧姆尼布斯",
+            name: "奥姆尼布斯",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -208,6 +208,19 @@ const gameData = {
                 { srcList: ["char/013/Victoria.jpg"], type: "base" }
             ]
         },
+        // 德拉克鲁瓦二世
+        {
+            id: "g013_s07",
+            name: "德拉克鲁瓦二世",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/013/Delacroix.jpg"], type: "base" }
+            ]
+        },
         // 艾吉耶男爵
         {
             id: "g013_fs01",
@@ -221,10 +234,10 @@ const gameData = {
                 { srcList: ["char/013/Aiguille.jpg"], type: "base" }
             ]
         },
-        // 汉赛斯·海克森豪斯
+        // 汉赛尔·海克森豪斯
         {
             id: "g013_fs02",
-            name: "汉赛斯·海克森豪斯",
+            name: "汉赛尔·海克森豪斯",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -237,7 +250,7 @@ const gameData = {
         // 阿维多·克鲁德雷
         {
             id: "g013_fs03",
-            name: "配角",
+            name: "阿维多·克鲁德雷",
             gender: "male",
             isHidden: false,
             isFD: false,
