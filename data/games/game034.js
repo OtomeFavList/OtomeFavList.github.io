@@ -23,7 +23,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/034/Nozomi.jpg"], type: "base" }
+                { srcList: ["char/034/Nozomi.jpg",
+                            "char/034/Nozomi2.jpg",
+                            "char/034/Nozomi3.jpg",
+                            "char/034/Nozomi4.jpg"], type: "base" }
             ]
         },
         // 仓口步
@@ -34,7 +37,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/034/Ayumu.jpg"], type: "base" }
+                { srcList: ["char/034/Ayumu.jpg",
+                            "char/034/Ayumu2.jpg",
+                            "char/034/Ayumu3.jpg",
+                            "char/034/Ayumu4.jpg"], type: "base" }
             ]
         },
         // 星名穗积
@@ -45,7 +51,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/034/Hozumi.jpg"], type: "base" }
+                { srcList: ["char/034/Hozumi.jpg",
+                            "char/034/Hozumi2.jpg",
+                            "char/034/Hozumi3.jpg",
+                            "char/034/Hozumi4.jpg"], type: "base" }
             ]
         },
         // 姐崎隼
@@ -56,21 +65,74 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/034/Shun.jpg"], type: "base" }
+                { srcList: ["char/034/Shun.jpg",
+                            "char/034/Shun2.jpg",
+                            "char/034/Shun3.jpg",
+                            "char/034/Shun4.jpg"], type: "base" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 折笠未步
         {
-            id: "g1_s04",
-            name: "配角",
-            hiddenName: ["隐藏真名1","隐藏真名2"],    // 补丁新增：可选，不写则无隐藏名
+            id: "g034_s01",
+            name: "折笠未步",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/034/Miho.jpg",
+                            "char/034/Miho2.jpg",
+                            "char/034/Miho3.jpg",
+                            "char/034/Miho4.jpg"], type: "base" }
+            ]
+        },
+        // 星名瑞穗
+        {
+            id: "g034_s02",
+            name: "星名瑞穗",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/034/Mizuho.jpg",
+                            "char/034/Mizuho2.jpg",
+                            "char/034/Mizuho3.jpg",
+                            "char/034/Mizuho4.jpg"], type: "base" }
+            ]
+        },
+        // 柊闲音
+        {
+            id: "g034_s03",
+            name: "柊闲音",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/034/Shizune.jpg",
+                            "char/034/Shizune2.jpg",
+                            "char/034/Shizune3.jpg",
+                            "char/034/Shizune4.jpg"], type: "base" }
+            ]
+        },
+        // 押井有
+        {
+            id: "g034_s04",
+            name: "押井有",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/034/Yu.jpg",
+                            "char/034/Yu2.jpg",
+                            "char/034/Yu3.jpg",
+                            "char/034/Yu4.jpg"], type: "base" }
             ]
         }
     ]
