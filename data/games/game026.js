@@ -37,9 +37,9 @@ const gameData = {
             images: [
                 { srcList: ["char/026/Crius.jpg",
                             "char/026/Crius2.jpg",
-                            "char/026/Crius3.jpg",
-                            "char/026/Crius4.jpg",
-                            "char/026/Crius5.jpg"], type: "base" }
+                            "char/026/Crius3.jpg"], type: "base" },
+                { srcList: ["char/026/Crius4.jpg",
+                            "char/026/Crius5.jpg"], type: "fd" }
             ]
         },
         // 路西恩·诺伊施本
@@ -52,9 +52,9 @@ const gameData = {
             images: [
                 { srcList: ["char/026/Lucien.jpg",
                             "char/026/Lucien2.jpg",
-                            "char/026/Lucien3.jpg",
-                            "char/026/Lucien4.jpg",
-                            "char/026/Lucien5.jpg"], type: "base" }
+                            "char/026/Lucien3.jpg"], type: "base" },
+                { srcList: ["char/026/Lucien4.jpg",
+                            "char/026/Lucien5.jpg"], type: "fd" }
             ]
         },
         // 提瑞尔·I·利斯特
@@ -67,9 +67,9 @@ const gameData = {
             images: [
                 { srcList: ["char/026/Tyril.jpg",
                             "char/026/Tyril2.jpg",
-                            "char/026/Tyril3.jpg",
-                            "char/026/Tyril4.jpg",
-                            "char/026/Tyril5.jpg"], type: "base" }
+                            "char/026/Tyril3.jpg"], type: "base" },
+                { srcList: ["char/026/Tyril4.jpg",
+                            "char/026/Tyril5.jpg"], type: "fd" }
             ]
         },
         // 泽恩·索菲尔德
@@ -82,9 +82,9 @@ const gameData = {
             images: [
                 { srcList: ["char/026/Zenn.jpg",
                             "char/026/Zenn2.jpg",
-                            "char/026/Zenn3.jpg",
-                            "char/026/Zenn4.jpg",
-                            "char/026/Zenn5.jpg"], type: "base" }
+                            "char/026/Zenn3.jpg"], type: "base" },
+                { srcList: ["char/026/Zenn4.jpg",
+                            "char/026/Zenn5.jpg"], type: "fd" }
             ]
         },
         // 伊什
@@ -94,6 +94,7 @@ const gameData = {
             gender: "male",
             isHidden: false,
             isFD: true,
+            isSub: true,
             images: [
                 { srcList: ["char/026/Majo.jpg",
                             "char/026/Majo2.jpg",
