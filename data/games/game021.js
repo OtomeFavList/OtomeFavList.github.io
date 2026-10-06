@@ -24,8 +24,8 @@ const gameData = {
             images: [
                 { srcList: ["char/021/Alice.jpg",
                             "char/021/Alice2.jpg",
-                            "char/021/Alice3.jpg",
-                            "char/021/Alice4.png"], type: "base" }
+                            "char/021/Alice4.png"], type: "base" },
+                { srcList: ["char/021/Alice3.jpg"], type: "fd" }
             ]
         },
         // 布拉德·都普雷
@@ -38,8 +38,8 @@ const gameData = {
             images: [
                 { srcList: ["char/021/Blood.jpg",
                             "char/021/Blood2.jpg",
-                            "char/021/Blood3.jpg",
-                            "char/021/Blood4.png"], type: "base" }
+                            "char/021/Blood4.png"], type: "base" },
+                { srcList: ["char/021/Blood3.jpg"], type: "fd" }
             ]
         },
         // 崔德尔·迪
@@ -52,8 +52,8 @@ const gameData = {
             images: [
                 { srcList: ["char/021/Dee.jpg",
                             "char/021/Dee2.jpg",
-                            "char/021/Dee3.jpg",
-                            "char/021/Dee4.png"], type: "base" }
+                            "char/021/Dee4.png"], type: "base" },
+                { srcList: ["char/021/Dee3.jpg"], type: "fd" }
             ]
         },
         // 崔德尔·达姆
@@ -66,8 +66,8 @@ const gameData = {
             images: [
                 { srcList: ["char/021/Dum.jpg",
                             "char/021/Dum2.jpg",
-                            "char/021/Dum3.jpg",
-                            "char/021/Dum4.png"], type: "base" }
+                            "char/021/Dum4.png"], type: "base" },
+                { srcList: ["char/021/Dum3.jpg"], type: "fd" }
             ]
         },
         // 艾略特·玛奇
@@ -80,8 +80,8 @@ const gameData = {
             images: [
                 { srcList: ["char/021/Elliot.jpg",
                             "char/021/Elliot2.jpg",
-                            "char/021/Elliot3.jpg",
-                            "char/021/Elliot4.png"], type: "base" }
+                            "char/021/Elliot4.png"], type: "base" },
+                { srcList: ["char/021/Elliot3.jpg"], type: "fd" }
             ]
         },
         // 路易斯·可萝
@@ -94,8 +94,8 @@ const gameData = {
             images: [
                 { srcList: ["char/021/Lewis.jpg",
                             "char/021/Lewis2.jpg",
-                            "char/021/Lewis3.jpg",
-                            "char/021/Lewis4.png"], type: "base" }
+                            "char/021/Lewis4.png"], type: "base" },
+                { srcList: ["char/021/Lewis3.jpg"], type: "fd" }
             ]
         },
         // 奎恩·希尔凡
@@ -108,8 +108,8 @@ const gameData = {
             images: [
                 { srcList: ["char/021/Quin.jpg",
                             "char/021/Quin2.jpg",
-                            "char/021/Quin3.jpg",
-                            "char/021/Quin4.png"], type: "base" }
+                            "char/021/Quin4.png"], type: "base" },
+                { srcList: ["char/021/Quin3.jpg"], type: "fd" }
             ]
         },
         // 艾斯
@@ -121,9 +121,9 @@ const gameData = {
             isFD: true,
             images: [
                 { srcList: ["char/021/Ace.jpg",
-                            "char/021/Ace2.jpg",
                             "char/021/Ace3.jpg",
-                            "char/021/Ace4.png"], type: "base" }
+                            "char/021/Ace4.png"], type: "base" },
+                { srcList: ["char/021/Ace2.jpg"], type: "fd" }
             ]
         },
         // 波利斯·艾瑞
@@ -135,9 +135,9 @@ const gameData = {
             isFD: true,
             images: [
                 { srcList: ["char/021/Boris.jpg",
-                            "char/021/Boris2.jpg",
                             "char/021/Boris3.jpg",
-                            "char/021/Boris4.png"], type: "base" }
+                            "char/021/Boris4.png"], type: "base" },
+                { srcList: ["char/021/Boris2.jpg"], type: "fd" }
             ]
         },
         // 格雷·林谷马克
@@ -149,9 +149,9 @@ const gameData = {
             isFD: true,
             images: [
                 { srcList: ["char/021/Gray.jpg",
-                            "char/021/Gray2.jpg",
                             "char/021/Gray3.jpg",
-                            "char/021/Gray4.png"], type: "base" }
+                            "char/021/Gray4.png"], type: "base" },
+                { srcList: ["char/021/Gray2.jpg"], type: "fd" }
             ]
         },
         // 汉尼瓦·葛特
@@ -163,9 +163,9 @@ const gameData = {
             isFD: true,
             images: [
                 { srcList: ["char/021/Hannibal.jpg",
-                            "char/021/Hannibal2.jpg",
                             "char/021/Hannibal3.jpg",
-                            "char/021/Hannibal4.png"], type: "base" }
+                            "char/021/Hannibal4.png"], type: "base" },
+                { srcList: ["char/021/Hannibal2.jpg"], type: "fd" }
             ]
         },
         // Joker
@@ -177,9 +177,9 @@ const gameData = {
             isFD: true,
             images: [
                 { srcList: ["char/021/Joker.jpg",
-                            "char/021/Joker2.jpg",
                             "char/021/Joker3.jpg",
-                            "char/021/Joker4.png"], type: "base" }
+                            "char/021/Joker4.png"], type: "base" },
+                { srcList: ["char/021/Joker2.jpg"], type: "fd" }
             ]
         },
         // 奈特梅尔·哥德夏洛克
@@ -191,9 +191,9 @@ const gameData = {
             isFD: true,
             images: [
                 { srcList: ["char/021/Nightmare.jpg",
-                            "char/021/Nightmare2.jpg",
                             "char/021/Nightmare3.jpg",
-                            "char/021/Nightmare4.png"], type: "base" }
+                            "char/021/Nightmare4.png"], type: "base" },
+                { srcList: ["char/021/Nightmare2.jpg"], type: "fd" }
             ]
         },
         // 彼得·怀特
