@@ -2,7 +2,7 @@
 // ✅已核对信息
 const gameData = {
     id: "game032", // 全局唯一ID，不可重复
-    name: "幸运之杖R",
+    name: "Wand of Fortune R",
     year: "2024",
     publisher: ["Otomate"],
     cnStudio: "JOYOLAND",
