@@ -1,5 +1,6 @@
 // data/games/game013.js
 // ⚠️已核对信息，FD白银官网差分未制作
+// ℹ️部分配角名未校对
 const gameData = {
     id: "game013",
     name: "Code:Realize ~创世的公主~",
