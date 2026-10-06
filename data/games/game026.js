@@ -22,8 +22,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/026/Anastasia.jpg",
-                            "char/026/Anastasia2.jpg"], type: "base" }
+                { srcList: ["char/026/Anastasia.jpg"], type: "base" },
+                { srcList: ["char/026/Anastasia2.jpg"], type: "fd" }
             ]
         },
         // 克莱奥斯·卡索洛克
