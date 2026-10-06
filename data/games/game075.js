@@ -24,7 +24,7 @@ const gameData = {
     id: "game075", // 全局唯一ID，不可重复，如 game001
     name: "奥兹国安魂曲",
     year: "2026",
-    publisher: ["Kogado Studio","Otomate"],
+    publisher: ["工画堂スタジオ","Otomate"],
     cnStudio: "JOYOLAND",
     writer: [
         {name:"根岸十郎", lang:"zh"}
