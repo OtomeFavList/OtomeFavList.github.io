@@ -3,7 +3,7 @@
 // 无需额外配置，仅需要到 main.js 顶部 🚨gameIdList数组追加编号"002","003"...
 const gameData = {
     id: "game031", // 全局唯一ID，不可重复
-    name: "百密一疏少女心",
+    name: "VARIABLE BARRICADE 百密一疏少女心",
     year: "2023",
     publisher: ["Otomate"],
     cnStudio: "JOYOLAND",
@@ -91,18 +91,84 @@ const gameData = {
                             "char/031/Kasuga2.jpg"], type: "base" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 鹿野紬
         {
-            id: "g1_s06",
-            name: "配角",
-            hiddenName: ["隐藏真名1","隐藏真名2"],    // 补丁新增：可选，不写则无隐藏名
+            id: "g031_s01",
+            name: "鹿野紬",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/031/Kano.jpg",
+                            "char/031/Kano2.jpg"], type: "base" }
+            ]
+        },
+        // 阿千
+        {
+            id: "g031_s02",
+            name: "阿千",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/031/Kazu.jpg"], type: "base" }
+            ]
+        },
+        // 虎次郎
+        {
+            id: "g031_s03",
+            name: "虎次郎",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/031/Kojirou.jpg"], type: "base" }
+            ]
+        },
+        // 有村乃爱
+        {
+            id: "g031_s04",
+            name: "有村乃爱",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/031/Noa.jpg",
+                            "char/031/Noa2.jpg"], type: "base" }
+            ]
+        },
+        // 椎名琉羽
+        {
+            id: "g031_s05",
+            name: "椎名琉羽",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/031/Ruu.jpg"], type: "base" }
+            ]
+        },
+        // 东条鹰宗
+        {
+            id: "g031_s06",
+            name: "东条鹰宗",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/031/Takamune.jpg"], type: "base" }
             ]
         }
     ]
