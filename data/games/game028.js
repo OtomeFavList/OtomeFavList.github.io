@@ -89,7 +89,7 @@ const gameData = {
             images: [
                 { srcList: ["char/028/Susumu.jpg"], type: "base" },
                 { srcList: ["char/028/Susumu2.jpg",
-                            "char/028/Susumu3.jpg"], type: "fd" }
+                            "char/028/Susumu3.png"], type: "fd" }
             ]
         },
         // 宫之杜正
