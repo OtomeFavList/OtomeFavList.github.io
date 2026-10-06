@@ -1,5 +1,6 @@
 // data/games/game030.js
 // ✅已核对信息
+// ℹ️部分配角名未校对
 const gameData = {
     id: "game030", // 全局唯一ID，不可重复
     name: "花合 朔",
