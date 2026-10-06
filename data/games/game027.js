@@ -176,7 +176,7 @@ const gameData = {
         // LUKA
         {
             id: "g027_fs01",
-            name: "Luka",
+            name: "LUKA",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -189,7 +189,7 @@ const gameData = {
         // NOVA
         {
             id: "g027_fs02",
-            name: "Nova",
+            name: "NOVA",
             gender: "male",
             isHidden: false,
             isFD: false,
