@@ -277,7 +277,8 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/032/Vania.png"], type: "base" }
+                { srcList: ["char/032/Vania.png"], type: "base" },
+                { srcList: ["char/032/Vania2.jpg"], type: "fd" }
             ]
         },
         // 可可
