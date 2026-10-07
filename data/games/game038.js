@@ -25,7 +25,12 @@ const gameData = {
             images: [
                 { srcList: ["char/038/Naya.jpg",
                             "char/038/Naya2.jpg",
-                            "char/038/Naya3.png"], type: "base" }
+                            "char/038/Naya3.png",
+                            "char/038/Naya8.png"], type: "base" },
+                { srcList: ["char/038/Naya4.jpg",
+                            "char/038/Naya5.jpg",
+                            "char/038/Naya6.jpg",
+                            "char/038/Naya7.jpg"], type: "fd" }
             ]
         },
         // 玖燕来
@@ -38,7 +43,9 @@ const gameData = {
             images: [
                 { srcList: ["char/038/Enrai.jpg",
                             "char/038/Enrai2.jpg",
-                            "char/038/Enrai3.png"], type: "base" }
+                            "char/038/Enrai3.png",
+                            "char/038/Enrai5.png"], type: "base" },
+                { srcList: ["char/038/Enrai4.jpg"], type: "fd" }
             ]
         },
         // 斐伊
@@ -51,7 +58,8 @@ const gameData = {
             images: [
                 { srcList: ["char/038/Fey.jpg",
                             "char/038/Fey2.jpg",
-                            "char/038/Fey3.png"], type: "base" }
+                            "char/038/Fey3.png",
+                            "char/038/Fey4.png"], type: "base" }
             ]
         },
         // 洛欧
@@ -64,7 +72,9 @@ const gameData = {
             images: [
                 { srcList: ["char/038/Ruwo.jpg",
                             "char/038/Ruwo2.jpg",
-                            "char/038/Ruwo3.png"], type: "base" }
+                            "char/038/Ruwo3.png",
+                            "char/038/Ruwo5.png"], type: "base" },
+                { srcList: ["char/038/Ruwo4.jpg"], type: "fd" }
             ]
         },
         // 胡青凛
@@ -77,7 +87,9 @@ const gameData = {
             images: [
                 { srcList: ["char/038/Seirin.jpg",
                             "char/038/Seirin2.jpg",
-                            "char/038/Seirin3.png"], type: "base" }
+                            "char/038/Seirin3.png",
+                            "char/038/Seirin5.png"], type: "base" },
+                { srcList: ["char/038/Seirin4.jpg"], type: "fd" }
             ]
         },
         // 臧布尼勒
@@ -90,20 +102,26 @@ const gameData = {
             images: [
                 { srcList: ["char/038/Zebenera.jpg",
                             "char/038/Zebenera2.jpg",
-                            "char/038/Zebenera3.png"], type: "base" }
+                            "char/038/Zebenera3.png",
+                            "char/038/Zebenera5.png"], type: "base" },
+                { srcList: ["char/038/SZebenera4.jpg"], type: "fd" }
             ]
         },
         // 羯磨
         {
             id: "g038_h01",
-            name: "羯磨",
+            name: "二角兽",
+            hiddenName: ["羯磨"],
             gender: "male",
             isHidden: true,
             isFD: false,
             images: [
                 { srcList: ["char/038/Bicorn.jpg",
                             "char/038/Bicorn2.jpg",
-                            "char/038/Bicorn3.png"], type: "base" }
+                            "char/038/Bicorn3.jpg",
+                            "char/038/Bicorn4.png",
+                            "char/038/Bicorn6.png"], type: "base" },
+                { srcList: ["char/038/Bicorn5.jpg"], type: "fd" }
             ]
         },
         // 斐恩
@@ -120,32 +138,161 @@ const gameData = {
                             "char/038/Fuen4.jpg"], type: "base" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 玉彗
         {
-            id: "g1_s07",
-            name: "配角",
-            hiddenName: ["隐藏真名1","隐藏真名2"],    // 补丁新增：可选，不写则无隐藏名
+            id: "g038_fd01",
+            name: "玉彗",
+            gender: "male",
+            isHidden: false,
+            isFD: true,
+            isSub: false,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/038/Gyokusui.jpg",
+                            "char/038/Gyokusui2.jpg",
+                            "char/038/Gyokusui3.png"], type: "base" }
+            ]
+        },
+        // 阿格多
+        {
+            id: "g038_s01",
+            name: "阿格多",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/038/Agedo.jpg",
+                            "char/038/Agedo2.png"], type: "base" }
             ]
         },
-        // 续作/FD次要角色（isFdSub=true → 开关开启才显示整个角色卡片）
+        // 巴敖
         {
-            id: "g1_fs04",
-            name: "配角",
-            hiddenName: ["隐藏真名1","隐藏真名2"],    // 补丁新增：可选，不写则无隐藏名
+            id: "g038_s02",
+            name: "巴敖",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/038/Bao.jpg",
+                            "char/038/Bao2.png"], type: "base" }
+            ]
+        },
+        // 后主大人
+        {
+            id: "g038_s03",
+            name: "后主大人",
+            hiddenName: ["玖燕粋"],
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/038/Kousyu.jpg",
+                            "char/038/Kousyu2.png"], type: "base" }
+            ]
+        },
+        // 丽穹
+        {
+            id: "g038_s04",
+            name: "丽穹",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/038/Reikyu.jpg",
+                            "char/038/Reikyu2.png"], type: "base" }
+            ]
+        },
+        // 紫惺
+        {
+            id: "g038_s05",
+            name: "紫惺",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/038/Shisei.jpg",
+                            "char/038/Shisei2.png"], type: "base" }
+            ]
+        },
+        // 小蝶
+        {
+            id: "g038_s06",
+            name: "小蝶",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/038/Shoucho.jpg",
+                            "char/038/Shoucho2.png"], type: "base" }
+            ]
+        },
+        // 妖魔
+        {
+            id: "g038_s07",
+            name: "妖魔",
+            hiddenName: ["穷奇"],
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/038/Youma.jpg",
+                            "char/038/Youma2.png"], type: "base" }
+            ]
+        },
+        // マリク
+        {
+            id: "g038_fs01",
+            name: "マリク",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: false,
             isFdSub: true,
             images: [
-                { srcList: ["char/g001_fS01_1.jpg"], type: "base" }
+                { srcList: ["char/038/Malik.jpg",
+                            "char/038/Malik2.png"], type: "base" }
+            ]
+        },
+        // 央零
+        {
+            id: "g038_fs02",
+            name: "央零",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/038/Ourei.jpg",
+                            "char/038/Ourei2.png"], type: "base" }
+            ]
+        },
+        // 緑蓉
+        {
+            id: "g038_fs03",
+            name: "緑蓉",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/038/Ryokuyo.jpg",
+                            "char/038/Ryokuyo2.png"], type: "base" }
             ]
         }
     ]
