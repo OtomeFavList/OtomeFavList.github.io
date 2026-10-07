@@ -1,5 +1,6 @@
 // data/games/game038.js
 // ✅已核对信息
+// ℹ️续作内容未汉化
 const gameData = {
     id: "game038", // 全局唯一ID，不可重复
     name: "茉莉花之炯 天命胤异传",
