@@ -1,15 +1,12 @@
-// ==========【单个游戏独立数据模板｜新版ESModule】==========
-// 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
-// 无需额外配置，仅需要到 main.js 顶部 🚨gameIdList数组追加编号"002","003"...
+// data/games/game036.js
+// ⚠️已核对信息，立绘未重置、新差分未制作
 const gameData = {
     id: "game036", // 全局唯一ID，不可重复
-    name: "魔鬼恋人 GRAND EDITION",
+    name: "DIABOLIK LOVERS 魔鬼恋人 GRAND EDITION",
     year: "2024",
     publisher: ["Otomate","Rejet"],
     cnStudio: "JOYOLAND",
     writer: [
-        {name:"小和泉いづみ", lang:"zh"},
-        {name:"真崎結衣", lang:"zh"},
         {name:"恵莉ひなこ", lang:"zh"},
         {name:"加納高子", lang:"zh"},
         {name:"吉村りりか", lang:"zh"},
@@ -217,5 +214,5 @@ const gameData = {
     ]
 };
 
-// ✅新版导出！不要使用window.gameDataList.push！
+// ESModule导出
 export { gameData };
