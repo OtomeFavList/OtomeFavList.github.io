@@ -111,6 +111,20 @@ const gameData = {
                             "char/046/Lucas2.jpg",
                             "char/046/Lucas3.png"], type: "base" }
             ]
+        },
+        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g46_s11",
+            name: "配角",
+            hiddenName: ["隐藏真名1","隐藏真名2"],    // 补丁新增：可选，不写则无隐藏名
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+            ]
         }
     ]
 };
