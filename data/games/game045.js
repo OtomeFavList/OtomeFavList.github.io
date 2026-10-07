@@ -122,7 +122,7 @@ const gameData = {
         },
         // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
         {
-            id: "g1_s01",
+            id: "g45_s08",
             name: "配角",
             hiddenName: ["隐藏真名1","隐藏真名2"],    // 补丁新增：可选，不写则无隐藏名
             gender: "male",
@@ -136,7 +136,7 @@ const gameData = {
         },
         // 续作/FD次要角色（isFdSub=true → 开关开启才显示整个角色卡片）
         {
-            id: "g1_fs01",
+            id: "g45_fs04",
             name: "配角",
             hiddenName: ["隐藏真名1","隐藏真名2"],    // 补丁新增：可选，不写则无隐藏名
             gender: "male",
