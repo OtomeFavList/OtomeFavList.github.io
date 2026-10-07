@@ -101,6 +101,7 @@ const gameData = {
             gender: "male",
             isHidden: true,
             isFD: false,
+            isSub: true,
             images: [
                 { srcList: ["char/040/Gannet.jpg"], type: "base" }
             ]
