@@ -114,6 +114,19 @@ const gameData = {
                 { srcList: ["char/049/Wataru.jpg",
                             "char/049/Wataru2.jpg"], type: "base" }
             ]
+        },
+        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g1_s03",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+            ]
         }
     ]
 };
