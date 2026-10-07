@@ -37,7 +37,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/037/Houou.jpg",
-                            "char/037/Houou2.jpg"
+                            "char/037/Houou2.jpg",
                             "char/037/Houou3.png"], type: "base" }
             ]
         },
