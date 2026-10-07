@@ -137,8 +137,8 @@ const gameData = {
             gender: "male",
             isHidden: false,
             isFD: false,
-            isSub: true,
-            isFdSub: false,
+            isSub: false,
+            isFdSub: true,
             images: [
                 { srcList: ["char/037/Nozomi.jpg",
                             "char/037/Nozomi2.png"], type: "base" }
