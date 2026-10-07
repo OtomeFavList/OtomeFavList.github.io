@@ -149,8 +149,8 @@ const gameData = {
             isFdSub: false,
             images: [
                 { srcList: ["char/038/Gyokusui.jpg",
-                            "char/038/Gyokusui2.jpg",
-                            "char/038/Gyokusui3.png"], type: "base" }
+                            "char/038/Gyokusui3.png",
+                            "char/038/Gyokusui2.jpg"], type: "base" }
             ]
         },
         // 阿格多
