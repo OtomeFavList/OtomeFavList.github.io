@@ -26,7 +26,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/037/Hinako.jpg",
-                            "char/037/Hinako2.jpg"], type: "base" }
+                            "char/037/Hinako2.png"], type: "base" }
             ]
         },
         // 鬼岛凤凰
@@ -38,7 +38,8 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/037/Houou.jpg",
-                            "char/037/Houou2.jpg"], type: "base" }
+                            "char/037/Houou2.jpg"
+                            "char/037/Houou3.png"], type: "base" }
             ]
         },
         // 吉良麟太郎
@@ -50,7 +51,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/037/Rintarou.jpg",
-                            "char/037/Rintarou2.jpg"], type: "base" }
+                            "char/037/Rintarou2.png"], type: "base" }
             ]
         },
         // 金春贵之
@@ -62,7 +63,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/037/Takayuki.jpg",
-                            "char/037/Takayuki2.jpg"], type: "base" }
+                            "char/037/Takayuki2.png"], type: "base" }
             ]
         },
         // 箕轮斗斗丸
@@ -74,7 +75,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/037/Totomaru.jpg",
-                            "char/037/Totomaru2.jpg"], type: "base" }
+                            "char/037/Totomaru2.png"], type: "base" }
             ]
         },
         // 未良子裕太
@@ -86,7 +87,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/037/Yuuta.jpg",
-                            "char/037/Yuuta2.jpg"], type: "base" }
+                            "char/037/Yuuta2.png"], type: "base" }
             ]
         },
         // 相乐天马
@@ -99,21 +100,49 @@ const gameData = {
             images: [
                 { srcList: ["char/037/Tenma.jpg",
                             "char/037/Tenma2.jpg",
-                            "char/037/Tenma3.jpg"], type: "base" }
+                            "char/037/Tenma3.png"], type: "base" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 坂口春生
         {
-            id: "g1_s02",
-            name: "配角",
-            hiddenName: ["隐藏真名1","隐藏真名2"],    // 补丁新增：可选，不写则无隐藏名
+            id: "g037_s01",
+            name: "坂口春生",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/037/Haruo.jpg",
+                            "char/037/Haruo2.png"], type: "base" }
+            ]
+        },
+        // 鬼岛光
+        {
+            id: "g037_s02",
+            name: "鬼岛光",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/037/Hikaru.jpg",
+                            "char/037/Hikaru2.png"], type: "base" }
+            ]
+        },
+        // 吉良希
+        {
+            id: "g037_s03",
+            name: "吉良希",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/037/Nozomi.jpg",
+                            "char/037/Nozomi2.png"], type: "base" }
             ]
         }
     ]
