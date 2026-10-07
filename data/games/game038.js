@@ -104,7 +104,7 @@ const gameData = {
                             "char/038/Zebenera2.jpg",
                             "char/038/Zebenera3.jpg",
                             "char/038/Zebenera5.png"], type: "base" },
-                { srcList: ["char/038/SZebenera4.jpg"], type: "fd" }
+                { srcList: ["char/038/Zebenera4.jpg"], type: "fd" }
             ]
         },
         // 羯磨
