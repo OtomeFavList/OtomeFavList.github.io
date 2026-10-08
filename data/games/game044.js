@@ -1,6 +1,5 @@
-// ==========【单个游戏独立数据模板｜新版ESModule】==========
-// 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
-// 无需额外配置，仅需要到 main.js 顶部 🚨gameIdList数组追加编号"002","003"...
+// data/games/game040.js
+// ✅已核对信息
 const gameData = {
     id: "game044", // 全局唯一ID，不可重复
     name: "9 R.I.P.",
@@ -17,6 +16,7 @@ const gameData = {
         {name:"藤川ちより", lang:"zh"},
         {name:"長田大夢", lang:"zh"},
         {name:"長野和泉", lang:"zh"},
+        {name:"合同会社Re,AER", lang:"zh"},
         {name:"ゆきみなべ", lang:"ja"},
         {name:"Salala", lang:"en"}
     ],
@@ -393,5 +393,5 @@ const gameData = {
     ]
 };
 
-// ✅新版导出！不要使用window.gameDataList.push！
+// ESModule导出
 export { gameData };
