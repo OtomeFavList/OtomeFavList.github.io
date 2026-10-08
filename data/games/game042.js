@@ -4,7 +4,7 @@
 // ℹ️配角名未校对
 const gameData = {
     id: "game042", // 全局唯一ID，不可重复
-    name: "蛇香之夜~Trap of MUSK~",
+    name: "蛇香之夜 ~Trap of MUSK~",
     year: "2024",
     publisher: ["Frontier Works","Otomate"],
     cnStudio: "JOYOLAND",
