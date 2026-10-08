@@ -42,7 +42,8 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/043/Kobase.jpg",
-                            "char/043/Kobase2.jpg"], type: "base" }
+                            "char/043/Kobase2.jpg",
+                            "char/043/Kobase3.jpg"], type: "base" }
             ]
         },
         // 凑康平
@@ -54,7 +55,8 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/043/Minato.jpg",
-                            "char/043/Minato2.jpg"], type: "base" }
+                            "char/043/Minato2.jpg"],
+                            "char/043/Minato3.jpg", type: "base" }
             ]
         },
         // 五月女光基
@@ -66,7 +68,8 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/043/Mitsuki.jpg",
-                            "char/043/Mitsuki2.jpg"], type: "base" }
+                            "char/043/Mitsuki2.jpg",
+                            "char/043/Mitsuki3.jpg"], type: "base" }
             ]
         },
         // 吉冈绿郎
@@ -78,7 +81,8 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/043/Rokuro.jpg",
-                            "char/043/Rokuro2.jpg"], type: "base" }
+                            "char/043/Rokuro2.jpg",
+                            "char/043/Rokuro3.jpg"], type: "base" }
             ]
         },
         // 碓井修也
@@ -90,7 +94,8 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/043/Shuya.jpg",
-                            "char/043/Shuya2.jpg"], type: "base" }
+                            "char/043/Shuya2.jpg",
+                            "char/043/Shuya3.jpg"], type: "base" }
             ]
         },
         // 多井中法
@@ -102,7 +107,8 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/043/Tainaka.jpg",
-                            "char/043/Tainaka2.jpg"], type: "base" }
+                            "char/043/Tainaka2.jpg",
+                            "char/043/Tainaka3.jpg"], type: "base" }
             ]
         },
         // 比嘉月彦
@@ -114,7 +120,8 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/043/Higa.jpg",
-                            "char/043/Higa2.jpg"], type: "base" }
+                            "char/043/Higa2.jpg",
+                            "char/043/Higa3.jpg"], type: "base" }
             ]
         },
         // YOFY
@@ -126,21 +133,47 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/043/Yofy.jpg",
-                            "char/043/Yofy2.jpg"], type: "base" }
+                            "char/043/Yofy2.jpg",
+                            "char/043/Yofy3.jpg"], type: "base" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 饭村秋雄
         {
-            id: "g1_s04",
-            name: "配角",
-            hiddenName: ["隐藏真名1","隐藏真名2"],    // 补丁新增：可选，不写则无隐藏名
+            id: "g043_s01",
+            name: "饭村秋雄",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/043/Akio.jpg"], type: "base" }
+            ]
+        },
+        // 大江奈波
+        {
+            id: "g043_s02",
+            name: "大江奈波",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/043/Nanami.jpg"], type: "base" }
+            ]
+        },
+        // 榎坂俊信
+        {
+            id: "g043_s03",
+            name: "榎坂俊信",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/043/Oshinobu.jpg"], type: "base" }
             ]
         }
     ]
