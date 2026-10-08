@@ -144,7 +144,8 @@ const gameData = {
         // 埃尔伯特
         {
             id: "g032_m08",
-            name: "埃尔文",
+            name: "埃尔伯特",
+            fdName: "埃尔文",
             fdName: ["FD新增名1","FD新增名2"],
             gender: "male",
             isHidden: false,
