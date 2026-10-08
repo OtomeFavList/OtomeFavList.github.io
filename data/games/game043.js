@@ -55,8 +55,8 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/043/Minato.jpg",
-                            "char/043/Minato2.jpg"],
-                            "char/043/Minato3.jpg", type: "base" }
+                            "char/043/Minato2.jpg",
+                            "char/043/Minato3.jpg"], type: "base" }
             ]
         },
         // 五月女光基
