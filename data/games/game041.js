@@ -23,7 +23,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/041/Tsubasa2.png"], type: "base" }
+                { srcList: ["char/041/Tsubasa.png"], type: "base" }
             ]
         },
         // 不动明谦
@@ -34,7 +34,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/041/Akane2.png"], type: "base" }
+                { srcList: ["char/041/Akane.png"], type: "base" }
             ]
         },
         // 金城刚士
@@ -45,7 +45,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/041/Goushi2.png"], type: "base" }
+                { srcList: ["char/041/Goushi.png"], type: "base" }
             ]
         },
         // 寺光遥日
@@ -56,7 +56,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/041/Haruhi2.png"], type: "base" }
+                { srcList: ["char/041/Haruhi.png"], type: "base" }
             ]
         },
         // 王茶利晖
@@ -67,7 +67,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/041/Hikaru2.png"], type: "base" }
+                { srcList: ["char/041/Hikaru.png"], type: "base" }
             ]
         },
         // 增长和南
@@ -78,7 +78,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/041/Kazuna2.png"], type: "base" }
+                { srcList: ["char/041/Kazuna.png"], type: "base" }
             ]
         },
         // 爱染健十
@@ -89,7 +89,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/041/Kento2.png"], type: "base" }
+                { srcList: ["char/041/Kento.png"], type: "base" }
             ]
         },
         // 释村帝人
@@ -100,7 +100,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/041/Mikado2.png"], type: "base" }
+                { srcList: ["char/041/Mikado.png"], type: "base" }
             ]
         },
         // 殿弥勒
@@ -111,7 +111,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/041/Miroku2.png"], type: "base" }
+                { srcList: ["char/041/Miroku.png"], type: "base" }
             ]
         },
         // 音济百太郎
@@ -122,7 +122,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/041/Momotarou2.png"], type: "base" }
+                { srcList: ["char/041/Momotarou.png"], type: "base" }
             ]
         },
         // 是国龙持
@@ -133,7 +133,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/041/Ryuuji2.png"], type: "base" }
+                { srcList: ["char/041/Ryuuji.png"], type: "base" }
             ]
         },
         // 野目龙广
@@ -144,7 +144,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/041/Tatsuhiro2.png"], type: "base" }
+                { srcList: ["char/041/Tatsuhiro.png"], type: "base" }
             ]
         },
         // 北门伦毘沙
@@ -155,7 +155,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/041/Tomohisa2.png"], type: "base" }
+                { srcList: ["char/041/Tomohisa.png"], type: "base" }
             ]
         },
         // 阿修悠太
@@ -166,7 +166,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/041/Yuuta2.png"], type: "base" }
+                { srcList: ["char/041/Yuuta.png"], type: "base" }
             ]
         },
         // 寺光唯月
@@ -177,72 +177,59 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/041/Yuzuki2.png"], type: "base" }
+                { srcList: ["char/041/Yuzuki.png"], type: "base" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 大黑笃志
         {
-            id: "g41_s01",
-            name: "配角",
+            id: "g041_s01",
+            name: "大黑笃志",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/041/Atsushi.png"], type: "base" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 大黑修二
         {
-            id: "g41_s02",
-            name: "配角",
+            id: "g041_s02",
+            name: "大黑修二",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/041/huuji.png"], type: "base" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 增长希充
         {
-            id: "g41_s03",
-            name: "配角",
+            id: "g041_s03",
+            name: "增长希充",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/041/Nozomi.png"], type: "base" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 夜叉丸朔太郎
         {
-            id: "g41_s04",
-            name: "配角",
+            id: "g041_s04",
+            name: "夜叉丸朔太郎",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
-            ]
-        },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
-        {
-            id: "g41_s05",
-            name: "配角",
-            gender: "male",
-            isHidden: false,
-            isFD: false,
-            isSub: true,
-            isFdSub: false,
-            images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/041/Sakutarou.png"], type: "base" }
             ]
         }
     ]
