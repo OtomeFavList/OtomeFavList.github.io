@@ -1,6 +1,7 @@
 // ==========【单个游戏独立数据模板｜新版ESModule】==========
 // 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
 // 无需额外配置，仅需要到 main.js 顶部 🚨gameIdList数组追加编号"002","003"...
+// ℹ️配角名未校对
 const gameData = {
     id: "game042", // 全局唯一ID，不可重复
     name: "蛇香之夜~Trap of MUSK~",
@@ -106,56 +107,60 @@ const gameData = {
                             "char/042/Vince3.jpg"], type: "base" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 阿伊莎
         {
-            id: "g42_s01",
-            name: "配角",
+            id: "g042_s01",
+            name: "阿伊莎",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/042/Aisha.jpg",
+                            "char/042/Aisha2.jpg"], type: "base" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 店主大人
         {
-            id: "g42_s02",
-            name: "配角",
+            id: "g042_s02",
+            name: "店主大人",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/042/Master.jpg",
+                            "char/042/Master2.jpg"], type: "base" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 美兰
         {
-            id: "g42_s03",
-            name: "配角",
+            id: "g042_s03",
+            name: "美兰",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/042/Miran.jpg",
+                            "char/042/Miran2.jpg"], type: "base" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 特奥多尔·巴里什
         {
-            id: "g42_s04",
-            name: "配角",
+            id: "g042_s04",
+            name: "特奥多尔·巴里什",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/042/Theodor.jpg",
+                            "char/042/Theodor2.jpg"], type: "base" }
             ]
         }
     ]
