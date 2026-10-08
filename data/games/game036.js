@@ -35,6 +35,7 @@ const gameData = {
         {
             id: "g036_m01",
             name: "逆卷绫人",
+            fdName: ["绫人"],
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -49,6 +50,7 @@ const gameData = {
         {
             id: "g036_m02",
             name: "无神梓",
+            fdName: ["梓"],
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -63,6 +65,7 @@ const gameData = {
         {
             id: "g036_m03",
             name: "逆卷奏人",
+            fdName: ["奏人"],
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -77,6 +80,7 @@ const gameData = {
         {
             id: "g036_m04",
             name: "无神皓",
+            fdName: ["皓"],
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -91,6 +95,7 @@ const gameData = {
         {
             id: "g036_m05",
             name: "逆卷礼人",
+            fdName: ["礼人"],
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -105,6 +110,7 @@ const gameData = {
         {
             id: "g036_m06",
             name: "逆卷怜司",
+            fdName: ["怜司"],
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -119,6 +125,7 @@ const gameData = {
         {
             id: "g036_m07",
             name: "无神琉辉",
+            fdName: ["琉辉"],
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -133,6 +140,7 @@ const gameData = {
         {
             id: "g036_m08",
             name: "逆卷修",
+            fdName: ["修"],
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -147,6 +155,7 @@ const gameData = {
         {
             id: "g036_m09",
             name: "逆卷昴",
+            fdName: ["昴"],
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -161,6 +170,7 @@ const gameData = {
         {
             id: "g036_m10",
             name: "无神悠真",
+            fdName: ["悠真"],
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -175,6 +185,7 @@ const gameData = {
         {
             id: "g036_fd01",
             name: "月浪卡拉",
+            fdName: ["卡拉"],
             gender: "male",
             isHidden: false,
             isFD: true,
@@ -189,6 +200,7 @@ const gameData = {
         {
             id: "g036_fd02",
             name: "月浪辛",
+            fdName: ["辛"],
             gender: "male",
             isHidden: false,
             isFD: true,
