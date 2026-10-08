@@ -34,19 +34,24 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/044/Misa.jpg",
-                            "char/044/Misa2.png"], type: "base" }
+                            "char/044/Misa2.png",
+                            "char/044/Misa3.jpg"], type: "base" }
             ]
         },
         // 响
         {
             id: "g044_m01",
             name: "响",
+            fdName: ["FD新增名1","FD新增名2"],
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
                 { srcList: ["char/044/Hibiki.jpg",
-                            "char/044/Hibiki2.png"], type: "base" }
+                            "char/044/Hibiki2.png",
+                            "char/044/Hibiki3.jpg",
+                            "char/044/Hibiki4.jpg",
+                            "char/044/Hibiki5.jpg"], type: "base" }
             ]
         },
         // 狐春
@@ -58,31 +63,42 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/044/Koharu.jpg",
-                            "char/044/Koharu2.png"], type: "base" }
+                            "char/044/Koharu2.png",
+                            "char/044/Koharu3.jpg",
+                            "char/044/Koharu4.jpg",
+                            "char/044/Koharu5.jpg"], type: "base" }
             ]
         },
         // 香羊
         {
             id: "g044_m03",
             name: "香羊",
+            fdName: ["FD新增名1","FD新增名2"],
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
                 { srcList: ["char/044/Kouyou.jpg",
-                            "char/044/Kouyou2.png"], type: "base" }
+                            "char/044/Kouyou2.png",
+                            "char/044/Kouyou3.jpg",
+                            "char/044/Kouyou4.jpg",
+                            "char/044/Kouyou5.jpg"], type: "base" }
             ]
         },
         // 红华
         {
             id: "g044_m04",
             name: "红华",
+            fdName: ["FD新增名1","FD新增名2"],
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
                 { srcList: ["char/044/Kureha.jpg",
-                            "char/044/Kureha2.png"], type: "base" }
+                            "char/044/Kureha2.png",
+                            "char/044/Kureha3.jpg",
+                            "char/044/Kureha4.jpg",
+                            "char/044/Kureha5.jpg"], type: "base" }
             ]
         },
         // 魅勿鬽
@@ -94,31 +110,42 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/044/Minami.jpg",
-                            "char/044/Minami2.png"], type: "base" }
+                            "char/044/Minami2.png",
+                            "char/044/Minami3.jpg",
+                            "char/044/Minami4.jpg",
+                            "char/044/Minami5.jpg"], type: "base" }
             ]
         },
         // 圣夜
         {
             id: "g044_m06",
             name: "圣夜",
+            fdName: ["FD新增名1","FD新增名2"],
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
                 { srcList: ["char/044/Seiya.jpg",
-                            "char/044/Seiya2.png"], type: "base" }
+                            "char/044/Seiya2.png",
+                            "char/044/Seiya3.jpg",
+                            "char/044/Seiya4.jpg",
+                            "char/044/Seiya5.jpg"], type: "base" }
             ]
         },
         // 星绊
         {
             id: "g044_m07",
             name: "星绊",
+            fdName: ["FD新增名1","FD新增名2"],
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
                 { srcList: ["char/044/Sena.jpg",
-                            "char/044/Sena2.png"], type: "base" }
+                            "char/044/Sena2.png",
+                            "char/044/Sena3.jpg",
+                            "char/044/Sena4.jpg",
+                            "char/044/Sena5.jpg"], type: "base" }
             ]
         },
         // 幸麿
@@ -130,27 +157,33 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/044/Yukimaro.jpg",
-                            "char/044/Yukimaro2.png"], type: "base" }
+                            "char/044/Yukimaro2.png",
+                            "char/044/Yukimaro3.jpg",
+                            "char/044/Yukimaro4.jpg",
+                            "char/044/Yukimaro5.jpg"], type: "base" }
             ]
         },
         // 桃嘉
         {
             id: "g044_h01",
             name: "桃嘉",
+            fdName: ["FD新增名1","FD新增名2"],
             gender: "male",
             isHidden: true,
             isFD: false,
             images: [
                 { srcList: ["char/044/Toka.jpg",
                             "char/044/Toka2.png",
-                            "char/044/Toka3.jpg"], type: "base" }
+                            "char/044/Toka3.jpg",
+                            "char/044/Toka3.jpg",
+                            "char/044/Toka4.jpg",
+                            "char/044/Toka5.jpg"], type: "base" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 逸色绚芽
         {
-            id: "g1_s06",
-            name: "配角",
-            hiddenName: ["隐藏真名1","隐藏真名2"],    // 补丁新增：可选，不写则无隐藏名
+            id: "g044_s01",
+            name: "逸色绚芽",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -160,11 +193,193 @@ const gameData = {
                 { srcList: ["char/g001_S01_1.jpg"], type: "base" }
             ]
         },
+        // 飞騨咲耶果
+        {
+            id: "g044_s02",
+            name: "飞騨咲耶果",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+            ]
+        },
+        // 逸色翼
+        {
+            id: "g044_s03",
+            name: "逸色翼",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+            ]
+        },
+        // 美住丽歌
+        {
+            id: "g044_s04",
+            name: "美住丽歌",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+            ]
+        },
+        // 神主
+        {
+            id: "g044_s05",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+            ]
+        },
+        // 月神优衣
+        {
+            id: "g044_s06",
+            name: "优衣",
+            fdName: ["月神优衣"],
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+            ]
+        },
+        // 天堂雏菊
+        {
+            id: "g044_fs01",
+            name: "天堂雏菊",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/g001_fS01_1.jpg"], type: "base" }
+            ]
+        },
+        // 幸我
+        {
+            id: "g044_fs02",
+            name: "幸我",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/g001_fS01_1.jpg"], type: "base" }
+            ]
+        },
         // 续作/FD次要角色（isFdSub=true → 开关开启才显示整个角色卡片）
         {
-            id: "g1_fs10",
+            id: "g044_fs03",
             name: "配角",
-            hiddenName: ["隐藏真名1","隐藏真名2"],    // 补丁新增：可选，不写则无隐藏名
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/g001_fS01_1.jpg"], type: "base" }
+            ]
+        },
+        // 续作/FD次要角色（isFdSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g044_fs04",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/g001_fS01_1.jpg"], type: "base" }
+            ]
+        },
+        // 续作/FD次要角色（isFdSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g044_fs05",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/g001_fS01_1.jpg"], type: "base" }
+            ]
+        },
+        // 续作/FD次要角色（isFdSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g044_fs06",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/g001_fS01_1.jpg"], type: "base" }
+            ]
+        },
+        // 续作/FD次要角色（isFdSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g044_fs07",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/g001_fS01_1.jpg"], type: "base" }
+            ]
+        },
+        // 续作/FD次要角色（isFdSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g044_fs08",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/g001_fS01_1.jpg"], type: "base" }
+            ]
+        },
+        // 续作/FD次要角色（isFdSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g044_fs09",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/g001_fS01_1.jpg"], type: "base" }
+            ]
+        },
+        // 续作/FD次要角色（isFdSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g044_fs10",
+            name: "配角",
             gender: "male",
             isHidden: false,
             isFD: false,
