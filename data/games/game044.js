@@ -42,7 +42,7 @@ const gameData = {
         {
             id: "g044_m01",
             name: "响",
-            fdName: ["FD新增名1","FD新增名2"],
+            fdName: ["伊音响"],
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -73,7 +73,7 @@ const gameData = {
         {
             id: "g044_m03",
             name: "香羊",
-            fdName: ["FD新增名1","FD新增名2"],
+            fdName: ["秋月香羊"],
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -89,7 +89,7 @@ const gameData = {
         {
             id: "g044_m04",
             name: "红华",
-            fdName: ["FD新增名1","FD新增名2"],
+            fdName: ["天堂红华"],
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -120,7 +120,7 @@ const gameData = {
         {
             id: "g044_m06",
             name: "圣夜",
-            fdName: ["FD新增名1","FD新增名2"],
+            fdName: ["柚木永圣夜"],
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -136,7 +136,7 @@ const gameData = {
         {
             id: "g044_m07",
             name: "星绊",
-            fdName: ["FD新增名1","FD新增名2"],
+            fdName: ["水镜星绊"],
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -167,7 +167,7 @@ const gameData = {
         {
             id: "g044_h01",
             name: "桃嘉",
-            fdName: ["FD新增名1","FD新增名2"],
+            fdName: ["久远桃嘉"],
             gender: "male",
             isHidden: true,
             isFD: false,
@@ -190,7 +190,8 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/044/Ayame.jpg",
+                            "char/044/Ayame2.jpg"], type: "base" }
             ]
         },
         // 飞騨咲耶果
@@ -203,7 +204,8 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/044/Hida.jpg",
+                            "char/044/Hida2.jpg"], type: "base" }
             ]
         },
         // 逸色翼
@@ -216,7 +218,8 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/044/Isshiki.jpg",
+                            "char/044/Isshiki2.jpg"], type: "base" }
             ]
         },
         // 美住丽歌
@@ -229,20 +232,20 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/044/Misumi.jpg"], type: "base" }
             ]
         },
         // 神主
         {
             id: "g044_s05",
-            name: "配角",
+            name: "神主",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/044/Priest.jpg"], type: "base" }
             ]
         },
         // 月神优衣
@@ -256,7 +259,7 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/044/Yui.jpg"], type: "base" }
             ]
         },
         // 天堂雏菊
@@ -269,7 +272,7 @@ const gameData = {
             isSub: false,
             isFdSub: true,
             images: [
-                { srcList: ["char/g001_fS01_1.jpg"], type: "base" }
+                { srcList: ["char/044/Hinagiku.jpg"], type: "base" }
             ]
         },
         // 幸我
@@ -282,111 +285,111 @@ const gameData = {
             isSub: false,
             isFdSub: true,
             images: [
-                { srcList: ["char/g001_fS01_1.jpg"], type: "base" }
+                { srcList: ["char/044/Koga.jpg"], type: "base" }
             ]
         },
-        // 续作/FD次要角色（isFdSub=true → 开关开启才显示整个角色卡片）
+        // 狐之依丸
         {
             id: "g044_fs03",
-            name: "配角",
+            name: "狐之依丸",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: false,
             isFdSub: true,
             images: [
-                { srcList: ["char/g001_fS01_1.jpg"], type: "base" }
+                { srcList: ["char/044/Konoemaru.jpg"], type: "base" }
             ]
         },
-        // 续作/FD次要角色（isFdSub=true → 开关开启才显示整个角色卡片）
+        // 冥命
         {
             id: "g044_fs04",
-            name: "配角",
+            name: "冥命",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: false,
             isFdSub: true,
             images: [
-                { srcList: ["char/g001_fS01_1.jpg"], type: "base" }
+                { srcList: ["char/044/Meimei.jpg"], type: "base" }
             ]
         },
-        // 续作/FD次要角色（isFdSub=true → 开关开启才显示整个角色卡片）
+        // 津津良未子
         {
             id: "g044_fs05",
-            name: "配角",
+            name: "津津良未子",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: false,
             isFdSub: true,
             images: [
-                { srcList: ["char/g001_fS01_1.jpg"], type: "base" }
+                { srcList: ["char/044/Miko.jpg"], type: "base" }
             ]
         },
-        // 续作/FD次要角色（isFdSub=true → 开关开启才显示整个角色卡片）
+        // 朱里
         {
             id: "g044_fs06",
-            name: "配角",
+            name: "朱里",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: false,
             isFdSub: true,
             images: [
-                { srcList: ["char/g001_fS01_1.jpg"], type: "base" }
+                { srcList: ["char/044/Shuri.jpg"], type: "base" }
             ]
         },
-        // 续作/FD次要角色（isFdSub=true → 开关开启才显示整个角色卡片）
+        // 空兰
         {
             id: "g044_fs07",
-            name: "配角",
+            name: "空兰",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: false,
             isFdSub: true,
             images: [
-                { srcList: ["char/g001_fS01_1.jpg"], type: "base" }
+                { srcList: ["char/044/Soran.jpg"], type: "base" }
             ]
         },
-        // 续作/FD次要角色（isFdSub=true → 开关开启才显示整个角色卡片）
+        // 朱雀
         {
             id: "g044_fs08",
-            name: "配角",
+            name: "朱雀",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: false,
             isFdSub: true,
             images: [
-                { srcList: ["char/g001_fS01_1.jpg"], type: "base" }
+                { srcList: ["char/044/Susaku.jpg"], type: "base" }
             ]
         },
-        // 续作/FD次要角色（isFdSub=true → 开关开启才显示整个角色卡片）
+        // 铃岛拓海
         {
             id: "g044_fs09",
-            name: "配角",
+            name: "铃岛拓海",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: false,
             isFdSub: true,
             images: [
-                { srcList: ["char/g001_fS01_1.jpg"], type: "base" }
+                { srcList: ["char/044/Takumi.jpg"], type: "base" }
             ]
         },
-        // 续作/FD次要角色（isFdSub=true → 开关开启才显示整个角色卡片）
+        // 户田和真
         {
             id: "g044_fs10",
-            name: "配角",
+            name: "户田和真",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: false,
             isFdSub: true,
             images: [
-                { srcList: ["char/g001_fS01_1.jpg"], type: "base" }
+                { srcList: ["char/044/Toda.jpg"], type: "base" }
             ]
         }
     ]
