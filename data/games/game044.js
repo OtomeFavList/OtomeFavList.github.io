@@ -34,8 +34,8 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/044/Misa.jpg",
-                            "char/044/Misa2.png",
-                            "char/044/Misa3.jpg"], type: "base" }
+                            "char/044/Misa2.png"], type: "base" },
+                { srcList: ["char/044/Misa3.jpg"], type: "fd" }
             ]
         },
         // 响
@@ -49,9 +49,9 @@ const gameData = {
             images: [
                 { srcList: ["char/044/Hibiki.jpg",
                             "char/044/Hibiki2.png",
-                            "char/044/Hibiki3.jpg",
-                            "char/044/Hibiki4.jpg",
-                            "char/044/Hibiki5.jpg"], type: "base" }
+                            "char/044/Hibiki3.jpg"], type: "base" },
+                { srcList: ["char/044/Hibiki4.jpg",
+                            "char/044/Hibiki5.jpg"], type: "fd" }
             ]
         },
         // 狐春
@@ -64,9 +64,9 @@ const gameData = {
             images: [
                 { srcList: ["char/044/Koharu.jpg",
                             "char/044/Koharu2.png",
-                            "char/044/Koharu3.jpg",
-                            "char/044/Koharu4.jpg",
-                            "char/044/Koharu5.jpg"], type: "base" }
+                            "char/044/Koharu3.jpg"], type: "base" },
+                { srcList: ["char/044/Koharu4.jpg",
+                            "char/044/Koharu5.jpg"], type: "fd" }
             ]
         },
         // 香羊
@@ -80,9 +80,9 @@ const gameData = {
             images: [
                 { srcList: ["char/044/Kouyou.jpg",
                             "char/044/Kouyou2.png",
-                            "char/044/Kouyou3.jpg",
-                            "char/044/Kouyou4.jpg",
-                            "char/044/Kouyou5.jpg"], type: "base" }
+                            "char/044/Kouyou3.jpg"], type: "base" },
+                { srcList: ["char/044/Kouyou4.jpg",
+                            "char/044/Kouyou5.jpg"], type: "fd" }
             ]
         },
         // 红华
@@ -96,9 +96,9 @@ const gameData = {
             images: [
                 { srcList: ["char/044/Kureha.jpg",
                             "char/044/Kureha2.png",
-                            "char/044/Kureha3.jpg",
-                            "char/044/Kureha4.jpg",
-                            "char/044/Kureha5.jpg"], type: "base" }
+                            "char/044/Kureha3.jpg"], type: "base" },
+                { srcList: ["char/044/Kureha4.jpg",
+                            "char/044/Kureha5.jpg"], type: "fd" }
             ]
         },
         // 魅勿鬽
@@ -111,9 +111,9 @@ const gameData = {
             images: [
                 { srcList: ["char/044/Minami.jpg",
                             "char/044/Minami2.png",
-                            "char/044/Minami3.jpg",
-                            "char/044/Minami4.jpg",
-                            "char/044/Minami5.jpg"], type: "base" }
+                            "char/044/Minami3.jpg"], type: "base" },
+                { srcList: ["char/044/Minami4.jpg",
+                            "char/044/Minami5.jpg"], type: "fd" }
             ]
         },
         // 圣夜
@@ -127,9 +127,9 @@ const gameData = {
             images: [
                 { srcList: ["char/044/Seiya.jpg",
                             "char/044/Seiya2.png",
-                            "char/044/Seiya3.jpg",
-                            "char/044/Seiya4.jpg",
-                            "char/044/Seiya5.jpg"], type: "base" }
+                            "char/044/Seiya3.jpg"], type: "base" },
+                { srcList: ["char/044/Seiya4.jpg",
+                            "char/044/Seiya5.jpg"], type: "fd" }
             ]
         },
         // 星绊
@@ -143,9 +143,9 @@ const gameData = {
             images: [
                 { srcList: ["char/044/Sena.jpg",
                             "char/044/Sena2.png",
-                            "char/044/Sena3.jpg",
-                            "char/044/Sena4.jpg",
-                            "char/044/Sena5.jpg"], type: "base" }
+                            "char/044/Sena3.jpg"], type: "base" },
+                { srcList: ["char/044/Sena4.jpg",
+                            "char/044/Sena5.jpg"], type: "fd" }
             ]
         },
         // 幸麿
@@ -158,9 +158,9 @@ const gameData = {
             images: [
                 { srcList: ["char/044/Yukimaro.jpg",
                             "char/044/Yukimaro2.png",
-                            "char/044/Yukimaro3.jpg",
-                            "char/044/Yukimaro4.jpg",
-                            "char/044/Yukimaro5.jpg"], type: "base" }
+                            "char/044/Yukimaro3.jpg"], type: "base" },
+                { srcList: ["char/044/Yukimaro4.jpg",
+                            "char/044/Yukimaro5.jpg"], type: "fd" }
             ]
         },
         // 桃嘉
@@ -174,10 +174,8 @@ const gameData = {
             images: [
                 { srcList: ["char/044/Toka.jpg",
                             "char/044/Toka2.png",
-                            "char/044/Toka3.jpg",
-                            "char/044/Toka3.jpg",
-                            "char/044/Toka4.jpg",
-                            "char/044/Toka5.jpg"], type: "base" }
+                            "char/044/Toka3.jpg"], type: "base" },
+                { srcList: ["char/044/Toka4.jpg"], type: "fd" }
             ]
         },
         // 逸色绚芽
