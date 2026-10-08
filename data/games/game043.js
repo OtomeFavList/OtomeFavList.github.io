@@ -3,7 +3,7 @@
 // 无需额外配置，仅需要到 main.js 顶部 🚨gameIdList数组追加编号"002","003"...
 const gameData = {
     id: "game043", // 全局唯一ID，不可重复
-    name: "共鸣之吻",
+    name: "SympathyKiss 共鸣之吻",
     year: "2024",
     publisher: ["Otomate"],
     cnStudio: "JSD",
