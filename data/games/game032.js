@@ -131,6 +131,7 @@ const gameData = {
         {
             id: "g032_m07",
             name: "艾米",
+            fdName: ["米菈"],
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -143,7 +144,8 @@ const gameData = {
         // 埃尔伯特
         {
             id: "g032_m08",
-            name: "埃尔伯特",
+            name: "埃尔文",
+            fdName: ["FD新增名1","FD新增名2"],
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -170,6 +172,7 @@ const gameData = {
         {
             id: "g032_s01",
             name: "阿黛蕾",
+            fdName: ["玛莉"],
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -185,6 +188,7 @@ const gameData = {
         {
             id: "g032_s02",
             name: "辛西娅",
+            fdName: ["莉莉"],
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -200,6 +204,7 @@ const gameData = {
         {
             id: "g032_s03",
             name: "埃德加",
+            fdName: ["拉特"],
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -215,6 +220,7 @@ const gameData = {
         {
             id: "g032_s04",
             name: "伊万",
+            fdName: ["莱纳斯"],
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -229,6 +235,7 @@ const gameData = {
         {
             id: "g032_s05",
             name: "玛莎",
+            fdName: ["莎莉"],
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -244,6 +251,7 @@ const gameData = {
         {
             id: "g032_s06",
             name: "马修",
+            fdName: ["格罗姆"],
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -272,6 +280,7 @@ const gameData = {
         {
             id: "g032_s08",
             name: "瓦妮亚",
+            fdName: ["贝尔特丽丝"],
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -334,10 +343,10 @@ const gameData = {
                 { srcList: ["char/032/Henri.jpg"], type: "base" }
             ]
         },
-        // 莉安
+        // 珂莲
         {
             id: "g032_fs05",
-            name: "莉安",
+            name: "珂莲",
             gender: "male",
             isHidden: false,
             isFD: false,
