@@ -1,4 +1,5 @@
-
+// data/games/game047.js
+// ✅已核对信息
 const gameData = {
     id: "game047", // 全局唯一ID，不可重复
     name: "璃梦泡影之世外浮城",
@@ -322,5 +323,5 @@ const gameData = {
     ]
 };
 
-// ✅新版导出！不要使用window.gameDataList.push！
+// ESModule导出
 export { gameData };
