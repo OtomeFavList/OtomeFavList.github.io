@@ -40,7 +40,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/045/Ion.jpg",
-                            "char/045/Ion2.jpg"], type: "base" }
+                            "char/045/Ion3.jpg"], type: "base" }
             ]
         },
         // 帕斯哈里亚
