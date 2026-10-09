@@ -116,7 +116,7 @@ const gameData = {
             id: "g048_h01",
             name: "筱宫枫",
             gender: "male",
-            isHidden: true,
+            isHidden: false,
             isFD: false,
             isSub: true,
             images: [
@@ -128,7 +128,7 @@ const gameData = {
             id: "g048_h02",
             name: "雷恩",
             gender: "male",
-            isHidden: true,
+            isHidden: false,
             isFD: false,
             isSub: true,
             images: [
