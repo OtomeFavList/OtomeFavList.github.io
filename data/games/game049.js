@@ -115,17 +115,46 @@ const gameData = {
                             "char/049/Wataru2.jpg"], type: "base" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 枪千花志
         {
-            id: "g1_s03",
-            name: "配角",
+            id: "g049_s01",
+            name: "枪千花志",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/049/Chikashi.jpg",
+                            "char/049/Chikashi2.jpg"], type: "base" }
+            ]
+        },
+        // 有泽梢
+        {
+            id: "g049_s02",
+            name: "有泽梢",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/049/Kozue.jpg",
+                            "char/049/Kozue2.jpg"], type: "base" }
+            ]
+        },
+        // 唐草黎
+        {
+            id: "g049_s03",
+            name: "唐草黎",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/049/Rei.jpg",
+                            "char/049/Rei2.jpg"], type: "base" }
             ]
         }
     ]
