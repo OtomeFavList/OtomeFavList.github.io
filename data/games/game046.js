@@ -21,17 +21,17 @@ const gameData = {
     ],
     cover: "game/046.jpg",
     charList: [
-        // 亚普萝丝
+        // 亚普萝丝·E·兰多夫
         {
             id: "g046_f01",
-            name: "亚普萝丝",
+            name: "萝丝·科廷利",
+            hiddenName: ["亚普萝丝·E·兰多夫"],
             gender: "female",
             isHidden: false,
             isFD: false,
             images: [
                 { srcList: ["char/046/Applause.jpg",
-                            "char/046/Applause2.jpg",
-                            "char/046/Applause3.png"], type: "base" }
+                            "char/046/Applause2.jpg"], type: "base" }
             ]
         },
         // 阿尔弗雷德·克雷斯维尔
@@ -43,8 +43,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/046/Alfred.jpg",
-                            "char/046/Alfred2.jpg",
-                            "char/046/Alfred3.png"], type: "base" }
+                            "char/046/Alfred2.jpg"], type: "base" }
             ]
         },
         // 亚斯科特·林代尔
@@ -56,8 +55,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/046/Ascot.jpg",
-                            "char/046/Ascot2.jpg",
-                            "char/046/Ascot3.png"], type: "base" }
+                            "char/046/Ascot2.jpg"], type: "base" }
             ]
         },
         // 爱德华·伯思斯坦
@@ -69,8 +67,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/046/Edward.jpg",
-                            "char/046/Edward2.jpg",
-                            "char/046/Edward3.png"], type: "base" }
+                            "char/046/Edward2.jpg"], type: "base" }
             ]
         },
         // 约翰
@@ -82,8 +79,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/046/John.jpg",
-                            "char/046/John2.jpg",
-                            "char/046/John3.png"], type: "base" }
+                            "char/046/John2.jpg"], type: "base" }
             ]
         },
         // 莱纳斯·沃德
@@ -95,8 +91,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/046/Linus.jpg",
-                            "char/046/Linus2.jpg",
-                            "char/046/Linus3.png"], type: "base" }
+                            "char/046/Linus2.jpg"], type: "base" }
             ]
         },
         // 卢卡斯·沙利文
@@ -108,22 +103,150 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/046/Lucas.jpg",
-                            "char/046/Lucas2.jpg",
-                            "char/046/Lucas3.png"], type: "base" }
+                            "char/046/Lucas2.jpg"], type: "base" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 夏洛特·佩雷斯
         {
-            id: "g46_s11",
-            name: "配角",
-            hiddenName: ["隐藏真名1","隐藏真名2"],    // 补丁新增：可选，不写则无隐藏名
+            id: "g46_s01",
+            name: "夏洛特·佩雷斯",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/046/Charlotte.jpg"], type: "base" }
+            ]
+        },
+        // 埃德蒙·伯思斯坦
+        {
+            id: "g46_s02",
+            name: "埃德蒙·伯思斯坦",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/046/Edmund.jpg"], type: "base" }
+            ]
+        },
+        // 艾芙林·米勒
+        {
+            id: "g46_s03",
+            name: "艾芙林·米勒",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/046/Evelyn.jpg"], type: "base" }
+            ]
+        },
+        // 歌内莉尔
+        {
+            id: "g46_s04",
+            name: "歌内莉尔",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/046/Goneril.jpg"], type: "base" }
+            ]
+        },
+        // 莱昂纳多
+        {
+            id: "g46_s05",
+            name: "莱昂纳多",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/046/Leonardo.jpg"], type: "base" }
+            ]
+        },
+        // 莉莉·伯思斯坦
+        {
+            id: "g46_s06",
+            name: "莉莉·伯思斯坦",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/046/Lilly.jpg"], type: "base" }
+            ]
+        },
+        // 尼古拉斯·亨德森
+        {
+            id: "g46_s07",
+            name: "尼古拉斯·亨德森",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/046/Nicholas.jpg"], type: "base" }
+            ]
+        },
+        // 奥伯隆
+        {
+            id: "g46_s08",
+            name: "奥伯隆",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/046/Oberon.jpg"], type: "base" }
+            ]
+        },
+        // 菲利普·奥蒂斯
+        {
+            id: "g46_s09",
+            name: "菲利普·奥蒂斯",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/046/Philip.jpg"], type: "base" }
+            ]
+        },
+        // 莱利·兰多夫
+        {
+            id: "g46_s10",
+            name: "莱利·兰多夫",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/046/Riley.jpg"], type: "base" }
+            ]
+        },
+        // 蒂娅
+        {
+            id: "g46_s11",
+            name: "蒂娅",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/046/Tia.jpg"], type: "base" }
             ]
         }
     ]
