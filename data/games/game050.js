@@ -39,7 +39,8 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/050/Haruka.jpg",
-                            "char/050/Haruka2.jpg"], type: "base" }
+                            "char/050/Haruka2.jpg",
+                            "char/050/Haruka3.jpg"], type: "base" }
             ]
         },
         // 细波艾斯
@@ -51,7 +52,8 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/050/Ace.jpg",
-                            "char/050/Ace2.jpg"], type: "base" }
+                            "char/050/Ace2.jpg",
+                            "char/050/Ace3.jpg"], type: "base" }
             ]
         },
         // 神里晓
@@ -63,7 +65,8 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/050/Kyou.jpg",
-                            "char/050/Kyou2.jpg"], type: "base" }
+                            "char/050/Kyou2.jpg",
+                            "char/050/Kyou3.jpg"], type: "base" }
             ]
         },
         // 来实雅人
@@ -75,7 +78,8 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/050/Masato.jpg",
-                            "char/050/Masato2.jpg"], type: "base" }
+                            "char/050/Masato2.jpg",
+                            "char/050/Masato3.jpg"], type: "base" }
             ]
         },
         // 弓仓音时
@@ -87,7 +91,8 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/050/Neji.jpg",
-                            "char/050/Neji2.jpg"], type: "base" }
+                            "char/050/Neji2.jpg",
+                            "char/050/Neji3.jpg"], type: "base" }
             ]
         },
         // 指乃朱理
@@ -99,7 +104,8 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/050/Shuri.jpg",
-                            "char/050/Shuri2.jpg"], type: "base" }
+                            "char/050/Shuri2.jpg",
+                            "char/050/Shuri3.jpg"], type: "base" }
             ]
         },
         // 九鬼辉
@@ -109,9 +115,12 @@ const gameData = {
             gender: "male",
             isHidden: false,
             isFD: false,
+            isSub: true,
+            isFdSub: false,
             images: [
                 { srcList: ["char/050/Akira.jpg",
-                            "char/050/Akira2.jpg"], type: "base" }
+                            "char/050/Akira2.jpg",
+                            "char/050/Akira3.jpg"], type: "base" }
             ]
         },
         // 九鬼光
@@ -121,9 +130,12 @@ const gameData = {
             gender: "male",
             isHidden: false,
             isFD: false,
+            isSub: true,
+            isFdSub: false,
             images: [
                 { srcList: ["char/050/Hikaru.jpg",
-                            "char/050/Hikaru2.jpg"], type: "base" }
+                            "char/050/Hikaru2.jpg",
+                            "char/050/Hikaru3.jpg"], type: "base" }
             ]
         },
         // 九鬼静
@@ -133,9 +145,12 @@ const gameData = {
             gender: "male",
             isHidden: false,
             isFD: false,
+            isSub: true,
+            isFdSub: false,
             images: [
                 { srcList: ["char/050/Shizuka.jpg",
-                            "char/050/Shizuka2.jpg"], type: "base" }
+                            "char/050/Shizuka2.jpg",
+                            "char/050/Shizuka3.jpg"], type: "base" }
             ]
         }
     ]
