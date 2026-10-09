@@ -1,9 +1,4 @@
-// ==========【单个游戏独立数据模板｜新版ESModule】==========
-// 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
-// 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
-// 网页渲染时由 main.js 的 getWebImageUrl 拼接为 R2 完整 URL
-// Canvas 导出时由 export-canvas-render.js 的 convertR2ToJsDelivr 拼接为 jsDelivr URL
-// 无需额外配置，仅需要到 main.js 顶部 🚨gameIdList数组追加编号"002","003"...
+// ℹ️配角名未校对
 const gameData = {
     id: "game045", // 全局唯一ID，不可重复
     name: "绚烂传说",
@@ -120,32 +115,161 @@ const gameData = {
                             "char/045/Liyan2.jpg"], type: "base" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 阿莱斯特
         {
-            id: "g45_s08",
-            name: "配角",
-            hiddenName: ["隐藏真名1","隐藏真名2"],    // 补丁新增：可选，不写则无隐藏名
+            id: "g45_s01",
+            name: "阿莱斯特",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/045/Alest.jpg"], type: "base" }
             ]
         },
-        // 续作/FD次要角色（isFdSub=true → 开关开启才显示整个角色卡片）
+        // 阿维
         {
-            id: "g45_fs04",
-            name: "配角",
-            hiddenName: ["隐藏真名1","隐藏真名2"],    // 补丁新增：可选，不写则无隐藏名
+            id: "g45_s02",
+            name: "阿维",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/045/Avi.jpg"], type: "base" }
+            ]
+        },
+        // 巴尔托
+        {
+            id: "g45_s03",
+            name: "巴尔托",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/045/Balto.jpg"], type: "base" }
+            ]
+        },
+        // 柯里乌斯
+        {
+            id: "g45_s04",
+            name: "柯里乌斯",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/045/Colivus.jpg",
+                            "char/045/Colivus2.jpg"], type: "base" }
+            ]
+        },
+        // 露娜
+        {
+            id: "g45_s05",
+            name: "露娜",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/045/Luna.jpg"], type: "base" }
+            ]
+        },
+        // 菲罗
+        {
+            id: "g45_s06",
+            name: "菲罗",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/045/Phiro.jpg"], type: "base" }
+            ]
+        },
+        // 斯皮雷亚
+        {
+            id: "g45_s07",
+            name: "斯皮雷亚",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/045/Spirea.jpg"], type: "base" }
+            ]
+        },
+        // 维戈尼亚
+        {
+            id: "g45_s08",
+            name: "维戈尼亚",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/045/Vigonia.jpg"], type: "base" }
+            ]
+        },
+        // 娜莉亚
+        {
+            id: "g45_fs01",
+            name: "娜莉亚",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: false,
             isFdSub: true,
             images: [
-                { srcList: ["char/g001_fS01_1.jpg"], type: "base" }
+                { srcList: ["char/045/Naria.jpg"], type: "base" }
+            ]
+        },
+        // 拉吉艾尔
+        {
+            id: "g45_fs02",
+            name: "拉吉艾尔",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/045/Raijieru.jpg"], type: "base" }
+            ]
+        },
+        // 雷夫
+        {
+            id: "g45_fs03",
+            name: "雷夫",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/045/Reve.jpg"], type: "base" }
+            ]
+        },
+        // 乌塔
+        {
+            id: "g45_fs04",
+            name: "乌塔",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/045/Vta.jpg"], type: "base" }
             ]
         }
     ]
