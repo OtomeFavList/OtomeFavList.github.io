@@ -35,13 +35,13 @@ const gameData = {
         {
             id: "g048_m01",
             name: "英圆",
+            hiddenName: ["主教"],
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
                 { srcList: ["char/048/Madoka.jpg"], type: "base" },
                 { srcList: ["char/048/Bishop.jpg",
-                            "char/048/Bishop2.jpg",
                             "char/048/Madoka2.jpg"], type: "hidden" }
             ]
         },
@@ -49,13 +49,13 @@ const gameData = {
         {
             id: "g048_m02",
             name: "英央",
+            hiddenName: ["情报商"],
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
                 { srcList: ["char/048/Nakaba.jpg"], type: "base" },
                 { srcList: ["char/048/Journalist.jpg",
-                            "char/048/Journalist2.jpg",
                             "char/048/Nakaba2.jpg"], type: "hidden" }
             ]
         },
@@ -63,13 +63,13 @@ const gameData = {
         {
             id: "g048_m03",
             name: "加纳理一郎",
+            hiddenName: ["流浪者"],
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
                 { srcList: ["char/048/Riichiro.jpg"], type: "base" },
                 { srcList: ["char/048/Wanderer.jpg",
-                            "char/048/Wanderer2.jpg",
                             "char/048/Riichiro2.jpg"], type: "hidden" }
             ]
         },
@@ -77,13 +77,13 @@ const gameData = {
         {
             id: "g048_m04",
             name: "西园寺寅之助",
+            hiddenName: ["反叛者"],
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
                 { srcList: ["char/048/Saionji.jpg"], type: "base" },
                 { srcList: ["char/048/Traitor.jpg",
-                            "char/048/Traitor2.jpg",
                             "char/048/Saionji2.jpg"], type: "hidden" }
             ]
         },
@@ -91,13 +91,13 @@ const gameData = {
         {
             id: "g048_m05",
             name: "时田终夜",
+            hiddenName: ["哲学家"],
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
                 { srcList: ["char/048/Shuya.jpg"], type: "base" },
                 { srcList: ["char/048/Philosopher.jpg",
-                            "char/048/Philosopher2.jpg",
                             "char/048/Shuya2.jpg"], type: "hidden" }
             ]
         },
@@ -105,13 +105,13 @@ const gameData = {
         {
             id: "g048_m06",
             name: "海棠鹰斗",
+            hiddenName: ["神贺旭","国王"],
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
                 { srcList: ["char/048/Takato.jpg"], type: "base" },
                 { srcList: ["char/048/Kaga.jpg",
-                            "char/048/Kaga2.jpg",
                             "char/048/Takato2.jpg"], type: "hidden" }
             ]
         },
@@ -122,6 +122,7 @@ const gameData = {
             gender: "male",
             isHidden: true,
             isFD: false,
+            isSub: true,
             images: [
                 { srcList: ["char/048/Kaede.jpg"], type: "base" }
             ]
@@ -133,23 +134,61 @@ const gameData = {
             gender: "male",
             isHidden: true,
             isFD: false,
+            isSub: true,
             images: [
-                { srcList: ["char/048/Rook.jpg",
-                            "char/048/Rook2.jpg"], type: "base" }
+                { srcList: ["char/048/Rook.jpg"], type: "base" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 九楼嘉昭
         {
-            id: "g1_s04",
-            name: "配角",
-            hiddenName: ["隐藏真名1","隐藏真名2"],    // 补丁新增：可选，不写则无隐藏名
+            id: "g048_s01",
+            name: "九楼嘉昭",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/048/Kuroh.jpg"], type: "base" }
+            ]
+        },
+        // 首领
+        {
+            id: "g048_s02",
+            name: "首领",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/048/Leader.jpg"], type: "base" }
+            ]
+        },
+        // 零
+        {
+            id: "g048_s03",
+            name: "零",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/048/Rei.jpg"], type: "base" }
+            ]
+        },
+        // 诗雨
+        {
+            id: "g048_s04",
+            name: "诗雨",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/048/Shigure.jpg"], type: "base" }
             ]
         }
     ]
