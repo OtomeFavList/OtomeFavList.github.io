@@ -1,9 +1,4 @@
-// ==========【单个游戏独立数据模板｜新版ESModule】==========
-// 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
-// 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
-// 网页渲染时由 main.js 的 getWebImageUrl 拼接为 R2 完整 URL
-// Canvas 导出时由 export-canvas-render.js 的 convertR2ToJsDelivr 拼接为 jsDelivr URL
-// 无需额外配置，仅需要到 main.js 顶部 🚨gameIdList数组追加编号"002","003"...
+
 const gameData = {
     id: "game047", // 全局唯一ID，不可重复
     name: "璃梦泡影之世外浮城",
@@ -90,32 +85,238 @@ const gameData = {
                             "char/047/Yori2.jpg"], type: "base" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 蓝白
         {
-            id: "g47_s14",
-            name: "配角",
-            hiddenName: ["隐藏真名1","隐藏真名2"],    // 补丁新增：可选，不写则无隐藏名
+            id: "g47_s01",
+            name: "蓝白",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/047/Aijiro.jpg"], type: "base" }
             ]
         },
-        // 续作/FD次要角色（isFdSub=true → 开关开启才显示整个角色卡片）
+        // 葵
         {
-            id: "g47_fs03",
-            name: "配角",
-            hiddenName: ["隐藏真名1","隐藏真名2"],    // 补丁新增：可选，不写则无隐藏名
+            id: "g47_s02",
+            name: "葵",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/047/Aoi.jpg"], type: "base" }
+            ]
+        },
+        // 千鸟
+        {
+            id: "g47_s03",
+            name: "千鸟",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/047/Chidori.jpg"], type: "base" }
+            ]
+        },
+        // 枸橘
+        {
+            id: "g47_s04",
+            name: "枸橘",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/047/Karatachi.jpg"], type: "base" }
+            ]
+        },
+        // 鸣神
+        {
+            id: "g47_s05",
+            name: "鸣神",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/047/Narukami.jpg"], type: "base" }
+            ]
+        },
+        // 胧
+        {
+            id: "g47_s06",
+            name: "胧",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/047/Oboro.jpg"], type: "base" }
+            ]
+        },
+        // 贤木
+        {
+            id: "g47_s07",
+            name: "贤木",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/047/Sakaki.jpg"], type: "base" }
+            ]
+        },
+        // 朔
+        {
+            id: "g47_s08",
+            name: "朔",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/047/Saku.jpg"], type: "base" }
+            ]
+        },
+        // 潮路
+        {
+            id: "g47_s09",
+            name: "潮路",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/047/Shioji.jpg"], type: "base" }
+            ]
+        },
+        // 寿寿音
+        {
+            id: "g47_s10",
+            name: "寿寿音",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/047/Suzune.jpg"], type: "base" }
+            ]
+        },
+        // 松柏
+        {
+            id: "g47_s11",
+            name: "松柏",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/047/Syohaku.jpg"], type: "base" }
+            ]
+        },
+        // 大树
+        {
+            id: "g47_s12",
+            name: "大树",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/047/Taijyu.jpg"], type: "base" }
+            ]
+        },
+        // 雨月
+        {
+            id: "g47_s13",
+            name: "雨月",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/047/Ugetsu.jpg"], type: "base" }
+            ]
+        },
+        // 柊
+        {
+            id: "g47_fs01",
+            name: "柊",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: false,
             isFdSub: true,
             images: [
-                { srcList: ["char/g001_fS01_1.jpg"], type: "base" }
+                { srcList: ["char/047/Hiiragi.jpg"], type: "base" }
+            ]
+        },
+        // 氷雨
+        {
+            id: "g47_fs02",
+            name: "氷雨",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/047/Hisame.jpg"], type: "base" }
+            ]
+        },
+        // 佳月
+        {
+            id: "g47_fs03",
+            name: "佳月",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/047/Kagetsu.jpg"], type: "base" }
+            ]
+        },
+        // 周防
+        {
+            id: "g47_fs04",
+            name: "周防",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/047/Suou.jpg"], type: "base" }
+            ]
+        },
+        // 石蕗
+        {
+            id: "g47_fs05",
+            name: "石蕗",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/047/Tsuwabuki.jpg"], type: "base" }
             ]
         }
     ]
