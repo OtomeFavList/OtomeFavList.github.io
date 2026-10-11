@@ -32,7 +32,8 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/055/Nagisa.jpg",
-                            "char/055/Nagisa2.jpg"], type: "base" }
+                            "char/055/Nagisa2.jpg",
+                            "char/055/Nagisa4.jpg"], type: "base" }
             ]
         },
         // 埃尔文
@@ -44,7 +45,9 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/055/Alvin.jpg",
-                            "char/055/Alvin2.jpg"], type: "base" }
+                            "char/055/Alvin2.jpg",
+                            "char/055/Alvin3.jpg",
+                            "char/055/Alvin4.jpg"], type: "base" }
             ]
         },
         // 以利亚
@@ -56,7 +59,9 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/055/Elijah.jpg",
-                            "char/055/Elijah2.jpg"], type: "base" }
+                            "char/055/Elijah2.jpg",
+                            "char/055/Elijah3.jpg",
+                            "char/055/Elijah4.jpg"], type: "base" }
             ]
         },
         // 伊诺
@@ -68,7 +73,9 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/055/Eno.jpg",
-                            "char/055/Eno2.jpg"], type: "base" }
+                            "char/055/Eno2.jpg",
+                            "char/055/Eno3.jpg",
+                            "char/055/Eno4.jpg"], type: "base" }
             ]
         },
         // 费恩
@@ -80,7 +87,9 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/055/Finn.jpg",
-                            "char/055/Finn2.jpg"], type: "base" }
+                            "char/055/Finn2.jpg",
+                            "char/055/Finn3.jpg",
+                            "char/055/Finn4.jpg"], type: "base" }
             ]
         },
         // 米洛
@@ -92,7 +101,9 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/055/Milo.jpg",
-                            "char/055/Milo2.jpg"], type: "base" }
+                            "char/055/Milo2.jpg",
+                            "char/055/Milo3.jpg",
+                            "char/055/Milo4.jpg"], type: "base" }
             ]
         },
         // 狄奥
@@ -104,21 +115,89 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/055/Theo.jpg",
-                            "char/055/Theo2.jpg"], type: "base" }
+                            "char/055/Theo2.jpg",
+                            "char/055/Theo3.jpg",
+                            "char/055/Theo4.jpg"], type: "base" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 贝蒂
         {
-            id: "g1_s06",
-            name: "配角",
-            hiddenName: ["隐藏真名1","隐藏真名2"],    // 补丁新增：可选，不写则无隐藏名
+            id: "g055_s01",
+            name: "贝蒂",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/055/Bertie.jpg"], type: "base" }
+            ]
+        },
+        // 科特
+        {
+            id: "g055_s02",
+            name: "卡特",
+            hiddenName: ["科特"],
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/055/Colt2.jpg"], type: "base" },
+                { srcList: ["char/055/Colt.jpg"], type: "hidden" }
+            ]
+        },
+        // 海达尔
+        {
+            id: "g055_s03",
+            name: "海达尔",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/055/Haidar.jpg"], type: "base" }
+            ]
+        },
+        // 埃娜奥
+        {
+            id: "g055_s04",
+            name: "埃娜奥",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/055/Henao.jpg"], type: "base" }
+            ]
+        },
+        // 皮特
+        {
+            id: "g055_s05",
+            name: "皮特",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/055/Pete.jpg"], type: "base" }
+            ]
+        },
+        // 史凯拉
+        {
+            id: "g055_s06",
+            name: "史凯拉",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/055/Skylar.jpg"], type: "base" }
             ]
         }
     ]
