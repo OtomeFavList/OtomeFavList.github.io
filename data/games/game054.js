@@ -14,7 +14,8 @@ const gameData = {
         {name:"炭水化物", lang:"zh"},
         {name:"長野和泉", lang:"zh"},
         {name:"有野幸", lang:"zh"},
-        {name:"小縞なお", lang:"zh"}
+        {name:"小縞なお", lang:"zh"},
+        {name:"合同会社Re,AER", lang:"zh"}
     ],
     art: [
         {name:"御堂マヰカ", lang:"zh"}
