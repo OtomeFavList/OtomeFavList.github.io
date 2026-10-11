@@ -4,7 +4,7 @@ const gameData = {
     id: "game056", // 全局唯一ID，不可重复
     name: "红铃的恸哭",
     year: "2026",
-    publisher: ["Voltage"],
+    publisher: ["AmuLit"],
     cnStudio: "JOYOLAND",
     writer: [
         {name:"夕月", lang:"zh"}
