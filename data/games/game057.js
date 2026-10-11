@@ -24,7 +24,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/057/Rin.jpg",
+                { srcList: ["char/057/Rin.jpeg",
                             "char/057/Rin2.jpg",
                             "char/057/Rin3.jpg"], type: "base" }
             ]
