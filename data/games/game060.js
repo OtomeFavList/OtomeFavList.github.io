@@ -87,7 +87,7 @@ const gameData = {
         },
         // 玖珂叁月
         {
-            id: "g60_s01",
+            id: "g060_s01",
             name: "玖珂叁月",
             gender: "male",
             isHidden: false,
@@ -100,7 +100,7 @@ const gameData = {
         },
         // 八木泽萌花
         {
-            id: "g60_s02",
+            id: "g060_s02",
             name: "八木泽萌花",
             gender: "male",
             isHidden: false,
@@ -113,7 +113,7 @@ const gameData = {
         },
         // 女王
         {
-            id: "g60_s03",
+            id: "g060_s03",
             name: "女王",
             hiddenName: ["藤枝麻理亚"],
             gender: "male",
@@ -127,7 +127,7 @@ const gameData = {
         },
         // 玖珂真一
         {
-            id: "g60_s04",
+            id: "g060_s04",
             name: "玖珂真一",
             gender: "male",
             isHidden: false,
@@ -140,7 +140,7 @@ const gameData = {
         },
         // 镝木苍一郎
         {
-            id: "g60_s05",
+            id: "g060_s05",
             name: "镝木苍一郎",
             gender: "male",
             isHidden: false,
@@ -153,7 +153,7 @@ const gameData = {
         },
         // 爱德华·高崎
         {
-            id: "g60_s06",
+            id: "g060_s06",
             name: "爱德华·高崎",
             gender: "male",
             isHidden: false,
