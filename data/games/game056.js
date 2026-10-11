@@ -1,4 +1,4 @@
-// ℹ️配角名未校对
+
 const gameData = {
     id: "game056", // 全局唯一ID，不可重复
     name: "红铃的恸哭",
@@ -72,10 +72,10 @@ const gameData = {
                             "char/056/Rhodes2.jpg"], type: "base" }
             ]
         },
-        // 阿尔伯特·兰卡斯特
+        // 埃尔伯特·兰卡斯特
         {
             id: "g056_s01",
-            name: "阿尔伯特·兰卡斯特",
+            name: "埃尔伯特·兰卡斯特",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -85,10 +85,10 @@ const gameData = {
                 { srcList: ["char/056/Albert.jpg"], type: "base" }
             ]
         },
-        // 巴伦·费舍尔
+        // 巴伦·费希尔
         {
             id: "g056_s02",
-            name: "巴伦·费舍尔",
+            name: "巴伦·费希尔",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -124,10 +124,10 @@ const gameData = {
                 { srcList: ["char/056/Eileen.jpg"], type: "base" }
             ]
         },
-        // 弗林·索尔斯伯里
+        // 弗林·索尔兹伯里
         {
             id: "g056_s05",
-            name: "弗林·索尔斯伯里",
+            name: "弗林·索尔兹伯里",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -150,10 +150,10 @@ const gameData = {
                 { srcList: ["char/056/Jack.jpg"], type: "base" }
             ]
         },
-        // 莉娜莉亚·伦威克
+        // 里娜莉亚·伦威克
         {
             id: "g056_s07",
-            name: "莉娜莉亚·伦威克",
+            name: "里娜莉亚·伦威克",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -176,10 +176,10 @@ const gameData = {
                 { srcList: ["char/056/Matthew.jpg"], type: "base" }
             ]
         },
-        // 玛尔贝里·格里姆维奇
+        // 玛尔贝利·格里姆维奇
         {
             id: "g056_s09",
-            name: "玛尔贝里·格里姆维奇",
+            name: "玛尔贝利·格里姆维奇",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -189,10 +189,10 @@ const gameData = {
                 { srcList: ["char/056/Mulberry.jpg"], type: "base" }
             ]
         },
-        // 妮可拉·卡莱尔
+        // 妮古拉·卡莱尔
         {
             id: "g056_s10",
-            name: "妮可拉·卡莱尔",
+            name: "妮古拉·卡莱尔",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -228,10 +228,10 @@ const gameData = {
                 { srcList: ["char/056/Roderick.jpg"], type: "base" }
             ]
         },
-        // 弗拉德·海罗维尔
+        // 弗拉德·哈罗韦尔
         {
             id: "g056_s13",
-            name: "弗拉德·海罗维尔",
+            name: "弗拉德·哈罗韦尔",
             gender: "male",
             isHidden: false,
             isFD: false,
