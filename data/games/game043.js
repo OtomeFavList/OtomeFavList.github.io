@@ -132,8 +132,8 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/043/Yofy.jpg",
-                            "char/043/Yofy2.jpg",
-                            "char/043/Yofy3.jpg"], type: "base" }
+                            "char/043/Yofy3.jpg",
+                            "char/043/Yofy2.jpg"], type: "base" }
             ]
         },
         // 饭村秋雄
