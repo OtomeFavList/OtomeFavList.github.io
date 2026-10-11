@@ -106,7 +106,7 @@ const gameData = {
         },
         // 九鬼辉
         {
-            id: "g050_m06",
+            id: "g050_s06",
             name: "九鬼辉",
             gender: "male",
             isHidden: false,
@@ -121,7 +121,7 @@ const gameData = {
         },
         // 九鬼光
         {
-            id: "g050_m07",
+            id: "g050_s07",
             name: "九鬼光",
             gender: "male",
             isHidden: false,
@@ -136,7 +136,7 @@ const gameData = {
         },
         // 九鬼静
         {
-            id: "g050_m08",
+            id: "g050_s08",
             name: "九鬼静",
             gender: "male",
             isHidden: false,
