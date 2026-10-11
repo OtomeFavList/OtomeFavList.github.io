@@ -1,5 +1,5 @@
-// data/games/game050.js
-// ✅已核对信息
+// data/games/game051.js
+// ⚠️已核对信息，立绘未重置
 const gameData = {
     id: "game051", // 全局唯一ID，不可重复
     name: "夏空的独白 ~Another Memory~",
