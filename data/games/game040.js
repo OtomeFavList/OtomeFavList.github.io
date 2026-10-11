@@ -104,6 +104,71 @@ const gameData = {
             images: [
                 { srcList: ["char/040/Gannet.jpg"], type: "base" }
             ]
+        },
+        // 安柏·克洛伊兹
+        {
+            id: "g040_s01",
+            name: "安柏·克洛伊兹",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/040/Ambeu.jpg"], type: "base" }
+            ]
+        },
+        // 卡尔塞德·赫尔特林
+        {
+            id: "g040_s02",
+            name: "卡尔塞德·赫尔特林",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/040/Chelced.jpg"], type: "base" }
+            ]
+        },
+        // 小啾
+        {
+            id: "g040_s03",
+            name: "小啾",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/040/Cue.jpg"], type: "base" }
+            ]
+        },
+        // 可莉诺·基斯贝尔特
+        {
+            id: "g040_s04",
+            name: "可莉诺·基斯贝尔特",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/040/Elina.jpg"], type: "base" }
+            ]
+        },
+        // 奥利文·克洛伊兹
+        {
+            id: "g040_s05",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/040/Oliuine.jpg"], type: "base" }
+            ]
         }
     ]
 };
