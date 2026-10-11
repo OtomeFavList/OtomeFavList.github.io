@@ -1,3 +1,5 @@
+// data/games/game058.js
+// ✅已核对信息
 // ℹ️部分配角名未校对
 const gameData = {
     id: "game058", // 全局唯一ID，不可重复
@@ -6,6 +8,7 @@ const gameData = {
     publisher: ["honeybee black"],
     cnStudio: "JOYOLAND",
     writer: [
+        {name:"中村幸代", lang:"zh"},
         {name:"柚子みかん", lang:"zh"},
         {name:"浅生柚子", lang:"zh"},
         {name:"相川暁子", lang:"zh"},
@@ -260,5 +263,5 @@ const gameData = {
     ]
 };
 
-// ✅新版导出！不要使用window.gameDataList.push！
+// ESModule导出
 export { gameData };
