@@ -1,9 +1,4 @@
-// ==========【单个游戏独立数据模板｜新版ESModule】==========
-// 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
-// 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
-// 网页渲染时由 main.js 的 getWebImageUrl 拼接为 R2 完整 URL
-// Canvas 导出时由 export-canvas-render.js 的 convertR2ToJsDelivr 拼接为 jsDelivr URL
-// 无需额外配置，仅需要到 main.js 顶部 🚨gameIdList数组追加编号"002","003"...
+// ℹ️配角名未校对
 const gameData = {
     id: "game052", // 全局唯一ID，不可重复
     name: "提米拉纳国的好运公主与衰运骑士团",
@@ -31,9 +26,7 @@ const gameData = {
             images: [
                 { srcList: ["char/052/Cecilia.jpg",
                             "char/052/Cecilia2.jpg",
-                            "char/052/Cecilia3.png",
-                            "char/052/Cecilia4.jpg",
-                            "char/052/Cecilia5.jpg"], type: "base" }
+                            "char/052/Cecilia3.png"], type: "base" }
             ]
         },
         // 阿德尔·纳雷斯
@@ -46,9 +39,7 @@ const gameData = {
             images: [
                 { srcList: ["char/052/Adel.jpg",
                             "char/052/Adel2.jpg",
-                            "char/052/Adel3.png",
-                            "char/052/Adel4.jpg",
-                            "char/052/Adel5.jpg"], type: "base" }
+                            "char/052/Adel3.png"], type: "base" }
             ]
         },
         // 约瑟菲·康奈希尔德·佐达利克
@@ -61,9 +52,7 @@ const gameData = {
             images: [
                 { srcList: ["char/052/Josephy.jpg",
                             "char/052/Josephy2.jpg",
-                            "char/052/Josephy3.png",
-                            "char/052/Josephy4.jpg",
-                            "char/052/Josephy5.jpg"], type: "base" }
+                            "char/052/Josephy3.png"], type: "base" }
             ]
         },
         // 齐亚·奈尔提
@@ -76,9 +65,7 @@ const gameData = {
             images: [
                 { srcList: ["char/052/Kiya.jpg",
                             "char/052/Kiya2.jpg",
-                            "char/052/Kiya3.png",
-                            "char/052/Kiya4.jpg",
-                            "char/052/Kiya5.jpg"], type: "base" }
+                            "char/052/Kiya3.png"], type: "base" }
             ]
         },
         // 米兰·赫林
@@ -91,9 +78,7 @@ const gameData = {
             images: [
                 { srcList: ["char/052/Milan.jpg",
                             "char/052/Milan2.jpg",
-                            "char/052/Milan3.png",
-                            "char/052/Milan4.jpg",
-                            "char/052/Milan5.jpg"], type: "base" }
+                            "char/052/Milan3.png"], type: "base" }
             ]
         },
         // 托比亚斯·哈贝克·弗莱
@@ -106,13 +91,249 @@ const gameData = {
             images: [
                 { srcList: ["char/052/Tobias.jpg",
                             "char/052/Tobias2.jpg",
-                            "char/052/Tobias3.png",
-                            "char/052/Tobias4.jpg",
-                            "char/052/Tobias5.jpg"], type: "base" }
+                            "char/052/Tobias3.png"], type: "base" }
+            ]
+        },
+        // 艾莉森·达里尔斯·克雷努
+        {
+            id: "g52_s01",
+            name: "艾莉森·达里尔斯·克雷努",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/052/Alison.jpg",
+                            "char/052/Alison2.png"], type: "base" }
+            ]
+        },
+        // 安杰拉·奥尔斯泰特·提米拉纳
+        {
+            id: "g52_s02",
+            name: "安杰拉·奥尔斯泰特·提米拉纳",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/052/Angela.jpg",
+                            "char/052/Angela2.png"], type: "base" }
+            ]
+        },
+        // 贝内蒂·阿斯特拉
+        {
+            id: "g52_s03",
+            name: "贝内蒂·阿斯特拉",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/052/Benetti.jpg",
+                            "char/052/Benetti2.png"], type: "base" }
+            ]
+        },
+        // 巴吉特·赫林戴尔·莫拉蒂
+        {
+            id: "g52_s04",
+            name: "巴吉特·赫林戴尔·莫拉蒂",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/052/Burkitt.jpg",
+                            "char/052/Burkitt2.png"], type: "base" }
+            ]
+        },
+        // 卡斯·库根
+        {
+            id: "g52_s05",
+            name: "卡斯·库根",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/052/Cass.jpg",
+                            "char/052/Cass2.png"], type: "base" }
+            ]
+        },
+        // 克劳迪娅·法里亚斯·提米拉纳
+        {
+            id: "g52_s06",
+            name: "克劳迪娅·法里亚斯·提米拉纳",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/052/Claudia.jpg",
+                            "char/052/Claudia2.png"], type: "base" }
+            ]
+        },
+        // 艾瑞克
+        {
+            id: "g52_s07",
+            name: "艾瑞克",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/052/Eriku.jpg",
+                            "char/052/Eriku2.png"], type: "base" }
+            ]
+        },
+        // 伊诺
+        {
+            id: "g52_s08",
+            name: "伊诺",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/052/Ino.jpg",
+                            "char/052/Ino2.png"], type: "base" }
+            ]
+        },
+        // 伊莎贝拉·法里亚斯·尤贝尔维克
+        {
+            id: "g52_s09",
+            name: "伊莎贝拉·法里亚斯·尤贝尔维克",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/052/Isabella.jpg",
+                            "char/052/Isabella2.png"], type: "base" }
+            ]
+        },
+        // 卡里姆·奥尔斯泰特·阿利亚
+        {
+            id: "g52_s10",
+            name: "卡里姆·奥尔斯泰特·阿利亚",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/052/Karim.jpg",
+                            "char/052/Karim2.png"], type: "base" }
+            ]
+        },
+        // 卡尔纳普·法里亚斯·提米拉纳
+        {
+            id: "g52_s11",
+            name: "卡尔纳普·法里亚斯·提米拉纳",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/052/Karnap.jpg",
+                            "char/052/Karnap2.png"], type: "base" }
+            ]
+        },
+        // 马修·奥尔贝格·奈塞尔
+        {
+            id: "g52_s12",
+            name: "马修·奥尔贝格·奈塞尔",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/052/Matthew.jpg",
+                            "char/052/Matthew2.png"], type: "base" }
+            ]
+        },
+        // 妮尔达·巴雷托斯·雷安德尔
+        {
+            id: "g52_s13",
+            name: "妮尔达·巴雷托斯·雷安德尔",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/052/Nilda.jpg",
+                            "char/052/Nilda2.png"], type: "base" }
+            ]
+        },
+        // 波拉
+        {
+            id: "g52_s14",
+            name: "波拉",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/052/Pora.jpg",
+                            "char/052/Pora2.png"], type: "base" }
+            ]
+        },
+        // 莱因哈特·法里亚斯·海涅曼
+        {
+            id: "g52_s15",
+            name: "莱因哈特·法里亚斯·海涅曼",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/052/Reinhardt.jpg",
+                            "char/052/Reinhardt2.png"], type: "base" }
+            ]
+        },
+        // 鲁迪·玛贝尔
+        {
+            id: "g52_s16",
+            name: "鲁迪·玛贝尔",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/052/Rudy.jpg",
+                            "char/052/Rudy2.png"], type: "base" }
+            ]
+        },
+        // 沃尔恩塔尔
+        {
+            id: "g52_s17",
+            name: "沃尔恩塔尔",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/052/Uorutaru.jpg",
+                            "char/052/Uorutaru2.png"], type: "base" }
             ]
         }
     ]
 };
 
-// ✅新版导出！不要使用window.gameDataList.push！
+// ESModule导出
 export { gameData };
