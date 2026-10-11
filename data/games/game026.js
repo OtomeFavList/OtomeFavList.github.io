@@ -4,7 +4,7 @@ const gameData = {
     id: "game026", // 全局唯一ID，不可重复
     name: "even if TEMPEST 黄昏中魔女如是说",
     year: "2023",
-    publisher: ["Voltage"],
+    publisher: ["AmuLit"],
     cnStudio: "JOYOLAND",
     writer: [
         {name:"潮文音", lang:"zh"}
