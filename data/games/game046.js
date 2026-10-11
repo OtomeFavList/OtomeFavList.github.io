@@ -104,7 +104,7 @@ const gameData = {
         },
         // 夏洛特·佩雷斯
         {
-            id: "g46_s01",
+            id: "g046_s01",
             name: "夏洛特·佩雷斯",
             gender: "male",
             isHidden: false,
@@ -117,7 +117,7 @@ const gameData = {
         },
         // 埃德蒙·伯思斯坦
         {
-            id: "g46_s02",
+            id: "g046_s02",
             name: "埃德蒙·伯思斯坦",
             gender: "male",
             isHidden: false,
@@ -130,7 +130,7 @@ const gameData = {
         },
         // 艾芙林·米勒
         {
-            id: "g46_s03",
+            id: "g046_s03",
             name: "艾芙林·米勒",
             gender: "male",
             isHidden: false,
@@ -143,7 +143,7 @@ const gameData = {
         },
         // 歌内莉尔
         {
-            id: "g46_s04",
+            id: "g046_s04",
             name: "歌内莉尔",
             gender: "male",
             isHidden: false,
@@ -156,7 +156,7 @@ const gameData = {
         },
         // 莱昂纳多
         {
-            id: "g46_s05",
+            id: "g046_s05",
             name: "莱昂纳多",
             gender: "male",
             isHidden: false,
@@ -169,7 +169,7 @@ const gameData = {
         },
         // 莉莉·伯思斯坦
         {
-            id: "g46_s06",
+            id: "g046_s06",
             name: "莉莉·伯思斯坦",
             gender: "male",
             isHidden: false,
@@ -182,7 +182,7 @@ const gameData = {
         },
         // 尼古拉斯·亨德森
         {
-            id: "g46_s07",
+            id: "g046_s07",
             name: "尼古拉斯·亨德森",
             gender: "male",
             isHidden: false,
@@ -195,7 +195,7 @@ const gameData = {
         },
         // 奥伯隆
         {
-            id: "g46_s08",
+            id: "g046_s08",
             name: "奥伯隆",
             gender: "male",
             isHidden: false,
@@ -208,7 +208,7 @@ const gameData = {
         },
         // 菲利普·奥蒂斯
         {
-            id: "g46_s09",
+            id: "g046_s09",
             name: "菲利普·奥蒂斯",
             gender: "male",
             isHidden: false,
@@ -221,7 +221,7 @@ const gameData = {
         },
         // 莱利·兰多夫
         {
-            id: "g46_s10",
+            id: "g046_s10",
             name: "莱利·兰多夫",
             gender: "male",
             isHidden: false,
@@ -234,7 +234,7 @@ const gameData = {
         },
         // 蒂娅
         {
-            id: "g46_s11",
+            id: "g046_s11",
             name: "蒂娅",
             gender: "male",
             isHidden: false,
