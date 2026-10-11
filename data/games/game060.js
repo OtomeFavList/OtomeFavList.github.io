@@ -49,7 +49,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/060/Ichiha.jpg"], type: "base" }
+                { srcList: ["char/060/Ichiha.jpeg"], type: "base" }
             ]
         },
         // 鹭之宫零
