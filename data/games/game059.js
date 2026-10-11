@@ -1,9 +1,9 @@
-// data/games/game055.js
+// data/games/game059.js
 // ✅已核对信息
 // ℹ️配角名未校对，续作内容未汉化
 const gameData = {
     id: "game059", // 全局唯一ID，不可重复
-    name: "妖怪饭 ~大碗开动！~",
+    name: "妖怪饭~大碗开动!~",
     year: "2026",
     publisher: ["honeybee"],
     cnStudio: "JSD",
