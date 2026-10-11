@@ -519,7 +519,7 @@ const gameData = {
             isSub: false,
             isFdSub: true,
             images: [
-                { srcList: ["char/059/Handa.jpgg"], type: "base" }
+                { srcList: ["char/059/Handa.jpg"], type: "base" }
             ]
         },
         // 木邑伊散
