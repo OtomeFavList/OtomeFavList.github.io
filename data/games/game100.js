@@ -25,7 +25,7 @@ const gameData = {
     id: "game100", // 全局唯一ID，不可重复，如 game001
     name: "sins of KALEIDO 塔巡りし因果の魔女",
     year: "2026",
-    publisher: ["Voltage"],
+    publisher: ["AmuLit"],
     cnStudio: "暂无",
     writer: [
         {name:"潮文音", lang:"zh"}
