@@ -1,9 +1,5 @@
-// ==========【单个游戏独立数据模板｜新版ESModule】==========
-// 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
-// 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
-// 网页渲染时由 main.js 的 getWebImageUrl 拼接为 R2 完整 URL
-// Canvas 导出时由 export-canvas-render.js 的 convertR2ToJsDelivr 拼接为 jsDelivr URL
-// 无需额外配置，仅需要到 main.js 顶部 🚨gameIdList数组追加编号"002","003"...
+// data/games/game060.js
+// ✅已核对信息
 const gameData = {
     id: "game060", // 全局唯一ID，不可重复
     name: "绝对阶级学园",
@@ -29,7 +25,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/060/Neri.jpg"], type: "base" }
+                { srcList: ["char/060/Neri.jpg",
+                            "char/060/Neri2.jpg",
+                            "char/060/Neri3.jpg"], type: "base" }
             ]
         },
         // 五十岚春
@@ -86,9 +84,87 @@ const gameData = {
             images: [
                 { srcList: ["char/060/Touya.jpg"], type: "base" }
             ]
+        },
+        // 玖珂叁月
+        {
+            id: "g60_s01",
+            name: "玖珂叁月",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/060/Mitsuki.jpg"], type: "base" }
+            ]
+        },
+        // 八木泽萌花
+        {
+            id: "g60_s02",
+            name: "八木泽萌花",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/060/Moeka.jpg"], type: "base" }
+            ]
+        },
+        // 女王
+        {
+            id: "g60_s03",
+            name: "女王",
+            hiddenName: ["藤枝麻理亚"],
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/060/Queen.jpg"], type: "base" }
+            ]
+        },
+        // 玖珂真一
+        {
+            id: "g60_s04",
+            name: "玖珂真一",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/060/Shinichi.jpg"], type: "base" }
+            ]
+        },
+        // 镝木苍一郎
+        {
+            id: "g60_s05",
+            name: "镝木苍一郎",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/060/Souichirou.jpg"], type: "base" }
+            ]
+        },
+        // 爱德华·高崎
+        {
+            id: "g60_s06",
+            name: "爱德华·高崎",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/060/Takasaki.jpg"], type: "base" }
+            ]
         }
-    ]
 };
 
-// ✅新版导出！不要使用window.gameDataList.push！
+// ESModule导出
 export { gameData };
