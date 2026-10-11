@@ -1,5 +1,6 @@
 // data/games/game057.js
 // ✅已核对信息
+// ℹ️info图
 const gameData = {
     id: "game057", // 全局唯一ID，不可重复
     name: "吉原彼岸花 久远之契",
