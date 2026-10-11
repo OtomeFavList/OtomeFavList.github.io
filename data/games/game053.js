@@ -1,3 +1,5 @@
+// data/games/game053.js
+// ✅已核对信息
 // ℹ️配角名未校对，续作内容未汉化
 const gameData = {
     id: "game053", // 全局唯一ID，不可重复
@@ -308,7 +310,6 @@ const gameData = {
         }
     ]
 };
-
 
 // ESModule导出
 export { gameData };
