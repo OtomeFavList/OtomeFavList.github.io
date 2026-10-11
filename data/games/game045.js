@@ -119,7 +119,7 @@ const gameData = {
         },
         // 阿莱斯特
         {
-            id: "g45_s01",
+            id: "g045_s01",
             name: "阿莱斯特",
             gender: "male",
             isHidden: false,
@@ -132,7 +132,7 @@ const gameData = {
         },
         // 阿维
         {
-            id: "g45_s02",
+            id: "g045_s02",
             name: "阿维",
             gender: "male",
             isHidden: false,
@@ -145,7 +145,7 @@ const gameData = {
         },
         // 巴尔托
         {
-            id: "g45_s03",
+            id: "g045_s03",
             name: "巴尔托",
             gender: "male",
             isHidden: false,
@@ -158,7 +158,7 @@ const gameData = {
         },
         // 柯里乌斯
         {
-            id: "g45_s04",
+            id: "g045_s04",
             name: "柯里乌斯",
             gender: "male",
             isHidden: false,
@@ -172,7 +172,7 @@ const gameData = {
         },
         // 露娜
         {
-            id: "g45_s05",
+            id: "g045_s05",
             name: "露娜",
             gender: "male",
             isHidden: false,
@@ -185,7 +185,7 @@ const gameData = {
         },
         // 菲罗
         {
-            id: "g45_s06",
+            id: "g045_s06",
             name: "菲罗",
             gender: "male",
             isHidden: false,
@@ -198,7 +198,7 @@ const gameData = {
         },
         // 斯皮雷亚
         {
-            id: "g45_s07",
+            id: "g045_s07",
             name: "斯皮雷亚",
             gender: "male",
             isHidden: false,
@@ -211,7 +211,7 @@ const gameData = {
         },
         // 维戈尼亚
         {
-            id: "g45_s08",
+            id: "g045_s08",
             name: "维戈尼亚",
             gender: "male",
             isHidden: false,
@@ -224,7 +224,7 @@ const gameData = {
         },
         // 娜莉亚
         {
-            id: "g45_fs01",
+            id: "g045_fs01",
             name: "娜莉亚",
             gender: "male",
             isHidden: false,
@@ -237,7 +237,7 @@ const gameData = {
         },
         // 拉吉艾尔
         {
-            id: "g45_fs02",
+            id: "g045_fs02",
             name: "拉吉艾尔",
             gender: "male",
             isHidden: false,
@@ -250,7 +250,7 @@ const gameData = {
         },
         // 雷夫
         {
-            id: "g45_fs03",
+            id: "g045_fs03",
             name: "雷夫",
             gender: "male",
             isHidden: false,
@@ -263,7 +263,7 @@ const gameData = {
         },
         // 乌塔
         {
-            id: "g45_fs04",
+            id: "g045_fs04",
             name: "乌塔",
             gender: "male",
             isHidden: false,
