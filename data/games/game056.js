@@ -1,9 +1,4 @@
-// ==========【单个游戏独立数据模板｜新版ESModule】==========
-// 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
-// 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
-// 网页渲染时由 main.js 的 getWebImageUrl 拼接为 R2 完整 URL
-// Canvas 导出时由 export-canvas-render.js 的 convertR2ToJsDelivr 拼接为 jsDelivr URL
-// 无需额外配置，仅需要到 main.js 顶部 🚨gameIdList数组追加编号"002","003"...
+// ℹ️配角名未校对
 const gameData = {
     id: "game056", // 全局唯一ID，不可重复
     name: "红铃的恸哭",
@@ -37,7 +32,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/056/Asher.jpg"], type: "base" }
+                { srcList: ["char/056/Asher.jpg",
+                            "char/056/Asher2.jpg"], type: "base" }
             ]
         },
         // 奇兰·洛厄尔
@@ -48,7 +44,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/056/Ciaran.jpg"], type: "base" }
+                { srcList: ["char/056/Ciaran.jpg",
+                            "char/056/Ciaran2.jpg"], type: "base" }
             ]
         },
         // 加勒特·威尔金
@@ -59,7 +56,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/056/Garrett.jpg"], type: "base" }
+                { srcList: ["char/056/Garrett.jpg",
+                            "char/056/Garrett2.jpg"], type: "base" }
             ]
         },
         // 罗德斯·哈特菲尔德
@@ -70,11 +68,194 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/056/Rhodes.jpg"], type: "base" }
+                { srcList: ["char/056/Rhodes.jpg",
+                            "char/056/Rhodes2.jpg"], type: "base" }
+            ]
+        },
+        // 阿尔伯特·兰卡斯特
+        {
+            id: "g056_s01",
+            name: "阿尔伯特·兰卡斯特",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/056/Albert.jpg"], type: "base" }
+            ]
+        },
+        // 巴伦·费舍尔
+        {
+            id: "g056_s02",
+            name: "巴伦·费舍尔",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/056/Baron.jpg"], type: "base" }
+            ]
+        },
+        // 克里斯托夫·朗费罗
+        {
+            id: "g056_s03",
+            name: "克里斯托夫·朗费罗",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/056/Christoph.jpg"], type: "base" }
+            ]
+        },
+        // 艾琳·温德姆
+        {
+            id: "g056_s04",
+            name: "艾琳·温德姆",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/056/Eileen.jpg"], type: "base" }
+            ]
+        },
+        // 弗林·索尔斯伯里
+        {
+            id: "g056_s05",
+            name: "弗林·索尔斯伯里",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/056/Flynn.jpg"], type: "base" }
+            ]
+        },
+        // 杰克·格雷斯通
+        {
+            id: "g056_s06",
+            name: "杰克·格雷斯通",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/056/Jack.jpg"], type: "base" }
+            ]
+        },
+        // 莉娜莉亚·伦威克
+        {
+            id: "g056_s07",
+            name: "莉娜莉亚·伦威克",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/056/Lynaria.jpg"], type: "base" }
+            ]
+        },
+        // 马修·特纳
+        {
+            id: "g056_s08",
+            name: "马修·特纳",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/056/Matthew.jpg"], type: "base" }
+            ]
+        },
+        // 玛尔贝里·格里姆维奇
+        {
+            id: "g056_s09",
+            name: "玛尔贝里·格里姆维奇",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/056/Mulberry.jpg"], type: "base" }
+            ]
+        },
+        // 妮可拉·卡莱尔
+        {
+            id: "g056_s10",
+            name: "妮可拉·卡莱尔",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/056/Nicola.jpg"], type: "base" }
+            ]
+        },
+        // 奥利安德·伦威克
+        {
+            id: "g056_s11",
+            name: "奥利安德·伦威克",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/056/Oleander.jpg"], type: "base" }
+            ]
+        },
+        // 罗德里克·兰卡斯特
+        {
+            id: "g056_s12",
+            name: "罗德里克·兰卡斯特",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/056/Roderick.jpg"], type: "base" }
+            ]
+        },
+        // 弗拉德·海罗维尔
+        {
+            id: "g056_s13",
+            name: "弗拉德·海罗维尔",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/056/Vlad.jpg"], type: "base" }
+            ]
+        },
+        // ？？？
+        {
+            id: "g056_s14",
+            name: "？？？",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/056/？？？.jpg"], type: "base" }
             ]
         }
     ]
 };
 
-// ✅新版导出！不要使用window.gameDataList.push！
+// ESModule导出
 export { gameData };
