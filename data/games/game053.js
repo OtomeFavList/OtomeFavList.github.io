@@ -37,7 +37,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/053/Mahiro.jpg"], type: "base" }
+                { srcList: ["char/053/Mahiro.jpg",
+                            "char/053/Mahiro2.jpg",
+                            "char/053/Mahiro3.jpg"], type: "base" }
             ]
         },
         // 狗谷辽
@@ -48,7 +50,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/053/Ryou.jpg"], type: "base" }
+                { srcList: ["char/053/Ryou.jpg",
+                            "char/053/Ryou2.jpg",
+                            "char/053/Ryou3.jpg"], type: "base" }
             ]
         },
         // 犬戒慎司
@@ -59,7 +63,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/053/Shinji.jpg"], type: "base" }
+                { srcList: ["char/053/Shinji.jpg",
+                            "char/053/Shinji2.jpg",
+                            "char/053/Shinji3.jpg"], type: "base" }
             ]
         },
         // 大蛇草
@@ -70,7 +76,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/053/Suguru.jpg"], type: "base" }
+                { srcList: ["char/053/Suguru.jpg",
+                            "char/053/Suguru2.jpg",
+                            "char/053/Suguru3.jpg"], type: "base" }
             ]
         },
         // 鬼崎拓磨
@@ -81,7 +89,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/053/Takuma.jpg"], type: "base" }
+                { srcList: ["char/053/Takuma.jpg",
+                            "char/053/Takuma2.jpg",
+                            "char/053/Takuma3.jpg"], type: "base" }
             ]
         },
         // 狐邑祐一
@@ -92,14 +102,132 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/053/Yuuichi.jpg"], type: "base" }
+                { srcList: ["char/053/Yuuichi.jpg",
+                            "char/053/Yuuichi2.jpg",
+                            "char/053/Yuuichi3.jpg"], type: "base" }
             ]
         },
         // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
         {
-            id: "g1_s10",
+            id: "g053_s01",
             name: "配角",
-            hiddenName: ["隐藏真名1","隐藏真名2"],    // 补丁新增：可选，不写则无隐藏名
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+            ]
+        },
+        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g053_s02",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+            ]
+        },
+        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g053_s03",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+            ]
+        },
+        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g053_s04",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+            ]
+        },
+        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g053_s05",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+            ]
+        },
+        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g053_s06",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+            ]
+        },
+        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g053_s07",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+            ]
+        },
+        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g053_s08",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+            ]
+        },
+        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g053_s09",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+            ]
+        },
+        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g053_s10",
+            name: "配角",
             gender: "male",
             isHidden: false,
             isFD: false,
