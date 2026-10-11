@@ -14,6 +14,7 @@ const gameData = {
         {name:"相川暁子", lang:"zh"},
         {name:"深瀬カエル", lang:"zh"},
         {name:"葉山いずみ", lang:"zh"},
+        {name:"株式会社エッジワークス", lang:"zh"},
         {name:"ふくだりょうこ", lang:"ja"}
     ],
     art: [
