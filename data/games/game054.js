@@ -1,9 +1,4 @@
-// ==========【单个游戏独立数据模板｜新版ESModule】==========
-// 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
-// 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
-// 网页渲染时由 main.js 的 getWebImageUrl 拼接为 R2 完整 URL
-// Canvas 导出时由 export-canvas-render.js 的 convertR2ToJsDelivr 拼接为 jsDelivr URL
-// 无需额外配置，仅需要到 main.js 顶部 🚨gameIdList数组追加编号"002","003"...
+// ℹ️配角名未校对
 const gameData = {
     id: "game054", // 全局唯一ID，不可重复
     name: "冬园的祭奠",
@@ -24,15 +19,16 @@ const gameData = {
     ],
     cover: "game/054.jpg",
     charList: [
-        // 莱蒂西娅
+        // 莱蒂西娅·夏尔丹
         {
             id: "g054_f01",
-            name: "莱蒂西娅",
+            name: "莱蒂西娅·夏尔丹",
             gender: "female",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/054/Laetitia.jpg"], type: "base" }
+                { srcList: ["char/054/Laetitia.jpg",
+                            "char/054/Laetitia2.png"], type: "base" }
             ]
         },
         // 迪兰·纪拜尔
@@ -43,18 +39,20 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/054/Dylan.jpg"], type: "base" }
+                { srcList: ["char/054/Dylan.jpg",
+                            "char/054/Dylan2.png"], type: "base" }
             ]
         },
-        // 埃利亚斯·贝尔耶
+        // 埃利亚斯·贝尔尼耶
         {
             id: "g054_m02",
-            name: "埃利亚斯·贝尔耶",
+            name: "埃利亚斯·贝尔尼耶",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/054/Elias.jpg"], type: "base" }
+                { srcList: ["char/054/Elias.jpg",
+                            "char/054/Elias2.png"], type: "base" }
             ]
         },
         // 伊维尔
@@ -65,7 +63,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/054/Hiver.jpg"], type: "base" }
+                { srcList: ["char/054/Hiver.jpg",
+                            "char/054/Hiver2.png"], type: "base" }
             ]
         },
         // 奥斯卡·希尔维斯特
@@ -76,36 +75,94 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/054/Oscar.jpg"], type: "base" }
+                { srcList: ["char/054/Oscar.jpg",
+                            "char/054/Oscar2.png"], type: "base" }
             ]
         },
-        // 雷吉斯·德·卢佩提
+        // 雷吉斯·德·卢佩提耶
         {
             id: "g054_m05",
-            name: "雷吉斯·德·卢佩提",
+            name: "雷吉斯·德·卢佩提耶",
             gender: "male",
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/054/Régis.jpg"], type: "base" }
+                { srcList: ["char/054/Régis.jpg",
+                            "char/054/Régis2.png"], type: "base" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 夏尔·德·贝尔尼耶
         {
-            id: "g1_s05",
-            name: "配角",
-            hiddenName: ["隐藏真名1","隐藏真名2"],    // 补丁新增：可选，不写则无隐藏名
+            id: "g054_s01",
+            name: "夏尔·德·贝尔尼耶",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/054/Charles.jpg",
+                            "char/054/Charles2.png"], type: "base" }
+            ]
+        },
+        // 埃雷加尔
+        {
+            id: "g054_s02",
+            name: "埃雷加尔",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/054/Elégal.jpg",
+                            "char/054/Elégal2.png"], type: "base" }
+            ]
+        },
+        // 芙蕾迪娅
+        {
+            id: "g054_s03",
+            name: "芙蕾迪娅",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/054/Frédia.jpg",
+                            "char/054/Frédia2.png"], type: "base" }
+            ]
+        },
+        // 玛特蕾亚
+        {
+            id: "g054_s04",
+            name: "玛特蕾亚",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/054/Matéreas.jpg",
+                            "char/054/Matéreas2.png"], type: "base" }
+            ]
+        },
+        // 提诺斯
+        {
+            id: "g054_s05",
+            name: "提诺斯",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/054/Tinos.jpg",
+                            "char/054/Tinos2.png"], type: "base" }
             ]
         }
     ]
 };
 
-// ✅新版导出！不要使用window.gameDataList.push！
+// ESModule导出
 export { gameData };
