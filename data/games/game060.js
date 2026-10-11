@@ -164,6 +164,7 @@ const gameData = {
                 { srcList: ["char/060/Takasaki.jpg"], type: "base" }
             ]
         }
+    ]
 };
 
 // ESModule导出
