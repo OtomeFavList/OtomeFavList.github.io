@@ -1,3 +1,5 @@
+// data/games/game055.js
+// ✅已核对信息
 // ℹ️配角名未校对，续作内容未汉化
 const gameData = {
     id: "game059", // 全局唯一ID，不可重复
@@ -14,6 +16,7 @@ const gameData = {
         {name:"葉山いずみ", lang:"zh"},
         {name:"雅夜美竜", lang:"zh"},
         {name:"柚子みかん", lang:"zh"},
+        {name:"浅生柚子", lang:"zh"},
         {name:"株式会社エッジワークス", lang:"zh"},
         {name:"みなづきともこ", lang:"ja"},
         {name:"ゆずみやともめ", lang:"ja"},
@@ -691,5 +694,5 @@ const gameData = {
     ]
 };
 
-// ✅新版导出！不要使用window.gameDataList.push！
+// ESModule导出
 export { gameData };
