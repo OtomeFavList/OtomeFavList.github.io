@@ -88,7 +88,7 @@ const gameData = {
         },
         // 蓝白
         {
-            id: "g47_s01",
+            id: "g047_s01",
             name: "蓝白",
             gender: "male",
             isHidden: false,
@@ -101,7 +101,7 @@ const gameData = {
         },
         // 葵
         {
-            id: "g47_s02",
+            id: "g047_s02",
             name: "葵",
             gender: "male",
             isHidden: false,
@@ -114,7 +114,7 @@ const gameData = {
         },
         // 千鸟
         {
-            id: "g47_s03",
+            id: "g047_s03",
             name: "千鸟",
             gender: "male",
             isHidden: false,
@@ -127,7 +127,7 @@ const gameData = {
         },
         // 枸橘
         {
-            id: "g47_s04",
+            id: "g047_s04",
             name: "枸橘",
             gender: "male",
             isHidden: false,
@@ -140,7 +140,7 @@ const gameData = {
         },
         // 鸣神
         {
-            id: "g47_s05",
+            id: "g047_s05",
             name: "鸣神",
             gender: "male",
             isHidden: false,
@@ -153,7 +153,7 @@ const gameData = {
         },
         // 胧
         {
-            id: "g47_s06",
+            id: "g047_s06",
             name: "胧",
             gender: "male",
             isHidden: false,
@@ -166,7 +166,7 @@ const gameData = {
         },
         // 贤木
         {
-            id: "g47_s07",
+            id: "g047_s07",
             name: "贤木",
             gender: "male",
             isHidden: false,
@@ -179,7 +179,7 @@ const gameData = {
         },
         // 朔
         {
-            id: "g47_s08",
+            id: "g047_s08",
             name: "朔",
             gender: "male",
             isHidden: false,
@@ -192,7 +192,7 @@ const gameData = {
         },
         // 潮路
         {
-            id: "g47_s09",
+            id: "g047_s09",
             name: "潮路",
             gender: "male",
             isHidden: false,
@@ -205,7 +205,7 @@ const gameData = {
         },
         // 寿寿音
         {
-            id: "g47_s10",
+            id: "g047_s10",
             name: "寿寿音",
             gender: "male",
             isHidden: false,
@@ -218,7 +218,7 @@ const gameData = {
         },
         // 松柏
         {
-            id: "g47_s11",
+            id: "g047_s11",
             name: "松柏",
             gender: "male",
             isHidden: false,
@@ -231,7 +231,7 @@ const gameData = {
         },
         // 大树
         {
-            id: "g47_s12",
+            id: "g047_s12",
             name: "大树",
             gender: "male",
             isHidden: false,
@@ -244,7 +244,7 @@ const gameData = {
         },
         // 雨月
         {
-            id: "g47_s13",
+            id: "g047_s13",
             name: "雨月",
             gender: "male",
             isHidden: false,
@@ -257,7 +257,7 @@ const gameData = {
         },
         // 柊
         {
-            id: "g47_fs01",
+            id: "g047_fs01",
             name: "柊",
             gender: "male",
             isHidden: false,
@@ -270,7 +270,7 @@ const gameData = {
         },
         // 氷雨
         {
-            id: "g47_fs02",
+            id: "g047_fs02",
             name: "氷雨",
             gender: "male",
             isHidden: false,
@@ -283,7 +283,7 @@ const gameData = {
         },
         // 佳月
         {
-            id: "g47_fs03",
+            id: "g047_fs03",
             name: "佳月",
             gender: "male",
             isHidden: false,
@@ -296,7 +296,7 @@ const gameData = {
         },
         // 周防
         {
-            id: "g47_fs04",
+            id: "g047_fs04",
             name: "周防",
             gender: "male",
             isHidden: false,
@@ -309,7 +309,7 @@ const gameData = {
         },
         // 石蕗
         {
-            id: "g47_fs05",
+            id: "g047_fs05",
             name: "石蕗",
             gender: "male",
             isHidden: false,
