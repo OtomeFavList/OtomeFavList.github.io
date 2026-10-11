@@ -28,7 +28,7 @@ const gameData = {
     id: "game078", // 全局唯一ID，不可重复，如 game001
     name: "霓虹三国-Echoes of the Lost-",
     year: "2026",
-    publisher: ["Voltage"],
+    publisher: ["AmuLit"],
     cnStudio: "JOYOLAND",
     writer: [
         {name:"吉村りりか", lang:"zh"}
