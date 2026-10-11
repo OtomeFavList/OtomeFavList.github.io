@@ -1,9 +1,4 @@
-// ==========【单个游戏独立数据模板｜新版ESModule】==========
-// 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
-// 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
-// 网页渲染时由 main.js 的 getWebImageUrl 拼接为 R2 完整 URL
-// Canvas 导出时由 export-canvas-render.js 的 convertR2ToJsDelivr 拼接为 jsDelivr URL
-// 无需额外配置，仅需要到 main.js 顶部 🚨gameIdList数组追加编号"002","003"...
+// ℹ️配角名未校对，续作内容未汉化
 const gameData = {
     id: "game053", // 全局唯一ID，不可重复
     name: "绯色的碎片 玉依姬奇谭 ~记忆中的颜色~",
@@ -26,7 +21,8 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/053/Tamaki.jpg"], type: "base" }
+                { srcList: ["char/053/Tamaki.jpg"], type: "base" },
+                { srcList: ["char/053/Tamaki2.jpg"], type: "fd" }
             ]
         },
         // 鸦取真弘
@@ -39,7 +35,8 @@ const gameData = {
             images: [
                 { srcList: ["char/053/Mahiro.jpg",
                             "char/053/Mahiro2.jpg",
-                            "char/053/Mahiro3.jpg"], type: "base" }
+                            "char/053/Mahiro3.jpg"], type: "base" },
+                { srcList: ["char/053/Mahiro4.jpg"], type: "fd" }
             ]
         },
         // 狗谷辽
@@ -52,7 +49,8 @@ const gameData = {
             images: [
                 { srcList: ["char/053/Ryou.jpg",
                             "char/053/Ryou2.jpg",
-                            "char/053/Ryou3.jpg"], type: "base" }
+                            "char/053/Ryou3.jpg"], type: "base" },
+                { srcList: ["char/053/Ryou4.jpg"], type: "fd" }
             ]
         },
         // 犬戒慎司
@@ -65,7 +63,8 @@ const gameData = {
             images: [
                 { srcList: ["char/053/Shinji.jpg",
                             "char/053/Shinji2.jpg",
-                            "char/053/Shinji3.jpg"], type: "base" }
+                            "char/053/Shinji3.jpg"], type: "base" },
+                { srcList: ["char/053/Shinji4.jpg"], type: "fd" }
             ]
         },
         // 大蛇草
@@ -78,7 +77,8 @@ const gameData = {
             images: [
                 { srcList: ["char/053/Suguru.jpg",
                             "char/053/Suguru2.jpg",
-                            "char/053/Suguru3.jpg"], type: "base" }
+                            "char/053/Suguru3.jpg"], type: "base" },
+                { srcList: ["char/053/Suguru4.jpg"], type: "fd" }
             ]
         },
         // 鬼崎拓磨
@@ -91,7 +91,8 @@ const gameData = {
             images: [
                 { srcList: ["char/053/Takuma.jpg",
                             "char/053/Takuma2.jpg",
-                            "char/053/Takuma3.jpg"], type: "base" }
+                            "char/053/Takuma3.jpg"], type: "base" },
+                { srcList: ["char/053/Takuma4.jpg"], type: "fd" }
             ]
         },
         // 狐邑祐一
@@ -104,88 +105,125 @@ const gameData = {
             images: [
                 { srcList: ["char/053/Yuuichi.jpg",
                             "char/053/Yuuichi2.jpg",
-                            "char/053/Yuuichi3.jpg"], type: "base" }
+                            "char/053/Yuuichi3.jpg"], type: "base" },
+                { srcList: ["char/053/Yuuichi4.jpg"], type: "fd" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // ケテル
+        {
+            id: "g053_fd01",
+            name: "ケテル",
+            gender: "male",
+            isHidden: false,
+            isFD: true,
+            isSub: false,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/053/Keter.jpg"], type: "base" }
+            ]
+        },
+        // 凛
+        {
+            id: "g053_fd01",
+            name: "凛",
+            gender: "male",
+            isHidden: false,
+            isFD: true,
+            isSub: false,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/053/Rin.jpg"], type: "base" }
+            ]
+        },
+        // 艾利亚·罗森伯格
         {
             id: "g053_s01",
-            name: "配角",
+            name: "艾利亚·罗森伯格",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/053/Aria.jpg",
+                            "char/053/Aria2.jpg"], type: "base" },
+                { srcList: ["char/053/Aria3.jpg"], type: "fd" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 多莱尔
         {
             id: "g053_s02",
-            name: "配角",
+            name: "多莱尔",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/053/Drei.jpg",
+                            "char/053/Drei2.jpg"], type: "base" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 艾恩
         {
             id: "g053_s03",
-            name: "配角",
+            name: "艾恩",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/053/Ein.jpg",
+                            "char/053/Ein2.jpg"], type: "base" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 言藏美鹤
         {
             id: "g053_s04",
-            name: "配角",
+            name: "言藏美鹤",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/053/Kotokura.jpg",
+                            "char/053/Kotokura2.jpg"], type: "base" },
+                { srcList: ["char/053/Kotokura3.jpg"], type: "fd" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 御先狐
         {
             id: "g053_s05",
-            name: "配角",
+            name: "御先狐",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/053/Oochan.jpg",
+                            "char/053/Oochan3.jpg",
+                            "char/053/Oochan2.jpg"], type: "base" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 芦屋正隆
         {
             id: "g053_s06",
-            name: "配角",
+            name: "芦屋正隆",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/053/Oshiya.jpg",
+                            "char/053/Oshiya2.jpg"], type: "base" },
+                { srcList: ["char/053/Oshiya3.jpg"], type: "fd" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 多家良清乃
         {
             id: "g053_s07",
             name: "配角",
@@ -195,50 +233,82 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/053/Takara.jpg",
+                            "char/053/Takara2.jpg"], type: "base" },
+                { srcList: ["char/053/Takara3.jpg"], type: "fd" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 宇贺谷静纪
         {
             id: "g053_s08",
-            name: "配角",
+            name: "宇贺谷静纪",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/053/Ugaya.jpg"], type: "base" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 菲亚
         {
             id: "g053_s09",
-            name: "配角",
+            name: "菲亚",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/053/Vier.jpg",
+                            "char/053/Vier2.jpg"], type: "base" },
+                { srcList: ["char/053/Vier3.jpg"], type: "fd" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 兹拜
         {
             id: "g053_s10",
-            name: "配角",
+            name: "兹拜",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/053/Zwei.jpg",
+                            "char/053/Zwei2.jpg"], type: "base" }
+            ]
+        },
+        // ニール
+        {
+            id: "g053_fs01",
+            name: "ニール",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/053/Neil.jpg"], type: "base" }
+            ]
+        },
+        // 五瀨新
+        {
+            id: "g053_fs02",
+            name: "五瀨新",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/053/Shin.jpg"], type: "base" }
             ]
         }
     ]
 };
 
-// ✅新版导出！不要使用window.gameDataList.push！
+
+// ESModule导出
 export { gameData };
