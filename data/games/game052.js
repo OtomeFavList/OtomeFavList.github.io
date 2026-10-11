@@ -98,7 +98,7 @@ const gameData = {
         },
         // 艾莉森·达里尔斯·克雷努
         {
-            id: "g52_s01",
+            id: "g052_s01",
             name: "艾莉森·达里尔斯·克雷努",
             gender: "male",
             isHidden: false,
@@ -112,7 +112,7 @@ const gameData = {
         },
         // 安杰拉·奥尔斯泰特·提米拉纳
         {
-            id: "g52_s02",
+            id: "g052_s02",
             name: "安杰拉·奥尔斯泰特·提米拉纳",
             gender: "male",
             isHidden: false,
@@ -126,7 +126,7 @@ const gameData = {
         },
         // 贝内蒂·阿斯特拉
         {
-            id: "g52_s03",
+            id: "g052_s03",
             name: "贝内蒂·阿斯特拉",
             gender: "male",
             isHidden: false,
@@ -140,7 +140,7 @@ const gameData = {
         },
         // 巴吉特·赫林戴尔·莫拉蒂
         {
-            id: "g52_s04",
+            id: "g052_s04",
             name: "巴吉特·赫林戴尔·莫拉蒂",
             gender: "male",
             isHidden: false,
@@ -154,7 +154,7 @@ const gameData = {
         },
         // 卡斯·库根
         {
-            id: "g52_s05",
+            id: "g052_s05",
             name: "卡斯·库根",
             gender: "male",
             isHidden: false,
@@ -168,7 +168,7 @@ const gameData = {
         },
         // 克劳迪娅·法里亚斯·提米拉纳
         {
-            id: "g52_s06",
+            id: "g052_s06",
             name: "克劳迪娅·法里亚斯·提米拉纳",
             gender: "male",
             isHidden: false,
@@ -182,7 +182,7 @@ const gameData = {
         },
         // 艾瑞克
         {
-            id: "g52_s07",
+            id: "g052_s07",
             name: "艾瑞克",
             gender: "male",
             isHidden: false,
@@ -196,7 +196,7 @@ const gameData = {
         },
         // 伊诺
         {
-            id: "g52_s08",
+            id: "g052_s08",
             name: "伊诺",
             gender: "male",
             isHidden: false,
@@ -210,7 +210,7 @@ const gameData = {
         },
         // 伊莎贝拉·法里亚斯·尤贝尔维克
         {
-            id: "g52_s09",
+            id: "g052_s09",
             name: "伊莎贝拉·法里亚斯·尤贝尔维克",
             gender: "male",
             isHidden: false,
@@ -224,7 +224,7 @@ const gameData = {
         },
         // 卡里姆·奥尔斯泰特·阿利亚
         {
-            id: "g52_s10",
+            id: "g052_s10",
             name: "卡里姆·奥尔斯泰特·阿利亚",
             gender: "male",
             isHidden: false,
@@ -238,7 +238,7 @@ const gameData = {
         },
         // 卡尔纳普·法里亚斯·提米拉纳
         {
-            id: "g52_s11",
+            id: "g052_s11",
             name: "卡尔纳普·法里亚斯·提米拉纳",
             gender: "male",
             isHidden: false,
@@ -252,7 +252,7 @@ const gameData = {
         },
         // 马修·奥尔贝格·奈塞尔
         {
-            id: "g52_s12",
+            id: "g052_s12",
             name: "马修·奥尔贝格·奈塞尔",
             gender: "male",
             isHidden: false,
@@ -266,7 +266,7 @@ const gameData = {
         },
         // 妮尔达·巴雷托斯·雷安德尔
         {
-            id: "g52_s13",
+            id: "g052_s13",
             name: "妮尔达·巴雷托斯·雷安德尔",
             gender: "male",
             isHidden: false,
@@ -280,7 +280,7 @@ const gameData = {
         },
         // 波拉
         {
-            id: "g52_s14",
+            id: "g052_s14",
             name: "波拉",
             gender: "male",
             isHidden: false,
@@ -294,7 +294,7 @@ const gameData = {
         },
         // 莱因哈特·法里亚斯·海涅曼
         {
-            id: "g52_s15",
+            id: "g052_s15",
             name: "莱因哈特·法里亚斯·海涅曼",
             gender: "male",
             isHidden: false,
@@ -308,7 +308,7 @@ const gameData = {
         },
         // 鲁迪·玛贝尔
         {
-            id: "g52_s16",
+            id: "g052_s16",
             name: "鲁迪·玛贝尔",
             gender: "male",
             isHidden: false,
@@ -322,7 +322,7 @@ const gameData = {
         },
         // 沃尔恩塔尔
         {
-            id: "g52_s17",
+            id: "g052_s17",
             name: "沃尔恩塔尔",
             gender: "male",
             isHidden: false,
