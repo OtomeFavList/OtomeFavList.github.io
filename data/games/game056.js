@@ -1,4 +1,5 @@
-
+// data/games/game056.js
+// ✅已核对信息
 const gameData = {
     id: "game056", // 全局唯一ID，不可重复
     name: "红铃的恸哭",
