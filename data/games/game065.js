@@ -135,6 +135,279 @@ const gameData = {
             images: [
                 { srcList: ["char/065/Syuuyu.jpg"], type: "base" }
             ]
+        },
+        // 马超
+        {
+            id: "g065_s01",
+            name: "马超",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/065/Bachou.jpg"], type: "base" }
+            ]
+        },
+        // 文丑
+        {
+            id: "g065_s02",
+            name: "文丑",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/065/Bunnshuu.jpg"], type: "base" }
+            ]
+        },
+        // 张角
+        {
+            id: "g065_s03",
+            name: "张角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/065/Choukaku.jpg"], type: "base" }
+            ]
+        },
+        // 张世平
+        {
+            id: "g065_s04",
+            name: "张世平",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/065/Chouseihei.jpg"], type: "base" }
+            ]
+        },
+        // 貂蝉
+        {
+            id: "g065_s05",
+            name: "貂蝉",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/065/Chousen.jpg"], type: "base" }
+            ]
+        },
+        // 张苏双
+        {
+            id: "g065_s06",
+            name: "张苏双",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/065/Chousosou.jpg"], type: "base" }
+            ]
+        },
+        // 袁术
+        {
+            id: "g065_s07",
+            name: "袁术",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/065/Ennjutsu.jpg"], type: "base" }
+            ]
+        },
+        // 袁绍
+        {
+            id: "g065_s08",
+            name: "袁绍",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/065/Ennshou.jpg"], type: "base" }
+            ]
+        },
+        // 颜良
+        {
+            id: "g065_s09",
+            name: "颜良",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/065/Gannryou.jpg"], type: "base" }
+            ]
+        },
+        // 夏侯渊
+        {
+            id: "g065_s10",
+            name: "夏侯渊",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/065/Kakouen.jpg"], type: "base" }
+            ]
+        },
+        // 贾诩
+        {
+            id: "g065_s11",
+            name: "贾诩",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/065/Kaku.jpg"], type: "base" }
+            ]
+        },
+        // 郭嘉
+        {
+            id: "g065_s12",
+            name: "郭嘉",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/065/Kakuka.jpg"], type: "base" }
+            ]
+        },
+        // 关定
+        {
+            id: "g065_s13",
+            name: "关定",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/065/Kanntei.jpg"], type: "base" }
+            ]
+        },
+        // 黄盖
+        {
+            id: "g065_s14",
+            name: "黄盖",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/065/Kougai.jpg"], type: "base" }
+            ]
+        },
+        // 公孙瓒
+        {
+            id: "g065_s15",
+            name: "公孙瓒",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/065/Kousonnsan.jpg"], type: "base" }
+            ]
+        },
+        // 吕布
+        {
+            id: "g065_s16",
+            name: "吕布",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/065/Ryohu.jpg"], type: "base" }
+            ]
+        },
+        // 刘表
+        {
+            id: "g065_s17",
+            name: "刘表",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/065/Ryuuhyou.jpg"], type: "base" }
+            ]
+        },
+        // 刘琦
+        {
+            id: "g065_s18",
+            name: "刘琦",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/065/Ryuuki.jpg"], type: "base" }
+            ]
+        },
+        // 孙尚香
+        {
+            id: "g065_s19",
+            name: "孙尚香",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/065/Shoukou.jpg"], type: "base" }
+            ]
+        },
+        // 孙权
+        {
+            id: "g065_s20",
+            name: "孙权",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/065/Sonnken.jpg"], type: "base" }
+            ]
+        },
+        // 董卓
+        {
+            id: "g065_s21",
+            name: "董卓",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/065/Toutaku.jpg"], type: "base" }
+            ]
         }
     ]
 };
