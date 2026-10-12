@@ -45,7 +45,9 @@ const gameData = {
                             "char/059/Rin8.jpg",
                             "char/059/Rin9.jpg",
                             "char/059/Rin10.jpg",
-                            "char/059/Rin11.jpg"], type: "base" }
+                            "char/059/Rin11.jpg"], type: "base" },
+                { srcList: ["char/059/Rin12.jpg",
+                            "char/059/Rin13.jpg"], type: "fd" }
             ]
         },
         // 木邑浅葱
