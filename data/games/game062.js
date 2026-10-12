@@ -243,7 +243,7 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/062/Ray..jpg"], type: "base" }
+                { srcList: ["char/062/Ray.jpg"], type: "base" }
             ]
         },
         // 悠久的钢刃列骑
