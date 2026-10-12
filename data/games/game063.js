@@ -133,7 +133,7 @@ const gameData = {
         // 元让
         {
             id: "g063_s01",
-            name: "配角",
+            name: "元让",
             gender: "male",
             isHidden: false,
             isFD: false,
