@@ -29,7 +29,10 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/063/Hana.jpg",
-                            "char/063/Hana2.jpg"], type: "base" }
+                            "char/063/Hana2.jpg",
+                            "char/063/Hana3.jpg",
+                            "char/063/Hana4.jpg",
+                            "char/063/Hana5.jpg"], type: "base" }
             ]
         },
         // 文若
@@ -40,8 +43,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/063/Bunjaku.jpg",
-                            "char/063/Bunjaku2.jpg"], type: "base" }
+                { srcList: ["char/063/Bunjaku.jpg"], type: "base" }
             ]
         },
         // 仲谋
@@ -52,8 +54,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/063/Chuubou.jpg",
-                            "char/063/Chuubou2.jpg"], type: "base" }
+                { srcList: ["char/063/Chuubou.jpg"], type: "base" }
             ]
         },
         // 玄德
@@ -64,8 +65,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/063/Gentoku.jpg",
-                            "char/063/Gentoku2.jpg"], type: "base" }
+                { srcList: ["char/063/Gentoku.jpg"], type: "base" }
             ]
         },
         // 公瑾
@@ -76,8 +76,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/063/Koukin.jpg",
-                            "char/063/Koukin2.jpg"], type: "base" }
+                { srcList: ["char/063/Koukin.jpg"], type: "base" }
             ]
         },
         // 孔明
@@ -88,8 +87,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/063/Koumei.jpg",
-                            "char/063/Koumei2.jpg"], type: "base" }
+                { srcList: ["char/063/Koumei.jpg"], type: "base" }
             ]
         },
         // 孟德
@@ -100,8 +98,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/063/Moutoku.jpg",
-                            "char/063/Moutoku2.jpg"], type: "base" }
+                { srcList: ["char/063/Moutoku.jpg"], type: "base" }
             ]
         },
         // 子龙
@@ -112,8 +109,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/063/Shiryuu.jpg",
-                            "char/063/Shiryuu2.jpg"], type: "base" }
+                { srcList: ["char/063/Shiryuu.jpg"], type: "base" }
             ]
         },
         // 云长
@@ -124,8 +120,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/063/Unchou.jpg",
-                            "char/063/Unchou2.jpg"], type: "base" }
+                { srcList: ["char/063/Unchou.jpg"], type: "base" }
             ]
         },
         // 翼德
@@ -136,8 +131,59 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/063/Yokutoku.jpg",
-                            "char/063/Yokutoku2.jpg"], type: "base" }
+                { srcList: ["char/063/Yokutoku.jpg"], type: "base" }
+            ]
+        },
+        // 元让
+        {
+            id: "g063_s01",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/063/Genjou.jpg"], type: "base" }
+            ]
+        },
+        // 芙蓉姬
+        {
+            id: "g063_s02",
+            name: "芙蓉姬",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/063/Huyou.jpg"], type: "base" }
+            ]
+        },
+        // 早安
+        {
+            id: "g063_s03",
+            name: "早安",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/063/Souan.jpg"], type: "base" }
+            ]
+        },
+        // 尚香
+        {
+            id: "g063_s04",
+            name: "尚香",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/063/Syoukou.jpg"], type: "base" }
             ]
         }
     ]
