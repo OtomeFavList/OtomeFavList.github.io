@@ -113,6 +113,32 @@ const gameData = {
                 { srcList: ["char/064/Pace.jpg",
                             "char/064/Pace2.jpg"], type: "base" }
             ]
+        },
+        // 默德
+        {
+            id: "g064_s01",
+            name: "默德",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/064/Mondo.jpg"], type: "base" }
+            ]
+        },
+        // 堇
+        {
+            id: "g064_s02",
+            name: "堇",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/064/Sumire.jpg"], type: "base" }
+            ]
         }
     ]
 };
