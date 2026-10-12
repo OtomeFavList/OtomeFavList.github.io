@@ -1,3 +1,5 @@
+// data/games/game062.js
+// ✅已核对信息
 const gameData = {
     id: "game062", // 全局唯一ID，不可重复
     name: "悠久的钢刃列骑",
@@ -7,8 +9,7 @@ const gameData = {
     writer: [
         {name:"中村和騎", lang:"zh"},
         {name:"中山智美", lang:"zh"},
-        {name:"佐々木麿", lang:"zh"},
-        {name:"结良あや", lang:"zh"}
+        {name:"佐々木麿", lang:"zh"}
     ],
     art: [
         {name:"いけ", lang:"ja"},
@@ -263,5 +264,5 @@ const gameData = {
     ]
 };
 
-// ✅新版导出！不要使用window.gameDataList.push！
+// ESModule导出
 export { gameData };
