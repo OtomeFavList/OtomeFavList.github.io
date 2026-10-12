@@ -28,9 +28,8 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/061/Ayano.jpg",
-                            "char/061/Ayano3.jpg",
-                            "char/061/Ayano4.jpg",
-                            "char/061/Ayano5.jpg"], type: "base" }
+                            "char/061/Ayano2.jpg"
+                            "char/061/Ayano3.jpg"], type: "base" }
             ]
         },
         // 天近美铃
@@ -42,9 +41,8 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/061/Misuzu.jpg",
-                            "char/061/Misuzu3.jpg",
-                            "char/061/Misuzu4.jpg",
-                            "char/061/Misuzu5.jpg"], type: "base" }
+                            "char/061/Misuzu2.jpg",
+                            "char/061/Misuzu3.jpg"], type: "base" }
             ]
         },
         // 月城茅
@@ -56,9 +54,8 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/061/Chigaya.jpg",
-                            "char/061/Chigaya3.jpg",
-                            "char/061/Chigaya4.jpg",
-                            "char/061/Chigaya5.jpg"], type: "base" }
+                            "char/061/Chigaya2.jpg",
+                            "char/061/Chigaya3.jpg"], type: "base" }
             ]
         },
         // 海濑隼人
@@ -70,9 +67,8 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/061/Hayato.jpg",
-                            "char/061/Hayato3.jpg",
-                            "char/061/Hayato4.jpg",
-                            "char/061/Hayato5.jpg"], type: "base" }
+                            "char/061/Hayato2.jpg",
+                            "char/061/Hayato3.jpg"], type: "base" }
             ]
         },
         // 风见琉佳
@@ -84,9 +80,8 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/061/Luka.jpg",
-                            "char/061/Luka3.jpg",
-                            "char/061/Luka4.jpg",
-                            "char/061/Luka5.jpg"], type: "base" }
+                            "char/061/Luka2.jpg",
+                            "char/061/Luka3.jpg"], type: "base" }
             ]
         },
         // 花丘槙尾
@@ -98,9 +93,8 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/061/Makio.jpg",
-                            "char/061/Makio3.jpg",
-                            "char/061/Makio4.jpg",
-                            "char/061/Makio5.jpg"], type: "base" }
+                            "char/061/Makio2.jpg",
+                            "char/061/Makio3.jpg"], type: "base" }
             ]
         },
         // 日向野骏
@@ -112,9 +106,8 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/061/Shun.jpg",
-                            "char/061/Shun3.jpg",
-                            "char/061/Shun4.jpg",
-                            "char/061/Shun5.jpg"], type: "base" }
+                            "char/061/Shun2.jpg",
+                            "char/061/Shun3.jpg"], type: "base" }
             ]
         },
         // 空闲巴
@@ -126,9 +119,8 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/061/Tomoe.jpg",
-                            "char/061/Tomoe3.jpg",
-                            "char/061/Tomoe4.jpg",
-                            "char/061/Tomoe5.jpg"], type: "base" }
+                            "char/061/Tomoe2.jpg",
+                            "char/061/Tomoe3.jpg"], type: "base" }
             ]
         },
         // 月城苇夜
@@ -140,9 +132,8 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/061/Yoshiya.jpg",
-                            "char/061/Yoshiya3.jpg",
-                            "char/061/Yoshiya4.jpg",
-                            "char/061/Yoshiya5.jpg"], type: "base" }
+                            "char/061/Yoshiya2.jpg",
+                            "char/061/Yoshiya3.jpg"], type: "base" }
             ]
         },
         // 善知鸟全
@@ -154,9 +145,92 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/061/Zen.jpg",
-                            "char/061/Zen3.jpg",
-                            "char/061/Zen4.jpg",
-                            "char/061/Zen5.jpg"], type: "base" }
+                            "char/061/Zen2.jpg",
+                            "char/061/Zen3.jpg"], type: "base" }
+            ]
+        },
+        // 水无月朗
+        {
+            id: "g061_s01",
+            name: "水无月朗",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/061/Akira.jpg",
+                            "char/061/Akira2.jpg"], type: "base" }
+            ]
+        },
+        // 弥生一伽
+        {
+            id: "g061_s02",
+            name: "弥生一伽",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/061/Ichika.jpg",
+                            "char/061/Ichika2.jpg"], type: "base" }
+            ]
+        },
+        // 真波熏
+        {
+            id: "g061_s03",
+            name: "真波熏",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/061/Kaoru.jpg",
+                            "char/061/Kaoru2.jpg"], type: "base" }
+            ]
+        },
+        // 月城秋桐·冬桐
+        {
+            id: "g061_s04",
+            name: "月城秋桐·冬桐",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/061/Toudou.jpg",
+                            "char/061/Toudou2.jpg"], type: "base" }
+            ]
+        },
+        // 月城蓉市
+        {
+            id: "g061_s05",
+            name: "月城蓉市",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/061/Youichi.jpg",
+                            "char/061/Youichi2.jpg"], type: "base" }
+            ]
+        },
+        // 时生悠人
+        {
+            id: "g061_s06",
+            name: "时生悠人",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/061/Yuuto.jpg",
+                            "char/061/Yuuto2.jpg"], type: "base" }
             ]
         }
     ]
