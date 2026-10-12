@@ -1,9 +1,3 @@
-// ==========【单个游戏独立数据模板｜新版ESModule】==========
-// 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
-// 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
-// 网页渲染时由 main.js 的 getWebImageUrl 拼接为 R2 完整 URL
-// Canvas 导出时由 export-canvas-render.js 的 convertR2ToJsDelivr 拼接为 jsDelivr URL
-// 无需额外配置，仅需要到 main.js 顶部 🚨gameIdList数组追加编号"002","003"...
 const gameData = {
     id: "game062", // 全局唯一ID，不可重复
     name: "悠久的钢刃列骑",
@@ -30,7 +24,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/062/Eve.jpg"], type: "base" }
+                { srcList: ["char/062/Eve.jpg",
+                            "char/062/Eve2.jpg",
+                            "char/062/Eve3.jpg",
+                            "char/062/Eve4.jpg"], type: "base" }
             ]
         },
         // 阿塔尔瓦
@@ -41,7 +38,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/062/Atharva.jpg"], type: "base" }
+                { srcList: ["char/062/Atharva.jpg",
+                            "char/062/Atharva2.jpg",
+                            "char/062/Atharva3.jpg",
+                            "char/062/Atharva4.jpg"], type: "base" }
             ]
         },
         // 克莱德尔
@@ -52,7 +52,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/062/Cradle.jpg"], type: "base" }
+                { srcList: ["char/062/Cradle.jpg",
+                            "char/062/Cradle2.jpg",
+                            "char/062/Cradle3.jpg",
+                            "char/062/Cradle4.jpg"], type: "base" }
             ]
         },
         // 罗
@@ -63,7 +66,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/062/Row.jpg"], type: "base" }
+                { srcList: ["char/062/Row.jpg",
+                            "char/062/Row2.jpg",
+                            "char/062/Row3.jpg",
+                            "char/062/Row4.jpg"], type: "base" }
             ]
         },
         // 修德
@@ -74,7 +80,10 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/062/Sud.jpg"], type: "base" }
+                { srcList: ["char/062/Sud.jpg",
+                            "char/062/Sud2.jpg",
+                            "char/062/Sud3.jpg",
+                            "char/062/Sud4.jpg"], type: "base" }
             ]
         },
         // 约叙尔
@@ -85,7 +94,170 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/062/Yajur.jpg"], type: "base" }
+                { srcList: ["char/062/Yajur.jpg",
+                            "char/062/Yajur2.jpg",
+                            "char/062/Yajur3.jpg",
+                            "char/062/Yajur4.jpg",
+                            "char/062/Yajur5.jpg"], type: "base" }
+            ]
+        },
+        // 爱娜
+        {
+            id: "g062_s01",
+            name: "爱娜",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/062/Aina.jpg"], type: "base" }
+            ]
+        },
+        // 阿卡迪亚
+        {
+            id: "g062_s02",
+            name: "阿卡迪亚",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/062/Arcadia.jpg"], type: "base" }
+            ]
+        },
+        // 卡曼因
+        {
+            id: "g062_s03",
+            name: "卡曼因",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/062/Carmine.jpg",
+                            "char/062/Carmine2.jpg"], type: "base" }
+            ]
+        },
+        // 丹佐伊德
+        {
+            id: "g062_s04",
+            name: "丹佐伊德",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/062/Dezoid.jpg"], type: "base" }
+            ]
+        },
+        // 艾利希恩
+        {
+            id: "g062_s05",
+            name: "艾利希恩",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/062/Elysion.jpg"], type: "base" }
+            ]
+        },
+        // 艾尔泽
+        {
+            id: "g062_s06",
+            name: "艾尔泽",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/062/Eruze.jpg"], type: "base" }
+            ]
+        },
+        // 方
+        {
+            id: "g062_s07",
+            name: "方",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/062/Fou.jpg"], type: "base" }
+            ]
+        },
+        // 加尔加德
+        {
+            id: "g062_s08",
+            name: "加尔加德",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/062/Gargado.jpg"], type: "base" }
+            ]
+        },
+        // 基尔
+        {
+            id: "g062_s09",
+            name: "基尔",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/062/Gill.jpg"], type: "base" }
+            ]
+        },
+        // 罗兰特
+        {
+            id: "g062_s10",
+            name: "罗兰特",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/062/Lorant.jpg"], type: "base" }
+            ]
+        },
+        // 雷
+        {
+            id: "g062_s11",
+            name: "雷",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/062/Ray..jpg"], type: "base" }
+            ]
+        },
+        // 悠久的钢刃列骑
+        {
+            id: "g062_s12",
+            name: "悠久的钢刃列骑",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/062/Tierblade.jpg",
+                            "char/062/Tierblade2.jpg",
+                            "char/062/Tierblade3.jpg"], type: "base" }
             ]
         }
     ]
