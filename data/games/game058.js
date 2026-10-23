@@ -47,7 +47,8 @@ const gameData = {
                             "char/058/Aki2.jpg",
                             "char/058/Aki3.jpg",
                             "char/058/Aki4.jpg",
-                            "char/058/Aki5.jpg"], type: "base" }
+                            "char/058/Aki5.jpg",
+                            "char/058/Aki6.jpg"], type: "base" }
             ]
         },
         // 月野原久远
@@ -63,7 +64,8 @@ const gameData = {
                             "char/058/Kuon2.jpg",
                             "char/058/Kuon3.jpg",
                             "char/058/Kuon4.jpg",
-                            "char/058/Kuon5.jpg"], type: "base" }
+                            "char/058/Kuon5.jpg",
+                            "char/058/Kuon6.jpg"], type: "base" }
             ]
         },
         // 香椎玲音
@@ -79,7 +81,8 @@ const gameData = {
                             "char/058/Reon2.jpg",
                             "char/058/Reon3.jpg",
                             "char/058/Reon4.jpg",
-                            "char/058/Reon5.jpg"], type: "base" }
+                            "char/058/Reon5.jpg",
+                            "char/058/Reon6.jpg"], type: "base" }
             ]
         },
         // 百濑䌷生
@@ -95,7 +98,8 @@ const gameData = {
                             "char/058/Tsumugi2.jpg",
                             "char/058/Tsumugi3.jpg",
                             "char/058/Tsumugi4.jpg",
-                            "char/058/Tsumugi5.jpg"], type: "base" }
+                            "char/058/Tsumugi5.jpg",
+                            "char/058/Tsumugi6.jpg"], type: "base" }
             ]
         },
         // 香椎秋叶
