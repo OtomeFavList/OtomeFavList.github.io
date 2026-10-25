@@ -14,19 +14,19 @@ const gameData = {
     art: [
         {name:"悌太", lang:"zh"}
     ],
-    cover: "game/066.jpg", // 相对路径，游戏封面
+    cover: "game/066.jpg",
     charList: [
         // 上野槐
         {
             id: "g066_f01",
             name: "上野槐",
             gender: "female",
-            isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
-            isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
+            isHidden: false,
+            isFD: false,
             images: [
                 { srcList: ["char/066/Enju.jpg",
                             "char/066/Enju2.jpg",
-                            "char/066/Enju3.jpg"], type: "base" },      // 默认基础图，始终加载
+                            "char/066/Enju3.jpg"], type: "base" },
             ]
         },
         // 百地蝶治郎
@@ -39,7 +39,7 @@ const gameData = {
             images: [
                 { srcList: ["char/066/Choujirou.jpg",
                             "char/066/Choujirou2.jpg",
-                            "char/066/Choujirou3.png"], type: "base" },      // 默认基础图，始终加载
+                            "char/066/Choujirou3.png"], type: "base" },
             ]
         },
         // 月下丸
