@@ -22,7 +22,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/081/Lucia.jpg"
+                { srcList: ["char/081/Lucia.jpg",
                             "char/081/Lucia2.jpg",
                             "char/081/Lucia3.jpg",
                             "char/081/Lucia4.jpg",
