@@ -90,6 +90,84 @@ const gameData = {
                 { srcList: ["char/070/Yuzuki.jpg",
                             "char/070/Yuzuki2.jpg"], type: "base" },
             ]
+        },
+        // 乌丸千影
+        {
+            id: "g070_s01",
+            name: "乌丸千影",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/070/Chikage.jpg"], type: "base" }
+            ]
+        },
+        // 花手
+        {
+            id: "g070_s02",
+            name: "花手",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/070/Hanate.jpg"], type: "base" }
+            ]
+        },
+        // 月读神乐
+        {
+            id: "g070_s03",
+            name: "月读神乐",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/070/Kagura.jpg"], type: "base" }
+            ]
+        },
+        // 久久利安弥
+        {
+            id: "g070_s04",
+            name: "久久利安弥",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/070/Yasuhisa.jpg"], type: "base" }
+            ]
+        },
+        // 须沙野祐亚
+        {
+            id: "g070_s05",
+            name: "须沙野祐亚",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/070/Yua.jpg"], type: "base" }
+            ]
+        },
+        // 比良坂有希
+        {
+            id: "g070_s06",
+            name: "比良坂有希",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/070/Yuki.jpg"], type: "base" }
+            ]
         }
     ]
 };
