@@ -1,9 +1,4 @@
-// ==========【单个游戏独立数据模板｜新版ESModule】==========
-// 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
-// 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
-// 网页渲染时由 main.js 的 getWebImageUrl 拼接为 R2 完整 URL
-// Canvas 导出时由 export-canvas-render.js 的 convertR2ToJsDelivr 拼接为 jsDelivr URL
-// 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
+// ℹ️配角名未汉化
 const gameData = {
     id: "game072", // 全局唯一ID，不可重复，如 game001
     name: "燃烧吧!乙女道士 ~华游恋语~",
@@ -84,6 +79,110 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/072/Yuhan.jpg"], type: "base" },
+            ]
+        },
+        // ミーミ
+        {
+            id: "g072_s01",
+            name: "ミーミ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/072/Mimi.jpg"], type: "base" }
+            ]
+        },
+        // リーホン
+        {
+            id: "g072_s02",
+            name: "リーホン",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/072/Rihon.jpg"], type: "base" }
+            ]
+        },
+        // ルオジン
+        {
+            id: "g072_s03",
+            name: "ルオジン",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/072/Ruojin.jpg"], type: "base" }
+            ]
+        },
+        // セイセツ
+        {
+            id: "g072_s04",
+            name: "セイセツ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/072/Seisetsu.jpg"], type: "base" }
+            ]
+        },
+        // ウェイ
+        {
+            id: "g072_s05",
+            name: "ウェイ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/072/Wei.jpg"], type: "base" }
+            ]
+        },
+        // シユ
+        {
+            id: "g072_s06",
+            name: "シユ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/072/Xiu.jpg"], type: "base" }
+            ]
+        },
+        // イーミン
+        {
+            id: "g072_s07",
+            name: "イーミン",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/072/Yimin.jpg"], type: "base" }
+            ]
+        },
+        // ヨキ
+        {
+            id: "g072_s08",
+            name: "ヨキ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/072/Yoki.jpg"], type: "base" }
             ]
         }
     ]
