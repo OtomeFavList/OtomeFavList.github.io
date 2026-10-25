@@ -23,9 +23,10 @@ const gameData = {
         {
             id: "g069_f01",
             name: "杰德",
+            hiddenName: ["艾儿"],
             gender: "female",
-            isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
-            isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
+            isHidden: false,
+            isFD: false,
             images: [
                 { srcList: ["char/069/Jed.jpg",
                             "char/069/Jed2.jpg",
@@ -95,6 +96,76 @@ const gameData = {
                 { srcList: ["char/069/Tower.jpg",
                             "char/069/Tower2.jpg",
                             "char/069/Tower3.jpg"], type: "base" },
+            ]
+        },
+        // 艾尔利克
+        {
+            id: "g069_s01",
+            name: "艾尔利克",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/069/Elric.jpg",
+                            "char/069/Elric2.jpg"], type: "base" }
+            ]
+        },
+        // 弗朗西丝卡
+        {
+            id: "g069_s02",
+            name: "弗朗西丝卡",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/069/Francisca.jpg",
+                            "char/069/Francisca2.jpg"], type: "base" }
+            ]
+        },
+        // 劳伦斯
+        {
+            id: "g069_s03",
+            name: "劳伦斯",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/069/Lawrence.jpg",
+                            "char/069/Lawrence2.jpg"], type: "base" }
+            ]
+        },
+        // 奥尔迦
+        {
+            id: "g069_s04",
+            name: "奥尔迦",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/069/Olga.jpg",
+                            "char/069/Olga2.jpg"], type: "base" }
+            ]
+        },
+        // 缇伊
+        {
+            id: "g069_s05",
+            name: "缇伊",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/069/Tee.jpg",
+                            "char/069/Tee2.jpg"], type: "base" }
             ]
         }
     ]
