@@ -1,3 +1,4 @@
+// ✅已核对信息
 // ℹ️未官中，官中发售后需要修改：游戏名、发售年份、汉化厂商、封面图、角色名
 const gameData = {
     id: "game077", // 全局唯一ID，不可重复，如 game001
@@ -12,6 +13,7 @@ const gameData = {
         {name:"森田彩莉", lang:"zh"},
         {name:"桜ゆづき", lang:"zh"},
         {name:"葉山いずみ", lang:"zh"},
+        {name:"株式会社エッジワークス", lang:"zh"},
         {name:"もち大福", lang:"ja"}
     ],
     art: [
