@@ -42,7 +42,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/081/Alexei.jpg"
+                { srcList: ["char/081/Alexei.jpg",
                             "char/081/Alexei2.jpg",
                             "char/081/Alexei3.jpg",
                             "char/081/Alexei4.jpg",
@@ -62,7 +62,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/081/Isaiah.jpg"
+                { srcList: ["char/081/Isaiah.jpg",
                             "char/081/Isaiah2.jpg",
                             "char/081/Isaiah3.jpg",
                             "char/081/Isaiah4.jpg",
@@ -82,7 +82,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/081/Lars.jpg"
+                { srcList: ["char/081/Lars.jpg",
                             "char/081/Lars2.jpg",
                             "char/081/Lars3.jpg",
                             "char/081/Lars4.jpg",
@@ -102,7 +102,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/081/Ricardo.jpg"
+                { srcList: ["char/081/Ricardo.jpg",
                             "char/081/Ricardo2.jpg",
                             "char/081/Ricardo3.jpg",
                             "char/081/Ricardo4.jpg",
@@ -122,7 +122,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/081/Sion.jpg"
+                { srcList: ["char/081/Sion.jpg",
                             "char/081/Sion2.jpg",
                             "char/081/Sion3.jpg",
                             "char/081/Sion4.jpg",
