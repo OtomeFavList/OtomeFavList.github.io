@@ -86,8 +86,8 @@ const gameData = {
         // 不知火秦
         {
             id: "g076_m05",
-            name: "男主5",
-            gender: "不知火秦",
+            name: "不知火秦",
+            gender: "male",
             isHidden: false,
             isFD: false,
             images: [
