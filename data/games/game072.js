@@ -1,3 +1,5 @@
+// data/games/game072.js
+// ✅已核对信息
 // ℹ️配角名未汉化
 const gameData = {
     id: "game072", // 全局唯一ID，不可重复，如 game001
