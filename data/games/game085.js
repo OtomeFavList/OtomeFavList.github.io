@@ -1,19 +1,5 @@
-// BYAKKO ～四神部隊炎恋記～
-// 开发: オトメイト
-// 发行: アイディアファクトリー株式会社、オトメイト
-// 剧本: メインシナリオ：嶋野まち（詠野万知子） サブシナリオ：合同会社Re,AER(影山千博、彩月レイ、呉西しの)、景山千博
-// 音乐: 市川淳
-// 人物设定: 煮たか
-// 原画: 煮たか
-// otomate.jp/byakko/
-
-// ==========【单个游戏独立数据模板｜新版ESModule】==========
-// 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
-// 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
-// 网页渲染时由 main.js 的 getWebImageUrl 拼接为 R2 完整 URL
-// Canvas 导出时由 export-canvas-render.js 的 convertR2ToJsDelivr 拼接为 jsDelivr URL
-// 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
-// 官中发售以后，需要修改：游戏名、发售年份、汉化厂商、封面图、角色名
+// ✅已核对信息
+// ℹ️未官中，官中发售后需要修改：游戏名、发售年份、汉化厂商、封面图、info图、角色名
 const gameData = {
     id: "game085", // 全局唯一ID，不可重复，如 game001
     name: "BYAKKO ~四神部隊炎恋記~",
@@ -25,7 +11,8 @@ const gameData = {
         {name:"影山千博", lang:"zh"},
         {name:"彩月レイ", lang:"zh"},
         {name:"呉西しの", lang:"zh"},
-        {name:"景山千博", lang:"zh"}
+        {name:"景山千博", lang:"zh"},
+        {name:"合同会社Re,AER", lang:"zh"}
     ],
     art: [
         {name:"煮たか", lang:"zh"}
