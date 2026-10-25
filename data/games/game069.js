@@ -1,5 +1,6 @@
 // data/games/game069.js
 // ✅已核对信息
+// ℹ️info图
 const gameData = {
     id: "game069", // 全局唯一ID，不可重复，如 game001
     name: "灰鹰幻境",
