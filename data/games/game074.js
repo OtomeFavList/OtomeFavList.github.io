@@ -1,9 +1,4 @@
-// ==========【单个游戏独立数据模板｜新版ESModule】==========
-// 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
-// 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
-// 网页渲染时由 main.js 的 getWebImageUrl 拼接为 R2 完整 URL
-// Canvas 导出时由 export-canvas-render.js 的 convertR2ToJsDelivr 拼接为 jsDelivr URL
-// 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
+// ℹ️配角名未校对
 const gameData = {
     id: "game074", // 全局唯一ID，不可重复，如 game001
     name: "转生成女性向游戏只有毁灭END的坏人大小姐 ~掀起波澜的海盗~",
@@ -23,12 +18,12 @@ const gameData = {
             id: "g074_f01",
             name: "卡塔莉娜·库莱耶思",
             gender: "female",
-            isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
-            isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
+            isHidden: false,
+            isFD: false,
             images: [
                 { srcList: ["char/074/Catarina.jpg",
                             "char/074/Catarina2.jpg",
-                            "char/074/Catarina3.jpg"], type: "base" },      // 默认基础图，始终加载
+                            "char/074/Catarina3.jpg"], type: "base" },
             ]
         },
         // 亚兰·史提亚德
@@ -41,7 +36,7 @@ const gameData = {
             images: [
                 { srcList: ["char/074/Alan.jpg",
                             "char/074/Alan2.jpg",
-                            "char/074/Alan3.jpg"], type: "base" },      // 默认基础图，始终加载
+                            "char/074/Alan3.jpg"], type: "base" },
             ]
         },
         // 吉奥多·史提亚德
@@ -114,6 +109,7 @@ const gameData = {
             gender: "male",
             isHidden: false,
             isFD: false,
+            isSub: true,
             images: [
                 { srcList: ["char/074/Maria.jpg",
                             "char/074/Maria2.jpg",
@@ -127,6 +123,7 @@ const gameData = {
             gender: "male",
             isHidden: false,
             isFD: false,
+            isSub: true,
             images: [
                 { srcList: ["char/074/Mary.jpg",
                             "char/074/Mary2.jpg",
@@ -140,10 +137,89 @@ const gameData = {
             gender: "male",
             isHidden: false,
             isFD: false,
+            isSub: true,
             images: [
                 { srcList: ["char/074/Sophia.jpg",
                             "char/074/Sophia2.jpg",
                             "char/074/Sophia3.jpg"], type: "base" },
+            ]
+        },
+        // 亚尔伯特
+        {
+            id: "g074_s01",
+            name: "亚尔伯特",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/074/Albert.jpg"], type: "base" }
+            ]
+        },
+        // 迪尔克·里加德威尔
+        {
+            id: "g074_s02",
+            name: "迪尔克·里加德威尔",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/074/Dirk.jpg"], type: "base" }
+            ]
+        },
+        // 费德里克·艾尔森
+        {
+            id: "g074_s03",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/074/Frederic.jpg"], type: "base" }
+            ]
+        },
+        // 莉莉安娜
+        {
+            id: "g074_s04",
+            name: "莉莉安娜",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/074/Liliana.jpg"], type: "base" }
+            ]
+        },
+        // 莱尔·威尔达
+        {
+            id: "g074_s05",
+            name: "莱尔·威尔达",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/074/Ryle.jpg"], type: "base" }
+            ]
+        },
+        // 瑟特·诺迪
+        {
+            id: "g074_s06",
+            name: "瑟特·诺迪",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/074/Set.jpg"], type: "base" }
             ]
         }
     ]
