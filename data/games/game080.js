@@ -42,7 +42,8 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/080/Kashu.jpg",
-                            "char/080/Kashu2.jpg"], type: "base" },
+                            "char/080/Kashu2.jpg",
+                            "char/080/Kashu3.jpg"], type: "base" },
             ]
         },
         // 葛葉翔
@@ -54,7 +55,8 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/080/Kuzuha.jpg",
-                            "char/080/Kuzuha2.jpg"], type: "base" },
+                            "char/080/Kuzuha2.jpg",
+                            "char/080/Kuzuha3.jpg"], type: "base" },
             ]
         },
         // 凪原大貴
@@ -66,7 +68,8 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/080/Nagihara.jpg",
-                            "char/080/Nagihara2.jpg"], type: "base" },
+                            "char/080/Nagihara2.jpg",
+                            "char/080/Nagihara3.jpg"], type: "base" },
             ]
         },
         // 志奴要
@@ -78,7 +81,8 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/080/Shido.jpg",
-                            "char/080/Shido2.jpg"], type: "base" },
+                            "char/080/Shido2.jpg",
+                            "char/080/Shido3.jpg"], type: "base" },
             ]
         },
         // 東條海里
@@ -90,7 +94,8 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/080/Toujou.jpg",
-                            "char/080/Toujou2.jpg"], type: "base" },
+                            "char/080/Toujou2.jpg",
+                            "char/080/Toujou3.jpg"], type: "base" },
             ]
         },
         // 柳遼太
@@ -102,7 +107,8 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/080/Yanagi.jpg",
-                            "char/080/Yanagi2.jpg"], type: "base" },
+                            "char/080/Yanagi2.jpg",
+                            "char/080/Yanagi3.jpg"], type: "base" },
             ]
         }
     ]
