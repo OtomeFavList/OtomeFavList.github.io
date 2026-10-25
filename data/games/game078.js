@@ -347,13 +347,13 @@ const gameData = {
             isFdSub: false,
             images: [
                 { srcList: ["char/078/Zhia.jpg",
-                            "char/078/Zhia.jpg",
-                            "char/078/Zhia.jpg"], type: "base" }
+                            "char/078/Zhia2.jpg",
+                            "char/078/Zhia3.jpg"], type: "base" }
             ]
         },
         // 雪糜·子方
         {
-            id: "g078_s19",
+            id: "g078_s20",
             name: "雪糜·子方",
             gender: "male",
             isHidden: false,
@@ -362,8 +362,8 @@ const gameData = {
             isFdSub: false,
             images: [
                 { srcList: ["char/078/Zhiho.jpg",
-                            "char/078/Zhiho.jpg",
-                            "char/078/Zhiho.jpg"], type: "base" }
+                            "char/078/Zhiho2.jpg",
+                            "char/078/Zhiho3.jpg"], type: "base" }
             ]
         }
     ]
