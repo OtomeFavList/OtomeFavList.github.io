@@ -43,7 +43,7 @@ const gameData = {
             images: [
                 { srcList: ["char/066/Choujirou.jpg",
                             "char/066/Choujirou2.jpg",
-                            "char/066/Choujirou3.jpg"], type: "base" },      // 默认基础图，始终加载
+                            "char/066/Choujirou3.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 月下丸
@@ -56,7 +56,7 @@ const gameData = {
             images: [
                 { srcList: ["char/066/Gekkamaru.jpg",
                             "char/066/Gekkamaru2.jpg",
-                            "char/066/Gekkamaru3.jpg"], type: "base" },
+                            "char/066/Gekkamaru3.png"], type: "base" },
             ]
         },
         // 石川五右卫门
@@ -69,7 +69,7 @@ const gameData = {
             images: [
                 { srcList: ["char/066/Goemon.jpg",
                             "char/066/Goemon2.jpg",
-                            "char/066/Goemon3.jpg"], type: "base" },
+                            "char/066/Goemon3.png"], type: "base" },
             ]
         },
         // 服部半藏
@@ -82,7 +82,7 @@ const gameData = {
             images: [
                 { srcList: ["char/066/Hattori.jpg",
                             "char/066/Hattori2.jpg",
-                            "char/066/Hattori3.jpg"], type: "base" },
+                            "char/066/Hattori3.png"], type: "base" },
             ]
         },
         // 黑雪
@@ -95,7 +95,102 @@ const gameData = {
             images: [
                 { srcList: ["char/066/Kuroyuki.jpg",
                             "char/066/Kuroyuki2.jpg",
-                            "char/066/Kuroyuki3.jpg"], type: "base" },
+                            "char/066/Kuroyuki3.png"], type: "base" },
+            ]
+        },
+        // 山仓猿之介
+        {
+            id: "g066_s01",
+            name: "山仓猿之介",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/066/Ennosuke.jpg",
+                            "char/066/Ennosuke2.jpg"], type: "base" }
+            ]
+        },
+        // 石田三成
+        {
+            id: "g066_s02",
+            name: "石田三成",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/066/Ishida.jpg"], type: "base" }
+            ]
+        },
+        // 上野勘道
+        {
+            id: "g066_s03",
+            name: "上野勘道",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/066/Kandou.jpg"], type: "base" }
+            ]
+        },
+        // 霞
+        {
+            id: "g066_s04",
+            name: "霞",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/066/Kasumi.jpg",
+                            "char/066/Kasumi2.jpg"], type: "base" }
+            ]
+        },
+        // 三云伽罗
+        {
+            id: "g066_s05",
+            name: "三云伽罗",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/066/Kyara.jpg",
+                            "char/066/Kyara2.jpg"], type: "base" }
+            ]
+        },
+        // 徳川家康
+        {
+            id: "g066_s06",
+            name: "徳川家康",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/066/Tokugawa.jpg",
+                            "char/066/Tokugawa2.jpg"], type: "base" }
+            ]
+        },
+        // 丰臣秀吉
+        {
+            id: "g066_s07",
+            name: "丰臣秀吉",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/066/Toyotomi.jpg"], type: "base" }
             ]
         }
     ]
