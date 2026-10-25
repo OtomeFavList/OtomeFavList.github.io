@@ -1,4 +1,4 @@
-// ℹ️未官中，官中发售以后需要修改：游戏名、发售年份、汉化厂商、封面图、角色名
+// ℹ️未官中，官中发售后需要修改：游戏名、发售年份、汉化厂商、封面图、角色名
 const gameData = {
     id: "game077", // 全局唯一ID，不可重复，如 game001
     name: "DYNAMIC CHORD feat.Liar-S Remaster edition",
