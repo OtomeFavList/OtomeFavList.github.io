@@ -7,7 +7,9 @@ const gameData = {
     publisher: ["工画堂スタジオ","Otomate"],
     cnStudio: "JOYOLAND",
     writer: [
-        {name:"根岸十郎", lang:"zh"}
+        {name:"根岸十郎", lang:"zh"},
+        {name:"夏野景", lang:"zh"},
+        {name:"中越麻朝", lang:"zh"}
     ],
     art: [
         {name:"風李たゆ", lang:"zh"}
