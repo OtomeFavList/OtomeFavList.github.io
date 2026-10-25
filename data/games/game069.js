@@ -3,7 +3,7 @@
 const gameData = {
     id: "game069", // 全局唯一ID，不可重复，如 game001
     name: "灰鹰幻境",
-    year: "2018",
+    year: "2019",
     publisher: ["Otomate"],
     cnStudio: "JOYOLAND",
     writer: [
