@@ -1,7 +1,8 @@
-// ℹ️未官中，官中发售后需要修改：游戏名、发售年份、汉化厂商、封面图、角色名
+// ✅已核对信息
+// ℹ️未官中，官中发售后需要修改：游戏名、发售年份、汉化厂商、封面图、info图、角色名
 const gameData = {
     id: "game081", // 全局唯一ID，不可重复，如 game001
-    name: "トラブル・マギア ~訳アリ少女は未来を勝ち取るために異国の魔法学校へ留学します~",
+    name: "トラブル·マギア ~訳アリ少女は未来を勝ち取るために異国の魔法学校へ留学します~",
     year: "2024",
     publisher: ["Otomate"],
     cnStudio: "暂无",
@@ -346,5 +347,5 @@ const gameData = {
     ]
 };
 
-// ✅新版导出！不要使用window.gameDataList.push！
+// ESModule导出
 export { gameData };
