@@ -122,11 +122,11 @@ const gameData = {
             images: [
                 { srcList: ["char/071/Wataru.jpg",
                             "char/071/Wataru4.jpg",
-                            "char/071/Wataru5.jpg"
+                            "char/071/Wataru5.jpg",
                             "char/071/Wataru2.jpg",
                             "char/071/Wataru3.jpg",
                             "char/071/Wataru6.jpg",
-                            "char/071/Wataru7.jpg",], type: "base" },
+                            "char/071/Wataru7.jpg"], type: "base" },
             ]
         },
         // 望月要介
