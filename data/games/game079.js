@@ -31,7 +31,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/079/Sakuraba.jpg"], type: "base" }
+                { srcList: ["char/079/Sakuraba.jpg",
+                            "char/079/Sakuraba2.jpg",
+                            "char/079/Sakuraba3.jpg"], type: "base" }
             ]
         },
         // 帽子屋
@@ -42,7 +44,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/079/Boushiya.jpg"], type: "base" }
+                { srcList: ["char/079/Boushiya.jpg",
+                            "char/079/Boushiya2.jpg",
+                            "char/079/Boushiya3.jpg"], type: "base" }
             ]
         },
         // チェシャ猫
@@ -53,7 +57,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/079/Chesire.jpg"], type: "base" }
+                { srcList: ["char/079/Chesire.jpg",
+                            "char/079/Chesire2.jpg",
+                            "char/079/Chesire3.jpg"], type: "base" }
             ]
         },
         // キング
@@ -64,7 +70,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/079/King.jpg"], type: "base" }
+                { srcList: ["char/079/King.jpg",
+                            "char/079/King2.jpg",
+                            "char/079/King3.jpg"], type: "base" }
             ]
         },
         // 黒うさぎ
@@ -75,7 +83,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/079/Kuro.jpg"], type: "base" }
+                { srcList: ["char/079/Kuro.jpg",
+                            "char/079/Kuro2.jpg",
+                            "char/079/Kuro3.jpg"], type: "base" }
             ]
         },
         // 三月ウサギ
@@ -86,7 +96,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/079/Sangatsu.jpg"], type: "base" }
+                { srcList: ["char/079/Sangatsu.jpg",
+                            "char/079/Sangatsu2.jpg",
+                            "char/079/Sangatsu3.jpg"], type: "base" }
             ]
         },
         // 裏ありす
@@ -97,7 +109,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/079/Ura.jpg"], type: "base" }
+                { srcList: ["char/079/Ura.jpg",
+                            "char/079/Ura2.jpg",
+                            "char/079/Ura3.jpg"], type: "base" }
             ]
         }
     ]
