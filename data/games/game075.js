@@ -110,6 +110,76 @@ const gameData = {
                             "char/075/Ozma2.jpg",
                             "char/075/Ozma3.jpg"], type: "base" },
             ]
+        },
+        // 阿克雷
+        {
+            id: "g075_s01",
+            name: "阿克雷",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/075/Archray.jpg",
+                            "char/075/Archray2.jpg"], type: "base" }
+            ]
+        },
+        // 尤金·普尔波
+        {
+            id: "g075_s02",
+            name: "尤金·普尔波",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/075/Eugene.jpg",
+                            "char/075/Eugene2.jpg"], type: "base" }
+            ]
+        },
+        // 格琳达·菲利斯
+        {
+            id: "g075_s03",
+            name: "格琳达·菲利斯",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/075/Glinda.jpg",
+                            "char/075/Glinda2.jpg"], type: "base" }
+            ]
+        },
+        // 尼诺斯·乌洛
+        {
+            id: "g075_s04",
+            name: "尼诺斯·乌洛",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/075/Nenohs.jpg",
+                            "char/075/Nenohs2.jpg"], type: "base" }
+            ]
+        },
+        // 奥瑟·伍德兰
+        {
+            id: "g075_s05",
+            name: "奥瑟·伍德兰",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/075/Osser.jpg",
+                            "char/075/Osser2.jpg"], type: "base" }
+            ]
         }
     ]
 };
