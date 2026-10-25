@@ -29,7 +29,7 @@ const gameData = {
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
                 { srcList: ["char/068/Ai.jpg",
-                            "char/068/Ai2.jpg"], type: "base" },      // 默认基础图，始终加载
+                            "char/068/Ai2.jpg"], type: "base" },
             ]
         },
         // 绯影
@@ -41,7 +41,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/068/Hikage.jpg",
-                            "char/068/Hikage2.jpg"], type: "base" },      // 默认基础图，始终加载
+                            "char/068/Hikage2.jpg"], type: "base" },
             ]
         },
         // 钩翅
@@ -90,6 +90,19 @@ const gameData = {
             images: [
                 { srcList: ["char/068/Yamato.jpg",
                             "char/068/Yamato2.jpg"], type: "base" },
+            ]
+        },
+        // 兔子
+        {
+            id: "g068_s01",
+            name: "兔子",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/068/Wusagi.jpg"], type: "base" }
             ]
         }
     ]
