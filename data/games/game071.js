@@ -26,7 +26,9 @@ const gameData = {
             images: [
                 { srcList: ["char/071/Aoi.jpg",
                             "char/071/Aoi2.jpg",
-                            "char/071/Aoi3.jpg"], type: "base" },
+                            "char/071/Aoi3.jpg",
+                            "char/071/Aoi4.jpg",
+                            "char/071/Aoi5.jpg"], type: "base" },
             ]
         },
         // 东地枣
@@ -39,7 +41,9 @@ const gameData = {
             images: [
                 { srcList: ["char/071/Natsume.jpg",
                             "char/071/Natsume2.jpg",
-                            "char/071/Natsume3.jpg"], type: "base" },
+                            "char/071/Natsume3.jpg",
+                            "char/071/Natsume4.jpg",
+                            "char/071/Natsume5.jpg"], type: "base" },
             ]
         },
         // 东地樱
@@ -52,7 +56,9 @@ const gameData = {
             images: [
                 { srcList: ["char/071/Sakura.jpg",
                             "char/071/Sakura2.jpg",
-                            "char/071/Sakura3.jpg"], type: "base" },
+                            "char/071/Sakura3.jpg",
+                            "char/071/Sakura4.jpg",
+                            "char/071/Sakura5.jpg"], type: "base" },
             ]
         },
         // 翠川智裕
@@ -64,10 +70,12 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/071/Chihiro.jpg",
+                            "char/071/Chihiro4.jpg",
+                            "char/071/Chihiro5.jpg",
                             "char/071/Chihiro2.jpg",
                             "char/071/Chihiro3.jpg",
-                            "char/071/Chihiro4.jpg",
-                            "char/071/Chihiro5.jpg"], type: "base" },
+                            "char/071/Chihiro6.jpg",
+                            "char/071/Chihiro7.jpg"], type: "base" },
             ]
         },
         // 榊原洸
@@ -79,10 +87,12 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/071/Kou.jpg",
+                            "char/071/Kou4.jpg",
+                            "char/071/Kou5.jpg",
                             "char/071/Kou2.jpg",
                             "char/071/Kou3.jpg",
-                            "char/071/Kou4.jpg",
-                            "char/071/Kou5.jpg"], type: "base" },
+                            "char/071/Kou6.jpg",
+                            "char/071/Kou7.jpg"], type: "base" },
             ]
         },
         // 小野泽正人
@@ -94,10 +104,12 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/071/Masato.jpg",
+                            "char/071/Masato4.jpg",
+                            "char/071/Masato5.jpg",
                             "char/071/Masato2.jpg",
                             "char/071/Masato3.jpg",
-                            "char/071/Masato4.jpg",
-                            "char/071/Masato5.jpg"], type: "base" },
+                            "char/071/Masato6.jpg",
+                            "char/071/Masato7.jpg"], type: "base" },
             ]
         },
         // 仙波亘
@@ -109,10 +121,12 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/071/Wataru.jpg",
+                            "char/071/Wataru4.jpg",
+                            "char/071/Wataru5.jpg"
                             "char/071/Wataru2.jpg",
                             "char/071/Wataru3.jpg",
-                            "char/071/Wataru4.jpg",
-                            "char/071/Wataru5.jpg"], type: "base" },
+                            "char/071/Wataru6.jpg",
+                            "char/071/Wataru7.jpg",], type: "base" },
             ]
         },
         // 望月要介
@@ -124,10 +138,12 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/071/Yousuke.jpg",
+                            "char/071/Yousuke4.jpg",
+                            "char/071/Yousuke5.jpg",
                             "char/071/Yousuke2.jpg",
                             "char/071/Yousuke3.jpg",
-                            "char/071/Yousuke4.jpg",
-                            "char/071/Yousuke5.jpg"], type: "base" },
+                            "char/071/Yousuke6.jpg",
+                            "char/071/Yousuke7.jpg"], type: "base" },
             ]
         },
         // 榊原悠
@@ -139,11 +155,13 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/071/Yuu.jpg",
-                            "char/071/Yuu2.jpg",
-                            "char/071/Yuu3.jpg",
                             "char/071/Yuu4.jpg",
                             "char/071/Yuu5.jpg",
-                            "char/071/Yuu6.jpg"], type: "base" },
+                            "char/071/Yuu6.jpg",
+                            "char/071/Yuu2.jpg",
+                            "char/071/Yuu3.jpg",
+                            "char/071/Yuu7.jpg",
+                            "char/071/Yuu8.jpg"], type: "base" },
             ]
         }
     ]
