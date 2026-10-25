@@ -1,34 +1,4 @@
-// 中文名: DYNAMIC CHORD 动态和弦 feat.Liar-S Remaster edition
-// 开发: honeybee black
-// 发行: アリスマティック、dramatic create、欢乐百世
-// 人物设定: 冨士原良
-// 原画: 冨士原良
-// 别名: ダイナミックコード フィーチャリング ライアーズ リマスター エディション
-// honeybee-cd.com/dynamic/switch-liar/
-
-// DYNAMIC CHORD feat.Liar-S
-// 剧本: Plot：高木彩佳；执笔：もち大福、株式会社エッジワークス（浅生柚子、相川暁子、森田彩莉、桜ゆづき、葉山いずみ）
-// honeybee-cd.com/dynamic/liar/index.html
-
-// DYNAMIC CHORD feat.Liar-S Append Disc
-// 剧本: 桜ゆづき、相川暁子、葉山いずみ
-// honeybee-cd.com/dynamic/liar/append.html
-
-// DYNAMIC CHORD feat.Liar-S V edition
-// 开发: honeybee black
-// 发行: honeybee black
-// 剧本: もち大福、株式会社エッジワークス、桜ゆづき、森田彩莉、浅生柚子、相川暁子、葉山いずみ
-// 人物设定: 冨士原良
-// 原画: 冨士原良
-// honeybee-cd.com/dynamic/vita-liar/index.html
-
-// ==========【单个游戏独立数据模板｜新版ESModule】==========
-// 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
-// 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
-// 网页渲染时由 main.js 的 getWebImageUrl 拼接为 R2 完整 URL
-// Canvas 导出时由 export-canvas-render.js 的 convertR2ToJsDelivr 拼接为 jsDelivr URL
-// 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
-// 官中发售以后，需要修改：游戏名、发售年份、汉化厂商、封面图、角色名
+// ℹ️未官中
 const gameData = {
     id: "game077", // 全局唯一ID，不可重复，如 game001
     name: "DYNAMIC CHORD feat.Liar-S Remaster edition",
@@ -47,18 +17,18 @@ const gameData = {
     art: [
         {name:"冨士原良", lang:"zh"}
     ],
-    cover: "game/077.jpg", // 相对路径，游戏封面
+    cover: "game/077.jpg",
     charList: [
         // 双海仁菜
         {
             id: "g077_f01",
             name: "双海仁菜",
             gender: "female",
-            isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
-            isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
+            isHidden: false,
+            isFD: false,
             images: [
                 { srcList: ["char/077/Nina.jpg",
-                            "char/077/Nina2.jpg"], type: "base" },      // 默认基础图，始终加载
+                            "char/077/Nina2.jpg"], type: "base" },
             ]
         },
         // 榛名宗太郎
@@ -70,7 +40,16 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/077/Haruna.jpg",
-                            "char/077/Haruna2.jpg"], type: "base" },      // 默认基础图，始终加载
+                            "char/077/Haruna2.jpg",
+                            "char/077/Haruna3.jpg",
+                            "char/077/Haruna4.jpg",
+                            "char/077/Haruna5.jpg",
+                            "char/077/Haruna6.jpg",
+                            "char/077/Haruna7.jpg",
+                            "char/077/Haruna8.jpg",
+                            "char/077/Haruna9.jpg",
+                            "char/077/Haruna10.jpg",
+                            "char/077/Haruna11.jpg"], type: "base" },
             ]
         },
         // 檜山朔良
@@ -82,7 +61,16 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/077/Hinoyama.jpg",
-                            "char/077/Hinoyama2.jpg"], type: "base" },
+                            "char/077/Hinoyama2.jpg",
+                            "char/077/Hinoyama3.jpg",
+                            "char/077/Hinoyama4.jpg",
+                            "char/077/Hinoyama5.jpg",
+                            "char/077/Hinoyama6.jpg",
+                            "char/077/Hinoyama7.jpg",
+                            "char/077/Hinoyama8.jpg",
+                            "char/077/Hinoyama9.jpg",
+                            "char/077/Hinoyama10.jpg",
+                            "char/077/Hinoyama11.jpg"], type: "base" },
             ]
         },
         // 珠洲乃千哉
@@ -94,7 +82,16 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/077/Suzuno.jpg",
-                            "char/077/Suzuno2.jpg"], type: "base" },
+                            "char/077/Suzuno2.jpg",
+                            "char/077/Suzuno3.jpg",
+                            "char/077/Suzuno4.jpg",
+                            "char/077/Suzuno5.jpg",
+                            "char/077/Suzuno6.jpg",
+                            "char/077/Suzuno7.jpg",
+                            "char/077/Suzuno8.jpg",
+                            "char/077/Suzuno9.jpg",
+                            "char/077/Suzuno10.jpg",
+                            "char/077/Suzuno11.jpg"], type: "base" },
             ]
         },
         // 結崎芹
@@ -106,7 +103,86 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/077/Yuisaki.jpg",
-                            "char/077/Yuisaki2.jpg"], type: "base" },
+                            "char/077/Yuisaki2.jpg",
+                            "char/077/Yuisaki3.jpg",
+                            "char/077/Yuisaki4.jpg",
+                            "char/077/Yuisaki5.jpg",
+                            "char/077/Yuisaki6.jpg",
+                            "char/077/Yuisaki7.jpg",
+                            "char/077/Yuisaki8.jpg",
+                            "char/077/Yuisaki9.jpg",
+                            "char/077/Yuisaki10.jpg",
+                            "char/077/Yuisaki11.jpg"], type: "base" },
+            ]
+        },
+        // 加賀真実
+        {
+            id: "g077_s01",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/077/Kaga.jpg",
+                            "char/077/Kaga2.jpg"], type: "base" }
+            ]
+        },
+        // MERI
+        {
+            id: "g077_s02",
+            name: "MERI",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/077/Meri.jpg",
+                            "char/077/Meri2.jpg"], type: "base" }
+            ]
+        },
+        // 槇慎也
+        {
+            id: "g077_s03",
+            name: "槇慎也",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/077/Shinya.jpg",
+                            "char/077/Shinya2.jpg"], type: "base" }
+            ]
+        },
+        // 雨宮詩央
+        {
+            id: "g077_s04",
+            name: "雨宮詩央",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/077/Shio.jpg",
+                            "char/077/Shio2.jpg"], type: "base" }
+            ]
+        },
+        // 伊澄久臣
+        {
+            id: "g077_s05",
+            name: "伊澄久臣",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/077/Syacho.jpg",
+                            "char/077/Syacho2.jpg"], type: "base" }
             ]
         }
     ]
