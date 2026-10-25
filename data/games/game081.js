@@ -23,15 +23,15 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/081/Lucia.jpg",
-                            "char/081/Lucia2.jpg",
+                            "char/081/Lucia2.png",
                             "char/081/Lucia3.jpg",
                             "char/081/Lucia4.jpg",
                             "char/081/Lucia5.jpg",
                             "char/081/Lucia6.jpg",
                             "char/081/Lucia7.jpg",
                             "char/081/Lucia8.jpg",
-                            "char/081/Lucia9.jpg",
-                            "char/081/Lucia10.jpg"], type: "base" },
+                            "char/081/Lucia9.png",
+                            "char/081/Lucia10.png"], type: "base" },
             ]
         },
         // アレクセイ·エルディール
@@ -43,15 +43,15 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/081/Alexei.jpg",
-                            "char/081/Alexei2.jpg",
+                            "char/081/Alexei2.png",
                             "char/081/Alexei3.jpg",
                             "char/081/Alexei4.jpg",
                             "char/081/Alexei5.jpg",
                             "char/081/Alexei6.jpg",
                             "char/081/Alexei7.jpg",
                             "char/081/Alexei8.jpg",
-                            "char/081/Alexei9.jpg",
-                            "char/081/Alexei10.jpg"], type: "base" },
+                            "char/081/Alexei9.png",
+                            "char/081/Alexei10.png"], type: "base" },
             ]
         },
         // イザヤ·クライン
@@ -63,15 +63,15 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/081/Isaiah.jpg",
-                            "char/081/Isaiah2.jpg",
+                            "char/081/Isaiah2.png",
                             "char/081/Isaiah3.jpg",
                             "char/081/Isaiah4.jpg",
                             "char/081/Isaiah5.jpg",
                             "char/081/Isaiah6.jpg",
                             "char/081/Isaiah7.jpg",
                             "char/081/Isaiah8.jpg",
-                            "char/081/Isaiah9.jpg",
-                            "char/081/Isaiah10.jpg"], type: "base" },
+                            "char/081/Isaiah9.png",
+                            "char/081/Isaiah10.png"], type: "base" },
             ]
         },
         // ラルス·クロッツ
@@ -83,15 +83,15 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/081/Lars.jpg",
-                            "char/081/Lars2.jpg",
+                            "char/081/Lars2.png",
                             "char/081/Lars3.jpg",
                             "char/081/Lars4.jpg",
                             "char/081/Lars5.jpg",
                             "char/081/Lars6.jpg",
                             "char/081/Lars7.jpg",
                             "char/081/Lars8.jpg",
-                            "char/081/Lars9.jpg",
-                            "char/081/Lars10.jpg"], type: "base" },
+                            "char/081/Lars9.png",
+                            "char/081/Lars10.png"], type: "base" },
             ]
         },
         // リカルド·サンテ
@@ -103,15 +103,15 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/081/Ricardo.jpg",
-                            "char/081/Ricardo2.jpg",
+                            "char/081/Ricardo2.png",
                             "char/081/Ricardo3.jpg",
                             "char/081/Ricardo4.jpg",
                             "char/081/Ricardo5.jpg",
                             "char/081/Ricardo6.jpg",
                             "char/081/Ricardo7.jpg",
                             "char/081/Ricardo8.jpg",
-                            "char/081/Ricardo9.jpg",
-                            "char/081/Ricardo10.jpg"], type: "base" },
+                            "char/081/Ricardo9.png",
+                            "char/081/Ricardo10.png"], type: "base" },
             ]
         },
         // シオン·カルド
@@ -123,15 +123,15 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/081/Sion.jpg",
-                            "char/081/Sion2.jpg",
+                            "char/081/Sion2.png",
                             "char/081/Sion3.jpg",
                             "char/081/Sion4.jpg",
                             "char/081/Sion5.jpg",
                             "char/081/Sion6.jpg",
                             "char/081/Sion7.jpg",
                             "char/081/Sion8.jpg",
-                            "char/081/Sion9.jpg",
-                            "char/081/Sion10.jpg"], type: "base" },
+                            "char/081/Sion9.png",
+                            "char/081/Sion10.png"], type: "base" },
             ]
         },
         // アニス·ロシェット
