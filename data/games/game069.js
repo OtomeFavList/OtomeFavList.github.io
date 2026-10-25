@@ -1,9 +1,5 @@
-// ==========【单个游戏独立数据模板｜新版ESModule】==========
-// 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
-// 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
-// 网页渲染时由 main.js 的 getWebImageUrl 拼接为 R2 完整 URL
-// Canvas 导出时由 export-canvas-render.js 的 convertR2ToJsDelivr 拼接为 jsDelivr URL
-// 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
+// data/games/game069.js
+// ✅已核对信息
 const gameData = {
     id: "game069", // 全局唯一ID，不可重复，如 game001
     name: "灰鹰幻境",
@@ -17,7 +13,7 @@ const gameData = {
     art: [
         {name:"結賀さとる", lang:"zh"}
     ],
-    cover: "game/069.jpg", // 相对路径，游戏封面
+    cover: "game/069.jpg",
     charList: [
         // 杰德
         {
@@ -30,7 +26,7 @@ const gameData = {
             images: [
                 { srcList: ["char/069/Jed.jpg",
                             "char/069/Jed2.jpg",
-                            "char/069/Jed3.jpg"], type: "base" },      // 默认基础图，始终加载
+                            "char/069/Jed3.jpg"], type: "base" },
             ]
         },
         // 休
@@ -43,7 +39,7 @@ const gameData = {
             images: [
                 { srcList: ["char/069/Hugh.jpg",
                             "char/069/Hugh2.jpg",
-                            "char/069/Hugh3.jpg"], type: "base" },      // 默认基础图，始终加载
+                            "char/069/Hugh3.jpg"], type: "base" },
             ]
         },
         // 拉凡
