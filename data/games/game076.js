@@ -91,9 +91,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["img/char/076/Shin.jpg",
-                            "img/char/076/Shin2.jpg",
-                            "img/char/076/Shin3.jpg"], type: "base" },
+                { srcList: ["char/076/Shin.jpg",
+                            "char/076/Shin2.jpg",
+                            "char/076/Shin3.jpg"], type: "base" },
             ]
         },
         // 本多正信
@@ -106,8 +106,8 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["img/char/076/Honda.jpg",
-                            "img/char/076/Honda2.jpg"], type: "base" }
+                { srcList: ["char/076/Honda.jpg",
+                            "char/076/Honda2.jpg"], type: "base" }
             ]
         },
         // 德川家康
@@ -120,8 +120,8 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["img/char/076/Ieyasu.jpg",
-                            "img/char/076/Ieyasu2.jpg"], type: "base" }
+                { srcList: ["char/076/Ieyasu.jpg",
+                            "char/076/Ieyasu2.jpg"], type: "base" }
             ]
         },
         // 石田三成
@@ -134,8 +134,8 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["img/char/076/Ishida.jpg",
-                            "img/char/076/Ishida2.jpg"], type: "base" }
+                { srcList: ["char/076/Ishida.jpg",
+                            "char/076/Ishida2.jpg"], type: "base" }
             ]
         },
         // 八濑千羽
@@ -148,8 +148,8 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["img/char/076/Kazuha.jpg",
-                            "img/char/076/Kazuha2.jpg"], type: "base" }
+                { srcList: ["char/076/Kazuha.jpg",
+                            "char/076/Kazuha2.jpg"], type: "base" }
             ]
         },
         // 毛利元康
@@ -162,8 +162,8 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["img/char/076/Mouri.jpg",
-                            "img/char/076/Mouri2.jpg"], type: "base" }
+                { srcList: ["char/076/Mouri.jpg",
+                            "char/076/Mouri2.jpg"], type: "base" }
             ]
         },
         // 岛左近
@@ -176,8 +176,8 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["img/char/076/Shima.jpg",
-                            "img/char/076/Shima2.jpg"], type: "base" }
+                { srcList: ["char/076/Shima.jpg",
+                            "char/076/Shima2.jpg"], type: "base" }
             ]
         },
         // 岛津义弘
@@ -190,8 +190,8 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["img/char/076/Shimazu.jpg",
-                            "img/char/076/Shimazu2.jpg"], type: "base" }
+                { srcList: ["char/076/Shimazu.jpg",
+                            "char/076/Shimazu2.jpg"], type: "base" }
             ]
         },
         // 汐见秋士
@@ -204,8 +204,8 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["img/char/076/Shiomi.jpg",
-                            "img/char/076/Shiomi2.jpg"], type: "base" }
+                { srcList: ["char/076/Shiomi.jpg",
+                            "char/076/Shiomi2.jpg"], type: "base" }
             ]
         },
         // 酒吞童子
@@ -218,8 +218,8 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["img/char/076/Shutendouji.jpg",
-                            "img/char/076/Shutendouji2.jpg"], type: "base" }
+                { srcList: ["char/076/Shutendouji.jpg",
+                            "char/076/Shutendouji2.jpg"], type: "base" }
             ]
         },
         // 南云秀
@@ -232,9 +232,9 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["img/char/076/Shuu.jpg",
-                            "img/char/076/Shuu2.jpg",
-                            "img/char/076/Shuu3.jpg"], type: "base" }
+                { srcList: ["char/076/Shuu.jpg",
+                            "char/076/Shuu2.jpg",
+                            "char/076/Shuu3.jpg"], type: "base" }
             ]
         },
         // 琴浦透真
@@ -247,8 +247,8 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["img/char/076/Touma.jpg",
-                            "img/char/076/Touma2.jpg"], type: "base" }
+                { srcList: ["char/076/Touma.jpg",
+                            "char/076/Touma2.jpg"], type: "base" }
             ]
         },
         // 月岛勲朗
@@ -261,8 +261,8 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["img/char/076/Tsukishima.jpg",
-                            "img/char/076/Tsukishima2.jpg"], type: "base" }
+                { srcList: ["char/076/Tsukishima.jpg",
+                            "char/076/Tsukishima2.jpg"], type: "base" }
             ]
         },
         // 宇喜多秀家
@@ -275,8 +275,8 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["img/char/076/Ukita.jpg",
-                            "img/char/076/Ukita2.jpg"], type: "base" }
+                { srcList: ["char/076/Ukita.jpg",
+                            "char/076/Ukita2.jpg"], type: "base" }
             ]
         },
         // 胧八千代
@@ -289,9 +289,9 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["img/char/076/Yachiyo.jpg",
-                            "img/char/076/Yachiyo2.jpg",
-                            "img/char/076/Yachiyo3.jpg"], type: "base" }
+                { srcList: ["char/076/Yachiyo.jpg",
+                            "char/076/Yachiyo2.jpg",
+                            "char/076/Yachiyo3.jpg"], type: "base" }
             ]
         },
         // 岛津丰久
@@ -304,8 +304,8 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["img/char/076/Toyohisa.jpg",
-                            "img/char/076/Toyohisa2.jpg"], type: "base" }
+                { srcList: ["char/076/Toyohisa.jpg",
+                            "char/076/Toyohisa2.jpg"], type: "base" }
             ]
         }
     ]
