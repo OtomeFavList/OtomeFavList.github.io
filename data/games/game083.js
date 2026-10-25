@@ -1,23 +1,5 @@
-// Panic Palette
-// 中文名: 恐慌调色盘
-// 开发: TAKUYO
-// 发行: TAKUYO
-// 剧本: 井上愁、藤元（藤文）
-// 人物设定: 仁神ユキタカ
-// 主题歌作曲: 森藤晶司、ざっとん、カケリネ
-// 主题歌作词: CAO、アキレスKEN、カケリネ
-// 主题歌演出: flaque、ラムソアーズ
-// 原画: 仁神ユキタカ
-// 别名: Panic Palette~パニック パレット~
-// takuyo.co.jp/products/panipare/
-
-// ==========【单个游戏独立数据模板｜新版ESModule】==========
-// 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
-// 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
-// 网页渲染时由 main.js 的 getWebImageUrl 拼接为 R2 完整 URL
-// Canvas 导出时由 export-canvas-render.js 的 convertR2ToJsDelivr 拼接为 jsDelivr URL
-// 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
-// 官中发售以后，需要修改：游戏名、发售年份、汉化厂商、封面图、角色名
+// ✅已核对信息
+// ℹ️未官中，官中发售后需要修改：游戏名、发售年份、汉化厂商、封面图、info图、角色名
 const gameData = {
     id: "game083", // 全局唯一ID，不可重复，如 game001
     name: "Panic Palette",
