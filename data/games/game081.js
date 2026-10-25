@@ -173,7 +173,7 @@ const gameData = {
             isFdSub: false,
             images: [
                 { srcList: ["char/081/Cailey.jpg",
-                            "char/081/Cailey.2.png"], type: "base" }
+                            "char/081/Cailey2.png"], type: "base" }
             ]
         },
         // コルトン·ネイディス
