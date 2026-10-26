@@ -1,15 +1,5 @@
-// DistortedCode -生者の残り香-
-// 开发: TAKUYO
-// 发行: TAKUYO
-// 人物设定: あとりちや
-// 原画: あとりちや
-// 导演: ちひろ、関口琴子
-// 别名: ディストーテッドコード
-// 平台: Nintendo Switch
-// 游戏类型: 乙女向けホラーアドベンチャー
-// 剧本: ちひろ
-// 企画: ちひろ
-// takuyo.co.jp/products/distortedcode/index.html
+// ✅已核对信息
+// ℹ️未官中，官中发售后需要修改：游戏名、发售年份、汉化厂商、封面图、info图、角色名
 const gameData = {
     id: "game087", // 全局唯一ID，不可重复，如 game001
     name: "DistortedCode -生者の残り香-",
@@ -22,18 +12,18 @@ const gameData = {
     art: [
         {name:"あとりちや", lang:"ja"}
     ],
-    cover: "game/087.jpg", // 相对路径，游戏封面
+    cover: "game/087.jpg",
     charList: [
         // 伴星澪
         {
             id: "g087_f01",
             name: "伴星澪",
             gender: "female",
-            isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
-            isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
+            isHidden: false,
+            isFD: false,
             images: [
                 { srcList: ["char/087/Mio.jpg",
-                            "char/087/Mio2.jpg"], type: "base" },      // 默认基础图，始终加载
+                            "char/087/Mio2.jpg"], type: "base" },
             ]
         },
         // 二ノ瀬隼人
@@ -45,7 +35,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/087/Kan.jpg",
-                            "char/087/Kan2.jpg"], type: "base" },      // 默认基础图，始终加载
+                            "char/087/Kan2.jpg"], type: "base" },
             ]
         },
         // 間宮仁章
@@ -179,5 +169,5 @@ const gameData = {
     ]
 };
 
-// ✅新版导出！不要使用window.gameDataList.push！
+// ESModule导出
 export { gameData };
