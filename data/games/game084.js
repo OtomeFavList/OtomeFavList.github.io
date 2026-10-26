@@ -68,6 +68,97 @@ const gameData = {
             images: [
                 { srcList: ["char/084/Olivier.jpg"], type: "base" },
             ]
+        },
+        // オーギュスト·フルニエ
+        {
+            id: "g084_s01",
+            name: "オーギュスト·フルニエ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/084/Auguste.jpg"], type: "base" }
+            ]
+        },
+        // シアラ·ド·ボーモン
+        {
+            id: "g084_s02",
+            name: "シアラ·ド·ボーモン",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/084/Ciara.jpg"], type: "base" }
+            ]
+        },
+        // コルネイユ三世
+        {
+            id: "g084_s03",
+            name: "コルネイユ三世",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/084/Corneille.jpg"], type: "base" }
+            ]
+        },
+        // マリー·ド·リシュリュー
+        {
+            id: "g084_s04",
+            name: "マリー·ド·リシュリュー",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/084/Marie.jpg"], type: "base" }
+            ]
+        },
+        // オマリ
+        {
+            id: "g084_s05",
+            name: "オマリ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/084/Omari.jpg"], type: "base" }
+            ]
+        },
+        // サンピエール
+        {
+            id: "g084_s06",
+            name: "サンピエール",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/084/Pierre.jpg"], type: "base" }
+            ]
+        },
+        // ？？？
+        {
+            id: "g084_s07",
+            name: "？？？",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/084/？？？.jpg"], type: "base" }
+            ]
         }
     ]
 };
