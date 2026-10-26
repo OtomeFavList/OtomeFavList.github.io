@@ -12,19 +12,19 @@ const gameData = {
     art: [
         {name:"清白かりん", lang:"zh"}
     ],
-    cover: "game/082.jpg", // 相对路径，游戏封面
+    cover: "game/082.jpg",
     charList: [
         // 玻ヰ璃＝ラリック
         {
             id: "g082_f01",
             name: "玻ヰ璃＝ラリック",
             gender: "female",
-            isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
-            isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
+            isHidden: false,
+            isFD: false,
             images: [
                 { srcList: ["char/082/Lalique.jpg",
                             "char/082/Lalique2.jpg",
-                            "char/082/Lalique3.jpg"], type: "base" },      // 默认基础图，始终加载
+                            "char/082/Lalique3.jpg"], type: "base" },
             ]
         },
         // 廻螺＝アマルリック
@@ -111,6 +111,32 @@ const gameData = {
             images: [
                 { srcList: ["char/082/Ulen.jpg",
                             "char/082/Ulen2.jpg"], type: "base" },
+            ]
+        },
+        // 衿栖＝シュナイダー
+        {
+            id: "g082_s01",
+            name: "衿栖＝シュナイダー",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/082/Elisu.jpg"], type: "base" }
+            ]
+        },
+        // 糸遠＝ラリック
+        {
+            id: "g082_s01",
+            name: "糸遠＝ラリック",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/082/Shion.jpg"], type: "base" }
             ]
         }
     ]
