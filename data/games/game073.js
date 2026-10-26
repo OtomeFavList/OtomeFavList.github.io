@@ -34,8 +34,8 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/073/Charlie.jpg",
-                            "char/073/Charlie2.jpg",
-                            "char/073/Charlie3.jpg"], type: "base" }
+                            "char/073/Charlie2.jpg"], type: "base" },
+                { srcList: ["char/073/Charlie3.jpg"], type: "fd" }
             ]
         },
         // 藤田五郎
@@ -47,8 +47,8 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/073/Gorou.jpg",
-                            "char/073/Gorou2.jpg",
-                            "char/073/Gorou3.jpg"], type: "base" }
+                            "char/073/Gorou2.jpg"], type: "base" },
+                { srcList: ["char/073/Gorou3.jpg"], type: "fd" }
             ]
         },
         // 泉镜花
@@ -60,8 +60,8 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/073/Kyouka.jpg",
-                            "char/073/Kyouka2.jpg",
-                            "char/073/Kyouka3.jpg"], type: "base" }
+                            "char/073/Kyouka2.jpg"], type: "base" },
+                { srcList: ["char/073/Kyouka3.jpg"], type: "fd" }
             ]
         },
         // 森鸥外
@@ -73,8 +73,8 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/073/Mori.jpg",
-                            "char/073/Mori2.jpg",
-                            "char/073/Mori3.jpg"], type: "base" }
+                            "char/073/Mori2.jpg"], type: "base" },
+                { srcList: ["char/073/Mori3.jpg"], type: "fd" }
             ]
         },
         // 川上音二郎
@@ -86,8 +86,8 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/073/Otojirou.jpg",
-                            "char/073/Otojirou2.jpg",
-                            "char/073/Otojirou3.jpg"], type: "base" }
+                            "char/073/Otojirou2.jpg"], type: "base" },
+                { srcList: ["char/073/Otojirou3.jpg"], type: "fd" }
             ]
         },
         // 菱田春草
@@ -99,8 +99,8 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/073/Shunsou.jpg",
-                            "char/073/Shunsou2.jpg",
-                            "char/073/Shunsou3.jpg"], type: "base" }
+                            "char/073/Shunsou2.jpg"], type: "base" },
+                { srcList: ["char/073/Shunsou3.jpg"], type: "fd" }
             ]
         },
         // 岩崎桃介
@@ -124,8 +124,8 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/073/Yakumo.jpg",
-                            "char/073/Yakumo2.jpg",
-                            "char/073/Yakumo3.jpg"], type: "base" }
+                            "char/073/Yakumo2.jpg"], type: "base" },
+                { srcList: ["char/073/Yakumo3.jpg"], type: "fd" }
             ]
         }
     ]
