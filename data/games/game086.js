@@ -1,14 +1,5 @@
-// 数乱digit for Nintendo Switch
-// 开发: オトメイト
-// 发行: アイディアファクトリー株式会社
-// 剧本: 一二階、みぞおち鳩子、紅原香、ミカガミ
-// 人物设定: めろ
-// 主题歌作曲: 宮崎京一
-// 主题歌作词: 米倉千尋
-// 主题歌演出: 米倉千尋
-// 原画: めろ、里雪
-// 导演: 谷口歌奈
-// otomate.jp/suran/
+// ✅已核对信息
+// ℹ️未官中，官中发售后需要修改：游戏名、发售年份、汉化厂商、封面图、info图、角色名
 const gameData = {
     id: "game086", // 全局唯一ID，不可重复，如 game001
     name: "数乱digit",
@@ -223,5 +214,5 @@ const gameData = {
     ]
 };
 
-// ✅新版导出！不要使用window.gameDataList.push！
+// ESModule导出
 export { gameData };
