@@ -9,14 +9,7 @@
 // 原画: めろ、里雪
 // 导演: 谷口歌奈
 // otomate.jp/suran/
-
-// ==========【单个游戏独立数据模板｜新版ESModule】==========
-// 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
-// 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
-// 网页渲染时由 main.js 的 getWebImageUrl 拼接为 R2 完整 URL
-// Canvas 导出时由 export-canvas-render.js 的 convertR2ToJsDelivr 拼接为 jsDelivr URL
-// 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
-// 官中发售以后，需要修改：游戏名、发售年份、汉化厂商、封面图、角色名
+// ℹ️Ichizono6.jpg
 const gameData = {
     id: "game086", // 全局唯一ID，不可重复，如 game001
     name: "数乱digit",
@@ -40,12 +33,13 @@ const gameData = {
             id: "g086_f01",
             name: "零崎紘可",
             gender: "female",
-            isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
-            isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
+            isHidden: false,
+            isFD: false,
             images: [
                 { srcList: ["char/086/Hiroka.jpg",
                             "char/086/Hiroka2.png",
-                            "char/086/Hiroka3.png"], type: "base" },      // 默认基础图，始终加载
+                            "char/086/Hiroka3.png",
+                            "char/086/Hiroka4.jpg"], type: "base" },
             ]
         },
         // 壱園央助
@@ -60,7 +54,8 @@ const gameData = {
                             "char/086/Ichizono2.jpg",
                             "char/086/Ichizono3.jpg",
                             "char/086/Ichizono4.png",
-                            "char/086/Ichizono5.png"], type: "base" },      // 默认基础图，始终加载
+                            "char/086/Ichizono5.png",
+                            "char/086/Ichizono6.jpg"], type: "base" },
             ]
         },
         // 玖折巡
@@ -75,7 +70,8 @@ const gameData = {
                             "char/086/Kuori2.jpg",
                             "char/086/Kuori3.jpg",
                             "char/086/Kuori4.png",
-                            "char/086/Kuori5.png"], type: "base" },
+                            "char/086/Kuori5.png",
+                            "char/086/Kuori6.jpg"], type: "base" },
             ]
         },
         // 弐藤光
@@ -90,7 +86,8 @@ const gameData = {
                             "char/086/Nitou2.jpg",
                             "char/086/Nitou3.jpg",
                             "char/086/Nitou4.png",
-                            "char/086/Nitou5.png"], type: "base" },
+                            "char/086/Nitou5.png",
+                            "char/086/Nitou6.jpg"], type: "base" },
             ]
         },
         // 陸平崇樹
@@ -105,7 +102,8 @@ const gameData = {
                             "char/086/Rokuhira2.jpg",
                             "char/086/Rokuhira3.jpg",
                             "char/086/Rokuhira4.png",
-                            "char/086/Rokuhira5.png"], type: "base" },
+                            "char/086/Rokuhira5.png",
+                            "char/086/Rokuhira6.jpg"], type: "base" },
             ]
         },
         // 漆原景太郎
@@ -120,7 +118,8 @@ const gameData = {
                             "char/086/Shichihara2.jpg",
                             "char/086/Shichihara3.jpg",
                             "char/086/Shichihara4.png",
-                            "char/086/Shichihara5.png"], type: "base" },
+                            "char/086/Shichihara5.png",
+                            "char/086/Shichihara6.jpg"], type: "base" },
             ]
         },
         // 肆形有比
@@ -135,7 +134,91 @@ const gameData = {
                             "char/086/Shikata2.jpg",
                             "char/086/Shikata3.jpg",
                             "char/086/Shikata4.png",
-                            "char/086/Shikata5.png"], type: "base" },
+                            "char/086/Shikata5.png",
+                            "char/086/Shikata6.jpg"], type: "base" },
+            ]
+        },
+        // 捌沢暗
+        {
+            id: "g86_s01",
+            name: "捌沢暗",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/086/An.jpg",
+                            "char/086/An2.jpg",
+                            "char/086/An3.jpg",
+                            "char/086/An4.jpg",
+                            "char/086/An5.jpg"], type: "base" }
+            ]
+        },
+        // 伍代朋江
+        {
+            id: "g86_s02",
+            name: "伍代朋江",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/086/Godai.jpg",
+                            "char/086/Godai2.jpg",
+                            "char/086/Godai3.jpg",
+                            "char/086/Godai4.jpg",
+                            "char/086/Godai5.jpg"], type: "base" }
+            ]
+        },
+        // 捌沢明
+        {
+            id: "g86_s03",
+            name: "捌沢明",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/086/Mei.jpg",
+                            "char/086/Mei2.jpg",
+                            "char/086/Mei3.jpg",
+                            "char/086/Mei4.jpg",
+                            "char/086/Mei5.jpg"], type: "base" }
+            ]
+        },
+        // 無良木耶告
+        {
+            id: "g86_s04",
+            name: "無良木耶告",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/086/Muraki.jpg",
+                            "char/086/Muraki2.jpg",
+                            "char/086/Muraki3.jpg"], type: "base" }
+            ]
+        },
+        // 参河利保子
+        {
+            id: "g86_s05",
+            name: "参河利保子",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/086/Sanga.jpg",
+                            "char/086/Sanga2.jpg",
+                            "char/086/Sanga3.jpg",
+                            "char/086/Sanga4.jpg",
+                            "char/086/Sanga5.jpg"], type: "base" }
             ]
         }
     ]
