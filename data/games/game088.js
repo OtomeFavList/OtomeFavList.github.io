@@ -23,14 +23,6 @@
 // 原画: すめらぎ琥珀
 // 企画: 文化放送エクステンド
 // joqrextend.co.jp/extend/sidekicks/
-
-// ==========【单个游戏独立数据模板｜新版ESModule】==========
-// 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
-// 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
-// 网页渲染时由 main.js 的 getWebImageUrl 拼接为 R2 完整 URL
-// Canvas 导出时由 export-canvas-render.js 的 convertR2ToJsDelivr 拼接为 jsDelivr URL
-// 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
-// 官中发售以后，需要修改：游戏名、发售年份、汉化厂商、封面图、角色名
 const gameData = {
     id: "game088", // 全局唯一ID，不可重复，如 game001
     name: "Side Kicks!beyond",
@@ -120,6 +112,110 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/088/Tatewaki.jpg"], type: "base" },
+            ]
+        },
+        // アヤメ
+        {
+            id: "g088_s01",
+            name: "アヤメ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/088/Ayame.jpg"], type: "base" }
+            ]
+        },
+        // キララ
+        {
+            id: "g088_s02",
+            name: "キララ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/088/Kirara.jpg"], type: "base" }
+            ]
+        },
+        // クルミ
+        {
+            id: "g088_s03",
+            name: "クルミ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/088/Kurumi.jpg"], type: "base" }
+            ]
+        },
+        // マキ
+        {
+            id: "g088_s04",
+            name: "マキ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/088/Maki.jpg"], type: "base" }
+            ]
+        },
+        // シオン
+        {
+            id: "g088_s05",
+            name: "シオン",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/088/Shion.jpg"], type: "base" }
+            ]
+        },
+        // シスイ
+        {
+            id: "g088_s06",
+            name: "シスイ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/088/Shisui.jpg"], type: "base" }
+            ]
+        },
+        // ツバキ
+        {
+            id: "g088_s07",
+            name: "ツバキ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/088/Tsubaki.jpg"], type: "base" }
+            ]
+        },
+        // ヤシロ
+        {
+            id: "g088_s08",
+            name: "ヤシロ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/088/Yashiro.jpg"], type: "base" }
             ]
         }
     ]
