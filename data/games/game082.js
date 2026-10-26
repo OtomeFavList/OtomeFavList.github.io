@@ -128,7 +128,7 @@ const gameData = {
         },
         // 糸遠＝ラリック
         {
-            id: "g082_s01",
+            id: "g082_s02",
             name: "糸遠＝ラリック",
             gender: "male",
             isHidden: false,
