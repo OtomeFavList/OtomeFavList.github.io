@@ -9,7 +9,6 @@
 // 原画: めろ、里雪
 // 导演: 谷口歌奈
 // otomate.jp/suran/
-// ℹ️Ichizono6.jpg
 const gameData = {
     id: "game086", // 全局唯一ID，不可重复，如 game001
     name: "数乱digit",
