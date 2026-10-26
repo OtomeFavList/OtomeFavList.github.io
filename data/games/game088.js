@@ -1,28 +1,5 @@
-// Side Kicks! beyond
-// 开发: 文化放送エクステンド
-// 发行: 文化放送エクステンド
-// 剧本: minetaka（文化放送エクステンド）
-// 音乐: 上倉紀行、伊藤賢治、アネモネ・モーニアン
-// 人物设定: すめらぎ琥珀
-// 主题歌作曲: 西岡和哉
-// 主题歌作词: 森久保祥太郎
-// 主题歌演出: 森久保祥太郎
-// 原画: すめらぎ琥珀
-// joqrextend.co.jp/extend/sidekicks/
-
-// Side Kicks!
-// 开发: 文化放送エクステンド、トイボックス株式会社
-// 发行: 文化放送エクステンド
-// 剧本: Team SK、minetaka、海堂めぐる
-// 音乐: 上倉紀行、伊藤賢治
-// 人物设定: すめらぎ琥珀
-// 主题歌作曲: 井上日徳、森久保祥太郎
-// 主题歌作词: 森久保祥太郎
-// 主题歌演出: 森久保祥太郎
-// 插入歌演出: アネモネ・モーニアン
-// 原画: すめらぎ琥珀
-// 企画: 文化放送エクステンド
-// joqrextend.co.jp/extend/sidekicks/
+// ✅已核对信息
+// ℹ️未官中，官中发售后需要修改：游戏名、发售年份、汉化厂商、封面图、info图、角色名
 const gameData = {
     id: "game088", // 全局唯一ID，不可重复，如 game001
     name: "Side Kicks!beyond",
@@ -30,22 +7,24 @@ const gameData = {
     publisher: ["eXtend"],
     cnStudio: "暂无",
     writer: [
-        {name:"minetaka", lang:"en"}
+        {name:"海堂めぐる", lang:"zh"},
+        {name:"Team SK", lang:"en"},
+        {name:"minetaka", lang:"en"},
     ],
     art: [
         {name:"すめらぎ琥珀", lang:"ja"}
     ],
-    cover: "game/088.jpg", // 相对路径，游戏封面
+    cover: "game/088.jpg",
     charList: [
-        // 女イノリ
+        // イノリ
         {
             id: "g088_f01",
             name: "イノリ",
             gender: "female",
-            isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
-            isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
+            isHidden: false,
+            isFD: false,
             images: [
-                { srcList: ["char/088/Inori.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/088/Inori.jpg"], type: "base" },
             ]
         },
         // チカ
@@ -221,5 +200,5 @@ const gameData = {
     ]
 };
 
-// ✅新版导出！不要使用window.gameDataList.push！
+// ESModule导出
 export { gameData };
