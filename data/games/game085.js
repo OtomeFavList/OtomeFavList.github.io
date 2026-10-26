@@ -129,7 +129,7 @@ const gameData = {
             images: [
                 { srcList: ["char/085/Byakkoshin.jpg",
                             "char/085/Byakkoshin2.jpg",
-                            "char/085/Byakkoshin3.png"], type: "base" }
+                            "char/085/Byakkoshin3.jpg"], type: "base" }
             ]
         },
         // 佐川半兵衛
@@ -144,7 +144,7 @@ const gameData = {
             images: [
                 { srcList: ["char/085/Hanbee.jpg",
                             "char/085/Hanbee2.jpg",
-                            "char/085/Hanbee3.png"], type: "base" }
+                            "char/085/Hanbee3.jpg"], type: "base" }
             ]
         },
         // 松科容保
@@ -159,7 +159,7 @@ const gameData = {
             images: [
                 { srcList: ["char/085/Katamori.jpg",
                             "char/085/Katamori2.jpg",
-                            "char/085/Katamori3.png"], type: "base" }
+                            "char/085/Katamori3.jpg"], type: "base" }
             ]
         },
         // 日比野内記
@@ -174,7 +174,7 @@ const gameData = {
             images: [
                 { srcList: ["char/085/Naiki.jpg",
                             "char/085/Naiki2.jpg",
-                            "char/085/Naiki3.png"], type: "base" }
+                            "char/085/Naiki3.jpg"], type: "base" }
             ]
         },
         // 神保咲子
@@ -189,7 +189,7 @@ const gameData = {
             images: [
                 { srcList: ["char/085/Sakiko.jpg",
                             "char/085/Sakiko2.jpg",
-                            "char/085/Sakiko3.png"], type: "base" }
+                            "char/085/Sakiko3.jpg"], type: "base" }
             ]
         },
         // 佐野善一郎
@@ -204,7 +204,7 @@ const gameData = {
             images: [
                 { srcList: ["char/085/Sano.jpg",
                             "char/085/Sano2.jpg",
-                            "char/085/Sano3.png"], type: "base" }
+                            "char/085/Sano3.jpg"], type: "base" }
             ]
         },
         // 東屋千吉
@@ -219,7 +219,7 @@ const gameData = {
             images: [
                 { srcList: ["char/085/Senkichi.jpg",
                             "char/085/Senkichi2.jpg",
-                            "char/085/Senkichi3.png"], type: "base" }
+                            "char/085/Senkichi3.jpg"], type: "base" }
             ]
         },
         // 岡本八重
@@ -234,7 +234,7 @@ const gameData = {
             images: [
                 { srcList: ["char/085/Yae.jpg",
                             "char/085/Yae2.jpg",
-                            "char/085/Yae3.png"], type: "base" }
+                            "char/085/Yae3.jpg"], type: "base" }
             ]
         }
     ]
