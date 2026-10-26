@@ -13,18 +13,18 @@ const gameData = {
     art: [
         {name:"仁神ユキタカ", lang:"zh"}
     ],
-    cover: "game/083.jpg", // 相对路径，游戏封面
+    cover: "game/083.jpg",
     charList: [
         // 依藤亜貴
         {
             id: "g083_f01",
             name: "依藤亜貴",
             gender: "female",
-            isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
-            isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
+            isHidden: false,
+            isFD: false,
             images: [
                 { srcList: ["char/083/Akit.jpg",
-                            "char/083/Akit2.jpg"], type: "base" },      // 默认基础图，始终加载
+                            "char/083/Akit2.jpg"], type: "base" },
             ]
         },
         // 烏羽一徒
@@ -36,7 +36,7 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/083/Karasut.jpg",
-                            "char/083/Karasut2.jpg"], type: "base" },      // 默认基础图，始终加载
+                            "char/083/Karasut2.jpg"], type: "base" },
             ]
         },
         // 真朱柑
@@ -97,6 +97,71 @@ const gameData = {
             images: [
                 { srcList: ["char/083/Tsukasat.jpg",
                             "char/083/Tsukasat2.jpg"], type: "base" },
+            ]
+        },
+        // 紺青悦
+        {
+            id: "g083_s01",
+            name: "紺青悦",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/083/Etsut.jpg"], type: "base" }
+            ]
+        },
+        // ノルレッテ
+        {
+            id: "g083_s02",
+            name: "ノルレッテ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/083/Norut.jpg"], type: "base" }
+            ]
+        },
+        // 言雄琉佳
+        {
+            id: "g083_s03",
+            name: "言雄琉佳",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/083/Rukat.jpg"], type: "base" }
+            ]
+        },
+        // 沢登譲
+        {
+            id: "g083_s04",
+            name: "沢登譲",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/083/Sawatot.jpg"], type: "base" }
+            ]
+        },
+        // 松本義之輔
+        {
+            id: "g083_s05",
+            name: "松本義之輔",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/083/Yoshit.jpg"], type: "base" }
             ]
         }
     ]
