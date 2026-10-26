@@ -17,20 +17,20 @@ const gameData = {
     art: [
         {name:"煮たか", lang:"zh"}
     ],
-    cover: "game/085.jpg", // 相对路径，游戏封面
+    cover: "game/085.jpg",
     charList: [
         // 佐野ゆずりは
         {
             id: "g085_f01",
             name: "佐野ゆずりは",
             gender: "female",
-            isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
-            isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
+            isHidden: false,
+            isFD: false,
             images: [
                 { srcList: ["char/085/Yuzuriha.jpg",
                             "char/085/Yuzuriha2.jpg",
                             "char/085/Yuzuriha3.png",
-                            "char/085/Yuzuriha4.png"], type: "base" },      // 默认基础图，始终加载
+                            "char/085/Yuzuriha4.png"], type: "base" },
             ]
         },
         // 秋月栄次郎
@@ -44,7 +44,7 @@ const gameData = {
                 { srcList: ["char/085/Akizuki.jpg",
                             "char/085/Akizuki2.jpg",
                             "char/085/Akizuki3.png",
-                            "char/085/Akizuki4.png"], type: "base" },      // 默认基础图，始终加载
+                            "char/085/Akizuki4.png"], type: "base" },
             ]
         },
         // 飯山貞吉
@@ -116,9 +116,129 @@ const gameData = {
                             "char/085/Yamase3.png",
                             "char/085/Yamase4.png"], type: "base" },
             ]
+        },
+        // 白虎神
+        {
+            id: "g086_s01",
+            name: "白虎神",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/085/Byakkoshin.jpg",
+                            "char/085/Byakkoshin2.jpg",
+                            "char/085/Byakkoshin3.png"], type: "base" }
+            ]
+        },
+        // 佐川半兵衛
+        {
+            id: "g086_s02",
+            name: "佐川半兵衛",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/085/Hanbee.jpg",
+                            "char/085/Hanbee2.jpg",
+                            "char/085/Hanbee3.png"], type: "base" }
+            ]
+        },
+        // 松科容保
+        {
+            id: "g086_s03",
+            name: "松科容保",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/085/Katamori.jpg",
+                            "char/085/Katamori2.jpg",
+                            "char/085/Katamori3.png"], type: "base" }
+            ]
+        },
+        // 日比野内記
+        {
+            id: "g086_s04",
+            name: "日比野内記",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/085/Naiki.jpg",
+                            "char/085/Naiki2.jpg",
+                            "char/085/Naiki3.png"], type: "base" }
+            ]
+        },
+        // 神保咲子
+        {
+            id: "g086_s05",
+            name: "神保咲子",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/085/Sakiko.jpg",
+                            "char/085/Sakiko2.jpg",
+                            "char/085/Sakiko3.png"], type: "base" }
+            ]
+        },
+        // 佐野善一郎
+        {
+            id: "g086_s06",
+            name: "佐野善一郎",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/085/Sano.jpg",
+                            "char/085/Sano2.jpg",
+                            "char/085/Sano3.png"], type: "base" }
+            ]
+        },
+        // 東屋千吉
+        {
+            id: "g086_s07",
+            name: "東屋千吉",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/085/Senkichi.jpg",
+                            "char/085/Senkichi2.jpg",
+                            "char/085/Senkichi3.png"], type: "base" }
+            ]
+        },
+        // 岡本八重
+        {
+            id: "g086_s08",
+            name: "岡本八重",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/085/Yae.jpg",
+                            "char/085/Yae2.jpg",
+                            "char/085/Yae3.png"], type: "base" }
+            ]
         }
     ]
 };
 
-// ✅新版导出！不要使用window.gameDataList.push！
+// ESModule导出
 export { gameData };
