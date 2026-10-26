@@ -44,14 +44,6 @@
 // 企画: 叶瀬あつこ
 // 主题歌作词: 小山哉枝
 // 官方网站: otomate.jp/bc/
-
-// ==========【单个游戏独立数据模板｜新版ESModule】==========
-// 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
-// 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
-// 网页渲染时由 main.js 的 getWebImageUrl 拼接为 R2 完整 URL
-// Canvas 导出时由 export-canvas-render.js 的 convertR2ToJsDelivr 拼接为 jsDelivr URL
-// 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
-// 官中发售以后，需要修改：游戏名、发售年份、汉化厂商、封面图、角色名
 const gameData = {
     id: "game089", // 全局唯一ID，不可重复，如 game001
     name: "BROTHERS CONFLICT Precious Baby",
@@ -257,6 +249,58 @@ const gameData = {
             images: [
                 { srcList: ["char/089/Juli.jpg",
                             "char/089/Juli2.jpg"], type: "base" },
+            ]
+        },
+        // 佐々倉和馬
+        {
+            id: "g089_s01",
+            name: "佐々倉和馬",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/089/Kazuma.jpg"], type: "base" }
+            ]
+        },
+        // 今井真秀子
+        {
+            id: "g089_s02",
+            name: "今井真秀子",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/089/Mahoko.jpg"], type: "base" }
+            ]
+        },
+        // 朝日奈美和
+        {
+            id: "g089_s03",
+            name: "朝日奈美和",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/089/Miwa.jpg"], type: "base" }
+            ]
+        },
+        // 日向麟太郎
+        {
+            id: "g089_s04",
+            name: "日向麟太郎",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/089/Rintaro.jpg"], type: "base" }
             ]
         }
     ]
