@@ -10,14 +10,6 @@
 // 剧本: ちひろ
 // 企画: ちひろ
 // takuyo.co.jp/products/distortedcode/index.html
-
-// ==========【单个游戏独立数据模板｜新版ESModule】==========
-// 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
-// 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
-// 网页渲染时由 main.js 的 getWebImageUrl 拼接为 R2 完整 URL
-// Canvas 导出时由 export-canvas-render.js 的 convertR2ToJsDelivr 拼接为 jsDelivr URL
-// 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
-// 官中发售以后，需要修改：游戏名、发售年份、汉化厂商、封面图、角色名
 const gameData = {
     id: "game087", // 全局唯一ID，不可重复，如 game001
     name: "DistortedCode -生者の残り香-",
@@ -90,6 +82,98 @@ const gameData = {
             images: [
                 { srcList: ["char/087/Nin.jpg",
                             "char/087/Nin2.jpg"], type: "base" },
+            ]
+        },
+        // 鳴海暁乃
+        {
+            id: "g087_s01",
+            name: "鳴海暁乃",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/087/Aki.jpg"], type: "base" }
+            ]
+        },
+        // 伴星隼
+        {
+            id: "g087_s02",
+            name: "伴星隼",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/087/Hay.jpg",
+                            "char/087/Hay2.jpg"], type: "base" }
+            ]
+        },
+        // 水代薫
+        {
+            id: "g087_s03",
+            name: "水代薫",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/087/Min.jpg"], type: "base" }
+            ]
+        },
+        // 七杜神夜
+        {
+            id: "g087_s04",
+            name: "七杜神夜",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/087/Nan.jpg"], type: "base" }
+            ]
+        },
+        // 梶間ナツコ
+        {
+            id: "g087_s05",
+            name: "梶間ナツコ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/087/Nat.jpg"], type: "base" }
+            ]
+        },
+        // 嶋田英介
+        {
+            id: "g087_s06",
+            name: "嶋田英介",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/087/Sim.jpg"], type: "base" }
+            ]
+        },
+        // 宇海政義
+        {
+            id: "g087_s07",
+            name: "宇海政義",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/087/Uka.jpg"], type: "base" }
             ]
         }
     ]
