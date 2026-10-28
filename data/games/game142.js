@@ -1,10 +1,21 @@
+//白華の檻～緋色の欠片4～
+开发: オトメイト、Design Factory、デザインファクトリー
+发行: アイディアファクトリー（日本）、NTTソルマーレ（英文版）
+剧本: 西村悠、水澤なな
+人物设定: いけ
+主题歌作曲: 藤田麻衣子
+主题歌作词: 藤田麻衣子
+主题歌演出: 藤田麻衣子
+原画: いけ
+导演: 一ジョー
+
 // 单个游戏独立数据模板，新版ESModule
 // 图片路径采用相对路径格式，网页渲染时由 main.js 的 getWebImageUrl 拼接为 R2 完整 URL
 // Canvas 导出时由 export-canvas-render.js 的 convertR2ToJsDelivr 拼接为 jsDelivr URL
 // 官中发售以后，需要修改：游戏名、发售年份、汉化厂商、封面图、角色名
 const gameData = {
     id: "game1", // 全局唯一ID，不可重复，如 game001
-    name: "绯色的欠片2",
+    name: "绯色的欠片4",
     year: "20",
     publisher: ["原厂发行商"],
     cnStudio: "汉化厂商",
