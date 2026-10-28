@@ -1,6 +1,8 @@
-MIX DUNK-KING OF BASKETBALL-
+絢しき灯幻鏡のアリアス
 开发: オトメイト
 发行: アイディアファクトリー
-原画: 中村龍徳
-协力: 大盛真歩、AKB48
-官方网站: otomate.jp/mix_dunk/
+剧本: 片桐由摩
+人物设定: 清白かりん
+导演: 悠瀬あきら
+制作人: 寺嶋桃子
+官方网站: otomate.jp/aya-ari/
