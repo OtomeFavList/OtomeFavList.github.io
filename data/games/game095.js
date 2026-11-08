@@ -237,10 +237,10 @@ const gameData = {
                 { srcList: ["char/095/Izumi.jpg"], type: "base" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // ジン
         {
             id: "g095_s05",
-            name: "配角",
+            name: "ジン",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -250,43 +250,43 @@ const gameData = {
                 { srcList: ["char/095/Jin.jpg"], type: "base" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 高瀬マサキ
         {
             id: "g095_s06",
-            name: "配角",
+            name: "高瀬マサキ",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/095/Masaki.jpg"], type: "base" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // ニャン吉
         {
             id: "g095_s07",
-            name: "配角",
+            name: "ニャン吉",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/095/Nyan.jpg"], type: "base" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 五十嵐八雲
         {
             id: "g095_s08",
-            name: "配角",
+            name: "五十嵐八雲",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/095/Yakumo.jpg"], type: "base" }
             ]
         }
     ]
