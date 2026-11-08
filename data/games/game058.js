@@ -141,10 +141,10 @@ const gameData = {
                 { srcList: ["char/058/Hisaomi.jpg"], type: "base" }
             ]
         },
-        // 立川阵平
+        // ジン
         {
             id: "g058_s04",
-            name: "立川阵平",
+            name: "ジン",
             gender: "male",
             isHidden: false,
             isFD: false,
