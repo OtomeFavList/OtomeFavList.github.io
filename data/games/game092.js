@@ -159,6 +159,123 @@ const gameData = {
                             "char/092/Yukito4.jpg",
                             "char/092/Yukito5.jpg"], type: "base" },
             ]
+        },
+        // 千賀皐月
+        {
+            id: "g092_s01",
+            name: "千賀皐月",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/092/Chiga.jpg"], type: "base" }
+            ]
+        },
+        // ジーノ
+        {
+            id: "g092_s02",
+            name: "ジーノ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/092/Gino.jpg"], type: "base" }
+            ]
+        },
+        // 鷲崎篝
+        {
+            id: "g092_s03",
+            name: "鷲崎篝",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/092/Kagari.jpg"], type: "base" }
+            ]
+        },
+        // 星野此方
+        {
+            id: "g092_s04",
+            name: "星野此方",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/092/Konota.jpg"], type: "base" }
+            ]
+        },
+        // 黒江兼定
+        {
+            id: "g092_s05",
+            name: "黒江兼定",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/092/Kuroe.jpg"], type: "base" }
+            ]
+        },
+        // 愛佳
+        {
+            id: "g092_s06",
+            name: "愛佳",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/092/Manaka.jpg"], type: "base" }
+            ]
+        },
+        // 美羽
+        {
+            id: "g092_s07",
+            name: "美羽",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/092/Miu.jpg"], type: "base" }
+            ]
+        },
+        // 姫乃門治
+        {
+            id: "g092_s08",
+            name: "姫乃門治",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/092/Monji.jpg"], type: "base" }
+            ]
+        },
+        // 早希
+        {
+            id: "g092_s09",
+            name: "早希",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/092/Saki.jpg"], type: "base" }
+            ]
         }
     ]
 };
