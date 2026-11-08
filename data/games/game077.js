@@ -120,7 +120,7 @@ const gameData = {
         // 加賀真実
         {
             id: "g077_s01",
-            name: "配角",
+            name: "加賀真実",
             gender: "male",
             isHidden: false,
             isFD: false,
