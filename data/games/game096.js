@@ -110,6 +110,123 @@ const gameData = {
             images: [
                 { srcList: ["char/096/Victor.jpg"], type: "base" },
             ]
+        },
+        // アドナイ
+        {
+            id: "g096_s01",
+            name: "アドナイ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/096/Adonai.jpg"], type: "base" }
+            ]
+        },
+        // アニス·エリコ·プレゼンス
+        {
+            id: "g096_s02",
+            name: "アニス·エリコ·プレゼンス",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/096/Anis.jpg"], type: "base" }
+            ]
+        },
+        // ビルシャ·シディム·スターニス
+        {
+            id: "g096_s03",
+            name: "ビルシャ·シディム·スターニス",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/096/Birsha.jpg"], type: "base" }
+            ]
+        },
+        // カルドゥエーリス·エリコ·ホレグ
+        {
+            id: "g096_s04",
+            name: "カルドゥエーリス·エリコ·ホレグ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/096/Carduelis.jpg"], type: "base" }
+            ]
+        },
+        // クーラ·エリコ·プレゼンス
+        {
+            id: "g096_s05",
+            name: "クーラ·エリコ·プレゼンス",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["img/char/096/Cura.jpg"], type: "base" }
+            ]
+        },
+        // レメク
+        {
+            id: "g096_s06",
+            name: "レメク",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/096/Lamech.jpg"], type: "base" }
+            ]
+        },
+        // リヒトオート·リブナ·シャローシュ
+        {
+            id: "g096_s07",
+            name: "リヒトオート·リブナ·シャローシュ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/096/Lichtort.jpg"], type: "base" }
+            ]
+        },
+        // リルモッド·エリコ·ミガッド
+        {
+            id: "g096_s08",
+            name: "リルモッド·エリコ·ミガッド",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/096/Lilmod.jpg"], type: "base" }
+            ]
+        },
+        // ミシュマール·リブナ·ヴァーチュ
+        {
+            id: "g096_s09",
+            name: "ミシュマール·リブナ·ヴァーチュ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/096/Mishmar.jpg"], type: "base" }
+            ]
         }
     ]
 };
