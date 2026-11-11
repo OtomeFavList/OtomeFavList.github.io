@@ -44,7 +44,8 @@ const gameData = {
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
                 { srcList: ["char/099/Sophia.jpg",
-                            "char/099/Sophia2.jpg"], type: "base" },      // 默认基础图，始终加载
+                            "char/099/Sophia2.jpg",
+                            "char/099/Sophia3.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // クロノール
@@ -56,7 +57,8 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/099/Cronoll.jpg",
-                            "char/099/Cronoll2.jpg"], type: "base" },      // 默认基础图，始终加载
+                            "char/099/Cronoll2.jpg",
+                            "char/099/Cronoll3.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // フラトニス·ライラプス
@@ -68,7 +70,8 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/099/Flatnis.jpg",
-                            "char/099/Flatnis2.jpg"], type: "base" },
+                            "char/099/Flatnis2.jpg",
+                            "char/099/Flatnis3.jpg"], type: "base" },
             ]
         },
         // God
@@ -80,7 +83,8 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/099/God.jpg",
-                            "char/099/God2.jpg"], type: "base" },
+                            "char/099/God2.jpg",
+                            "char/099/God3.jpg"], type: "base" },
             ]
         },
         // リーズ·ルネ·シャナ
@@ -92,7 +96,8 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/099/Lise.jpg",
-                            "char/099/Lise2.jpg"], type: "base" },
+                            "char/099/Lise2.jpg",
+                            "char/099/Lise3.jpg"], type: "base" },
             ]
         },
         // レクス·ド·クラーシェル
@@ -104,7 +109,8 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/099/Rex.jpg",
-                            "char/099/Rex2.jpg"], type: "base" },
+                            "char/099/Rex2.jpg",
+                            "char/099/Rex3.jpg"], type: "base" },
             ]
         },
         // ヴァーデス
@@ -116,7 +122,119 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/099/Vardis.jpg",
-                            "char/099/Vardis2.jpg"], type: "base" },
+                            "char/099/Vardis2.jpg",
+                            "char/099/Vardis3.jpg"], type: "base" },
+            ]
+        },
+        // アルト
+        {
+            id: "g099_s01",
+            name: "アルト",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/099/Alto.jpg",
+                            "char/099/Alto2.jpg"], type: "base" }
+            ]
+        },
+        // カルム·ド·クラーシェル
+        {
+            id: "g099_s02",
+            name: "カルム·ド·クラーシェル",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/099/Calme.jpg",
+                            "char/099/Calme2.jpg"], type: "base" }
+            ]
+        },
+        // キャスパー
+        {
+            id: "g099_s03",
+            name: "キャスパー",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/099/Casper.jpg"], type: "base" }
+            ]
+        },
+        // デュランダル
+        {
+            id: "g099_s04",
+            name: "デュランダル",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/099/Durandal.jpg",
+                            "char/099/Durandal2.jpg"], type: "base" }
+            ]
+        },
+        // イザーク·アージェンス
+        {
+            id: "g099_s05",
+            name: "イザーク·アージェンス",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/099/Isaac.jpg",
+                            "char/099/Isaac2.jpg"], type: "base" }
+            ]
+        },
+        // ノックス·フォル·アルベド
+        {
+            id: "g099_s06",
+            name: "ノックス·フォル·アルベド",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/099/Knox.jpg",
+                            "char/099/Knox2.jpg"], type: "base" }
+            ]
+        },
+        // リビティナ
+        {
+            id: "g099_s07",
+            name: "リビティナ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/099/Libitina.jpg",
+                            "char/099/Libitina2.jpg"], type: "base" }
+            ]
+        },
+        // リコールド
+        {
+            id: "g099_s08",
+            name: "リコールド",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/099/Ricold.jpg",
+                            "char/099/Ricold2.jpg"], type: "base" }
             ]
         }
     ]
