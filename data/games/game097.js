@@ -113,7 +113,12 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/097/Nanami.jpg",
-                            "char/097/Nanami2.jpg"], type: "base" },      // 默认基础图，始终加载
+                            "char/097/Nanami2.jpg",
+                            "char/097/Nanami3.jpg",
+                            "char/097/Nanami4.jpg",
+                            "char/097/Nanami5.jpg",
+                            "char/097/Nanami6.jpg",
+                            "char/097/Nanami7.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 土萌羊
@@ -125,7 +130,12 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/097/Tomoe.jpg",
-                            "char/097/Tomoe2.jpg"], type: "base" },
+                            "char/097/Tomoe2.jpg",
+                            "char/097/Tomoe3.jpg",
+                            "char/097/Tomoe4.jpg",
+                            "char/097/Tomoe5.jpg",
+                            "char/097/Tomoe6.jpg",
+                            "char/097/Tomoe7.jpg"], type: "base" },
             ]
         },
         // 東月錫也
@@ -137,7 +147,110 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/097/Touzuki.jpg",
-                            "char/097/Touzuki2.jpg"], type: "base" },
+                            "char/097/Touzuki2.jpg",
+                            "char/097/Touzuki3.jpg",
+                            "char/097/Touzuki4.jpg",
+                            "char/097/Touzuki5.jpg",
+                            "char/097/Touzuki6.jpg",
+                            "char/097/Touzuki7.jpg"], type: "base" },
+            ]
+        },
+        // 和泉崇嗣
+        {
+            id: "g097_m04",
+            name: "和泉崇嗣",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/097/Takatsugu.jpg",
+                            "char/097/Takatsugu2.jpg"], type: "base" },
+            ]
+        },
+        // 忍成ハル
+        {
+            id: "g097_m05",
+            name: "忍成ハル",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/097/Haru.jpg",
+                            "char/097/Haru2.jpg"], type: "base" },
+            ]
+        },
+        // 土萌未莉
+        {
+            id: "g097_s01",
+            name: "土萌未莉",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/097/Imari.jpg",
+                            "char/097/Imari2.jpg"], type: "base" }
+            ]
+        },
+        // ラウル·マティアス·ジャン·エーメ
+        {
+            id: "g097_s02",
+            name: "ラウル·マティアス·ジャン·エーメ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/097/Rauru.jpg",
+                            "char/097/Rauru2.jpg"], type: "base" }
+            ]
+        },
+        // 春名真琴
+        {
+            id: "g097_s03",
+            name: "春名真琴",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/097/Makoto.jpg",
+                            "char/097/Makoto2.jpg"], type: "base" }
+            ]
+        },
+        // 七海まゆみ
+        {
+            id: "g097_s04",
+            name: "七海まゆみ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/097/Mayumi.jpg",
+                            "char/097/Mayumi2.jpg"], type: "base" }
+            ]
+        },
+        // 東月小百合
+        {
+            id: "g097_s05",
+            name: "東月小百合",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/097/Sayuri.jpg",
+                            "char/097/Sayuri2.jpg"], type: "base" }
             ]
         }
     ]
