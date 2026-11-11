@@ -138,7 +138,7 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_h01_1.jpg"], type: "base" }
+                { srcList: ["char/001/隐藏角色.jpg"], type: "base" }
             ]
         },
         // 续作FD限定角色（isFD=true → FD开关开启才显示整个角色卡片）
@@ -153,7 +153,7 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
+                { srcList: ["char/001/续作FD限定角色.jpg"], type: "base" }
             ]
         },
         // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
@@ -168,7 +168,7 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/001/次要角色.jpg"], type: "base" }
             ]
         },
         // 续作/FD次要角色（isFdSub=true → 开关开启才显示整个角色卡片）
@@ -183,7 +183,7 @@ const gameData = {
             isSub: false,
             isFdSub: true,
             images: [
-                { srcList: ["char/g001_fS01_1.jpg"], type: "base" }
+                { srcList: ["char/001/续作/FD次要角色.jpg"], type: "base" }
             ]
         }
     ]
