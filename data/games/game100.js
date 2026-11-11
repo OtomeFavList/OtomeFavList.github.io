@@ -106,6 +106,201 @@ const gameData = {
                 { srcList: ["char/100/Tilkett.jpg",
                             "char/100/Tilkett2.jpg"], type: "base" },
             ]
+        },
+        // アンブローズ
+        {
+            id: "g100_s01",
+            name: "アンブローズ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/100/Ambrose.jpg"], type: "base" }
+            ]
+        },
+        // セシル·グローヴァー
+        {
+            id: "g100_s02",
+            name: "セシル·グローヴァー",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/100/Cecil.jpg"], type: "base" }
+            ]
+        },
+        // ダレン·ユールウッド
+        {
+            id: "g100_s03",
+            name: "ダレン·ユールウッド",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/100/Dalen.jpg"], type: "base" }
+            ]
+        },
+        // ドレイク·ブレークリー
+        {
+            id: "g100_s04",
+            name: "ドレイク·ブレークリー",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["/char/100/Drake.jpg"], type: "base" }
+            ]
+        },
+        // エイラ·ハーウィック
+        {
+            id: "g100_s05",
+            name: "エイラ·ハーウィック",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/100/Eira.jpg"], type: "base" }
+            ]
+        },
+        // インレイ·グッドマン
+        {
+            id: "g100_s06",
+            name: "インレイ·グッドマン",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/100/Inley.jpg"], type: "base" }
+            ]
+        },
+        // リアム·ノット
+        {
+            id: "g100_s07",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/100/Riasu.jpg"], type: "base" }
+            ]
+        },
+        // ロア·シャドウモア
+        {
+            id: "g100_s08",
+            name: "ロア·シャドウモア",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/100/Loa.jpg"], type: "base" }
+            ]
+        },
+        // ラック·バースデン
+        {
+            id: "g100_s09",
+            name: "ラック·バースデン",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/100/Luc.jpg"], type: "base" }
+            ]
+        },
+        // マウロ·シャドウモア
+        {
+            id: "g100_s10",
+            name: "マウロ·シャドウモア",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/100/Maulo.jpg"], type: "base" }
+            ]
+        },
+        // モーフィア·ハルムショー
+        {
+            id: "g100_s11",
+            name: "モーフィア·ハルムショー",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/100/Morphia.jpg"], type: "base" }
+            ]
+        },
+        // シャノン·メロウェイ
+        {
+            id: "g100_s12",
+            name: "シャノン·メロウェイ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/100/Shanan.jpg"], type: "base" }
+            ]
+        },
+        // ウィロウ·アコニット
+        {
+            id: "g100_s13",
+            name: "ウィロウ·アコニット",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/100/Willow.jpg"], type: "base" }
+            ]
+        },
+        // ？？？
+        {
+            id: "g100_s14",
+            name: "？？？",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/100/？？.jpg"], type: "base" }
+            ]
+        },
+        // ？？？
+        {
+            id: "g100_s15",
+            name: "？？？",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/100/？？？.jpg"], type: "base" }
+            ]
         }
     ]
 };
