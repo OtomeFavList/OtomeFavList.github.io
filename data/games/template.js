@@ -32,11 +32,11 @@ const gameData = {
             isSub: false,    // true=配角，开关控制是否展示该角色
             isFdSub: false,    // true=续作/FD新增配角，开关控制是否展示该角色
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["char/001/女主A3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["char/001/女主A4.jpg"], type: "fd" },          // 需要开启FD开关才展示的图片
-                { srcList: ["char/001/女主A5.jpg"], type: "hidden-fd" }   // 开启隐藏开关或FD开关展示的图片
+                { srcList: ["char/1/.jpg"
+                            "char/1/2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/1/3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
+                { srcList: ["char/1/4.jpg"], type: "fd" },          // 需要开启FD开关才展示的图片
+                { srcList: ["char/1/5.jpg"], type: "hidden-fd" }   // 开启隐藏开关或FD开关展示的图片
             ]
         },
         // 普通可攻略男主 male
@@ -51,11 +51,11 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/001/男主A.jpg",
-                            "char/001/男主A2.jpg"], type: "base" },
-                { srcList: ["char/001/男主A3.jpg"], type: "hidden" },
-                { srcList: ["char/001/男主A4.jpg"], type: "fd" },
-                { srcList: ["char/001/男主A5.jpg"], type: "hidden-fd" }
+                { srcList: ["char/1/.jpg",
+                            "char/1/2.jpg"], type: "base" },
+                { srcList: ["char/1/3.jpg"], type: "hidden" },
+                { srcList: ["char/1/4.jpg"], type: "fd" },
+                { srcList: ["char/1/5.jpg"], type: "hidden-fd" }
             ]
         },
         // 普通可攻略男主 male
@@ -68,11 +68,11 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/001/男主B.jpg",
-                            "char/001/男主B2.jpg"], type: "base" },
-                { srcList: ["char/001/男主B3.jpg"], type: "hidden" },
-                { srcList: ["char/001/男主B4.jpg"], type: "fd" },
-                { srcList: ["char/001/男主B5.jpg"], type: "hidden-fd" }
+                { srcList: ["char/1/.jpg",
+                            "char/1/2.jpg"], type: "base" },
+                { srcList: ["char/1/3.jpg"], type: "hidden" },
+                { srcList: ["char/1/4.jpg"], type: "fd" },
+                { srcList: ["char/1/5.jpg"], type: "hidden-fd" }
             ]
         },
         // 普通可攻略男主 male
@@ -85,11 +85,11 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/001/男主C.jpg",
-                            "char/001/男主C2.jpg"], type: "base" },
-                { srcList: ["char/001/男主C3.jpg"], type: "hidden" },
-                { srcList: ["char/001/男主C4.jpg"], type: "fd" },
-                { srcList: ["char/001/男主C5.jpg"], type: "hidden-fd" }
+                { srcList: ["char/1/.jpg",
+                            "char/1/2.jpg"], type: "base" },
+                { srcList: ["char/1/3.jpg"], type: "hidden" },
+                { srcList: ["char/1/4.jpg"], type: "fd" },
+                { srcList: ["char/1/5.jpg"], type: "hidden-fd" }
             ]
         },
         // 普通可攻略男主 male
@@ -102,11 +102,11 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/001/男主D.jpg",
-                            "char/001/男主D2.jpg"], type: "base" },
-                { srcList: ["char/001/男主D3.jpg"], type: "hidden" },
-                { srcList: ["char/001/男主D4.jpg"], type: "fd" },
-                { srcList: ["char/001/男主D5.jpg"], type: "hidden-fd" }
+                { srcList: ["char/1/.jpg",
+                            "char/1/2.jpg"], type: "base" },
+                { srcList: ["char/1/3.jpg"], type: "hidden" },
+                { srcList: ["char/1/4.jpg"], type: "fd" },
+                { srcList: ["char/1/5.jpg"], type: "hidden-fd" }
             ]
         },
         // 普通可攻略男主 male
@@ -119,11 +119,11 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/001/男主F.jpg",
-                            "char/001/男主F2.jpg"], type: "base" },
-                { srcList: ["char/001/男主F3.jpg"], type: "hidden" },
-                { srcList: ["char/001/男主F4.jpg"], type: "fd" },
-                { srcList: ["char/001/男主F5.jpg"], type: "hidden-fd" }
+                { srcList: ["char/1/.jpg",
+                            "char/1/2.jpg"], type: "base" },
+                { srcList: ["char/1/3.jpg"], type: "hidden" },
+                { srcList: ["char/1/4.jpg"], type: "fd" },
+                { srcList: ["char/1/5.jpg"], type: "hidden-fd" }
             ]
         },
         // 隐藏角色（isHidden=true → 开关开启才显示整个角色卡片）
@@ -138,7 +138,7 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/001/隐藏角色.jpg"], type: "base" }
+                { srcList: ["char/0/.jpg"], type: "base" }
             ]
         },
         // 续作FD限定角色（isFD=true → FD开关开启才显示整个角色卡片）
@@ -153,8 +153,8 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/001/续作FD限定角色.jpg"], type: "base" }
-            ]
+                { srcList: ["char/0/.jpg"], type: "base" }
+            
         },
         // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
         {
@@ -168,7 +168,7 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/001/次要角色.jpg"], type: "base" }
+                { srcList: ["char/0/.jpg"], type: "base" }
             ]
         },
         // 续作/FD次要角色（isFdSub=true → 开关开启才显示整个角色卡片）
@@ -183,7 +183,7 @@ const gameData = {
             isSub: false,
             isFdSub: true,
             images: [
-                { srcList: ["char/001/续作/FD次要角色.jpg"], type: "base" }
+                { srcList: ["char/0/.jpg"], type: "base" }
             ]
         }
     ]
