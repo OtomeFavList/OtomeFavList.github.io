@@ -118,6 +118,32 @@ const gameData = {
                             "char/098/Tsuyuki3.jpg",
                             "char/098/Tsuyuki4.jpg"], type: "base" },
             ]
+        },
+        // 水島明日香
+        {
+            id: "g098_s01",
+            name: "水島明日香",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/098/Asuka.jpg"], type: "base" }
+            ]
+        },
+        // オヤカタ
+        {
+            id: "g098_s02",
+            name: "オヤカタ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/098/Oyakata.jpg"], type: "base" }
+            ]
         }
     ]
 };
