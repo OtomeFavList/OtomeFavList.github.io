@@ -197,7 +197,7 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["img/char/091/Kisaki.jpg"], type: "base" }
+                { srcList: ["char/091/Kisaki.jpg"], type: "base" }
             ]
         },
         // 絢瀬琴乃
