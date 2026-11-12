@@ -30,8 +30,9 @@ const gameData = {
             isFD: false,    // true=续作/FD专属角色，开关控制是否展示该角色
             isSub: false,    // true=配角，开关控制是否展示该角色
             images: [
-                { srcList: ["char/111/Tama.jpg",
-                            "char/111/Tama2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/111/Tama3.jpg",
+                            "char/111/Tama2.jpg",
+                            "char/111/Tama4.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 神谷一颯
@@ -43,8 +44,11 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/111/Kamiya.jpg",
-                            "char/111/Kamiya2.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/111/Kamiya3.jpg",
+                            "char/111/Kamiya.jpg",
+                            "char/111/Kamiya2.jpg",
+                            "char/111/Kamiya4.jpg",
+                            "char/111/Kamiya5.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // キティ
@@ -56,8 +60,10 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/111/Kitty.jpg",
-                            "char/111/Kitty2.jpg"], type: "base" },
+                { srcList: ["char/111/Kitty3.jpg",
+                            "char/111/Kitty.jpg"
+                            "char/111/Kitty2.jpg",
+                            "char/111/Kitty4.jpg"], type: "base" },
             ]
         },
         // コタロウ
@@ -69,8 +75,9 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/111/Kotarou.jpg",
-                            "char/111/Kotarou2.jpg"], type: "base" },
+                { srcList: ["char/111/Kotarou3.jpg",
+                            "char/111/Kotarou2.jpg",
+                            "char/111/Kotarou4.jpg"], type: "base" },
             ]
         },
         // くーにゃん
@@ -82,8 +89,9 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/111/KuNyan.jpg",
-                            "char/111/KuNyan2.jpg"], type: "base" },
+                { srcList: ["char/111/KuNyan3.jpg",
+                            "char/111/KuNyan2.jpg",
+                            "char/111/KuNyan4.jpg"], type: "base" },
             ]
         },
         // シェド
@@ -95,8 +103,9 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/111/Shed.jpg",
-                            "char/111/Shed2.jpg"], type: "base" },
+                { srcList: ["char/111/Shed3.jpg",
+                            "char/111/Shed2.jpg",
+                            "char/111/Shed4.jpg"], type: "base" },
             ]
         },
         // ユズ
@@ -108,8 +117,110 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/111/Yuzu.jpg",
-                            "char/111/Yuzu2.jpg"], type: "base" },
+                { srcList: ["char/111/Yuzu3.jpg",
+                            "char/111/Yuzu2.jpg",
+                            "char/111/Yuzu4.jpg"], type: "base" },
+            ]
+        },
+        // ハク
+        {
+            id: "g111_s01",
+            name: "ハク",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/111/Haku.jpg",
+                            "char/111/Haku2.jpg"], type: "base" }
+            ]
+        },
+        // インク
+        {
+            id: "g111_s02",
+            name: "インク",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/111/Ink.jpg",
+                            "char/111/Ink2.jpg",
+                            "char/111/Ink3.jpg"], type: "base" }
+            ]
+        },
+        // シュバルツ
+        {
+            id: "g111_s03",
+            name: "シュバルツ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/111/Schwartz.jpg",
+                            "char/111/Schwartz2.jpg"], type: "base" }
+            ]
+        },
+        // セキ
+        {
+            id: "g111_s04",
+            name: "セキ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/111/Seki.jpg",
+                            "char/111/Seki2.jpg"], type: "base" }
+            ]
+        },
+        // ソラ
+        {
+            id: "g111_s05",
+            name: "ソラ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/111/Sora.jpg",
+                            "char/111/Sora2.jpg",
+                            "char/111/Sora3.jpg"], type: "base" }
+            ]
+        },
+        // ティガー
+        {
+            id: "g111_s06",
+            name: "ティガー",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/111/Tigger.jpg",
+                            "char/111/Tigger2.jpg"], type: "base" }
+            ]
+        },
+        // ウィロウ
+        {
+            id: "g111_s07",
+            name: "ウィロウ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/111/Willow.jpg",
+                            "char/111/Willow2.jpg",
+                            "char/111/Willow3.jpg"], type: "base" }
             ]
         }
     ]
