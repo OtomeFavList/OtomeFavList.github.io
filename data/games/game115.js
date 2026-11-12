@@ -99,6 +99,76 @@ const gameData = {
                 { srcList: ["char/115/Sena.jpg",
                             "char/115/Sena2.jpg"], type: "base" },
             ]
+        },
+        // 花井隆也
+        {
+            id: "g115_s01",
+            name: "花井隆也",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/115/Hanai.jpg",
+                            "char/115/Hanai2.jpg"], type: "base" }
+            ]
+        },
+        // 鹿山ゆう
+        {
+            id: "g115_s02",
+            name: "鹿山ゆう",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/115/Kayama.jpg",
+                            "char/115/Kayama2.jpg"], type: "base" }
+            ]
+        },
+        // 綺羅梨
+        {
+            id: "g115_s03",
+            name: "綺羅梨",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/115/Kirari.jpg",
+                            "char/115/Kirari2.jpg"], type: "base" }
+            ]
+        },
+        // 西嶋浩介
+        {
+            id: "g115_s04",
+            name: "西嶋浩介",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/115/Kousuke.jpg",
+                            "char/115/Kousuke2.jpg"], type: "base" }
+            ]
+        },
+        // 真木野雄三
+        {
+            id: "g115_s05",
+            name: "真木野雄三",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/115/Makino.jpg",
+                            "char/115/Makino2.jpg"], type: "base" }
+            ]
         }
     ]
 };
