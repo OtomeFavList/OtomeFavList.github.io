@@ -102,6 +102,175 @@ const gameData = {
             images: [
                 { srcList: ["char/118/Sally.jpg"], type: "base" },
             ]
+        },
+        // アイーダ·ファルコーネ
+        {
+            id: "g118_s01",
+            name: "アイーダ·ファルコーネ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/118/Aida.jpg"], type: "base" }
+            ]
+        },
+        // アルフォンス·ノエル
+        {
+            id: "g118_s02",
+            name: "アルフォンス·ノエル",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/118/Alphonse.jpg"], type: "base" }
+            ]
+        },
+        // アントニーノ·ドルチェ
+        {
+            id: "g118_s03",
+            name: "アントニーノ·ドルチェ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/118/Antonino.jpg"], type: "base" }
+            ]
+        },
+        // カルロス·レオン
+        {
+            id: "g118_s04",
+            name: "カルロス·レオン",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/118/Carlos.jpg"], type: "base" }
+            ]
+        },
+        // 宰相
+        {
+            id: "g118_s05",
+            name: "宰相",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/118/Chancellor.jpg"], type: "base" }
+            ]
+        },
+        // 子守
+        {
+            id: "g118_s06",
+            name: "子守",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/118/Child.jpg"], type: "base" }
+            ]
+        },
+        // クリステル
+        {
+            id: "g118_s07",
+            name: "クリステル",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/118/Christel.jpg"], type: "base" }
+            ]
+        },
+        // 指揮官
+        {
+            id: "g118_s08",
+            name: "指揮官",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/118/Concert.jpg"], type: "base" }
+            ]
+        },
+        // エドワード·ハートフィールド
+        {
+            id: "g118_s09",
+            name: "エドワード·ハートフィールド",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/118/Edward.jpg"], type: "base" }
+            ]
+        },
+        // 執行人
+        {
+            id: "g118_s10",
+            name: "執行人",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/118/Enforcer.jpg"], type: "base" }
+            ]
+        },
+        // 家令
+        {
+            id: "g118_s11",
+            name: "家令",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/118/House.jpg"], type: "base" }
+            ]
+        },
+        // ルカ·サルヴァドーリ
+        {
+            id: "g118_s12",
+            name: "ルカ·サルヴァドーリ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/118/Luca.jpg"], type: "base" }
+            ]
+        },
+        // レベッカ·ロッソ
+        {
+            id: "g118_s13",
+            name: "レベッカ·ロッソ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/118/Rebecca.jpg"], type: "base" }
+            ]
         }
     ]
 };
