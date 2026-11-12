@@ -109,6 +109,136 @@ const gameData = {
                 { srcList: ["char/101/Sabine.jpg",
                             "char/101/Sabine2.jpg"], type: "base" },
             ]
+        },
+        // バロン·マインスター
+        {
+            id: "g101_s01",
+            name: "バロン·マインスター",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/101/Baron.jpg"], type: "base" }
+            ]
+        },
+        // カーミラ
+        {
+            id: "g101_s02",
+            name: "カーミラ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/101/Carmilla.jpg"], type: "base" }
+            ]
+        },
+        // モンテベッロ
+        {
+            id: "g101_s03",
+            name: "モンテベッロ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/101/Duc.jpg"], type: "base" }
+            ]
+        },
+        // エドワード
+        {
+            id: "g101_s04",
+            name: "エドワード",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/101/Edward.jpg"], type: "base" }
+            ]
+        },
+        // アンリ·サンソン
+        {
+            id: "g101_s05",
+            name: "アンリ·サンソン",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/101/Henri.jpg"], type: "base" }
+            ]
+        },
+        // レスタト
+        {
+            id: "g101_s06",
+            name: "レスタト",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/101/Lestat.jpg"], type: "base" }
+            ]
+        },
+        // ラウル·シャストル
+        {
+            id: "g101_s07",
+            name: "ラウル·シャストル",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/101/Raoul.jpg"], type: "base" }
+            ]
+        },
+        // クレイヴン
+        {
+            id: "g101_s08",
+            name: "クレイヴン",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/101/Raven.jpg"], type: "base" }
+            ]
+        },
+        // 近藤宗助
+        {
+            id: "g101_s09",
+            name: "近藤宗助",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/101/Sousuke.jpg"], type: "base" }
+            ]
+        },
+        // ヴラド·ツェペシュ
+        {
+            id: "g101_s10",
+            name: "ヴラド·ツェペシュ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/101/Vlad.jpg"], type: "base" }
+            ]
         }
     ]
 };
