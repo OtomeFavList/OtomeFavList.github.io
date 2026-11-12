@@ -140,6 +140,90 @@ const gameData = {
                             "char/116/Czarodziej3.jpg",
                             "char/116/Czarodziej4.jpg"], type: "base" },
             ]
+        },
+        // アデーレ
+        {
+            id: "g116_s01",
+            name: "アデーレ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/1/Adele.jpg",
+                            "char/1/Adele2.jpg"], type: "base" }
+            ]
+        },
+        // バルトルト
+        {
+            id: "g116_s02",
+            name: "バルトルト",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/1/Barthold.jpg",
+                            "char/1/Barthold2.jpg"], type: "base" }
+            ]
+        },
+        // フベルト
+        {
+            id: "g116_s03",
+            name: "フベルト",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/1/Hubert.jpg",
+                            "char/1/Hubert2.jpg"], type: "base" }
+            ]
+        },
+        // イグナツィ
+        {
+            id: "g116_s04",
+            name: "イグナツィ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/1/Ignacy.jpg",
+                            "char/1/Ignacy2.jpg"], type: "base" }
+            ]
+        },
+        // マレク
+        {
+            id: "g116_s05",
+            name: "マレク",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/1/Marek.jpg",
+                            "char/1/Marek2.jpg"], type: "base" }
+            ]
+        },
+        // ムローク
+        {
+            id: "g116_s06",
+            name: "ムローク",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/1/Mrok.jpg",
+                            "char/1/Mrok2.jpg"], type: "base" }
+            ]
         }
     ]
 };
