@@ -1,5 +1,5 @@
 // data/games/game028.js
-// ✅已核对信息
+// ⚠️已核对信息，立绘未重置
 const gameData = {
     id: "game028", // 全局唯一ID，不可重复
     name: "华彩煌煌，吾之一族 摩登时代",
