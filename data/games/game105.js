@@ -35,6 +35,7 @@ const gameData = {
             isSub: false,
             images: [
                 { srcList: ["char/105/Kazuma.jpg",
+                            "char/105/Kazuma3.jpg"
                             "char/105/Kazuma2.jpg"], type: "base" },
             ]
         },
@@ -48,6 +49,7 @@ const gameData = {
             isSub: false,
             images: [
                 { srcList: ["char/105/Kei.jpg",
+                            "char/105/Kei3.jpg"
                             "char/105/Kei2.jpg"], type: "base" },
             ]
         },
@@ -61,6 +63,7 @@ const gameData = {
             isSub: false,
             images: [
                 { srcList: ["char/105/Madoka.jpg",
+                            "char/105/Madoka3.jpg"
                             "char/105/Madoka2.jpg"], type: "base" },
             ]
         },
@@ -74,6 +77,7 @@ const gameData = {
             isSub: false,
             images: [
                 { srcList: ["char/105/Reiichi.jpg",
+                            "char/105/Reiichi3.jpg"
                             "char/105/Reiichi2.jpg"], type: "base" },
             ]
         },
@@ -87,6 +91,7 @@ const gameData = {
             isSub: false,
             images: [
                 { srcList: ["char/105/Sakuya.jpg",
+                            "char/105/Sakuya4.jpg"
                             "char/105/Sakuya2.jpg",
                             "char/105/Sakuya3.jpg"], type: "base" },
             ]
@@ -101,6 +106,7 @@ const gameData = {
             isSub: false,
             images: [
                 { srcList: ["char/105/Shiki.jpg",
+                            "char/105/Shiki3.jpg"
                             "char/105/Shiki2.jpg"], type: "base" },
             ]
         },
@@ -114,6 +120,7 @@ const gameData = {
             isSub: false,
             images: [
                 { srcList: ["char/105/Wataru.jpg",
+                            "char/105/Wataru3.jpg",
                             "char/105/Wataru2.jpg"], type: "base" },
             ]
         },
@@ -127,6 +134,7 @@ const gameData = {
             isSub: false,
             images: [
                 { srcList: ["char/105/Chiharu.jpg",
+                            "char/105/Chiharu4.jpg"
                             "char/105/Chiharu2.jpg",
                             "char/105/Chiharu3.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
@@ -140,7 +148,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/105/Ikkaku.jpg"], type: "base" },
+                { srcList: ["char/105/Ikkaku.jpg",
+                            "char/105/Ikkaku2.jpg"], type: "base" },
             ]
         },
         // 天童壬
@@ -153,7 +162,91 @@ const gameData = {
             isSub: false,
             images: [
                 { srcList: ["char/105/Jin.jpg",
+                            "char/105/Jin3.jpg"
                             "char/105/Jin2.jpg"], type: "base" },
+            ]
+        },
+        // 花椿吾郎
+        {
+            id: "g105_s01",
+            name: "花椿吾郎",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/105/Goro2.jpg",
+                            "char/105/Goro3.jpg"], type: "base" }
+            ]
+        },
+        // 須藤瑞希
+        {
+            id: "g105_s02",
+            name: "須藤瑞希",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/105/Mizuki2.jpg",
+                            "char/105/Mizuki3.jpg"], type: "base" }
+            ]
+        },
+        // 藤井奈津実
+        {
+            id: "g105_s03",
+            name: "藤井奈津実",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/105/Natsumi2.jpg",
+                            "char/105/Natsumi3.jpg"], type: "base" }
+            ]
+        },
+        // 有沢志穂
+        {
+            id: "g105_s04",
+            name: "有沢志穂",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/105/Shiho2.jpg",
+                            "char/105/Shiho3.jpg"], type: "base" }
+            ]
+        },
+        // 紺野珠美
+        {
+            id: "g105_s05",
+            name: "紺野珠美",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/105/Tamami2.jpg",
+                            "char/105/Tamami3.jpg"], type: "base" }
+            ]
+        },
+        // 尽
+        {
+            id: "g105_s06",
+            name: "尽",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/105/Tsukushi3.jpg"], type: "base" }
             ]
         }
     ]
