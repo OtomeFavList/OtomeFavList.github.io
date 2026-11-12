@@ -106,6 +106,104 @@ const gameData = {
                             "char/112/Sousuke2.jpg",
                             "char/112/Sousuke3.png"], type: "base" },
             ]
+        },
+        // 安倍晴明
+        {
+            id: "g112_s01",
+            name: "安倍晴明",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/112/Abe.jpg",
+                            "char/112/Abe2.png"], type: "base" }
+            ]
+        },
+        // 渕田茂孝
+        {
+            id: "g112_s02",
+            name: "渕田茂孝",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/112/Fujita.jpg",
+                            "char/112/Fujita2.png"], type: "base" }
+            ]
+        },
+        // 陽琉
+        {
+            id: "g112_s03",
+            name: "陽琉",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/112/Haru.jpg",
+                            "char/112/Haru2.png"], type: "base" }
+            ]
+        },
+        // 颯
+        {
+            id: "g112_s04",
+            name: "颯",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/112/Hayate.jpg",
+                            "char/112/Hayate2.png"], type: "base" }
+            ]
+        },
+        // 陽菜
+        {
+            id: "g112_s05",
+            name: "陽菜",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/112/Hina.jpg",
+                            "char/112/Hina2.png"], type: "base" }
+            ]
+        },
+        // 慧
+        {
+            id: "g112_s06",
+            name: "慧",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/112/Satoru.jpg",
+                            "char/112/Satoru2.png"], type: "base" }
+            ]
+        },
+        // 朱桃
+        {
+            id: "g112_s07",
+            name: "朱桃",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/112/Sumomo.jpg",
+                            "char/112/Sumomo2.png"], type: "base" }
+            ]
         }
     ]
 };
