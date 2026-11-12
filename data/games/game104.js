@@ -97,6 +97,188 @@ const gameData = {
                 { srcList: ["char/104/Shigenobu.jpg",
                             "char/104/Shigenobu2.jpg"], type: "base" },
             ]
+        },
+        // 穴山小助
+        {
+            id: "g104_s01",
+            name: "穴山小助",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/104/Anayamakosuke.jpg"], type: "base" }
+            ]
+        },
+        // 安房守
+        {
+            id: "g104_s02",
+            name: "安房守",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/104/Awanokami.jpg"], type: "base" }
+            ]
+        },
+        // 毘沙門
+        {
+            id: "g104_s03",
+            name: "毘沙門",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/104/Bishamon.jpg"], type: "base" }
+            ]
+        },
+        // 白蓮
+        {
+            id: "g104_s04",
+            name: "白蓮",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/104/Byakuren.jpg"], type: "base" }
+            ]
+        },
+        // 鎮西八郎
+        {
+            id: "g104_s05",
+            name: "鎮西八郎",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/104/Chinzeihachirou.jpg"], type: "base" }
+            ]
+        },
+        // 巌流
+        {
+            id: "g104_s06",
+            name: "巌流",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/104/Ganryuu.jpg"], type: "base" }
+            ]
+        },
+        // グラシア
+        {
+            id: "g104_s07",
+            name: "グラシア",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/104/Gurashia.jpg"], type: "base" }
+            ]
+        },
+        // 豊臣秀頼
+        {
+            id: "g104_s08",
+            name: "豊臣秀頼",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/104/Hideyori.jpg"], type: "base" }
+            ]
+        },
+        // 三好伊佐入道
+        {
+            id: "g104_s09",
+            name: "三好伊佐入道",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/104/Isanyuudou.jpg"], type: "base" }
+            ]
+        },
+        // 根津甚八
+        {
+            id: "g104_s10",
+            name: "根津甚八",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/104/Nezujimpachi.jpg"], type: "base" }
+            ]
+        },
+        // 真田信尹
+        {
+            id: "g104_s11",
+            name: "真田信尹",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/104/Nobutada.jpg"], type: "base" }
+            ]
+        },
+        // 三好青海入道
+        {
+            id: "g104_s12",
+            name: "三好青海入道",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/104/Seikainyuudou.jpg"], type: "base" }
+            ]
+        },
+        // 海野六郎
+        {
+            id: "g104_s13",
+            name: "海野六郎",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/104/Unnorokurou.jpg"], type: "base" }
+            ]
+        },
+        // 融仙院
+        {
+            id: "g104_s14",
+            name: "融仙院",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/104/Yuuzenin.jpg"], type: "base" }
+            ]
         }
     ]
 };
