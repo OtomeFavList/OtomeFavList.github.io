@@ -127,6 +127,84 @@ const gameData = {
                             "char/117/Silvio3.jpg",
                             "char/117/Silvio4.jpg"], type: "base" },
             ]
+        },
+        // ベルント
+        {
+            id: "g117_s01",
+            name: "ベルント",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/117/Bernd.jpg"], type: "base" }
+            ]
+        },
+        // ディルク
+        {
+            id: "g117_s02",
+            name: "ディルク",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/117/Dirk.jpg"], type: "base" }
+            ]
+        },
+        // ゲルダ
+        {
+            id: "g117_s03",
+            name: "ゲルダ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/117/Gerda.jpg"], type: "base" }
+            ]
+        },
+        // ハンネス
+        {
+            id: "g117_s04",
+            name: "ハンネス",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/117/Hannes.jpg"], type: "base" }
+            ]
+        },
+        // クルト
+        {
+            id: "g117_s05",
+            name: "クルト",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/117/Kurt.jpg"], type: "base" }
+            ]
+        },
+        // ロッテ
+        {
+            id: "g117_s06",
+            name: "ロッテ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/117/Lotte.jpg"], type: "base" }
+            ]
         }
     ]
 };
