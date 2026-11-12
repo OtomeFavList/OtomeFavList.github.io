@@ -1,4 +1,4 @@
-// ⚠️配角未添加
+// ⚠️立绘差分未制作
 const gameData = {
     id: "game110", // 全局唯一ID，不可重复，如 game001
     name: "うたの☆プリンスさまっ♪ Repeat LOVE",
@@ -266,6 +266,34 @@ const gameData = {
                             "char/110/Ryuuya2.jpg",
                             "char/110/Ryuuya3.jpg",
                             "char/110/Ryuuya4.jpg"], type: "base" }
+            ]
+        },
+        // 来栖薫
+        {
+            id: "g110_s01",
+            name: "来栖薫",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/110/Kaoru.jpg",
+                            "char/110/Kaoru2.jpg"], type: "base" }
+            ]
+        },
+        // 渋谷友千香
+        {
+            id: "g110_s02",
+            name: "渋谷友千香",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/110/Tomochika.jpg",
+                            "char/110/Tomochika2.jpg"], type: "base" }
             ]
         }
     ]
