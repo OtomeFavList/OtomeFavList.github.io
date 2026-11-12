@@ -32,6 +32,7 @@ const gameData = {
             isSub: false,    // true=配角，开关控制是否展示该角色
             images: [
                 { srcList: ["char/103/Megumi.jpg",
+                            "char/103/Megumi3.jpg",
                             "char/103/Megumi2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
@@ -45,6 +46,7 @@ const gameData = {
             isSub: false,
             images: [
                 { srcList: ["char/103/Hibiki.jpg",
+                            "char/103/Hibiki3.jpg",
                             "char/103/Hibiki2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
@@ -58,6 +60,7 @@ const gameData = {
             isSub: false,
             images: [
                 { srcList: ["char/103/Nozomu.jpg",
+                            "char/103/Nozomu3.jpg",
                             "char/103/Nozomu2.jpg"], type: "base" },
             ]
         },
@@ -71,6 +74,7 @@ const gameData = {
             isSub: false,
             images: [
                 { srcList: ["char/103/Satoya.jpg",
+                            "char/103/Satoya3.jpg",
                             "char/103/Satoya2.jpg"], type: "base" },
             ]
         },
@@ -84,7 +88,91 @@ const gameData = {
             isSub: false,
             images: [
                 { srcList: ["char/103/Wataru.jpg",
+                            "char/103/Wataru3.jpg",
                             "char/103/Wataru2.jpg"], type: "base" },
+            ]
+        },
+        // 藤堂樹
+        {
+            id: "g103_fd01",
+            name: "藤堂樹",
+            gender: "male",
+            isHidden: false,
+            isFD: true,
+            isSub: false,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/103/Itsuki.jpg"], type: "base" }
+            ]
+        },
+        // 大井川護
+        {
+            id: "g103_fd02",
+            name: "大井川護",
+            gender: "male",
+            isHidden: false,
+            isFD: true,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/103/Mamoru.jpg",
+                            "char/103/Mamoru2.jpg",
+                            "char/103/Mamoru3.jpg"], type: "base" }
+            ]
+        },
+        // 藤堂雅
+        {
+            id: "g103_fd03",
+            name: "藤堂雅",
+            gender: "male",
+            isHidden: false,
+            isFD: true,
+            isSub: false,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/103/Miyabi.jpg"], type: "base" }
+            ]
+        },
+        // 菖蒲
+        {
+            id: "g103_s01",
+            name: "菖蒲",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/103/Ayame.jpg",
+                            "char/103/Ayame2.jpg"], type: "base" }
+            ]
+        },
+        // 深海尊人
+        {
+            id: "g103_s02",
+            name: "深海尊人",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/103/Mikoto.jpg",
+                            "char/103/Mikoto2.jpg"], type: "base" }
+            ]
+        },
+        // 猪口ノア
+        {
+            id: "g103_s03",
+            name: "猪口ノア",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/103/Noa.jpg",
+                            "char/103/Noa2.jpg"], type: "base" }
             ]
         }
     ]
