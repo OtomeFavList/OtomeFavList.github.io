@@ -156,7 +156,7 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["/char/100/Drake.jpg"], type: "base" }
+                { srcList: ["char/100/Drake.jpg"], type: "base" }
             ]
         },
         // エイラ·ハーウィック
@@ -188,7 +188,7 @@ const gameData = {
         // リアム·ノット
         {
             id: "g100_s07",
-            name: "配角",
+            name: "リアム·ノット",
             gender: "male",
             isHidden: false,
             isFD: false,
