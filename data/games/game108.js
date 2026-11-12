@@ -181,7 +181,35 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/108/Kuuya.jpg"], type: "base" }
+                { srcList: ["char/108/Kuuya.jpg"], type: "base" },
+            ]
+        },
+        // 花椿ひかる
+        {
+            id: "g108_s01",
+            name: "花椿ひかる",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/108/Hikaru.jpg",
+                            "char/108/Hikaru2.jpg"], type: "base" }
+            ]
+        },
+        // 花椿みちる
+        {
+            id: "g108_s02",
+            name: "花椿みちる",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/108/Michiru.jpg",
+                            "char/108/Michiru2.jpg"], type: "base" }
             ]
         }
     ]
