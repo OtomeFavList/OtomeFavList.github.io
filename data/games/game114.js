@@ -28,7 +28,9 @@ const gameData = {
             isFD: false,    // true=续作/FD专属角色，开关控制是否展示该角色
             isSub: false,    // true=配角，开关控制是否展示该角色
             images: [
-                { srcList: ["char/114/Fuka.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/114/Fuka.jpg",
+                            "char/114/Fuka2.jpg",
+                            "char/114/Fuka3.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // アルファーニ
@@ -40,7 +42,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/114/Alfani.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/114/Alfani.jpg",
+                            "char/114/Alfani2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // アクセル
@@ -52,7 +55,9 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/114/Axel.jpg"], type: "base" },
+                { srcList: ["char/114/Axel.jpg",
+                            "char/114/Axel2.jpg",
+                            "char/114/Axel3.jpg"], type: "base" },
             ]
         },
         // シーザー
@@ -64,7 +69,9 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/114/Caesar.jpg"], type: "base" },
+                { srcList: ["char/114/Caesar.jpg",
+                            "char/114/Caesar2.jpg",
+                            "char/114/Caesar3.jpg"], type: "base" },
             ]
         },
         // カラミア
@@ -76,7 +83,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/114/Caramia.jpg"], type: "base" },
+                { srcList: ["char/114/Caramia.jpg",
+                            "char/114/Caramia2.jpg"], type: "base" },
             ]
         },
         // ドリアン·グレイ
@@ -88,7 +96,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/114/Dorian.jpg"], type: "base" },
+                { srcList: ["char/114/Dorian.jpg",
+                            "char/114/Dorian2.jpg"], type: "base" },
             ]
         },
         // ハーメルン
@@ -100,7 +109,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/114/Hameln.jpg"], type: "base" },
+                { srcList: ["char/114/Hameln.jpg",
+                            "char/114/Hameln2.jpg"], type: "base" },
             ]
         },
         // キリエ
@@ -112,7 +122,9 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/114/Kyrie.jpg"], type: "base" },
+                { srcList: ["char/114/Kyrie.jpg",
+                            "char/114/Kyrie2.jpg",
+                            "char/114/Kyrie3.jpg"], type: "base" },
             ]
         },
         // マンボイ
@@ -124,7 +136,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/114/Manboy.jpg"], type: "base" },
+                { srcList: ["char/114/Manboy.jpg",
+                            "char/114/Manboy2.jpg"], type: "base" },
             ]
         },
         // パシェ
@@ -136,7 +149,8 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/114/Pashet.jpg"], type: "base" },
+                { srcList: ["char/114/Pashet.jpg",
+                            "char/114/Pashet2.jpg"], type: "base" },
             ]
         },
         // ロビン·フッド
@@ -160,7 +174,9 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/114/Scarlet.jpg"], type: "base" },
+                { srcList: ["char/114/Scarlet.jpg",
+                            "char/114/Scarlet2.jpg",
+                            "char/114/Scarlet3.jpg"], type: "base" },
             ]
         },
         // ソウ
@@ -172,7 +188,91 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/114/So.jpg"], type: "base" },
+                { srcList: ["char/114/So.jpg",
+                            "char/114/So2.jpg",
+                            "char/114/So3.jpg"], type: "base" },
+            ]
+        },
+        // アンデ
+        {
+            id: "g114_s01",
+            name: "アンデ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/114/Andy.jpg",
+                            "char/114/Andy2.jpg"], type: "base" }
+            ]
+        },
+        // エーリング
+        {
+            id: "g114_s02",
+            name: "エーリング",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/114/Eric‌.jpg"], type: "base" }
+            ]
+        },
+        // グレーテル
+        {
+            id: "g114_s03",
+            name: "グレーテル",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/114/Gretel.jpg",
+                            "char/114/Gretel2.jpg"], type: "base" }
+            ]
+        },
+        // ヘンゼル
+        {
+            id: "g114_s04",
+            name: "ヘンゼル",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/114/Hansel.jpg",
+                            "char/114/Hansel2.jpg"], type: "base" }
+            ]
+        },
+        // ハイディ
+        {
+            id: "g114_s05",
+            name: "ハイディ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/114/Heidi.jpg",
+                            "char/114/Heidi2.jpg"], type: "base" }
+            ]
+        },
+        // メリサス
+        {
+            id: "g114_s06",
+            name: "メリサス",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/114/Melisus.jpg"], type: "base" }
             ]
         }
     ]
