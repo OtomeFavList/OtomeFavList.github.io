@@ -173,6 +173,136 @@ const gameData = {
                             "char/102/Tatsuji2.jpg",
                             "char/102/Tatsuji3.png"], type: "base" },
             ]
+        },
+        // 纱武敏実
+        {
+            id: "g102_s01",
+            name: "紗武敏実",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/102/binjitsu.jpg"], type: "base" }
+            ]
+        },
+        // エレナ·アンダーリン
+        {
+            id: "g102_s02",
+            name: "エレナ·アンダーリン",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/102/Erina.jpg"], type: "base" }
+            ]
+        },
+        // 花房健一
+        {
+            id: "g102_s03",
+            name: "花房健一",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/102/Kenichi.jpg"], type: "base" }
+            ]
+        },
+        // 篁昂生
+        {
+            id: "g102_s04",
+            name: "篁昂生",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/102/Kosei.jpg"], type: "base" }
+            ]
+        },
+        // つば九郎
+        {
+            id: "g102_s05",
+            name: "つば九郎",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/102/Kurou.jpg"], type: "base" }
+            ]
+        },
+        // 河見ナツ子
+        {
+            id: "g102_s06",
+            name: "河見ナツ子",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/102/Natsuko.jpg"], type: "base" }
+            ]
+        },
+        // ‌リッキー·ガレン
+        {
+            id: "g102_s07",
+            name: "リッキー·ガレン",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/102/Riki.jpg"], type: "base" }
+            ]
+        },
+        // 御山紗菜
+        {
+            id: "g102_s08",
+            name: "御山紗菜",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/102/Sana.jpg"], type: "base" }
+            ]
+        },
+        // 炉木清史郎
+        {
+            id: "g102_s09",
+            name: "炉木清史郎",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/102/Seishiro.jpg"], type: "base" }
+            ]
+        },
+        // 岩元哲路
+        {
+            id: "g102_s10",
+            name: "岩元哲路",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/102/Tetsuro.jpg"], type: "base" }
+            ]
         }
     ]
 };
