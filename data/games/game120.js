@@ -135,6 +135,71 @@ const gameData = {
             images: [
                 { srcList: ["char/120/Yukinami.jpg"], type: "base" },
             ]
+        },
+        // 護堂ヤシマ
+        {
+            id: "g120_s01",
+            name: "護堂ヤシマ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/120/Goudou.jpg"], type: "base" }
+            ]
+        },
+        // 東雲リーゼ
+        {
+            id: "g120_s02",
+            name: "東雲リーゼ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/120/Lize.jpg"], type: "base" }
+            ]
+        },
+        // 間宮リツ
+        {
+            id: "g120_s03",
+            name: "間宮リツ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/120/Mamiya.jpg"], type: "base" }
+            ]
+        },
+        // 倉守マサキ
+        {
+            id: "g120_s04",
+            name: "倉守マサキ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/120/Masaki.jpg"], type: "base" }
+            ]
+        },
+        // 横原ゼンジ
+        {
+            id: "g120_s05",
+            name: "横原ゼンジ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/120/Zenji.jpg"], type: "base" }
+            ]
         }
     ]
 };
