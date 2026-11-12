@@ -1,5 +1,5 @@
 // data/games/game036.js
-// ⚠️已核对信息，立绘未重置、新差分未制作
+// ⚠️已核对信息，立绘未重置、立绘差分未制作
 const gameData = {
     id: "game036", // 全局唯一ID，不可重复
     name: "DIABOLIK LOVERS 魔鬼恋人 GRAND EDITION",
