@@ -173,7 +173,7 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["img/char/096/Cura.jpg"], type: "base" }
+                { srcList: ["char/096/Cura.jpg"], type: "base" }
             ]
         },
         // レメク
