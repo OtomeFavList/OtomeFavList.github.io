@@ -167,6 +167,34 @@ const gameData = {
             images: [
                 { srcList: ["char/107/Tatsuya.jpg"], type: "base" },
             ]
+        },
+        // 花椿カレン
+        {
+            id: "g107_s01",
+            name: "花椿カレン",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/1/Karen.jpg",
+                            "char/1/Karen2.jpg"], type: "base" }
+            ]
+        },
+        // 宇賀神みよ
+        {
+            id: "g107_s02",
+            name: "宇賀神みよ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/1/Yomi.jpg",
+                            "char/1/Yomi2.jpg"], type: "base" }
+            ]
         }
     ]
 };
