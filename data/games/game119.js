@@ -127,6 +127,175 @@ const gameData = {
             images: [
                 { srcList: ["char/119/Yagyuu.jpg"], type: "base" },
             ]
+        },
+        // 筒見屋あやめ
+        {
+            id: "g119_s01",
+            name: "筒見屋あやめ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/119/Ayame.jpg"], type: "base" }
+            ]
+        },
+        // カピタン·モロ
+        {
+            id: "g119_s02",
+            name: "カピタン·モロ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/119/Captain.jpg"], type: "base" }
+            ]
+        },
+        // 織田秀信
+        {
+            id: "g119_s03",
+            name: "織田秀信",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/119/Hidenobu.jpg"], type: "base" }
+            ]
+        },
+        // 徳川家康
+        {
+            id: "g119_s04",
+            name: "徳川家康",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/119/Ieyasu.jpg"], type: "base" }
+            ]
+        },
+        // 石田三成
+        {
+            id: "g119_s05",
+            name: "石田三成",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/119/Ishida.jpg"], type: "base" }
+            ]
+        },
+        // 織田信長
+        {
+            id: "g119_s06",
+            name: "織田信長",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/119/Nobunaga.jpg"], type: "base" }
+            ]
+        },
+        // 織田信忠
+        {
+            id: "g119_s07",
+            name: "織田信忠",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/119/Nobutada.jpg"], type: "base" }
+            ]
+        },
+        // 真田信之
+        {
+            id: "g119_s08",
+            name: "真田信之",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/119/Sanada.jpg"], type: "base" }
+            ]
+        },
+        // 謎の剣士
+        {
+            id: "g119_s09",
+            name: "謎の剣士",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/119/Swordsman.jpg"], type: "base" }
+            ]
+        },
+        // ターラ
+        {
+            id: "g119_s10",
+            name: "ターラ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/119/Tara.jpg"], type: "base" }
+            ]
+        },
+        // 筒見屋つばき
+        {
+            id: "g119_s11",
+            name: "筒見屋つばき",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/119/Tsubaki.jpg"], type: "base" }
+            ]
+        },
+        // 結城喜太郎
+        {
+            id: "g119_s12",
+            name: "結城喜太郎",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/119/Yuuki.jpg"], type: "base" }
+            ]
+        },
+        // 平島義近
+        {
+            id: "g119_s13",
+            name: "平島義近",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/119/Hirashima.jpg"], type: "base" }
+            ]
         }
     ]
 };
