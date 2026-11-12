@@ -192,8 +192,8 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/1/Yomi.jpg",
-                            "char/1/Yomi2.jpg"], type: "base" }
+                { srcList: ["char/1/Miyo.jpg",
+                            "char/1/Miyo2.jpg"], type: "base" }
             ]
         }
     ]
