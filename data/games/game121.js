@@ -195,6 +195,19 @@ const gameData = {
                             "char/121/Yuri5.png"], type: "base" },
             ]
         },
+        // 藤原貴家
+        {
+            id: "g121_s01",
+            name: "藤原貴家",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/121/Takaie.jpg"], type: "base" }
+            ]
+        }
     ]
 };
 
