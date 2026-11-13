@@ -1,10 +1,4 @@
-// ==========【单个游戏独立数据模板｜新版ESModule】==========
-// 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
-// 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
-// 网页渲染时由 main.js 的 getWebImageUrl 拼接为 R2 完整 URL
-// Canvas 导出时由 export-canvas-render.js 的 convertR2ToJsDelivr 拼接为 jsDelivr URL
-// 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
-// 官中发售以后，需要修改：游戏名、发售年份、汉化厂商、封面图、角色名
+// ⚠️立绘差分未制作
 const gameData = {
     id: "game122", // 全局唯一ID，不可重复，如 game001
     name: "私立ベルばら学園 ~ベルサイユのばらRe*imagination~",
@@ -34,6 +28,31 @@ const gameData = {
             images: [
                 { srcList: ["char/122/Oscar.jpg",
                             "char/122/Oscar2.jpg"], type: "base" },      // 默认基础图，始终加载
+            ]
+        },
+        // 有栖川マリ
+        {
+            id: "g122_f02",
+            name: "有栖川マリ",
+            gender: "female",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/122/Mari.jpg"], type: "base" },
+            ]
+        },
+        // 真輝望
+        {
+            id: "g122_f03",
+            name: "真輝望",
+            gender: "female",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            images: [
+                { srcList: ["char/122/Maki.jpg",
+                            "char/122/Maki2.jpg"], type: "base" },
             ]
         },
         // 衛藤晶
@@ -98,6 +117,188 @@ const gameData = {
             isSub: false,
             images: [
                 { srcList: ["char/122/Sazuki.jpg"], type: "base" },
+            ]
+        },
+        // 安藤礼二
+        {
+            id: "g122_s01",
+            name: "安藤礼二",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/122/Andou.jpg"], type: "base" }
+            ]
+        },
+        // ベルローズ学園長
+        {
+            id: "g122_s02",
+            name: "ベルローズ学園長",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/122/Belrose.jpg"], type: "base" }
+            ]
+        },
+        // シャルル
+        {
+            id: "g122_s03",
+            name: "シャルル",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/122/Charles.jpg"], type: "base" }
+            ]
+        },
+        // 花野ラヴィアンローズ
+        {
+            id: "g122_s04",
+            name: "花野ラヴィアンローズ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/122/Hanano.jpg"], type: "base" }
+            ]
+        },
+        // 星空ヒカル
+        {
+            id: "g122_s05",
+            name: "星空ヒカル",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/122/Hikaru.jpg"], type: "base" }
+            ]
+        },
+        // 清水イツキ
+        {
+            id: "g122_s06",
+            name: "清水イツキ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/122/Itsuki.jpg"], type: "base" }
+            ]
+        },
+        // 黒沢潤子
+        {
+            id: "g122_s07",
+            name: "黒沢潤子",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/122/Junko.jpg"], type: "base" }
+            ]
+        },
+        // ル·ルー
+        {
+            id: "g122_s08",
+            name: "ル·ルー",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/122/Loulou.jpg"], type: "base" }
+            ]
+        },
+        // 有栖川マリ
+        {
+            id: "g122_s09",
+            name: "有栖川マリ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/122/Mari.jpg"], type: "base" }
+            ]
+        },
+        // フィリップ·ハンソン
+        {
+            id: "g122_s10",
+            name: "フィリップ·ハンソン",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/122/Philippe.jpg"], type: "base" }
+            ]
+        },
+        // 姫宮りか
+        {
+            id: "g122_s11",
+            name: "姫宮りか",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/122/Rika.jpg"], type: "base" }
+            ]
+        },
+        // ピエール皇
+        {
+            id: "g122_s12",
+            name: "ピエール皇",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/122/Sumeragi.jpg"], type: "base" }
+            ]
+        },
+        // 山田のばら
+        {
+            id: "g122_s13",
+            name: "山田のばら",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/122/Yamada.jpg"], type: "base" }
+            ]
+        },
+        // 白鳥由香里
+        {
+            id: "g122_s14",
+            name: "白鳥由香里",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/122/Yukari.jpg"], type: "base" }
             ]
         }
     ]
