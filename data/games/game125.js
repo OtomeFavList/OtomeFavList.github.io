@@ -107,6 +107,123 @@ const gameData = {
                             "char/125/Tokujirou3.jpg",
                             "char/125/Tokujirou4.jpg"], type: "base" },
             ]
+        },
+        // 藤樹修蔵
+        {
+            id: "g125_s01",
+            name: "藤樹修蔵",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/125/Fujiki.jpg"], type: "base" }
+            ]
+        },
+        // 五世木正則
+        {
+            id: "g125_s02",
+            name: "五世木正則",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/125/Iyogi.jpg"], type: "base" }
+            ]
+        },
+        // 河島常良
+        {
+            id: "g125_s03",
+            name: "河島常良",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/125/Kawashima.jpg"], type: "base" }
+            ]
+        },
+        // 黄身丸
+        {
+            id: "g125_s04",
+            name: "黄身丸",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/125/Kimimaru.jpg"], type: "base" }
+            ]
+        },
+        // 守田優花
+        {
+            id: "g125_s05",
+            name: "守田優花",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/125/Morita.jpg"], type: "base" }
+            ]
+        },
+        // 南郷棋三郎
+        {
+            id: "g125_s06",
+            name: "南郷棋三郎",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/125/Kisaburou.jpg"], type: "base" }
+            ]
+        },
+        // 櫻小路信子
+        {
+            id: "g125_s07",
+            name: "櫻小路信子",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/125/Nobuko.jpg"], type: "base" }
+            ]
+        },
+        // 立垣トミ
+        {
+            id: "g125_s08",
+            name: "立垣トミ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/125/Tomi.jpg"], type: "base" }
+            ]
+        },
+        // 山崎清道
+        {
+            id: "g125_s09",
+            name: "山崎清道",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/125/Yamazaki.jpg"], type: "base" }
+            ]
         }
     ]
 };
