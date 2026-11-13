@@ -118,6 +118,177 @@ const gameData = {
                 { srcList: ["char/123/Wilhelm.jpg",
                             "char/123/Wilhelm2.jpg"], type: "base" },
             ]
+        },
+        // エリアス
+        {
+            id: "g123_s01",
+            name: "エリアス",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/123/Alias.jpg"], type: "base" }
+            ]
+        },
+        // アサカ
+        {
+            id: "g123_s02",
+            name: "アサカ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/123/Asaka.jpg",
+                            "char/123/Asaka2.jpg"], type: "base" }
+            ]
+        },
+        // コレット
+        {
+            id: "g123_s03",
+            name: "コレット",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/123/Collette.jpg"], type: "base" }
+            ]
+        },
+        // ギード
+        {
+            id: "g123_s04",
+            name: "ギード",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/123/Ghido.jpg"], type: "base" }
+            ]
+        },
+        // イグニス
+        {
+            id: "g123_s05",
+            name: "イグニス",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/123/Ignis.jpg"], type: "base" }
+            ]
+        },
+        // イルダス
+        {
+            id: "g123_s06",
+            name: "イルダス",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/123/Ildas.jpg"], type: "base" }
+            ]
+        },
+        // レオニダス
+        {
+            id: "g123_s07",
+            name: "レオニダス",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/123/Leonidas.jpg"], type: "base" }
+            ]
+        },
+        // メフィスト
+        {
+            id: "g123_s08",
+            name: "メフィスト",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/123/Mephisto.jpg"], type: "base" }
+            ]
+        },
+        // キオラ
+        {
+            id: "g123_s09",
+            name: "キオラ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/123/Qiora.jpg"], type: "base" }
+            ]
+        },
+        // リシャール
+        {
+            id: "g123_s10",
+            name: "リシャール",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/123/Richard.jpg"], type: "base" }
+            ]
+        },
+        // シェラザール
+        {
+            id: "g123_s11",
+            name: "シェラザール",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/123/Serazar.jpg"], type: "base" }
+            ]
+        },
+        // シャオレイ
+        {
+            id: "g123_s12",
+            name: "シャオレイ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/123/Xiaolei.jpg"], type: "base" }
+            ]
+        },
+        // ユリアナ
+        {
+            id: "g123_s13",
+            name: "ユリアナ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/123/Yuriana.jpg",
+                            "char/123/Yuriana.jpg"], type: "base" }
+            ]
         }
     ]
 };
