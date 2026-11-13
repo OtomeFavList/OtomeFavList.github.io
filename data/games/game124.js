@@ -122,6 +122,111 @@ const gameData = {
                             "char/124/Naomasa3.jpg",
                             "char/124/Naomasa4.jpg"], type: "base" },
             ]
+        },
+        // 早月千代
+        {
+            id: "g127_s01",
+            name: "早月千代",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/124/Chiyo.jpg"], type: "base" }
+            ]
+        },
+        // 片桐銀次郎
+        {
+            id: "g127_s02",
+            name: "片桐銀次郎",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/124/Ginjiro.jpg",
+                            "char/124/Ginjiro2.jpg"], type: "base" }
+            ]
+        },
+        // 佐伯雛子
+        {
+            id: "g127_s03",
+            name: "佐伯雛子",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/124/Hinako.jpg"], type: "base" }
+            ]
+        },
+        // 葛城清隆
+        {
+            id: "g127_s04",
+            name: "葛城清隆",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/124/Kiyotaka.jpg"], type: "base" }
+            ]
+        },
+        // 西原七緒
+        {
+            id: "g127_s05",
+            name: "西原七緒",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/124/Nanao.jpg"], type: "base" }
+            ]
+        },
+        // 葉山聡介
+        {
+            id: "g127_s06",
+            name: "葉山聡介",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/124/Sousuke.jpg"], type: "base" }
+            ]
+        },
+        // 菅春次郎
+        {
+            id: "g127_s07",
+            name: "菅春次郎",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/124/Syunjiro.jpg"], type: "base" }
+            ]
+        },
+        // 泉高之
+        {
+            id: "g127_s08",
+            name: "泉高之",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/124/Takayuki.jpg"], type: "base" }
+            ]
         }
     ]
 };
