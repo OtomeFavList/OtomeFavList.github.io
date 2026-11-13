@@ -1,26 +1,3 @@
-// sins of KALEIDO 塔巡りし因果の魔女
-// 开发: Voltage, Inc.、AmuLit
-// 发行: Voltage, Inc.
-// 剧本: 潮文音
-// 音乐: 浅野隼人
-// 主题歌演出: DUSTCELL
-// 导演: 潮文音
-// 企画: Voltage, Inc.
-// 平台: Nintendo Switch
-// 游玩人数: 1人
-// 发行日期: 2026-7-16
-// 原画: Tana Khaki
-// 服装设计: ウニコ
-// 背景: 清井fen
-// 官方网站: products.voltage.co.jp/kaleido/
-
-// ==========【单个游戏独立数据模板｜新版ESModule】==========
-// 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
-// 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
-// 网页渲染时由 main.js 的 getWebImageUrl 拼接为 R2 完整 URL
-// Canvas 导出时由 export-canvas-render.js 的 convertR2ToJsDelivr 拼接为 jsDelivr URL
-// 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
-// 官中发售以后，需要修改：游戏名、发售年份、汉化厂商、封面图、角色名
 const gameData = {
     id: "game100", // 全局唯一ID，不可重复，如 game001
     name: "sins of KALEIDO 塔巡りし因果の魔女",
