@@ -90,6 +90,97 @@ const gameData = {
             images: [
                 { srcList: ["char/135/Tooya.jpg"], type: "base" },
             ]
+        },
+        // 太宰ともゑ
+        {
+            id: "g135_s01",
+            name: "太宰ともゑ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/135/Dazai.jpg"], type: "base" }
+            ]
+        },
+        // 臥待春夫
+        {
+            id: "g135_s02",
+            name: "臥待春夫",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/135/Haruo.jpg"], type: "base" }
+            ]
+        },
+        // 宮沢夏帆
+        {
+            id: "g135_s03",
+            name: "宮沢夏帆",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/135/Kaho.jpg"], type: "base" }
+            ]
+        },
+        // ルイス
+        {
+            id: "g135_s04",
+            name: "ルイス",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/135/Lewis.jpg"], type: "base" }
+            ]
+        },
+        // ヴィルヘルム
+        {
+            id: "g135_s05",
+            name: "ヴィルヘルム",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/135/Neko.jpg"], type: "base" }
+            ]
+        },
+        // 日生紫
+        {
+            id: "g135_s06",
+            name: "日生紫",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/135/Yukari.jpg"], type: "base" }
+            ]
+        },
+        // 夏目悠希
+        {
+            id: "g135_s07",
+            name: "夏目悠希",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/135/Yuuki.jpg"], type: "base" }
+            ]
         }
     ]
 };
