@@ -34,8 +34,8 @@ const gameData = {
             isSub: false,    // true=配角，开关控制是否展示该角色
             images: [
                 { srcList: ["char/116/Julia3.jpg",
-                            "char/116/Julia2.jpg",
-                            "char/116/Julia.jpg"], type: "base" },      // 默认基础图，始终加载
+                            "char/116/Julia.jpg",
+                            "char/116/Julia2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // ヘンリク
