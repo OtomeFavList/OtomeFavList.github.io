@@ -98,6 +98,118 @@ const gameData = {
                 { srcList: ["char/131/Tomoki.jpg",
                             "char/131/Tomoki2.jpg"], type: "base" },
             ]
+        },
+        // クランベリー
+        {
+            id: "g131_s01",
+            name: "クランベリー",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/131/Cranberry.jpg",
+                            "char/131/Cranberry2.jpg"], type: "base" }
+            ]
+        },
+        // ガート
+        {
+            id: "g131_s02",
+            name: "ガート",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/131/Gart.jpg",
+                            "char/131/Gart2.jpg"], type: "base" }
+            ]
+        },
+        // ケイファ
+        {
+            id: "g131_s03",
+            name: "ケイファ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/131/Keifa.jpg",
+                            "char/131/Keifa2.jpg"], type: "base" }
+            ]
+        },
+        // マリス
+        {
+            id: "g131_s04",
+            name: "マリス",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/131/Maris.jpg",
+                            "char/131/Maris2.jpg"], type: "base" }
+            ]
+        },
+        // ネージュ
+        {
+            id: "g131_s05",
+            name: "ネージュ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/131/Neige.jpg",
+                            "char/131/Neige2.jpg"], type: "base" }
+            ]
+        },
+        // ラズベリー
+        {
+            id: "g131_s06",
+            name: "ラズベリー",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/131/Raspberry.jpg",
+                            "char/131/Raspberry2.jpg"], type: "base" }
+            ]
+        },
+        // スイートクラウン
+        {
+            id: "g131_s07",
+            name: "スイートクラウン",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/131/Sweetclown.jpg",
+                            "char/131/Sweetclown2.jpg"], type: "base" }
+            ]
+        },
+        // ネコ
+        {
+            id: "g131_s08",
+            name: "ネコ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/131/Neko.jpg",
+                            "char/131/Neko2.jpg"], type: "base" }
+            ]
         }
     ]
 };
