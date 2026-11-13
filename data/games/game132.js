@@ -92,6 +92,19 @@ const gameData = {
             images: [
                 { srcList: ["char/132/Yumeji.jpg"], type: "base" },
             ]
+        },
+        // 皇艶真
+        {
+            id: "g132_s01",
+            name: "皇艶真",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/132/Enma.jpg"], type: "base" }
+            ]
         }
     ]
 };
