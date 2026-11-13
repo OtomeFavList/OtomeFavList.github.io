@@ -80,7 +80,7 @@ const gameData = {
             images: [
                 { srcList: ["char/102/Clan.jpg",
                             "char/102/Clan2.jpg",
-                            "char/102/Clan3.png"], type: "base" },
+                            "char/102/Clan3.jpg"], type: "base" },
             ]
         },
         // 時透晴生
