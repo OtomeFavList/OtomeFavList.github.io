@@ -178,8 +178,8 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/1/Karen.jpg",
-                            "char/1/Karen2.jpg"], type: "base" }
+                { srcList: ["char/107/Karen.jpg",
+                            "char/107/Karen2.jpg"], type: "base" }
             ]
         },
         // 宇賀神みよ
@@ -192,8 +192,8 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/1/Miyo.jpg",
-                            "char/1/Miyo2.jpg"], type: "base" }
+                { srcList: ["char/107/Miyo.jpg",
+                            "char/107/Miyo2.jpg"], type: "base" }
             ]
         }
     ]
