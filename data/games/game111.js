@@ -61,7 +61,7 @@ const gameData = {
             isSub: false,
             images: [
                 { srcList: ["char/111/Kitty3.jpg",
-                            "char/111/Kitty.jpg"
+                            "char/111/Kitty.jpg",
                             "char/111/Kitty2.jpg",
                             "char/111/Kitty4.jpg"], type: "base" },
             ]
