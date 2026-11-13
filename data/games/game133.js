@@ -31,7 +31,8 @@ const gameData = {
             isFD: false,    // true=续作/FD专属角色，开关控制是否展示该角色
             isSub: false,    // true=配角，开关控制是否展示该角色
             images: [
-                { srcList: ["char/133/Koi.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/133/Koi.jpg",
+                            "char/133/Koi2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 夏八木光
@@ -109,6 +110,32 @@ const gameData = {
             images: [
                 { srcList: ["char/133/Yamato.jpg",
                             "char/133/Yamato2.jpg"], type: "base" },
+            ]
+        },
+        // 春村真亜耶
+        {
+            id: "g133_s01",
+            name: "春村真亜耶",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/133/Maaya.jpg"], type: "base" }
+            ]
+        },
+        // 天城寺善
+        {
+            id: "g133_s02",
+            name: "天城寺善",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/133/Zen.jpg"], type: "base" }
             ]
         }
     ]
