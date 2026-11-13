@@ -124,6 +124,32 @@ const gameData = {
                             "char/127/Tamotsu3.jpg",
                             "char/127/Tamotsu4.jpg"], type: "base" },
             ]
+        },
+        // 眞泉千種
+        {
+            id: "g127_s01",
+            name: "眞泉千種",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/127/Chigusa.jpg"], type: "base" }
+            ]
+        },
+        // アルカンジェ舞渡華
+        {
+            id: "g127_s02",
+            name: "アルカンジェ舞渡華",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/127/Madoka.jpg"], type: "base" }
+            ]
         }
     ]
 };
