@@ -33,9 +33,9 @@ const gameData = {
             isFD: false,    // true=续作/FD专属角色，开关控制是否展示该角色
             isSub: false,    // true=配角，开关控制是否展示该角色
             images: [
-                { srcList: ["char/116/Julia.jpg",
+                { srcList: ["char/116/Julia3.jpg",
                             "char/116/Julia2.jpg",
-                            "char/116/Julia3.jpg"], type: "base" },      // 默认基础图，始终加载
+                            "char/116/Julia.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // ヘンリク
@@ -47,10 +47,10 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/116/Henryk.jpg",
+                { srcList: ["char/116/Henryk4.jpg",
+                            "char/116/Henryk.jpg",
                             "char/116/Henryk2.jpg",
-                            "char/116/Henryk3.jpg",
-                            "char/116/Henryk4.jpg"], type: "base" },      // 默认基础图，始终加载
+                            "char/116/Henryk3.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // ユゼフ
@@ -62,10 +62,10 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/116/Jozef.jpg",
+                { srcList: ["char/116/Jozef4.jpg",
+                            "char/116/Jozef.jpg",
                             "char/116/Jozef2.jpg",
-                            "char/116/Jozef3.jpg",
-                            "char/116/Jozef4.jpg"], type: "base" },
+                            "char/116/Jozef3.jpg"], type: "base" },
             ]
         },
         // ルドヴィク
@@ -77,10 +77,10 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/116/Ludwik.jpg",
+                { srcList: ["char/116/Ludwik4.jpg",
+                            "char/116/Ludwik.jpg",
                             "char/116/Ludwik2.jpg",
-                            "char/116/Ludwik3.jpg",
-                            "char/116/Ludwik4.jpg"], type: "base" },
+                            "char/116/Ludwik3.jpg"], type: "base" },
             ]
         },
         // ミアーシュ
@@ -92,10 +92,10 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/116/Mias.jpg",
+                { srcList: ["char/116/Mias4.jpg",
+                            "char/116/Mias.jpg",
                             "char/116/Mias2.jpg",
-                            "char/116/Mias3.jpg",
-                            "char/116/Mias4.jpg"], type: "base" },
+                            "char/116/Mias3.jpg"], type: "base" },
             ]
         },
         // リシャルト
@@ -107,10 +107,10 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/116/Ryszard.jpg",
+                { srcList: ["char/116/Ryszard4.jpg",
+                            "char/116/Ryszard.jpg",
                             "char/116/Ryszard2.jpg",
-                            "char/116/Ryszard3.jpg",
-                            "char/116/Ryszard4.jpg"], type: "base" },
+                            "char/116/Ryszard3.jpg"], type: "base" },
             ]
         },
         // タルメ
@@ -122,8 +122,8 @@ const gameData = {
             isFD: true,
             isSub: false,
             images: [
-                { srcList: ["char/116/Czarny.jpg",
-                            "char/116/Czarny2.jpg"], type: "base" },
+                { srcList: ["char/116/Czarny2.jpg",
+                            "char/116/Czarny.jpg"], type: "base" },
             ]
         },
         // 魔術師
@@ -135,10 +135,10 @@ const gameData = {
             isFD: true,
             isSub: false,
             images: [
-                { srcList: ["char/116/Czarodziej.jpg",
+                { srcList: ["char/116/Czarodziej4.jpg",
+                            "char/116/Czarodziej.jpg",
                             "char/116/Czarodziej2.jpg",
-                            "char/116/Czarodziej3.jpg",
-                            "char/116/Czarodziej4.jpg"], type: "base" },
+                            "char/116/Czarodziej3.jpg"], type: "base" },
             ]
         },
         // アデーレ
@@ -151,8 +151,8 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/116/Adele.jpg",
-                            "char/116/Adele2.jpg"], type: "base" }
+                { srcList: ["char/116/Adele2.jpg",
+                            "char/116/Adele.jpg"], type: "base" }
             ]
         },
         // バルトルト
@@ -165,8 +165,8 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/116/Barthold.jpg",
-                            "char/116/Barthold2.jpg"], type: "base" }
+                { srcList: ["char/116/Barthold2.jpg",
+                            "char/116/Barthold.jpg"], type: "base" }
             ]
         },
         // フベルト
@@ -179,8 +179,8 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/116/Hubert.jpg",
-                            "char/116/Hubert2.jpg"], type: "base" }
+                { srcList: ["char/116/Hubert2.jpg",
+                            "char/116/Hubert.jpg"], type: "base" }
             ]
         },
         // イグナツィ
@@ -193,8 +193,8 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/116/Ignacy.jpg",
-                            "char/116/Ignacy2.jpg"], type: "base" }
+                { srcList: ["char/116/Ignacy2.jpg",
+                            "char/116/Ignacy.jpg"], type: "base" }
             ]
         },
         // マレク
@@ -207,8 +207,8 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/116/Marek.jpg",
-                            "char/116/Marek2.jpg"], type: "base" }
+                { srcList: ["char/116/Marek2.jpg",
+                            "char/116/Marek.jpg"], type: "base" }
             ]
         },
         // ムローク
@@ -221,8 +221,8 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/116/Mrok.jpg",
-                            "char/116/Mrok2.jpg"], type: "base" }
+                { srcList: ["char/116/Mrok2.jpg",
+                            "char/116/Mrok.jpg"], type: "base" }
             ]
         }
     ]
