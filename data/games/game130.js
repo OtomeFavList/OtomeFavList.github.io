@@ -45,7 +45,15 @@ const gameData = {
             isSub: false,
             images: [
                 { srcList: ["char/130/Otoishi.jpg",
-                            "char/130/Otoishi2.jpg"], type: "base" },      // 默认基础图，始终加载
+                            "char/130/Otoishi2.jpg",
+                            "char/130/Otoishi3.jpg",
+                            "char/130/Otoishi4.jpg",
+                            "char/130/Otoishi5.jpg",
+                            "char/130/Otoishi6.jpg",
+                            "char/130/Otoishi7.jpg",
+                            "char/130/Otoishi8.jpg",
+                            "char/130/Otoishi9.jpg",
+                            "char/130/Otoishi10.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 青井有紀
@@ -58,7 +66,15 @@ const gameData = {
             isSub: false,
             images: [
                 { srcList: ["char/130/Yuki.jpg",
-                            "char/130/Yuki2.jpg"], type: "base" },
+                            "char/130/Yuki2.jpg",
+                            "char/130/Yuki3.jpg",
+                            "char/130/Yuki4.jpg",
+                            "char/130/Yuki5.jpg",
+                            "char/130/Yuki6.jpg",
+                            "char/130/Yuki7.jpg",
+                            "char/130/Yuki8.jpg",
+                            "char/130/Yuki9.jpg",
+                            "char/130/Yuki10.jpg"], type: "base" },
             ]
         },
         // 黒沢忍
@@ -71,7 +87,15 @@ const gameData = {
             isSub: false,
             images: [
                 { srcList: ["char/130/Kurosawa.jpg",
-                            "char/130/Kurosawa2.jpg"], type: "base" },
+                            "char/130/Kurosawa2.jpg",
+                            "char/130/Kurosawa3.jpg",
+                            "char/130/Kurosawa4.jpg",
+                            "char/130/Kurosawa5.jpg",
+                            "char/130/Kurosawa6.jpg",
+                            "char/130/Kurosawa7.jpg",
+                            "char/130/Kurosawa8.jpg",
+                            "char/130/Kurosawa9.jpg",
+                            "char/130/Kurosawa10.jpg"], type: "base" },
             ]
         },
         // 天城成海
@@ -84,7 +108,93 @@ const gameData = {
             isSub: false,
             images: [
                 { srcList: ["char/130/Narumi.jpg",
-                            "char/130/Narumi2.jpg"], type: "base" },
+                            "char/130/Narumi2.jpg",
+                            "char/130/Narumi3.jpg",
+                            "char/130/Narumi4.jpg",
+                            "char/130/Narumi5.jpg",
+                            "char/130/Narumi6.jpg",
+                            "char/130/Narumi7.jpg",
+                            "char/130/Narumi8.jpg",
+                            "char/130/Narumi9.jpg",
+                            "char/130/Narumi10.jpg"], type: "base" },
+            ]
+        },
+        // 末永歌奈
+        {
+            id: "g130_s01",
+            name: "末永歌奈",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/130/Kana.jpg"], type: "base" }
+            ]
+        },
+        // 八剣桔平
+        {
+            id: "g130_s02",
+            name: "八剣桔平",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/130/Kippei.jpg"], type: "base" }
+            ]
+        },
+        // 諸星翼
+        {
+            id: "g130_s03",
+            name: "諸星翼",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/130/Tasuku.jpg"], type: "base" }
+            ]
+        },
+        // 相模原龍雄
+        {
+            id: "g130_s04",
+            name: "相模原龍雄",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/130/Tatsuo.jpg"], type: "base" }
+            ]
+        },
+        // 小笠原虎雄
+        {
+            id: "g130_s05",
+            name: "小笠原虎雄",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/130/Torao.jpg"], type: "base" }
+            ]
+        },
+        // 日向裕貴
+        {
+            id: "g130_s06",
+            name: "日向裕貴",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/130/Uki.jpg"], type: "base" }
             ]
         }
     ]
