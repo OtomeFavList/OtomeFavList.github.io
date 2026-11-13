@@ -110,6 +110,166 @@ const gameData = {
                 { srcList: ["char/126/Tristan.jpg",
                             "char/126/Tristan2.jpg"], type: "base" },
             ]
+        },
+        // ボールス
+        {
+            id: "g126_s01",
+            name: "ボールス",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/126/Bors.jpg",
+                            "char/126/Bors2.jpg"], type: "base" }
+            ]
+        },
+        // エレイン
+        {
+            id: "g126_s02",
+            name: "エレイン",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/126/Elaine.jpg"], type: "base" }
+            ]
+        },
+        // ギネヴィア
+        {
+            id: "g126_s03",
+            name: "ギネヴィア",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/126/Guinevere.jpg"], type: "base" }
+            ]
+        },
+        // ケイ
+        {
+            id: "g126_s04",
+            name: "ケイ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/126/Kay.jpg",
+                            "char/126/Kay2.jpg"], type: "base" }
+            ]
+        },
+        // ケット·シー
+        {
+            id: "g126_s05",
+            name: "ケット·シー",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/126/Kudo.jpg"], type: "base" }
+            ]
+        },
+        // ルキウス·ティベリウス
+        {
+            id: "g126_s06",
+            name: "ルキウス·ティベリウス",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/126/Lucius.jpg"], type: "base" }
+            ]
+        },
+        // マリー
+        {
+            id: "g126_s07",
+            name: "マリー",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/126/Marie.jpg"], type: "base" }
+            ]
+        },
+        // メドラウト
+        {
+            id: "g126_s08",
+            name: "メドラウト",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/126/Medraut.jpg",
+                            "char/126/Medraut2.jpg"], type: "base" }
+            ]
+        },
+        // モルゴース
+        {
+            id: "g126_s09",
+            name: "モルゴース",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/126/Morgause.jpg"], type: "base" }
+            ]
+        },
+        // ニムエ
+        {
+            id: "g126_s10",
+            name: "ニムエ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/126/Nimue.jpg"], type: "base" }
+            ]
+        },
+        // パーシヴァル
+        {
+            id: "g126_s11",
+            name: "パーシヴァル",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/126/Percival.jpg",
+                            "char/126/Percival2.jpg"], type: "base" }
+            ]
+        },
+        // リャナンシー
+        {
+            id: "g126_s12",
+            name: "リャナンシー",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/126/Rashi.jpg"], type: "base" }
+            ]
         }
     ]
 };
