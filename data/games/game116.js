@@ -151,8 +151,8 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/1/Adele.jpg",
-                            "char/1/Adele2.jpg"], type: "base" }
+                { srcList: ["char/116/Adele.jpg",
+                            "char/116/Adele2.jpg"], type: "base" }
             ]
         },
         // バルトルト
@@ -165,8 +165,8 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/1/Barthold.jpg",
-                            "char/1/Barthold2.jpg"], type: "base" }
+                { srcList: ["char/116/Barthold.jpg",
+                            "char/116/Barthold2.jpg"], type: "base" }
             ]
         },
         // フベルト
@@ -179,8 +179,8 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/1/Hubert.jpg",
-                            "char/1/Hubert2.jpg"], type: "base" }
+                { srcList: ["char/116/Hubert.jpg",
+                            "char/116/Hubert2.jpg"], type: "base" }
             ]
         },
         // イグナツィ
@@ -193,8 +193,8 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/1/Ignacy.jpg",
-                            "char/1/Ignacy2.jpg"], type: "base" }
+                { srcList: ["char/116/Ignacy.jpg",
+                            "char/116/Ignacy2.jpg"], type: "base" }
             ]
         },
         // マレク
@@ -207,8 +207,8 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/1/Marek.jpg",
-                            "char/1/Marek2.jpg"], type: "base" }
+                { srcList: ["char/116/Marek.jpg",
+                            "char/116/Marek2.jpg"], type: "base" }
             ]
         },
         // ムローク
@@ -221,8 +221,8 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/1/Mrok.jpg",
-                            "char/1/Mrok2.jpg"], type: "base" }
+                { srcList: ["char/116/Mrok.jpg",
+                            "char/116/Mrok2.jpg"], type: "base" }
             ]
         }
     ]
