@@ -29,7 +29,8 @@ const gameData = {
             isFD: false,    // true=续作/FD专属角色，开关控制是否展示该角色
             isSub: false,    // true=配角，开关控制是否展示该角色
             images: [
-                { srcList: ["char/134/Nanami.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/134/Nanami.jpg",
+                            "char/134/Nanami2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // 上河明良
@@ -108,6 +109,63 @@ const gameData = {
             images: [
                 { srcList: ["char/134/Taira.jpg",
                             "char/134/Taira2.jpg"], type: "base" },
+            ]
+        },
+        // 夏八木光
+        {
+            id: "g134_s01",
+            name: "夏八木光",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/134/Hikaru.jpg",
+                            "char/134/Hikaru2.jpg"], type: "base" }
+            ]
+        },
+        // 柏木林斗
+        {
+            id: "g134_s02",
+            name: "柏木林斗",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/134/Rinto.jpg",
+                            "char/134/Rinto2.jpg"], type: "base" }
+            ]
+        },
+        // 直村琉耶
+        {
+            id: "g134_s03",
+            name: "直村琉耶",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/134/Ryuuya.jpg",
+                            "char/134/Ryuuya2.jpg",
+                            "char/134/Ryuuya32.jpg"], type: "base" }
+            ]
+        },
+        // 高城大和
+        {
+            id: "g134_s04",
+            name: "高城大和",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/134/Yamato.jpg",
+                            "char/134/Yamato2.jpg"], type: "base" }
             ]
         }
     ]
