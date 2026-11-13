@@ -191,7 +191,7 @@ const gameData = {
             isFdSub: false,
             images: [
                 { srcList: ["char/105/Mizuki2.jpg",
-                            "char/105/Mizuki3.jpg"], type: "base" }
+                            "char/105/Mizuki3.jpg"], type: "base" },
             ]
         },
         // 藤井奈津実
@@ -205,7 +205,7 @@ const gameData = {
             isFdSub: false,
             images: [
                 { srcList: ["char/105/Natsumi2.jpg",
-                            "char/105/Natsumi3.jpg"], type: "base" }
+                            "char/105/Natsumi3.jpg"], type: "base" },
             ]
         },
         // 有沢志穂
@@ -219,7 +219,7 @@ const gameData = {
             isFdSub: false,
             images: [
                 { srcList: ["char/105/Shiho2.jpg",
-                            "char/105/Shiho3.jpg"], type: "base" }
+                            "char/105/Shiho3.jpg"], type: "base" },
             ]
         },
         // 紺野珠美
@@ -233,7 +233,7 @@ const gameData = {
             isFdSub: false,
             images: [
                 { srcList: ["char/105/Tamami2.jpg",
-                            "char/105/Tamami3.jpg"], type: "base" }
+                            "char/105/Tamami3.jpg"], type: "base" },
             ]
         },
         // 尽
@@ -246,7 +246,7 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/105/Tsukushi3.jpg"], type: "base" }
+                { srcList: ["char/105/Tsukushi3.jpg"], type: "base" },
             ]
         }
     ]
