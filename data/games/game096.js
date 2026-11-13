@@ -1,36 +1,3 @@
-// 闇色の魔珠
-// 中文名: 暗色的魔珠
-// 开发: Daisy²
-// 发行: Daisy²、株式会社プロトタイプ
-// 剧本: 雨宮うた
-// 音乐: 細井聡司(細井そうし)
-// 人物设定: めろ
-// 主题歌演出: SUZUKA、YURIA、中原涼
-// 原画: めろ
-// 平台:
-// PC Nintendo Switch
-// 游戏类型: 全年齡乙女ゲーム
-// 游玩人数: 1
-// 发行日期:
-// PC版 2023-12-22
-// Nintendo Switch版 2025-11-20
-// 售价:
-// PC豪華特装版 11,000円（税込）
-// PC通常版 8,250円（税込）
-// Nintendo Switchパッケージ通常版 6,820 円（税込）
-// Nintendo Switchパッケージ初回限定版 11,880 円（税込）
-// Nintendo Switchダウンロード版 5,800 円（税込）
-// 主题歌作曲: 細井そうし
-// 链接: ErogameScape VNDB
-// 官方网站: daisy-daisy.in/products/majyu/
-
-// ==========【单个游戏独立数据模板｜新版ESModule】==========
-// 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
-// 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
-// 网页渲染时由 main.js 的 getWebImageUrl 拼接为 R2 完整 URL
-// Canvas 导出时由 export-canvas-render.js 的 convertR2ToJsDelivr 拼接为 jsDelivr URL
-// 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
-// 官中发售以后，需要修改：游戏名、发售年份、汉化厂商、封面图、角色名
 const gameData = {
     id: "game096", // 全局唯一ID，不可重复，如 game001
     name: "闇色の魔珠",
