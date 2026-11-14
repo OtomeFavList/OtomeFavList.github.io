@@ -298,6 +298,97 @@ const gameData = {
                 { srcList: ["char/140/Tono.jpg",
                             "char/140/Tono2.png"], type: "base" },
             ]
+        },
+        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g140_s01",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/140/.jpg"], type: "base" }
+            ]
+        },
+        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g140_s02",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/140/.jpg"], type: "base" }
+            ]
+        },
+        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g140_s03",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/140/.jpg"], type: "base" }
+            ]
+        },
+        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g140_s04",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/140/.jpg"], type: "base" }
+            ]
+        },
+        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g140_s05",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/140/.jpg"], type: "base" }
+            ]
+        },
+        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g140_s06",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/140/.jpg"], type: "base" }
+            ]
+        },
+        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g140_s07,
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/140/.jpg"], type: "base" }
+            ]
         }
     ]
 };
