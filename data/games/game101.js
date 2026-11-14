@@ -1,29 +1,5 @@
-// 薄桜鬼異聞 ベレジンスキーの魔女
-// 开发: オトメイト、デザインファクトリー
-// 发行: アイディアファクトリー
-// 音乐: 杉浦勇紀
-// 人物设定: 四季咲組、薄葉カゲロー
-// 主题歌作曲: 森拓人 / 鞠
-// 主题歌作词: 小岩井ことり / 鞠
-// 主题歌演出: 小岩井ことり / 瑞葵（mizuki）（UNIDOTS）
-// 导演: 藤澤経清
-// 平台: Nintendo Switch
-// 游戏类型: 女性向けドラマティックADV
-// 游玩人数: 1人
-// 发行日期: 2026-12-10
-// 售价:
-// 通常版 8,580円
-// 特装版 10,780円
-// ダウンロード版 8,580円
-// 官方网站: otomate.jp/witch_bere/
-
-// ==========【单个游戏独立数据模板｜新版ESModule】==========
-// 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
-// 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
-// 网页渲染时由 main.js 的 getWebImageUrl 拼接为 R2 完整 URL
-// Canvas 导出时由 export-canvas-render.js 的 convertR2ToJsDelivr 拼接为 jsDelivr URL
-// 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
-// 官中发售以后，需要修改：游戏名、发售年份、汉化厂商、封面图、角色名
+// ⚠️尚未发售信息未完善
+// ℹ️未官中，官中发售后需要修改：游戏名、发售年份、汉化厂商、封面图、info图、角色名
 // 封面不够清晰
 const gameData = {
     id: "game101", // 全局唯一ID，不可重复，如 game001
@@ -243,5 +219,5 @@ const gameData = {
     ]
 };
 
-// ✅新版导出！不要使用window.gameDataList.push！
+// ESModule导出
 export { gameData };
