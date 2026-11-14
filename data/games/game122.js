@@ -38,6 +38,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             isSub: true,
+            cpOnlyFemale: true,
             images: [
                 { srcList: ["char/122/Mari.jpg"], type: "base" },
             ]
@@ -50,6 +51,7 @@ const gameData = {
             isHidden: false,
             isFD: false,
             isSub: true,
+            cpOnlyFemale: true,
             images: [
                 { srcList: ["char/122/Maki.jpg",
                             "char/122/Maki2.jpg"], type: "base" },
