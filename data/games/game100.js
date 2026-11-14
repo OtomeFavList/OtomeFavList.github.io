@@ -1,3 +1,5 @@
+// ✅已核对信息
+// ℹ️未官中，官中发售后需要修改：游戏名、发售年份、汉化厂商、封面图、info图、角色名
 const gameData = {
     id: "game100", // 全局唯一ID，不可重复，如 game001
     name: "sins of KALEIDO 塔巡りし因果の魔女",
@@ -282,5 +284,5 @@ const gameData = {
     ]
 };
 
-// ✅新版导出！不要使用window.gameDataList.push！
+// ESModule导出
 export { gameData };
