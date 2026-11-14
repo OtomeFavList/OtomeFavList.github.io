@@ -35,7 +35,6 @@ const gameData = {
             id: "g122_f02",
             name: "有栖川マリ",
             gender: "female",
-            gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
@@ -48,7 +47,6 @@ const gameData = {
             id: "g122_f03",
             name: "真輝望",
             gender: "female",
-            gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
@@ -81,6 +79,19 @@ const gameData = {
             images: [
                 { srcList: ["char/122/Hatori.jpg",
                             "char/122/Hatori2.jpg"], type: "base" },
+            ]
+        },
+        // 真輝望
+        {
+            id: "g122_m03",
+            name: "真輝望",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            images: [
+                { srcList: ["char/122/Maki.jpg",
+                            "char/122/Maki2.jpg"], type: "base" },
             ]
         },
         // 明智優
@@ -210,6 +221,19 @@ const gameData = {
             isFdSub: false,
             images: [
                 { srcList: ["char/122/Loulou.jpg"], type: "base" }
+            ]
+        },
+        // 有栖川マリ
+        {
+            id: "g122_s09",
+            name: "有栖川マリ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/122/Mari.jpg"], type: "base" }
             ]
         },
         // フィリップ·ハンソン
