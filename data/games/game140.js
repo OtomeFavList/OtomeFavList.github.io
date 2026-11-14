@@ -1,10 +1,4 @@
-// ==========【单个游戏独立数据模板｜新版ESModule】==========
-// 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
-// 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
-// 网页渲染时由 main.js 的 getWebImageUrl 拼接为 R2 完整 URL
-// Canvas 导出时由 export-canvas-render.js 的 convertR2ToJsDelivr 拼接为 jsDelivr URL
-// 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
-// 官中发售以后，需要修改：游戏名、发售年份、汉化厂商、封面图、角色名
+// ⚠️FD内容未添加/FDAnotherSky官网差分未制作
 const gameData = {
     id: "game140", // 全局唯一ID，不可重复，如 game001
     name: "金色のコルダ３フルボイスSpecial",
@@ -207,7 +201,7 @@ const gameData = {
             gender: "male",
             isHidden: false,
             isFD: true,
-            isSub: false,
+            isSub: true,
             images: [
                 { srcList: ["char/140/Aran.jpg"], type: "base" },
             ]
@@ -219,7 +213,7 @@ const gameData = {
             gender: "male",
             isHidden: false,
             isFD: true,
-            isSub: false,
+            isSub: true,
             images: [
                 { srcList: ["char/140/Hido.jpg"], type: "base" },
             ]
@@ -231,7 +225,7 @@ const gameData = {
             gender: "male",
             isHidden: false,
             isFD: true,
-            isSub: false,
+            isSub: true,
             images: [
                 { srcList: ["char/140/Mutsumi.jpg"], type: "base" },
             ]
@@ -242,7 +236,7 @@ const gameData = {
             name: "長嶺雅紀",
             gender: "male",
             isHidden: false,
-            isFD: true,
+            isFD: false,
             isSub: false,
             images: [
                 { srcList: ["char/140/Nagamine.jpg"], type: "base" },
@@ -255,7 +249,7 @@ const gameData = {
             gender: "male",
             isHidden: false,
             isFD: true,
-            isSub: false,
+            isSub: true,
             images: [
                 { srcList: ["char/140/Nia.jpg",
                             "char/140/Nia2.png"], type: "base" },
@@ -268,7 +262,7 @@ const gameData = {
             gender: "male",
             isHidden: false,
             isFD: true,
-            isSub: false,
+            isSub: true,
             images: [
                 { srcList: ["char/140/Sora.jpg",
                             "char/140/Sora2.png"], type: "base" },
@@ -293,13 +287,13 @@ const gameData = {
             gender: "male",
             isHidden: false,
             isFD: true,
-            isSub: false,
+            isSub: true,
             images: [
                 { srcList: ["char/140/Tono.jpg",
                             "char/140/Tono2.png"], type: "base" },
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 東金源一
         {
             id: "g140_s01",
             name: "配角",
@@ -309,85 +303,87 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/140/.jpg"], type: "base" }
+                { srcList: ["char/140/Genyichi.jpg",
+                            "char/140/Genyichi2.jpg"], type: "base" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 碓氷穗乃香
         {
             id: "g140_s02",
-            name: "配角",
+            name: "碓氷穗乃香",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/140/.jpg"], type: "base" }
+                { srcList: ["char/140/Honoka.jpg",
+                            "char/140/Honoka2.jpg"], type: "base" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 伊織浩平
         {
             id: "g140_s03",
-            name: "配角",
+            name: "伊織浩平",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/140/.jpg"], type: "base" }
+                { srcList: ["char/140/Iori.jpg"], type: "base" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 小倉宗一郎
         {
             id: "g140_s04",
-            name: "配角",
+            name: "小倉宗一郎",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/140/.jpg"], type: "base" }
+                { srcList: ["char/140/Ogura.jpg"], type: "base" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 御影涼子
         {
             id: "g140_s05",
-            name: "配角",
+            name: "御影涼子",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/140/.jpg"], type: "base" }
+                { srcList: ["char/140/Ryouko.jpg"], type: "base" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 冥加枝織
         {
             id: "g140_s06",
-            name: "配角",
+            name: "冥加枝織",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/140/.jpg"], type: "base" }
+                { srcList: ["char/140/Shiori.jpg"], type: "base" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 狩野航
         {
             id: "g140_s07,
-            name: "配角",
+            name: "狩野航",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/140/.jpg"], type: "base" }
+                { srcList: ["char/140/Wataru.jpg"], type: "base" }
             ]
         }
     ]
