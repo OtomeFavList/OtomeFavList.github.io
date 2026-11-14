@@ -1,3 +1,5 @@
+// ✅已核对信息
+// ℹ️未官中，官中发售后需要修改：游戏名、发售年份、汉化厂商、封面图、info图、角色名
 const gameData = {
     id: "game098", // 全局唯一ID，不可重复，如 game001
     name: "君に惑い、君に溺れる。",
@@ -124,5 +126,5 @@ const gameData = {
     ]
 };
 
-// ✅新版导出！不要使用window.gameDataList.push！
+// ESModule导出
 export { gameData };
