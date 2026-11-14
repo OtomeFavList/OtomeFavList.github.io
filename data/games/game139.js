@@ -190,6 +190,49 @@ const gameData = {
                             "char/139/Kiriya2.jpg",
                             "char/139/Kiriya3.jpg"], type: "base" },
             ]
+        },
+        // 天羽菜美
+        {
+            id: "g139_s01",
+            name: "天羽菜美",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/139/Nami.png",
+                            "char/139/Nami2.jpg"], type: "base" }
+            ]
+        },
+        // リリ
+        {
+            id: "g139_s02",
+            name: "リリ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/139/Riri.jpg"], type: "base" }
+            ]
+        },
+        // 冬海笙子
+        {
+            id: "g139_s03",
+            name: "冬海笙子",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/139/Shouko.png",
+                            "char/139/Shouko2.jpg",
+                            "char/139/Shouko3.jpg",
+                            "char/139/Shouko4.jpg"], type: "base" }
+            ]
         }
     ]
 };
