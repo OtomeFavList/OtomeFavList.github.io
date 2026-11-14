@@ -388,7 +388,7 @@ const gameData = {
             isFdSub: true,
             images: [
                 { srcList: ["char/140/Genyichi.jpg",
-                            "char/140/Genyichi2.jpg"], type: "base" }
+                            "char/140/Genyichi2.png"], type: "base" }
             ]
         },
         // 碓氷穗乃香
@@ -402,7 +402,7 @@ const gameData = {
             isFdSub: true,
             images: [
                 { srcList: ["char/140/Honoka.jpg",
-                            "char/140/Honoka2.jpg"], type: "base" }
+                            "char/140/Honoka2.png"], type: "base" }
             ]
         },
         // 照辺一寿
