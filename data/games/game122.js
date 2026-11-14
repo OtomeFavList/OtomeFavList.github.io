@@ -1,4 +1,5 @@
-// ⚠️立绘差分未制作
+// ⚠️已核对信息，立绘差分未制作
+// ℹ️未官中，官中发售后需要修改：游戏名、发售年份、汉化厂商、封面图、info图、角色名
 const gameData = {
     id: "game122", // 全局唯一ID，不可重复，如 game001
     name: "私立ベルばら学園 ~ベルサイユのばらRe*imagination~",
@@ -10,7 +11,8 @@ const gameData = {
         {name:"浦井アンナ", lang:"zh"},
         {name:"吉田夏美", lang:"zh"},
         {name:"清水花歩", lang:"zh"},
-        {name:"高橋香里", lang:"zh"}
+        {name:"高橋香里", lang:"zh"},
+        {name:"ウサギリス株式会社", lang:"ja"}
     ],
     art: [
         {name:"東狐もず", lang:"zh"}
@@ -306,5 +308,5 @@ const gameData = {
     ]
 };
 
-// ✅新版导出！不要使用window.gameDataList.push！
+// ESModule导出
 export { gameData };
