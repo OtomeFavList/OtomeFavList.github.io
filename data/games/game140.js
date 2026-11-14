@@ -463,7 +463,7 @@ const gameData = {
         // 江波紫音
         {
             id: "g140_fs07",
-            name: "配角",
+            name: "江波紫音",
             gender: "male",
             isHidden: false,
             isFD: false,
