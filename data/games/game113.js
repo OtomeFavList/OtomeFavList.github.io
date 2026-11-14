@@ -1,10 +1,4 @@
-// ==========【单个游戏独立数据模板｜新版ESModule】==========
-// 新增游戏操作：复制本文件，修改所有信息、唯一ID、图片路径
-// 图片路径采用相对路径格式（game/xxx.jpg 或 char/xxx/xxx.jpg）
-// 网页渲染时由 main.js 的 getWebImageUrl 拼接为 R2 完整 URL
-// Canvas 导出时由 export-canvas-render.js 的 convertR2ToJsDelivr 拼接为 jsDelivr URL
-// 仅需要在 main.js 顶部 🚨gameIdList数组追加编号
-// 官中发售以后，需要修改：游戏名、发售年份、汉化厂商、封面图、角色名
+// ✅已核对信息
 const gameData = {
     id: "game1", // 全局唯一ID，不可重复，如 game001
     name: "崩坏世界的指引之人",
@@ -19,10 +13,10 @@ const gameData = {
     ],
     cover: "game/113.jpg", // 相对路径，游戏封面
     charList: [
-        // 桃井ひかり
+        // 桃井光璃
         {
             id: "g113_f01",
-            name: "桃井ひかり",
+            name: "桃井光璃",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,    // true=续作/FD专属角色，开关控制是否展示该角色
@@ -31,10 +25,10 @@ const gameData = {
                 { srcList: ["char/113/Momoi.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 夏秋冬実果
+        // 夏秋冬实果
         {
             id: "g113_m01",
-            name: "夏秋冬実果",
+            name: "夏秋冬实果",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -46,5 +40,5 @@ const gameData = {
     ]
 };
 
-// ✅新版导出！不要使用window.gameDataList.push！
+// ESModule导出
 export { gameData };
