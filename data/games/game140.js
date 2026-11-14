@@ -236,7 +236,7 @@ const gameData = {
             name: "長嶺雅紀",
             gender: "male",
             isHidden: false,
-            isFD: false,
+            isFD: true,
             isSub: false,
             images: [
                 { srcList: ["char/140/Nagamine.jpg"], type: "base" },
@@ -300,8 +300,8 @@ const gameData = {
             gender: "male",
             isHidden: false,
             isFD: false,
-            isSub: true,
-            isFdSub: false,
+            isSub: false,
+            isFdSub: true,
             images: [
                 { srcList: ["char/140/Genyichi.jpg",
                             "char/140/Genyichi2.jpg"], type: "base" }
@@ -314,8 +314,8 @@ const gameData = {
             gender: "male",
             isHidden: false,
             isFD: false,
-            isSub: true,
-            isFdSub: false,
+            isSub: false,
+            isFdSub: true,
             images: [
                 { srcList: ["char/140/Honoka.jpg",
                             "char/140/Honoka2.jpg"], type: "base" }
@@ -341,8 +341,8 @@ const gameData = {
             gender: "male",
             isHidden: false,
             isFD: false,
-            isSub: true,
-            isFdSub: false,
+            isSub: false,
+            isFdSub: true,
             images: [
                 { srcList: ["char/140/Ogura.jpg"], type: "base" }
             ]
@@ -384,6 +384,45 @@ const gameData = {
             isFdSub: false,
             images: [
                 { srcList: ["char/140/Wataru.jpg"], type: "base" }
+            ]
+        },
+        // アレクセイ·ジューコフ
+        {
+            id: "g140_s08",
+            name: "アレクセイ·ジューコフ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/140/.jpg"], type: "base" }
+            ]
+        },
+        // 円城寺冴香
+        {
+            id: "g140_s09",
+            name: "円城寺冴香",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/140/.jpg"], type: "base" }
+            ]
+        },
+        // 续作/FD次要角色（isFdSub=true → 开关开启才显示整个角色卡片）
+        {
+            id: "g140_fs01",
+            name: "配角",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/140/.jpg"], type: "base" }
             ]
         }
     ]
