@@ -203,7 +203,8 @@ const gameData = {
             isFD: true,
             isSub: true,
             images: [
-                { srcList: ["char/140/Aran.jpg"], type: "base" },
+                { srcList: ["char/140/Aran.jpg",
+                            "char/140/Aran2.png"], type: "base" },
             ]
         },
         // 氷渡貴史
@@ -331,7 +332,8 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/140/Iori.jpg"], type: "base" }
+                { srcList: ["char/140/Iori.jpg",
+                            "char/140/Iori2.png"], type: "base" }
             ]
         },
         // 小倉宗一郎
@@ -357,7 +359,8 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/140/Ryouko.jpg"], type: "base" }
+                { srcList: ["char/140/Ryouko.jpg",
+                            "char/140/Ryouko2.png"], type: "base" }
             ]
         },
         // 冥加枝織
@@ -370,7 +373,8 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/140/Shiori.jpg"], type: "base" }
+                { srcList: ["char/140/Shiori.jpg",
+                            "char/140/Shiori2.png"], type: "base" }
             ]
         },
         // 狩野航
@@ -383,7 +387,8 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/140/Wataru.jpg"], type: "base" }
+                { srcList: ["char/140/Wataru.jpg",
+                            "char/140/Wataru2.png"], type: "base" }
             ]
         },
         // アレクセイ·ジューコフ
@@ -396,7 +401,8 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/140/.jpg"], type: "base" }
+                { srcList: ["char/140/Alexei.jpg",
+                            "char/140/Alexei2.png"], type: "base" }
             ]
         },
         // 円城寺冴香
@@ -409,12 +415,69 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/140/.jpg"], type: "base" }
+                { srcList: ["char/140/Saeka.jpg"], type: "base" }
             ]
         },
-        // 续作/FD次要角色（isFdSub=true → 开关开启才显示整个角色卡片）
+        // 火原和樹
         {
             id: "g140_fs01",
+            name: "火原和樹",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/139/Kazuki4.jpg"
+                            "char/140/Kazuki.jpg",
+                            "char/140/Kazuki2.png"], type: "base" }
+            ]
+        },
+        // 照辺一寿
+        {
+            id: "g140_fs02",
+            name: "照辺一寿",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/140/Kazutoshi.jpg",
+                            "char/140/Kazutoshi2.png"], type: "base" }
+            ]
+        },
+        // 阿藤啓太
+        {
+            id: "g140_fs03",
+            name: "阿藤啓太",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/140/Keita.jpg",
+                            "char/140/Keita2.png"], type: "base" }
+            ]
+        },
+        // 目時文吾
+        {
+            id: "g140_fs04",
+            name: "目時文吾",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/140/Meji.jpg",
+                            "char/140/Meji2.png"], type: "base" }
+            ]
+        },
+        // 江波紫音
+        {
+            id: "g140_fs05",
             name: "配角",
             gender: "male",
             isHidden: false,
@@ -422,7 +485,34 @@ const gameData = {
             isSub: false,
             isFdSub: true,
             images: [
-                { srcList: ["char/140/.jpg"], type: "base" }
+                { srcList: ["char/140/Shion.jpg",
+                            "char/140/Shion2.png"], type: "base" }
+            ]
+        },
+        // 月森蓮
+        {
+            id: "g140_fs06",
+            name: "月森蓮",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/139/Ren5.jpg"], type: "base" }
+            ]
+        },
+        // 土浦梁太郎
+        {
+            id: "g140_fs07",
+            name: "土浦梁太郎",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/139/Ryoutarou5.jpg"], type: "base" }
             ]
         }
     ]
