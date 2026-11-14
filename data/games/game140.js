@@ -294,37 +294,9 @@ const gameData = {
                             "char/140/Tono2.png"], type: "base" },
             ]
         },
-        // 東金源一
-        {
-            id: "g140_s01",
-            name: "配角",
-            gender: "male",
-            isHidden: false,
-            isFD: false,
-            isSub: false,
-            isFdSub: true,
-            images: [
-                { srcList: ["char/140/Genyichi.jpg",
-                            "char/140/Genyichi2.jpg"], type: "base" }
-            ]
-        },
-        // 碓氷穗乃香
-        {
-            id: "g140_s02",
-            name: "碓氷穗乃香",
-            gender: "male",
-            isHidden: false,
-            isFD: false,
-            isSub: false,
-            isFdSub: true,
-            images: [
-                { srcList: ["char/140/Honoka.jpg",
-                            "char/140/Honoka2.jpg"], type: "base" }
-            ]
-        },
         // 伊織浩平
         {
-            id: "g140_s03",
+            id: "g140_s01",
             name: "伊織浩平",
             gender: "male",
             isHidden: false,
@@ -336,22 +308,9 @@ const gameData = {
                             "char/140/Iori2.png"], type: "base" }
             ]
         },
-        // 小倉宗一郎
-        {
-            id: "g140_s04",
-            name: "小倉宗一郎",
-            gender: "male",
-            isHidden: false,
-            isFD: false,
-            isSub: false,
-            isFdSub: true,
-            images: [
-                { srcList: ["char/140/Ogura.jpg"], type: "base" }
-            ]
-        },
         // 御影涼子
         {
-            id: "g140_s05",
+            id: "g140_s02",
             name: "御影涼子",
             gender: "male",
             isHidden: false,
@@ -365,7 +324,7 @@ const gameData = {
         },
         // 冥加枝織
         {
-            id: "g140_s06",
+            id: "g140_s03",
             name: "冥加枝織",
             gender: "male",
             isHidden: false,
@@ -379,7 +338,7 @@ const gameData = {
         },
         // 狩野航
         {
-            id: "g140_s07,
+            id: "g140_s04",
             name: "狩野航",
             gender: "male",
             isHidden: false,
@@ -393,7 +352,7 @@ const gameData = {
         },
         // アレクセイ·ジューコフ
         {
-            id: "g140_s08",
+            id: "g140_s05",
             name: "アレクセイ·ジューコフ",
             gender: "male",
             isHidden: false,
@@ -407,7 +366,7 @@ const gameData = {
         },
         // 円城寺冴香
         {
-            id: "g140_s09",
+            id: "g140_s06",
             name: "円城寺冴香",
             gender: "male",
             isHidden: false,
@@ -418,24 +377,37 @@ const gameData = {
                 { srcList: ["char/140/Saeka.jpg"], type: "base" }
             ]
         },
-        // 火原和樹
+        // 東金源一
         {
             id: "g140_fs01",
-            name: "火原和樹",
+            name: "配角",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: false,
             isFdSub: true,
             images: [
-                { srcList: ["char/139/Kazuki4.jpg"
-                            "char/140/Kazuki.jpg",
-                            "char/140/Kazuki2.png"], type: "base" }
+                { srcList: ["char/140/Genyichi.jpg",
+                            "char/140/Genyichi2.jpg"], type: "base" }
+            ]
+        },
+        // 碓氷穗乃香
+        {
+            id: "g140_fs02",
+            name: "碓氷穗乃香",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/140/Honoka.jpg",
+                            "char/140/Honoka2.jpg"], type: "base" }
             ]
         },
         // 照辺一寿
         {
-            id: "g140_fs02",
+            id: "g140_fs03",
             name: "照辺一寿",
             gender: "male",
             isHidden: false,
@@ -447,9 +419,22 @@ const gameData = {
                             "char/140/Kazutoshi2.png"], type: "base" }
             ]
         },
+        // 小倉宗一郎
+        {
+            id: "g140_fs04",
+            name: "小倉宗一郎",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/140/Ogura.jpg"], type: "base" }
+            ]
+        },
         // 阿藤啓太
         {
-            id: "g140_fs03",
+            id: "g140_fs05",
             name: "阿藤啓太",
             gender: "male",
             isHidden: false,
@@ -463,7 +448,7 @@ const gameData = {
         },
         // 目時文吾
         {
-            id: "g140_fs04",
+            id: "g140_fs06",
             name: "目時文吾",
             gender: "male",
             isHidden: false,
@@ -477,7 +462,7 @@ const gameData = {
         },
         // 江波紫音
         {
-            id: "g140_fs05",
+            id: "g140_fs07",
             name: "配角",
             gender: "male",
             isHidden: false,
@@ -489,9 +474,23 @@ const gameData = {
                             "char/140/Shion2.png"], type: "base" }
             ]
         },
+        // 火原和樹
+        {
+            id: "g140_fs08",
+            name: "火原和樹",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: true,
+            images: [
+                { srcList: ["char/140/Kazuki.jpg",
+                            "char/140/Kazuki2.png"], type: "base" }
+            ]
+        },
         // 月森蓮
         {
-            id: "g140_fs06",
+            id: "g140_fs09",
             name: "月森蓮",
             gender: "male",
             isHidden: false,
@@ -504,7 +503,7 @@ const gameData = {
         },
         // 土浦梁太郎
         {
-            id: "g140_fs07",
+            id: "g140_fs010",
             name: "土浦梁太郎",
             gender: "male",
             isHidden: false,
