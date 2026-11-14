@@ -29,7 +29,7 @@ const gameData = {
             isSub: false,    // true=配角，开关控制是否展示该角色
             images: [
                 { srcList: ["char/138/Mizuki.jpg",
-                            "char/138/Mizuki3.jpg"
+                            "char/138/Mizuki3.jpg",
                             "char/138/Mizuki2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
@@ -43,7 +43,7 @@ const gameData = {
             isSub: false,
             images: [
                 { srcList: ["char/138/Asahi.jpg",
-                            "char/138/Asahi3.jpg"
+                            "char/138/Asahi3.jpg",
                             "char/138/Asahi2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
@@ -57,7 +57,7 @@ const gameData = {
             isSub: false,
             images: [
                 { srcList: ["char/138/Hinata.jpg",
-                            "char/138/Hinata3.jpg"
+                            "char/138/Hinata3.jpg",
                             "char/138/Hinata2.jpg"], type: "base" },
             ]
         },
@@ -111,7 +111,7 @@ const gameData = {
             isSub: false,
             images: [
                 { srcList: ["char/138/Souta.jpg",
-                            "char/138/Souta3.jpg"
+                            "char/138/Souta3.jpg",
                             "char/138/Souta2.jpg"], type: "base" },
             ]
         },
@@ -271,6 +271,7 @@ const gameData = {
                 { srcList: ["char/138/？？？.jpg"], type: "base" }
             ]
         }
+    ]
 };
 
 // ✅新版导出！不要使用window.gameDataList.push！
