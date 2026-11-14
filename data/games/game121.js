@@ -7,7 +7,7 @@
 // 官中发售以后，需要修改：游戏名、发售年份、汉化厂商、封面图、角色名
 const gameData = {
     id: "game121", // 全局唯一ID，不可重复，如 game001
-    name: "忍び、恋うつつ",
+    name: "忍び、恋うつつ -万花彩絵巻-",
     year: "2020",
     publisher: ["Otomate"],
     cnStudio: "暂无",
