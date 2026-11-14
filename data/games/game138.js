@@ -29,6 +29,7 @@ const gameData = {
             isSub: false,    // true=配角，开关控制是否展示该角色
             images: [
                 { srcList: ["char/138/Mizuki.jpg",
+                            "char/138/Mizuki3.jpg"
                             "char/138/Mizuki2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
@@ -42,6 +43,7 @@ const gameData = {
             isSub: false,
             images: [
                 { srcList: ["char/138/Asahi.jpg",
+                            "char/138/Asahi3.jpg"
                             "char/138/Asahi2.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
@@ -55,6 +57,7 @@ const gameData = {
             isSub: false,
             images: [
                 { srcList: ["char/138/Hinata.jpg",
+                            "char/138/Hinata3.jpg"
                             "char/138/Hinata2.jpg"], type: "base" },
             ]
         },
@@ -81,6 +84,7 @@ const gameData = {
             isSub: false,
             images: [
                 { srcList: ["char/138/Nao.jpg",
+                            "char/138/Nao3.jpg",
                             "char/138/Nao2.jpg"], type: "base" },
             ]
         },
@@ -107,10 +111,166 @@ const gameData = {
             isSub: false,
             images: [
                 { srcList: ["char/138/Souta.jpg",
+                            "char/138/Souta3.jpg"
                             "char/138/Souta2.jpg"], type: "base" },
             ]
+        },
+        // 仁科葵
+        {
+            id: "g138_s01",
+            name: "仁科葵",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/138/Aoi.jpg"], type: "base" }
+            ]
+        },
+        // 南条樹
+        {
+            id: "g138_s02",
+            name: "南条樹",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/138/Itsuki.jpg"], type: "base" }
+            ]
+        },
+        // カグナ
+        {
+            id: "g138_s03",
+            name: "カグナ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/138/Kaguna.jpg"], type: "base" }
+            ]
+        },
+        // 仁科浩介
+        {
+            id: "g138_s04",
+            name: "仁科浩介",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/138/Kousuke.jpg"], type: "base" }
+            ]
+        },
+        // 高耶
+        {
+            id: "g138_s05",
+            name: "高耶",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/138/Kouya.jpg"], type: "base" }
+            ]
+        },
+        // 松永京平
+        {
+            id: "g138_s06",
+            name: "松永京平",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/138/Kyouhei.jpg"], type: "base" }
+            ]
+        },
+        // 水世
+        {
+            id: "g138_s07",
+            name: "水世",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/138/Minase.jpg"], type: "base" }
+            ]
+        },
+        // サカキ
+        {
+            id: "g138_s08",
+            name: "サカキ",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/138/Sakaki.jpg"], type: "base" }
+            ]
+        },
+        // 南条辰蔵
+        {
+            id: "g138_s09",
+            name: "南条辰蔵",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/138/Shinzou.jpg"], type: "base" }
+            ]
+        },
+        // 花山紬
+        {
+            id: "g138_s10",
+            name: "花山紬",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/138/Tsumugi.jpg"], type: "base" }
+            ]
+        },
+        // 善右衛門
+        {
+            id: "g138_s11",
+            name: "善右衛門",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/138/Zenemo.jpg"], type: "base" }
+            ]
+        },
+        // ？？？
+        {
+            id: "g138_s12",
+            name: "？？？",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/138/？？？.jpg"], type: "base" }
+            ]
         }
-    ]
 };
 
 // ✅新版导出！不要使用window.gameDataList.push！
