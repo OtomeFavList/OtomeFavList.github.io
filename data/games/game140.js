@@ -380,7 +380,7 @@ const gameData = {
         // 東金源一
         {
             id: "g140_fs01",
-            name: "配角",
+            name: "東金源一",
             gender: "male",
             isHidden: false,
             isFD: false,
