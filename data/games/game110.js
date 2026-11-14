@@ -12,7 +12,8 @@ const gameData = {
         {name:"クレイ·シーゴット", lang:"ja"}
     ],
     art: [
-        {name:"工画堂スタジオ", lang:"zh"}
+        {name:"工画堂スタジオ", lang:"zh"},
+        {name:"倉花千夏", lang:"zh"}
     ],
     cover: "game/110.jpg", // 相对路径，游戏封面
     charList: [
