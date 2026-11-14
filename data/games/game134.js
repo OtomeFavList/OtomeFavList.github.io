@@ -151,7 +151,7 @@ const gameData = {
             images: [
                 { srcList: ["char/134/Ryuuya.jpg",
                             "char/134/Ryuuya2.jpg",
-                            "char/134/Ryuuya32.jpg"], type: "base" }
+                            "char/134/Ryuuya3.jpg"], type: "base" }
             ]
         },
         // 高城大和
