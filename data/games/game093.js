@@ -17,20 +17,20 @@ const gameData = {
         {name:"花邑まい", lang:"zh"},
         {name:"うた", lang:"ja"}
     ],
-    cover: "game/093.jpg", // 相对路径，游戏封面
+    cover: "game/093.jpg",
     charList: [
         // 涼乃環無
         {
             id: "g093_f01",
             name: "涼乃環無",
             gender: "female",
-            isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
-            isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
+            isHidden: false,
+            isFD: false,
             images: [
                 { srcList: ["char/093/Kanna.jpg",
                             "char/093/Kanna2.jpg",
                             "char/093/Kanna3.png",
-                            "char/093/Kanna4.jpg"], type: "base" },      // 默认基础图，始终加载
+                            "char/093/Kanna4.jpg"], type: "base" },
             ]
         },
         // 宗像戒
@@ -46,7 +46,7 @@ const gameData = {
                             "char/093/Kai3.png",
                             "char/093/Kai4.jpg",
                             "char/093/Kai5.jpg",
-                            "char/093/Kai6.jpg"], type: "base" },      // 默认基础图，始终加载
+                            "char/093/Kai6.jpg"], type: "base" },
             ]
         },
         // 雅火
@@ -115,5 +115,5 @@ const gameData = {
     ]
 };
 
-// ✅新版导出！不要使用window.gameDataList.push！
+// ESModule导出
 export { gameData };
