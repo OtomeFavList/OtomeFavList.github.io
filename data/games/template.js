@@ -2,7 +2,7 @@
 // 图片路径采用相对路径格式，网页渲染时由 main.js 的 getWebImageUrl 拼接为 R2 完整 URL
 // Canvas 导出时由 export-canvas-render.js 的 convertR2ToJsDelivr 拼接为 jsDelivr URL
 // ✅已核对信息
-// ⚠️已核对信息，FD内容未添加/FD官网差分未制作/续作官网差分未制作/立绘差分未制作/立绘未重置/配角未添加
+// ⚠️已核对信息/未发售信息未完善，FD内容未添加/FD官网差分未制作/续作官网差分未制作/立绘差分未制作/立绘未重置/配角未添加
 // ℹ️未官中，官中发售后需要修改：游戏名、发售年份、汉化厂商、封面图、info图、角色名
 const gameData = {
     id: "game1", // 全局唯一ID，不可重复，如 game001
