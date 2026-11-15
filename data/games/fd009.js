@@ -1,6 +1,6 @@
 const gameData = {
     id: "fd009",
-    name: "Code:Realize ~祝福的未來~",
+    name: "Code:Realize ~祝福的未来~",
     year: "2022",
     publisher: ["Otomate"],
     cnStudio: "JSD",
