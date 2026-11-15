@@ -2,7 +2,7 @@
 // ℹ️未官中，官中发售后需要修改：游戏名、发售年份、汉化厂商、封面图、info图、角色名
 const gameData = {
     id: "game114", // 全局唯一ID，不可重复，如 game001
-    name: "OZMAFIA!! -vivace-",
+    name: "OZMAFIA!!-vivace-",
     year: "2020",
     publisher: ["Poni-Pachet"],
     cnStudio: "暂无",
