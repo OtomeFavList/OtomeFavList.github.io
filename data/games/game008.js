@@ -1,5 +1,5 @@
 // data/games/game008.js
-// ✅已核对信息，编剧信息采用Steam版
+// ✅已核对信息
 const gameData = {
     id: "game008",
     name: "剑为君舞 for S",
@@ -7,18 +7,30 @@ const gameData = {
     publisher: ["Rejet"],
     cnStudio: "JOYOLAND",
     writer: [
-        {name:"加納高子", lang:"zh"},
-        {name:"吉村りりか", lang:"zh"},
-        {name:"夏野景", lang:"zh"},
-        {name:"小和泉いづみ", lang:"zh"},
-        {name:"山田かのこ", lang:"zh"},
-        {name:"砂原有季", lang:"zh"},
         {name:"関涼子", lang:"zh"},
+        {name:"夏野景", lang:"zh"},
+        {name:"砂原有季", lang:"zh"},
+        {name:"山田かのこ", lang:"zh"},
+        {name:"加納高子", lang:"zh"},
         {name:"谷村日名子", lang:"zh"},
-        {name:"真崎結衣", lang:"zh"},
+        {name:"吉村りりか", lang:"zh"},
         {name:"都井きつき", lang:"zh"},
         {name:"海桐ユキチカ", lang:"zh"},
+        {name:"卯木悠里", lang:"zh"},
+        {name:"中越麻朝", lang:"zh"},
+        {name:"鷹匠早紀", lang:"zh"},
+        {name:"瀬多海人", lang:"zh"},
+        {name:"田中しかく", lang:"zh"},
+        {name:"小和泉いづみ", lang:"zh"},
+        {name:"真崎結衣", lang:"zh"},
+        {name:"有栖川あやみ", lang:"zh"},
+        {name:"久遠まひ", lang:"zh"},
+        {name:"三芳秀克", lang:"zh"},
+        {name:"秋月ひろ", lang:"zh"},
+        {name:"株式会社PolkaDot", lang:"zh"},
+        {name:"こたに白子", lang:"ja"},
         {name:"やまだ有見", lang:"ja"}
+        
     ],
     art: [
         {name:"読", lang:"zh"}
