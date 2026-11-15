@@ -5,7 +5,7 @@ const gameData = {
     publisher: ["WoGa"],
     cnStudio: "dramatic create",
     writer: [
-        {name:"", lang:"zh"}
+        {name:"月花", lang:"zh"}
     ],
     art: [
         {name:"由良", lang:"zh"}
