@@ -5,6 +5,7 @@ const fdGameFileNames = [
     "game006.js", "game007.js", "game008.js", "game009.js", "game010.js",
     "game011.js", "game012.js", "game013.js", "game014.js", "game015.js",
     "game016.js", "game017.js", "game018.js", "game019.js", "game020.js",
+    "game021.js", "game022.js", "game023.js", "game024.js", "game025.js",
 ];
 window.fdGameList = [];
 
