@@ -2,7 +2,7 @@
 // ℹ️未官中，官中发售后需要修改：游戏名、发售年份、汉化厂商、封面图、info图、角色名
 const gameData = {
     id: "game118", // 全局唯一ID，不可重复，如 game001
-    name: "DesperaDrops",
+    name: "DesperaDrops/デスペラドロップス",
     year: "2023",
     publisher: ["RED"],
     cnStudio: "暂无",
