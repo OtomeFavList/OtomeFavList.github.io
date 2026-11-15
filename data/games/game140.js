@@ -1,4 +1,5 @@
-// ⚠️FD内容未添加/FDAnotherSky官网差分未制作
+// ⚠️已核对信息，FDAnotherSky官网差分未制作
+// ℹ️未官中，官中发售后需要修改：游戏名、发售年份、汉化厂商、封面图、info图、角色名
 const gameData = {
     id: "game140", // 全局唯一ID，不可重复，如 game001
     name: "金色のコルダ３フルボイスSpecial",
@@ -6,7 +7,16 @@ const gameData = {
     publisher: ["KOEI"],
     cnStudio: "暂无",
     writer: [
-        {name:"Ruby Party", lang:"en"}
+        {name:"杉原希", lang:"zh"},
+        {name:"松濤明子", lang:"zh"},
+        {name:"上田聡子", lang:"zh"},
+        {name:"筒井麻海", lang:"zh"},
+        {name:"中村美沙", lang:"zh"},
+        {name:"鈴原希", lang:"zh"},
+        {name:"下村恭子", lang:"zh"},
+        {name:"亀井美幸", lang:"zh"},
+        {name:"千田愛美", lang:"zh"},
+        {name:"須田真尉子", lang:"zh"}
     ],
     art: [
         {name:"呉由姫", lang:"zh"}
@@ -517,5 +527,5 @@ const gameData = {
     ]
 };
 
-// ✅新版导出！不要使用window.gameDataList.push！
+// ESModule导出
 export { gameData };
