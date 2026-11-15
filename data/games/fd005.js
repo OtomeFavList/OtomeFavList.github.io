@@ -1,16 +1,16 @@
 const gameData = {
-    id: "fd0005",
+    id: "fd005",
     name: "Cupid Parasite 共生邱比特-Sweet & Spicy Darling.-",
     year: "2024",
     publisher: ["Otomate"],
     cnStudio: "GSE",
     writer: [
-        {name:"中文编剧", lang:"zh"},
+        {name:"吉村りりか", lang:"zh"}
     ],
     art: [
-        {name:"日文原画", lang:"ja"},
+        {name:"ユウヤ", lang:"ja"}
     ],
-    cover: "game/fd0005.jpg",
-    baseGameId: "game008"
+    cover: "game/fd005.jpg",
+    baseGameId: "game009"
 };
 export { gameData };
