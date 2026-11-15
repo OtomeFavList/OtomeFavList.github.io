@@ -3,7 +3,7 @@
 // ℹ️部分配角名未校对
 const gameData = {
     id: "game030", // 全局唯一ID，不可重复
-    name: "花合 朔",
+    name: "花合 朔 -蛟篇-",
     year: "2023",
     publisher: ["WoGa"],
     cnStudio: "dramatic create",
