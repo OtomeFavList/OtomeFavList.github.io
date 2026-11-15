@@ -1,5 +1,4 @@
 // ✅已核对信息
-// ℹ️未官中，官中发售后需要修改：游戏名、发售年份、汉化厂商、封面图、info图、角色名
 const gameData = {
     id: "game111", // 全局唯一ID，不可重复，如 game001
     name: "穿军靴的猫",
@@ -17,10 +16,10 @@ const gameData = {
     ],
     cover: "game/111.jpg", // 相对路径，游戏封面
     charList: [
-        // タマ
+        // 玉
         {
             id: "g111_f01",
-            name: "タマ",
+            name: "玉",
             gender: "female",
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,    // true=续作/FD专属角色，开关控制是否展示该角色
@@ -31,10 +30,10 @@ const gameData = {
                             "char/111/Tama4.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // 神谷一颯
+        // 神谷一飒
         {
             id: "g111_m01",
-            name: "神谷一颯",
+            name: "神谷一飒",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -47,10 +46,10 @@ const gameData = {
                             "char/111/Kamiya5.jpg"], type: "base" },      // 默认基础图，始终加载
             ]
         },
-        // キティ
+        // 凯迪
         {
             id: "g111_m02",
-            name: "キティ",
+            name: "凯迪",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -62,10 +61,10 @@ const gameData = {
                             "char/111/Kitty4.jpg"], type: "base" },
             ]
         },
-        // コタロウ
+        // 小太郎
         {
             id: "g111_m03",
-            name: "コタロウ",
+            name: "小太郎",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -76,10 +75,10 @@ const gameData = {
                             "char/111/Kotarou4.jpg"], type: "base" },
             ]
         },
-        // くーにゃん
+        // 小咕
         {
             id: "g111_m04",
-            name: "くーにゃん",
+            name: "小咕",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -90,10 +89,10 @@ const gameData = {
                             "char/111/KuNyan4.jpg"], type: "base" },
             ]
         },
-        // シェド
+        // 施德
         {
             id: "g111_m05",
-            name: "シェド",
+            name: "施德",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -104,10 +103,10 @@ const gameData = {
                             "char/111/Shed4.jpg"], type: "base" },
             ]
         },
-        // ユズ
+        // 柚
         {
             id: "g111_m06",
-            name: "ユズ",
+            name: "柚",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -118,10 +117,10 @@ const gameData = {
                             "char/111/Yuzu4.jpg"], type: "base" },
             ]
         },
-        // ハク
+        // 狛
         {
             id: "g111_s01",
-            name: "ハク",
+            name: "狛",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -132,10 +131,10 @@ const gameData = {
                             "char/111/Haku2.jpg"], type: "base" }
             ]
         },
-        // インク
+        // 因克
         {
             id: "g111_s02",
-            name: "インク",
+            name: "因克",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -147,10 +146,10 @@ const gameData = {
                             "char/111/Ink3.jpg"], type: "base" }
             ]
         },
-        // シュバルツ
+        // 修瓦茨
         {
             id: "g111_s03",
-            name: "シュバルツ",
+            name: "修瓦茨",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -161,10 +160,10 @@ const gameData = {
                             "char/111/Schwartz2.jpg"], type: "base" }
             ]
         },
-        // セキ
+        // 皙
         {
             id: "g111_s04",
-            name: "セキ",
+            name: "皙",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -175,10 +174,10 @@ const gameData = {
                             "char/111/Seki2.jpg"], type: "base" }
             ]
         },
-        // ソラ
+        // 空
         {
             id: "g111_s05",
-            name: "ソラ",
+            name: "空",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -190,10 +189,10 @@ const gameData = {
                             "char/111/Sora3.jpg"], type: "base" }
             ]
         },
-        // ティガー
+        // 提格
         {
             id: "g111_s06",
-            name: "ティガー",
+            name: "提格",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -204,10 +203,10 @@ const gameData = {
                             "char/111/Tigger2.jpg"], type: "base" }
             ]
         },
-        // ウィロウ
+        // 维洛
         {
             id: "g111_s07",
-            name: "ウィロウ",
+            name: "维洛",
             gender: "male",
             isHidden: false,
             isFD: false,
