@@ -1,6 +1,6 @@
 const gameData = {
     id: "fd026",
-    name: "花合 朔 -姬空木篇-",
+    name: "花合 朔 -唐红/宇津都篇-",
     year: "2023",
     publisher: ["WoGa"],
     cnStudio: "dramatic create",
