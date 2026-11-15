@@ -2,7 +2,7 @@
 const gameData = {
     id: "fd006",
     name: "ニル·アドミラリの天秤 クロユリ炎陽譚",
-    year: "2018",
+    year: "2017",
     publisher: ["Otomate"],
     cnStudio: "暂无",
     writer: [
