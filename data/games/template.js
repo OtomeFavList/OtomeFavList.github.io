@@ -8,7 +8,7 @@ const gameData = {
     id: "game1", // 全局唯一ID，不可重复，如 game001
     name: "示例乙女游戏",
     year: "20",
-    publisher: ["原厂发行商"],
+    publisher: ["原发行商/品牌"],
     cnStudio: "汉化厂商",
     writer: [
         {name:"中文编剧", lang:"zh"},
