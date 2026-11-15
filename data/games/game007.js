@@ -10,6 +10,7 @@ const gameData = {
         {name:"有野幸", lang:"zh"},
         {name:"砂原有季", lang:"zh"},
         {name:"小縞なお", lang:"zh"},
+        {name:"有限会社Dilettantes·Nest", lang:"zh"},
         {name:"いわた志信", lang:"ja"}
     ],
     art: [
