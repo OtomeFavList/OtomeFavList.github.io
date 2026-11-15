@@ -12,6 +12,7 @@ const gameData = {
         {name:"三芳秀克", lang:"zh"},
         {name:"久遠まひろ", lang:"zh"},
         {name:"関涼子", lang:"zh"},
+        {name:"株式会社PolkaDot", lang:"zh"},
         {name:"やまだ有見", lang:"ja"},
         {name:"こたに白子", lang:"ja"}
     ],
