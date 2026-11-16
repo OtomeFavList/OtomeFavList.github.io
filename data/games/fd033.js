@@ -1,4 +1,4 @@
-⚠️原画信息未明确
+// ⚠️原画信息不确切
 const gameData = {
     id: "fd033",
     name: "DIABOLIK LOVERS CHAOS LINEAGE 魔鬼恋人 混乱族谱",
