@@ -1,9 +1,17 @@
-DIABOLIK LOVERS VANDEAD CARNIVAL
-剧本: やまだ有見
-音乐: 杉浦勇紀
-人物设定: さとい
-主题歌作曲: MIKOTO
-主题歌作词: 岩崎大介
-主题歌演出: 緑川光、近藤隆、鳥海浩輔
-原画: さとい
-未汉化
+// ℹ️未官中，官中发售后需要修改：游戏名、发售年份、汉化厂商、封面图、info图、角色名
+const gameData = {
+    id: "fd034",
+    name: "DIABOLIK LOVERS VANDEAD CARNIVAL",
+    year: "2014",
+    publisher: ["Otomate","Rejet"],
+    cnStudio: "暂无",
+    writer: [
+        {name:"やまだ有見", lang:"ja"}
+    ],
+    art: [
+        {name:"さとい", lang:"ja"}
+    ],
+    cover: "game/fd034.jpg",
+    baseGameId: "game036"
+};
+export { gameData };
