@@ -1,6 +1,19 @@
-绚烂传说 ~Fanfare！~
-剧本: 北弓しほ、葉月ネリカ、小縞なお
-人物设定: 薄葉カゲロー、miko
-主题歌作曲: 三好啓太、藤原燈太
-主题歌作词: 井筒日美
-原画: 朱玖、miko
+const gameData = {
+    id: "fd039",
+    name: "绚烂传说 ~Fanfare!~",
+    year: "2025",
+    publisher: ["Otomate"],
+    cnStudio: "JSD",
+    writer: [
+        {name:"小縞なお", lang:"zh"},
+        {name:"葉月ネリカ", lang:"zh"},
+        {name:"北弓しほ", lang:"zh"}
+    ],
+    art: [
+        {name:"朱玖", lang:"zh"},
+        {name:"miko", lang:"en"}
+    ],
+    cover: "game/fd039.jpg",
+    baseGameId: "game045"
+};
+export { gameData };
