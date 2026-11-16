@@ -4,7 +4,7 @@ const gameData = {
     name: "BUSTAFELLOWS Season2",
     year: "2023",
     publisher: ["eXtend"],
-    cnStudio: "GSE",
+    cnStudio: "暂无",
     writer: [
         {name:"minetaka", lang:"en"}
     ],
