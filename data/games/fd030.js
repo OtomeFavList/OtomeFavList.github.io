@@ -1,7 +1,16 @@
-幸运之杖R2FD 献给你的终曲
-剧本: かずら林檎
-人物设定: 薄葉カゲロー
-主题歌作曲: 藤本記子
-主题歌作词: SigN、藤本記子
-主题歌演出: 理多、Rita
-原画: 薄葉カゲロー
+const gameData = {
+    id: "fd030",
+    name: "幸运之杖 Wand of Fortune R2 FD ~献给妳的终章~",
+    year: "2025",
+    publisher: ["Otomate"],
+    cnStudio: "JOYOLAND",
+    writer: [
+        {name:"かずら林檎", lang:"ja"}
+    ],
+    art: [
+        {name:"薄葉カゲロー", lang:"zh"}
+    ],
+    cover: "game/fd030.jpg",
+    baseGameId: "game032"
+};
+export { gameData };
