@@ -1,6 +1,6 @@
 // ✅已核对信息
 const gameData = {
-    id: "game1", // 全局唯一ID，不可重复，如 game001
+    id: "game113", // 全局唯一ID，不可重复，如 game001
     name: "崩坏世界的指引之人",
     year: "2026",
     publisher: ["Primula"],
