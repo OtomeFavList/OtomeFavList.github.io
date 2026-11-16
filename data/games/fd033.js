@@ -10,7 +10,7 @@ const gameData = {
         {name:"ゆずみやともめ", lang:"ja"}
     ],
     art: [
-        {name:"Tana Khaki", lang:"ja"}
+        {name:"Tana Khaki", lang:"en"}
     ],
     cover: "game/fd033.jpg",
     baseGameId: "game036"
