@@ -1,8 +1,21 @@
-9 R.I.P. sequel
-剧本: 亜文（香羊、星绊线以及其他）、喜多南（桃嘉、圣线）、ゆきみなべ（红华、响线）、Salala（魅线）、海野凛久（狐春线）、藤川ちより（幸麿线）
-人物设定: ユウヤ(わいあっと)
-主题歌作曲: 藤原燈太、鞠
-主题歌作词: やなぎなぎ、春瀬ルナ、鞠
-主题歌演出: となりの坂田。、やなぎなぎ、小笠原仁、柿原徹也、榊原優希、白井悠介、あほの坂田。
-插入歌演出: 柿原徹也
-原画: ユウヤ(わいあっと)
+const gameData = {
+    id: "fd038",
+    name: "9 R.I.P. sequel",
+    year: "2026",
+    publisher: ["Otomate"],
+    cnStudio: "GSE",
+     writer: [
+        {name:"亜文", lang:"zh"},
+        {name:"喜多南", lang:"zh"},
+        {name:"海野凛久", lang:"zh"},
+        {name:"藤川ちより", lang:"zh"},
+        {name:"ゆきみなべ", lang:"ja"},
+        {name:"Salala", lang:"en"}
+    ],
+    art: [
+        {name:"ユウヤ", lang:"ja"}
+    ],
+    cover: "game/fd038.jpg",
+    baseGameId: "game0"
+};
+export { gameData };
