@@ -16,6 +16,6 @@ const gameData = {
         {name:"ユウヤ", lang:"ja"}
     ],
     cover: "game/fd038.jpg",
-    baseGameId: "game0"
+    baseGameId: "game044"
 };
 export { gameData };
