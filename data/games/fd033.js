@@ -1,6 +1,18 @@
-中文名: 魔鬼恋人 混乱族谱
-开发: オトメイト、Rejet
-发行: アイディアファクトリー株式会社、欢乐百世
-剧本: 日野光里、ゆずみやともめ
-原画：Tana Khaki
-原画信息未明确
+⚠️原画信息未明确
+const gameData = {
+    id: "fd033",
+    name: "DIABOLIK LOVERS CHAOS LINEAGE 魔鬼恋人 混乱族谱",
+    year: "2026",
+    publisher: ["Otomate","Rejet"],
+    cnStudio: "JOYOLAND",
+    writer: [
+        {name:"日野光里", lang:"zh"},
+        {name:"ゆずみやともめ", lang:"ja"}
+    ],
+    art: [
+        {name:"Tana Khaki", lang:"ja"}
+    ],
+    cover: "game/fd033.jpg",
+    baseGameId: "game036"
+};
+export { gameData };
