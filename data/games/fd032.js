@@ -1,17 +1,23 @@
-魔鬼恋人 狂乱命运 GRAND EDITION
-开发: オトメイト、Rejet
-发行: アイディアファクトリー株式会社
-剧本: やまだ有見、関涼子
-音乐: 杉浦勇紀
-人物设定: さとい
-主题歌作曲: MIKOTO
-主题歌作词: 岩崎大介
-主题歌演出: 森久保祥太郎、森川智之、緑川光、近藤隆、鳥海浩輔
-原画: さとい
-剧本: 関涼子、久遠まひろ、鷹匠早紀、有栖川あやみ、真崎結衣、竹藤夜宵、こたに白子、やまだ有見
-音乐: 杉浦勇紀
-人物设定: さとい
-主题歌作曲: MIKOTO
-主题歌作词: 岩崎大介
-主题歌演出: 小西克幸、平川大輔、梶裕貴、緑川光、近藤隆、鳥海浩輔
-原画: さとい
+const gameData = {
+    id: "fd032",
+    name: "DIABOLIK LOVERS LUNATIC FATE 魔鬼恋人 狂乱命运 GRAND EDITION",
+    year: "2026",
+    publisher: ["Otomate","Rejet"],
+    cnStudio: "JOYOLAND",
+    writer: [
+        {name:"関涼子", lang:"zh"},
+        {name:"久遠まひろ", lang:"zh"},
+        {name:"鷹匠早紀", lang:"zh"},
+        {name:"有栖川あやみ", lang:"zh"},
+        {name:"真崎結衣", lang:"zh"},
+        {name:"竹藤夜宵", lang:"zh"},
+        {name:"こたに白子", lang:"ja"},
+        {name:"やまだ有見", lang:"ja"}
+    ],
+    art: [
+        {name:"さとい", lang:"ja"}
+    ],
+    cover: "game/fd032.jpg",
+    baseGameId: "game036"
+};
+export { gameData };
