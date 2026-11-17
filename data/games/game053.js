@@ -38,7 +38,9 @@ const gameData = {
                 { srcList: ["char/053/Mahiro.jpg",
                             "char/053/Mahiro2.jpg",
                             "char/053/Mahiro3.jpg"], type: "base" },
-                { srcList: ["char/053/Mahiro4.jpg"], type: "fd" }
+                { srcList: ["char/053/Mahiro4.jpg",
+                            "char/053/Mahiro5.jpg",
+                            "char/053/Mahiro6.jpg"], type: "fd" }
             ]
         },
         // 狗谷辽
@@ -52,7 +54,9 @@ const gameData = {
                 { srcList: ["char/053/Ryou.jpg",
                             "char/053/Ryou2.jpg",
                             "char/053/Ryou3.jpg"], type: "base" },
-                { srcList: ["char/053/Ryou4.jpg"], type: "fd" }
+                { srcList: ["char/053/Ryou4.jpg",
+                            "char/053/Ryou5.jpg",
+                            "char/053/Ryou6.jpg"], type: "fd" }
             ]
         },
         // 犬戒慎司
@@ -66,7 +70,9 @@ const gameData = {
                 { srcList: ["char/053/Shinji.jpg",
                             "char/053/Shinji2.jpg",
                             "char/053/Shinji3.jpg"], type: "base" },
-                { srcList: ["char/053/Shinji4.jpg"], type: "fd" }
+                { srcList: ["char/053/Shinji4.jpg",
+                            "char/053/Shinji5.jpg",
+                            "char/053/Shinji6.jpg"], type: "fd" }
             ]
         },
         // 大蛇草
@@ -80,7 +86,9 @@ const gameData = {
                 { srcList: ["char/053/Suguru.jpg",
                             "char/053/Suguru2.jpg",
                             "char/053/Suguru3.jpg"], type: "base" },
-                { srcList: ["char/053/Suguru4.jpg"], type: "fd" }
+                { srcList: ["char/053/Suguru4.jpg",
+                            "char/053/Suguru5.jpg",
+                            "char/053/Suguru6.jpg"], type: "fd" }
             ]
         },
         // 鬼崎拓磨
@@ -94,7 +102,9 @@ const gameData = {
                 { srcList: ["char/053/Takuma.jpg",
                             "char/053/Takuma2.jpg",
                             "char/053/Takuma3.jpg"], type: "base" },
-                { srcList: ["char/053/Takuma4.jpg"], type: "fd" }
+                { srcList: ["char/053/Takuma4.jpg",
+                            "char/053/Takuma5.jpg",
+                            "char/053/Takuma6.jpg"], type: "fd" }
             ]
         },
         // 狐邑祐一
@@ -108,7 +118,9 @@ const gameData = {
                 { srcList: ["char/053/Yuuichi.jpg",
                             "char/053/Yuuichi2.jpg",
                             "char/053/Yuuichi3.jpg"], type: "base" },
-                { srcList: ["char/053/Yuuichi4.jpg"], type: "fd" }
+                { srcList: ["char/053/Yuuichi4.jpg",
+                            "char/053/Yuuichi5.jpg",
+                            "char/053/Yuuichi6.jpg"], type: "fd" }
             ]
         },
         // ケテル
@@ -121,7 +133,8 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/053/Keter.jpg"], type: "base" }
+                { srcList: ["char/053/Keter.jpg",
+                            "char/053/Keter2.jpg"], type: "base" }
             ]
         },
         // 凛
@@ -134,7 +147,8 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/053/Rin.jpg"], type: "base" }
+                { srcList: ["char/053/Rin.jpg",
+                            "char/053/Rin2.jpg"], type: "base" }
             ]
         },
         // 艾利亚·罗森伯格
