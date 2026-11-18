@@ -2,7 +2,7 @@
 const gameData = {
     id: "fd047",
     name: "大正×対称アリス HEADS&TAILS",
-    year: "20",
+    year: "2020",
     publisher: ["Primula"],
     cnStudio: "暂无",
     writer: [
