@@ -2,7 +2,7 @@
 // ℹ️未官中，官中发售后需要修改：游戏名、发售年份、汉化厂商、封面图、info图、角色名
 const gameData = {
     id: "fd056",
-    name: "金色のコルダ2 アンコール",
+    name: "金色のコルダ2f アンコール",
     year: "2012",
     publisher: ["KOEI"],
     cnStudio: "暂无",
