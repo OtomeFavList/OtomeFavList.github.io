@@ -1,9 +1,19 @@
-アルカナ・ファミリア2
-发行: COMFORT
-剧本: ふくだりょうこ（ルカ、ダンテ） 清水慶 藤谷燈子
-人物设定: さらちよみ
-主题歌作曲: 奈良悠樹、MANYO
-主题歌作词: 日山尚、稲葉エミ
-主题歌演出: 原田ひとみ、canoue
-原画: さらちよみ
-http://www.comfort-soft.jp/products/arcana2/index.html
+// ℹ️未官中，官中发售后需要修改：游戏名、发售年份、汉化厂商、封面图、info图、角色名
+const gameData = {
+    id: "fd044",
+    name: "アルカナ·ファミリア2",
+    year: "2013",
+    publisher: ["COMFORT"],
+    cnStudio: "暂无",
+    writer: [
+        {name:"清水慶", lang:"zh"},
+        {name:"藤谷燈子", lang:"zh"},
+        {name:"ふくだりょうこ", lang:"ja"}
+    ],
+    art: [
+        {name:"さらちよみ", lang:"ja"}
+    ],
+    cover: "game/fd044.jpg",
+    baseGameId: "game064"
+};
+export { gameData };
