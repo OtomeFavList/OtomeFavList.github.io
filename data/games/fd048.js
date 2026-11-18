@@ -1,12 +1,16 @@
-中文名: 明治东京恋语 暮光之吻
-开发: ヒューネックス株式会社
-发行: ブロッコリー（PSP）、dramatic create (ヒューネックス株式会社) (Nintendo Switch/Steam)
-剧本: 魚住ユキコ
-主题歌作曲: 小川智之
-主题歌作词: 魚住ユキコ
-主题歌演出: KENN、岡本信彦
-原作: MAGES.、LOVE&ART
-人物设定: かる
-原画: かる
-http://www.meikoi-psp.com/
-https://dramaticcreate.com/meikoi_fd/
+const gameData = {
+    id: "fd048",
+    name: "明治东京恋语·暮光之吻",
+    year: "2026",
+    publisher: ["MAGES."],
+    cnStudio: "dramatic create",
+    writer: [
+        {name:"魚住ユキコ", lang:"zh"}
+    ],
+    art: [
+        {name:"かる", lang:"ja"}
+    ],
+    cover: "game/fd048.jpg",
+    baseGameId: "game073"
+};
+export { gameData };
