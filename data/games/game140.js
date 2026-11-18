@@ -2,7 +2,7 @@
 // ℹ️未官中，官中发售后需要修改：游戏名、发售年份、汉化厂商、封面图、info图、角色名
 const gameData = {
     id: "game140", // 全局唯一ID，不可重复，如 game001
-    name: "金色のコルダ３フルボイスSpecial",
+    name: "金色のコルダ3 フルボイスSpecial",
     year: "2018",
     publisher: ["KOEI"],
     cnStudio: "暂无",
