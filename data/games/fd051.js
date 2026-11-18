@@ -1,8 +1,18 @@
-うたの☆プリンスさまっ♪Debut
-剧本: クレイ・シーゴット、静月遠火
-音乐: Elements Garden
-人物设定: 倉花千夏
-主题歌作曲: Elements Garden
-主题歌演出: 下野紘、宮野真守、寺島拓篤、諏訪部順一、谷山紀章、鈴村健一、鳥海浩輔
-插入歌演出: 前野智昭、宮野真守、寺島拓篤、森久保祥太郎、蒼井翔太、諏訪部順一、谷山紀章、鈴木達央、鈴村健一、鳥海浩輔
-原画: 工画堂スタジオ
+// ℹ️未官中，官中发售后需要修改：游戏名、发售年份、汉化厂商、封面图、info图、角色名
+const gameData = {
+    id: "fd051",
+    name: "ううたの☆プリンスさまっ♪Debut",
+    year: "2021",
+    publisher: ["BROCCOLI"],
+    cnStudio: "暂无",
+    writer: [
+        {name:"静月遠火", lang:"zh"},
+        {name:"クレイ·シーゴット", lang:"ja"}
+    ],
+    art: [
+        {name:"工画堂スタジオ", lang:"zh"}
+    ],
+    cover: "game/fd051.jpg",
+    baseGameId: "game0110"
+};
+export { gameData };
