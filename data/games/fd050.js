@@ -1,25 +1,18 @@
-うたの☆プリンスさまっ♪ Amazing Aria & Sweet Serenade LOVE
-剧本: クレイ・シーゴット、武口 碧(株式会社ブロッコリー) 
-开发: 株式会社日本一ソフトウェア
-发行: 株式会社ブロッコリー
-人物设定: 倉花千夏
-原作: 上松範康、株式会社ブロッコリー
-开发: 日本一ソフトウェア
-发行: ブロッコリー
-美工: 工画堂スタジオ、Production I.G
-音乐: Elements Garden
-人物设定: 倉花千夏
-主题歌作曲: 菊田大介
-主题歌作词: 上松範康
-主题歌演出: 寺島拓篤、谷山紀章、鈴村健一、鳥海浩輔
-插入歌演出: 寺島拓篤、谷山紀章、鈴村健一、鳥海浩輔
-原画: 工画堂スタジオ
-美工: Production I.G、工画堂スタジオ
-音乐: Elements Garden
-人物设定: 倉花千夏
-主题歌作曲: 藤間仁
-主题歌作词: 織田あすか
-主题歌演出: 下野紘、宮野真守、寺島拓篤、谷山紀章、鈴村健一、諏訪部順一
-插入歌演出: 下野紘、宮野真守、諏訪部順一
-原画: 工画堂スタジオ
-剧本: クレイ・シーゴット
+// ℹ️未官中，官中发售后需要修改：游戏名、发售年份、汉化厂商、封面图、info图、角色名
+const gameData = {
+    id: "fd050",
+    name: "うたの☆プリンスさまっ♪Amazing Aria & Sweet Serenade LOVE",
+    year: "2020",
+    publisher: ["BROCCOLI"],
+    cnStudio: "暂无",
+    writer: [
+        {name:"武口碧", lang:"zh"},
+        {name:"クレイ·シーゴット", lang:"ja"}
+    ],
+    art: [
+        {name:"工画堂スタジオ", lang:"zh"}
+    ],
+    cover: "game/fd050.jpg",
+    baseGameId: "game0110"
+};
+export { gameData };
