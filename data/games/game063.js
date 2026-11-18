@@ -28,7 +28,9 @@ const gameData = {
                             "char/063/Hana2.jpg",
                             "char/063/Hana3.jpg",
                             "char/063/Hana4.jpg",
-                            "char/063/Hana5.jpg"], type: "base" }
+                            "char/063/Hana5.jpg"], type: "base" },
+                { srcList: ["char/063/Hana7.jpg",
+                            "char/063/Hana7.png"], type: "fd" }
             ]
         },
         // 文若
@@ -39,7 +41,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/063/Bunjaku.jpg"], type: "base" }
+                { srcList: ["char/063/Bunjaku.jpg"], type: "base" },
+                { srcList: ["char/063/Bunjaku.2.jpg",
+                            "char/063/Bunjaku.3.png"], type: "fd" }
             ]
         },
         // 仲谋
@@ -50,7 +54,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/063/Chuubou.jpg"], type: "base" }
+                { srcList: ["char/063/Chuubou.jpg"], type: "base" },
+                { srcList: ["char/063/Chuubou.2.jpg",
+                            "char/063/Chuubou.3.png"], type: "fd" }
             ]
         },
         // 玄德
@@ -61,7 +67,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/063/Gentoku.jpg"], type: "base" }
+                { srcList: ["char/063/Gentoku.jpg"], type: "base" },
+                { srcList: ["char/063/Gentoku.2.jpg",
+                            "char/063/Gentoku3.png"], type: "fd" }
             ]
         },
         // 公瑾
@@ -72,7 +80,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/063/Koukin.jpg"], type: "base" }
+                { srcList: ["char/063/Koukin.jpg"], type: "base" },
+                { srcList: ["char/063/Koukin2.jpg",
+                            "char/063/Koukin3.png"], type: "fd" }
             ]
         },
         // 孔明
@@ -83,7 +93,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/063/Koumei.jpg"], type: "base" }
+                { srcList: ["char/063/Koumei.jpg"], type: "base" },
+                { srcList: ["char/063/Koumei2.jpg",
+                            "char/063/Koumei3.png"], type: "fd" }
             ]
         },
         // 孟德
@@ -94,7 +106,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/063/Moutoku.jpg"], type: "base" }
+                { srcList: ["char/063/Moutoku.jpg"], type: "base" },
+                { srcList: ["char/063/Moutoku2.jpg",
+                            "char/063/Moutoku3.png"], type: "fd" }
             ]
         },
         // 子龙
@@ -105,7 +119,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/063/Shiryuu.jpg"], type: "base" }
+                { srcList: ["char/063/Shiryuu.jpg"], type: "base" },
+                { srcList: ["char/063/Shiryuu2.jpg",
+                            "char/063/Shiryuu3.png"], type: "fd" }
             ]
         },
         // 云长
@@ -116,7 +132,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/063/Unchou.jpg"], type: "base" }
+                { srcList: ["char/063/Unchou.jpg"], type: "base" },
+                { srcList: ["char/063/Unchou2.jpg",
+                            "char/063/Unchou3.png"], type: "fd" }
             ]
         },
         // 翼德
@@ -127,7 +145,9 @@ const gameData = {
             isHidden: false,
             isFD: false,
             images: [
-                { srcList: ["char/063/Yokutoku.jpg"], type: "base" }
+                { srcList: ["char/063/Yokutoku.jpg"], type: "base" },
+                { srcList: ["char/063/Yokutoku2.jpg",
+                            "char/063/Yokutoku3.png"], type: "fd" }
             ]
         },
         // 元让
@@ -140,7 +160,8 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/063/Genjou.jpg"], type: "base" }
+                { srcList: ["char/063/Genjou.jpg"], type: "base" },
+                { srcList: ["char/063/Genjou2.jpg"], type: "fd" }
             ]
         },
         // 芙蓉姬
@@ -153,7 +174,8 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/063/Huyou.jpg"], type: "base" }
+                { srcList: ["char/063/Huyou.jpg"], type: "base" },
+                { srcList: ["char/063/Huyou2.jpg"], type: "fd" }
             ]
         },
         // 早安
@@ -166,7 +188,8 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/063/Souan.jpg"], type: "base" }
+                { srcList: ["char/063/Souan.jpg"], type: "base" },
+                { srcList: ["char/063/Souan2.jpg"], type: "fd" }
             ]
         },
         // 尚香
@@ -179,7 +202,8 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/063/Syoukou.jpg"], type: "base" }
+                { srcList: ["char/063/Syoukou.jpg"], type: "base" },
+                { srcList: ["char/063/Syoukou2.jpg"], type: "fd" }
             ]
         }
     ]
