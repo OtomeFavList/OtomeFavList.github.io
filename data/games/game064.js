@@ -1,5 +1,7 @@
 // data/games/game064.js
 // ✅已核对信息
+// http://www.comfort-soft.jp/products/af_vascello/index.html
+// http://www.comfort-soft.jp/products/arcana2/index.html
 const gameData = {
     id: "game064", // 全局唯一ID，不可重复
     name: "圣灵家族 Rinato",
