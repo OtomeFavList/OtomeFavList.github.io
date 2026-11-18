@@ -1,5 +1,6 @@
 // data/games/game067.js
 // ✅已核对信息
+// http://www.primula.jpn.com/taishoalicefd
 const gameData = {
     id: "game067", // 全局唯一ID，不可重复，如 game001
     name: "大正×对称爱丽丝 all in one",
