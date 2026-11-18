@@ -18,6 +18,6 @@ const gameData = {
         {name:"英文原画", lang:"en"}
     ],
     cover: "game/fd0.jpg",
-    baseGameId: "game0"
+    baseGameId: "game1"
 };
 export { gameData };
