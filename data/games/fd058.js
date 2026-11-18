@@ -1,4 +1,4 @@
-// ⚠️已核对信息/未发售官网信息未完善/信息不确切，封面不清晰
+// ⚠️编剧、原画信息不确切
 // ℹ️未官中，官中发售后需要修改：游戏名、发售年份、汉化厂商、封面图、info图、角色名
 const gameData = {
     id: "fd058",
@@ -7,14 +7,10 @@ const gameData = {
     publisher: ["KOEI"],
     cnStudio: "暂无",
     writer: [
-        {name:"中文编剧", lang:"zh"},
-        {name:"日文编剧", lang:"ja"},
-        {name:"英文编剧", lang:"en"}
+        {name:"仲野うさこ", lang:"zh"}
     ],
     art: [
-        {name:"中文原画", lang:"zh"},
-        {name:"日文原画", lang:"ja"},
-        {name:"英文原画", lang:"en"}
+        {name:"船鬼一夫", lang:"zh"},
     ],
     cover: "game/fd058.jpg",
     baseGameId: "game140"
