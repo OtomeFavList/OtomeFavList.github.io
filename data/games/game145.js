@@ -100,10 +100,10 @@ const gameData = {
                             "char/145/Tanaka2.jpg"], type: "base" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // フォツクスくん
         {
             id: "g145_s01",
-            name: "配角",
+            name: "フォツクスくん",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -113,10 +113,10 @@ const gameData = {
                 { srcList: ["char/145/Miakusu.jpg"], type: "base" }
             ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // フォツクス2号
         {
             id: "g145_s02",
-            name: "配角",
+            name: "フォツクス2号",
             gender: "male",
             isHidden: false,
             isFD: false,
