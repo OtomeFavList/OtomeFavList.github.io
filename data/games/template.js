@@ -34,7 +34,7 @@ const gameData = {
             isSub: false,    // true=配角，开关控制是否展示该角色
             isFdSub: false,    // true=续作/FD新增配角，开关控制是否展示该角色
             images: [
-                { srcList: ["char/1/.jpg"
+                { srcList: ["char/1/.jpg",
                             "char/1/2.jpg"], type: "base" },      // 默认基础图，始终加载
                 { srcList: ["char/1/3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
                 { srcList: ["char/1/4.jpg"], type: "fd" },          // 需要开启FD开关才展示的图片
@@ -54,7 +54,7 @@ const gameData = {
             isFdSub: false,    // true=续作/FD新增配角，开关控制是否展示该角色
             cpOnlyFemale: true,  // 仅在CP模式作为女主出现，普通模式不显示
             images: [
-                { srcList: ["char/1/.jpg"
+                { srcList: ["char/1/.jpg",
                             "char/1/2.jpg"], type: "base" },      // 默认基础图，始终加载
                 { srcList: ["char/1/3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
                 { srcList: ["char/1/4.jpg"], type: "fd" },          // 需要开启FD开关才展示的图片
