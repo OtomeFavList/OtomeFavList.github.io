@@ -15,88 +15,89 @@ const gameData = {
     ],
     cover: "game/145.jpg", // 相对路径，游戏封面
     charList: [
-        // 女主模板 female
+        // 畑中十萌
         {
             id: "g145_f01",
-            name: "女主A",
+            name: "畑中十萌",
             gender: "female",
             isHidden: false,
             isFD: false,
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/145/.jpg"
-                            "char/145/2.jpg"], type: "base" }
+                { srcList: ["char/145/Tomoe.jpg",
+                            "char/145/Tomoe2.jpg",
+                            "char/145/Tomoe3.jpg"], type: "base" }
             ]
         },
-        // 普通可攻略男主 male
+        // アミル＝サイード
         {
             id: "g145_m01",
-            name: "男主1",
+            name: "アミル＝サイード",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/145/.jpg",
-                            "char/145/2.jpg"], type: "base" }
+                { srcList: ["char/145/Amir.jpg",
+                            "char/145/Amir2.jpg"], type: "base" }
             ]
         },
-        // 普通可攻略男主 male
+        // 加賀美楓真
         {
             id: "g145_m02",
-            name: "男主2",
+            name: "加賀美楓真",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/145/.jpg",
-                            "char/145/2.jpg"], type: "base" }
+                { srcList: ["char/145/Fuma.jpg",
+                            "char/145/Fuma2.jpg"], type: "base" }
             ]
         },
-        // 普通可攻略男主 male
+        // 黄浩然
         {
             id: "g145_m03",
-            name: "男主3",
+            name: "黄浩然",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/145/.jpg",
-                            "char/145/2.jpg"], type: "base" }
+                { srcList: ["char/145/Haoren.jpg",
+                            "char/145/Haoren2.jpg"], type: "base" }
             ]
         },
-        // 普通可攻略男主 male
+        // ジェレミア＝ジェンキンス
         {
             id: "g145_m04",
-            name: "男主4",
+            name: "ジェレミア＝ジェンキンス",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/145/.jpg",
-                            "char/145/2.jpg"], type: "base" }
+                { srcList: ["char/145/Jenkins.jpg",
+                            "char/145/Jenkins2.jpg"], type: "base" }
             ]
         },
-        // 普通可攻略男主 male
+        // 田中さん
         {
             id: "g145_m05",
-            name: "男主5",
+            name: "田中さん",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/145/.jpg",
-                            "char/145/2.jpg"], type: "base" }
+                { srcList: ["char/145/Tanaka.jpg",
+                            "char/145/Tanaka2.jpg"], type: "base" }
             ]
         },
         // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
@@ -109,7 +110,7 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/145/.jpg"], type: "base" }
+                { srcList: ["char/145/Miakusu.jpg"], type: "base" }
             ]
         },
         // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
@@ -122,7 +123,7 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/145/.jpg"], type: "base" }
+                { srcList: ["char/145/Nigou.jpg"], type: "base" }
             ]
         }
     ]
