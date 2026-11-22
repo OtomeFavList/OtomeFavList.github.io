@@ -1,200 +1,200 @@
-//白華の檻～緋色の欠片4～
-开发: オトメイト、Design Factory、デザインファクトリー
-发行: アイディアファクトリー（日本）、NTTソルマーレ（英文版）
-剧本: 西村悠、水澤なな
-人物设定: いけ
-主题歌作曲: 藤田麻衣子
-主题歌作词: 藤田麻衣子
-主题歌演出: 藤田麻衣子
-原画: いけ
-导演: 一ジョー
-
-// 单个游戏独立数据模板，新版ESModule
-// 图片路径采用相对路径格式，网页渲染时由 main.js 的 getWebImageUrl 拼接为 R2 完整 URL
-// Canvas 导出时由 export-canvas-render.js 的 convertR2ToJsDelivr 拼接为 jsDelivr URL
-// 官中发售以后，需要修改：游戏名、发售年份、汉化厂商、封面图、角色名
+// ✅已核对信息
+// ℹ️未官中，官中发售后需要修改：游戏名、发售年份、汉化厂商、封面图、info图、角色名
 const gameData = {
-    id: "game1", // 全局唯一ID，不可重复，如 game001
-    name: "绯色的欠片4",
-    year: "20",
-    publisher: ["原厂发行商"],
-    cnStudio: "汉化厂商",
+    id: "game142", // 全局唯一ID，不可重复，如 game001
+    name: "白華の檻 ~緋色の欠片4~",
+    year: "2012",
+    publisher: ["Otomate"],
+    cnStudio: "暂无",
     writer: [
-        {name:"中文编剧", lang:"zh"},
-        {name:"日文编剧", lang:"ja"},
-        {name:"英文编剧", lang:"en"}
+        {name:"西村悠", lang:"zh"},
+        {name:"水澤なな", lang:"zh"}
     ],
     art: [
-        {name:"中文原画", lang:"zh"},
-        {name:"日文原画", lang:"ja"},
-        {name:"英文原画", lang:"en"}
+        {name:"いけ", lang:"ja"}
     ],
-    cover: "game/1.jpg", // 相对路径，游戏封面
+    cover: "game/142.jpg", // 相对路径，游戏封面
     charList: [
-        // 女主模板 female
+        // 詞紀
         {
-            id: "g1_f01",
-            name: "女主A",
-            hiddenName: ["隐藏真名1","隐藏真名2"],    // 补丁新增：可选，不写则无隐藏名
-            fdName: ["FD新增名1","FD新增名2"],    // 补丁新增：可选，不写则无FD名
+            id: "g142_f01",
+            name: "詞紀",
             gender: "female",
-            isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
-            isFD: false,    // true=续作/FD新增角色，开关控制是否展示该角色
-            isSub: false,    // true=配角，开关控制是否展示该角色
-            isFdSub: false,    // true=续作/FD新增配角，开关控制是否展示该角色
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: false,
             images: [
-                { srcList: ["char/001/女主A.jpg",
-                            "char/001/女主A2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["char/001/女主A3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["char/001/女主A4.jpg"], type: "fd" },          // 需要开启FD开关才展示的图片
-                { srcList: ["char/001/女主A5.jpg"], type: "hidden-fd" }   // 开启隐藏开关或FD开关展示的图片
+                { srcList: ["char/142/Shiki.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 秋篠古嗣
         {
-            id: "g1_m01",
-            name: "男主1",
-            hiddenName: ["隐藏真名1","隐藏真名2"],    // 补丁新增：可选，不写则无隐藏名
-            fdName: ["FD新增名1","FD新增名2"],    // 补丁新增：可选，不写则无FD名
+            id: "g142_m01",
+            name: "秋篠古嗣",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/001/男主A.jpg",
-                            "char/001/男主A2.jpg"], type: "base" },
-                { srcList: ["char/001/男主A3.jpg"], type: "hidden" },
-                { srcList: ["char/001/男主A4.jpg"], type: "fd" },
-                { srcList: ["char/001/男主A5.jpg"], type: "hidden-fd" }
+                { srcList: ["char/142/Furutsugu.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 幻灯火
         {
-            id: "g1_m02",
-            name: "男主2",
+            id: "g142_m02",
+            name: "幻灯火",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/001/男主B.jpg",
-                            "char/001/男主B2.jpg"], type: "base" },
-                { srcList: ["char/001/男主B3.jpg"], type: "hidden" },
-                { srcList: ["char/001/男主B4.jpg"], type: "fd" },
-                { srcList: ["char/001/男主B5.jpg"], type: "hidden-fd" }
+                { srcList: ["char/142/Gentouka.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 胡土前
         {
-            id: "g1_m03",
-            name: "男主3",
+            id: "g142_m03",
+            name: "胡土前",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/001/男主C.jpg",
-                            "char/001/男主C2.jpg"], type: "base" },
-                { srcList: ["char/001/男主C3.jpg"], type: "hidden" },
-                { srcList: ["char/001/男主C4.jpg"], type: "fd" },
-                { srcList: ["char/001/男主C5.jpg"], type: "hidden-fd" }
+                { srcList: ["char/142/Mae.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 空疎尊
         {
-            id: "g1_m04",
-            name: "男主4",
+            id: "g142_m04",
+            name: "空疎尊",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/001/男主D.jpg",
-                            "char/001/男主D2.jpg"], type: "base" },
-                { srcList: ["char/001/男主D3.jpg"], type: "hidden" },
-                { srcList: ["char/001/男主D4.jpg"], type: "fd" },
-                { srcList: ["char/001/男主D5.jpg"], type: "hidden-fd" }
+                { srcList: ["char/142/Mikoto.jpg"], type: "base" },
             ]
         },
-        // 普通可攻略男主 male
+        // 隠岐秋房
         {
-            id: "g1_m05",
-            name: "男主5",
+            id: "g142_m05",
+            name: "隠岐秋房",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/001/男主F.jpg",
-                            "char/001/男主F2.jpg"], type: "base" },
-                { srcList: ["char/001/男主F3.jpg"], type: "hidden" },
-                { srcList: ["char/001/男主F4.jpg"], type: "fd" },
-                { srcList: ["char/001/男主F5.jpg"], type: "hidden-fd" }
+                { srcList: ["char/142/Oki.jpg"], type: "base" },
             ]
         },
-        // 隐藏角色（isHidden=true → 开关开启才显示整个角色卡片）
+        // 悪路王
         {
-            id: "g1_h01",
-            name: "隐藏攻略角色",
-            hiddenName: ["隐藏真名1","隐藏真名2"],    // 补丁新增：可选，不写则无隐藏名
-            fdName: ["FD新增名1","FD新增名2"],    // 补丁新增：可选，不写则无FD名
-            gender: "male",
-            isHidden: true,
-            isFD: false,
-            isSub: false,
-            isFdSub: false,
-            images: [
-                { srcList: ["char/g001_h01_1.jpg"], type: "base" }
-            ]
-        },
-        // 续作FD限定角色（isFD=true → FD开关开启才显示整个角色卡片）
-        {
-            id: "g1_fd01",
-            name: "续作FD新增角色",
-            hiddenName: ["隐藏真名1","隐藏真名2"],    // 补丁新增：可选，不写则无隐藏名
-            fdName: ["FD新增名1","FD新增名2"],    // 补丁新增：可选，不写则无FD名
+            id: "g142_fd01",
+            name: "悪路王",
             gender: "male",
             isHidden: false,
             isFD: true,
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_fd01_1.jpg"], type: "base" }
-            ]
+                { srcList: ["char/142/Akuroou.jpg"], type: "base" }
+            
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // 言蔵智則
         {
-            id: "g1_s01",
-            name: "配角",
-            hiddenName: ["隐藏真名1","隐藏真名2"],    // 补丁新增：可选，不写则无隐藏名
-            fdName: ["FD新增名1","FD新增名2"],    // 补丁新增：可选，不写则无FD名
+            id: "g142_fd02",
+            name: "言蔵智則",
+            gender: "male",
+            isHidden: false,
+            isFD: true,
+            isSub: false,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/142/Tomonori.jpg"], type: "base" }
+            
+        },
+        // 芦屋道満
+        {
+            id: "g142_s01",
+            name: "芦屋道満",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/g001_S01_1.jpg"], type: "base" }
+                { srcList: ["char/142/Douman.jpg"], type: "base" }
             ]
         },
-        // 续作/FD次要角色（isFdSub=true → 开关开启才显示整个角色卡片）
+        // 神産巣日神
         {
-            id: "g1_fs01",
-            name: "配角",
-            hiddenName: ["隐藏真名1","隐藏真名2"],    // 补丁新增：可选，不写则无隐藏名
-            fdName: ["FD新增名1","FD新增名2"],    // 补丁新增：可选，不写则无FD名
+            id: "g142_s02",
+            name: "神産巣日神",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/142/Kami.jpg"], type: "base" }
+            ]
+        },
+        // 風波尊
+        {
+            id: "g142_s03",
+            name: "風波尊",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/142/Kazanami.jpg"], type: "base" }
+            ]
+        },
+        // 藤原貞繁
+        {
+            id: "g142_s04",
+            name: "藤原貞繁",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/142/Sadashige.jpg"], type: "base" }
+            ]
+        },
+        // 秋篠吉影
+        {
+            id: "g142_s05",
+            name: "秋篠吉影",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/142/Yoshikage.jpg"], type: "base" }
+            ]
+        },
+        // 綾読
+        {
+            id: "g142_fs01",
+            name: "綾読",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: false,
             isFdSub: true,
             images: [
-                { srcList: ["char/g001_fS01_1.jpg"], type: "base" }
+                { srcList: ["char/142/Oyayomi.jpg"], type: "base" }
             ]
         }
     ]
