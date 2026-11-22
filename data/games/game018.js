@@ -27,8 +27,8 @@ const gameData = {
                 { srcList: ["char/018/Koharu.jpg",
                             "char/018/Koharu2.jpg",
                             "char/018/Koharu3.jpg",
-                            "char/018/Koharu4.jpg",
-                            "char/018/Koharu5.jpg"], type: "base" }
+                            "char/018/Koharu4.jpg"], type: "base" },
+                { srcList: ["char/018/Koharu5.jpg"], type: "fd" }
             ]
         },
         // 久我深琴
@@ -42,8 +42,8 @@ const gameData = {
                 { srcList: ["char/018/Mikoto.jpg",
                             "char/018/Mikoto2.jpg",
                             "char/018/Mikoto3.jpg",
-                            "char/018/Mikoto4.jpg",
-                            "char/018/Mikoto5.jpg"], type: "base" }
+                            "char/018/Mikoto4.jpg"], type: "base" },
+                { srcList: ["char/018/Mikoto5.jpg"], type: "fd" }
             ]
         },
         // 不知火七海
@@ -57,8 +57,8 @@ const gameData = {
                 { srcList: ["char/018/Nanami.jpg",
                             "char/018/Nanami2.jpg",
                             "char/018/Nanami3.jpg",
-                            "char/018/Nanami4.jpg",
-                            "char/018/Nanami5.jpg"], type: "base" }
+                            "char/018/Nanami4.jpg"], type: "base" },
+                { srcList: ["char/018/Nanami5.jpg"], type: "fd" }
             ]
         },
         // 宿史晓人
@@ -72,8 +72,8 @@ const gameData = {
                 { srcList: ["char/018/Akito.jpg",
                             "char/018/Akito2.jpg",
                             "char/018/Akito3.jpg",
-                            "char/018/Akito4.jpg",
-                            "char/018/Akito5.jpg"], type: "base" }
+                            "char/018/Akito4.jpg"], type: "base" },
+                { srcList: ["char/018/Akito5.jpg"], type: "fd" }
             ]
         },
         // 乙丸平士
@@ -87,8 +87,8 @@ const gameData = {
                 { srcList: ["char/018/Heishi.jpg",
                             "char/018/Heishi2.jpg",
                             "char/018/Heishi3.jpg",
-                            "char/018/Heishi4.jpg",
-                            "char/018/Heishi5.jpg"], type: "base" }
+                            "char/018/Heishi4.jpg"], type: "base" },
+                { srcList: ["char/018/Heishi5.jpg"], type: "fd" }
             ]
         },
         // 加贺见一月
@@ -102,8 +102,8 @@ const gameData = {
                 { srcList: ["char/018/Itsuki.jpg",
                             "char/018/Itsuki2.jpg",
                             "char/018/Itsuki3.jpg",
-                            "char/018/Itsuki4.jpg",
-                            "char/018/Itsuki5.jpg"], type: "base" }
+                            "char/018/Itsuki4.jpg"], type: "base" },
+                { srcList: ["char/018/Itsuki5.jpg"], type: "fd" }
             ]
         },
         // 结贺驱
@@ -117,8 +117,8 @@ const gameData = {
                 { srcList: ["char/018/Kakeru.jpg",
                             "char/018/Kakeru2.jpg",
                             "char/018/Kakeru3.jpg",
-                            "char/018/Kakeru4.jpg",
-                            "char/018/Kakeru5.jpg"], type: "base" }
+                            "char/018/Kakeru4.jpg"], type: "base" },
+                { srcList: ["char/018/Kakeru5.jpg"], type: "fd" }
             ]
         },
         // 远矢正宗
@@ -132,8 +132,8 @@ const gameData = {
                 { srcList: ["char/018/Masamune.jpg",
                             "char/018/Masamune2.jpg",
                             "char/018/Masamune3.jpg",
-                            "char/018/Masamune4.jpg",
-                            "char/018/Masamune5.jpg"], type: "base" }
+                            "char/018/Masamune4.jpg"], type: "base" },
+                { srcList: ["char/018/Masamune5.jpg"], type: "fd" }
             ]
         },
         // 吾妻夏彦
@@ -147,8 +147,8 @@ const gameData = {
                 { srcList: ["char/018/Natsuhiko.jpg",
                             "char/018/Natsuhiko2.jpg",
                             "char/018/Natsuhiko3.jpg",
-                            "char/018/Natsuhiko4.jpg",
-                            "char/018/Natsuhiko5.jpg"], type: "base" }
+                            "char/018/Natsuhiko4.jpg"], type: "base" },
+                { srcList: ["char/018/Natsuhiko5.jpg"], type: "fd" }
             ]
         },
         // 二条朔也
@@ -162,8 +162,8 @@ const gameData = {
                 { srcList: ["char/018/Sakuya.jpg",
                             "char/018/Sakuya2.jpg",
                             "char/018/Sakuya3.jpg",
-                            "char/018/Sakuya4.jpg",
-                            "char/018/Sakuya5.jpg"], type: "base" }
+                            "char/018/Sakuya4.jpg"], type: "base" },
+                { srcList: ["char/018/Sakuya5.jpg"], type: "fd" }
             ]
         },
         // 市之濑千里
@@ -177,8 +177,8 @@ const gameData = {
                 { srcList: ["char/018/Senri.jpg",
                             "char/018/Senri2.jpg",
                             "char/018/Senri3.jpg",
-                            "char/018/Senri4.jpg",
-                            "char/018/Senri5.jpg"], type: "base" }
+                            "char/018/Senri4.jpg"], type: "base" },
+                { srcList: ["char/018/Senri5.jpg"], type: "fd" }
             ]
         },
         // 室星朗
@@ -192,8 +192,8 @@ const gameData = {
                 { srcList: ["char/018/Ron.jpg",
                             "char/018/Ron2.jpg",
                             "char/018/Ron3.jpg",
-                            "char/018/Ron4.jpg",
-                            "char/018/Ron5.jpg"], type: "base" }
+                            "char/018/Ron4.jpg"], type: "base" },
+                { srcList: ["char/018/Ron5.jpg"], type: "fd" }
             ]
         },
         // 艾因
@@ -251,52 +251,52 @@ const gameData = {
         },
         // 加贺见和叶
         {
-            id: "g018_fs01",
+            id: "g018_s05",
             name: "加贺见和叶",
             gender: "male",
             isHidden: false,
             isFD: false,
-            isSub: false,
-            isFdSub: true,
+            isSub: true,
+            isFdSub: false,
             images: [
                 { srcList: ["char/018/Kazuha.jpg"], type: "base" }
             ]
         },
         // 远矢基久
         {
-            id: "g018_fs02",
+            id: "g018_s06",
             name: "远矢基久",
             gender: "male",
             isHidden: false,
             isFD: false,
-            isSub: false,
-            isFdSub: true,
+            isSub: true,
+            isFdSub: false,
             images: [
                 { srcList: ["char/018/Motohisa.jpg"], type: "base" }
             ]
         },
         // 徒徒枝凪沙
         {
-            id: "g018_fs03",
+            id: "g018_s07",
             name: "徒徒枝凪沙",
             gender: "male",
             isHidden: false,
             isFD: false,
-            isSub: false,
-            isFdSub: true,
+            isSub: true,
+            isFdSub: false,
             images: [
                 { srcList: ["char/018/Nagisa.jpg"], type: "base" }
             ]
         },
         // 西所弥广
         {
-            id: "g018_fs04",
+            id: "g018_s08",
             name: "西所弥广",
             gender: "male",
             isHidden: false,
             isFD: false,
-            isSub: false,
-            isFdSub: true,
+            isSub: true,
+            isFdSub: false,
             images: [
                 { srcList: ["char/018/Yahiro.jpg"], type: "base" }
             ]
