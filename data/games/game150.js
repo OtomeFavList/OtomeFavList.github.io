@@ -4,8 +4,8 @@ const gameData = {
     id: "game150", // 全局唯一ID，不可重复，如 game001
     name: "逆転吉原~扇屋編~",
     year: "2018",
-    publisher: ["原发行商/品牌"],
-    cnStudio: "",
+    publisher: ["D3 Publisher"],
+    cnStudio: "D3 Publisher",
     writer: [
         {name:"株式会社ひつじぐも", lang:"zh
     ],
