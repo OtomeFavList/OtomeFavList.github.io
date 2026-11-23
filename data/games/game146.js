@@ -4,7 +4,7 @@ const gameData = {
     id: "game146", // 全局唯一ID，不可重复，如 game001
     name: "イケメン戦国◆時をかける恋 新たなる出逢い",
     year: "2022",
-    publisher: ["CYBIRD"],["Otomate"],
+    publisher: ["CYBIRD","Otomate"],
     cnStudio: "暂无",
     writer: [
         {name:"晴日青", lang:"zh"},
