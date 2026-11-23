@@ -1,222 +1,149 @@
-逆転吉原
-发行: Dogenzaka Lab
-人物设定: Hs
-原画: Hs
-开发: スマホカレシ
-官方网站: d3p.co.jp/sumakare/gyakuten/
-
-男遊郭
-开发: ひつじぐも、株式会社ブリッジ、ディースリー・パブリッシャー
-剧本: かほく麻緒、島田類、ひつじぐも
-音乐: 浅乃一
-人物设定: Hs
-主题歌作曲: AZ-MIX、タナカノブマサ、ロア健治、田中智之、浅乃一、野見山美貴、麿
-主题歌作词: yumico、サカモトヨシキ、タナカノブマサ、ロア健治、麿
-主题歌演出: 久野藍、柿原徹也、森久保祥太郎、置鮎龍太郎、野島健児、鳥海浩輔、黒田崇矢
-原画: Hs
-导演: 島田類
-// 单个游戏独立数据模板，新版ESModule
-// 图片路径采用相对路径格式，网页渲染时由 main.js 的 getWebImageUrl 拼接为 R2 完整 URL
-// Canvas 导出时由 export-canvas-render.js 的 convertR2ToJsDelivr 拼接为 jsDelivr URL
 // ✅已核对信息
-// ⚠️已核对信息/未发售官网信息未完善/信息不确切，FD内容未添加/FD官网差分未制作/续作官网差分未制作/立绘差分未制作/立绘未重置/配角未添加/封面不清晰
 // ℹ️未官中，官中发售后需要修改：游戏名、发售年份、汉化厂商、封面图、info图、角色名
 const gameData = {
-    id: "game1", // 全局唯一ID，不可重复，如 game001
-    name: "逆転吉~菊屋編~",
+    id: "game149", // 全局唯一ID，不可重复，如 game001
+    name: "逆転吉原~菊屋編~",
     year: "2018",
-    publisher: ["原发行商/品牌"],
-    cnStudio: "汉化厂商",
+    publisher: ["D3 Publisher"],
+    cnStudio: "D3 Publisher",
     writer: [
-        {name:"中文编剧", lang:"zh"},
-        {name:"日文编剧", lang:"ja"},
-        {name:"英文编剧", lang:"en"}
+        {name:"島田類", lang:"zh"},
+        {name:"かほく麻緒", lang:"ja"},
+        {name:"ひつじぐも", lang:"ja"}
     ],
     art: [
-        {name:"中文原画", lang:"zh"},
-        {name:"日文原画", lang:"ja"},
-        {name:"英文原画", lang:"en"}
+        {name:"Hs", lang:"en"}
     ],
-    cover: "game/1.jpg", // 相对路径，游戏封面
+    cover: "game/149.jpg", // 相对路径，游戏封面
     charList: [
-        // 女主模板 female
+        // 偉宝みさを
         {
             id: "g149_f01",
-            name: "女主A",
+            name: "偉宝みさを",
             gender: "female",
             isHidden: false,
             isFD: false,
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/149/.jpg"], type: "base" },
+                { srcList: ["char/149/Misawo.jpg"], type: "base" },
             ]
         },
-        // CP女主模板 female
+        // 隼
         {
-            id: "g1_f01",
-            name: "女主A",
-            hiddenName: ["隐藏真名1","隐藏真名2"],    // 补丁新增：可选，不写则无隐藏名
-            fdName: ["FD新增名1","FD新增名2"],    // 补丁新增：可选，不写则无FD名
-            gender: "female",
-            isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
-            isFD: false,    // true=续作/FD新增角色，开关控制是否展示该角色
-            isSub: false,    // true=配角，开关控制是否展示该角色
-            isFdSub: false,    // true=续作/FD新增配角，开关控制是否展示该角色
-            cpOnlyFemale: true,  // 仅在CP模式作为女主出现，普通模式不显示
-            images: [
-                { srcList: ["char/1/.jpg",
-                            "char/1/2.jpg"], type: "base" },      // 默认基础图，始终加载
-                { srcList: ["char/1/3.jpg"], type: "hidden" },     // 需要开启隐藏角色开关才展示的图片
-                { srcList: ["char/1/4.jpg"], type: "fd" },          // 需要开启FD开关才展示的图片
-                { srcList: ["char/1/5.jpg"], type: "hidden-fd" }   // 开启隐藏开关或FD开关展示的图片
-            ]
-        },
-        // 普通可攻略男主 male
-        {
-            id: "g1_m01",
-            name: "男主1",
-            hiddenName: ["隐藏真名1","隐藏真名2"],    // 补丁新增：可选，不写则无隐藏名
-            fdName: ["FD新增名1","FD新增名2"],    // 补丁新增：可选，不写则无FD名
+            id: "g149_m01",
+            name: "隼",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/1/.jpg",
-                            "char/1/2.jpg"], type: "base" },
-                { srcList: ["char/1/3.jpg"], type: "hidden" },
-                { srcList: ["char/1/4.jpg"], type: "fd" },
-                { srcList: ["char/1/5.jpg"], type: "hidden-fd" }
+                { srcList: ["char/149/Hayabusa.jpg"], type: "base" }
             ]
         },
-        // 普通可攻略男主 male
+        // いろは
         {
-            id: "g1_m02",
-            name: "男主2",
+            id: "g149_m02",
+            name: "いろは",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/1/.jpg",
-                            "char/1/2.jpg"], type: "base" },
-                { srcList: ["char/1/3.jpg"], type: "hidden" },
-                { srcList: ["char/1/4.jpg"], type: "fd" },
-                { srcList: ["char/1/5.jpg"], type: "hidden-fd" }
+                { srcList: ["char/149/Iroha.jpg"], type: "base" }
             ]
         },
-        // 普通可攻略男主 male
+        // かげろう
         {
-            id: "g1_m03",
-            name: "男主3",
+            id: "g149_m03",
+            name: "かげろう",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/1/.jpg",
-                            "char/1/2.jpg"], type: "base" },
-                { srcList: ["char/1/3.jpg"], type: "hidden" },
-                { srcList: ["char/1/4.jpg"], type: "fd" },
-                { srcList: ["char/1/5.jpg"], type: "hidden-fd" }
+                { srcList: ["char/149/Kagerou.jpg"], type: "base" }
             ]
         },
-        // 普通可攻略男主 male
+        // 神楽
         {
-            id: "g1_m04",
-            name: "男主4",
+            id: "g149_m04",
+            name: "神楽",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/1/.jpg",
-                            "char/1/2.jpg"], type: "base" },
-                { srcList: ["char/1/3.jpg"], type: "hidden" },
-                { srcList: ["char/1/4.jpg"], type: "fd" },
-                { srcList: ["char/1/5.jpg"], type: "hidden-fd" }
+                { srcList: ["char/149/Kagura.jpg"], type: "base" }
             ]
         },
-        // 普通可攻略男主 male
+        // 伊東慶次
         {
-            id: "g1_m05",
-            name: "男主5",
+            id: "g149_m05",
+            name: "伊東慶次",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/1/.jpg",
-                            "char/1/2.jpg"], type: "base" },
-                { srcList: ["char/1/3.jpg"], type: "hidden" },
-                { srcList: ["char/1/4.jpg"], type: "fd" },
-                { srcList: ["char/1/5.jpg"], type: "hidden-fd" }
+                { srcList: ["char/149/Keiji.jpg"], type: "base" }
             ]
         },
-        // 隐藏角色（isHidden=true → 开关开启才显示整个角色卡片）
+        // 高尾
         {
-            id: "g1_h01",
-            name: "隐藏攻略角色",
-            hiddenName: ["隐藏真名1","隐藏真名2"],    // 补丁新增：可选，不写则无隐藏名
-            fdName: ["FD新增名1","FD新增名2"],    // 补丁新增：可选，不写则无FD名
+            id: "g149_m06",
+            name: "高尾",
             gender: "male",
-            isHidden: true,
+            isHidden: false,
             isFD: false,
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/1/.jpg"], type: "base" }
+                { srcList: ["char/149/Takao.jpg"], type: "base" }
             ]
         },
-        // 续作FD限定角色（isFD=true → FD开关开启才显示整个角色卡片）
+        // ときわ
         {
-            id: "g1_fd01",
-            name: "续作FD新增角色",
-            hiddenName: ["隐藏真名1","隐藏真名2"],    // 补丁新增：可选，不写则无隐藏名
-            fdName: ["FD新增名1","FD新增名2"],    // 补丁新增：可选，不写则无FD名
+            id: "g149_m07",
+            name: "ときわ",
             gender: "male",
             isHidden: false,
-            isFD: true,
+            isFD: false,
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/1/.jpg"], type: "base" }
-            
+                { srcList: ["char/149/Tokiwa.jpg"], type: "base" }
+            ]
         },
-        // 次要角色（isSub=true → 开关开启才显示整个角色卡片）
+        // あずさ
         {
-            id: "g1_s01",
-            name: "配角",
-            hiddenName: ["隐藏真名1","隐藏真名2"],    // 补丁新增：可选，不写则无隐藏名
-            fdName: ["FD新增名1","FD新增名2"],    // 补丁新增：可选，不写则无FD名
+            id: "g149_s01",
+            name: "あずさ",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/1/.jpg"], type: "base" }
+                { srcList: ["char/149/Azusa.jpg"], type: "base" }
             ]
         },
-        // 续作/FD次要角色（isFdSub=true → 开关开启才显示整个角色卡片）
+        // 冴木
         {
-            id: "g1_fs01",
-            name: "配角",
-            hiddenName: ["隐藏真名1","隐藏真名2"],    // 补丁新增：可选，不写则无隐藏名
-            fdName: ["FD新增名1","FD新增名2"],    // 补丁新增：可选，不写则无FD名
+            id: "g149_s02",
+            name: "冴木",
             gender: "male",
             isHidden: false,
             isFD: false,
-            isSub: false,
-            isFdSub: true,
+            isSub: true,
+            isFdSub: false,
             images: [
-                { srcList: ["char/1/.jpg"], type: "base" }
+                { srcList: ["char/149/Saeki.jpg"], type: "base" }
             ]
         }
     ]
