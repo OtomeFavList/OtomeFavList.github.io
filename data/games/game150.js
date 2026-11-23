@@ -14,10 +14,10 @@ const gameData = {
     ],
     cover: "game/150.jpg", // 相对路径，游戏封面
     charList: [
-        // 染井清葉
+        // 染井清叶
         {
             id: "g150_f01",
-            name: "染井清葉",
+            name: "染井清叶",
             gender: "female",
             isHidden: false,
             isFD: false,
@@ -27,10 +27,10 @@ const gameData = {
                 { srcList: ["char/150/Kiyoha.jpg"], type: "base" }
             ]
         },
-        // あげは
+        // 扬羽
         {
             id: "g150_m01",
-            name: "あげは",
+            name: "扬羽",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -40,10 +40,10 @@ const gameData = {
                 { srcList: ["char/150/Ageha.jpg"], type: "base" }
             ]
         },
-        // 朝霧
+        // 朝雾
         {
             id: "g150_m02",
-            name: "朝霧",
+            name: "朝雾",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -66,10 +66,10 @@ const gameData = {
                 { srcList: ["char/150/Gakuto.jpg"], type: "base" }
             ]
         },
-        // 滝川
+        // 泷川
         {
             id: "g150_m04",
-            name: "滝川",
+            name: "泷川",
             gender: "male",
             isHidden: false,
             isFD: false,
