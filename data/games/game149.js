@@ -42,10 +42,10 @@ const gameData = {
                 { srcList: ["char/149/Hayabusa.jpg"], type: "base" }
             ]
         },
-        // いろは
+        // 伊吕波
         {
             id: "g149_m02",
-            name: "いろは",
+            name: "伊吕波",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -55,10 +55,10 @@ const gameData = {
                 { srcList: ["char/149/Iroha.jpg"], type: "base" }
             ]
         },
-        // かげろう
+        // 阳炎
         {
             id: "g149_m03",
-            name: "かげろう",
+            name: "阳炎",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -68,10 +68,10 @@ const gameData = {
                 { srcList: ["char/149/Kagerou.jpg"], type: "base" }
             ]
         },
-        // 神楽
+        // 神乐
         {
             id: "g149_m04",
-            name: "神楽",
+            name: "神乐",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -81,10 +81,10 @@ const gameData = {
                 { srcList: ["char/149/Kagura.jpg"], type: "base" }
             ]
         },
-        // 伊東慶次
+        // 伊东庆次
         {
             id: "g149_m05",
-            name: "伊東慶次",
+            name: "伊东庆次",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -107,10 +107,10 @@ const gameData = {
                 { srcList: ["char/149/Takao.jpg"], type: "base" }
             ]
         },
-        // ときわ
+        // 常叶
         {
             id: "g149_m07",
-            name: "ときわ",
+            name: "常叶",
             gender: "male",
             isHidden: false,
             isFD: false,
