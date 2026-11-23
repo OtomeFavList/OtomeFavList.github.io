@@ -14,10 +14,10 @@ const gameData = {
     ],
     cover: "game/148.jpg", // 相对路径，游戏封面
     charList: [
-        // 桜庭鈴花
+        // 樱庭铃花
         {
             id: "g148_f01",
-            name: "桜庭鈴花",
+            name: "樱庭铃花",
             gender: "female",
             isHidden: false,
             isFD: false,
@@ -105,10 +105,10 @@ const gameData = {
                 { srcList: ["char/148/Sanosuke.jpg"], type: "base" }
             ]
         },
-        // 永倉新八
+        // 永仓新八
         {
             id: "g148_m05",
-            name: "永倉新八",
+            name: "永仓新八",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -118,10 +118,10 @@ const gameData = {
                 { srcList: ["char/148/Shinpachi.jpg"], type: "base" }
             ]
         },
-        // 沖田総司
+        // 冲田总司
         {
             id: "g148_m05",
-            name: "沖田総司",
+            name: "冲田总司",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -144,10 +144,10 @@ const gameData = {
                 { srcList: ["char/148/Susumu.jpg"], type: "base" }
             ]
         },
-        // 土方歳三
+        // 土方岁三
         {
             id: "g148_m10",
-            name: "土方歳三",
+            name: "土方岁三",
             gender: "male",
             isHidden: false,
             isFD: false,
