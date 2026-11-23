@@ -79,82 +79,82 @@ const gameData = {
                 { srcList: ["char/148/Keisuke.jpg"], type: "base" }
             ]
         },
-        // 普通可攻略男主 male
+        // 才谷梅太郎
         {
             id: "g148_m05",
-            name: "男主5",
+            name: "才谷梅太郎",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/148/.jpg"], type: "base" }
+                { srcList: ["char/148/Saidani.jpg"], type: "base" }
             ]
         },
-        // 普通可攻略男主 male
+        // 原田左之助
         {
             id: "g148_m05",
-            name: "男主6",
+            name: "原田左之助",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/148/.jpg"], type: "base" }
+                { srcList: ["char/148/Sanosuke.jpg"], type: "base" }
             ]
         },
-        // 普通可攻略男主 male
+        // 永倉新八
         {
             id: "g148_m05",
-            name: "男主7",
+            name: "永倉新八",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/148/.jpg"], type: "base" }
+                { srcList: ["char/148/Shinpachi.jpg"], type: "base" }
             ]
         },
-        // 普通可攻略男主 male
+        // 沖田総司
         {
             id: "g148_m05",
-            name: "男主8",
+            name: "沖田総司",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/148/.jpg"], type: "base" }
+                { srcList: ["char/148/Souji.jpg"], type: "base" }
             ]
         },
-        // 普通可攻略男主 male
+        // 山崎烝
         {
             id: "g148_m05",
-            name: "男主9",
+            name: "山崎烝",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/148/.jpg"], type: "base" }
+                { srcList: ["char/148/Susumu.jpg"], type: "base" }
             ]
         },
-        // 普通可攻略男主 male
+        // 土方歳三
         {
             id: "g148_m10",
-            name: "男主5",
+            name: "土方歳三",
             gender: "male",
             isHidden: false,
             isFD: false,
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/148/.jpg"], type: "base" }
+                { srcList: ["char/148/Toshizou.jpg"], type: "base" }
             ]
         }
     ]
