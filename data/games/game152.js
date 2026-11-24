@@ -4,7 +4,7 @@ const gameData = {
     id: "game152", // 全局唯一ID，不可重复，如 game001
     name: "幕末恋華 花柳剣士伝",
     year: "2007",
-    publisher: ["原发行商/品牌"],
+    publisher: ["D3 Publisher"],
     cnStudio: "暂无",
     writer: [
         {name:"館山緑", lang:"zh"},
