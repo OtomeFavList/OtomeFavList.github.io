@@ -29,7 +29,7 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/144/Amane.png"
+                { srcList: ["char/144/Amane.png",
                             "char/144/Amane2.png"], type: "base" }
             ]
         },
