@@ -1,9 +1,18 @@
-カエル畑DE ・夏 千木良参戦！
-中文名: 蛙畑奇事 夏 千木良参战
-开发: TAKUYO
-发行: TAKUYO
-剧本: 井上愁、白鳥ユアン
-人物设定: ヒロセアヅミ
-主题歌作曲: 森藤晶司
-原画: ヒロセアヅミ
-takuyo.co.jp/products/kaerusummer/index.html
+// ℹ️未官中，官中发售后需要修改：游戏名、发售年份、汉化厂商、封面图、info图、角色名
+const gameData = {
+    id: "fd060",
+    name: "カエル畑DEつかまえて·夏 千木良参戦!",
+    year: "2022",
+    publisher: ["TAKUYO"],
+    cnStudio: "暂无",
+    writer: [
+        {name:"井上愁", lang:"zh"},
+        {name:"白鳥ユアン", lang:"zh"}
+    ],
+    art: [
+        {name:"ヒロセアヅミ", lang:"ja"}
+    ],
+    cover: "game/fd060.jpg",
+    baseGameId: "game147"
+};
+export { gameData };
