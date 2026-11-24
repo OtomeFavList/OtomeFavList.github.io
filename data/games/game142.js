@@ -105,7 +105,6 @@ const gameData = {
             images: [
                 { srcList: ["char/142/Akuroou.jpg"], type: "base" }
             ]
-            
         },
         // 言蔵智則
         {
@@ -119,7 +118,6 @@ const gameData = {
             images: [
                 { srcList: ["char/142/Tomonori.jpg"], type: "base" }
             ]
-            
         },
         // 芦屋道満
         {
