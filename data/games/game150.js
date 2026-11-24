@@ -7,7 +7,7 @@ const gameData = {
     publisher: ["D3 Publisher"],
     cnStudio: "D3 Publisher",
     writer: [
-        {name:"株式会社ひつじぐも", lang:"zh
+        {name:"株式会社ひつじぐも", lang:"zh"}
     ],
     art: [
         {name:"Hs", lang:"en"}
