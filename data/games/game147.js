@@ -53,7 +53,7 @@ const gameData = {
         // 空閑正臣
         {
             id: "g147_m02",
-            name: 空閑正臣",
+            name: "空閑正臣",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -154,6 +154,7 @@ const gameData = {
                             "char/147/Takumi3.jpg",
                             "char/147/Takumi4.jpg",
                             "char/147/Takumi5.jpg"], type: "base" }
+            ]
             
         },
         // 謎のカエルその1
