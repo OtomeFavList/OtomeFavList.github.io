@@ -14,7 +14,6 @@ const gameData = {
         {name:"TOKO", lang:"en"}
     ],
     cover: "game/152.png", // 相对路径，游戏封面
-    ]
 };
 
 // ESModule导出
