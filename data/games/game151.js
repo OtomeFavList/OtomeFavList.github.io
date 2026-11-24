@@ -1,9 +1,154 @@
-三国恋戦記 魁
-开发: Daisy²
-发行: Daisy²
-剧本: トム、宙地、中条ローザ、喜屋武米助
-人物设定: スズケン
-主题歌作曲: 細井聡司
-主题歌演出: 仲村芽衣子
-原画: スズケン
-http://www.daisy-daisy.in/products/sangoku2/
+// ✅已核对信息
+// ℹ️未官中，官中发售后需要修改：游戏名、发售年份、汉化厂商、封面图、info图、角色名
+const gameData = {
+    id: "game151", // 全局唯一ID，不可重复，如 game001
+    name: "三国恋戦記 魁",
+    year: "2019",
+    publisher: ["Daisy²"],
+    cnStudio: "暂无",
+    writer: [
+        {name:"喜屋武米助", lang:"zh"},
+        {name:"中条ローザ", lang:"zh"},
+        {name:"宙地", lang:"zh"},
+        {name:"トム", lang:"ja"}
+    ],
+    art: [
+        {name:"スズケン", lang:"ja"}
+    ],
+    cover: "game/151.jpg", // 相对路径，游戏封面
+    charList: [
+        // 木下巴
+        {
+            id: "g151_f01",
+            name: "木下巴",
+            gender: "female",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/151/Tomoe.jpg"], type: "base" }
+            ]
+        },
+        // 仲頴
+        {
+            id: "g151_m01",
+            name: "仲頴",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/151/Chouei.jpg"], type: "base" }
+            ]
+        },
+        // 伯符
+        {
+            id: "g151_m02",
+            name: "伯符",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/151/Hakufu.jpg"], type: "base" }
+            ]
+        },
+        // 本初
+        {
+            id: "g151_m03",
+            name: "本初",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/151/Honsho.jpg"], type: "base" }
+            ]
+        },
+        // 奉先
+        {
+            id: "g151_m04",
+            name: "奉先",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/151/Housen.jpg"], type: "base" }
+            ]
+        },
+        // 華陀
+        {
+            id: "g151_m05",
+            name: "華陀",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: false,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/151/Kada.jpg"], type: "base" }
+            ]
+        },
+        // 公瑾
+        {
+            id: "g151_s01",
+            name: "公瑾",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/151/Koukin.jpg"], type: "base" }
+            ]
+        },
+        // 孟卓
+        {
+            id: "g151_s02",
+            name: "孟卓",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/151/Moutaka.jpg"], type: "base" }
+            ]
+        },
+        // 孟徳
+        {
+            id: "g151_s03",
+            name: "孟徳",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/151/Moutoku.jpg"], type: "base" }
+            ]
+        },
+        // 盧植
+        {
+            id: "g151_s04",
+            name: "盧植",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/151/Roshoku.jpg"], type: "base" }
+            ]
+        }
+    ]
+};
+
+// ESModule导出
+export { gameData };
