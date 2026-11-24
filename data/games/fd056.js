@@ -12,7 +12,7 @@ const gameData = {
     art: [
         {name:"呉由姫", lang:"zh"}
     ],
-    cover: "game/fd056.jpg",
+    cover: "game/fd056.png",
     baseGameId: "game139"
 };
 export { gameData };
