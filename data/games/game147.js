@@ -155,7 +155,6 @@ const gameData = {
                             "char/147/Takumi4.jpg",
                             "char/147/Takumi5.jpg"], type: "base" }
             ]
-            
         },
         // 謎のカエルその1
         {
