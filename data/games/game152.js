@@ -1,8 +1,21 @@
-幕末恋華 花柳剣士伝
-开发: 株式会社ブリッジ
-发行: ディースリー・パブリッシャー
-剧本: 館山緑、砂原有季
-主题歌作曲: 浅乃一
-主题歌作词: 浅乃一
-主题歌演出: 吉野裕行、宮野真守
-原画: TOKO
+// ✅已核对信息
+// ℹ️未官中，官中发售后需要修改：游戏名、发售年份、汉化厂商、封面图、info图、角色名
+const gameData = {
+    id: "game152", // 全局唯一ID，不可重复，如 game001
+    name: "幕末恋華 花柳剣士伝",
+    year: "2007",
+    publisher: ["原发行商/品牌"],
+    cnStudio: "暂无",
+    writer: [
+        {name:"館山緑", lang:"zh"},
+        {name:"砂原有季", lang:"zh"}
+    ],
+    art: [
+        {name:"TOKO", lang:"en"}
+    ],
+    cover: "game/152.jpg", // 相对路径，游戏封面
+    ]
+};
+
+// ESModule导出
+export { gameData };
