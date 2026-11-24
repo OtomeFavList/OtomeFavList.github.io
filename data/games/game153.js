@@ -14,7 +14,6 @@ const gameData = {
         {name:"加藤さやか", lang:"zh"}
     ],
     cover: "game/153.jpg", // 相对路径，游戏封面
-    ]
 };
 
 // ESModule导出
