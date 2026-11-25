@@ -27,7 +27,7 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/151/Tomoe.jpg"], type: "base" }
+                { srcList: ["char/151/Tomoe.png"], type: "base" }
             ]
         },
         // 仲頴
@@ -40,7 +40,7 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/151/Chouei.jpg"], type: "base" }
+                { srcList: ["char/151/Chouei.png"], type: "base" }
             ]
         },
         // 伯符
@@ -53,7 +53,7 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/151/Hakufu.jpg"], type: "base" }
+                { srcList: ["char/151/Hakufu.png"], type: "base" }
             ]
         },
         // 本初
@@ -66,7 +66,7 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/151/Honsho.jpg"], type: "base" }
+                { srcList: ["char/151/Honsho.png"], type: "base" }
             ]
         },
         // 奉先
@@ -79,7 +79,7 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/151/Housen.jpg"], type: "base" }
+                { srcList: ["char/151/Housen.png"], type: "base" }
             ]
         },
         // 華陀
@@ -92,7 +92,7 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/151/Kada.jpg"], type: "base" }
+                { srcList: ["char/151/Kada.png"], type: "base" }
             ]
         },
         // 公瑾
@@ -105,7 +105,7 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/151/Koukin.jpg"], type: "base" }
+                { srcList: ["char/151/Koukin.png"], type: "base" }
             ]
         },
         // 孟卓
@@ -118,7 +118,7 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/151/Moutaka.jpg"], type: "base" }
+                { srcList: ["char/151/Moutaka.png"], type: "base" }
             ]
         },
         // 孟徳
@@ -131,7 +131,7 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/151/Moutoku.jpg"], type: "base" }
+                { srcList: ["char/151/Moutoku.png"], type: "base" }
             ]
         },
         // 盧植
@@ -144,7 +144,7 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/151/Roshoku.jpg"], type: "base" }
+                { srcList: ["char/151/Roshoku.png"], type: "base" }
             ]
         }
     ]
