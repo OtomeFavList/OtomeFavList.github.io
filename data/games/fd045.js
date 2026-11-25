@@ -1,6 +1,6 @@
 // ℹ️未官中，官中发售后需要修改：游戏名、发售年份、汉化厂商、封面图、info图、角色名
 const gameData = {
-    id: "fd044",
+    id: "fd045",
     name: "アルカナ·ファミリア フェスタ·レガーロ!",
     year: "2012",
     publisher: ["COMFORT"],
@@ -12,7 +12,7 @@ const gameData = {
     art: [
         {name:"さらちよみ", lang:"ja"}
     ],
-    cover: "game/fd044.jpg",
+    cover: "game/fd045.jpg",
     baseGameId: "game064"
 };
 export { gameData };
