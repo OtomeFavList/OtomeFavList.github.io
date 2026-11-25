@@ -24,7 +24,7 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/148/Midori.jpg"], type: "base" },
+                { srcList: ["char/148/Midori.png"], type: "base" },
             ]
         },
         // 斎藤一
@@ -37,7 +37,7 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/148/Hajime.jpg"], type: "base" }
+                { srcList: ["char/148/Hajime.png"], type: "base" }
             ]
         },
         // 藤堂平助
@@ -50,7 +50,7 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/148/Heisuke.jpg"], type: "base" }
+                { srcList: ["char/148/Heisuke.png"], type: "base" }
             ]
         },
         // 近藤勇
@@ -63,7 +63,7 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/148/Isami.jpg"], type: "base" }
+                { srcList: ["char/148/Isami.png"], type: "base" }
             ]
         },
         // 山南敬助
@@ -76,7 +76,7 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/148/Keisuke.jpg"], type: "base" }
+                { srcList: ["char/148/Keisuke.png"], type: "base" }
             ]
         },
         // 才谷梅太郎
@@ -89,7 +89,7 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/148/Saidani.jpg"], type: "base" }
+                { srcList: ["char/148/Saidani.png"], type: "base" }
             ]
         },
         // 原田左之助
@@ -102,7 +102,7 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/148/Sanosuke.jpg"], type: "base" }
+                { srcList: ["char/148/Sanosuke.png"], type: "base" }
             ]
         },
         // 永仓新八
@@ -115,7 +115,7 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/148/Shinpachi.jpg"], type: "base" }
+                { srcList: ["char/148/Shinpachi.png"], type: "base" }
             ]
         },
         // 冲田总司
@@ -128,7 +128,7 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/148/Souji.jpg"], type: "base" }
+                { srcList: ["char/148/Souji.png"], type: "base" }
             ]
         },
         // 山崎烝
@@ -141,7 +141,7 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/148/Susumu.jpg"], type: "base" }
+                { srcList: ["char/148/Susumu.png"], type: "base" }
             ]
         },
         // 土方岁三
@@ -154,7 +154,7 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/148/Toshizou.jpg"], type: "base" }
+                { srcList: ["char/148/Toshizou.png"], type: "base" }
             ]
         }
     ]
