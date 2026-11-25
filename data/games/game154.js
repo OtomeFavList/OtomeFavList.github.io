@@ -69,7 +69,7 @@ const gameData = {
                             "char/154/Izuru5.png",
                             "char/154/Izuru6.png",
                             "char/154/Izuru7.jpg",
-                            "char/154/Izuru8.jpg""], type: "base" }
+                            "char/154/Izuru8.jpg"], type: "base" }
             ]
         },
         // 神郷圭碁
