@@ -89,7 +89,7 @@ const gameData = {
             isFdSub: false,
             images: [
                 { srcList: ["char/143/Mitsurugi.png",
-                            "char/143/Mitsurugi2jpg",
+                            "char/143/Mitsurugi2.jpg",
                             "char/143/Mitsurugi3.jpg",
                             "char/143/Mitsurugi4.jpg"], type: "base" }
             ]
