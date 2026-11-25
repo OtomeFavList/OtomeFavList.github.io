@@ -1440,9 +1440,20 @@ function bindImpressionEvents() {
     if (switchInput) {
       const key = switchInput.dataset.impSwitch;
       if (key && gameData.charSwitches) {
+        const categoryMap = { hideChar: "hideChar", fdChar: "fdChar", fdSubChar: "fdSubChar" };
+        const category = categoryMap[key];
+        if (category && switchInput.checked) {
+          const apply = () => {
+            gameData.charSwitches[key] = true;
+            saveOtherData();
+            requestAnimationFrame(() => rerenderImpressionCard(gameId));
+          };
+          if (window.__spoilerAsk(category, apply, "other")) return;
+          switchInput.checked = false; // 未确认，开关保持关闭
+          return;
+        }
         gameData.charSwitches[key] = switchInput.checked;
         saveOtherData();
-        // 补丁：延后到下一帧再替换当前卡片，保留滑块过渡，避免整卡替换导致跳变
         requestAnimationFrame(() => rerenderImpressionCard(gameId));
       }
       return;
@@ -1569,19 +1580,31 @@ function bindImpressionGlobalSwitches() {
     { id: 'other-imp-global-fd-char',    key: 'fdChar' },
     { id: 'other-imp-global-fd-sub-char', key: 'fdSubChar' }
   ];
-  switchConfig.forEach(item => {
+    switchConfig.forEach(item => {
     const el = document.getElementById(item.id);
     if (!el) return;
-    // 初始化 DOM 勾选状态（从持久化数据恢复）
     el.checked = !!otherImpGlobalSwitches[item.key];
     el.addEventListener('change', () => {
+      const categoryMap = { hideChar: "hideChar", fdChar: "fdChar", fdSubChar: "fdSubChar" };
+      const category = categoryMap[item.key];
+      if (category && el.checked) {
+        const apply = () => {
+          otherImpGlobalSwitches[item.key] = true;
+          if (otherData) {
+            otherData.impressionGlobalSwitches = { ...otherImpGlobalSwitches };
+            saveOtherData();
+          }
+          renderImpressionModule();
+        };
+        if (window.__spoilerAsk(category, apply, "other")) return;
+        el.checked = false; // 未确认，开关保持关闭
+        return;
+      }
       otherImpGlobalSwitches[item.key] = el.checked;
-      // 持久化到 otherData
       if (otherData) {
         otherData.impressionGlobalSwitches = { ...otherImpGlobalSwitches };
         saveOtherData();
       }
-      // 重新渲染所有 Impression 游戏卡片（可见角色列表变化）
       renderImpressionModule();
     });
   });
