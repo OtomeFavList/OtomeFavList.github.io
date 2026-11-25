@@ -12,7 +12,7 @@ const gameData = {
     art: [
         {name:"ヒロセアヅミ", lang:"ja"}
     ],
-    cover: "game/fd060.jpg",
+    cover: "game/fd060.png",
     baseGameId: "game147"
 };
 export { gameData };
