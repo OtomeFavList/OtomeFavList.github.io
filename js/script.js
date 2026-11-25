@@ -1,8 +1,8 @@
-// ===================== script.js UI交互层（模块化导出） =====================
-// 【重要说明】剧透弹窗、全局开关click事件全部迁移至main.js，本文件不再处理全局开关点击逻辑
-// 游戏卡片动态生成的局部开关：使用事件委托对接main.js剧透弹窗逻辑
-// 改造：每个游戏卡片内部渲染两套独立滑出面板 char / cp；不再使用全局唯一char-slide-panel
-// 注意：main.js禁止import本文件，避免循环依赖
+// script.js UI交互层（模块化导出）
+// 重要：剧透弹窗、全局开关 click 事件全部迁移至 main.js，本文件不再处理全局开关点击逻辑
+// 游戏卡片动态生成的局部开关：使用事件委托对接 main.js 剧透弹窗逻辑
+// 修改：每个游戏卡片内部渲染两套独立滑出面板 char / cp；不再使用全局唯一 char-slide-panel
+// 注意：main.js 禁止 import 本文件，避免循环依赖
 import {
   appData,
   gameTemplateList,
@@ -19,10 +19,13 @@ import {
   getAvailableCharImages,
   getCharDisplayName,
   getCharNameList,
-  getCharShowHide,  // ✅补丁新增
+  getCharShowHide,  // 补丁新增
   isTodayConfirmed,
   saveConfirmDate,
   renderGameSelectItem,
+  getCombinedGameList,
+  findGameById,
+  getEffectiveCharList,
   bindDynamicGameCardSwitchEvents,
   toggleCharItemSelect,
   toggleCpItemSelect,
@@ -31,16 +34,14 @@ import {
   getWebImageUrl
 } from './main.js';
 
-// ========== 导入原生Canvas绘制导出模块 ==========
+// 导入原生 Canvas 绘制导出模块
 import { renderExportCanvas } from './export-canvas-render.js';
-
-// ========== 导出预览全局状态锁与缓存 ==========
+// 导出预览全局状态锁与缓存
 let isRendering = false;
 let snapshotBlobCache = null;
-// 【新增】全局保存所有预览页面url列表，用于多页预览
+// 新增：全局保存所有预览页面 url 列表，用于多页预览
 let previewPageUrlList = [];
-
-// 缓存使用完毕后释放资源公共函数
+// 缓存使用完毕后释放资源的公共函数
 function clearPreviewCacheResource() {
     // 释放所有分页图片资源
     previewPageUrlList.forEach(url => {
@@ -51,23 +52,58 @@ function clearPreviewCacheResource() {
 }
 
 export function initPage(Core = {}) {
-  // 安全兜底，防止不传Core报错
+  // 安全兜底，防止不传 Core 报错
   Core = Core || {};
-
+  /**
+   * 补丁：统计角色在指定开关状态下的可用图片总数
+   * 复用 main.js getAvailableCharImages，通过比较开关开/关时的图片数量差，判断角色是否有隐藏图片或 FD 图片
+   */
+  function countCharImages(char, hideOn, fdOn) {
+    if (!char) return 0;
+    const units = getAvailableCharImages(char, hideOn, fdOn, false, false);
+    let count = 0;
+    units.forEach(u => {
+      if (Array.isArray(u.srcList)) count += u.srcList.length;
+    });
+    return count;
+  }
+  /**
+   * 补丁：判断角色是否有隐藏内容（隐藏角色标记 / 隐藏姓名 / 隐藏图片）
+   * 用于局部隐藏开关的显隐判断，解决有隐藏图片/姓名但无 isHidden 标记时开关不显示的问题
+   */
+  function charHasHiddenContent(char) {
+    if (!char) return false;
+    if (char.isHidden === true) return true;
+    if (char.hiddenName) return true;
+    // 开启隐藏开关后图片数量增加 → 角色有隐藏图片
+    return countCharImages(char, true, false) > countCharImages(char, false, false);
+  }
+  /**
+   * 补丁：判断角色是否有FD 内容（FD 角色标记 / FD 名 / FD 图片）
+   * 用于局部 FD 开关的显隐判断
+   */
+  function charHasFdContent(char) {
+    if (!char) return false;
+    if (char.isFD === true) return true;
+    // 新增：角色有 fdName 即视为有 FD 内容，局部 FD 开关需要显示
+    if (char.fdName) return true;
+    // 开启 FD 开关后图片数量增加，角色有 FD 图片
+    return countCharImages(char, false, true) > countCharImages(char, false, false);
+  }
   /**
    * 在指定游戏卡片内部渲染滑出面板内容
-   * @param {HTMLElement} cardDom 游戏卡片dom .added-game-card
+   * @param {HTMLElement} cardDom 游戏卡片 dom .added-game-card
    * @param {string} gameId
    * @param {'char'|'cp'} mode
    * @param {HTMLElement} panelDom 本卡片内的滑出面板容器
    */
   function renderCharSelectPanel(cardDom, gameId, mode, panelDom) {
-    if (!Array.isArray(gameTemplateList)) return;
-    const gameInfo = gameTemplateList.find(g => g.id === gameId);
+    if (!Array.isArray(getCombinedGameList())) return;
+    const gameInfo = findGameById(gameId);
     const gameItem = appData.gameList?.find(g => g?.gameId === gameId);
     if (!gameInfo || !gameItem || !panelDom) return;
 
-    // ==========新增：本面板图片预加载收集池==========
+    // 新增：本面板图片预加载收集池
     const preloadSrcList = [];
 
     // 面板头部
@@ -85,14 +121,15 @@ export function initPage(Core = {}) {
     const allChars = getAllGameChar(gameInfo);
     const femaleChars = allChars.filter(c => c.gender === "female");
     const maleChars = allChars.filter(c => c.gender === "male");
+    const femaleCharsForCharMode = femaleChars.filter(c => !c.cpOnlyFemale);
 
     if(mode === "char"){
-        // ========= Character模式：改为草稿临时勾选，确认才写入真实数据 =========
+        // 修改：Character 模式，草稿临时勾选，确认才写入真实数据
         // 临时草稿集合，只在本次面板生命周期有效 Set<string>
         const tempCharDraftSet = new Set(gameItem.selectChars);
 
         let femHtml = "";
-        femaleChars.forEach(char => {
+        femaleCharsForCharMode.forEach(char => {
             const imgsUnitList = getAvailableCharImages(char, appData.globalHideChar, appData.globalFD, gameItem.localHideChar, gameItem.localFD);
             if (imgsUnitList.length === 0) return;
 
@@ -100,7 +137,7 @@ export function initPage(Core = {}) {
             imgsUnitList.forEach(u => allSrc.push(...u.srcList));
             if (allSrc.length === 0) return;
 
-            // ★ 修改：只加入当前图片 + 前后相邻图片（用完整 URL）
+            // 修改：只加入当前图片 + 前后相邻图片（用完整 URL）
             if (allSrc.length > 0) {
                 const saveKey = `char-img-${gameId}-${char.id}`;
                 if(!appData.charImageSelect) appData.charImageSelect = {};
@@ -120,16 +157,16 @@ export function initPage(Core = {}) {
                 }
             }
 
-            // ★★★ 修改点：将 saveKey 改为带 char-img- 前缀 ★★★
+            // 修改：将 saveKey 改为带 char-img- 前缀
             const saveKey = `char-img-${gameId}-${char.id}`;
             if(!appData.charImageSelect) appData.charImageSelect = {};
             let imgIndex = Number(appData.charImageSelect?.[saveKey] ?? 0);
             if (imgIndex >= allSrc.length) imgIndex = 0;
             const showSrc = allSrc[imgIndex];
-            // ✅重点：selected 来自临时草稿，不再读取 gameItem.selectChars
+            // 重点：selected 来自临时草稿，不再读取 gameItem.selectChars
             let selected = tempCharDraftSet.has(char.id) ? "selected" : "";
 
-            // ✅补丁修改：待选角色多名字循环切换
+            // 补丁：待选角色多名字循环切换
             const showHideChar = getCharShowHide(char, appData.globalHideChar, gameItem.localHideChar, appData.globalFD, gameItem.localFD);
             const nmList = getCharNameList(char, showHideChar);
             const nmTotal = nmList.length;
@@ -144,7 +181,7 @@ export function initPage(Core = {}) {
                 <button class="char-name-switch-btn char-name-switch-prev" data-char-id="${char.id}" data-game-id="${gameId}" data-panel-mode="char">&lt;</button>
                 <button class="char-name-switch-btn char-name-switch-next" data-char-id="${char.id}" data-game-id="${gameId}" data-panel-mode="char">&gt;</button>
             ` : "";
-            // ✅补丁结束
+            // 补丁结束
 
             femHtml += `
             <div class="char-item ${selected}" data-cid="${char.id}" data-char-id="${char.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}" data-panel-mode="char">
@@ -170,7 +207,7 @@ export function initPage(Core = {}) {
             imgsUnitList.forEach(u => allSrc.push(...u.srcList));
             if (allSrc.length === 0) return;
 
-            // ★ 修改：只加入当前图片 + 前后相邻图片（用完整 URL）
+            // 修改：只加入当前图片 + 前后相邻图片（用完整 URL）
             if (allSrc.length > 0) {
                 const saveKey = `char-img-${gameId}-${char.id}`;
                 if(!appData.charImageSelect) appData.charImageSelect = {};
@@ -190,16 +227,16 @@ export function initPage(Core = {}) {
                 }
             }
 
-            // ★★★ 修改点：将 saveKey 改为带 char-img- 前缀 ★★★
+            // 修改：将 saveKey 改为带 char-img- 前缀
             const saveKey = `char-img-${gameId}-${char.id}`;
             if(!appData.charImageSelect) appData.charImageSelect = {};
             let imgIndex = Number(appData.charImageSelect?.[saveKey] ?? 0);
             if (imgIndex >= allSrc.length) imgIndex = 0;
             const showSrc = allSrc[imgIndex];
-            // ✅重点：selected 来自临时草稿
+            // 重点：selected 来自临时草稿
             let selected = tempCharDraftSet.has(char.id) ? "selected" : "";
 
-            // ✅补丁修改：待选角色多名字循环切换
+            // 补丁：待选角色多名字循环切换
             const showHideChar = getCharShowHide(char, appData.globalHideChar, gameItem.localHideChar, appData.globalFD, gameItem.localFD);
             const nmList = getCharNameList(char, showHideChar);
             const nmTotal = nmList.length;
@@ -214,7 +251,7 @@ export function initPage(Core = {}) {
                 <button class="char-name-switch-btn char-name-switch-prev" data-char-id="${char.id}" data-game-id="${gameId}" data-panel-mode="char">&lt;</button>
                 <button class="char-name-switch-btn char-name-switch-next" data-char-id="${char.id}" data-game-id="${gameId}" data-panel-mode="char">&gt;</button>
             ` : "";
-            // ✅补丁结束
+            // 补丁结束
 
             maleHtml += `
             <div class="char-item ${selected}" data-cid="${char.id}" data-char-id="${char.id}" data-game-id="${gameId}" data-total-img="${allSrc.length}" data-panel-mode="char">
@@ -231,7 +268,7 @@ export function initPage(Core = {}) {
         });
         heroListBox.innerHTML = maleHtml;
 
-        // ✅追加确认/取消按钮栏，直接复用cp的css类
+        // 追加确认/取消按钮栏，直接复用 cp 的 css 类
         const btnBarHtml = `
         <div class="cp-select-btn-bar">
             <button class="char-panel-cancel-btn" data-gid="${gameId}">取消</button>
@@ -239,23 +276,29 @@ export function initPage(Core = {}) {
         </div>`;
         panelDom.insertAdjacentHTML('beforeend', btnBarHtml);
 
-        // 将草稿集合挂载到panelDom，委托事件可以读取
+        // 将草稿集合挂载到 panelDom，委托事件可以读取
         panelDom._tempCharDraftSet = tempCharDraftSet;
     }else{
-        // ====================== mode === "cp" 全新草稿模式逻辑 ======================
-        // 兜底：旧存档没有cpEditState则自动生成【修改点1：增加femaleImgIndex:0】
-        if(!Array.isArray(gameItem.cpEditState) || gameItem.cpEditState.length ===0){
-            gameItem.cpEditState = femaleChars.map(f=>({
-                femaleId: f.id,
-                openMalePanel: false,
-                maleIds: [],
-                maleItems: [],
-                femaleImgIndex: 0,
-                femaleNameIndex: 0  // ✅补丁新增
-            }));
+        // mode === "cp" 全新草稿模式逻辑
+        // 兜底：旧存档没有 cpEditState 则自动生成（修改：增加 femaleImgIndex:0）
+        if(!Array.isArray(gameItem.cpEditState)){
+            gameItem.cpEditState = [];
         }
+        // 增量补全：cpOnlyFemale角色自动追加到cpEditState，不覆盖已有条目
+        femaleChars.forEach(f=>{
+            if(!gameItem.cpEditState.some(s=>s.femaleId === f.id)){
+                gameItem.cpEditState.push({
+                    femaleId: f.id,
+                    openMalePanel: false,
+                    maleIds: [],
+                    maleItems: [],
+                    femaleImgIndex: 0,
+                    femaleNameIndex: 0// 补丁新增
+                });
+            }
+        });
 
-        // 【重构草稿结构：对齐Character，草稿只保存选中ID Set，不缓存imgIndex】
+        // 重构草稿结构：对齐 Character，草稿只保存选中 ID Set，不缓存 imgIndex
         const tempCpDraftMap = {};
         femaleChars.forEach(fChar=>{
             const state = gameItem.cpEditState.find(s=>s.femaleId === fChar.id);
@@ -270,7 +313,7 @@ export function initPage(Core = {}) {
             }
         });
 
-        // 渲染CP面板HTML：每一位女主作为可点击按钮；展开则下方显示该女主专属男主选择区，自动换行
+        // 渲染 CP 面板 HTML
         let cpPanelHtml = "";
         femaleChars.forEach(fChar=>{
             const state = gameItem.cpEditState.find(s=>s.femaleId === fChar.id);
@@ -282,7 +325,7 @@ export function initPage(Core = {}) {
             imgsUnitList.forEach(u=>allSrc.push(...u.srcList));
             if(allSrc.length === 0) return;
 
-            // ★ 修改：只加入当前图片 + 前后相邻图片（用完整 URL）
+            // 修改：只加入当前图片 + 前后相邻图片（用完整 URL）
             if (allSrc.length > 0) {
                 let imgIndex = Number(state.femaleImgIndex ?? 0);
                 if (imgIndex >= allSrc.length) imgIndex = 0;
@@ -300,12 +343,12 @@ export function initPage(Core = {}) {
                 }
             }
 
-            //【修改点2：从cpEditState读取女主立绘下标，不再读appData.charImageSelect】
+            // 修改：从 cpEditState 读取女主立绘下标，不再读 appData.charImageSelect
             let imgIndex = Number(state.femaleImgIndex ?? 0);
             if(imgIndex >= allSrc.length) imgIndex = 0;
             const showSrc = allSrc[imgIndex];
 
-            // ✅补丁修改：CP女主待选多名字循环切换
+            // 补丁：CP 女主待选多名字循环切换
             const fShowHideNm = getCharShowHide(fChar, appData.globalHideChar, gameItem.localHideChar, appData.globalFD, gameItem.localFD);
             const fNmList = getCharNameList(fChar, fShowHideNm);
             const fNmTotal = fNmList.length;
@@ -318,10 +361,10 @@ export function initPage(Core = {}) {
                 <button class="char-name-switch-btn char-name-switch-prev" data-char-id="${fChar.id}" data-game-id="${gameId}" data-panel-mode="cp" data-cp-female="1">&lt;</button>
                 <button class="char-name-switch-btn char-name-switch-next" data-char-id="${fChar.id}" data-game-id="${gameId}" data-panel-mode="cp" data-cp-female="1">&gt;</button>
             ` : "";
-            // ✅补丁结束
+            // 补丁结束
 
-            // 女主卡片：增加data-char-id，多立绘渲染切换按钮，标记panel-mode="cp"
-            // ★★★ 修复点：为 cp-female-card-btn 添加 data-game-id 属性 ★★★
+            // 女主卡片：增加 data-char-id，多立绘渲染切换按钮，标记 panel-mode="cp"
+            // 修复：为 cp-female-card-btn 添加 data-game-id 属性
             cpPanelHtml += `
             <div class="cp-female-block" data-fid="${fChar.id}" data-gid="${gameId}">
                 <!-- 女主点击按钮 -->
@@ -341,7 +384,7 @@ export function initPage(Core = {}) {
                         <span class="char-name-text">${fDispNm}</span>
                     </div>
                 </div>
-                <!-- 如果openMalePanel=true，渲染该女主对应的男主候选列表 -->
+                <!-- openMalePanel=true 渲染该女主对应的男主候选列表 -->
                 ${state.openMalePanel ? `
                 <div class="cp-male-select-wrap" data-fid="${fChar.id}">
                     <div class="cp-male-title">为【${fChar.name}】选择角色</div>
@@ -352,7 +395,7 @@ export function initPage(Core = {}) {
                             mImgs.forEach(u=>mSrcArr.push(...u.srcList));
                             if(mSrcArr.length===0) return "";
 
-                            // ★ 修改：只加入当前图片 + 前后相邻图片（用完整 URL）
+                            // 修改：只加入当前图片 + 前后相邻图片（用完整 URL）
                             if (mSrcArr.length > 0) {
                                 // 预加载用，不影响逻辑
                                 const mSaveKey = `cp-img-${gameId}-${mChar.id}`;
@@ -371,14 +414,14 @@ export function initPage(Core = {}) {
                                 }
                             }
 
-                            // 【修改】草稿只存ID，渲染始终读取全局最新下标
+                            // 修改：草稿只存 ID，渲染始终读取全局最新下标
                             const mSaveKey = `cp-img-${gameId}-${mChar.id}`;
                             let mImgIndex = Number(appData.charImageSelect?.[mSaveKey] ?? 0);
                             if(mImgIndex >= mSrcArr.length) mImgIndex = 0;
                             const mShowSrc = mSrcArr[mImgIndex];
                             const mSel = draftMap.has(mChar.id) ? "selected" : "";
 
-                            // ✅补丁修改：CP男主待选多名字循环切换
+                            // 补丁：CP 男主待选多名字循环切换
                             const mShowHideNm = getCharShowHide(mChar, appData.globalHideChar, gameItem.localHideChar, appData.globalFD, gameItem.localFD);
                             const mNmList = getCharNameList(mChar, mShowHideNm);
                             const mNmTotal = mNmList.length;
@@ -393,7 +436,7 @@ export function initPage(Core = {}) {
                                 <button class="char-name-switch-btn char-name-switch-prev" data-char-id="${mChar.id}" data-game-id="${gameId}" data-panel-mode="cp">&lt;</button>
                                 <button class="char-name-switch-btn char-name-switch-next" data-char-id="${mChar.id}" data-game-id="${gameId}" data-panel-mode="cp">&gt;</button>
                             ` : "";
-                            // ✅补丁结束
+                            // 补丁结束
 
                             return `
                             <div class="cp-male-item ${mSel}" 
@@ -416,7 +459,7 @@ export function initPage(Core = {}) {
                         }).join("")}
                     </div>
                 </div>
-                <!-- ✅按钮栏提升到cp-male-select-wrap外部，cp-female-block直接子节点 -->
+                <!-- 按钮栏提升到 cp-male-select-wrap 外部，cp-female-block 直接子节点 -->
                 <div class="cp-select-btn-bar">
                     <button class="cp-cancel-btn" data-fid="${fChar.id}" data-gid="${gameId}">取消</button>
                     <button class="cp-confirm-btn" data-fid="${fChar.id}" data-gid="${gameId}">确认</button>
@@ -426,39 +469,39 @@ export function initPage(Core = {}) {
             `;
         });
 
-        // cp模式下，清空原有heroineBox/heroListBox，直接输出新排版
+        // cp 模式下，清空原有 heroineBox/heroListBox，直接输出新排版
         heroineBox.innerHTML = "";
         heroListBox.innerHTML = cpPanelHtml;
 
-        // ==========【修改点5：cpList带上femaleImgIndex】==========
+        // 修改：cpList 带上 femaleImgIndex
         gameItem.cpList = gameItem.cpEditState
             .filter(st=> Array.isArray(st.maleItems) && st.maleItems.length>0)
             .map(st=>({
                 femaleId: st.femaleId,
                 femaleImgIndex: st.femaleImgIndex ?? 0,
-                femaleNameIndex: st.femaleNameIndex ?? 0,  // ✅补丁新增
+                femaleNameIndex: st.femaleNameIndex ?? 0,  // 补丁新增
                 maleItems: st.maleItems.map(x=>({...x}))
             }));
 
-        // 将草稿map挂载到panel dom上，事件委托可以读取
+        // 将草稿 map 挂载到 panel dom 上，事件委托可以读取
         panelDom._tempCpDraftMap = tempCpDraftMap;
     }
 
-    // ==========渲染HTML全部完成后，执行空闲预加载==========
+    // 渲染 HTML 全部完成后，执行空闲预加载
     if(Core && typeof Core.preloadImagesInIdle === "function" && preloadSrcList.length > 0){
-        // 去重：避免同一个图片url多次传入
+        // 去重，避免同一个图片 url 多次传入
         const uniqueSrc = [...new Set(preloadSrcList)];
         Core.preloadImagesInIdle(uniqueSrc);
     }
   }
 
   /**
-   * 生成单个游戏卡片内部滑出面板HTML字符串
+   * 生成单个游戏卡片内部滑出面板 HTML 字符串
    * @param {'char'|'cp'} mode
    */
   function getInnerSlidePanelHtml(mode){
     const cls = mode === "char" ? "char-slide-panel-char" : "char-slide-panel-cp";
-    // 移除hide-block，默认无class，靠 .active 控制显示
+    // 移除 hide-block，默认无 class，靠 .active 控制显示
     return `
     <div class="${cls}">
       <div class="panel-header">
@@ -472,13 +515,13 @@ export function initPage(Core = {}) {
     `;
   }
 
-  // ===================== 页面启动bootstrap，UI渲染、表单、导出、卡片事件 =====================
+  // 页面启动 bootstrap，UI 渲染、表单、导出、卡片事件
   async function bootstrap() {
-    // 防止多次调用bootstrap重复注册click监听
+    // 防止多次调用 bootstrap 重复注册 click 监听
     if((window).__uiListenerRegistered) return;
     (window).__uiListenerRegistered = true;
 
-    // DOM元素缓存，移除全局char-slide-panel
+    // DOM 元素缓存，移除全局 char-slide-panel
     const el = {
       globalHideChar: document.getElementById("global-hide-char"),
       globalFD: document.getElementById("global-fd-game"),
@@ -503,25 +546,27 @@ export function initPage(Core = {}) {
       exportBtn: document.getElementById("btn-export"),
       canvas: document.getElementById("export-canvas"),
       snapshotContainer: document.getElementById("snapshot-container"),
-      // =========新增：导出折叠内容开关==========
+      // 新增：导出折叠内容开关
       exportFoldContentSwitch: document.getElementById("export-fold-content"),
-      // =========新增：显示隐藏/续作FD角色名开关==========
+      // 新增：显示隐藏/续作 FD 角色名开关
       exportShowHiddenFDNameSwitch: document.getElementById("export-show-hidden-fd-name"),
-      // =========新增：恢复默认配色按钮==========
+      // 新增：导出普通画质开关
+      exportNormalQualitySwitch: document.getElementById("export-normal-quality"),
+      // 新增：恢复默认配色按钮
       resetColorBtn: document.getElementById("btn-reset-color"),
-      // =========【新增】自定义文本字号滑块 ==========
+      // 新增：自定义文本字号滑块
       sliderCustomTextFont: document.getElementById("slider-custom-text-font"),
       customTextFontValueDisplay: document.getElementById("custom-text-font-value")
     };
 
-    // ========== 预览弹窗元素 ==========
+    // 预览弹窗元素
     const previewModal = document.getElementById("export-preview-modal");
     const previewScrollWrap = previewModal?.querySelector(".preview-scroll-wrap");
     const previewCloseBtn = document.getElementById("preview-close-btn");
     const previewRegenBtn = document.getElementById("preview-regen-btn");
     const previewDownloadBtn = document.getElementById("preview-download-btn");
 
-    // ========== 预览弹窗按钮事件绑定 ==========
+    // 预览弹窗按钮事件绑定
     if (previewModal) {
         // 点击遮罩关闭
         previewModal.addEventListener("click", function(e) {
@@ -543,16 +588,15 @@ export function initPage(Core = {}) {
         if (previewRegenBtn) {
             previewRegenBtn.addEventListener("click", () => {
                 previewModal.classList.remove("active");
-                // 触发重新生成
                 if (el.exportBtn) el.exportBtn.click();
             });
         }
 
-        // 导出按钮（默认行为，会被导出逻辑覆盖）
-        // 注意：这里使用 addEventListener，但在导出逻辑中会重新赋值 onclick 以支持多页
+        // 导出按钮
+        // 使用 addEventListener，但在导出逻辑中会重新赋值 onclick 以支持多页
         if (previewDownloadBtn) {
             previewDownloadBtn.addEventListener("click", () => {
-                // 这个监听器会被导出逻辑中的 onclick 覆盖，但保留以防万一
+                // 这个监听器会被导出逻辑中的 onclick 覆盖，但保留
                 if (!snapshotBlobCache) return;
                 const link = document.createElement('a');
                 link.download = `Otome_FavList_${new Date().getTime()}.png`;
@@ -567,7 +611,7 @@ export function initPage(Core = {}) {
     /**
      * 渲染已添加游戏卡片
      * 每个卡片内部嵌入两套滑出面板 char / cp
-     * ✅传入容器对象el，消除ReferenceError
+     * 传入容器对象 el，消除 ReferenceError
      */
     function renderAddedGame(el) {
       if (!el.addedGameBox) return;
@@ -578,42 +622,48 @@ export function initPage(Core = {}) {
 
       document.querySelectorAll(".modal-trigger").forEach(dom => dom.classList.remove("modal-trigger"));
 
-      // =========【修复：第一步：预处理所有游戏数据，先补全cpEditState / cpList，不操作DOM】=========
+      // 修复：预处理所有游戏数据，先补全 cpEditState / cpList，不操作 DOM
       appData.gameList?.forEach((gameItem) => {
         if (!gameItem) return;
-        const gameInfo = gameTemplateList.find(g => g.id === gameItem.gameId);
+        const gameInfo = findGameById(gameItem.gameId);
         if (!gameInfo) return;
 
         const allChars = getAllGameChar(gameInfo);
         const femaleChars = allChars.filter(c => c.gender === "female");
 
-        //【修改点1：初始化增加femaleImgIndex:0】
-        if(!Array.isArray(gameItem.cpEditState) || gameItem.cpEditState.length ===0){
-            gameItem.cpEditState = femaleChars.map(f=>({
-                femaleId: f.id,
-                openMalePanel: false,
-                maleIds: [],
-                maleItems: [],
-                femaleImgIndex: 0,
-                femaleNameIndex: 0  // ✅补丁新增
-            }));
+        // 修改：初始化增加 femaleImgIndex:0，并增量补全配角开关打开后新出现的女主
+        if(!Array.isArray(gameItem.cpEditState)){
+            gameItem.cpEditState = [];
         }
-        // 预生成cpList，保证renderCP拿到最新数据【修改点5带上femaleImgIndex】
+        femaleChars.forEach(f=>{
+            if(!gameItem.cpEditState.some(s=>s.femaleId === f.id)){
+                gameItem.cpEditState.push({
+                    femaleId: f.id,
+                    openMalePanel: false,
+                    maleIds: [],
+                    maleItems: [],
+                    femaleImgIndex: 0,
+                    femaleNameIndex: 0
+                });
+            }
+        });
+        
+        // 预生成 cpList，保证 renderCP 拿到最新数据（修改：带上 femaleImgIndex）
         gameItem.cpList = gameItem.cpEditState
             .filter(st=> Array.isArray(st.maleItems) && st.maleItems.length>0)
             .map(st=>({
                 femaleId: st.femaleId,
                 femaleImgIndex: st.femaleImgIndex ?? 0,
-                femaleNameIndex: st.femaleNameIndex ?? 0,  // ✅补丁新增
+                femaleNameIndex: st.femaleNameIndex ?? 0,  // 补丁新增
                 maleItems: st.maleItems.map(x=>({...x}))
             }));
       });
 
-      // 全部预处理完成，再拼接HTML
+      // 全部预处理完成，再拼接 HTML
       let html = "";
       appData.gameList?.forEach((gameItem, index) => {
         if (!gameItem) return;
-        const gameInfo = gameTemplateList.find(g => g.id === gameItem.gameId);
+        const gameInfo = findGameById(gameItem.gameId);
         if (!gameInfo) return;
 
         // 使用 SVG 矢量爱心，防止移动端强制渲染为 emoji
@@ -623,14 +673,17 @@ export function initPage(Core = {}) {
           heartHtml += `<span class="heart ${gameItem.loveRate >= i ? 'active' : ''}" data-val="${i}">${heartSvg}</span>`;
         }
 
-        // =========【新增：条件渲染本游戏局部开关】=========
-        const hasLocalHideChar = gameInfo.charList.some(c => c.isHidden === true);
-        const hasLocalFDChar = gameInfo.charList.some(c => c.isFD === true);
-        const hasLocalSubChar = gameInfo.charList.some(c => c.isSub === true);
-        const hasLocalFdSubChar = gameInfo.charList.some(c => c.isFdSub === true); // ✅补丁新增：检测是否存在续作/FD次要角色
+        // 新增：条件渲染本游戏局部开关
+        // 修复：隐藏开关不仅看 isHidden 标记，还要看是否有隐藏姓名或隐藏图片
+        const charList = getEffectiveCharList(gameInfo);
+        const hasLocalHideChar = charList.some(c => charHasHiddenContent(c));
+        // 修复：FD 开关不仅看 isFD 标记，还要看是否有 FD 图片
+        const hasLocalFDChar = charList.some(c => charHasFdContent(c));
+        const hasLocalSubChar = charList.some(c => c.isSub === true);
+        const hasLocalFdSubChar = charList.some(c => c.isFdSub === true);
         let switchRowInnerHtml = "";
 
-        // 新增【单独显示本游戏次要角色】
+        // 新增：单独显示本游戏次要角色
         if(hasLocalSubChar){
             switchRowInnerHtml += `
             <div>
@@ -642,7 +695,7 @@ export function initPage(Core = {}) {
             </div>`;
         }
 
-        // ✅补丁新增：单独显示本游戏续作/FD次要角色
+        // 新增：单独显示本游戏续作/FD 次要角色
         if(hasLocalFdSubChar){
             switchRowInnerHtml += `
             <div>
@@ -661,7 +714,7 @@ export function initPage(Core = {}) {
                     <input type="checkbox" class="game-hide-char" data-gameidx="${index}" ${(gameItem.localHideChar ?? false) ? 'checked' : ''}>
                     <span class="slider"></span>
                 </label>
-                <span>单独显示本游戏隐藏角色</span>
+                <span>单独显示本游戏隐藏图片、角色</span>
             </div>`;
         }
         if(hasLocalFDChar){
@@ -671,19 +724,19 @@ export function initPage(Core = {}) {
                     <input type="checkbox" class="game-fd-switch" data-gameidx="${index}" ${(gameItem.localFD ?? false) ? 'checked' : ''}>
                     <span class="slider"></span>
                 </label>
-                <span>单独显示本游戏续作/FD角色</span>
+                <span>单独显示本游戏续作/FD图片、角色</span>
             </div>`;
         }
         const switchRowHtml = switchRowInnerHtml ? `<div class="game-switch-row">${switchRowInnerHtml}</div>` : "";
-        // =========【新增结束】=========
+        // 新增结束
 
-        // ========== 新增三个自定义文本区域的HTML（已消除换行空白） ==========
-        // 【修改点1】统一 placeholder 为 "自定义文本"，并在 textarea 后追加 <span class="resize-handle"></span>
+        // 新增三个自定义文本区域的 HTML，已消除换行空白
+        // 修改：在 textarea 后追加 <span class="resize-handle"></span>
         const headTextHtml = `<div class="game-custom-text-wrap"><textarea class="game-head-text-input" data-gid="${gameItem.gameId}" placeholder="自定义文本">${gameItem.gameHeadText || ''}</textarea><span class="resize-handle"></span></div>`;
         const charTextHtml = `<div class="game-custom-text-wrap"><textarea class="game-char-text-input" data-gid="${gameItem.gameId}" placeholder="自定义文本">${gameItem.charSectionText || ''}</textarea><span class="resize-handle"></span></div>`;
         const cpTextHtml = `<div class="game-custom-text-wrap"><textarea class="game-cp-text-input" data-gid="${gameItem.gameId}" placeholder="自定义文本">${gameItem.cpSectionText || ''}</textarea><span class="resize-handle"></span></div>`;
 
-        html += `
+                html += `
         <div class="added-game-card" data-gameid="${gameItem.gameId}" data-fold="${!!gameItem.fold}">
           <div class="game-card-head">
             <div class="game-card-head-title-wrap">
@@ -692,11 +745,14 @@ export function initPage(Core = {}) {
             <div class="heart-rate" data-gid="${gameItem.gameId}">
               ${heartHtml}
             </div>
-            ${gameItem.fold ? `<button class="game-fold-icon-expand" data-gid="${gameItem.gameId}">▼</button>` : ''}
+            <div class="game-card-head-btns">
+              <button class="game-fold-icon fold-game" data-gid="${gameItem.gameId}">${gameItem.fold ? '▲' : '▼'}</button>
+              <button class="game-delete-btn del-game" data-gid="${gameItem.gameId}">×</button>
+            </div>
             ${switchRowHtml}
             ${headTextHtml}
           </div>
-          <!-- ✅全部移出game-card-head，作为added-game-card直接子节点 -->
+          <!-- 全部移出 game-card-head，作为 added-game-card 直接子节点 -->
           <div class="game-card-block-item char-section block-margin-gap">
             <button class="btn-character" data-gid="${gameItem.gameId}">选择角色 Character</button>
             ${getInnerSlidePanelHtml("char")}
@@ -709,10 +765,6 @@ export function initPage(Core = {}) {
             <div class="game-card-empty-tip cp-render-box" data-gid="${gameItem.gameId}">${renderCP(gameItem, gameInfo) || `<div class="empty-hint">暂未选择角色</div>`}</div>
             ${cpTextHtml}
           </div>
-          <div class="card-bottom-buttons block-margin-gap">
-            <button class="btn-fold fold-game btn-gray-bg" data-gid="${gameItem.gameId}">折叠</button>
-            <button class="btn-del del-game btn-gray-bg" data-gid="${gameItem.gameId}">删除</button>
-          </div>
         </div>
         `;
       });
@@ -723,17 +775,17 @@ export function initPage(Core = {}) {
       document.querySelectorAll(".added-game-card").forEach(cardDom => {
         const gid = cardDom.dataset.gameid;
         const gameItem = appData.gameList.find(g => g.gameId === gid);
-        const gameInfo = gameTemplateList.find(g => g.id === gid);
+        const gameInfo = findGameById(gid);
         if(!gameItem || !gameInfo) return;
 
         const charPanel = cardDom.querySelector(".char-slide-panel-char");
         const cpPanel = cardDom.querySelector(".char-slide-panel-cp");
 
-        // DOM面板填充（只负责渲染滑出面板内部HTML，数据已经预处理完毕）
+        // 1. DOM 面板填充，只负责渲染滑出面板内部 HTML，数据已经预处理完毕
         if(charPanel) renderCharSelectPanel(cardDom, gid, "char", charPanel);
         if(cpPanel) renderCharSelectPanel(cardDom, gid, "cp", cpPanel);
 
-        // 2.内容填充完毕，再根据状态打开面板
+        // 2. 内容填充完毕，再根据状态打开面板
         if (!gameItem.fold) {
             if(gameItem.charPanelOpen) charPanel?.classList.add("active");
             if(gameItem.cpPanelOpen) cpPanel?.classList.add("active");
@@ -743,35 +795,18 @@ export function initPage(Core = {}) {
 
     window.refreshGameCardUi = () => renderAddedGame(el);
 
-    // ==========【全局事件委托：角色立绘左右切换 + CP全部业务逻辑】==========
+    // 全局事件委托：角色立绘左右切换 + CP 全部业务逻辑
     document.addEventListener("click", async function (e) {
-      // ==========【新增：自定义文本输入框点击不处理，避免干扰】==========
+      // 新增：自定义文本输入框点击不处理，避免干扰
       const textInput = e.target.closest(".game-head-text-input,.game-char-text-input,.game-cp-text-input");
       if (textInput) {
-          // 不阻止默认行为，仅忽略点击事件，由input事件处理
+          // 不阻止默认行为，仅忽略点击事件，由 input 事件处理
           return;
       }
 
-      // ==========【新增：图片点击冒泡兼容，解决cp面板点击图片需要两次】==========
+      // 新增：图片点击冒泡兼容，解决 cp 面板点击图片需要两次
       if(e.target.tagName === "IMG"){
-          // 允许事件向上冒泡至父级char-item / cp-male-item，不拦截
-      }
-
-      // ==========【新增】折叠状态：游戏标题旁图标展开按钮 ==========
-      const iconExpandBtn = e.target.closest(".game-fold-icon-expand");
-      if (iconExpandBtn) {
-          e.stopPropagation();
-          const gid = iconExpandBtn.dataset.gid;
-          const gameItem = appData.gameList?.find(g => g.gameId === gid);
-          if (!gameItem) return;
-          // 图标按钮只做【展开】，只把fold置false
-          gameItem.fold = false;
-          saveData();
-          clearPreviewCacheResource(); // 缓存失效
-          requestAnimationFrame(()=>{
-              window.refreshGameCardUi();
-          });
-          return;
+          // 允许事件向上冒泡至父级 char-item / cp-male-item，不拦截
       }
 
       const switchBtn = e.target.closest(".char-switch-btn");
@@ -782,10 +817,10 @@ export function initPage(Core = {}) {
         const charId = charCard.dataset.charId;
         const gameId = charCard.dataset.gameId;
         const panelMode = switchBtn.dataset.panelMode || charCard.dataset.panelMode;
-        const gameInfo = gameTemplateList.find(g => g.id === gameId);
+        const gameInfo = findGameById(gameId);
         if (!gameInfo) return;
 
-        const char = gameInfo.charList.find(c => c.id === charId);
+        const char = getEffectiveCharList(gameInfo).find(c => c.id === charId);
         if (!char) return;
 
         const gameItem = appData.gameList?.find(g => g.gameId === gameId);
@@ -803,24 +838,24 @@ export function initPage(Core = {}) {
         availImgUnits.forEach(unit => allSrc.push(...unit.srcList));
         if (allSrc.length <= 1) return;
 
-        // ========== 修复：区分 char/CP女主/CP男主 ==========
+        // 修复：区分 char / CP 女主 / CP 男主
         let currentIndex;
         let saveKey = "";
         const isCpFemaleCard = charCard.classList.contains("cp-female-card-btn");
 
         if (panelMode === "char") {
-            // char普通角色：char-img-{gid}-{cid}
+            // char 普通角色：char-img-{gid}-{cid}
             saveKey = `char-img-${gameId}-${charId}`;
             if(!appData.charImageSelect) appData.charImageSelect = {};
             currentIndex = Number(appData.charImageSelect?.[saveKey] ?? 0);
         } else if (panelMode === "cp") {
             if (isCpFemaleCard) {
-                // CP女主：唯一数据源 cpEditState.femaleImgIndex
+                // CP 女主：唯一数据源 cpEditState.femaleImgIndex
                 const targetGameItem = appData.gameList?.find(g=>g.gameId === gameId);
                 const st = targetGameItem?.cpEditState.find(s=>s.femaleId === charId);
                 currentIndex = Number(st?.femaleImgIndex ?? 0);
             } else {
-                // CP男主：cp-img-{gid}-{cid}
+                // CP 男主：cp-img-{gid}-{cid}
                 saveKey = `cp-img-${gameId}-${charId}`;
                 if(!appData.charImageSelect) appData.charImageSelect = {};
                 currentIndex = Number(appData.charImageSelect?.[saveKey] ?? 0);
@@ -836,7 +871,7 @@ export function initPage(Core = {}) {
           if (currentIndex < 0) currentIndex = allSrc.length - 1;
         }
 
-        // ========== 分支回写持久化数据 ==========
+        // 分支回写持久化数据
         if (panelMode === "char") {
             appData.charImageSelect[saveKey] = currentIndex;
         } else if (panelMode === "cp") {
@@ -845,35 +880,35 @@ export function initPage(Core = {}) {
             const targetGameItem = appData.gameList?.find(g=>g.gameId === gameId);
 
             if (isCpFemaleCard) {
-                // CP女主：写入cpEditState.femaleImgIndex，禁止写入charImageSelect
+                // CP 女主：写入 cpEditState.femaleImgIndex，禁止写入 charImageSelect
                 const st = targetGameItem?.cpEditState.find(s=>s.femaleId === charId);
                 if(st) st.femaleImgIndex = currentIndex;
             } else {
-                // CP男主：写入全局存储；草稿不再缓存imgIndex，无需同步草稿
+                // CP 男主：写入全局存储；草稿不再缓存 imgIndex，无需同步草稿
                 appData.charImageSelect[saveKey] = currentIndex;
             }
         }
 
         saveData();
 
-        // ========== 替换为带loading切换函数 ==========
+        // 替换为带 loading 切换函数
         const imgBox = charCard.querySelector(".char-card-img-box");
         if(imgBox){
-            // ★★★ 修复：将相对路径转为完整 R2 URL ★★★
+            // 修复：将相对路径转为完整 R2 URL
             const fullUrl = getWebImageUrl(allSrc[currentIndex]);
             await switchCharImageWithLoading(imgBox, fullUrl);
-            // ========== 后备：强制更新图片 src ==========
+            // 强制更新图片 src
             const imgDom = imgBox.querySelector("img");
             if (imgDom && imgDom.src !== fullUrl) {
                 imgDom.src = fullUrl;
             }
         }
-        // =========【新增调试日志】=========
+        // 新增调试日志
         console.log("mode",panelMode,"charId",charId,"currentIndex",currentIndex,"src",allSrc[currentIndex]);
-        return; //处理完图片切换直接return，不再往下执行cp逻辑
+        return; //处理完图片切换直接 return，不再往下执行 cp 逻辑
       }
 
-      // ========== ✅补丁修改：待选面板 角色名切换按钮（多名字循环） ==========
+      // 补丁：待选面板角色名切换按钮
       const nameSwitchBtn = e.target.closest(".char-name-switch-btn");
       if (nameSwitchBtn) {
         e.stopPropagation();
@@ -885,10 +920,10 @@ export function initPage(Core = {}) {
         const isCpFemale = !!nameSwitchBtn.dataset.cpFemale;
         const gameItem = appData.gameList?.find(g => g.gameId === gameId);
         if (!gameItem) return;
-        // ✅补丁修改：多名字循环切换
-        const nmGameInfo = gameTemplateList.find(g => g.id === gameId);
+        // 修改：多名字循环切换
+        const nmGameInfo = findGameById(gameId);
         const nmChar = nmGameInfo?.charList?.find(c => c.id === charId);
-        // ✅补丁修改：隐藏开关或FD开关（角色isFD时）任一开启即显示隐藏名
+        // 修改：隐藏开关或 FD 开关（角色 isFD 时）任一开启即显示隐藏名
         const nmShowHide = getCharShowHide(
             nmChar,
             appData.globalHideChar,
@@ -900,7 +935,7 @@ export function initPage(Core = {}) {
         const nmTotal = nmList.length;
         const isPrevBtn = nameSwitchBtn.classList.contains("char-name-switch-prev");
         if (panelMode === "cp" && isCpFemale) {
-          // CP女主：循环写入 cpEditState.femaleNameIndex
+          // CP 女主：循环写入 cpEditState.femaleNameIndex
           const st = gameItem.cpEditState?.find(s => s.femaleId === charId);
           if (st) {
             let cur = Number(st.femaleNameIndex ?? 0);
@@ -908,7 +943,7 @@ export function initPage(Core = {}) {
             st.femaleNameIndex = isPrevBtn ? (cur - 1 + nmTotal) % nmTotal : (cur + 1) % nmTotal;
           }
         } else {
-          // Character / CP男主：循环写入全局 charNameSelect
+          // Character / CP 男主：循环写入全局 charNameSelect
           const saveKey = `char-name-${gameId}-${charId}`;
           if (!appData.charNameSelect) appData.charNameSelect = {};
           let curIdx = Number(appData.charNameSelect[saveKey] ?? 0);
@@ -917,11 +952,11 @@ export function initPage(Core = {}) {
           appData.charNameSelect[saveKey] = newIdx;
         }
         saveData();
-        // 直接更新DOM文字，不整卡重渲染（避免面板状态丢失）
+        // 直接更新 DOM 文字，不整卡重渲染，免面板状态丢失
         const nameBox = charCard.querySelector(".char-card-name, .cp-female-name");
         const nameTextEl = nameBox?.querySelector(".char-name-text");
         if (nameTextEl && gameId) {
-          const gameInfo = gameTemplateList.find(g => g.id === gameId);
+          const gameInfo = findGameById(gameId);
           const char = gameInfo?.charList?.find(c => c.id === charId);
           if (char) {
             const showHide = getCharShowHide(char, appData.globalHideChar, gameItem.localHideChar, appData.globalFD, gameItem.localFD);
@@ -936,9 +971,9 @@ export function initPage(Core = {}) {
         }
         return;
       }
-      // ========== 补丁结束 ==========
+      // 补丁结束
 
-      // ============下面全部是原来CP事件逻辑（移到此处）============
+      // 原 CP 事件逻辑，移到此处
       const cpFemaleBtn = e.target.closest(".cp-female-card-btn");
       if(cpFemaleBtn){
           e.stopPropagation();
@@ -959,12 +994,10 @@ export function initPage(Core = {}) {
           return;
       }
 
-      // ============================================================
-      // ★★★ 修改点：cpMaleItem 点击逻辑（对齐Character面板交互） ★★★
-      // ============================================================
+      // 修改：cpMaleItem 点击逻辑，对齐 Character 面板交互
       const cpMaleItem = e.target.closest(".char-slide-panel-cp .cp-male-item");
       if(cpMaleItem){
-          // 交互规则对齐character面板：点击切换按钮 → 仅切换立绘，不选中角色
+          // 交互规则对齐 character 面板
           const switchBtn = e.target.closest(".char-switch-btn");
           if (switchBtn) {
               return;
@@ -981,7 +1014,7 @@ export function initPage(Core = {}) {
               selectedMidSet.delete(mid);
               cpMaleItem.classList.remove("selected");
           }else{
-              // 草稿仅记录选中ID，不再缓存imgIndex；下标确认时实时读取全局
+              // 草稿仅记录选中 ID，不再缓存 imgIndex；下标确认时实时读取全局
               selectedMidSet.add(mid);
               cpMaleItem.classList.add("selected");
           }
@@ -989,7 +1022,7 @@ export function initPage(Core = {}) {
           return;
       }
 
-      //【修改点5】确认按钮：写入maleItems，保留maleIds兼容旧存档
+      // 修改：确认按钮：写入 maleItems，保留 maleIds 兼容旧存档
       const cpConfirmBtn = e.target.closest(".cp-confirm-btn");
       if(cpConfirmBtn){
           e.stopPropagation();
@@ -1005,11 +1038,11 @@ export function initPage(Core = {}) {
           if(!st) return;
           const selectedMidSet = draftMap[fid];
           st.maleItems = [];
-          // ✅对齐Character逻辑：确认时实时读取全局最新立绘下标
+          // 对齐 Character 逻辑：确认时实时读取全局最新立绘下标
           selectedMidSet.forEach(cid=>{
               const mSaveKey = `cp-img-${gid}-${cid}`;
               const latestImgIndex = Number(appData.charImageSelect?.[mSaveKey] ?? 0);
-              // ✅补丁新增：读取男主名字索引
+              // 新增：读取男主名字索引
               const mNameKey = `char-name-${gid}-${cid}`;
               const latestNameIndex = Number(appData.charNameSelect?.[mNameKey] ?? 0);
               st.maleItems.push({charId:cid, imgIndex: latestImgIndex, nameIndex: latestNameIndex});
@@ -1030,7 +1063,7 @@ export function initPage(Core = {}) {
           return;
       }
 
-      //取消按钮
+      // 取消按钮
       const cpCancelBtn = e.target.closest(".cp-cancel-btn");
       if(cpCancelBtn){
           e.stopPropagation();
@@ -1050,7 +1083,7 @@ export function initPage(Core = {}) {
           return;
       }
 
-      // ==========【修复：btn-character / btn-couple 全局事件委托】==========
+      // 修复：btn-character / btn-couple 全局事件委托
       const charBtn = e.target.closest(".btn-character");
       if(charBtn){
         const gid = charBtn.dataset.gid;
@@ -1085,7 +1118,7 @@ export function initPage(Core = {}) {
         return;
       }
 
-      // ========= char面板确认按钮：把草稿集合同步到真实 selectChars / selectCharItems，关闭面板 =========
+      // char 面板确认按钮：把草稿集合同步到真实 selectChars / selectCharItems，关闭面板
       const charConfirmBtn = e.target.closest(".char-panel-confirm-btn");
       if(charConfirmBtn){
           e.stopPropagation();
@@ -1095,15 +1128,15 @@ export function initPage(Core = {}) {
           const gameItem = appData.gameList.find(g=>g.gameId === gid);
           if(!gameItem || !draftSet) return;
 
-          // 1.清空旧selectChars、selectCharItems
+          // 1. 清空旧 selectChars、selectCharItems
           gameItem.selectChars = [];
           gameItem.selectCharItems = [];
 
-          // 2.遍历草稿集合写入真实数据
+          // 2. 遍历草稿集合写入真实数据
           draftSet.forEach(charId=>{
               gameItem.selectChars.push(charId);
               const imgIndex = Number(appData.charImageSelect[`char-img-${gid}-${charId}`] ?? 0);
-              // ✅补丁新增：读取名字索引并写入
+              // 新增：读取名字索引并写入
               const nameIndex = Number(appData.charNameSelect?.[`char-name-${gid}-${charId}`] ?? 0);
               gameItem.selectCharItems.push({
                   charId: charId,
@@ -1112,7 +1145,7 @@ export function initPage(Core = {}) {
               });
           });
 
-          // 关闭char面板
+          // 关闭 char 面板
           gameItem.charPanelOpen = false;
           saveData();
           clearPreviewCacheResource(); // 缓存失效
@@ -1120,7 +1153,7 @@ export function initPage(Core = {}) {
           return;
       }
 
-      // ========= char面板取消按钮：丢弃草稿，直接关闭面板，不做任何修改 =========
+      // char 面板取消按钮：丢弃草稿，直接关闭面板
       const charCancelBtn = e.target.closest(".char-panel-cancel-btn");
       if(charCancelBtn){
           e.stopPropagation();
@@ -1134,7 +1167,7 @@ export function initPage(Core = {}) {
           return;
       }
 
-      // ✅ 卡片内滑出面板角色勾选事件委托：仅处理char模式面板角色勾选
+      // 卡片内滑出面板角色勾选事件委托：仅处理 char 模式面板角色勾选
       const charItem = e.target.closest(".char-slide-panel-char .char-item");
       if (charItem) {
           const cid = charItem.dataset.cid;
@@ -1144,7 +1177,7 @@ export function initPage(Core = {}) {
 
           const panelChar = charItem.closest(".char-slide-panel-char");
           if (panelChar) {
-              // ========= char模式：仅操作本地草稿集合，不写真实数据 =========
+              // char 模式：仅操作本地草稿集合，不写真实数据
               const draftSet = panelChar._tempCharDraftSet;
               if(!draftSet) return;
               if(draftSet.has(cid)){
@@ -1154,14 +1187,14 @@ export function initPage(Core = {}) {
                   draftSet.add(cid);
                   charItem.classList.add("selected");
               }
-              // ❗不保存、不关闭面板，等待用户点确认/取消
+              // 不保存、不关闭面板，等待用户点确认/取消
               return;
           }
-          // 【移除旧cp废弃分支，新版cp全部使用cp-maleItem + 确认按钮草稿模式】
+          // 移除旧 cp 废弃分支，新版 cp 全部使用 cp-maleItem + 确认按钮草稿模式
           return;
       }
 
-      // ✅面板内部关闭按钮（×）
+      // 面板内部关闭按钮（×）
       const closeBtn = e.target.closest(".panel-close-btn");
       if(closeBtn){
         const panel = closeBtn.closest(".char-slide-panel-char, .char-slide-panel-cp");
@@ -1200,7 +1233,7 @@ export function initPage(Core = {}) {
       }
     }
 
-    // ============修复：加上await================
+    // 修复：加上 await
     await loadData();
 
     if(Array.isArray(appData.gameList)){
@@ -1219,7 +1252,7 @@ export function initPage(Core = {}) {
     if (el.inputStory) el.inputStory.value = appData.baseInfo?.story ?? "";
     if (el.inputFirstgame) el.inputFirstgame.value = appData.baseInfo?.firstgame ?? "";
 
-    // ========= 扩展颜色绑定：7项（增加CSS变量支持） =========
+    // 扩展颜色绑定：增加 CSS 变量支持
     const colorBindList = [
       {dom: el.colorBg, dataKey: "bg", cssVar: "--export-bg", default:"#fff7f9"},
       {dom: el.colorTitle, dataKey: "title", cssVar: "--export-title", default:"#b33a3a"},
@@ -1234,36 +1267,36 @@ export function initPage(Core = {}) {
       if (!item.dom) return;
       const initColor = appData.exportColor?.[item.dataKey] ?? item.default;
       item.dom.value = initColor;
-      // 页面初始化时设置CSS变量
+      // 页面初始化时设置 CSS 变量
       document.body.style.setProperty(item.cssVar, initColor);
 
       item.dom.oninput = () => {
         if(!appData.exportColor) appData.exportColor = {};
         appData.exportColor[item.dataKey] = item.dom.value;
-        // 实时更新CSS变量，页面立刻生效
+        // 实时更新 CSS 变量，页面立刻生效
         document.body.style.setProperty(item.cssVar, item.dom.value);
         saveData();
         clearPreviewCacheResource();
       }
     });
 
-    // =========【新增：恢复默认配色按钮事件】==========
+    // 新增：恢复默认配色按钮事件
     if(el.resetColorBtn){
       el.resetColorBtn.addEventListener("click", ()=>{
         colorBindList.forEach(item=>{
           item.dom.value = item.default;
           if(!appData.exportColor) appData.exportColor = {};
           appData.exportColor[item.dataKey] = item.default;
-          // 同步更新CSS变量
+          // 同步更新 CSS 变量
           document.body.style.setProperty(item.cssVar, item.default);
         });
-        // =========【新增：重置自定义文本字体大小回到16px】==========
+        // 新增：重置自定义文本字体大小回到 16px
         if(el.sliderCustomTextFont && el.customTextFontValueDisplay){
             const defaultFs = 16;
             appData.exportCustomTextFontSize = defaultFs;
             el.sliderCustomTextFont.value = defaultFs;
             el.customTextFontValueDisplay.textContent = `${defaultFs}px`;
-            // ✅必须调用，刷新 --slider-progress CSS变量，修复轨道颜色残留粉色
+            // 必须调用，刷新 slider-progress CSS 变量，修复轨道颜色残留粉色
             updateSliderProgress(el.sliderCustomTextFont);
         }
         saveData();
@@ -1271,14 +1304,14 @@ export function initPage(Core = {}) {
       })
     }
 
-    // =========【新增：自定义导出文本字号滑块初始化】==========
-    // ✅提升到bootstrap函数顶层，全局可访问，不再嵌套在if判断内部
+    // 新增：自定义导出文本字号滑块初始化
+    // 提升到 bootstrap 函数顶层，全局可访问，不再嵌套在 if 判断内部
     function updateSliderProgress(sliderEl) {
         const min = Number(sliderEl.min);
         const max = Number(sliderEl.max);
         const val = Number(sliderEl.value);
         const percent = ((val - min) / (max - min)) * 100;
-        // 重点：向父容器 .font‑size‑set‑row 设置变量，不要设置给input本身
+        // 重点：向父容器 .font-size-set-row 设置变量，不要设置给 input 本身
         const rowWrap = sliderEl.closest('.font-size-set-row');
         if(rowWrap){
             rowWrap.style.setProperty('--slider-progress', `${percent}%`);
@@ -1286,7 +1319,7 @@ export function initPage(Core = {}) {
     }
 
     if(el.sliderCustomTextFont && el.customTextFontValueDisplay){
-        // 初始化，默认16，范围14‑42
+        // 初始化，默认 16，范围 14-42
         const initFontSize = Number(appData.exportCustomTextFontSize ?? 16);
         const safeInit = Math.max(14, Math.min(42, initFontSize));
         appData.exportCustomTextFontSize = safeInit;
@@ -1299,26 +1332,31 @@ export function initPage(Core = {}) {
             const val = Number(el.sliderCustomTextFont.value);
             appData.exportCustomTextFontSize = val;
             el.customTextFontValueDisplay.textContent = `${val}px`;
-            updateSliderProgress(el.sliderCustomTextFont); // ✅实时更新进度渐变
+            updateSliderProgress(el.sliderCustomTextFont); // 实时更新进度渐变
             saveData();
             clearPreviewCacheResource();
         };
     }
 
-    // 注意：不再单独设置 body.style.background，由CSS变量统一控制
+    // 注意：不再单独设置 body.style.background，由 CSS 变量统一控制
 
-    // =========【新增】渲染【导出折叠内容】开关初始状态 =========
+    // 新增：渲染导出折叠内容开关初始状态
     if (el.exportFoldContentSwitch) {
         el.exportFoldContentSwitch.checked = !!appData.exportFoldContent;
     }
-    // =========【新增】渲染【显示隐藏/续作/FD角色名】开关初始状态（默认关闭） =========
+    // 新增：渲染显示隐藏/续作/FD 角色名开关初始状态（默认开启）
     if (el.exportShowHiddenFDNameSwitch) {
         el.exportShowHiddenFDNameSwitch.checked = !!appData.exportShowHiddenFDName;
     }
 
+    // 新增：渲染导出普通画质开关初始状态（默认关闭）
+    if (el.exportNormalQualitySwitch) {
+        el.exportNormalQualitySwitch.checked = !!appData.exportNormalQuality;
+    }
+
     refreshHideCharSwitch();
     refreshFDSwitch();
-    fillFilterOptions(gameTemplateList);
+    fillFilterOptions(getCombinedGameList());
 
     const baseInputMap = [
       {dom: el.inputNick, key: "nick"},
@@ -1336,7 +1374,7 @@ export function initPage(Core = {}) {
       }
     });
 
-    // =========【新增】导出折叠内容开关事件 =========
+    // 新增：导出折叠内容开关事件
     if (el.exportFoldContentSwitch) {
         el.exportFoldContentSwitch.addEventListener("change", function() {
             appData.exportFoldContent = this.checked;
@@ -1344,7 +1382,7 @@ export function initPage(Core = {}) {
             clearPreviewCacheResource(); // 开关变更，预览缓存失效
         });
     }
-    // =========【新增】显示隐藏/续作FD角色名开关事件 =========
+    // 新增：显示隐藏/续作 FD 角色名开关事件
     if (el.exportShowHiddenFDNameSwitch) {
         el.exportShowHiddenFDNameSwitch.addEventListener("change", function() {
             appData.exportShowHiddenFDName = this.checked;
@@ -1352,8 +1390,16 @@ export function initPage(Core = {}) {
             clearPreviewCacheResource();
         });
     }
+    // 新增：导出普通画质开关事件
+    if (el.exportNormalQualitySwitch) {
+        el.exportNormalQualitySwitch.addEventListener("change", function() {
+            appData.exportNormalQuality = this.checked;
+            saveData();
+            clearPreviewCacheResource();
+        });
+    }
 
-    // ============【已修改：添加游戏按钮，支持再次点击关闭搜索面板】============
+    // 修改：添加游戏按钮，支持再次点击关闭搜索面板
     if (el.addGameBtn) {
       el.addGameBtn.onclick = function () {
         renderGameSelectList();
@@ -1383,9 +1429,10 @@ export function initPage(Core = {}) {
             clearPreviewCacheResource();
         });
     });
-
+    
     function renderGameSelectList() {
-      if (!el.gameSearchInput || !el.gameSelectList || !Array.isArray(gameTemplateList)) return;
+      const combinedList = getCombinedGameList();
+      if (!el.gameSearchInput || !el.gameSelectList || !Array.isArray(combinedList)) return;
 
       const keyword = el.gameSearchInput.value.toLowerCase();
       const filterYear = document.getElementById("filter-year")?.value || "";
@@ -1394,15 +1441,14 @@ export function initPage(Core = {}) {
       const filterWriter = document.getElementById("filter-writer")?.value || "";
       const filterArt = document.getElementById("filter-art")?.value || "";
 
-      // 修复：把zh-CN（软连字符）改为标准 zh-CN
-      const sortedGames = [...gameTemplateList].sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
+      const sortedGames = [...combinedList].sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
       let html = "";
 
       sortedGames.forEach((game, index) => {   // 增加 index
         if (!game) return;
         let match = true;
 
-        // =========【新增：渲染副本+按lang规则排序writer/art】=========
+        // 新增：渲染副本 + 按 lang 规则排序 writer/art
         const gameCopy = {...game};
         function sortStaffByLang(list) {
             if (!Array.isArray(list)) return [];
@@ -1432,15 +1478,14 @@ export function initPage(Core = {}) {
         }
         gameCopy.writer = sortStaffByLang(game.writer);
         gameCopy.art = sortStaffByLang(game.art);
-        // =========【新增代码结束】=========
+        // 新增代码结束
 
         if (keyword && !game.name?.toLowerCase().includes(keyword)) match = false;
         if (filterYear && game.year != filterYear) match = false;
-        // 发行厂商筛选：数组包含匹配，对齐编剧、画师筛选逻辑
         if (filterPub && (!Array.isArray(game.publisher) || !game.publisher.includes(filterPub))) match = false;
         if (filterCn && game.cnStudio != filterCn) match = false;
 
-        // ========== writer / art 对象数组匹配逻辑，读取原始game，保持不变 ==========
+        // writer / art 对象数组匹配逻辑，读取原始 game，保持不变
         if (filterWriter) {
           let writerNameList = [];
           if (Array.isArray(game.writer)) {
@@ -1458,7 +1503,7 @@ export function initPage(Core = {}) {
         }
 
         if (!match) return;
-        //传入排序副本 gameCopy 和 index
+        // 传入排序副本 gameCopy 和 index
         html += `<div class="game-option-item" data-game-id="${game.id}">` + renderGameSelectItem(gameCopy, index) + `</div>`;
       })
 
@@ -1466,11 +1511,11 @@ export function initPage(Core = {}) {
       document.querySelectorAll(".game-option-item").forEach(item => {
         item.onclick = () => {
           const gid = item.dataset.gameId;
-          const targetGame = gameTemplateList.find(g => g.id === gid);
+          const targetGame = findGameById(gid);
           if (!targetGame) return alert("游戏数据加载异常");
 
           const exist = appData.gameList?.find(g => g.gameId === gid);
-          if (exist) return alert("该游戏已添加！");
+          if (exist) return alert("该游戏已添加");
 
           const newGameData = {
             gameId: gid,
@@ -1480,14 +1525,14 @@ export function initPage(Core = {}) {
             cpPanelOpen: false,
             localHideChar: false,
             localFD: false,
-            localSubChar: false, // ✅新增，新建游戏默认关闭次要角色开关
-            localFdSubChar: false, // ✅补丁新增，新建游戏默认关闭续作/FD次要角色开关
+            localSubChar: false, // 新增，新建游戏默认关闭次要角色开关
+            localFdSubChar: false, // 新增，新建游戏默认关闭续作/FD次要角色开关
             loveRate: 0,
             selectChars: [],
             cpSelectIds: [],
             cpList: [],
             cpEditState: [],
-            // =========新增自定义文本字段==========
+            // 新增自定义文本字段
             gameHeadText: "",
             charSectionText: "",
             cpSectionText: ""
@@ -1497,7 +1542,7 @@ export function initPage(Core = {}) {
           saveData();
           clearPreviewCacheResource(); // 游戏列表变更，缓存失效
 
-          //【修复】关闭搜索面板，使用.active
+          // 修复：关闭搜索面板，使用 .active
           if (el.searchPanel) el.searchPanel.classList.remove("active");
           window.refreshGameCardUi();
         }
@@ -1559,18 +1604,18 @@ export function initPage(Core = {}) {
       })
     }
 
-    // ========== 导出按钮：先弹窗后渲染（原生Canvas绘制，无DOM捕获，支持分页） ==========
+    // 导出按钮：先弹窗后渲染，原生 Canvas 绘制，无 DOM 捕获，支持分页
     if (el.exportBtn) {
         el.exportBtn.addEventListener('click', async () => {
             let unlockTimer = null;
             if (isRendering) {
-                alert("正在渲染中，请稍候！");
+                alert("正在渲染中，请稍候");
                 return;
             }
             clearPreviewCacheResource();
             isRendering = true;
 
-            // 超时兜底：15秒强制解锁
+            // 超时兜底：15 秒强制解锁
             unlockTimer = setTimeout(() => {
                 isRendering = false;
                 console.warn("渲染超时，强制解除渲染锁");
@@ -1581,19 +1626,19 @@ export function initPage(Core = {}) {
             const downloadBtn = document.getElementById("preview-download-btn");
 
             try {
-                // 打开预览弹窗并显示loading
+                // 打开预览弹窗并显示 loading
                 previewModal.classList.add("active");
 
-                // ==========【新增：渲染耗时预估计算】==========
-                // 1. 判断是否IOS WebKit（与export‑canvas-render.js保持完全一致检测逻辑）
+                // 新增：渲染耗时预估计算
+                // 1. 判断是否 IOS WebKit（对齐 export-canvas-render.js 检测逻辑）
                 const IS_IOS_WEBKIT = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
                 const isAndroid = /Android/.test(navigator.userAgent);
 
-                // 2. 统计参与导出的有效游戏卡片数量（对齐renderExportCanvas过滤逻辑）
+                // 2. 统计参与导出的有效游戏卡片数量（对齐 renderExportCanvas 过滤逻辑）
                 let validGameCount = 0;
                 let totalImageCount = 0;
                 appData.gameList.forEach(gameItem => {
-                    // 和renderExportCanvas保持一样过滤：不导出折叠卡片
+                    // 和 renderExportCanvas 保持一样过滤：不导出折叠卡片
                     if (!appData.exportFoldContent && gameItem.fold === true) {
                         return;
                     }
@@ -1601,31 +1646,31 @@ export function initPage(Core = {}) {
 
                     // 统计本游戏图片数量 char + cp
                     let imgCnt = 0;
-                    // char角色图片
+                    // char 角色图片
                     if(Array.isArray(gameItem.selectChars)) imgCnt += gameItem.selectChars.length;
                     // cp：女主 + 每个男主
                     if(Array.isArray(gameItem.cpList)){
                         gameItem.cpList.forEach(cp=>{
-                            imgCnt += 1; //女主
+                            imgCnt += 1; // 女主
                             if(Array.isArray(cp.maleItems)) imgCnt += cp.maleItems.length;
                         })
                     }
                     totalImageCount += imgCnt;
                 });
 
-                // ==========【修改后：预估计算纳入图源降级、重试、圆角画布串行开销】==========
-                // 3. 分平台设置耗时系数，纳入：jsdelivr超时降级COS、单图最多2次重试、圆角画布串行延时、IOS离屏画布sleep开销
+                // 修改：预估计算纳入图源降级、重试、圆角画布串行开销
+                // 3. 分平台设置耗时系数，纳入：jsdelivr 超时降级 COS、单图最多 2 次重试、圆角画布串行延时、IOS 离屏画布 sleep 开销
                 let gameCardCost, imgCost, networkBufferSec, roundCanvasOverheadSec;
                 if(IS_IOS_WEBKIT){
                     gameCardCost = 1.10;
                     imgCost = 0.85;
-                    // IOS：jsdelivr超时(600ms) + 重试2次 + COS降级请求 + 圆角画布每一张30ms串行sleep
+                    // IOS：jsdelivr 超时(600ms) + 重试 2 次 + COS 降级请求 + 圆角画布每一张 30ms 串行 sleep
                     networkBufferSec = 4.8;
                     roundCanvasOverheadSec = Math.min(8, totalImageCount * 0.030);
                 }else if(isAndroid){
                     gameCardCost = 0.55;
                     imgCost = 0.40;
-                    // Android：重试+降级，圆角画布12ms间隔
+                    // Android：重试 + 降级，圆角画布 12ms 间隔
                     networkBufferSec = 2.6;
                     roundCanvasOverheadSec = Math.min(4, totalImageCount * 0.012);
                 }else{
@@ -1639,8 +1684,8 @@ export function initPage(Core = {}) {
                 // 基础渲染耗时
                 let baseEstimate = validGameCount * gameCardCost + totalImageCount * imgCost;
 
-                // 【重点】叠加图片重试降级开销：每张图片理论最大会经历 jsdelivr超时(600ms) + COS请求
-                // 不按全部图片都降级来算，取30%图片触发降级作为现实网络场景的经验值
+                // 重点：叠加图片重试降级开销：每张图片理论最大会经历 jsdelivr 超时(600ms) + COS 请求
+                // 不按全部图片都降级计算，取 30% 图片触发降级
                 const fallbackProbability = 0.30;
                 const fallbackPerImageSec = 0.6;
                 let fallbackEstimate = totalImageCount * fallbackProbability * fallbackPerImageSec;
@@ -1648,15 +1693,15 @@ export function initPage(Core = {}) {
                 // 总预估
                 let estimateSec = Math.ceil(baseEstimate + networkBufferSec + roundCanvasOverheadSec + fallbackEstimate);
 
-                // 上下限保护，调大IOS上限，PC保持原有上限
+                // 上下限保护，调大 IOS 上限，PC 保持原有上限
                 if(IS_IOS_WEBKIT){
                     estimateSec = Math.max(2, Math.min(45, estimateSec));
                 }else{
                     estimateSec = Math.max(1, Math.min(35, estimateSec));
                 }
-                // ==========【修改结束】==========
+                // 修改结束
 
-                // =====================【补丁新增：渲染进度UI补丁 开始】 =====================
+                // 新增：渲染进度 UI 补丁开始
                 // 渲染进度监听，只在本次渲染生命周期有效，渲染结束移除监听
                 let progressHandler;
                 progressHandler = function(e) {
@@ -1676,7 +1721,7 @@ export function initPage(Core = {}) {
                     </div>
                 `;
                 if (downloadBtn) downloadBtn.disabled = true;
-                // =====================【补丁新增：渲染进度UI补丁 结束】 =====================
+                // 新增：渲染进度 UI 补丁结束
 
                 // 获取导出尺寸配置
                 const sizeRadio = document.querySelector('input[name="export-size"]:checked');
@@ -1703,8 +1748,10 @@ export function initPage(Core = {}) {
                     maxPageHeight = h;
                 }
 
-                // 【核心】调用原生Canvas绘制模块，返回 Blob 数组
-                const blobList = await renderExportCanvas(targetWidth, isLongMode, maxPageHeight, appData, gameTemplateList);
+                // 核心：调用原生 Canvas 绘制模块，返回 Blob 数组
+                // 导出普通画质开关开启时 DPR=1（640/810/1080 实际像素），关闭时 DPR=2（1280/1620/2160 实际像素）
+                const exportDpr = appData.exportNormalQuality ? 1 : 2;
+                const blobList = await renderExportCanvas(targetWidth, isLongMode, maxPageHeight, appData, getCombinedGameList(), exportDpr);
                 if (!Array.isArray(blobList) || blobList.length === 0) throw new Error("Canvas绘制失败，未能生成图片");
 
                 // 多页预览状态
@@ -1751,17 +1798,17 @@ export function initPage(Core = {}) {
                     }
                 }
 
-                // 初始渲染第1页
+                // 初始渲染第 1 页
                 renderPreviewPage(0);
 
                 if (downloadBtn) downloadBtn.disabled = false;
 
-                // === 重新绑定下载按钮，支持多页批量下载（移动端异步串行，间隔1500ms） ===
+                // 补丁：重新绑定下载按钮，支持多页批量下载（移动端异步串行，间隔 1500ms）
                 previewDownloadBtn.onclick = async () => {
                     if (!blobList || blobList.length === 0) return;
                     const baseTime = new Date().getTime();
-                    // 异步串行：每次下载间隔1500ms，确保移动端浏览器逐个处理，
-                    // 避免同步forEach连续click导致只响应第一张
+                    // 异步串行：每次下载间隔 1500ms，确保移动端浏览器逐个处理，
+                    // 避免同步 forEach 连续 click 导致只响应第一张
                     for (let pageIdx = 0; pageIdx < blobList.length; pageIdx++) {
                         const blob = blobList[pageIdx];
                         const link = document.createElement('a');
@@ -1771,7 +1818,7 @@ export function initPage(Core = {}) {
                         document.body.appendChild(link);
                         link.click();
                         document.body.removeChild(link);
-                        // 非最后一张：等待1500ms再触发下一张下载
+                        // 非最后一张：等待 1500ms 再触发下一张下载
                         if (pageIdx < blobList.length - 1) {
                             await new Promise(r => setTimeout(r, 1500));
                         }
@@ -1788,25 +1835,25 @@ export function initPage(Core = {}) {
                         <p style="font-size:14px;margin-top:8px;">${err.message || '请检查控制台错误信息'}</p>
                     </div>
                 `;
-                alert("导出失败，请查看控制台错误。");
+                alert("导出失败，请查看控制台错误");
             } finally {
-                // =====================【补丁新增：清理进度事件监听】 =====================
+                // 新增：清理进度事件监听
                 if(typeof progressHandler !== 'undefined'){
                     window.removeEventListener('canvas-render-progress', progressHandler);
                 }
-                // ===================== 补丁结束 =====================
+                // 补丁结束
                 if (unlockTimer) clearTimeout(unlockTimer);
                 isRendering = false;
             }
         });
     }
 
-    // ✅仅启动时执行一次事件委托绑定，卡片渲染完成后
+    // 仅启动时执行一次事件委托绑定，卡片渲染完成后
     if (typeof bindDynamicGameCardSwitchEvents === "function") {
       bindDynamicGameCardSwitchEvents();
     }
 
-    // ==========【新增：自定义文本输入实时保存】==========
+    // 新增：自定义文本输入实时保存
     document.addEventListener("input", function(e) {
         const target = e.target;
         const gid = target.dataset.gid;
@@ -1827,38 +1874,135 @@ export function initPage(Core = {}) {
         clearPreviewCacheResource(); // 文字变更，导出缓存失效
     });
 
-    // ========== 右下角悬浮按钮 - 滚动到【添加游戏按钮】&滚动到最后游戏卡片 ==========
+    // 悬浮按钮
+    // ▲：模块中间滚动到当前模块顶部；已在顶部滚动到上一个模块顶部；第一个模块滚动到页面最顶
+    // ▼：模块中间滚动到当前模块底部；已在底部滚动到下一个模块底部；最后一个模块不动作
+    // 补丁：空模块（高度 <140px）自动跳过，避免模块三无游戏卡片时滚动目标近乎为 0 导致没反应
     const backToAddBtn = document.getElementById('back-to-add-btn');
     const scrollToLastGameBtn = document.getElementById('scroll-to-last-game-btn');
-    const targetAddBtn = document.getElementById('btn-add-game');
-    const addedGameContainer = document.getElementById('added-game-container');
-
-    if (backToAddBtn && targetAddBtn) {
+    if (backToAddBtn && scrollToLastGameBtn) {
+        const TOLERANCE = 30;               // 容差像素，视为已滚动到
+        const EMPTY_MODULE_HEIGHT = 140;     // 空模块阈值：高度小于此值视为无内容模块，自动跳过
+        // 获取 FavList 页面所有大模块，按 DOM 顺序
+        function getFavListModules() {
+            const activeWrap = document.querySelector('.mode-wrap:not(.mode-hidden)') || document.querySelector('.mode-wrap');
+            if (activeWrap) {
+                const cards = activeWrap.querySelectorAll('.big-card');
+                if (cards.length > 0) return Array.from(cards);
+            }
+            return Array.from(document.querySelectorAll('.big-card'));
+        }
+        // 判断模块是否为空（高度过小）
+        function isEmptyModule(moduleEl) {
+            if (!moduleEl) return true;
+            return moduleEl.getBoundingClientRect().height < EMPTY_MODULE_HEIGHT;
+        }
+        // 从指定索引向前找最近的非空模块（含自身）
+        function findPrevNonEmpty(modules, fromIdx) {
+            for (let i = fromIdx; i >= 0; i--) {
+                if (!isEmptyModule(modules[i])) return i;
+            }
+            return -1;
+        }
+        // 从指定索引向后找最近的非空模块（含自身）
+        function findNextNonEmpty(modules, fromIdx) {
+            for (let i = fromIdx; i < modules.length; i++) {
+                if (!isEmptyModule(modules[i])) return i;
+            }
+            return -1;
+        }
+        // 根据视口垂直中心判断当前在哪个模块（优先非空模块）
+        function getCurrentModuleIndex() {
+            const modules = getFavListModules();
+            if (modules.length === 0) return -1;
+            const viewCenter = window.scrollY + window.innerHeight / 2;
+            // 优先：视口中心落在某个非空模块范围内
+            for (let i = 0; i < modules.length; i++) {
+                if (isEmptyModule(modules[i])) continue;
+                const rect = modules[i].getBoundingClientRect();
+                const top = rect.top + window.scrollY;
+                const bottom = rect.bottom + window.scrollY;
+                if (viewCenter >= top && viewCenter <= bottom) return i;
+            }
+            // 次优先：视口中心落在任意模块（含空模块）范围内
+            for (let i = 0; i < modules.length; i++) {
+                const rect = modules[i].getBoundingClientRect();
+                const top = rect.top + window.scrollY;
+                const bottom = rect.bottom + window.scrollY;
+                if (viewCenter >= top && viewCenter <= bottom) return i;
+            }
+            // 兜底：视口中心在模块间隙中，找距离最近的非空模块（综合顶部和底部距离）
+            let closest = -1;
+            let minDist = Infinity;
+            for (let i = 0; i < modules.length; i++) {
+                if (isEmptyModule(modules[i])) continue;
+                const rect = modules[i].getBoundingClientRect();
+                const top = rect.top + window.scrollY;
+                const bottom = rect.bottom + window.scrollY;
+                let dist;
+                if (viewCenter < top) dist = top - viewCenter;
+                else if (viewCenter > bottom) dist = viewCenter - bottom;
+                else dist = 0;
+                if (dist < minDist) { minDist = dist; closest = i; }
+            }
+            return closest >= 0 ? closest : 0;
+        }
+        // ▲ 按钮
         backToAddBtn.addEventListener('click', function() {
-            targetAddBtn.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+            const modules = getFavListModules();
+            if (modules.length === 0) return;
+            let idx = getCurrentModuleIndex();
+            if (idx < 0) return;
+            // 当前命中空模块时，向前找到最近的非空模块作为当前模块
+            if (isEmptyModule(modules[idx])) {
+                const nonEmptyIdx = findPrevNonEmpty(modules, idx);
+                if (nonEmptyIdx >= 0) idx = nonEmptyIdx;
+            }
+            const currentTop = modules[idx].getBoundingClientRect().top + window.scrollY;
+            if (window.scrollY > currentTop + TOLERANCE) {
+                // 在模块中间：滚动到当前模块顶部
+                modules[idx].scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else {
+                // 已在当前模块顶部：滚动到上一个非空模块顶部
+                const prevIdx = findPrevNonEmpty(modules, idx - 1);
+                if (prevIdx >= 0) {
+                    modules[prevIdx].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                } else {
+                    // 前面无非空模块：滚动到页面最顶
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            }
         });
-    }
-
-    if (scrollToLastGameBtn) {
-        // ▼按钮点击：滚动到最后一张游戏卡片
-        scrollToLastGameBtn.addEventListener('click', function () {
-            const lastGameCard = document.querySelector('.added-game-card:last-of-type');
-            if(lastGameCard){
-                lastGameCard.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+        // ▼ 按钮
+        scrollToLastGameBtn.addEventListener('click', function() {
+            const modules = getFavListModules();
+            if (modules.length === 0) return;
+            let idx = getCurrentModuleIndex();
+            if (idx < 0) return;
+            // 当前命中空模块时，向后找到最近的非空模块作为当前模块
+            if (isEmptyModule(modules[idx])) {
+                const nonEmptyIdx = findNextNonEmpty(modules, idx);
+                if (nonEmptyIdx >= 0) idx = nonEmptyIdx;
+            }
+            const currentBottom = modules[idx].getBoundingClientRect().bottom + window.scrollY;
+            const viewBottom = window.scrollY + window.innerHeight;
+            if (viewBottom < currentBottom - TOLERANCE) {
+                // 在模块中间：滚动到当前模块底部（元素底部对齐视口底部）
+                modules[idx].scrollIntoView({ behavior: 'smooth', block: 'end' });
+            } else {
+                // 已在当前模块底部：滚动到下一个非空模块底部
+                const nextIdx = findNextNonEmpty(modules, idx + 1);
+                if (nextIdx >= 0) {
+                    modules[nextIdx].scrollIntoView({ behavior: 'smooth', block: 'end' });
+                }
+                // 后面无非空模块：不动作
             }
         });
     }
 
-    /* 【补丁修改】移除滚动控制按钮显隐逻辑，两个按钮永久可见；保留原有点击逻辑不变 */
-    // 按钮点击逻辑完全保留不变，只删除显示隐藏相关代码
+    /* 补丁修改：移除滚动控制按钮显隐逻辑，两个按钮永久可见 */
 
-    // ==========【新增】自制textarea垂直拖拽逻辑（PC+移动端touch兼容） ==========
+    // 新增：自制 textarea 垂直拖拽逻辑（PC + 移动端 touch 兼容）
     function bindTextareaResizeHandler() {
         document.querySelectorAll('.game-custom-text-wrap .resize-handle').forEach(handle => {
             // 防止重复绑定
@@ -1916,7 +2060,7 @@ export function initPage(Core = {}) {
             document.addEventListener('touchend', dragEnd);
         });
     }
-    // 每次刷新卡片UI后重新绑定拖拽控件
+    // 每次刷新卡片 UI 后重新绑定拖拽控件
     const originRefresh = window.refreshGameCardUi;
     window.refreshGameCardUi = function() {
         originRefresh();
@@ -1934,6 +2078,6 @@ export function initPage(Core = {}) {
   window.openCharSelectModal = openCharSelectModal;
   window.renderCharSelectList = renderCharSelectList;
 
-  // 不再此处直接调用bootstrap，交给index.html时序控制
+  // 不再此处直接调用 bootstrap，交给 index.html 时序控制
   window.uiBootstrap = bootstrap;
 }
