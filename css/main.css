@@ -831,6 +831,10 @@ input[type="checkbox"] {
     align-items: center;
     justify-content: center;
 }
+/* 剧透弹窗层级：高于游戏、角色、Couple 选择弹窗(9999) */
+#spoiler-modal.modal-mask {
+    z-index: 10002;
+}
 .modal-mask.active {
     display: flex;
 }
