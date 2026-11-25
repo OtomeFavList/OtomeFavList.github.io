@@ -3934,8 +3934,18 @@ export function initAnnualModule(){
                 return;
             }
             if(e.target.closest("#annual-modal-global-hide-char")){
-                charModalGlobal.hideChar = !charModalGlobal.hideChar;
-                if(charModalViewMode === "charList") renderCharModalCharList();
+                const el = e.target.closest("#annual-modal-global-hide-char");
+                if (charModalGlobal.hideChar) {
+                    charModalGlobal.hideChar = false;
+                    el.checked = false;
+                } else {
+                    const apply = () => {
+                        charModalGlobal.hideChar = true;
+                        el.checked = true;
+                        if(charModalViewMode === "charList") renderCharModalCharList();
+                    };
+                    window.__spoilerAsk("hideChar", apply, "annual");
+                }
                 return;
             }
             if(e.target.closest("#annual-modal-global-fd-game")){
