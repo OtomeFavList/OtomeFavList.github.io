@@ -25,9 +25,8 @@ export const OLD_STORE_KEYS = [                               // 历史遗留 ke
 ];
 export const SPOILER_DATE_KEY = "spoiler-confirm-date";       // 全局剧透确认日期
 export const SPOILER_LOCAL_SWITCH_KEY = "local-switch-spoiler-date"; // 局部开关确认日期
-// 新版剧透确认记录：按 模式 × 分类 × 北京日期 存储
+// 新增：剧透确认记录：按 模式 × 分类 × 北京日期 存储
 export const SPOILER_CONFIRM_KEY = "spoiler-confirm-v2";
-// 参与剧透确认的三类；subChar（普通次要角色）不在其中
 const SPOILER_CATEGORIES = ["hideChar", "fdChar", "fdSubChar"];
 
 // 图片 URL 域名配置
@@ -219,7 +218,7 @@ export let charPoolMode = "char"; // char = 单选角色, cp = CP 搭配
 
 window.pendingGlobalSwitch = null;
 window.pendingGameOp = null;
-window.__spoilerPending = null; // 通用剧透待确认操作 { mode, category, onConfirm }
+window.__spoilerPending = null; // 通用剧透待确认操作
 
 // 本地存储读写工具函数，appData 完整保存到 localStorage
 export function saveData() {
