@@ -26,7 +26,7 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/149/Misawo.jpg"], type: "base" },
+                { srcList: ["char/149/Misawo.png"], type: "base" },
             ]
         },
         // 隼
@@ -39,7 +39,7 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/149/Hayabusa.jpg"], type: "base" }
+                { srcList: ["char/149/Hayabusa.png"], type: "base" }
             ]
         },
         // 伊吕波
@@ -52,7 +52,7 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/149/Iroha.jpg"], type: "base" }
+                { srcList: ["char/149/Iroha.png"], type: "base" }
             ]
         },
         // 阳炎
@@ -65,7 +65,7 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/149/Kagerou.jpg"], type: "base" }
+                { srcList: ["char/149/Kagerou.png"], type: "base" }
             ]
         },
         // 神乐
@@ -78,7 +78,7 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/149/Kagura.jpg"], type: "base" }
+                { srcList: ["char/149/Kagura.png"], type: "base" }
             ]
         },
         // 伊东庆次
@@ -91,7 +91,7 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/149/Keiji.jpg"], type: "base" }
+                { srcList: ["char/149/Keiji.png"], type: "base" }
             ]
         },
         // 高尾
@@ -104,7 +104,7 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/149/Takao.jpg"], type: "base" }
+                { srcList: ["char/149/Takao.png"], type: "base" }
             ]
         },
         // 常叶
@@ -117,7 +117,7 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/149/Tokiwa.jpg"], type: "base" }
+                { srcList: ["char/149/Tokiwa.png"], type: "base" }
             ]
         },
         // あずさ
@@ -130,7 +130,7 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/149/Azusa.jpg"], type: "base" }
+                { srcList: ["char/149/Azusa.png"], type: "base" }
             ]
         },
         // 冴木
@@ -143,7 +143,7 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/149/Saeki.jpg"], type: "base" }
+                { srcList: ["char/149/Saeki.png"], type: "base" }
             ]
         }
     ]
