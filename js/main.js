@@ -25,6 +25,10 @@ export const OLD_STORE_KEYS = [                               // 历史遗留 ke
 ];
 export const SPOILER_DATE_KEY = "spoiler-confirm-date";       // 全局剧透确认日期
 export const SPOILER_LOCAL_SWITCH_KEY = "local-switch-spoiler-date"; // 局部开关确认日期
+// 新版剧透确认记录：按 模式 × 分类 × 北京日期 存储
+export const SPOILER_CONFIRM_KEY = "spoiler-confirm-v2";
+// 参与剧透确认的三类；subChar（普通次要角色）不在其中
+const SPOILER_CATEGORIES = ["hideChar", "fdChar", "fdSubChar"];
 
 // 图片 URL 域名配置
 export const R2_BASE_URL = "https://pub-7fe3cf5d6e78426b988975ff957a6ee9.r2.dev";
@@ -215,6 +219,7 @@ export let charPoolMode = "char"; // char = 单选角色, cp = CP 搭配
 
 window.pendingGlobalSwitch = null;
 window.pendingGameOp = null;
+window.__spoilerPending = null; // 通用剧透待确认操作 { mode, category, onConfirm }
 
 // 本地存储读写工具函数，appData 完整保存到 localStorage
 export function saveData() {
@@ -498,6 +503,51 @@ export function localSwitchIsConfirmedToday() {
 export function saveLocalSwitchConfirmDate() {
     localStorage.setItem(SPOILER_LOCAL_SWITCH_KEY, getTodayDateStr());
 }
+
+// 北京时间日期字符串（UTC+8，以 24 点为界）
+function getBeijingDateStr() {
+    const d = new Date(Date.now() + 8 * 3600 * 1000);
+    return d.toISOString().slice(0, 10);
+}
+
+function readSpoilerStore() {
+    try { return JSON.parse(localStorage.getItem(SPOILER_CONFIRM_KEY)) || {}; }
+    catch (e) { return {}; }
+}
+
+// 当天该模式、该分类是否已确认过剧透
+export function isSpoilerConfirmedToday(mode, category) {
+    if (!SPOILER_CATEGORIES.includes(category)) return true;
+    const store = readSpoilerStore();
+    return !!store[mode] && store[mode][category] === getBeijingDateStr();
+}
+
+// 记录当天该模式、该分类已确认
+export function markSpoilerConfirmed(mode, category) {
+    if (!SPOILER_CATEGORIES.includes(category)) return;
+    const store = readSpoilerStore();
+    if (!store[mode]) store[mode] = {};
+    store[mode][category] = getBeijingDateStr();
+    localStorage.setItem(SPOILER_CONFIRM_KEY, JSON.stringify(store));
+}
+
+function getCurrentSpoilerMode() {
+    const btn = document.querySelector(".mode-btn.active");
+    return (btn && btn.dataset.mode) || "favlist";
+}
+
+// 统一询问入口：当天已确认则直接执行 onConfirm；否则挂起，等弹窗确认
+window.__spoilerAsk = function (category, onConfirm, mode) {
+    const m = mode || getCurrentSpoilerMode();
+    if (isSpoilerConfirmedToday(m, category)) {
+        if (onConfirm) onConfirm();
+        return true;
+    }
+    window.__spoilerPending = { mode: m, category, onConfirm: onConfirm || null };
+    const modal = document.getElementById("spoiler-modal");
+    if (modal) modal.classList.add("active");
+    return false;
+};
 
 // 角色图片过滤工具函数，适配 srcList 格式
 export function getAvailableCharImages(char, globalHideSwitch, globalFDSwitch, localHideSwitch, localFDSwitch) {
@@ -1432,17 +1482,28 @@ function wrapClickHandler(e) {
            });
            return;
        }
-       // 新增：局部续作/FD次要角色开关，无剧透弹窗直接切换，复用 game-sub-switch 逻辑
+       // 局部续作/FD 次要角色：关闭直接生效；开启需先过剧透确认
        if (targetInput.classList.contains("game-fd-sub-switch")) {
-           // 补丁：读取原生 checked，不打断原生勾选；下一帧再重建，保留滑块过渡
            const idx = Number(targetInput.dataset.gameidx);
            const gameItem = appData.gameList[idx];
            if (!gameItem) return;
-           gameItem.localFdSubChar = targetInput.checked;
-           saveData();
-           requestAnimationFrame(() => {
-               if (window.refreshGameCardUi) window.refreshGameCardUi();
-           });
+           if (!targetInput.checked) {
+               gameItem.localFdSubChar = false;
+               saveData();
+               requestAnimationFrame(() => {
+                   if (window.refreshGameCardUi) window.refreshGameCardUi();
+               });
+               return;
+           }
+           const apply = () => {
+               gameItem.localFdSubChar = true;
+               saveData();
+               requestAnimationFrame(() => {
+                   if (window.refreshGameCardUi) window.refreshGameCardUi();
+               });
+           };
+           if (window.__spoilerAsk("fdSubChar", apply)) return;
+           targetInput.checked = false; // 未确认，开关保持关闭
            return;
        }
 
@@ -1484,13 +1545,17 @@ function wrapClickHandler(e) {
             return;
         }
 
-        // 打开弹出剧透弹窗
-        if (targetInput.classList.contains("game-hide-char") || targetInput.classList.contains("modal-local-hide-char")) {
-            window.pendingGameOp = { type: "hideChar", idx };
-        } else {
-            window.pendingGameOp = { type: "fd", idx };
-        }
-        spoilerModal.classList.add("active");
+        const isHide = targetInput.classList.contains("game-hide-char") || targetInput.classList.contains("modal-local-hide-char");
+        const category = isHide ? "hideChar" : "fdChar";
+        const apply = () => {
+            if (isHide) gameItem.localHideChar = true;
+            else gameItem.localFD = true;
+            saveData();
+            requestAnimationFrame(() => {
+                if (window.refreshGameCardUi) window.refreshGameCardUi();
+            });
+        };
+        window.__spoilerAsk(category, apply);
         return;
     }
 
@@ -1598,6 +1663,7 @@ function wrapClickHandler(e) {
     // 点击遮罩空白关闭弹窗
     if (e.target === spoilerModal) {
         spoilerModal.classList.remove("active");
+        window.__spoilerPending = null;
         window.pendingGlobalSwitch = null;
         window.pendingGameOp = null;
     }
@@ -1641,32 +1707,40 @@ function bindGlobalSwitchSpoilerEvents() {
 
     // 全局隐藏角色开关，使用 label click，阻止默认行为
     labelHideChar.addEventListener("click", function (e) {
-        e.preventDefault(); // 禁止浏览器原生切换checkbox！全部交给JS控制
-        const currentVal = appData.globalHideChar;
-        if (currentVal === true) {
+        e.preventDefault();
+        if (appData.globalHideChar === true) {
             appData.globalHideChar = false;
             saveData();
             renderGlobalSwitchDom();
             if (window.refreshGameCardUi) window.refreshGameCardUi();
             return;
         }
-        window.pendingGlobalSwitch = "hideChar";
-        spoilerModal.classList.add("active");
+        const apply = () => {
+            appData.globalHideChar = true;
+            saveData();
+            renderGlobalSwitchDom();
+            if (window.refreshGameCardUi) window.refreshGameCardUi();
+        };
+        window.__spoilerAsk("hideChar", apply);
     });
 
-    // 全局 FD 开关
+    // 全局续作/FD 图片角色开关
     labelFD.addEventListener("click", function (e) {
         e.preventDefault();
-        const currentVal = appData.globalFD;
-        if (currentVal === true) {
+        if (appData.globalFD === true) {
             appData.globalFD = false;
             saveData();
             renderGlobalSwitchDom();
             if (window.refreshGameCardUi) window.refreshGameCardUi();
             return;
         }
-        window.pendingGlobalSwitch = "fdGame";
-        spoilerModal.classList.add("active");
+        const apply = () => {
+            appData.globalFD = true;
+            saveData();
+            renderGlobalSwitchDom();
+            if (window.refreshGameCardUi) window.refreshGameCardUi();
+        };
+        window.__spoilerAsk("fdChar", apply);
     });
 
     // 全局次要角色开关，无剧透弹窗直接切换
@@ -1677,21 +1751,40 @@ function bindGlobalSwitchSpoilerEvents() {
         renderGlobalSwitchDom();
         if (window.refreshGameCardUi) window.refreshGameCardUi();
     });
-    // 新增：全局续作/FD次要角色开关，无剧透弹窗直接切换
+    // 全局续作/FD 次要角色开关：关闭直接生效，开启需先过剧透确认
     if (labelFdSubChar) {
         labelFdSubChar.addEventListener("click", function (e) {
             e.preventDefault();
-            appData.globalFdSubChar = !appData.globalFdSubChar;
-            saveData();
-            renderGlobalSwitchDom();
-            if (window.refreshGameCardUi) window.refreshGameCardUi();
+            if (appData.globalFdSubChar === true) {
+                appData.globalFdSubChar = false;
+                saveData();
+                renderGlobalSwitchDom();
+                if (window.refreshGameCardUi) window.refreshGameCardUi();
+                return;
+            }
+            const apply = () => {
+                appData.globalFdSubChar = true;
+                saveData();
+                renderGlobalSwitchDom();
+                if (window.refreshGameCardUi) window.refreshGameCardUi();
+            };
+            window.__spoilerAsk("fdSubChar", apply);
         });
     }
 
     // 弹窗确认（扩展：同时处理全局 / 动态卡片局部）
     spoilerConfirmBtn.onclick = null;
     spoilerConfirmBtn.addEventListener("click", function () {
-        // 优先处理动态游戏卡片操作（含弹窗内modal-local-*开关）
+        // 通用剧透挂起操作优先处理
+        if (window.__spoilerPending) {
+            const pending = window.__spoilerPending;
+            window.__spoilerPending = null;
+            markSpoilerConfirmed(pending.mode, pending.category);
+            if (pending.onConfirm) pending.onConfirm();
+            spoilerModal.classList.remove("active");
+            return;
+        }
+        // 兼容旧的动态卡片操作分支
         if (window.pendingGameOp) {
             const op = window.pendingGameOp;
             const g = appData.gameList[op.idx];
@@ -1735,6 +1828,7 @@ function bindGlobalSwitchSpoilerEvents() {
     spoilerCancelBtn.onclick = null;
     spoilerCancelBtn.addEventListener("click", function () {
         spoilerModal.classList.remove("active");
+        window.__spoilerPending = null;
         window.pendingGlobalSwitch = null;
         window.pendingGameOp = null;
     });
