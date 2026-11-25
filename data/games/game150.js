@@ -24,7 +24,7 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/150/Kiyoha.jpg"], type: "base" }
+                { srcList: ["char/150/Kiyoha.png"], type: "base" }
             ]
         },
         // 扬羽
@@ -37,7 +37,7 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/150/Ageha.jpg"], type: "base" }
+                { srcList: ["char/150/Ageha.png"], type: "base" }
             ]
         },
         // 朝雾
@@ -50,7 +50,7 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/150/Asagiri.jpg"], type: "base" }
+                { srcList: ["char/150/Asagiri.png"], type: "base" }
             ]
         },
         // 岳人
@@ -63,7 +63,7 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/150/Gakuto.jpg"], type: "base" }
+                { srcList: ["char/150/Gakuto.png"], type: "base" }
             ]
         },
         // 泷川
@@ -76,7 +76,7 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/150/Takigawa.jpg"], type: "base" }
+                { srcList: ["char/150/Takigawa.png"], type: "base" }
             ]
         },
         // 空蝉
@@ -89,7 +89,7 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/150/Utsusemi.jpg"], type: "base" }
+                { srcList: ["char/150/Utsusemi.png"], type: "base" }
             ]
         }
     ]
