@@ -13,6 +13,6 @@ const gameData = {
         {name:"工画堂スタジオ", lang:"zh"}
     ],
     cover: "game/fd051.jpg",
-    baseGameId: "game0110"
+    baseGameId: "game110"
 };
 export { gameData };
