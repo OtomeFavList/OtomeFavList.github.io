@@ -84,7 +84,7 @@ const gameData = {
             isFD: false,
             isSub: false,
             images: [
-                { srcList: ["char/119/Sanada.jpg"], type: "base" },
+                { srcList: ["char/119/Yukimura.jpg"], type: "base" },
             ]
         },
         // 佐佐木大和
@@ -224,7 +224,7 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/119/Sanada.jpg"], type: "base" }
+                { srcList: ["char/119/Nobuyuki.jpg"], type: "base" }
             ]
         },
         // 謎の剣士
