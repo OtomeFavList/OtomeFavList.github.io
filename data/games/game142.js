@@ -25,7 +25,7 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/142/Shiki.jpg"], type: "base" },
+                { srcList: ["char/142/Shiki.png"], type: "base" },
             ]
         },
         // 秋篠古嗣
@@ -38,7 +38,7 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/142/Furutsugu.jpg"], type: "base" },
+                { srcList: ["char/142/Furutsugu.png"], type: "base" },
             ]
         },
         // 幻灯火
@@ -51,7 +51,7 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/142/Gentouka.jpg"], type: "base" },
+                { srcList: ["char/142/Gentouka.png"], type: "base" },
             ]
         },
         // 胡土前
@@ -64,7 +64,7 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/142/Mae.jpg"], type: "base" },
+                { srcList: ["char/142/Mae.png"], type: "base" },
             ]
         },
         // 空疎尊
@@ -77,7 +77,7 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/142/Mikoto.jpg"], type: "base" },
+                { srcList: ["char/142/Mikoto.png"], type: "base" },
             ]
         },
         // 隠岐秋房
@@ -90,7 +90,7 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/142/Oki.jpg"], type: "base" },
+                { srcList: ["char/142/Oki.png"], type: "base" },
             ]
         },
         // 悪路王
@@ -103,7 +103,7 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/142/Akuroou.jpg"], type: "base" }
+                { srcList: ["char/142/Akuroou.png"], type: "base" }
             ]
         },
         // 言蔵智則
@@ -116,7 +116,7 @@ const gameData = {
             isSub: false,
             isFdSub: false,
             images: [
-                { srcList: ["char/142/Tomonori.jpg"], type: "base" }
+                { srcList: ["char/142/Tomonori.png"], type: "base" }
             ]
         },
         // 芦屋道満
@@ -129,7 +129,7 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/142/Douman.jpg"], type: "base" }
+                { srcList: ["char/142/Douman.png"], type: "base" }
             ]
         },
         // 神産巣日神
@@ -142,7 +142,7 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/142/Kami.jpg"], type: "base" }
+                { srcList: ["char/142/Kami.png"], type: "base" }
             ]
         },
         // 風波尊
@@ -155,7 +155,7 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/142/Kazanami.jpg"], type: "base" }
+                { srcList: ["char/142/Kazanami.png"], type: "base" }
             ]
         },
         // 藤原貞繁
@@ -168,7 +168,7 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/142/Sadashige.jpg"], type: "base" }
+                { srcList: ["char/142/Sadashige.png"], type: "base" }
             ]
         },
         // 秋篠吉影
@@ -181,7 +181,7 @@ const gameData = {
             isSub: true,
             isFdSub: false,
             images: [
-                { srcList: ["char/142/Yoshikage.jpg"], type: "base" }
+                { srcList: ["char/142/Yoshikage.png"], type: "base" }
             ]
         },
         // 綾読
@@ -194,7 +194,7 @@ const gameData = {
             isSub: false,
             isFdSub: true,
             images: [
-                { srcList: ["char/142/Oyayomi.jpg"], type: "base" }
+                { srcList: ["char/142/Oyayomi.png"], type: "base" }
             ]
         }
     ]
