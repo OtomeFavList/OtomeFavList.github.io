@@ -22,7 +22,9 @@ const gameData = {
             isHidden: false,    // true=隐藏角色，开关控制是否展示该角色
             isFD: false,        // true=续作/FD专属角色，FD开关控制是否展示该角色
             images: [
-                { srcList: ["char/101/Sarah.jpg"], type: "base" },      // 默认基础图，始终加载
+                { srcList: ["char/101/Sarah.jpg",
+                            "char/101/Sarah3.png",
+                            "char/101/Sarah4.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // アレクサンドル·シラージ
@@ -34,7 +36,9 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/101/Aleksandr.jpg",
-                            "char/101/Aleksandr2.jpg"], type: "base" },      // 默认基础图，始终加载
+                            "char/101/Aleksandr2.jpg",
+                            "char/101/Aleksandr3.png",
+                            "char/101/Aleksandr4.png"], type: "base" },      // 默认基础图，始终加载
             ]
         },
         // ジョナス·フィッツジェラルド
@@ -46,7 +50,9 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/101/Jonas.jpg",
-                            "char/101/Jonas2.jpg"], type: "base" },
+                            "char/101/Jonas2.jpg",
+                            "char/101/Jonas3.png",
+                            "char/101/Jonas4.png"], type: "base" },
             ]
         },
         // マエル·ド·ラヴァル
@@ -58,7 +64,9 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/101/Mael.jpg",
-                            "char/101/Mael2.jpg"], type: "base" },
+                            "char/101/Mael2.jpg",
+                            "char/101/Mael3.png",
+                            "char/101/Mael4.png"], type: "base" },
             ]
         },
         // ラファエル·ナーダシュディ
@@ -70,7 +78,9 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/101/Rafael.jpg",
-                            "char/101/Rafael2.jpg"], type: "base" },
+                            "char/101/Rafael2.jpg",
+                            "char/101/Rafael3.png",
+                            "char/101/Rafael4.png"], type: "base" },
             ]
         },
         // ザビーネ·アルブレヒト
@@ -82,7 +92,9 @@ const gameData = {
             isFD: false,
             images: [
                 { srcList: ["char/101/Sabine.jpg",
-                            "char/101/Sabine2.jpg"], type: "base" },
+                            "char/101/Sabine2.jpg",
+                            "char/101/Sabine3.png",
+                            "char/101/Sabine4.png"], type: "base" },
             ]
         },
         // バロン·マインスター
