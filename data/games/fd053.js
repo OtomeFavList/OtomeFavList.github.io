@@ -1,6 +1,6 @@
 // ℹ️未官中，官中发售后需要修改：游戏名、发售年份、汉化厂商、封面图、info图、角色名
 const gameData = {
-    id: "fd051",
+    id: "fd053",
     name: "うたの☆プリンスさまっ♪All Star After Secret",
     year: "2022",
     publisher: ["BROCCOLI"],
@@ -20,7 +20,7 @@ const gameData = {
     art: [
         {name:"工画堂スタジオ", lang:"zh"}
     ],
-    cover: "game/fd051.jpg",
+    cover: "game/fd053.jpg",
     baseGameId: "game0110"
 };
 export { gameData };
