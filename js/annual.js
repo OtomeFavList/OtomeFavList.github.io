@@ -3944,19 +3944,42 @@ export function initAnnualModule(){
                         el.checked = true;
                         if(charModalViewMode === "charList") renderCharModalCharList();
                     };
-                    window.__spoilerAsk("hideChar", apply, "annual");
+                    if (window.__spoilerAsk("hideChar", apply, "annual")) return;
+                    el.checked = false;
                 }
                 return;
             }
             if(e.target.closest("#annual-modal-global-fd-game")){
-                charModalGlobal.fdChar = !charModalGlobal.fdChar;
-                if(charModalViewMode === "charList") renderCharModalCharList();
+                const el = e.target.closest("#annual-modal-global-fd-game");
+               if (charModalGlobal.fdChar) {
+                    charModalGlobal.fdChar = false;
+                    el.checked = false;
+                } else {
+                    const apply = () => {
+                        charModalGlobal.fdChar = true;
+                        el.checked = true;
+                        if(charModalViewMode === "charList") renderCharModalCharList();
+                    };
+                    if (window.__spoilerAsk("fdChar", apply, "annual")) return;
+                    el.checked = false;
+                }
                 return;
             }
             // 新增：全局续作/FD 次要角色开关
             if(e.target.closest("#annual-modal-global-fd-sub-char")){
-                charModalGlobal.fdSubChar = !charModalGlobal.fdSubChar;
-                if(charModalViewMode === "charList") renderCharModalCharList();
+                const el = e.target.closest("#annual-modal-global-fd-sub-char");
+                if (charModalGlobal.fdSubChar) {
+                    charModalGlobal.fdSubChar = false;
+                    el.checked = false;
+                } else {
+                    const apply = () => {
+                        charModalGlobal.fdSubChar = true;
+                        el.checked = true;
+                        if(charModalViewMode === "charList") renderCharModalCharList();
+                    };
+                    if (window.__spoilerAsk("fdSubChar", apply, "annual")) return;
+                    el.checked = false;
+                }
                 return;
             }
             // 本游戏局部开关
@@ -3967,25 +3990,57 @@ export function initAnnualModule(){
                 return;
             }
             if(e.target.closest("#annual-modal-game-hide-char")){
-                charModalLocal.hideChar = !charModalLocal.hideChar;
-                saveCharModalLocalSwitches(charModalCurrentGameId);
-                renderCharModalCharList();
+                const el = e.target.closest("#annual-modal-game-hide-char");
+                if (charModalLocal.hideChar) {
+                    charModalLocal.hideChar = false;
+                    el.checked = false;
+                } else {
+                    const apply = () => {
+                        charModalLocal.hideChar = true;
+                        el.checked = true;
+                        saveCharModalLocalSwitches(charModalCurrentGameId);
+                        renderCharModalCharList();
+                    };
+                    if (window.__spoilerAsk("hideChar", apply, "annual")) return;
+                    el.checked = false;
+                }
                 return;
             }
             if(e.target.closest("#annual-modal-game-fd-game")){
-                charModalLocal.fdChar = !charModalLocal.fdChar;
-                saveCharModalLocalSwitches(charModalCurrentGameId);
-                renderCharModalCharList();
+                const el = e.target.closest("#annual-modal-game-fd-game");
+                if (charModalLocal.fdChar) {
+                    charModalLocal.fdChar = false;
+                    el.checked = false;
+                } else {
+                    const apply = () => {
+                        charModalLocal.fdChar = true;
+                        el.checked = true;
+                        saveCharModalLocalSwitches(charModalCurrentGameId);
+                        renderCharModalCharList();
+                    };
+                    if (window.__spoilerAsk("fdChar", apply, "annual")) return;
+                    el.checked = false;
+                }
                 return;
             }
             // 新增：单游戏续作/FD 次要角色开关
             if(e.target.closest("#annual-modal-game-fd-sub-char")){
-                charModalLocal.fdSubChar = !charModalLocal.fdSubChar;
-                saveCharModalLocalSwitches(charModalCurrentGameId);
-                renderCharModalCharList();
+                const el = e.target.closest("#annual-modal-game-fd-sub-char");
+                if (charModalLocal.fdSubChar) {
+                    charModalLocal.fdSubChar = false;
+                    el.checked = false;
+                } else {
+                    const apply = () => {
+                        charModalLocal.fdSubChar = true;
+                        el.checked = true;
+                        saveCharModalLocalSwitches(charModalCurrentGameId);
+                        renderCharModalCharList();
+                    };
+                    if (window.__spoilerAsk("fdSubChar", apply, "annual")) return;
+                    el.checked = false;
+                }
                 return;
             }
-
             // 新增：CP 弹窗全局开关
             if(e.target.closest("#annual-modal-cp-global-sub-char")){
                 cpModalGlobal.subChar = !cpModalGlobal.subChar;
@@ -3993,18 +4048,51 @@ export function initAnnualModule(){
                 return;
             }
             if(e.target.closest("#annual-modal-cp-global-hide-char")){
-                cpModalGlobal.hideChar = !cpModalGlobal.hideChar;
-                if(cpModalViewMode === "femaleList") renderCpModalFemaleList();
+                const el = e.target.closest("#annual-modal-cp-global-hide-char");
+                if (cpModalGlobal.hideChar) {
+                    cpModalGlobal.hideChar = false;
+                    el.checked = false;
+                } else {
+                    const apply = () => {
+                        cpModalGlobal.hideChar = true;
+                        el.checked = true;
+                        if(cpModalViewMode === "femaleList") renderCpModalFemaleList();
+                    };
+                    if (window.__spoilerAsk("hideChar", apply, "annual")) return;
+                    el.checked = false;
+                }
                 return;
             }
             if(e.target.closest("#annual-modal-cp-global-fd-game")){
-                cpModalGlobal.fdChar = !cpModalGlobal.fdChar;
-                if(cpModalViewMode === "femaleList") renderCpModalFemaleList();
+                const el = e.target.closest("#annual-modal-cp-global-fd-game");
+                if (cpModalGlobal.fdChar) {
+                    cpModalGlobal.fdChar = false;
+                    el.checked = false;
+                } else {
+                    const apply = () => {
+                        cpModalGlobal.fdChar = true;
+                        el.checked = true;
+                        if(cpModalViewMode === "femaleList") renderCpModalFemaleList();
+                    };
+                    if (window.__spoilerAsk("fdChar", apply, "annual")) return;
+                    el.checked = false;
+                }
                 return;
             }
             if(e.target.closest("#annual-modal-cp-global-fd-sub-char")){
-                cpModalGlobal.fdSubChar = !cpModalGlobal.fdSubChar;
-                if(cpModalViewMode === "femaleList") renderCpModalFemaleList();
+                const el = e.target.closest("#annual-modal-cp-global-fd-sub-char");
+                if (cpModalGlobal.fdSubChar) {
+                    cpModalGlobal.fdSubChar = false;
+                    el.checked = false;
+                } else {
+                    const apply = () => {
+                        cpModalGlobal.fdSubChar = true;
+                        el.checked = true;
+                        if(cpModalViewMode === "femaleList") renderCpModalFemaleList();
+                    };
+                    if (window.__spoilerAsk("fdSubChar", apply, "annual")) return;
+                    el.checked = false;
+                }
                 return;
             }
             // 新增：CP 弹窗局部开关
@@ -4015,21 +4103,54 @@ export function initAnnualModule(){
                 return;
             }
             if(e.target.closest("#annual-modal-cp-game-hide-char")){
-                cpModalLocal.hideChar = !cpModalLocal.hideChar;
-                saveCpModalLocalSwitches(cpModalCurrentGameId);
-                renderCpModalFemaleList();
+                const el = e.target.closest("#annual-modal-cp-game-hide-char");
+                if (cpModalLocal.hideChar) {
+                    cpModalLocal.hideChar = false;
+                    el.checked = false;
+                } else {
+                    const apply = () => {
+                        cpModalLocal.hideChar = true;
+                        el.checked = true;
+                        saveCpModalLocalSwitches(cpModalCurrentGameId);
+                        renderCpModalFemaleList();
+                    };
+                    if (window.__spoilerAsk("hideChar", apply, "annual")) return;
+                    el.checked = false;
+                }
                 return;
             }
             if(e.target.closest("#annual-modal-cp-game-fd-game")){
-                cpModalLocal.fdChar = !cpModalLocal.fdChar;
-                saveCpModalLocalSwitches(cpModalCurrentGameId);
-                renderCpModalFemaleList();
+                const el = e.target.closest("#annual-modal-cp-game-fd-game");
+                if (cpModalLocal.fdChar) {
+                    cpModalLocal.fdChar = false;
+                    el.checked = false;
+                } else {
+                    const apply = () => {
+                        cpModalLocal.fdChar = true;
+                        el.checked = true;
+                        saveCpModalLocalSwitches(cpModalCurrentGameId);
+                        renderCpModalFemaleList();
+                    };
+                    if (window.__spoilerAsk("fdChar", apply, "annual")) return;
+                    el.checked = false;
+                }
                 return;
             }
             if(e.target.closest("#annual-modal-cp-game-fd-sub-char")){
-                cpModalLocal.fdSubChar = !cpModalLocal.fdSubChar;
-                saveCpModalLocalSwitches(cpModalCurrentGameId);
-                renderCpModalFemaleList();
+                const el = e.target.closest("#annual-modal-cp-game-fd-sub-char");
+                if (cpModalLocal.fdSubChar) {
+                    cpModalLocal.fdSubChar = false;
+                    el.checked = false;
+                } else {
+                    const apply = () => {
+                        cpModalLocal.fdSubChar = true;
+                        el.checked = true;
+                        saveCpModalLocalSwitches(cpModalCurrentGameId);
+                        renderCpModalFemaleList();
+                    };
+                    if (window.__spoilerAsk("fdSubChar", apply, "annual")) return;
+                    el.checked = false;
+                }
                 return;
             }
         });
