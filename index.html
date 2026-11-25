@@ -5,38 +5,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Otome FavList</title>
     <link rel="stylesheet" href="./css/main.css">
-    <!-- html2canvas CDN（第三方库，保留全局引入） -->
+    <link rel="stylesheet" href="./css/annual.css">
+    <link rel="stylesheet" href="./css/other.css">
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js">
     </script>
-    <!-- ✅必须 type="module"，games.js内部使用动态import，不能去掉module属性 -->
-    <!-- 使用绝对路径 /data/games.js 确保从网站根目录加载 -->
+    <!-- games.js 使用动态 import，type="module" 不能移除 -->
+    <!-- 用绝对路径 /data/games.js，从网站根目录加载 -->
     <script type="module" src="/data/games.js">
     </script>
-    <!-- ==========【新增样式】弹窗打开锁定页面滚动 ========== -->
+    <!-- 标题切换 -->
     <style>
         body.modal-lock {
             overflow: hidden;
+        }
+        /* annual / other 模式下隐藏副标题 */
+        .site-title.annual-active .title-sub-cn,
+        .site-title.annual-active .sub-desc,
+        .site-title.other-active .title-sub-cn,
+        .site-title.other-active .sub-desc {
+            display: none;
+        }
+        /* NO. 颜色用变量控制，移除 !important */
+        .annual-top-label {
+            color: var(--annual-export-subtitle, #b85878);
+        }
+        @media (max-width: 768px) {
+            .site-title h1 {
+                font-size: 30px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- ========== 交互页面（用户操作） ========== -->
+    <!-- 交互页面 -->
     <div class="wrap">
         <div class="site-title">
             <h1>Otome FavList</h1>
             <p class="title-sub-cn">日乙个人喜好表</p>
-            <p class="sub-desc text-gray-desc">选择你喜欢的角色，生成属于你的FavList。</p>
-            <!-- ===== 新增：使用指南按钮 ===== -->
-            <div class="center-btn-block" style="margin-top:12px;margin-bottom:30px;">
+            <p class="sub-desc text-gray-desc">选择你喜欢的角色，生成属于你的FavList</p>
+            <p class="annual-sub-desc">日乙年度报告 & 总结报告<br>生成属于你的<br>Annual Report & Summary Report</p>
+            <p class="other-sub-desc">日乙游戏Repo & 印象表<br>生成属于你的<br>Report & Impression</p>
+
+            <!-- 使用指南按钮 -->
+            <div class="center-btn-block guide-btn-block">
                 <button id="open-guide-btn" style="
                 padding: 8px 22px;
                 border: 2px solid #f6a5b8;
                 border-radius: 8px;
                 background: #fff7f9;
-                color: #b33a3a;
+                color: #b85878;
                 font-size: 16px;
-                font-weight: 600;
+                font-weight: bold;
                 cursor: pointer;
                 transition: 0.2s;
             " onmouseover="this.style.background='#fce8ed'" onmouseout="this.style.background='#fff7f9'">
@@ -45,212 +65,758 @@
     </div>
 </div>
 
-<div class="big-card" id="card-setting">
-    <h2>一、设置</h2>
-    <div class="switch-row">
-        <label class="switch">
-            <input type="checkbox" id="global-sub-char">
-            <span class="slider"></span>
-        </label>
-        <div>
-            <span class="text-light-pink">全局显示次要角色</span>
-            <p class="switch-desc">开启后显示所有游戏次要角色，关闭则所有游戏默认隐藏，单个游戏可单独开启。</p>
-        </div>
-    </div>
-    <!-- ✅补丁新增：全局显示续作/FD次要角色开关 -->
-    <div class="switch-row">
-        <label class="switch">
-            <input type="checkbox" id="global-fd-sub-char">
-            <span class="slider"></span>
-        </label>
-        <div>
-            <span class="text-light-pink">全局显示续作/FD次要角色</span>
-            <p class="switch-desc">开启后显示所有游戏续作、FD新增次要角色，关闭则所有游戏默认隐藏，单个游戏可单独开启。</p>
-        </div>
-    </div>
-    <div class="switch-row">
-        <label class="switch">
-            <input type="checkbox" id="global-hide-char">
-            <span class="slider"></span>
-        </label>
-        <div>
-            <span class="text-light-pink">全局显示隐藏图片、角色</span>
-            <p class="switch-desc">开启后显示所有游戏隐藏图片、角色，关闭则所有游戏默认隐藏，单个游戏可单独开启。切换此全局开关会触发剧透警告弹窗。</p>
-        </div>
-    </div>
-    <div class="switch-row">
-        <label class="switch">
-            <input type="checkbox" id="global-fd-game">
-            <span class="slider"></span>
-        </label>
-        <div>
-            <span class="text-light-pink">全局显示续作/FD图片、角色</span>
-            <p class="switch-desc">开启后显示所有游戏续作、FD新增图片、角色，关闭则所有游戏默认隐藏，单个游戏可单独开启。切换此全局开关会触发剧透警告弹窗。</p>
-        </div>
-    </div>
+<!-- 模式切换按钮组 FavList / Annual Report -->
+<div class="mode-switch-wrap">
+    <button class="mode-btn active" data-mode="favlist">FavList</button>
+    <button class="mode-btn" data-mode="annual">Annual Report</button>
+    <button class="mode-btn" data-mode="other">Other</button>
 </div>
 
-<div class="big-card" id="card-base">
-    <h2>二、基础信息</h2>
-    <div class="form-row-double">
-        <div class="form-row">
-            <label class="text-light-pink base-info-item">昵称</label>
-            <input type="text" id="input-nick" placeholder="填写你的昵称">
+<!-- FavList 模式 wrap -->
+<div class="mode-wrap" data-mode="favlist">
+    <div class="big-card" id="card-setting">
+        <h2>一、设置</h2>
+        <div class="switch-row">
+            <label class="switch">
+                <input type="checkbox" id="global-sub-char">
+                <span class="slider"></span>
+            </label>
+            <div>
+                <span class="text-light-pink">全局显示次要角色</span>
+                <p class="switch-desc">开启后显示所有游戏次要角色，关闭则所有游戏默认隐藏，单个游戏可单独开启。</p>
+            </div>
         </div>
-        <div class="form-row">
-            <label class="text-light-pink base-info-item">游玩总数</label>
-            <input type="number" id="input-count" placeholder="数字" min="0">
+        <div class="switch-row">
+            <label class="switch">
+                <input type="checkbox" id="global-fd-sub-char">
+                <span class="slider"></span>
+            </label>
+            <div>
+                <span class="text-light-pink">全局显示续作/FD次要角色</span>
+                <p class="switch-desc">开启后显示所有游戏续作、FD新增次要角色，关闭则所有游戏默认隐藏，单个游戏可单独开启。</p>
+            </div>
+        </div>
+        <div class="switch-row">
+            <label class="switch">
+                <input type="checkbox" id="global-hide-char">
+                <span class="slider"></span>
+            </label>
+            <div>
+                <span class="text-light-pink">全局显示隐藏图片、角色</span>
+                <p class="switch-desc">开启后显示所有游戏隐藏图片、角色，关闭则所有游戏默认隐藏，单个游戏可单独开启。切换此全局开关会触发剧透警告弹窗。</p>
+            </div>
+        </div>
+        <div class="switch-row">
+            <label class="switch">
+                <input type="checkbox" id="global-fd-game">
+                <span class="slider"></span>
+            </label>
+            <div>
+                <span class="text-light-pink">全局显示续作/FD图片、角色</span>
+                <p class="switch-desc">开启后显示所有游戏续作、FD新增图片、角色，关闭则所有游戏默认隐藏，单个游戏可单独开启。切换此全局开关会触发剧透警告弹窗。</p>
+            </div>
         </div>
     </div>
-    <div class="form-row-double">
-        <div class="form-row">
-            <label class="text-light-pink base-info-item">入坑时间</label>
-            <input type="text" id="input-story" placeholder="例如：2020年">
+    <div class="big-card" id="card-base">
+        <h2>二、基础信息</h2>
+        <div class="form-row-double">
+            <div class="form-row">
+                <label class="text-light-pink base-info-item">昵称</label>
+                <input type="text" id="input-nick" placeholder="填写你的昵称">
+            </div>
+            <div class="form-row">
+                <label class="text-light-pink base-info-item">游玩总数</label>
+                <input type="number" id="input-count" placeholder="数字" min="0">
+            </div>
         </div>
-        <div class="form-row">
-            <label class="text-light-pink base-info-item">入坑作品</label>
-            <input type="text" id="input-firstgame" placeholder="第一款日乙游戏">
+        <div class="form-row-double">
+            <div class="form-row">
+                <label class="text-light-pink base-info-item">入坑时间</label>
+                <input type="text" id="input-story" placeholder="例如：2020年">
+            </div>
+            <div class="form-row">
+                <label class="text-light-pink base-info-item">入坑作品</label>
+                <input type="text" id="input-firstgame" placeholder="第一款日乙游戏">
+            </div>
         </div>
+    </div>
+    <div class="big-card" id="card-game">
+        <h2>三、游戏列表</h2>
+        <div class="center-btn-block">
+            <button id="btn-add-game">+ 添加游戏</button>
+        </div>
+        <!-- 搜索面板：默认隐藏，JS 通过 .active 控制显示 -->
+        <div class="game-search-box" id="search-panel">
+            <input type="text" id="game-search-input" placeholder="搜索游戏名称">
+            <div class="filter-group">
+                <select id="filter-writer">
+                    <option value="">筛选编剧</option>
+                </select>
+                <select id="filter-art">
+                    <option value="">筛选画师</option>
+                </select>
+                <select id="filter-year">
+                    <option value="">筛选发售年份</option>
+                </select>
+                <select id="filter-publisher">
+                    <option value="">筛选开发厂商</option>
+                </select>
+                <select id="filter-cn">
+                    <option value="">筛选汉化厂商</option>
+                </select>
+            </div>
+            <div class="game-list-select" id="game-select-list"></div>
+        </div>
+        <div id="added-game-container"></div>
+    </div>
+    <div class="big-card" id="card-export">
+        <h2>四、导出</h2>
+        <div class="switch-row">
+            <label class="switch">
+                <input type="checkbox" id="export-fold-content">
+                <span class="slider"></span>
+            </label>
+            <div>
+                <span class="text-light-pink">导出折叠内容</span>
+                <p class="switch-desc">开启后生成并导出的图片会包含折叠的游戏卡片，关闭则只生成并导出展开的游戏卡片。</p>
+            </div>
+        </div>
+        <div class="switch-row">
+            <label class="switch">
+                <input type="checkbox" id="export-show-hidden-fd-name">
+                <span class="slider"></span>
+            </label>
+            <div>
+                <span class="text-light-pink">导出隐藏/续作/FD角色名</span>
+                <p class="switch-desc">开启后生成并导出的图片中会显示隐藏/续作/FD的角色名，关闭则只显示角色图片。适合搭配剪影图使用，形成剧透防护。</p>
+            </div>
+        </div>
+        <div class="switch-row">
+            <label class="switch">
+                <input type="checkbox" id="export-normal-quality">
+                <span class="slider"></span>
+            </label>
+            <div>
+                <span class="text-light-pink">导出普通画质</span>
+                <p class="switch-desc">iOS 系统存在对内核与总像素的硬性限制，若使用 IOS 设备渲染失败则建议开启，总像素低、图片未超出上限时便可成功生成并导出。</p>
+            </div>
+        </div>
+        <div class="center-btn-block left-align-btn">
+            <button id="btn-reset-color">恢复默认设置</button>
+        </div>
+        <!-- 颜色选择区域 -->
+        <div class="color-set-row">
+            <div class="color-item">
+                <label class="text-light-pink">图片底色</label>
+                <input type="color" id="color-bg" value="#fff7f9">
+            </div>
+            <div class="color-item">
+                <label class="text-light-pink">标题文字色</label>
+                <input type="color" id="color-title" value="#b33a3a">
+            </div>
+            <div class="color-item">
+                <label class="text-light-pink">小标题文字色</label>
+                <input type="color" id="color-subtitle" value="#b85878">
+            </div>
+            <div class="color-item">
+                <label class="text-light-pink">基础信息色</label>
+                <input type="color" id="color-baseinfotext" value="#c98fac">
+            </div>
+            <div class="color-item">
+                <label class="text-light-pink">游戏名文字色</label>
+                <input type="color" id="color-gamename" value="#000000">
+            </div>
+            <div class="color-item">
+                <label class="text-light-pink">自定义文本色</label>
+                <input type="color" id="color-customtext" value="#c98fac">
+            </div>
+            <div class="color-item">
+                <label class="text-light-pink">图片边框色</label>
+                <input type="color" id="color-border" value="#f6a5b8">
+            </div>
+        </div>
+        <div class="font-size-set-row">
+            <label for="slider-custom-text-font">调节自定义文本字号</label>
+            <div id="custom-text-font-value" class="font-size-value-display">16px</div>
+            <input id="slider-custom-text-font" type="range" min="14" max="42" step="1" value="16">
+        </div>
+        <!-- 导出尺寸选项 -->
+        <div class="size-select">
+            <label class="text-light-pink">导出尺寸：</label>
+            <!-- 固定尺寸，启用分页 -->
+            <label><input type="radio" name="export-size" value="640,853">640×853</label>
+            <label><input type="radio" name="export-size" value="810,1080">810×1080</label>
+            <label><input type="radio" name="export-size" value="1080,1440">1080×1440</label>
+            <label><input type="radio" name="export-size" value="640,640">640×640</label>
+            <label><input type="radio" name="export-size" value="810,810">810×810</label>
+            <label><input type="radio" name="export-size" value="1080,1080">1080×1080</label>
+            <!-- 长图模式 -->
+            <label><input type="radio" name="export-size" value="long-640">640长图</label>
+            <label><input type="radio" name="export-size" value="long-810" checked>810长图</label>
+            <label><input type="radio" name="export-size" value="long-1080">1080长图</label>
+        </div>
+        <div class="center-btn-block export-btn-wrap">
+            <button id="btn-export">生成并导出图片</button>
+        </div>
+        <canvas id="export-canvas" style="display:none;"></canvas>
+    </div>
+
+    <!-- 悬浮按钮 -->
+    <button id="back-to-add-btn" class="float-scroll-btn back-to-add">▲</button>
+    <button id="scroll-to-last-game-btn" class="float-scroll-btn scroll-last-card">▼</button>
+
+    <div class="about-block">
+        <h2>About</h2>
+        <p>由于开发者未接触所有游戏，部分游戏可能缺少隐藏角色。</p>
+        <p>如果发现角色遗漏（若涉及剧透烦请在邮件标题添加预警）、内容错误、功能异常，<br>
+            或有希望新增的作品，欢迎通过邮箱联系。</p>
+        <p class="email-text">Email：<a href="mailto:otomefavlist@163.com">otomefavlist@163.com</a></p>
     </div>
 </div>
+<!-- FavList 模式 wrap 结束 -->
 
-<div class="big-card" id="card-game">
-    <h2>三、游戏列表</h2>
-    <div class="center-btn-block">
-        <button id="btn-add-game">+ 添加游戏</button>
-    </div>
-    <!-- 搜索面板：默认隐藏，JS通过 .active 控制显示 -->
-    <div class="game-search-box" id="search-panel">
-        <input type="text" id="game-search-input" placeholder="搜索游戏名称">
-        <div class="filter-group">
-            <!-- 筛选顺序：编剧 → 画师 → 发售年份 → 开发厂商 → 汉化厂商 -->
-            <select id="filter-writer">
-                <option value="">筛选编剧</option>
-            </select>
-            <select id="filter-art">
-                <option value="">筛选画师</option>
-            </select>
-            <select id="filter-year">
-                <option value="">筛选发售年份</option>
-            </select>
-            <select id="filter-publisher">
-                <option value="">筛选开发厂商</option>
-            </select>
-            <select id="filter-cn">
-                <option value="">筛选汉化厂商</option>
-            </select>
+<!-- 年度报告模式 wrap，默认 mode-hidden 占位隐藏，不使用 display:none -->
+<div class="mode-wrap mode-hidden" data-mode="annual">
+    <!-- 年度报告页面主标题已移除，改为动态替换 .site-title h1 -->
+    <div class="big-card annual-card-stats">
+        <div class="annual-card-header">
+            <h2>一、数据统计</h2>
+            <button class="annual-card-fold-btn">▲</button>
         </div>
-        <div class="game-list-select" id="game-select-list"></div>
+        <div class="annual-card-body">
+        <div class="annual-stat-line">
+            <span></span>
+            <input class="annual-input" data-key="reportYear" type="text">
+            <span>年游玩了</span>
+            <input class="annual-input" data-key="playCount" type="text">
+            <span>部日乙<br>总时数</span>
+            <input class="annual-input" data-key="totalHours" type="text">
+            <span>小时<br>喜欢</span>
+            <input class="annual-input" data-key="likeCharCount" type="text">
+            <span>个人<br>嗑</span>
+            <input class="annual-input" data-key="cpCount" type="text">
+            <span>对CP<br>一共买了</span>
+            <input class="annual-input" data-key="buyCount" type="text">
+            <span>部游戏<br>花费 </span>
+            <input class="annual-input" data-key="costMoney" type="text">
+            <span>元<br>其中，</span>
+            <input class="annual-input" data-key="finished" type="text">
+            <span>部已封盘<br></span>
+            <input class="annual-input" data-key="ongoing" type="text">
+            <span>部正在进行<br></span>
+            <input class="annual-input" data-key="notStart" type="text">
+            <span>部还未开始</span>
+        </div>
+        </div><!-- /.annual-card-body -->
     </div>
-
-    <div id="added-game-container"></div>
-</div>
-
-<div class="big-card" id="card-export">
-    <h2>四、导出</h2>
-    <!-- ==========【新增】导出折叠内容开关 ========== -->
-    <div class="switch-row">
-        <label class="switch">
-            <input type="checkbox" id="export-fold-content">
-            <span class="slider"></span>
-        </label>
-        <div>
-            <span class="text-light-pink">导出折叠内容</span>
-            <p class="switch-desc">开启后生成并导出的图片会包含折叠的游戏卡片，关闭则只生成并导出展开的游戏卡片。</p>
+    <div class="big-card annual-card-top3">
+        <div class="annual-card-header">
+            <h2>二、ゲームTOP</h2>
+            <button class="annual-card-fold-btn">▲</button>
+        </div>
+        <div class="annual-card-body">
+        <!-- 游戏按钮放在板块顶部，移除每个 item 内部按钮 -->
+        <div class="annual-global-add-game-btn-wrap center-btn-block">
+            <button id="annual-global-add-game-btn" class="annual-add-game-btn">+ 添加游戏</button>
+        </div>
+        <div id="annual-game-top-drag-container">
+            <!-- 条目全部由 JS 动态生成，页面不预置 annual-top-item -->
+        </div>
+        </div><!-- /.annual-card-body -->
+    </div>
+    <div class="big-card annual-card-char-top3">
+        <div class="annual-card-header">
+            <h2>三、キャラTOP</h2>
+            <button class="annual-card-fold-btn">▲</button>
+        </div>
+        <div class="annual-card-body">
+        <!-- 角色按钮放在板块顶部，移除每个 item 内部按钮 -->
+        <div class="annual-global-add-char-btn-wrap center-btn-block">
+            <button id="annual-global-add-char-btn" class="annual-add-char-btn">+ 添加角色</button>
+        </div>
+        <div id="annual-char-top-drag-container">
+            <!-- 条目全部由 JS 动态生成，页面不预置 annual-char-top-item -->
+        </div>
+        </div><!-- /.annual-card-body -->
+    </div>
+    <div class="big-card annual-card-cp-top3">
+        <div class="annual-card-header">
+            <h2>四、カップルTOP</h2>
+            <button class="annual-card-fold-btn">▲</button>
+        </div>
+        <div class="annual-card-body">
+        <div class="annual-global-add-cp-btn-wrap center-btn-block">
+            <button id="annual-global-add-cp-btn" class="annual-add-cp-btn">+ 添加Couple</button>
+        </div>
+        <div id="annual-cp-top-drag-container"></div>
+        </div><!-- /.annual-card-body -->
+    </div>
+    <div class="big-card annual-card-other">
+        <div class="annual-card-header">
+            <h2>五、其他</h2>
+            <button class="annual-card-fold-btn">▲</button>
+        </div>
+        <div class="annual-card-body">
+            <div class="annual-other-also-box" id="annual-other-also-box">
+                <div class="annual-other-also-title">还玩了</div>
+                <div class="annual-other-also-content" id="annual-other-also-content">
+                    <!-- 空状态 + 按钮/已添加封面列表，由 JS 动态渲染 -->
+                </div>
+            </div>
+            <div class="annual-other-cards-row" id="annual-other-cards-row">
+                <div class="annual-other-card">
+                    <div class="annual-other-card-title">最喜欢的女主</div>
+                    <div class="annual-other-card-body" id="annual-other-favheroine-body">
+                        <button class="annual-grid-add-btn" data-other-action="addFavHeroine">+</button>
+                    </div>
+                </div>
+                <div class="annual-other-card">
+                    <div class="annual-other-card-title">最喜欢的配角</div>
+                    <div class="annual-other-card-body" id="annual-other-favsupport-body">
+                        <button class="annual-grid-add-btn" data-other-action="addFavSupport">+</button>
+                    </div>
+                </div>
+                <div class="annual-other-card">
+                    <div class="annual-other-card-title">最喜欢的CP</div>
+                    <div class="annual-other-card-body" id="annual-other-favcp-body">
+                        <button class="annual-grid-add-btn" data-other-action="addFavCp">+</button>
+                    </div>
+                </div>
+                <!-- 自定义角色卡片由 JS 动态插到此锚点之前 -->
+                <div class="annual-other-card" id="annual-other-first-text-card">
+                    <div class="annual-other-card-title">最喜欢的台词</div>
+                    <div class="annual-custom-text-wrap">
+                        <textarea class="annual-other-textarea" placeholder="自定义文本" data-other-key="favLine"></textarea>
+                        <div class="resize-handle"></div>
+                    </div>
+                </div>
+                <div class="annual-other-card">
+                    <div class="annual-other-card-title">最喜欢的剧情线</div>
+                    <div class="annual-custom-text-wrap">
+                        <textarea class="annual-other-textarea" placeholder="自定义文本" data-other-key="favPlotLine"></textarea>
+                        <div class="resize-handle"></div>
+                    </div>
+                </div>
+                <div class="annual-other-card">
+                    <div class="annual-other-card-title">最喜欢的感情线</div>
+                    <div class="annual-custom-text-wrap">
+                        <textarea class="annual-other-textarea" placeholder="自定义文本" data-other-key="favRomanceLine"></textarea>
+                        <div class="resize-handle"></div>
+                    </div>
+                </div>
+                <div class="annual-other-card">
+                    <div class="annual-other-card-title">最喜欢的OP/ED/BGM</div>
+                    <div class="annual-custom-text-wrap">
+                        <textarea class="annual-other-textarea" placeholder="自定义文本" data-other-key="favMusic"></textarea>
+                        <div class="resize-handle"></div>
+                    </div>
+                </div>
+                <div class="annual-other-card">
+                    <div class="annual-other-card-title">最喜欢的HE</div>
+                    <div class="annual-custom-text-wrap">
+                        <textarea class="annual-other-textarea" placeholder="自定义文本" data-other-key="favHe"></textarea>
+                        <div class="resize-handle"></div>
+                    </div>
+                </div>
+                <div class="annual-other-card">
+                    <div class="annual-other-card-title">最喜欢的BE</div>
+                    <div class="annual-custom-text-wrap">
+                        <textarea class="annual-other-textarea" placeholder="自定义文本" data-other-key="favBe"></textarea>
+                        <div class="resize-handle"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <!-- ==========【新增】导出隐藏/续作/FD角色名开关 ========== -->
-    <div class="switch-row">
-        <label class="switch">
-            <input type="checkbox" id="export-show-hidden-fd-name">
-            <span class="slider"></span>
-        </label>
-        <div>
-            <span class="text-light-pink">导出隐藏/续作/FD角色名</span>
-            <p class="switch-desc">开启后生成并导出的图片中会显示隐藏/续作/FD的角色名，关闭则只显示角色图片。适合搭配剪影图使用，形成剧透防护。</p>
+    <div class="big-card annual-card-game-grid">
+        <div class="annual-card-header">
+            <h2>六、ゲーム宫格</h2>
+            <button class="annual-card-fold-btn">▲</button>
+        </div>
+        <div class="annual-card-body">
+            <div class="annual-grid-container" id="annual-game-grid-container"></div>
+            <div class="annual-grid-footer-text">
+                <div class="annual-other-card-title">明年最期待</div>
+                <div class="annual-custom-text-wrap">
+                    <textarea class="annual-other-textarea" placeholder="自定义文本" id="annual-game-grid-footer-text"></textarea>
+                    <div class="resize-handle"></div>
+                </div>
+            </div>
         </div>
     </div>
-    <!-- 恢复默认设置按钮（导出折叠内容下方、导出背景色上方） -->
-    <div class="center-btn-block left-align-btn">
-        <button id="btn-reset-color">恢复默认设置</button>
+    <div class="big-card annual-card-char-grid">
+        <div class="annual-card-header">
+            <h2>七、キャラ宫格</h2>
+            <button class="annual-card-fold-btn">▲</button>
+        </div>
+        <div class="annual-card-body">
+            <div class="annual-grid-container" id="annual-char-grid-container"></div>
+            <div class="annual-grid-footer-text">
+                <div class="annual-other-card-title">还想说</div>
+                <div class="annual-custom-text-wrap">
+                    <textarea class="annual-other-textarea" placeholder="自定义文本" id="annual-char-grid-footer-text"></textarea>
+                    <div class="resize-handle"></div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <!-- 颜色选择区域 -->
+    <div class="big-card annual-card-game-monthly">
+        <div class="annual-card-header">
+            <h2>八、ゲーム月度总结</h2>
+            <button class="annual-card-fold-btn">▲</button>
+        </div>
+        <div class="annual-card-body">
+            <div class="annual-monthly-container" id="annual-game-monthly-container">
+                <!-- 12个月列由JS动态生成 -->
+            </div>
+        </div>
+    </div>
+    <div class="big-card annual-card-char-monthly">
+        <div class="annual-card-header">
+            <h2>九、キャラ月度总结</h2>
+            <button class="annual-card-fold-btn">▲</button>
+        </div>
+        <div class="annual-card-body">
+            <div class="annual-monthly-container" id="annual-char-monthly-container">
+                <!-- 12个月列由JS动态生成 -->
+            </div>
+        </div>
+    </div>  
+    <div class="big-card" id="annual-card-export">
+        <div class="annual-card-header">
+            <h2>十、导出</h2>
+            <button class="annual-card-fold-btn">▲</button>
+        </div>
+        <div class="annual-card-body">
+            <div class="annual-reporter-row">
+                <span class="text-light-pink">填表人：</span>
+                <input type="text" id="annual-reporter-name" placeholder="选填，生成并导出图片时显示在标题右下方">
+            </div>
+            <div class="switch-row">
+                <label class="switch">
+                    <input type="checkbox" id="annual-use-summary-title">
+                    <span class="slider"></span>
+                </label>
+                <div>
+                    <span class="text-light-pink">导出标题使用 Otome Summary Report</span>
+                    <p class="switch-desc">开启后生成并导出的图片标题为 Otome Summary Report，关闭则标题默认为 20XX Otome Annual Report。</p>
+                </div>
+            </div>
+            <div class="switch-row">
+                <label class="switch">
+                    <input type="checkbox" id="annual-use-oshi-title">
+                    <span class="slider"></span>
+                </label>
+                <div>
+                    <span class="text-light-pink">导出标题使用推しゲーム & 推しキャラ</span>
+                    <p class="switch-desc">开启后，生成并导出的图片中模块六、模块七的小标题为推しゲーム & 推しキャラ，关闭则小标题默认为ゲーム宫格 & キャラ宫格。</p>
+                </div>
+            </div>
+            <div class="switch-row">
+                <label class="switch">
+                    <input type="checkbox" id="annual-export-normal-quality">
+                    <span class="slider"></span>
+                </label>
+                <div>
+                    <span class="text-light-pink">导出普通画质</span>
+                    <p class="switch-desc">iOS 系统存在对内核与总像素的硬性限制，若使用 IOS 设备渲染失败则建议开启，总像素低、图片未超出上限时便可成功生成并导出。</p>
+                </div>
+            </div>
+            <div class="center-btn-block left-align-btn">
+                <button id="annual-btn-reset-color">恢复默认设置</button>
+            </div>
+            <!-- 颜色选择区域 -->
             <div class="color-set-row">
-        <div class="color-item">
-            <label class="text-light-pink">导出背景色</label>
-            <input type="color" id="color-bg" value="#fff7f9">
-        </div>
-        <div class="color-item">
-            <label class="text-light-pink">标题文字色</label>
-            <input type="color" id="color-title" value="#b33a3a">
-        </div>
-        <div class="color-item">
-            <label class="text-light-pink">小标题文字色</label>
-            <input type="color" id="color-subtitle" value="#b85878">
-        </div>
-        <div class="color-item">
-            <label class="text-light-pink">基础信息色</label>
-            <input type="color" id="color-baseinfotext" value="#c98fac">
-        </div>
-        <div class="color-item">
-            <label class="text-light-pink">游戏名文字色</label>
-            <input type="color" id="color-gamename" value="#000000">
-        </div>
-        <!-- 新增：自定义文本色 -->
-        <div class="color-item">
-            <label class="text-light-pink">自定义文本色</label>
-            <input type="color" id="color-customtext" value="#c98fac">
-        </div>
-        <div class="color-item">
-            <label class="text-light-pink">卡片边框色</label>
-            <input type="color" id="color-border" value="#f6a5b8">
-        </div>
+                <div class="color-item">
+                    <label class="text-light-pink">图片底色</label>
+                    <input type="color" id="annual-color-bg" value="#fff7f9">
+                </div>
+                <div class="color-item">
+                    <label class="text-light-pink">标题文字色</label>
+                    <input type="color" id="annual-color-title" value="#b33a3a">
+                </div>
+                <div class="color-item">
+                    <label class="text-light-pink">小标题文字色</label>
+                    <input type="color" id="annual-color-subtitle" value="#b85878">
+                </div>
+                <div class="color-item">
+                    <label class="text-light-pink">数据统计文字色</label>
+                    <input type="color" id="annual-color-stattext" value="#b85878">
+                </div>
+                <div class="color-item">
+                    <label class="text-light-pink">数据统计数据色</label>
+                    <input type="color" id="annual-color-statdata" value="#b33a3a">
+                </div>
+                <div class="color-item">
+                    <label class="text-light-pink">游戏角色名文字色</label>
+                    <input type="color" id="annual-color-gamename" value="#000000">
+                </div>
+                <div class="color-item">
+                   <label class="text-light-pink">自定义文本色</label>
+                    <input type="color" id="annual-color-customtext" value="#c98fac">
+                </div>
+                <div class="color-item">
+                    <label class="text-light-pink">自定义文本边框色</label>
+                    <input type="color" id="annual-color-customborder" value="#eeeeee">
+                </div>
+                <div class="color-item">
+                    <label class="text-light-pink">卡片底色</label>
+                    <input type="color" id="annual-color-boxbg" value="#fff7f9">
+                </div>
+                <div class="color-item">
+                    <label class="text-light-pink">标签文字色</label>
+                    <input type="color" id="annual-color-labelcolor" value="#b85878">
+                </div>
+                <div class="color-item">
+                    <label class="text-light-pink">时长文字色</label>
+                    <input type="color" id="annual-color-hourstext" value="#b33a3a">
+                </div>
+                <div class="color-item">
+                    <label class="text-light-pink">柱状条色</label>
+                    <input type="color" id="annual-color-barcolor" value="#e895a8">
+                </div>
+                <div class="color-item">
+                    <label class="text-light-pink">填表人文字色</label>
+                    <input type="color" id="annual-color-reportercolor" value="#b33a3a">
+                </div>
+                <div class="color-item">
+                    <label class="text-light-pink">图片边框色</label>
+                    <input type="color" id="annual-color-border" value="#f6a5b8">
+                </div>
+            </div>
+            <div class="font-size-set-row">
+                <label for="annual-slider-custom-text-font">调节自定义文本字号</label>
+                <div id="annual-custom-text-font-value" class="font-size-value-display">16px</div>
+                <input id="annual-slider-custom-text-font" type="range" min="14" max="42" step="1" value="16">
+            </div>
+            <div class="size-select">
+                <label class="text-light-pink">导出尺寸：</label>
+                <label><input type="radio" name="annual-export-size" value="long-640">640长图</label>
+                <label><input type="radio" name="annual-export-size" value="long-810" checked>810长图</label>
+                <label><input type="radio" name="annual-export-size" value="long-1080">1080长图</label>
+            </div>
+            <div class="center-btn-block export-btn-wrap">
+                <button id="annual-btn-export-image">生成并导出图片</button>
+            </div>
+            <canvas id="annual-export-canvas" style="display:none;"></canvas>
+        </div><!-- /.annual-card-body -->
     </div>
 
-    <div class="font-size-set-row">
-        <label for="slider-custom-text-font">调节自定义文本字号</label>
-        <div id="custom-text-font-value" class="font-size-value-display">16px</div>
-        <input id="slider-custom-text-font" type="range" min="14" max="42" step="1" value="16">
-    </div>
-    
-    <!-- 导出尺寸选项 -->
-    <div class="size-select">
-        <label class="text-light-pink">导出尺寸：</label>
-        <!-- 固定尺寸（启用分页） -->
-        <label><input type="radio" name="export-size" value="640,853">640×853</label>
-        <label><input type="radio" name="export-size" value="810,1080">810×1080</label>
-        <label><input type="radio" name="export-size" value="1080,1440">1080×1440</label>
-        <label><input type="radio" name="export-size" value="640,640">640×640</label>
-        <label><input type="radio" name="export-size" value="810,810">810×810</label>
-        <label><input type="radio" name="export-size" value="1080,1080">1080×1080</label>
-        <!-- 长图模式 -->
-        <label><input type="radio" name="export-size" value="long-640">640长图</label>
-        <label><input type="radio" name="export-size" value="long-810" checked>810长图</label>
-        <label><input type="radio" name="export-size" value="long-1080">1080长图</label>
-    </div>
+<!-- 新增：annual 模式悬浮滚动按钮，复用 .float-scroll-btn 样式，逻辑独立 -->
+<button id="annual-back-to-top-btn" class="float-scroll-btn back-to-add">▲</button>
+<button id="annual-scroll-to-bottom-btn" class="float-scroll-btn scroll-last-card">▼</button>
 
-    <div class="center-btn-block export-btn-wrap">
-        <button id="btn-export">生成并导出图片</button>
+    <div class="about-block">
+        <h2>About</h2>
+        <p>由于开发者未接触所有游戏，部分游戏可能缺少隐藏角色。</p>
+        <p>如果发现角色遗漏（若涉及剧透烦请在邮件标题添加预警）、内容错误、功能异常，<br>
+            或有希望新增的作品，欢迎通过邮箱联系。</p>
+        <p class="email-text">Email：<a href="mailto:otomefavlist@163.com">otomefavlist@163.com</a></p>
     </div>
-
-    <canvas id="export-canvas" style="display:none;"></canvas>
 </div>
+<!-- 年度报告模式 wrap 结束 -->
 
-<!-- 回到添加游戏、最后一张游戏卡片悬浮按钮 -->
-<button id="back-to-add-btn" class="float-scroll-btn back-to-add">▲</button>
-<button id="scroll-to-last-game-btn" class="float-scroll-btn scroll-last-card">▼</button>
-        
-<div class="about-block">
-    <h2>About</h2>
-    <p>由于开发者未接触所有游戏，部分游戏可能缺少隐藏角色。</p>
-    <p>如果发现角色遗漏（若涉及剧透烦请在邮件标题添加预警）、内容错误、功能异常，<br>
-        或有希望新增的作品，欢迎通过邮箱联系。</p>
-    <p class="email-text">Email：<a href="mailto:otomefavlist@163.com">otomefavlist@163.com</a></p>
-</div>
-</div>
+<!-- Other 模式 wrap，默认 mode-hidden 占位隐藏 -->
+<div class="mode-wrap mode-hidden" data-mode="other">
+    <!-- 一、Repo -->
+    <div class="big-card other-card-repo">
+        <div class="annual-card-header">
+            <h2>一、Repo</h2>
+            <button class="other-card-fold-btn">▲</button>
+        </div>
+        <div class="annual-card-body">
+            <div class="other-add-game-btn-wrap center-btn-block">
+                <button id="other-repo-add-game-btn" class="other-add-game-btn">+ 添加游戏</button>
+            </div>
+            <div id="other-repo-game-container">
+                <!-- Rero 游戏卡片由 JS 动态生成 -->
+            </div>
+        </div>
+    </div>
 
-<!-- ========== 快照容器（导出截图专用，不可见） ========== -->
+    <!-- 二、Impression -->
+    <div class="big-card other-card-impression">
+        <div class="annual-card-header">
+            <h2>二、Impression</h2>
+            <button class="other-card-fold-btn">▲</button>
+        </div>
+        <div class="annual-card-body">
+            <div class="other-imp-global-switches">
+                <div class="switch-row">
+                    <label class="switch">
+                        <input type="checkbox" id="other-imp-global-sub-char">
+                        <span class="slider"></span>
+                    </label>
+                    <div>
+                        <span class="text-light-pink">全局显示次要角色</span>
+                        <p class="switch-desc">开启后显示所有游戏次要角色，关闭则所有游戏默认隐藏，单个游戏可单独开启。</p>
+                    </div>
+                </div>
+                <div class="switch-row">
+                    <label class="switch">
+                        <input type="checkbox" id="other-imp-global-fd-sub-char">
+                        <span class="slider"></span>
+                    </label>
+                    <div>
+                        <span class="text-light-pink">全局显示续作/FD次要角色</span>
+                        <p class="switch-desc">开启后显示所有游戏续作、FD新增次要角色，关闭则所有游戏默认隐藏，单个游戏可单独开启。</p>
+                    </div>
+                </div>
+                <div class="switch-row">
+                    <label class="switch">
+                        <input type="checkbox" id="other-imp-global-hide-char">
+                        <span class="slider"></span>
+                    </label>
+                    <div>
+                        <span class="text-light-pink">全局显示隐藏图片、角色</span>
+                        <p class="switch-desc">开启后显示所有游戏隐藏图片、角色，关闭则所有游戏默认隐藏，单个游戏可单独开启。切换此全局开关会触发剧透警告弹窗。</p>
+                    </div>
+                </div>
+                <div class="switch-row">
+                    <label class="switch">
+                        <input type="checkbox" id="other-imp-global-fd-char">
+                        <span class="slider"></span>
+                    </label>
+                    <div>
+                        <span class="text-light-pink">全局显示续作/FD图片、角色</span>
+                        <p class="switch-desc">开启后显示所有游戏续作、FD新增图片、角色，关闭则所有游戏默认隐藏，单个游戏可单独开启。切换此全局开关会触发剧透警告弹窗。</p>
+                    </div>
+                </div>
+            </div>
+            <div class="other-add-game-btn-wrap center-btn-block">
+                <button id="other-impression-add-game-btn" class="other-add-game-btn">+ 添加游戏</button>
+            </div>
+            <div id="other-impression-game-container">
+                <!-- Impression 游戏卡片由 JS 动态生成，卡片内容结构待后续确认 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 三、导出 -->
+    <div class="big-card" id="other-card-export">
+        <div class="annual-card-header">
+            <h2>三、导出</h2>
+            <button class="other-card-fold-btn">▲</button>
+        </div>
+        <div class="annual-card-body other-export-config">
+            <div class="annual-reporter-row">
+                <span class="text-light-pink">填表人：</span>
+                <input type="text" id="other-reporter-name" placeholder="选填，生成并导出图片时显示在标题右下方">
+            </div>
+            <div class="switch-row">
+                <label class="switch">
+                    <input type="checkbox" id="other-export-brief">
+                    <span class="slider"></span>
+                </label>
+                <div>
+                    <span class="text-light-pink">导出简评表</span>
+                    <p class="switch-desc">开启后，会根据 Repo 模块额外生成简评表，包含时长、全通、日期、甜虐度、总评、喜爱度、五维图的内容，未填写的相应内容不生成。</p>
+                </div>
+            </div>
+            <div class="switch-row">
+                <label class="switch">
+                    <input type="checkbox" id="other-export-normal-quality">
+                    <span class="slider"></span>
+                </label>
+                <div>
+                    <span class="text-light-pink">导出普通画质</span>
+                    <p class="switch-desc">iOS 系统存在对内核与总像素的硬性限制，若使用 IOS 设备渲染失败则建议开启，总像素低、图片未超出上限时便可成功生成并导出。</p>
+                </div>
+            </div>
+            <div class="center-btn-block left-align-btn">
+                <button id="other-btn-reset-color">恢复默认设置</button>
+            </div>
+            <div class="color-set-row">
+                <div class="color-item">
+                    <label class="text-light-pink">图片底色</label>
+                    <input type="color" id="other-color-bg" value="#fff7f9">
+                </div>
+                <div class="color-item">
+                    <label class="text-light-pink">标题文字色</label>
+                    <input type="color" id="other-color-title" value="#b33a3a">
+                </div>
+                <div class="color-item">
+                    <label class="text-light-pink">游戏角色名文字色</label>
+                    <input type="color" id="other-color-char-name" value="#000000">
+                </div>
+                <div class="color-item">
+                    <label class="text-light-pink">默认内容文字色</label>
+                    <input type="color" id="other-color-default-text" value="#b85878">
+                </div>
+                <div class="color-item">
+                    <label class="text-light-pink">填写内容文字色</label>
+                    <input type="color" id="other-color-input-text" value="#000000">
+                </div>
+                <div class="color-item">
+                    <label class="text-light-pink">选中状态填充色</label>
+                    <input type="color" id="other-color-active-fill" value="#e895a8">
+                </div>
+                <div class="color-item">
+                    <label class="text-light-pink">爱心填充色</label>
+                    <input type="color" id="other-color-heart" value="#e895a8">
+                </div>
+                <div class="color-item">
+                    <label class="text-light-pink">五维图色</label>
+                    <input type="color" id="other-color-radar" value="#e895a8">
+                </div>
+                <div class="color-item">
+                    <label class="text-light-pink">卡片底色</label>
+                    <input type="color" id="other-color-card-bg" value="#fff7f9">
+                </div>
+                <div class="color-item">
+                    <label class="text-light-pink">标签文字色</label>
+                    <input type="color" id="other-color-label" value="#b85878">
+                </div>
+                <div class="color-item">
+                    <label class="text-light-pink">自定义文本色</label>
+                    <input type="color" id="other-color-customtext" value="#c98fac">
+                </div>
+                <div class="color-item">
+                    <label class="text-light-pink">自定义文本边框色</label>
+                    <input type="color" id="other-color-customborder" value="#eeeeee">
+                </div>
+                <div class="color-item">
+                    <label class="text-light-pink">填表人文字色</label>
+                    <input type="color" id="other-color-reporter" value="#b33a3a">
+                </div>
+                <div class="color-item">
+                    <label class="text-light-pink">图片边框色</label>
+                    <input type="color" id="other-color-image-border" value="#eeeeee">
+                </div>
+            </div>
+            <div class="font-size-set-row">
+                <label for="other-slider-input-font">调节填写内容字号</label>
+                <div id="other-input-font-value" class="font-size-value-display">16px</div>
+                <input id="other-slider-input-font" type="range" min="14" max="42" step="1" value="16">
+            </div>
+            <div class="font-size-set-row">
+                <label for="other-slider-custom-text-font">调节自定义文本字号</label>
+                <div id="other-custom-text-font-value" class="font-size-value-display">16px</div>
+                <input id="other-slider-custom-text-font" type="range" min="14" max="42" step="1" value="16">
+            </div>
+            <div class="center-btn-block export-btn-wrap">
+                <button id="other-btn-export-image">生成并导出图片</button>
+            </div>
+            <canvas id="other-export-canvas" style="display:none;"></canvas>
+        </div>
+    </div>
+
+    <!-- Other 模式悬浮滚动按钮，复用 .float-scroll-btn 样式 -->
+    <button id="other-back-to-top-btn" class="float-scroll-btn back-to-add">▲</button>
+    <button id="other-scroll-to-bottom-btn" class="float-scroll-btn scroll-last-card">▼</button>
+
+    <div class="about-block">
+        <h2>About</h2>
+        <p>由于开发者未接触所有游戏，部分游戏可能缺少隐藏角色。</p>
+        <p>如果发现角色遗漏（若涉及剧透烦请在邮件标题添加预警）、内容错误、功能异常，<br>
+            或有希望新增的作品，欢迎通过邮箱联系。</p>
+        <p class="email-text">Email：<a href="mailto:otomefavlist@163.com">otomefavlist@163.com</a></p>
+    </div>
+</div>
+<!-- Other 模式 wrap 结束 -->
+</div> <!-- .wrap 结束 -->
+
+<!-- 快照容器，导出截图专用，不可见 -->
 <div id="snapshot-container" style="
 opacity: 0;
 position: fixed;
@@ -262,7 +828,7 @@ pointer-events: none;
 z-index: -999;
 "></div>
 
-<!-- 剧透警告弹窗：id="spoiler-modal" class="modal‑mask"，用 .active 控制显示 -->
+<!-- 剧透警告弹窗，用 .active 控制显示 -->
 <div id="spoiler-modal" class="modal-mask">
     <div class="modal-box">
         <h3>⚠️剧透警告⚠️</h3>
@@ -274,7 +840,7 @@ z-index: -999;
     </div>
 </div>
 
-<!-- ==========【新增】游戏数据加载进度弹窗 样式完全对齐剧透弹窗，仅单个确认按钮 ========== -->
+<!-- 新增：游戏数据加载进度弹窗 -->
 <div id="game-load-modal" class="modal-mask">
     <div class="modal-box">
         <h3>提示</h3>
@@ -285,7 +851,7 @@ z-index: -999;
     </div>
 </div>
 
-<!-- 【新增】导出预览弹窗容器，复用modal-mask遮罩体系 -->
+<!-- 新增：导出预览弹窗，复用 modal-mask 遮罩 -->
 <div id="export-preview-modal" class="modal-mask">
     <div class="modal-preview-box">
         <div class="modal-preview-head">
@@ -307,11 +873,10 @@ z-index: -999;
     </div>
 </div>
 
-<!-- ========== 使用指南弹窗（长内容滚动弹窗） ========== -->
+<!-- 使用指南弹窗 -->
 <div id="guide-modal" class="modal-mask">
     <div class="modal-guide-box" style="background:#fff; border-radius:12px; border:2px solid #f6a5b8; width:min(92vw, 900px); max-height:85vh; display:flex; flex-direction:column; overflow:hidden;">
         <div class="modal-guide-scroll" style="flex:1; padding:24px 28px; overflow-y:auto;">
-            <!-- ===== 标题 + 按钮行 ===== -->
             <div style="display: flex; align-items: center; justify-content: flex-end; flex-wrap: wrap; gap: 12px; margin-bottom: 4px;">
                 <h2 style="margin: 0; font-size: 24px; color: #b85878; border-left: 5px solid #b85878; padding-left: 12px; font-weight: bold; margin-right:auto;">
                     📖 使用指南
@@ -333,10 +898,8 @@ z-index: -999;
 </div>
 </div>
 
-<!-- ===== 内容区域（移除折叠控制） ===== -->
+<!-- 内容区域，已移除折叠控制 -->
 <div id="intro-content" style="margin-top: 16px;">
-
-    <!-- 简介 -->
     <p style="font-size: 17px; line-height: 1.8; color: #333; margin-bottom: 20px;">
         <strong style="font-size: 18px; color: #b33a3a;">日乙个人喜好表生成工具</strong>
         — 选择你喜欢的角色，生成属于你的 FavList。
@@ -346,10 +909,7 @@ z-index: -999;
         你可以自由添加已玩过的游戏、选择喜欢的角色（支持单角色、多角色与 CP 组合）、用爱心评分，
         并一键导出为高清图片，用于分享或收藏。
     </p>
-
     <hr style="border: none; border-top: 2px solid #f6d8e0; margin: 20px 0;">
-
-    <!-- 功能特色 -->
     <h3 style="font-size: 19px; color: #b85878; margin: 0 0 12px 0; font-weight: bold;">✨ 功能特色</h3>
     <ul style="font-size: 15px; line-height: 1.9; color: #444; padding-left: 22px; margin-bottom: 20px; list-style-type: disc;">
         <li><strong>游戏库管理</strong>：内置 140+ 款日乙游戏（持续更新），支持按编剧、画师、年份、厂商等筛选。</li>
@@ -373,12 +933,8 @@ z-index: -999;
         <li><strong>预览及分页导出</strong>：生成图片前先预览，多页内容自动分页并支持批量下载。</li>
         <li><strong>本地数据持久化</strong>：所有配置（游戏列表、角色选择、自定义文本等）自动保存到浏览器本地，刷新页面不丢失。</li>
     </ul>
-
     <hr style="border: none; border-top: 2px solid #f6d8e0; margin: 20px 0;">
-
-    <!-- 如何使用 -->
-    <h3 style="font-size: 19px; color: #b85878; margin: 0 0 12px 0; font-weight: bold;">🚀 如何使用</h3>
-
+    <h3 style="font-size: 19px; color: #b85878; margin: 0 0 12px 0; font-weight: bold;">📌 如何使用</h3>
     <h4 style="font-size: 16px; color: #b33a3a; margin: 12px 0 4px 0; font-weight: 600;">1. 访问地址</h4>
     <p style="font-size: 15px; line-height: 1.8; color: #555; margin: 0 0 12px 0;">
         项目已部署至：<br>
@@ -391,24 +947,21 @@ z-index: -999;
         <li>可按名称搜索，或使用编剧/画师/年份/厂商等筛选。</li>
         <li>点击任意游戏卡片即可添加至列表。</li>
     </ul>
-
     <h4 style="font-size: 16px; color: #b33a3a; margin: 12px 0 4px 0; font-weight: 600;">3. 评分</h4>
     <p style="font-size: 15px; line-height: 1.8; color: #555; margin: 0 0 12px 0;">
         游戏名称右侧有五颗爱心，点击即可为该游戏评分（1~5 颗爱心）。
     </p>
-
     <h4 style="font-size: 16px; color: #b33a3a; margin: 12px 0 4px 0; font-weight: 600;">4. 选择角色</h4>
     <p style="font-size: 15px; line-height: 1.8; color: #555; margin: 0 0 4px 0;">
         每个已添加的游戏卡片下方有两个按钮：
     </p>
     <ul style="font-size: 15px; line-height: 1.8; color: #444; padding-left: 22px; margin: 0 0 12px 0; list-style-type: disc;">
-        <li><strong>选择角色 Character</strong>：勾选你喜欢的角色（可多选，按照选择的顺序进行添加），点击确认保存。</li>
+        <li><strong>选择角色 Character</strong>：点击你喜欢的角色（可多选，按照选择的顺序进行添加），确认后保存。</li>
         <li><strong>选择角色 Couple</strong>：点击女主卡片展开男主列表，勾选你心仪的 CP 组合，确认后保存。</li>
     </ul>
     <blockquote style="font-size: 14px; line-height: 1.7; color: #666; background: #fff7f9; border-left: 4px solid #e895a8; padding: 8px 16px; margin: 4px 0 12px 0;">
-        💡 角色立绘支持多张图片切换（例如动作、服装差分或FD ver），点击左右箭头即可。
+        💡 角色立绘支持多张图片切换（例如动作、服装差分或FD ver），点击左右箭头即可。角色名也支持切换，点击左右箭头即可。
     </blockquote>
-
     <h4 style="font-size: 16px; color: #b33a3a; margin: 12px 0 4px 0; font-weight: 600;">5. 添加自定义文本</h4>
     <p style="font-size: 15px; line-height: 1.8; color: #555; margin: 0 0 4px 0;">
         在每个游戏卡片中各有三个文本框分别位于游戏标题、Character 区域、Couple 区域下方：
@@ -419,9 +972,8 @@ z-index: -999;
         <li><strong>Couple 区域下方文本框</strong>：可针对所选 CP 组合添加感想等内容。</li>
     </ul>
     <blockquote style="font-size: 14px; line-height: 1.7; color: #666; background: #fff7f9; border-left: 4px solid #e895a8; padding: 8px 16px; margin: 4px 0 12px 0;">
-        💡 文本内容支持换行且自动保存。
+        💡 文本内容支持换行且自动保存。可拖动右下角改变文本框大小。
     </blockquote>
-
     <h4 style="font-size: 16px; color: #b33a3a; margin: 12px 0 4px 0; font-weight: 600;">6. 自定义导出设置</h4>
     <ul style="font-size: 15px; line-height: 1.8; color: #444; padding-left: 22px; margin: 0 0 12px 0; list-style-type: disc;">
         <li><strong>导出折叠内容</strong>：开启后，即使游戏卡片处于折叠状态，也会在生成的图片中完整显示。</li>
@@ -429,50 +981,56 @@ z-index: -999;
         <li><strong>配色</strong>：通过颜色选择器自由调整图片的配色方案，点击「恢复默认设置」可一键重置。</li>
         <li><strong>尺寸</strong>：支持多种固定尺寸及长图模式，满足不同社交平台需求。</li>
     </ul>
-
     <h4 style="font-size: 16px; color: #b33a3a; margin: 12px 0 4px 0; font-weight: 600;">7. 生成并导出图片</h4>
-    <p style="font-size: 15px; line-height: 1.8; color: #555; margin: 0 0 20px 0;">
-        点击「生成并导出图片」→ 预览弹窗出现 → 确认无误后点击「导出图片」即可下载（多页时自动分批下载）。
-    </p>
-
+    <ul style="font-size: 15px; line-height: 1.8; color: #444; padding-left: 22px; margin: 0 0 12px 0; list-style-type: disc;">
+        <li>点击「生成并导出图片」→ 预览弹窗出现 → 确认无误后点击「导出图片」即可下载。</li>
+        <li>多页导出时，PC 端将一次性导出全部图片；移动端则以 1.5 秒为间隔逐张弹出图片下载确认（部分浏览器可一次性导出全部图片）。</li>
+    </ul>
     <hr style="border: none; border-top: 2px solid #f6d8e0; margin: 20px 0;">
-
-    <!-- 常见问题 -->
+    <h3 style="font-size: 19px; color: #b85878; margin: 0 0 12px 0; font-weight: bold;">🛠️ 更新安排</h3>
+    <h4 style="font-size: 16px; color: #b33a3a; margin: 12px 0 4px 0; font-weight: 600;">1. 官中</h4>
+    <p style="font-size: 15px; line-height: 1.8; color: #555; margin: 0 0 12px 0;">
+        推出新官中游戏时，会在发售后两三天内将游戏名称、角色名等信息更改为官中内容。如若发售后未及时更改，则会在月底统一更改。
+    </p>
+    <h4 style="font-size: 16px; color: #b33a3a; margin: 12px 0 4px 0; font-weight: 600;">2. 日乙</h4>
+    <p style="font-size: 15px; line-height: 1.8; color: #555; margin: 0 0 12px 0;">
+        推出新日乙游戏时，会在发售前有完善官网内容的情况下，在月底统一添加。
+    </p>
+    <hr style="border: none; border-top: 2px solid #f6d8e0; margin: 20px 0;">
     <h3 style="font-size: 19px; color: #b85878; margin: 0 0 12px 0; font-weight: bold;">❓ 常见问题</h3>
-
     <p style="font-size: 15px; line-height: 1.8; color: #555; margin: 0 0 4px 0;">
         <strong style="color: #b33a3a;">Q：生成预览的进度停滞？</strong>
     </p>
     <p style="font-size: 14px; line-height: 1.8; color: #666; margin: 0 0 12px 0; padding-left: 20px;">
         A：图片源文件存储于海外节点，国内访问链路波动属于普遍现象，使用🔮可显著提高生成效率。已新增国内节点作为备用源，若长时间等待后仍停滞，可尝试刷新或更换网络重试。
     </p>
-
     <p style="font-size: 15px; line-height: 1.8; color: #555; margin: 0 0 4px 0;">
         <strong style="color: #b33a3a;">Q：生成的图片中角色图空白？</strong>
     </p>
     <p style="font-size: 14px; line-height: 1.8; color: #666; margin: 0 0 12px 0; padding-left: 20px;">
-        A：请确保在导出前所有角色图片已完整显示。若仍有问题，可尝试刷新、重新添加游戏卡片、清除缓存或更换浏览器重试。
+        A：请确保在导出前所有角色图片已完整显示。若仍有问题，可尝试刷新、重新添加相应的游戏卡片、清除缓存或更换浏览器重试。
     </p>
-
     <p style="font-size: 15px; line-height: 1.8; color: #555; margin: 0 0 4px 0;">
         <strong style="color: #b33a3a;">Q：添加的数据会丢失吗？</strong>
     </p>
     <p style="font-size: 14px; line-height: 1.8; color: #666; margin: 0 0 20px 0; padding-left: 20px;">
         A：所有数据保存在浏览器 localStorage 中，清除浏览器缓存或使用无痕模式会导致数据丢失，建议定期导出图片。只会缓存已添加图片的图片源，不会缓存多余文件。
     </p>
-
     <p style="font-size: 15px; line-height: 1.8; color: #555; margin: 0 0 4px 0;">
         <strong style="color: #b33a3a;">❗IOS 设备无法导出长图</strong>
     </p>
     <p style="font-size: 14px; line-height: 1.8; color: #666; margin: 0 0 20px 0; padding-left: 20px;">
-        <strong>已针对IOS系统增加补丁。</strong><br>
-        iOS系统存在对内核与总像素的硬性限制，补丁只能缓解、降低触发概率，无法完全杜绝，且IOS系统强制在苹果商店上架的应用使用同一套渲染引擎，所以更换浏览器也无法解决。<br>
-        建议IOS设备使用分页导出；若要使用长图导出，请通过「导出折叠内容」开关来控制图片长度，使图片不超出上限就可以成功生成并导出。
+        <strong>已针对 IOS 系统增加补丁。</strong><br>
+        iOS 系统存在对内核与总像素的硬性限制，补丁只能缓解、降低触发概率，无法完全杜绝，且 IOS 系统强制在苹果商店上架的应用使用同一套渲染引擎，所以更换浏览器也无法解决。<br>
+        若使用 IOS 设备渲染失败，则建议开启普通画质开关，或使用分页导出，或通过「导出折叠内容」开关来控制图片长度，使图片不超出上限就可以成功生成并导出。
     </p>
-
+    <p style="font-size: 15px; line-height: 1.8; color: #555; margin: 0 0 4px 0;">
+        <strong style="color: #b33a3a;">⚠️自定义颜色面板</strong>
+    </p>
+    <p style="font-size: 14px; line-height: 1.8; color: #666; margin: 0 0 20px 0; padding-left: 20px;">
+        自定义颜色面板是各个浏览器自带的，所以电脑、平板、手机以及不同浏览器之间的自定义颜色面板款式会不同。
+    </p>
     <hr style="border: none; border-top: 2px solid #f6d8e0; margin: 20px 0;">
-
-    <!-- 反馈与建议 -->
     <h3 style="font-size: 19px; color: #b85878; margin: 0 0 12px 0; font-weight: bold;">📧 反馈与建议</h3>
     <p style="font-size: 15px; line-height: 1.8; color: #555; margin: 0 0 12px 0;">
         由于开发者未接触所有游戏，部分游戏可能缺少隐藏角色。
@@ -487,65 +1045,280 @@ z-index: -999;
     <blockquote style="font-size: 14px; line-height: 1.7; color: #888; background: #fafafa; border-left: 4px solid #ddd; padding: 8px 16px; margin: 12px 0 0 0;">
         本项目为非商业项目，仅供爱好者交流学习使用。所有游戏图片及角色素材版权归原厂商所有。
     </blockquote>
-
+</div>
+            
+<!-- Annual Report 模式使用指南，默认隐藏，切换到 annual 模式时显示 -->
+<div id="annual-intro-content" style="margin-top: 16px; display: none;">
+    <p style="font-size: 17px; line-height: 1.8; color: #333; margin-bottom: 20px;">
+        <strong style="font-size: 18px; color: #b33a3a;">日乙年度报告 & 总结报告生成工具</strong>
+        — 生成属于你的 Annual Report & Summary Report。
+    </p>
+    <p style="font-size: 15px; line-height: 1.8; color: #555; margin-bottom: 24px;">
+        这是一款纯前端、无需安装的 Web 应用，专为日乙玩家设计。
+        你可以自由添加已玩过的游戏、选择喜欢的角色、CP，将你的游玩历程汇总成一份年度报告或总结报告，
+        并一键导出为高清图片，用于分享或收藏。
+    </p>
+    <hr style="border: none; border-top: 2px solid #f6d8e0; margin: 20px 0;">
+    <h3 style="font-size: 19px; color: #b85878; margin: 0 0 12px 0; font-weight: bold;">✨ 功能特色</h3>
+    <ul style="font-size: 15px; line-height: 1.9; color: #444; padding-left: 22px; margin-bottom: 20px; list-style-type: disc;">
+        <li>
+            <strong>「TOP」模块</strong>：游戏 TOP、角色 TOP、CP TOP 三大模块，可无限添加卡片，每个卡片均包含自定义文本框，且可更改排序。若没有对某个模块或自定义文本框添加内容，则不会生成与导出相应模块或自定义文本框。
+            <ul style="padding-left: 22px; margin-top: 2px; list-style-type: circle;">
+                <li><strong>排序模式</strong>：长按游戏名称/角色名、游戏封面/角色图的部分 1 秒即可进入排序模式，卡片变为虚线高亮并在各个卡片之间出现红色插入指示线；点击指示线第一次变深红，点击第二次执行移动插入，并自动更改序号。<br>进入排序模式后同样长按游戏名称/角色名、游戏封面/角色图的部分 1 秒即可退出。</li>
+            </ul>
+        </li>
+        <li>
+            <strong>「其他」模块</strong>：
+            <ul style="padding-left: 22px; margin-top: 2px; list-style-type: circle;">
+                <li>7 项固定标签可添加对应游戏、角色、文字内容，若没有对某个卡片添加内容，则不会生成与导出相应卡片。</li>
+                <li>可无限添加自定义卡片，其中含有自定义标签与自定义文本框，用于记录任何额外内容。</li>
+            </ul>
+        </li>
+        <li>
+            <strong>「宫格」模块</strong>：
+            <ul style="padding-left: 22px; margin-top: 2px; list-style-type: circle;">
+                <li>固定标签（19 项游戏标签 / 13 项角色标签）可添加对应游戏封面、角色图，若没有对某个卡片添加内容，则不会生成与导出相应卡片。</li>
+                <li>可无限添加自定义卡片，其中含有自定义标签与添加游戏封面/角色图，用于记录任何额外内容。<br>在自定义标签中填写 TOP 或月份即可成为排名宫格或月度总结宫格；未填写自定义标签时，则会自动生成游戏名称与角色名，可搭配小标题开关成为推し宫格。</li>
+                <li>底部各存在文本框，用于补充说明。若没有添加内容，则不会生成与导出相应自定义文本框。</li>
+            </ul>
+        </li>
+        <li>
+            <strong>「月度总结」模块</strong>：
+            <ul style="padding-left: 22px; margin-top: 2px; list-style-type: circle;">
+                <li>月份卡片可添加对应游戏封面、角色图，每个月份卡片包含游戏时长文字框、自定义文本框。若没有对某个卡片或自定义文本框添加内容，则不会生成与导出相应卡片或自定义文本框。</li>
+                <li>可在游戏时长文字框中添加相应月份的游戏时长数字，会根据游戏时长在月份卡片中生成总时长、平均每月时长与柱状统计图。</li>
+            </ul>
+        </li>
+    </ul>
+    <hr style="border: none; border-top: 2px solid #f6d8e0; margin: 20px 0;">
+    <h3 style="font-size: 19px; color: #b85878; margin: 0 0 12px 0; font-weight: bold;">📌 如何使用</h3>
+    <h4 style="font-size: 16px; color: #b33a3a; margin: 12px 0 4px 0; font-weight: 600;">1. 切换至 Annual Report 模式</h4>
+    <p style="font-size: 15px; line-height: 1.8; color: #555; margin: 0 0 12px 0;">
+        点击页面顶部按钮组中的 <strong>Annual Report</strong> 按钮，即可切换到年度报告编辑界面。
+    </p>
+    <h4 style="font-size: 16px; color: #b33a3a; margin: 12px 0 4px 0; font-weight: 600;">2. 添加数据统计</h4>
+    <p style="font-size: 15px; line-height: 1.8; color: #555; margin: 0 0 12px 0;">
+        在「数据统计」模块中，填写各项数据，所有输入框内容自动保存。选填。
+    </p>
+    <h4 style="font-size: 16px; color: #b33a3a; margin: 12px 0 4px 0; font-weight: 600;">3. 添加 TOP 卡片</h4>
+    <ul style="font-size: 15px; line-height: 1.8; color: #444; padding-left: 22px; margin: 0 0 12px 0; list-style-type: disc;">
+        <li>每个 TOP 卡片顶部的「+ 添加游戏/角色/Couple」按钮点击后会弹出对应的选择弹窗。若没有对某个模块或自定义文本框添加内容，则不会生成与导出相应模块或自定义文本框。</li>
+        <li><strong>游戏 TOP</strong>：搜索游戏弹窗显示完整游戏列表，支持搜索游戏名称，点击即可添加。</li>
+        <li><strong>角色 TOP</strong>：搜索角色弹窗先显示游戏列表，支持搜索游戏名称与角色名，选择游戏后进入角色列表，点击角色即可添加。</li>
+        <li><strong>CP TOP</strong>：搜索 Couple 弹窗先显示游戏列表，选择游戏后进入女主列表，点击女主展开男主列表，选择男主后以 CP 组合添加。</li>
+    </ul>
+    <blockquote style="font-size: 14px; line-height: 1.7; color: #666; background: #fff7f9; border-left: 4px solid #e895a8; padding: 8px 16px; margin: 4px 0 8px 0;">
+        💡 搜索游戏弹窗中包含续作/FD的封面图可供添加。搜索角色弹窗与搜索Couple弹窗中只有本篇可供选择，但包含续作/FD内容。可以通过开关控制是否显示次要角色、隐藏角色、续篇/FD角色。
+    </blockquote>
+    <blockquote style="font-size: 14px; line-height: 1.7; color: #666; background: #fff7f9; border-left: 4px solid #e895a8; padding: 8px 16px; margin: 4px 0 8px 0;">
+        💡 角色立绘支持多张图片切换（例如动作、服装差分或 FD ver），点击左右箭头即可。角色名同样支持切换。
+    </blockquote>
+    <ul style="font-size: 15px; line-height: 1.8; color: #444; padding-left: 22px; margin: 0 0 12px 0; list-style-type: disc;">
+        <li>所有 TOP 卡片均支持 <strong>排序模式</strong>：长按游戏名称/角色名、游戏封面/角色图的部分 1 秒即可进入排序模式，卡片变为虚线高亮并在各个卡片之间出现红色插入指示线；点击指示线第一次变深红，点击第二次执行移动插入，并自动更改序号。<br>进入排序模式后同样长按游戏名称/角色名、游戏封面/角色图的部分 1 秒即可退出。</li>
+        <li>每个卡片右上角存在「×」删除按钮，可随时移除添加的卡片。</li>
+    </ul>
+    <blockquote style="font-size: 14px; line-height: 1.7; color: #666; background: #fff7f9; border-left: 4px solid #e895a8; padding: 8px 16px; margin: 4px 0 12px 0;">
+        💡 文本内容支持换行且自动保存。可拖拽右下角改变文本框大小。
+    </blockquote>
+    <h4 style="font-size: 16px; color: #b33a3a; margin: 12px 0 4px 0; font-weight: 600;">4. 编辑「其他」模块</h4>
+    <ul style="font-size: 15px; line-height: 1.8; color: #444; padding-left: 22px; margin: 0 0 12px 0; list-style-type: disc;">
+        <li><strong>「还玩了」框</strong>：选填。点击「+」按钮，搜索游戏弹窗显示完整游戏列表，点击即可添加。</li>
+        <li><strong>最喜欢的女主/配角/CP</strong>：选填。点击「+」按钮，分别显示搜索 Couple 弹窗与搜索角色弹窗，点击即可添加。</li>
+        <li><strong>最喜欢的台词/OP/ED/BGM/HE/BE</strong>：选填。编辑文本框，填写相应内容。<br>若没有对某个固定卡片添加内容，则不会生成与导出相应卡片。</li>
+        <li><strong>自定义卡片</strong>：每个卡片包含自定义标签与自定义文本框，每次填写标签后会自动在末尾追加新的空白自定义卡片，支持无限添加。</li>
+    </ul>
+    <h4 style="font-size: 16px; color: #b33a3a; margin: 12px 0 4px 0; font-weight: 600;">5. 编辑「宫格」模块</h4>
+    <ul style="font-size: 15px; line-height: 1.8; color: #444; padding-left: 22px; margin: 0 0 12px 0; list-style-type: disc;">
+        <li><strong>固定标签</strong>（19项游戏标签 / 13项角色标签）：选填。可点击「+」按钮选择添加游戏或角色。若没有对某个固定卡片添加内容，则不会生成与导出相应卡片。</li>
+        <li><strong>自定义宫格</strong>：点击「+」添加图片，每次添加后会自动在末尾追加新的空白自定义卡片，支持无限添加。<br>在自定义标签中填写 TOP 或月份即可成为排名宫格或月度总结宫格；未填写自定义标签时，则会自动生成游戏名称与角色名，可搭配小标题开关成为推し宫格。</li>
+        <li>底部各存在文本框，用于补充说明。若无添加则不会生成与导出相应自定义文本。</li>
+        <li>每个卡片右上角存在「×」删除按钮，有图片时删除图片，无图片时则删除整个自定义卡片（固定卡片只删除图片）。</li>
+    </ul>
+    <h4 style="font-size: 16px; color: #b33a3a; margin: 12px 0 4px 0; font-weight: 600;">6. 编辑「月度总结」模块</h4>
+    <ul style="font-size: 15px; line-height: 1.8; color: #444; padding-left: 22px; margin: 0 0 12px 0; list-style-type: disc;">
+        <li><strong>月份标签</strong>：选填。可点击「+」按钮选择添加游戏或角色。若没有对某个卡片或自定义文本框添加内容，则不会生成与导出相应卡片或自定义文本框。</li>
+        <li><strong>数据统计</strong>：可在游戏时长文字框中添加相应月份的游戏时长数字，会根据游戏时长在月份卡片中生成总时长、平均每月时长与柱状统计图。</li>
+    </ul>
+    <h4 style="font-size: 16px; color: #b33a3a; margin: 12px 0 4px 0; font-weight: 600;">7. 自定义导出设置</h4>
+    <ul style="font-size: 15px; line-height: 1.8; color: #444; padding-left: 22px; margin: 0 0 12px 0; list-style-type: disc;">
+        <li><strong>填表人</strong>：选填，可输入昵称，生成并导出图片时显示在标题右下方。</li>
+        <li><strong>导出标题开关</strong>：开启后标题为 Otome Summary Report，关闭则默认为 20XX Otome Annual Report。年度报告标题会自动生成当年年份，可每年循环使用。</li>
+        <li><strong>导出小标题开关</strong>：开启后模块六、模块七的小标题为推しゲーム & 推しキャラ，关闭则默认为ゲーム宫格 & キャラ宫格。</li>
+        <li><strong>配色</strong>：通过颜色选择器自由调整图片的配色方案，点击「恢复默认设置」可一键重置。</li>
+        <li><strong>尺寸</strong>：各模块各自生成一张长图，支持 640/810/1080 宽。</li>
+    </ul>
+    <h4 style="font-size: 16px; color: #b33a3a; margin: 12px 0 4px 0; font-weight: 600;">8. 生成并导出图片</h4>
+    <ul style="font-size: 15px; line-height: 1.8; color: #444; padding-left: 22px; margin: 0 0 12px 0; list-style-type: disc;">
+        <li>点击「生成并导出图片」→ 预览弹窗出现 → 确认无误后点击「导出图片」即可下载。</li>
+        <li>多页导出时，PC 端将一次性导出全部图片；移动端则以 1.5 秒为间隔逐张弹出图片下载确认（部分浏览器可一次性导出全部图片）。</li>
+    </ul>
+    <hr style="border: none; border-top: 2px solid #f6d8e0; margin: 20px 0;">
+    <h3 style="font-size: 19px; color: #b85878; margin: 0 0 12px 0; font-weight: bold;">🛠️ 更新安排</h3>
+    <h4 style="font-size: 16px; color: #b33a3a; margin: 12px 0 4px 0; font-weight: 600;">1. 官中</h4>
+    <p style="font-size: 15px; line-height: 1.8; color: #555; margin: 0 0 12px 0;">
+        推出新官中游戏时，会在发售后两三天内将游戏名称、角色名等信息更改为官中内容。如若发售后未及时更改，则会在月底统一更改。
+    </p>
+    <h4 style="font-size: 16px; color: #b33a3a; margin: 12px 0 4px 0; font-weight: 600;">2. 日乙</h4>
+    <p style="font-size: 15px; line-height: 1.8; color: #555; margin: 0 0 12px 0;">
+        推出新日乙游戏时，会在发售前有完善官网内容的情况下，在月底统一添加。
+    </p>
+    <hr style="border: none; border-top: 2px solid #f6d8e0; margin: 20px 0;">
+    <h3 style="font-size: 19px; color: #b85878; margin: 0 0 12px 0; font-weight: bold;">❓ 常见问题</h3>
+    <p style="font-size: 15px; line-height: 1.8; color: #555; margin: 0 0 4px 0;">
+        <strong style="color: #b33a3a;">Q：生成预览的进度停滞？</strong>
+    </p>
+    <p style="font-size: 14px; line-height: 1.8; color: #666; margin: 0 0 12px 0; padding-left: 20px;">
+        A：图片源文件存储于海外节点，国内访问链路波动属于普遍现象，使用🔮可显著提高生成效率。已新增国内节点作为备用源，若长时间等待后仍停滞，可尝试刷新或更换网络重试。
+    </p>
+    <p style="font-size: 15px; line-height: 1.8; color: #555; margin: 0 0 4px 0;">
+        <strong style="color: #b33a3a;">Q：生成的图片中角色图空白？</strong>
+    </p>
+    <p style="font-size: 14px; line-height: 1.8; color: #666; margin: 0 0 12px 0; padding-left: 20px;">
+        A：请确保在导出前所有角色图片已完整显示。若仍有问题，可尝试刷新、重新添加相应卡片、清除缓存或更换浏览器重试。
+    </p>
+    <p style="font-size: 15px; line-height: 1.8; color: #555; margin: 0 0 4px 0;">
+        <strong style="color: #b33a3a;">Q：添加的数据会丢失吗？</strong>
+    </p>
+    <p style="font-size: 14px; line-height: 1.8; color: #666; margin: 0 0 20px 0; padding-left: 20px;">
+        A：所有数据保存在浏览器 localStorage 中，清除浏览器缓存或使用无痕模式会导致数据丢失，建议定期导出图片。只会缓存已添加图片的图片源，不会缓存多余文件。
+    </p>
+    <p style="font-size: 15px; line-height: 1.8; color: #555; margin: 0 0 4px 0;">
+        <strong style="color: #b33a3a;">❗IOS 设备无法导出长图</strong>
+    </p>
+    <p style="font-size: 14px; line-height: 1.8; color: #666; margin: 0 0 20px 0; padding-left: 20px;">
+        <strong>已针对 IOS 系统增加补丁。</strong><br>
+        iOS 系统存在对内核与总像素的硬性限制，补丁只能缓解、降低触发概率，无法完全杜绝，且 IOS 系统强制在苹果商店上架的应用使用同一套渲染引擎，所以更换浏览器也无法解决。<br>
+        若使用 IOS 设备渲染失败，则建议开启普通画质开关，使图片不超出上限就可以成功生成并导出。
+    </p>
+    <p style="font-size: 15px; line-height: 1.8; color: #555; margin: 0 0 4px 0;">
+        <strong style="color: #b33a3a;">⚠️自定义颜色面板</strong>
+    </p>
+    <p style="font-size: 14px; line-height: 1.8; color: #666; margin: 0 0 20px 0; padding-left: 20px;">
+        自定义颜色面板是各个浏览器自带的，所以电脑、平板、手机以及不同浏览器之间的自定义颜色面板款式会不同。
+    </p>
+    <hr style="border: none; border-top: 2px solid #f6d8e0; margin: 20px 0;">
+    <h3 style="font-size: 19px; color: #b85878; margin: 0 0 12px 0; font-weight: bold;">📧 反馈与建议</h3>
+    <p style="font-size: 15px; line-height: 1.8; color: #555; margin: 0 0 12px 0;">
+        由于开发者未接触所有游戏，部分游戏可能缺少隐藏角色。
+        若发现遗漏、内容错误、功能异常，或有希望新增的作品，欢迎通过以下邮箱联系：
+    </p>
+    <p style="font-size: 16px; line-height: 1.8; color: #222; margin: 0 0 12px 0; text-align: center;">
+        📬 <strong style="color: #b33a3a; font-size: 17px;">otomefavlist@163.com</strong>
+    </p>
+    <p style="font-size: 14px; line-height: 1.7; color: #888; margin: 0 0 4px 0; text-align: center;">
+        （若涉及剧透，请在邮件标题添加【剧透】预警）
+    </p>
+    <blockquote style="font-size: 14px; line-height: 1.7; color: #888; background: #fafafa; border-left: 4px solid #ddd; padding: 8px 16px; margin: 12px 0 0 0;">
+        本项目为非商业项目，仅供爱好者交流学习使用。所有游戏图片及角色素材版权归原厂商所有。
+    </blockquote>
 </div>
 </div>
 </div>
 </div>
 
-<!-- 全局独立Loading遮罩已删除，所有加载状态移至预览弹窗内部 -->
+<!-- 全局独立 Loading 遮罩已删除，所有加载状态移到预览弹窗内部 -->
 
 <script type="module">
     import { bootstrapCore } from "./js/main.js";
 
     (async function() {
         await new Promise(resolve => document.addEventListener("DOMContentLoaded", resolve));
-
-        // 获取加载弹窗元素
+        // 加载弹窗元素
         const loadModal = document.getElementById("game-load-modal");
         const progressText = document.getElementById("load-progress-text");
         const loadConfirmBtn = document.getElementById("load-modal-confirm");
-
-        // 页面初始锁定：显示加载弹窗
+        // 页面初始锁定，显示加载弹窗
         loadModal.classList.add("active");
         document.body.classList.add("modal-lock");
-
-        // 监听游戏加载进度（全局回调，由data/games.js内注入进度通知）
+        // 监听游戏加载进度，进度由 data/games.js 回调
+        let baseLoaded = 0;
+        let baseTotal = 0;
+        let fdLoaded = 0;
+        let fdTotal = 0;
+        function renderCombinedProgress() {
+            const combinedLoaded = baseLoaded + fdLoaded;
+            const combinedTotal = baseTotal + fdTotal;
+            progressText.innerHTML = `游戏数据正在加载 ${combinedLoaded}/${combinedTotal}，请稍候…`;
+        }
         window.onGameLoadProgress = (current, total) => {
-            progressText.innerHTML = `游戏数据正在加载 ${current}/${total}，请稍候…`;
+            baseLoaded = current;
+            baseTotal = total;
+            renderCombinedProgress();
+        };
+        window.onFDGameLoadProgress = (current, total) => {
+            fdLoaded = current;
+            fdTotal = total;
+            renderCombinedProgress();
         };
 
-        // 1. 加载所有游戏文件（内部应通过并发批量加载并回调进度）
+        // 1. 加载所有游戏文件，内部并发并回调进度
         if (typeof window.loadAllGames === "function") {
             await window.loadAllGames();
         }
-
+        // 1b. 同时加载 FD/续作游戏文件，进度合并到同一提示
+        try {
+            const fdModule = await import("./data/fd-games.js");
+            if (typeof fdModule.loadAllFDGames === "function") {
+                await fdModule.loadAllFDGames();
+            }
+        } catch (e) {
+            console.warn("FD游戏预加载失败，将在后续流程重试", e);
+        }
         // 加载完成，启用确认按钮
         loadConfirmBtn.disabled = false;
-
-        // 点击确认关闭弹窗，继续初始化页面
+        // 点击确认关闭弹窗，继续初始化
         loadConfirmBtn.onclick = async () => {
             loadModal.classList.remove("active");
             document.body.classList.remove("modal-lock");
             // 2. bootstrapCore
             await bootstrapCore();
-            // 3. 启动UI
+            // 3. 启动 UI
             if (typeof window.uiBootstrap === "function") {
                 await window.uiBootstrap();
             }
-            // 清理进度回调，防止内存残留
+
+            // 修复：等待 annual.js 挂载到 window，解决 ES Module 加载时序竞争
+            async function safeInitAnnual(){
+                let retry = 0;
+                while(typeof window.initAnnualModule !== "function" && retry < 20){
+                    await new Promise(r=>setTimeout(r,50));
+                    retry++;
+                }
+                if(typeof window.initAnnualModule === "function"){
+                    window.initAnnualModule();
+                    console.log("✅年度报告模块已初始化");
+                }else{
+                    console.warn("⚠️年度报告模块初始化失败，window.initAnnualModule仍然未定义");
+                }
+            }
+            await safeInitAnnual();
+            // 初始化 Other 模块
+            async function safeInitOther(){
+                let retry = 0;
+                while(typeof window.initOtherModule !== "function" && retry < 20){
+                    await new Promise(r=>setTimeout(r,50));
+                    retry++;
+                }
+                if(typeof window.initOtherModule === "function"){
+                    window.initOtherModule();
+                    console.log("✅Other 模块已初始化");
+                }else{
+                    console.warn("⚠️Other 模块初始化失败，window.initOtherModule仍然未定义");
+                }
+            }
+            await safeInitOther();
+            // 清掉进度回调，防止内存残留
             window.onGameLoadProgress = null;
         };
     })();
 </script>
 
-<!-- 使用指南弹窗交互（已移除收起展开逻辑） -->
+<!-- 使用指南弹窗交互，已移除收起展开逻辑 -->
 <script>
     (function() {
         const guideModal = document.getElementById('guide-modal');
         const openBtn = document.getElementById('open-guide-btn');
         const closeBtn = document.getElementById('guide-close-btn');
-
         // 打开弹窗
         if (openBtn) {
             openBtn.addEventListener('click', () => {
@@ -553,17 +1326,14 @@ z-index: -999;
                 document.body.classList.add("modal-lock");
             });
         }
-
         // 关闭弹窗
         function closeGuideModal() {
             guideModal.classList.remove('active');
             document.body.classList.remove("modal-lock");
         }
-
         if (closeBtn) {
             closeBtn.addEventListener('click', closeGuideModal);
         }
-
         // 点击遮罩关闭
         if (guideModal) {
             guideModal.addEventListener('click', (e) => {
@@ -575,10 +1345,10 @@ z-index: -999;
     })();
 </script>
 
-<!-- 防图片保存JS防护 -->
+<!-- 防图片保存 JS 防护 -->
 <script>
 (function(){
-    // 1. 拦截右键上下文菜单；允许输入框/文本域右键
+    // 1. 拦截右键菜单，输入框/文本域放行
     document.addEventListener('contextmenu', function(e){
         const tag = e.target.tagName;
         if(tag === 'INPUT' || tag === 'TEXTAREA'){
@@ -594,7 +1364,7 @@ z-index: -999;
             return false;
         }
     });
-    // 3. 移动端：长按弹出菜单禁止
+    // 3. 禁止移动端长按菜单
     document.addEventListener('touchstart', function(e){
         // 输入框放行
         const tag = e.target.tagName;
@@ -602,12 +1372,288 @@ z-index: -999;
             return;
         }
     }, {passive:true});
-    // 禁止图片长按呼出系统菜单（webkit内核：Safari、微信、华为浏览器）
+    // 禁止图片长按菜单，webkit 内核：Safari、微信、华为浏览器
     document.documentElement.style.webkitTouchCallout = 'none';
 })();
 </script>
 
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "b88bc20591cc4e0b8702b7339c4d0e6d"}'></script><!-- End Cloudflare Web Analytics -->
-    
+
+<!-- 模式切换逻辑：FavList / Annual Report -->
+<script>
+// 模式切换：FavList / Annual Report / Other
+(function(){
+    const btns = document.querySelectorAll('.mode-switch-wrap .mode-btn');
+    const wraps = document.querySelectorAll('.mode-wrap');
+    const siteTitleDom = document.querySelector('.site-title h1');
+    const siteTitleWrap = document.querySelector('.site-title');
+    // 保存原始标题
+    const originalTitleText = siteTitleDom.innerText;
+    const annualTitleText = "Otome Annual Report";
+    const otherTitleText = "Otome Other";
+    btns.forEach(btn=>{
+        btn.addEventListener('click',()=>{
+            const targetMode = btn.dataset.mode;
+            // 更新按钮 active
+            btns.forEach(b=>b.classList.remove('active'));
+            btn.classList.add('active');
+            // 切换容器显隐
+            wraps.forEach(w=>{
+                if(w.dataset.mode === targetMode){
+                    w.classList.remove('mode-hidden');
+                }else{
+                    w.classList.add('mode-hidden');
+                }
+            })
+            // 标题切换 + active class
+            siteTitleWrap.classList.remove("annual-active", "other-active");
+            if(targetMode === "annual"){
+                siteTitleDom.innerText = annualTitleText;
+                siteTitleWrap.classList.add("annual-active");
+            }else if(targetMode === "other"){
+                siteTitleDom.innerText = otherTitleText;
+                siteTitleWrap.classList.add("other-active");
+            }else{
+                siteTitleDom.innerText = originalTitleText;
+            }
+            // 使用指南内容切换
+            const introContent = document.getElementById('intro-content');
+            const annualIntroContent = document.getElementById('annual-intro-content');
+            if(targetMode === "annual"){
+                if(introContent) introContent.style.display = 'none';
+                if(annualIntroContent) annualIntroContent.style.display = 'block';
+            }else{
+                if(introContent) introContent.style.display = 'block';
+                if(annualIntroContent) annualIntroContent.style.display = 'none';
+            }
+        })
+    })
+})();
+</script>
+
+<!-- 新增：年度报告脚本 -->
+<script type="module" src="./js/annual.js"></script>
+<!-- 新增：Other 模式脚本 -->
+<script type="module" src="./js/other.js"></script>
+<script type="module" src="js/other-canvas-render.js"></script>
+
+<!-- 修改：年度报告全局游戏选择弹窗，body 直接子节点 -->
+<div id="annual-global-game-modal">
+    <div class="annual-global-modal-inner">
+        <!-- 弹窗头部，不参与滚动 -->
+        <div class="annual-modal-header">
+            <div class="annual-modal-header-title">搜索游戏</div>
+            <button class="annual-modal-close-btn">×</button>
+        </div>
+        <!-- 新增：搜索框固定层，不在滚动区域内 -->
+        <div class="annual-modal-search-bar-wrap">
+            <input class="annual-global-search-input" placeholder="搜索游戏名称">
+            <div class="filter-group annual-filter-group">
+                <select class="annual-filter-writer"><option value="">筛选编剧</option></select>
+                <select class="annual-filter-art"><option value="">筛选画师</option></select>
+                <select class="annual-filter-year"><option value="">筛选发售年份</option></select>
+                <select class="annual-filter-publisher"><option value="">筛选开发厂商</option></select>
+                <select class="annual-filter-cn"><option value="">筛选汉化厂商</option></select>
+            </div>
+        </div>
+        <!-- 大滚动外壳：只保留游戏列表，搜索框已经移出 -->
+        <div class="annual-modal-scroll-wrap">
+            <div class="annual-global-game-list"></div>
+        </div>
+    </div>
+</div>
+
+<!-- 修复滚动范围：年度报告全局角色选择弹窗 -->
+<div id="annual-global-char-modal">
+    <div class="annual-global-modal-inner">
+        <!-- 弹窗头部，不参与滚动 -->
+        <div class="annual-modal-header">
+            <button class="annual-modal-back-btn">←</button>
+            <div class="annual-modal-header-title">搜索角色</div>
+            <button class="annual-modal-close-btn">×</button>
+        </div>
+        <!-- 大滚动条 -->
+        <div class="annual-modal-scroll-wrap">
+            <!-- 全局开关组，仅 gameList 视图可见 -->
+            <div class="annual-modal-global-switch-group">
+                <div class="switch-row">
+                    <label class="switch">
+                        <input type="checkbox" id="annual-modal-global-sub-char">
+                        <span class="slider"></span>
+                    </label>
+                    <div>
+                        <span class="text-light-pink">全局显示次要角色</span>
+                        <p class="switch-desc">开启后显示所有游戏次要角色，关闭则所有游戏默认隐藏，单个游戏可单独开启。</p>
+                    </div>
+                </div>
+                <div class="switch-row">
+                    <label class="switch">
+                        <input type="checkbox" id="annual-modal-global-fd-sub-char">
+                        <span class="slider"></span>
+                    </label>
+                    <div>
+                        <span class="text-light-pink">全局显示续作/FD次要角色</span>
+                        <p class="switch-desc">开启后显示所有游戏续作、FD新增次要角色，关闭则所有游戏默认隐藏，单个游戏可单独开启。</p>
+                    </div>
+                </div>
+                <div class="switch-row">
+                    <label class="switch">
+                        <input type="checkbox" id="annual-modal-global-hide-char">
+                        <span class="slider"></span>
+                    </label>
+                    <div>
+                        <span class="text-light-pink">全局显示隐藏图片、角色</span>
+                        <p class="switch-desc">开启后显示所有游戏隐藏图片、角色，关闭则所有游戏默认隐藏，单个游戏可单独开启。切换此全局开关会触发剧透警告弹窗。</p>
+                    </div>
+                </div>
+                <div class="switch-row">
+                    <label class="switch">
+                        <input type="checkbox" id="annual-modal-global-fd-game">
+                        <span class="slider"></span>
+                    </label>
+                    <div>
+                        <span class="text-light-pink">全局显示续作/FD图片、角色</span>
+                        <p class="switch-desc">开启后显示所有游戏续作、FD新增图片、角色，关闭则所有游戏默认隐藏，单个游戏可单独开启。切换此全局开关会触发剧透警告弹窗。</p>
+                    </div>
+                </div>
+            </div>
+            <!-- 搜索输入框，仅 gameList 视图可见 -->
+            <input class="annual-global-char-search-input" placeholder="搜索游戏名称/角色名">
+            <div class="filter-group annual-filter-group">
+                <select class="annual-filter-writer"><option value="">筛选编剧</option></select>
+                <select class="annual-filter-art"><option value="">筛选画师</option></select>
+                <select class="annual-filter-year"><option value="">筛选发售年份</option></select>
+                <select class="annual-filter-publisher"><option value="">筛选开发厂商</option></select>
+                <select class="annual-filter-cn"><option value="">筛选汉化厂商</option></select>
+            </div>
+            <!-- 视图容器 -->
+            <div class="annual-modal-view-container">
+                <!-- 单游戏角色页专属开关组，仅 charList 视图可见 -->
+                <div class="annual-modal-game-switch-group">
+                    <div class="switch-row">
+                        <label class="switch">
+                            <input type="checkbox" id="annual-modal-game-sub-char">
+                            <span class="slider"></span>
+                        </label>
+                        <div>
+                            <span class="text-light-pink">单独显示本游戏次要角色</span>
+                        </div>
+                    </div>
+                    <!-- 补丁：单独显示本游戏续作/FD次要角色开关，JS 根据当前游戏是否有 isFdSub 角色自动显隐 -->
+                    <div class="switch-row">
+                        <label class="switch">
+                            <input type="checkbox" id="annual-modal-game-fd-sub-char">
+                            <span class="slider"></span>
+                        </label>
+                        <div>
+                            <span class="text-light-pink">单独显示本游戏续作/FD次要角色</span>
+                        </div>
+                    </div>
+                    <div class="switch-row">
+                        <label class="switch">
+                            <input type="checkbox" id="annual-modal-game-hide-char">
+                            <span class="slider"></span>
+                        </label>
+                        <div>
+                            <span class="text-light-pink">单独显示本游戏隐藏图片、角色</span>
+                        </div>
+                    </div>
+                    <div class="switch-row">
+                        <label class="switch">
+                            <input type="checkbox" id="annual-modal-game-fd-game">
+                            <span class="slider"></span>
+                        </label>
+                        <div>
+                            <span class="text-light-pink">单独显示本游戏续作/FD图片、角色</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- 视图A：游戏列表 -->
+                <div class="annual-global-char-game-list"></div>
+                <!-- 视图B：当前游戏待选角色列表 -->
+                <div class="annual-global-char-char-list"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 年度报告全局 CP 选择弹窗 -->
+<div id="annual-global-cp-modal">
+    <div class="annual-global-modal-inner">
+        <div class="annual-modal-header">
+            <button class="annual-cp-modal-back-btn">←</button>
+            <div class="annual-modal-header-title">搜索Couple</div>
+            <button class="annual-modal-close-btn annual-cp-close-btn">×</button>
+        </div>
+        <div class="annual-modal-scroll-wrap">
+            <div class="annual-modal-global-switch-group annual-cp-global-switch-group">
+                <div class="switch-row">
+                    <label class="switch"><input type="checkbox" id="annual-modal-cp-global-sub-char"><span class="slider"></span></label>
+                    <div>
+                        <span class="text-light-pink">全局显示次要角色</span>
+                        <p class="switch-desc">开启后显示所有游戏次要角色，关闭则所有游戏默认隐藏，单个游戏可单独开启。</p>
+                    </div>
+                </div>
+                <div class="switch-row">
+                    <label class="switch"><input type="checkbox" id="annual-modal-cp-global-fd-sub-char"><span class="slider"></span></label>
+                    <div>
+                        <span class="text-light-pink">全局显示续作/FD次要角色</span>
+                        <p class="switch-desc">开启后显示所有游戏续作、FD新增次要角色，关闭则所有游戏默认隐藏，单个游戏可单独开启。</p>
+                    </div>
+                </div>
+                <div class="switch-row">
+                    <label class="switch"><input type="checkbox" id="annual-modal-cp-global-hide-char"><span class="slider"></span></label>
+                    <div>
+                        <span class="text-light-pink">全局显示隐藏图片、角色</span>
+                        <p class="switch-desc">开启后显示所有游戏隐藏图片、角色，关闭则所有游戏默认隐藏，单个游戏可单独开启。</p>
+                    </div>
+                </div>
+                <div class="switch-row">
+                    <label class="switch"><input type="checkbox" id="annual-modal-cp-global-fd-game"><span class="slider"></span></label>
+                    <div>
+                        <span class="text-light-pink">全局显示续作/FD图片、角色</span>
+                        <p class="switch-desc">开启后显示所有游戏续作、FD新增图片、角色，关闭则所有游戏默认隐藏，单个游戏可单独开启。</p>
+                    </div>
+                </div>
+            </div>
+            <!-- 搜索框 -->
+            <input class="annual-global-cp-search-input" placeholder="搜索游戏名称">
+            <div class="filter-group annual-filter-group">
+                <select class="annual-filter-writer"><option value="">筛选编剧</option></select>
+                <select class="annual-filter-art"><option value="">筛选画师</option></select>
+                <select class="annual-filter-year"><option value="">筛选发售年份</option></select>
+                <select class="annual-filter-publisher"><option value="">筛选开发厂商</option></select>
+                <select class="annual-filter-cn"><option value="">筛选汉化厂商</option></select>
+            </div>
+            <!-- 视图容器 -->
+            <div class="annual-modal-view-container annual-cp-view-container">
+                <!-- 单游戏开关组 -->
+                <div class="annual-modal-game-switch-group annual-cp-game-switch-group">
+                    <div class="switch-row">
+                        <label class="switch"><input type="checkbox" id="annual-modal-cp-game-sub-char"><span class="slider"></span></label>
+                        <div><span class="text-light-pink">单独显示本游戏次要角色</span></div>
+                    </div>
+                    <div class="switch-row">
+                        <label class="switch"><input type="checkbox" id="annual-modal-cp-game-fd-sub-char"><span class="slider"></span></label>
+                        <div><span class="text-light-pink">单独显示本游戏续作/FD次要角色</span></div>
+                    </div>
+                    <div class="switch-row">
+                        <label class="switch"><input type="checkbox" id="annual-modal-cp-game-hide-char"><span class="slider"></span></label>
+                        <div><span class="text-light-pink">单独显示本游戏隐藏图片、角色</span></div>
+                    </div>
+                    <div class="switch-row">
+                        <label class="switch"><input type="checkbox" id="annual-modal-cp-game-fd-game"><span class="slider"></span></label>
+                        <div><span class="text-light-pink">单独显示本游戏续作/FD图片、角色</span></div>
+                    </div>
+                </div>
+                <!-- 游戏列表视图 -->
+                <div class="annual-global-cp-game-list"></div>
+                <!-- 女主+男主列表视图 -->
+                <div class="annual-global-cp-female-list"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
