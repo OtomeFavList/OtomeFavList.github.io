@@ -33,10 +33,10 @@ const gameData = {
                 { srcList: ["char/080/Hina.jpg"], type: "base" },
             ]
         },
-        // 加修レム
+        // 加修雷姆
         {
             id: "g080_m01",
-            name: "加修レム",
+            name: "加修雷姆",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -46,10 +46,10 @@ const gameData = {
                             "char/080/Kashu3.jpg"], type: "base" },
             ]
         },
-        // 葛葉翔
+        // 葛叶翔
         {
             id: "g080_m02",
-            name: "葛葉翔",
+            name: "葛叶翔",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -59,10 +59,10 @@ const gameData = {
                             "char/080/Kuzuha3.jpg"], type: "base" },
             ]
         },
-        // 凪原大貴
+        // 凪原大贵
         {
             id: "g080_m03",
-            name: "凪原大貴",
+            name: "凪原大贵",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -85,10 +85,10 @@ const gameData = {
                             "char/080/Shido3.jpg"], type: "base" },
             ]
         },
-        // 東條海里
+        // 东条海里
         {
             id: "g080_m05",
-            name: "東條海里",
+            name: "东条海里",
             gender: "male",
             isHidden: false,
             isFD: false,
@@ -98,10 +98,10 @@ const gameData = {
                             "char/080/Toujou3.jpg"], type: "base" },
             ]
         },
-        // 柳遼太
+        // 柳辽太
         {
             id: "g080_m06",
-            name: "柳遼太",
+            name: "柳辽太",
             gender: "male",
             isHidden: false,
             isFD: false,
