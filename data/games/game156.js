@@ -3,7 +3,7 @@
 const gameData = {
     id: "game156", // 全局唯一ID，不可重复，如 game001
     name: "Starry☆Sky~Summer Stories~",
-    year: "2027",
+    year: "2017",
     publisher: ["honeybee"],
     cnStudio: "暂无",
     writer: [
