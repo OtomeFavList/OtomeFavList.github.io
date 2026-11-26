@@ -22,10 +22,10 @@ const gameData = {
     ],
     cover: "game/080.jpg", // 相对路径，游戏封面
     charList: [
-        // 川奈ヒナ
+        // 川奈雏
         {
             id: "g080_f01",
-            name: "川奈ヒナ",
+            name: "川奈雏",
             gender: "female",
             isHidden: false,
             isFD: false,
