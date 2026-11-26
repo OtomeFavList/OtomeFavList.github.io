@@ -1,11 +1,10 @@
 // ✅已核对信息
-// ℹ️未官中，官中发售后需要修改：游戏名、发售年份、汉化厂商、封面图、info图、角色名
 const gameData = {
     id: "game079", // 全局唯一ID，不可重复，如 game001
-    name: "ALICE=ALICE",
+    name: "ALICE＝ALICE",
     year: "2026",
     publisher: ["Rejet"],
-    cnStudio: "暂无",
+    cnStudio: "JOYOLAND",
     writer: [
         {name:"真崎結衣", lang:"zh"},
         {name:"小和泉いづみ", lang:"zh"},
