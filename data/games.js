@@ -31,7 +31,8 @@ const allGameFileNames = [
     "game136.js", "game137.js", "game138.js", "game139.js", "game140.js",
     "game141.js", "game142.js", "game143.js", "game144.js", "game145.js",
     "game146.js", "game147.js", "game148.js", "game149.js", "game150.js",
-    "game151.js", "game152.js", "game153.js", "game154.js"
+    "game151.js", "game152.js", "game153.js", "game154.js", "game155.js",
+    "game156.js", "game157.js"
 ];
 
 // 全局游戏数据存储容器
