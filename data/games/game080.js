@@ -1,7 +1,7 @@
 // ✅已核对信息
 const gameData = {
     id: "game080", // 全局唯一ID，不可重复，如 game001
-    name: "BAD MEDICINE",
+    name: "BAD MEDICINE 危险老师的特别授课",
     year: "2026",
     publisher: ["Rejet"],
     cnStudio: "JOYOLAND",
