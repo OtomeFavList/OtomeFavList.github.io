@@ -14,7 +14,8 @@ const gameData = {
         {name:"株式会社エッジワークス", lang:"zh"}
     ],
     art: [
-        {name:"カズアキ", lang:"ja"}
+        {name:"カズアキ", lang:"ja"},
+        {name:"ゑむ", lang:"ja"},
     ],
     cover: "game/155.jpg", // 相对路径，游戏封面
     charList: [
