@@ -1,7 +1,7 @@
-魔界王子と魅惑のナイトメア ～誘惑の口づけ～
-开发: Voltage, Inc.
-发行: Voltage, Inc.
-人物设定: 双葉はづき
-别名: Court of Darkness
-链接: VNDB
-官方网站: koi-game.voltage.co.jp/title/makai/
+Starry☆Sky ～Winter Stories～
+开发: honeybee
+发行: honeybee
+剧本: 株式会社エッジワークス
+剧本: 高木聖子、清水慶、春名佳純
+剧本: 春名佳純、浅生柚子
+原画: カズアキ
