@@ -88,6 +88,7 @@ let _otherIsRendering = false;
 // 导出预览弹窗状态
 let _otherPreviewResults = [];
 let _otherPreviewUrls = [];
+let _otherPreviewFailCount = 0;
 let _otherPreviewBound = false;
 let _otherCurrentPage = 0;
 
@@ -209,7 +210,11 @@ function loadOtherData() {
 }
 
 function saveOtherData() {
-  localStorage.setItem(OTHER_DATA_KEY, JSON.stringify(otherData));
+  try {
+    localStorage.setItem(OTHER_DATA_KEY, JSON.stringify(otherData));
+  } catch (e) {
+    console.error("Other 数据保存失败：", e);
+  }
 }
 
 function loadOtherConfig() {
@@ -251,7 +256,11 @@ function loadOtherConfig() {
 }
 
 function saveOtherConfig() {
-  localStorage.setItem(OTHER_CONFIG_KEY, JSON.stringify(otherConfig));
+  try {
+    localStorage.setItem(OTHER_CONFIG_KEY, JSON.stringify(otherConfig));
+  } catch (e) {
+    console.error("Other 配置保存失败：", e);
+  }
 }
 
 // 创建新 Rero 游戏数据（默认值）
@@ -1874,9 +1883,13 @@ function renderOtherPreviewPage(pageIndex) {
       <button class="preview-next-page" ${pageIndex >= totalPage - 1 ? 'disabled' : ''}>下一张</button>
     </div>`;
   }
+  const failHint = _otherPreviewFailCount > 0
+    ? `<p style="margin:8px 0 0;text-align:center;color:#b33a3a;font-size:13px;">有 ${_otherPreviewFailCount} 张图片请求失败，图中已标注，请点击「重新生成」重试</p>`
+    : "";
   scrollWrap.innerHTML = `
     <img class="preview-img-item" src="${currentUrl}" alt="Other 导出预览">
     ${paginationHtml}
+    ${failHint}
   `;
   const prevBtn = scrollWrap.querySelector(".preview-prev-page");
   const nextBtn = scrollWrap.querySelector(".preview-next-page");
@@ -1896,6 +1909,7 @@ function renderOtherPreviewPage(pageIndex) {
 function showOtherPreviewModal(results) {
   _otherPreviewResults = results;
   _otherCurrentPage = 0;
+  _otherPreviewFailCount = (results && results.imageFailList) ? results.imageFailList.length : 0;
   const downloadBtn = document.getElementById("preview-download-btn");
   // 清理旧 URL
   _otherPreviewUrls.forEach(u => URL.revokeObjectURL(u));
