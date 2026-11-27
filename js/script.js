@@ -1753,6 +1753,7 @@ export function initPage(Core = {}) {
                 const exportDpr = appData.exportNormalQuality ? 1 : 2;
                 const blobList = await renderExportCanvas(targetWidth, isLongMode, maxPageHeight, appData, getCombinedGameList(), exportDpr);
                 if (!Array.isArray(blobList) || blobList.length === 0) throw new Error("Canvas绘制失败，未能生成图片");
+                const failCount = (blobList.imageFailList || []).length;
 
                 // 多页预览状态
                 let currentPreviewPage = 0;
@@ -1778,9 +1779,13 @@ export function initPage(Core = {}) {
                         `;
                     }
 
+                    const failHint = failCount > 0
+                        ? `<p style="margin:8px 0 0;text-align:center;color:#b33a3a;font-size:13px;">有 ${failCount} 张图片请求失败，图中已标注，请点击「重新生成」重试</p>`
+                        : "";
                     previewScrollWrap.innerHTML = `
                         <img class="preview-img-item" src="${currentUrl}" alt="导出预览">
                         ${paginationHtml}
+                        ${failHint}
                     `;
 
                     // 绑定分页切换事件
