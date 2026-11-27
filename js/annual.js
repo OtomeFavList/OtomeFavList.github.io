@@ -59,7 +59,11 @@ function saveAnnualExportConfig() {
     if(!annualExportConfig){
         annualExportConfig = {...annualExportDefault};
     }
-    localStorage.setItem("annual-export-config", JSON.stringify(annualExportConfig));
+    try {
+        localStorage.setItem("annual-export-config", JSON.stringify(annualExportConfig));
+    } catch (e) {
+        console.error("Annual 配置保存失败：", e);
+    }
 }
 
 let annualExportConfig = loadAnnualExportConfig();
@@ -578,15 +582,28 @@ function loadAnnualData() {
     if(raw) {
         try {
             const parsed = JSON.parse(raw);
-            annualData = Object.assign(getDefaultAnnualData(), parsed);
+            const defaults = getDefaultAnnualData();
+            annualData = Object.assign(defaults, parsed);
+            // 嵌套对象补默认值，避免旧存档缺新字段时出现 undefined
+            const nestedKeys = ["other", "gameGrid", "charGrid", "gameMonthly", "charMonthly"];
+            nestedKeys.forEach(key => {
+                annualData[key] = Object.assign({}, defaults[key], parsed[key]);
+            });
         } catch(e) {
             annualData = getDefaultAnnualData();
+            try { localStorage.removeItem(ANNUAL_STORE_KEY); } catch (_) {}
         }
+    } else {
+        annualData = getDefaultAnnualData();
     }
 }
 
 function saveAnnualData() {
-    localStorage.setItem(ANNUAL_STORE_KEY, JSON.stringify(annualData));
+    try {
+        localStorage.setItem(ANNUAL_STORE_KEY, JSON.stringify(annualData));
+    } catch (e) {
+        console.error("Annual 数据保存失败：", e);
+    }
 }
 
 function bindStatInputs() {
@@ -3395,6 +3412,7 @@ function showAnnualPreviewLoading(scrollWrap) {
 // 年度报告预览弹窗管理
 let _annualPreviewResults = [];
 let _annualPreviewUrls = [];
+let _annualPreviewFailCount = 0;
 let _annualPreviewWidth = 810;
 let _annualPreviewBound = false;
 let _annualCurrentPage = 0;  // 新增：当前预览页码
@@ -3403,6 +3421,7 @@ function showAnnualPreviewModal(results, exportWidth) {
     _annualPreviewResults = results;
     _annualPreviewWidth = exportWidth;
     _annualCurrentPage = 0;  // 重置到第 1 张
+    _annualPreviewFailCount = (results && results.imageFailList) ? results.imageFailList.length : 0;
     const downloadBtn = document.getElementById("preview-download-btn");
     // 清理旧 URL
     _annualPreviewUrls.forEach(u => URL.revokeObjectURL(u));
@@ -3455,9 +3474,13 @@ function renderAnnualPreviewPage(pageIndex) {
         </div>`;
     }
     // 单张图片 + 分页控件，仅用 CSS 类控制，无内联样式）
+    const failHint = _annualPreviewFailCount > 0
+        ? `<p style="margin:8px 0 0;text-align:center;color:#b33a3a;font-size:13px;">有 ${_annualPreviewFailCount} 张图片请求失败，图中已标注，请点击「重新生成」重试</p>`
+        : "";
     scrollWrap.innerHTML = `
         <img class="preview-img-item" src="${currentUrl}" alt="年度报告预览">
         ${paginationHtml}
+        ${failHint}
     `;
     // 绑定上一张/下一张点击
     const prevBtn = scrollWrap.querySelector(".preview-prev-page");
