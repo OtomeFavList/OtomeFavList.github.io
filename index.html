@@ -846,7 +846,7 @@ z-index: -999;
         <h3>提示</h3>
         <p class="text-gray-desc" id="load-progress-text">游戏数据正在加载 0/140，请稍候…</p>
         <div class="modal-btns">
-            <button id="load-modal-confirm">确认</button>
+            <button id="load-modal-confirm" disabled>确认</button>
         </div>
     </div>
 </div>
@@ -1264,51 +1264,66 @@ z-index: -999;
         } catch (e) {
             console.warn("FD游戏预加载失败，将在后续流程重试", e);
         }
-        // 加载完成，启用确认按钮
-        loadConfirmBtn.disabled = false;
-        // 点击确认关闭弹窗，继续初始化
-        loadConfirmBtn.onclick = async () => {
-            loadModal.classList.remove("active");
-            document.body.classList.remove("modal-lock");
-            // 2. bootstrapCore
+
+        // 修复：等待 annual.js 挂载到 window，解决 ES Module 加载时序竞争
+        async function safeInitAnnual(){
+            let retry = 0;
+            while(typeof window.initAnnualModule !== "function" && retry < 20){
+                await new Promise(r=>setTimeout(r,50));
+                retry++;
+            }
+            if(typeof window.initAnnualModule === "function"){
+                window.initAnnualModule();
+                console.log("✅年度报告模块已初始化");
+            }else{
+                console.warn("⚠️年度报告模块初始化失败，window.initAnnualModule仍然未定义");
+            }
+        }
+        // 初始化 Other 模块
+        async function safeInitOther(){
+            let retry = 0;
+            while(typeof window.initOtherModule !== "function" && retry < 20){
+                await new Promise(r=>setTimeout(r,50));
+                retry++;
+            }
+            if(typeof window.initOtherModule === "function"){
+                window.initOtherModule();
+                console.log("✅Other 模块已初始化");
+            }else{
+                console.warn("⚠️Other 模块初始化失败，window.initOtherModule仍然未定义");
+            }
+        }
+
+        // 2. 弹窗未关闭期间，在后台完成读存档 + UI + Annual/Other 初始化
+        let initDone = false;
+        async function prepareApp() {
+            if (initDone) return;
+            // bootstrapCore：读本地存储、清洗脏数据、绑定全局开关
             await bootstrapCore();
-            // 3. 启动 UI
+            // 启动 UI
             if (typeof window.uiBootstrap === "function") {
                 await window.uiBootstrap();
             }
-
-            // 修复：等待 annual.js 挂载到 window，解决 ES Module 加载时序竞争
-            async function safeInitAnnual(){
-                let retry = 0;
-                while(typeof window.initAnnualModule !== "function" && retry < 20){
-                    await new Promise(r=>setTimeout(r,50));
-                    retry++;
-                }
-                if(typeof window.initAnnualModule === "function"){
-                    window.initAnnualModule();
-                    console.log("✅年度报告模块已初始化");
-                }else{
-                    console.warn("⚠️年度报告模块初始化失败，window.initAnnualModule仍然未定义");
-                }
-            }
             await safeInitAnnual();
-            // 初始化 Other 模块
-            async function safeInitOther(){
-                let retry = 0;
-                while(typeof window.initOtherModule !== "function" && retry < 20){
-                    await new Promise(r=>setTimeout(r,50));
-                    retry++;
-                }
-                if(typeof window.initOtherModule === "function"){
-                    window.initOtherModule();
-                    console.log("✅Other 模块已初始化");
-                }else{
-                    console.warn("⚠️Other 模块初始化失败，window.initOtherModule仍然未定义");
-                }
-            }
             await safeInitOther();
+            initDone = true;
             // 清掉进度回调，防止内存残留
             window.onGameLoadProgress = null;
+        }
+
+        // 后台准备，就绪后再启用确认按钮；准备期间弹窗继续遮挡，用户操作不到未就绪界面
+        prepareApp().then(() => {
+            loadConfirmBtn.disabled = false;
+        }).catch((err) => {
+            console.error("后台初始化失败：", err);
+            loadConfirmBtn.disabled = false;
+        });
+
+        // 点击确认：此时数据与 UI 已就绪，仅关闭弹窗，不再等待初始化
+        loadConfirmBtn.onclick = () => {
+            if (loadConfirmBtn.disabled) return; // 守卫：未就绪/重复点击不响应
+            loadModal.classList.remove("active");
+            document.body.classList.remove("modal-lock");
         };
     })();
 </script>
