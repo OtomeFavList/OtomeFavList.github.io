@@ -10,7 +10,8 @@ import {
   getCharDisplayName,
   getCharNameList,
   getCharShowHide,  //新增
-  getEffectiveCharList  //新增
+  getEffectiveCharList,  //新增
+  drawImageFailPlaceholder  //新增
 } from './main.js';
 
 // 最大并发图片加载数量，降低并发减少移动端解码资源竞争
@@ -1111,6 +1112,8 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
             painter.ctx.restore();
           }
         }
+      } else {
+        drawImageFailPlaceholder(painter.ctx, xPos + innerPad, imgY, imgSize, imgSize);
       }
       const nameBoxY = yPos + innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB;
       const nameBoxH = charCardHeight - (innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB) - innerPad;
@@ -1239,6 +1242,8 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
             painter.ctx.restore();
           }
         }
+      } else {
+        drawImageFailPlaceholder(painter.ctx, femaleX + innerPad, femaleY + innerPad, imgSize, imgSize);
       }
       const fNameBoxY = femaleY + innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB;
       const fNameBoxH = rowH - (innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB) - innerPad;
@@ -1300,6 +1305,8 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
               painter.ctx.restore();
             }
           }
+        } else {
+          drawImageFailPlaceholder(painter.ctx, mx + innerPad, my + innerPad, imgSize, imgSize);
         }
         const mNameBoxY = my + innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB;
         const mNameBoxH = rowH - (innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB) - innerPad;
