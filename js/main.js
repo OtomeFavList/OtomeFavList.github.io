@@ -222,7 +222,11 @@ window.__spoilerPending = null; // 通用剧透待确认操作
 
 // 本地存储读写工具函数，appData 完整保存到 localStorage
 export function saveData() {
-    localStorage.setItem(STORE_KEY, JSON.stringify(appData));
+    try {
+        localStorage.setItem(STORE_KEY, JSON.stringify(appData));
+    } catch (e) {
+        console.error("保存本地存储失败：", e);
+    }
 }
 
 // 重构 loadData：隔离旧数据、独立迁移区块、深度合并、自动清理缓存
@@ -469,8 +473,9 @@ export function loadData() {
         // 数据重载时清空图片缓存，防止旧 URL 缓存阻塞 Canvas 渲染
         imgCacheMap.clear();
 
-    } catch (e) {
-        console.error("读取本地存储失败：", e);
+        } catch (e) {
+        console.error("读取本地存储失败，已清空损坏存档：", e);
+        try { localStorage.removeItem(STORE_KEY); } catch (_) {}
     }
 }
 
@@ -698,6 +703,23 @@ export function preloadAndDecodeImage(src) {
 
     imgCacheMap.set(src, p);
     return p;
+}
+
+// 图片加载失败时在画布上绘制失败占位
+export function drawImageFailPlaceholder(ctx, x, y, w, h, label) {
+    if (!ctx) return;
+    ctx.save();
+    ctx.fillStyle = '#f2e6ea';
+    ctx.fillRect(x, y, w, h);
+    ctx.strokeStyle = '#d9a8b6';
+    ctx.lineWidth = 1;
+    ctx.strokeRect(x, y, w, h);
+    ctx.fillStyle = '#b33a3a';
+    ctx.font = '13px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(label || '图片请求失败', x + w / 2, y + h / 2);
+    ctx.restore();
 }
 
 // 新增：preloadImageBitmap，Canvas 导出使用，启用高质量缩放 + 降级兜底
@@ -1876,6 +1898,20 @@ function disableImageLongPressMenu() {
   document.addEventListener('touchend', clearLongPressTimer, { passive: true });
   document.addEventListener('touchcancel', clearLongPressTimer, { passive: true });
   document.addEventListener('touchmove', clearLongPressTimer, { passive: true });
+
+  // 动态图片补 draggable=false，兜底部分安卓 WebView/旧内核的拖拽保存
+  document.addEventListener('dragstart', function (e) {
+    const imgEl = e.target.closest('img');
+    if (imgEl) { imgEl.draggable = false; }
+  }, { passive: true });
+
+  // 图片加载失败：隐藏破图图标，加失败占位背景，不阻断导出流程
+  document.addEventListener('error', function (e) {
+    const imgEl = e.target.closest && e.target.closest('img');
+    if (!imgEl) return;
+    imgEl.style.background = '#f2e6ea';
+    imgEl.alt = '图片请求失败';
+  }, true);
 }
 
 // 对外暴露启动入口，供 index.html 调用
