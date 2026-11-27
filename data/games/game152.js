@@ -157,6 +157,149 @@ const gameData = {
             images: [
                 { srcList: ["char/152/Younosuke.jpg"], type: "base" }
             ]
+        },
+        // 原田左之助
+        {
+            id: "g148_s01",
+            name: "原田左之助",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/148/Sanosuke.png"], type: "base" }
+            ]
+        },
+        // 土方歳三
+        {
+            id: "g148_s02",
+            name: "土方歳三",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/148/Toshizou.png"], type: "base" }
+            ]
+        },
+        // 近藤勇
+        {
+            id: "g148_s03",
+            name: "近藤勇",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/148/Isami.png"], type: "base" }
+            ]
+        },
+        // 永倉新八
+        {
+            id: "g148_s04",
+            name: "永倉新八",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/148/Shinpachi.png"], type: "base" }
+            ]
+        },
+        // 沖田総司
+        {
+            id: "g148_s05",
+            name: "沖田総司",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/148/Souji.png"], type: "base" }
+            ]
+        },
+        // 才谷梅太郎
+        {
+            id: "g148_s06",
+            name: "才谷梅太郎",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/148/Saidani.png"], type: "base" }
+            ]
+        },
+        // 斎藤一
+        {
+            id: "g148_s07",
+            name: "斎藤一",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/148/Hajime.png"], type: "base" }
+            ]
+        },
+        // 桜庭鈴花
+        {
+            id: "g148_s08",
+            name: "桜庭鈴花",
+            gender: "female",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/148/Midori.png"], type: "base" },
+            ]
+        },
+        // 藤堂平助
+        {
+            id: "g148_s09",
+            name: "藤堂平助",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/148/Heisuke.png"], type: "base" }
+            ]
+        },
+        // 山南敬助
+        {
+            id: "g148_s10",
+            name: "山南敬助",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/148/Keisuke.png"], type: "base" }
+            ]
+        },
+        // 山崎烝
+        {
+            id: "g148_s11",
+            name: "山崎烝",
+            gender: "male",
+            isHidden: false,
+            isFD: false,
+            isSub: true,
+            isFdSub: false,
+            images: [
+                { srcList: ["char/148/Susumu.png"], type: "base" }
+            ]
         }
     ]
 };
