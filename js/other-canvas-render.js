@@ -10,7 +10,8 @@ import {
   getCharNameList,
   getCharShowHide,
   LAYOUT_SPACE,
-  LAYOUT_STYLE
+  LAYOUT_STYLE,
+  drawImageFailPlaceholder
 } from './main.js';
 import {
   wrapText,
@@ -331,6 +332,8 @@ function drawCoverCard(painter, x, y, cardW, cardH, img, srcUrl, radius) {
     } finally {
       ctx.restore();
     }
+  } else {
+    drawImageFailPlaceholder(ctx, x + radius, y + radius, cardW - radius * 2, cardH - radius * 2);
   }
 }
 
@@ -1402,6 +1405,9 @@ function drawImpressionGameCard(painter, targetW, gameData, gameInfo, config, im
     // 完整绘制，不居中裁剪
     ctx.drawImage(drawTarget, contentX, painter.y, innerW, infoH);
     ctx.restore();
+  } else if (infoSrc) {
+    drawImageFailPlaceholder(ctx, contentX, painter.y, innerW, 120, '信息图请求失败');
+  }
     // 底部淡出渐变（起始透明色适配用户自定义背景色）
     const fadeY = painter.y + infoH - IMP_INFO_FADE_H;
     const gradient = ctx.createLinearGradient(0, fadeY, 0, painter.y + infoH);
@@ -1682,6 +1688,9 @@ async function renderOtherRepoGameCanvas(designW, gameData, gameInfo, config, dp
   imageUrls = [...new Set(imageUrls)];
   const loadRet = await loadImagesWithLimit(imageUrls, MAX_IMAGE_CONCURRENCY);
   const imageCache = loadRet.resultMap;
+  if (typeof window !== 'undefined') {
+    window.__otherModuleFailList = loadRet.failList || [];
+  }
   await new Promise(r => setTimeout(r, 30));
   await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
   emitRenderProgress(65);
@@ -1886,6 +1895,7 @@ async function renderOtherBriefPageCanvas(designW, pageGameDataList, pageGameInf
 // 批量导出
 export async function renderAllOtherGames(designW, otherData, gameTemplateList, config, dpr) {
   const results = [];
+  const failUrls = [];
   const effectiveDpr = dpr || (config.normalQuality ? 1 : 2);
   // ===== 1. Repo 模块 =====
   const repoGames = otherData?.repoGames || [];
@@ -1896,6 +1906,7 @@ export async function renderAllOtherGames(designW, otherData, gameTemplateList, 
     if (blob) {
       results.push({ moduleType: 'repo', gameId: gameData.gameId, gameName: gameInfo.name, blob });
     }
+    failUrls.push(...((typeof window !== 'undefined' && window.__otherModuleFailList) || []));
   }
   // ===== 2. 简评表（Repo 之后、Impression 之前，受 exportBrief 开关控制）=====
   if (config.exportBrief !== false) {
@@ -1918,6 +1929,7 @@ export async function renderAllOtherGames(designW, otherData, gameTemplateList, 
           blob
         });
       }
+      failUrls.push(...((typeof window !== 'undefined' && window.__otherModuleFailList) || []));
     }
   }
   // ===== 3. Impression 模块 =====
@@ -1934,13 +1946,16 @@ export async function renderAllOtherGames(designW, otherData, gameTemplateList, 
     if (blob) {
       results.push({ moduleType: 'impression', gameId: gameData.gameId, gameName: gameInfo.name, blob });
     }
+    failUrls.push(...((typeof window !== 'undefined' && window.__otherModuleFailList) || []));
   }
+  results.imageFailList = [...new Set(failUrls)];
   return results;
 }
 
 // 简评表批量导出：将 Repo 游戏按每页至多3个分组，逐页渲染
 export async function renderAllOtherBriefGames(designW, otherData, gameTemplateList, config, dpr) {
   const results = [];
+  const failUrls = [];
   const effectiveDpr = dpr || (config.normalQuality ? 1 : 2);
   const repoGames = otherData?.repoGames || [];
   // 过滤出有对应游戏模板的游戏
@@ -1964,7 +1979,9 @@ export async function renderAllOtherBriefGames(designW, otherData, gameTemplateL
         blob
       });
     }
+    failUrls.push(...((typeof window !== 'undefined' && window.__otherModuleFailList) || []));
   }
+  results.imageFailList = [...new Set(failUrls)];
   return results;
 }
 
