@@ -6,7 +6,8 @@ import {
   preloadAndDecodeImage,
   convertR2ToJsDelivr,
   LAYOUT_SPACE,
-  LAYOUT_STYLE
+  LAYOUT_STYLE,
+  drawImageFailPlaceholder
 } from './main.js';
 import { wrapText, measureWrappedHeight, CanvasLayoutPainter, setCurrentDPR } from './export-canvas-render.js';
 
@@ -1050,7 +1051,12 @@ function drawCoverCard(painter, x, y, cardW, cardH, img, srcUrl, radius) {
       ctx.drawImage(drawTarget, imgX, imgY, imgW, imgH);
     } finally {
       ctx.restore();
+    } finally {
+      ctx.restore();
     }
+  } else {
+    drawImageFailPlaceholder(ctx, x + COVER_CARD_PAD, y + COVER_CARD_PAD,
+      cardW - COVER_CARD_PAD * 2, cardH - COVER_CARD_PAD * 2);
   }
 }
 
@@ -1188,7 +1194,10 @@ function drawStatsContent(painter, x, y, innerW, annualData, config, imageCache)
   const bgUrl = toCanvasUrl(bgInfo.file);
   const bgImg = bgUrl ? imageCache.get(bgUrl) : null;
   const dims = getImgSize(bgImg);
-  if (dims.w <= 0 || dims.h <= 0) return;
+  if (dims.w <= 0 || dims.h <= 0) {
+    drawImageFailPlaceholder(ctx, x, y, innerW, 300, '背景图请求失败');
+    return;
+  }
   const drawW = innerW;
   const drawH = Math.round(innerW * dims.h / dims.w);
   const resInfo = rawImageResourceCache.get(bgUrl);
@@ -1722,6 +1731,9 @@ export async function renderAnnualModuleCanvas(designW, moduleType, moduleTitle,
   imageUrls = [...new Set(imageUrls)];
   const loadRet = await loadImagesWithLimit(imageUrls, MAX_IMAGE_CONCURRENCY);
   const imageCache = loadRet.resultMap;
+  if (typeof window !== 'undefined') {
+    window.__annualModuleFailList = loadRet.failList || [];
+  }
 
   await new Promise(r => setTimeout(r, 30));
   await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
@@ -1871,6 +1883,7 @@ export async function renderAnnualModuleCanvas(designW, moduleType, moduleTitle,
 
 // 批量导出所有模块
 export async function renderAllAnnualModules(designW, annualData, config, titleMap, dpr) {
+  const failUrls = [];
   // 新增：推し标题开关，开启时模块六/七小标题为推しゲーム/推しキャラ，关闭则默认ゲーム宫格/キャラ宫格
   const gameGridTitle = config.useOshiTitle ? '推しゲーム' : (titleMap?.gameGrid || 'ゲーム宫格');
   const charGridTitle = config.useOshiTitle ? '推しキャラ' : (titleMap?.charGrid || 'キャラ宫格');
@@ -1892,7 +1905,10 @@ export async function renderAllAnnualModules(designW, annualData, config, titleM
     if (blob) {
       results.push({ moduleType: mod.type, moduleTitle: mod.title, blob });
     }
+    const moduleFail = (typeof window !== 'undefined' && window.__annualModuleFailList) || [];
+    failUrls.push(...moduleFail);
   }
+  results.imageFailList = [...new Set(failUrls)];
   return results;
 }
 
