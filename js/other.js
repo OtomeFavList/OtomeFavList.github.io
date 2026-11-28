@@ -161,15 +161,72 @@ function getGameMergedCharList(gameInfo) {
   });
   return [...baseChars, ...fdChars];
 }
+
+// ===== 存档读取容错（本轮新增）：解析失败先修复 3 次，仍失败则备份原文并保留主键 =====
+const OTHER_BACKUP_SUFFIX = "-backup";
+const OTHER_BACKUP_TIME_SUFFIX = "-backup-time";
+const OTHER_RECOVER_SUFFIX = "-recover-count";
+const OTHER_MAX_RECOVER = 3;
+// 同一次页面加载内只累计一次失败，避免重复调用导致计数翻倍
+let otherRecoverRecorded = {};
+
+function parseOtherJsonWithRepair(raw) {
+  if (typeof raw !== "string" || raw.length === 0) return { ok: false };
+  try { return { ok: true, data: JSON.parse(raw) }; } catch (_) {}
+  try {
+    const cleaned = raw.replace(/\uFEFF/g, "").replace(/[\u200B-\u200D]/g, "").trim();
+    return { ok: true, data: JSON.parse(cleaned) };
+  } catch (_) {}
+  try {
+    const start = raw.search(/[\[{]/);
+    const endA = raw.lastIndexOf("}");
+    const endB = raw.lastIndexOf("]");
+    const end = Math.max(endA, endB);
+    if (start >= 0 && end > start) {
+      return { ok: true, data: JSON.parse(raw.slice(start, end + 1)) };
+    }
+  } catch (_) {}
+  return { ok: false };
+}
+
+function readOtherStorageJson(key) {
+  let raw = null;
+  try { raw = localStorage.getItem(key); } catch (e) { console.warn("读取本地存储失败：", key, e); return { ok: false, empty: true, data: null }; }
+  if (!raw) return { ok: false, empty: true, data: null };
+  const parseRet = parseOtherJsonWithRepair(raw);
+  if (parseRet.ok) {
+    try { localStorage.removeItem(key + OTHER_RECOVER_SUFFIX); } catch (_) {}
+    return { ok: true, empty: false, data: parseRet.data };
+  }
+  let count = 1;
+  try {
+    localStorage.setItem(key + OTHER_BACKUP_SUFFIX, raw);
+    localStorage.setItem(key + OTHER_BACKUP_TIME_SUFFIX, new Date().toISOString());
+    if (!otherRecoverRecorded[key]) {
+      otherRecoverRecorded[key] = true;
+      count = Number(localStorage.getItem(key + OTHER_RECOVER_SUFFIX) || "0") + 1;
+      localStorage.setItem(key + OTHER_RECOVER_SUFFIX, String(count));
+    } else {
+      count = Number(localStorage.getItem(key + OTHER_RECOVER_SUFFIX) || "1");
+    }
+  } catch (_) {}
+  console.warn(`⚠️${key} 解析失败（第 ${count}/${OTHER_MAX_RECOVER} 次），原文已备份到 ${key + OTHER_BACKUP_SUFFIX}，本次先用默认数据`);
+  if (count >= OTHER_MAX_RECOVER) {
+    try {
+      localStorage.removeItem(key);
+      localStorage.removeItem(key + OTHER_RECOVER_SUFFIX);
+    } catch (_) {}
+    console.warn(`⚠️${key} 已连续 ${OTHER_MAX_RECOVER} 次解析失败，主键已清空；原始存档仍保留在 ${key + OTHER_BACKUP_SUFFIX}`);
+  }
+  return { ok: false, empty: false, data: null };
+}
+
 // 数据持久化
 function loadOtherData() {
-  try {
-    const raw = localStorage.getItem(OTHER_DATA_KEY);
-    otherData = raw ? JSON.parse(raw) : {};
-  } catch (e) {
-    otherData = {};
-    try { localStorage.removeItem(OTHER_DATA_KEY); } catch (_) {}
-  }
+  // 改为容错读取：解析失败先修复，仍失败则备份原文、保留主键（连续 3 次才降级）
+  let readRet = { ok: false, empty: true, data: null };
+  try { readRet = readOtherStorageJson(OTHER_DATA_KEY); } catch (e) { console.warn("Other 存档读取异常，本次使用默认数据：", e); }
+  otherData = (readRet.ok && readRet.data && typeof readRet.data === "object") ? readRet.data : {};
   if (!Array.isArray(otherData.repoGames)) otherData.repoGames = [];
   if (!Array.isArray(otherData.impressionGames)) otherData.impressionGames = [];
 
@@ -219,13 +276,10 @@ function saveOtherData() {
 }
 
 function loadOtherConfig() {
-  try {
-    const raw = localStorage.getItem(OTHER_CONFIG_KEY);
-    otherConfig = raw ? JSON.parse(raw) : {};
-  } catch (e) {
-    otherConfig = {};
-    try { localStorage.removeItem(OTHER_CONFIG_KEY); } catch (_) {}
-  }
+  // 改为容错读取：解析失败先修复，仍失败则备份原文、保留键值
+  let readRet = { ok: false, empty: true, data: null };
+  try { readRet = readOtherStorageJson(OTHER_CONFIG_KEY); } catch (e) { console.warn("Other 配置读取异常，本次使用默认配置：", e); }
+  otherConfig = (readRet.ok && readRet.data && typeof readRet.data === "object") ? readRet.data : {};
   // 旧字段迁移
   if (otherConfig.boxbg !== undefined && otherConfig.cardBg === undefined) {
     otherConfig.cardBg = otherConfig.boxbg;
