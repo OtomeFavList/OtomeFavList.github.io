@@ -30,18 +30,77 @@ const annualExportDefault = {
     reporterColor: "#b33a3a"      // 修改：填表人文字色
 };
 
-function loadAnnualExportConfig() {
-    const raw = localStorage.getItem("annual-export-config");
-    let config;
-    if(raw) {
-        try {
-            config = Object.assign({}, annualExportDefault, JSON.parse(raw));
-        } catch(e) {
-            config = {...annualExportDefault};
-            try { localStorage.removeItem("annual-export-config"); } catch (_) {}
+}
+
+// 补丁：存档读取容错，解析失败不立即删除存档
+const ANNUAL_BACKUP_SUFFIX = "-backup";
+const ANNUAL_BACKUP_TIME_SUFFIX = "-backup-time";
+const ANNUAL_RECOVER_SUFFIX = "-recover-count";
+const ANNUAL_MAX_RECOVER = 3;
+let annualRecoverRecorded = {};
+
+function parseAnnualJsonWithRepair(raw) {
+    if (typeof raw !== "string" || raw.length === 0) return { ok: false };
+    try { return { ok: true, data: JSON.parse(raw) }; } catch (_) {}
+    try {
+        const cleaned = raw.replace(/\uFEFF/g, "").replace(/[\u200B-\u200D]/g, "").trim();
+        return { ok: true, data: JSON.parse(cleaned) };
+    } catch (_) {}
+    try {
+        const start = raw.search(/[\[{]/);
+        const endA = raw.lastIndexOf("}");
+        const endB = raw.lastIndexOf("]");
+        const end = Math.max(endA, endB);
+        if (start >= 0 && end > start) {
+            return { ok: true, data: JSON.parse(raw.slice(start, end + 1)) };
         }
+    } catch (_) {}
+    return { ok: false };
+}
+
+function readAnnualStorageJson(key) {
+    let raw = null;
+    try { raw = localStorage.getItem(key); } catch (e) { console.warn("读取本地存储失败：", key, e); return { ok: false, empty: true, data: null }; }
+    if (!raw) return { ok: false, empty: true, data: null };
+    const parseRet = parseAnnualJsonWithRepair(raw);
+    if (parseRet.ok) {
+        try { localStorage.removeItem(key + ANNUAL_RECOVER_SUFFIX); } catch (_) {}
+        return { ok: true, empty: false, data: parseRet.data };
+    }
+    let count = 1;
+    try {
+        localStorage.setItem(key + ANNUAL_BACKUP_SUFFIX, raw);
+        localStorage.setItem(key + ANNUAL_BACKUP_TIME_SUFFIX, new Date().toISOString());
+        if (!annualRecoverRecorded[key]) {
+            annualRecoverRecorded[key] = true;
+            count = Number(localStorage.getItem(key + ANNUAL_RECOVER_SUFFIX) || "0") + 1;
+            localStorage.setItem(key + ANNUAL_RECOVER_SUFFIX, String(count));
+        } else {
+            count = Number(localStorage.getItem(key + ANNUAL_RECOVER_SUFFIX) || "1");
+        }
+    } catch (_) {}
+    console.warn(`⚠️${key} 解析失败（第 ${count}/${ANNUAL_MAX_RECOVER} 次），原文已备份到 ${key + ANNUAL_BACKUP_SUFFIX}，本次使用默认数据`);
+    if (count >= ANNUAL_MAX_RECOVER) {
+        try {
+            localStorage.removeItem(key);
+            localStorage.removeItem(key + ANNUAL_RECOVER_SUFFIX);
+        } catch (_) {}
+        console.warn(`⚠️${key} 已连续 ${ANNUAL_MAX_RECOVER} 次解析失败，主键已清空；原始存档仍保留在 ${key + ANNUAL_BACKUP_SUFFIX}`);
+    }
+    return { ok: false, empty: false, data: null };
+}
+
+function loadAnnualExportConfig() {
+    // 修改：解析失败先修复，仍失败则备份原文、保留键值
+    const readRet = readAnnualStorageJson("annual-export-config");
+    let config;
+    if (readRet.ok) {
+        const parsed = (readRet.data && typeof readRet.data === "object") ? readRet.data : {};
+        config = Object.assign({}, annualExportDefault, parsed);
     } else {
         config = {...annualExportDefault};
+    }
+
     }
     // input[type=color] 只接受 #rrggbb 六位格式，旧数据中存的 #eee 三位简写会被移动端浏览器回退为黑色 #000000
     // 修改：扩展到新字段
@@ -579,21 +638,16 @@ function refreshCpTopItemUi(itemDom, dataItem) {
 }
 
 function loadAnnualData() {
-    const raw = localStorage.getItem(ANNUAL_STORE_KEY);
-    if(raw) {
-        try {
-            const parsed = JSON.parse(raw);
-            const defaults = getDefaultAnnualData();
-            annualData = Object.assign(defaults, parsed);
-            // 嵌套对象补默认值，避免旧存档缺新字段时出现 undefined
-            const nestedKeys = ["other", "gameGrid", "charGrid", "gameMonthly", "charMonthly"];
-            nestedKeys.forEach(key => {
-                annualData[key] = Object.assign({}, defaults[key], parsed[key]);
-            });
-        } catch(e) {
-            annualData = getDefaultAnnualData();
-            try { localStorage.removeItem(ANNUAL_STORE_KEY); } catch (_) {}
-        }
+    // 修改：解析失败先修复，仍失败则备份原文、保留主键，连续3次后降级
+    const readRet = readAnnualStorageJson(ANNUAL_STORE_KEY);
+    if (readRet.ok) {
+        const parsed = readRet.data || {};
+        const defaults = getDefaultAnnualData();
+        annualData = Object.assign(defaults, parsed);
+        const nestedKeys = ["other", "gameGrid", "charGrid", "gameMonthly", "charMonthly"];
+        nestedKeys.forEach(key => {
+            annualData[key] = Object.assign({}, defaults[key], parsed[key]);
+        });
     } else {
         annualData = getDefaultAnnualData();
     }
