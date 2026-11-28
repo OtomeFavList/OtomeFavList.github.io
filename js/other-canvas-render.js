@@ -310,8 +310,8 @@ async function loadImagesWithLimit(urlList, limit) {
 // 绘制辅助函数
 function drawCoverCard(painter, x, y, cardW, cardH, img, srcUrl, radius) {
   painter.drawRoundRect(x, y, cardW, cardH, SUB_CARD_RADIUS, '#ffffff', SUB_CARD_BORDER, 1);
+  const ctx = painter.ctx;
   if (img) {
-    const ctx = painter.ctx;
     ctx.save();
     try {
       ctx.beginPath();
@@ -319,7 +319,7 @@ function drawCoverCard(painter, x, y, cardW, cardH, img, srcUrl, radius) {
       ctx.lineTo(x + cardW - radius, y);
       ctx.quadraticCurveTo(x + cardW, y, x + cardW, y + radius);
       ctx.lineTo(x + cardW, y + cardH - radius);
-      ctx.quadraticCurveTo(x + cardW, y + cardH, x + cardW - radius, y + cardH);
+      ctx.quadraticCurveTo(x + cardW, y, x + cardW - radius, y + cardH);
       ctx.lineTo(x + radius, y + cardH);
       ctx.quadraticCurveTo(x, y + cardH, x, y + cardH - radius);
       ctx.lineTo(x, y + radius);
@@ -904,7 +904,11 @@ function calcImpressionGameHeight(ctx, targetW, gameData, gameInfo, config, imag
       infoH = Math.round(innerW * ih / w);
     }
   }
-  if (infoH > 0) contentH += infoH + IMP_INFO_MB;
+  if (infoH > 0) {
+    contentH += infoH + IMP_INFO_MB;
+  } else if (infoSrc) {
+    contentH += 120 + IMP_INFO_MB;
+  }
   // 三列内容：可见角色列表（导出时不绘制 4 开关，不绘制游戏名）
   let visibleChars = canvasGetImpVisibleChars(gameInfo, switches, globalSwitches, allGames);
   // 过滤掉 Before / After 均未填写任何内容的角色
@@ -1406,7 +1410,9 @@ function drawImpressionGameCard(painter, targetW, gameData, gameInfo, config, im
     ctx.drawImage(drawTarget, contentX, painter.y, innerW, infoH);
     ctx.restore();
   } else if (infoSrc) {
+    infoH = 120;
     drawImageFailPlaceholder(ctx, contentX, painter.y, innerW, 120, '信息图请求失败');
+    painter.shiftY(120 + IMP_INFO_MB);
   }
     // 底部淡出渐变（起始透明色适配用户自定义背景色）
     const fadeY = painter.y + infoH - IMP_INFO_FADE_H;
@@ -1486,7 +1492,7 @@ function drawImpressionGameCard(painter, targetW, gameData, gameInfo, config, im
         if (charImg) {
           drawCoverCard(painter, ix, charImgY, charColW, IMP_CHAR_IMG_H, charImg, charSrc, 6);
         } else {
-          painter.drawRoundRect(ix, charImgY, charColW, IMP_CHAR_IMG_H, 6, '#f5f5f5', '#eee', 1);
+          drawImageFailPlaceholder(painter.ctx, ix, charImgY, charColW, IMP_CHAR_IMG_H, '角色图请求失败');
         }
         // 角色名：多行换行居中绘制，不加粗，名称已在 rowData 预计算
         ctx.textBaseline = 'top';
@@ -1761,6 +1767,9 @@ async function renderOtherImpressionGameCanvas(designW, gameData, gameInfo, conf
   imageUrls = [...new Set(imageUrls)];
   const loadRet = await loadImagesWithLimit(imageUrls, MAX_IMAGE_CONCURRENCY);
   const imageCache = loadRet.resultMap;
+  if (typeof window !== 'undefined') {
+    window.__otherModuleFailList = loadRet.failList || [];
+  }
   await new Promise(r => setTimeout(r, 30));
   await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
   emitRenderProgress(65);
@@ -1831,6 +1840,9 @@ async function renderOtherBriefPageCanvas(designW, pageGameDataList, pageGameInf
   imageUrls = [...new Set(imageUrls)];
   const loadRet = await loadImagesWithLimit(imageUrls, MAX_IMAGE_CONCURRENCY);
   const imageCache = loadRet.resultMap;
+  if (typeof window !== 'undefined') {
+    window.__otherModuleFailList = loadRet.failList || [];
+  }
   await new Promise(r => setTimeout(r, 30));
   await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
   emitRenderProgress(50);
