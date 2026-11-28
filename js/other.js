@@ -162,12 +162,11 @@ function getGameMergedCharList(gameInfo) {
   return [...baseChars, ...fdChars];
 }
 
-// ===== 存档读取容错（本轮新增）：解析失败先修复 3 次，仍失败则备份原文并保留主键 =====
+// 补丁：存档读取容错，解析失败不立即删除存档
 const OTHER_BACKUP_SUFFIX = "-backup";
 const OTHER_BACKUP_TIME_SUFFIX = "-backup-time";
 const OTHER_RECOVER_SUFFIX = "-recover-count";
 const OTHER_MAX_RECOVER = 3;
-// 同一次页面加载内只累计一次失败，避免重复调用导致计数翻倍
 let otherRecoverRecorded = {};
 
 function parseOtherJsonWithRepair(raw) {
@@ -210,7 +209,7 @@ function readOtherStorageJson(key) {
       count = Number(localStorage.getItem(key + OTHER_RECOVER_SUFFIX) || "1");
     }
   } catch (_) {}
-  console.warn(`⚠️${key} 解析失败（第 ${count}/${OTHER_MAX_RECOVER} 次），原文已备份到 ${key + OTHER_BACKUP_SUFFIX}，本次先用默认数据`);
+  console.warn(`⚠️${key} 解析失败（第 ${count}/${OTHER_MAX_RECOVER} 次），原文已备份到 ${key + OTHER_BACKUP_SUFFIX}，本次使用默认数据`);
   if (count >= OTHER_MAX_RECOVER) {
     try {
       localStorage.removeItem(key);
@@ -223,7 +222,7 @@ function readOtherStorageJson(key) {
 
 // 数据持久化
 function loadOtherData() {
-  // 改为容错读取：解析失败先修复，仍失败则备份原文、保留主键（连续 3 次才降级）
+  // 修改：解析失败先修复，仍失败则备份原文、保留主键，连续3次后降级
   let readRet = { ok: false, empty: true, data: null };
   try { readRet = readOtherStorageJson(OTHER_DATA_KEY); } catch (e) { console.warn("Other 存档读取异常，本次使用默认数据：", e); }
   otherData = (readRet.ok && readRet.data && typeof readRet.data === "object") ? readRet.data : {};
@@ -276,7 +275,7 @@ function saveOtherData() {
 }
 
 function loadOtherConfig() {
-  // 改为容错读取：解析失败先修复，仍失败则备份原文、保留键值
+  // 修改：解析失败先修复，仍失败则备份原文、保留键值
   let readRet = { ok: false, empty: true, data: null };
   try { readRet = readOtherStorageJson(OTHER_CONFIG_KEY); } catch (e) { console.warn("Other 配置读取异常，本次使用默认配置：", e); }
   otherConfig = (readRet.ok && readRet.data && typeof readRet.data === "object") ? readRet.data : {};
