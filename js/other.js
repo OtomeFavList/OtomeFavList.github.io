@@ -224,6 +224,7 @@ function loadOtherConfig() {
     otherConfig = raw ? JSON.parse(raw) : {};
   } catch (e) {
     otherConfig = {};
+    try { localStorage.removeItem(OTHER_CONFIG_KEY); } catch (_) {}
   }
   // 旧字段迁移
   if (otherConfig.boxbg !== undefined && otherConfig.cardBg === undefined) {
