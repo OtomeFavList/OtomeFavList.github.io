@@ -1392,7 +1392,7 @@ function drawImpressionGameCard(painter, targetW, gameData, gameInfo, config, im
   const infoIdx = Math.min(gameData.infoImgIndex || 0, Math.max(0, infoImages.length - 1));
   const infoSrc = infoImages[infoIdx] ? toCanvasUrl(infoImages[infoIdx]) : '';
   const infoImg = infoSrc ? imageCache.get(infoSrc) : null;
-  let infoH = 0;
+    let infoH = 0;
   if (infoImg) {
     const { w, h: ih } = getImgSize(infoImg);
     if (w > 0 && ih > 0) {
@@ -1409,11 +1409,6 @@ function drawImpressionGameCard(painter, targetW, gameData, gameInfo, config, im
     // 完整绘制，不居中裁剪
     ctx.drawImage(drawTarget, contentX, painter.y, innerW, infoH);
     ctx.restore();
-  } else if (infoSrc) {
-    infoH = 120;
-    drawImageFailPlaceholder(ctx, contentX, painter.y, innerW, 120, '信息图请求失败');
-    painter.shiftY(120 + IMP_INFO_MB);
-  }
     // 底部淡出渐变（起始透明色适配用户自定义背景色）
     const fadeY = painter.y + infoH - IMP_INFO_FADE_H;
     const gradient = ctx.createLinearGradient(0, fadeY, 0, painter.y + infoH);
@@ -1422,10 +1417,13 @@ function drawImpressionGameCard(painter, targetW, gameData, gameInfo, config, im
     ctx.fillStyle = gradient;
     ctx.fillRect(contentX, fadeY, innerW, IMP_INFO_FADE_H);
     painter.shiftY(infoH + IMP_INFO_MB);
+  } else if (infoSrc) {
+    infoH = 120;
+    drawImageFailPlaceholder(ctx, contentX, painter.y, innerW, 120, '信息图请求失败');
+    painter.shiftY(120 + IMP_INFO_MB);
   }
-  // ===== 三列内容：不绘制游戏名，不绘制 4 开关 =====
   let visibleChars = canvasGetImpVisibleChars(gameInfo, switches, gs, allGames);
-  // 过滤掉 Before / After 均未填写任何内容的角色（与 calcImpressionGameHeight 保持一致）
+  // 过滤掉 Before / After 未填写任何内容的角色
   visibleChars = visibleChars.filter(char => {
     const ct = gameData.charTexts?.[char.id];
     return !!(ct && ((ct.before && String(ct.before).trim()) || (ct.after && String(ct.after).trim())));
@@ -1436,7 +1434,7 @@ function drawImpressionGameCard(painter, targetW, gameData, gameInfo, config, im
     const charColW = IMP_CHAR_IMG_W;
     const textColW = (blockInnerW - charColW - IMP_COL_GAP * 2) / 2;
     const blockRows = Math.ceil(visibleChars.length / IMP_BLOCK_COLS);
-    // Before / After 标签与文本框紧凑间距（标签16px + 4px = 20px，文本框上移）
+    // Before / After 标签与文本框紧凑间距
     const labelH = IMP_COL_LABEL_SIZE + 4;
     for (let r = 0; r < blockRows; r++) {
       // 先算该行最大高度
@@ -1480,7 +1478,7 @@ function drawImpressionGameCard(painter, targetW, gameData, gameInfo, config, im
         painter.drawRoundRect(blockX, blockY, blockW, rowMaxH, 10, '#ffffff', '#eee', 1);
         const ix = blockX + IMP_BLOCK_PAD;
         const iy = blockY + IMP_BLOCK_PAD;
-        // Character 列：角色图（使用用户当前切换的那张）+ 角色名（使用用户切换显示的名字）
+        // Character 列：角色图 + 角色名
         const avail = canvasGetImpCharImages(rb.char, switches, gs);
         const charIdx = window.getOtherImpressionCharImgIndex ?
           window.getOtherImpressionCharImgIndex(gameData.gameId, rb.char.id) : 0;
