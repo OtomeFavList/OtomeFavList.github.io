@@ -168,6 +168,7 @@ function loadOtherData() {
     otherData = raw ? JSON.parse(raw) : {};
   } catch (e) {
     otherData = {};
+    try { localStorage.removeItem(OTHER_DATA_KEY); } catch (_) {}
   }
   if (!Array.isArray(otherData.repoGames)) otherData.repoGames = [];
   if (!Array.isArray(otherData.impressionGames)) otherData.impressionGames = [];
