@@ -269,7 +269,7 @@ function handleFavListParseFailure(raw) {
             count = Number(localStorage.getItem(STORE_RECOVER_COUNT_KEY) || "1");
         }
     } catch (_) {}
-    console.warn(`⚠️存档解析失败（第 ${count}/${STORE_MAX_RECOVER} 次），原文已备份到 ${STORE_BACKUP_KEY}，本次先用默认数据`);
+    console.warn(`⚠️存档解析失败（第 ${count}/${STORE_MAX_RECOVER} 次），原文已备份到 ${STORE_BACKUP_KEY}，本次使用默认数据`);
     if (count >= STORE_MAX_RECOVER) {
         try {
             localStorage.removeItem(STORE_KEY);
@@ -278,7 +278,7 @@ function handleFavListParseFailure(raw) {
             }
             localStorage.removeItem(STORE_RECOVER_COUNT_KEY);
         } catch (_) {}
-        console.warn(`⚠️已连续 ${STORE_MAX_RECOVER} 次解析失败，主键已清空；原始存档仍保留在 ${STORE_BACKUP_KEY}，可人工恢复`);
+        console.warn(`⚠️已连续 ${STORE_MAX_RECOVER} 次解析失败，主键已清空；原始存档仍保留在 ${STORE_BACKUP_KEY}`);
     }
 }
 
