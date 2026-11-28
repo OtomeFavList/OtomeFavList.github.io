@@ -229,6 +229,62 @@ export function saveData() {
     }
 }
 
+// ===== 存档读取容错（本轮新增）：解析失败不立即删除存档，先做 3 次修复，仍失败则备份原文并保留主键 =====
+const STORE_BACKUP_KEY = STORE_KEY + "-backup";
+const STORE_BACKUP_TIME_KEY = STORE_KEY + "-backup-time";
+const STORE_RECOVER_COUNT_KEY = STORE_KEY + "-recover-count";
+const STORE_MAX_RECOVER = 3;
+// 同一次页面加载内只累计一次失败：bootstrapCore 与 script.js 会各调一次 loadData，避免计数翻倍
+let favListRecoverRecorded = false;
+
+// 三次修复策略：原样 → 清洗 BOM/零宽字符/首尾空白 → 截取 JSON 主体
+function parseFavListJsonWithRepair(raw) {
+    if (typeof raw !== "string" || raw.length === 0) return { ok: false };
+    try { return { ok: true, data: JSON.parse(raw) }; } catch (_) {}
+    try {
+        const cleaned = raw.replace(/\uFEFF/g, "").replace(/[\u200B-\u200D]/g, "").trim();
+        return { ok: true, data: JSON.parse(cleaned) };
+    } catch (_) {}
+    try {
+        const start = raw.search(/[\[{]/);
+        const endA = raw.lastIndexOf("}");
+        const endB = raw.lastIndexOf("]");
+        const end = Math.max(endA, endB);
+        if (start >= 0 && end > start) {
+            return { ok: true, data: JSON.parse(raw.slice(start, end + 1)) };
+        }
+    } catch (_) {}
+    return { ok: false };
+}
+
+// 失败处理：先备份原文并计数，连续 3 次（跨 3 次页面加载）仍失败才清主键，备份永久保留
+function handleFavListParseFailure(raw) {
+    let count = 1;
+    try {
+        localStorage.setItem(STORE_BACKUP_KEY, raw);
+        localStorage.setItem(STORE_BACKUP_TIME_KEY, new Date().toISOString());
+        if (!favListRecoverRecorded) {
+            favListRecoverRecorded = true;
+            count = Number(localStorage.getItem(STORE_RECOVER_COUNT_KEY) || "0") + 1;
+            localStorage.setItem(STORE_RECOVER_COUNT_KEY, String(count));
+        } else {
+            count = Number(localStorage.getItem(STORE_RECOVER_COUNT_KEY) || "1");
+        }
+    } catch (_) {}
+    console.warn(`⚠️存档解析失败（第 ${count}/${STORE_MAX_RECOVER} 次），原文已备份到 ${STORE_BACKUP_KEY}，本次先用默认数据`);
+    if (count >= STORE_MAX_RECOVER) {
+        try {
+            // 主键与旧版本 key 一并清理，避免下次启动又从旧 key 迁移回同样的损坏内容
+            localStorage.removeItem(STORE_KEY);
+            for (const oldKey of OLD_STORE_KEYS) {
+                localStorage.removeItem(oldKey);
+            }
+            localStorage.removeItem(STORE_RECOVER_COUNT_KEY);
+        } catch (_) {}
+        console.warn(`⚠️已连续 ${STORE_MAX_RECOVER} 次解析失败，主键已清空；原始存档仍保留在 ${STORE_BACKUP_KEY}，可人工恢复`);
+    }
+}
+
 // 重构 loadData：隔离旧数据、独立迁移区块、深度合并、自动清理缓存
 export function loadData() {
     try {
@@ -250,7 +306,16 @@ export function loadData() {
 
         // 临时对象隔离原始存储数据，不直接污染全局 appData
         let loadedRaw = null;
-        if (raw) loadedRaw = JSON.parse(raw);
+        if (raw) {
+            const parseRet = parseFavListJsonWithRepair(raw);
+            if (parseRet.ok) {
+                loadedRaw = parseRet.data;
+                // 解析成功即清零失败计数，避免历史失败累计导致误清
+                try { localStorage.removeItem(STORE_RECOVER_COUNT_KEY); } catch (_) {}
+            } else {
+                handleFavListParseFailure(raw);
+            }
+        }
 
         // 合并：先复制默认模板，再融合用户数据，规避顶层浅覆盖嵌套对象
         const tempData = structuredClone(appData);
@@ -474,8 +539,15 @@ export function loadData() {
         imgCacheMap.clear();
 
         } catch (e) {
-        console.error("读取本地存储失败，已清空损坏存档：", e);
-        try { localStorage.removeItem(STORE_KEY); } catch (_) {}
+        // 读取/迁移过程异常同样不删存档：只备份原文并降级为默认数据
+        console.error("读取本地存储失败，已保留原存档并降级为默认数据：", e);
+        try {
+            const rawBackup = localStorage.getItem(STORE_KEY);
+            if (rawBackup) {
+                localStorage.setItem(STORE_BACKUP_KEY, rawBackup);
+                localStorage.setItem(STORE_BACKUP_TIME_KEY, new Date().toISOString());
+            }
+        } catch (_) {}
     }
 }
 
@@ -918,7 +990,7 @@ export function preloadAdjacentImages(srcList, index) {
 
 // 游戏模板加载模块：不再 import 游戏，读取全局已加载数据
 export async function loadAllGameTemplates() {
-    // 补丁：独立加载 FD/续作游戏，不混入主 gameDataList
+    // 补丁：独立加载 FD/续作游戏，不混入主游戏数据
     try {
         // 守卫：若加载弹窗阶段已预加载完成，跳过重复加载
         if (!(Array.isArray(window.fdGameList) && window.fdGameList.length > 0)) {
