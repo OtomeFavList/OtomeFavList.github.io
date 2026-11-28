@@ -1113,7 +1113,7 @@ async function drawSingleGameCard(painter, targetWidth, renderData, imageCache, 
           }
         }
       } else {
-        drawImageFailPlaceholder(painter.ctx, xPos + innerPad, imgY, imgSize, imgSize);
+        drawImageFailPlaceholder(painter.ctx, xPos + innerPad, yPos + innerPad, imgSize, imgSize);
       }
       const nameBoxY = yPos + innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB;
       const nameBoxH = charCardHeight - (innerPad + imgSize + LAYOUT_SPACE.CHAR_IMG_BOX_MB) - innerPad;
