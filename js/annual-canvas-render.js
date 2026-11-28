@@ -1026,12 +1026,12 @@ function drawModuleTitle(painter, centerX, y, title, config) {
 
 function drawCoverCard(painter, x, y, cardW, cardH, img, srcUrl, radius) {
   painter.drawRoundRect(x, y, cardW, cardH, SUB_CARD_RADIUS, '#ffffff', SUB_CARD_BORDER, 1);
+  const ctx = painter.ctx;
   if (img) {
     const imgX = x + COVER_CARD_PAD;
     const imgY = y + COVER_CARD_PAD;
     const imgW = cardW - COVER_CARD_PAD * 2;
     const imgH = cardH - COVER_CARD_PAD * 2;
-    const ctx = painter.ctx;
     ctx.save();
     try {
       ctx.beginPath();
@@ -1049,8 +1049,6 @@ function drawCoverCard(painter, x, y, cardW, cardH, img, srcUrl, radius) {
       const resInfo = rawImageResourceCache.get(srcUrl);
       const drawTarget = resInfo?.type === 'image' ? resInfo.data : img;
       ctx.drawImage(drawTarget, imgX, imgY, imgW, imgH);
-    } finally {
-      ctx.restore();
     } finally {
       ctx.restore();
     }
