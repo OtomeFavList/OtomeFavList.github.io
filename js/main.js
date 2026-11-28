@@ -229,15 +229,13 @@ export function saveData() {
     }
 }
 
-// ===== 存档读取容错（本轮新增）：解析失败不立即删除存档，先做 3 次修复，仍失败则备份原文并保留主键 =====
+// 补丁：存档读取容错，解析失败不立即删除存档
 const STORE_BACKUP_KEY = STORE_KEY + "-backup";
 const STORE_BACKUP_TIME_KEY = STORE_KEY + "-backup-time";
 const STORE_RECOVER_COUNT_KEY = STORE_KEY + "-recover-count";
 const STORE_MAX_RECOVER = 3;
-// 同一次页面加载内只累计一次失败：bootstrapCore 与 script.js 会各调一次 loadData，避免计数翻倍
 let favListRecoverRecorded = false;
 
-// 三次修复策略：原样 → 清洗 BOM/零宽字符/首尾空白 → 截取 JSON 主体
 function parseFavListJsonWithRepair(raw) {
     if (typeof raw !== "string" || raw.length === 0) return { ok: false };
     try { return { ok: true, data: JSON.parse(raw) }; } catch (_) {}
@@ -257,7 +255,7 @@ function parseFavListJsonWithRepair(raw) {
     return { ok: false };
 }
 
-// 失败处理：先备份原文并计数，连续 3 次（跨 3 次页面加载）仍失败才清主键，备份永久保留
+// 补丁：失败处理，先备份原文并计数，连续失败才清主键，备份永久保留
 function handleFavListParseFailure(raw) {
     let count = 1;
     try {
@@ -274,7 +272,6 @@ function handleFavListParseFailure(raw) {
     console.warn(`⚠️存档解析失败（第 ${count}/${STORE_MAX_RECOVER} 次），原文已备份到 ${STORE_BACKUP_KEY}，本次先用默认数据`);
     if (count >= STORE_MAX_RECOVER) {
         try {
-            // 主键与旧版本 key 一并清理，避免下次启动又从旧 key 迁移回同样的损坏内容
             localStorage.removeItem(STORE_KEY);
             for (const oldKey of OLD_STORE_KEYS) {
                 localStorage.removeItem(oldKey);
@@ -539,7 +536,6 @@ export function loadData() {
         imgCacheMap.clear();
 
         } catch (e) {
-        // 读取/迁移过程异常同样不删存档：只备份原文并降级为默认数据
         console.error("读取本地存储失败，已保留原存档并降级为默认数据：", e);
         try {
             const rawBackup = localStorage.getItem(STORE_KEY);
