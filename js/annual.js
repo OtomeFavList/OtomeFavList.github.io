@@ -38,6 +38,7 @@ function loadAnnualExportConfig() {
             config = Object.assign({}, annualExportDefault, JSON.parse(raw));
         } catch(e) {
             config = {...annualExportDefault};
+            try { localStorage.removeItem("annual-export-config"); } catch (_) {}
         }
     } else {
         config = {...annualExportDefault};
